@@ -1,0 +1,42 @@
+.overlaySelector {
+
+    .content {
+        overflow-y: scroll;
+        position:relative;
+        margin: 30px;
+        max-height:500px;
+
+        .selectorTable {
+            position: relative;
+            display: table;
+            /*border-right: 1px solid #efefef;*/
+
+            li {
+                position: relative;
+                display: table-cell;
+                width: 170px;
+                height: 190px;
+
+                img {
+                   max-height: 160px;
+                   max-width: 140px;
+               }
+
+               a {
+                 display: block;
+                 width: 160px;
+                 height: 160px;
+                 text-align: center;
+               }
+
+               p {
+                padding: 0;
+                margin: 0;
+                text-align: center;
+                font-size: 10px;
+              }
+
+            }
+        }
+    }
+}

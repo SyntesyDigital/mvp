@@ -1,0 +1,33 @@
+.overlayCreator {
+    .form {
+        padding: 30px;
+
+        #overlayCreator-image {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dcdcdc;
+            margin-top: 15px;
+            height:100px;
+
+            img {
+                max-width: 80%;
+                max-height: 100px;
+                width: auto;
+                height: auto;
+            }
+        }
+    }
+    
+    .options-form{
+      overflow-y:scroll;
+      height:600px;
+    }
+
+    .content {
+        padding: 0px;
+
+        .map {
+            border: 1px solid #dcdcdc;
+        }
+    }
+}

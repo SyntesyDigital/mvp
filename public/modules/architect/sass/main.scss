@@ -1,0 +1,22 @@
+@import "tools/modal";
+@import "tools/mediaselector";
+@import "tools/contentselector";
+@import "tools/overlaycreator";
+@import "tools/form";
+@import "tools/jsonbuilder";
+
+@import "avant";
+@import "custom-avant";
+@import "dashboard";
+
+
+.medias-dropfiles {
+
+    background-image: url("/images/backend/glissezoff.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 200px;
+    border: 2px dotted #efefef;
+    line-height: 200px;
+    margin-bottom: 20px;
+}

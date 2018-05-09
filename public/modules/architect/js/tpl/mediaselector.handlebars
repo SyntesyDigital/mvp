@@ -1,0 +1,125 @@
+<script type="text/x-handlebars-template" id="main">
+<div class="row">
+    <input placeholder="Rechercher" name="search" type="text" class="form-control"/>
+<!--
+    <form action="" method="POST"  class="form-horizontal form-filter">
+        <input type="text" name="by_title" />
+        <input type="submit" value="Filter" class="btn btn-primary"/>
+    </form>
+-->
+
+    <div class="mediaSelector">
+    	<div class="col-md-8 mediaSelector-content">
+            <ul class="selectorTable">
+                {{{medias}}}
+            </ul>
+            <div class="pages"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-4 form">
+            <div class="col-md-11">
+                <div class="filedropzone"><p align="center"><strong>Drag & drop your files here</strong><p></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</script>
+
+<script type="text/x-handlebars-template" id="medias">
+{{#MEDIAS}}
+    <li class="col-md-2">
+        <a href="#{{id}}" class="thumb">
+            {{#ifvalue type value="image"}}
+            	<div class="media-item background-image" style="background-image:url('/storage/medias/{{stored_filename}}');">
+                </div>
+            {{/ifvalue}}
+
+            {{#ifvalue type value="video"}}
+                <i class="glyphicon glyphicon-film"></i>
+            {{/ifvalue}}
+
+            <p align="center">
+                {{uploaded_filename}}<br />
+            </p>
+        </a>
+
+    </li>
+{{/MEDIAS}}
+</script>
+
+<script type="text/x-handlebars-template" id="pagination">
+<ul class="pagination">
+
+    {{#if pagination.prev_page}}
+        <li><a href="#" data-page="{{ pagination.prev_page }}">Prev</a></li>
+    {{else}}
+        <li class="disabled"><a href="#" data-page="{{ pagination.prev_page }}">Prev</a></li>
+    {{/if}}
+
+    {{#each pagination.pages}}
+        <li><a href="#" data-page="{{ page }}">{{ page }}</a></li>
+    {{/each}}
+
+    {{#if pagination.next_page}}
+        <li><a href="#" data-page="{{ pagination.next_page }}">Next</a></li>
+    {{else}}
+        <li class="disabled"><a href="#" data-page="{{ pagination.next_page }}">Next</a></li>
+    {{/if}}
+
+</ul>
+</script>
+
+<script type="text/x-handlebars-template" id="form-image">
+<div class="col-md-11">
+<form class="form-horizontal" role="form">
+    <input type="hidden" name="_method" value="PUT" />
+
+    <fieldset>
+        <input type="hidden" value="{{id}}" name="id" />
+        <div class="form-group">
+            <legend>{{type}}</legend>
+            <div class="image-preview">
+                {{#ifvalue type value="image"}}
+                    <div class="fixed-dragger-cropper">
+                        <img src="/storage/medias/{{stored_filename}}" class="img-responsive">
+                    </div>
+                    <div class="cropper-actions">
+                        <a href="#" class="btn btn-sm btn-default toggle-cropper">Découper</a>
+                        <a href="#" class="btn btn-sm btn-danger toggle-cropper-cancel hide">Annuler</a>
+                    </div>
+                {{/ifvalue}}
+
+                {{#ifvalue type value="video"}}
+                <video controls src="/storage/medias/{{stored_filename}}" width="280" height="200" ></video>
+                {{/ifvalue}}
+
+                <input type="hidden" value="{{stored_filename}}" name="file" id="file" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Type</label> : {{mime_type}}<br />
+            <label>File</label> : {{uploaded_filename}}<br />
+        </div>
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" value="{{metadata.title}}" id="title">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="resume" rows="3" class="form-control" id="resume">{{metadata.description}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" name="mime_type" value="{{mime_type}}" id="mime_type">
+
+            <button type="submit" class="btn btn-primary"> Sauvegarder</button>
+            <button type="button" class="clear-form btn btn-default"> Annuler</button>
+        </div>
+    </fieldset>
+</form>
+</div>
+</script>

@@ -1,0 +1,32 @@
+<script type="text/x-handlebars-template" id="main">
+<div class="row">
+
+    <div class="overlaySelector">
+
+        <!-- CONTENT -->
+        <div class="col-md-11 content">
+            <ul class="selectorTable">
+                {{{medias}}}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+</script>
+
+
+<script type="text/x-handlebars-template" id="medias">
+{{#MEDIAS}}
+    <li class="col-md-2">
+        <a href="#{{id}}" class="thumb">
+
+            <img src="{{media_path}}{{file}}" alt="">
+
+            <p align="center">
+                {{title}}
+            </p>
+        </a>
+    </li>
+{{/MEDIAS}}
+</script>
