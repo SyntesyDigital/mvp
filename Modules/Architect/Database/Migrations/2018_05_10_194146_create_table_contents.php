@@ -4,27 +4,29 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableUsers extends Migration
+class CreateTableContents extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('image')->nullable();
-            $table->string('status')->nullable();
 
-            $table->rememberToken();
+            $table->integer('typology_id')->unsigned();
+            $table->foreign('typology_id')->references('id')->on('typologies');
+
+            $table->integer('author_id')->unsigned();
+            $table->foreign('author_id')->references('id')->on('users');
+
+            $table->string('status');
+
+
             $table->timestamps();
         });
 
-        
+
     }
 
     /**
@@ -34,7 +36,7 @@ class CreateTableUsers extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('contents');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

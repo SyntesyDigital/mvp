@@ -12,9 +12,6 @@ class ArchitectController extends Controller
 {
     public function index()
     {
-
-        print_R(Auth::user());
-
         return view('architect::index');
     }
 }
