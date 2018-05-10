@@ -7,11 +7,17 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
+use Modules\Architect\Http\Requests\SaveContent;
 
 class ArchitectController extends Controller
 {
     public function index()
     {
         return view('architect::index');
+    }
+
+    public function save(SaveContent $request)
+    {
+        
     }
 }

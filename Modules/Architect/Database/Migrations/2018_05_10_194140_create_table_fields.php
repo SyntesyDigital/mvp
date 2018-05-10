@@ -21,9 +21,9 @@ class CreateTableFields extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('icon')->nullable();
-            $table->json('rules')->nullable();
+            $table->string('rules')->nullable();
             $table->json('settings')->nullable();
-            
+
             $table->timestamps();
         });
 

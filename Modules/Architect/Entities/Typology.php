@@ -52,4 +52,9 @@ class Typology extends Model
         return $this->hasMany('\Modules\Architect\Entities\Content');
     }
 
+    public function fields()
+    {
+        return $this->hasMany('\Modules\Architect\Entities\Field');
+    }
+
 }
