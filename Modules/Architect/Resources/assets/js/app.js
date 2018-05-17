@@ -4,7 +4,13 @@
  * includes React and other helpers. It's a great starting point while
  * building robust, powerful web applications using React + Laravel.
  */
-
+//require('./jquery-2.2.4.min');
+require('./material-kit/jquery.min');
+require('./material-kit/bootstrap.min');
+require('./material-kit/material.min');
+require('./material-kit/nouislider.min');
+require('./material-kit/bootstrap-datepicker');
+require('./material-kit/material-kit');
 require('./bootstrap');
 
 /**
@@ -14,3 +20,7 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+require('./components/Typology/ModalSettings');
+
+// Medias
+require('./components/Media/MediaUploader');
