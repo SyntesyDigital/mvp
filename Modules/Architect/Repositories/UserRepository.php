@@ -3,7 +3,7 @@
 namespace Modules\Architect\Repositories;
 
 use App\Role;
-use App\User;
+use App\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
 use DB;
 
