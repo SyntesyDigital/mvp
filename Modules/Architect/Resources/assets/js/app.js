@@ -22,3 +22,5 @@ require('./material-kit/material-kit');
  */
 
 require('./components/Example');
+
+require('./components/Typology/TypologyForm');
