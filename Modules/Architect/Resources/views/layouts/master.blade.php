@@ -75,6 +75,15 @@
         </section>
 
 		@stack('javascripts-libs')
-        @stack('javascripts')
+
+    <script>
+      const WEBROOT = '{{route("home")}}';
+      const ASSETS = '{{asset('')}}';
+
+    </script>
+
+    <script type="text/javascript" src="{{asset('modules/architect/js/app.js')}}" ></script>
+
+    @stack('javascripts')
     </body>
 </html>

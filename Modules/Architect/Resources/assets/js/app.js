@@ -7,6 +7,14 @@
 
 require('./bootstrap');
 
+// Material kit (https://www.creative-tim.com/product/material-kit)
+require('./material-kit/jquery.min');
+require('./material-kit/bootstrap.min');
+require('./material-kit/material.min');
+require('./material-kit/nouislider.min');
+require('./material-kit/bootstrap-datepicker');
+require('./material-kit/material-kit');
+
 /**
  * Next, we will create a fresh React component instance and attach it to
  * the page. Then, you may begin adding components to this application

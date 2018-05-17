@@ -3,9 +3,12 @@ body {
 }
 
 #wrapper {
-    position: absolute;
+    position: relative;
     height: 100%;
-    width: 100%;
+}
+
+.container{
+  width:100% !important;
 }
 
 #main {
@@ -54,8 +57,6 @@ section#main {
 }
 
 section#content {
-
-    padding-top: 105px;
 
     button.btn {
         @extend .rounded;
@@ -150,7 +151,6 @@ section#content {
         padding: 30px 70px 70px;
     }
 }
-
 
 
 .bootstrap-select {
