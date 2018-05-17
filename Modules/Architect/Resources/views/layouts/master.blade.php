@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+
         <title>{{env('APP_NAME')}}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +22,11 @@
         <!-- Toastr -->
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
+
+        <script>
+          const WEBROOT = '{{route("home")}}';
+          const ASSETS = '{{asset('')}}';
+        </script>
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>

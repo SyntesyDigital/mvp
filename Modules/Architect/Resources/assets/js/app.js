@@ -5,6 +5,9 @@
  * building robust, powerful web applications using React + Laravel.
  */
 //require('./jquery-2.2.4.min');
+
+
+// Material kit (https://www.creative-tim.com/product/material-kit)
 require('./material-kit/jquery.min');
 require('./material-kit/bootstrap.min');
 require('./material-kit/material.min');

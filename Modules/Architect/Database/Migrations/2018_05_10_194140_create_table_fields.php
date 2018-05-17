@@ -22,7 +22,7 @@ class CreateTableFields extends Migration
             $table->string('type');
             $table->string('icon')->nullable();
             $table->string('rules')->nullable();
-            $table->json('settings')->nullable();
+            $table->longText('settings')->nullable();
 
             $table->timestamps();
         });
