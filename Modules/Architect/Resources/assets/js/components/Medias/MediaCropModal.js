@@ -53,7 +53,7 @@ class MediaCropModal extends Component {
 
     componentDidMount(){
       console.log("MediaEditModal :: open");
-      //TO TEST modal 
+      //TO TEST modal
       //this.modalOpen();
     }
 
@@ -175,7 +175,7 @@ class MediaCropModal extends Component {
                           <Cropper
                             ref='cropper'
                             src={WEBROOT+'/modules/architect/images/default.jpg'}
-                            style={{height: 400, width: '100%'}}
+                            style={{height: $(window).height() - 360, width: '100%'}}
                             // Cropper.js options
                             aspectRatio={crop.width / crop.height}
                             guides={false}

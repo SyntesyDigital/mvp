@@ -1,6 +1,10 @@
 @extends('architect::layouts.master')
 
 @section('content')
+
+<!-- React Component Medias/MediaEditModal -->
+<div id="media-edit-modal"></div>
+
 <div class="body">
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
