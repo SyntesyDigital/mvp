@@ -60,7 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 124);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
+>>>>>>> dev
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,6 +74,7 @@
 "use strict";
 
 
+<<<<<<< HEAD
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
@@ -86,6 +91,10 @@ if (false) {
 
 var bind = __webpack_require__(20);
 var isBuffer = __webpack_require__(43);
+=======
+var bind = __webpack_require__(11);
+var isBuffer = __webpack_require__(24);
+>>>>>>> dev
 
 /*global toString:true*/
 
@@ -636,6 +645,7 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
@@ -644,13 +654,11 @@ var normalizeHeaderName = __webpack_require__(45);
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
 };
+=======
+>>>>>>> dev
 
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
 
+<<<<<<< HEAD
 function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
@@ -763,6 +771,14 @@ module.exports = function(module) {
 	return module;
 };
 
+=======
+if (false) {
+  module.exports = require('./cjs/react.production.min.js');
+} else {
+  module.exports = __webpack_require__(42);
+}
+
+>>>>>>> dev
 
 /***/ }),
 /* 13 */
@@ -924,6 +940,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
   }
 }
 
+<<<<<<< HEAD
 module.exports = checkPropTypes;
 
 
@@ -932,6 +949,306 @@ module.exports = checkPropTypes;
 /* 16 */,
 /* 17 */,
 /* 18 */
+=======
+module.exports = warning;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(27);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(12);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(12);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)))
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (true) {
+  var invariant = __webpack_require__(3);
+  var warning = __webpack_require__(4);
+  var ReactPropTypesSecret = __webpack_require__(19);
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (true) {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 9 */
+>>>>>>> dev
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3374,10 +3691,17 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
 /* 19 */
+=======
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
+
+/***/ }),
+/* 10 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13748,7 +14072,11 @@ return jQuery;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 20 */
+=======
+/* 11 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13766,12 +14094,17 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 21 */
+=======
+/* 12 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(1);
 var settle = __webpack_require__(46);
 var buildURL = __webpack_require__(48);
@@ -13779,6 +14112,15 @@ var parseHeaders = __webpack_require__(49);
 var isURLSameOrigin = __webpack_require__(50);
 var createError = __webpack_require__(22);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(51);
+=======
+var utils = __webpack_require__(0);
+var settle = __webpack_require__(28);
+var buildURL = __webpack_require__(30);
+var parseHeaders = __webpack_require__(31);
+var isURLSameOrigin = __webpack_require__(32);
+var createError = __webpack_require__(13);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(33);
+>>>>>>> dev
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13875,7 +14217,11 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
+<<<<<<< HEAD
       var cookies = __webpack_require__(52);
+=======
+      var cookies = __webpack_require__(34);
+>>>>>>> dev
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13953,13 +14299,21 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 22 */
+=======
+/* 13 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var enhanceError = __webpack_require__(47);
+=======
+var enhanceError = __webpack_require__(29);
+>>>>>>> dev
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13978,7 +14332,11 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 23 */
+=======
+/* 14 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13990,7 +14348,11 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 24 */
+=======
+/* 15 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14016,7 +14378,11 @@ module.exports = Cancel;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 25 */
+=======
+/* 16 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14039,6 +14405,7 @@ if (true) {
 module.exports = emptyObject;
 
 /***/ }),
+<<<<<<< HEAD
 /* 26 */,
 /* 27 */,
 /* 28 */
@@ -14241,6 +14608,55 @@ process.umask = function() { return 0; };
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+=======
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (true) {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (false) {
+  // DCE check should happen before ReactDOM bundle executes so that
+  // DevTools can report bad minification during injection.
+  checkDCE();
+  module.exports = require('./cjs/react-dom.production.min.js');
+} else {
+  module.exports = __webpack_require__(43);
+}
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+>>>>>>> dev
 
 
 
@@ -14250,6 +14666,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 30 */,
 /* 31 */,
 /* 32 */,
@@ -14260,6 +14677,28 @@ module.exports = ReactPropTypesSecret;
 /* 37 */,
 /* 38 */,
 /* 39 */
+=======
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+/* 20 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31369,10 +31808,17 @@ module.exports = ReactPropTypesSecret;
   }
 }.call(this));
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(12)(module)))
 
 /***/ }),
 /* 40 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(18)(module)))
+
+/***/ }),
+/* 21 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -31381,7 +31827,11 @@ module.exports = ReactPropTypesSecret;
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
+<<<<<<< HEAD
 	 true ? factory(exports, __webpack_require__(19), __webpack_require__(18)) :
+=======
+	 true ? factory(exports, __webpack_require__(10), __webpack_require__(9)) :
+>>>>>>> dev
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -35272,6 +35722,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35279,15 +35730,31 @@ module.exports = __webpack_require__(42);
 
 /***/ }),
 /* 42 */
+=======
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(23);
+
+/***/ }),
+/* 23 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(20);
 var Axios = __webpack_require__(44);
 var defaults = __webpack_require__(10);
+=======
+var utils = __webpack_require__(0);
+var bind = __webpack_require__(11);
+var Axios = __webpack_require__(25);
+var defaults = __webpack_require__(5);
+>>>>>>> dev
 
 /**
  * Create an instance of Axios
@@ -35320,15 +35787,25 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
+<<<<<<< HEAD
 axios.Cancel = __webpack_require__(24);
 axios.CancelToken = __webpack_require__(58);
 axios.isCancel = __webpack_require__(23);
+=======
+axios.Cancel = __webpack_require__(15);
+axios.CancelToken = __webpack_require__(40);
+axios.isCancel = __webpack_require__(14);
+>>>>>>> dev
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
+<<<<<<< HEAD
 axios.spread = __webpack_require__(59);
+=======
+axios.spread = __webpack_require__(41);
+>>>>>>> dev
 
 module.exports = axios;
 
@@ -35337,7 +35814,11 @@ module.exports.default = axios;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 43 */
+=======
+/* 24 */
+>>>>>>> dev
 /***/ (function(module, exports) {
 
 /*!
@@ -35364,16 +35845,27 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 44 */
+=======
+/* 25 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var defaults = __webpack_require__(10);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(53);
 var dispatchRequest = __webpack_require__(54);
+=======
+var defaults = __webpack_require__(5);
+var utils = __webpack_require__(0);
+var InterceptorManager = __webpack_require__(35);
+var dispatchRequest = __webpack_require__(36);
+>>>>>>> dev
 
 /**
  * Create a new instance of Axios
@@ -35450,7 +35942,201 @@ module.exports = Axios;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 45 */
+=======
+/* 26 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 27 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35469,13 +36155,21 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 46 */
+=======
+/* 28 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var createError = __webpack_require__(22);
+=======
+var createError = __webpack_require__(13);
+>>>>>>> dev
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -35502,7 +36196,11 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 47 */
+=======
+/* 29 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35530,7 +36228,11 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 48 */
+=======
+/* 30 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35603,7 +36305,11 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 49 */
+=======
+/* 31 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35663,7 +36369,11 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 50 */
+=======
+/* 32 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35738,7 +36448,11 @@ module.exports = (
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 51 */
+=======
+/* 33 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35781,7 +36495,11 @@ module.exports = btoa;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 52 */
+=======
+/* 34 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35841,7 +36559,11 @@ module.exports = (
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 53 */
+=======
+/* 35 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35900,18 +36622,31 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 54 */
+=======
+/* 36 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(55);
 var isCancel = __webpack_require__(23);
 var defaults = __webpack_require__(10);
 var isAbsoluteURL = __webpack_require__(56);
 var combineURLs = __webpack_require__(57);
+=======
+var utils = __webpack_require__(0);
+var transformData = __webpack_require__(37);
+var isCancel = __webpack_require__(14);
+var defaults = __webpack_require__(5);
+var isAbsoluteURL = __webpack_require__(38);
+var combineURLs = __webpack_require__(39);
+>>>>>>> dev
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -35993,7 +36728,11 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 55 */
+=======
+/* 37 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36020,7 +36759,11 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 56 */
+=======
+/* 38 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36041,7 +36784,11 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 57 */
+=======
+/* 39 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36062,13 +36809,21 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 58 */
+=======
+/* 40 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var Cancel = __webpack_require__(24);
+=======
+var Cancel = __webpack_require__(15);
+>>>>>>> dev
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -36126,7 +36881,11 @@ module.exports = CancelToken;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 59 */
+=======
+/* 41 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36160,7 +36919,11 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 60 */
+=======
+/* 42 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36181,12 +36944,21 @@ if (true) {
   (function() {
 'use strict';
 
+<<<<<<< HEAD
 var _assign = __webpack_require__(13);
 var emptyObject = __webpack_require__(25);
 var invariant = __webpack_require__(8);
 var warning = __webpack_require__(9);
 var emptyFunction = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(14);
+=======
+var _assign = __webpack_require__(6);
+var emptyObject = __webpack_require__(16);
+var invariant = __webpack_require__(3);
+var warning = __webpack_require__(4);
+var emptyFunction = __webpack_require__(1);
+var checkPropTypes = __webpack_require__(7);
+>>>>>>> dev
 
 // TODO: this is special because it gets imported during build.
 
@@ -37524,7 +38296,11 @@ module.exports = react;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 61 */
+=======
+/* 43 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37545,6 +38321,7 @@ if (true) {
   (function() {
 'use strict';
 
+<<<<<<< HEAD
 var React = __webpack_require__(0);
 var invariant = __webpack_require__(8);
 var warning = __webpack_require__(9);
@@ -37560,6 +38337,23 @@ var emptyObject = __webpack_require__(25);
 var checkPropTypes = __webpack_require__(14);
 var hyphenateStyleName = __webpack_require__(70);
 var camelizeStyleName = __webpack_require__(72);
+=======
+var React = __webpack_require__(2);
+var invariant = __webpack_require__(3);
+var warning = __webpack_require__(4);
+var ExecutionEnvironment = __webpack_require__(44);
+var _assign = __webpack_require__(6);
+var emptyFunction = __webpack_require__(1);
+var EventListener = __webpack_require__(45);
+var getActiveElement = __webpack_require__(46);
+var shallowEqual = __webpack_require__(47);
+var containsNode = __webpack_require__(48);
+var focusNode = __webpack_require__(51);
+var emptyObject = __webpack_require__(16);
+var checkPropTypes = __webpack_require__(7);
+var hyphenateStyleName = __webpack_require__(52);
+var camelizeStyleName = __webpack_require__(54);
+>>>>>>> dev
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -53442,6 +54236,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
+<<<<<<< HEAD
 /* 74 */,
 /* 75 */,
 /* 76 */,
@@ -53502,6 +54297,24 @@ module.exports = __webpack_require__(129);
 
 /***/ }),
 /* 125 */
+=======
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(63);
+__webpack_require__(66);
+module.exports = __webpack_require__(70);
+
+
+/***/ }),
+/* 63 */
+>>>>>>> dev
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -53511,7 +54324,11 @@ module.exports = __webpack_require__(129);
  * building robust, powerful web applications using React + Laravel.
  */
 
+<<<<<<< HEAD
 __webpack_require__(126);
+=======
+__webpack_require__(64);
+>>>>>>> dev
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -53519,6 +54336,7 @@ __webpack_require__(126);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+<<<<<<< HEAD
 __webpack_require__(127);
 
 /***/ }),
@@ -53528,6 +54346,17 @@ __webpack_require__(127);
 
 window._ = __webpack_require__(39);
 window.Popper = __webpack_require__(18).default;
+=======
+__webpack_require__(65);
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__(20);
+window.Popper = __webpack_require__(9).default;
+>>>>>>> dev
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -53536,9 +54365,15 @@ window.Popper = __webpack_require__(18).default;
  */
 
 try {
+<<<<<<< HEAD
   window.$ = window.jQuery = __webpack_require__(19);
 
   __webpack_require__(40);
+=======
+  window.$ = window.jQuery = __webpack_require__(10);
+
+  __webpack_require__(21);
+>>>>>>> dev
 } catch (e) {}
 
 /**
@@ -53547,7 +54382,11 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+<<<<<<< HEAD
 window.axios = __webpack_require__(41);
+=======
+window.axios = __webpack_require__(22);
+>>>>>>> dev
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -53583,14 +54422,24 @@ if (token) {
 // });
 
 /***/ }),
+<<<<<<< HEAD
 /* 127 */
+=======
+/* 65 */
+>>>>>>> dev
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(17);
+>>>>>>> dev
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -53655,13 +54504,24 @@ if (document.getElementById('example')) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 128 */
+=======
+/* 66 */
+>>>>>>> dev
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
+<<<<<<< HEAD
 /* 129 */
+=======
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */
+>>>>>>> dev
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -27,15 +27,15 @@ class SaveContent extends FormRequest
     //
     // See : https://stackoverflow.com/questions/46670018/how-to-set-custom-response-for-selected-request-class-in-laravel-5-5?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     //
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = new JsonResponse([
-            'success' => false,
-            'errors' => $validator->errors()
-        ], 422);
-
-        throw new \Illuminate\Validation\ValidationException($validator, $response);
-    }
+    // protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    // {
+    //     $response = new JsonResponse([
+    //         'success' => false,
+    //         'errors' => $validator->errors()
+    //     ], 422);
+    //
+    //     throw new \Illuminate\Validation\ValidationException($validator, $response);
+    // }
 
 
     /**

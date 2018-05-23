@@ -25,6 +25,7 @@
         "react-dom": "^16.2.0"
     },
     "dependencies": {
+<<<<<<< HEAD
         "immutability-helper": "^2.7.0",
         "react-bootstrap": "^0.32.1",
         "react-bootstrap-select": "^0.14.0",
@@ -32,5 +33,8 @@
         "react-dnd": "^2.6.0",
         "react-dnd-html5-backend": "^2.6.0",
         "react-select": "^2.0.0-beta.5"
+=======
+        "rodal": "^1.6.3"
+>>>>>>> dev
     }
 }

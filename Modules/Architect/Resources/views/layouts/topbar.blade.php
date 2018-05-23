@@ -24,7 +24,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="">
+                        <a href="{{route('medias.index')}}">
                           Medias
                         </a>
                       </li>
@@ -51,7 +51,7 @@
                               <ul class="dropdown-menu dropdown-menu-right default-padding">
                                   <li class="dropdown-header"></li>
                                   <li>
-                                      <a href="#">
+                                      <a href="{{route('account')}}">
                                           <i class="fa fa-user-circle-o"></i>
                                           &nbsp;Mi cuenta
                                       </a>
@@ -81,10 +81,16 @@
         <div class="topnav-bottom">
             <div class="container">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#">
-                          Inicio
-                      </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('medias.index')}}">
+                            Medias
+                        </a>
                     </li>
                 </ul>
             </div>

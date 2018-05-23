@@ -47,6 +47,7 @@ class ArchitectServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../Config/config.php' => config_path('architect.php'),
+            __DIR__.'/../Config/fields.php' => config_path('fields.php'),
         ], 'config');
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'architect'

@@ -9,6 +9,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Http\Requests\SaveContent;
 
+use App\Models\User;
+use App\Models\Role;
+
 class TypologiesController extends Controller
 {
     public function index()
