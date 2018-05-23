@@ -3,6 +3,11 @@ import { render } from 'react-dom';
 
 class TypologyBar extends Component {
 
+  constructor(props){
+    super(props);
+
+  }
+
   render() {
     return (
       <div className="page-bar">
@@ -12,11 +17,17 @@ class TypologyBar extends Component {
             <div className="col-md-12">
               <a href="" className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
               <h1>
-                Nova tipologia
+                {this.props.icon != "" &&
+                  <i className={"fa "+this.props.icon.value}></i>
+                }
+
+                {'\u00A0'}
+
+                { this.props.name != "" ? this.props.name : "Nova tipologia" }
               </h1>
 
               <div className="float-buttons pull-right">
-                <a href="" className="btn btn-primary"> <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+                <a href="" className="btn btn-primary" onClick={this.props.onSubmitForm}> <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
               </div>
 
             </div>

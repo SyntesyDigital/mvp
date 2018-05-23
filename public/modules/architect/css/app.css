@@ -14095,10 +14095,17 @@ nav.main-nav ul li a:hover {
 .rightbar-page .page-content .fields-list-container {
   /*background-color: #fafafa;*/
   border: 1px dashed #ccc;
-  height: 40vh;
-  display: table;
+  padding: 15px;
   width: 100%;
   text-align: center;
+  margin-bottom: 40px;
+}
+
+.rightbar-page .page-content .fields-list-container .list-container-content-wrapper {
+  display: block;
+  display: table;
+  width: 100%;
+  height: 40vh;
 }
 
 .rightbar-page .page-content .fields-list-container .list-container-content {
@@ -14108,6 +14115,21 @@ nav.main-nav ul li a:hover {
   line-height: 20px;
   font-weight: 400;
   color: #aaa;
+  width: 100%;
+  height: 100%;
+}
+
+.rightbar-page .page-content .fields-list-container.can-drop {
+  background-color: #fafafa;
+}
+
+.rightbar-page .page-content .fields-list-container.is-active {
+  background-color: #fafafa;
+  border: 1px dashed #5b9fef;
+}
+
+.rightbar-page .page-content .fields-list-container.is-active .list-container-content {
+  color: #5b9fef;
 }
 
 .rightbar-page .page-content .typology-field {
@@ -14133,6 +14155,8 @@ nav.main-nav ul li a:hover {
   display: inline-block;
   width: 150px;
   position: absolute;
+  top: 0px;
+  left: 0px;
   font-size: 14px;
   line-height: 50px;
   font-weight: 500;
@@ -14152,15 +14176,19 @@ nav.main-nav ul li a:hover {
 .rightbar-page .page-content .typology-field .field-inputs {
   position: relative;
   padding-left: 160px;
-  padding-right: 150px;
+  padding-right: 200px;
   padding-top: 2px;
+}
+
+.rightbar-page .page-content .typology-field .remove-field-btn {
+  color: #fc4b6c;
 }
 
 .rightbar-page .page-content .typology-field .field-actions {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 100px;
+  width: 180px;
 }
 
 .rightbar-page .page-content .typology-field .field-actions a {
@@ -14190,6 +14218,7 @@ nav.main-nav ul li a:hover {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   padding: 0 10px;
+  background-color: #fafafa;
 }
 
 .rightbar-page .form-group {
@@ -14232,6 +14261,7 @@ nav.main-nav ul li a:hover {
   background-color: #fafafa;
   padding-left: 60px;
   border-radius: 6px;
+  cursor: 'move';
 }
 
 .rightbar-page .field-list .field i.fa {
@@ -14246,7 +14276,6 @@ nav.main-nav ul li a:hover {
 .custom-modal {
   display: none;
   opacity: 0;
-  z-index: 0;
   z-index: 1000;
 }
 

@@ -20,11 +20,10 @@ export default class TypologyForm extends Component {
     render() {
         return (
             <div>
-                <TypologyModal />
 
-                <TypologyBar />
+                <TypologyContainer
 
-                <TypologyContainer />
+                />
             </div>
         );
     }
