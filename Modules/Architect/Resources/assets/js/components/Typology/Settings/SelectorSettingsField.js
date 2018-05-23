@@ -35,6 +35,8 @@ class SelectorSettingsField extends Component {
       value = this.props.field.settings[this.props.name];
     }
 
+    var selctValue = value == null ? "" : value;
+
     return (
 
       <div style={{display : value != null ? 'block' : 'none'}}>
@@ -52,7 +54,7 @@ class SelectorSettingsField extends Component {
 
             <div className="form-group bmd-form-group">
 
-              <select className="form-control" name={this.props.name} value={value} onChange={this.handleFieldChange} >
+              <select className="form-control" name={this.props.name} value={selctValue} onChange={this.handleFieldChange} >
                 {this.renderOptions()}
               </select>
 

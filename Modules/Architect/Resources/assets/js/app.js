@@ -28,3 +28,4 @@ require('./libs/tweenMax/tweenmax.js');
 require('./components/Example');
 
 require('./components/Typology/TypologyForm');
+require('./components/Medias/MediaEditModal');
