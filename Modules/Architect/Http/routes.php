@@ -11,6 +11,10 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');
+    Route::post('/medias', 'MediaController@store')->name('medias.store');
+    Route::get('/medias/{media?}', 'MediaController@show')->name('medias.show');
+    Route::delete('/medias/{media?}/delete', 'MediaController@delete')->name('medias.delete');
+    Route::put('/medias/{media?}/update', 'MediaController@update')->name('medias.update');
 
     // Account
     Route::post('/account/save', 'AccountController@save')->name('account.save');

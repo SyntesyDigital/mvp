@@ -24,7 +24,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="">
+                        <a href="{{route('medias.index')}}">
                           Medias
                         </a>
                       </li>
