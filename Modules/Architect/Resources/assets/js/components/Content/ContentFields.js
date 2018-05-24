@@ -22,7 +22,7 @@ class ContentFields extends Component {
         <div className="field-group">
 
           <TextField
-
+            
           />
 
         </div>
