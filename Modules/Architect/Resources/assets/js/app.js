@@ -8,14 +8,15 @@
 
 
 // Material kit (https://www.creative-tim.com/product/material-kit)
-require('./material-kit/jquery.min');
+//require('./material-kit/jquery.min');
+
 require('./material-kit/bootstrap.min');
 require('./material-kit/material.min');
 require('./material-kit/nouislider.min');
 require('./material-kit/bootstrap-datepicker');
 require('./material-kit/material-kit');
-require('./bootstrap');
 
+//require('./bootstrap');
 require('./libs/tweenMax/tweenmax.js');
 
 /**
@@ -26,11 +27,10 @@ require('./libs/tweenMax/tweenmax.js');
 
 //var _ = require('lodash');
 
-require('./components/Example');
-
 require('./components/Typology/TypologyForm');
-require('./components/Medias/MediaEditModal');
 require('./components/Typology/ModalSettings');
+require('./components/Medias/MediaEditModal');
+require('./components/Content/ContentForm')
 
 // Medias
-require('./components/Media/MediaUploader');
+//require('./components/Media/MediaUploader');
