@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-class TextField extends Component {
+class RichTextField extends Component {
 
   constructor(props){
     super(props);
@@ -11,15 +13,15 @@ class TextField extends Component {
   }
 
 
-  handleOnChange(event) {
+  handleOnChange(value) {
 
-    const language = $(event.target).closest('.form-control').attr('language');
+    //const language = $(event.target).closest('.form-control').attr('language');
 
 
     var field = {
       identifier : this.props.field.identifier,
-      language : language,
-      value : event.target.value
+      language : "ca",
+      value : value
     };
 
     console.log("textField :: handleOnChange ");
@@ -35,9 +37,18 @@ class TextField extends Component {
     for(var key in this.props.translations){
       if(this.props.translations[key]){
         inputs.push(
+
+
+
           <div className="form-group bmd-form-group" key={key}>
              <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-             <input type="text" className="form-control" language={key} name="name" value={this.props.field.values[key]} onChange={this.handleOnChange} />
+
+             <ReactQuill
+                language={key}
+                value={this.props.field.values[key]}
+                onChange={this.handleOnChange}
+              />
+
           </div>
         );
       }
@@ -74,4 +85,4 @@ class TextField extends Component {
   }
 
 }
-export default TextField;
+export default RichTextField;

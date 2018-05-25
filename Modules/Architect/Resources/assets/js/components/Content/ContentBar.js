@@ -17,8 +17,13 @@ class ContentBar extends Component {
             <div className="col-md-12">
               <a href="" className="btn btn-default btn-close"> <i className="fa fa-angle-left"></i> </a>
               <h1>
-                <i className="fa fa-envelope"></i>
-                Page Name
+                {this.props.icon != "" &&
+                  <i className={"fa "+this.props.icon}></i>
+                }
+                {'\u00A0'}
+
+                { this.props.name != "" ? this.props.name : "Nou contingut" }
+
               </h1>
 
               <div className="float-buttons pull-right">
@@ -55,7 +60,7 @@ class ContentBar extends Component {
 
 
                 <a href="" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
-                <a href="" className="btn btn-primary" > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+                <a href="" className="btn btn-primary" onClick={this.props.onSubmitForm} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
               </div>
 
             </div>
