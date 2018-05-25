@@ -14243,3 +14243,13 @@ nav.main-nav ul li a:hover {
   color: #b4b4b4;
 }
 
+.medias .medias-dropfiles {
+  border: 2px dotted #dcdcdc;
+  padding: 30px 50px;
+}
+
+.medias .table .thumbnail {
+  max-width: 80px !important;
+  max-height: 80px !important;
+}
+

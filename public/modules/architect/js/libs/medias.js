@@ -1,42 +1,42 @@
 var medias = {
 
-    _dropzone : null,
-    _settings : null,
-    _defaults : {
-
+    _dropzone: null,
+    _settings: null,
+    _defaults: {
+        acceptedFiles : 'image/jpeg,image/png,image/gif',
+        maxFilesize : 20, // MB
+        paramName : 'file'
     },
 
     init: function(options)
     {
         this._settings = $.extend({}, this._defaults, options);
+        this.initDropzone();
+        this.setDatatable();
     },
 
 
     initDropzone: function()
     {
-
         var _this = this;
 
-        this._dropzone = new Dropzone('.medias-dropfiles', {
-            url : '{{ action("Admin\Content\MediaController@store") }}',
+        var settings = {
+            url: _this._settings.urls.store,
             uploadMultiple: false,
             parallelUploads: 1,
-            // acceptedFiles:'image/jpeg,image/png,image/gif',
-            addRemoveLinks : false,
-            maxFilesize: 2, // MB
-            paramName : 'file',
+            // acceptedFiles: _this._settings.acceptedFiles,
+            addRemoveLinks: false,
+            maxFilesize: _this._settings.maxFilesize,
+            paramName: _this._settings.paramName,
             thumbnail: function(file, dataUrl) {
-                /* do something else with the dataUrl */
                 return false;
-            },
-            sending: function(file, xhr, formData) {
-                formData.append("_token", "{{ csrf_token() }}");
-            },
-            init: function() {
-                this.on("error", function(file, response) {
-                    toastr.error(response.file[0]);
-                });
             }
+        };
+
+        this._dropzone = new Dropzone(_this._settings.identifier, settings);
+
+        this._dropzone.on("error", function(file, response) {
+            toastr.error(response.errors.file[0]);
         });
 
         this._dropzone.on("totaluploadprogress", function(progress) {
@@ -61,82 +61,63 @@ var medias = {
             toastr.error('File ' + file.name + ' is too big !');
         });
 
-
-
         this._dropzone.on("queuecomplete", function(file, response) {
-            setTimeout(function(){
+            setTimeout(function() {
                 $(".progress-bar").parent().removeClass("progress-striped active");
                 $(".progress-bar").width("0%");
                 $(".progress-bar").html("");
             }, 2000);
 
-            _this.removeAllFiles(true);
-            _this.onSuccessUpload();
+            _this._dropzone.removeAllFiles(true);
         });
 
 
         this._dropzone.on("success", function(file, response) {
-            this._dropzone.removeAllFiles(true);
-            toastr.success('Votre fichier vient d\'être enregistré');
+            _this.onSuccessUpload(_this);
         });
     },
 
-    onSuccessUpload: function()
+    onSuccessUpload: function(_this)
+    {
+        toastr.success('File save correctly');
+        _this._settings.table.DataTable().ajax.reload();
+        _this.initEvents();
+    },
+
+    setDatatable: function()
     {
         var _this = this;
 
-        $.ajax({
-           url: '{{ action("Admin\Content\MediaController@index") }}',
-           type: 'GET',
-           dataType: 'json',
-           error: function(response) {
-                console.log(response);
-           },
-           success: function(response) {
-                $('#medias-rows').empty();
-
-                var removeUrl = '{{ action('Admin\Content\MediaController@delete', ':id') }}';
-
-                $.each(response.data, function( index, value ) {
-                    var html = '<tr>';
-
-                        html += '<td width="50">';
-                            html += value.id;
-                        html += '</td>';
-
-                        html += '<td width="80">';
-                            html += '<img src="' + value.file + '" style="max-height: 80px"/>';
-                        html += '</td>';
-
-                        html += '<td>';
-                            html += value.filename + '';
-                        html += '</td>';
-
-                        html += '<td align="right">';
-                            html += '<form action="' + removeUrl.replace(':id', value.id) + '" method="POST" enctype="multipart/form-data" class="">';
-                            html += '<input type="hidden" name="_token" value="{{ csrf_token() }}" />';
-                            html += '<input type="hidden" name="_method" value="DELETE">';
-                            html += '<input type="submit" value="Supprimer" class="btn btn-link" />';
-                            html += '</form>';
-                            html += '<a href="#" onClick="app.mediaSelector.init({}, ' + value.id + '); return false;" class="btn btn-success">Editer</a>';
-                        html += '</td>';
-
-                    html += '</tr>';
-
-                    $('#medias-rows').append(html);
-
-                    _this.initEvents();
-
-
+        var table = _this._settings.table.DataTable({
+    	    language: {
+    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
+    	    },
+    		processing: true,
+            serverSide: true,
+    	    pageLength: 20,
+    	    ajax: _this._settings.table.data('url'),
+    	    columns: [
+    	        // {data: 'id', name: 'id', width: '40'},
+                {data: 'preview', name: 'preview'},
+    	        {data: 'uploaded_filename', name: 'uploaded_filename'},
+                {data: 'type', name: 'type'},
+    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+    	    ],
+            initComplete: function(settings, json) {
+                DataTableTools.init(this, {
+                    onDelete: function(response) {
+                        _this._settings.table.DataTable().ajax.reload();
+                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                        _this.initEvents();
+                    }
                 });
-           }
+    	    }
         });
     },
 
-
     initEvents: function()
     {
-        $('.toggle-delete').off('submit').on('submit', function(e){
+        $('.toggle-delete').off('submit').on('submit', function(e) {
 
             var _this = $(this);
 
@@ -153,8 +134,8 @@ var medias = {
                         className: 'btn-danger'
                     }
                 },
-                callback: function (result) {
-                    if(result) {
+                callback: function(result) {
+                    if (result) {
                         _this.off('submit')
                             .trigger('submit');
                     }
@@ -162,8 +143,4 @@ var medias = {
             });
         });
     }
-
-
-
-
 }

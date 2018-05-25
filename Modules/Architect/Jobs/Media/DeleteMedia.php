@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Content\Media;
+namespace Modules\Architect\Jobs\Media;
 
 use Modules\Architect\Http\Requests\Media\DeleteMediaRequest;
 use Modules\Architect\Entities\Media;

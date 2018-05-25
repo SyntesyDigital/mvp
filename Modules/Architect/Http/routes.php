@@ -11,6 +11,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');
+    Route::get('/medias/data', 'MediaController@data')->name('medias.data');
     Route::post('/medias', 'MediaController@store')->name('medias.store');
     Route::get('/medias/{media?}', 'MediaController@show')->name('medias.show');
     Route::delete('/medias/{media?}/delete', 'MediaController@delete')->name('medias.delete');

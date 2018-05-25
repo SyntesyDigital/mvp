@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Architect\Jobs\Content\Media;
+namespace Modules\Architect\Jobs\Media;
 
 use Modules\Architect\Http\Requests\Media\CreateMediaRequest;
 use Modules\Architect\Entities\Media;
@@ -26,20 +26,18 @@ class CreateMedia
 
         if ($filePath) {
 
-
             $mime = $this->file->getMimeType();
             $type = explode('/', $mime)[0] ?: null;
 
-            // Pre-processing...
+            // Pre-processing data
             switch ($type) {
                 case 'image':
-                    $imageData = Image::make(storage_path().'/app/'.$filePath)
+                    $imageData = Image::make(storage_path() . '/app/' . $filePath)
                         ->resize(null, 1024, function ($constraint) {
                             $constraint->aspectRatio();
                             $constraint->upsize();
                         })
                         ->encode();
-
                     Storage::put($filePath, (string) $imageData);
                 break;
             }

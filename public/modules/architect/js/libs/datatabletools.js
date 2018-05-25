@@ -1,8 +1,12 @@
 var DataTableTools = {
 
-    init: function(instance)
+    _settings: null,
+
+    init: function(instance, options)
     {
         var self = this;
+
+        this._settings = $.extend({}, this._settings, options);
 
         $(instance).find('[data-filter="select"]').each(function(k,v){
             self._select(instance, $(this));
@@ -113,6 +117,8 @@ var DataTableTools = {
      */
     _delete: function(instance, el)
     {
+        var _this = this;
+
         el.off('click')
             .on('click', function(e){
                 e.preventDefault();
@@ -139,8 +145,12 @@ var DataTableTools = {
                             })
                             .done(function(response) {
                                 if(response.success) {
-                                    $(instance).DataTable().ajax.reload();
-                                    toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                                    if(_this._settings.onDelete !== undefined) {
+                                        _this._settings.onDelete(response);
+                                    } else {
+                                        instance.DataTable().ajax.reload();
+                                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                                    }
                                 } else {
                                     toastr.error(response.message, 'Erreur !', {timeOut: 3000});
                                 }

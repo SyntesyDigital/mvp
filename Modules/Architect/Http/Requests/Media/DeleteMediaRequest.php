@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Architect\Http\Requests;
+namespace Modules\Architect\Http\Requests\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 

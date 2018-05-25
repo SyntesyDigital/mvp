@@ -13,6 +13,10 @@ use Modules\Architect\Http\Requests\Media\CreateMediaRequest;
 use Modules\Architect\Http\Requests\Media\DeleteMediaRequest;
 
 use Modules\Architect\Jobs\Media\DeleteMedia;
+use Modules\Architect\Jobs\Media\CreateMedia;
+use Illuminate\Support\Facades\Bus;
+
+use Session;
 
 class MediaController extends Controller
 {
@@ -24,6 +28,11 @@ class MediaController extends Controller
     public function index()
     {
         return view('architect::medias.index');
+    }
+
+    public function data()
+    {
+        return $this->medias->getDatatable();
     }
 
     // public function index(Request $request)
@@ -43,7 +52,14 @@ class MediaController extends Controller
 
     public function store(CreateMediaRequest $request)
     {
-        //return $this->dispatchNow(CreateMedia::fromRequest($request));
+        $media = dispatch_now(CreateMedia::fromRequest($request));
+
+        return $media ? response()->json([
+            'success' => true,
+            'response' => $media
+        ]) : response()->json([
+            'success' => false
+        ], 500);
     }
 
     public function show($id, Request $request)
@@ -59,15 +75,22 @@ class MediaController extends Controller
     {
     }
 
-    public function delete($id)
+    public function delete($id, Request $request)
     {
-        // if ($this->dispatchNow(new DeleteMedia($this->medias->find($id)))) {
-        //     Session::flash('notify_success', 'Enregistrement effectué avec succès');
-        // } else {
-        //     Session::flash('notify_error', "Une erreur s'est produite lors de la suppression");
-        // }
-        //
-        // return redirect()->route('admin.content.medias.index');
+        if (dispatch_now(new DeleteMedia($this->medias->find($id)))) {
+            return $request->ajax()
+                ? response()->json([
+                    'success' => true,
+                    'message' => 'Media deleted with success'
+                ]) : redirect()->route('admin.content.medias.index');
+        }
+
+        return $request->ajax()
+            ? response()->json([
+                'error' => true,
+                'message' => 'An error occured when deleting media'
+            ], 500)
+            : redirect()->route('admin.content.medias.index');
     }
 
 }

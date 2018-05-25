@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 62);
+/******/ 	return __webpack_require__(__webpack_require__.s = 56);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -53416,22 +53416,16 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(63);
-__webpack_require__(66);
-module.exports = __webpack_require__(70);
+__webpack_require__(57);
+__webpack_require__(60);
+module.exports = __webpack_require__(64);
 
 
 /***/ }),
-/* 63 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -53441,7 +53435,7 @@ module.exports = __webpack_require__(70);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(64);
+__webpack_require__(58);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -53449,10 +53443,10 @@ __webpack_require__(64);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(65);
+__webpack_require__(59);
 
 /***/ }),
-/* 64 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -53513,7 +53507,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 65 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53585,16 +53579,16 @@ if (document.getElementById('example')) {
 }
 
 /***/ }),
-/* 66 */
+/* 60 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

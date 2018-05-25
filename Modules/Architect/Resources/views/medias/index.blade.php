@@ -1,7 +1,7 @@
 @extends('architect::layouts.master')
 
 @section('content')
-<div class="body">
+<div class="body medias">
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
             <div class="card">
@@ -26,29 +26,72 @@
 
                 </div>
             </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10" style="margin-top:30px;">
+            <div class="card">
+				<div class="card-body">
+                    <table class="table" id="table-medias" data-url="{{route('medias.data')}}">
+                        <thead>
+                           <tr>
+                               {{-- <th>#</th> --}}
+                               <th></th>
+                               <th>Filename</th>
+                               <th data-filter="select">Type</th>
+                               <th></th>
+                           </tr>
+                        </thead>
+                        <tfoot>
+                           <tr>
+                               <th></th>
+                               <th></th>
+                               <th></th>
+                               <th></th>
+                           </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<script>
-    medias.init({
-        'identifier' : '.medias-dropfiles',
-        'urls': {
-            'store' : '{{ route('medias.store') }}',
-            'show' : '{{ route('medias.show') }}',
-            'delete' : '{{ route('medias.delete') }}',
-            'update' : '{{ route('medias.update') }}',
-        }
-    })
-</script>
-
 @stop
 
-@push('javascripts-libs')
+
+
+
+@push('plugins')
     {{ Html::script('/modules/architect/plugins/dropzone/dropzone.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/dropzone/dropzone.min.css') }}
+
+    {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
+
+    {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/architect/js/libs/dialog.js') }}
     {{ Html::script('/modules/architect/js/libs/medias.js') }}
 @endpush
 
+@push('javascripts-libs')
+<script>
+    medias.init({
+        'identifier' : '.medias-dropfiles',
+        'table' : $('#table-medias'),
+        'urls': {
+            'index' : '{{ route('medias.index') }}',
+            'store' : '{{ route('medias.store') }}',
+            'show' : '{{ route('medias.show') }}',
+            'delete' : '{{ route('medias.delete') }}',
+            'update' : '{{ route('medias.update') }}'
+        }
+    })
+</script>
+@endpush
+
 @push('stylesheets')
-    {{ HTML::style('/modules/architect/plugins/dropzone/dropzone.min.css') }}
+
 @endpush

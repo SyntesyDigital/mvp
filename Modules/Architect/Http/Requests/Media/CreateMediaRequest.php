@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Architect\Http\Requests;
+namespace Modules\Architect\Http\Requests\Media;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class CreateMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:jpg,jpeg,png',
+            'file' => 'required|mimes:jpg,jpeg,png,pdf,doc',
         ];
     }
 }
