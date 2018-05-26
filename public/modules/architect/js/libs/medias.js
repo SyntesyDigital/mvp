@@ -80,8 +80,7 @@ var medias = {
     onSuccessUpload: function(_this)
     {
         toastr.success('File save correctly');
-        _this._settings.table.DataTable().ajax.reload();
-        _this.initEvents();
+        _this.refresh();
     },
 
     setDatatable: function()
@@ -101,28 +100,46 @@ var medias = {
                 {data: 'preview', name: 'preview'},
     	        {data: 'uploaded_filename', name: 'uploaded_filename'},
                 {data: 'type', name: 'type'},
+                {data: 'author', name: 'author'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
-                _this.initEvents();
-
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        _this._settings.table.DataTable().ajax.reload();
                         toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                        _this.initEvents();
+                        _this.refresh();
                     }
                 });
+
+                _this.initEvents();
     	    }
+        });
+    },
+
+    refresh: function()
+    {
+        var _this = this;
+        var table = this._settings.table;
+        var datatable = table.DataTable();
+
+        datatable.ajax.reload(function(){
+            _this.initEvents();
+
+            // FIXME : Find a better way :)
+            table.find('[data-toogle="delete"]').each(function(k,v){
+                DataTableTools._delete(datatable, $(this));
+            });
         });
     },
 
     initEvents: function()
     {
         var _this = this;
-        $('.toogle-edit').off('click').on('click', function(e) {
-            e.preventDefault();
-            _this._editModal.modalOpen($(this).data('id'));
-        });
+        _this._settings.table.find('.toogle-edit')
+            .off('click')
+            .on('click', function(e) {
+                e.preventDefault();
+                _this._editModal.modalOpen($(this).data('id'));
+            });
     }
 }

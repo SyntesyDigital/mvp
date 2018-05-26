@@ -7,9 +7,14 @@ use Modules\Architect\Entities\Media;
 
 use Intervention\Image\ImageManagerStatic as Image;
 use Storage;
+use Auth;
 
 class CreateMedia
 {
+
+    private $filePath = null;
+    private $metadata = null;
+
     public function __construct($file)
     {
         $this->file = $file;
@@ -20,36 +25,78 @@ class CreateMedia
         return new self($request->file('file'));
     }
 
-    public function handle()
+    private function getFileMimeType()
     {
-        $filePath = $this->file->store('public/medias');
+        return $this->file->getMimeType();
+    }
 
-        if ($filePath) {
+    private function getFileType()
+    {
+        return explode('/', $this->getFileMimeType())[0] ?: null;
+    }
 
-            $mime = $this->file->getMimeType();
-            $type = explode('/', $mime)[0] ?: null;
+    private function processImage()
+    {
+        $this->filePath = $this->file->store(config('images.storage_directory') . '/original');
 
-            // Pre-processing data
-            switch ($type) {
-                case 'image':
-                    $imageData = Image::make(storage_path() . '/app/' . $filePath)
-                        ->resize(null, 1024, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        })
-                        ->encode();
-                    Storage::put($filePath, (string) $imageData);
-                break;
+        if ($this->filePath) {
+
+            // Build others image formats
+            foreach(config('images.formats') as $format) {
+                $imageData = Image::make(storage_path() . '/app/' . $this->filePath)
+                    ->fit($format["width"], $format["height"])
+                    ->encode();
+
+                $path = sprintf('%s/%s/%s',
+                    config('images.storage_directory'),
+                    $format['directory'],
+                    basename($this->filePath)
+                );
+
+                Storage::put($path, (string) $imageData);
             }
 
-            return Media::create([
-                 'stored_filename' => basename($filePath),
-                 'uploaded_filename' => $this->file->getClientOriginalName(),
-                 'type' => $type,
-                 'mime_type' => $mime,
-             ]);
+            // Build medatadata
+            $image = Image::make(storage_path() . '/app/' . $this->filePath);
+
+            $this->metadata = [
+                'filesize' => number_format($image->filesize() / 1000, 2, ',', ' '),
+                'dimension' => sprintf('%dx%d', $image->width(), $image->height()),
+            ];
+
+            return true;
         }
 
         return false;
+    }
+
+    private function processFile()
+    {
+        $this->filePath = $this->file->store('public/medias/files');
+    }
+
+
+    public function handle()
+    {
+        switch ($this->getFileType()) {
+            case 'image':
+                $this->processImage();
+            break;
+
+            default:
+                $this->processFile();
+            break;
+        }
+
+        return $this->filePath
+            ? Media::create([
+                'stored_filename' => basename($this->filePath),
+                'uploaded_filename' => $this->file->getClientOriginalName(),
+                'type' => $this->getFileType(),
+                'mime_type' => $this->getFileMimeType(),
+                'author_id' => Auth::user()->id,
+                'metadata' => $this->metadata ? json_encode($this->metadata) : null
+            ])
+            : false;
     }
 }

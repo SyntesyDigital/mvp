@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 use DataTables;
 use Storage;
+use Modules\Architect\Entities\Media;
 
 class MediaRepository extends BaseRepository
 {
@@ -16,11 +17,24 @@ class MediaRepository extends BaseRepository
 
     public function getDatatable()
     {
-        return Datatables::of($this->model->orderBy('created_at', 'desc'))
+        $medias = Media::leftJoin('users', 'users.id', '=', 'medias.author_id')
+            ->select(
+                'medias.*',
+                'users.firstname',
+                'users.lastname'
+            );
+
+        return Datatables::of($medias->orderBy('created_at', 'desc'))
+            ->filterColumn('author', function ($query, $keyword) {
+                $query->whereRaw("CONCAT(users.firstname,' ',users.lastname) like ?", ["%{$keyword}%"]);
+            })
+            ->addColumn('author', function ($item) {
+                return $item->author->full_name;
+            })
             ->addColumn('preview', function ($item) {
                 switch($item->type) {
                     case "image":
-                        return '<img src="' . Storage::url('medias/' . $item->stored_filename) . '" class="thumbnail" />';
+                        return '<img src="' . Storage::url('medias/' . config('images.display') .  '/' . $item->stored_filename) . '" class="thumbnail" />';
                         break;
 
                     default:
@@ -30,10 +44,13 @@ class MediaRepository extends BaseRepository
 
             })
             ->addColumn('action', function ($item) {
-                return '
-                    <a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Are you sûre ?">Delete</a>
-                    <a href="#" class="btn btn-sm btn-success toogle-edit" data-toogle="edit" data-id="'.$item->id.'">Edit</a>
-                ';
+                $html = '<a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Are you sûre ?">Delete</a>';
+
+                if($item->type == "image") {
+                    $html .= '<a href="#" class="btn btn-sm btn-success toogle-edit" data-toogle="edit" data-id="'.$item->id.'">Edit</a>';
+                }
+
+                return $html;
             })
             ->rawColumns(['preview', 'action'])
         ->make(true);

@@ -41,15 +41,16 @@
                     <table class="table" id="table-medias" data-url="{{route('medias.data')}}">
                         <thead>
                            <tr>
-                               {{-- <th>#</th> --}}
                                <th></th>
                                <th>Filename</th>
                                <th data-filter="select">Type</th>
+                               <th data-filter="select">Author</th>
                                <th></th>
                            </tr>
                         </thead>
                         <tfoot>
                            <tr>
+                               <th></th>
                                <th></th>
                                <th></th>
                                <th></th>

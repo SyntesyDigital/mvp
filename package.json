@@ -26,11 +26,13 @@
     },
     "dependencies": {
         "immutability-helper": "^2.7.0",
+        "react-autosuggest": "^9.3.4",
         "react-bootstrap": "^0.32.1",
         "react-bootstrap-select": "^0.14.0",
         "react-cropper": "^1.0.1",
         "react-dnd": "^2.6.0",
         "react-dnd-html5-backend": "^2.6.0",
+        "react-quill": "^1.2.7",
         "react-select": "^2.0.0-beta.5",
         "rodal": "^1.6.3"
     }
