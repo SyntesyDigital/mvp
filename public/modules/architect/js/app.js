@@ -54907,201 +54907,251 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MediaEditModal = function (_Component) {
-  _inherits(MediaEditModal, _Component);
+    _inherits(MediaEditModal, _Component);
 
-  function MediaEditModal(props) {
-    _classCallCheck(this, MediaEditModal);
+    function MediaEditModal(props) {
+        _classCallCheck(this, MediaEditModal);
 
-    var _this2 = _possibleConstructorReturn(this, (MediaEditModal.__proto__ || Object.getPrototypeOf(MediaEditModal)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (MediaEditModal.__proto__ || Object.getPrototypeOf(MediaEditModal)).call(this, props));
 
-    _this2.state = {
-      image: "",
-      fields: {
-        titleCa: "",
-        titleEs: "",
-        titleEn: "",
-        altCa: "",
-        altEn: "",
-        altEs: "",
-        descriptionCa: "",
-        descriptionEn: "",
-        descriptionEs: ""
-      },
-      cropsOpen: false
-    };
+        _this.state = {
+            media: null,
+            fields: {
+                title: {},
+                alt: {},
+                description: {}
+            },
+            cropsOpen: false,
+            languages: JSON.parse(_this.props.languages)
+        };
 
-    _this2.onModalClose = _this2.onModalClose.bind(_this2);
-    _this2.handleChange = _this2.handleChange.bind(_this2);
-    _this2.toggleCrops = _this2.toggleCrops.bind(_this2);
-    _this2.handleModalCropClose = _this2.handleModalCropClose.bind(_this2);
-
-    return _this2;
-  }
-
-  _createClass(MediaEditModal, [{
-    key: 'handleChange',
-    value: function handleChange(field) {
-
-      var fields = this.state.fields;
-      fields[field.name] = field.value;
-
-      this.setState({
-        fields: fields
-      });
+        _this.onModalClose = _this.onModalClose.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.toggleCrops = _this.toggleCrops.bind(_this);
+        _this.onSubmit = _this.onSubmit.bind(_this);
+        _this.handleModalCropClose = _this.handleModalCropClose.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'toggleCrops',
-    value: function toggleCrops(event) {
-      event.preventDefault();
 
-      this.setState({
-        cropsOpen: true
-      });
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log("MediaEditModal :: open");
-      //this.modalOpen();
+    _createClass(MediaEditModal, [{
+        key: 'initFields',
+        value: function initFields() {
+            var fields = this.state.fields;
+            this.state.languages.forEach(function (language) {
+                fields.title[language.iso] = {
+                    'label': language.name,
+                    'value': ''
+                };
 
-      if (medias) {
-        medias._editModal = this;
-      }
-    }
-  }, {
-    key: 'modalOpen',
-    value: function modalOpen(mediaId) {
-      var _this3 = this;
+                fields.alt[language.iso] = {
+                    'label': language.name,
+                    'value': ''
+                };
 
-      TweenMax.to($("#media-edit"), 0.5, { opacity: 1, display: "block", ease: Power2.easeInOut });
-      var _this = this;
-      __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get('/architect/medias/' + mediaId).then(function (response) {
-        _this3.setState({
-          image: '/storage/medias/' + response.data.media.stored_filename
-        });
-      });
-    }
-  }, {
-    key: 'modalClose',
-    value: function modalClose() {
-      TweenMax.to($("#media-edit"), 0.5, { display: "none", opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {} });
-    }
-  }, {
-    key: 'onModalClose',
-    value: function onModalClose() {
-      this.modalClose();
-    }
-  }, {
-    key: 'handleModalCropClose',
-    value: function handleModalCropClose() {
-      this.setState({
-        cropsOpen: false
-      });
-    }
-  }, {
-    key: 'onSubmit',
-    value: function onSubmit() {}
-  }, {
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__MediaCropModal__["a" /* default */], {
-          display: this.state.cropsOpen,
-          onModalClose: this.handleModalCropClose
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'custom-modal', id: 'media-edit' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'modal-container' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'modal-header' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'h2',
+                fields.description[language.iso] = {
+                    'label': language.name,
+                    'value': ''
+                };
+            });
+
+            this.setState({
+                fields: fields
+            });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(field) {
+            var locale = field.name.match(/\[(.*?)\]/i)[1];
+            var name = field.name.replace('[' + locale + ']', '');
+            var fields = this.state.fields;
+            fields[name][locale].value = field.value;
+
+            this.setState({
+                fields: fields
+            });
+        }
+    }, {
+        key: 'toggleCrops',
+        value: function toggleCrops(event) {
+            event.preventDefault();
+
+            this.setState({
+                cropsOpen: true
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            // IF media lib is present...
+            if (medias) {
+                medias._editModal = this;
+            }
+        }
+    }, {
+        key: 'modalOpen',
+        value: function modalOpen(mediaId) {
+            this.initFields();
+            this.read(mediaId);
+            TweenMax.to($("#media-edit"), 0.5, { opacity: 1, display: "block", ease: Power2.easeInOut });
+        }
+    }, {
+        key: 'modalClose',
+        value: function modalClose() {
+            TweenMax.to($("#media-edit"), 0.5, { display: "none", opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {} });
+        }
+    }, {
+        key: 'onModalClose',
+        value: function onModalClose() {
+            this.modalClose();
+        }
+    }, {
+        key: 'handleModalCropClose',
+        value: function handleModalCropClose() {
+            this.setState({
+                cropsOpen: false
+            });
+        }
+    }, {
+        key: 'read',
+        value: function read(mediaId) {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get('/architect/medias/' + mediaId).then(function (response) {
+                _this2.setState({
+                    media: response.data.media
+                });
+
+                if (response.data.media.metadata.fields !== undefined) {
+                    _this2.setState({
+                        fields: response.data.media.metadata.fields
+                    });
+                }
+
+                _this2.mediaFieldsList.loadMedia(response.data.media);
+            });
+        }
+    }, {
+        key: 'onSubmit',
+        value: function onSubmit(e) {
+            e.preventDefault();
+
+            __WEBPACK_IMPORTED_MODULE_4_axios___default.a.put('/architect/medias/' + this.state.media.id + '/update', {
+                metadata: {
+                    fields: this.state.fields
+                }
+            }).then(function (response) {
+                console.log(response.data);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
                 null,
-                'Edita media'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'modal-buttons' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__MediaCropModal__["a" /* default */], {
+                    display: this.state.cropsOpen,
+                    onModalClose: this.handleModalCropClose
+                }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { className: 'btn btn-default close-button-modal', onClick: this.onModalClose },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times' })
-                )
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'modal-content' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'container' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'div',
-                  { className: 'row' },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'col-xs-6 image-col' },
-                    this.state.image && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'original-image', style: { backgroundImage: 'url(' + this.state.image + ')' } }),
+                    { className: 'custom-modal', id: 'media-edit' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      'div',
-                      { className: 'image-actions' },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'a',
-                        { href: '', className: 'btn btn-default', onClick: this.toggleCrops },
-                        ' ',
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-scissors' }),
-                        ' Retalla '
-                      )
-                    )
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'col-xs-6 content-col' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MediaFieldsList__["a" /* default */], {
-                      fields: this.state.fields,
-                      onHandleChange: this.handleChange
-                    })
-                  )
+                        'div',
+                        { className: 'modal-container' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'modal-header' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'h2',
+                                null,
+                                'Edita media'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'modal-buttons' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'a',
+                                    { className: 'btn btn-default close-button-modal', onClick: this.onModalClose },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times' })
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'modal-content' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'container' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'row' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xs-6 image-col' },
+                                        this.state.media && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'original-image', style: { backgroundImage: 'url(/storage/medias/original/' + this.state.media.stored_filename + ')' } }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'div',
+                                            { className: 'image-actions' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                'a',
+                                                { href: '', className: 'btn btn-default', onClick: this.toggleCrops },
+                                                ' ',
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-scissors' }),
+                                                ' Retalla '
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'div',
+                                        { className: 'col-xs-6 content-col' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MediaFieldsList__["a" /* default */], {
+                                            ref: function ref(mediaFieldsList) {
+                                                return _this3.mediaFieldsList = mediaFieldsList;
+                                            },
+                                            media: this.state.media,
+                                            fields: this.state.fields,
+                                            onHandleChange: this.handleChange
+                                        })
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'modal-footer' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'a',
+                                    { href: '', className: 'btn btn-default', onClick: this.onModalClose },
+                                    ' Tancar '
+                                ),
+                                ' \xA0',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'a',
+                                    { href: '', className: 'btn btn-primary', onClick: this.onSubmit },
+                                    ' Guardar '
+                                )
+                            )
+                        )
+                    ),
+                    '}'
                 )
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'modal-footer' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: '', className: 'btn btn-default', onClick: this.onModalClose },
-                  ' Tancar '
-                ),
-                ' \xA0',
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: '', className: 'btn btn-primary', onClick: this.onSubmit },
-                  ' Guardar '
-                )
-              )
-            )
-          ),
-          '}'
-        )
-      );
-    }
-  }]);
+            );
+        }
+    }]);
 
-  return MediaEditModal;
+    return MediaEditModal;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (MediaEditModal);
 
 
 if (document.getElementById('media-edit-modal')) {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MediaEditModal, null), document.getElementById('media-edit-modal'));
+    var languages = document.getElementById('media-edit-modal').getAttribute('languages');
+
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MediaEditModal, { languages: languages }), document.getElementById('media-edit-modal'));
 }
 
 /***/ }),
@@ -55125,202 +55175,212 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MediaFieldsList = function (_Component) {
-  _inherits(MediaFieldsList, _Component);
+    _inherits(MediaFieldsList, _Component);
 
-  function MediaFieldsList(props) {
-    _classCallCheck(this, MediaFieldsList);
+    function MediaFieldsList(props) {
+        _classCallCheck(this, MediaFieldsList);
 
-    var _this = _possibleConstructorReturn(this, (MediaFieldsList.__proto__ || Object.getPrototypeOf(MediaFieldsList)).call(this, props));
+        // Building form stats...
+        var _this = _possibleConstructorReturn(this, (MediaFieldsList.__proto__ || Object.getPrototypeOf(MediaFieldsList)).call(this, props));
 
-    _this.handleChange = _this.handleChange.bind(_this);
-    return _this;
-  }
-
-  _createClass(MediaFieldsList, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-
-      var field = null;
-
-      console.log(event.target.type);
-
-      if (event.target.type == "text" || event.target.type == "textarea") {
-        field = {
-          name: event.target.name,
-          value: event.target.value
+        _this.state = {
+            fields: props.fields,
+            media: props.media
         };
-      }
 
-      this.props.onHandleChange(field);
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'image-info row' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-xs-6' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'ul',
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Nom arxiu'
-                ),
-                ' : title_image.jpg'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Data'
-                ),
-                ' : 14, Oct, 2017'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Autor'
-                ),
-                ' : Nom Autor'
-              )
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-xs-6' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'ul',
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Tipus'
-                ),
-                ' : image/jpeg'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Pes original'
-                ),
-                ' : 335 Kb'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'li',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'b',
-                  null,
-                  'Mida original'
-                ),
-                ' : 1200 x 1800'
-              )
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'media-form' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'fields-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              null,
-              'Llegenda'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Llegenda - catal\xE0', name: 'titleCa', value: this.props.fields.titleCa, onChange: this.handleChange })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Llegenda - espa\xF1ol', name: 'titleEs', value: this.props.fields.titleEs, onChange: this.handleChange })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Llegenda - english', name: 'titleEn', value: this.props.fields.titleEn, onChange: this.handleChange })
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'fields-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              null,
-              'Text alternatiu'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Text alternatiu - catal\xE0', name: 'altCa', value: this.props.fields.altCa, onChange: this.handleChange })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Text alternatiu - espa\xF1ol', name: 'altEs', value: this.props.fields.altEs, onChange: this.handleChange })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Text alternatiu - english', name: 'altEn', value: this.props.fields.altEn, onChange: this.handleChange })
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'fields-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              null,
-              'Descripci\xF3'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', id: 'descriptionCa', placeholder: 'Descripci\xF3 - catal\xE0', rows: '4', name: 'descriptionCa', onChange: this.handleChange, value: this.props.fields.descriptionCa })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', id: 'descriptionEs', placeholder: 'Descripci\xF3 - espa\xF1ol', rows: '4', name: 'descriptionEs', onChange: this.handleChange, value: this.props.fields.descriptionEs })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'form-group bmd-form-group' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', id: 'descriptionEn', placeholder: 'Descripci\xF3 - english', rows: '4', name: 'descriptionEn', onChange: this.handleChange, value: this.props.fields.descriptionEn })
-            )
-          )
-        )
-      );
-    }
-  }]);
 
-  return MediaFieldsList;
+    _createClass(MediaFieldsList, [{
+        key: 'loadMedia',
+        value: function loadMedia(media) {
+            this.setState({
+                media: media
+            });
+
+            if (media.metadata.fields !== undefined) {
+                this.setState({
+                    fields: media.metadata.fields
+                });
+            }
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var locale = event.target.name.match(/\[(.*?)\]/i)[1];
+            var name = event.target.name.replace('[' + locale + ']', '');
+            var fields = this.state.fields;
+            fields[name][locale].value = event.target.value;
+
+            this.setState({
+                fields: fields
+            });
+
+            this.props.onHandleChange(event.target);
+        }
+    }, {
+        key: 'renderField',
+        value: function renderField(name, type, label) {
+            var _this2 = this;
+
+            // console.log(this.state.fields);
+
+            var field = this.state.fields[name];
+
+            switch (type) {
+                case "text":
+                    return Object.keys(field).map(function (k) {
+                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group bmd-form-group', key: name + '_' + k },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', placeholder: label + ' - ' + field[k].label, value: _this2.state.fields[name][k].value, name: name + '[' + k + ']', onChange: _this2.handleChange })
+                        );
+                    });
+                    break;
+
+                case "textarea":
+                    return Object.keys(field).map(function (k) {
+                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'form-group bmd-form-group', key: name + '_' + k },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', id: 'descriptionCa', placeholder: label + ' - ' + field[k].label, rows: '4', name: name + '[' + k + ']', onChange: _this2.handleChange, value: field[k].value })
+                        );
+                    });
+                    break;
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'image-info row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-xs-6' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'ul',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Nom arxiu'
+                                ),
+                                ' : ',
+                                this.state.media && this.state.media.uploaded_filename
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Data'
+                                ),
+                                ' : ',
+                                this.state.media && this.state.media.created_at
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Autor'
+                                ),
+                                ' : ',
+                                this.state.media && this.state.media.author.firstname + ' ' + this.state.media.author.lastname
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-xs-6' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'ul',
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Tipus'
+                                ),
+                                ' : image/jpeg'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Pes original'
+                                ),
+                                ' :  ',
+                                this.state.media && this.state.media.metadata.filesize + 'Kb'
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'li',
+                                null,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'b',
+                                    null,
+                                    'Mida original'
+                                ),
+                                ' :',
+                                this.state.media && this.state.media.metadata.dimension
+                            )
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'media-form' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'fields-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            null,
+                            'Llegenda'
+                        ),
+                        this.renderField('title', 'text', 'Llegenda')
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'fields-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            null,
+                            'Text alternatiu'
+                        ),
+                        this.renderField('alt', 'text', 'Text alternatiu')
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'fields-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            null,
+                            'Descripci\xF3'
+                        ),
+                        this.renderField('description', 'textarea', 'Descripció')
+                    )
+                )
+            );
+        }
+    }]);
+
+    return MediaFieldsList;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (MediaFieldsList);
@@ -55389,8 +55449,8 @@ var MediaCropModal = function (_Component) {
   _createClass(MediaCropModal, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      console.log("MediaCropModal :: componentWillReceiveProps");
-      console.log(nextProps);
+      // console.log("MediaCropModal :: componentWillReceiveProps");
+      // console.log(nextProps);
 
       if (nextProps.display) {
         this.modalOpen();
@@ -55401,7 +55461,7 @@ var MediaCropModal = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log("MediaEditModal :: open");
+      // console.log("MediaEditModal :: open");
       //TO TEST modal
       //this.modalOpen();
     }
@@ -55429,8 +55489,8 @@ var MediaCropModal = function (_Component) {
     value: function onCropSubmit(event) {
       event.preventDefault();
 
-      console.log("onCropSubmit");
-      console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+      // console.log("onCropSubmit");
+      // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
 
       //TODO guardar el resultado en la nueva imagen
     }
@@ -55446,7 +55506,7 @@ var MediaCropModal = function (_Component) {
     value: function selectCrop(event) {
 
       var id = $(event.target).closest('.crop-item').attr('id');
-      console.log("select crop : " + id);
+      // console.log("select crop : "+id)
 
       this.setState({
         selected: id

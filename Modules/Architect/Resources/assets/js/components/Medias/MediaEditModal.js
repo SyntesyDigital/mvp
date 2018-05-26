@@ -12,71 +12,88 @@ export default class MediaEditModal extends Component {
         super(props);
 
         this.state = {
-            image : "",
-          fields : {
-            titleCa : "",
-            titleEs : "",
-            titleEn : "",
-            altCa : "",
-            altEn : "",
-            altEs : "",
-            descriptionCa : "",
-            descriptionEn : "",
-            descriptionEs : ""
-          },
-          cropsOpen : false
+            media : null,
+            fields : {
+                title : {},
+                alt : {},
+                description : {},
+            },
+            cropsOpen : false,
+            languages : JSON.parse(this.props.languages),
         };
 
         this.onModalClose = this.onModalClose.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.toggleCrops = this.toggleCrops.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.handleModalCropClose = this.handleModalCropClose.bind(this);
-
     }
 
-    handleChange(field) {
+    initFields()
+    {
+        var fields = this.state.fields;
+        this.state.languages.forEach(function(language) {
+            fields.title[language.iso] = {
+                'label' : language.name,
+                'value' : ''
+            };
 
-      const fields = this.state.fields;
-      fields[field.name] = field.value;
+            fields.alt[language.iso] = {
+                'label' : language.name,
+                'value' : ''
+            };
 
-      this.setState({
-        fields : fields
-      });
+            fields.description[language.iso] = {
+                'label' : language.name,
+                'value' : ''
+            };
+        });
 
+        this.setState({
+            fields : fields
+        });
     }
 
-    toggleCrops(event) {
-      event.preventDefault();
+    handleChange(field)
+    {
+        var locale = field.name.match(/\[(.*?)\]/i)[1];
+        var name = field.name.replace('[' + locale + ']','');
+        var fields = this.state.fields;
+        fields[name][locale].value = field.value;
 
-      this.setState({
-        cropsOpen : true
-      });
+        this.setState({
+            fields : fields
+        });
     }
 
-    componentDidMount(){
-      console.log("MediaEditModal :: open");
-      //this.modalOpen();
-    
-      if(medias) {
-          medias._editModal = this;
-      }
+    toggleCrops(event)
+    {
+        event.preventDefault();
+
+        this.setState({
+            cropsOpen : true
+        });
     }
 
-    modalOpen(mediaId) {
+    componentDidMount()
+    {
+        // IF media lib is present...
+        if(medias) {
+            medias._editModal = this;
+        }
+    }
+
+    modalOpen(mediaId)
+    {
+        this.initFields();
+        this.read(mediaId);
         TweenMax.to($("#media-edit"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
-        var _this = this;
-        axios.get('/architect/medias/' + mediaId)
-            .then(response => {
-                this.setState({
-                    image: '/storage/medias/' + response.data.media.stored_filename
-                });
-            });
     }
 
     modalClose() {
-      TweenMax.to($("#media-edit"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
+        TweenMax.to($("#media-edit"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
 
-      }});
+        }});
     }
 
     onModalClose(){
@@ -85,12 +102,39 @@ export default class MediaEditModal extends Component {
 
     handleModalCropClose(){
       this.setState({
-        cropsOpen : false
+          cropsOpen : false
       });
     }
 
-    onSubmit() {
+    read(mediaId)
+    {
+        axios.get('/architect/medias/' + mediaId)
+            .then(response => {
+                this.setState({
+                    media: response.data.media,
+                });
 
+                if(response.data.media.metadata.fields !== undefined) {
+                    this.setState({
+                        fields: response.data.media.metadata.fields,
+                    });
+                }
+
+                this.mediaFieldsList.loadMedia(response.data.media);
+            });
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        axios.put('/architect/medias/' + this.state.media.id + '/update', {
+            metadata : {
+                fields : this.state.fields
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+            });
     }
 
     render() {
@@ -121,8 +165,8 @@ export default class MediaEditModal extends Component {
                       <div className="row">
                         <div className="col-xs-6 image-col">
 
-                        {this.state.image && 
-                          <div className="original-image" style={{backgroundImage:'url('+ this.state.image + ')'}}></div>
+                        {this.state.media &&
+                          <div className="original-image" style={{backgroundImage:'url(/storage/medias/original/' + this.state.media.stored_filename + ')'}}></div>
                           }
                           <div className="image-actions">
                             <a href="" className="btn btn-default" onClick={this.toggleCrops}> <i className="fa fa-scissors"></i> Retalla </a>
@@ -130,12 +174,12 @@ export default class MediaEditModal extends Component {
 
                         </div>
                         <div className="col-xs-6 content-col">
-
                           <MediaFieldsList
-                            fields= {this.state.fields}
+                            ref={(mediaFieldsList) => this.mediaFieldsList = mediaFieldsList}
+                            media={this.state.media}
+                            fields={this.state.fields}
                             onHandleChange={this.handleChange}
                           />
-
                         </div>
                       </div>
                     </div>
@@ -155,5 +199,7 @@ export default class MediaEditModal extends Component {
 }
 
 if (document.getElementById('media-edit-modal')) {
-    ReactDOM.render(<MediaEditModal />, document.getElementById('media-edit-modal'));
+    var languages = document.getElementById('media-edit-modal').getAttribute('languages');
+
+    ReactDOM.render(<MediaEditModal languages={languages}/>, document.getElementById('media-edit-modal'));
 }

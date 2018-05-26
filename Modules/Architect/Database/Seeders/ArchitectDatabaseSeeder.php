@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
 use App\Models\Role;
+use Modules\Architect\Entities\Language;
 
 class ArchitectDatabaseSeeder extends Seeder
 {
@@ -42,6 +43,25 @@ class ArchitectDatabaseSeeder extends Seeder
 
         $admin->attachRole($adminRole);
 
+        Language::create([
+            'name' => 'Français',
+            'iso' => 'fr'
+        ]);
+
+        Language::create([
+            'name' => 'English',
+            'iso' => 'en'
+        ]);
+
+        Language::create([
+            'name' => 'Español',
+            'iso' => 'es'
+        ]);
+
+        Language::create([
+            'name' => 'Catalan',
+            'iso' => 'cat'
+        ]);
         // $this->call("OthersTableSeeder");
     }
 }

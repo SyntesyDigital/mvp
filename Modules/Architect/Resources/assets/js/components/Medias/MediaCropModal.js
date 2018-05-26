@@ -40,8 +40,8 @@ class MediaCropModal extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-      console.log("MediaCropModal :: componentWillReceiveProps");
-      console.log(nextProps);
+      // console.log("MediaCropModal :: componentWillReceiveProps");
+      // console.log(nextProps);
 
       if(nextProps.display){
         this.modalOpen();
@@ -52,7 +52,7 @@ class MediaCropModal extends Component {
     }
 
     componentDidMount(){
-      console.log("MediaEditModal :: open");
+      // console.log("MediaEditModal :: open");
       //TO TEST modal
       //this.modalOpen();
     }
@@ -80,8 +80,8 @@ class MediaCropModal extends Component {
     onCropSubmit(event){
       event.preventDefault();
 
-      console.log("onCropSubmit");
-      console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+      // console.log("onCropSubmit");
+      // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
 
       //TODO guardar el resultado en la nueva imagen
 
@@ -96,7 +96,7 @@ class MediaCropModal extends Component {
     selectCrop(event) {
 
       var id = $(event.target).closest('.crop-item').attr('id');
-      console.log("select crop : "+id)
+      // console.log("select crop : "+id)
 
       this.setState({
         selected : id

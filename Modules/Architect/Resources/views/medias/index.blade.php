@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- React Component Medias/MediaEditModal -->
-<div id="media-edit-modal"></div>
+<div id="media-edit-modal" languages="{{ Modules\Architect\Entities\Language::all() }}"></div>
 
 <div class="body medias">
 

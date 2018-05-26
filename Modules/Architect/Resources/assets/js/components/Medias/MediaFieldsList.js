@@ -7,26 +7,68 @@ class MediaFieldsList extends Component {
     {
         super(props);
 
+        // Building form stats...
+        this.state = {
+            fields : props.fields,
+            media : props.media,
+        };
+
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
+    loadMedia(media) {
+        this.setState({
+            media: media,
+        });
 
-      var field = null;
-
-      console.log(event.target.type);
-
-      if(event.target.type == "text" || event.target.type == "textarea"){
-        field = {
-          name : event.target.name,
-          value : event.target.value
-        };
-      }
-
-      this.props.onHandleChange(field)
+        if(media.metadata.fields !== undefined) {
+            this.setState({
+                fields: media.metadata.fields,
+            });
+        }
     }
 
-    render() {
+    handleChange(event)
+    {
+        var locale = event.target.name.match(/\[(.*?)\]/i)[1];
+        var name = event.target.name.replace('[' + locale + ']','');
+        var fields = this.state.fields;
+        fields[name][locale].value = event.target.value;
+
+        this.setState({
+            fields : fields
+        });
+
+        this.props.onHandleChange(event.target);
+    }
+
+    renderField(name, type, label)
+    {
+        // console.log(this.state.fields);
+
+        var field = this.state.fields[name];
+
+        switch(type) {
+            case "text":
+                return Object.keys(field).map((k) =>
+                    <div className="form-group bmd-form-group" key={name + '_' + k}>
+                       <input type="text" className="form-control" placeholder={label +' - ' + field[k].label} value={this.state.fields[name][k].value} name={name + '[' + k + ']'} onChange={this.handleChange} />
+                    </div>
+                );
+            break;
+
+            case "textarea":
+                return Object.keys(field).map((k) =>
+                    <div className="form-group bmd-form-group" key={name + '_' + k}>
+                       <textarea className="form-control" id="descriptionCa" placeholder={label + ' - ' + field[k].label} rows="4" name={name + '[' + k + ']'} onChange={this.handleChange} value={field[k].value}></textarea>
+                    </div>
+                );
+            break;
+        }
+    }
+
+    render()
+    {
         return (
 
           <div>
@@ -35,13 +77,13 @@ class MediaFieldsList extends Component {
 
                 <ul>
                   <li>
-                    <b>Nom arxiu</b> : title_image.jpg
+                    <b>Nom arxiu</b> : {this.state.media && this.state.media.uploaded_filename}
                   </li>
                   <li>
-                    <b>Data</b> : 14, Oct, 2017
+                    <b>Data</b> : {this.state.media && this.state.media.created_at}
                   </li>
                   <li>
-                    <b>Autor</b> : Nom Autor
+                    <b>Autor</b> : {this.state.media && this.state.media.author.firstname + ' ' + this.state.media.author.lastname}
                   </li>
                 </ul>
               </div>
@@ -51,10 +93,10 @@ class MediaFieldsList extends Component {
                   <b>Tipus</b> : image/jpeg
                 </li>
                 <li>
-                  <b>Pes original</b> : 335 Kb
+                  <b>Pes original</b> :  {this.state.media && this.state.media.metadata.filesize + 'Kb'}
                 </li>
                 <li>
-                  <b>Mida original</b> : 1200 x 1800
+                  <b>Mida original</b> :{this.state.media && this.state.media.metadata.dimension}
                 </li>
 
               </ul>
@@ -67,42 +109,17 @@ class MediaFieldsList extends Component {
 
               <div className="fields-group">
                 <label>Llegenda</label>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Llegenda - català" name="titleCa" value={this.props.fields.titleCa} onChange={this.handleChange} />
-                  </div>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Llegenda - español" name="titleEs" value={this.props.fields.titleEs} onChange={this.handleChange} />
-                  </div>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Llegenda - english" name="titleEn" value={this.props.fields.titleEn} onChange={this.handleChange} />
-                  </div>
+                {this.renderField('title', 'text', 'Llegenda')}
               </div>
 
               <div className="fields-group">
                 <label>Text alternatiu</label>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Text alternatiu - català" name="altCa" value={this.props.fields.altCa} onChange={this.handleChange} />
-                  </div>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Text alternatiu - español" name="altEs" value={this.props.fields.altEs} onChange={this.handleChange} />
-                  </div>
-                  <div className="form-group bmd-form-group">
-                     <input type="text" className="form-control" placeholder="Text alternatiu - english" name="altEn" value={this.props.fields.altEn} onChange={this.handleChange} />
-                  </div>
+                {this.renderField('alt', 'text', 'Text alternatiu')}
               </div>
 
               <div className="fields-group">
                 <label>Descripció</label>
-                <div className="form-group bmd-form-group">
-                   <textarea className="form-control" id="descriptionCa" placeholder="Descripció - català" rows="4" name="descriptionCa" onChange={this.handleChange} value={this.props.fields.descriptionCa}></textarea>
-                </div>
-                <div className="form-group bmd-form-group">
-                   <textarea className="form-control" id="descriptionEs"  placeholder="Descripció - español" rows="4" name="descriptionEs" onChange={this.handleChange} value={this.props.fields.descriptionEs}></textarea>
-                </div>
-                <div className="form-group bmd-form-group">
-                   <textarea className="form-control" id="descriptionEn"  placeholder="Descripció - english" rows="4" name="descriptionEn" onChange={this.handleChange} value={this.props.fields.descriptionEn}></textarea>
-                </div>
-
+                {this.renderField('description', 'textarea', 'Descripció')}
               </div>
 
             </div>

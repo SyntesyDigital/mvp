@@ -11,10 +11,15 @@ use Modules\Architect\Repositories\MediaRepository;
 
 use Modules\Architect\Http\Requests\Media\CreateMediaRequest;
 use Modules\Architect\Http\Requests\Media\DeleteMediaRequest;
+use Modules\Architect\Http\Requests\Media\UpdateMediaRequest;
 
 use Modules\Architect\Jobs\Media\DeleteMedia;
 use Modules\Architect\Jobs\Media\CreateMedia;
+use Modules\Architect\Jobs\Media\UpdateMedia;
+
 use Illuminate\Support\Facades\Bus;
+
+use Modules\Architect\Entities\Media;
 
 use Session;
 
@@ -35,21 +40,6 @@ class MediaController extends Controller
         return $this->medias->getDatatable();
     }
 
-    // public function index(Request $request)
-    // {
-    //     $medias = $this->medias->orderBy('id', 'desc')->paginate(10);
-    //
-    //     return $request->ajax()
-    //         ? response()->json($medias)
-    //         : view('admin.content.medias.index', [
-    //             'medias' => $medias,
-    //         ]);
-    // }
-
-    public function create()
-    {
-    }
-
     public function store(CreateMediaRequest $request)
     {
         $media = dispatch_now(CreateMedia::fromRequest($request));
@@ -64,7 +54,7 @@ class MediaController extends Controller
 
     public function show($id, Request $request)
     {
-        $media = $this->medias->find($id);
+        $media = $this->medias->with('author')->find($id);
 
         return response()->json([
             'success' => $media ? true : false,
@@ -72,8 +62,18 @@ class MediaController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Media $media, UpdateMediaRequest $request)
     {
+        if(dispatch_now(UpdateMedia::fromRequest($media, $request))) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Media updated with success'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false
+        ], 500);
     }
 
     public function delete($id, Request $request)
