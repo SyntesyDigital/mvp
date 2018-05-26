@@ -7,6 +7,7 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//@import "node_modules/react-select/dist/react-select.css";
 
 // Material Kit
 // https://www.creative-tim.com/product/material-kit
@@ -14,6 +15,7 @@
 
 @import '../helpers/common';
 @import '../helpers/mixins';
+@import '../helpers/breakpoints';
 
 //layouts
 @import 'layout';
@@ -22,5 +24,7 @@
 @import 'topnav';
 @import 'grid-page';
 @import 'rightbar-page';
+@import 'leftbar-page';
 @import 'modal';
+@import 'content';
 @import 'medias';

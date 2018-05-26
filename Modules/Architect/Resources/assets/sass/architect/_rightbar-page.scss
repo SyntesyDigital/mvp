@@ -17,6 +17,20 @@
 
   }
 
+  .actions-dropdown{
+    display: inline-block;
+    position: relative;
+
+    .btn {
+      padding-right: 20px;
+
+      .caret{
+        margin-left: 6px;
+      }
+    }
+  }
+
+
   h1{
     @include font(20,60,400);
     display: inline-block;
@@ -24,7 +38,7 @@
     padding-left: 20px;
   }
 
-  .btn-default{
+  .btn-default.btn-close {
     background-color: transparent;
     height: 63px;
     margin: 0;
@@ -40,7 +54,11 @@
 
   }
 
-
+  .dropdown-menu li a:hover, .dropdown-menu li a:focus, .dropdown-menu li a:active{
+    background-color:$cms-light-color-3;
+    color:$text-color;
+    box-shadow: none;
+  }
 
 }
 
@@ -54,17 +72,39 @@
     .fields-list-container{
       /*background-color: #fafafa;*/
       border:1px dashed #ccc;
-      height: 40vh;
+      padding:15px;
 
-      display: table;
       width: 100%;
       text-align: center;
+      margin-bottom:40px;
+
+      .list-container-content-wrapper{
+        display: block;
+        display: table;
+        width: 100%;
+        height: 40vh;
+      }
 
       .list-container-content{
         display: table-cell;
         vertical-align: middle;
         @include font(16,20,400);
         color:#aaa;
+        width:100%;
+        height:100%;
+      }
+
+      &.can-drop {
+        background-color:#fafafa;
+      }
+
+      &.is-active {
+        background-color:#fafafa;
+        border:1px dashed $cms-color-1;
+
+        .list-container-content{
+            color:$cms-color-1;
+        }
       }
 
     }
@@ -89,6 +129,8 @@
         display: inline-block;
         width:150px;
         position:absolute;
+        top: 0px;
+        left: 0px;
 
         @include font(14,50,500);
         padding-left:45px;
@@ -108,8 +150,12 @@
       .field-inputs {
         position:relative;
         padding-left:160px;
-        padding-right:150px;
+        padding-right:200px;
         padding-top: 2px;
+      }
+
+      .remove-field-btn{
+        color:$brand-danger;
       }
 
       .field-name {
@@ -124,7 +170,7 @@
         position: absolute;
         top:0px;
         right:0px;
-        width:100px;
+        width: 180px;
 
         a{
           @include font(12,50,400);
@@ -158,6 +204,7 @@
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
     padding : 0 10px;
+    background-color: #fafafa;
   }
 
   .form-group{
@@ -197,6 +244,7 @@
       background-color: #fafafa;
       padding-left:60px;
       @include round(6px);
+      cursor: 'move';
 
       i.fa{
         position:absolute;

@@ -64,11 +64,12 @@ class MediaController extends Controller
 
     public function show($id, Request $request)
     {
-        // return $request->ajax()
-        //     ? $this->medias->find($id)
-        //     : view('admin.content.medias.show', [
-        //         'media' => $this->medias->find($id),
-        //     ]);
+        $media = $this->medias->find($id);
+
+        return response()->json([
+            'success' => $media ? true : false,
+            'media' => $media
+        ]);
     }
 
     public function update(Request $request, $id)

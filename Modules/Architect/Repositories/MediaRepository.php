@@ -32,7 +32,7 @@ class MediaRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 return '
                     <a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Are you sûre ?">Delete</a>
-                    <a href="#" class="btn btn-sm btn-success">Edit</a>
+                    <a href="#" class="btn btn-sm btn-success toogle-edit" data-toogle="edit" data-id="'.$item->id.'">Edit</a>
                 ';
             })
             ->rawColumns(['preview', 'action'])

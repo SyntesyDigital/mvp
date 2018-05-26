@@ -8,13 +8,16 @@
 
 
 // Material kit (https://www.creative-tim.com/product/material-kit)
-require('./material-kit/jquery.min');
+//require('./material-kit/jquery.min');
+
 require('./material-kit/bootstrap.min');
 require('./material-kit/material.min');
 require('./material-kit/nouislider.min');
 require('./material-kit/bootstrap-datepicker');
 require('./material-kit/material-kit');
-require('./bootstrap');
+
+//require('./bootstrap');
+require('./libs/tweenMax/tweenmax.js');
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -22,8 +25,12 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
+//var _ = require('lodash');
+
+require('./components/Typology/TypologyForm');
 require('./components/Typology/ModalSettings');
+require('./components/Medias/MediaEditModal');
+require('./components/Content/ContentForm')
 
 // Medias
-require('./components/Media/MediaUploader');
+//require('./components/Media/MediaUploader');

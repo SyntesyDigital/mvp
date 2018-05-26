@@ -104,6 +104,8 @@ var medias = {
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
+                _this.initEvents();
+
                 DataTableTools.init(this, {
                     onDelete: function(response) {
                         _this._settings.table.DataTable().ajax.reload();
@@ -117,30 +119,10 @@ var medias = {
 
     initEvents: function()
     {
-        $('.toggle-delete').off('submit').on('submit', function(e) {
-
-            var _this = $(this);
-
+        var _this = this;
+        $('.toogle-edit').off('click').on('click', function(e) {
             e.preventDefault();
-            bootbox.confirm({
-                message: 'Etes-vous sur de vouloir supprimer cet élément ?',
-                buttons: {
-                    confirm: {
-                        label: 'Oui',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: 'Non',
-                        className: 'btn-danger'
-                    }
-                },
-                callback: function(result) {
-                    if (result) {
-                        _this.off('submit')
-                            .trigger('submit');
-                    }
-                }
-            });
+            _this._editModal.modalOpen($(this).data('id'));
         });
     }
 }

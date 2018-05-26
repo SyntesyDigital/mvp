@@ -19,7 +19,7 @@
                         </a>
                       </li>
                       <li>
-                        <a href="">
+                        <a href="{{route('contents')}}">
                         Content
                         </a>
                       </li>
@@ -40,6 +40,7 @@
                 <div class="col-md-2">
 
                   <div class="topbar-right">
+
                     <div class="navbar-collapse">
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -68,6 +69,7 @@
                         </li>
                       </ul>
                     </div>
+
                   </div>
 
                 </div>

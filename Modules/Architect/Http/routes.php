@@ -9,6 +9,11 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/typologies', 'TypologiesController@index')->name('typologies');
     Route::get('/typologies/show', 'TypologiesController@show')->name('typologies.show');
 
+    // Contents
+    Route::get('/contents', 'ContentController@index')->name('contents');
+    Route::get('/contents/show', 'ContentController@show')->name('contents.show');
+
+
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');
     Route::get('/medias/data', 'MediaController@data')->name('medias.data');

@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class TypologyForm extends React.Component {
+import TypologyModal from './TypologyModal';
+import TypologyBar from './TypologyBar';
+import TypologyContainer from './TypologyContainer';
 
-    constructor(props) {
+export default class TypologyForm extends Component {
+
+    constructor(props)
+    {
         super(props);
-    }
 
+        this.state = {
+
+        };
+
+    }
 
     render() {
         return (
             <div>
-                
+
+                <TypologyContainer
+
+                />
             </div>
-        )
+        );
     }
 }
 
-if (document.getElementById('component-typology-form')) {
-    ReactDOM.render(<TypologyForm />, document.getElementById('component-typology-form'));
+if (document.getElementById('typology-form')) {
+
+    ReactDOM.render(<TypologyForm />, document.getElementById('typology-form'));
 }
