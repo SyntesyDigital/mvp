@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- React Component Medias/MediaEditModal -->
-<div id="media-edit-modal" languages="{{ Modules\Architect\Entities\Language::all() }}"></div>
+<div id="media-edit-modal" languages="{{ Modules\Architect\Entities\Language::all() }}" crops="{{ json_encode(config('images.formats')) }}"></div>
 
 <div class="body medias">
 

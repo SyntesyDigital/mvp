@@ -20,6 +20,7 @@ export default class MediaEditModal extends Component {
             },
             cropsOpen : false,
             languages : JSON.parse(this.props.languages),
+            crops : JSON.parse(this.props.crops),
         };
 
         this.onModalClose = this.onModalClose.bind(this);
@@ -110,17 +111,26 @@ export default class MediaEditModal extends Component {
     {
         axios.get('/architect/medias/' + mediaId)
             .then(response => {
+                var media = response.data.media;
+
                 this.setState({
-                    media: response.data.media,
+                    media: media,
                 });
 
-                if(response.data.media.metadata.fields !== undefined) {
+                if(media.metadata.fields !== undefined) {
                     this.setState({
-                        fields: response.data.media.metadata.fields,
+                        fields: media.metadata.fields,
                     });
                 }
 
-                this.mediaFieldsList.loadMedia(response.data.media);
+                this.mediaFieldsList.loadMedia(media);
+
+                var crops = this.state.crops;
+                crops.map(function(crop, i){
+                    crops[i].url = '/storage/medias/' + crop.directory + '/' + media.stored_filename;
+                });
+                this.mediaCropModal.setOriginal(media.stored_filename);
+                this.mediaCropModal.setCrops(crops);
             });
     }
 
@@ -141,8 +151,10 @@ export default class MediaEditModal extends Component {
         return (
           <div>
             <MediaCropModal
-              display = {this.state.cropsOpen}
-              onModalClose = {this.handleModalCropClose}
+                ref={(mediaCropModal) => this.mediaCropModal = mediaCropModal}
+                media = {this.state.media}
+                display = {this.state.cropsOpen}
+                onModalClose = {this.handleModalCropClose}
             />
 
             <div className="custom-modal" id="media-edit">
@@ -200,6 +212,7 @@ export default class MediaEditModal extends Component {
 
 if (document.getElementById('media-edit-modal')) {
     var languages = document.getElementById('media-edit-modal').getAttribute('languages');
+    var crops = document.getElementById('media-edit-modal').getAttribute('crops');
 
-    ReactDOM.render(<MediaEditModal languages={languages}/>, document.getElementById('media-edit-modal'));
+    ReactDOM.render(<MediaEditModal languages={languages} crops={crops}/>, document.getElementById('media-edit-modal'));
 }

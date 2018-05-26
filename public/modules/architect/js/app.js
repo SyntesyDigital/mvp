@@ -54922,7 +54922,8 @@ var MediaEditModal = function (_Component) {
                 description: {}
             },
             cropsOpen: false,
-            languages: JSON.parse(_this.props.languages)
+            languages: JSON.parse(_this.props.languages),
+            crops: JSON.parse(_this.props.crops)
         };
 
         _this.onModalClose = _this.onModalClose.bind(_this);
@@ -55017,17 +55018,26 @@ var MediaEditModal = function (_Component) {
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get('/architect/medias/' + mediaId).then(function (response) {
+                var media = response.data.media;
+
                 _this2.setState({
-                    media: response.data.media
+                    media: media
                 });
 
-                if (response.data.media.metadata.fields !== undefined) {
+                if (media.metadata.fields !== undefined) {
                     _this2.setState({
-                        fields: response.data.media.metadata.fields
+                        fields: media.metadata.fields
                     });
                 }
 
-                _this2.mediaFieldsList.loadMedia(response.data.media);
+                _this2.mediaFieldsList.loadMedia(media);
+
+                var crops = _this2.state.crops;
+                crops.map(function (crop, i) {
+                    crops[i].url = '/storage/medias/' + crop.directory + '/' + media.stored_filename;
+                });
+                _this2.mediaCropModal.setOriginal(media.stored_filename);
+                _this2.mediaCropModal.setCrops(crops);
             });
         }
     }, {
@@ -55052,6 +55062,10 @@ var MediaEditModal = function (_Component) {
                 'div',
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__MediaCropModal__["a" /* default */], {
+                    ref: function ref(mediaCropModal) {
+                        return _this3.mediaCropModal = mediaCropModal;
+                    },
+                    media: this.state.media,
                     display: this.state.cropsOpen,
                     onModalClose: this.handleModalCropClose
                 }),
@@ -55150,8 +55164,9 @@ var MediaEditModal = function (_Component) {
 
 if (document.getElementById('media-edit-modal')) {
     var languages = document.getElementById('media-edit-modal').getAttribute('languages');
+    var crops = document.getElementById('media-edit-modal').getAttribute('crops');
 
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MediaEditModal, { languages: languages }), document.getElementById('media-edit-modal'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MediaEditModal, { languages: languages, crops: crops }), document.getElementById('media-edit-modal'));
 }
 
 /***/ }),
@@ -55420,6 +55435,7 @@ var MediaCropModal = function (_Component) {
     var _this = _possibleConstructorReturn(this, (MediaCropModal.__proto__ || Object.getPrototypeOf(MediaCropModal)).call(this, props));
 
     _this.state = {
+      original: null,
       crops: [{
         name: "thumbnail",
         width: 500,
@@ -55442,11 +55458,24 @@ var MediaCropModal = function (_Component) {
     _this.selectCrop = _this.selectCrop.bind(_this);
     _this.onCropClose = _this.onCropClose.bind(_this);
     _this.onCropSubmit = _this.onCropSubmit.bind(_this);
-
     return _this;
   }
 
   _createClass(MediaCropModal, [{
+    key: 'setOriginal',
+    value: function setOriginal(original) {
+      this.setState({
+        original: original
+      });
+    }
+  }, {
+    key: 'setCrops',
+    value: function setCrops(crops) {
+      this.setState({
+        crops: crops
+      });
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       // console.log("MediaCropModal :: componentWillReceiveProps");
@@ -55626,14 +55655,14 @@ var MediaCropModal = function (_Component) {
                   ),
                   crop != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_cropper___default.a, {
                     ref: 'cropper',
-                    src: WEBROOT + '/modules/architect/images/default.jpg',
+                    src: '/storage/medias/original/' + this.state.original,
                     style: { height: $(window).height() - 360, width: '100%' }
                     // Cropper.js options
                     , aspectRatio: crop.width / crop.height,
                     guides: false,
                     crop: this.onCropDone.bind(this)
                   }),
-                  crop == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'original-image', style: { backgroundImage: 'url(/modules/architect/images/default.jpg)' } }),
+                  crop == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'original-image', style: { backgroundImage: 'url(/storage/medias/original/' + this.state.original + ')' } }),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'image-actions' },

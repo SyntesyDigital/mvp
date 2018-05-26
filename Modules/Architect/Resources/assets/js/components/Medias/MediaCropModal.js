@@ -10,6 +10,7 @@ class MediaCropModal extends Component {
         super(props);
 
         this.state = {
+            original : null,
           crops : [
             {
               name : "thumbnail",
@@ -35,8 +36,20 @@ class MediaCropModal extends Component {
         this.selectCrop = this.selectCrop.bind(this);
         this.onCropClose = this.onCropClose.bind(this);
         this.onCropSubmit = this.onCropSubmit.bind(this);
+    }
 
+    setOriginal(original)
+    {
+        this.setState({
+            original: original
+        });
+    }
 
+    setCrops(crops)
+    {
+        this.setState({
+            crops: crops
+        });
     }
 
     componentWillReceiveProps(nextProps){
@@ -174,7 +187,7 @@ class MediaCropModal extends Component {
                         {crop != null &&
                           <Cropper
                             ref='cropper'
-                            src={WEBROOT+'/modules/architect/images/default.jpg'}
+                            src={'/storage/medias/original/' + this.state.original}
                             style={{height: $(window).height() - 360, width: '100%'}}
                             // Cropper.js options
                             aspectRatio={crop.width / crop.height}
@@ -184,7 +197,7 @@ class MediaCropModal extends Component {
                         }
 
                         {crop == null &&
-                          <div className="original-image" style={{backgroundImage:'url(/modules/architect/images/default.jpg)'}}>
+                          <div className="original-image" style={{backgroundImage:'url(/storage/medias/original/' + this.state.original + ')'}}>
                           </div>
                         }
 
