@@ -34,7 +34,7 @@ class MediaRepository extends BaseRepository
             ->addColumn('preview', function ($item) {
                 switch($item->type) {
                     case "image":
-                        return '<img src="' . Storage::url('medias/' . config('images.display') .  '/' . $item->stored_filename) . '" class="thumbnail" />';
+                        return '<img src="' . Storage::url('medias/' . config('images.display') .  '/' . $item->stored_filename) . '?t='.time().'" class="thumbnail" />';
                         break;
 
                     default:

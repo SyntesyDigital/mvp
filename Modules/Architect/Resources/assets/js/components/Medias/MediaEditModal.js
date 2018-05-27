@@ -13,6 +13,7 @@ export default class MediaEditModal extends Component {
 
         this.state = {
             media : null,
+            image : {}, // Different format
             fields : {
                 title : {},
                 alt : {},
@@ -20,7 +21,7 @@ export default class MediaEditModal extends Component {
             },
             cropsOpen : false,
             languages : JSON.parse(this.props.languages),
-            crops : JSON.parse(this.props.crops),
+            formats : JSON.parse(this.props.formats),
         };
 
         this.onModalClose = this.onModalClose.bind(this);
@@ -79,8 +80,8 @@ export default class MediaEditModal extends Component {
     componentDidMount()
     {
         // IF media lib is present...
-        if(medias) {
-            medias._editModal = this;
+        if(architect.medias) {
+            architect.medias._editModal = this;
         }
     }
 
@@ -92,6 +93,10 @@ export default class MediaEditModal extends Component {
     }
 
     modalClose() {
+        if(architect.medias) {
+            architect.medias.refresh();
+        }
+
         TweenMax.to($("#media-edit"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
 
         }});
@@ -101,9 +106,10 @@ export default class MediaEditModal extends Component {
         this.modalClose();
     }
 
-    handleModalCropClose(){
+    handleModalCropClose(image){
       this.setState({
-          cropsOpen : false
+          cropsOpen : false,
+          image : image
       });
     }
 
@@ -113,10 +119,6 @@ export default class MediaEditModal extends Component {
             .then(response => {
                 var media = response.data.media;
 
-                this.setState({
-                    media: media,
-                });
-
                 if(media.metadata.fields !== undefined) {
                     this.setState({
                         fields: media.metadata.fields,
@@ -125,26 +127,56 @@ export default class MediaEditModal extends Component {
 
                 this.mediaFieldsList.loadMedia(media);
 
-                var crops = this.state.crops;
-                crops.map(function(crop, i){
-                    crops[i].url = '/storage/medias/' + crop.directory + '/' + media.stored_filename;
+                var image = {
+                    url: '/storage/medias/original/' + media.stored_filename,
+                    width: media.metadata.dimension.split('x')[0],
+                    height: media.metadata.dimension.split('x')[1],
+                    formats: []
+                };
+
+                this.state.formats.map(function(format, i){
+                    image['formats'].push({
+                        url : '/storage/medias/' + format.directory + '/' + media.stored_filename,
+                        width: format.width,
+                        height: format.height,
+                        name: format.name,
+                        ratio: format.ratio
+                    });
                 });
-                this.mediaCropModal.setOriginal(media.stored_filename);
-                this.mediaCropModal.setCrops(crops);
+
+                this.mediaCropModal.setState({
+                    image : image
+                });
+
+                this.setState({
+                    media: media,
+                    image: image
+                });
             });
     }
 
     onSubmit(e) {
         e.preventDefault();
 
-        axios.put('/architect/medias/' + this.state.media.id + '/update', {
+        var _this = this;
+
+        var data = {
             metadata : {
                 fields : this.state.fields
+            },
+            formats: this.state.image.formats
+        };
+
+        if(this.state.image.formats) {
+            data.formats = this.state.image.formats;
+        }
+
+        axios.put('/architect/medias/' + this.state.media.id + '/update', data)
+        .then(response => {
+            if(response.data.success) {
+                _this.modalClose();
             }
-        })
-            .then(response => {
-                console.log(response.data);
-            });
+        });
     }
 
     render() {
@@ -212,7 +244,7 @@ export default class MediaEditModal extends Component {
 
 if (document.getElementById('media-edit-modal')) {
     var languages = document.getElementById('media-edit-modal').getAttribute('languages');
-    var crops = document.getElementById('media-edit-modal').getAttribute('crops');
+    var formats = document.getElementById('media-edit-modal').getAttribute('formats');
 
-    ReactDOM.render(<MediaEditModal languages={languages} crops={crops}/>, document.getElementById('media-edit-modal'));
+    ReactDOM.render(<MediaEditModal languages={languages} formats={formats}/>, document.getElementById('media-edit-modal'));
 }

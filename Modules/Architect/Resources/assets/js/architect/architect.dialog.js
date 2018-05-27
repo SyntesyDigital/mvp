@@ -1,4 +1,8 @@
-var dialog = {
+//------------------------------------------//
+//      ARCHITECT DIALOG
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.dialog = {
 
     confirm: function(msg, _callback) {
         bootbox.confirm({

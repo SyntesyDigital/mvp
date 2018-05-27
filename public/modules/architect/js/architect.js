@@ -1,4 +1,41 @@
-var medias = {
+//------------------------------------------//
+//      BOOTSTRAP FOR ARCHITECT LIB
+//      @syntey-digital - 2018
+//------------------------------------------//
+var architect = {};
+
+//------------------------------------------//
+//      ARCHITECT DIALOG
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.dialog = {
+
+    confirm: function(msg, _callback) {
+        bootbox.confirm({
+            message: msg,
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                _callback(result);
+            }
+        });
+    }
+
+};
+
+//------------------------------------------//
+//      ARCHITECT MEDIAS MANAGER
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.medias = {
 
     _dropzone: null,
     _settings: null,
@@ -139,7 +176,10 @@ var medias = {
             .off('click')
             .on('click', function(e) {
                 e.preventDefault();
-                _this._editModal.modalOpen($(this).data('id'));
+
+                if(_this._editModal !== undefined) {
+                    _this._editModal.modalOpen($(this).data('id'));
+                }
             });
     }
 }

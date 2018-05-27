@@ -10,160 +10,131 @@ class MediaCropModal extends Component {
         super(props);
 
         this.state = {
-            original : null,
-          crops : [
-            {
-              name : "thumbnail",
-              width : 500,
-              height : 500,
-              ratio : "1:1",
-              url : "/modules/architect/images/default-thumb.jpg",
-              error : ""
-            },
-            {
-              name : "banner",
-              width : 1000,
-              height : 500,
-              ratio : "2:1",
-              url : "/modules/architect/images/default-banner.jpg",
-              error : "Imatge original massa petita per obtenir bona qualitat"
-            }
-          ],
-          selected : null
+            image : {},
+            currentFormat : null
         };
 
         this.onModalClose = this.onModalClose.bind(this);
-        this.selectCrop = this.selectCrop.bind(this);
+        this.setCurrentFormat = this.setCurrentFormat.bind(this);
         this.onCropClose = this.onCropClose.bind(this);
         this.onCropSubmit = this.onCropSubmit.bind(this);
     }
 
-    setOriginal(original)
+    componentWillReceiveProps(nextProps)
     {
-        this.setState({
-            original: original
-        });
-    }
-
-    setCrops(crops)
-    {
-        this.setState({
-            crops: crops
-        });
-    }
-
-    componentWillReceiveProps(nextProps){
-      // console.log("MediaCropModal :: componentWillReceiveProps");
-      // console.log(nextProps);
-
       if(nextProps.display){
-        this.modalOpen();
-      }
-      else {
-        this.modalClose();
+          this.modalOpen();
+      } else {
+          this.modalClose();
       }
     }
 
-    componentDidMount(){
+    componentDidMount()
+    {
       // console.log("MediaEditModal :: open");
       //TO TEST modal
       //this.modalOpen();
     }
 
-    modalOpen() {
+    modalOpen()
+    {
       TweenMax.to($("#media-crops"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
     }
 
-    modalClose() {
+    modalClose()
+    {
       TweenMax.to($("#media-crops"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
-
       }});
     }
 
-    onCropClose(event){
+    onCropClose(event)
+    {
       event.preventDefault();
 
       this.setState({
-        selected : null
+          currentFormat : null
       })
-
-
     }
 
-    onCropSubmit(event){
-      event.preventDefault();
+    onCropSubmit(event)
+    {
+        event.preventDefault();
 
-      // console.log("onCropSubmit");
-      // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+        var currentFormat = this.state.currentFormat;
+        var index = null;
+        this.state.image.formats.map(function(format, i){
+            if(currentFormat.name == format.name) {
+                index = i;
+            }
+        });
 
-      //TODO guardar el resultado en la nueva imagen
+        var formats = this.state.image.formats;
+        formats[index]['data'] = this.refs.cropper.getCroppedCanvas().toDataURL();
 
+        this.setState({
+            formats : formats
+        });
     }
 
-    onCropDone(){
+    onCropDone()
+    {
       // image in dataUrl
       //console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
       //console.log(this.refs.cropper);
     }
 
-    selectCrop(event) {
-
+    setCurrentFormat(event)
+    {
       var id = $(event.target).closest('.crop-item').attr('id');
-      // console.log("select crop : "+id)
 
       this.setState({
-        selected : id
+          currentFormat : this.state.image.formats[id]
       })
     }
 
-    onModalClose(e){
-      e.preventDefault();
-
-      this.props.onModalClose();
+    onModalClose(e)
+    {
+        e.preventDefault();
+        this.props.onModalClose(this.state.image);
     }
 
-    renderCrops() {
-      return (
-        this.state.crops.map((item,i) => (
-          <div
-              id={i}
-              className={"crop-item "+(this.state.selected != null && this.state.selected == i ? "selected" : "")}
-              key={i}
-              onClick={this.selectCrop}
-            >
-            <div className="crop-info">
-              <p className="crop-title">
-                {item.name}
-              </p>
-              <p className="crop-dimensions">
-                <b>Mida máxima</b>: {item.width}x{item.height} <br/>
-                <b>Ratio</b>: {item.ratio}
-              </p>
-              {item.error != "" &&
-                <p className="error-message">
-                  {item.error}
+    renderFormats()
+    {
+        return (
+          this.state.image.formats.map((format,i) => (
+            <div
+                id={i}
+                className={"crop-item "+(this.state.currentFormat != null && this.state.currentFormat == i ? "selected" : "")}
+                key={i}
+                onClick={this.setCurrentFormat}
+              >
+              <div className="crop-info">
+                <p className="crop-title">
+                  {format.name}
                 </p>
-              }
-            </div>
-            <div className="crop-image" style={{backgroundImage:'url('+item.url+')'}}>
-            </div>
+                <p className="crop-dimensions">
+                  <b>Mida máxima</b>: {format.width}x{format.height} <br/>
+                  <b>Ratio</b>: {format.ratio}
+                </p>
+                {format.error != "" &&
+                  <p className="error-message">
+                    {format.error}
+                  </p>
+                }
+              </div>
+              <div className="crop-image" style={{backgroundImage:'url('+format.url+')'}}>
+              </div>
 
-          </div>
-        ))
-      );
+            </div>
+          ))
+        );
     }
 
-    render() {
-
-        var crop = null;
-        if(this.state.selected != null){
-          crop = this.state.crops[this.state.selected];
-        }
-
+    render()
+    {
         return (
           <div className="custom-modal" id="media-crops">
             <div className="modal-background"></div>
-
 
               <div className="modal-container">
                   <div className="modal-header">
@@ -181,35 +152,36 @@ class MediaCropModal extends Component {
                     <div className="row">
                       <div className="col-xs-6 image-col">
 
-                        <h3>Original 1200x600 ( ratio 1:2 )</h3>
+                        {this.state.currentFormat != null &&
+                            <h3>{this.state.currentFormat.name} {this.state.currentFormat.width}x{this.state.currentFormat.height} ( ratio 1:2 )</h3>
+                        }
 
-
-                        {crop != null &&
+                        {this.state.currentFormat != null &&
                           <Cropper
                             ref='cropper'
-                            src={'/storage/medias/original/' + this.state.original}
-                            style={{height: $(window).height() - 360, width: '100%'}}
+                            src={this.state.image.url}
+                            style={{height: $(window).height() - 560, width: '100%'}}
                             // Cropper.js options
-                            aspectRatio={crop.width / crop.height}
+                            aspectRatio={this.state.currentFormat.width / this.state.currentFormat.height}
                             guides={false}
                             crop={this.onCropDone.bind(this)}
                           />
                         }
 
-                        {crop == null &&
-                          <div className="original-image" style={{backgroundImage:'url(/storage/medias/original/' + this.state.original + ')'}}>
+                        {this.state.currentFormat == null &&
+                          <div className="original-image" style={{backgroundImage:'url(' + this.state.image.url + ')'}}>
                           </div>
                         }
 
                         <div className="image-actions">
 
-                          {this.state.selected == null &&
+                          {this.state.currentFormat == null &&
                             <p>
                               Selecciona una opció de la llista de la dreta
                             </p>
                           }
 
-                          {this.state.selected != null &&
+                          {this.state.currentFormat != null &&
                             <div>
                               <a href="" className="btn btn-default" onClick={this.onCropClose}> Tancar </a>
                               <a href="" className="btn btn-primary" onClick={this.onCropSubmit}> Guardar </a>
@@ -219,9 +191,32 @@ class MediaCropModal extends Component {
 
                       </div>
                       <div className="col-xs-6 content-col">
+                          {this.state.image.formats && this.state.image.formats.map((format,i) => (
+                            <div
+                                id={i}
+                                className={"crop-item "+(this.state.currentFormat != null && this.state.currentFormat == i ? "selected" : "")}
+                                key={i}
+                                onClick={this.setCurrentFormat}
+                              >
+                              <div className="crop-info">
+                                <p className="crop-title">
+                                  {format.name}
+                                </p>
+                                <p className="crop-dimensions">
+                                  <b>Mida máxima</b>: {format.width}x{format.height} <br/>
+                                  <b>Ratio</b>: {format.ratio}
+                                </p>
+                                {format.error != "" &&
+                                  <p className="error-message">
+                                    {format.error}
+                                  </p>
+                                }
+                              </div>
+                              <div className="crop-image" style={{backgroundImage:'url('+ (format.data ? format.data : format.url) +')'}}>
+                              </div>
 
-                          {this.renderCrops()}
-
+                            </div>
+                            ))}
                       </div>
                     </div>
                   </div>

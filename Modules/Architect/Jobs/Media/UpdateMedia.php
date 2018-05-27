@@ -12,18 +12,41 @@ use Auth;
 class UpdateMedia
 {
     private $fields = [
-        'metadata'
+        'metadata',
+        'formats'
     ];
 
     public function __construct(Media $media, $attributes = [])
     {
         $this->media = $media;
         $this->attributes = array_only($attributes, $this->fields);
+
     }
 
     public static function fromRequest(Media $media, UpdateMediaRequest $request)
     {
         return new self($media, $request->all());
+    }
+
+
+    private function processImageFormats()
+    {
+        $formats = isset($this->attributes['formats']) ? $this->attributes['formats'] : null;
+
+        if(!$formats) {
+            return;
+        }
+
+        foreach($formats as $f) {
+            $data = isset($f['data']) ? $f['data'] : null;
+
+            if($data) {
+                $path = str_replace('/storage/', '/public/', $f['url']);
+                $imageData = (string) Image::make($data)->encode();
+
+                Storage::put($path, $imageData);
+            }
+        }
     }
 
 
@@ -42,6 +65,8 @@ class UpdateMedia
         if($this->media->update([
             'metadata' => $metadata
         ])) {
+            $this->processImageFormats();
+
             return true;
         }
 
