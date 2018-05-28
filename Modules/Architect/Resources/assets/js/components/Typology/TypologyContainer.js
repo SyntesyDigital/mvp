@@ -250,6 +250,8 @@ class TypologyContainer extends Component {
      this.setState({
          'typology' : response.typology
      })
+
+     toastr.success('ok');
  }
 
   render() {

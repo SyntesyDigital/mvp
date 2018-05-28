@@ -45067,6 +45067,8 @@ var TypologyContainer = function (_Component) {
             this.setState({
                 'typology': response.typology
             });
+
+            toastr.success('ok');
         }
     }, {
         key: 'render',
