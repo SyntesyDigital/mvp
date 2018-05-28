@@ -15035,3 +15035,32 @@ nav.main-nav ul li a:hover {
   background-color: #ddd;
 }
 
+.dataTables_wrapper .form-group.form-group-sm {
+  margin-top: 0px;
+}
+
+.dataTables_wrapper .form-group.form-group-sm .form-control,
+.dataTables_wrapper .form-group.form-group-sm .cke_textarea_inline,
+.dataTables_wrapper .form-group.form-group-sm .cke_textarea_inline {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.table.dataTable .btn.btn-link {
+  padding: 0px;
+}
+
+.table.dataTable .thumbnail {
+  margin-bottom: 0px;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+  vertical-align: middle;
+}
+

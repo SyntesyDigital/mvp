@@ -15,12 +15,12 @@ architect.dialog = {
             message: msg,
             buttons: {
                 confirm: {
-                    label: 'Yes',
-                    className: 'btn-success'
+                    label: 'Sí',
+                    className: 'btn-primary'
                 },
                 cancel: {
                     label: 'No',
-                    className: 'btn-danger'
+                    className: 'btn-default'
                 }
             },
             callback: function (result) {
@@ -61,13 +61,15 @@ architect.medias = {
             url: _this._settings.urls.store,
             uploadMultiple: false,
             parallelUploads: 1,
+            createImageThumbnails : false,
             // acceptedFiles: _this._settings.acceptedFiles,
             addRemoveLinks: false,
             maxFilesize: _this._settings.maxFilesize,
             paramName: _this._settings.paramName,
+            /*
             thumbnail: function(file, dataUrl) {
                 return false;
-            }
+            }*/
         };
 
         this._dropzone = new Dropzone(_this._settings.identifier, settings);
@@ -129,8 +131,11 @@ architect.medias = {
     	        "url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		processing: true,
-            serverSide: true,
+          serverSide: true,
     	    pageLength: 20,
+          language: {
+              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+          },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},

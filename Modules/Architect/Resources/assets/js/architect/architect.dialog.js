@@ -9,12 +9,12 @@ architect.dialog = {
             message: msg,
             buttons: {
                 confirm: {
-                    label: 'Yes',
-                    className: 'btn-success'
+                    label: 'Sí',
+                    className: 'btn-primary'
                 },
                 cancel: {
                     label: 'No',
-                    className: 'btn-danger'
+                    className: 'btn-default'
                 }
             },
             callback: function (result) {

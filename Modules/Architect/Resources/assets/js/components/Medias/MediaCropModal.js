@@ -72,7 +72,8 @@ class MediaCropModal extends Component {
         formats[index]['data'] = this.refs.cropper.getCroppedCanvas().toDataURL();
 
         this.setState({
-            formats : formats
+            formats : formats,
+            currentFormat : null
         });
     }
 
@@ -183,8 +184,8 @@ class MediaCropModal extends Component {
 
                           {this.state.currentFormat != null &&
                             <div>
-                              <a href="" className="btn btn-default" onClick={this.onCropClose}> Tancar </a>
-                              <a href="" className="btn btn-primary" onClick={this.onCropSubmit}> Guardar </a>
+                              <a href="" className="btn btn-default" onClick={this.onCropClose}> Cancel·lar </a>
+                              <a href="" className="btn btn-primary" onClick={this.onCropSubmit}> Aplicar </a>
                             </div>
                           }
                         </div>
@@ -222,7 +223,7 @@ class MediaCropModal extends Component {
                   </div>
 
                   <div className="modal-footer">
-                    <a href="" className="btn btn-default" onClick={this.onModalClose}> Tancar </a> &nbsp;
+                    <a href="" className="btn btn-default" onClick={this.onModalClose}> Tornar </a> &nbsp;
                   </div>
 
                 </div>

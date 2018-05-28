@@ -55171,7 +55171,7 @@ var MediaEditModal = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
                                     { href: '', className: 'btn btn-default', onClick: this.onModalClose },
-                                    ' Tancar '
+                                    ' Cancel\xB7lar '
                                 ),
                                 ' \xA0',
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -55530,7 +55530,8 @@ var MediaCropModal = function (_Component) {
       formats[index]['data'] = this.refs.cropper.getCroppedCanvas().toDataURL();
 
       this.setState({
-        formats: formats
+        formats: formats,
+        currentFormat: null
       });
     }
   }, {
@@ -55685,12 +55686,12 @@ var MediaCropModal = function (_Component) {
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'a',
                         { href: '', className: 'btn btn-default', onClick: this.onCropClose },
-                        ' Tancar '
+                        ' Cancel\xB7lar '
                       ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'a',
                         { href: '', className: 'btn btn-primary', onClick: this.onCropSubmit },
-                        ' Guardar '
+                        ' Aplicar '
                       )
                     )
                   )
@@ -55755,7 +55756,7 @@ var MediaCropModal = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'a',
                 { href: '', className: 'btn btn-default', onClick: this.onModalClose },
-                ' Tancar '
+                ' Tornar '
               ),
               ' \xA0'
             )
