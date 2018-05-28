@@ -129,8 +129,8 @@ export default class MediaEditModal extends Component {
 
                 var image = {
                     url: '/storage/medias/original/' + media.stored_filename,
-                    width: media.metadata.dimension.split('x')[0],
-                    height: media.metadata.dimension.split('x')[1],
+                    width: media.metadata.dimension.split('x')[0] ? media.metadata.dimension.split('x')[0] : 0,
+                    height: media.metadata.dimension.split('x')[1] ? media.metadata.dimension.split('x')[1] : 0,
                     formats: []
                 };
 

@@ -95,7 +95,7 @@ class CreateMedia
                 'type' => $this->getFileType(),
                 'mime_type' => $this->getFileMimeType(),
                 'author_id' => Auth::user()->id,
-                'metadata' => $this->metadata ? json_encode($this->metadata) : null
+                'metadata' => $this->metadata ? $this->metadata : null
             ])
             : false;
     }

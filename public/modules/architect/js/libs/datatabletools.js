@@ -127,7 +127,7 @@ var DataTableTools = {
                 var redirect = $(this).data('redirect');
                 var confirmMessage = $(this).data('confirm-message');
 
-                dialog.confirm(confirmMessage, function(result){
+                architect.dialog.confirm(confirmMessage, function(result){
                     if(result) {
 
                         if(redirect) {

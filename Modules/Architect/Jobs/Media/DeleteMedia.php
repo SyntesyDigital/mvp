@@ -30,7 +30,7 @@ class DeleteMedia
                 );
 
                 // Remove all formats
-                foreach($config["formats"] as $format) {
+                foreach(config('images.formats') as $format) {
                     $files[] = sprintf('%s/%s/%s',
                         config('images.storage_directory'),
                         $format['directory'],
