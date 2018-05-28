@@ -7,7 +7,10 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Typologies
     Route::get('/typologies', 'TypologiesController@index')->name('typologies');
-    Route::get('/typologies/show', 'TypologiesController@show')->name('typologies.show');
+    Route::post('/typologies', 'TypologiesController@store')->name('typologies.store');
+    Route::get('/typologies/create', 'TypologiesController@create')->name('typologies.create');
+    Route::get('/typologies/{typology?}', 'TypologiesController@show')->name('typologies.show');
+    Route::put('/typologies/{typology?}/update', 'TypologiesController@update')->name('typologies.update');
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

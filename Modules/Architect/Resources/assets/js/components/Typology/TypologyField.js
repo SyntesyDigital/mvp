@@ -82,52 +82,48 @@ function collectSource(connect, monitor) {
 class TypologyField extends Component {
 
 
-	constructor(props){
-		super(props);
-
-		this.onRemoveField = this.onRemoveField.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.onOpenSettings = this.onOpenSettings.bind(this);
+	constructor(props) {
+	    super(props);
+	    this.onRemoveField = this.onRemoveField.bind(this);
+	    this.handleChange = this.handleChange.bind(this);
+	    this.onOpenSettings = this.onOpenSettings.bind(this);
 	}
 
 	onRemoveField(event) {
-		event.preventDefault();
-
-		this.props.onRemoveField(this.props.id);
+	    event.preventDefault();
+	    this.props.onRemoveField(this.props.id);
 	}
 
 	onOpenSettings(event) {
-		event.preventDefault();
-
-		this.props.onOpenSettings(this.props.id);
+	    event.preventDefault();
+	    this.props.onOpenSettings(this.props.id);
 	}
 
 	handleChange(event) {
 
-    var field = null;
+	    var field = null;
 
-    if(event.target.type == "text"){
-      field = {
-				id : this.props.id,
-        name : event.target.name,
-        value : event.target.value
-      };
-    }
+	    if (event.target.type == "text") {
+	        field = {
+	            id: this.props.id,
+	            name: event.target.name,
+	            value: event.target.value
+	        };
+	    }
 
-    if(field != null)
-      this.props.onFieldChange(field);
-  }
-
+	    if (field != null)
+	        this.props.onFieldChange(field);
+	}
 
 
   render() {
 
-    const {
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
-		const opacity = isDragging ? 0 : 1
+	const {
+		isDragging,
+		connectDragSource,
+		connectDropTarget,
+	} = this.props
+	const opacity = isDragging ? 0 : 1
 
     return connectDragSource(
 			connectDropTarget(
@@ -149,9 +145,9 @@ class TypologyField extends Component {
         </div>
 
         <div className="field-actions">
-          <a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
-					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
-					&nbsp;&nbsp;
+			<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
+			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+			&nbsp;&nbsp;
         </div>
       </div>),
     );
@@ -160,7 +156,7 @@ class TypologyField extends Component {
 }
 
 TypologyField.propTypes = {
-  connectDragSource: PropTypes.func.isRequired,
+	connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 	isDragging: PropTypes.bool.isRequired,

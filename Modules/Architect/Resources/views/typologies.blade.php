@@ -6,7 +6,7 @@
       <div class="col-md-offset-2 col-md-8">
 
         <div class="page-title">
-          <h1>Tipologies</h1> <a href="{{route('typologies.show')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tipologia</a>
+          <h1>Tipologies</h1> <a href="{{route('typologies.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tipologia</a>
         </div>
 
         <div class="grid-items">

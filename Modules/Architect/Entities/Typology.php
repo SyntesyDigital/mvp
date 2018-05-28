@@ -20,10 +20,10 @@ class Typology extends Model
      */
     protected $fillable = [
         'name',
-        'fields',
+        // 'fields',
         'identifier',
-        'is_page',
-        'display_pagebuilder'
+        // 'is_page',
+        // 'display_pagebuilder'
     ];
 
     /**

@@ -7,8 +7,17 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Architect\Http\Requests\SaveContent;
 
+// Requests
+use Modules\Architect\Http\Requests\Typology\CreateTypologyRequest;
+use Modules\Architect\Jobs\Typology\CreateTypology;
+
+// Jobs
+use Modules\Architect\Http\Requests\Typology\UpdateTypologyRequest;
+use Modules\Architect\Jobs\Typology\UpdateTypology;
+
+// Models
+use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
 
@@ -19,13 +28,39 @@ class TypologiesController extends Controller
         return view('architect::typologies');
     }
 
-    public function show()
+    public function create()
     {
-      return view('architect::typology');
+        return view('architect::typology');
     }
 
-    public function save(SaveContent $request)
+    public function show(Typology $typology)
     {
+        return view('architect::typology', [
+            'typology' => $typology->load('fields')
+        ]);
+    }
 
+    public function store(CreateTypologyRequest $request)
+    {
+        $typology = dispatch_now(CreateTypology::fromRequest($request));
+
+        return $typology ? response()->json([
+            'success' => true,
+            'typology' => $typology
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function update(Typology $typology, UpdateTypologyRequest $request)
+    {
+        $typology = dispatch_now(UpdateTypology::fromRequest($typology, $request));
+
+        return $typology ? response()->json([
+            'success' => true,
+            'typology' => $typology
+        ]) : response()->json([
+            'success' => false
+        ], 500);
     }
 }

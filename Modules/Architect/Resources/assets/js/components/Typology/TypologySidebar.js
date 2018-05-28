@@ -75,6 +75,11 @@ class TypologySidebar extends Component {
         </div>
 
         <div className="form-group bmd-form-group">
+           <label htmlFor="identifier" className="bmd-label-floating">Identifier</label>
+           <input type="text" className="form-control" id="identifier" name="identifier" value={this.props.fields.identifier} onChange={this.handleChange} />
+        </div>
+
+        <div className="form-group bmd-form-group">
            <label htmlFor="icon" className="bmd-label-floating">Icona</label>
            <Select
                 id="icon" name="icon"

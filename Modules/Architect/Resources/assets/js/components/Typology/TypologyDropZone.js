@@ -124,23 +124,24 @@ class TypologyDropZone extends Component {
 	renderFields() {
 		const fields = this.props.fields;
 
+
 		return (
 			fields.map((item, i) => (
-
-					<TypologyField
-						key={item.id}
-						index={i}
-						id={item.id}
-						type={item.type}
-						label={item.label}
-						icon={item.icon}
-						moveField={this.moveField}
-						onRemoveField={this.handleRemoveField}
-						onFieldChange={this.handleFieldChange}
-						onOpenSettings={this.handleOpenSettings}
-					/>
-
-				))
+				<TypologyField
+					key={item.id}
+					index={i}
+					id={item.id}
+					type={item.type}
+					label={item.label}
+					icon={item.icon}
+					name={item.name}
+					identifier={item.identifier}
+					moveField={this.moveField}
+					onRemoveField={this.handleRemoveField}
+					onFieldChange={this.handleFieldChange}
+					onOpenSettings={this.handleOpenSettings}
+				/>
+			))
 		);
 
 
