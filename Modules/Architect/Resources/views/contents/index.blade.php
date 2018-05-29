@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('architect::contents.modal-new')
+
 <div class="container leftbar-page">
 
   <div class="sidebar">
@@ -37,10 +39,30 @@
   <div class="col-xs-offset-2 col-xs-10 page-content">
 
     <h3 class="card-title">Continguts</h3>
-    <a href="{{route('contents.show')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir contingut</a>
+    <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir contingut</a>
 
   </div>
 
 </div>
 
 @stop
+
+@push('javascripts')
+
+<script>
+$(function(){
+
+  $(".btn-primary").click(function(e){
+    e.preventDefault();
+    TweenMax.to($("#new-content-modal"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+  });
+
+  $(document).on('click',"#new-content-modal .close-btn",function(e){
+    e.preventDefault();
+    TweenMax.to($("#new-content-modal"),0.5,{opacity:0,display:"none",ease:Power2.easeInOut});
+  });
+
+});
+</script>
+
+@endpush

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
+import CustomFieldTypes from './../../common/CustomFieldTypes';
+
 class TextField extends Component {
 
   constructor(props){
@@ -52,7 +54,7 @@ class TextField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className="fa fa-font"></i> Text
+            <i className={"fa "+CustomFieldTypes.TEXT.icon}></i> {CustomFieldTypes.TEXT.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

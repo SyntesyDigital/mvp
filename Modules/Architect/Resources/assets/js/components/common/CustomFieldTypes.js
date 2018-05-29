@@ -1,6 +1,14 @@
 export default {
-	TEXT: 'text',
-	RICH: 'rich_text',
+	TEXT: {
+		value:'text',
+		name:'Text',
+		icon:'fa-font'
+	},
+	RICH: {
+		value:'rich_text',
+		name:'Text enriquit',
+		icon:'fa-font'
+	},
 	IMAGE: 'image',
 	DATE: 'date',
 	MAP: 'map',

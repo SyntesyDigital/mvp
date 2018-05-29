@@ -14063,6 +14063,12 @@ nav.main-nav ul li a:hover {
   margin: 0;
 }
 
+.grid-items a {
+  display: block;
+  color: #455660;
+  text-decoration: none;
+}
+
 .page-bar {
   position: fixed;
   top: 70px;
@@ -14684,6 +14690,16 @@ nav.main-nav ul li a:hover {
 
 .custom-modal .setup-field .form-group {
   padding-left: 53px;
+}
+
+.custom-modal.no-buttons .modal-header {
+  border-bottom: none;
+  background-color: #fff;
+  height: 0px;
+}
+
+.custom-modal.no-buttons .modal-content {
+  /*padding-bottom:0px;*/
 }
 
 .content {

@@ -4,6 +4,8 @@
   opacity:0;
   z-index:1000;
 
+
+
   .form-group .form-control, .form-group .cke_textarea_inline{
     border-top:1px solid #ccc;
     border-left:1px solid #ccc;
@@ -157,6 +159,17 @@
 
     .form-group{
       padding-left: 53px;
+    }
+  }
+
+  &.no-buttons {
+    .modal-header{
+      border-bottom: none;
+      background-color:#fff;
+      height: 0px;
+    }
+    .modal-content {
+      /*padding-bottom:0px;*/
     }
   }
 
