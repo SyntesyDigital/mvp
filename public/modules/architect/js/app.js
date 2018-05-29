@@ -1036,7 +1036,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
 
 /***/ }),
 /* 15 */
@@ -1078,7 +1078,7 @@ module.exports = emptyObject;
 if (true) {
   var invariant = __webpack_require__(8);
   var warning = __webpack_require__(9);
-  var ReactPropTypesSecret = __webpack_require__(30);
+  var ReactPropTypesSecret = __webpack_require__(31);
   var loggedTypeFailures = {};
 }
 
@@ -1596,6 +1596,69 @@ module.exports = baseRest;
 
 /***/ }),
 /* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+	TEXT: {
+		value: 'text',
+		name: 'Text',
+		icon: 'fa-font'
+	},
+	RICH: {
+		value: 'rich_text',
+		name: 'Text enriquit',
+		icon: 'fa-align-left'
+	},
+	IMAGE: {
+		value: 'image',
+		name: 'Imatge',
+		icon: 'fa-picture-o'
+	},
+	DATE: {
+		value: 'date',
+		name: 'Data',
+		icon: 'fa-calendar'
+	},
+	MAP: {
+		value: 'map',
+		name: 'Localització',
+		icon: 'fa-map-marker'
+	},
+	IMAGES: {
+		value: 'images',
+		name: 'Images',
+		icon: 'fa-th-large'
+	},
+	CONTENTS: {
+		value: 'contents',
+		name: 'Continguts',
+		icon: 'fa-file-o'
+	},
+	LIST: {
+		value: 'list',
+		name: 'Llista',
+		icon: 'fa-th-list'
+	},
+	BOOLEAN: {
+		value: 'boolean',
+		name: 'Booleà',
+		icon: 'fa-check-square-o'
+	},
+	LINK: {
+		value: 'link',
+		name: 'Enllaç',
+		icon: 'fa-link'
+	},
+	VIDEO: {
+		value: 'video',
+		name: 'Video',
+		icon: 'fa-video-camera'
+	}
+});
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1623,7 +1686,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1813,7 +1876,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1832,7 +1895,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1874,7 +1937,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1917,7 +1980,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1975,7 +2038,7 @@ Object.defineProperty(exports, 'DropTarget', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2171,7 +2234,7 @@ function endDrag() {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(83),
@@ -2204,7 +2267,7 @@ module.exports = SetCache;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(18);
@@ -2216,7 +2279,7 @@ module.exports = nativeCreate;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var listCacheClear = __webpack_require__(206),
@@ -2254,10 +2317,10 @@ module.exports = ListCache;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(39);
+var eq = __webpack_require__(40);
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -2281,7 +2344,7 @@ module.exports = assocIndexOf;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -2324,7 +2387,7 @@ module.exports = eq;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isKeyable = __webpack_require__(212);
@@ -2348,7 +2411,7 @@ module.exports = getMapData;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /**
@@ -2375,7 +2438,7 @@ module.exports = arrayMap;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /**
@@ -2394,7 +2457,7 @@ module.exports = cacheHas;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArrayLike = __webpack_require__(20),
@@ -2433,7 +2496,7 @@ module.exports = isArrayLikeObject;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2480,7 +2543,7 @@ function removeTarget(targetId) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2502,33 +2565,6 @@ function checkDecoratorArguments(functionName, signature) {
 		}
 	}
 }
-
-/***/ }),
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-	TEXT: {
-		value: 'text',
-		name: 'Text',
-		icon: 'fa-font'
-	},
-	RICH: {
-		value: 'rich_text',
-		name: 'Text enriquit',
-		icon: 'fa-font'
-	},
-	IMAGE: 'image',
-	DATE: 'date',
-	MAP: 'map',
-	IMAGES: 'images',
-	CONTENTS: 'contents',
-	LIST: 'list',
-	BOOLEAN: 'boolean',
-	LINK: 'link',
-	VIDEO: 'video'
-});
 
 /***/ }),
 /* 47 */
@@ -4922,8 +4958,8 @@ var containsNode = __webpack_require__(75);
 var focusNode = __webpack_require__(78);
 var emptyObject = __webpack_require__(15);
 var checkPropTypes = __webpack_require__(16);
-var hyphenateStyleName = __webpack_require__(31);
-var camelizeStyleName = __webpack_require__(32);
+var hyphenateStyleName = __webpack_require__(32);
+var camelizeStyleName = __webpack_require__(33);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -22198,7 +22234,7 @@ var _hoistNonReactStatics = __webpack_require__(94);
 
 var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-var _checkDecoratorArguments = __webpack_require__(45);
+var _checkDecoratorArguments = __webpack_require__(46);
 
 var _checkDecoratorArguments2 = _interopRequireDefault(_checkDecoratorArguments);
 
@@ -22336,7 +22372,7 @@ exports.default = dragOffset;
 exports.getSourceClientOffset = getSourceClientOffset;
 exports.getDifferenceFromInitialOffset = getDifferenceFromInitialOffset;
 
-var _dragDrop = __webpack_require__(34);
+var _dragDrop = __webpack_require__(35);
 
 var initialState = {
 	initialSourceClientOffset: null,
@@ -22438,7 +22474,7 @@ function matchesType(targetType, draggedItemType) {
 
 var baseDifference = __webpack_require__(117),
     baseRest = __webpack_require__(27),
-    isArrayLikeObject = __webpack_require__(43);
+    isArrayLikeObject = __webpack_require__(44);
 
 /**
  * Creates an array excluding all given values using
@@ -22473,12 +22509,12 @@ module.exports = without;
 /* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(35),
+var SetCache = __webpack_require__(36),
     arrayIncludes = __webpack_require__(85),
     arrayIncludesWith = __webpack_require__(86),
-    arrayMap = __webpack_require__(41),
+    arrayMap = __webpack_require__(42),
     baseUnary = __webpack_require__(87),
-    cacheHas = __webpack_require__(42);
+    cacheHas = __webpack_require__(43);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -22730,9 +22766,9 @@ var _intersection = __webpack_require__(232);
 
 var _intersection2 = _interopRequireDefault(_intersection);
 
-var _dragDrop = __webpack_require__(34);
+var _dragDrop = __webpack_require__(35);
 
-var _registry = __webpack_require__(44);
+var _registry = __webpack_require__(45);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22869,10 +22905,10 @@ module.exports = arrayPush;
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(35),
+var SetCache = __webpack_require__(36),
     arrayIncludes = __webpack_require__(85),
     arrayIncludesWith = __webpack_require__(86),
-    cacheHas = __webpack_require__(42),
+    cacheHas = __webpack_require__(43),
     createSet = __webpack_require__(231),
     setToArray = __webpack_require__(93);
 
@@ -23358,7 +23394,7 @@ function isValidType(type, allowArray) {
 /* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(39),
+var eq = __webpack_require__(40),
     isArrayLike = __webpack_require__(20),
     isIndex = __webpack_require__(97),
     isObject = __webpack_require__(13);
@@ -23488,7 +23524,7 @@ var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)(module)))
 
 /***/ }),
 /* 136 */
@@ -39751,7 +39787,7 @@ module.exports = find;
 /* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(37),
+var ListCache = __webpack_require__(38),
     stackClear = __webpack_require__(345),
     stackDelete = __webpack_require__(346),
     stackGet = __webpack_require__(347),
@@ -39784,9 +39820,9 @@ module.exports = Stack;
 /* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(35),
+var SetCache = __webpack_require__(36),
     arraySome = __webpack_require__(152),
-    cacheHas = __webpack_require__(42);
+    cacheHas = __webpack_require__(43);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -44767,13 +44803,13 @@ var SelectorSettingsField = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dnd__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dnd__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dnd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd_html5_backend__ = __webpack_require__(261);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd_html5_backend___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd_html5_backend__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_immutability_helper__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__TypologyDropZone__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__TypologySidebar__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__TypologyDragField__ = __webpack_require__(303);
@@ -45022,17 +45058,17 @@ var TypologyContainer = function (_Component) {
                 fields: this.state.inputs,
                 onFieldChange: this.handleInputChange
               },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT, label: 'Text', icon: 'fa-font' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH, label: 'Text enriquit', icon: 'fa-align-left' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE, label: 'Imatge', icon: 'fa-picture-o' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].DATE, label: 'Data', icon: 'fa-calendar' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].MAP, label: 'Localitzaci\xF3', icon: 'fa-map-marker' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGES, label: 'Images', icon: 'fa-th-large' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS, label: 'Continguts', icon: 'fa-file-o' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LIST, label: 'Llista', icon: 'fa-th-list' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].BOOLEAN, label: 'Boole\xE0', icon: 'fa-check-square-o' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LINK, label: 'Enlla\xE7', icon: 'fa-link' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].VIDEO, label: 'Video', icon: 'fa-video-camera' })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].DATE }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].MAP }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGES }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LIST }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].BOOLEAN }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LINK }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].VIDEO })
             )
           )
         )
@@ -45064,7 +45100,7 @@ var invariant = __webpack_require__(8);
 var warning = __webpack_require__(9);
 var assign = __webpack_require__(11);
 
-var ReactPropTypesSecret = __webpack_require__(30);
+var ReactPropTypesSecret = __webpack_require__(31);
 var checkPropTypes = __webpack_require__(16);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
@@ -45664,7 +45700,7 @@ var _reducers = __webpack_require__(193);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
-var _dragDrop = __webpack_require__(34);
+var _dragDrop = __webpack_require__(35);
 
 var dragDropActions = _interopRequireWildcard(_dragDrop);
 
@@ -46270,9 +46306,9 @@ var _without = __webpack_require__(116);
 
 var _without2 = _interopRequireDefault(_without);
 
-var _dragDrop = __webpack_require__(34);
+var _dragDrop = __webpack_require__(35);
 
-var _registry = __webpack_require__(44);
+var _registry = __webpack_require__(45);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46341,7 +46377,7 @@ function dragOperation() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Hash = __webpack_require__(196),
-    ListCache = __webpack_require__(37),
+    ListCache = __webpack_require__(38),
     Map = __webpack_require__(84);
 
 /**
@@ -46405,7 +46441,7 @@ module.exports = Hash;
 /* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(36);
+var nativeCreate = __webpack_require__(37);
 
 /**
  * Removes all key-value entries from the hash.
@@ -46559,7 +46595,7 @@ module.exports = hashDelete;
 /* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(36);
+var nativeCreate = __webpack_require__(37);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -46595,7 +46631,7 @@ module.exports = hashGet;
 /* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(36);
+var nativeCreate = __webpack_require__(37);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -46624,7 +46660,7 @@ module.exports = hashHas;
 /* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(36);
+var nativeCreate = __webpack_require__(37);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -46672,7 +46708,7 @@ module.exports = listCacheClear;
 /* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(38);
+var assocIndexOf = __webpack_require__(39);
 
 /** Used for built-in method references. */
 var arrayProto = Array.prototype;
@@ -46713,7 +46749,7 @@ module.exports = listCacheDelete;
 /* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(38);
+var assocIndexOf = __webpack_require__(39);
 
 /**
  * Gets the list cache value for `key`.
@@ -46738,7 +46774,7 @@ module.exports = listCacheGet;
 /* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(38);
+var assocIndexOf = __webpack_require__(39);
 
 /**
  * Checks if a list cache value for `key` exists.
@@ -46760,7 +46796,7 @@ module.exports = listCacheHas;
 /* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(38);
+var assocIndexOf = __webpack_require__(39);
 
 /**
  * Sets the list cache `key` to `value`.
@@ -46792,7 +46828,7 @@ module.exports = listCacheSet;
 /* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(40);
+var getMapData = __webpack_require__(41);
 
 /**
  * Removes `key` and its value from the map.
@@ -46837,7 +46873,7 @@ module.exports = isKeyable;
 /* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(40);
+var getMapData = __webpack_require__(41);
 
 /**
  * Gets the map value for `key`.
@@ -46859,7 +46895,7 @@ module.exports = mapCacheGet;
 /* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(40);
+var getMapData = __webpack_require__(41);
 
 /**
  * Checks if a map value for `key` exists.
@@ -46881,7 +46917,7 @@ module.exports = mapCacheHas;
 /* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(40);
+var getMapData = __webpack_require__(41);
 
 /**
  * Sets the map `key` to `value`.
@@ -47182,7 +47218,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = refCount;
 
-var _registry = __webpack_require__(44);
+var _registry = __webpack_require__(45);
 
 function refCount() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -47207,7 +47243,7 @@ function refCount() {
 var arrayFilter = __webpack_require__(124),
     baseRest = __webpack_require__(27),
     baseXor = __webpack_require__(228),
-    isArrayLikeObject = __webpack_require__(43);
+    isArrayLikeObject = __webpack_require__(44);
 
 /**
  * Creates an array of unique values that is the
@@ -47355,7 +47391,7 @@ module.exports = createSet;
 /* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayMap = __webpack_require__(41),
+var arrayMap = __webpack_require__(42),
     baseIntersection = __webpack_require__(233),
     baseRest = __webpack_require__(27),
     castArrayLikeObject = __webpack_require__(234);
@@ -47391,12 +47427,12 @@ module.exports = intersection;
 /* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(35),
+var SetCache = __webpack_require__(36),
     arrayIncludes = __webpack_require__(85),
     arrayIncludesWith = __webpack_require__(86),
-    arrayMap = __webpack_require__(41),
+    arrayMap = __webpack_require__(42),
     baseUnary = __webpack_require__(87),
-    cacheHas = __webpack_require__(42);
+    cacheHas = __webpack_require__(43);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMin = Math.min;
@@ -47471,7 +47507,7 @@ module.exports = baseIntersection;
 /* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArrayLikeObject = __webpack_require__(43);
+var isArrayLikeObject = __webpack_require__(44);
 
 /**
  * Casts `value` to an empty array if it's not an array like object.
@@ -47768,7 +47804,7 @@ var _asap = __webpack_require__(238);
 
 var _asap2 = _interopRequireDefault(_asap);
 
-var _registry = __webpack_require__(44);
+var _registry = __webpack_require__(45);
 
 var _getNextUniqueId = __webpack_require__(240);
 
@@ -48603,7 +48639,7 @@ var _shallowEqualScalar = __webpack_require__(128);
 
 var _shallowEqualScalar2 = _interopRequireDefault(_shallowEqualScalar);
 
-var _checkDecoratorArguments = __webpack_require__(45);
+var _checkDecoratorArguments = __webpack_require__(46);
 
 var _checkDecoratorArguments2 = _interopRequireDefault(_checkDecoratorArguments);
 
@@ -48740,7 +48776,7 @@ var _isPlainObject = __webpack_require__(17);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _checkDecoratorArguments = __webpack_require__(45);
+var _checkDecoratorArguments = __webpack_require__(46);
 
 var _checkDecoratorArguments2 = _interopRequireDefault(_checkDecoratorArguments);
 
@@ -49481,7 +49517,7 @@ var _isPlainObject = __webpack_require__(17);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _checkDecoratorArguments = __webpack_require__(45);
+var _checkDecoratorArguments = __webpack_require__(46);
 
 var _checkDecoratorArguments2 = _interopRequireDefault(_checkDecoratorArguments);
 
@@ -50579,7 +50615,7 @@ exports.default = HTML5Backend;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseRest = __webpack_require__(27),
-    eq = __webpack_require__(39),
+    eq = __webpack_require__(40),
     isIterateeCall = __webpack_require__(133),
     keysIn = __webpack_require__(264);
 
@@ -50833,7 +50869,7 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)(module)))
 
 /***/ }),
 /* 269 */
@@ -51016,7 +51052,7 @@ exports.default = EnterLeaveCounter;
 var baseFlatten = __webpack_require__(90),
     baseRest = __webpack_require__(27),
     baseUniq = __webpack_require__(126),
-    isArrayLikeObject = __webpack_require__(43);
+    isArrayLikeObject = __webpack_require__(44);
 
 /**
  * Creates an array of unique values, in order, from all given arrays using
@@ -51448,13 +51484,13 @@ function getEmptyImage() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_immutability_helper__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__FieldTypes__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__TypologyField__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51519,11 +51555,11 @@ var TypologyDropZone = function (_Component) {
 		value: function getSettingsStructure(type) {
 
 			switch (type) {
-				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].TEXT:
+				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].TEXT.value:
 					return {
 						required: false
 					};
-				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].RICH:
+				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].RICH.value:
 					return {
 						required: false,
 						maxCharacters: {
@@ -51535,7 +51571,7 @@ var TypologyDropZone = function (_Component) {
 							input: ""
 						}
 					};
-				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].CONTENTS:
+				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].CONTENTS.value:
 					return {
 						required: false,
 						typesAllowed: {
@@ -51543,7 +51579,7 @@ var TypologyDropZone = function (_Component) {
 							fields: []
 						}
 					};
-				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].LIST:
+				case __WEBPACK_IMPORTED_MODULE_7__common_CustomFieldTypes__["a" /* default */].LIST.value:
 					return {
 						required: false,
 						selectedList: ""
@@ -51672,7 +51708,7 @@ TypologyDropZone.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__FieldTypes__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_flow__ = __webpack_require__(280);
@@ -54014,7 +54050,7 @@ module.exports.polyfill = function(object) {
 
 //# sourceMappingURL=performance-now.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)))
 
 /***/ }),
 /* 300 */
@@ -54464,7 +54500,7 @@ SelectValue.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__FieldTypes__ = __webpack_require__(99);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -54485,9 +54521,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var fieldSource = {
 	beginDrag: function beginDrag(props) {
 		return {
-			type: props.type,
-			label: props.label,
-			icon: props.icon
+			type: props.definition.value,
+			label: props.definition.name,
+			icon: props.definition.icon
 		};
 	},
 	endDrag: function endDrag(props, monitor) {
@@ -54528,9 +54564,9 @@ var TypologyDragField = function (_Component) {
 			return connectDragSource(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				{ className: 'field', style: { opacity: opacity } },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.icon }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.definition.icon }),
 				' \xA0 ',
-				this.props.label
+				this.props.definition.name
 			));
 		}
 	}]);
@@ -59878,7 +59914,7 @@ if (document.getElementById('content-form')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ContentBar__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ContentSidebar__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ContentFields__ = __webpack_require__(332);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59921,7 +59957,7 @@ var ContentContainer = function (_Component) {
         name: "Content",
         fields: [{
           id: 1,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT,
+          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT.value,
           name: "Title",
           identifier: "text_1",
           values: {
@@ -59931,9 +59967,9 @@ var ContentContainer = function (_Component) {
           }
         }, {
           id: 2,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT,
-          name: "Title 2",
-          identifier: "text_2",
+          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH.value,
+          name: "Description",
+          identifier: "rich_1",
           values: {
             "ca": "Hola",
             "es": "Hola",
@@ -59941,13 +59977,13 @@ var ContentContainer = function (_Component) {
           }
         }, {
           id: 3,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH,
-          name: "Description",
-          identifier: "rich_1",
+          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE.value,
+          name: "Imatge",
+          identifier: "image_1",
           values: {
-            "ca": "Hola",
-            "es": "Hola",
-            "en": "Hola"
+            "ca": "",
+            "es": "",
+            "en": ""
           }
         }]
       }
@@ -62702,7 +62738,8 @@ var mapToAutowhateverTheme = exports.mapToAutowhateverTheme = function mapToAuto
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ContentFields_TextField__ = __webpack_require__(333);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ContentFields_RichTextField__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ContentFields_ImageField__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62710,6 +62747,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -62741,15 +62779,22 @@ var ContentFields = function (_Component) {
       for (var i = 0; i < this.props.fields.length; i++) {
         var item = this.props.fields[i];
 
-        if (item.type == __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__["a" /* default */].TEXT) {
+        if (item.type == __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT.value) {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ContentFields_TextField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
             key: i,
             onFieldChange: this.props.onFieldChange
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__["a" /* default */].RICH) {
+        } else if (item.type == __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH.value) {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ContentFields_RichTextField__["a" /* default */], {
+            field: item,
+            translations: this.props.translations,
+            key: i,
+            onFieldChange: this.props.onFieldChange
+          }));
+        } else if (item.type == __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE.value) {
+          fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ContentFields_ImageField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
             key: i,
@@ -62789,7 +62834,7 @@ var ContentFields = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_CustomFieldTypes__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_CustomFieldTypes__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62910,6 +62955,7 @@ var TextField = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_quill___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_quill__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_quill_dist_quill_snow_css__ = __webpack_require__(392);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_quill_dist_quill_snow_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_quill_dist_quill_snow_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__ = __webpack_require__(28);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62923,29 +62969,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
 var RichTextField = function (_Component) {
   _inherits(RichTextField, _Component);
 
   function RichTextField(props) {
     _classCallCheck(this, RichTextField);
 
-    var _this = _possibleConstructorReturn(this, (RichTextField.__proto__ || Object.getPrototypeOf(RichTextField)).call(this, props));
+    return _possibleConstructorReturn(this, (RichTextField.__proto__ || Object.getPrototypeOf(RichTextField)).call(this, props));
 
-    _this.handleOnChange = _this.handleOnChange.bind(_this);
-
-    return _this;
+    //this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   _createClass(RichTextField, [{
     key: 'handleOnChange',
-    value: function handleOnChange(value) {
+    value: function handleOnChange(key, value, delta, source, editor) {
 
       //const language = $(event.target).closest('.form-control').attr('language');
+
+      //console.log("source : ");
+      //console.log(key);
+      //console.log(delta);
+      //console.log(source);
+      //console.log(editor);
 
 
       var field = {
         identifier: this.props.field.identifier,
-        language: "ca",
+        language: key,
         value: value
       };
 
@@ -62973,9 +63025,9 @@ var RichTextField = function (_Component) {
               key
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_quill___default.a, {
-              language: key,
+              id: key,
               value: this.props.field.values[key],
-              onChange: this.handleOnChange
+              onChange: this.handleOnChange.bind(this, key)
             })
           ));
         }
@@ -62994,8 +63046,9 @@ var RichTextField = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
             { className: 'field-type' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-font' }),
-            ' Text'
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__["a" /* default */].RICH.icon }),
+            ' ',
+            __WEBPACK_IMPORTED_MODULE_4__common_CustomFieldTypes__["a" /* default */].RICH.name
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
@@ -66546,7 +66599,7 @@ module.exports = baseIsMatch;
 /* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(37);
+var ListCache = __webpack_require__(38);
 
 /**
  * Removes all key-value entries from the stack.
@@ -66631,7 +66684,7 @@ module.exports = stackHas;
 /* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(37),
+var ListCache = __webpack_require__(38),
     Map = __webpack_require__(84),
     MapCache = __webpack_require__(83);
 
@@ -66762,7 +66815,7 @@ module.exports = baseIsEqualDeep;
 
 var Symbol = __webpack_require__(26),
     Uint8Array = __webpack_require__(352),
-    eq = __webpack_require__(39),
+    eq = __webpack_require__(40),
     equalArrays = __webpack_require__(151),
     mapToArray = __webpack_require__(353),
     setToArray = __webpack_require__(93);
@@ -67468,7 +67521,7 @@ module.exports = toString;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Symbol = __webpack_require__(26),
-    arrayMap = __webpack_require__(41),
+    arrayMap = __webpack_require__(42),
     isArray = __webpack_require__(4),
     isSymbol = __webpack_require__(48);
 
@@ -68379,11 +68432,11 @@ var _assign = __webpack_require__(11);
 var React = __webpack_require__(0);
 var emptyFunction = __webpack_require__(6);
 var emptyObject = __webpack_require__(15);
-var hyphenateStyleName = __webpack_require__(31);
+var hyphenateStyleName = __webpack_require__(32);
 var memoizeStringOnly = __webpack_require__(391);
 var warning = __webpack_require__(9);
 var checkPropTypes = __webpack_require__(16);
-var camelizeStyleName = __webpack_require__(32);
+var camelizeStyleName = __webpack_require__(33);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -70980,6 +71033,154 @@ exports.push([module.i, "/*!\n * Quill Editor v1.3.0\n * https://quilljs.com/\n 
 
 // exports
 
+
+/***/ }),
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__common_CustomFieldTypes__ = __webpack_require__(28);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var ImageField = function (_Component) {
+  _inherits(ImageField, _Component);
+
+  function ImageField(props) {
+    _classCallCheck(this, ImageField);
+
+    var _this = _possibleConstructorReturn(this, (ImageField.__proto__ || Object.getPrototypeOf(ImageField)).call(this, props));
+
+    _this.handleOnChange = _this.handleOnChange.bind(_this);
+
+    return _this;
+  }
+
+  _createClass(ImageField, [{
+    key: 'handleOnChange',
+    value: function handleOnChange(event) {
+
+      var language = $(event.target).closest('.form-control').attr('language');
+
+      var field = {
+        identifier: this.props.field.identifier,
+        language: language,
+        value: event.target.value
+      };
+
+      console.log("textField :: handleOnChange ");
+      console.log(field);
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'renderInputs',
+    value: function renderInputs() {
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'form-group bmd-form-group image-field-container' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'image-field' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'image' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'add-button' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'a',
+              { href: '#', className: 'btn btn-default' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-plus-circle' }),
+              '  Seleccionar'
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'image-buttons' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '', className: 'btn btn-link' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-pencil' }),
+            ' Editar'
+          ),
+          ' \xA0',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '', className: 'btn btn-link text-danger' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times' }),
+            ' Cancel\xB7lar'
+          ),
+          ' \xA0'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          { className: 'field-help' },
+          'Thumbnail : Mides : 1000x400 ( Ratio 1:2 )'
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'field-item' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { id: "heading" + this.props.field.identifier, className: 'btn btn-link', 'data-toggle': 'collapse', 'data-target': "#collapse" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            { className: 'field-type' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + __WEBPACK_IMPORTED_MODULE_2__common_CustomFieldTypes__["a" /* default */].IMAGE.icon }),
+            ' ',
+            __WEBPACK_IMPORTED_MODULE_2__common_CustomFieldTypes__["a" /* default */].IMAGE.name
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'span',
+            { className: 'field-name' },
+            this.props.field.name
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { id: "collapse" + this.props.field.identifier, className: 'collapse in', 'aria-labelledby': "heading" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'field-form' },
+            this.renderInputs()
+          )
+        )
+      );
+    }
+  }]);
+
+  return ImageField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ImageField);
 
 /***/ })
 /******/ ]);

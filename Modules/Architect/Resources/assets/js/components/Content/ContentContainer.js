@@ -34,7 +34,7 @@ class ContentContainer extends Component {
         fields : [
           {
             id : 1,
-            type : CustomFieldTypes.TEXT,
+            type : CustomFieldTypes.TEXT.value,
             name : "Title",
             identifier : "text_1",
             values : {
@@ -45,9 +45,9 @@ class ContentContainer extends Component {
           },
           {
             id : 2,
-            type : CustomFieldTypes.TEXT,
-            name : "Title 2",
-            identifier : "text_2",
+            type : CustomFieldTypes.RICH.value,
+            name : "Description",
+            identifier : "rich_1",
             values : {
               "ca" : "Hola",
               "es" : "Hola",
@@ -56,15 +56,16 @@ class ContentContainer extends Component {
           },
           {
             id : 3,
-            type : CustomFieldTypes.RICH,
-            name : "Description",
-            identifier : "rich_1",
+            type : CustomFieldTypes.IMAGE.value,
+            name : "Imatge",
+            identifier : "image_1",
             values : {
-              "ca" : "Hola",
-              "es" : "Hola",
-              "en" : "Hola"
+              "ca" : "",
+              "es" : "",
+              "en" : ""
             }
           }
+
         ]
       }
 

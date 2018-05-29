@@ -48,11 +48,11 @@ class TypologyDropZone extends Component {
 
 
 		switch(type) {
-			case CustomFieldTypes.TEXT :
+			case CustomFieldTypes.TEXT.value :
 				return {
 					required : false
 				};
-			case CustomFieldTypes.RICH :
+			case CustomFieldTypes.RICH.value :
 				return {
 					required : false,
 					maxCharacters : {
@@ -64,7 +64,7 @@ class TypologyDropZone extends Component {
 						input : ""
 					}
 				};
-			case CustomFieldTypes.CONTENTS :
+			case CustomFieldTypes.CONTENTS.value :
 				return {
 					required : false,
 					typesAllowed : {
@@ -72,7 +72,7 @@ class TypologyDropZone extends Component {
 						fields : []
 					}
 				};
-			case CustomFieldTypes.LIST :
+			case CustomFieldTypes.LIST.value :
 				return {
 					required : false,
 					selectedList : ""

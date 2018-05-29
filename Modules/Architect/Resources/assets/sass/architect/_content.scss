@@ -131,10 +131,37 @@
 
       }
 
+      .ql-editor{
+        height:100px;
+      }
+
       .field-form {
         padding:20px 20px 20px 30px;
+
       }
 
     }
   }
+
+  .ql-container.ql-snow{
+    background-color: $cms-light-color-5;
+  }
+
+  .image-field-container {
+
+    text-align: center;
+
+    .image-field{
+      height: 180px;
+      width: 200px;
+      border: 1px dashed #ccc;
+      margin:0 auto;
+      /*background-color:$cms-light-color-5;*/
+    }
+
+    .add-button{
+      padding-top:60px;
+    }
+  }
+
 }

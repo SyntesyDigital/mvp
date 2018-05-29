@@ -1,35 +1,27 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
-class RichTextField extends Component {
+class ImageField extends Component {
 
   constructor(props){
     super(props);
 
-    //this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
 
   }
 
 
-  handleOnChange(key,value, delta, source, editor) {
+  handleOnChange(event) {
 
-    //const language = $(event.target).closest('.form-control').attr('language');
-
-    //console.log("source : ");
-    //console.log(key);
-    //console.log(delta);
-    //console.log(source);
-    //console.log(editor);
+    const language = $(event.target).closest('.form-control').attr('language');
 
 
     var field = {
       identifier : this.props.field.identifier,
-      language : key,
-      value : value
+      language : language,
+      value : event.target.value
     };
 
     console.log("textField :: handleOnChange ");
@@ -40,26 +32,22 @@ class RichTextField extends Component {
 
   renderInputs() {
 
-    var inputs = [];
+    return (
+      <div className="form-group bmd-form-group image-field-container">
+         <div className="image-field">
+            <div className="image" ></div>
+            <div className="add-button">
+              <a href="#" className="btn btn-default"><i className="fa fa-plus-circle"></i>  Seleccionar</a>
+            </div>
+         </div>
+         <div className="image-buttons">
+           <a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a> &nbsp;
+           <a href="" className="btn btn-link text-danger"><i className="fa fa-times"></i> Cancel·lar</a> &nbsp;
+        </div>
+         <p className="field-help">Thumbnail : Mides : 1000x400 ( Ratio 1:2 )</p>
+      </div>
+    );
 
-    for(var key in this.props.translations){
-      if(this.props.translations[key]){
-        inputs.push(
-
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-
-             <ReactQuill
-                id={key}
-                value={this.props.field.values[key]}
-                onChange={this.handleOnChange.bind(this,key)}
-              />
-
-          </div>
-        );
-      }
-    }
-    return inputs;
   }
 
 
@@ -69,7 +57,7 @@ class RichTextField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.RICH.icon}></i> {CustomFieldTypes.RICH.name}
+            <i className={"fa "+CustomFieldTypes.IMAGE.icon}></i> {CustomFieldTypes.IMAGE.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -91,4 +79,4 @@ class RichTextField extends Component {
   }
 
 }
-export default RichTextField;
+export default ImageField;

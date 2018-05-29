@@ -14820,8 +14820,32 @@ nav.main-nav ul li a:hover {
   font-weight: 400;
 }
 
+.content .field-group .field-item .ql-editor {
+  height: 100px;
+}
+
 .content .field-group .field-item .field-form {
   padding: 20px 20px 20px 30px;
+}
+
+.content .ql-container.ql-snow {
+  background-color: #fafafa;
+}
+
+.content .image-field-container {
+  text-align: center;
+}
+
+.content .image-field-container .image-field {
+  height: 180px;
+  width: 200px;
+  border: 1px dashed #ccc;
+  margin: 0 auto;
+  /*background-color:$cms-light-color-5;*/
+}
+
+.content .image-field-container .add-button {
+  padding-top: 60px;
 }
 
 .medias .medias-dropfiles {

@@ -7,15 +7,51 @@ export default {
 	RICH: {
 		value:'rich_text',
 		name:'Text enriquit',
-		icon:'fa-font'
+		icon:'fa-align-left'
 	},
-	IMAGE: 'image',
-	DATE: 'date',
-	MAP: 'map',
-	IMAGES: 'images',
-	CONTENTS :'contents',
-	LIST :'list',
-	BOOLEAN :'boolean',
-	LINK :'link',
-	VIDEO : 'video'
+	IMAGE: {
+		value:'image',
+		name:'Imatge',
+		icon:'fa-picture-o'
+	},
+	DATE: {
+		value:'date',
+		name:'Data',
+		icon:'fa-calendar'
+	},
+	MAP: {
+		value:'map',
+		name:'Localització',
+		icon:'fa-map-marker'
+	},
+	IMAGES: {
+		value:'images',
+		name:'Images',
+		icon:'fa-th-large'
+	},
+	CONTENTS :{
+		value:'contents',
+		name:'Continguts',
+		icon:'fa-file-o'
+	},
+	LIST :{
+		value:'list',
+		name:'Llista',
+		icon:'fa-th-list'
+	},
+	BOOLEAN :{
+		value:'boolean',
+		name:'Booleà',
+		icon:'fa-check-square-o'
+	},
+	LINK :{
+		value:'link',
+		name:'Enllaç',
+		icon:'fa-link'
+	},
+	VIDEO : {
+		value:'video',
+		name:'Video',
+		icon:'fa-video-camera'
+	}
 }
