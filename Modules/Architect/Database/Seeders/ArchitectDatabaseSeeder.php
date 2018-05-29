@@ -43,14 +43,10 @@ class ArchitectDatabaseSeeder extends Seeder
 
         $admin->attachRole($adminRole);
 
-        Language::create([
-            'name' => 'Français',
-            'iso' => 'fr'
-        ]);
 
         Language::create([
-            'name' => 'English',
-            'iso' => 'en'
+            'name' => 'Català',
+            'iso' => 'ca'
         ]);
 
         Language::create([
@@ -59,9 +55,10 @@ class ArchitectDatabaseSeeder extends Seeder
         ]);
 
         Language::create([
-            'name' => 'Catalan',
-            'iso' => 'cat'
+            'name' => 'English',
+            'iso' => 'en'
         ]);
+
         // $this->call("OthersTableSeeder");
     }
 }
