@@ -15,12 +15,11 @@
     </ul>
     <hr />
     <ul>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
+      @foreach($typologies as $typology)
+          <li>
+            <a href="{{route('contents', ['typology_id' => $typology->id])}}"><i class="fa {{$typology->icon}}"></i><span class="text">{{$typology->name}}</span> </a>
+          </li>
+      @endforeach()
     </ul>
     <hr/>
     <ul>

@@ -20,7 +20,7 @@ class Typology extends Model
      */
     protected $fillable = [
         'name',
-        // 'fields',
+        'icon',
         'identifier',
         // 'is_page',
         // 'display_pagebuilder'

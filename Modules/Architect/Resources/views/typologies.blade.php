@@ -14,7 +14,7 @@
               @foreach($typologies as $typology)
                 <div class="col-xs-3">
                     <div class="grid-item">
-                        <i class="fa fa-envelope"></i>
+                        <i class="fa {{$typology->icon}}"></i>
 
                         <p class="grid-item-name">
                             <a href="{{ route('typologies.show', $typology)}}">{{$typology->name}}</a>

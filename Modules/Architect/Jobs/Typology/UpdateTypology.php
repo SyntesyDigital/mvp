@@ -15,8 +15,7 @@ class UpdateTypology
             'name',
             'fields',
             'identifier',
-            'is_page',
-            'display_pagebuilder'
+            'icon',
         ]);
     }
 
@@ -30,6 +29,7 @@ class UpdateTypology
         $this->typology->update([
             'name' => $this->attributes["name"],
             'identifier' => $this->attributes["identifier"],
+            'icon' => isset($this->attributes["icon"]) ? $this->attributes["icon"] : null,
         ]);
 
         $this->typology->fields()->delete();

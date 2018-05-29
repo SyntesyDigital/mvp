@@ -15,8 +15,7 @@ class CreateTypology
             'name',
             'fields',
             'identifier',
-            'is_page',
-            'display_pagebuilder'
+            'icon',
         ]);
     }
 
@@ -30,6 +29,7 @@ class CreateTypology
         $typology = Typology::create([
             'name' => $this->attributes["name"],
             'identifier' => $this->attributes["identifier"],
+            'icon' => isset($this->attributes["icon"]) ? $this->attributes["icon"] : null,
         ]);
 
         foreach($this->attributes["fields"] as $field) {

@@ -222,7 +222,8 @@ class TypologyContainer extends Component {
      return {
          name : this.state.inputs.name,
          identifier : this.state.inputs.identifier,
-         fields : this.state.fields
+         fields : this.state.fields,
+         icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null
      };
  }
 

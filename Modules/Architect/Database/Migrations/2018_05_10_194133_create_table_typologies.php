@@ -15,7 +15,7 @@ class CreateTableTypologies extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('identifier')->unique();
-            // $table->string('is_page');
+            $table->string('icon')->nullable();
             // $table->string('had_pagebuilder');
 
             $table->timestamps();
