@@ -25,7 +25,9 @@ class TypologiesController extends Controller
 {
     public function index()
     {
-        return view('architect::typologies');
+        return view('architect::typologies', [
+            "typologies" => Typology::all()
+        ]);
     }
 
     public function create()

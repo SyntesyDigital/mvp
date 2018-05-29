@@ -11,18 +11,17 @@
 
         <div class="grid-items">
           <div class="row">
-            @for($i=0;$i<8;$i++)
+              @foreach($typologies as $typology)
+                <div class="col-xs-3">
+                    <div class="grid-item">
+                        <i class="fa fa-envelope"></i>
 
-            <div class="col-xs-3">
-              <div class="grid-item">
-                <i class="fa fa-envelope"></i>
-                <p class="grid-item-name">
-                  Page
-                </p>
-              </div>
-            </div>
-
-            @endfor
+                        <p class="grid-item-name">
+                            <a href="{{ route('typologies.show', $typology)}}">{{$typology->name}}</a>
+                        </p>
+                    </div>
+                </div>
+              @endforeach()
           </div>
         </div>
 

@@ -8,6 +8,12 @@ class TypologyBar extends Component {
 
   }
 
+  goBack(e)
+  {
+      e.preventDefault();
+      window.history.back();
+  }
+
   render() {
     return (
       <div className="page-bar">
@@ -15,7 +21,7 @@ class TypologyBar extends Component {
           <div className="row">
 
             <div className="col-md-12">
-              <a href="" className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
+              <a href="" className="btn btn-default" onClick={this.goBack}> <i className="fa fa-angle-left"></i> </a>
               <h1>
                 {this.props.icon != "" &&
                   <i className={"fa "+this.props.icon.value}></i>

@@ -22101,6 +22101,12 @@ var TypologyBar = function (_Component) {
   }
 
   _createClass(TypologyBar, [{
+    key: 'goBack',
+    value: function goBack(e) {
+      e.preventDefault();
+      window.history.back();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -22117,7 +22123,7 @@ var TypologyBar = function (_Component) {
               { className: 'col-md-12' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'a',
-                { href: '', className: 'btn btn-default' },
+                { href: '', className: 'btn btn-default', onClick: this.goBack },
                 ' ',
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-angle-left' }),
                 ' '
