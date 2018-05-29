@@ -81,9 +81,14 @@ function collectSource(connect, monitor) {
 
 class TypologyField extends Component {
 
-
 	constructor(props) {
 	    super(props);
+
+		this.state = {
+            name : this.props.name,
+			identifier : this.props.identifier
+        };
+
 	    this.onRemoveField = this.onRemoveField.bind(this);
 	    this.handleChange = this.handleChange.bind(this);
 	    this.onOpenSettings = this.onOpenSettings.bind(this);
@@ -99,21 +104,36 @@ class TypologyField extends Component {
 	    this.props.onOpenSettings(this.props.id);
 	}
 
-	handleChange(event) {
+	handleChange(event)
+	{
+		var name = event.target.value;
+		var identifier = slugify(event.target.value, {
+			replacement: '-',
+			remove: /[$*+~.()'"!\-:@]/g,
+			lower: true
+		});
+
+		this.setState({
+			name : name,
+			identifier : identifier
+		});
 
 	    var field = null;
-
 	    if (event.target.type == "text") {
 	        field = {
 	            id: this.props.id,
-	            name: event.target.name,
-	            value: event.target.value
+				name : name,
+				identifier : identifier
 	        };
 	    }
 
-	    if (field != null)
-	        this.props.onFieldChange(field);
+	    if (field != null) {
+			this.props.onFieldChange(field);
+		}
+
 	}
+
+
 
 
   render() {
@@ -136,10 +156,10 @@ class TypologyField extends Component {
         <div className="field-inputs">
           <div className="row">
             <div className="field-name col-xs-6">
-              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.props.name} onChange={this.handleChange}/>
+              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
             <div className="field-id col-xs-6">
-              <input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.props.identifier} onChange={this.handleChange}/>
+              <input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
             </div>
           </div>
         </div>

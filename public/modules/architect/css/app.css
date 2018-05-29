@@ -14137,6 +14137,10 @@ nav.main-nav ul li a:hover {
   margin-bottom: 40px;
 }
 
+.rightbar-page .page-content .fields-list-container.error {
+  border: 1px dashed #f44336 !important;
+}
+
 .rightbar-page .page-content .fields-list-container .list-container-content-wrapper {
   display: block;
   display: table;
@@ -15033,5 +15037,19 @@ nav.main-nav ul li a:hover {
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+.has-error {
+  color: #f44336;
+}
+
+.has-error label {
+  color: #f44336 !important;
+}
+
+.has-error .form-control,
+.has-error .cke_textarea_inline {
+  border: 1px solid #f44336 !important;
+  border-bottom: 2px solid #f44336;
 }
 

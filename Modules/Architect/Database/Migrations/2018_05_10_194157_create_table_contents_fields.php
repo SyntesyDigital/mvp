@@ -19,7 +19,7 @@ class CreateTableContentsFields extends Migration
             $table->integer('content_id')->unsigned();
             $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
 
-            $table->integer('language_id')->unsigned();
+            $table->integer('language_id')->unsigned()->nullable();
             $table->foreign('language_id')->references('id')->on('languages');
 
             $table->string('name');

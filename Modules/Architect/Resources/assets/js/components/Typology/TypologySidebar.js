@@ -69,12 +69,12 @@ class TypologySidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <div className="form-group bmd-form-group">
+        <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
            <label htmlFor="name" className="bmd-label-floating">Nom</label>
            <input type="text" className="form-control" id="name" name="name" value={this.props.fields.name} onChange={this.handleChange} />
         </div>
 
-        <div className="form-group bmd-form-group">
+        <div className={"form-group bmd-form-group " + (this.props.errors.identifier ? 'has-error' : '')}>
            <label htmlFor="identifier" className="bmd-label-floating">Identifier</label>
            <input type="text" className="form-control" id="identifier" name="identifier" value={this.props.fields.identifier} onChange={this.handleChange} />
         </div>

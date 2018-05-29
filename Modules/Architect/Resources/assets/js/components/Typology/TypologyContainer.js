@@ -32,6 +32,11 @@ class TypologyContainer extends Component {
              categories: false,
              tags: false,
          },
+         errors: {
+             name: null,
+             identifier: null,
+             fields: null,
+         },
          fields: [],
          settingsField: null
      };
@@ -45,7 +50,7 @@ class TypologyContainer extends Component {
      this.handleModalClose = this.handleModalClose.bind(this);
      this.handleSettingsChanged = this.handleSettingsChanged.bind(this);
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
-
+     this.onSaveError = this.onSaveError.bind(this);
  }
 
  handleInputChange(field) {
@@ -69,7 +74,6 @@ class TypologyContainer extends Component {
      this.setState({
          fields: fields
      });
-
  }
 
  moveField(dragIndex, hoverIndex) {
@@ -116,7 +120,8 @@ class TypologyContainer extends Component {
 
      for (var i = 0; i < fields.length; i++) {
          if (field.id == fields[i].id) {
-             fields[i][field.name] = field.value;
+            fields[i]["name"] = field.name;
+            fields[i]["identifier"] = field.identifier;
              break;
          }
      }
@@ -124,8 +129,6 @@ class TypologyContainer extends Component {
      this.setState({
          fields: fields
      });
-
-
 
  }
 
@@ -227,32 +230,77 @@ class TypologyContainer extends Component {
  {
      var _this = this;
      axios.post('/architect/typologies', this.getFormData())
-         .then(response => {
-             if(response.data.success) {
-                 _this.onSaveSuccess(response.data);
-             }
-         });
+    .then((response) => {
+        if(response.data.success) {
+            _this.onSaveSuccess(response.data);
+        }
+    })
+    .catch((error) => {
+        if (error.response) {
+            _this.onSaveError(error.response.data);
+        } else if (error.message) {
+            toastr.error(error.message);
+        } else {
+            console.log('Error', error.message);
+        }
+        //console.log(error.config);
+    });
  }
 
  update()
  {
      var _this = this;
      axios.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData())
-         .then(response => {
+         .then((response) => {
              if(response.data.success) {
                  _this.onSaveSuccess(response.data);
              }
+         })
+         .catch((error) => {
+             if (error.response) {
+                 _this.onSaveError(error.response.data);
+             } else if (error.message) {
+                 toastr.error(error.message);
+             } else {
+                 console.log('Error', error.message);
+             }
+             //console.log(error.config);
          });
  }
 
- onSaveSuccess(response)
- {
-     this.setState({
-         'typology' : response.typology
-     })
+     onSaveSuccess(response)
+     {
+         this.setState({
+             'typology' : response.typology
+         })
 
-     toastr.success('ok');
- }
+         toastr.success('ok');
+     }
+
+    onSaveError(response)
+    {
+        var errors = response.errors ? response.errors : null;
+        var _this = this;
+        var stateErrors = this.state.errors;
+
+        if(errors) {
+            Object.keys(stateErrors).map(function(k){
+                stateErrors[k] = errors[k] ? true : false;
+
+                if(errors[k]) {
+                    toastr.error(errors[k]);
+                }
+            });
+
+            this.setState({
+                errors : stateErrors
+            });
+        }
+
+        if(response.message) {
+            toastr.error(response.message);
+        }
+    }
 
   render() {
     return (
@@ -277,6 +325,7 @@ class TypologyContainer extends Component {
 
             <div className="col-md-9 page-content">
               <TypologyDropZone
+                errors={this.state.errors}
                 fields={this.state.fields}
                 onFieldAdded={this.handleFieldAdded}
                 onFieldChanged={this.handleFieldChange}
@@ -289,6 +338,7 @@ class TypologyContainer extends Component {
 
             <TypologySidebar
               fields={this.state.inputs}
+              errors={this.state.errors}
               onFieldChange={this.handleInputChange}
             >
 

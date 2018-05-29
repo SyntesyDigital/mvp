@@ -153,14 +153,18 @@ class TypologyDropZone extends Component {
 		const isActive = canDrop && isOver
 
     let className = '';
-		if (isActive) {
-			className += 'is-active';
-		} else if (canDrop) {
-			className += 'can-drop';
-		}
+	if (isActive) {
+		className += 'is-active';
+	} else if (canDrop) {
+		className += 'can-drop';
+	}
+
+	if(this.props.errors.fields) {
+		className += ' error';
+	}
 
     return connectDropTarget(
-			<div className={"fields-list-container "+className}>
+			<div className={"fields-list-container " + className}>
 
 				{this.renderFields()}
 

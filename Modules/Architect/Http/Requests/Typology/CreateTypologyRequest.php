@@ -16,8 +16,7 @@ class CreateTypologyRequest extends FormRequest
         return [
             'name' => 'required',
             'fields' => 'required',
-            'identifier' => 'required',
-            'fields' => 'required'
+            'identifier' => 'required|unique:typologies',
         ];
     }
 

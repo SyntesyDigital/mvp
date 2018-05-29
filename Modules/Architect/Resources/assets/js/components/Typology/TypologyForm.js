@@ -5,6 +5,8 @@ import TypologyModal from './TypologyModal';
 import TypologyBar from './TypologyBar';
 import TypologyContainer from './TypologyContainer';
 
+
+
 export default class TypologyForm extends Component {
 
     constructor(props)
@@ -12,7 +14,7 @@ export default class TypologyForm extends Component {
         super(props);
 
         this.state = {
-            typology : props.typology !== undefined ? JSON.parse(atob(props.typology)) : ''
+            typology : props.typology ? JSON.parse(atob(props.typology)) : ''
         };
     }
 
