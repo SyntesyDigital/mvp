@@ -27,7 +27,8 @@ class MediaSelectModal extends Component {
 
     onModalClose(e){
         e.preventDefault();
-        this.modalClose();
+        //this.modalClose();
+        this.props.onImageCancel();
     }
 
     componentDidMount(){
@@ -36,10 +37,12 @@ class MediaSelectModal extends Component {
 
     modalOpen()
     {
+        console.log("modalOpen");
         TweenMax.to($("#media-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
     }
 
     modalClose() {
+        console.log("modalClose");
       var self =this;
         TweenMax.to($("#media-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({

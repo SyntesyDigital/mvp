@@ -99,6 +99,7 @@ class ContentFields extends Component {
               translations={this.props.translations}
               key={i}
               onFieldChange={this.props.onFieldChange}
+              onContentSelect={this.props.onContentSelect}
           />
         );
       }

@@ -235,7 +235,6 @@ export default class MediaEditModal extends Component {
 
                   </div>
               </div>
-              }
             </div>
           </div>
         );

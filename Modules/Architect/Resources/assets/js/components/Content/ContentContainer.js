@@ -7,6 +7,7 @@ import ContentFields from './ContentFields';
 
 import CustomFieldTypes from './../common/CustomFieldTypes';
 import MediaSelectModal from './../Medias/MediaSelectModal';
+import ContentSelectModal from './ContentSelectModal';
 
 import moment from 'moment';
 
@@ -128,9 +129,13 @@ class ContentContainer extends Component {
         ]
       },
 
-      //FIXME quiza esto va dentro del custom field
+      //FIXME quiza esto va dentro del custom field?
       displayMediaModal : false,
-      sourceField : null
+      sourceField : null,
+
+      displayContentModal : false,
+      contentSourceField : null
+
     };
 
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
@@ -141,10 +146,18 @@ class ContentContainer extends Component {
     this.handleRemoveTag = this.handleRemoveTag.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
     this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
+
     this.handleImageSelect = this.handleImageSelect.bind(this);
     this.handleImageSelected = this.handleImageSelected.bind(this);
     this.handleImageCancel = this.handleImageCancel.bind(this);
+
+    this.handleContentSelect = this.handleContentSelect.bind(this);
+    this.handleContentSelected = this.handleContentSelected.bind(this);
+    this.handleContentCancel = this.handleContentCancel.bind(this);
+
   }
+
+  /******** Images  ********/
 
   handleImageSelect(identifier) {
 
@@ -196,6 +209,52 @@ class ContentContainer extends Component {
     });
 
   }
+
+  /******** Contents  ********/
+
+  handleContentSelect(identifier) {
+
+    this.setState({
+      displayContentModal : true,
+      contentSourceField : identifier
+    });
+
+  }
+
+  handleContentCancel(){
+    this.setState({
+      displayContentModal : false,
+      contentSourceField : null
+    });
+  }
+
+  handleContentSelected(content){
+
+    this.updateContent(this.state.contentSourceField,content);
+  }
+
+  updateContent(identifier,content){
+
+    const {typology} = this.state;
+
+    for(var i=0;i<typology.fields.length;i++) {
+      var item = typology.fields[i];
+      if(item.identifier == identifier ){
+        typology.fields[i].values.push(content);
+        break;
+      }
+    }
+
+    this.setState({
+      typology : typology,
+      displayContentModal : false,
+      contentSourceField : null
+    });
+
+  }
+
+  /********  Form ********/
+
 
   handleSubmitForm(e) {
 
@@ -328,6 +387,14 @@ class ContentContainer extends Component {
           display={this.state.displayMediaModal}
           field={this.state.sourceField}
           onImageSelected={this.handleImageSelected}
+          onImageCancel={this.handleImageCancel}
+        />
+
+        <ContentSelectModal
+          display={this.state.displayContentModal}
+          field={this.state.contentSourceField}
+          onContentSelected={this.handleContentSelected}
+          onContentCancel={this.handleContentCancel}
         />
 
         <ContentBar
@@ -360,6 +427,7 @@ class ContentContainer extends Component {
               translations={this.state.translations}
               onFieldChange={this.handleCustomFieldChange}
               onImageSelect={this.handleImageSelect}
+              onContentSelect={this.handleContentSelect}
             />
 
 

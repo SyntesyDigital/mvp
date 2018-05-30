@@ -15,6 +15,7 @@ class ContentsField extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveField = this.moveField.bind(this);
 		this.handleRemoveField = this.handleRemoveField.bind(this);
+    this.onContentSelect = this.onContentSelect.bind(this);
 
   }
 
@@ -82,6 +83,12 @@ class ContentsField extends Component {
     this.props.onFieldChange(field);
   }
 
+  onContentSelect(event) {
+    event.preventDefault();
+
+    this.props.onContentSelect(this.props.field.identifier);
+  }
+
   renderInputs() {
 
     const fields = this.props.field.values;
@@ -130,7 +137,7 @@ class ContentsField extends Component {
           </DragDropContextProvider>
 
           <div className="add-content-button">
-            <a href="" className="btn btn-default"><i className="fa fa-plus-circle"></i> Afegir </a>
+            <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> Afegir </a>
           </div>
 
         </div>
