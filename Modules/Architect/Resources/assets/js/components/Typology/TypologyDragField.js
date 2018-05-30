@@ -8,9 +8,9 @@ import FieldTypes from './FieldTypes';
 const fieldSource = {
 	beginDrag(props) {
 		return {
-			type: props.type,
-			label: props.label,
-			icon: props.icon,
+			type: props.definition.value,
+			label: props.definition.name,
+			icon: props.definition.icon,
 		}
 	},
 
@@ -40,7 +40,7 @@ class TypologyDragField extends Component {
 
 		return connectDragSource(
       <div className="field" style={{ opacity }}>
-        <i className={"fa "+this.props.icon}></i> &nbsp; {this.props.label}
+        <i className={"fa "+this.props.definition.icon}></i> &nbsp; {this.props.definition.name}
       </div>
     )
 	}

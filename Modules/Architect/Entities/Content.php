@@ -3,9 +3,14 @@
 namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Architect\Traits\HasFields;
 
 class Content extends Model
 {
+    use HasFields;
+
+    const STATUS_PUBLISHED = 'PUBLISHED';
+    const STATUS_DRAFT = 'DRAFT';
 
     /**
      * The database table used by the model.
@@ -23,7 +28,7 @@ class Content extends Model
         'status',
         'typology_id',
         'user_id',
-
+        'author_id'
     ];
 
     /**
@@ -49,6 +54,16 @@ class Content extends Model
     public function typology()
     {
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
+    }
+
+    public function fields()
+    {
+        return $this->hasMany('\Modules\Architect\Entities\ContentField');
+    }
+
+    public function author()
+    {
+        return $this->hasOne('App\Models\User', "id", "author_id");
     }
 
 }

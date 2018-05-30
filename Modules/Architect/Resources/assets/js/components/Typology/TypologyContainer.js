@@ -343,17 +343,17 @@ class TypologyContainer extends Component {
               onFieldChange={this.handleInputChange}
             >
 
-              <TypologyDragField type={CustomFieldTypes.TEXT} label="Text" icon="fa-font" />
-              <TypologyDragField type={CustomFieldTypes.RICH} label="Text enriquit" icon="fa-align-left" />
-              <TypologyDragField type={CustomFieldTypes.IMAGE} label="Imatge" icon="fa-picture-o" />
-              <TypologyDragField type={CustomFieldTypes.DATE} label="Data" icon="fa-calendar" />
-              <TypologyDragField type={CustomFieldTypes.MAP} label="Localització" icon="fa-map-marker" />
-              <TypologyDragField type={CustomFieldTypes.IMAGES} label="Images" icon="fa-th-large" />
-              <TypologyDragField type={CustomFieldTypes.CONTENTS} label="Continguts" icon="fa-file-o" />
-              <TypologyDragField type={CustomFieldTypes.LIST} label="Llista" icon="fa-th-list" />
-              <TypologyDragField type={CustomFieldTypes.BOOLEAN} label="Booleà" icon="fa-check-square-o" />
-              <TypologyDragField type={CustomFieldTypes.LINK} label="Enllaç" icon="fa-link" />
-              <TypologyDragField type={CustomFieldTypes.VIDEO} label="Video" icon="fa-video-camera" />
+              <TypologyDragField definition={CustomFieldTypes.TEXT}/>
+              <TypologyDragField definition={CustomFieldTypes.RICH}/>
+              <TypologyDragField definition={CustomFieldTypes.IMAGE}/>
+              <TypologyDragField definition={CustomFieldTypes.DATE}/>
+              <TypologyDragField definition={CustomFieldTypes.MAP}/>
+              <TypologyDragField definition={CustomFieldTypes.IMAGES}/>
+              <TypologyDragField definition={CustomFieldTypes.CONTENTS}/>
+              <TypologyDragField definition={CustomFieldTypes.LIST}/>
+              <TypologyDragField definition={CustomFieldTypes.BOOLEAN}/>
+              <TypologyDragField definition={CustomFieldTypes.LINK}/>
+              <TypologyDragField definition={CustomFieldTypes.VIDEO}/>
 
             </TypologySidebar>
 

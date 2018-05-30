@@ -14,8 +14,12 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');
+    Route::get('/contents/data', 'ContentController@data')->name('contents.data');
+    Route::post('/contents', 'ContentController@store')->name('contents.store');
     Route::get('/contents/show', 'ContentController@show')->name('contents.show');
-
+    Route::get('/contents/{typology}/create', 'ContentController@create')->name('contents.create');
+    Route::get('/contents/{content?}', 'ContentController@show')->name('contents.show');
+    Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');

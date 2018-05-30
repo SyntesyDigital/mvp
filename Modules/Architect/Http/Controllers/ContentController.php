@@ -7,27 +7,75 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
+use Modules\Architect\Repositories\ContentRepository;
 
+// Requests
+use Modules\Architect\Http\Requests\Content\CreateContentRequest;
+use Modules\Architect\Jobs\Content\CreateContent;
+
+// Jobs
+use Modules\Architect\Http\Requests\Content\UpdateContentRequest;
+use Modules\Architect\Jobs\Content\UpdateContent;
+
+// Models
 use Modules\Architect\Entities\Typology;
+use App\Models\User;
+use App\Models\Role;
 
 class ContentController extends Controller
 {
 
-    public function __construct() {
+    public function __construct(ContentRepository $contents) {
+        $this->contents = $contents;
     }
 
     public function index(Request $request)
     {
-        // $request->get('typology_id');
-        
         return view('architect::contents.index', [
             "typologies" => Typology::all()
         ]);
     }
 
-    public function show( Request $request)
+    public function data()
+    {
+        return $this->contents->getDatatable();
+    }
+
+    public function show(Request $request)
     {
         return view('architect::contents.show');
+    }
+
+    public function create(Typology $typology, Request $request)
+    {
+        return view('architect::contents.show', [
+            'typology' => $typology->load('fields'),
+            'users' => User::all()
+        ]);
+    }
+
+    public function store(CreateContentRequest $request)
+    {
+        $content = dispatch_now(CreateContent::fromRequest($request));
+
+        return $content ? response()->json([
+            'success' => true,
+            'content' => $content
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function update(Content $content, CreateContentRequest $request)
+    {
+        $content = dispatch_now(UpdateContent::fromRequest($content, $request));
+
+        return $content ? response()->json([
+            'success' => true,
+            'content' => $content
+        ]) : response()->json([
+            'success' => false
+        ], 500);
     }
 
 }
