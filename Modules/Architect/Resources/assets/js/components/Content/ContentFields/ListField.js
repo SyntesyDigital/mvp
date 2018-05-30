@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
-class TextField extends Component {
+class ListField extends Component {
 
   constructor(props){
     super(props);
@@ -15,38 +15,37 @@ class TextField extends Component {
 
   handleOnChange(event) {
 
-    const language = $(event.target).closest('.form-control').attr('language');
+    const fields = this.props.field.values;
 
-    const values = this.props.field.values;
+    for(var i=0;i<fields.length;i++){
+      if(fields[i].value == event.target.value){
+        fields[i].checked = event.target.checked;
+        break;
+      }
+    }
 
-    values[language] = event.target.value;
 
-    var field = {
-      identifier : this.props.field.identifier,
-      values : values
-    };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
-
-    this.props.onFieldChange(field);
+    this.props.onFieldChange(fields);
   }
 
   renderInputs() {
 
-    var inputs = [];
+    return (
+      this.props.field.values.map((item,i) => (
+        <div className="checkbox-field" key={i}>
 
-    for(var key in this.props.translations){
-      if(this.props.translations[key]){
-        inputs.push(
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-             <input type="text" className="form-control" language={key} name="name" value={this.props.field.values[key]} onChange={this.handleOnChange} />
-          </div>
-        );
-      }
-    }
-    return inputs;
+          <label className="form-check-label">
+              <input className="form-check-input" type="checkbox"
+                checked={item.checked}
+                value={item.value}
+                onChange={this.handleOnChange}
+              /> {'\u00A0'}
+              {item.name}
+          </label>
+        </div>
+
+      ))
+    );
   }
 
 
@@ -56,7 +55,7 @@ class TextField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.TEXT.icon}></i> {CustomFieldTypes.TEXT.name}
+            <i className={"fa "+CustomFieldTypes.LIST.icon}></i> {CustomFieldTypes.LIST.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -78,4 +77,4 @@ class TextField extends Component {
   }
 
 }
-export default TextField;
+export default ListField;

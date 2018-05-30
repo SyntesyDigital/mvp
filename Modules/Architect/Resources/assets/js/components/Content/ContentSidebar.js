@@ -86,7 +86,7 @@ class ContentSidebar extends Component {
 
         <hr/>
 
-        <div className="form-group bmd-form-group">
+        <div className="form-group bmd-form-group has-danger">
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
               <option name="" value="1"> Categoria 1 </option>

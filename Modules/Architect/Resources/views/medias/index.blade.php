@@ -19,7 +19,7 @@
                         <p align="center" style="pointer-events:none;">
                             <strong>{{ __('Arrossega un arxiu o') }}</strong> <br />
                             <a href="#" class="btn btn-default"><i class="fa fa-upload"></i> &nbsp; {{ __('Pujar arxiu') }}</a>
-                        <p>
+                        </p>
                     </div>
 
                     <div class="progress">

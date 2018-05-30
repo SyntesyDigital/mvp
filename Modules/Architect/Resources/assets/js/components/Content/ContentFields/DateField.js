@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
-class TextField extends Component {
+class DateField extends Component {
 
   constructor(props){
     super(props);
@@ -13,40 +17,36 @@ class TextField extends Component {
   }
 
 
-  handleOnChange(event) {
-
-    const language = $(event.target).closest('.form-control').attr('language');
-
-    const values = this.props.field.values;
-
-    values[language] = event.target.value;
+  handleOnChange(date) {
 
     var field = {
       identifier : this.props.field.identifier,
-      values : values
+      values : date
     };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
 
     this.props.onFieldChange(field);
   }
 
   renderInputs() {
 
-    var inputs = [];
+    return (
+      <div className="form-group bmd-form-group" >
+         <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name}</label>
 
-    for(var key in this.props.translations){
-      if(this.props.translations[key]){
-        inputs.push(
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-             <input type="text" className="form-control" language={key} name="name" value={this.props.field.values[key]} onChange={this.handleOnChange} />
-          </div>
-        );
-      }
-    }
-    return inputs;
+         <DatePicker
+             className="form-control"
+             selected={this.props.field.values}
+             onChange={this.handleOnChange}
+             showTimeSelect
+             timeFormat="HH:mm"
+             timeIntervals={15}
+             dateFormat="LLL"
+             timeCaption="time"
+             locale="ca-es"
+         />
+
+      </div>
+    );
   }
 
 
@@ -56,7 +56,7 @@ class TextField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.TEXT.icon}></i> {CustomFieldTypes.TEXT.name}
+            <i className={"fa "+CustomFieldTypes.DATE.icon}></i> {CustomFieldTypes.DATE.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -78,4 +78,4 @@ class TextField extends Component {
   }
 
 }
-export default TextField;
+export default DateField;

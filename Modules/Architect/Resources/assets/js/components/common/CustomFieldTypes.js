@@ -26,7 +26,7 @@ export default {
 	},
 	IMAGES: {
 		value:'images',
-		name:'Images',
+		name:'Imatges',
 		icon:'fa-th-large'
 	},
 	CONTENTS :{

@@ -161,7 +161,7 @@ class MediaCropModal extends Component {
                           <Cropper
                             ref='cropper'
                             src={this.state.image.url}
-                            style={{height: $(window).height() - 560, width: '100%'}}
+                            style={{height: $(window).height() - 360, width: '100%'}}
                             // Cropper.js options
                             aspectRatio={this.state.currentFormat.width / this.state.currentFormat.height}
                             guides={false}

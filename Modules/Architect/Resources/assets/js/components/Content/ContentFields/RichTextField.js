@@ -25,11 +25,13 @@ class RichTextField extends Component {
     //console.log(source);
     //console.log(editor);
 
+    const values = this.props.field.values;
+
+    values[key] = value;
 
     var field = {
       identifier : this.props.field.identifier,
-      language : key,
-      value : value
+      values : values
     };
 
     console.log("textField :: handleOnChange ");

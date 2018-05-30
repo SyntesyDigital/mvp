@@ -6,6 +6,9 @@ import ContentSidebar from './ContentSidebar';
 import ContentFields from './ContentFields';
 
 import CustomFieldTypes from './../common/CustomFieldTypes';
+import MediaSelectModal from './../Medias/MediaSelectModal';
+
+import moment from 'moment';
 
 class ContentContainer extends Component {
 
@@ -59,16 +62,75 @@ class ContentContainer extends Component {
             type : CustomFieldTypes.IMAGE.value,
             name : "Imatge",
             identifier : "image_1",
+            settings : {
+              type : "thumb",
+              name : "Thumbnail",
+              width : 500,
+              height : 500,
+              ratio : "1:1"
+            },
             values : {
-              "ca" : "",
-              "es" : "",
-              "en" : ""
+              url : ""
             }
+          },
+          {
+            id : 4,
+            type : CustomFieldTypes.DATE.value,
+            name : "Inici event",
+            identifier : "data_1",
+            values : moment()
+          },
+          {
+            id : 5,
+            type : CustomFieldTypes.IMAGES.value,
+            name : "Galería",
+            identifier : "images_1",
+            settings : {
+              type : "banner",
+              name : "Banner",
+              width : 1000,
+              height : 500,
+              ratio : "2:1"
+            },
+            values : [{
+                url : ASSETS+"modules/architect/images/default.jpg"
+              },
+              {
+                url : ASSETS+"modules/architect/images/default.jpg"
+              }
+            ]
+          },
+          {
+            id : 6,
+            type : CustomFieldTypes.LIST.value,
+            name : "Tipus",
+            identifier : "list_1",
+            settings : {},
+            values : [
+              {name:"Tipus 1", value:"1",checked:false},
+              {name:"Tipus 2", value:"2",checked:false},
+              {name:"Tipus 3", value:"3",checked:true}
+            ]
+          },
+          {
+            id : 7,
+            type : CustomFieldTypes.CONTENTS.value,
+            name : "Events",
+            identifier : "contents_1",
+            settings : {},
+            values : [
+              {id:1,name:"Event 1",type:"event",label:"Event",icon:"fa-calendar"},
+              {id:2,name:"Event 2",type:"event",label:"Event",icon:"fa-calendar"},
+              {id:3,name:"Event 3",type:"event",label:"Event",icon:"fa-calendar"},
+            ]
           }
 
         ]
-      }
+      },
 
+      //FIXME quiza esto va dentro del custom field
+      displayMediaModal : false,
+      sourceField : null
     };
 
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
@@ -79,6 +141,59 @@ class ContentContainer extends Component {
     this.handleRemoveTag = this.handleRemoveTag.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
     this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
+    this.handleImageSelect = this.handleImageSelect.bind(this);
+    this.handleImageSelected = this.handleImageSelected.bind(this);
+    this.handleImageCancel = this.handleImageCancel.bind(this);
+  }
+
+  handleImageSelect(identifier) {
+
+    this.setState({
+      displayMediaModal : true,
+      sourceField : identifier
+    });
+
+  }
+
+  handleImageCancel(){
+    this.setState({
+      displayMediaModal : false,
+      sourceField : null
+    });
+  }
+
+  handleImageSelected(image){
+
+    console.log("handleImageSelected :: images : ");
+
+    this.updateImage(this.state.sourceField,image);
+
+  }
+
+  updateImage(identifier,image){
+
+    const {typology} = this.state;
+
+    for(var i=0;i<typology.fields.length;i++) {
+      var item = typology.fields[i];
+      if(item.identifier == identifier ){
+
+        if(item.type == CustomFieldTypes.IMAGES.value){
+          typology.fields[i].values.push(image);
+          break;
+        }
+        else if(item.type == CustomFieldTypes.IMAGE.value){
+          typology.fields[i].values = image;
+          break;
+        }
+      }
+    }
+
+    this.setState({
+      typology : typology,
+      displayMediaModal : false,
+      sourceField : null
+    });
 
   }
 
@@ -192,7 +307,7 @@ class ContentContainer extends Component {
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
       if(item.identifier == field.identifier ){
-        typology.fields[i].values[field.language] = field.value;
+        typology.fields[i].values = field.values;
         break;
       }
     }
@@ -203,9 +318,17 @@ class ContentContainer extends Component {
 
   }
 
+
+
   render() {
     return (
       <div>
+
+        <MediaSelectModal
+          display={this.state.displayMediaModal}
+          field={this.state.sourceField}
+          onImageSelected={this.handleImageSelected}
+        />
 
         <ContentBar
           icon={this.state.typology.icon}
@@ -236,6 +359,7 @@ class ContentContainer extends Component {
               fields={this.state.typology.fields}
               translations={this.state.translations}
               onFieldChange={this.handleCustomFieldChange}
+              onImageSelect={this.handleImageSelect}
             />
 
 
