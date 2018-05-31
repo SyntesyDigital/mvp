@@ -76273,7 +76273,7 @@ if (document.getElementById('content-form')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ContentFields__ = __webpack_require__(456);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Medias_MediaSelectModal__ = __webpack_require__(537);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ContentSelectModal__ = __webpack_require__(546);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ContentSelectModal__ = __webpack_require__(538);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_moment__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -95693,15 +95693,7 @@ var MediaSelectModal = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (MediaSelectModal);
 
 /***/ }),
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */
+/* 538 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

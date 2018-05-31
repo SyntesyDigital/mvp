@@ -13988,11 +13988,15 @@ header .topnav .dropdown.open .dropdown-menu a {
 }
 
 #logo-wrapper {
-  background-color: #192532;
-  height: 70px;
+  background-color: #fff;
+  height: 73px;
   font-size: 16px;
   line-height: 70px;
   font-weight: 400;
+}
+
+#logo-wrapper img {
+  width: 100%;
 }
 
 nav.main-nav ul {
@@ -14995,6 +14999,14 @@ nav.main-nav ul li a:hover {
 .medias .table .thumbnail {
   max-width: 80px !important;
   max-height: 80px !important;
+}
+
+.dz-preview {
+  display: none;
+}
+
+.dz-file-preview.dz-processing {
+  display: none;
 }
 
 #media-edit.custom-modal .modal-content .container {
