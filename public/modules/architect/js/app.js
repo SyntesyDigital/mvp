@@ -76580,6 +76580,12 @@ var ContentContainer = function (_Component) {
 
     var _this2 = _possibleConstructorReturn(this, (ContentContainer.__proto__ || Object.getPrototypeOf(ContentContainer)).call(this, props));
 
+    var typology = props.typology;
+
+    if (props.typology == "event") {
+      typology = {};
+    }
+
     _this2.state = {
       status: 0,
       template: "",
@@ -76602,7 +76608,7 @@ var ContentContainer = function (_Component) {
       author: "",
       authors: props.authors,
       created_at: "14, Oct 2018",
-      typology: props.typology,
+      typology: typology,
 
       //FIXME quiza esto va dentro del custom field?
       displayMediaModal: false,

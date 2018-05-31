@@ -18,6 +18,12 @@ class ContentContainer extends Component {
   constructor(props) {
      super(props);
 
+     var typology = props.typology;
+
+     if(props.typology == "event"){
+       typology = {};
+     }
+
      this.state = {
          status: 0,
          template: "",
@@ -43,7 +49,7 @@ class ContentContainer extends Component {
          author: "",
          authors: props.authors,
          created_at: "14, Oct 2018",
-         typology: props.typology,
+         typology: typology,
 
          //FIXME quiza esto va dentro del custom field?
          displayMediaModal: false,

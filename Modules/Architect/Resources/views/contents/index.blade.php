@@ -8,11 +8,8 @@
 
   <div class="sidebar">
     <ul>
-      <li class="active">
-        <a href="" > <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+      <li >
+        <a href="" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
       </li>
     </ul>
     <hr />
@@ -26,10 +23,10 @@
     <hr/>
     <ul>
       <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+        <a href=""> <i class="fa fa-list"></i> <span class="text">Categories</span> </a>
       </li>
       <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+        <a href=""> <i class="fa fa-tag"></i> <span class="text">Etiquetes</span> </a>
       </li>
     </ul>
 
