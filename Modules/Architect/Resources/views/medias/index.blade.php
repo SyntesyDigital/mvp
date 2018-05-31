@@ -12,14 +12,14 @@
             <div class="card">
 				<div class="card-body">
 
-                    <h3 class="card-title">{{ __('List of media') }}</h3>
-    				<h6 class="card-subtitle mb-2 text-muted">{{ __('All content media can be found here.') }}</h6>
+                    <h3 class="card-title">{{ __('Llista de Mitjans') }}</h3>
+    				<h6 class="card-subtitle mb-2 text-muted">{{ __('Tots els mitjans poden ser trobats aquí.') }}</h6>
 
-                    <div class="medias-dropfiles">
-                        <p align="center">
-                            <strong>{{ __('Put your file here') }}</strong> <br />
-                            <small>{{ __('or click') }}</small>
-                        <p>
+                    <div class="medias-dropfiles" style="cursor:pointer;">
+                        <p align="center" style="pointer-events:none;">
+                            <strong>{{ __('Arrossega un arxiu o') }}</strong> <br />
+                            <a href="#" class="btn btn-default"><i class="fa fa-upload"></i> &nbsp; {{ __('Pujar arxiu') }}</a>
+                        </p>
                     </div>
 
                     <div class="progress">
@@ -42,9 +42,9 @@
                         <thead>
                            <tr>
                                <th></th>
-                               <th>Filename</th>
-                               <th data-filter="select">Type</th>
-                               <th data-filter="select">Author</th>
+                               <th>Nom d'arxiu</th>
+                               <th data-filter="select">Tipus</th>
+                               <th data-filter="select">Autor</th>
                                <th></th>
                            </tr>
                         </thead>

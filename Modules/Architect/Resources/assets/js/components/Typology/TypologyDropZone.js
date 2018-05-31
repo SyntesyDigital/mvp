@@ -48,11 +48,11 @@ class TypologyDropZone extends Component {
 
 
 		switch(type) {
-			case CustomFieldTypes.TEXT :
+			case CustomFieldTypes.TEXT.value :
 				return {
 					required : false
 				};
-			case CustomFieldTypes.RICH :
+			case CustomFieldTypes.RICH.value :
 				return {
 					required : false,
 					maxCharacters : {
@@ -64,7 +64,7 @@ class TypologyDropZone extends Component {
 						input : ""
 					}
 				};
-			case CustomFieldTypes.CONTENTS :
+			case CustomFieldTypes.CONTENTS.value :
 				return {
 					required : false,
 					typesAllowed : {
@@ -72,7 +72,7 @@ class TypologyDropZone extends Component {
 						fields : []
 					}
 				};
-			case CustomFieldTypes.LIST :
+			case CustomFieldTypes.LIST.value :
 				return {
 					required : false,
 					selectedList : ""
@@ -124,23 +124,24 @@ class TypologyDropZone extends Component {
 	renderFields() {
 		const fields = this.props.fields;
 
+
 		return (
 			fields.map((item, i) => (
-
-					<TypologyField
-						key={item.id}
-						index={i}
-						id={item.id}
-						type={item.type}
-						label={item.label}
-						icon={item.icon}
-						moveField={this.moveField}
-						onRemoveField={this.handleRemoveField}
-						onFieldChange={this.handleFieldChange}
-						onOpenSettings={this.handleOpenSettings}
-					/>
-
-				))
+				<TypologyField
+					key={item.id}
+					index={i}
+					id={item.id}
+					type={item.type}
+					label={item.label}
+					icon={item.icon}
+					name={item.name}
+					identifier={item.identifier}
+					moveField={this.moveField}
+					onRemoveField={this.handleRemoveField}
+					onFieldChange={this.handleFieldChange}
+					onOpenSettings={this.handleOpenSettings}
+				/>
+			))
 		);
 
 
@@ -152,14 +153,18 @@ class TypologyDropZone extends Component {
 		const isActive = canDrop && isOver
 
     let className = '';
-		if (isActive) {
-			className += 'is-active';
-		} else if (canDrop) {
-			className += 'can-drop';
-		}
+	if (isActive) {
+		className += 'is-active';
+	} else if (canDrop) {
+		className += 'can-drop';
+	}
+
+	if(this.props.errors.fields) {
+		className += ' error';
+	}
 
     return connectDropTarget(
-			<div className={"fields-list-container "+className}>
+			<div className={"fields-list-container " + className}>
 
 				{this.renderFields()}
 

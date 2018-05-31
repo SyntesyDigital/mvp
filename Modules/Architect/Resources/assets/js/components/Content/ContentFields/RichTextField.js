@@ -3,29 +3,28 @@ import { render } from 'react-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+import CustomFieldTypes from './../../common/CustomFieldTypes';
+
 class RichTextField extends Component {
 
   constructor(props){
     super(props);
 
-    this.handleOnChange = this.handleOnChange.bind(this);
+    //this.handleOnChange = this.handleOnChange.bind(this);
 
   }
 
 
-  handleOnChange(value) {
+  handleOnChange(key,value, delta, source, editor)
+  {
+    const values = this.props.field.values ? this.props.field.values : {};
 
-    //const language = $(event.target).closest('.form-control').attr('language');
-
+    values[key] = value;
 
     var field = {
       identifier : this.props.field.identifier,
-      language : "ca",
-      value : value
+      values : values
     };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
 
     this.props.onFieldChange(field);
   }
@@ -36,20 +35,21 @@ class RichTextField extends Component {
 
     for(var key in this.props.translations){
       if(this.props.translations[key]){
+
+          var value = '';
+          if(this.props.field.values) {
+              value = this.props.field.values[key] ? this.props.field.values[key] : '';
+          }
+
         inputs.push(
-
-
-
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-
-             <ReactQuill
-                language={key}
-                value={this.props.field.values[key]}
-                onChange={this.handleOnChange}
-              />
-
-          </div>
+        <div className="form-group bmd-form-group" key={key}>
+         <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
+         <ReactQuill
+            id={key}
+            value={value}
+            onChange={this.handleOnChange.bind(this,key)}
+          />
+        </div>
         );
       }
     }
@@ -63,7 +63,7 @@ class RichTextField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className="fa fa-font"></i> Text
+            <i className={"fa "+CustomFieldTypes.RICH.icon}></i> {CustomFieldTypes.RICH.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

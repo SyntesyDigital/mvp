@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Field extends Model
 {
 
+    protected $casts = [
+        'rules' => 'array',
+        'settings' => 'array'
+    ];
+
     /**
      * The database table used by the model.
      *
@@ -21,6 +26,7 @@ class Field extends Model
      */
     protected $fillable = [
         'typology_id',
+        'name',
         'icon',
         'identifier',
         'type',

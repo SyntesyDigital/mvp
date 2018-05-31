@@ -78,6 +78,10 @@
       text-align: center;
       margin-bottom:40px;
 
+      &.error {
+          border: 1px dashed $red !important;
+      }
+
       .list-container-content-wrapper{
         display: block;
         display: table;
@@ -198,7 +202,7 @@
     height: calc(100vh - 110px);
     overflow: scroll;
 
-    
+
   }
 
   .form-group .form-control, .form-group .cke_textarea_inline{

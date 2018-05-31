@@ -229,13 +229,12 @@ export default class MediaEditModal extends Component {
                     </div>
 
                     <div className="modal-footer">
-                      <a href="" className="btn btn-default" onClick={this.onModalClose}> Tancar </a> &nbsp;
+                      <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
                       <a href="" className="btn btn-primary" onClick={this.onSubmit}> Guardar </a>
                     </div>
 
                   </div>
               </div>
-              }
             </div>
           </div>
         );

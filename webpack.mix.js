@@ -10,7 +10,8 @@ mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js'
 mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.js',
   'Modules/Architect/Resources/assets/js/architect/architect.dialog.js',
-  'Modules/Architect/Resources/assets/js/architect/architect.medias.js'
+  'Modules/Architect/Resources/assets/js/architect/architect.medias.js',
+  'Modules/Architect/Resources/assets/js/architect/architect.contents.js'
 ], 'public/modules/architect/js/architect.js');
 
 mix.browserSync('http://localhost:8000');

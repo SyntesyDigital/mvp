@@ -44,11 +44,16 @@ class MediaRepository extends BaseRepository
 
             })
             ->addColumn('action', function ($item) {
-                $html = '<a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Are you sûre ?">Delete</a>';
+
+                $html = "";
+
+                //$html .= '<a href="'..'" target="_blank" class="btn btn-sm" data-id="'.$item->id.'"><i class="fa fa-pencil"> &nbsp; Editar</a>';
 
                 if($item->type == "image") {
-                    $html .= '<a href="#" class="btn btn-sm btn-success toogle-edit" data-toogle="edit" data-id="'.$item->id.'">Edit</a>';
+                    $html .= '<a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;';
                 }
+
+                $html .= '<a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;';
 
                 return $html;
             })

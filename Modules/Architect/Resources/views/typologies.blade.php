@@ -6,23 +6,22 @@
       <div class="col-md-offset-2 col-md-8">
 
         <div class="page-title">
-          <h1>Tipologies</h1> <a href="{{route('typologies.show')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tipologia</a>
+          <h1>Tipologies</h1> <a href="{{route('typologies.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tipologia</a>
         </div>
 
         <div class="grid-items">
           <div class="row">
-            @for($i=0;$i<8;$i++)
+              @foreach($typologies as $typology)
+                <div class="col-xs-3">
+                    <div class="grid-item">
+                        <i class="fa {{$typology->icon}}"></i>
 
-            <div class="col-xs-3">
-              <div class="grid-item">
-                <i class="fa fa-envelope"></i>
-                <p class="grid-item-name">
-                  Page
-                </p>
-              </div>
-            </div>
-
-            @endfor
+                        <p class="grid-item-name">
+                            <a href="{{ route('typologies.show', $typology)}}">{{$typology->name}}</a>
+                        </p>
+                    </div>
+                </div>
+              @endforeach()
           </div>
         </div>
 
