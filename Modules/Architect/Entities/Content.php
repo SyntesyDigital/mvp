@@ -66,4 +66,17 @@ class Content extends Model
         return $this->hasOne('App\Models\User', "id", "author_id");
     }
 
+    public function getStringStatus()
+    {
+
+        $status = [
+            1 => 'Publicat',
+            0 => 'Esborrany',
+            self::STATUS_PUBLISHED => 'Publicat',//__('contents.status.published'),
+            self::STATUS_DRAFT => 'Esborrany' //__('contents.status.draft')
+        ];
+
+        return isset($status[$this->status]) ? $status[$this->status] : null;
+    }
+
 }

@@ -76492,11 +76492,11 @@ var ContentForm = function (_Component) {
     _createClass(ContentForm, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            if (this.state.typology) {
-                this.contentContainer.setState({
-                    typology: this.state.typology
-                });
-            }
+            // if(this.state.typology) {
+            //     this.contentContainer.setState({
+            //         typology : this.state.typology
+            //     });
+            // }
         }
     }, {
         key: 'render',
@@ -76508,6 +76508,7 @@ var ContentForm = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ContentContainer__["a" /* default */], {
                     authors: this.state.authors,
+                    typology: this.state.typology,
                     ref: function ref(contentContainer) {
                         return _this2.contentContainer = contentContainer;
                     }
@@ -76601,113 +76602,7 @@ var ContentContainer = function (_Component) {
       author: "",
       authors: props.authors,
       created_at: "14, Oct 2018",
-      typology: {
-        icon: 'fa-file-o',
-        name: "Content",
-        fields: [{
-          id: 1,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT.value,
-          name: "Title",
-          identifier: "text_1",
-          values: {
-            "ca": "Hola",
-            "es": "Hola",
-            "en": "Hola"
-          }
-        }, {
-          id: 2,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH.value,
-          name: "Description",
-          identifier: "rich_1",
-          values: {
-            "ca": "Hola",
-            "es": "Hola",
-            "en": "Hola"
-          }
-        }, {
-          id: 3,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE.value,
-          name: "Imatge",
-          identifier: "image_1",
-          settings: {
-            type: "thumb",
-            name: "Thumbnail",
-            width: 500,
-            height: 500,
-            ratio: "1:1"
-          },
-          values: {
-            url: ""
-          }
-        }, {
-          id: 4,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].DATE.value,
-          name: "Inici event",
-          identifier: "data_1",
-          values: __WEBPACK_IMPORTED_MODULE_8_moment___default()()
-        }, {
-          id: 5,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGES.value,
-          name: "Galería",
-          identifier: "images_1",
-          settings: {
-            type: "banner",
-            name: "Banner",
-            width: 1000,
-            height: 500,
-            ratio: "2:1"
-          },
-          values: [{
-            url: ASSETS + "modules/architect/images/default.jpg"
-          }, {
-            url: ASSETS + "modules/architect/images/default.jpg"
-          }]
-        }, {
-          id: 6,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LIST.value,
-          name: "Tipus",
-          identifier: "list_1",
-          settings: {},
-          values: [{
-            name: "Tipus 1",
-            value: "1",
-            checked: false
-          }, {
-            name: "Tipus 2",
-            value: "2",
-            checked: false
-          }, {
-            name: "Tipus 3",
-            value: "3",
-            checked: true
-          }]
-        }, {
-          id: 7,
-          type: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS.value,
-          name: "Events",
-          identifier: "contents_1",
-          settings: {},
-          values: [{
-            id: 1,
-            name: "Event 1",
-            type: "event",
-            label: "Event",
-            icon: "fa-calendar"
-          }, {
-            id: 2,
-            name: "Event 2",
-            type: "event",
-            label: "Event",
-            icon: "fa-calendar"
-          }, {
-            id: 3,
-            name: "Event 3",
-            type: "event",
-            label: "Event",
-            icon: "fa-calendar"
-          }]
-        }]
-      },
+      typology: props.typology,
 
       //FIXME quiza esto va dentro del custom field?
       displayMediaModal: false,
@@ -76907,10 +76802,6 @@ var ContentContainer = function (_Component) {
   }, {
     key: 'onSaveSuccess',
     value: function onSaveSuccess(response) {
-      // this.setState({
-      //     'typology' : response.typology
-      // })
-
       toastr.success('ok');
     }
   }, {

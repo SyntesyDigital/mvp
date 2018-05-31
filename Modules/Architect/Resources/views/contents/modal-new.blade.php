@@ -30,7 +30,7 @@
                         <div class="col-xs-3">
                           <a href="{{route('contents.create', $typology)}}">
                             <div class="grid-item">
-                              <i class="fa fa-file"></i>
+                              <i class="fa {{$typology->icon}}"></i>
                               <p class="grid-item-name">
                                 {{$typology->name}}
                               </p>

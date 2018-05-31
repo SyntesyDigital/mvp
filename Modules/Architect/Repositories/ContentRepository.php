@@ -24,6 +24,9 @@ class ContentRepository extends BaseRepository
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
+            ->addColumn('status', function ($item) {
+                return $item->getStringStatus();
+            })
             ->addColumn('typology', function ($item) {
                 return $item->typology->name;
             })
@@ -31,7 +34,10 @@ class ContentRepository extends BaseRepository
                 return $item->author->full_name;
             })
             ->addColumn('action', function ($item) {
-                return '';
+                return '
+                <a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="#" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                ';
             })
             ->make(true);
     }

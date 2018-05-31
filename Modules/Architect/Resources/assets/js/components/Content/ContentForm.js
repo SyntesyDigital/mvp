@@ -17,11 +17,11 @@ export default class ContentForm extends Component {
 
     componentDidMount()
     {
-        if(this.state.typology) {
-            this.contentContainer.setState({
-                typology : this.state.typology
-            });
-        }
+        // if(this.state.typology) {
+        //     this.contentContainer.setState({
+        //         typology : this.state.typology
+        //     });
+        // }
     }
 
     render() {
@@ -29,6 +29,7 @@ export default class ContentForm extends Component {
             <div>
                 <ContentContainer
                 authors={this.state.authors}
+                typology={this.state.typology}
                 ref={(contentContainer) => this.contentContainer = contentContainer}
                 />
             </div>

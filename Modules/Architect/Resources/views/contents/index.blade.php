@@ -43,15 +43,17 @@
     <table class="table" id="table-contents" data-url="{{route('contents.data', Request('typology_id'))}}">
         <thead>
            <tr>
-               <th></th>
-               <th></th>
-               <th></th>
-               <th></th>
+               <th>Nom</th>
+               <th>Tipus</th>
+               <th>Actualiztat</th>
+               <th>Autor</th>
+               <th>Estat</th>
                <th></th>
            </tr>
         </thead>
         <tfoot>
            <tr>
+               <th></th>
                <th></th>
                <th></th>
                <th></th>
