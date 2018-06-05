@@ -82,7 +82,6 @@ class ArchitectServiceProvider extends ServiceProvider
     public function registerTranslations()
     {
         $langPath = resource_path('lang/modules/architect');
-
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'architect');
         } else {

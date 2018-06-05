@@ -4,7 +4,7 @@ import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
 
-import CustomFieldTypes from './../common/CustomFieldTypes';
+//import CustomFieldTypes from './../common/CustomFieldTypes';
 import TypologyDropZone from './TypologyDropZone';
 import TypologySidebar from './TypologySidebar';
 import TypologyDragField from './TypologyDragField';
@@ -38,7 +38,8 @@ class TypologyContainer extends Component {
              fields: null,
          },
          fields: [],
-         settingsField: null
+         settingsField: null,
+         fieldsList: null
      };
 
      this.handleInputChange = this.handleInputChange.bind(this);
@@ -304,6 +305,11 @@ class TypologyContainer extends Component {
     }
 
   render() {
+
+      console.log(this.state.fieldsList);
+
+
+
     return (
       <div>
 
@@ -343,17 +349,11 @@ class TypologyContainer extends Component {
               onFieldChange={this.handleInputChange}
             >
 
-              <TypologyDragField definition={CustomFieldTypes.TEXT}/>
-              <TypologyDragField definition={CustomFieldTypes.RICH}/>
-              <TypologyDragField definition={CustomFieldTypes.IMAGE}/>
-              <TypologyDragField definition={CustomFieldTypes.DATE}/>
-              <TypologyDragField definition={CustomFieldTypes.MAP}/>
-              <TypologyDragField definition={CustomFieldTypes.IMAGES}/>
-              <TypologyDragField definition={CustomFieldTypes.CONTENTS}/>
-              <TypologyDragField definition={CustomFieldTypes.LIST}/>
-              <TypologyDragField definition={CustomFieldTypes.BOOLEAN}/>
-              <TypologyDragField definition={CustomFieldTypes.LINK}/>
-              <TypologyDragField definition={CustomFieldTypes.VIDEO}/>
+            {
+                this.state.fieldsList && Object.keys(this.state.fieldsList).map((k) =>
+                    <TypologyDragField definition={this.state.fieldsList[k]}/>
+                )
+            }
 
             </TypologySidebar>
 
@@ -365,4 +365,17 @@ class TypologyContainer extends Component {
   }
 
 }
+
+// <TypologyDragField definition={CustomFieldTypes.TEXT}/>
+// <TypologyDragField definition={CustomFieldTypes.RICH}/>
+// <TypologyDragField definition={CustomFieldTypes.IMAGE}/>
+// <TypologyDragField definition={CustomFieldTypes.DATE}/>
+// <TypologyDragField definition={CustomFieldTypes.MAP}/>
+// <TypologyDragField definition={CustomFieldTypes.IMAGES}/>
+// <TypologyDragField definition={CustomFieldTypes.CONTENTS}/>
+// <TypologyDragField definition={CustomFieldTypes.LIST}/>
+// <TypologyDragField definition={CustomFieldTypes.BOOLEAN}/>
+// <TypologyDragField definition={CustomFieldTypes.LINK}/>
+// <TypologyDragField definition={CustomFieldTypes.VIDEO}/>
+
 export default TypologyContainer;

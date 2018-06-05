@@ -2,23 +2,32 @@
 
 namespace Modules\Architect\Fields\Types;
 
+use Modules\Architect\Fields\Field;
 use Modules\Architect\Fields\FieldInterface;
+use Modules\Architect\Entities\Content;
 
-class Text implements FieldInterface
+class Text extends Field implements FieldInterface
 {
     public $type = 'text';
+    public $icon = 'fa-font';
+    public $name = 'TEXT';
 
-    private $optionalValidationRules = [
+    public $rules = [
         'required',
         'unique',
-        'size'
+        'maxCharacters',
+        'minCharacters',
     ];
 
-    public function validate(Request $request)
+    public $options = [];
+
+    public function validate($request)
     {}
 
-    public function save(Content $content, Request $request)
-    {}
-        
+    public function save($content, $identifier, $values, $languages = null)
+    {
+        return parent::save($content, $identifier, $values, $languages);
+    }
+
 }
 ?>

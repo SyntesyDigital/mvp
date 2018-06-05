@@ -6,11 +6,11 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::post('/save', 'ArchitectController@save')->name('save');
 
     // Typologies
-    Route::get('/typologies', 'TypologiesController@index')->name('typologies');
-    Route::post('/typologies', 'TypologiesController@store')->name('typologies.store');
-    Route::get('/typologies/create', 'TypologiesController@create')->name('typologies.create');
-    Route::get('/typologies/{typology?}', 'TypologiesController@show')->name('typologies.show');
-    Route::put('/typologies/{typology?}/update', 'TypologiesController@update')->name('typologies.update');
+    Route::get('/typologies', 'TypologyController@index')->name('typologies');
+    Route::post('/typologies', 'TypologyController@store')->name('typologies.store');
+    Route::get('/typologies/create', 'TypologyController@create')->name('typologies.create');
+    Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
+    Route::put('/typologies/{typology?}/update', 'TypologyController@update')->name('typologies.update');
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

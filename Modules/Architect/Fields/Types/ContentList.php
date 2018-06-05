@@ -4,20 +4,21 @@ namespace Modules\Architect\Fields\Types;
 
 use Modules\Architect\Fields\Field;
 use Modules\Architect\Fields\FieldInterface;
+
 use Modules\Architect\Entities\Content;
 
-class Image extends Field implements FieldInterface
+class ContentList extends Field implements FieldInterface
 {
-    public $type = 'image';
-    public $icon = 'fa-picture-o';
-    public $name = 'IMAGE';
+    public $type = 'contentlist';
+    public $icon = 'fa-th-list';
+    public $name = 'LIST';
 
     public $rules = [
         'required'
     ];
 
     public $options = [
-        'only_formats'
+        'only_typologies'
     ];
 
     public function validate($request)

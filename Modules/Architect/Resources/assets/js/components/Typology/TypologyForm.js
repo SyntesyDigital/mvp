@@ -14,7 +14,8 @@ export default class TypologyForm extends Component {
         super(props);
 
         this.state = {
-            typology : props.typology ? JSON.parse(atob(props.typology)) : ''
+            typology : props.typology ? JSON.parse(atob(props.typology)) : '',
+            fieldsList : JSON.parse(props.fields)
         };
     }
 
@@ -38,10 +39,11 @@ export default class TypologyForm extends Component {
             this.typologyContainer.setState({
                 typology : this.state.typology,
                 fields : fields,
+                icon : this.state.typology.icon,
                 inputs : {
                     name: this.state.typology.name,
                     identifier: this.state.typology.identifier,
-                    icon: "one",
+                    icon: this.state.typology.icon,
                     template: "",
                     slugOn: false,
                     slugCa: "",
@@ -51,9 +53,12 @@ export default class TypologyForm extends Component {
                     tags: false,
                 }
             });
-
-
         }
+
+        this.typologyContainer.setState({
+            fieldsList: this.state.fieldsList
+        });
+
     }
 
     render() {
@@ -70,5 +75,6 @@ export default class TypologyForm extends Component {
 if (document.getElementById('typology-form')) {
     var element = document.getElementById('typology-form');
     var typology = element.getAttribute('typology');
-    ReactDOM.render(<TypologyForm typology={typology} />, element);
+    var fields = element.getAttribute('fields');
+    ReactDOM.render(<TypologyForm fields={fields} typology={typology} />, element);
 }

@@ -4,6 +4,8 @@ namespace Modules\Architect\Http\Requests\Content;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Modules\Architect\Rules\ContentField;
+
 class CreateContentRequest extends FormRequest
 {
     /**
@@ -15,9 +17,10 @@ class CreateContentRequest extends FormRequest
     {
         return [
             'status' => 'required',
-            'typology_id' => 'required',
+            //'typology_id' => 'required',
             'author_id' => 'required',
-            'fields' => 'required'
+            'fields' => ['required', new ContentField],
+
         ];
     }
 
