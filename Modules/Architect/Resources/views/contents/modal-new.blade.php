@@ -26,6 +26,18 @@
 
               <div class="grid-items">
                 <div class="row">
+
+                  <div class="col-xs-3">
+                    <a href="#">
+                      <div class="grid-item">
+                        <i class="fa fa-file-o"></i>
+                        <p class="grid-item-name">
+                          Pàgina
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+
                     @foreach(Modules\Architect\Entities\Typology::all() as $typology)
                         <div class="col-xs-3">
                           <a href="{{route('contents.create', $typology)}}">

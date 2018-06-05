@@ -7,7 +7,7 @@
               <div class="row">
 
                 <div id="logo-wrapper" class="col-md-2">
-                    TurismoBCN
+                    <img src="{{asset('modules/architect/images/client-logo.jpg')}}" alt="Logo" />
                 </div>
 
                 <div class="col-md-8">
