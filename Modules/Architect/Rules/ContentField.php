@@ -32,7 +32,6 @@ class ContentField implements Rule
             $values = isset($v['values']) ? $v['values'] : null;
 
             if(is_array($rules)) {
-
                 foreach($rules as $rule => $ruleValue) {
                     switch($rule) {
                         case 'required':
@@ -49,14 +48,19 @@ class ContentField implements Rule
                         case 'maxCharacters':
                             if(is_array($values)) {
                                 foreach($values as $k2 => $v2) {
-                                    $isValid = strlen($v2) <= $ruleValue ? true : false;
-
-                                    if(!$isValid) {
+                                    if(strlen($values) > $ruleValue) {
                                         $this->errors[] = [
                                             'identifier' => $v['identifier'],
                                             'message' => 'to much !'
                                         ];
                                     }
+                                }
+                            } else {
+                                if(strlen($values) > $ruleValue) {
+                                    $this->errors[] = [
+                                        'identifier' => $v['identifier'],
+                                        'message' => 'to much !'
+                                    ];
                                 }
                             }
                         break;
