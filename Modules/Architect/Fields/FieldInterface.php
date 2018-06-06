@@ -1,13 +1,17 @@
 <?php
 namespace Modules\Architect\Fields;
 
+use Modules\Architect\Entities\Content;
+
 interface FieldInterface
 {
-    public $type;
-    
-    public function validate(Request $request);
+    //public $type;
 
-    public function save(Content $content, Request $request);
+    public function validate($request);
+
+    public function save($content, $identifier, $values, $languages = null);
+
+    public function getRules();
 }
 
 ?>

@@ -28,11 +28,11 @@ class ContentFields extends Component {
   renderFields() {
 
     var fields = [];
-
+    
     for(var i=0;i<this.props.fields.length;i++){
       var item = this.props.fields[i];
-
-      if(item.type == CustomFieldTypes.TEXT.value){
+            
+      if(item.type == "text"){
         fields.push(
           <TextField
             field={item}
@@ -42,7 +42,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.RICH.value){
+      else if(item.type == "richtext"){
         fields.push(
           <RichTextField
               field={item}
@@ -52,7 +52,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.IMAGE.value){
+      else if(item.type == "image"){
         fields.push(
           <ImageField
               field={item}
@@ -63,7 +63,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.DATE.value){
+      else if(item.type == "date"){
         fields.push(
           <DateField
               field={item}
@@ -74,7 +74,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.IMAGES.value){
+      else if(item.type == "images"){
         fields.push(
           <ImagesField
               field={item}
@@ -85,7 +85,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.LIST.value){
+      else if(item.type == "list"){
         fields.push(
           <ListField
               field={item}
@@ -95,7 +95,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.CONTENTS.value){
+      else if(item.type == "contents"){
         fields.push(
           <ContentsField
               field={item}

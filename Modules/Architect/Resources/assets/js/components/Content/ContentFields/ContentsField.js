@@ -10,108 +10,116 @@ import ContentsDragField from './ContentsDragField';
 
 class ContentsField extends Component {
 
-  constructor(props){
-    super(props);
+  constructor(props) {
+     super(props);
 
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.moveField = this.moveField.bind(this);
-		this.handleRemoveField = this.handleRemoveField.bind(this);
-    this.onContentSelect = this.onContentSelect.bind(this);
+     this.handleOnChange = this.handleOnChange.bind(this);
+     this.moveField = this.moveField.bind(this);
+     this.handleRemoveField = this.handleRemoveField.bind(this);
+     this.onContentSelect = this.onContentSelect.bind(this);
+ }
 
-  }
+ moveField(dragIndex, hoverIndex) {
 
-  moveField(dragIndex, hoverIndex) {
+     const field = this.props.field;
+     const dragField = field.values[dragIndex]
 
-    const field = this.props.field;
-		const dragField = field.values[dragIndex]
+     var result = update(field, {
+         values: {
+             $splice: [
+                 [dragIndex, 1],
+                 [hoverIndex, 0, dragField]
+             ],
+         }
+     });
 
-    var result = update(field,{
-      values : {
-        $splice: [[dragIndex, 1], [hoverIndex, 0, dragField]],
-      }
-    });
 
+     // console.log("\n\nResult values : ");
+     // console.log(field.values);
+     // console.log(result);
 
-    console.log("\n\nResult values : ");
-    console.log(field.values);
-    console.log(result);
+     var newField = {
+         identifier: this.props.field.identifier,
+         values: result.values
+     };
 
-    var newField = {
-      identifier : this.props.field.identifier,
-      values : result.values
-    };
+     this.props.onFieldChange(newField);
 
-    this.props.onFieldChange(newField);
+ }
 
-	}
+ handleRemoveField(fieldId) {
 
-	handleRemoveField(fieldId) {
+     const fields = this.props.field.values;
 
-    const fields = this.props.field.values;
+     for (var i = 0; i < fields.length; i++) {
+         if (fieldId == fields[i].id) {
+             fields.splice(i, 1);
+             break;
+         }
+     }
 
-		for(var i=0;i<fields.length;i++){
-			if(fieldId == fields[i].id ){
-				fields.splice(i,1);
-				break;
-			}
-		}
+     var field = {
+         identifier: this.props.field.identifier,
+         values: fields
+     };
 
-    var field = {
-      identifier : this.props.field.identifier,
-      values : fields
-    };
+     this.props.onFieldChange(field);
 
-    this.props.onFieldChange(field);
+ }
 
-	}
+ handleOnChange(event) {
+     const language = $(event.target).closest('.form-control').attr('language');
+     const values = this.props.field.values;
+     values[language] = event.target.value;
+     var field = {
+         identifier: this.props.field.identifier,
+         values: values
+     };
 
-  handleOnChange(event) {
+     // console.log("textField :: handleOnChange ");
+     // console.log(field);
 
-    const language = $(event.target).closest('.form-control').attr('language');
+     this.props.onFieldChange(field);
+ }
 
-    const values = this.props.field.values;
+ onContentSelect(event) {
+     event.preventDefault();
+     this.props.onContentSelect(this.props.field.identifier);
+ }
 
-    values[language] = event.target.value;
-
-    var field = {
-      identifier : this.props.field.identifier,
-      values : values
-    };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
-
-    this.props.onFieldChange(field);
-  }
-
-  onContentSelect(event) {
-    event.preventDefault();
-
-    this.props.onContentSelect(this.props.field.identifier);
-  }
-
-  renderInputs() {
-
-    const fields = this.props.field.values;
-
-		return (
-			fields.map((item, i) => (
-
-  					<ContentsDragField
-  						key={item.id}
-  						index={i}
-  						id={item.id}
-  						type={item.type}
-  						label={item.label}
-  						icon={item.icon}
-              name={item.name}
-  						moveField={this.moveField}
-  						onRemoveField={this.handleRemoveField}
-  					/>
-
-				))
-		);
-  }
+ renderInputs() {
+     console.log('fields =>', this.props.field);
+     const fields = this.props.field.values;
+     // return (
+     //     fields.map((item, i) => (
+     // 
+     //         <ContentsDragField 
+     //         key = {item.id}
+     //         index = {i}
+     //         id = {item.id}
+     //         type = {item.type}
+     //         label = {item.label}
+     //         icon = {item.icon}
+     //         name = {item.name}
+     //         moveField = {this.moveField}
+     //         onRemoveField = {this.handleRemoveField}  />
+     // 
+     //     ))
+     // );
+     
+     if(this.props.field.values) {
+         return <ContentsDragField 
+         key = {item.id}
+         index = {i}
+         id = {item.id}
+         type = {item.type}
+         label = {item.label}
+         icon = {item.icon}
+         name = {item.name}
+         moveField = {this.moveField}
+         onRemoveField = {this.handleRemoveField}  />
+     }
+ }
 
 
   render() {

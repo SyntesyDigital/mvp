@@ -3,15 +3,29 @@
 namespace Modules\Architect\Fields\Types;
 
 use Modules\Architect\Fields\FieldInterface;
+use Modules\Architect\Entities\Content;
+use Modules\Architect\Fields\Field;
 
-class RichText implements FieldInterface
+class Richtext extends Field implements FieldInterface
 {
     public $type = 'richtext';
+    public $icon = 'fa-align-left';
+    public $name = 'RICHTEXT';
 
-    public function validate(Request $request)
+    public $rules = [
+        'required',
+        'max',
+    ];
+
+    public $options = [];
+
+    public function validate($request)
     {}
 
-    public function save(Content $content, Request $request)
-    {}
+    public function save($content, $identifier, $values, $languages = null)
+    {
+        return parent::save($content, $identifier, $values, $languages);
+    }
+
 }
 ?>

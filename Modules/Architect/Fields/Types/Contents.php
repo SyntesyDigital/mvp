@@ -2,16 +2,30 @@
 
 namespace Modules\Architect\Fields\Types;
 
+use Modules\Architect\Fields\Field;
 use Modules\Architect\Fields\FieldInterface;
+use Modules\Architect\Entities\Content;
 
-class Contents implements FieldInterface
+class Contents extends Field implements FieldInterface
 {
     public $type = 'contents';
+    public $icon = 'fa-file-o';
+    public $name = 'CONTENTS';
 
-    public function validate(Request $request)
+    public $rules = [
+        'required'
+    ];
+
+    public $options = [
+        'only_formats'
+    ];
+
+    public function validate($request)
     {}
 
-    public function save(Content $content, Request $request)
-    {}
+    public function save($content, $identifier, $values, $languages = null)
+    {
+        return parent::save($content, $identifier, $values, $languages);
+    }
 }
 ?>

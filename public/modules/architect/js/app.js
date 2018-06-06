@@ -60773,7 +60773,8 @@ var TypologyForm = function (_Component) {
         var _this = _possibleConstructorReturn(this, (TypologyForm.__proto__ || Object.getPrototypeOf(TypologyForm)).call(this, props));
 
         _this.state = {
-            typology: props.typology ? JSON.parse(atob(props.typology)) : ''
+            typology: props.typology ? JSON.parse(atob(props.typology)) : '',
+            fieldsList: JSON.parse(props.fields)
         };
         return _this;
     }
@@ -60799,6 +60800,7 @@ var TypologyForm = function (_Component) {
                 this.typologyContainer.setState({
                     typology: this.state.typology,
                     fields: fields,
+                    icon: this.state.typology.icon,
                     inputs: {
                         name: this.state.typology.name,
                         identifier: this.state.typology.identifier,
@@ -60816,6 +60818,10 @@ var TypologyForm = function (_Component) {
                     }
                 });
             }
+
+            this.typologyContainer.setState({
+                fieldsList: this.state.fieldsList
+            });
         }
     }, {
         key: 'render',
@@ -60843,7 +60849,8 @@ var TypologyForm = function (_Component) {
 if (document.getElementById('typology-form')) {
     var element = document.getElementById('typology-form');
     var typology = element.getAttribute('typology');
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologyForm, { typology: typology }), element);
+    var fields = element.getAttribute('fields');
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologyForm, { fields: fields, typology: typology }), element);
 }
 
 /***/ }),
@@ -61347,14 +61354,13 @@ var SelectorSettingsField = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd_html5_backend___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd_html5_backend__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_immutability_helper__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__TypologyDropZone__ = __webpack_require__(404);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__TypologySidebar__ = __webpack_require__(415);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__TypologyDragField__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__TypologyModal__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__TypologyBar__ = __webpack_require__(114);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__TypologyDropZone__ = __webpack_require__(404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__TypologySidebar__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__TypologyDragField__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__TypologyModal__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__TypologyBar__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61369,7 +61375,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-
+//import CustomFieldTypes from './../common/CustomFieldTypes';
 
 
 
@@ -61406,7 +61412,8 @@ var TypologyContainer = function (_Component) {
                 fields: null
             },
             fields: [],
-            settingsField: null
+            settingsField: null,
+            fieldsList: null
         };
 
         _this2.handleInputChange = _this2.handleInputChange.bind(_this2);
@@ -61590,7 +61597,7 @@ var TypologyContainer = function (_Component) {
         key: 'create',
         value: function create() {
             var _this = this;
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post('/architect/typologies', this.getFormData()).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_10_axios___default.a.post('/architect/typologies', this.getFormData()).then(function (response) {
                 if (response.data.success) {
                     _this.onSaveSuccess(response.data);
                 }
@@ -61609,7 +61616,7 @@ var TypologyContainer = function (_Component) {
         key: 'update',
         value: function update() {
             var _this = this;
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData()).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_10_axios___default.a.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData()).then(function (response) {
                 if (response.data.success) {
                     _this.onSaveSuccess(response.data);
                 }
@@ -61661,14 +61668,14 @@ var TypologyContainer = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
 
-            console.log("render inputs!");
-            console.log(this.state.inputs);
+            console.log(this.state.fieldsList);
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__TypologyBar__["a" /* default */], {
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__TypologyBar__["a" /* default */], {
                     icon: this.state.inputs.icon,
                     name: this.state.inputs.name,
                     onSubmitForm: this.handleSubmitForm
@@ -61679,7 +61686,7 @@ var TypologyContainer = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'container rightbar-page' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__TypologyModal__["a" /* default */], {
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyModal__["a" /* default */], {
                             field: this.state.settingsField,
                             id: 'settings-modal',
                             onModalClose: this.handleModalClose,
@@ -61688,7 +61695,7 @@ var TypologyContainer = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-md-9 page-content' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__TypologyDropZone__["a" /* default */], {
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__TypologyDropZone__["a" /* default */], {
                                 errors: this.state.errors,
                                 fields: this.state.fields,
                                 onFieldAdded: this.handleFieldAdded,
@@ -61700,23 +61707,15 @@ var TypologyContainer = function (_Component) {
                             })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_7__TypologySidebar__["a" /* default */],
+                            __WEBPACK_IMPORTED_MODULE_6__TypologySidebar__["a" /* default */],
                             {
                                 fields: this.state.inputs,
                                 errors: this.state.errors,
                                 onFieldChange: this.handleInputChange
                             },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].TEXT }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].RICH }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGE }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].DATE }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].MAP }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].IMAGES }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LIST }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].BOOLEAN }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].LINK }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__TypologyDragField__["a" /* default */], { definition: __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].VIDEO })
+                            this.state.fieldsList && Object.keys(this.state.fieldsList).map(function (k) {
+                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__TypologyDragField__["a" /* default */], { definition: _this3.state.fieldsList[k] });
+                            })
                         )
                     )
                 )
@@ -61726,6 +61725,18 @@ var TypologyContainer = function (_Component) {
 
     return TypologyContainer;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+// <TypologyDragField definition={CustomFieldTypes.TEXT}/>
+// <TypologyDragField definition={CustomFieldTypes.RICH}/>
+// <TypologyDragField definition={CustomFieldTypes.IMAGE}/>
+// <TypologyDragField definition={CustomFieldTypes.DATE}/>
+// <TypologyDragField definition={CustomFieldTypes.MAP}/>
+// <TypologyDragField definition={CustomFieldTypes.IMAGES}/>
+// <TypologyDragField definition={CustomFieldTypes.CONTENTS}/>
+// <TypologyDragField definition={CustomFieldTypes.LIST}/>
+// <TypologyDragField definition={CustomFieldTypes.BOOLEAN}/>
+// <TypologyDragField definition={CustomFieldTypes.LINK}/>
+// <TypologyDragField definition={CustomFieldTypes.VIDEO}/>
 
 /* harmony default export */ __webpack_exports__["a"] = (TypologyContainer);
 
@@ -71137,7 +71148,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var fieldSource = {
 	beginDrag: function beginDrag(props) {
 		return {
-			type: props.definition.value,
+			type: props.definition.type,
 			label: props.definition.name,
 			icon: props.definition.icon
 		};
@@ -79756,21 +79767,21 @@ var ContentFields = function (_Component) {
       for (var i = 0; i < this.props.fields.length; i++) {
         var item = this.props.fields[i];
 
-        if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].TEXT.value) {
+        if (item.type == "text") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ContentFields_TextField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
             key: i,
             onFieldChange: this.props.onFieldChange
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].RICH.value) {
+        } else if (item.type == "richtext") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ContentFields_RichTextField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
             key: i,
             onFieldChange: this.props.onFieldChange
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].IMAGE.value) {
+        } else if (item.type == "image") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ContentFields_ImageField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
@@ -79778,7 +79789,7 @@ var ContentFields = function (_Component) {
             onFieldChange: this.props.onFieldChange,
             onImageSelect: this.props.onImageSelect
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].DATE.value) {
+        } else if (item.type == "date") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__ContentFields_DateField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
@@ -79786,7 +79797,7 @@ var ContentFields = function (_Component) {
             onFieldChange: this.props.onFieldChange,
             onImageSelect: this.props.onImageSelect
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].IMAGES.value) {
+        } else if (item.type == "images") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ContentFields_ImagesField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
@@ -79794,14 +79805,14 @@ var ContentFields = function (_Component) {
             onFieldChange: this.props.onFieldChange,
             onImageSelect: this.props.onImageSelect
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].LIST.value) {
+        } else if (item.type == "list") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ContentFields_ListField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
             key: i,
             onFieldChange: this.props.onFieldChange
           }));
-        } else if (item.type == __WEBPACK_IMPORTED_MODULE_11__common_CustomFieldTypes__["a" /* default */].CONTENTS.value) {
+        } else if (item.type == "contents") {
           fields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ContentFields_ContentsField__["a" /* default */], {
             field: item,
             translations: this.props.translations,
@@ -95694,159 +95705,167 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var ContentsField = function (_Component) {
-  _inherits(ContentsField, _Component);
+    _inherits(ContentsField, _Component);
 
-  function ContentsField(props) {
-    _classCallCheck(this, ContentsField);
+    function ContentsField(props) {
+        _classCallCheck(this, ContentsField);
 
-    var _this = _possibleConstructorReturn(this, (ContentsField.__proto__ || Object.getPrototypeOf(ContentsField)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ContentsField.__proto__ || Object.getPrototypeOf(ContentsField)).call(this, props));
 
-    _this.handleOnChange = _this.handleOnChange.bind(_this);
-    _this.moveField = _this.moveField.bind(_this);
-    _this.handleRemoveField = _this.handleRemoveField.bind(_this);
-    _this.onContentSelect = _this.onContentSelect.bind(_this);
+        _this.handleOnChange = _this.handleOnChange.bind(_this);
+        _this.moveField = _this.moveField.bind(_this);
+        _this.handleRemoveField = _this.handleRemoveField.bind(_this);
+        _this.onContentSelect = _this.onContentSelect.bind(_this);
+        return _this;
+    }
 
-    return _this;
-  }
+    _createClass(ContentsField, [{
+        key: 'moveField',
+        value: function moveField(dragIndex, hoverIndex) {
 
-  _createClass(ContentsField, [{
-    key: 'moveField',
-    value: function moveField(dragIndex, hoverIndex) {
+            var field = this.props.field;
+            var dragField = field.values[dragIndex];
 
-      var field = this.props.field;
-      var dragField = field.values[dragIndex];
+            var result = __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default()(field, {
+                values: {
+                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragField]]
+                }
+            });
 
-      var result = __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default()(field, {
-        values: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragField]]
+            // console.log("\n\nResult values : ");
+            // console.log(field.values);
+            // console.log(result);
+
+            var newField = {
+                identifier: this.props.field.identifier,
+                values: result.values
+            };
+
+            this.props.onFieldChange(newField);
         }
-      });
+    }, {
+        key: 'handleRemoveField',
+        value: function handleRemoveField(fieldId) {
 
-      console.log("\n\nResult values : ");
-      console.log(field.values);
-      console.log(result);
+            var fields = this.props.field.values;
 
-      var newField = {
-        identifier: this.props.field.identifier,
-        values: result.values
-      };
+            for (var i = 0; i < fields.length; i++) {
+                if (fieldId == fields[i].id) {
+                    fields.splice(i, 1);
+                    break;
+                }
+            }
 
-      this.props.onFieldChange(newField);
-    }
-  }, {
-    key: 'handleRemoveField',
-    value: function handleRemoveField(fieldId) {
+            var field = {
+                identifier: this.props.field.identifier,
+                values: fields
+            };
 
-      var fields = this.props.field.values;
-
-      for (var i = 0; i < fields.length; i++) {
-        if (fieldId == fields[i].id) {
-          fields.splice(i, 1);
-          break;
+            this.props.onFieldChange(field);
         }
-      }
+    }, {
+        key: 'handleOnChange',
+        value: function handleOnChange(event) {
+            var language = $(event.target).closest('.form-control').attr('language');
+            var values = this.props.field.values;
+            values[language] = event.target.value;
+            var field = {
+                identifier: this.props.field.identifier,
+                values: values
+            };
 
-      var field = {
-        identifier: this.props.field.identifier,
-        values: fields
-      };
+            // console.log("textField :: handleOnChange ");
+            // console.log(field);
 
-      this.props.onFieldChange(field);
-    }
-  }, {
-    key: 'handleOnChange',
-    value: function handleOnChange(event) {
+            this.props.onFieldChange(field);
+        }
+    }, {
+        key: 'onContentSelect',
+        value: function onContentSelect(event) {
+            event.preventDefault();
+            this.props.onContentSelect(this.props.field.identifier);
+        }
+    }, {
+        key: 'renderInputs',
+        value: function renderInputs() {
+            console.log('fields =>', this.props.field);
+            var fields = this.props.field.values;
+            // return (
+            //     fields.map((item, i) => (
+            // 
+            //         <ContentsDragField 
+            //         key = {item.id}
+            //         index = {i}
+            //         id = {item.id}
+            //         type = {item.type}
+            //         label = {item.label}
+            //         icon = {item.icon}
+            //         name = {item.name}
+            //         moveField = {this.moveField}
+            //         onRemoveField = {this.handleRemoveField}  />
+            // 
+            //     ))
+            // );
 
-      var language = $(event.target).closest('.form-control').attr('language');
+            if (this.props.field.values) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ContentsDragField__["a" /* default */], {
+                    key: item.id,
+                    index: i,
+                    id: item.id,
+                    type: item.type,
+                    label: item.label,
+                    icon: item.icon,
+                    name: item.name,
+                    moveField: this.moveField,
+                    onRemoveField: this.handleRemoveField });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'field-item contents-field' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { id: "heading" + this.props.field.identifier, className: 'btn btn-link', 'data-toggle': 'collapse', 'data-target': "#collapse" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'field-type' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS.icon }),
+                        ' ',
+                        __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS.name
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'field-name' },
+                        this.props.field.name
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { id: "collapse" + this.props.field.identifier, className: 'collapse in', 'aria-labelledby': "heading" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-form fields-list-container' },
+                        this.renderInputs()
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'add-content-button' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '', className: 'btn btn-default', onClick: this.onContentSelect },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-plus-circle' }),
+                            ' Afegir '
+                        )
+                    )
+                )
+            );
+        }
+    }]);
 
-      var values = this.props.field.values;
-
-      values[language] = event.target.value;
-
-      var field = {
-        identifier: this.props.field.identifier,
-        values: values
-      };
-
-      console.log("textField :: handleOnChange ");
-      console.log(field);
-
-      this.props.onFieldChange(field);
-    }
-  }, {
-    key: 'onContentSelect',
-    value: function onContentSelect(event) {
-      event.preventDefault();
-
-      this.props.onContentSelect(this.props.field.identifier);
-    }
-  }, {
-    key: 'renderInputs',
-    value: function renderInputs() {
-      var _this2 = this;
-
-      var fields = this.props.field.values;
-
-      return fields.map(function (item, i) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__ContentsDragField__["a" /* default */], {
-          key: item.id,
-          index: i,
-          id: item.id,
-          type: item.type,
-          label: item.label,
-          icon: item.icon,
-          name: item.name,
-          moveField: _this2.moveField,
-          onRemoveField: _this2.handleRemoveField
-        });
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'field-item contents-field' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { id: "heading" + this.props.field.identifier, className: 'btn btn-link', 'data-toggle': 'collapse', 'data-target': "#collapse" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            { className: 'field-type' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS.icon }),
-            ' ',
-            __WEBPACK_IMPORTED_MODULE_5__common_CustomFieldTypes__["a" /* default */].CONTENTS.name
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            { className: 'field-name' },
-            this.props.field.name
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { id: "collapse" + this.props.field.identifier, className: 'collapse in', 'aria-labelledby': "heading" + this.props.field.identifier, 'aria-expanded': 'true', 'aria-controls': "collapse" + this.props.field.identifier },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'field-form fields-list-container' },
-            this.renderInputs()
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'add-content-button' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'a',
-              { href: '', className: 'btn btn-default', onClick: this.onContentSelect },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-plus-circle' }),
-              ' Afegir '
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return ContentsField;
+    return ContentsField;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (ContentsField);

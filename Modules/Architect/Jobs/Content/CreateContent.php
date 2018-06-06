@@ -7,6 +7,8 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
+use Modules\Architect\Fields\FieldConfig;
+
 class CreateContent
 {
 
@@ -26,47 +28,48 @@ class CreateContent
     }
 
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
+    public function getFieldObject($type, $fieldObjects)
+    {
+        foreach($fieldObjects as $f) {
+            if($type == $f["type"]) {
+                return new $f['class'];
+            }
+        }
+
+        return null;
+    }
+
+
+    public function saveTypologyContent(Content $content)
+    {
+        $fieldObjects = FieldConfig::get();
+        $languages = Language::all();
+
+        foreach($this->attributes["fields"] as $field) {
+            $values = isset($field["values"]) ? $field["values"] : null;
+            $identifier = isset($field["identifier"]) ? $field["identifier"] : null;
+            $type = isset($field["type"]) ? $field["type"] : null;
+
+            if($values && $type && $identifier) {
+                $this
+                    ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
+                    ->save($content, $identifier, $values, $languages);
+            }
+        }
+    }
+
+
     public function handle()
     {
         $content = Content::create([
             'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
-            'typology_id' => $this->attributes['typology_id'],
+            'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
             'author_id' => $this->attributes['author_id'],
         ]);
 
-        $languages = Language::all();
-
-        foreach($this->attributes["fields"] as $field) {
-            if(!is_array($field["values"])) {
-                $content->fields()->save(new ContentField([
-                    'name' => $field["identifier"],
-                    'value' => $field["values"]
-                ]));
-            } else {
-                foreach($field["values"] as $iso => $value) {
-
-                    $language = $languages->map(function($language) use ($iso){
-                        if($iso == $language->iso) {
-                            return $language;
-                        }
-                        return false;
-                    })->first();
-
-                    if($language) {
-                        $content->fields()->save(new ContentField([
-                            'name' => $field["identifier"],
-                            'value' => $value,
-                            'language_id' => $language->id
-                        ]));
-                    }
-
-                }
-            }
+        // IF content with typology
+        if($content->typology_id) {
+            $this->saveTypologyContent($content);
         }
 
         return $content;
