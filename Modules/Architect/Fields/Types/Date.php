@@ -16,7 +16,7 @@ class Date extends Field implements FieldInterface
         'required'
     ];
 
-    public $options = [];
+    public $settings = [];
 
     public function validate($request)
     {}

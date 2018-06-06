@@ -165,9 +165,10 @@ class TypologyContainer extends Component {
 
      const settingsField = this.state.settingsField;
 
-     settingsField.settings[field.name] = field.value;
+     settingsField[field.source][field.name] = field.value;
 
-     //console.log(settingsField);
+     console.log("TypologyContainer :: handleSettingsChange");
+     console.log(settingsField);
 
      this.setState({
          settingsField: settingsField
@@ -252,6 +253,9 @@ class TypologyContainer extends Component {
  update()
  {
      var _this = this;
+
+     console.log(this.getFormData());
+
      axios.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData())
          .then((response) => {
              if(response.data.success) {
@@ -350,8 +354,8 @@ class TypologyContainer extends Component {
             >
 
             {
-                this.state.fieldsList && Object.keys(this.state.fieldsList).map((k) =>
-                    <TypologyDragField definition={this.state.fieldsList[k]}/>
+                this.state.fieldsList && Object.keys(this.state.fieldsList).map((k,i) =>
+                    <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
                 )
             }
 

@@ -23,6 +23,43 @@ class TypologyModal extends Component {
 
   }
 
+  renderFields() {
+
+    var settingFields = [];
+
+    const rules = this.props.field.rules;
+    const settings = this.props.field.settings;
+
+    console.log("typologyModal :: renderFields : ");
+    console.log(rules);
+
+    for( var key in rules){
+
+      console.log(key);
+
+      if(key == "required"){
+
+        settingFields.push(
+          <BooleanSettingsField
+            field={this.props.field}
+            name="required"
+            source="rules"
+            onFieldChange={this.handleFieldSettingsChange}
+            label="Camp obligatori"
+          />
+        );
+
+      }
+      else if(key == "unique"){
+
+      }
+    }
+
+    return settingFields;
+
+  }
+
+
   render() {
     return (
       <div className="custom-modal" id={this.props.id}>
@@ -48,17 +85,42 @@ class TypologyModal extends Component {
                 <div className="row">
                   <div className="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
+
+                    {/*
+                    {this.props.field != null &&
+                      this.renderFields()
+                    }
+                    */}
+
                     <BooleanSettingsField
                       field={this.props.field}
                       name="required"
+                      source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Camp obligatori"
                     />
 
+                    <BooleanSettingsField
+                      field={this.props.field}
+                      name="unique"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Camp únic"
+                    />
+
+                    <InputSettingsField
+                      field={this.props.field}
+                      name="minCharacters"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Caràcters mínims"
+                      inputLabel="Indica el número mínim de caràcters"
+                    />
 
                     <InputSettingsField
                       field={this.props.field}
                       name="maxCharacters"
+                      source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Caràcters màxims"
                       inputLabel="Indica el número màxim de caràcters"
@@ -67,10 +129,14 @@ class TypologyModal extends Component {
                     <InputSettingsField
                       field={this.props.field}
                       name="fieldHeight"
+                      source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Alçada del camp"
                       inputLabel="Indica la alçada en pixels"
                     />
+
+
+                    {/*
 
                     <CheckboxesSettingsField
                       field={this.props.field}
@@ -93,7 +159,7 @@ class TypologyModal extends Component {
                         {name:"Llista 2",value:2}
                       ]}
                     />
-
+                    */}
 
                   </div>
                 </div>

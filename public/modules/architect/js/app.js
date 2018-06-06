@@ -26871,6 +26871,36 @@ var TypologyModal = function (_Component) {
     key: 'handleInputSettingsChange',
     value: function handleInputSettingsChange(event) {}
   }, {
+    key: 'renderFields',
+    value: function renderFields() {
+
+      var settingFields = [];
+
+      var rules = this.props.field.rules;
+      var settings = this.props.field.settings;
+
+      console.log("typologyModal :: renderFields : ");
+      console.log(rules);
+
+      for (var key in rules) {
+
+        console.log(key);
+
+        if (key == "required") {
+
+          settingFields.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Settings_BooleanSettingsField__["a" /* default */], {
+            field: this.props.field,
+            name: 'required',
+            source: 'rules',
+            onFieldChange: this.handleFieldSettingsChange,
+            label: 'Camp obligatori'
+          }));
+        } else if (key == "unique") {}
+      }
+
+      return settingFields;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -26915,12 +26945,29 @@ var TypologyModal = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Settings_BooleanSettingsField__["a" /* default */], {
                     field: this.props.field,
                     name: 'required',
+                    source: 'rules',
                     onFieldChange: this.handleFieldSettingsChange,
                     label: 'Camp obligatori'
+                  }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Settings_BooleanSettingsField__["a" /* default */], {
+                    field: this.props.field,
+                    name: 'unique',
+                    source: 'rules',
+                    onFieldChange: this.handleFieldSettingsChange,
+                    label: 'Camp \xFAnic'
+                  }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_InputSettingsField__["a" /* default */], {
+                    field: this.props.field,
+                    name: 'minCharacters',
+                    source: 'rules',
+                    onFieldChange: this.handleFieldSettingsChange,
+                    label: 'Car\xE0cters m\xEDnims',
+                    inputLabel: 'Indica el n\xFAmero m\xEDnim de car\xE0cters'
                   }),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_InputSettingsField__["a" /* default */], {
                     field: this.props.field,
                     name: 'maxCharacters',
+                    source: 'rules',
                     onFieldChange: this.handleFieldSettingsChange,
                     label: 'Car\xE0cters m\xE0xims',
                     inputLabel: 'Indica el n\xFAmero m\xE0xim de car\xE0cters'
@@ -26928,23 +26975,10 @@ var TypologyModal = function (_Component) {
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_InputSettingsField__["a" /* default */], {
                     field: this.props.field,
                     name: 'fieldHeight',
+                    source: 'settings',
                     onFieldChange: this.handleFieldSettingsChange,
                     label: 'Al\xE7ada del camp',
                     inputLabel: 'Indica la al\xE7ada en pixels'
-                  }),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_CheckboxesSettingsField__["a" /* default */], {
-                    field: this.props.field,
-                    name: 'typesAllowed',
-                    onFieldChange: this.handleFieldSettingsChange,
-                    label: 'Tipologies permeses',
-                    options: [{ name: "Categories", value: 1 }, { name: "Events", value: 2 }]
-                  }),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Settings_SelectorSettingsField__["a" /* default */], {
-                    field: this.props.field,
-                    name: 'selectedList',
-                    onFieldChange: this.handleFieldSettingsChange,
-                    label: 'Llista seleccionada',
-                    options: [{ name: "Llista 1", value: 1 }, { name: "Llista 2", value: 2 }]
                   })
                 )
               )
@@ -60784,16 +60818,23 @@ var TypologyForm = function (_Component) {
         value: function componentDidMount() {
             if (this.state.typology) {
 
+                console.log("create fields");
+
                 // Build field list
                 var fields = [];
                 this.state.typology.fields.map(function (field) {
+
+                    console.log(field);
+
                     fields.push({
                         icon: field.icon,
                         id: field.id,
                         label: field.type,
                         name: field.name,
                         identifier: field.identifier,
-                        type: field.type
+                        type: field.type,
+                        rules: field.rules,
+                        settings: field.settings
                     });
                 });
 
@@ -60890,6 +60931,7 @@ var BooleanSettingsField = function (_Component) {
     value: function handleFieldChange(event) {
       var field = {
         name: event.target.name,
+        source: this.props.source,
         value: event.target.checked
       };
 
@@ -60898,9 +60940,17 @@ var BooleanSettingsField = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+
+      var display = false;
+      var checkbox = null;
+      if (this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined) {
+        checkbox = this.props.field[this.props.source][this.props.name];
+        display = true;
+      }
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'setup-field', style: { display: this.props.field != null && this.props.field.settings[this.props.name] !== undefined ? 'block' : 'none' } },
+        { className: 'setup-field', style: { display: display ? "block" : "none" } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'togglebutton' },
@@ -60910,7 +60960,7 @@ var BooleanSettingsField = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
               type: 'checkbox',
               name: this.props.name,
-              checked: this.props.field != null && this.props.field.settings[this.props.name] !== undefined ? this.props.field.settings[this.props.name] : false,
+              checked: checkbox != null ? checkbox : false,
               onChange: this.handleFieldChange
             }),
             this.props.label
@@ -60965,6 +61015,7 @@ var InputSettingsField = function (_Component) {
 
       var field = {
         name: this.props.name,
+        source: this.props.source,
         value: {
           checkbox: event.target.checked,
           input: ""
@@ -60979,6 +61030,7 @@ var InputSettingsField = function (_Component) {
 
       var field = {
         name: this.props.name,
+        source: this.props.source,
         value: {
           checkbox: true,
           input: event.target.value
@@ -60991,19 +61043,30 @@ var InputSettingsField = function (_Component) {
     key: 'render',
     value: function render() {
 
+      var display = false;
       var checkbox = null;
-      if (this.props.field != null && this.props.field.settings[this.props.name] !== undefined) {
-        checkbox = this.props.field.settings[this.props.name].checkbox;
-      }
-
       var input = "";
-      if (this.props.field != null && this.props.field.settings[this.props.name] !== undefined) {
-        input = this.props.field.settings[this.props.name].input;
+      if (this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined) {
+
+        if (this.props.field[this.props.source][this.props.name] != null && this.props.field[this.props.source][this.props.name].checkbox !== undefined) {
+          checkbox = this.props.field[this.props.source][this.props.name].checkbox;
+        } else {
+          checkbox = false;
+        }
+
+        display = true;
+
+        if (this.props.field != null && this.props.field[this.props.source][this.props.name] !== undefined) {
+
+          if (this.props.field[this.props.source][this.props.name] != null && this.props.field[this.props.source][this.props.name].input !== undefined) {
+            input = this.props.field[this.props.source][this.props.name].input;
+          }
+        }
       }
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { style: { display: checkbox != null ? 'block' : 'none' } },
+        { style: { display: display ? 'block' : 'none' } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'setup-field' },
@@ -61230,7 +61293,7 @@ var CheckboxesSettingsField = function (_Component) {
   return CheckboxesSettingsField;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (CheckboxesSettingsField);
+/* unused harmony default export */ var _unused_webpack_default_export = (CheckboxesSettingsField);
 
 /***/ }),
 /* 308 */
@@ -61337,7 +61400,7 @@ var SelectorSettingsField = function (_Component) {
   return SelectorSettingsField;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (SelectorSettingsField);
+/* unused harmony default export */ var _unused_webpack_default_export = (SelectorSettingsField);
 
 /***/ }),
 /* 309 */
@@ -61532,9 +61595,10 @@ var TypologyContainer = function (_Component) {
 
             var settingsField = this.state.settingsField;
 
-            settingsField.settings[field.name] = field.value;
+            settingsField[field.source][field.name] = field.value;
 
-            //console.log(settingsField);
+            console.log("TypologyContainer :: handleSettingsChange");
+            console.log(settingsField);
 
             this.setState({
                 settingsField: settingsField
@@ -61616,6 +61680,9 @@ var TypologyContainer = function (_Component) {
         key: 'update',
         value: function update() {
             var _this = this;
+
+            console.log(this.getFormData());
+
             __WEBPACK_IMPORTED_MODULE_10_axios___default.a.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData()).then(function (response) {
                 if (response.data.success) {
                     _this.onSaveSuccess(response.data);
@@ -61713,8 +61780,8 @@ var TypologyContainer = function (_Component) {
                                 errors: this.state.errors,
                                 onFieldChange: this.handleInputChange
                             },
-                            this.state.fieldsList && Object.keys(this.state.fieldsList).map(function (k) {
-                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__TypologyDragField__["a" /* default */], { definition: _this3.state.fieldsList[k] });
+                            this.state.fieldsList && Object.keys(this.state.fieldsList).map(function (k, i) {
+                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__TypologyDragField__["a" /* default */], { definition: _this3.state.fieldsList[k], key: i });
                             })
                         )
                     )
@@ -68160,7 +68227,7 @@ var TypologyDropZone = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (TypologyDropZone.__proto__ || Object.getPrototypeOf(TypologyDropZone)).call(this, props));
 
-		_this.currentId = 1;
+		_this.currentId = _this.props.fields.length;
 
 		_this.moveField = _this.moveField.bind(_this);
 		_this.handleRemoveField = _this.handleRemoveField.bind(_this);
@@ -68215,8 +68282,25 @@ var TypologyDropZone = function (_Component) {
 			}
 		}
 	}, {
+		key: 'exploteToObject',
+		value: function exploteToObject(fields) {
+
+			if (fields == null) {
+				return null;
+			}
+
+			var result = {};
+
+			for (var i = 0; i < fields.length; i++) {
+				result[fields[i]] = null;
+			}
+			return result;
+		}
+	}, {
 		key: 'addField',
 		value: function addField(field) {
+
+			console.log("TypologyDropZone :: addField");
 
 			var field = {
 				id: this.currentId,
@@ -68225,8 +68309,11 @@ var TypologyDropZone = function (_Component) {
 				icon: field.icon,
 				name: "",
 				identifier: "",
-				settings: this.getSettingsStructure(field.type)
+				rules: this.exploteToObject(field.rules),
+				settings: this.exploteToObject(field.settings)
 			};
+
+			console.log(field);
 
 			this.currentId++;
 
@@ -71150,7 +71237,9 @@ var fieldSource = {
 		return {
 			type: props.definition.type,
 			label: props.definition.name,
-			icon: props.definition.icon
+			icon: props.definition.icon,
+			rules: props.definition.rules,
+			settings: props.definition.settings
 		};
 	},
 	endDrag: function endDrag(props, monitor) {
@@ -71203,10 +71292,10 @@ var TypologyDragField = function (_Component) {
 
 TypologyDragField.propTypes = {
 	connectDragSource: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func.isRequired,
-	isDragging: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool.isRequired,
-	type: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string.isRequired,
-	label: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string.isRequired,
-	icon: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string.isRequired
+	isDragging: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool.isRequired
+	//type: PropTypes.string.isRequired,
+	//label : PropTypes.string.isRequired,
+	//icon : PropTypes.string.isRequired,
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_3_react_dnd__["DragSource"])(__WEBPACK_IMPORTED_MODULE_4__FieldTypes__["a" /* default */].FIELD, fieldSource, collect)(TypologyDragField));

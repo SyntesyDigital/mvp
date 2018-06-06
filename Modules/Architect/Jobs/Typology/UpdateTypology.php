@@ -40,6 +40,7 @@ class UpdateTypology
                 'name' => $field['name'],
                 'identifier' => $field['identifier'],
                 'type' => $field['type'],
+                'rules' => isset($field['rules']) ? $field['rules'] : null,
                 'settings' => isset($field['settings']) ? $field['settings'] : null,
             ]));
         }

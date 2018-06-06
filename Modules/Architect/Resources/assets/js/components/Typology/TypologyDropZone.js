@@ -32,7 +32,7 @@ class TypologyDropZone extends Component {
 	constructor(props){
     super(props);
 
-		this.currentId = 1;
+		this.currentId = this.props.fields.length;
 
 		this.moveField = this.moveField.bind(this);
 		this.handleRemoveField = this.handleRemoveField.bind(this);
@@ -45,7 +45,6 @@ class TypologyDropZone extends Component {
 	* TODO : Pensar de donde viene esta información para construir el settings.
 	*/
 	getSettingsStructure(type) {
-
 
 		switch(type) {
 			case CustomFieldTypes.TEXT.value :
@@ -85,7 +84,24 @@ class TypologyDropZone extends Component {
 
 	}
 
+	exploteToObject(fields) {
+
+		if(fields == null){
+			return null;
+		}
+
+		var result = {};
+
+		for(var i=0;i<fields.length;i++){
+			result[fields[i]] = null;
+		}
+		return result;
+	}
+
 	addField(field) {
+
+		console.log("TypologyDropZone :: addField");
+
 
 		var field = {
 			id : this.currentId,
@@ -94,8 +110,11 @@ class TypologyDropZone extends Component {
 			icon : field.icon,
 			name : "",
 			identifier : "",
-			settings : this.getSettingsStructure(field.type)
+			rules : this.exploteToObject(field.rules),
+			settings : this.exploteToObject(field.settings),
 		};
+
+		console.log(field);
 
 		this.currentId++;
 

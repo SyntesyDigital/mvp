@@ -15,6 +15,7 @@ class InputSettingsField extends Component {
 
     var field = {
       name : this.props.name,
+      source : this.props.source,
       value : {
         checkbox : event.target.checked,
         input : ""
@@ -28,6 +29,7 @@ class InputSettingsField extends Component {
 
     var field = {
       name : this.props.name,
+      source : this.props.source,
       value : {
         checkbox : true,
         input : event.target.value
@@ -40,20 +42,35 @@ class InputSettingsField extends Component {
 
   render() {
 
-
+    var display = false;
     var checkbox = null;
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
-      checkbox = this.props.field.settings[this.props.name].checkbox;
-    }
-
     var input = "";
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
-      input = this.props.field.settings[this.props.name].input;
+    if(this.props.field != null && this.props.field[this.props.source] != null &&
+       this.props.field[this.props.source][this.props.name] !== undefined){
+
+      if(this.props.field[this.props.source][this.props.name] != null &&
+        this.props.field[this.props.source][this.props.name].checkbox !== undefined){
+        checkbox = this.props.field[this.props.source][this.props.name].checkbox;
+      }
+      else {
+        checkbox = false;
+      }
+
+      display = true;
+
+      if(this.props.field != null && this.props.field[this.props.source][this.props.name] !== undefined){
+
+        if(this.props.field[this.props.source][this.props.name] != null &&
+          this.props.field[this.props.source][this.props.name].input !== undefined){
+            input = this.props.field[this.props.source][this.props.name].input;
+        }
+      }
+
     }
 
     return (
 
-      <div style={{display : checkbox != null ? 'block' : 'none'}}>
+      <div style={{display : display ? 'block' : 'none'}}>
         <div className="setup-field" >
           <div className="togglebutton">
             <label>

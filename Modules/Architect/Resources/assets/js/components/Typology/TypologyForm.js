@@ -23,16 +23,23 @@ export default class TypologyForm extends Component {
     {
         if(this.state.typology) {
 
+            console.log("create fields");
+
             // Build field list
             var fields = [];
             this.state.typology.fields.map(function(field){
+
+                console.log(field);
+
                 fields.push({
                     icon : field.icon,
                     id : field.id,
                     label : field.type,
                     name : field.name,
                     identifier : field.identifier,
-                    type : field.type
+                    type : field.type,
+                    rules : field.rules,
+                    settings : field.settings
                 });
             });
 

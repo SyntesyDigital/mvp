@@ -61,9 +61,9 @@ abstract class Field
         return $this->rules;
     }
 
-    public function getOptions()
+    public function getSettings()
     {
-        return $this->options;
+        return $this->settings;
     }
 }
 ?>

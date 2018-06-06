@@ -14,10 +14,12 @@ class Richtext extends Field implements FieldInterface
 
     public $rules = [
         'required',
-        'max',
+        'maxCharacters',
     ];
 
-    public $options = [];
+    public $settings = [
+        'fieldHeight'
+    ];
 
     public function validate($request)
     {}

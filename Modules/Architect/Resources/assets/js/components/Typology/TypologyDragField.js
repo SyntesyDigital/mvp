@@ -11,6 +11,8 @@ const fieldSource = {
 			type: props.definition.type,
 			label: props.definition.name,
 			icon: props.definition.icon,
+			rules: props.definition.rules,
+			settings: props.definition.settings,
 		}
 	},
 
@@ -47,9 +49,9 @@ class TypologyDragField extends Component {
 TypologyDragField.propTypes = {
 	connectDragSource: PropTypes.func.isRequired,
 	isDragging: PropTypes.bool.isRequired,
-	type: PropTypes.string.isRequired,
-	label : PropTypes.string.isRequired,
-	icon : PropTypes.string.isRequired,
+	//type: PropTypes.string.isRequired,
+	//label : PropTypes.string.isRequired,
+	//icon : PropTypes.string.isRequired,
 };
 
 export default DragSource(FieldTypes.FIELD, fieldSource, collect)(TypologyDragField);
