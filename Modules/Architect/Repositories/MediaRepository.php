@@ -55,8 +55,6 @@ class MediaRepository extends BaseRepository
 
                 $html .= '<a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;';
 
-
-
                 return $html;
             })
             ->rawColumns(['preview', 'action'])

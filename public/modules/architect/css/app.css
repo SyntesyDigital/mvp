@@ -14147,6 +14147,10 @@ nav.main-nav ul li a:hover {
   margin-bottom: 40px;
 }
 
+.rightbar-page .page-content .fields-list-container.error {
+  border: 1px dashed #f44336 !important;
+}
+
 .rightbar-page .page-content .fields-list-container .list-container-content-wrapper {
   display: block;
   display: table;
@@ -14719,6 +14723,7 @@ nav.main-nav ul li a:hover {
   */
   /** IMAGES AND IMAGES **/
   /** DATE  **/
+  /** DATE  **/
   /**** Contents *****/
 }
 
@@ -14898,6 +14903,11 @@ nav.main-nav ul li a:hover {
   color: #fc4b6c;
 }
 
+.content .field-form .toggle {
+  float: none;
+  margin-left: 30px;
+}
+
 .content .react-datepicker-popper {
   z-index: 1000;
 }
@@ -14989,6 +14999,19 @@ nav.main-nav ul li a:hover {
   line-height: 45px;
   text-align: left;
   padding-left: 30px;
+}
+
+.content .contents-field.images-field .image {
+  width: 51px;
+  height: 40px;
+  background-size: cover;
+  position: absolute;
+  top: 5px;
+  left: 155px;
+}
+
+.content .contents-field.images-field .field-name {
+  padding-left: 60px;
 }
 
 .medias .medias-dropfiles {
@@ -15362,5 +15385,19 @@ nav.main-nav ul li a:hover {
 .table > tfoot > tr > th,
 .table > tfoot > tr > td {
   vertical-align: middle;
+}
+
+.has-error {
+  color: #f44336;
+}
+
+.has-error label {
+  color: #f44336 !important;
+}
+
+.has-error .form-control,
+.has-error .cke_textarea_inline {
+  border: 1px solid #f44336 !important;
+  border-bottom: 2px solid #f44336;
 }
 

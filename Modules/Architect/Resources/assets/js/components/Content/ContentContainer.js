@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import ContentBar from './ContentBar';
 import ContentSidebar from './ContentSidebar';
@@ -11,151 +13,204 @@ import ContentSelectModal from './ContentSelectModal';
 
 import moment from 'moment';
 
+import axios from 'axios';
+
 class ContentContainer extends Component {
 
-  constructor(props){
-    super(props);
+  constructor(props) {
+     super(props);
 
-    this.state = {
-      status : 0,
-      template : "",
-      category : "",
-      tags : [
-        {id:1,name:"Tag 1"},
-        {id:2,name:"Tag 2"},
-        {id:3,name:"Tag 3"}
-      ],
-      translations : {
-        ca : true,
-        es : true,
-        en : true
-      },
-      author : "",
-      created_at : "14, Oct 2018",
-      typology : {
-        icon : 'fa-file-o',
-        name : "Content",
-        fields : [
-          {
-            id : 1,
-            type : CustomFieldTypes.TEXT.value,
-            name : "Title",
-            identifier : "text_1",
-            values : {
-              "ca" : "Hola",
-              "es" : "Hola",
-              "en" : "Hola"
-            }
-          },
-          {
-            id : 2,
-            type : CustomFieldTypes.RICH.value,
-            name : "Description",
-            identifier : "rich_1",
-            values : {
-              "ca" : "Hola",
-              "es" : "Hola",
-              "en" : "Hola"
-            }
-          },
-          {
-            id : 3,
-            type : CustomFieldTypes.IMAGE.value,
-            name : "Imatge",
-            identifier : "image_1",
-            settings : {
-              type : "thumb",
-              name : "Thumbnail",
-              width : 500,
-              height : 500,
-              ratio : "1:1"
-            },
-            values : {
-              url : ""
-            }
-          },
-          {
-            id : 4,
-            type : CustomFieldTypes.DATE.value,
-            name : "Inici event",
-            identifier : "data_1",
-            values : moment()
-          },
-          {
-            id : 5,
-            type : CustomFieldTypes.IMAGES.value,
-            name : "Galería",
-            identifier : "images_1",
-            settings : {
-              type : "banner",
-              name : "Banner",
-              width : 1000,
-              height : 500,
-              ratio : "2:1"
-            },
-            values : [{
-                url : ASSETS+"modules/architect/images/default.jpg"
-              },
-              {
-                url : ASSETS+"modules/architect/images/default.jpg"
-              }
-            ]
-          },
-          {
-            id : 6,
-            type : CustomFieldTypes.LIST.value,
-            name : "Tipus",
-            identifier : "list_1",
-            settings : {},
-            values : [
-              {name:"Tipus 1", value:"1",checked:false},
-              {name:"Tipus 2", value:"2",checked:false},
-              {name:"Tipus 3", value:"3",checked:true}
-            ]
-          },
-          {
-            id : 7,
-            type : CustomFieldTypes.CONTENTS.value,
-            name : "Events",
-            identifier : "contents_1",
-            settings : {},
-            values : [
-              {id:1,name:"Event 1",type:"event",label:"Event",icon:"fa-calendar"},
-              {id:2,name:"Event 2",type:"event",label:"Event",icon:"fa-calendar"},
-              {id:3,name:"Event 3",type:"event",label:"Event",icon:"fa-calendar"},
-            ]
-          }
+     var typology = props.typology;
 
-        ]
-      },
+     if(props.typology.identifier == "event"){
+       typology = {
+         icon : 'fa-file-o',
+         name : "Content",
+         fields : [
+           {
+             id : 1,
+             type : CustomFieldTypes.TEXT.value,
+             name : "Title",
+             identifier : "text_1",
+             values : {
+               "ca" : "Hola",
+               "es" : "Hola",
+               "en" : "Hola"
+             }
+           },
+           {
+             id : 2,
+             type : CustomFieldTypes.RICH.value,
+             name : "Description",
+             identifier : "rich_1",
+             values : {
+               "ca" : "Hola",
+               "es" : "Hola",
+               "en" : "Hola"
+             }
+           },
+           {
+             id : 3,
+             type : CustomFieldTypes.IMAGE.value,
+             name : "Imatge",
+             identifier : "image_1",
+             settings : {
+               type : "thumb",
+               name : "Thumbnail",
+               width : 500,
+               height : 500,
+               ratio : "1:1"
+             },
+             values : {
+               url : ASSETS+"modules/architect/images/default.jpg"
+             }
+           },
+           {
+             id : 4,
+             type : CustomFieldTypes.DATE.value,
+             name : "Inici event",
+             identifier : "data_1",
+             values : moment()
+           },
+           {
+             id : 5,
+             type : CustomFieldTypes.IMAGES.value,
+             name : "Galería",
+             identifier : "images_1",
+             settings : {
+               type : "banner",
+               name : "Banner",
+               width : 1000,
+               height : 500,
+               ratio : "2:1"
+             },
+             values : [{
+                 id : 1,
+                 title : "image 1",
+                 url : ASSETS+"modules/architect/images/default.jpg"
+               },
+               {
+                 id : 2,
+                 title : "image 2",
+                 url : ASSETS+"modules/architect/images/default.jpg"
+               }
+             ]
+           },
+           {
+             id : 6,
+             type : CustomFieldTypes.LIST.value,
+             name : "Tipus",
+             identifier : "list_1",
+             settings : {},
+             values : [
+               {name:"Tipus 1", value:"1",checked:false},
+               {name:"Tipus 2", value:"2",checked:false},
+               {name:"Tipus 3", value:"3",checked:true}
+             ]
+           },
+           {
+             id : 7,
+             type : CustomFieldTypes.CONTENTS.value,
+             name : "Events",
+             identifier : "contents_1",
+             settings : {},
+             values : [
+               {id:1,name:"Event 1",type:"event",label:"Event",icon:"fa-calendar"},
+               {id:2,name:"Event 2",type:"event",label:"Event",icon:"fa-calendar"},
+               {id:3,name:"Event 3",type:"event",label:"Event",icon:"fa-calendar"},
+             ]
+           },
+           {
+             id : 8,
+             type : CustomFieldTypes.BOOLEAN.value,
+             name : "Es public ?",
+             identifier : "boolean_1",
+             values : true
+           },
+           {
+             id : 9,
+             type : CustomFieldTypes.LINK.value,
+             name : "Enllaç pàgina web event",
+             identifier : "link_1",
+             values :  {
+               ca : "Hola",
+               es : "Hola",
+               en : "Hola",
+               isPage : false,
+               linkValues : {
+                 ca : "http://",
+                 es : "http://",
+                 en : "http://",
+               }
+               /*
+               isPage : true,
+               linkValues : {
+                 id : "",
+                 label : "Event",
+                 icon : "fa-calendar",
+                 name : "Page title"
+               }
+               */
+             }
+           }
 
-      //FIXME quiza esto va dentro del custom field?
-      displayMediaModal : false,
-      sourceField : null,
+         ]
+       };
+     }
 
-      displayContentModal : false,
-      contentSourceField : null
+     console.log(typology);
 
-    };
+     this.state = {
+         status: 0,
+         template: "",
+         category: "",
+         tags: [{
+                 id: 1,
+                 name: "Tag 1"
+             },
+             {
+                 id: 2,
+                 name: "Tag 2"
+             },
+             {
+                 id: 3,
+                 name: "Tag 3"
+             }
+         ],
+         translations: {
+             ca: true,
+             es: true,
+             en: true
+         },
+         author: "",
+         authors: props.authors,
+         created_at: "14, Oct 2018",
+         typology: typology,
 
-    this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    this.handlePublish = this.handlePublish.bind(this);
-    this.handleUnpublish = this.handleUnpublish.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleTagAdded = this.handleTagAdded.bind(this);
-    this.handleRemoveTag = this.handleRemoveTag.bind(this);
-    this.handleTranslationChange = this.handleTranslationChange.bind(this);
-    this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
+         //FIXME quiza esto va dentro del custom field?
+         displayMediaModal: false,
+         sourceField: null,
 
-    this.handleImageSelect = this.handleImageSelect.bind(this);
-    this.handleImageSelected = this.handleImageSelected.bind(this);
-    this.handleImageCancel = this.handleImageCancel.bind(this);
+         displayContentModal: false,
+         contentSourceField: null
 
-    this.handleContentSelect = this.handleContentSelect.bind(this);
-    this.handleContentSelected = this.handleContentSelected.bind(this);
-    this.handleContentCancel = this.handleContentCancel.bind(this);
+     };
 
-  }
+     this.handleSubmitForm = this.handleSubmitForm.bind(this);
+     this.handlePublish = this.handlePublish.bind(this);
+     this.handleUnpublish = this.handleUnpublish.bind(this);
+     this.handleFieldChange = this.handleFieldChange.bind(this);
+     this.handleTagAdded = this.handleTagAdded.bind(this);
+     this.handleRemoveTag = this.handleRemoveTag.bind(this);
+     this.handleTranslationChange = this.handleTranslationChange.bind(this);
+     this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
+     this.handleImageSelect = this.handleImageSelect.bind(this);
+     this.handleImageSelected = this.handleImageSelected.bind(this);
+     this.handleImageCancel = this.handleImageCancel.bind(this);
+     this.handleContentSelect = this.handleContentSelect.bind(this);
+     this.handleContentSelected = this.handleContentSelected.bind(this);
+     this.handleContentCancel = this.handleContentCancel.bind(this);
+ }
 
   /******** Images  ********/
 
@@ -260,12 +315,104 @@ class ContentContainer extends Component {
 
     e.preventDefault();
 
-    console.log("submit form!");
-    console.log(this.state);
+    // console.log("submit form!");
+    // console.log(this.state);
+
+    if(this.state.content) {
+        this.update();
+    } else {
+        this.create();
+    }
 
     //TODO hacer el ajax para guardar la información de la typologia
 
   }
+
+  getFormData()
+  {
+      return {
+          status : this.state.status,
+          category : this.state.category,
+          tags : this.state.tags,
+          fields : this.state.typology.fields,
+          author_id : this.state.author,
+          typology_id : this.state.typology.id
+      };
+  }
+
+  create()
+  {
+      var _this = this;
+      axios.post('/architect/contents', this.getFormData())
+     .then((response) => {
+         if(response.data.success) {
+             _this.onSaveSuccess(response.data);
+         }
+     })
+     .catch((error) => {
+         if (error.response) {
+             _this.onSaveError(error.response.data);
+         } else if (error.message) {
+             toastr.error(error.message);
+         } else {
+             console.log('Error', error.message);
+         }
+         //console.log(error.config);
+     });
+  }
+
+  update()
+  {
+      var _this = this;
+      axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
+          .then((response) => {
+              if(response.data.success) {
+                  _this.onSaveSuccess(response.data);
+              }
+          })
+          .catch((error) => {
+              if (error.response) {
+                  _this.onSaveError(error.response.data);
+              } else if (error.message) {
+                  toastr.error(error.message);
+              } else {
+                  console.log('Error', error.message);
+              }
+              //console.log(error.config);
+          });
+  }
+
+  onSaveSuccess(response)
+  {
+      toastr.success('ok');
+  }
+
+ onSaveError(response)
+ {
+     console.log('error...');
+     // var errors = response.errors ? response.errors : null;
+     // var _this = this;
+     // var stateErrors = this.state.errors;
+     //
+     // if(errors) {
+     //     Object.keys(stateErrors).map(function(k){
+     //         stateErrors[k] = errors[k] ? true : false;
+     //
+     //         if(errors[k]) {
+     //             toastr.error(errors[k]);
+     //         }
+     //     });
+     //
+     //     this.setState({
+     //         errors : stateErrors
+     //     });
+     // }
+     //
+     // if(response.message) {
+     //     toastr.error(response.message);
+     // }
+ }
+
 
   handlePublish(e) {
 
@@ -380,6 +527,7 @@ class ContentContainer extends Component {
 
 
   render() {
+
     return (
       <div>
 
@@ -412,8 +560,8 @@ class ContentContainer extends Component {
               tags={this.state.tags}
               translations={this.state.translations}
               author={this.state.author}
+              authors={this.state.authors}
               createdAt={this.state.created_at}
-
               onPublish={this.handlePublish}
               onUnpublish={this.handleUnpublish}
               onFieldChange={this.handleFieldChange}
@@ -422,13 +570,15 @@ class ContentContainer extends Component {
               onRemoveTag={this.handleRemoveTag}
             />
 
-            <ContentFields
-              fields={this.state.typology.fields}
-              translations={this.state.translations}
-              onFieldChange={this.handleCustomFieldChange}
-              onImageSelect={this.handleImageSelect}
-              onContentSelect={this.handleContentSelect}
-            />
+            <DragDropContextProvider backend={HTML5Backend}>
+              <ContentFields
+                fields={this.state.typology.fields}
+                translations={this.state.translations}
+                onFieldChange={this.handleCustomFieldChange}
+                onImageSelect={this.handleImageSelect}
+                onContentSelect={this.handleContentSelect}
+              />
+            </DragDropContextProvider>
 
 
         </div>

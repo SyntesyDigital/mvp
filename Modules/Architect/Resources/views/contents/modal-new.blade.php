@@ -26,27 +26,36 @@
 
               <div class="grid-items">
                 <div class="row">
-                  @for($i=0;$i<8;$i++)
 
                   <div class="col-xs-3">
-                    <a href="{{route('contents.show')}}">
+                    <a href="#">
                       <div class="grid-item">
-                        <i class="fa fa-file"></i>
+                        <i class="fa fa-file-o"></i>
                         <p class="grid-item-name">
-                          Page
+                          Pàgina
                         </p>
                       </div>
                     </a>
                   </div>
 
-                  @endfor
+                    @foreach(Modules\Architect\Entities\Typology::all() as $typology)
+                        <div class="col-xs-3">
+                          <a href="{{route('contents.create', $typology)}}">
+                            <div class="grid-item">
+                              <i class="fa {{$typology->icon}}"></i>
+                              <p class="grid-item-name">
+                                {{$typology->name}}
+                              </p>
+                            </div>
+                          </a>
+                        </div>
+                    @endforeach
                 </div>
               </div>
 
             </div>
           </div>
         </div>
-
 
         <div class="modal-footer">
           <a href="" class="btn btn-default close-btn" > Cancel·lar </a>

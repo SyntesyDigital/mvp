@@ -81,53 +81,69 @@ function collectSource(connect, monitor) {
 
 class TypologyField extends Component {
 
+	constructor(props) {
+	    super(props);
 
-	constructor(props){
-		super(props);
+		this.state = {
+            name : this.props.name,
+			identifier : this.props.identifier
+        };
 
-		this.onRemoveField = this.onRemoveField.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.onOpenSettings = this.onOpenSettings.bind(this);
+	    this.onRemoveField = this.onRemoveField.bind(this);
+	    this.handleChange = this.handleChange.bind(this);
+	    this.onOpenSettings = this.onOpenSettings.bind(this);
 	}
 
 	onRemoveField(event) {
-		event.preventDefault();
-
-		this.props.onRemoveField(this.props.id);
+	    event.preventDefault();
+	    this.props.onRemoveField(this.props.id);
 	}
 
 	onOpenSettings(event) {
-		event.preventDefault();
-
-		this.props.onOpenSettings(this.props.id);
+	    event.preventDefault();
+	    this.props.onOpenSettings(this.props.id);
 	}
 
-	handleChange(event) {
+	handleChange(event)
+	{
+		var name = event.target.value;
+		var identifier = slugify(event.target.value, {
+			replacement: '-',
+			remove: /[$*+~.()'"!\-:@]/g,
+			lower: true
+		});
 
-    var field = null;
+		this.setState({
+			name : name,
+			identifier : identifier
+		});
 
-    if(event.target.type == "text"){
-      field = {
-				id : this.props.id,
-        name : event.target.name,
-        value : event.target.value
-      };
-    }
+	    var field = null;
+	    if (event.target.type == "text") {
+	        field = {
+	            id: this.props.id,
+				name : name,
+				identifier : identifier
+	        };
+	    }
 
-    if(field != null)
-      this.props.onFieldChange(field);
-  }
+	    if (field != null) {
+			this.props.onFieldChange(field);
+		}
+
+	}
+
 
 
 
   render() {
 
-    const {
-			isDragging,
-			connectDragSource,
-			connectDropTarget,
-		} = this.props
-		const opacity = isDragging ? 0 : 1
+	const {
+		isDragging,
+		connectDragSource,
+		connectDropTarget,
+	} = this.props
+	const opacity = isDragging ? 0 : 1
 
     return connectDragSource(
 			connectDropTarget(
@@ -140,18 +156,18 @@ class TypologyField extends Component {
         <div className="field-inputs">
           <div className="row">
             <div className="field-name col-xs-6">
-              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.props.name} onChange={this.handleChange}/>
+              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
             <div className="field-id col-xs-6">
-              <input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.props.identifier} onChange={this.handleChange}/>
+              <input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
             </div>
           </div>
         </div>
 
         <div className="field-actions">
-          <a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
-					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
-					&nbsp;&nbsp;
+			<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
+			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+			&nbsp;&nbsp;
         </div>
       </div>),
     );
@@ -160,7 +176,7 @@ class TypologyField extends Component {
 }
 
 TypologyField.propTypes = {
-  connectDragSource: PropTypes.func.isRequired,
+	connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 	isDragging: PropTypes.bool.isRequired,

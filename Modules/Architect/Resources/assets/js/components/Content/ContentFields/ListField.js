@@ -12,7 +12,6 @@ class ListField extends Component {
 
   }
 
-
   handleOnChange(event) {
 
     const fields = this.props.field.values;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
@@ -128,13 +129,13 @@ class ContentsField extends Component {
 
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
-          <DragDropContextProvider backend={HTML5Backend}>
-            <div className="field-form fields-list-container">
 
-              {this.renderInputs()}
+          <div className="field-form fields-list-container">
 
-            </div>
-          </DragDropContextProvider>
+            {this.renderInputs()}
+
+          </div>
+
 
           <div className="add-content-button">
             <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> Afegir </a>

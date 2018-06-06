@@ -8,29 +8,25 @@
 
   <div class="sidebar">
     <ul>
-      <li class="active">
-        <a href="" > <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+      <li >
+        <a href="" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
       </li>
     </ul>
     <hr />
     <ul>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
-      </li>
+      @foreach($typologies as $typology)
+          <li>
+            <a href="{{route('contents', ['typology_id' => $typology->id])}}"><i class="fa {{$typology->icon}}"></i><span class="text">{{$typology->name}}</span> </a>
+          </li>
+      @endforeach()
     </ul>
     <hr/>
     <ul>
       <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+        <a href=""> <i class="fa fa-list"></i> <span class="text">Categories</span> </a>
       </li>
       <li>
-        <a href=""> <i class="fa fa-envelope"></i> <span class="text">Page</span> </a>
+        <a href=""> <i class="fa fa-tag"></i> <span class="text">Etiquetes</span> </a>
       </li>
     </ul>
 
@@ -41,11 +37,59 @@
     <h3 class="card-title">Continguts</h3>
     <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir contingut</a>
 
+    <table class="table" id="table-contents" data-url="{{route('contents.data', Request('typology_id'))}}">
+        <thead>
+           <tr>
+               <th>Nom</th>
+               <th>Tipus</th>
+               <th>Actualiztat</th>
+               <th>Autor</th>
+               <th>Estat</th>
+               <th></th>
+           </tr>
+        </thead>
+        <tfoot>
+           <tr>
+               <th></th>
+               <th></th>
+               <th></th>
+               <th></th>
+               <th></th>
+               <th></th>
+           </tr>
+        </tfoot>
+    </table>
+
   </div>
 
 </div>
-
 @stop
+
+
+@push('plugins')
+    {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
+
+    {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/architect/js/architect.js') }}
+@endpush
+
+@push('javascripts-libs')
+<script>
+    architect.contents.init({
+        'table' : $('#table-contents'),
+        'urls': {
+            'index' : '{{ route('medias.index') }}',
+            'store' : '{{ route('medias.store') }}',
+            'show' : '{{ route('medias.show') }}',
+            'delete' : '{{ route('medias.delete') }}',
+            'update' : '{{ route('medias.update') }}'
+        }
+    })
+</script>
+@endpush
+
 
 @push('javascripts')
 

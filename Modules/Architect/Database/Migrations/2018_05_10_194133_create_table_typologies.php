@@ -13,9 +13,10 @@ class CreateTableTypologies extends Migration
     {
         Schema::create('typologies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('identifier')->unique();
-            $table->string('is_page');
-            $table->string('had_pagebuilder');
+            $table->string('icon')->nullable();
+            // $table->string('had_pagebuilder');
 
             $table->timestamps();
         });

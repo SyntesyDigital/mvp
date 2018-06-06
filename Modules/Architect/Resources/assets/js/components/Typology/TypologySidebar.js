@@ -18,6 +18,9 @@ class TypologySidebar extends Component {
       fields : {}
     };
 
+    console.log("TypologySidebar :: icon : ");
+    console.log(this.props.fields.icon);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
 
@@ -25,7 +28,6 @@ class TypologySidebar extends Component {
     for(var key in fontAwesomeIcons){
 
       this.fontIcons.push({
-          icon : fontAwesomeIcons[key],
           value : fontAwesomeIcons[key],
           label : fontAwesomeIcons[key]
       });
@@ -67,20 +69,29 @@ class TypologySidebar extends Component {
  }
 
   render() {
+
+
+    console.log("typologySidebar render! "+this.props.fields.icon);
+    console.log(this.props.fields.icon);
+
     return (
       <div className="sidebar">
-        <div className="form-group bmd-form-group">
+        <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
            <label htmlFor="name" className="bmd-label-floating">Nom</label>
            <input type="text" className="form-control" id="name" name="name" value={this.props.fields.name} onChange={this.handleChange} />
+        </div>
+
+        <div className={"form-group bmd-form-group " + (this.props.errors.identifier ? 'has-error' : '')}>
+           <label htmlFor="identifier" className="bmd-label-floating">Identifier</label>
+           <input type="text" className="form-control" id="identifier" name="identifier" value={this.props.fields.identifier} onChange={this.handleChange} />
         </div>
 
         <div className="form-group bmd-form-group">
            <label htmlFor="icon" className="bmd-label-floating">Icona</label>
            <Select
-                id="icon" name="icon"
-                optionComponent={SelectOption}
+                id="icon"
+                name="icon"
                 value={this.props.fields.icon}
-                valueComponent={SelectValue}
                 onChange={this.handleSelectChange}
                 options={this.fontIcons}
             />

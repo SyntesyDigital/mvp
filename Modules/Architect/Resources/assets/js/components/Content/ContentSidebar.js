@@ -137,10 +137,13 @@ class ContentSidebar extends Component {
 
         <div className="form-group bmd-form-group sidebar-item">
            <label htmlFor="author" className="bmd-label-floating">Autor</label>
-           <select className="form-control" id="author" name="author" value={this.props.author} onChange={this.handleChange}>
-              <option name="" value="1"> Autor 1 </option>
-              <option name="" value="2"> Autor 2 </option>
-              <option name="" value="3"> Autor 3 </option>
+           <select className="form-control" id="author" name="author" value={this.props.author} onChange={this.handleChange} placeholder="---">
+           <option value=""></option>
+           {
+             this.props.authors.map(function(author, i) {
+               return <option value={author.id} key={i}>{author.firstname + ' ' + author.lastname}</option>
+             })
+           }
            </select>
 
            <p className="field-help">Creat el {this.props.createdAt}</p>

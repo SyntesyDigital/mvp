@@ -1,0 +1,12 @@
+.has-error {
+    color: $red;
+
+    label {
+        color: $red !important;
+    }
+
+    .form-control {
+        border: 1px solid $red  !important;
+        border-bottom: 2px solid $red;
+    }
+}

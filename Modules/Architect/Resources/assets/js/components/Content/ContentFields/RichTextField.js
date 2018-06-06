@@ -15,17 +15,9 @@ class RichTextField extends Component {
   }
 
 
-  handleOnChange(key,value, delta, source, editor) {
-
-    //const language = $(event.target).closest('.form-control').attr('language');
-
-    //console.log("source : ");
-    //console.log(key);
-    //console.log(delta);
-    //console.log(source);
-    //console.log(editor);
-
-    const values = this.props.field.values;
+  handleOnChange(key,value, delta, source, editor)
+  {
+    const values = this.props.field.values ? this.props.field.values : {};
 
     values[key] = value;
 
@@ -33,9 +25,6 @@ class RichTextField extends Component {
       identifier : this.props.field.identifier,
       values : values
     };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
 
     this.props.onFieldChange(field);
   }
@@ -46,18 +35,21 @@ class RichTextField extends Component {
 
     for(var key in this.props.translations){
       if(this.props.translations[key]){
+
+          var value = '';
+          if(this.props.field.values) {
+              value = this.props.field.values[key] ? this.props.field.values[key] : '';
+          }
+
         inputs.push(
-
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-
-             <ReactQuill
-                id={key}
-                value={this.props.field.values[key]}
-                onChange={this.handleOnChange.bind(this,key)}
-              />
-
-          </div>
+        <div className="form-group bmd-form-group" key={key}>
+         <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
+         <ReactQuill
+            id={key}
+            value={value}
+            onChange={this.handleOnChange.bind(this,key)}
+          />
+        </div>
         );
       }
     }
