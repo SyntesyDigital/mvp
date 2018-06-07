@@ -60776,6 +60776,8 @@ var TypologyForm = function (_Component) {
             typology: props.typology ? JSON.parse(atob(props.typology)) : '',
             fieldsList: JSON.parse(props.fields)
         };
+
+        console.log(JSON.parse(props.fields));
         return _this;
     }
 
