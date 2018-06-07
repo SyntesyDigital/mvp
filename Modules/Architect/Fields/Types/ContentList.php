@@ -17,7 +17,7 @@ class ContentList extends Field implements FieldInterface
         'required'
     ];
 
-    public $options = [
+    public $settings = [
         'only_typologies'
     ];
 

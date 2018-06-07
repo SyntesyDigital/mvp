@@ -20,7 +20,7 @@ class FieldConfig
                 'name' => trans('architect::fields.' . $field->getType()),
                 'type' => $field->getType(),
                 'icon' => $field->getIcon(),
-                'options' => $field->getOptions() ?: null
+                'settings' => $field->getSettings() ?: null
             ];
         }
 

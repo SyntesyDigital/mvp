@@ -19,7 +19,7 @@ class Text extends Field implements FieldInterface
         'minCharacters',
     ];
 
-    public $options = [];
+    public $settings = [];
 
     public function validate($request)
     {}

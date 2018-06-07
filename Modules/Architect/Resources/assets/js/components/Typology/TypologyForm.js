@@ -25,16 +25,23 @@ export default class TypologyForm extends Component {
     {
         if(this.state.typology) {
 
+            console.log("create fields");
+
             // Build field list
             var fields = [];
             this.state.typology.fields.map(function(field){
+
+                console.log(field);
+
                 fields.push({
                     icon : field.icon,
                     id : field.id,
                     label : field.type,
                     name : field.name,
                     identifier : field.identifier,
-                    type : field.type
+                    type : field.type,
+                    rules : field.rules,
+                    settings : field.settings
                 });
             });
 
@@ -45,7 +52,10 @@ export default class TypologyForm extends Component {
                 inputs : {
                     name: this.state.typology.name,
                     identifier: this.state.typology.identifier,
-                    icon: this.state.typology.icon,
+                    icon: {
+                      value : this.state.typology.icon,
+                      label : this.state.typology.icon
+                    },
                     template: "",
                     slugOn: false,
                     slugCa: "",

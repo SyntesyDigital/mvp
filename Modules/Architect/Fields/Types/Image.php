@@ -16,7 +16,7 @@ class Image extends Field implements FieldInterface
         'required'
     ];
 
-    public $options = [
+    public $settings = [
         'only_formats'
     ];
 

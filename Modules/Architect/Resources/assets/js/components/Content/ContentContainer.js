@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import ContentBar from './ContentBar';
 import ContentSidebar from './ContentSidebar';
@@ -83,9 +85,13 @@ class ContentContainer extends Component {
                ratio : "2:1"
              },
              values : [{
+                 id : 1,
+                 title : "image 1",
                  url : ASSETS+"modules/architect/images/default.jpg"
                },
                {
+                 id : 2,
+                 title : "image 2",
                  url : ASSETS+"modules/architect/images/default.jpg"
                }
              ]
@@ -113,6 +119,39 @@ class ContentContainer extends Component {
                {id:2,name:"Event 2",type:"event",label:"Event",icon:"fa-calendar"},
                {id:3,name:"Event 3",type:"event",label:"Event",icon:"fa-calendar"},
              ]
+           },
+           {
+             id : 8,
+             type : CustomFieldTypes.BOOLEAN.value,
+             name : "Es public ?",
+             identifier : "boolean_1",
+             values : true
+           },
+           {
+             id : 9,
+             type : CustomFieldTypes.LINK.value,
+             name : "Enllaç pàgina web event",
+             identifier : "link_1",
+             values :  {
+               ca : "Hola",
+               es : "Hola",
+               en : "Hola",
+               isPage : false,
+               linkValues : {
+                 ca : "http://",
+                 es : "http://",
+                 en : "http://",
+               }
+               /*
+               isPage : true,
+               linkValues : {
+                 id : "",
+                 label : "Event",
+                 icon : "fa-calendar",
+                 name : "Page title"
+               }
+               */
+             }
            }
 
          ]
@@ -531,13 +570,15 @@ class ContentContainer extends Component {
               onRemoveTag={this.handleRemoveTag}
             />
 
-            <ContentFields
-              fields={this.state.typology.fields}
-              translations={this.state.translations}
-              onFieldChange={this.handleCustomFieldChange}
-              onImageSelect={this.handleImageSelect}
-              onContentSelect={this.handleContentSelect}
-            />
+            <DragDropContextProvider backend={HTML5Backend}>
+              <ContentFields
+                fields={this.state.typology.fields}
+                translations={this.state.translations}
+                onFieldChange={this.handleCustomFieldChange}
+                onImageSelect={this.handleImageSelect}
+                onContentSelect={this.handleContentSelect}
+              />
+            </DragDropContextProvider>
 
 
         </div>

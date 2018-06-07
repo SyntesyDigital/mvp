@@ -12,6 +12,7 @@ class BooleanSettingsField extends Component {
   handleFieldChange(event) {
     var field = {
       name : event.target.name,
+      source : this.props.source,
       value : event.target.checked
     };
 
@@ -20,14 +21,23 @@ class BooleanSettingsField extends Component {
   }
 
   render() {
+
+    var display = false;
+    var checkbox = null;
+    if(this.props.field != null && this.props.field[this.props.source] != null &&
+       this.props.field[this.props.source][this.props.name] !== undefined){
+      checkbox = this.props.field[this.props.source][this.props.name];
+      display = true;
+    }
+
     return (
-      <div className="setup-field" style={{display : this.props.field != null && this.props.field.settings[this.props.name] !== undefined ? 'block' : 'none'}}>
+      <div className="setup-field" style={{display : display ? "block":"none"}}>
         <div className="togglebutton">
           <label>
               <input
                 type="checkbox"
                 name={this.props.name}
-                checked={ this.props.field != null && this.props.field.settings[this.props.name] !== undefined  ? this.props.field.settings[this.props.name] : false }
+                checked={  checkbox != null  ? checkbox : false }
                 onChange={this.handleFieldChange}
               />
               {this.props.label}

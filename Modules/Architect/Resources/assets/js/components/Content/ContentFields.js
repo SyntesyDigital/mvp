@@ -8,6 +8,9 @@ import DateField from './ContentFields/DateField';
 import ImagesField from './ContentFields/ImagesField';
 import ListField from './ContentFields/ListField';
 import ContentsField from './ContentFields/ContentsField';
+import BooleanField from './ContentFields/BooleanField';
+import LinkField from './ContentFields/LinkField';
+
 
 import CustomFieldTypes from './../common/CustomFieldTypes';
 
@@ -95,6 +98,28 @@ class ContentFields extends Component {
       else if(item.type == "contents"){
         fields.push(
           <ContentsField
+              field={item}
+              translations={this.props.translations}
+              key={i}
+              onFieldChange={this.props.onFieldChange}
+              onContentSelect={this.props.onContentSelect}
+          />
+        );
+      }
+      else if(item.type == CustomFieldTypes.BOOLEAN.value){
+        fields.push(
+          <BooleanField
+              field={item}
+              translations={this.props.translations}
+              key={i}
+              onFieldChange={this.props.onFieldChange}
+              onContentSelect={this.props.onContentSelect}
+          />
+        );
+      }
+      else if(item.type == CustomFieldTypes.LINK.value){
+        fields.push(
+          <LinkField
               field={item}
               translations={this.props.translations}
               key={i}

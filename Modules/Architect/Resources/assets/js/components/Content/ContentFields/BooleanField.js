@@ -3,47 +3,38 @@ import { render } from 'react-dom';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
-class ListField extends Component {
+class BooleanField extends Component {
 
   constructor(props){
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);
-
   }
 
   handleOnChange(event) {
 
-    const fields = this.props.field.values;
+    var field = {
+      identifier : this.props.field.identifier,
+      values : event.target.checked
+    };
 
-    for(var i=0;i<fields.length;i++){
-      if(fields[i].value == event.target.value){
-        fields[i].checked = event.target.checked;
-        break;
-      }
-    }
-
-
-    this.props.onFieldChange(fields);
+    this.props.onFieldChange(field);
   }
 
   renderInputs() {
 
     return (
-      this.props.field.values.map((item,i) => (
-        <div className="checkbox-field" key={i}>
 
-          <label className="form-check-label">
-              <input className="form-check-input" type="checkbox"
-                checked={item.checked}
-                value={item.value}
-                onChange={this.handleOnChange}
-              /> {'\u00A0'}
-              {item.name}
-          </label>
-        </div>
+      <div className="togglebutton" >
+        <label>
+            {this.props.field.name}
+            <input type="checkbox"
+              checked={this.props.field.values}
+              onChange={this.handleOnChange}
+            />
+        </label>
+      </div>
 
-      ))
     );
   }
 
@@ -54,7 +45,7 @@ class ListField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.LIST.icon}></i> {CustomFieldTypes.LIST.name}
+            <i className={"fa "+CustomFieldTypes.BOOLEAN.icon}></i> {CustomFieldTypes.BOOLEAN.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -64,8 +55,11 @@ class ListField extends Component {
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
           <div className="field-form">
-
-            {this.renderInputs()}
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                {this.renderInputs()}
+              </div>
+            </div>
 
           </div>
 
@@ -76,4 +70,4 @@ class ListField extends Component {
   }
 
 }
-export default ListField;
+export default BooleanField;
