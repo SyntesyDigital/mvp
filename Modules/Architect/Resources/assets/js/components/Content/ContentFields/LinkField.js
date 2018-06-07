@@ -3,14 +3,60 @@ import { render } from 'react-dom';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
+const TYPE_INTERNAL = "internal";
+const TYPE_EXTERNAL = "external";
+
+/*
+
+values :  {
+  ca : "Hola",
+  es : "Hola",
+  en : "Hola",
+
+
+  linkType : "internal",
+  linkValues : {
+    ca : "http://",
+    es : "http://",
+    en : "http://",
+  }
+
+
+  linkType : "external",
+  linkValues : {
+    id : "1",
+    label : "Event",
+    icon : "fa-calendar",
+    name : "Page title"
+  }
+
+}
+
+*/
+
 class LinkField extends Component
 {
   constructor(props)
   {
     super(props);
+
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleLinkChange = this.handleLinkChange.bind(this);
-    this.handlePageChange = this.handlePageChange.bind(this);
+    this.handleLinkTypeChange = this.handleLinkTypeChange.bind(this);
+    this.onContentSelect = this.onContentSelect.bind(this);
+    this.onRemoveField = this.onRemoveField.bind(this);
+  }
+
+  componentDidMount()
+  {
+    if(this.props.field.values === undefined || this.props.field.values == null){
+      this.updateByType(TYPE_INTERNAL);
+    }
+  }
+
+  onContentSelect(event) {
+      event.preventDefault();
+      this.props.onContentSelect(this.props.field.identifier);
   }
 
   handleOnChange(event)
@@ -27,13 +73,19 @@ class LinkField extends Component
     this.props.onFieldChange(field);
   }
 
-  handlePageChange(event)
+  handleLinkTypeChange(event)
   {
+    this.updateByType(event.target.value);
+  }
+
+  updateByType(type)
+  {
+
     const values = this.props.field.values ? this.props.field.values : {};
 
-    values.isPage = event.target.checked;
+    values.linkType = type;
 
-    var linkValues = values.isPage ?
+    var linkValues = values.linkType == TYPE_INTERNAL ?
         null
       :
         {
@@ -57,9 +109,16 @@ class LinkField extends Component
 
   handleLinkChange(event)
   {
+
     const language = $(event.target).closest('.form-control').attr('language');
     const values = this.props.field.values ? this.props.field.values : {};
-    values.linkValues[language] = event.target.value;
+
+    var linkValues = this.props.field.values !== undefined && this.props.field.values.linkValues !== undefined
+      && this.props.field.values.linkValues != null ?
+      this.props.field.values.linkValues : {};
+
+    linkValues[language] = event.target.value;
+    values.linkValues = linkValues;
 
     var field = {
       identifier : this.props.field.identifier,
@@ -69,10 +128,120 @@ class LinkField extends Component
     this.props.onFieldChange(field);
   }
 
-  renderSelectedPage()
+  onRemoveField(event){
+
+    event.preventDefault();
+
+    const values = this.props.field.values;
+
+    values.linkValues = null;
+
+    var field = {
+      identifier : this.props.field.identifier,
+      values : values
+    };
+
+    this.props.onFieldChange(field);
+
+  }
+
+  renderTitle()
+  {
+    var inputs = [];
+    for(var key in this.props.translations){
+      if(this.props.translations[key]){
+          var value = '';
+          console.log(this.props.field);
+
+          if(this.props.field.values) {
+              value = this.props.field.values[key] ? this.props.field.values[key] : '';
+          }
+
+        inputs.push(
+          <div className="form-group bmd-form-group" key={key}>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Títol - {key}</label>
+             <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
+          </div>
+        );
+      }
+    }
+
+    return inputs;
+  }
+
+  renderRadio() {
+
+    const linkType = this.props.field.values !== undefined && this.props.field.values.linkType !== undefined ?
+      this.props.field.values.linkType : TYPE_INTERNAL;
+
+    return (
+
+      <div className="radio-form">
+
+        <br/>
+
+        <label className="form-check-label" >
+            <input className="form-check-input" type="radio"
+              checked={linkType == TYPE_INTERNAL}
+              name={"linkType"+this.props.field.identifier}
+              value={TYPE_INTERNAL}
+              onChange={this.handleLinkTypeChange}
+            /> &nbsp;
+            Enllaç intern
+            &nbsp;&nbsp;
+        </label>
+
+        &nbsp;
+
+        <label className="form-check-label">
+            <input className="form-check-input" type="radio"
+              checked={linkType == TYPE_EXTERNAL}
+              name={"linkType"+this.props.field.identifier}
+              value={TYPE_EXTERNAL}
+              onChange={this.handleLinkTypeChange}
+            /> &nbsp;
+            Enllaç extern
+            &nbsp;&nbsp;
+        </label>
+
+        <br/>
+        <br/>
+
+      </div>
+
+
+    );
+  }
+
+  renderLinks(linkValues)
   {
 
-    const pageValues = this.props.field.values.linkValues;
+    var inputs = [];
+    for(var key in this.props.translations){
+      if(this.props.translations[key]){
+          var value = '';
+          console.log(this.props.field);
+
+          if(linkValues !== undefined && linkValues != null) {
+              value = linkValues[key] ? linkValues[key] : '';
+          }
+
+        inputs.push(
+          <div className="form-group bmd-form-group" key={key}>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Enllaç - {key}</label>
+             <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
+          </div>
+        );
+      }
+    }
+
+    return inputs;
+  }
+
+  renderSelectedPage(linkValues)
+  {
+
+    const pageValues = linkValues;
 
     if(pageValues != null){
       return (
@@ -110,69 +279,15 @@ class LinkField extends Component
 
   }
 
-  renderInputs()
-  {
-    var inputs = [];
-    for(var key in this.props.translations){
-      if(this.props.translations[key]){
-          var value = '';
-          console.log(this.props.field);
-
-          if(this.props.field.values) {
-              value = this.props.field.values[key] ? this.props.field.values[key] : '';
-          }
-
-        inputs.push(
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Títol - {key}</label>
-             <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
-          </div>
-        );
-      }
-    }
-
-    inputs.push(
-      <div className="togglebutton" >
-        <label>
-            És un enllaç intern ?
-            <input type="checkbox"
-              checked={this.props.field.values.isPage}
-              onChange={this.handlePageChange}
-            />
-        </label>
-      </div>
-    );
-
-    if(this.props.field.values.isPage) {
-
-      inputs.push(this.renderSelectedPage());
-
-    }
-    else {
-      for(var key in this.props.translations){
-        if(this.props.translations[key]){
-            var value = '';
-            console.log(this.props.field);
-
-            if(this.props.field.values) {
-                value = this.props.field.values.linkValues[key] ? this.props.field.values.linkValues[key] : '';
-            }
-
-          inputs.push(
-            <div className="form-group bmd-form-group" key={key}>
-               <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Enllaç - {key}</label>
-               <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
-            </div>
-          );
-        }
-      }
-    }
-
-    return inputs;
-  }
-
 
   render() {
+
+    const linkType = this.props.field.values !== undefined && this.props.field.values.linkType !== undefined ?
+      this.props.field.values.linkType : TYPE_INTERNAL;
+
+    const linkValues = this.props.field.values !== undefined && this.props.field.values.linkValues !== undefined ?
+      this.props.field.values.linkValues : null;
+
     return (
       <div className="field-item">
 
@@ -189,7 +304,17 @@ class LinkField extends Component
 
           <div className="field-form">
 
-            {this.renderInputs()}
+            {this.renderTitle()}
+
+            {this.renderRadio()}
+
+            {linkType == TYPE_INTERNAL &&
+              this.renderSelectedPage(linkValues)
+            }
+
+            {linkType == TYPE_EXTERNAL &&
+              this.renderLinks(linkValues)
+            }
 
           </div>
 

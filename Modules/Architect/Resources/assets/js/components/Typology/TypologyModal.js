@@ -5,6 +5,7 @@ import BooleanSettingsField from './Settings/BooleanSettingsField';
 import InputSettingsField from './Settings/InputSettingsField';
 import CheckboxesSettingsField from './Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './Settings/SelectorSettingsField';
+import RadioSettingsField from './Settings/RadioSettingsField';
 
 class TypologyModal extends Component {
 
@@ -22,43 +23,6 @@ class TypologyModal extends Component {
   handleInputSettingsChange(event) {
 
   }
-
-  renderFields() {
-
-    var settingFields = [];
-
-    const rules = this.props.field.rules;
-    const settings = this.props.field.settings;
-
-    console.log("typologyModal :: renderFields : ");
-    console.log(rules);
-
-    for( var key in rules){
-
-      console.log(key);
-
-      if(key == "required"){
-
-        settingFields.push(
-          <BooleanSettingsField
-            field={this.props.field}
-            name="required"
-            source="rules"
-            onFieldChange={this.handleFieldSettingsChange}
-            label="Camp obligatori"
-          />
-        );
-
-      }
-      else if(key == "unique"){
-
-      }
-    }
-
-    return settingFields;
-
-  }
-
 
   render() {
     return (
@@ -85,12 +49,6 @@ class TypologyModal extends Component {
                 <div className="row">
                   <div className="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
-
-                    {/*
-                    {this.props.field != null &&
-                      this.renderFields()
-                    }
-                    */}
 
                     <BooleanSettingsField
                       field={this.props.field}
@@ -128,6 +86,25 @@ class TypologyModal extends Component {
 
                     <InputSettingsField
                       field={this.props.field}
+                      name="maxItems"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Número màxim d'elements"
+                      inputLabel="Indica el número màxim"
+                    />
+
+
+                    <InputSettingsField
+                      field={this.props.field}
+                      name="minItems"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Número mínim d'elements"
+                      inputLabel="Indica el número mínim"
+                    />
+
+                    <InputSettingsField
+                      field={this.props.field}
                       name="fieldHeight"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -135,12 +112,10 @@ class TypologyModal extends Component {
                       inputLabel="Indica la alçada en pixels"
                     />
 
-
-                    {/*
-
                     <CheckboxesSettingsField
                       field={this.props.field}
-                      name="typesAllowed"
+                      name="typologiesAllowed"
+                      source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Tipologies permeses"
                       options={[
@@ -149,9 +124,22 @@ class TypologyModal extends Component {
                       ]}
                     />
 
+                    <RadioSettingsField
+                      field={this.props.field}
+                      name="cropsAllowed"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Mides permeses"
+                      options={[
+                        {name:"Thumbnail",value:1},
+                        {name:"Banner",value:2}
+                      ]}
+                    />
+
                     <SelectorSettingsField
                       field={this.props.field}
-                      name="selectedList"
+                      name="listAllowed"
+                      source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Llista seleccionada"
                       options={[
@@ -159,7 +147,7 @@ class TypologyModal extends Component {
                         {name:"Llista 2",value:2}
                       ]}
                     />
-                    */}
+
 
                   </div>
                 </div>
