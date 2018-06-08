@@ -37,9 +37,13 @@ class ContentController extends Controller
         ]);
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        return $this->contents->getDatatable();
+        $where = $request->get('typology_id') ? [
+            'typology_id' => $request->get('typology_id')
+        ] : null;
+
+        return $this->contents->getDatatable($where);
     }
 
     public function show(Content $content, Request $request)

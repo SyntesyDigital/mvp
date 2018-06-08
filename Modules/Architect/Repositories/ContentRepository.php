@@ -15,9 +15,15 @@ class ContentRepository extends BaseRepository
         return "Modules\\Architect\\Entities\\Content";
     }
 
-    public function getDatatable()
+    public function getDatatable($where = null)
     {
-        return Datatables::of($this->model->with('fields'))
+        $results = $this->model->with('fields');
+
+        if($where) {
+            $results->where($where);
+        }
+
+        return Datatables::of($results)
             ->addColumn('title', function ($item) {
                 return $item->getField('title');
             })
