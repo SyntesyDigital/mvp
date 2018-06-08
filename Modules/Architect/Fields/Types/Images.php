@@ -13,11 +13,13 @@ class Images extends Field implements FieldInterface
     public $name = 'IMAGES';
 
     public $rules = [
-        'required'
+        'required',
+        'maxItems',
+        'minItems'
     ];
 
     public $settings = [
-        'only_formats'
+        'cropsAllowed'
     ];
 
 }

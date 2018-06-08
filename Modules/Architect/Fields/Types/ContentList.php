@@ -18,7 +18,7 @@ class ContentList extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'only_typologies'
+        'listAllowed'
     ];
 }
 ?>

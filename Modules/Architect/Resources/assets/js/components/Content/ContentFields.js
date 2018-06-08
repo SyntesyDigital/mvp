@@ -10,6 +10,8 @@ import ListField from './ContentFields/ListField';
 import ContentsField from './ContentFields/ContentsField';
 import BooleanField from './ContentFields/BooleanField';
 import LinkField from './ContentFields/LinkField';
+import VideoField from './ContentFields/VideoField';
+import LocalizationField from './ContentFields/LocalizationField';
 
 
 import CustomFieldTypes from './../common/CustomFieldTypes';
@@ -28,10 +30,10 @@ class ContentFields extends Component {
   renderFields() {
 
     var fields = [];
-    
+
     for(var i=0;i<this.props.fields.length;i++){
       var item = this.props.fields[i];
-            
+
       if(item.type == "text"){
         fields.push(
           <TextField
@@ -85,7 +87,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "list"){
+      else if(item.type == "contentlist"){
         fields.push(
           <ListField
               field={item}
@@ -125,6 +127,26 @@ class ContentFields extends Component {
               key={i}
               onFieldChange={this.props.onFieldChange}
               onContentSelect={this.props.onContentSelect}
+          />
+        );
+      }
+      else if(item.type == CustomFieldTypes.VIDEO.value){
+        fields.push(
+          <VideoField
+              field={item}
+              translations={this.props.translations}
+              key={i}
+              onFieldChange={this.props.onFieldChange}
+          />
+        );
+      }
+      else if(item.type == "localization"){
+        fields.push(
+          <LocalizationField
+              field={item}
+              translations={this.props.translations}
+              key={i}
+              onFieldChange={this.props.onFieldChange}
           />
         );
       }

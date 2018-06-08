@@ -136,7 +136,33 @@ class ContentContainer extends Component {
                ca : "Hola",
                es : "Hola",
                en : "Hola",
-               isPage : false,
+               linkType : "",
+               linkValues : {
+                 ca : "http://",
+                 es : "http://",
+                 en : "http://",
+               }
+               /*
+               isPage : true,
+               linkValues : {
+                 id : "",
+                 label : "Event",
+                 icon : "fa-calendar",
+                 name : "Page title"
+               }
+               */
+             }
+           },
+           {
+             id : 10,
+             type : CustomFieldTypes.MAP.value,
+             name : "M",
+             identifier : "link_1",
+             values :  {
+               ca : "Hola",
+               es : "Hola",
+               en : "Hola",
+               linkType : "",
                linkValues : {
                  ca : "http://",
                  es : "http://",
@@ -295,7 +321,15 @@ class ContentContainer extends Component {
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
       if(item.identifier == identifier ){
-        typology.fields[i].values.push(content);
+
+        if(typology.fields[i].type == "link"){
+            typology.fields[i].values.linkValues = content;
+        }
+        else {
+            typology.fields[i].values.push(content);
+        }
+
+
         break;
       }
     }

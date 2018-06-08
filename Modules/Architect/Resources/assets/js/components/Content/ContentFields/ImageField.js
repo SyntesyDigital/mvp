@@ -3,6 +3,28 @@ import { render } from 'react-dom';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
+/*
+
+Values format :
+
+{
+  id : 3,
+  type : CustomFieldTypes.IMAGE.value,
+  name : "Imatge",
+  identifier : "image_1",
+  settings : {
+    type : "thumb",
+    name : "Thumbnail",
+    width : 500,
+    height : 500,
+    ratio : "1:1"
+  },
+  values : {
+    url : ASSETS+"modules/architect/images/default.jpg"
+  }
+}
+
+*/
 class ImageField extends Component {
 
   constructor(props){
@@ -55,25 +77,38 @@ class ImageField extends Component {
 
   renderInputs() {
 
+    var defined = false;
+    var values = {};
+
+    if(this.props.field.values !== undefined){
+      defined = true;
+      values = this.props.field.values;
+    }
+
+    console.log(defined,values);
+
     return (
       <div className="form-group bmd-form-group image-field-container">
          <div className="image-field">
-            <div className="image" style={{backgroundImage:"url("+this.props.field.values.url+")"}} ></div>
-            {this.props.field.values.url == "" &&
+            <div className="image" style={{backgroundImage:"url("+(values.url !== undefined ? values.url : "")+")"}} ></div>
+            {(!defined || values.url == "" ) &&
               <div className="add-button">
                 <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
               </div>
             }
          </div>
 
-          {this.props.field.values.url != "" &&
+          {defined && values.url != "" &&
             <div className="image-buttons">
               {/*<a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a>*/}
                <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> Cancel·lar</a>
             </div>
            }
 
+           //TODO falta añadir la información de la imagen en settings
+          {/*
          <p className="field-help"> <b>{this.props.field.settings.name}</b> : Mides {this.props.field.settings.width}x{this.props.field.settings.height} ( Ratio {this.props.field.settings.ratio} )</p>
+         */}
       </div>
     );
 
