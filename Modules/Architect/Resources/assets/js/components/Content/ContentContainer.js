@@ -19,173 +19,42 @@ class ContentContainer extends Component {
 
   constructor(props) {
      super(props);
-
-     var typology = props.typology;
-
-     if(props.typology.identifier == "event"){
-       typology = {
-         icon : 'fa-file-o',
-         name : "Content",
-         fields : [
-           {
-             id : 1,
-             type : CustomFieldTypes.TEXT.value,
-             name : "Title",
-             identifier : "text_1",
-             values : {
-               "ca" : "Hola",
-               "es" : "Hola",
-               "en" : "Hola"
-             }
-           },
-           {
-             id : 2,
-             type : CustomFieldTypes.RICH.value,
-             name : "Description",
-             identifier : "rich_1",
-             values : {
-               "ca" : "Hola",
-               "es" : "Hola",
-               "en" : "Hola"
-             }
-           },
-           {
-             id : 3,
-             type : CustomFieldTypes.IMAGE.value,
-             name : "Imatge",
-             identifier : "image_1",
-             settings : {
-               type : "thumb",
-               name : "Thumbnail",
-               width : 500,
-               height : 500,
-               ratio : "1:1"
-             },
-             values : {
-               url : ASSETS+"modules/architect/images/default.jpg"
-             }
-           },
-           {
-             id : 4,
-             type : CustomFieldTypes.DATE.value,
-             name : "Inici event",
-             identifier : "data_1",
-             values : moment()
-           },
-           {
-             id : 5,
-             type : CustomFieldTypes.IMAGES.value,
-             name : "Galería",
-             identifier : "images_1",
-             settings : {
-               type : "banner",
-               name : "Banner",
-               width : 1000,
-               height : 500,
-               ratio : "2:1"
-             },
-             values : [{
-                 id : 1,
-                 title : "image 1",
-                 url : ASSETS+"modules/architect/images/default.jpg"
-               },
-               {
-                 id : 2,
-                 title : "image 2",
-                 url : ASSETS+"modules/architect/images/default.jpg"
-               }
-             ]
-           },
-           {
-             id : 6,
-             type : CustomFieldTypes.LIST.value,
-             name : "Tipus",
-             identifier : "list_1",
-             settings : {},
-             values : [
-               {name:"Tipus 1", value:"1",checked:false},
-               {name:"Tipus 2", value:"2",checked:false},
-               {name:"Tipus 3", value:"3",checked:true}
-             ]
-           },
-           {
-             id : 7,
-             type : CustomFieldTypes.CONTENTS.value,
-             name : "Events",
-             identifier : "contents_1",
-             settings : {},
-             values : [
-               {id:1,name:"Event 1",type:"event",label:"Event",icon:"fa-calendar"},
-               {id:2,name:"Event 2",type:"event",label:"Event",icon:"fa-calendar"},
-               {id:3,name:"Event 3",type:"event",label:"Event",icon:"fa-calendar"},
-             ]
-           },
-           {
-             id : 8,
-             type : CustomFieldTypes.BOOLEAN.value,
-             name : "Es public ?",
-             identifier : "boolean_1",
-             values : true
-           },
-           {
-             id : 9,
-             type : CustomFieldTypes.LINK.value,
-             name : "Enllaç pàgina web event",
-             identifier : "link_1",
-             values :  {
-               ca : "Hola",
-               es : "Hola",
-               en : "Hola",
-               linkType : "",
-               linkValues : {
-                 ca : "http://",
-                 es : "http://",
-                 en : "http://",
-               }
-               /*
-               isPage : true,
-               linkValues : {
-                 id : "",
-                 label : "Event",
-                 icon : "fa-calendar",
-                 name : "Page title"
-               }
-               */
-             }
-           },
-           {
-             id : 10,
-             type : CustomFieldTypes.MAP.value,
-             name : "M",
-             identifier : "link_1",
-             values :  {
-               ca : "Hola",
-               es : "Hola",
-               en : "Hola",
-               linkType : "",
-               linkValues : {
-                 ca : "http://",
-                 es : "http://",
-                 en : "http://",
-               }
-               /*
-               isPage : true,
-               linkValues : {
-                 id : "",
-                 label : "Event",
-                 icon : "fa-calendar",
-                 name : "Page title"
-               }
-               */
-             }
-           }
-
-         ]
-       };
+     
+     // Set translations
+     var translations = {};
+     props.languages.map(function(v,k){
+         translations[v.iso] = true;
+     });
+     
+     // Load content fields 
+     var fields = props.typology.fields;
+     var content = props.content;
+     var languages = props.languages;
+     if(props.content) {
+         fields.map(function(field, k){
+     
+             // Settings values from content
+             var values = {};
+             content.fields.map(function(f2, k2){
+                 if(f2.name == field.identifier) {
+                     if(f2.language_id) {
+                         languages.map(function(l){
+                             if(f2.language_id == l.id) {
+                                 values[l.iso] = f2.value;
+                             }
+                         });
+                     } else {
+                         values = f2.value;
+                     }
+                 }
+             });
+     
+            fields[k].values = values;
+         });
      }
-
-     console.log(typology);
-
+     
+     
+     // Build state...
      this.state = {
          status: 0,
          template: "",
@@ -210,17 +79,20 @@ class ContentContainer extends Component {
          },
          author: "",
          authors: props.authors,
+         content: props.content,
+         typology: props.typology,
+         languages: props.languages,
+         fields: fields, 
          created_at: "14, Oct 2018",
-         typology: typology,
-
+         
          //FIXME quiza esto va dentro del custom field?
          displayMediaModal: false,
          sourceField: null,
 
          displayContentModal: false,
          contentSourceField: null
-
      };
+     
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
@@ -237,7 +109,8 @@ class ContentContainer extends Component {
      this.handleContentSelected = this.handleContentSelected.bind(this);
      this.handleContentCancel = this.handleContentCancel.bind(this);
  }
-
+ 
+ 
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -257,11 +130,7 @@ class ContentContainer extends Component {
   }
 
   handleImageSelected(image){
-
-    console.log("handleImageSelected :: images : ");
-
     this.updateImage(this.state.sourceField,image);
-
   }
 
   updateImage(identifier,image){
@@ -310,8 +179,7 @@ class ContentContainer extends Component {
   }
 
   handleContentSelected(content){
-
-    this.updateContent(this.state.contentSourceField,content);
+      this.updateContent(this.state.contentSourceField,content);
   }
 
   updateContent(identifier,content){
@@ -320,7 +188,8 @@ class ContentContainer extends Component {
 
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
-      if(item.identifier == identifier ){
+      
+      if(item.identifier == identifier){
 
         if(typology.fields[i].type == "link"){
             typology.fields[i].values.linkValues = content;
@@ -335,9 +204,9 @@ class ContentContainer extends Component {
     }
 
     this.setState({
-      typology : typology,
-      displayContentModal : false,
-      contentSourceField : null
+        typology : typology,
+        displayContentModal : false,
+        contentSourceField : null
     });
 
   }
@@ -365,12 +234,13 @@ class ContentContainer extends Component {
   getFormData()
   {
       return {
+          content_id : this.state.content !== undefined ? this.state.content.id : null,
+          typology_id : this.state.typology.id,
           status : this.state.status,
           category : this.state.category,
           tags : this.state.tags,
-          fields : this.state.typology.fields,
-          author_id : this.state.author,
-          typology_id : this.state.typology.id
+          fields : this.state.fields,
+          author_id : this.state.author
       };
   }
 
@@ -378,21 +248,21 @@ class ContentContainer extends Component {
   {
       var _this = this;
       axios.post('/architect/contents', this.getFormData())
-     .then((response) => {
-         if(response.data.success) {
-             _this.onSaveSuccess(response.data);
-         }
-     })
-     .catch((error) => {
-         if (error.response) {
-             _this.onSaveError(error.response.data);
-         } else if (error.message) {
-             toastr.error(error.message);
-         } else {
-             console.log('Error', error.message);
-         }
-         //console.log(error.config);
-     });
+         .then((response) => {
+             if(response.data.success) {
+                 _this.onSaveSuccess(response.data);
+             }
+         })
+         .catch((error) => {
+             if (error.response) {
+                 _this.onSaveError(error.response.data);
+             } else if (error.message) {
+                 toastr.error(error.message);
+             } else {
+                 console.log('Error', error.message);
+             }
+             //console.log(error.config);
+         });
   }
 
   update()
@@ -478,25 +348,23 @@ class ContentContainer extends Component {
 
   }
 
-  handleFieldChange(field) {
+    handleFieldChange(field) {
+        const result = {};
+        result[field.name] = field.value;
 
-    const result = {};
-    result[field.name] = field.value;
+        this.setState(result);
+    }
 
-		this.setState(result);
+    handleTranslationChange(field) {
 
-	}
+        const {translations} = this.state;
+        translations[field.name] = field.value;
 
-  handleTranslationChange(field) {
+        this.setState({
+            translations : translations
+        });
 
-    const {translations} = this.state;
-    translations[field.name] = field.value;
-
-		this.setState({
-      translations : translations
-    });
-
-	}
+    }
 
   handleTagAdded(tag) {
 
@@ -539,11 +407,8 @@ class ContentContainer extends Component {
 
   handleCustomFieldChange(field){
 
-    console.log("ContentContainer :: handleCustomFieldChange :: ");
-    console.log(field);
-
     const {typology} = this.state;
-
+    
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
       if(item.identifier == field.identifier ){
@@ -551,7 +416,7 @@ class ContentContainer extends Component {
         break;
       }
     }
-
+    
     this.setState({
       typology : typology
     });
@@ -606,7 +471,7 @@ class ContentContainer extends Component {
 
             <DragDropContextProvider backend={HTML5Backend}>
               <ContentFields
-                fields={this.state.typology.fields}
+                fields={this.state.fields}
                 translations={this.state.translations}
                 onFieldChange={this.handleCustomFieldChange}
                 onImageSelect={this.handleImageSelect}

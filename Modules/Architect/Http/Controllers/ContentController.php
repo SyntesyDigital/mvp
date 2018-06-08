@@ -19,6 +19,7 @@ use Modules\Architect\Jobs\Content\UpdateContent;
 
 // Models
 use Modules\Architect\Entities\Typology;
+use Modules\Architect\Entities\Content;
 use App\Models\User;
 use App\Models\Role;
 
@@ -41,9 +42,13 @@ class ContentController extends Controller
         return $this->contents->getDatatable();
     }
 
-    public function show(Request $request)
+    public function show(Content $content, Request $request)
     {
-        return view('architect::contents.show');
+        return view('architect::contents.show', [
+            'content' => $content->load('fields'),
+            'typology' => $content->typology->load('fields'),
+            'users' => User::all(),
+        ]);
     }
 
     public function create(Typology $typology, Request $request)

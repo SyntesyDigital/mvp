@@ -106,21 +106,6 @@ class ContentsField extends Component {
       return;
     }
 
-     const fields = this.props.field.values;
-     return (
-         fields.map((item, i) => (
-          <ContentsDragField
-             key = {item.id}
-             index = {i}
-             id = {item.id}
-             type = {item.type}
-             label = {item.label}
-             icon = {item.icon}
-             name = {item.name}
-             moveField = {this.moveField}
-             onRemoveField = {this.handleRemoveField}  />
-         ))
-     );
  }
 
 
@@ -142,7 +127,16 @@ class ContentsField extends Component {
 
           <div className="field-form fields-list-container">
 
-            {this.renderInputs()}
+          <ContentsDragField
+             key = {this.props.field.id}
+             index = {1}
+             id = {this.props.field.id}
+             type = {this.props.field.type}
+             label = {this.props.field.name}
+             icon = {this.props.field.icon}
+             name = {this.props.field.identifier}
+             moveField = {this.moveField}
+             onRemoveField = {this.handleRemoveField}  />
 
           </div>
 

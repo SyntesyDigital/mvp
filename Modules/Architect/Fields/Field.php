@@ -15,12 +15,12 @@ abstract class Field
 
     public function getLanguageFromIso($iso, $languages)
     {
-        return $languages->map(function($language) use ($iso){
-            if($iso == $language->iso) {
+        foreach($languages as $language) {
+            if($language->iso == $iso) {
                 return $language;
             }
-            return false;
-        })->first();
+        }
+        return false;
     }
 
     public function save($content, $identifier, $values, $languages = null)
@@ -29,7 +29,6 @@ abstract class Field
 
         foreach($values as $iso => $value) {
             $language = $this->getLanguageFromIso($iso, $languages);
-
             $content->fields()->save(new ContentField([
                 'name' => $identifier,
                 'value' => is_array($value) ? json_encode($value) : $value,
