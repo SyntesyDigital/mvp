@@ -58,12 +58,10 @@ class InputSettingsField extends Component {
 
       display = true;
 
-      if(this.props.field != null && this.props.field[this.props.source][this.props.name] !== undefined){
 
-        if(this.props.field[this.props.source][this.props.name] != null &&
-          this.props.field[this.props.source][this.props.name].input !== undefined){
-            input = this.props.field[this.props.source][this.props.name].input;
-        }
+      if(this.props.field[this.props.source][this.props.name] != null &&
+        this.props.field[this.props.source][this.props.name].input !== undefined){
+          input = this.props.field[this.props.source][this.props.name].input;
       }
 
     }

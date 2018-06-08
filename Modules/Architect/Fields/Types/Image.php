@@ -17,7 +17,7 @@ class Image extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'only_formats'
+        'cropsAllowed'
     ];
 
     public function validate($request)

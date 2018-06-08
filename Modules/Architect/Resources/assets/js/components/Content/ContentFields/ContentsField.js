@@ -19,6 +19,19 @@ class ContentsField extends Component {
      this.onContentSelect = this.onContentSelect.bind(this);
  }
 
+ componentDidMount(){
+
+   if(this.props.field.values === undefined || this.props.field.values == null){
+     //setup values if not yet defined
+     var newField = {
+         identifier: this.props.field.identifier,
+         values: []
+     };
+
+     this.props.onFieldChange(newField);
+   }
+ }
+
  moveField(dragIndex, hoverIndex) {
 
      const field = this.props.field;
@@ -88,37 +101,26 @@ class ContentsField extends Component {
  }
 
  renderInputs() {
-     console.log('fields =>', this.props.field);
+
+    if(this.props.field.values === undefined || this.props.field.values == null){
+      return;
+    }
+
      const fields = this.props.field.values;
-     // return (
-     //     fields.map((item, i) => (
-     // 
-     //         <ContentsDragField 
-     //         key = {item.id}
-     //         index = {i}
-     //         id = {item.id}
-     //         type = {item.type}
-     //         label = {item.label}
-     //         icon = {item.icon}
-     //         name = {item.name}
-     //         moveField = {this.moveField}
-     //         onRemoveField = {this.handleRemoveField}  />
-     // 
-     //     ))
-     // );
-     
-     if(this.props.field.values) {
-         return <ContentsDragField 
-         key = {item.id}
-         index = {i}
-         id = {item.id}
-         type = {item.type}
-         label = {item.label}
-         icon = {item.icon}
-         name = {item.name}
-         moveField = {this.moveField}
-         onRemoveField = {this.handleRemoveField}  />
-     }
+     return (
+         fields.map((item, i) => (
+          <ContentsDragField
+             key = {item.id}
+             index = {i}
+             id = {item.id}
+             type = {item.type}
+             label = {item.label}
+             icon = {item.icon}
+             name = {item.name}
+             moveField = {this.moveField}
+             onRemoveField = {this.handleRemoveField}  />
+         ))
+     );
  }
 
 

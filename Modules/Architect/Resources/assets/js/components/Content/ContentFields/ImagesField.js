@@ -17,6 +17,19 @@ class ImagesField extends Component {
     this.onImageSelect = this.onImageSelect.bind(this);
   }
 
+  componentDidMount(){
+
+    if(this.props.field.values === undefined || this.props.field.values == null){
+      //setup values if not yet defined
+      var newField = {
+          identifier: this.props.field.identifier,
+          values: []
+      };
+
+      this.props.onFieldChange(newField);
+    }
+  }
+
   moveField(dragIndex, hoverIndex) {
 
     const field = this.props.field;
@@ -84,6 +97,10 @@ class ImagesField extends Component {
 	}
 
   renderInputs() {
+
+    if(this.props.field.values === undefined || this.props.field.values == null){
+      return;
+    }
 
     const images = this.props.field.values;
 

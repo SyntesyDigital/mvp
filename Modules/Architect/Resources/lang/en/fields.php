@@ -3,9 +3,13 @@
 return [
     'text' => 'Text',
     'richtext' => 'Richtext',
-    'image' => 'Image',
-    'images' => 'Images',
+    'image' => 'Imatge',
+    'images' => 'Imatges',
     'contents' => 'Continguts',
-    'date' => 'Date',
-    'contentlist' => 'List'
+    'date' => 'Data',
+    'contentlist' => 'Llista',
+    'boolean' => 'Booleà',
+    'link' => 'Enllaç',
+    'video' => 'Video',
+    'localization' => 'Localització'
 ];

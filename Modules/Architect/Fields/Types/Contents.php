@@ -13,11 +13,13 @@ class Contents extends Field implements FieldInterface
     public $name = 'CONTENTS';
 
     public $rules = [
-        'required'
+        'required',
+        'maxItems',
+        'minItems'
     ];
 
     public $settings = [
-        'only_formats'
+        'typologiesAllowed'
     ];
 
     public function validate($request)

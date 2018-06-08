@@ -23,13 +23,17 @@ class BooleanField extends Component {
 
   renderInputs() {
 
+    const value = this.props.field.values !== undefined && this.props.field.values != null ?
+      this.props.field.values :
+      false;
+
     return (
 
       <div className="togglebutton" >
         <label>
             {this.props.field.name}
             <input type="checkbox"
-              checked={this.props.field.values}
+              checked={value}
               onChange={this.handleOnChange}
             />
         </label>

@@ -8,6 +8,7 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 //@import "node_modules/react-select/dist/react-select.css";
+@import '~leaflet/dist/leaflet.css';
 
 // Material Kit
 // https://www.creative-tim.com/product/material-kit
@@ -31,3 +32,4 @@
 @import 'autosuggest';
 @import 'datatable';
 @import 'form';
+@import 'map';

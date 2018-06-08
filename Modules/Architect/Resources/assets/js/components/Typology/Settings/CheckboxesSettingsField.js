@@ -16,6 +16,7 @@ class CheckboxesSettingsField extends Component {
 
     var field = {
       name : this.props.name,
+      source : this.props.source,
       value : {
         checkbox : event.target.checked,
         fields : []
@@ -29,7 +30,11 @@ class CheckboxesSettingsField extends Component {
 
   handleCheckboxChange(event) {
 
-    var fields = this.props.field.settings[this.props.name].fields;
+    var fields = [];
+
+    if(this.props.field[this.props.source][this.props.name] != null){
+      fields = this.props.field[this.props.source][this.props.name].fields;
+    }
 
     console.log("CheckboxesSettingsField::handleFieldChange");
     console.log(event.target.value);
@@ -48,6 +53,7 @@ class CheckboxesSettingsField extends Component {
 
     var field = {
       name : this.props.name,
+      source : this.props.source,
       value : {
         checkbox : true,
         fields : fields
@@ -75,9 +81,10 @@ class CheckboxesSettingsField extends Component {
 
     console.log("SelectorSettings : existInput : "+value);
 
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
+    if(this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined
+      && this.props.field[this.props.source][this.props.name] != null){
 
-      const fields = this.props.field.settings[this.props.name].fields;
+      const fields = this.props.field[this.props.source][this.props.name].fields;
       console.log(fields);
       console.log(value);
       if(fields.indexOf(value) != -1){
@@ -97,7 +104,7 @@ class CheckboxesSettingsField extends Component {
     return (
       this.props.options.map((item,i) => (
         <label className="form-check-label" key={i}>
-            <input className="form-check-input" type="checkbox"
+            <input className="form-check-input" type="radio"
               checked={self.existInput(item.value)}
               value={item.value}
               onChange={self.handleCheckboxChange}
@@ -115,18 +122,34 @@ class CheckboxesSettingsField extends Component {
 
 
     var checkbox = null;
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
-      checkbox = this.props.field.settings[this.props.name].checkbox;
+    var display = false;
+    var fields = [];
+
+    if(this.props.field != null && this.props.field[this.props.source] != null &&
+      this.props.field[this.props.source][this.props.name] !== undefined){
+
+      if(this.props.field[this.props.source][this.props.name] != null &&
+        this.props.field[this.props.source][this.props.name].checkbox !== undefined){
+        checkbox = this.props.field[this.props.source][this.props.name].checkbox;
+      }
+      else {
+        checkbox = false;
+      }
+
+      display = true;
+
+      if(this.props.field[this.props.source][this.props.name] != null &&
+        this.props.field[this.props.source][this.props.name].fields !== undefined){
+        fields = this.props.field[this.props.source][this.props.name].fields;
+      }
     }
 
-    var fields = [];
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
-      fields = this.props.field.settings[this.props.name].fields;
-    }
+
+
 
     return (
 
-      <div style={{display : checkbox != null ? 'block' : 'none'}}>
+      <div style={{display : display ? 'block' : 'none'}}>
         <div className="setup-field" >
           <div className="togglebutton">
             <label>

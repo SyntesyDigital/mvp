@@ -13,6 +13,7 @@ class SelectorSettingsField extends Component {
 
     var field = {
       name : this.props.name,
+      source : this.props.source,
       value : event.target.value
     };
 
@@ -31,15 +32,21 @@ class SelectorSettingsField extends Component {
 
 
     var value = null;
-    if(this.props.field != null && this.props.field.settings[this.props.name] !== undefined){
-      value = this.props.field.settings[this.props.name];
-    }
+    var display = false;
 
-    var selctValue = value == null ? "" : value;
+    if(this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined){
+      display = true;
+      if(this.props.field[this.props.source][this.props.name] != null ) {
+        value = this.props.field[this.props.source][this.props.name];
+      }
+      else {
+        value = "";
+      }
+    }
 
     return (
 
-      <div style={{display : value != null ? 'block' : 'none'}}>
+      <div style={{display : display ? 'block' : 'none'}}>
         <div className="setup-field" >
 
           <div className="togglebutton">
@@ -54,7 +61,7 @@ class SelectorSettingsField extends Component {
 
             <div className="form-group bmd-form-group">
 
-              <select className="form-control" name={this.props.name} value={selctValue} onChange={this.handleFieldChange} >
+              <select className="form-control" name={this.props.name} value={value} onChange={this.handleFieldChange} >
                 {this.renderOptions()}
               </select>
 

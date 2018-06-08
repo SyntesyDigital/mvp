@@ -140,7 +140,7 @@ ImagesDragField.propTypes = {
 	index: PropTypes.number.isRequired,
 	isDragging: PropTypes.bool.isRequired,
 	id: PropTypes.any.isRequired,
-	title : PropTypes.string.isRequired,
+	//title : PropTypes.string.isRequired,
 	url : PropTypes.string.isRequired,
 	moveField: PropTypes.func.isRequired,
 };
