@@ -20,12 +20,5 @@ class Image extends Field implements FieldInterface
         'only_formats'
     ];
 
-    public function validate($request)
-    {}
-
-    public function save($content, $identifier, $values, $languages = null)
-    {
-        return parent::save($content, $identifier, $values, $languages);
-    }
 }
 ?>

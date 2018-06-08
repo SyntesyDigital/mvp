@@ -16,18 +16,10 @@ class Text extends Field implements FieldInterface
         'required',
         'unique',
         'maxCharacters',
-        'minCharacters',
+        'minCharacters'
     ];
 
     public $settings = [];
-
-    public function validate($request)
-    {}
-
-    public function save($content, $identifier, $values, $languages = null)
-    {
-        return parent::save($content, $identifier, $values, $languages);
-    }
 
 }
 ?>

@@ -4,6 +4,7 @@ namespace Modules\Architect\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
+use Modules\Architect\Fields\FieldValidator;
 
 class ContentField implements Rule
 {
@@ -24,50 +25,10 @@ class ContentField implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $values)
     {
-        foreach($value as $k => $v) {
-
-            $rules = isset($v["rules"]) ? $v["rules"] : null;
-            $values = isset($v['values']) ? $v['values'] : null;
-
-            if(is_array($rules)) {
-                foreach($rules as $rule => $ruleValue) {
-                    switch($rule) {
-                        case 'required':
-                            $isValid = is_array($values) ? !empty(array_filter($values)) : !empty($values);
-
-                            if(!$isValid) {
-                                $this->errors[] = [
-                                    'identifier' => $v['identifier'],
-                                    'message' => 'is not good !'
-                                ];
-                            }
-                        break;
-
-                        case 'maxCharacters':
-                            if(is_array($values)) {
-                                foreach($values as $k2 => $v2) {
-                                    if(strlen($values) > $ruleValue) {
-                                        $this->errors[] = [
-                                            'identifier' => $v['identifier'],
-                                            'message' => 'to much !'
-                                        ];
-                                    }
-                                }
-                            } else {
-                                if(strlen($values) > $ruleValue) {
-                                    $this->errors[] = [
-                                        'identifier' => $v['identifier'],
-                                        'message' => 'to much !'
-                                    ];
-                                }
-                            }
-                        break;
-                    }
-                }
-            }
-        }
+        $validator = new FieldValidator();
+        $this->errors = $validator->validate($values);
 
         return empty($this->errors) ? true : false;
     }

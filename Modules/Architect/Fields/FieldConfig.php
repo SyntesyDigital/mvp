@@ -2,10 +2,28 @@
 
 namespace Modules\Architect\Fields;
 
-use Modules\Architect\Fields\FieldInterface;
-
 class FieldConfig
 {
+
+    public function __construct()
+    {
+        $this->fields = self::get();
+    }
+
+    public function getByType($type)
+    {
+        if(is_array($this->fields)) {
+            foreach($this->fields as $k => $field) {
+                if($field["type"] == $type) {
+                    return $field;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // FIXME : find a better way ! -)
     public static function get()
     {
         $fields = [];

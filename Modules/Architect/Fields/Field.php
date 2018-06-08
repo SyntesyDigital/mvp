@@ -8,7 +8,6 @@ use Modules\Architect\Entities\ContentField;
 
 abstract class Field
 {
-
     public function model()
     {
         return "Modules\\Architect\\Entities\\ContentField";

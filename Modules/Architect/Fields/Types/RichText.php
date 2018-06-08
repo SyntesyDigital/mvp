@@ -20,14 +20,5 @@ class Richtext extends Field implements FieldInterface
     public $settings = [
         'fieldHeight'
     ];
-
-    public function validate($request)
-    {}
-
-    public function save($content, $identifier, $values, $languages = null)
-    {
-        return parent::save($content, $identifier, $values, $languages);
-    }
-
 }
 ?>
