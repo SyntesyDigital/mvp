@@ -6,7 +6,6 @@ use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
-
 use Modules\Architect\Fields\FieldConfig;
 
 class CreateContent

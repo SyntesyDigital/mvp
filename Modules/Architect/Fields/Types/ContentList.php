@@ -20,13 +20,5 @@ class ContentList extends Field implements FieldInterface
     public $settings = [
         'listAllowed'
     ];
-
-    public function validate($request)
-    {}
-
-    public function save($content, $identifier, $values, $languages = null)
-    {
-        return parent::save($content, $identifier, $values, $languages);
-    }
 }
 ?>

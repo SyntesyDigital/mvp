@@ -11,9 +11,7 @@ class DateField extends Component {
 
   constructor(props){
     super(props);
-
     this.handleOnChange = this.handleOnChange.bind(this);
-
   }
 
 
@@ -28,14 +26,14 @@ class DateField extends Component {
   }
 
   renderInputs() {
-
+      
     return (
       <div className="form-group bmd-form-group" >
          <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name}</label>
 
          <DatePicker
              className="form-control"
-             selected={this.props.field.values}
+             selected={moment(this.props.field.values)}
              onChange={this.handleOnChange}
              showTimeSelect
              timeFormat="HH:mm"

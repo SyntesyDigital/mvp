@@ -15,9 +15,15 @@ class ContentRepository extends BaseRepository
         return "Modules\\Architect\\Entities\\Content";
     }
 
-    public function getDatatable()
+    public function getDatatable($where = null)
     {
-        return Datatables::of($this->model->with('fields'))
+        $results = $this->model->with('fields');
+
+        if($where) {
+            $results->where($where);
+        }
+
+        return Datatables::of($results)
             ->addColumn('title', function ($item) {
                 return $item->getField('title');
             })
@@ -35,7 +41,7 @@ class ContentRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '
-                <a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
+                <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
                 <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="#" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
                 ';
             })
