@@ -27,8 +27,13 @@ class DateField extends Component {
 
   renderInputs() {
       
+      var error = null;
+      if(this.props.field.errors) {
+          error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
+      }
+      
     return (
-      <div className="form-group bmd-form-group" >
+      <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} >
          <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name}</label>
 
          <DatePicker

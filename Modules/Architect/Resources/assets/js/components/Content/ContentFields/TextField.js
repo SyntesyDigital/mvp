@@ -8,6 +8,7 @@ class TextField extends Component
   constructor(props)
   {
     super(props);
+    
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
@@ -29,27 +30,33 @@ class TextField extends Component
   {
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
-          var value = '';
-          console.log(this.props.field);
+        if(this.props.translations[key]){
+            var value = '';          
+            var error = null;
 
-          if(this.props.field.values) {
-              value = this.props.field.values[key] ? this.props.field.values[key] : '';
-          }
+            
+            if(this.props.field.errors) {
+                error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
+            }
 
-        inputs.push(
-          <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-             <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
-          </div>
-        );
-      }
+            if(this.props.field.values) {
+                value = this.props.field.values[key] ? this.props.field.values[key] : '';
+            }
+            
+            inputs.push(
+                <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
+                    <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
+                    <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
+                </div>
+            );
+        }
     }
+    
     return inputs;
   }
 
 
-  render() {
+  render() {      
     return (
       <div className="field-item">
 
