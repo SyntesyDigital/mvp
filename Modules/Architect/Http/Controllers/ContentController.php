@@ -46,6 +46,15 @@ class ContentController extends Controller
         return $this->contents->getDatatable($where);
     }
 
+    public function modalData(Request $request)
+    {
+        $where = $request->get('typology_id') ? [
+            'typology_id' => $request->get('typology_id')
+        ] : null;
+
+        return $this->contents->getModalDatatable($where);
+    }
+
     public function show(Content $content, Request $request)
     {
         return view('architect::contents.show', [

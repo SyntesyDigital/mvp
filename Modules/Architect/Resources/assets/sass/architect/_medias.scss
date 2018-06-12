@@ -223,8 +223,26 @@
     text-align:center;
 
     .image-container{
-      height: calc(100vh - 240px);
+      height: calc(100vh - 160px);
       overflow-y: scroll;
+
+
+      .pdf-preview{
+        border:1px solid #ccc;
+        text-align: center;
+        width:130px;
+        height:130px;
+        padding:15px;
+        margin:0 auto;
+        margin-top:20px;
+
+        i.fa{
+          font-size: 50px;
+          line-height: 100px;
+          color:#b4b4b4;
+        }
+      }
+
     }
 
     ul{
@@ -299,6 +317,37 @@
 
   /*min-height: calc(100vh - 190px);*/
 
+  .pdf-preview{
+    border:1px solid #ccc;
+    text-align: center;
+    width:130px;
+    height:130px;
+    padding:15px;
+
+    i.fa{
+      font-size: 40px;
+      line-height: 70px;
+      color:#b4b4b4;
+    }
+
+    p {
+      position: absolute;
+      bottom:2px;
+      left:6%;
+      width:88%;
+
+      font-size: 10px;
+      white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      white-space: pre-wrap;       /* css-3 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+      word-break: break-all;
+      white-space: normal;
+    }
+  }
+
   .row{
     margin:0;
   }
@@ -346,7 +395,6 @@
 
   tr{
     display : inline-block;
-    height:130px;
     width:20%;
 
     td:nth-child(1){

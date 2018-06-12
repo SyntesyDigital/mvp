@@ -80,7 +80,7 @@ export default class MediaEditModal extends Component {
     componentDidMount()
     {
         // IF media lib is present...
-        if(architect.medias) {
+        if(architect.medias._settings != null) {
             architect.medias._editModal = this;
         }
     }
@@ -93,16 +93,23 @@ export default class MediaEditModal extends Component {
     }
 
     modalClose() {
-        if(architect.medias) {
+
+        console.log(architect.medias);
+
+        if(architect.medias._settings != null) {
             architect.medias.refresh();
         }
+
+        this.props.onModalClose();
 
         TweenMax.to($("#media-edit"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
 
         }});
     }
 
-    onModalClose(){
+    onModalClose(e){
+      e.preventDefault();
+
         this.modalClose();
     }
 
@@ -181,7 +188,7 @@ export default class MediaEditModal extends Component {
 
     render() {
         return (
-          <div>
+          <div style={{zIndex:10000}}>
             <MediaCropModal
                 ref={(mediaCropModal) => this.mediaCropModal = mediaCropModal}
                 media = {this.state.media}

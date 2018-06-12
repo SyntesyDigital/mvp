@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import ContentDataTable from './ContentDataTable';
+
 class ContentSelectModal extends Component {
 
     constructor(props)
@@ -12,7 +14,7 @@ class ContentSelectModal extends Component {
         };
 
         this.onModalClose = this.onModalClose.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.handleSelectItem = this.handleSelectItem.bind(this);
     }
 
     componentWillReceiveProps(nextProps)
@@ -33,13 +35,11 @@ class ContentSelectModal extends Component {
       //this.modalOpen();
     }
 
-    onSubmit(e){
-      e.preventDefault();
+    handleSelectItem(item){
 
-      var rand = parseInt(Math.random()*100);
+      console.log(item);
 
-      this.props.onContentSelected({id:rand,name:"Event "+rand,type:"event",label:"Event",icon:"fa-calendar"});
-
+      this.props.onContentSelected(item);
     }
 
     modalOpen()
@@ -79,7 +79,10 @@ class ContentSelectModal extends Component {
                       <div className="row">
                         <div className="col-xs-12">
 
-
+                            <ContentDataTable
+                              route={routes["contents.data"]}
+                              onSelectItem={this.handleSelectItem}
+                            />
 
                         </div>
                       </div>
@@ -87,12 +90,9 @@ class ContentSelectModal extends Component {
 
                     <div className="modal-footer">
                       <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                      <a href="" className="btn btn-primary" onClick={this.onSubmit}> Afegir </a>
                     </div>
 
                   </div>
-
-
 
               </div>
             </div>

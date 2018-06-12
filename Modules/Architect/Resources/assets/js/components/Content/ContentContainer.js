@@ -86,7 +86,8 @@ class ContentContainer extends Component {
          fields: fields,
          created_at: "14, Oct 2018",
 
-         //FIXME quiza esto va dentro del custom field?
+
+         //modal states
          displayMediaModal: false,
          sourceField: null,
 
@@ -184,6 +185,11 @@ class ContentContainer extends Component {
   }
 
   updateContent(identifier,content){
+
+
+    console.log("ContentContainer :: updateContent");
+    console.log(identifier);
+    console.log(content);
 
     const {typology} = this.state;
 

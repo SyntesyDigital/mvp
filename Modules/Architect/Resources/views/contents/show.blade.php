@@ -31,7 +31,9 @@ var routes = {
   'medias.store' : '{{ route('medias.store') }}',
   'medias.show' : '{{ route('medias.show') }}',
   'medias.delete' : '{{ route('medias.delete') }}',
-  'medias.update' : '{{ route('medias.update') }}'
+  'medias.update' : '{{ route('medias.update') }}',
+
+  'contents.data' : '{{ route('contents.modal.data') }}'
 };
 </script>
 

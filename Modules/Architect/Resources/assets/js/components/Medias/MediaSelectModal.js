@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import MediaSelectedItem from './MediaSelectedItem';
+import MediaEditModal from './MediaEditModal';
+
 const acceptedFiles = 'image/jpeg,image/png,image/gif',
       maxFilesize = 20, // MB
       paramName = 'file',
@@ -18,13 +21,17 @@ class MediaSelectModal extends Component {
         };
 
         this._dropzone = null;
+        this._mediaEditModal = null;
         this._table = $('#table-medias');
 
         console.log("MediaSelectModal :: construct");
 
         this.onModalClose = this.onModalClose.bind(this);
-        this.selectImage = this.selectImage.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.handleMediaSelected = this.handleMediaSelected.bind(this);
+        this.initEvents = this.initEvents.bind(this);
+        this.handleCancelImage = this.handleCancelImage.bind(this);
+        this.handleImageEdit = this.handleImageEdit.bind(this);
+        this.handleEditModalClose = this.handleEditModalClose.bind(this);
 
     }
 
@@ -36,6 +43,14 @@ class MediaSelectModal extends Component {
       this.initDropzone();
       this.setDatatable();
 
+    }
+
+    handleCancelImage(e){
+      e.preventDefault();
+
+      this.setState({
+        imageSelected:null
+      });
     }
 
     initDropzone()
@@ -169,18 +184,15 @@ class MediaSelectModal extends Component {
     initEvents()
     {
         var _this = this;
-        $('#table-medias').find('.toogle-edit')
-            .off('click')
-            .on('click', function(e) {
-                e.preventDefault();
+        $(document).on('click','.select-media',function(e){
+          e.preventDefault();
 
-                if(_this._editModal !== undefined) {
-                    _this._editModal.modalOpen($(this).data('id'));
-                }
-            });
+          _this.setState({
+            imageSelected : $(this).data('id')
+          });
+        });
+
     }
-
-
 
     componentWillReceiveProps(nextProps)
     {
@@ -221,11 +233,23 @@ class MediaSelectModal extends Component {
       })
     }
 
-    onSubmit(e){
+    handleMediaSelected(media){
+      this.props.onImageSelected(media);
+    }
+
+    handleImageEdit(e) {
       e.preventDefault();
 
-      this.props.onImageSelected(this.state.imageSelected);
+      this._mediaEditModal.modalOpen(this.state.imageSelected);
 
+    }
+
+    handleEditModalClose() {
+      this.refresh();
+
+      this.setState({
+        imageSelected : this.state.imageSelected
+      });
     }
 
     renderImages() {
@@ -255,9 +279,20 @@ class MediaSelectModal extends Component {
 
     }
 
+
+
     render() {
         return (
           <div>
+
+            //TODO Fix que los lenguages y los formatos venga por configuración global
+            <MediaEditModal
+              ref={m => { this._mediaEditModal = m; }}
+              languages = '[{"id":1,"name":"Catal\u00e0","iso":"ca","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"},{"id":2,"name":"Espa\u00f1ol","iso":"es","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"},{"id":3,"name":"English","iso":"en","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"}]'
+              formats = '[{"name":"thumbnail","directory":"thumbnail","ratio":"1:1","width":500,"height":500},{"name":"banner","directory":"banner","ratio":"2:1","width":1000,"height":500}]'
+              onModalClose = {this.handleEditModalClose}
+            />
+
             <div className="custom-modal" id="media-select">
               <div className="modal-background"></div>
 
@@ -285,63 +320,33 @@ class MediaSelectModal extends Component {
 
                         </div>
 
-                        { this.state.imageSelected == null &&
-                          <div className="col-xs-4 image-col">
-                            <div className="image no-selected medias-dropfiles">
-                              <p align="center">
-                                <strong>Arrossega un arxiu o</strong> <br />
-                                <a href="#" className="btn btn-default"><i className="fa fa-upload"></i> Pujar arxiu </a>
-                              </p>
-                            </div>
 
-                            <div className="progress">
-                              <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style={{width:'0%'}}>
-                                <span className="sr-only"></span>
-                              </div>
-                            </div>
-
+                        <div className="col-xs-4 image-col" style={{display: this.state.imageSelected == null ? "block" : "none"}}>
+                          <div className="image no-selected medias-dropfiles">
+                            <p align="center">
+                              <strong>Arrossega un arxiu o</strong> <br />
+                              <a href="#" className="btn btn-default"><i className="fa fa-upload"></i> Pujar arxiu </a>
+                            </p>
                           </div>
-                        }
+
+                          <div className="progress">
+                            <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style={{width:'0%'}}>
+                              <span className="sr-only"></span>
+                            </div>
+                          </div>
+
+                        </div>
 
                         { this.state.imageSelected != null &&
                           <div className="col-xs-4 image-col">
-                            <div className="image-container">
-                              <div className="image" style={{backgroundImage:"url(/modules/architect/images/default.jpg)"}} ></div>
-
-                              {/*
-                              <a href="" className="btn btn-default"><i className="fa fa-pencil"></i> Editar</a>
-                              */}
-
-                              <ul>
-                                <li>
-                                  <b>Nom arxiu</b> : nom_arxiu.jpg
-                                </li>
-                                <li>
-                                  <b>Llegenda</b> : Lleganda de la imatge
-                                </li>
-                                <li>
-                                  <b>Mida original</b> : 1900x460
-                                </li>
-                                <li>
-                                  <b>Pes original</b> : 4000Kb
-                                </li>
-                                <li>
-                                  <b>Autor</b> : Nom Autor
-                                </li>
-                                <li>
-                                  <a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a> <a href="" className="btn btn-link text-danger"><i className="fa fa-trash"></i> Esborrar</a>
-                                </li>
-                              </ul>
-                            </div>
-                            <div className="col-footer">
-
-                              <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                              <a href="" className="btn btn-primary" onClick={this.onSubmit}> Afegir </a>
-
-                            </div>
+                            <MediaSelectedItem
+                              onImageEdit={this.handleImageEdit}
+                              selectedItem={this.state.imageSelected}
+                              onCancelImage={this.handleCancelImage}
+                              onMediaSelected={this.handleMediaSelected}
+                            />
                           </div>
                         }
-
 
                       </div>
                     </div>

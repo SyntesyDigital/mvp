@@ -47,4 +47,36 @@ class ContentRepository extends BaseRepository
             })
             ->make(true);
     }
+
+    public function getModalDatatable($where = null)
+    {
+        $results = $this->model->with('fields');
+
+        if($where) {
+            $results->where($where);
+        }
+
+        return Datatables::of($results)
+            ->addColumn('title', function ($item) {
+                return $item->getField('title');
+            })
+            ->addColumn('updated', function ($item) {
+                return $item->updated_at->format('d, M, Y');
+            })
+            ->addColumn('status', function ($item) {
+                return $item->getStringStatus();
+            })
+            ->addColumn('typology', function ($item) {
+                return $item->typology->name;
+            })
+            ->addColumn('author', function ($item) {
+                return $item->author->full_name;
+            })
+            ->addColumn('action', function ($item) {
+                return '
+                <a href="" id="item-'.$item->id.'" class="btn btn-link add-item" data-type="'.$item->typology->name.'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
+                ';
+            })
+            ->make(true);
+    }
 }

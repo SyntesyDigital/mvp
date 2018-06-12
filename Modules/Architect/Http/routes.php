@@ -15,6 +15,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');
     Route::get('/contents/data', 'ContentController@data')->name('contents.data');
+    Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
     Route::post('/contents', 'ContentController@store')->name('contents.store');
     Route::get('/contents/show', 'ContentController@show')->name('contents.show');
     Route::get('/contents/{typology}/create', 'ContentController@create')->name('contents.create');
