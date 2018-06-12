@@ -10,6 +10,7 @@ class LocalizationField extends Component
   {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleLatLngChange = this.handleLatLngChange.bind(this);
   }
 
   componentDidMount(){
@@ -25,18 +26,33 @@ class LocalizationField extends Component
       };
 
       this.props.onFieldChange(newField);
+
     }
   }
 
   handleOnChange(event)
   {
-    const language = $(event.target).closest('.form-control').attr('language');
     const values = this.props.field.values ? this.props.field.values : {};
-    values[event.target.name] = event.target.value;
+    values[event.target.name] = parseFloat(event.target.value);
 
     var field = {
       identifier : this.props.field.identifier,
       values : values
+    };
+
+    console.log(field);
+
+    this.props.onFieldChange(field);
+  }
+
+  handleLatLngChange(latLng){
+
+    var field = {
+      identifier : this.props.field.identifier,
+      values : {
+        lat : latLng.lat,
+        lng : latLng.lng,
+      }
     };
 
     this.props.onFieldChange(field);
@@ -55,13 +71,19 @@ class LocalizationField extends Component
         <div className="col-xs-6">
           <div className="form-group bmd-form-group">
              <label htmlFor={this.props.field.identifier+"_lat"} className="bmd-label-floating">Latitud</label>
+             <div>{lat}</div>
+             {/*
              <input type="text" className="form-control" name="lat" value={lat} onChange={this.handleOnChange} />
+             */}
           </div>
         </div>
         <div className="col-xs-6">
           <div className="form-group bmd-form-group">
              <label htmlFor={this.props.field.identifier+"_lng"} className="bmd-label-floating">Longitud</label>
+             <div>{lng}</div>
+             {/*
              <input type="text" className="form-control" name="lng" value={lng} onChange={this.handleOnChange} />
+             */}
           </div>
         </div>
       </div>
@@ -86,7 +108,10 @@ class LocalizationField extends Component
 
           <div className="field-form">
 
-            <MapComponent />
+            <MapComponent
+              markerPosition={this.props.field.values}
+              onLatLngChange={this.handleLatLngChange}
+            />
 
             {this.renderInputs()}
 
