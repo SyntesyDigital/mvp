@@ -59,6 +59,7 @@ class ContentContainer extends Component {
          status: 0,
          template: "",
          category: "",
+         errors : {},
          tags: [{
                  id: 1,
                  name: "Tag 1"
@@ -290,33 +291,35 @@ class ContentContainer extends Component {
   {
       toastr.success('ok');
   }
+  
 
  onSaveError(response)
  {
-     console.log('error...');
-     // var errors = response.errors ? response.errors : null;
-     // var _this = this;
-     // var stateErrors = this.state.errors;
-     //
-     // if(errors) {
-     //     Object.keys(stateErrors).map(function(k){
-     //         stateErrors[k] = errors[k] ? true : false;
-     //
-     //         if(errors[k]) {
-     //             toastr.error(errors[k]);
-     //         }
-     //     });
-     //
-     //     this.setState({
-     //         errors : stateErrors
-     //     });
-     // }
-     //
-     // if(response.message) {
-     //     toastr.error(response.message);
-     // }
- }
+     var errors = response.errors ? response.errors : null;
+     var _this = this;
+     var stateErrors = this.state.errors;
 
+     if(errors) {
+         
+         var fields = errors.fields ? errors.fields : null;
+         
+         if(fields) {
+             fields.map(function(field){
+                Object.keys(field).map(function(identifier){
+                    stateErrors[identifier] = field[identifier];
+                })
+             });
+         }
+         
+         this.setState({
+             errors : stateErrors
+         });
+     }
+
+     if(response.message) {
+         toastr.error(response.message);
+     }
+ }
 
   handlePublish(e) {
 
@@ -470,13 +473,16 @@ class ContentContainer extends Component {
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
+            {this.state.errors && 
               <ContentFields
+                errors={this.state.errors}
                 fields={this.state.fields}
                 translations={this.state.translations}
                 onFieldChange={this.handleCustomFieldChange}
                 onImageSelect={this.handleImageSelect}
                 onContentSelect={this.handleContentSelect}
               />
+            }
             </DragDropContextProvider>
 
 

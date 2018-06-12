@@ -9,16 +9,21 @@ class Required
     public function validate($value, $param)
     {
         $values = !is_array($value) ? [$value] : $value;
-
+        $errors = [];
+        
         if($param) {
-            if(empty(array_filter($values))) {
-                return $this->message();
+            foreach($values as $k => $value) {
+                if(!$value) {
+                    $errors[$k] = $this->message();
+                }
             }
         }
+
+        return !empty($errors) ? $errors : null;
     }
 
     public function message()
     {
-        return 'Empty field !';
+        return trans('architect::rules.required');
     }
 }

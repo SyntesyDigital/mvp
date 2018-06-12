@@ -26,10 +26,15 @@ class BooleanField extends Component {
     const value = this.props.field.values !== undefined && this.props.field.values != null ?
       this.props.field.values :
       false;
+      
+      var error = null;
+      if(this.props.field.errors) {
+          error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
+      }
 
     return (
 
-      <div className="togglebutton" >
+      <div className={'togglebutton ' + (error !== null ? 'has-error' : null)}>
         <label>
             {this.props.field.name}
             <input type="checkbox"

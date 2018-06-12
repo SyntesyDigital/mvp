@@ -22,18 +22,19 @@ class ContentFields extends Component {
     super(props);
 
     this.state = {
-
+        fields : [],
+        errors : this.props.errors
     };
 
   }
 
   renderFields() {
-
     var fields = [];
 
     for(var i=0;i<this.props.fields.length;i++){
       var item = this.props.fields[i];
-
+      item.errors = this.state.errors[item.identifier] ? this.state.errors[item.identifier] : null;
+      
       if(item.type == "text"){
         fields.push(
           <TextField
@@ -143,10 +144,10 @@ class ContentFields extends Component {
       else if(item.type == "localization"){
         fields.push(
           <LocalizationField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
+            field={item}
+            translations={this.props.translations}
+            key={i}
+            onFieldChange={this.props.onFieldChange}
           />
         );
       }
@@ -157,15 +158,12 @@ class ContentFields extends Component {
 
 
   render() {
+
     return (
       <div className="col-xs-9 page-content">
-
         <div className="field-group">
-
-          {this.renderFields()}
-
+            {this.renderFields()}
         </div>
-
       </div>
     );
   }

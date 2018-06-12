@@ -13,6 +13,6 @@ class Unique
 
     public function message()
     {
-        return 'Empty field !';
+        return trans('architect::rules.unique');
     }
 }

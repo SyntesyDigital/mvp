@@ -9,18 +9,21 @@ class MaxCharacters
     public function validate($value, $param)
     {
         $values = !is_array($value) ? [$value] : $value;
-
+        $errors = [];
+        
         if($param) {
             foreach($values as $k => $value) {
                 if(strlen($value) > $param) {
-                    return [$k => $this->message()];
+                    $errors[$k] = $this->message();
                 }
             }
         }
+
+        return !empty($errors) ? $errors : null;
     }
 
     public function message()
     {
-        return 'Max reached !';
+        return trans('architect::rules.maxCharacters');
     }
 }

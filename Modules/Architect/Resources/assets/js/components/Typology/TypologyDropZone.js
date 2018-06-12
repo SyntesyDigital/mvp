@@ -99,10 +99,6 @@ class TypologyDropZone extends Component {
 	}
 
 	addField(field) {
-
-		console.log("TypologyDropZone :: addField");
-
-
 		var field = {
 			id : this.currentId,
 			type : field.type,
@@ -113,8 +109,6 @@ class TypologyDropZone extends Component {
 			rules : this.exploteToObject(field.rules),
 			settings : this.exploteToObject(field.settings),
 		};
-
-		console.log(field);
 
 		this.currentId++;
 
