@@ -15,24 +15,16 @@ export default class TypologyForm extends Component {
 
         this.state = {
             typology : props.typology ? JSON.parse(atob(props.typology)) : '',
-            fieldsList : JSON.parse(props.fields)
+            fieldsList : FIELDS
         };
-        
-        console.log(JSON.parse(props.fields));
     }
 
     componentDidMount()
     {
         if(this.state.typology) {
-
-            console.log("create fields");
-
             // Build field list
             var fields = [];
             this.state.typology.fields.map(function(field){
-
-                console.log(field);
-
                 fields.push({
                     icon : field.icon,
                     id : field.id,

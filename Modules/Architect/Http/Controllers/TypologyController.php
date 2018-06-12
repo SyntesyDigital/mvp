@@ -8,20 +8,23 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
-// Requests
-use Modules\Architect\Http\Requests\Typology\CreateTypologyRequest;
-use Modules\Architect\Jobs\Typology\CreateTypology;
-
-// Jobs
-use Modules\Architect\Http\Requests\Typology\UpdateTypologyRequest;
-use Modules\Architect\Jobs\Typology\UpdateTypology;
-
 // Models
 use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
 
-use Modules\Architect\Fields\FieldConfig;
+// Create
+use Modules\Architect\Http\Requests\Typology\CreateTypologyRequest;
+use Modules\Architect\Jobs\Typology\CreateTypology;
+
+// Update
+use Modules\Architect\Http\Requests\Typology\UpdateTypologyRequest;
+use Modules\Architect\Jobs\Typology\UpdateTypology;
+
+// Delete
+use Modules\Architect\Http\Requests\Typology\DeleteTypologyRequest;
+use Modules\Architect\Jobs\Typology\DeleteTypology;
+
 
 class TypologyController extends Controller
 {
@@ -34,15 +37,12 @@ class TypologyController extends Controller
 
     public function create()
     {
-        return view('architect::typologies.form', [
-            "fieldsConfig" => FieldConfig::get()
-        ]);
+        return view('architect::typologies.form');
     }
 
     public function show(Typology $typology)
     {
         return view('architect::typologies.form', [
-            "fieldsConfig" => FieldConfig::get(),
             'typology' => $typology->load('fields')
         ]);
     }
@@ -66,6 +66,18 @@ class TypologyController extends Controller
         return $typology ? response()->json([
             'success' => true,
             'typology' => $typology
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+
+    public function delete(Typology $typology, DeleteTypologyRequest $request)
+    {
+        $typology = dispatch_now(DeleteTypology::fromRequest($typology, $request));
+
+        return $typology ? response()->json([
+            'success' => true
         ]) : response()->json([
             'success' => false
         ], 500);

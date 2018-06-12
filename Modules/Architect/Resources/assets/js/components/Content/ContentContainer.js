@@ -52,7 +52,7 @@ class ContentContainer extends Component {
             fields[k].values = values;
          });
      }
-
+     
 
      // Build state...
      this.state = {
@@ -78,14 +78,13 @@ class ContentContainer extends Component {
              es: true,
              en: true
          },
-         author: "",
+         author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
          typology: props.typology,
          languages: props.languages,
          fields: fields,
-         created_at: "14, Oct 2018",
-
+         created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
 
          //modal states
          displayMediaModal: false,
@@ -185,11 +184,6 @@ class ContentContainer extends Component {
   }
 
   updateContent(identifier,content){
-
-
-    console.log("ContentContainer :: updateContent");
-    console.log(identifier);
-    console.log(content);
 
     const {typology} = this.state;
 
@@ -316,11 +310,17 @@ class ContentContainer extends Component {
                 })
              });
          }
-
+         
+         if(errors['author_id'] !== undefined) {
+            stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
+         }
+                  
          this.setState({
              errors : stateErrors
          });
      }
+     
+    
 
      if(response.message) {
          toastr.error(response.message);
@@ -462,20 +462,21 @@ class ContentContainer extends Component {
         <div className="container rightbar-page content">
 
             <ContentSidebar
-              status={this.state.status}
-              template={this.state.template}
-              category={this.state.category}
-              tags={this.state.tags}
-              translations={this.state.translations}
-              author={this.state.author}
-              authors={this.state.authors}
-              createdAt={this.state.created_at}
-              onPublish={this.handlePublish}
-              onUnpublish={this.handleUnpublish}
-              onFieldChange={this.handleFieldChange}
-              onTranslationChange={this.handleTranslationChange}
-              onTagAdded={this.handleTagAdded}
-              onRemoveTag={this.handleRemoveTag}
+                errors={this.state.errors}
+                status={this.state.status}
+                template={this.state.template}
+                category={this.state.category}
+                tags={this.state.tags}
+                translations={this.state.translations}
+                author={this.state.author}
+                authors={this.state.authors}
+                createdAt={this.state.created_at}
+                onPublish={this.handlePublish}
+                onUnpublish={this.handleUnpublish}
+                onFieldChange={this.handleFieldChange}
+                onTranslationChange={this.handleTranslationChange}
+                onTagAdded={this.handleTagAdded}
+                onRemoveTag={this.handleRemoveTag}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
@@ -490,7 +491,6 @@ class ContentContainer extends Component {
               />
             }
             </DragDropContextProvider>
-
 
         </div>
 
