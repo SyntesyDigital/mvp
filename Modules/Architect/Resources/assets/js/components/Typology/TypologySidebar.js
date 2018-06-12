@@ -156,6 +156,12 @@ class TypologySidebar extends Component {
 
         </div>
 
+        <hr/>
+
+        <div className="text-right">
+          <a className="btn btn-link text-danger"><i className="fa fa-trash"></i> Esborrar</a>
+        </div>
+
       </div>
     );
   }

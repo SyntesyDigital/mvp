@@ -13,13 +13,14 @@
           <div class="row">
               @foreach($typologies as $typology)
                 <div class="col-xs-3">
-                    <div class="grid-item">
-                        <i class="fa {{$typology->icon}}"></i>
-
-                        <p class="grid-item-name">
-                            <a href="{{ route('typologies.show', $typology)}}">{{$typology->name}}</a>
-                        </p>
-                    </div>
+                    <a href="{{ route('typologies.show', $typology)}}">
+                      <div class="grid-item">
+                          <i class="fa {{$typology->icon}}"></i>
+                          <p class="grid-item-name">
+                              {{$typology->name}}
+                          </p>
+                      </div>
+                    </a>
                 </div>
               @endforeach()
           </div>
