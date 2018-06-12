@@ -6,4 +6,9 @@
       height: 600px;
       width: 100%;
   }
+
+  .leaflet-control-container{
+      z-index: 400;
+  }
+
 }

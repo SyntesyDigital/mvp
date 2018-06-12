@@ -13,7 +13,7 @@
 				<div class="card-body">
 
                     <h3 class="card-title">{{ __('Llista de Mitjans') }}</h3>
-    				<h6 class="card-subtitle mb-2 text-muted">{{ __('Tots els mitjans poden ser trobats aquí.') }}</h6>
+    				        <h6 class="card-subtitle mb-2 text-muted">{{ __('Tots els mitjans poden ser trobats aquí.') }}</h6>
 
                     <div class="medias-dropfiles" style="cursor:pointer;">
                         <p align="center" style="pointer-events:none;">

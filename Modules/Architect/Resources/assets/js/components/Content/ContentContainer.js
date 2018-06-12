@@ -19,20 +19,20 @@ class ContentContainer extends Component {
 
   constructor(props) {
      super(props);
-     
+
      // Set translations
      var translations = {};
      props.languages.map(function(v,k){
          translations[v.iso] = true;
      });
-     
-     // Load content fields 
+
+     // Load content fields
      var fields = props.typology.fields;
      var content = props.content;
      var languages = props.languages;
      if(props.content) {
          fields.map(function(field, k){
-     
+
              // Settings values from content
              var values = {};
              content.fields.map(function(f2, k2){
@@ -48,12 +48,12 @@ class ContentContainer extends Component {
                      }
                  }
              });
-     
+
             fields[k].values = values;
          });
      }
-     
-     
+
+
      // Build state...
      this.state = {
          status: 0,
@@ -83,9 +83,9 @@ class ContentContainer extends Component {
          content: props.content,
          typology: props.typology,
          languages: props.languages,
-         fields: fields, 
+         fields: fields,
          created_at: "14, Oct 2018",
-         
+
          //FIXME quiza esto va dentro del custom field?
          displayMediaModal: false,
          sourceField: null,
@@ -93,7 +93,7 @@ class ContentContainer extends Component {
          displayContentModal: false,
          contentSourceField: null
      };
-     
+
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
@@ -110,8 +110,8 @@ class ContentContainer extends Component {
      this.handleContentSelected = this.handleContentSelected.bind(this);
      this.handleContentCancel = this.handleContentCancel.bind(this);
  }
- 
- 
+
+
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -189,7 +189,7 @@ class ContentContainer extends Component {
 
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
-      
+
       if(item.identifier == identifier){
 
         if(typology.fields[i].type == "link"){
@@ -291,7 +291,7 @@ class ContentContainer extends Component {
   {
       toastr.success('ok');
   }
-  
+
 
  onSaveError(response)
  {
@@ -300,9 +300,9 @@ class ContentContainer extends Component {
      var stateErrors = this.state.errors;
 
      if(errors) {
-         
+
          var fields = errors.fields ? errors.fields : null;
-         
+
          if(fields) {
              fields.map(function(field){
                 Object.keys(field).map(function(identifier){
@@ -310,7 +310,7 @@ class ContentContainer extends Component {
                 })
              });
          }
-         
+
          this.setState({
              errors : stateErrors
          });
@@ -411,7 +411,7 @@ class ContentContainer extends Component {
   handleCustomFieldChange(field){
 
     const {typology} = this.state;
-    
+
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
       if(item.identifier == field.identifier ){
@@ -419,7 +419,7 @@ class ContentContainer extends Component {
         break;
       }
     }
-    
+
     this.setState({
       typology : typology
     });
@@ -473,7 +473,7 @@ class ContentContainer extends Component {
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
-            {this.state.errors && 
+            {this.state.errors &&
               <ContentFields
                 errors={this.state.errors}
                 fields={this.state.fields}
