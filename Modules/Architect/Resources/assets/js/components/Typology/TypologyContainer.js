@@ -30,7 +30,7 @@ class TypologyContainer extends Component {
              slugEs: "",
              slugEn: "",
              categories: false,
-             tags: false,
+             tags: false
          },
          errors: {
              name: null,
@@ -168,14 +168,35 @@ class TypologyContainer extends Component {
 
      settingsField[field.source][field.name] = field.value;
 
-     console.log("TypologyContainer :: handleSettingsChange");
-     console.log(settingsField);
+     //console.log("TypologyContainer :: handleSettingsChange :: chaging settings, settings field :");
+     //console.log(settingsField);
+
+     const {fields} = this.state;
+
+     if(field.name == "entryTitle" && field.value == true){
+     //tryingn to update entry title remove if others
+
+       for(var key in fields){
+         var tempField = fields[key];
+         if(tempField.settings != null && tempField.settings.entryTitle !== undefined){
+           if(tempField.settings.entryTitle &&
+             tempField.identifier != this.state.settingsField.identifier ){
+             //reset value
+             fields[key].settings.entryTitle = false;
+           }
+         }
+       }
+
+     }
+
+     console.log(fields);
 
      this.setState({
+         fields : fields,
          settingsField: settingsField
      });
-
  }
+
 
  handleModalClose(e) {
 
@@ -251,12 +272,14 @@ class TypologyContainer extends Component {
 
     delete()
     {
-        var _this = this;   
-                
+        var _this = this;
+
         axios.delete('/architect/typologies/' + this.state.typology.id + '/delete')
             .then((response) => {
                 if(response.data.success) {
                     _this.onSaveSuccess(response.data);
+
+                    window.location.href = routes['typologies'];
                 }
             })
             .catch((error) => {
@@ -269,7 +292,7 @@ class TypologyContainer extends Component {
                 }
             });
     }
-    
+
     update() {
         var _this = this;
 
@@ -296,7 +319,8 @@ class TypologyContainer extends Component {
              typology : response.typology
          })
 
-         toastr.success('ok');
+         toastr.success('Ok');
+
      }
 
     onSaveError(response) {

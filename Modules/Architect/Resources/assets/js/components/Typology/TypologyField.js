@@ -138,6 +138,14 @@ class TypologyField extends Component {
 
   render() {
 
+	var isEntryTitle = false;
+	if(this.props.settings != null &&
+		this.props.settings.entryTitle !== undefined &&
+		this.props.settings.entryTitle
+	){
+		isEntryTitle = true;
+	}
+
 	const {
 		isDragging,
 		connectDragSource,
@@ -149,7 +157,7 @@ class TypologyField extends Component {
 			connectDropTarget(
 
       <div className="typology-field" style={{ ...style, opacity }}>
-        <div className="field-type">
+        <div className={"field-type "+ (isEntryTitle ? "is-title" : "" ) }>
           <i className={"fa "+this.props.icon}></i> &nbsp; {this.props.label}
         </div>
 

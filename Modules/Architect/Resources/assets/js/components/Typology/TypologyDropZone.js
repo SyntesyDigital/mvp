@@ -148,6 +148,7 @@ class TypologyDropZone extends Component {
 					label={item.label}
 					icon={item.icon}
 					name={item.name}
+					settings={item.settings}
 					identifier={item.identifier}
 					moveField={this.moveField}
 					onRemoveField={this.handleRemoveField}
