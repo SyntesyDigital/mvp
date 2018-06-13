@@ -151,6 +151,7 @@ class TypologyModal extends Component {
                       options={this.getCropsformats()}
                     />
 
+                    {/*
                     <SelectorSettingsField
                       field={this.props.field}
                       name="listAllowed"
@@ -162,6 +163,7 @@ class TypologyModal extends Component {
                         {name:"Llista 2",value:2}
                       ]}
                     />
+                    */}
 
 
                   </div>

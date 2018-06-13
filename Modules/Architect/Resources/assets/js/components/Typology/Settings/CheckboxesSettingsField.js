@@ -10,6 +10,34 @@ class CheckboxesSettingsField extends Component {
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.existInput = this.existInput.bind(this);
 
+    this.state = {
+      checkbox : null,
+      fields : [],
+      display : false
+    };
+
+  }
+
+  componentWillReceiveProps(nextProps){
+
+    var checkbox = null;
+    var display = false;
+    var fields = [];
+
+    if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
+      nextProps.field[nextProps.source][nextProps.name] !== undefined){
+
+      checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+      display = true;
+      fields = nextProps.field[nextProps.source][nextProps.name];
+    }
+
+    this.setState({
+      checkbox : checkbox,
+      fields : fields,
+      display : display
+    });
+
   }
 
   handleFieldChange(event) {
@@ -17,24 +45,15 @@ class CheckboxesSettingsField extends Component {
     var field = {
       name : this.props.name,
       source : this.props.source,
-      value : {
-        checkbox : event.target.checked,
-        fields : []
-      }
+      value : event.target.checked ? [] : null
     };
 
     this.props.onFieldChange(field);
   }
 
-
-
   handleCheckboxChange(event) {
 
-    var fields = [];
-
-    if(this.props.field[this.props.source][this.props.name] != null){
-      fields = this.props.field[this.props.source][this.props.name].fields;
-    }
+    var fields = this.state.fields;
 
     console.log("CheckboxesSettingsField::handleFieldChange");
     console.log(event.target.value);
@@ -48,20 +67,16 @@ class CheckboxesSettingsField extends Component {
     else {
       //remove value
       this.removeValue(event.target.value,fields);
-
     }
 
     var field = {
       name : this.props.name,
       source : this.props.source,
-      value : {
-        checkbox : true,
-        fields : fields
-      }
+      value : fields
     };
 
-    console.log("selectorSettingsField");
-    console.log(field);
+    //console.log("selectorSettingsField");
+    //console.log(field);
 
     this.props.onFieldChange(field);
 
@@ -79,35 +94,29 @@ class CheckboxesSettingsField extends Component {
 
   existInput(value) {
 
-    console.log("SelectorSettings : existInput : "+value);
+    //console.log("SelectorSettings : existInput : "+value);
+    const fields = this.state.fields;
 
-    if(this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined
-      && this.props.field[this.props.source][this.props.name] != null){
-
-      const fields = this.props.field[this.props.source][this.props.name].fields;
-      console.log(fields);
-      console.log(value);
-      if(fields.indexOf(value) != -1){
-        console.log("true");
-        return true;
-      }
+    if(fields == null){
+      return false;
     }
-    console.log("false");
+
+    if(fields.indexOf(value) != -1){
+      return true;
+    }
+
     return false;
   }
 
   renderOptions() {
 
-    var self = this;
-    console.log("renderOptions");
-
     return (
       this.props.options.map((item,i) => (
         <label className="form-check-label" key={i}>
-            <input className="form-check-input" type="radio"
-              checked={self.existInput(item.value)}
+            <input className="form-check-input" type="checkbox"
+              checked={this.existInput(item.value)}
               value={item.value}
-              onChange={self.handleCheckboxChange}
+              onChange={this.handleCheckboxChange}
             /> {'\u00A0'}
             {item.name}
             {'\u00A0'}
@@ -120,32 +129,7 @@ class CheckboxesSettingsField extends Component {
 
   render() {
 
-
-    var checkbox = null;
-    var display = false;
-    var fields = [];
-
-    if(this.props.field != null && this.props.field[this.props.source] != null &&
-      this.props.field[this.props.source][this.props.name] !== undefined){
-
-      if(this.props.field[this.props.source][this.props.name] != null &&
-        this.props.field[this.props.source][this.props.name].checkbox !== undefined){
-        checkbox = this.props.field[this.props.source][this.props.name].checkbox;
-      }
-      else {
-        checkbox = false;
-      }
-
-      display = true;
-
-      if(this.props.field[this.props.source][this.props.name] != null &&
-        this.props.field[this.props.source][this.props.name].fields !== undefined){
-        fields = this.props.field[this.props.source][this.props.name].fields;
-      }
-    }
-
-
-
+    const {checkbox,display,fields} = this.state;
 
     return (
 
