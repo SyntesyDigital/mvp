@@ -88,7 +88,7 @@ class ImageField extends Component {
       
       return _format;
   }
-
+  
   renderInputs() {
 
     var defined = false;
@@ -100,7 +100,7 @@ class ImageField extends Component {
     }
     
     var format = this.props.field.settings.cropsAllowed ? this.getImageFormat(this.props.field.settings.cropsAllowed) : null;
-    var url = values.urls[format.name] ? values.urls[format.name] : null;
+    var url = values.urls !== undefined && values.urls[format.name] !== undefined ? values.urls[format.name] : null;
     
     return (
       <div className="form-group bmd-form-group image-field-container">
@@ -137,7 +137,7 @@ class ImageField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.IMAGE.icon}></i> {CustomFieldTypes.IMAGE.name}
+            <i className={"fa "+ FIELDS.IMAGE.icon }></i> {FIELDS.IMAGE.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

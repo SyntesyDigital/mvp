@@ -7,6 +7,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use DataTables;
 use Storage;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Field;
 
 class ContentRepository extends BaseRepository
 {
@@ -17,15 +18,35 @@ class ContentRepository extends BaseRepository
 
     public function getDatatable($where = null)
     {
-        $results = $this->model->with('fields');
+        $results = Content::leftJoin('contents_fields', 'contents.id', '=', 'contents_fields.content_id')
+            ->leftJoin('users', 'contents.author_id', '=', 'users.id')
+            ->select(
+                'contents.*',
+                'users.firstname',
+                'users.lastname'
+            )
+            ->groupBy('contents.id');
+
+        //$results = $this->model->with('fields');
 
         if($where) {
             $results->where($where);
         }
 
+
+        $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
+        $titleFields = [];
+        foreach($fields as $k => $v) {
+            $titleFields[] = $v->identifier;
+        }
+
+
         return Datatables::of($results)
+            ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
+                $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
+            })
             ->addColumn('title', function ($item) {
-                return $item->getField('title');
+                return $item->getField($item->typology->getIndexField());
             })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');

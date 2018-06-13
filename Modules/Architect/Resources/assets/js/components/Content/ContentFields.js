@@ -109,7 +109,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.BOOLEAN.value){
+      else if(item.type == FIELDS.BOOLEAN.value){
         fields.push(
           <BooleanField
               field={item}
@@ -120,7 +120,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.LINK.value){
+      else if(item.type == FIELDS.LINK.value){
         fields.push(
           <LinkField
               field={item}
@@ -131,7 +131,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == CustomFieldTypes.VIDEO.value){
+      else if(item.type == FIELDS.VIDEO.value){
         fields.push(
           <VideoField
               field={item}
