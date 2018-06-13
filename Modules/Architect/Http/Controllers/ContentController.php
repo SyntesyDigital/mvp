@@ -57,9 +57,12 @@ class ContentController extends Controller
 
     public function show(Content $content, Request $request)
     {
+        $content->loadFields();
+        $content->typology->load('fields');
+
         return view('architect::contents.show', [
-            'content' => $content->load('fields'),
-            'typology' => $content->typology->load('fields'),
+            'content' => $content,
+            'typology' => $content->typology,
             'users' => User::all(),
         ]);
     }

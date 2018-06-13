@@ -98,15 +98,14 @@ class ImagesField extends Component {
 
   renderInputs() {
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
+    if(Object.keys(this.props.field.values).length === 0 || this.props.field.values === undefined || this.props.field.values == null){
       return;
     }
 
     const images = this.props.field.values;
-
+    
     return (
 			images.map((item, i) => (
-
   					<ImagesDragField
   						key={item.id}
   						index={i}

@@ -56,11 +56,6 @@ class Content extends Model
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
     }
 
-    public function fields()
-    {
-        return $this->hasMany('\Modules\Architect\Entities\ContentField');
-    }
-
     public function author()
     {
         return $this->hasOne('App\Models\User', "id", "author_id");
@@ -70,10 +65,10 @@ class Content extends Model
     {
 
         $status = [
-            1 => 'Publicat',
-            0 => 'Esborrany',
-            self::STATUS_PUBLISHED => 'Publicat',//__('contents.status.published'),
-            self::STATUS_DRAFT => 'Esborrany' //__('contents.status.draft')
+            1 => trans('architect::contents.published'),
+            0 => trans('architect::contents.draft'),
+            self::STATUS_PUBLISHED => trans('architect::contents.published'), //'Publicat',//__('contents.status.published'),
+            self::STATUS_DRAFT => trans('architect::contents.draft') //'Esborrany' //__('contents.status.draft')
         ];
 
         return isset($status[$this->status]) ? $status[$this->status] : null;

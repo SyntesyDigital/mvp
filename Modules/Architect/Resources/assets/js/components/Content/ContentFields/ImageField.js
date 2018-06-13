@@ -100,11 +100,15 @@ class ImageField extends Component {
     }
     
     var format = this.props.field.settings.cropsAllowed ? this.getImageFormat(this.props.field.settings.cropsAllowed) : null;
+    var url = values.urls[format.name] ? values.urls[format.name] : null;
     
     return (
       <div className="form-group bmd-form-group image-field-container">
          <div className="image-field">
-            <div className="image" style={{backgroundImage:"url("+(values.url !== undefined ? values.url : "")+")"}} ></div>
+            {url && 
+            <div className="image" style={{backgroundImage:"url(/"+ url +")"}} ></div>
+            }
+            
             {(!defined || values.url == "" ) &&
               <div className="add-button">
                 <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
