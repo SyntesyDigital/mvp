@@ -144,6 +144,7 @@ class TypologyModal extends Component {
                       ]}
                     />
 
+                    {/*
                     <SelectorSettingsField
                       field={this.props.field}
                       name="listAllowed"
@@ -155,6 +156,7 @@ class TypologyModal extends Component {
                         {name:"Llista 2",value:2}
                       ]}
                     />
+                    */}
 
 
                   </div>

@@ -6,8 +6,44 @@ class InputSettingsField extends Component {
   constructor(props) {
     super(props);
 
+    var checkbox = null;
+    var input = "";
+    var display = false;
+
+    this.state = {
+      checkbox : checkbox,
+      input : input,
+      display : display
+    };
+
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+  }
+
+  componentWillReceiveProps(nextProps){
+
+    var checkbox = null;
+    var input = "";
+    var display = false;
+
+    //console.log("InputSettingsField :: componentWillRecieveProps");
+    //console.log(nextProps);
+
+    if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
+       nextProps.field[nextProps.source][nextProps.name] !== undefined){
+
+      checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+      display = true;
+
+      input = nextProps.field[nextProps.source][nextProps.name];
+    }
+
+    this.setState({
+      checkbox : checkbox,
+      input : input,
+      display : display
+    });
 
   }
 
@@ -16,10 +52,7 @@ class InputSettingsField extends Component {
     var field = {
       name : this.props.name,
       source : this.props.source,
-      value : {
-        checkbox : event.target.checked,
-        input : ""
-      }
+      value : event.target.checked ? "" : null
     };
 
     this.props.onFieldChange(field);
@@ -30,10 +63,7 @@ class InputSettingsField extends Component {
     var field = {
       name : this.props.name,
       source : this.props.source,
-      value : {
-        checkbox : true,
-        input : event.target.value
-      }
+      value : event.target.value
     };
 
     this.props.onFieldChange(field);
@@ -42,39 +72,17 @@ class InputSettingsField extends Component {
 
   render() {
 
-    var display = false;
-    var checkbox = null;
-    var input = "";
-    if(this.props.field != null && this.props.field[this.props.source] != null &&
-       this.props.field[this.props.source][this.props.name] !== undefined){
-
-      if(this.props.field[this.props.source][this.props.name] != null &&
-        this.props.field[this.props.source][this.props.name].checkbox !== undefined){
-        checkbox = this.props.field[this.props.source][this.props.name].checkbox;
-      }
-      else {
-        checkbox = false;
-      }
-
-      display = true;
-
-
-      if(this.props.field[this.props.source][this.props.name] != null &&
-        this.props.field[this.props.source][this.props.name].input !== undefined){
-          input = this.props.field[this.props.source][this.props.name].input;
-      }
-
-    }
+    const {checkbox,input} = this.state;
 
     return (
 
-      <div style={{display : display ? 'block' : 'none'}}>
+      <div style={{display : this.state.display ? 'block' : 'none'}}>
         <div className="setup-field" >
           <div className="togglebutton">
             <label>
                 <input type="checkbox"
                   name={this.props.name}
-                  checked={ checkbox != null ? checkbox : false }
+                  checked={ this.state.checkbox != null ? checkbox : false }
                   onChange={this.handleFieldChange}
                 />
                 {this.props.label}
@@ -82,10 +90,10 @@ class InputSettingsField extends Component {
           </div>
 
 
-          <div className="setup-field-config" style={{display : checkbox != null && checkbox ? "block" : "none" }}>
+          <div className="setup-field-config" style={{display : this.state.checkbox != null && this.state.checkbox ? "block" : "none" }}>
             <div className="form-group bmd-form-group">
                <label htmlFor="num" className="bmd-label-floating">{this.props.inputLabel}</label>
-               <input type="text" name="" className="form-control" id="num" value={input} onChange={this.handleInputChange}/>
+               <input type="text" name="" className="form-control" id="num" value={this.state.input} onChange={this.handleInputChange}/>
             </div>
           </div>
 
