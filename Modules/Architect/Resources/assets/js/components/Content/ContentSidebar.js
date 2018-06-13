@@ -9,10 +9,9 @@ class ContentSidebar extends Component {
   constructor(props) {
 
     super(props);
-
+        
     this.handleChange = this.handleChange.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
-
   }
 
   handleChange(event) {
@@ -20,39 +19,38 @@ class ContentSidebar extends Component {
     var field = null;
 
     if(event.target.type == "text" || event.target.type == "select-one"){
-      field = {
-        name : event.target.name,
-        value : event.target.value
-      };
+        field = {
+            name : event.target.name,
+            value : event.target.value
+        };
     }
     else if(event.target.type == "checkbox"){
-      field = {
-        name : event.target.name,
-        value : event.target.checked
-      };
+        field = {
+            name : event.target.name,
+            value : event.target.checked
+        };
     }
 
-    if(field != null)
-      this.props.onFieldChange(field);
+    if(field != null) {
+        this.props.onFieldChange(field);
+    }
+      
   }
 
   handleTranslationChange(event) {
-
     var field = {
       name : event.target.name,
       value : event.target.checked
     };
 
     this.props.onTranslationChange(field);
-
   }
 
 
-  render() {
+  render() {      
+  
     return (
       <div className="sidebar">
-
-
         {this.props.status == 1 &&
           <div className="publish-form sidebar-item">
               <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
@@ -98,13 +96,11 @@ class ContentSidebar extends Component {
         <hr/>
 
         <div className="form-group bmd-form-group sidebar-item">
-
           <TagManager
             tags={this.props.tags}
             onTagAdded={this.props.onTagAdded}
             onRemoveTag={this.props.onRemoveTag}
           />
-
         </div>
 
         <hr/>
@@ -135,7 +131,7 @@ class ContentSidebar extends Component {
 
         <hr/>
 
-        <div className="form-group bmd-form-group sidebar-item">
+        <div className={'form-group bmd-form-group sidebar-item ' + ( this.props.errors['author_id'] ? 'has-error' : '')}>
            <label htmlFor="author" className="bmd-label-floating">Autor</label>
            <select className="form-control" id="author" name="author" value={this.props.author} onChange={this.handleChange} placeholder="---">
            <option value=""></option>

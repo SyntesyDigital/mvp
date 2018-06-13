@@ -15,7 +15,7 @@ class CreateTableFields extends Migration
             $table->increments('id');
 
             $table->integer('typology_id')->unsigned();
-            $table->foreign('typology_id')->references('id')->on('typologies');
+            $table->foreign('typology_id')->references('id')->on('typologies')->onDelete('cascade');
 
             $table->string('identifier');
             $table->string('name');
@@ -26,8 +26,6 @@ class CreateTableFields extends Migration
 
             $table->timestamps();
         });
-
-
     }
 
     /**

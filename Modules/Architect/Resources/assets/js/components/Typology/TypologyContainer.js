@@ -52,6 +52,7 @@ class TypologyContainer extends Component {
      this.handleSettingsChanged = this.handleSettingsChanged.bind(this);
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.onSaveError = this.onSaveError.bind(this);
+     this.delete = this.delete.bind(this);
  }
 
  handleInputChange(field) {
@@ -208,85 +209,99 @@ class TypologyContainer extends Component {
 
  }
 
- handleSubmitForm(e) {
+     handleSubmitForm(e) {
 
-     e.preventDefault();
+         e.preventDefault();
 
-     if(this.state.typology) {
-         this.update();
-     } else {
-         this.create();
+         if(this.state.typology) {
+             this.update();
+         } else {
+             this.create();
+         }
      }
- }
 
- getFormData()
- {
-     return {
-         name : this.state.inputs.name,
-         identifier : this.state.inputs.identifier,
-         fields : this.state.fields,
-         icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null
-     };
- }
+     getFormData() {
+         return {
+             name : this.state.inputs.name,
+             identifier : this.state.inputs.identifier,
+             fields : this.state.fields,
+             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null
+         };
+     }
 
- create()
- {
-     var _this = this;
-     axios.post('/architect/typologies', this.getFormData())
-    .then((response) => {
-        if(response.data.success) {
-            _this.onSaveSuccess(response.data);
-        }
-    })
-    .catch((error) => {
-        if (error.response) {
-            _this.onSaveError(error.response.data);
-        } else if (error.message) {
-            toastr.error(error.message);
-        } else {
-            console.log('Error', error.message);
-        }
-        //console.log(error.config);
-    });
- }
+     create() {
+         var _this = this;
+         axios.post('/architect/typologies', this.getFormData())
+        .then((response) => {
+            if(response.data.success) {
+                _this.onSaveSuccess(response.data);
+            }
+        })
+        .catch((error) => {
+            if (error.response) {
+                _this.onSaveError(error.response.data);
+            } else if (error.message) {
+                toastr.error(error.message);
+            } else {
+                console.log('Error', error.message);
+            }
+            //console.log(error.config);
+        });
+     }
 
- update()
- {
-     var _this = this;
+    delete()
+    {
+        var _this = this;   
+                
+        axios.delete('/architect/typologies/' + this.state.typology.id + '/delete')
+            .then((response) => {
+                if(response.data.success) {
+                    _this.onSaveSuccess(response.data);
+                }
+            })
+            .catch((error) => {
+                if (error.response) {
+                    _this.onSaveError(error.response.data);
+                } else if (error.message) {
+                    toastr.error(error.message);
+                } else {
+                    console.log('Error', error.message);
+                }
+            });
+    }
+    
+    update() {
+        var _this = this;
 
-     console.log(this.getFormData());
+        axios.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData())
+             .then((response) => {
+                 if(response.data.success) {
+                     _this.onSaveSuccess(response.data);
+                 }
+             })
+             .catch((error) => {
+                 if (error.response) {
+                     _this.onSaveError(error.response.data);
+                 } else if (error.message) {
+                     toastr.error(error.message);
+                 } else {
+                     console.log('Error', error.message);
+                 }
+                 //console.log(error.config);
+             });
+    }
 
-     axios.put('/architect/typologies/' + this.state.typology.id + '/update', this.getFormData())
-         .then((response) => {
-             if(response.data.success) {
-                 _this.onSaveSuccess(response.data);
-             }
-         })
-         .catch((error) => {
-             if (error.response) {
-                 _this.onSaveError(error.response.data);
-             } else if (error.message) {
-                 toastr.error(error.message);
-             } else {
-                 console.log('Error', error.message);
-             }
-             //console.log(error.config);
-         });
- }
-
-     onSaveSuccess(response)
-     {
+     onSaveSuccess(response) {
          this.setState({
-             'typology' : response.typology
+             typology : response.typology
          })
 
          toastr.success('ok');
      }
 
-    onSaveError(response)
-    {
-        var errors = response.errors ? response.errors : null;
+    onSaveError(response) {
         var _this = this;
+        var errors = response.errors ? response.errors : null;
         var stateErrors = this.state.errors;
 
         if(errors) {
@@ -308,64 +323,61 @@ class TypologyContainer extends Component {
         }
     }
 
-  render() {
+    render() {
 
-      console.log(this.state.fieldsList);
+        return (
+          <div>
 
-
-
-    return (
-      <div>
-
-      <TypologyBar
-        icon={this.state.inputs.icon}
-        name={this.state.inputs.name}
-        onSubmitForm={this.handleSubmitForm}
-      />
-
-      <DragDropContextProvider backend={HTML5Backend}>
-
-        <div className="container rightbar-page">
-
-          <TypologyModal
-            field={this.state.settingsField}
-            id="settings-modal"
-            onModalClose={this.handleModalClose}
-            onSettingsFieldChange={this.handleSettingsChanged}
+          <TypologyBar
+            icon={this.state.inputs.icon}
+            name={this.state.inputs.name}
+            onSubmitForm={this.handleSubmitForm}
           />
 
-            <div className="col-md-9 page-content">
-              <TypologyDropZone
-                errors={this.state.errors}
-                fields={this.state.fields}
-                onFieldAdded={this.handleFieldAdded}
-                onFieldChanged={this.handleFieldChange}
-                moveField={this.moveField}
-                onRemoveField={this.handleRemoveField}
+          <DragDropContextProvider backend={HTML5Backend}>
+
+            <div className="container rightbar-page">
+
+              <TypologyModal
+                field={this.state.settingsField}
+                id="settings-modal"
+                onModalClose={this.handleModalClose}
                 onSettingsFieldChange={this.handleSettingsChanged}
-                onOpenSettings={this.handleOpenSettings}
               />
+
+                <div className="col-md-9 page-content">
+                  <TypologyDropZone
+                    errors={this.state.errors}
+                    fields={this.state.fields}
+                    onFieldAdded={this.handleFieldAdded}
+                    onFieldChanged={this.handleFieldChange}
+                    moveField={this.moveField}
+                    onRemoveField={this.handleRemoveField}
+                    onSettingsFieldChange={this.handleSettingsChanged}
+                    onOpenSettings={this.handleOpenSettings}
+                  />
+                </div>
+
+                <TypologySidebar
+                  fields={this.state.inputs}
+                  errors={this.state.errors}
+                  onFieldChange={this.handleInputChange}
+                  deleteHandler={this.delete}
+                >
+
+                {
+                    this.state.fieldsList && Object.keys(this.state.fieldsList).map((k,i) =>
+                        <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
+                    )
+                }
+
+                </TypologySidebar>
+
             </div>
+          </DragDropContextProvider>
 
-            <TypologySidebar
-              fields={this.state.inputs}
-              errors={this.state.errors}
-              onFieldChange={this.handleInputChange}
-            >
-
-            {
-                this.state.fieldsList && Object.keys(this.state.fieldsList).map((k,i) =>
-                    <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
-                )
-            }
-
-            </TypologySidebar>
-
-        </div>
-      </DragDropContextProvider>
-
-      </div>
-    );
+          </div>
+      );
   }
 
 }

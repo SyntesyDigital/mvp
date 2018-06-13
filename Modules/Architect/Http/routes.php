@@ -9,8 +9,10 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/typologies', 'TypologyController@index')->name('typologies');
     Route::post('/typologies', 'TypologyController@store')->name('typologies.store');
     Route::get('/typologies/create', 'TypologyController@create')->name('typologies.create');
-    Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
     Route::put('/typologies/{typology?}/update', 'TypologyController@update')->name('typologies.update');
+    Route::delete('/typologies/{typology?}/delete', 'TypologyController@delete')->name('typologies.delete');
+    Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
+
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

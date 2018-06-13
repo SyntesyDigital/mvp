@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 370);
+/******/ 	return __webpack_require__(__webpack_require__.s = 371);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -30792,17 +30792,24 @@ if (false) {
 
 /***/ }),
 
-/***/ 370:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(371);
-__webpack_require__(376);
-module.exports = __webpack_require__(378);
-
+module.exports = __webpack_require__(86);
 
 /***/ }),
 
 /***/ 371:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(372);
+__webpack_require__(377);
+module.exports = __webpack_require__(379);
+
+
+/***/ }),
+
+/***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -30812,7 +30819,7 @@ module.exports = __webpack_require__(378);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(372);
+__webpack_require__(373);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -30820,15 +30827,15 @@ __webpack_require__(372);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(375);
+__webpack_require__(376);
 
 /***/ }),
 
-/***/ 372:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(373);
+window._ = __webpack_require__(374);
 window.Popper = __webpack_require__(167).default;
 
 /**
@@ -30840,7 +30847,7 @@ window.Popper = __webpack_require__(167).default;
 try {
   window.$ = window.jQuery = __webpack_require__(168);
 
-  __webpack_require__(374);
+  __webpack_require__(375);
 } catch (e) {}
 
 /**
@@ -30849,7 +30856,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(44);
+window.axios = __webpack_require__(34);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -30886,7 +30893,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 373:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -47996,11 +48003,11 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(43)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(44)(module)))
 
 /***/ }),
 
-/***/ 374:
+/***/ 375:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -51901,7 +51908,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 375:
+/***/ 376:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51974,14 +51981,14 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 376:
+/***/ 377:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 378:
+/***/ 379:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -52299,7 +52306,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -52325,13 +52332,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ 44:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(86);
 
 /***/ }),
 

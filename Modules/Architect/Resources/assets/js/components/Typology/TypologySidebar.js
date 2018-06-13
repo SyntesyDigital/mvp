@@ -15,7 +15,7 @@ class TypologySidebar extends Component {
     super(props);
 
     this.state = {
-      fields : {}
+        fields : {}
     };
 
     console.log("TypologySidebar :: icon : ");
@@ -23,10 +23,10 @@ class TypologySidebar extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleDeleteTypology = this.handleDeleteTypology.bind(this);
 
     this.fontIcons = [];
     for(var key in fontAwesomeIcons){
-
       this.fontIcons.push({
           value : fontAwesomeIcons[key],
           label : fontAwesomeIcons[key]
@@ -35,11 +35,13 @@ class TypologySidebar extends Component {
 
   }
 
+  handleDeleteTypology(event) {
+      this.props.deleteHandler();
+  }
+  
   handleChange(event) {
 
     var field = null;
-
-    console.log(event.target.type);
 
     if(event.target.type == "text" || event.target.type == "select-one"){
       field = {
@@ -59,21 +61,14 @@ class TypologySidebar extends Component {
   }
 
   handleSelectChange(selectedOption) {
-
     var field = {
       name : "icon",
       value : selectedOption
     };
-
     this.props.onFieldChange(field);
  }
 
   render() {
-
-
-    console.log("typologySidebar render! "+this.props.fields.icon);
-    console.log(this.props.fields.icon);
-
     return (
       <div className="sidebar">
         <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
@@ -151,15 +146,13 @@ class TypologySidebar extends Component {
         <h3>Afegeix camps</h3>
 
         <div className="field-list">
-
           {this.props.children}
-
         </div>
 
         <hr/>
 
         <div className="text-right">
-          <a className="btn btn-link text-danger"><i className="fa fa-trash"></i> Esborrar</a>
+          <a className="btn btn-link text-danger" onClick={this.handleDeleteTypology}><i className="fa fa-trash"></i> Esborrar</a>
         </div>
 
       </div>

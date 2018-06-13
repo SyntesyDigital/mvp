@@ -17,8 +17,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
 
         <script>
-          const WEBROOT = '{{route("home")}}';
-          const ASSETS = '{{asset('')}}';
+          const WEBROOT = '{{ route("home") }}';
+          const ASSETS = '{{ asset('') }}';
+          const FIELDS = {!! json_encode(Modules\Architect\Fields\FieldConfig::get(), JSON_PRETTY_PRINT) !!};
+          const CURRENT_USER = {!! json_encode(Auth::user(), JSON_PRETTY_PRINT) !!}
         </script>
 
         <!-- Jquery -->
@@ -27,7 +29,6 @@
         <!-- Toaster -->
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
-
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>
