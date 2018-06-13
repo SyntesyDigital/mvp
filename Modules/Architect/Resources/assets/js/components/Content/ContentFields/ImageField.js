@@ -29,7 +29,7 @@ class ImageField extends Component {
 
   constructor(props){
     super(props);
-
+    
     this.handleOnChange = this.handleOnChange.bind(this);
     this.onImageSelect = this.onImageSelect.bind(this);
     this.cancelImage = this.cancelImage.bind(this);
@@ -39,7 +39,6 @@ class ImageField extends Component {
   handleOnChange(event) {
 
     const language = $(event.target).closest('.form-control').attr('language');
-
 
     var field = {
       identifier : this.props.field.identifier,
@@ -74,6 +73,21 @@ class ImageField extends Component {
     this.props.onFieldChange(field);
 
   }
+  
+  getImageFormat(format)
+  {
+      var _format = null;
+      
+      if(IMAGES_FORMATS) {
+          IMAGES_FORMATS.map(function(f){
+              if(f.name == format) {
+                  _format = f;
+              }
+          });
+      }
+      
+      return _format;
+  }
 
   renderInputs() {
 
@@ -84,9 +98,9 @@ class ImageField extends Component {
       defined = true;
       values = this.props.field.values;
     }
-
-    console.log(defined,values);
-
+    
+    var format = this.props.field.settings.cropsAllowed ? this.getImageFormat(this.props.field.settings.cropsAllowed) : null;
+    
     return (
       <div className="form-group bmd-form-group image-field-container">
          <div className="image-field">
@@ -105,10 +119,8 @@ class ImageField extends Component {
             </div>
            }
 
-           //TODO falta añadir la información de la imagen en settings
-          {/*
-         <p className="field-help"> <b>{this.props.field.settings.name}</b> : Mides {this.props.field.settings.width}x{this.props.field.settings.height} ( Ratio {this.props.field.settings.ratio} )</p>
-         */}
+         <p className="field-help"> <b>{format.name}</b> : Mides {format.width}x{format.height} ( Ratio {format.ratio} )</p>
+    
       </div>
     );
 
