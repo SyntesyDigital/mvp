@@ -23,13 +23,23 @@ class TypologyModal extends Component {
   handleInputSettingsChange(event) {
 
   }
+  
+  getCropsformats() {
+      var formats = [];
+      IMAGES_FORMATS.map(function(format, k){
+          formats.push({
+              name : format.name,
+              value : format.name
+          });
+      });
+      
+      return formats;
+  }
 
   render() {
     return (
       <div className="custom-modal" id={this.props.id}>
         <div className="modal-background"></div>
-
-
           <div className="modal-container">
             {this.props.field != null &&
               <div className="modal-header">
@@ -130,10 +140,7 @@ class TypologyModal extends Component {
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Mides permeses"
-                      options={[
-                        {name:"Thumbnail",value:1},
-                        {name:"Banner",value:2}
-                      ]}
+                      options={this.getCropsformats()}
                     />
 
                     <SelectorSettingsField

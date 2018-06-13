@@ -4,14 +4,11 @@ import Rodal from 'rodal';
 
 import 'rodal/lib/rodal.css';
 
-
 class ModalSettings extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { visible: false };
-        
-        //this.props.width = 600;
     }
 
     show() {
@@ -26,7 +23,6 @@ class ModalSettings extends React.Component {
         return (
             <div>
                 <button onClick={this.show.bind(this)}>show</button>
-
                 <Rodal visible={this.state.visible} onClose={this.hide.bind(this)} width="600">
                     <div>Content</div>
                 </Rodal>

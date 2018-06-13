@@ -119,7 +119,7 @@ class TypologyContainer extends Component {
      const {
          fields
      } = this.state;
-
+     
      for (var i = 0; i < fields.length; i++) {
          if (field.id == fields[i].id) {
             fields[i]["name"] = field.name;
@@ -161,15 +161,11 @@ class TypologyContainer extends Component {
 
  handleSettingsChanged(field) {
 
-     //console.log("TypologyContainer :: handleSettingsChanged");
-     //console.log(field);
-
      const settingsField = this.state.settingsField;
 
      settingsField[field.source][field.name] = field.value;
 
-     console.log("TypologyContainer :: handleSettingsChange");
-     console.log(settingsField);
+     console.log("handleSettingsChanged =>", settingsField);
 
      this.setState({
          settingsField: settingsField
