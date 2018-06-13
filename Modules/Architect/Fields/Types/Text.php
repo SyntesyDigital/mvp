@@ -19,7 +19,9 @@ class Text extends Field implements FieldInterface
         'minCharacters'
     ];
 
-    public $settings = [];
+    public $settings = [
+      'entryTitle'
+    ];
 
 }
 ?>

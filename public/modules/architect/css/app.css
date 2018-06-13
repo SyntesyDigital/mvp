@@ -14849,6 +14849,10 @@ nav.main-nav ul li a:hover {
   border-right: 1px solid #ccc;
 }
 
+.rightbar-page .page-content .typology-field .field-type.is-title {
+  background-color: #e0e0e0;
+}
+
 .rightbar-page .page-content .typology-field .field-type i.fa {
   position: absolute;
   top: 12px;

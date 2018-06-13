@@ -62,6 +62,14 @@ class TypologyModal extends Component {
 
                     <BooleanSettingsField
                       field={this.props.field}
+                      name="entryTitle"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Títol principal"
+                    />
+
+                    <BooleanSettingsField
+                      field={this.props.field}
                       name="required"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}

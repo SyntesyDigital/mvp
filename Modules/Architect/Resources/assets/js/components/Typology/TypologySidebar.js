@@ -36,9 +36,31 @@ class TypologySidebar extends Component {
   }
 
   handleDeleteTypology(event) {
-      this.props.deleteHandler();
+
+    var self = this;
+
+    bootbox.confirm({
+        message: "Estas segur d'esborrar permanentment aquesta tipologia ?",
+        buttons: {
+            confirm: {
+                label: 'Sí',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if(result){
+            self.props.deleteHandler();
+          }
+        }
+    });
+
+
   }
-  
+
   handleChange(event) {
 
     var field = null;
