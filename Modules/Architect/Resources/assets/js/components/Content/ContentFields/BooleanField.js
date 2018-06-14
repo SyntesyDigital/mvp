@@ -17,24 +17,18 @@ class BooleanField extends Component {
       identifier : this.props.field.identifier,
       values : event.target.checked
     };
-
+        
     this.props.onFieldChange(field);
   }
 
   renderInputs() {
 
-    const value = this.props.field.values !== undefined && this.props.field.values != null ?
-      this.props.field.values :
-      false;
-      
-      var error = null;
-      if(this.props.field.errors) {
-          error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
-      }
+    const value = (this.props.field.values !== undefined && this.props.field.values != null)
+        ? this.props.field.values 
+        : false;
 
     return (
-
-      <div className={'togglebutton ' + (error !== null ? 'has-error' : null)}>
+      <div className={'togglebutton ' + (this.props.field.errors !== null ? 'has-error' : null)}>
         <label>
             {this.props.field.name}
             <input type="checkbox"
@@ -43,7 +37,6 @@ class BooleanField extends Component {
             />
         </label>
       </div>
-
     );
   }
 
@@ -54,7 +47,7 @@ class BooleanField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.BOOLEAN.icon}></i> {CustomFieldTypes.BOOLEAN.name}
+            <i className={"fa " + FIELDS.BOOLEAN.icon}></i> {FIELDS.BOOLEAN.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

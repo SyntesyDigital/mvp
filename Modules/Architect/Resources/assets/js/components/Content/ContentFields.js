@@ -35,7 +35,7 @@ class ContentFields extends Component {
       var item = this.props.fields[i];
       item.errors = this.state.errors[item.identifier] ? this.state.errors[item.identifier] : null;
       
-      if(item.type == "text"){
+      if(item.type == FIELDS.TEXT.type){
         fields.push(
           <TextField
             field={item}
@@ -45,7 +45,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "richtext"){
+      else if(item.type == FIELDS.RICHTEXT.type){
         fields.push(
           <RichTextField
               field={item}
@@ -55,7 +55,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "image"){
+      else if(item.type == FIELDS.IMAGE.type){
         fields.push(
           <ImageField
               field={item}
@@ -66,7 +66,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "date"){
+      else if(item.type == FIELDS.DATE.type){
         fields.push(
           <DateField
               field={item}
@@ -77,7 +77,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "images"){
+      else if(item.type == FIELDS.IMAGES.type){
         fields.push(
           <ImagesField
               field={item}
@@ -98,7 +98,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "contents"){
+      else if(item.type == FIELDS.CONTENTS.type){
         fields.push(
           <ContentsField
               field={item}
@@ -109,7 +109,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == FIELDS.BOOLEAN.value){
+      else if(item.type == FIELDS.BOOLEAN.type){
         fields.push(
           <BooleanField
               field={item}
@@ -120,7 +120,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == FIELDS.LINK.value){
+      else if(item.type == FIELDS.LINK.type){
         fields.push(
           <LinkField
               field={item}
@@ -131,7 +131,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == FIELDS.VIDEO.value){
+      else if(item.type == FIELDS.VIDEO.type){
         fields.push(
           <VideoField
               field={item}
@@ -141,7 +141,7 @@ class ContentFields extends Component {
           />
         );
       }
-      else if(item.type == "localization"){
+      else if(item.type == FIELDS.LOCALIZATION.type){
         fields.push(
           <LocalizationField
             field={item}

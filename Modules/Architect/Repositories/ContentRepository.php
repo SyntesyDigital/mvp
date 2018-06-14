@@ -62,7 +62,7 @@ class ContentRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 return '
                 <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="#" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
                 ';
             })
             ->make(true);

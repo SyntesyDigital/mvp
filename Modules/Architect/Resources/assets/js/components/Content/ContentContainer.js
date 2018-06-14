@@ -22,10 +22,10 @@ class ContentContainer extends Component {
 
      // Set translations
      var translations = {};
-     props.languages.map(function(v,k){
+     LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-
+     
      // Load content fields
      var fields = props.typology.fields;
      var content = props.content;
@@ -73,11 +73,7 @@ class ContentContainer extends Component {
                  name: "Tag 3"
              }
          ],
-         translations: {
-             ca: true,
-             es: true,
-             en: true
-         },
+         translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
@@ -140,13 +136,12 @@ class ContentContainer extends Component {
 
     for(var i=0;i<typology.fields.length;i++) {
       var item = typology.fields[i];
-      if(item.identifier == identifier ){
-
-        if(item.type == CustomFieldTypes.IMAGES.value){
+      if(item.identifier == identifier){
+        if(item.type == FIELDS.IMAGES.type){
           typology.fields[i].values.push(image);
           break;
         }
-        else if(item.type == CustomFieldTypes.IMAGE.value){
+        else if(item.type == FIELDS.IMAGE.type){
           typology.fields[i].values = image;
           break;
         }

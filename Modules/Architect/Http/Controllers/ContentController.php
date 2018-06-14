@@ -9,13 +9,14 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\ContentRepository;
 
-// Requests
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Jobs\Content\CreateContent;
 
-// Jobs
 use Modules\Architect\Http\Requests\Content\UpdateContentRequest;
 use Modules\Architect\Jobs\Content\UpdateContent;
+
+use Modules\Architect\Http\Requests\Content\DeleteContentRequest;
+use Modules\Architect\Jobs\Content\DeleteContent;
 
 // Models
 use Modules\Architect\Entities\Typology;
@@ -94,6 +95,15 @@ class ContentController extends Controller
         return $content ? response()->json([
             'success' => true,
             'content' => $content
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function delete(Content $content, DeleteContentRequest $request)
+    {
+        return dispatch_now(DeleteContent::fromRequest($content, $request)) ? response()->json([
+            'success' => true
         ]) : response()->json([
             'success' => false
         ], 500);

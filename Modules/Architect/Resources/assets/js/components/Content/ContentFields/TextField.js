@@ -12,12 +12,21 @@ class TextField extends Component
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+  componentDidMount(){
+    if(this.props.field.values === undefined || this.props.field.values == null) {
+        this.props.field.values = {};
+        for(var key in this.props.translations){
+            this.props.field.values[key] = '';
+        }
+    }
+  }
+  
   handleOnChange(event)
   {
     const language = $(event.target).closest('.form-control').attr('language');
     const values = this.props.field.values ? this.props.field.values : {};
     values[language] = event.target.value;
-
+    
     var field = {
       identifier : this.props.field.identifier,
       values : values
@@ -34,10 +43,11 @@ class TextField extends Component
             var value = '';          
             var error = null;
 
-            
             if(this.props.field.errors) {
                 error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
             }
+            
+            console.log('TextField error => ', this.props.field.errors);
 
             if(this.props.field.values) {
                 value = this.props.field.values[key] ? this.props.field.values[key] : '';

@@ -46,6 +46,17 @@ class ContentSidebar extends Component {
     this.props.onTranslationChange(field);
   }
 
+  renderLanguagesCheckbox()
+  {
+    return (LANGUAGES.map((language, k) => (
+        <div className="togglebutton" key={k}>
+            <label>
+              {language.name} 
+              <input type="checkbox" name={language.iso} checked={this.props.translations[language.iso]} onChange={this.handleTranslationChange} />
+            </label>
+        </div>
+    )));
+  }
 
   render() {      
   
@@ -107,26 +118,7 @@ class ContentSidebar extends Component {
 
         <div className="form-group bmd-form-group sidebar-item">
            <label className="bmd-label-floating">Traduccions</label>
-
-          <div className="togglebutton">
-            <label>
-                Català
-                <input type="checkbox" name="ca" checked={this.props.translations.ca} onChange={this.handleTranslationChange} />
-            </label>
-          </div>
-          <div className="togglebutton">
-            <label>
-                Español
-                <input type="checkbox" name="es" checked={this.props.translations.es} onChange={this.handleTranslationChange} />
-            </label>
-          </div>
-          <div className="togglebutton">
-            <label>
-                English
-                <input type="checkbox" name="en" checked={this.props.translations.en} onChange={this.handleTranslationChange} />
-            </label>
-          </div>
-
+           {this.renderLanguagesCheckbox()}
         </div>
 
         <hr/>

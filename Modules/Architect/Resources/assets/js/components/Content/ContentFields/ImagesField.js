@@ -18,8 +18,7 @@ class ImagesField extends Component {
   }
 
   componentDidMount(){
-
-    if(this.props.field.values === undefined || this.props.field.values == null){
+    if(this.props.field.values === undefined || this.props.field.values == null || Object.keys(this.props.field.values).length == 0){
       //setup values if not yet defined
       var newField = {
           identifier: this.props.field.identifier,
@@ -27,6 +26,9 @@ class ImagesField extends Component {
       };
 
       this.props.onFieldChange(newField);
+      
+      console.log('componentDidMount =>', this.props.field.values);
+      
     }
   }
 
@@ -95,10 +97,26 @@ class ImagesField extends Component {
     this.props.onFieldChange(field);
 
 	}
+    
+    
+    getImageFormat(format)
+    {
+        var _format = null;
+        
+        if(IMAGES_FORMATS) {
+            IMAGES_FORMATS.map(function(f){
+                if(f.name == format) {
+                    _format = f;
+                }
+            });
+        }
+        
+        return _format;
+    }
 
   renderInputs() {
-
-    if(Object.keys(this.props.field.values).length === 0 || this.props.field.values === undefined || this.props.field.values == null){
+            
+    if(this.props.field.values === undefined || this.props.field.values == null || Object.keys(this.props.field.values).length === 0){
       return;
     }
 
@@ -110,7 +128,7 @@ class ImagesField extends Component {
   						key={item.id}
   						index={i}
   						id={item.id}
-              url={item.url}
+                        url={item.url}
   						title={item.title}
   						moveField={this.moveField}
   						onRemoveField={this.handleRemoveField}
