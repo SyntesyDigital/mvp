@@ -27,19 +27,18 @@ class ContentRepository extends BaseRepository
             )
             ->groupBy('contents.id');
 
-        //$results = $this->model->with('fields');
-
         if($where) {
             $results->where($where);
         }
 
-
         $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
         $titleFields = [];
-        foreach($fields as $k => $v) {
-            $titleFields[] = $v->identifier;
-        }
 
+        if($fields) {
+            foreach($fields as $k => $v) {
+                $titleFields[] = $v->identifier;
+            }
+        }
 
         return Datatables::of($results)
             ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
