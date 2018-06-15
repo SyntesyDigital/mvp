@@ -49,4 +49,9 @@ class ContentField extends Model
     {
         return $this->belongsTo('\Modules\Architect\Entities\Content');
     }
+
+    public function language()
+    {
+        return $this->belongsTo('\Modules\Architect\Entities\Language');
+    }
 }

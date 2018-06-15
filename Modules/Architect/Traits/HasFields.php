@@ -2,32 +2,20 @@
 
 namespace Modules\Architect\Traits;
 
-use Modules\Architect\Entities\Media;
+
 
 trait HasFields
 {
-
-    public function loadFields()
+    public function getFieldChilds($field)
     {
-        parent::load('fields');
-
-        // FIXME : Optimize ;)
-        foreach($this->typology->fields as $field) {
-            foreach($this->fields as $k => $f) {
-
-                if($field->identifier == $f->name) {
-                    switch($field->type) {
-                        case "image":
-                            $this->fields[$k]->value = Media::find($f->value);
-                        break;
-
-                        case "images":
-                            $this->fields[$k]->value = Media::whereIn('id', json_decode($f->value))->get();
-                        break;
-                    }
-                }
+        $arr = [];
+        foreach($this->fields as $f) {
+            if($f->parent_id == $field->id) {
+                $arr[] = $f;
             }
         }
+
+        return sizeof($arr) ? collect($arr) : null;
     }
 
 

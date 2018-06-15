@@ -8,58 +8,35 @@ class TextField extends Component
   constructor(props)
   {
     super(props);
-    
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  componentDidMount(){
-    if(this.props.field.values === undefined || this.props.field.values == null) {
-        this.props.field.values = {};
-        for(var key in this.props.translations){
-            this.props.field.values[key] = '';
-        }
-    }
-  }
-  
+
   handleOnChange(event)
   {
     const language = $(event.target).closest('.form-control').attr('language');
-    const values = this.props.field.values ? this.props.field.values : {};
+    const values = this.props.field.value ? this.props.field.value : {};
     values[language] = event.target.value;
-    
-    var field = {
+
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
-      values : values
-    };
-
-    this.props.onFieldChange(field);
+      value : values
+    });
   }
-
+  
   renderInputs()
   {
     var inputs = [];
-    for(var key in this.props.translations){
-        if(this.props.translations[key]){
-            var value = '';          
-            var error = null;
-
-            if(this.props.field.errors) {
-                error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
-            }
-            
-            console.log('TextField error => ', this.props.field.errors);
-
-            if(this.props.field.values) {
-                value = this.props.field.values[key] ? this.props.field.values[key] : '';
-            }
-            
-            inputs.push(
-                <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
-                    <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-                    <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
-                </div>
-            );
-        }
+    for(var key in this.props.translations){        
+        var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';          
+        var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;          
+        
+        inputs.push(
+            <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
+                <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
+                <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
+            </div>
+        );
     }
     
     return inputs;
@@ -72,7 +49,7 @@ class TextField extends Component
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa " + CustomFieldTypes.TEXT.icon}></i> {CustomFieldTypes.TEXT.name}
+            <i className={"fa " + FIELDS.TEXT.icon}></i> {FIELDS.TEXT.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -80,13 +57,9 @@ class TextField extends Component
         </button>
 
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
-
           <div className="field-form">
-
             {this.renderInputs()}
-
           </div>
-
         </div>
 
       </div>

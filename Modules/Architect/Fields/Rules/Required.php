@@ -13,7 +13,7 @@ class Required
 
         if($param) {
             foreach($values as $k => $value) {
-                if(!$value) {
+                if(!trim($value)) {
                     $errors[$k] = $this->message();
                 }
             }

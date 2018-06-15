@@ -12,7 +12,6 @@ class Media extends Model
         'metadata' => 'array'
     ];
 
-    protected $attributes = ['urls'];
     protected $appends = ['urls'];
 
     /**

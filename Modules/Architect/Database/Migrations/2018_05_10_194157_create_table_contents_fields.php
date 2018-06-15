@@ -24,6 +24,11 @@ class CreateTableContentsFields extends Migration
 
             $table->string('name');
             $table->text('value')->nullable();
+            $table->text('relation')->nullable();
+
+            $table->integer('parent_id')->unsigned()->nullable();
+            //$table->foreign('parent_id')->references('id')->on('contents_fields');
+
             $table->timestamps();
         });
 

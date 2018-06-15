@@ -110,7 +110,7 @@ class ImagesDragField extends Component {
 
       <div className="typology-field" style={{ ...style, opacity }}>
         <div className="field-type">
-          <i className={"fa "+CustomFieldTypes.IMAGE.icon}></i> &nbsp; {CustomFieldTypes.IMAGE.name}
+          <i className={"fa "+FIELDS.IMAGE.icon}></i> &nbsp; {FIELDS.IMAGE.name}
         </div>
 
         <div className="field-inputs">

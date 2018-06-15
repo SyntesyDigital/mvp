@@ -25,35 +25,7 @@ class ContentContainer extends Component {
      LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-     
-     // Load content fields
-     var fields = props.typology.fields;
-     var content = props.content;
-     var languages = props.languages;
-     if(props.content) {
-         fields.map(function(field, k){
-
-             // Settings values from content
-             var values = {};
-             content.fields.map(function(f2, k2){
-                 if(f2.name == field.identifier) {
-                     if(f2.language_id) {
-                         languages.map(function(l){
-                             if(f2.language_id == l.id) {
-                                 values[l.iso] = f2.value;
-                             }
-                         });
-                     } else {
-                         values = f2.value;
-                     }
-                 }
-             });
-
-            fields[k].values = values;
-         });
-     }
-     
-
+         
      // Build state...
      this.state = {
          status: 0,
@@ -78,8 +50,8 @@ class ContentContainer extends Component {
          authors: props.authors,
          content: props.content,
          typology: props.typology,
-         languages: props.languages,
-         fields: fields,
+         languages: LANGUAGES,
+         fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
 
          //modal states
@@ -90,7 +62,8 @@ class ContentContainer extends Component {
          contentSourceField: null
      };
 
-
+     console.log('LOADED FIELDS => ', this.state.fields);
+     
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
      this.handleUnpublish = this.handleUnpublish.bind(this);
@@ -131,25 +104,26 @@ class ContentContainer extends Component {
   }
 
   updateImage(identifier,image){
+      
+      var fields = this.state.fields;
 
-    const {typology} = this.state;
-
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-      if(item.identifier == identifier){
-        if(item.type == FIELDS.IMAGES.type){
-          typology.fields[i].values.push(image);
-          break;
-        }
-        else if(item.type == FIELDS.IMAGE.type){
-          typology.fields[i].values = image;
-          break;
-        }
+    for(var i=0;i<fields.length;i++) {
+      var field = fields[i];
+      if(field.identifier == identifier){
+          switch (field.type) {
+              case FIELDS.IMAGES.type:
+                  fields[i].value.push(image);
+                  break;
+                  
+              case FIELDS.IMAGE.type:
+                  fields[i].value = image;
+                  break;
+          }
       }
     }
 
     this.setState({
-      typology : typology,
+      fields : fields,
       displayMediaModal : false,
       sourceField : null
     });
@@ -186,15 +160,11 @@ class ContentContainer extends Component {
       var item = typology.fields[i];
 
       if(item.identifier == identifier){
-
         if(typology.fields[i].type == "link"){
-            typology.fields[i].values.linkValues = content;
+            typology.fields[i].value.linkValues = content;
+        } else {
+            typology.fields[i].value.push(content);
         }
-        else {
-            typology.fields[i].values.push(content);
-        }
-
-
         break;
       }
     }
@@ -211,20 +181,13 @@ class ContentContainer extends Component {
 
 
   handleSubmitForm(e) {
-
     e.preventDefault();
-
-    // console.log("submit form!");
-    // console.log(this.state);
-
+    
     if(this.state.content) {
         this.update();
     } else {
         this.create();
     }
-
-    //TODO hacer el ajax para guardar la información de la typologia
-
   }
 
   getFormData()
@@ -409,22 +372,14 @@ class ContentContainer extends Component {
     });
   }
 
-  handleCustomFieldChange(field){
+  handleCustomFieldChange(field){      
 
-    const {typology} = this.state;
-
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-      if(item.identifier == field.identifier ){
-        typology.fields[i].values = field.values;
-        break;
-      }
-    }
-
-    this.setState({
-      typology : typology
-    });
-
+      var fields = this.state.fields;
+      fields[field.identifier].value = field.value;
+      
+      this.setState({
+        fields : fields
+      });
   }
 
 

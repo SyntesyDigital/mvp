@@ -24,6 +24,8 @@ use Modules\Architect\Entities\Content;
 use App\Models\User;
 use App\Models\Role;
 
+use Modules\Architect\Fields\FieldsReactAdapter;
+
 class ContentController extends Controller
 {
 
@@ -58,12 +60,12 @@ class ContentController extends Controller
 
     public function show(Content $content, Request $request)
     {
-        $content->loadFields();
         $content->typology->load('fields');
 
         return view('architect::contents.show', [
             'content' => $content,
             'typology' => $content->typology,
+            'fields' => (new FieldsReactAdapter($content))->get(),
             'users' => User::all(),
         ]);
     }
@@ -72,6 +74,7 @@ class ContentController extends Controller
     {
         return view('architect::contents.show', [
             'typology' => $typology->load('fields'),
+            'fields' => (new FieldsReactAdapter($typology))->get(),
             'users' => User::all()
         ]);
     }

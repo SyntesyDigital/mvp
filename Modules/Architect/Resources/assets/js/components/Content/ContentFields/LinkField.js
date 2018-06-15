@@ -6,34 +6,6 @@ import CustomFieldTypes from './../../common/CustomFieldTypes';
 const TYPE_INTERNAL = "internal";
 const TYPE_EXTERNAL = "external";
 
-/*
-
-values :  {
-  ca : "Hola",
-  es : "Hola",
-  en : "Hola",
-
-
-  linkType : "internal",
-  linkValues : {
-    ca : "http://",
-    es : "http://",
-    en : "http://",
-  }
-
-
-  linkType : "external",
-  linkValues : {
-    id : "1",
-    label : "Event",
-    icon : "fa-calendar",
-    name : "Page title"
-  }
-
-}
-
-*/
-
 class LinkField extends Component
 {
   constructor(props)
@@ -62,12 +34,12 @@ class LinkField extends Component
   handleOnChange(event)
   {
     const language = $(event.target).closest('.form-control').attr('language');
-    const values = this.props.field.values ? this.props.field.values : {};
+    const values = this.props.field.value ? this.props.field.value : {};
     values[language] = event.target.value;
 
     var field = {
       identifier : this.props.field.identifier,
-      values : values
+      value : values
     };
 
     this.props.onFieldChange(field);
@@ -81,7 +53,7 @@ class LinkField extends Component
   updateByType(type)
   {
 
-    const values = this.props.field.values ? this.props.field.values : {};
+    const values = this.props.field.value ? this.props.field.value : {};
 
     values.linkType = type;
 
@@ -101,8 +73,6 @@ class LinkField extends Component
       identifier : this.props.field.identifier,
       values : values
     };
-
-    console.log(field);
 
     this.props.onFieldChange(field);
   }
@@ -151,7 +121,7 @@ class LinkField extends Component
     for(var key in this.props.translations){
       if(this.props.translations[key]){
           var value = '';
-          console.log(this.props.field);
+
 
           if(this.props.field.values) {
               value = this.props.field.values[key] ? this.props.field.values[key] : '';
@@ -220,7 +190,7 @@ class LinkField extends Component
     for(var key in this.props.translations){
       if(this.props.translations[key]){
           var value = '';
-          console.log(this.props.field);
+
 
           if(linkValues !== undefined && linkValues != null) {
               value = linkValues[key] ? linkValues[key] : '';
@@ -303,9 +273,7 @@ class LinkField extends Component
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
           <div className="field-form">
-
             {this.renderTitle()}
-
             {this.renderRadio()}
 
             {linkType == TYPE_INTERNAL &&

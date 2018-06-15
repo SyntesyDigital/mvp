@@ -3,28 +3,6 @@ import { render } from 'react-dom';
 
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 
-/*
-
-Values format :
-
-{
-  id : 3,
-  type : CustomFieldTypes.IMAGE.value,
-  name : "Imatge",
-  identifier : "image_1",
-  settings : {
-    type : "thumb",
-    name : "Thumbnail",
-    width : 500,
-    height : 500,
-    ratio : "1:1"
-  },
-  values : {
-    url : ASSETS+"modules/architect/images/default.jpg"
-  }
-}
-
-*/
 class ImageField extends Component {
 
   constructor(props){
@@ -39,68 +17,54 @@ class ImageField extends Component {
   handleOnChange(event) {
 
     const language = $(event.target).closest('.form-control').attr('language');
-
-    var field = {
+    
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       language : language,
-      values : event.target.value
-    };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
-
-    this.props.onFieldChange(field);
+      value : event.target.value
+    });
   }
 
   onImageSelect(event) {
     event.preventDefault();
-    //console.log("\n\nImageField identifier : ");
-    //console.log(this.props.field.identifier);
-
-    this.props.onImageSelect(this.props.field.identifier);
+    this.props.onImageSelect(this.props.field);
   }
 
   cancelImage(event) {
     event.preventDefault();
-
-    var field = {
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
-      values : {
-        url : ""
-      }
-    };
-
-    this.props.onFieldChange(field);
-
+      value : null
+    });
   }
   
-  getImageFormat(format)
+  getImageFormat(value)
   {
-      var _format = null;
+      var format = null;
       
       if(IMAGES_FORMATS) {
           IMAGES_FORMATS.map(function(f){
-              if(f.name == format) {
-                  _format = f;
+              if(f.name == value) {
+                  format = f;
               }
           });
       }
       
-      return _format;
+      return format;
   }
   
   renderInputs() {
-
-    var defined = false;
-    var values = {};
-
-    if(this.props.field.values !== undefined){
-      defined = true;
-      values = this.props.field.values;
-    }
+            
+    var values = this.props.field.value ? this.props.field.value : {};
+    var defined = this.props.field.value ? true : false;    
     
-    var format = this.props.field.settings.cropsAllowed ? this.getImageFormat(this.props.field.settings.cropsAllowed) : null;
-    var url = values.urls !== undefined && values.urls[format.name] !== undefined ? values.urls[format.name] : null;
+    var format = this.props.field.settings.cropsAllowed 
+        ? this.getImageFormat(this.props.field.settings.cropsAllowed) 
+        : null;
+    
+    var url = (values.urls !== undefined && format.name && values.urls[format.name] !== undefined)
+        ? values.urls[format.name] 
+        : null;
     
     return (
       <div className="form-group bmd-form-group image-field-container">
@@ -123,8 +87,9 @@ class ImageField extends Component {
             </div>
            }
 
-         <p className="field-help"> <b>{format.name}</b> : Mides {format.width}x{format.height} ( Ratio {format.ratio} )</p>
-    
+           {format &&
+               <p className="field-help"> <b>{format.name}</b> : Mides {format.width}x{format.height} ( Ratio {format.ratio} )</p>
+            }
       </div>
     );
 

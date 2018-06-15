@@ -45,7 +45,7 @@ class CreateContent
         $languages = Language::all();
 
         foreach($this->attributes["fields"] as $field) {
-            $values = isset($field["values"]) ? $field["values"] : null;
+            $values = isset($field["value"]) ? $field["value"] : null;
             $identifier = isset($field["identifier"]) ? $field["identifier"] : null;
             $type = isset($field["type"]) ? $field["type"] : null;
 

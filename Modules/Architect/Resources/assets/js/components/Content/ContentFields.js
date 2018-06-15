@@ -25,133 +25,138 @@ class ContentFields extends Component {
         fields : [],
         errors : this.props.errors
     };
-
   }
 
   renderFields() {
     var fields = [];
-
-    for(var i=0;i<this.props.fields.length;i++){
-      var item = this.props.fields[i];
-      item.errors = this.state.errors[item.identifier] ? this.state.errors[item.identifier] : null;
-      
-      if(item.type == FIELDS.TEXT.type){
-        fields.push(
-          <TextField
-            field={item}
-            translations={this.props.translations}
-            key={i}
-            onFieldChange={this.props.onFieldChange}
-          />
-        );
-      }
-      else if(item.type == FIELDS.RICHTEXT.type){
-        fields.push(
-          <RichTextField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-          />
-        );
-      }
-      else if(item.type == FIELDS.IMAGE.type){
-        fields.push(
-          <ImageField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onImageSelect={this.props.onImageSelect}
-          />
-        );
-      }
-      else if(item.type == FIELDS.DATE.type){
-        fields.push(
-          <DateField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onImageSelect={this.props.onImageSelect}
-          />
-        );
-      }
-      else if(item.type == FIELDS.IMAGES.type){
-        fields.push(
-          <ImagesField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onImageSelect={this.props.onImageSelect}
-          />
-        );
-      }
-      else if(item.type == "contentlist"){
-        fields.push(
-          <ListField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-          />
-        );
-      }
-      else if(item.type == FIELDS.CONTENTS.type){
-        fields.push(
-          <ContentsField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onContentSelect={this.props.onContentSelect}
-          />
-        );
-      }
-      else if(item.type == FIELDS.BOOLEAN.type){
-        fields.push(
-          <BooleanField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onContentSelect={this.props.onContentSelect}
-          />
-        );
-      }
-      else if(item.type == FIELDS.LINK.type){
-        fields.push(
-          <LinkField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-              onContentSelect={this.props.onContentSelect}
-          />
-        );
-      }
-      else if(item.type == FIELDS.VIDEO.type){
-        fields.push(
-          <VideoField
-              field={item}
-              translations={this.props.translations}
-              key={i}
-              onFieldChange={this.props.onFieldChange}
-          />
-        );
-      }
-      else if(item.type == FIELDS.LOCALIZATION.type){
-        fields.push(
-          <LocalizationField
-            field={item}
-            translations={this.props.translations}
-            key={i}
-            onFieldChange={this.props.onFieldChange}
-          />
-        );
-      }
-    }
+    var _this = this;
+    
+    Object.keys(_this.props.fields).map(function(k){
+        switch(_this.props.fields[k].type) {
+            case FIELDS.TEXT.type:
+                fields.push(
+                  <TextField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                  />
+                );
+            break;
+            
+            case FIELDS.RICHTEXT.type:
+                fields.push(
+                <RichTextField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            case FIELDS.IMAGE.type:
+                fields.push(
+                <ImageField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onImageSelect={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            case FIELDS.DATE.type:
+                fields.push(
+                <DateField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            case FIELDS.IMAGES.type:
+                fields.push(
+                <ImagesField    
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onImageSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+            
+            case FIELDS.CONTENTS.type:
+                fields.push(
+                <ContentsField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onContentSelect={_this.props.onContentSelect}
+                />
+                );
+            break;
+            
+            case FIELDS.BOOLEAN.type:
+                fields.push(
+                <BooleanField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            
+            case FIELDS.LINK.type:
+                fields.push(
+                <LinkField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            case FIELDS.VIDEO.type:
+                fields.push(
+                <VideoField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+            
+            case FIELDS.LOCALIZATION.type:
+                fields.push(
+                <LocalizationField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+        }
+    });
 
     return fields;
   }
