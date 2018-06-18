@@ -80,11 +80,11 @@
     architect.contents.init({
         'table' : $('#table-contents'),
         'urls': {
-            'index' : '{{ route('medias.index') }}',
-            'store' : '{{ route('medias.store') }}',
-            'show' : '{{ route('medias.show') }}',
-            'delete' : '{{ route('medias.delete') }}',
-            'update' : '{{ route('medias.update') }}'
+            'index' : '{{ route('contents.data') }}',
+            'store' : '{{ route('contents.store') }}',
+            'show' : '{{ route('contents.show') }}',
+            'delete' : '{{ route('contents.delete') }}',
+            'update' : '{{ route('contents.update') }}'
         }
     })
 </script>

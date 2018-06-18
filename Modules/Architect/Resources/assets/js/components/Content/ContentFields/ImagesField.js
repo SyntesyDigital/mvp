@@ -13,42 +13,41 @@ class ImagesField extends Component {
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.moveField = this.moveField.bind(this);
-		this.handleRemoveField = this.handleRemoveField.bind(this);
+    this.handleRemoveField = this.handleRemoveField.bind(this);
     this.onImageSelect = this.onImageSelect.bind(this);
   }
 
   componentDidMount(){
+      console.log('IMAGES =>', this.props.field);
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
-      //setup values if not yet defined
+    if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length == 0){
+      //setup value if not yet defined
       var newField = {
           identifier: this.props.field.identifier,
-          values: []
+          value: []
       };
 
       this.props.onFieldChange(newField);
+
+      console.log('componentDidMount =>', this.props.field);
+
     }
   }
 
   moveField(dragIndex, hoverIndex) {
 
     const field = this.props.field;
-		const dragField = field.values[dragIndex]
+    const dragField = field.value[dragIndex]
 
     var result = update(field,{
-      values : {
+      value : {
         $splice: [[dragIndex, 1], [hoverIndex, 0, dragField]],
       }
     });
 
-
-    console.log("\n\nResult values : ");
-    console.log(field.values);
-    console.log(result);
-
     var newField = {
       identifier : this.props.field.identifier,
-      values : result.values
+      value : result.value
     };
 
     this.props.onFieldChange(newField);
@@ -56,63 +55,64 @@ class ImagesField extends Component {
 	}
 
   handleOnChange(event) {
-
-    var field = {
-      identifier : this.props.field.identifier,
-      values : event.target.value
-    };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
-
-    this.props.onFieldChange(field);
+      this.props.field.value = event.target.value;
+      this.props.onFieldChange(this.props.field);
   }
 
   onImageSelect(event) {
     event.preventDefault();
-    //console.log("\n\nImagesField identifier : ");
-    //console.log(this.props.field.identifier);
-
-    this.props.onImageSelect(this.props.field.identifier);
+    this.props.onImageSelect(this.props.field);
   }
 
   handleRemoveField(fieldId) {
 
-    const fields = this.props.field.values;
+        const fields = this.props.field.value;
 
-		for(var i=0;i<fields.length;i++){
-			if(fieldId == fields[i].id ){
-				fields.splice(i,1);
-				break;
-			}
-		}
+        for(var i=0;i<fields.length;i++){
+        	if(fieldId == fields[i].id ){
+        		fields.splice(i,1);
+        		break;
+        	}
+        }
 
-    var field = {
-      identifier : this.props.field.identifier,
-      values : fields
-    };
+        this.props.onFieldChange({
+            identifier : this.props.field.identifier,
+            value : fields
+        });
 
-    this.props.onFieldChange(field);
+    }
 
-	}
+    getImageFormat(format)
+    {
+        var _format = null;
+
+        if(IMAGES_FORMATS) {
+            IMAGES_FORMATS.map(function(f){
+                if(f.name == format) {
+                    _format = f;
+                }
+            });
+        }
+
+        return _format;
+    }
 
   renderInputs() {
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
+
+    if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length === 0){
       return;
     }
 
-    const images = this.props.field.values;
+    const images = this.props.field.value;
 
     return (
 			images.map((item, i) => (
-
   					<ImagesDragField
-  						key={item.id}
+  						key={i}
   						index={i}
   						id={item.id}
-              url={item.url}
-  						title={item.title}
+                        media={item}
   						moveField={this.moveField}
   						onRemoveField={this.handleRemoveField}
   					/>
@@ -129,7 +129,7 @@ class ImagesField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.IMAGES.icon}></i> {CustomFieldTypes.IMAGES.name}
+            <i className={"fa "+ FIELDS.IMAGES.icon}></i> {FIELDS.IMAGES.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

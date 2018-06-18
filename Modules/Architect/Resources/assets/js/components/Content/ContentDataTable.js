@@ -45,7 +45,7 @@ class ContentDataTable extends Component {
               {data: 'updated', name: 'updated'},
               {data: 'author', name: 'author'},
               {data: 'status', name: 'status'},
-    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+              {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
@@ -70,23 +70,11 @@ class ContentDataTable extends Component {
         var _this = this;
         $(document).on('click','.add-item',function(e){
           e.preventDefault();
+          var content = $(this).data('content');
+          content = JSON.parse(atob(content));
 
-          /*
-          _this.setState({
-            imageSelected : $(this).data('id')
-          });
-          */
-
-          var item = {
-            id : $(this).data('id'),
-            name : $(this).data('name'),
-            type : $(this).data('type'),
-          };
-
-          _this.props.onSelectItem(item);
-
+          _this.props.onSelectItem(content);
         });
-
     }
 
     render() {

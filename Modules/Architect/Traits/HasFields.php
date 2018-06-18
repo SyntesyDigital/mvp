@@ -2,8 +2,23 @@
 
 namespace Modules\Architect\Traits;
 
+
+
 trait HasFields
 {
+    public function getFieldChilds($field)
+    {
+        $arr = [];
+        foreach($this->fields as $f) {
+            if($f->parent_id == $field->id) {
+                $arr[] = $f;
+            }
+        }
+
+        return sizeof($arr) ? collect($arr) : null;
+    }
+
+
     public function fields()
     {
         return $this->hasMany('Modules\Architect\Entities\ContentField');

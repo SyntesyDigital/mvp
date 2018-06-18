@@ -22,37 +22,9 @@ class ContentContainer extends Component {
 
      // Set translations
      var translations = {};
-     props.languages.map(function(v,k){
+     LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-
-     // Load content fields
-     var fields = props.typology.fields;
-     var content = props.content;
-     var languages = props.languages;
-     if(props.content) {
-         fields.map(function(field, k){
-
-             // Settings values from content
-             var values = {};
-             content.fields.map(function(f2, k2){
-                 if(f2.name == field.identifier) {
-                     if(f2.language_id) {
-                         languages.map(function(l){
-                             if(f2.language_id == l.id) {
-                                 values[l.iso] = f2.value;
-                             }
-                         });
-                     } else {
-                         values = f2.value;
-                     }
-                 }
-             });
-
-            fields[k].values = values;
-         });
-     }
-     
 
      // Build state...
      this.state = {
@@ -73,17 +45,13 @@ class ContentContainer extends Component {
                  name: "Tag 3"
              }
          ],
-         translations: {
-             ca: true,
-             es: true,
-             en: true
-         },
+         translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
          typology: props.typology,
-         languages: props.languages,
-         fields: fields,
+         languages: LANGUAGES,
+         fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
 
          //modal states
@@ -94,6 +62,7 @@ class ContentContainer extends Component {
          contentSourceField: null
      };
 
+     console.log('LOADED FIELDS => ', this.state.fields);
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
@@ -115,6 +84,7 @@ class ContentContainer extends Component {
   /******** Images  ********/
 
   handleImageSelect(identifier) {
+      console.log('handleImageSelect => ', identifier);
 
     this.setState({
       displayMediaModal : true,
@@ -130,31 +100,26 @@ class ContentContainer extends Component {
     });
   }
 
-  handleImageSelected(image){
-    this.updateImage(this.state.sourceField,image);
+  handleImageSelected(media){
+      this.updateImage(this.state.sourceField,media);
   }
 
-  updateImage(identifier,image){
+  updateImage(field,media){
 
-    const {typology} = this.state;
+      var fields = this.state.fields;
 
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-      if(item.identifier == identifier ){
+      switch (field.type) {
+          case FIELDS.IMAGES.type:
+              fields[field.identifier].value.push(media);
+              break;
 
-        if(item.type == CustomFieldTypes.IMAGES.value){
-          typology.fields[i].values.push(image);
-          break;
-        }
-        else if(item.type == CustomFieldTypes.IMAGE.value){
-          typology.fields[i].values = image;
-          break;
-        }
+          case FIELDS.IMAGE.type:
+              fields[field.identifier].value = media;
+              break;
       }
-    }
 
     this.setState({
-      typology : typology,
+      fields : fields,
       displayMediaModal : false,
       sourceField : null
     });
@@ -180,32 +145,39 @@ class ContentContainer extends Component {
   }
 
   handleContentSelected(content){
-      this.updateContent(this.state.contentSourceField,content);
+      this.updateContent(this.state.contentSourceField, content);
   }
 
   updateContent(identifier,content){
 
-    const {typology} = this.state;
+    var fields = this.state.fields;
 
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
+    Object.keys(fields).map(function(k){
+        if(fields[k].identifier == identifier){
+            switch(fields[k].type) {
+                case FIELDS.LINK.type:
 
-      if(item.identifier == identifier){
-
-        if(typology.fields[i].type == "link"){
-            typology.fields[i].values.linkValues = content;
+                    if(fields[identifier].value == null){
+                      fields[identifier].value = {};
+                    }
+                    else if(fields[identifier].value.url !== undefined){
+                      delete fields[identifier].value['url'];
+                    }
+                    fields[identifier].value.content = content;
+                    break;
+                case FIELDS.CONTENTS.type:
+                    if(fields[identifier].value == null) {
+                        fields[identifier].value = [];
+                    }
+                    fields[identifier].value.push(content);
+                    break;
+            }
         }
-        else {
-            typology.fields[i].values.push(content);
-        }
+    })
 
-
-        break;
-      }
-    }
 
     this.setState({
-        typology : typology,
+        fields : fields,
         displayContentModal : false,
         contentSourceField : null
     });
@@ -216,20 +188,13 @@ class ContentContainer extends Component {
 
 
   handleSubmitForm(e) {
-
     e.preventDefault();
-
-    // console.log("submit form!");
-    // console.log(this.state);
 
     if(this.state.content) {
         this.update();
     } else {
         this.create();
     }
-
-    //TODO hacer el ajax para guardar la información de la typologia
-
   }
 
   getFormData()
@@ -289,7 +254,12 @@ class ContentContainer extends Component {
 
   onSaveSuccess(response)
   {
-      toastr.success('ok');
+      if(response.content) {
+          this.setState({
+              content : response.content
+          });
+          toastr.success('ok');
+      }
   }
 
 
@@ -310,17 +280,17 @@ class ContentContainer extends Component {
                 })
              });
          }
-         
+
          if(errors['author_id'] !== undefined) {
             stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
-                  
+
          this.setState({
              errors : stateErrors
          });
      }
-     
-    
+
+
 
      if(response.message) {
          toastr.error(response.message);
@@ -354,7 +324,6 @@ class ContentContainer extends Component {
     console.log(this.state);
 
     //TODO
-
   }
 
     handleFieldChange(field) {
@@ -415,21 +384,12 @@ class ContentContainer extends Component {
   }
 
   handleCustomFieldChange(field){
+      var fields = this.state.fields;
+      fields[field.identifier].value = field.value;
 
-    const {typology} = this.state;
-
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-      if(item.identifier == field.identifier ){
-        typology.fields[i].values = field.values;
-        break;
-      }
-    }
-
-    this.setState({
-      typology : typology
-    });
-
+      this.setState({
+          fields : fields
+      });
   }
 
 

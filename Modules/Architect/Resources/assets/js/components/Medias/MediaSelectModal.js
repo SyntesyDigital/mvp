@@ -285,11 +285,8 @@ class MediaSelectModal extends Component {
         return (
           <div>
 
-            //TODO Fix que los lenguages y los formatos venga por configuración global
             <MediaEditModal
               ref={m => { this._mediaEditModal = m; }}
-              languages = '[{"id":1,"name":"Catal\u00e0","iso":"ca","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"},{"id":2,"name":"Espa\u00f1ol","iso":"es","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"},{"id":3,"name":"English","iso":"en","created_at":"2018-06-11 14:47:36","updated_at":"2018-06-11 14:47:36"}]'
-              formats = '[{"name":"thumbnail","directory":"thumbnail","ratio":"1:1","width":500,"height":500},{"name":"banner","directory":"banner","ratio":"2:1","width":1000,"height":500}]'
               onModalClose = {this.handleEditModalClose}
             />
 

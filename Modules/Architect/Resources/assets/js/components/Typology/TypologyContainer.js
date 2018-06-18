@@ -161,12 +161,12 @@ class TypologyContainer extends Component {
 
  handleSettingsChanged(field) {
 
-     //console.log("TypologyContainer :: handleSettingsChanged");
-     //console.log(field);
-
      const settingsField = this.state.settingsField;
 
      settingsField[field.source][field.name] = field.value;
+
+
+     console.log("handleSettingsChanged =>", settingsField);
 
      //console.log("TypologyContainer :: handleSettingsChange :: chaging settings, settings field :");
      //console.log(settingsField);
@@ -190,6 +190,7 @@ class TypologyContainer extends Component {
      }
 
      console.log(fields);
+
 
      this.setState({
          fields : fields,

@@ -18,6 +18,22 @@ class ArchitectDatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Language::create([
+            'name' => 'Català',
+            'iso' => 'ca'
+        ]);
+
+        Language::create([
+            'name' => 'Español',
+            'iso' => 'es'
+        ]);
+
+        Language::create([
+            'name' => 'English',
+            'iso' => 'en'
+        ]);
+
+
         Model::unguard();
 
         $admin = User::create([
@@ -44,20 +60,7 @@ class ArchitectDatabaseSeeder extends Seeder
         $admin->attachRole($adminRole);
 
 
-        Language::create([
-            'name' => 'Català',
-            'iso' => 'ca'
-        ]);
 
-        Language::create([
-            'name' => 'Español',
-            'iso' => 'es'
-        ]);
-
-        Language::create([
-            'name' => 'English',
-            'iso' => 'en'
-        ]);
 
         // $this->call("OthersTableSeeder");
     }

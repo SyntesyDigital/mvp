@@ -161,7 +161,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*

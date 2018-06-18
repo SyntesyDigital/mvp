@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
-
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
-
-import CustomFieldTypes from './../../common/CustomFieldTypes';
 import ContentsDragField from './ContentsDragField';
 
 class ContentsField extends Component {
@@ -21,24 +18,24 @@ class ContentsField extends Component {
 
  componentDidMount(){
 
-   if(this.props.field.values === undefined || this.props.field.values == null){
-     //setup values if not yet defined
+   if(this.props.field.value === undefined || this.props.field.value == null){
+     //setup value if not yet defined
      var newField = {
          identifier: this.props.field.identifier,
-         values: []
+         value: []
      };
 
-     this.props.onFieldChange(newField);
+     //this.props.onFieldChange(newField);
    }
  }
 
  moveField(dragIndex, hoverIndex) {
 
      const field = this.props.field;
-     const dragField = field.values[dragIndex]
+     const dragField = field.value[dragIndex]
 
      var result = update(field, {
-         values: {
+         value: {
              $splice: [
                  [dragIndex, 1],
                  [hoverIndex, 0, dragField]
@@ -46,34 +43,33 @@ class ContentsField extends Component {
          }
      });
 
-
-     // console.log("\n\nResult values : ");
-     // console.log(field.values);
+     // console.log("\n\nResult value : ");
+     // console.log(field.value);
      // console.log(result);
 
-     var newField = {
+     this.props.onFieldChange({
          identifier: this.props.field.identifier,
-         values: result.values
-     };
-
-     this.props.onFieldChange(newField);
+         value: result.value
+     });
 
  }
 
  handleRemoveField(fieldId) {
 
-     const fields = this.props.field.values;
+     const fields = this.props.field.value;
 
-     for (var i = 0; i < fields.length; i++) {
-         if (fieldId == fields[i].id) {
-             fields.splice(i, 1);
-             break;
+     if(fields) {
+         for (var i = 0; i < fields.length; i++) {
+             if (fieldId == fields[i].id) {
+                 fields.splice(i, 1);
+                 break;
+             }
          }
      }
 
      var field = {
          identifier: this.props.field.identifier,
-         values: fields
+         value: fields
      };
 
      this.props.onFieldChange(field);
@@ -82,11 +78,12 @@ class ContentsField extends Component {
 
  handleOnChange(event) {
      const language = $(event.target).closest('.form-control').attr('language');
-     const values = this.props.field.values;
-     values[language] = event.target.value;
+     const value = this.props.field.value;
+     value[language] = event.target.value;
+
      var field = {
          identifier: this.props.field.identifier,
-         values: values
+         value: value
      };
 
      // console.log("textField :: handleOnChange ");
@@ -101,11 +98,28 @@ class ContentsField extends Component {
  }
 
  renderInputs() {
+    var fields = [];
+    var _this = this;
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
-      return;
+    if(this.props.field.value) {
+        this.props.field.value.map(function(content, i){
+            fields.push(
+                <ContentsDragField
+                   key = {content.id}
+                   index = {i}
+                   id = {content.id}
+                   type = {_this.props.field.type}
+                   label = {content.typology.name}
+                   icon = {content.typology.icon}
+                   name = {content.title}
+                   moveField = {_this.moveField}
+                   onRemoveField = {_this.handleRemoveField}  />
+            );
+        });
     }
 
+
+    return fields;
  }
 
 
@@ -115,7 +129,7 @@ class ContentsField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.CONTENTS.icon}></i> {CustomFieldTypes.CONTENTS.name}
+            <i className={"fa "+FIELDS.CONTENTS.icon}></i> {FIELDS.CONTENTS.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -124,20 +138,8 @@ class ContentsField extends Component {
 
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
-
           <div className="field-form fields-list-container">
-
-          <ContentsDragField
-             key = {this.props.field.id}
-             index = {1}
-             id = {this.props.field.id}
-             type = {this.props.field.type}
-             label = {this.props.field.name}
-             icon = {this.props.field.icon}
-             name = {this.props.field.identifier}
-             moveField = {this.moveField}
-             onRemoveField = {this.handleRemoveField}  />
-
+          {this.renderInputs()}
           </div>
 
 

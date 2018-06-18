@@ -21,6 +21,7 @@ class ContentField extends Model
     protected $fillable = [
         'name',
         'value',
+        'relation',
         'content_id',
         'language_id'
     ];
@@ -48,5 +49,10 @@ class ContentField extends Model
     public function content()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Content');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo('\Modules\Architect\Entities\Language');
     }
 }

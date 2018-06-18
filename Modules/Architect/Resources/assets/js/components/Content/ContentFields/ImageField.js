@@ -1,30 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-import CustomFieldTypes from './../../common/CustomFieldTypes';
-
-/*
-
-Values format :
-
-{
-  id : 3,
-  type : CustomFieldTypes.IMAGE.value,
-  name : "Imatge",
-  identifier : "image_1",
-  settings : {
-    type : "thumb",
-    name : "Thumbnail",
-    width : 500,
-    height : 500,
-    ratio : "1:1"
-  },
-  values : {
-    url : ASSETS+"modules/architect/images/default.jpg"
-  }
-}
-
-*/
 class ImageField extends Component {
 
   constructor(props){
@@ -35,80 +11,86 @@ class ImageField extends Component {
     this.cancelImage = this.cancelImage.bind(this);
   }
 
-
   handleOnChange(event) {
-
-    const language = $(event.target).closest('.form-control').attr('language');
-
-
-    var field = {
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
-      language : language,
-      values : event.target.value
-    };
-
-    console.log("textField :: handleOnChange ");
-    console.log(field);
-
-    this.props.onFieldChange(field);
+      language : $(event.target).closest('.form-control').attr('language'),
+      value : event.target.value
+    });
   }
 
   onImageSelect(event) {
     event.preventDefault();
-    //console.log("\n\nImageField identifier : ");
-    //console.log(this.props.field.identifier);
+    console.log('onImageSelect => ', event);
 
-    this.props.onImageSelect(this.props.field.identifier);
+    this.props.onImageSelect(this.props.field);
   }
 
   cancelImage(event) {
     event.preventDefault();
-
-    var field = {
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
-      values : {
-        url : ""
+      value : null
+    });
+  }
+
+  getImageFormat(value)
+  {
+      var format = null;
+
+      if(IMAGES_FORMATS) {
+          IMAGES_FORMATS.map(function(f){
+              if(f.name == value) {
+                  format = f;
+              }
+          });
       }
-    };
 
-    this.props.onFieldChange(field);
-
+      return format;
   }
 
   renderInputs() {
 
-    var defined = false;
-    var values = {};
+    var value = this.props.field.value ? this.props.field.value : {};
+    var defined = this.props.field.value ? true : false;
 
-    if(this.props.field.values !== undefined){
-      defined = true;
-      values = this.props.field.values;
+    var format = (this.props.field.settings.cropsAllowed && this.props.field.settings.cropsAllowed !== null)
+        ? this.getImageFormat(this.props.field.settings.cropsAllowed)
+        : null;
+
+    var url = this.props.field.value ? this.props.field.value.urls.original : null;
+
+
+    if(format && this.props.field.value && this.props.field.value.urls) {
+        if(format.name) {
+            url = this.props.field.value.urls[format.name];
+        }
     }
-
-    console.log(defined,values);
 
     return (
       <div className="form-group bmd-form-group image-field-container">
          <div className="image-field">
-            <div className="image" style={{backgroundImage:"url("+(values.url !== undefined ? values.url : "")+")"}} ></div>
-            {(!defined || values.url == "" ) &&
+            {url &&
+            <div className="image" style={{backgroundImage:"url(/"+ url +")"}} ></div>
+            }
+
+            {(!defined || value.url == "" ) &&
               <div className="add-button">
                 <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
               </div>
             }
          </div>
 
-          {defined && values.url != "" &&
+          {defined && value.url != "" &&
             <div className="image-buttons">
               {/*<a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a>*/}
                <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> Cancel·lar</a>
             </div>
            }
 
-           //TODO falta añadir la información de la imagen en settings
-          {/*
-         <p className="field-help"> <b>{this.props.field.settings.name}</b> : Mides {this.props.field.settings.width}x{this.props.field.settings.height} ( Ratio {this.props.field.settings.ratio} )</p>
-         */}
+           {format &&
+               <p className="field-help"> <b>{format.name}</b> : Mides {format.width}x{format.height} ( Ratio {format.ratio} )</p>
+            }
       </div>
     );
 
@@ -121,7 +103,7 @@ class ImageField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.IMAGE.icon}></i> {CustomFieldTypes.IMAGE.name}
+            <i className={"fa "+ FIELDS.IMAGE.icon }></i> {FIELDS.IMAGE.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -131,9 +113,7 @@ class ImageField extends Component {
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
           <div className="field-form">
-
             {this.renderInputs()}
-
           </div>
 
         </div>

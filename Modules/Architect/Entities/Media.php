@@ -7,10 +7,11 @@ use Storage;
 
 class Media extends Model
 {
-
     protected $casts = [
         'metadata' => 'array'
     ];
+
+    protected $appends = ['urls'];
 
     /**
      * The database table used by the model.
@@ -48,6 +49,32 @@ class Media extends Model
     public function getMetaJSON()
     {
         return json_encode($this->metadata);
+    }
+
+    public function getUrlsAttribute()
+    {
+        $config = config('images');
+
+        $urls = [
+            'original' => sprintf('%s/original/%s',
+                str_replace('public', 'storage', $config['storage_directory']),
+                $this->stored_filename
+            )
+        ];
+
+        foreach($config["formats"] as $format) {
+            $path = sprintf('%s/%s/%s',
+                str_replace('public', 'storage', $config['storage_directory']),
+                $format['directory'],
+                $this->stored_filename
+            );
+
+            if(stream_resolve_include_path($path)) {
+                $urls[ $format['name'] ] = $path;
+            }
+        }
+
+        return $urls;
     }
 
 }

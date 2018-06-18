@@ -5,74 +5,59 @@ class RadioSettingsField extends Component {
 
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      checkbox : null,
-      value : "",
-      display : false
-    };
-
+        checked : 'off',
+        field : {
+            name : this.props.name,
+            source : this.props.source,
+            value : null
+        }
+    }
+    
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-
-  }
-
-  componentWillReceiveProps(nextProps){
-
-    var checkbox = null;
-    var display = false;
-    var value = "";
-
-    if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
-      nextProps.field[nextProps.source][nextProps.name] !== undefined){
-
-      checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
-      display = true;
-      value = nextProps.field[nextProps.source][nextProps.name];
-    }
-
-    this.setState({
-      checkbox : checkbox,
-      value : value,
-      display : display
-    });
-
   }
 
   handleFieldChange(event) {
-
-    var field = {
-      name : this.props.name,
-      source : this.props.source,
-      value : event.target.checked ? "" : null
-    };
-
-    this.props.onFieldChange(field);
+    this.setState({
+        checked : event.target.checked,
+        field : {
+            name : this.props.name,
+            source : this.props.source,
+            value : null
+        },
+    });
+    
+    this.props.onFieldChange(this.state.field);
   }
 
   handleCheckboxChange(event) {
-
-    var field = {
-      name : this.props.name,
-      source : this.props.source,
-      value : event.target.value
-    };
-
-    this.props.onFieldChange(field);
-
+      console.log('=> handleCheckboxChange');
+      console.log('value => ',event.target.value);
+      
+      this.setState({
+          field : {
+            name : this.props.name,
+            source : this.props.source,
+            value : event.target.value
+          },
+      });
+      
+      this.props.onFieldChange(this.state.field);
   }
 
 
-  renderOptions(value) {
+  renderOptions() {
 
-    var self = this;
-    //console.log("renderOptions");
-
+    var self = this;    
+    var value = this.props.field && this.props.field[this.props.source] && this.props.field[this.props.source][this.props.name] !== undefined ? this.props.field[this.props.source][this.props.name] : null;
+    
     return (
       this.props.options.map((item,i) => (
         <label className="form-check-label" key={i}>
             <input className="form-check-input" type="radio"
-              checked={value == item.value ? true : false}
+              checked={(self.state.field !== null && self.state.field.value == item.value) || value == item.value ? true : false}
               name={self.props.name}
               value={item.value}
               onChange={self.handleCheckboxChange}
@@ -87,38 +72,33 @@ class RadioSettingsField extends Component {
   }
 
   render() {
-
-    const {checkbox,display,value} = this.state;
-
+      
+    var display = this.props.field != null  
+        && this.props.field[this.props.source] != null  
+        && this.props.field[this.props.source][this.props.name] !== undefined
+        ? true : false;
+         
     return (
-
       <div style={{display : display ? 'block' : 'none'}}>
         <div className="setup-field" >
           <div className="togglebutton">
             <label>
                 <input type="checkbox"
                   name={this.props.name}
-                  checked={ checkbox != null ? checkbox : false }
+                  checked={this.state.checked}
                   onChange={this.handleFieldChange}
                 />
                 {this.props.label}
             </label>
           </div>
 
-
-          <div className="setup-field-config" style={{display : checkbox != null && checkbox ? "block" : "none" }}>
-
+          <div className="setup-field-config" style={{display : this.state.checked ? "block" : "none" }}>
             <div className="form-group bmd-form-group">
-
-              {this.renderOptions(value)}
-
-
+              {this.renderOptions()}
             </div>
           </div>
-
         </div>
       </div>
-
     );
   }
 

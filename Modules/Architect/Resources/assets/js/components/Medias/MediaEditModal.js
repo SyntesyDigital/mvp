@@ -20,8 +20,8 @@ export default class MediaEditModal extends Component {
                 description : {},
             },
             cropsOpen : false,
-            languages : JSON.parse(this.props.languages),
-            formats : JSON.parse(this.props.formats),
+            languages : LANGUAGES,
+            formats : IMAGES_FORMATS,
         };
 
         this.onModalClose = this.onModalClose.bind(this);
@@ -93,9 +93,6 @@ export default class MediaEditModal extends Component {
     }
 
     modalClose() {
-
-        console.log(architect.medias);
-
         if(architect.medias._settings != null) {
             architect.medias.refresh();
         }
@@ -187,6 +184,7 @@ export default class MediaEditModal extends Component {
     }
 
     render() {
+        
         return (
           <div style={{zIndex:10000}}>
             <MediaCropModal

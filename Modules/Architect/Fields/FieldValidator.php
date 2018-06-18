@@ -18,7 +18,7 @@ class FieldValidator
 
         foreach($values as $field) {
 
-            $values = isset($field["values"]) ? $field["values"] : null;
+            $values = isset($field["value"]) ? $field["value"] : null;
             $rules = isset($field["rules"]) ? $field["rules"] : null;
             $identifier = isset($field["identifier"]) ? $field["identifier"] : null;
 

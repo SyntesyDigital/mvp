@@ -57,4 +57,16 @@ class Typology extends Model
         return $this->hasMany('\Modules\Architect\Entities\Field');
     }
 
+    public function getIndexField()
+    {
+        foreach($this->fields as $field) {
+            $entryTitle = isset($field->settings["entryTitle"]) ? $field->settings["entryTitle"] : null;
+
+            if($entryTitle === true) {
+                return $field->identifier;
+            }
+        }
+        return null;
+    }
+
 }

@@ -67,14 +67,7 @@ class MediaSelectedItem extends Component {
 
     onSubmit(e) {
       e.preventDefault();
-
-      var media = {
-        id:this.state.media.id,
-        url:this.state.image.url,
-        name:this.state.media.uploaded_filename
-      };
-
-      this.props.onMediaSelected(media);
+      this.props.onMediaSelected(this.state.media);
     }
 
     render() {
@@ -107,10 +100,8 @@ class MediaSelectedItem extends Component {
             }
             {this.state.media != null &&
               <div className="col-footer">
-
                 <a href="" className="btn btn-default" onClick={this.props.onCancelImage}> Cancel·lar </a> &nbsp;
                 <a href="" className="btn btn-primary" onClick={this.onSubmit}> Afegir </a>
-
               </div>
             }
           </div>

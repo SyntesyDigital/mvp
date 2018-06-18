@@ -3,9 +3,8 @@
 namespace Modules\Architect\Fields;
 
 use Modules\Architect\Fields\FieldInterface;
-
 use Modules\Architect\Entities\ContentField;
-
+use Modules\Architect\Entities\Language;
 abstract class Field
 {
     public function model()
@@ -25,6 +24,7 @@ abstract class Field
 
     public function save($content, $identifier, $values, $languages = null)
     {
+        $languages = Language::all();
         $values = !is_array($values) ? [$values] : $values;
 
         foreach($values as $iso => $value) {

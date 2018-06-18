@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/contents/{typology}/create', 'ContentController@create')->name('contents.create');
     Route::get('/contents/{content?}', 'ContentController@show')->name('contents.show');
     Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');
+    Route::delete('/contents/{content?}/delete', 'ContentController@delete')->name('contents.delete');
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');

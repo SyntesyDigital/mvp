@@ -20,7 +20,7 @@ return [
             'ratio' => '2:1',
             'width' => 1000,
             'height' => 500
-        ]
+        ],
     ]
 
 ];

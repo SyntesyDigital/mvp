@@ -10,10 +10,10 @@ class Required
     {
         $values = !is_array($value) ? [$value] : $value;
         $errors = [];
-        
+
         if($param) {
             foreach($values as $k => $value) {
-                if(!$value) {
+                if(!trim(strip_tags($value))) {
                     $errors[$k] = $this->message();
                 }
             }
