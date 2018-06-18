@@ -155,10 +155,17 @@ class ContentContainer extends Component {
     Object.keys(fields).map(function(k){
         if(fields[k].identifier == identifier){
             switch(fields[k].type) {
-                case 'link':
-                    fields[identifier].value.linkValues = content;
+                case FIELDS.LINK.type:
+
+                    if(fields[identifier].value == null){
+                      fields[identifier].value = {};
+                    }
+                    else if(fields[identifier].value.url !== undefined){
+                      delete fields[identifier].value['url'];
+                    }
+                    fields[identifier].value.content = content;
                     break;
-                case 'contents':
+                case FIELDS.CONTENTS.type:
                     if(fields[identifier].value == null) {
                         fields[identifier].value = [];
                     }
