@@ -12,6 +12,8 @@ class Content extends Model
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
 
+    protected $fieldModel = 'Modules\Architect\Entities\ContentField';
+
     protected $appends = ['title'];
 
     /**

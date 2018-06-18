@@ -126,6 +126,7 @@ class ContentFields extends Component {
                     translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
+                    onContentSelect={_this.props.onContentSelect}
                 />
                 );
             break;

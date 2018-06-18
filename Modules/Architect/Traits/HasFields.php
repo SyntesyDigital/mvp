@@ -2,8 +2,6 @@
 
 namespace Modules\Architect\Traits;
 
-
-
 trait HasFields
 {
     public function getFieldChilds($field)
@@ -21,7 +19,7 @@ trait HasFields
 
     public function fields()
     {
-        return $this->hasMany('Modules\Architect\Entities\ContentField');
+        return $this->hasMany($this->fieldModel);
     }
 
     public function getField($name)
