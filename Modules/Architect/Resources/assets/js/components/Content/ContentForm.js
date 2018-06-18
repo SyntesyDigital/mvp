@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import ContentContainer from './ContentContainer';
+import PageContainer from './Page/PageContainer';
 
 export default class ContentForm extends Component {
 
@@ -27,15 +28,30 @@ export default class ContentForm extends Component {
     }
 
     render() {
+
+        const page = true;
+
         return (
             <div>
-                <ContentContainer
-                languages={this.state.languages}
-                authors={this.state.authors}
-                typology={this.state.typology}
-                content={this.state.content}
-                ref={(contentContainer) => this.contentContainer = contentContainer}
-                />
+                {!page &&
+                  <ContentContainer
+                    languages={this.state.languages}
+                    authors={this.state.authors}
+                    typology={this.state.typology}
+                    content={this.state.content}
+                    ref={(contentContainer) => this.contentContainer = contentContainer}
+                  />
+                }
+
+                {page &&
+                  <PageContainer
+                    languages={this.state.languages}
+                    authors={this.state.authors}
+                    typology={this.state.typology}
+                    content={this.state.content}
+                    ref={(contentContainer) => this.contentContainer = contentContainer}
+                  />
+                }
             </div>
         );
     }
