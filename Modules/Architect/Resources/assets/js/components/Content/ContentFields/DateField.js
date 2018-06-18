@@ -5,8 +5,6 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import CustomFieldTypes from './../../common/CustomFieldTypes';
-
 class DateField extends Component {
 
   constructor(props){
@@ -19,26 +17,23 @@ class DateField extends Component {
 
     var field = {
       identifier : this.props.field.identifier,
-      values : date
+      value : date
     };
 
     this.props.onFieldChange(field);
   }
 
   renderInputs() {
-      
-      var error = null;
-      if(this.props.field.errors) {
-          error = this.props.field.errors[key] ? this.props.field.errors[key] : null;
-      }
-      
+
+      var error = this.props.errors && this.props.errors[this.props.field.identifier] ? true : false;
+
     return (
-      <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} >
+      <div className={'form-group bmd-form-group ' + (error ? 'has-error' : null)} >
          <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name}</label>
 
          <DatePicker
              className="form-control"
-             selected={moment(this.props.field.values)}
+             selected={ this.props.field.value ? moment(this.props.field.value) : moment() }
              onChange={this.handleOnChange}
              showTimeSelect
              timeFormat="HH:mm"
@@ -59,7 +54,7 @@ class DateField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.DATE.icon}></i> {CustomFieldTypes.DATE.name}
+            <i className={"fa "+FIELDS.DATE.icon}></i> {FIELDS.DATE.name}
           </span>
           <span className="field-name">
             {this.props.field.name}

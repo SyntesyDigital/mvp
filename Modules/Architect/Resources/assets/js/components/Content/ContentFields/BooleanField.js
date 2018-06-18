@@ -15,20 +15,20 @@ class BooleanField extends Component {
 
     var field = {
       identifier : this.props.field.identifier,
-      values : event.target.checked
+      value : event.target.checked
     };
-        
+
     this.props.onFieldChange(field);
   }
 
   renderInputs() {
 
-    const value = (this.props.field.values !== undefined && this.props.field.values != null)
-        ? this.props.field.values 
+    const value = (this.props.field.value !== undefined && this.props.field.value != null)
+        ? this.props.field.value
         : false;
 
     return (
-      <div className={'togglebutton ' + (this.props.field.errors !== null ? 'has-error' : null)}>
+      <div className={'togglebutton ' + (this.props.errors ? 'has-error' : null)}>
         <label>
             {this.props.field.name}
             <input type="checkbox"
