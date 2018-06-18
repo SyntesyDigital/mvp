@@ -67,12 +67,7 @@ class MediaSelectedItem extends Component {
 
     onSubmit(e) {
       e.preventDefault();
-
-      this.props.onMediaSelected({
-          id:this.state.media.id,
-          url:this.state.image.url,
-          name:this.state.media.uploaded_filename
-      });
+      this.props.onMediaSelected(this.state.media);
     }
 
     render() {

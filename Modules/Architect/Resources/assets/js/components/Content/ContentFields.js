@@ -13,9 +13,6 @@ import LinkField from './ContentFields/LinkField';
 import VideoField from './ContentFields/VideoField';
 import LocalizationField from './ContentFields/LocalizationField';
 
-
-import CustomFieldTypes from './../common/CustomFieldTypes';
-
 class ContentFields extends Component {
 
   constructor(props){
@@ -30,7 +27,7 @@ class ContentFields extends Component {
   renderFields() {
     var fields = [];
     var _this = this;
-    
+
     Object.keys(_this.props.fields).map(function(k){
         switch(_this.props.fields[k].type) {
             case FIELDS.TEXT.type:
@@ -44,7 +41,7 @@ class ContentFields extends Component {
                   />
                 );
             break;
-            
+
             case FIELDS.RICHTEXT.type:
                 fields.push(
                 <RichTextField
@@ -56,7 +53,7 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
+
             case FIELDS.IMAGE.type:
                 fields.push(
                 <ImageField
@@ -65,11 +62,11 @@ class ContentFields extends Component {
                     translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
-                    onImageSelect={_this.props.onFieldChange}
+                    onImageSelect={_this.props.onImageSelect}
                 />
                 );
             break;
-            
+
             case FIELDS.DATE.type:
                 fields.push(
                 <DateField
@@ -81,10 +78,10 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
+
             case FIELDS.IMAGES.type:
                 fields.push(
-                <ImagesField    
+                <ImagesField
                     errors={_this.props.errors[k]}
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}
@@ -94,7 +91,7 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
+
             case FIELDS.CONTENTS.type:
                 fields.push(
                 <ContentsField
@@ -102,11 +99,12 @@ class ContentFields extends Component {
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}
                     key={k}
+                    onFieldChange={_this.props.onFieldChange}
                     onContentSelect={_this.props.onContentSelect}
                 />
                 );
             break;
-            
+
             case FIELDS.BOOLEAN.type:
                 fields.push(
                 <BooleanField
@@ -118,8 +116,8 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
-            
+
+
             case FIELDS.LINK.type:
                 fields.push(
                 <LinkField
@@ -131,7 +129,7 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
+
             case FIELDS.VIDEO.type:
                 fields.push(
                 <VideoField
@@ -143,7 +141,7 @@ class ContentFields extends Component {
                 />
                 );
             break;
-            
+
             case FIELDS.LOCALIZATION.type:
                 fields.push(
                 <LocalizationField

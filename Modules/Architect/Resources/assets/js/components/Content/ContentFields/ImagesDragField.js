@@ -114,14 +114,12 @@ class ImagesDragField extends Component {
         </div>
 
         <div className="field-inputs">
+			<div className="image" style={{backgroundImage:'url(/' + this.props.media.urls.thumbnail + ')'}}>
+			</div>
 
-					<div className="image" style={{backgroundImage:'url('+this.props.url+')'}}>
-					</div>
-
-					<div className="field-name">
-						{this.props.title}
-          </div>
-
+			<div className="field-name">
+				{this.props.media.uploaded_filename}
+			</div>
         </div>
 
         <div className="field-actions">
@@ -140,8 +138,6 @@ ImagesDragField.propTypes = {
 	index: PropTypes.number.isRequired,
 	isDragging: PropTypes.bool.isRequired,
 	id: PropTypes.any.isRequired,
-	//title : PropTypes.string.isRequired,
-	url : PropTypes.string.isRequired,
 	moveField: PropTypes.func.isRequired,
 };
 

@@ -19,25 +19,25 @@ class ImagesField extends Component {
 
   componentDidMount(){
       console.log('IMAGES =>', this.props.field);
-      
+
     if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length == 0){
-      //setup values if not yet defined
+      //setup value if not yet defined
       var newField = {
           identifier: this.props.field.identifier,
-          values: []
+          value: []
       };
 
       this.props.onFieldChange(newField);
-      
+
       console.log('componentDidMount =>', this.props.field);
-      
+
     }
   }
 
   moveField(dragIndex, hoverIndex) {
 
     const field = this.props.field;
-		const dragField = field.value[dragIndex]
+    const dragField = field.value[dragIndex]
 
     var result = update(field,{
       value : {
@@ -47,7 +47,7 @@ class ImagesField extends Component {
 
     var newField = {
       identifier : this.props.field.identifier,
-      values : result.value
+      value : result.value
     };
 
     this.props.onFieldChange(newField);
@@ -61,9 +61,9 @@ class ImagesField extends Component {
 
   onImageSelect(event) {
     event.preventDefault();
-    this.props.onImageSelect(this.props.field.identifier);
+    this.props.onImageSelect(this.props.field);
   }
-  
+
   handleRemoveField(fieldId) {
 
         const fields = this.props.field.value;
@@ -75,19 +75,17 @@ class ImagesField extends Component {
         	}
         }
 
-        var field = {
-        identifier : this.props.field.identifier,
-        values : fields
-        };
-
-        this.props.onFieldChange(field);
+        this.props.onFieldChange({
+            identifier : this.props.field.identifier,
+            value : fields
+        });
 
     }
-    
+
     getImageFormat(format)
     {
         var _format = null;
-        
+
         if(IMAGES_FORMATS) {
             IMAGES_FORMATS.map(function(f){
                 if(f.name == format) {
@@ -95,31 +93,30 @@ class ImagesField extends Component {
                 }
             });
         }
-        
+
         return _format;
     }
 
   renderInputs() {
-    
-    
+
+
     if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length === 0){
       return;
     }
-    
+
     const images = this.props.field.value;
-    
+
     return (
 			images.map((item, i) => (
   					<ImagesDragField
   						key={i}
   						index={i}
   						id={item.id}
-                        url={item.url}
-  						title={item.title}
+                        media={item}
   						moveField={this.moveField}
   						onRemoveField={this.handleRemoveField}
   					/>
-    
+
 				))
 		);
 

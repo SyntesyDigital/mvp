@@ -2,16 +2,18 @@
 
 ## Custom Fields Types
 
-- Text
-- Richtext
-- Image
+- Text => OK
+- Richtext => OK
+- Image => OK
 - Date
 - Boolean
 - Link
 - Video
+- Images => OK
+- Contents => OK
+
+TODO
 - List
-- Images
-- Contents
 
 ## Custom Fields Configuration
 

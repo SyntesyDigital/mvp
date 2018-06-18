@@ -84,6 +84,7 @@ class ContentContainer extends Component {
   /******** Images  ********/
 
   handleImageSelect(identifier) {
+      console.log('handleImageSelect => ', identifier);
 
     this.setState({
       displayMediaModal : true,
@@ -99,28 +100,23 @@ class ContentContainer extends Component {
     });
   }
 
-  handleImageSelected(image){
-    this.updateImage(this.state.sourceField,image);
+  handleImageSelected(media){
+      this.updateImage(this.state.sourceField,media);
   }
 
-  updateImage(identifier,image){
+  updateImage(field,media){
 
       var fields = this.state.fields;
 
-    for(var i=0;i<fields.length;i++) {
-      var field = fields[i];
-      if(field.identifier == identifier){
-          switch (field.type) {
-              case FIELDS.IMAGES.type:
-                  fields[i].value.push(image);
-                  break;
+      switch (field.type) {
+          case FIELDS.IMAGES.type:
+              fields[field.identifier].value.push(media);
+              break;
 
-              case FIELDS.IMAGE.type:
-                  fields[i].value = image;
-                  break;
-          }
+          case FIELDS.IMAGE.type:
+              fields[field.identifier].value = media;
+              break;
       }
-    }
 
     this.setState({
       fields : fields,
@@ -251,7 +247,12 @@ class ContentContainer extends Component {
 
   onSaveSuccess(response)
   {
-      toastr.success('ok');
+      if(response.content) {
+          this.setState({
+              content : response.content
+          });
+          toastr.success('ok');
+      }
   }
 
 
@@ -316,7 +317,6 @@ class ContentContainer extends Component {
     console.log(this.state);
 
     //TODO
-
   }
 
     handleFieldChange(field) {

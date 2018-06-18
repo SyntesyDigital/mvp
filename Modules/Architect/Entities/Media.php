@@ -7,7 +7,6 @@ use Storage;
 
 class Media extends Model
 {
-
     protected $casts = [
         'metadata' => 'array'
     ];
@@ -56,7 +55,13 @@ class Media extends Model
     {
         $config = config('images');
 
-        $urls = [];
+        $urls = [
+            'original' => sprintf('%s/original/%s',
+                str_replace('public', 'storage', $config['storage_directory']),
+                $this->stored_filename
+            )
+        ];
+
         foreach($config["formats"] as $format) {
             $path = sprintf('%s/%s/%s',
                 str_replace('public', 'storage', $config['storage_directory']),
@@ -68,6 +73,7 @@ class Media extends Model
                 $urls[ $format['name'] ] = $path;
             }
         }
+
         return $urls;
     }
 

@@ -5,7 +5,7 @@ class ImageField extends Component {
 
   constructor(props){
     super(props);
-    
+
     this.handleOnChange = this.handleOnChange.bind(this);
     this.onImageSelect = this.onImageSelect.bind(this);
     this.cancelImage = this.cancelImage.bind(this);
@@ -21,7 +21,8 @@ class ImageField extends Component {
 
   onImageSelect(event) {
     event.preventDefault();
-    
+    console.log('onImageSelect => ', event);
+
     this.props.onImageSelect(this.props.field);
   }
 
@@ -32,11 +33,11 @@ class ImageField extends Component {
       value : null
     });
   }
-  
+
   getImageFormat(value)
   {
       var format = null;
-      
+
       if(IMAGES_FORMATS) {
           IMAGES_FORMATS.map(function(f){
               if(f.name == value) {
@@ -44,38 +45,43 @@ class ImageField extends Component {
               }
           });
       }
-      
+
       return format;
   }
-  
+
   renderInputs() {
-            
-    var values = this.props.field.value ? this.props.field.value : {};
-    var defined = this.props.field.value ? true : false;    
-    
-    var format = this.props.field.settings.cropsAllowed 
-        ? this.getImageFormat(this.props.field.settings.cropsAllowed) 
+
+    var value = this.props.field.value ? this.props.field.value : {};
+    var defined = this.props.field.value ? true : false;
+
+    var format = (this.props.field.settings.cropsAllowed && this.props.field.settings.cropsAllowed !== null)
+        ? this.getImageFormat(this.props.field.settings.cropsAllowed)
         : null;
-    
-    var url = (values.urls !== undefined && format.name && values.urls[format.name] !== undefined)
-        ? values.urls[format.name] 
-        : null;
-    
+
+    var url = this.props.field.value ? this.props.field.value.urls.original : null;
+
+
+    if(format && this.props.field.value && this.props.field.value.urls) {
+        if(format.name) {
+            url = this.props.field.value.urls[format.name];
+        }
+    }
+
     return (
       <div className="form-group bmd-form-group image-field-container">
          <div className="image-field">
-            {url && 
+            {url &&
             <div className="image" style={{backgroundImage:"url(/"+ url +")"}} ></div>
             }
-            
-            {(!defined || values.url == "" ) &&
+
+            {(!defined || value.url == "" ) &&
               <div className="add-button">
                 <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
               </div>
             }
          </div>
 
-          {defined && values.url != "" &&
+          {defined && value.url != "" &&
             <div className="image-buttons">
               {/*<a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a>*/}
                <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> Cancel·lar</a>

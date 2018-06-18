@@ -119,7 +119,7 @@ class TypologyContainer extends Component {
      const {
          fields
      } = this.state;
-     
+
      for (var i = 0; i < fields.length; i++) {
          if (field.id == fields[i].id) {
             fields[i]["name"] = field.name;

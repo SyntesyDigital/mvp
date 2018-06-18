@@ -62,6 +62,9 @@ class ContentController extends Controller
     {
         $content->typology->load('fields');
 
+        print_R((new FieldsReactAdapter($content))->get()->toJson(JSON_PRETTY_PRINT));
+        exit();
+
         return view('architect::contents.show', [
             'content' => $content,
             'typology' => $content->typology,
