@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
-
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
-
-import CustomFieldTypes from './../../common/CustomFieldTypes';
 import ContentsDragField from './ContentsDragField';
 
 class ContentsField extends Component {
@@ -28,7 +25,7 @@ class ContentsField extends Component {
          values: []
      };
 
-     this.props.onFieldChange(newField);
+     //this.props.onFieldChange(newField);
    }
  }
 
@@ -101,11 +98,28 @@ class ContentsField extends Component {
  }
 
  renderInputs() {
+    var fields = [];
+    var _this = this;
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
-      return;
+    if(this.props.field.value) {
+        this.props.field.value.map(function(content, i){
+            fields.push(
+                <ContentsDragField
+                   key = {content.id}
+                   index = {i}
+                   id = {content.id}
+                   type = {_this.props.field.type}
+                   label = {content.typology.name}
+                   icon = {content.typology.icon}
+                   name = {content.title}
+                   moveField = {_this.moveField}
+                   onRemoveField = {_this.handleRemoveField}  />
+            )
+        });
     }
 
+
+    return fields;
  }
 
 
@@ -115,7 +129,7 @@ class ContentsField extends Component {
 
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.CONTENTS.icon}></i> {CustomFieldTypes.CONTENTS.name}
+            <i className={"fa "+FIELDS.CONTENTS.icon}></i> {FIELDS.CONTENTS.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -124,20 +138,8 @@ class ContentsField extends Component {
 
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
-
           <div className="field-form fields-list-container">
-
-          <ContentsDragField
-             key = {this.props.field.id}
-             index = {1}
-             id = {this.props.field.id}
-             type = {this.props.field.type}
-             label = {this.props.field.name}
-             icon = {this.props.field.icon}
-             name = {this.props.field.identifier}
-             moveField = {this.moveField}
-             onRemoveField = {this.handleRemoveField}  />
-
+          {this.renderInputs()}
           </div>
 
 

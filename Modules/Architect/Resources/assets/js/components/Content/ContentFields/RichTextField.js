@@ -9,24 +9,33 @@ class RichTextField extends Component {
 
   constructor(props){
     super(props);
-
     //this.handleOnChange = this.handleOnChange.bind(this);
+    
+    var values = this.props.field.value ? this.props.field.value : {};
 
-  }
-
-
-  handleOnChange(key,value, delta, source, editor)
-  {
-    const values = this.props.field.values ? this.props.field.values : {};
-
-    values[key] = value;
-
-    var field = {
-      identifier : this.props.field.identifier,
-      values : values
+    for(var key in this.props.translations){
+        if(values[key] === undefined) {
+            values[key] = '';
+        }
+    }
+    
+    this.state = {
+        value : values
     };
+    
+  }
+  
+  handleOnChange(content, delta, source, editor)
+  {
+    var _this = this.parent;
+    var language = this.language ? this.language : null;
 
-    this.props.onFieldChange(field);
+    _this.state.value[language] = content;
+
+    _this.props.onFieldChange({
+        identifier : _this.props.field.identifier,
+        value : _this.state.value
+    });
   }
 
   renderInputs() {
@@ -35,19 +44,18 @@ class RichTextField extends Component {
 
     for(var key in this.props.translations){
       if(this.props.translations[key]){
-
-          var value = '';
-          if(this.props.field.values) {
-              value = this.props.field.values[key] ? this.props.field.values[key] : '';
-          }
-
+            
+          var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;      
+          
         inputs.push(
-        <div className="form-group bmd-form-group" key={key}>
+        <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
          <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
          <ReactQuill
             id={key}
-            value={value}
-            onChange={this.handleOnChange.bind(this,key)}
+            language={key}
+            parent={this}
+            value={this.state.value[key]}
+            onChange={this.handleOnChange}
           />
         </div>
         );
@@ -60,10 +68,9 @@ class RichTextField extends Component {
   render() {
     return (
       <div className="field-item">
-
         <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa "+CustomFieldTypes.RICH.icon}></i> {CustomFieldTypes.RICH.name}
+            <i className={"fa "+FIELDS.RICHTEXT.icon}></i> {FIELDS.RICHTEXT.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -71,15 +78,10 @@ class RichTextField extends Component {
         </button>
 
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
-
           <div className="field-form">
-
             {this.renderInputs()}
-
           </div>
-
         </div>
-
       </div>
     );
   }

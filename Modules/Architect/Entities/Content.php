@@ -12,6 +12,8 @@ class Content extends Model
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
 
+    protected $appends = ['title'];
+
     /**
      * The database table used by the model.
      *
@@ -72,6 +74,21 @@ class Content extends Model
         ];
 
         return isset($status[$this->status]) ? $status[$this->status] : null;
+    }
+
+
+    public function getTitleAttribute()
+    {
+        if($this->fields) {
+            $index = $this->typology->getIndexField();
+            foreach($this->fields as $field) {
+                if($field->name == $index) {
+                    return $this->getFieldValue($index);
+                }
+            }
+        }
+
+        return null;
     }
 
 }

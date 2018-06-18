@@ -25,7 +25,7 @@ class ContentContainer extends Component {
      LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-         
+
      // Build state...
      this.state = {
          status: 0,
@@ -63,7 +63,7 @@ class ContentContainer extends Component {
      };
 
      console.log('LOADED FIELDS => ', this.state.fields);
-     
+
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
      this.handleUnpublish = this.handleUnpublish.bind(this);
@@ -104,7 +104,7 @@ class ContentContainer extends Component {
   }
 
   updateImage(identifier,image){
-      
+
       var fields = this.state.fields;
 
     for(var i=0;i<fields.length;i++) {
@@ -114,7 +114,7 @@ class ContentContainer extends Component {
               case FIELDS.IMAGES.type:
                   fields[i].value.push(image);
                   break;
-                  
+
               case FIELDS.IMAGE.type:
                   fields[i].value = image;
                   break;
@@ -149,28 +149,32 @@ class ContentContainer extends Component {
   }
 
   handleContentSelected(content){
-      this.updateContent(this.state.contentSourceField,content);
+      this.updateContent(this.state.contentSourceField, content);
   }
 
   updateContent(identifier,content){
 
-    const {typology} = this.state;
+    var fields = this.state.fields;
 
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-
-      if(item.identifier == identifier){
-        if(typology.fields[i].type == "link"){
-            typology.fields[i].value.linkValues = content;
-        } else {
-            typology.fields[i].value.push(content);
+    Object.keys(fields).map(function(k){
+        if(fields[k].identifier == identifier){
+            switch(fields[k].type) {
+                case 'link':
+                    fields[identifier].value.linkValues = content;
+                    break;
+                case 'contents':
+                    if(fields[identifier].value == null) {
+                        fields[identifier].value = [];
+                    }
+                    fields[identifier].value.push(content);
+                    break;
+            }
         }
-        break;
-      }
-    }
+    })
+
 
     this.setState({
-        typology : typology,
+        fields : fields,
         displayContentModal : false,
         contentSourceField : null
     });
@@ -182,7 +186,7 @@ class ContentContainer extends Component {
 
   handleSubmitForm(e) {
     e.preventDefault();
-    
+
     if(this.state.content) {
         this.update();
     } else {
@@ -268,17 +272,17 @@ class ContentContainer extends Component {
                 })
              });
          }
-         
+
          if(errors['author_id'] !== undefined) {
             stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
-                  
+
          this.setState({
              errors : stateErrors
          });
      }
-     
-    
+
+
 
      if(response.message) {
          toastr.error(response.message);
@@ -372,13 +376,12 @@ class ContentContainer extends Component {
     });
   }
 
-  handleCustomFieldChange(field){      
-
+  handleCustomFieldChange(field){
       var fields = this.state.fields;
       fields[field.identifier].value = field.value;
-      
+
       this.setState({
-        fields : fields
+          fields : fields
       });
   }
 

@@ -63,7 +63,7 @@ class Typology extends Model
             $entryTitle = isset($field->settings["entryTitle"]) ? $field->settings["entryTitle"] : null;
 
             if($entryTitle === true) {
-                return $field->name;
+                return $field->identifier;
             }
         }
         return null;

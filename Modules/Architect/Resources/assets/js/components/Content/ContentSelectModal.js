@@ -36,9 +36,6 @@ class ContentSelectModal extends Component {
     }
 
     handleSelectItem(item){
-
-      console.log(item);
-
       this.props.onContentSelected(item);
     }
 

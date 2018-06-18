@@ -29,6 +29,7 @@ class Image extends Field implements FieldInterface
             return $content->fields()->save(new ContentField([
                 'name' => $identifier,
                 'value' => $mediaId,
+                'relation' => 'medias'
             ]));
         }
 

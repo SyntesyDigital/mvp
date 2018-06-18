@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-import CustomFieldTypes from './../../common/CustomFieldTypes';
-
 class ImageField extends Component {
 
   constructor(props){
@@ -13,20 +11,17 @@ class ImageField extends Component {
     this.cancelImage = this.cancelImage.bind(this);
   }
 
-
   handleOnChange(event) {
-
-    const language = $(event.target).closest('.form-control').attr('language');
-    
     this.props.onFieldChange({
       identifier : this.props.field.identifier,
-      language : language,
+      language : $(event.target).closest('.form-control').attr('language'),
       value : event.target.value
     });
   }
 
   onImageSelect(event) {
     event.preventDefault();
+    
     this.props.onImageSelect(this.props.field);
   }
 
@@ -112,9 +107,7 @@ class ImageField extends Component {
         <div id={"collapse"+this.props.field.identifier} className="collapse in" aria-labelledby={"heading"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
 
           <div className="field-form">
-
             {this.renderInputs()}
-
           </div>
 
         </div>

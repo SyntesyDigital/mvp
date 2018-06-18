@@ -1,14 +1,14 @@
 <?php
 
 namespace Modules\Architect\Fields;
-use Modules\Architect\Entities\Content;
-use Modules\Architect\Entities\Typology;
+
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 use Modules\Architect\Entities\Media;
+use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
-
 
 class FieldsReactAdapter
 {
@@ -102,6 +102,12 @@ class FieldsReactAdapter
                 $values = isset($typologyField->value) ? $typologyField->value : null;
                 $values[] = Media::find($contentField->value);
 
+                $typologyField->value = $values;
+            break;
+
+            case 'contents':
+                $values = isset($typologyField->value) ? $typologyField->value : [];
+                $values[] = Content::find($contentField->value)->load('fields');
                 $typologyField->value = $values;
             break;
 
