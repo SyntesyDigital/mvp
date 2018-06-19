@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 380);
+/******/ 	return __webpack_require__(__webpack_require__.s = 378);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17633,7 +17633,7 @@ module.exports = warning;
 
 /***/ }),
 
-/***/ 168:
+/***/ 167:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -20080,7 +20080,7 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
-/***/ 169:
+/***/ 168:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -30799,17 +30799,17 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ 380:
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(381);
-__webpack_require__(386);
-module.exports = __webpack_require__(388);
+__webpack_require__(379);
+__webpack_require__(384);
+module.exports = __webpack_require__(386);
 
 
 /***/ }),
 
-/***/ 381:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -30819,7 +30819,7 @@ module.exports = __webpack_require__(388);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(382);
+__webpack_require__(380);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -30827,16 +30827,16 @@ __webpack_require__(382);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(385);
+__webpack_require__(383);
 
 /***/ }),
 
-/***/ 382:
+/***/ 380:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(383);
-window.Popper = __webpack_require__(168).default;
+window._ = __webpack_require__(381);
+window.Popper = __webpack_require__(167).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -30845,9 +30845,9 @@ window.Popper = __webpack_require__(168).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(169);
+  window.$ = window.jQuery = __webpack_require__(168);
 
-  __webpack_require__(384);
+  __webpack_require__(382);
 } catch (e) {}
 
 /**
@@ -30893,7 +30893,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 383:
+/***/ 381:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -48007,7 +48007,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 384:
+/***/ 382:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -48016,7 +48016,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(169), __webpack_require__(168)) :
+	 true ? factory(exports, __webpack_require__(168), __webpack_require__(167)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -51908,7 +51908,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 385:
+/***/ 383:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51981,14 +51981,14 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 386:
+/***/ 384:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 388:
+/***/ 386:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -53081,29 +53081,6 @@ module.exports = Axios;
 
 /***/ }),
 
-/***/ 90:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(4);
-
-module.exports = function normalizeHeaderName(headers, normalizedName) {
-  utils.forEach(headers, function processHeader(value, name) {
-    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
-      headers[normalizedName] = value;
-      delete headers[name];
-    }
-  });
-};
-
-
-/***/ }),
-
-<<<<<<< HEAD
-/***/ 91:
-=======
 /***/ 9:
 /***/ (function(module, exports) {
 
@@ -53133,7 +53110,26 @@ module.exports = g;
 /***/ }),
 
 /***/ 90:
->>>>>>> dev
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(4);
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
