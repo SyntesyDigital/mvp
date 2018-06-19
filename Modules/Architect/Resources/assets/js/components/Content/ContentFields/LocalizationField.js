@@ -15,29 +15,27 @@ class LocalizationField extends Component
 
   componentDidMount(){
 
-    if(this.props.field.values === undefined || this.props.field.values == null){
-      //setup values if not yet defined
-      var newField = {
+    if(this.props.field.value === undefined || this.props.field.value == null){
+      //setup value if not yet defined
+      this.props.onFieldChange({
           identifier: this.props.field.identifier,
-          values: {
+          value: {
             lat : "",
             lng : ""
           }
-      };
-
-      this.props.onFieldChange(newField);
+      });
 
     }
   }
 
   handleOnChange(event)
   {
-    const values = this.props.field.values ? this.props.field.values : {};
-    values[event.target.name] = parseFloat(event.target.value);
+    const value = this.props.field.value ? this.props.field.value : {};
+    value[event.target.name] = parseFloat(event.target.value);
 
     var field = {
       identifier : this.props.field.identifier,
-      values : values
+      value : value
     };
 
     console.log(field);
@@ -49,7 +47,7 @@ class LocalizationField extends Component
 
     var field = {
       identifier : this.props.field.identifier,
-      values : {
+      value : {
         lat : latLng.lat,
         lng : latLng.lng,
       }
@@ -61,10 +59,10 @@ class LocalizationField extends Component
   renderInputs()
   {
 
-    const values = this.props.field.values !== undefined && this.props.field.values != null ? this.props.field.values : null;
+    const value = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value : null;
 
-    const lat = values != null && values.lat !== undefined ? values.lat : "";
-    const lng = values != null && values.lng !== undefined ? values.lng : "";
+    const lat = value != null && value.lat !== undefined ? value.lat : "";
+    const lng = value != null && value.lng !== undefined ? value.lng : "";
 
     return (
       <div className="row">
@@ -109,7 +107,7 @@ class LocalizationField extends Component
           <div className="field-form">
 
             <MapComponent
-              markerPosition={this.props.field.values}
+              markerPosition={this.props.field.value}
               onLatLngChange={this.handleLatLngChange}
             />
 
