@@ -13,6 +13,13 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::delete('/typologies/{typology?}/delete', 'TypologyController@delete')->name('typologies.delete');
     Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
 
+    // Categories
+    Route::get('/categories', 'CategoryController@index')->name('categories');
+    Route::post('/categories', 'CategoryController@store')->name('categories.store');
+    Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+    Route::put('/categories/{category?}/update', 'CategoryController@update')->name('categories.update');
+    Route::delete('/categories/{category?}/delete', 'CategoryController@delete')->name('categories.delete');
+    Route::get('/categories/{category?}', 'CategoryController@show')->name('categories.show');
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

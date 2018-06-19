@@ -24,6 +24,11 @@
                         </a>
                       </li>
                       <li>
+                        <a href="{{route('categories')}}">
+                          Categories
+                        </a>
+                      </li>
+                      <li>
                         <a href="{{route('medias.index')}}">
                           Medias
                         </a>

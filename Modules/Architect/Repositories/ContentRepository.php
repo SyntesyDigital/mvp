@@ -45,7 +45,7 @@ class ContentRepository extends BaseRepository
                 $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
             })
             ->addColumn('title', function ($item) {
-                return $item->getField($item->typology->getIndexField());
+                return $item->title;
             })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
@@ -78,7 +78,7 @@ class ContentRepository extends BaseRepository
 
         return Datatables::of($results)
             ->addColumn('title', function ($item) {
-                return $item->getField('title');
+                return $item->title;
             })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');

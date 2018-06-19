@@ -81,12 +81,19 @@ class Content extends Model
 
     public function getTitleAttribute()
     {
-        if($this->fields) {
-            $index = $this->typology->getIndexField();
-            foreach($this->fields as $field) {
-                if($field->name == $index) {
-                    return $this->getFieldValue($index);
-                }
+        if(!$this->fields) {
+            return null;
+        }
+
+        $index = $this->typology->getIndexField();
+
+        if(!$index) {
+            return null;
+        }
+
+        foreach($this->fields as $field) {
+            if($field->name == $index) {
+                return $this->getFieldValue($index);
             }
         }
 
