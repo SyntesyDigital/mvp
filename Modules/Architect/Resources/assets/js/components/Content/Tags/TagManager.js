@@ -15,18 +15,13 @@ const charMap = {
 class TagManager extends Component {
 
   constructor(props){
-    super(props);
-
-    this.suggestions = [
-      {id:1,name:"Tag 1"},
-      {id:2,name:"Tag 2"},
-      {id:3,name:"Tag 3"}
-    ];
-
+    super(props);    
+    this.suggestions = props.tags;
+    
     this.state = {
-          value: '',
-          suggestions: this.suggestions
-      };
+        value: '',
+        suggestions: this.suggestions
+    };
 
     this.onRemoveTag = this.onRemoveTag.bind(this);
     this.handleClickOnSuggest = this.handleClickOnSuggest.bind(this);
@@ -108,7 +103,7 @@ class TagManager extends Component {
               selectItem = item;
           }
       });
-
+      
       this.props.onTagAdded(selectItem);
   }
 
@@ -144,7 +139,7 @@ class TagManager extends Component {
 
   renderTags() {
     return (
-      this.props.tags.map((item,i) => (
+      this.props.content.tags.map((item,i) => (
         <span key={i} className="tag"> {item.name} <a href="" className="remove-btn" id={item.id} onClick={this.onRemoveTag}> <i className="fa fa-times-circle"></i> </a> </span>
       ))
     );

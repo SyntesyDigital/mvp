@@ -109,6 +109,7 @@ class ContentSidebar extends Component {
         <div className="form-group bmd-form-group sidebar-item">
           <TagManager
             tags={this.props.tags}
+            content={this.props.content}
             onTagAdded={this.props.onTagAdded}
             onRemoveTag={this.props.onRemoveTag}
           />

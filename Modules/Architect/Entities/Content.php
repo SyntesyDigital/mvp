@@ -60,6 +60,16 @@ class Content extends Model
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Tag', 'contents_tags');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'category_id', 'content_id');
+    }
+
     public function author()
     {
         return $this->hasOne('App\Models\User', "id", "author_id");

@@ -32,19 +32,7 @@ class ContentContainer extends Component {
          template: "",
          category: "",
          errors : {},
-         tags: [{
-                 id: 1,
-                 name: "Tag 1"
-             },
-             {
-                 id: 2,
-                 name: "Tag 2"
-             },
-             {
-                 id: 3,
-                 name: "Tag 3"
-             }
-         ],
+         tags: props.tags ? props.tags : [],
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
@@ -61,6 +49,8 @@ class ContentContainer extends Component {
          displayContentModal: false,
          contentSourceField: null
      };
+     
+     console.log('CONTENT =>', props.content);
 
      console.log('LOADED FIELDS => ', this.state.fields);
 
@@ -422,6 +412,7 @@ class ContentContainer extends Component {
         <div className="container rightbar-page content">
 
             <ContentSidebar
+                content={this.state.content}
                 errors={this.state.errors}
                 status={this.state.status}
                 template={this.state.template}

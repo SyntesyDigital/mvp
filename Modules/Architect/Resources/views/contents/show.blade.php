@@ -4,6 +4,8 @@
 <div id="content-form"
 languages="{{ base64_encode(Modules\Architect\Entities\Language::all()) }}"
 users="{{ $users ? base64_encode($users->toJson()) : null }}"
+tags="{{ $tags ? base64_encode($tags->toJson()) : null }}"
+categories="{{ $categories ? base64_encode($categories->toJson()) : null }}"
 fields="{{ base64_encode($fields->toJson()) }}"
 @if(isset($typology)) typology="{{base64_encode($typology->toJson())}}" @endif
 @if(isset($content)) content="{{base64_encode($content->toJson())}}" @endif
@@ -34,5 +36,4 @@ var routes = {
   'contents.data' : '{{ route('contents.modal.data') }}'
 };
 </script>
-
 @endpush

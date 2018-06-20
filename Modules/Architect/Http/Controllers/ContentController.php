@@ -21,6 +21,8 @@ use Modules\Architect\Jobs\Content\DeleteContent;
 // Models
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Tag;
+use Modules\Architect\Entities\Category;
 use App\Models\User;
 use App\Models\Role;
 
@@ -63,10 +65,12 @@ class ContentController extends Controller
         $content->typology->load('fields');
 
         return view('architect::contents.show', [
-            'content' => $content,
+            'content' => $content->load('tags', 'categories'),
             'typology' => $content->typology,
             'fields' => (new FieldsReactAdapter($content))->get(),
             'users' => User::all(),
+            'tags' => Tag::all(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -75,7 +79,9 @@ class ContentController extends Controller
         return view('architect::contents.show', [
             'typology' => $typology->load('fields'),
             'fields' => (new FieldsReactAdapter($typology))->get(),
-            'users' => User::all()
+            'users' => User::all(),
+            'tags' => Tag::all(),
+            'categories' => Category::all()
         ]);
     }
 

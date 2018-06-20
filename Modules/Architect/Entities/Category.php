@@ -83,4 +83,9 @@ class Category extends Model
         return null;
     }
 
+    public function contents()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Content');
+    }
+
 }
