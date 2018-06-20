@@ -23,11 +23,12 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Tags
     Route::get('/tags', 'TagController@index')->name('tags');
+    Route::get('/tags/data', 'TagController@data')->name('tags.data');
     Route::post('/tags', 'TagController@store')->name('tags.store');
     Route::get('/tags/create', 'TagController@create')->name('tags.create');
-    Route::put('/tags/{category?}/update', 'TagController@update')->name('tags.update');
-    Route::delete('/tags/{category?}/delete', 'TagController@delete')->name('tags.delete');
-    Route::get('/tags/{category?}', 'TagController@show')->name('tags.show');
+    Route::put('/tags/{tag?}/update', 'TagController@update')->name('tags.update');
+    Route::delete('/tags/{tag?}/delete', 'TagController@delete')->name('tags.delete');
+    Route::get('/tags/{tag?}', 'TagController@show')->name('tags.show');
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

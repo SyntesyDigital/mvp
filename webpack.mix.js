@@ -11,7 +11,8 @@ mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.js',
   'Modules/Architect/Resources/assets/js/architect/architect.dialog.js',
   'Modules/Architect/Resources/assets/js/architect/architect.medias.js',
-  'Modules/Architect/Resources/assets/js/architect/architect.contents.js'
+  'Modules/Architect/Resources/assets/js/architect/architect.contents.js',
+  'Modules/Architect/Resources/assets/js/architect/architect.tags.js'
 ], 'public/modules/architect/js/architect.js');
 
 mix.browserSync('http://localhost:8000');

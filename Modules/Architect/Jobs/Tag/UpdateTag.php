@@ -2,7 +2,7 @@
 
 namespace Modules\Architect\Jobs\Tag;
 
-use Modules\Architect\Http\Requests\Category\UpdateTagRequest;
+use Modules\Architect\Http\Requests\Tag\UpdateTagRequest;
 
 use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\TagField;
@@ -33,7 +33,7 @@ class UpdateTag
 
         foreach($this->attributes as $identifier => $field) {
             foreach($field as $languageId => $value) {
-                $this->tag->fields()->save(new CategoryField([
+                $this->tag->fields()->save(new TagField([
                     'name' => $identifier,
                     'value' => is_array($value) ? json_encode($value) : $value,
                     'language_id' => $languageId

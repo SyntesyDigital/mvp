@@ -76,11 +76,10 @@ class Category extends Model
         if($this->fields) {
             foreach($this->fields as $field) {
                 if($field->name == 'name') {
-                    return $this->getFieldValue($index);
+                    return $this->getFieldValue($field->name);
                 }
             }
         }
-
         return null;
     }
 

@@ -8,7 +8,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class Tag extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields;
 
     protected $fieldModel = 'Modules\Architect\Entities\TagField';
 
@@ -74,7 +74,7 @@ class Tag extends Model
         if($this->fields) {
             foreach($this->fields as $field) {
                 if($field->name == 'name') {
-                    return $this->getFieldValue($index);
+                    return $this->getFieldValue($field->name);
                 }
             }
         }

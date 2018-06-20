@@ -27,5 +27,18 @@ class CreateTag
 
     public function handle()
     {
+        $tag = Tag::create([]);
+
+        foreach($this->attributes as $identifier => $field) {
+            foreach($field as $languageId => $value) {
+                $tag->fields()->save(new TagField([
+                    'name' => $identifier,
+                    'value' => is_array($value) ? json_encode($value) : $value,
+                    'language_id' => $languageId
+                ]));
+            }
+        }
+
+        return $tag;
     }
 }

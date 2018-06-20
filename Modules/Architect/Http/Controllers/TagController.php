@@ -7,16 +7,16 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Architect\Repositories\tagRepository;
+use Modules\Architect\Repositories\TagRepository;
 
-use Modules\Architect\Http\Requests\tag\CreateTagRequest;
+use Modules\Architect\Http\Requests\Tag\CreateTagRequest;
 use Modules\Architect\Jobs\tag\CreateTag;
 
-use Modules\Architect\Http\Requests\tag\UpdateTagRequest;
+use Modules\Architect\Http\Requests\Tag\UpdateTagRequest;
 use Modules\Architect\Jobs\tag\UpdateTag;
 
-use Modules\Architect\Http\Requests\tag\DeleteTagRequest;
-use Modules\Architect\Jobs\tag\DeleteTag;
+use Modules\Architect\Http\Requests\Tag\DeleteTagRequest;
+use Modules\Architect\Jobs\Tag\DeleteTag;
 
 // Models
 use Modules\Architect\Entities\Tag;
@@ -86,6 +86,16 @@ class TagController extends Controller
         }
 
         return redirect(route('tags.show', $tag))->with('error', $error);
+    }
+
+
+    public function delete(Tag $tag, DeleteTagRequest $request)
+    {
+        return dispatch_now(DeleteTag::fromRequest($tag, $request)) ? response()->json([
+            'success' => true
+        ]) : response()->json([
+            'success' => false
+        ], 500);
     }
 
 }

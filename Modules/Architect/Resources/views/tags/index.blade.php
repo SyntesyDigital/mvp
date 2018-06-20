@@ -11,17 +11,20 @@
 
         <div class="grid-items">
           <div class="row">
-              @foreach($tags as $tag)
-                <div class="col-xs-3">
-                    <a href="{{ route('tags.show', $tag)}}">
-                      <div class="grid-item">
-                          <p class="grid-item-name">
-                              {{$tag->name}}
-                          </p>
-                      </div>
-                    </a>
-                </div>
-              @endforeach()
+              <table class="table" id="table-tags" data-url="{{route('tags.data')}}">
+                  <thead>
+                     <tr>
+                         <th>Nom</th>
+                         <th></th>
+                     </tr>
+                  </thead>
+                  <tfoot>
+                     <tr>
+                         <th></th>
+                         <th></th>
+                     </tr>
+                  </tfoot>
+              </table>
           </div>
         </div>
 
@@ -30,3 +33,25 @@
   </div>
 
 @stop
+
+
+@push('plugins')
+    {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
+    {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/architect/js/architect.js') }}
+@endpush
+
+@push('javascripts-libs')
+<script>
+    architect.tags.init({
+        'table' : $('#table-tags'),
+        'urls': {
+            'index' : '{{ route('contents.data') }}',
+            'show' : '{{ route('contents.show') }}',
+            'delete' : '{{ route('contents.delete') }}',
+        }
+    })
+</script>
+@endpush
