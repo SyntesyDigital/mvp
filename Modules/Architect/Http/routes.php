@@ -13,6 +13,22 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::delete('/typologies/{typology?}/delete', 'TypologyController@delete')->name('typologies.delete');
     Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
 
+    // Categories
+    Route::get('/categories', 'CategoryController@index')->name('categories');
+    Route::post('/categories', 'CategoryController@store')->name('categories.store');
+    Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+    Route::put('/categories/{category?}/update', 'CategoryController@update')->name('categories.update');
+    Route::delete('/categories/{category?}/delete', 'CategoryController@delete')->name('categories.delete');
+    Route::get('/categories/{category?}', 'CategoryController@show')->name('categories.show');
+
+    // Tags
+    Route::get('/tags', 'TagController@index')->name('tags');
+    Route::get('/tags/data', 'TagController@data')->name('tags.data');
+    Route::post('/tags', 'TagController@store')->name('tags.store');
+    Route::get('/tags/create', 'TagController@create')->name('tags.create');
+    Route::put('/tags/{tag?}/update', 'TagController@update')->name('tags.update');
+    Route::delete('/tags/{tag?}/delete', 'TagController@delete')->name('tags.delete');
+    Route::get('/tags/{tag?}', 'TagController@show')->name('tags.show');
 
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');

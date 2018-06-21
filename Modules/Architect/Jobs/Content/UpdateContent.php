@@ -4,6 +4,8 @@ namespace Modules\Architect\Jobs\Content;
 
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Category;
+use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Entities\Language;
@@ -17,7 +19,9 @@ class UpdateContent
              'status',
              'typology_id',
              'author_id',
-             'fields'
+             'fields',
+             'category_id',
+             'tags'
          ]);
      }
 
@@ -58,6 +62,26 @@ class UpdateContent
         }
     }
 
+    public function saveCategories()
+    {
+        $this->content->categories()->detach();
+        $category = isset($this->attributes['category_id']) ? Category::find($this->attributes['category_id']) : null;
+
+        if($category) {
+            $this->content->categories()->attach($category);
+        }
+    }
+
+    public function saveTags()
+    {
+        $this->content->tags()->detach();
+        $tags = isset($this->attributes['tags']) ? Tag::whereIn('id', collect($this->attributes['tags'])->pluck('id')->toArray())->get() : null;
+
+        if($tags) {
+            $this->content->tags()->attach($tags);
+        }
+    }
+
     public function handle()
     {
         $this->content->update([
@@ -65,10 +89,15 @@ class UpdateContent
             'author_id' => $this->attributes['author_id'],
         ]);
 
+        $this->saveCategories();
+        $this->saveTags();
+
         // IF content with typology
         if($this->content->typology_id) {
             $this->saveTypologyContent($this->content);
         }
+
+        $this->content->load('tags');
 
         return $this->content;
     }

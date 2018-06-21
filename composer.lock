@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d7109e22b76e5fba93f08645cc64a69d",
-    "content-hash": "09205b75738b1005b67124abe7e7d743",
+    "hash": "c04c6ced81c74aa590be18aff3594f56",
+    "content-hash": "2cf608f94306ad0a0f2a92157e301e44",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1310,16 +1310,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.6.5",
+            "version": "v5.6.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "623a150c91e2d3f92eeee9f9eda58a841e3cb548"
+                "reference": "974605fcd22a7e4d19f0b2ef635a0d1d7400387d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/623a150c91e2d3f92eeee9f9eda58a841e3cb548",
-                "reference": "623a150c91e2d3f92eeee9f9eda58a841e3cb548",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/974605fcd22a7e4d19f0b2ef635a0d1d7400387d",
+                "reference": "974605fcd22a7e4d19f0b2ef635a0d1d7400387d",
                 "shasum": ""
             },
             "require": {
@@ -1333,7 +1333,7 @@
             "require-dev": {
                 "illuminate/database": "5.6.*",
                 "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~5.4"
+                "phpunit/phpunit": "~7.1"
             },
             "type": "library",
             "extra": {
@@ -1374,7 +1374,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
-            "time": "2018-03-16 16:57:31"
+            "time": "2018-06-18 15:04:16"
         },
         {
             "name": "league/flysystem",

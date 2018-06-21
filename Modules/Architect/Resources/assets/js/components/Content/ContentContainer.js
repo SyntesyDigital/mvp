@@ -30,26 +30,16 @@ class ContentContainer extends Component {
      this.state = {
          status: 0,
          template: "",
-         category: "",
+         category: props.content ? props.content.categories[0].id : null,
          errors : {},
-         tags: [{
-                 id: 1,
-                 name: "Tag 1"
-             },
-             {
-                 id: 2,
-                 name: "Tag 2"
-             },
-             {
-                 id: 3,
-                 name: "Tag 3"
-             }
-         ],
+         tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
+         tagsList : props.tags ? props.tags : [], // La lista de los tags
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
          typology: props.typology,
+         categories: props.categories,
          languages: LANGUAGES,
          fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
@@ -61,6 +51,8 @@ class ContentContainer extends Component {
          displayContentModal: false,
          contentSourceField: null
      };
+     
+     console.log('CONTENT =>', props.content);
 
      console.log('LOADED FIELDS => ', this.state.fields);
 
@@ -189,12 +181,8 @@ class ContentContainer extends Component {
 
   handleSubmitForm(e) {
     e.preventDefault();
-
-    if(this.state.content) {
-        this.update();
-    } else {
-        this.create();
-    }
+    
+    this.state.content ? this.update() : this.create();
   }
 
   getFormData()
@@ -203,7 +191,7 @@ class ContentContainer extends Component {
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           typology_id : this.state.typology.id,
           status : this.state.status,
-          category : this.state.category,
+          category_id : this.state.category,
           tags : this.state.tags,
           fields : this.state.fields,
           author_id : this.state.author
@@ -358,7 +346,7 @@ class ContentContainer extends Component {
 
     if(!found){
       tags.push(tag);
-
+      
       this.setState({
         tags : tags
       });
@@ -369,11 +357,12 @@ class ContentContainer extends Component {
   }
 
   handleRemoveTag(tagId) {
+     
     const {tags} = this.state;
-
+    
     for(var i=0;i<tags.length;i++){
       if(tags[i].id == tagId){
-        tags.splice(i,1);
+        tags.splice(i,1);    
         break;
       }
     }
@@ -422,11 +411,13 @@ class ContentContainer extends Component {
         <div className="container rightbar-page content">
 
             <ContentSidebar
+                content={this.state.content}
                 errors={this.state.errors}
                 status={this.state.status}
                 template={this.state.template}
                 category={this.state.category}
-                tags={this.state.tags}
+                categories={this.state.categories}
+                tagsList={this.state.tagsList}
                 translations={this.state.translations}
                 author={this.state.author}
                 authors={this.state.authors}

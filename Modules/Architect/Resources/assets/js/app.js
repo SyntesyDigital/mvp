@@ -32,7 +32,4 @@ slugify = require('slugify');
 require('./components/Typology/TypologyForm');
 require('./components/Typology/ModalSettings');
 require('./components/Medias/MediaEditModal');
-require('./components/Content/ContentForm')
-
-// Medias
-//require('./components/Media/MediaUploader');
+require('./components/Content/ContentForm');
