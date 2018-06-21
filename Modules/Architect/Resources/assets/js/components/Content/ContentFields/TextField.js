@@ -24,14 +24,14 @@ class TextField extends Component
       value : values
     });
   }
-  
+
   renderInputs()
   {
     var inputs = [];
-    for(var key in this.props.translations){        
-        var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';          
-        var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;          
-        
+    for(var key in this.props.translations){
+        var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
+        var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
+
         inputs.push(
             <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
                 <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
@@ -39,16 +39,20 @@ class TextField extends Component
             </div>
         );
     }
-    
+
     return inputs;
   }
 
 
-  render() {      
+  render() {
+
+    const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
+
     return (
       <div className="field-item">
 
-        <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
+
+        <button style={{display:(hideTab ? 'none' : 'block')}} id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
             <i className={"fa " + FIELDS.TEXT.icon}></i> {FIELDS.TEXT.name}
           </span>

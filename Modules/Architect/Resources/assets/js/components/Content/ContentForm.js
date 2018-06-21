@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import ContentContainer from './ContentContainer';
+import PageContainer from './Page/PageContainer';
 
 export default class ContentForm extends Component {
 
@@ -29,10 +30,16 @@ export default class ContentForm extends Component {
     }
 
     render() {
+
+        const page = true;
+
+        console.log("languages : ",this.state.languages);
+
         return (
             <div>
-                <ContentContainer
-                    languages={this.state.languages}
+
+                {!page &&
+                  <ContentContainer
                     authors={this.state.authors}
                     typology={this.state.typology}
                     content={this.state.content}
@@ -41,6 +48,17 @@ export default class ContentForm extends Component {
                     tags={this.state.tags}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                 />
+
+                }
+
+                {page &&
+                  <PageContainer
+                    authors={this.state.authors}
+                    typology={this.state.typology}
+                    content={this.state.content}
+                    ref={(contentContainer) => this.contentContainer = contentContainer}
+                  />
+                }
             </div>
         );
     }
@@ -57,4 +75,5 @@ if (document.getElementById('content-form')) {
     var categories = element.getAttribute('categories');
     
     ReactDOM.render(<ContentForm tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
+
 }

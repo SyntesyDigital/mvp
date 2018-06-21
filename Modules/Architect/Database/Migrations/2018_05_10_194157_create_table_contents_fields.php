@@ -23,7 +23,7 @@ class CreateTableContentsFields extends Migration
             $table->foreign('language_id')->references('id')->on('languages');
 
             $table->string('name');
-            $table->text('value')->nullable();
+            $table->longText('value')->nullable();
             $table->text('relation')->nullable();
 
             $table->integer('parent_id')->unsigned()->nullable();

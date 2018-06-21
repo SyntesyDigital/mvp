@@ -26,7 +26,7 @@ class ContentContainer extends Component {
          translations[v.iso] = true;
      });
 
-     // Build state...
+     // Build state
      this.state = {
          status: 0,
          template: "",

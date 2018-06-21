@@ -4,6 +4,9 @@ namespace Modules\Architect\Jobs\Content;
 
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Page;
+use Modules\Architect\Entities\Tag;
+use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
@@ -18,8 +21,9 @@ class CreateContent
             'typology_id',
             'author_id',
             'fields',
-            'category_id'
-            'tags'
+            'category_id',
+            'tags',
+            'page'
         ]);
     }
 
@@ -41,7 +45,7 @@ class CreateContent
     }
 
 
-    public function saveTypologyContent(Content $content)
+    public function saveFields()
     {
         $fieldObjects = FieldConfig::get();
         $languages = Language::all();
@@ -54,10 +58,11 @@ class CreateContent
             if($values && $type && $identifier) {
                 $this
                     ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($content, $identifier, $values, $languages);
+                    ->save($this->content, $identifier, $values, $languages);
             }
         }
     }
+
 
     public function saveCategories()
     {
@@ -69,9 +74,11 @@ class CreateContent
         }
     }
 
+
     public function saveTags()
     {
         $this->content->tags()->detach();
+
         $tags = isset($this->attributes['tags']) ? Tag::whereIn('id', collect($this->attributes['tags'])->filter(function($tag){
             return isset($tag['id']) ? $tag['id'] : false;
         }))->get() : null;
@@ -79,7 +86,48 @@ class CreateContent
         if($tags) {
             $this->content->tags()->attach($tags);
         }
+
+        $this->content->load('tags');
     }
+
+
+/*
+[{
+	"type": "row",
+	"children": [{
+		"type": "col",
+		"colClass": "col-xs-12",
+		"children": [{
+			"type": "item",
+			"field": {
+				"class": "Modules\\Architect\\Fields\\Types\\Text",
+				"rules": ["required", "unique", "maxCharacters", "minCharacters"],
+				"label": "TEXT",
+				"name": "Text",
+				"type": "text",
+				"icon": "fa-font",
+				"settings": ["entryTitle"],
+				"value": {
+					"ca": "test",
+					"es": "test",
+					"en": "test"
+				}
+			}
+		}]
+	}]
+}]
+*/
+    public function savePage()
+    {
+        $page = Page::create([
+            'definition' => json_encode($this->attributes['page']),
+        ]);
+
+        $this->content->update([
+            'page_id' => $page ? $page->id : null
+        ]);
+    }
+
 
     public function handle()
     {
@@ -92,12 +140,11 @@ class CreateContent
         $this->saveCategories();
         $this->saveTags();
 
-        // IF content with typology
-        if($this->content->typology_id) {
-            $this->saveTypologyContent($this->content);
+        if(isset($this->attributes['page'])) {
+            $this->savePage();
+        } else {
+            $this->saveFields();
         }
-
-        $this->content->load('tags');
 
         return $this->content;
     }

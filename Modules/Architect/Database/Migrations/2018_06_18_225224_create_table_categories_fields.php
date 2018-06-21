@@ -23,7 +23,7 @@ class CreateTableCategoriesFields extends Migration
             $table->foreign('language_id')->references('id')->on('languages');
 
             $table->string('name');
-            $table->text('value')->nullable();
+            $table->longText('value')->nullable();
 
             $table->timestamps();
         });

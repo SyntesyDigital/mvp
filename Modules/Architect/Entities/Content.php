@@ -32,7 +32,8 @@ class Content extends Model
         'status',
         'typology_id',
         'user_id',
-        'author_id'
+        'author_id',
+        'page_id'
     ];
 
     /**
@@ -75,6 +76,11 @@ class Content extends Model
         return $this->hasOne('App\Models\User', "id", "author_id");
     }
 
+    public function page()
+    {
+        return $this->hasOne('App\Models\Page', "page_id", "id");
+    }
+
     public function getStringStatus()
     {
 
@@ -91,7 +97,7 @@ class Content extends Model
 
     public function getTitleAttribute()
     {
-        if(!$this->fields) {
+        if(!$this->fields || !$this->typology) {
             return null;
         }
 

@@ -80,7 +80,7 @@ class ContentDataTable extends Component {
     render() {
         return (
           <div>
-            <table className="table" id="table-contents">
+            <table className="table" id="table-contents" style={{width:"100%"}}>
                 <thead>
                    <tr>
                        <th>Nom</th>
