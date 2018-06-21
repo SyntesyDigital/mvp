@@ -29,7 +29,7 @@
     @endif
 
 
-    @if($category)
+    @if(isset($category))
         {!! Form::hidden('_method', 'PUT') !!}
     @endif
 
