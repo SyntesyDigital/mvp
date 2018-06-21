@@ -98,9 +98,11 @@ class ContentSidebar extends Component {
         <div className="form-group bmd-form-group has-danger">
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
-              <option name="" value="1"> Categoria 1 </option>
-              <option name="" value="2"> Categoria 2 </option>
-              <option name="" value="3"> Categoria 3 </option>
+               {
+                 this.props.categories.map(function(category, i) {
+                   return <option value={category.id} key={i}>{category.name}</option>
+                 })
+               }
            </select>
         </div>
 
@@ -108,7 +110,7 @@ class ContentSidebar extends Component {
 
         <div className="form-group bmd-form-group sidebar-item">
           <TagManager
-            tags={this.props.tags}
+            tagsList={this.props.tagsList}
             content={this.props.content}
             onTagAdded={this.props.onTagAdded}
             onRemoveTag={this.props.onRemoveTag}

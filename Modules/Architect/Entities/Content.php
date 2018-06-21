@@ -67,7 +67,7 @@ class Content extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'category_id', 'content_id');
+        return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'content_id', 'category_id');
     }
 
     public function author()

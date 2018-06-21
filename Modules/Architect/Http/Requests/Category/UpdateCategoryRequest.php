@@ -5,6 +5,7 @@ namespace Modules\Architect\Http\Requests\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Modules\Architect\Entities\Category;
+use Modules\Architect\Entities\Language;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -17,12 +18,17 @@ class UpdateCategoryRequest extends FormRequest
     private function buildRules($fielName)
     {
         $rules = [];
-        foreach(Category::FIELDS as $field) {
-            $required = isset($field['required']) ? $field['required'] : false;
+        $languages = Language::all();
 
-            if($required) {
-                $rules[$fielName . '.' . $field['identifier']] = 'required';
+        foreach(Category::FIELDS as $field) {
+            foreach($languages as $language) {
+                $required = isset($field['required']) ? $field['required'] : false;
+
+                if($required) {
+                    $rules[$fielName . '.' . $field['identifier']] = 'required|array';
+                }
             }
+
         }
 
         return $rules;

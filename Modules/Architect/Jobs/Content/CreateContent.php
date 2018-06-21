@@ -17,7 +17,9 @@ class CreateContent
             'status',
             'typology_id',
             'author_id',
-            'fields'
+            'fields',
+            'category_id'
+            'tags'
         ]);
     }
 
@@ -57,20 +59,46 @@ class CreateContent
         }
     }
 
+    public function saveCategories()
+    {
+        $this->content->categories()->detach();
+        $category = isset($this->attributes['category_id']) ? Category::find($this->attributes['category_id']) : null;
+
+        if($category) {
+            $this->content->categories()->attach($category);
+        }
+    }
+
+    public function saveTags()
+    {
+        $this->content->tags()->detach();
+        $tags = isset($this->attributes['tags']) ? Tag::whereIn('id', collect($this->attributes['tags'])->filter(function($tag){
+            return isset($tag['id']) ? $tag['id'] : false;
+        }))->get() : null;
+
+        if($tags) {
+            $this->content->tags()->attach($tags);
+        }
+    }
 
     public function handle()
     {
-        $content = Content::create([
+        $this->content = Content::create([
             'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
             'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
             'author_id' => $this->attributes['author_id'],
         ]);
 
+        $this->saveCategories();
+        $this->saveTags();
+
         // IF content with typology
-        if($content->typology_id) {
-            $this->saveTypologyContent($content);
+        if($this->content->typology_id) {
+            $this->saveTypologyContent($this->content);
         }
 
-        return $content;
+        $this->content->load('tags');
+
+        return $this->content;
     }
 }
