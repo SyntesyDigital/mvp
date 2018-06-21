@@ -60,6 +60,16 @@ class Content extends Model
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Tag', 'contents_tags');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'content_id', 'category_id');
+    }
+
     public function author()
     {
         return $this->hasOne('App\Models\User', "id", "author_id");
@@ -81,12 +91,19 @@ class Content extends Model
 
     public function getTitleAttribute()
     {
-        if($this->fields) {
-            $index = $this->typology->getIndexField();
-            foreach($this->fields as $field) {
-                if($field->name == $index) {
-                    return $this->getFieldValue($index);
-                }
+        if(!$this->fields) {
+            return null;
+        }
+
+        $index = $this->typology->getIndexField();
+
+        if(!$index) {
+            return null;
+        }
+
+        foreach($this->fields as $field) {
+            if($field->name == $index) {
+                return $this->getFieldValue($index);
             }
         }
 

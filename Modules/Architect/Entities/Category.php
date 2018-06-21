@@ -14,6 +14,27 @@ class Category extends Model
 
     protected $appends = ['name'];
 
+    const FIELDS = [
+        [
+            'name' => 'name',
+            'identifier' => 'name',
+            'type' => 'text',
+            'required' => true
+        ],
+        [
+            'name' => 'slug',
+            'identifier' => 'slug',
+            'type' => 'text',
+            'required' => true
+        ],
+        [
+            'name' => 'description',
+            'identifier' => 'description',
+            'type' => 'richtext'
+        ],
+    ];
+
+
     /**
      * The database table used by the model.
      *
@@ -55,12 +76,16 @@ class Category extends Model
         if($this->fields) {
             foreach($this->fields as $field) {
                 if($field->name == 'name') {
-                    return $this->getFieldValue($index);
+                    return $this->getFieldValue($field->name);
                 }
             }
         }
-
         return null;
+    }
+
+    public function contents()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Content');
     }
 
 }

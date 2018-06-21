@@ -15,18 +15,13 @@ const charMap = {
 class TagManager extends Component {
 
   constructor(props){
-    super(props);
-
-    this.suggestions = [
-      {id:1,name:"Tag 1"},
-      {id:2,name:"Tag 2"},
-      {id:3,name:"Tag 3"}
-    ];
-
+    super(props);    
+    this.suggestions = props.tagsList;
+    
     this.state = {
-          value: '',
-          suggestions: this.suggestions
-      };
+        value: '',
+        suggestions: this.suggestions
+    };
 
     this.onRemoveTag = this.onRemoveTag.bind(this);
     this.handleClickOnSuggest = this.handleClickOnSuggest.bind(this);
@@ -42,15 +37,15 @@ class TagManager extends Component {
   onChange(event, { newValue })
   {
       this.setState({
-        value: newValue
+          value: newValue
       });
   }
 
   normalize(str) {
 
     $.each(charMap, function (normalized, regex) {
-            str = str.replace(regex, normalized);
-        });
+        str = str.replace(regex, normalized);
+    });
     return str.toLowerCase();
   }
 
@@ -59,11 +54,7 @@ class TagManager extends Component {
       const inputValue = this.normalize(value.trim().toLowerCase());
       const inputLength = inputValue.length;
 
-      //console.log("GraphAuthoSuggest :: getSuggestions inputLength  :: "+inputValue);
-      //console.log("GraphAuthoSuggest :: getSuggestions normalized  :: "+this.normalize(inputValue));
-
       var _this = this;
-
       return inputLength === 0 ? [] : this.suggestions.filter(function(item) {
           //return item.name.toLowerCase().slice(0, inputLength) === inputValue
           return _this.normalize(item.name.toLowerCase()).indexOf(inputValue) != -1;
@@ -72,7 +63,7 @@ class TagManager extends Component {
 
   getSuggestionValue(suggestion)
   {
-    return suggestion.name;
+      return suggestion.name;
   }
 
   renderSuggestion(suggestion)
@@ -101,51 +92,40 @@ class TagManager extends Component {
 
   handleClickOnSuggest(id)
   {
-      var selectItem = null;
-      const tags = this.suggestions;
-      tags.map((item, index) => {
-          if(item.id === id) {
-              selectItem = item;
+      var self = this;
+
+      this.suggestions.map((item, _tag) => {
+          if(_tag.id === id) {
+              self.props.onTagAdded(_tag);
           }
       });
-
-      this.props.onTagAdded(selectItem);
   }
 
   handleKeyPress(event)
   {
-
-    //console.log("SearchForm :: handleKeyPress"+event.key);
-
     if(event.key == 'Enter'){
-
-      var selectItem = null;
-      const markers = this.suggestions;
-      markers.map((marker, index) => {
-          if(this.normalize(marker.name) == this.normalize(this.state.value)) {
-              selectItem = marker;
+      var self = this;
+      this.suggestions.map((tag, index) => {
+          if(this.normalize(tag.name) == this.normalize(this.state.value)) {
+              self.props.onTagAdded(tag);
           }
       });
-
-      if(selectItem != null){
-        this.props.onTagAdded(selectItem);
-      }
     }
   }
 
   onRemoveTag(e) {
     e.preventDefault();
-
-    var id = $(e.target).closest('.remove-btn').attr('id');
-
-    this.props.onRemoveTag(id)
-
+    this.props.onRemoveTag($(e.target).closest('.remove-btn').attr('id'))
   }
 
   renderTags() {
+    var tagsIds = this.props.content.tags ? this.props.content.tags.map(tag => tag.id) : [];
+  
     return (
-      this.props.tags.map((item,i) => (
-        <span key={i} className="tag"> {item.name} <a href="" className="remove-btn" id={item.id} onClick={this.onRemoveTag}> <i className="fa fa-times-circle"></i> </a> </span>
+      this.props.tagsList.filter(function(tag) {
+        return tagsIds.indexOf(tag.id) > -1 ? tag : false;
+      }).map((tag,i) => (
+        <span key={i} className="tag"> {tag.name} <a href="" className="remove-btn" id={tag.id} onClick={this.onRemoveTag}> <i className="fa fa-times-circle"></i> </a> </span>
       ))
     );
   }
