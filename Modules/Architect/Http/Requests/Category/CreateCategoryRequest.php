@@ -9,9 +9,9 @@ use Modules\Architect\Entities\Category;
 class CreateCategoryRequest extends FormRequest
 {
     public function rules()
-    {        
+    {
         return [
-            'fields.ca.name' => 'required',
+            'fields.name' => 'required',
             'fields.slug' => 'required'
         ];
     }
