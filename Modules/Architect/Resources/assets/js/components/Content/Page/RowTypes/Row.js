@@ -9,7 +9,11 @@ class Row extends Component {
   constructor(props){
     super(props);
 
-    this.deleteRow = this.deleteRow.bind(this);
+    console.log("Row : constructor ",props);
+
+    this.state = {
+      colsOpen : false
+    };
 
     this.colTypes = [
       ['col-xs-12'],
@@ -20,8 +24,26 @@ class Row extends Component {
       ['col-xs-3','col-xs-3','col-xs-3','col-xs-3']
     ];
 
+    this.deleteRow = this.deleteRow.bind(this);
     this.handleColTypeSelect = this.handleColTypeSelect.bind(this);
+    this.toggleColumns = this.toggleColumns.bind(this);
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    console.log("Row : componentWillRecieveProps ",nextProps);
+
+    this.setState({
+      colsOpen : false
+    });
+
+  }
+
+  getPathToIndex(index) {
+    const pathToIndex = this.props.pathToIndex.slice(0);
+    pathToIndex.push(parseInt(index));
+    return pathToIndex;
   }
 
   renderChildren() {
@@ -36,7 +58,15 @@ class Row extends Component {
               <Col
                 key={key}
                 colClass={item.colClass}
+                index={parseInt(key)}
                 data={item}
+                onSelectItem={this.props.onSelectItem}
+                onColsChanged={this.props.onColsChanged}
+                onDeleteRow={this.props.onDeleteRow}
+                pathToIndex={this.getPathToIndex(key)}
+                onEditItem={this.props.onEditItem}
+                onSelectItemBefore={this.props.onSelectItemBefore}
+                onSelectItemAfter={this.props.onSelectItemAfter}
               />
             );
           }
@@ -50,21 +80,32 @@ class Row extends Component {
 
     e.preventDefault();
 
-    this.props.onDeleteRow(this.props.index);
+    console.log("this.props.pathToIndex => ",this.props.pathToIndex);
 
+    this.props.onDeleteRow(this.props.pathToIndex);
+
+  }
+
+  toggleColumns(e) {
+    e.preventDefault();
+
+    this.setState({
+      colsOpen : !this.state.colsOpen
+    });
   }
 
   handleColTypeSelect(cols) {
 
-    this.props.colTypeSelect(this.props.index,cols);
+    //this.props.colTypeSelect(this.props.index,cols);
 
+    this.setColType(cols);
   }
 
   renderColTypes() {
 
 
     return (
-      <div className="col-types-container">
+      <div className={"col-types-container "+(this.state.colsOpen ? 'open' : '')}>
         <ul>
 
           {this.colTypes.map((item,index) => (
@@ -83,6 +124,49 @@ class Row extends Component {
 
   }
 
+  setColType(cols) {
+
+    const children = this.props.data.children;
+
+    if(cols.length < children.length ){
+      //join cols
+      //TODO como mejora unir las filas para no perder hijos
+    }
+
+    var resultChildren = [];
+
+    for(var i=0;i<cols.length;i++){
+      resultChildren.push({
+        type : 'col',
+        colClass : cols[i],
+        //children : children[i] !== undefined && children[i] != null ? children : []
+        children : []
+      });
+
+    }
+
+    //var pathToIndex = [];
+    //pathToIndex.push(this.props.index);
+
+    console.log("Row :: setColType : "+this.props.pathToIndex);
+
+    this.props.onColsChanged(this.props.pathToIndex,resultChildren);
+
+  }
+
+  joinChildren() {
+
+    var childrenData = [];
+
+    for(var i=0; i < this.props.data.children.length;i++){
+      var col = this.props.data.children[i];
+
+    }
+
+
+
+  }
+
 
   render() {
 
@@ -97,7 +181,7 @@ class Row extends Component {
               <a href="" className="btn btn-link">
                 <i className="fa fa-arrow-down"></i>
               </a>
-              <a href="" className="btn btn-link">
+              <a href="" className="btn btn-link" onClick={this.toggleColumns}>
                 <i className="fa fa-columns"></i>
               </a>
             </div>

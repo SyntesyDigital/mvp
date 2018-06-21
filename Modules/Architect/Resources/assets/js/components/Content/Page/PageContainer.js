@@ -24,7 +24,7 @@ class PageContainer extends Component {
 
      // Set translations
      var translations = {};
-     props.languages.map(function(v,k){
+     LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
 

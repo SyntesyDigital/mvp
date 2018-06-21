@@ -82,13 +82,19 @@
 
     .col-types-container {
 
+      @extend .animate;
+
       width:100%;
-      top:50px;
+      top:0px;
       left:0px;
       position: absolute;
-      z-index: 10;
+      z-index: 5;
       height: 40px;
       background-color: $cms-light-color-6;
+
+      &.open{
+        top:50px;
+      }
 
       ul {
 
@@ -141,6 +147,7 @@
       background-color:$cms-light-color-6;
       border: 1px solid #ccc;
       height:50px;
+      z-index: 10;
 
       .left-buttons {
         display: inline-block;

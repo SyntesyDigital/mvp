@@ -23,7 +23,8 @@ class ContentField extends Model
         'value',
         'relation',
         'content_id',
-        'language_id'
+        'language_id',
+        'parent_id'
     ];
 
     /**

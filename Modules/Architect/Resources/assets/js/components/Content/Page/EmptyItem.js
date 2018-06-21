@@ -8,12 +8,19 @@ class EmptyItem extends Component {
 
   }
 
+  onSelectItem(e) {
+    e.preventDefault();
+
+    console.log("EmptyItem :: onSelectItem : "+this.props.index);
+
+    this.props.onSelectItem(this.props.pathToIndex);
+  }
 
   render() {
 
     return (
       <div className="row empty-item">
-          <a href="" className="btn btn-link">
+          <a href="" className="btn btn-link" onClick={this.onSelectItem.bind(this)}>
             <i className="fa fa-plus"></i>
           </a>
       </div>

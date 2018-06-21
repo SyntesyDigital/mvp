@@ -31,11 +31,12 @@ export default class ContentForm extends Component {
 
         const page = true;
 
+        console.log("languages : ",this.state.languages);
+
         return (
             <div>
                 {!page &&
                   <ContentContainer
-                    languages={this.state.languages}
                     authors={this.state.authors}
                     typology={this.state.typology}
                     content={this.state.content}
@@ -46,7 +47,6 @@ export default class ContentForm extends Component {
 
                 {page &&
                   <PageContainer
-                    languages={this.state.languages}
                     authors={this.state.authors}
                     typology={this.state.typology}
                     content={this.state.content}

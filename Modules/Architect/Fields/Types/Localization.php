@@ -5,6 +5,7 @@ namespace Modules\Architect\Fields\Types;
 use Modules\Architect\Fields\Field;
 use Modules\Architect\Fields\FieldInterface;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\ContentField;
 
 class Localization extends Field implements FieldInterface
 {
@@ -18,12 +19,16 @@ class Localization extends Field implements FieldInterface
 
     public $settings = [];
 
-    public function validate($request)
-    {}
-
     public function save($content, $identifier, $values, $languages = null)
     {
-        return parent::save($content, $identifier, $values, $languages);
+        if($content->fields()->save(new ContentField([
+            'name' => $identifier,
+            'value' => is_array($values) ? json_encode($values) : $values
+        ]))) {
+            return true;
+        }
+
+        return false;
     }
 
 }
