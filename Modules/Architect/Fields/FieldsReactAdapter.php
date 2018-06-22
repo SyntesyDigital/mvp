@@ -119,15 +119,17 @@ class FieldsReactAdapter
                 $values = null;
                 $childs = $this->content->getFieldChilds($contentField);
 
-                foreach($childs as $k => $v) {
-                    if($v->language_id) {
-                        $iso = $this->getLanguageIsoFromId($v->language_id);
-                        $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
-                    } else {
-                        if(explode('.', $v->name)[1] == 'content') {
-                            $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
-                        }
-                    }
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+                      if($v->language_id) {
+                          $iso = $this->getLanguageIsoFromId($v->language_id);
+                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                      } else {
+                          if(explode('.', $v->name)[1] == 'content') {
+                              $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                          }
+                      }
+                  }
                 }
 
                 $typologyField->value = $values;

@@ -31,11 +31,10 @@ export default class ContentForm extends Component {
 
     render() {
 
-        const page = true;
+        const page = false;
 
         return (
             <div>
-
                 {!page &&
                   <ContentContainer
                     authors={this.state.authors}
@@ -70,7 +69,6 @@ if (document.getElementById('content-form')) {
     var fields = element.getAttribute('fields');
     var tags = element.getAttribute('tags');
     var categories = element.getAttribute('categories');
-    
-    ReactDOM.render(<ContentForm tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
 
+    ReactDOM.render(<ContentForm tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
 }

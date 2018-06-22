@@ -5,11 +5,16 @@
 
   .form-group.form-group-sm .form-control, .form-group.form-group-sm .cke_textarea_inline{
     @include font(14,18,400);
-    
+
   }
 }
 
 .table.dataTable {
+
+  td:last-child{
+    text-align: right;
+  }
+
   .btn.btn-link {
       padding:0px;
   }

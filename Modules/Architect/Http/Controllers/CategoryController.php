@@ -20,6 +20,7 @@ use Modules\Architect\Jobs\Category\DeleteCategory;
 
 // Models
 use Modules\Architect\Entities\Category;
+use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
 
@@ -33,6 +34,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         return view('architect::categories.index', [
+            "typologies" => Typology::all(),
             "categories" => $this->categories->all()
         ]);
     }

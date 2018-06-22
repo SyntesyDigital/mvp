@@ -29,15 +29,17 @@ class TextField extends Component
   {
     var inputs = [];
     for(var key in this.props.translations){
-        var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
-        var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
+        if(this.props.translations[key]){
+          var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
+          var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
-        inputs.push(
-            <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
-                <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
-                <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
-            </div>
-        );
+          inputs.push(
+              <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
+                  <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
+                  <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
+              </div>
+          );
+        }
     }
 
     return inputs;

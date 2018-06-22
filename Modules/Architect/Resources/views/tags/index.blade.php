@@ -1,36 +1,35 @@
 @extends('architect::layouts.master')
 
 @section('content')
-  <div class="container grid-page">
-    <div class="row">
-      <div class="col-md-offset-2 col-md-8">
 
-        <div class="page-title">
-          <h1>Tags</h1> <a href="{{route('tags.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tag</a>
-        </div>
 
-        <div class="grid-items">
-          <div class="row">
-              <table class="table" id="table-tags" data-url="{{route('tags.data')}}">
-                  <thead>
-                     <tr>
-                         <th>Nom</th>
-                         <th></th>
-                     </tr>
-                  </thead>
-                  <tfoot>
-                     <tr>
-                         <th></th>
-                         <th></th>
-                     </tr>
-                  </tfoot>
-              </table>
-          </div>
-        </div>
+<div class="container leftbar-page">
 
-      </div>
-    </div>
+  @include('architect::partials.content-nav',['typologies' => $typologies])
+
+  <div class="col-xs-offset-2 col-xs-10 page-content">
+
+    <h3 class="card-title">Etiquetes</h3>
+    <a href="{{route('tags.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tag</a>
+
+    <table class="table" id="table-tags" data-url="{{route('tags.data')}}">
+        <thead>
+           <tr>
+               <th>Nom</th>
+               <th></th>
+           </tr>
+        </thead>
+        <tfoot>
+           <tr>
+               <th></th>
+               <th></th>
+           </tr>
+        </tfoot>
+    </table>
+
   </div>
+
+</div>
 
 @stop
 

@@ -26,6 +26,8 @@ class ContentContainer extends Component {
          translations[v.iso] = true;
      });
 
+     //console.log("ContentContainer :: content => ", props.content);
+
      // Build state
      this.state = {
          status: 0,
@@ -51,7 +53,7 @@ class ContentContainer extends Component {
          displayContentModal: false,
          contentSourceField: null
      };
-     
+
      console.log('CONTENT =>', props.content);
      console.log('LOADED FIELDS => ', this.state.fields);
 
@@ -180,7 +182,7 @@ class ContentContainer extends Component {
 
   handleSubmitForm(e) {
     e.preventDefault();
-    
+
     this.state.content ? this.update() : this.create();
   }
 
@@ -345,7 +347,7 @@ class ContentContainer extends Component {
 
     if(!found){
       tags.push(tag);
-      
+
       this.setState({
         tags : tags
       });
@@ -356,12 +358,12 @@ class ContentContainer extends Component {
   }
 
   handleRemoveTag(tagId) {
-     
+
     const {tags} = this.state;
-    
+
     for(var i=0;i<tags.length;i++){
       if(tags[i].id == tagId){
-        tags.splice(i,1);    
+        tags.splice(i,1);
         break;
       }
     }

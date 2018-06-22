@@ -26,7 +26,7 @@ class CreateCategory
     }
 
     public function handle()
-    {        
+    {
         $category = Category::create([
             'parent_id' => $this->parent_id
         ]);
@@ -41,6 +41,6 @@ class CreateCategory
             }
         }
 
-        return $category:
+        return $category;
     }
 }

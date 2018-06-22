@@ -20,6 +20,7 @@ use Modules\Architect\Jobs\Tag\DeleteTag;
 
 // Models
 use Modules\Architect\Entities\Tag;
+use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
 
@@ -33,6 +34,7 @@ class TagController extends Controller
     public function index(Request $request)
     {
         return view('architect::tags.index', [
+            "typologies" => Typology::all(),
             "tags" => $this->tags->all()
         ]);
     }

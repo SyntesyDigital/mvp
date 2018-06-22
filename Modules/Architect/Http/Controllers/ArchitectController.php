@@ -16,8 +16,13 @@ class ArchitectController extends Controller
         return view('architect::index');
     }
 
+    public function settings()
+    {
+        return view('architect::settings');
+    }
+
     public function save(SaveContent $request)
     {
-        
+
     }
 }

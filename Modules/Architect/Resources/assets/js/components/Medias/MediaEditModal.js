@@ -96,8 +96,9 @@ export default class MediaEditModal extends Component {
         if(architect.medias._settings != null) {
             architect.medias.refresh();
         }
-
-        this.props.onModalClose();
+        else {
+          this.props.onModalClose();
+        }
 
         TweenMax.to($("#media-edit"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
 
@@ -184,7 +185,7 @@ export default class MediaEditModal extends Component {
     }
 
     render() {
-        
+
         return (
           <div style={{zIndex:10000}}>
             <MediaCropModal
