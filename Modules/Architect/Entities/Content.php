@@ -97,6 +97,11 @@ class Content extends Model
 
     public function getTitleAttribute()
     {
+
+        if($this->page_id) {
+            return $this->getFieldValue('title');
+        }
+
         if(!$this->fields || !$this->typology) {
             return null;
         }

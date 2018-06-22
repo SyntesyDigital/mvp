@@ -118,7 +118,6 @@ class PageBuilder extends Component {
     this.handleDeleteRow = this.handleDeleteRow.bind(this);
     this.handleColTypeSelected = this.handleColTypeSelected.bind(this);
     this.handleColChanged = this.handleColChanged.bind(this);
-
     this.handleItemSelect = this.handleItemSelect.bind(this);
     this.handleItemCancel = this.handleItemCancel.bind(this);
     this.handleItemSelected = this.handleItemSelected.bind(this);
@@ -445,21 +444,13 @@ class PageBuilder extends Component {
             onFieldChange={this.props.onFieldChange}
           />
 
-
           {this.renderRows()}
-
-
 
           <FirstEmptyRow
             onAddRow={this.handleAddRow}
           />
 
-
         </div>
-
-
-
-
       </div>
     );
   }

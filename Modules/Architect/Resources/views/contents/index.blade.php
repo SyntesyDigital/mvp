@@ -9,7 +9,7 @@
   <div class="sidebar">
     <ul>
       <li >
-        <a href="" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
+        <a href="?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
       </li>
     </ul>
     <hr />
@@ -37,7 +37,7 @@
     <h3 class="card-title">Continguts</h3>
     <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir contingut</a>
 
-    <table class="table" id="table-contents" data-url="{{route('contents.data', [ 'typology_id' => Request('typology_id') ])}}">
+    <table class="table" id="table-contents" data-url="{{route('contents.data', request()->all())}}">
         <thead>
            <tr>
                <th>Nom</th>

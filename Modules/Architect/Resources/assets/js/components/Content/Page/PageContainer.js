@@ -463,6 +463,7 @@ handleUpdateLayout(layout) {
               <PageBuilder
                 updateLayout={this.handleUpdateLayout}
                 translations={this.state.translations}
+                onFieldChange={this.handleFieldChange}
               />
             }
             </DragDropContextProvider>

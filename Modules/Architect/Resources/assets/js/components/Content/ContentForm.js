@@ -31,7 +31,7 @@ export default class ContentForm extends Component {
 
     render() {
 
-        const page = true;
+        const page = this.state.typology ? false : true;
 
         return (
             <div>
