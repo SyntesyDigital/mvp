@@ -31,9 +31,7 @@ export default class ContentForm extends Component {
 
     render() {
 
-        const page = false;
-
-        console.log("languages : ",this.state.languages);
+        const page = true;
 
         return (
             <div>
@@ -48,7 +46,6 @@ export default class ContentForm extends Component {
                     tags={this.state.tags}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                 />
-
                 }
 
                 {page &&

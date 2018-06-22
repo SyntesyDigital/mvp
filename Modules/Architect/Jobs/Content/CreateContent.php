@@ -16,6 +16,7 @@ class CreateContent
 
     public function __construct($attributes)
     {
+        $this->languages = Language::all();
         $this->attributes = array_only($attributes, [
             'status',
             'typology_id',
@@ -30,6 +31,27 @@ class CreateContent
     public static function fromRequest(CreateContentRequest $request)
     {
         return new self($request->all());
+    }
+
+
+    public function handle()
+    {
+        $this->content = Content::create([
+            'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
+            'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
+            'author_id' => $this->attributes['author_id'],
+        ]);
+
+        $this->saveCategories();
+        $this->saveTags();
+
+        if(isset($this->attributes['page'])) {
+            $this->savePage();
+        } else {
+            $this->saveFields();
+        }
+
+        return $this->content;
     }
 
 
@@ -48,7 +70,6 @@ class CreateContent
     public function saveFields()
     {
         $fieldObjects = FieldConfig::get();
-        $languages = Language::all();
 
         foreach($this->attributes["fields"] as $field) {
             $values = isset($field["value"]) ? $field["value"] : null;
@@ -58,7 +79,7 @@ class CreateContent
             if($values && $type && $identifier) {
                 $this
                     ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($this->content, $identifier, $values, $languages);
+                    ->save($this->content, $identifier, $values, $this->languages);
             }
         }
     }
@@ -90,37 +111,35 @@ class CreateContent
         $this->content->load('tags');
     }
 
+    function savePageBuilderFields(&$nodes) {
+        foreach ($nodes as $key => $node) {
 
-/*
-[{
-	"type": "row",
-	"children": [{
-		"type": "col",
-		"colClass": "col-xs-12",
-		"children": [{
-			"type": "item",
-			"field": {
-				"class": "Modules\\Architect\\Fields\\Types\\Text",
-				"rules": ["required", "unique", "maxCharacters", "minCharacters"],
-				"label": "TEXT",
-				"name": "Text",
-				"type": "text",
-				"icon": "fa-font",
-				"settings": ["entryTitle"],
-				"value": {
-					"ca": "test",
-					"es": "test",
-					"en": "test"
-				}
-			}
-		}]
-	}]
-}]
-*/
+            if(isset($node['children'])) {
+                $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
+            } else {
+                if(isset($node['field'])) {
+                    $field = $node['field'];
+
+                    $fieldName = uniqid('pagefield_');
+                    $fieldValue = isset($field['value']) ? $field['value'] : null;
+
+                    (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+
+                    unset($nodes[$key]['field']['value']);
+
+                    $nodes[$key]['field']['name'] = $fieldName;
+                }
+            }
+        }
+
+        return $nodes;
+    }
+
+
     public function savePage()
     {
         $page = Page::create([
-            'definition' => json_encode($this->attributes['page']),
+            'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
         ]);
 
         $this->content->update([
@@ -129,23 +148,5 @@ class CreateContent
     }
 
 
-    public function handle()
-    {
-        $this->content = Content::create([
-            'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
-            'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
-            'author_id' => $this->attributes['author_id'],
-        ]);
 
-        $this->saveCategories();
-        $this->saveTags();
-
-        if(isset($this->attributes['page'])) {
-            $this->savePage();
-        } else {
-            $this->saveFields();
-        }
-
-        return $this->content;
-    }
 }

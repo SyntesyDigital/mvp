@@ -81,7 +81,6 @@ class Link extends Field implements FieldInterface
             ]));
         }
 
-
         return true;
     }
 

@@ -53,7 +53,6 @@ class ContentContainer extends Component {
      };
      
      console.log('CONTENT =>', props.content);
-
      console.log('LOADED FIELDS => ', this.state.fields);
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
