@@ -20,7 +20,7 @@ class UpdateCategory
             ->toArray();
 
         $this->attributes = array_only($attributes['fields'], $fields);
-
+        $this->parent_id = isset($attributes['parent_id']) ? $attributes['parent_id'] : null;
     }
 
     public static function fromRequest(Category $category, UpdateCategoryRequest $request)
@@ -30,6 +30,9 @@ class UpdateCategory
 
     public function handle()
     {
+        $this->category->update([
+            'parent_id' => $this->parent_id
+        ]);
         $this->category->fields()->delete();
 
         foreach($this->attributes as $identifier => $field) {

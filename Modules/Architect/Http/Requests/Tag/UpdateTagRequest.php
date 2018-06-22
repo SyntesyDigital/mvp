@@ -5,27 +5,60 @@ namespace Modules\Architect\Http\Requests\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Modules\Architect\Entities\Tag;
+use Modules\Architect\Entities\Language;
 
 class UpdateTagRequest extends FormRequest
 {
 
     public function rules()
     {
-        return $this->buildRules('fields');
+        $this->fieldName = 'fields';
+
+        return $this->buildRules();
     }
 
-    private function buildRules($fielName)
+    private function buildRules()
     {
         $rules = [];
-        foreach(Tag::FIELDS as $field) {
-            $required = isset($field['required']) ? $field['required'] : false;
+        $languages = Language::all();
 
-            if($required) {
-                $rules[$fielName . '.' . $field['identifier']] = 'required';
+        // print_r(request()->all());
+        // exit();
+
+        foreach(Tag::FIELDS as $field) {
+            foreach($languages as $language) {
+                $required = isset($field['required']) ? $field['required'] : false;
+
+                if($required) {
+                    $fieldPath = $this->fieldName . '.' . $field['identifier'] . '.' . $language->id;
+                    $rules[$fieldPath] = 'required';
+                }
             }
+
         }
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        $messages = [];
+        $languages = Language::all();
+
+        foreach(Tag::FIELDS as $field) {
+            foreach($languages as $language) {
+                $required = isset($field['required']) ? $field['required'] : false;
+
+                if($required) {
+                    $fieldPath = $this->fieldName . '.' . $field['identifier'] . '.' . $language->id;
+                    $messages[$fieldPath . '.required'] = trans('validation.required', [
+                        'attribute' => $field['name'] . ' - ' . $language->name
+                    ]);
+                }
+            }
+        }
+
+        return $messages;
     }
 
     public function authorize()

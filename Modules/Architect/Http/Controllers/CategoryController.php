@@ -68,7 +68,9 @@ class CategoryController extends Controller
             $error = $ex->getMessage();
         }
 
-        return redirect(route('categories.create'))->with('error', $error);
+        return redirect(route('categories.create'))
+            ->with('error', $error)
+            ->withInput($request->input());
     }
 
     public function update(Category $category, UpdateCategoryRequest $request)
@@ -85,20 +87,9 @@ class CategoryController extends Controller
             $error = $ex->getMessage();
         }
 
-        return redirect(route('categories.create'))->with('error', $error);
-
-        return $this->sendJsonResponse();
-    }
-
-
-    private function sendJsonResponse($category)
-    {
-        return $category ? response()->json([
-            'success' => true,
-            'category' => $category
-        ]) : response()->json([
-            'success' => false
-        ], 500);
+        return redirect(route('categories.create'))
+            ->with('error', $error)
+            ->withInput($request->input());
     }
 
 }

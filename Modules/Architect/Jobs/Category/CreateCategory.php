@@ -16,8 +16,8 @@ class CreateCategory
             ->keyBy('identifier')
             ->keys()
             ->toArray();
-
         $this->attributes = array_only($attributes['fields'], $fields);
+        $this->parent_id = isset($attributes['parent_id']) ? $attributes['parent_id'] : null;
     }
 
     public static function fromRequest(CreateCategoryRequest $request)
@@ -26,8 +26,10 @@ class CreateCategory
     }
 
     public function handle()
-    {
-        $category = Category::create([]);
+    {        
+        $category = Category::create([
+            'parent_id' => $this->parent_id
+        ]);
 
         foreach($this->attributes as $identifier => $field) {
             foreach($field as $languageId => $value) {
@@ -38,5 +40,7 @@ class CreateCategory
                 ]));
             }
         }
+
+        return $category:
     }
 }

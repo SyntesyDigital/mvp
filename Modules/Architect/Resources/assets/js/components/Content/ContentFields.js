@@ -162,7 +162,6 @@ class ContentFields extends Component {
 
 
   render() {
-
     return (
       <div className="col-xs-9 page-content">
         <div className="field-group">
