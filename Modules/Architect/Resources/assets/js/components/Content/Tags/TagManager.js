@@ -16,7 +16,7 @@ class TagManager extends Component {
 
   constructor(props){
     super(props);    
-    this.suggestions = props.tagsList;
+    this.suggestions = props.tagsList ? props.tagsList : [];
     
     this.state = {
         value: '',
@@ -119,8 +119,13 @@ class TagManager extends Component {
   }
 
   renderTags() {
-    var tagsIds = this.props.content.tags ? this.props.content.tags.map(tag => tag.id) : [];
-  
+      
+      if(!this.props.tagsList) {
+          return;
+      }
+      
+    var tagsIds = this.props.content && this.props.content.tags ? this.props.content.tags.map(tag => tag.id) : [];
+    
     return (
       this.props.tagsList.filter(function(tag) {
         return tagsIds.indexOf(tag.id) > -1 ? tag : false;

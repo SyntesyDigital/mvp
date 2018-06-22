@@ -21,7 +21,8 @@ class UpdateContent
              'author_id',
              'fields',
              'category_id',
-             'tags'
+             'tags',
+             'is_page'
          ]);
      }
 

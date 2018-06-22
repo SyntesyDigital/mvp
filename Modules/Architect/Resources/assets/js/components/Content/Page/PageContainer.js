@@ -2,19 +2,14 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
 import ContentBar from './../ContentBar';
 import ContentSidebar from './../ContentSidebar';
 import ContentFields from './../ContentFields';
-
 import CustomFieldTypes from './../../common/CustomFieldTypes';
 import MediaSelectModal from './../../Medias/MediaSelectModal';
 import ContentSelectModal from './../ContentSelectModal';
-
 import PageBuilder from './PageBuilder';
-
 import moment from 'moment';
-
 import axios from 'axios';
 
 class PageContainer extends Component {
@@ -64,13 +59,11 @@ class PageContainer extends Component {
          languages: props.languages,
          fields: fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
-         //modal states
          displayMediaModal: false,
          sourceField: null,
-
          displayContentModal: false,
-         contentSourceField: null
+         contentSourceField: null,
+         layout : null
      };
 
 
@@ -88,9 +81,15 @@ class PageContainer extends Component {
      this.handleContentSelect = this.handleContentSelect.bind(this);
      this.handleContentSelected = this.handleContentSelected.bind(this);
      this.handleContentCancel = this.handleContentCancel.bind(this);
+     this.handleUpdateLayout = this.handleUpdateLayout.bind(this);
  }
 
-
+ 
+handleUpdateLayout(layout) {
+    this.setState({
+     layout : layout
+    });
+}
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -215,8 +214,9 @@ class PageContainer extends Component {
   {
       return {
           content_id : this.state.content !== undefined ? this.state.content.id : null,
-          typology_id : this.state.typology.id,
           status : this.state.status,
+          is_page : true,
+          page: this.state.layout,
           category : this.state.category,
           tags : this.state.tags,
           fields : this.state.fields,
@@ -247,23 +247,23 @@ class PageContainer extends Component {
 
   update()
   {
-      var _this = this;
-      axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
-          .then((response) => {
-              if(response.data.success) {
-                  _this.onSaveSuccess(response.data);
-              }
-          })
-          .catch((error) => {
-              if (error.response) {
-                  _this.onSaveError(error.response.data);
-              } else if (error.message) {
-                  toastr.error(error.message);
-              } else {
-                  console.log('Error', error.message);
-              }
-              //console.log(error.config);
-          });
+      // var _this = this;
+      // axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
+      //     .then((response) => {
+      //         if(response.data.success) {
+      //             _this.onSaveSuccess(response.data);
+      //         }
+      //     })
+      //     .catch((error) => {
+      //         if (error.response) {
+      //             _this.onSaveError(error.response.data);
+      //         } else if (error.message) {
+      //             toastr.error(error.message);
+      //         } else {
+      //             console.log('Error', error.message);
+      //         }
+      //         //console.log(error.config);
+      //     });
   }
 
   onSaveSuccess(response)
@@ -461,6 +461,7 @@ class PageContainer extends Component {
             <DragDropContextProvider backend={HTML5Backend}>
             {this.state.errors &&
               <PageBuilder
+                updateLayout={this.handleUpdateLayout}
                 translations={this.state.translations}
               />
             }

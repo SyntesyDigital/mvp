@@ -181,6 +181,8 @@ class PageBuilder extends Component {
       pathToIndex : null,
       addPosition : null
     });
+    
+    this.props.updateLayout(layout);
 
   }
 

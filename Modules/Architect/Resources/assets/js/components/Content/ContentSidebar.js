@@ -99,7 +99,7 @@ class ContentSidebar extends Component {
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
                {
-                 this.props.categories.map(function(category, i) {
+                 this.props.categories && this.props.categories.map(function(category, i) {
                    return <option value={category.id} key={i}>{category.name}</option>
                  })
                }
