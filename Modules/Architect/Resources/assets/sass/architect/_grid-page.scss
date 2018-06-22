@@ -6,10 +6,15 @@
   h1{
     display: inline-block;
     margin:0;
-    @include font(26,60,400);
+    @include font(24,60,700);
     margin-right: 40px;
   }
 
+  h3{
+    @include font(12,20,300);
+    text-transform: uppercase;
+    margin:0px;
+  }
 
 }
 

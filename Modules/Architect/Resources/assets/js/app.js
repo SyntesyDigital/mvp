@@ -18,6 +18,7 @@ require('./material-kit/material-kit');
 
 //require('./bootstrap');
 require('./libs/tweenMax/tweenmax.js');
+require('./libs/jquery.sortable.min.js');
 
 slugify = require('slugify');
 

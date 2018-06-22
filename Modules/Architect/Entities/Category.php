@@ -88,4 +88,9 @@ class Category extends Model
         return $this->belongsToMany('\Modules\Architect\Entities\Content');
     }
 
+    public function parent()
+    {
+    	return $this->hasOne('App\Models\Category', 'id', 'parent_id');
+    }
+
 }

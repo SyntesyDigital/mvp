@@ -14667,10 +14667,18 @@ nav.main-nav ul li a:hover {
 .page-title h1 {
   display: inline-block;
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
   line-height: 60px;
-  font-weight: 400;
+  font-weight: 700;
   margin-right: 40px;
+}
+
+.page-title h3 {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin: 0px;
 }
 
 .grid-items {
@@ -16135,6 +16143,10 @@ nav.main-nav ul li a:hover {
   font-weight: 400;
 }
 
+.table.dataTable td:last-child {
+  text-align: right;
+}
+
 .table.dataTable .btn.btn-link {
   padding: 0px;
 }
@@ -16416,5 +16428,153 @@ nav.main-nav ul li a:hover {
 .page-builder .row-container .row-container-body .row-container-body-bottom a.btn.btn-link {
   padding: 0;
   color: #acacac;
+}
+
+body.dragging,
+body.dragging {
+  cursor: move !important;
+}
+
+ol.sortable-list {
+  list-style-type: none;
+  margin: 0;
+  min-height: 10px;
+  padding-left: 0px;
+}
+
+ol.sortable-list li {
+  display: block;
+  margin: 5px;
+  padding: 0px 10px 0 10px;
+  min-height: 50px;
+}
+
+ol.sortable-list li .item-bar {
+  color: #455660;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+  border-radius: 6px;
+  min-height: 50px;
+  width: 50vw;
+  padding-left: 20px;
+}
+
+ol.sortable-list li.placeholder {
+  border: 1px dashed #4a9fea;
+  background-color: transparent;
+  width: 50vw;
+  margin-left: 15px;
+}
+
+ol.sortable-list li.drag {
+  pointer-events: auto;
+  line-height: 48px;
+  color: #455660;
+}
+
+ol.sortable-list li.drag i {
+  color: #b4b4b4;
+}
+
+ol.sortable-list li.no-drag {
+  pointer-events: none;
+  color: #273544;
+  background-color: transparent;
+}
+
+ol.sortable-list li .actions {
+  float: right;
+  line-height: 34px;
+  height: 30px;
+  padding-right: 20px;
+}
+
+ol.sortable-list li .actions a.btn-link {
+  padding: 4px;
+}
+
+ol.sortable-list li a.btn.btn-link {
+  color: #4a9fea;
+}
+
+ol.sortable-list li a.btn.btn-link i.fa {
+  color: #4a9fea;
+}
+
+ol.sortable-list li a.btn.btn-link.text-danger {
+  color: #fc4b6c;
+}
+
+ol.sortable-list li a.btn.btn-link.text-danger i.fa {
+  color: #fc4b6c;
+}
+
+/**
+body.dragging, body.dragging {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  top: 0;
+  opacity: .5;
+  z-index: 2000;
+}
+
+ol.vertical {
+  margin: 0 0 9px 0;
+  min-height: 10px;
+
+  li {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    color: $cms-color-1;
+    background: $cms-light-color-2;
+  }
+
+  li.placeholder {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+
+    &:before {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      margin-top: -5px;
+      left: -5px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left-color: #f00;
+      border-right: none;
+    }
+  }
+}
+*/
+
+body.dragging,
+body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
 }
 

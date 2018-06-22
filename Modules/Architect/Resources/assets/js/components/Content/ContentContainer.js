@@ -26,11 +26,13 @@ class ContentContainer extends Component {
          translations[v.iso] = true;
      });
 
+     //console.log("ContentContainer :: content => ", props.content);
+
      // Build state
      this.state = {
          status: 0,
          template: "",
-         category: props.content ? props.content.categories[0].id : null,
+         category: props.content !== undefined && props.content.categories !== undefined && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
          tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
          tagsList : props.tags ? props.tags : [], // La lista de los tags

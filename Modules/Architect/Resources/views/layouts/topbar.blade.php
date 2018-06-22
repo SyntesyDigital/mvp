@@ -29,8 +29,8 @@
                         </a>
                       </li>
                       <li>
-                        <a href="">
-                          Settings
+                        <a href="{{route('settings')}}">
+                          Configuració
                         </a>
                       </li>
                     </ul>
