@@ -9,7 +9,7 @@ class Row extends Component {
   constructor(props){
     super(props);
 
-    console.log("Row : constructor ",props);
+    //console.log("Row : constructor ",props);
 
     this.state = {
       colsOpen : false
@@ -32,7 +32,7 @@ class Row extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    console.log("Row : componentWillRecieveProps ",nextProps);
+    //console.log("Row : componentWillRecieveProps ",nextProps);
 
     this.setState({
       colsOpen : false
@@ -80,7 +80,7 @@ class Row extends Component {
 
     e.preventDefault();
 
-    console.log("this.props.pathToIndex => ",this.props.pathToIndex);
+    //console.log("this.props.pathToIndex => ",this.props.pathToIndex);
 
     this.props.onDeleteRow(this.props.pathToIndex);
 
@@ -148,7 +148,7 @@ class Row extends Component {
     //var pathToIndex = [];
     //pathToIndex.push(this.props.index);
 
-    console.log("Row :: setColType : "+this.props.pathToIndex);
+    //console.log("Row :: setColType : "+this.props.pathToIndex);
 
     this.props.onColsChanged(this.props.pathToIndex,resultChildren);
 

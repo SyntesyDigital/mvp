@@ -6,6 +6,7 @@
 
 <div class="container leftbar-page">
 
+
   @include('architect::partials.content-nav',['typologies' => $typologies, 'typology_id' => Request('typology_id')])
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
@@ -13,7 +14,7 @@
     <h3 class="card-title">Continguts</h3>
     <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir contingut</a>
 
-    <table class="table" id="table-contents" data-url="{{route('contents.data', [ 'typology_id' => Request('typology_id') ])}}">
+    <table class="table" id="table-contents" data-url="{{route('contents.data', request()->all())}}">
         <thead>
            <tr>
                <th>Nom</th>

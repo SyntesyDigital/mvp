@@ -32,7 +32,7 @@ class ContentRepository extends BaseRepository
         }
 
         $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
-        $titleFields = [];
+        $titleFields = ['title'];
 
         if($fields) {
             foreach($fields as $k => $v) {
@@ -54,6 +54,10 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
+                if($item->page_id) {
+                    return 'Page';
+                }
+
                 return isset($item->typology) ? $item->typology->name : null;
             })
             ->addColumn('author', function ($item) {
@@ -87,6 +91,9 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
+                if($item->page_id) {
+                    return 'Page';
+                }
                 return isset($item->typology) ? $item->typology->name : null;
             })
             ->addColumn('author', function ($item) {

@@ -18,7 +18,7 @@ class ModalEditItem extends Component {
   constructor(props){
     super(props);
 
-    console.log(" ModalEditItem :: construct ",props);
+    // console.log(" ModalEditItem :: construct ",props);
 
     this.state = {
       field : null
@@ -34,8 +34,8 @@ class ModalEditItem extends Component {
     field.value = props.item.data.field !== undefined &&
       props.item.data.field.value !== undefined ? props.item.data.field.value : null;
 
-
-    console.log("ModalEditItem :: field after process : ",field);
+    // 
+    // console.log("ModalEditItem :: field after process : ",field);
 
     return field;
   }
@@ -51,7 +51,7 @@ class ModalEditItem extends Component {
   componentWillReceiveProps(nextProps)
   {
 
-    console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
+    // console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
 
     var field = null;
 
@@ -63,7 +63,7 @@ class ModalEditItem extends Component {
         this.modalClose();
     }
 
-    console.log("componentWillReceiveProps :: =>",field);
+    // console.log("componentWillReceiveProps :: =>",field);
 
     this.setState({
       field : field

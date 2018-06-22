@@ -318,6 +318,9 @@ class ContentContainer extends Component {
     handleFieldChange(field) {
         const result = {};
         result[field.name] = field.value;
+        
+        console.log("handleFieldChange =====>", result);
+        
 
         this.setState(result);
     }

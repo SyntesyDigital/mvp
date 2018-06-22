@@ -48,6 +48,12 @@ class ContentController extends Controller
             'typology_id' => $request->get('typology_id')
         ] : null;
 
+        if($request->get('display_pages')) {
+            $where = [
+                ['page_id','<>', null]
+            ];
+        }
+
         return $this->contents->getDatatable($where);
     }
 
@@ -62,7 +68,9 @@ class ContentController extends Controller
 
     public function show(Content $content, Request $request)
     {
-        $content->typology->load('fields');
+        if($content->typology) {
+            $content->typology->load('fields');
+        }
 
         return view('architect::contents.show', [
             'content' => $content->load('tags', 'categories'),
