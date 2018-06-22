@@ -31,7 +31,7 @@ export default class ContentForm extends Component {
 
     render() {
 
-        const page = true;
+        const page = false;
 
         console.log("languages : ",this.state.languages);
 

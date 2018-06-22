@@ -45,7 +45,7 @@ class ContentRepository extends BaseRepository
                 $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
             })
             ->addColumn('title', function ($item) {
-                return $item->title;
+                return isset($item->title) ? $item->title : null;
             })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
@@ -54,10 +54,10 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
-                return $item->typology->name;
+                return isset($item->typology) ? $item->typology->name : null;
             })
             ->addColumn('author', function ($item) {
-                return $item->author->full_name;
+                return isset($item->author) ? $item->author->full_name : null;
             })
             ->addColumn('action', function ($item) {
                 return '
@@ -78,7 +78,7 @@ class ContentRepository extends BaseRepository
 
         return Datatables::of($results)
             ->addColumn('title', function ($item) {
-                return $item->title;
+                return isset($item->title) ? $item->title : null;
             })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
@@ -87,14 +87,14 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
-                return $item->typology->name;
+                return isset($item->typology) ? $item->typology->name : null;
             })
             ->addColumn('author', function ($item) {
-                return $item->author->full_name;
+                return isset($item->author) ? $item->author->full_name : null;
             })
             ->addColumn('action', function ($item) {
                 return '
-                <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->load('fields')->toJson()).'" class="btn btn-link add-item" data-type="'.$item->typology->name.'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
+                <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->load('fields')->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
                 ';
             })
             ->make(true);

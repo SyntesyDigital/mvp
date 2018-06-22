@@ -76,6 +76,7 @@ class Link extends Field implements FieldInterface
             $content->fields()->save(new ContentField([
                 'name' => $identifier . '.content',
                 'value' => $contentId,
+                'parent_id' => $field->id,
                 'relations' => 'contents'
             ]));
         }
