@@ -15418,7 +15418,8 @@ nav.main-nav ul li a:hover {
   margin-bottom: 20px;
 }
 
-.content .field-group .field-item button.btn {
+.content .field-group .field-item button.btn,
+.content .field-group .field-item div.btn {
   display: block;
   width: 100%;
   text-align: left;
@@ -15429,7 +15430,8 @@ nav.main-nav ul li a:hover {
   margin: 0;
 }
 
-.content .field-group .field-item button.btn:not(.collapsed):before {
+.content .field-group .field-item button.btn:not(.collapsed):before,
+.content .field-group .field-item div.btn:not(.collapsed):before {
   content: "\25BE";
   margin-right: 0px;
   position: absolute;
@@ -15439,7 +15441,8 @@ nav.main-nav ul li a:hover {
   color: #455660;
 }
 
-.content .field-group .field-item button.btn.collapsed:before {
+.content .field-group .field-item button.btn.collapsed:before,
+.content .field-group .field-item div.btn.collapsed:before {
   content: "\25B8";
   margin-right: 0px;
   position: absolute;
@@ -15449,21 +15452,24 @@ nav.main-nav ul li a:hover {
   color: #455660;
 }
 
-.content .field-group .field-item button.btn .field-type {
+.content .field-group .field-item button.btn .field-type,
+.content .field-group .field-item div.btn .field-type {
   color: #a0a6a9;
   text-transform: capitalize;
   padding-right: 10px;
   border-right: 1px solid #ccc;
 }
 
-.content .field-group .field-item button.btn .field-type i {
+.content .field-group .field-item button.btn .field-type i,
+.content .field-group .field-item div.btn .field-type i {
   position: relative;
   font-size: 22px;
   padding-right: 10px;
   color: #a0a6a9;
 }
 
-.content .field-group .field-item button.btn .field-name {
+.content .field-group .field-item button.btn .field-name,
+.content .field-group .field-item div.btn .field-name {
   color: #455660;
   padding-left: 10px;
   text-transform: capitalize;
