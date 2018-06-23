@@ -124,7 +124,6 @@ class CreateContent
                     $fieldValue = isset($field['value']) ? $field['value'] : null;
 
                     (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
-
                     unset($nodes[$key]['field']['value']);
 
                     $nodes[$key]['field']['name'] = $fieldName;

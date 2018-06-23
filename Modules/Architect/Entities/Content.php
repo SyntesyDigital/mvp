@@ -78,7 +78,7 @@ class Content extends Model
 
     public function page()
     {
-        return $this->hasOne('App\Models\Page', "page_id", "id");
+        return $this->hasOne('\Modules\Architect\Entities\Page', "id", "page_id");
     }
 
     public function getStringStatus()

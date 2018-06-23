@@ -19,81 +19,7 @@ class PageBuilder extends Component {
         fields : [],
         errors : this.props.errors,
 
-        layout : [
-
-          /*
-          {
-            type : 'row',
-            children : [
-              {
-                type : 'col',
-                colClass : 'col-xs-6',
-                children : [
-                  {
-                    type : 'item',
-                    field_id : 1,
-                  },
-                  {
-                    type : 'row',
-                    children : [
-                      {
-                        type : "col",
-                        colClass : 'col-xs-6',
-                      },
-                      {
-                        type : "col",
-                        colClass : 'col-xs-6',
-                      }
-                    ]
-                  },
-                  {
-                    type : 'item',
-                    id : 1,
-                    name : 'Titol',
-                    icon : 'fa-font',
-                    values : ''
-                  }
-                ]
-              },
-              {
-                type : 'col',
-                colClass : 'col-xs-6',
-                children : [
-                  {
-                    type : 'item',
-                    id : 1,
-                    name : 'Titol',
-                    icon : 'fa-font',
-                    values : ''
-                  },
-                  {
-                    type : 'item',
-                    id : 1,
-                    name : 'Titol',
-                    icon : 'fa-font',
-                    values : ''
-                  },
-                  {
-                    type : 'item',
-                    id : 1,
-                    name : 'Titol',
-                    icon : 'fa-font',
-                    values : ''
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            type : 'row',
-            children : [
-              {
-                type : 'col',
-                colClass : 'col-xs-12'
-              }
-            ]
-          }
-          */
+        layout : this.props.layout ? this.props.layout : [
           {
             type : 'row',
             children : [
@@ -110,8 +36,6 @@ class PageBuilder extends Component {
         pathToIndex : null,
         editItemData : null,
         addPosition : null
-
-
     };
 
     this.handleAddRow = this.handleAddRow.bind(this);

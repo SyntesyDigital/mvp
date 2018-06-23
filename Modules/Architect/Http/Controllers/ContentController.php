@@ -27,6 +27,7 @@ use App\Models\User;
 use App\Models\Role;
 
 use Modules\Architect\Fields\FieldsReactAdapter;
+use Modules\Architect\Fields\FieldsReactPageBuilderAdapter;
 
 class ContentController extends Controller
 {
@@ -75,7 +76,8 @@ class ContentController extends Controller
         return view('architect::contents.show', [
             'content' => $content->load('tags', 'categories'),
             'typology' => $content->typology,
-            'fields' => (new FieldsReactAdapter($content))->get(),
+            'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
+            'page' => $content->page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => Category::all()

@@ -6,7 +6,8 @@ languages="{{ base64_encode(Modules\Architect\Entities\Language::all()) }}"
 users="{{ $users ? base64_encode($users->toJson()) : null }}"
 tags="{{ $tags ? base64_encode($tags->toJson()) : null }}"
 categories="{{ $categories ? base64_encode($categories->toJson()) : null }}"
-fields="{{ base64_encode($fields->toJson()) }}"
+fields="{{ $fields ? base64_encode($fields->toJson()) : null }}"
+page="{{ $page ? base64_encode(json_encode($page, true)) : null }}"
 @if(isset($typology)) typology="{{base64_encode($typology->toJson())}}" @endif
 @if(isset($content)) content="{{base64_encode($content->toJson())}}" @endif
 ></div>

@@ -22,11 +22,8 @@ class PageContainer extends Component {
      LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-
-     // Load content fields
-     var fields = props.typology.fields;
-     var content = props.content;
-     var languages = props.languages;
+     
+     console.log('LAYOUT LOADED', props.page);
 
      // Build state...
      this.state = {
@@ -47,23 +44,19 @@ class PageContainer extends Component {
                  name: "Tag 3"
              }
          ],
-         translations: {
-             ca: true,
-             es: true,
-             en: true
-         },
+         translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
          typology: props.typology,
          languages: props.languages,
-         fields: fields,
+         layout : props.page ? props.page : null,
+         fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
          displayMediaModal: false,
          sourceField: null,
          displayContentModal: false,
-         contentSourceField: null,
-         layout : null
+         contentSourceField: null
      };
 
 
@@ -85,11 +78,12 @@ class PageContainer extends Component {
  }
 
  
-handleUpdateLayout(layout) {
-    this.setState({
-     layout : layout
-    });
-}
+    handleUpdateLayout(layout) {
+        this.setState({
+            layout : layout
+        });
+    }
+    
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -197,17 +191,11 @@ handleUpdateLayout(layout) {
 
     e.preventDefault();
 
-    // console.log("submit form!");
-    // console.log(this.state);
-
     if(this.state.content) {
         this.update();
     } else {
         this.create();
     }
-
-    //TODO hacer el ajax para guardar la información de la typologia
-
   }
 
   getFormData()
@@ -247,23 +235,23 @@ handleUpdateLayout(layout) {
 
   update()
   {
-      // var _this = this;
-      // axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
-      //     .then((response) => {
-      //         if(response.data.success) {
-      //             _this.onSaveSuccess(response.data);
-      //         }
-      //     })
-      //     .catch((error) => {
-      //         if (error.response) {
-      //             _this.onSaveError(error.response.data);
-      //         } else if (error.message) {
-      //             toastr.error(error.message);
-      //         } else {
-      //             console.log('Error', error.message);
-      //         }
-      //         //console.log(error.config);
-      //     });
+      var _this = this;
+      axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
+          .then((response) => {
+              if(response.data.success) {
+                  _this.onSaveSuccess(response.data);
+              }
+          })
+          .catch((error) => {
+              if (error.response) {
+                  _this.onSaveError(error.response.data);
+              } else if (error.message) {
+                  toastr.error(error.message);
+              } else {
+                  console.log('Error', error.message);
+              }
+              //console.log(error.config);
+          });
   }
 
   onSaveSuccess(response)
@@ -461,6 +449,7 @@ handleUpdateLayout(layout) {
             <DragDropContextProvider backend={HTML5Backend}>
             {this.state.errors &&
               <PageBuilder
+                layout={this.state.layout}
                 updateLayout={this.handleUpdateLayout}
                 translations={this.state.translations}
                 onFieldChange={this.handleFieldChange}
