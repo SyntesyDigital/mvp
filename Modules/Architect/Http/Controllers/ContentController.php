@@ -84,11 +84,12 @@ class ContentController extends Controller
         ]);
     }
 
-    public function create(Typology $typology, Request $request)
+    public function create(Typology $typology=null, Request $request)
     {
         return view('architect::contents.show', [
-            'typology' => $typology->load('fields'),
-            'fields' => (new FieldsReactAdapter($typology))->get(),
+            'typology' => $typology != null ? $typology->load('fields') : null,
+            'fields' => $typology != null ? (new FieldsReactAdapter($typology))->get() : null,
+            'page' => null,
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => Category::all()

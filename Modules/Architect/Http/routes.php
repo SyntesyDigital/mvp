@@ -37,6 +37,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
     Route::post('/contents', 'ContentController@store')->name('contents.store');
     Route::get('/contents/show', 'ContentController@show')->name('contents.show');
+    Route::get('/contents/page/create', 'ContentController@create')->name('contents.page.create');
     Route::get('/contents/{typology}/create', 'ContentController@create')->name('contents.create');
     Route::get('/contents/{content?}', 'ContentController@show')->name('contents.show');
     Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');

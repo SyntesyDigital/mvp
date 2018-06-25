@@ -4,10 +4,10 @@
 <div id="content-form"
 languages="{{ base64_encode(Modules\Architect\Entities\Language::all()) }}"
 users="{{ $users ? base64_encode($users->toJson()) : null }}"
-tags="{{ $tags ? base64_encode($tags->toJson()) : null }}"
-categories="{{ $categories ? base64_encode($categories->toJson()) : null }}"
-fields="{{ $fields ? base64_encode($fields->toJson()) : null }}"
-page="{{ $page ? base64_encode(json_encode($page, true)) : null }}"
+tags="{{ isset($tags) ? base64_encode($tags->toJson()) : null }}"
+categories="{{ isset($categories) ? base64_encode($categories->toJson()) : null }}"
+fields="{{ isset($fields) ? base64_encode($fields->toJson()) : null }}"
+page="{{ isset($page) ? base64_encode(json_encode($page, true)) : null }}"
 @if(isset($typology)) typology="{{base64_encode($typology->toJson())}}" @endif
 @if(isset($content)) content="{{base64_encode($content->toJson())}}" @endif
 ></div>
