@@ -46,7 +46,7 @@ class UpdateContent
         if(isset($this->attributes['page'])) {
             $this->savePage();
         } else {
-            $this->saveFields($this->content);
+            $this->saveFields();
         }
 
         return $this->content;
@@ -64,12 +64,10 @@ class UpdateContent
         return null;
     }
 
-    // FIXME : change the name :)
-    public function saveFields(Content $content)
+    public function saveFields()
     {
         $fieldObjects = FieldConfig::get();
-        $languages = Language::all();
-        $content->fields()->delete();
+        $this->content->fields()->delete();
 
         foreach($this->attributes["fields"] as $field) {
             $values = isset($field["value"]) ? $field["value"] : null;
@@ -79,10 +77,11 @@ class UpdateContent
             if($values && $type && $identifier) {
                 $this
                     ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($content, $identifier, $values, $languages);
+                    ->save($this->content, $identifier, $values, $languages);
             }
         }
     }
+
 
     public function saveCategories()
     {
