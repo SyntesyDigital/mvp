@@ -46,7 +46,7 @@ class UpdateContent
         if(isset($this->attributes['page'])) {
             $this->savePage();
         } else {
-            $this->saveFields();
+            $this->saveFields($this->content);
         }
 
         return $this->content;
