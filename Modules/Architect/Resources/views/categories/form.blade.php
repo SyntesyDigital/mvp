@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     {!!
         Form::open([
             'url' => isset($category) ? route('categories.update', $category) : route('categories.store'),
@@ -39,7 +38,7 @@
                   <ul class="dropdown-menu dropdown-menu-right default-padding">
                       <li class="dropdown-header"></li>
                       <li>
-                          <a href="{{route('account')}}">
+                          <a href="{{route('categories.create')}}">
                               <i class="fa fa-plus-circle"></i>
                               &nbsp;Nou
                           </a>
@@ -186,13 +185,13 @@
                                   if(isset($category)) {
                                       $categories->forget($category->id);
                                   }
-                                  $categories->prepend("---");
+
                               @endphp
 
                               {!!
                                   Form::select(
                                       'parent_id',
-                                      $categories,
+                                      ['' =>'---'] + $categories->toArray(),
                                       isset($category) ? $category->parent_id : null,
                                       [
                                           'class' => 'form-control'

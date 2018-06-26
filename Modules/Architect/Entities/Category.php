@@ -48,7 +48,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id',
+        'parent_id','order',
     ];
 
     /**
@@ -91,6 +91,23 @@ class Category extends Model
     public function parent()
     {
     	return $this->hasOne('App\Models\Category', 'id', 'parent_id');
+    }
+
+    public static function getTree($id)
+    {
+    	return Category::descendantsOf($id)->sortBy('order')->toTree($id);
+    }
+
+    public static function getTreeIds($id)
+    {
+    	$ids = [];
+      $categories = Category::descendantsOf($id);
+
+      foreach($categories as $category){
+        $ids[] = $category->id;
+      }
+
+      return $ids;
     }
 
 }

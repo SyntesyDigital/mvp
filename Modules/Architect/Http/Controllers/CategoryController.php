@@ -18,6 +18,9 @@ use Modules\Architect\Jobs\Category\UpdateCategory;
 use Modules\Architect\Http\Requests\Category\DeleteCategoryRequest;
 use Modules\Architect\Jobs\Category\DeleteCategory;
 
+use Modules\Architect\Http\Requests\Category\UpdateCategoryOrderRequest;
+use Modules\Architect\Jobs\Category\UpdateCategoryOrder;
+
 // Models
 use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\Typology;
@@ -41,8 +44,10 @@ class CategoryController extends Controller
 
     public function data(Request $request)
     {
-        return $this->categories->getDatatable();
+        return $this->categories->getTree();
     }
+
+
 
     public function show(Category $category, Request $request)
     {
@@ -93,5 +98,30 @@ class CategoryController extends Controller
             ->with('error', $error)
             ->withInput($request->input());
     }
+
+
+    public function updateOrder(UpdateCategoryOrderRequest $request)
+  	{
+
+        $result = dispatch_now(UpdateCategoryOrder::fromRequest($request));
+
+        return $result ? response()->json([
+            'success' => true,
+            'content' => $result
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+
+  	}
+
+    public function delete(Category $category, DeleteCategoryRequest $request)
+    {
+        return dispatch_now(DeleteCategory::fromRequest($category, $request)) ? response()->json([
+            'success' => true
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
 
 }

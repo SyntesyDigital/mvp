@@ -58,7 +58,25 @@ class ContentSidebar extends Component {
     )));
   }
 
+  printSpace(level)
+  {
+
+    if(level <= 1)
+      return null;
+
+    var spaces = [];
+    for(var i=1;i<level;i++){
+      spaces.push(
+        "- "
+      );
+    }
+
+    return spaces;
+  }
+
   render() {
+
+    var self = this;
 
     return (
       <div className="sidebar">
@@ -104,7 +122,7 @@ class ContentSidebar extends Component {
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
                {
                  this.props.categories && this.props.categories.map(function(category, i) {
-                   return <option value={category.id} key={i}>{category.name}</option>
+                   return <option value={category.id} key={i}>{self.printSpace(category.level)}{category.name}</option>
                  })
                }
            </select>
