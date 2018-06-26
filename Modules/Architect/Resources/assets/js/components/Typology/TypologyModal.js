@@ -23,7 +23,7 @@ class TypologyModal extends Component {
   handleInputSettingsChange(event) {
 
   }
-  
+
   getCropsformats() {
       var formats = [];
       IMAGES_FORMATS.map(function(format, k){
@@ -32,7 +32,7 @@ class TypologyModal extends Component {
               value : format.name
           });
       });
-      
+
       return formats;
   }
 
@@ -136,10 +136,7 @@ class TypologyModal extends Component {
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Tipologies permeses"
-                      options={[
-                        {name:"Categories",value:1},
-                        {name:"Events",value:2}
-                      ]}
+                      options={TYPOLOGIES}
                     />
 
                     <RadioSettingsField

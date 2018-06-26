@@ -13,22 +13,22 @@
                 <div class="col-md-8">
                   <nav class="main-nav">
                     <ul>
-                      <li>
+                      <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">
                           Tipologies
                         </a>
                       </li>
-                      <li>
+                      <li class="{{ Request::is('architect/contents*') ? 'active' : '' }}">
                         <a href="{{route('contents')}}">
                         Content
                         </a>
                       </li>
-                      <li>
+                      <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
                         <a href="{{route('medias.index')}}">
                           Medias
                         </a>
                       </li>
-                      <li>
+                      <li class="{{ Request::is('architect/settings*') ? 'active' : '' }}">
                         <a href="{{route('settings')}}">
                           Configuració
                         </a>

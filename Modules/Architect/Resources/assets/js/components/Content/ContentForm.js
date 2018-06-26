@@ -32,7 +32,7 @@ export default class ContentForm extends Component {
 
     render() {
         const page = this.state.typology ? false : true;
-        
+
         return (
             <div>
                 {!page &&
@@ -50,7 +50,6 @@ export default class ContentForm extends Component {
                 {page &&
                   <PageContainer
                     authors={this.state.authors}
-                    typology={this.state.typology}
                     content={this.state.content}
                     page={this.state.page}
                     ref={(contentContainer) => this.contentContainer = contentContainer}

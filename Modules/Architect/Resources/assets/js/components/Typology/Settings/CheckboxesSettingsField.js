@@ -114,8 +114,8 @@ class CheckboxesSettingsField extends Component {
       this.props.options.map((item,i) => (
         <label className="form-check-label" key={i}>
             <input className="form-check-input" type="checkbox"
-              checked={this.existInput(item.value)}
-              value={item.value}
+              checked={this.existInput(item.id)}
+              value={item.id}
               onChange={this.handleCheckboxChange}
             /> {'\u00A0'}
             {item.name}

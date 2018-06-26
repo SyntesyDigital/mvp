@@ -13,7 +13,8 @@ class Required
 
         if($param) {
             foreach($values as $k => $value) {
-                if(!trim(strip_tags($value))) {
+                //FIXME if(!trim(strip_tags($value))) {
+                if(!trim($value)) {
                     $errors[$k] = $this->message();
                 }
             }
