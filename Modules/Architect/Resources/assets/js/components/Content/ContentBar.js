@@ -15,7 +15,7 @@ class ContentBar extends Component {
           <div className="row">
 
             <div className="col-md-12">
-              <a href="" className="btn btn-default btn-close"> <i className="fa fa-angle-left"></i> </a>
+              <a href={routes.contents} className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
               <h1>
                 {this.props.icon != "" &&
                   <i className={"fa "+this.props.icon}></i>

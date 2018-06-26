@@ -23,6 +23,7 @@
           const FIELDS = {!! json_encode(Modules\Architect\Fields\FieldConfig::get(), JSON_PRETTY_PRINT) !!};
           const CURRENT_USER = {!! json_encode(Auth::user(), JSON_PRETTY_PRINT) !!};
           const LANGUAGES = {!! json_encode(Modules\Architect\Entities\Language::all(), JSON_PRETTY_PRINT) !!};
+          const TYPOLOGIES = {!! json_encode(Modules\Architect\Entities\Typology::all(), JSON_PRETTY_PRINT) !!};
         </script>
 
         <!-- Jquery -->

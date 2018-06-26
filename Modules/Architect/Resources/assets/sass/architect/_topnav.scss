@@ -211,6 +211,15 @@ nav.main-nav{
         }
 
       }
+
+      &.active{
+        a{
+          text-decoration: none;
+          color: $brand-primary;
+          border-bottom: 3px solid $brand-primary;
+        }
+      }
+
     }
   }
 }

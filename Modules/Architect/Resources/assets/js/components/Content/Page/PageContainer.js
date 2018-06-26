@@ -22,37 +22,31 @@ class PageContainer extends Component {
      LANGUAGES.map(function(v,k){
          translations[v.iso] = true;
      });
-     
+
      console.log('LAYOUT LOADED', props.page);
 
      // Build state...
      this.state = {
          status: 0,
          template: "",
-         category: "",
+         category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
-         tags: [{
-                 id: 1,
-                 name: "Tag 1"
-             },
-             {
-                 id: 2,
-                 name: "Tag 2"
-             },
-             {
-                 id: 3,
-                 name: "Tag 3"
-             }
-         ],
+         tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
+         title : {
+           id:0,
+           identifier:"title",
+           value:{},
+           name:"Títol"
+         },
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
-         typology: props.typology,
          languages: props.languages,
          layout : props.page ? props.page : null,
-         fields: props.typology.fields,
+         //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
+
          displayMediaModal: false,
          sourceField: null,
          displayContentModal: false,
@@ -77,13 +71,16 @@ class PageContainer extends Component {
      this.handleUpdateLayout = this.handleUpdateLayout.bind(this);
  }
 
- 
+
     handleUpdateLayout(layout) {
+
+        console.log("PageContainer :: handleUpdateLayout!");
+
         this.setState({
             layout : layout
         });
     }
-    
+
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -114,11 +111,11 @@ class PageContainer extends Component {
       var item = typology.fields[i];
       if(item.identifier == identifier ){
 
-        if(item.type == CustomFieldTypes.IMAGES.value){
+        if(item.type == FIELDS.IMAGES.type){
           typology.fields[i].values.push(image);
           break;
         }
-        else if(item.type == CustomFieldTypes.IMAGE.value){
+        else if(item.type == FIELDS.IMAGE.type){
           typology.fields[i].values = image;
           break;
         }
@@ -256,7 +253,7 @@ class PageContainer extends Component {
 
   onSaveSuccess(response)
   {
-      toastr.success('ok');
+      toastr.success('ok page!');
   }
 
 
@@ -325,6 +322,9 @@ class PageContainer extends Component {
   }
 
     handleFieldChange(field) {
+
+        console.log("On text change : =>",field);
+
         const result = {};
         result[field.name] = field.value;
 
@@ -421,8 +421,8 @@ class PageContainer extends Component {
         />
 
         <ContentBar
-          icon={this.state.typology.icon}
-          name={this.state.typology.name}
+          icon={'fa-file-o'}
+          name={'Pàgina'}
           onSubmitForm={this.handleSubmitForm}
         />
 
@@ -431,7 +431,7 @@ class PageContainer extends Component {
             <ContentSidebar
                 errors={this.state.errors}
                 status={this.state.status}
-                template={this.state.template}
+                template={null}
                 category={this.state.category}
                 tags={this.state.tags}
                 translations={this.state.translations}
@@ -447,14 +447,15 @@ class PageContainer extends Component {
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
-            {this.state.errors &&
+            {/* {this.state.errors &&  */}
               <PageBuilder
                 layout={this.state.layout}
                 updateLayout={this.handleUpdateLayout}
                 translations={this.state.translations}
                 onFieldChange={this.handleFieldChange}
+                title={this.state.title}
               />
-            }
+            {/*  } */}
             </DragDropContextProvider>
 
         </div>

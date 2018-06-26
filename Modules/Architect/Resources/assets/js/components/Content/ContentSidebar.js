@@ -9,7 +9,7 @@ class ContentSidebar extends Component {
   constructor(props) {
 
     super(props);
-        
+
     this.handleChange = this.handleChange.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
   }
@@ -34,7 +34,7 @@ class ContentSidebar extends Component {
     if(field != null) {
         this.props.onFieldChange(field);
     }
-      
+
   }
 
   handleTranslationChange(event) {
@@ -51,15 +51,15 @@ class ContentSidebar extends Component {
     return (LANGUAGES.map((language, k) => (
         <div className="togglebutton" key={k}>
             <label>
-              {language.name} 
+              {language.name}
               <input type="checkbox" name={language.iso} checked={this.props.translations[language.iso]} onChange={this.handleTranslationChange} />
             </label>
         </div>
     )));
   }
 
-  render() {      
-  
+  render() {
+
     return (
       <div className="sidebar">
         {this.props.status == 1 &&
@@ -84,16 +84,20 @@ class ContentSidebar extends Component {
 
         <hr/>
 
-        <div className="form-group bmd-form-group sidebar-item">
-           <label htmlFor="template" className="bmd-label-floating">Plantilla</label>
-           <select className="form-control" id="template" name="template" value={this.props.template}  onChange={this.handleChange}>
-              <option name="" value="1"> Plantilla 1 </option>
-              <option name="" value="2"> Plantilla 2 </option>
-              <option name="" value="3"> Plantilla 3 </option>
-           </select>
-        </div>
+        {this.props.template != null &&
+          <div>
+            <div className="form-group bmd-form-group sidebar-item">
+               <label htmlFor="template" className="bmd-label-floating">Plantilla</label>
+               <select className="form-control" id="template" name="template" value={this.props.template}  onChange={this.handleChange}>
+                  <option name="" value="1"> Plantilla 1 </option>
+                  <option name="" value="2"> Plantilla 2 </option>
+                  <option name="" value="3"> Plantilla 3 </option>
+               </select>
 
-        <hr/>
+            </div>
+            <hr/>
+          </div>
+        }
 
         <div className="form-group bmd-form-group has-danger">
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>

@@ -28,6 +28,7 @@ page="{{ isset($page) ? base64_encode(json_encode($page, true)) : null }}"
 @push('javascripts-libs')
 <script>
 var routes = {
+  'contents' : "{{route('contents')}}",
   'medias.data' : "{{route('medias.data')}}",
   'medias.index' : '{{ route('medias.index') }}',
   'medias.store' : '{{ route('medias.store') }}',

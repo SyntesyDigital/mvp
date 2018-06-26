@@ -14659,6 +14659,12 @@ nav.main-nav ul li a:hover {
   border-bottom: 3px solid #4a9fea;
 }
 
+nav.main-nav ul li.active a {
+  text-decoration: none;
+  color: #4a9fea;
+  border-bottom: 3px solid #4a9fea;
+}
+
 .page-title {
   padding: 10px 0;
   vertical-align: middle;

@@ -19,6 +19,7 @@ class PageBuilder extends Component {
         fields : [],
         errors : this.props.errors,
 
+        /*
         layout : this.props.layout ? this.props.layout : [
           {
             type : 'row',
@@ -30,6 +31,7 @@ class PageBuilder extends Component {
             ]
           }
         ],
+        */
 
         displayItemModal : false,
         displayEditItemModal : false,
@@ -46,6 +48,25 @@ class PageBuilder extends Component {
     this.handleItemCancel = this.handleItemCancel.bind(this);
     this.handleItemSelected = this.handleItemSelected.bind(this);
 
+  }
+
+  componentWillRecieveProps(nextProps) {
+
+    console.log("PageBuilder :: componentWillRecieveProps => ",nextProps);
+
+    if(nextProps.layout != null){
+
+      //a change has been done to layout
+
+      this.setState({
+        displayItemModal : false,
+        displayEditItemModal : false,
+        pathToIndex : null,
+        addPosition : null,
+        editItemData : null,
+        addPosition : null
+      });
+    }
   }
 
   /******** Modal Items  ********/
@@ -83,9 +104,9 @@ class PageBuilder extends Component {
 
   handleItemSelected(item){
 
-    console.log("handleColChanged => ", item);
+    console.log("handleItemSelected => ", item);
 
-    var layout = this.state.layout;
+    var layout = this.props.layout;
 
     if(this.state.addPosition != null && this.state.addPosition == "before"){
       //put object to the begining
@@ -98,13 +119,14 @@ class PageBuilder extends Component {
 
     console.log("layout final  => ",layout);
 
+
     this.setState({
-      layout : layout,
       displayItemModal : false,
       pathToIndex : null,
       addPosition : null
     });
-    
+
+
     this.props.updateLayout(layout);
 
   }
@@ -115,7 +137,11 @@ class PageBuilder extends Component {
 
     e.preventDefault();
 
-    const {layout} = this.state;
+    var {layout} = this.props;
+
+    if(layout == undefined || layout == null){
+      layout = [];
+    }
 
     layout.push({
         type : 'row',
@@ -131,9 +157,13 @@ class PageBuilder extends Component {
 
     console.log("handleAddRow : layout : ",layout);
 
+    /*
     this.setState({
       layout : layout
     });
+    */
+
+    this.props.updateLayout(layout);
 
   }
 
@@ -147,15 +177,19 @@ class PageBuilder extends Component {
 
     console.log("handleColChanged => ", pathToIndex, data);
 
-    var layout = this.state.layout;
+    var layout = this.props.layout;
 
     layout = this.changeCols(layout,-1,pathToIndex,data);
 
     console.log("handleColChanged : layout : ",layout);
 
+    /*
     this.setState({
       layout : layout
     });
+    */
+
+    this.props.updateLayout(layout);
   }
 
   changeRow(layout,currentIndex,pathToIndex,data,before){
@@ -254,22 +288,25 @@ class PageBuilder extends Component {
 
     console.log("handleDeleteRow => ", pathToIndex);
 
-    var layout = this.state.layout;
+    var layout = this.props.layout;
 
     layout = this.removeRow(layout,-1,pathToIndex);
 
     console.log("handleDeleteRow : layout : ",layout);
 
+    /*
     this.setState({
       layout : layout
     });
+    */
+
+    this.props.updateLayout(layout);
 
   }
 
 
 
   handleEditItem(item){
-
 
     this.setState({
       displayEditItemModal : true,
@@ -289,7 +326,7 @@ class PageBuilder extends Component {
 
   renderRows() {
 
-    const {layout} = this.state;
+    const {layout} = this.props;
 
     return (
         layout.map((item,index) =>
@@ -316,17 +353,19 @@ class PageBuilder extends Component {
     //update data to pathToIndex
     console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
 
-    var layout = this.state.layout;
+    var layout = this.props.layout;
 
     layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,data);
 
     console.log("handleOnEditField : layout : ",layout);
 
+
     this.setState({
-      layout : layout,
       displayEditItemModal : false,
       editItemData : null
     });
+
+    this.props.updateLayout(layout);
 
   }
 
@@ -353,22 +392,14 @@ class PageBuilder extends Component {
 
         <div className="field-group">
           <TextField
-            field={{
-              id:0,
-              identifier:"title",
-              values:{
-                "ca" : "",
-                "es" : "",
-                "en" : ""
-              },
-              name:"Títol"
-            }}
+            field={this.props.title}
             translations={this.props.translations}
-            key={1}
             onFieldChange={this.props.onFieldChange}
           />
 
-          {this.renderRows()}
+          {this.props.layout != null &&
+            this.renderRows()
+          }
 
           <FirstEmptyRow
             onAddRow={this.handleAddRow}
