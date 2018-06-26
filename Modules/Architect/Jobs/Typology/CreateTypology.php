@@ -33,11 +33,13 @@ class CreateTypology
         ]);
 
         foreach($this->attributes["fields"] as $field) {
+
             $typology->fields()->save(new Field([
                 'icon' => $field['icon'],
                 'name' => $field['name'],
                 'identifier' => $field['identifier'],
                 'type' => $field['type'],
+                'rules' => isset($field['rules']) ? $field['rules'] : null,
                 'settings' => $field['settings'],
             ]));
         }
