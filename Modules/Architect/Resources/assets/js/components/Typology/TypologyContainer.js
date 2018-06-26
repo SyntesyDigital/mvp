@@ -232,9 +232,16 @@ class TypologyContainer extends Component {
  }
 
      handleSubmitForm(e) {
-
          e.preventDefault();
-
+         
+         this.setState({
+             errors :  {
+                 name: null,
+                 identifier: null,
+                 fields: null,
+             }
+         });
+         
          if(this.state.typology) {
              this.update();
          } else {
@@ -253,22 +260,23 @@ class TypologyContainer extends Component {
 
      create() {
          var _this = this;
+         
          axios.post('/architect/typologies', this.getFormData())
-        .then((response) => {
-            if(response.data.success) {
-                _this.onSaveSuccess(response.data);
-            }
-        })
-        .catch((error) => {
-            if (error.response) {
-                _this.onSaveError(error.response.data);
-            } else if (error.message) {
-                toastr.error(error.message);
-            } else {
-                console.log('Error', error.message);
-            }
-            //console.log(error.config);
-        });
+            .then((response) => {
+                if(response.data.success) {
+                    _this.onSaveSuccess(response.data);
+                }
+            })
+            .catch((error) => {
+                if (error.response) {
+                    _this.onSaveError(error.response.data);
+                } else if (error.message) {
+                    toastr.error(error.message);
+                } else {
+                    console.log('Error', error.message);
+                }
+                //console.log(error.config);
+            });
      }
 
     delete()
