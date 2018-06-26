@@ -77,7 +77,7 @@ class UpdateContent
             if($values && $type && $identifier) {
                 $this
                     ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($this->content, $identifier, $values, $languages);
+                    ->save($this->content, $identifier, $values, $this->languages);
             }
         }
     }

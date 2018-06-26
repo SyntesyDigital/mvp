@@ -19,6 +19,10 @@ class DeleteContent
 
     public function handle()
     {
+        if($this->content->page) {
+            $this->content->page->delete();
+        }
+        
         return $this->content->delete();
     }
 }
