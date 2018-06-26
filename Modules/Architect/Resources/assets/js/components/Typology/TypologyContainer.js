@@ -25,10 +25,7 @@ class TypologyContainer extends Component {
              identifier: "",
              icon: "",
              template: "",
-             slugOn: false,
-             slugCa: "",
-             slugEs: "",
-             slugEn: "",
+             slug : null,
              categories: false,
              tags: false
          },
@@ -60,6 +57,8 @@ class TypologyContainer extends Component {
      const inputs = this.state.inputs;
 
      inputs[field.name] = field.value;
+
+     //console.log("TypologyContainer :: handleInputChange => ",inputs);
 
      this.setState({
          inputs: inputs
@@ -243,11 +242,13 @@ class TypologyContainer extends Component {
      }
 
      getFormData() {
+
          return {
              name : this.state.inputs.name,
              identifier : this.state.inputs.identifier,
              fields : this.state.fields,
-             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null
+             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null,
+             slug : this.state.inputs.slug
          };
      }
 
@@ -388,6 +389,7 @@ class TypologyContainer extends Component {
                   errors={this.state.errors}
                   onFieldChange={this.handleInputChange}
                   deleteHandler={this.delete}
+                  translations={this.props.translations}
                 >
 
                 {

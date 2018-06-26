@@ -13,9 +13,17 @@ export default class TypologyForm extends Component {
     {
         super(props);
 
+        // Set translations
+        var translations = {};
+        LANGUAGES.map(function(v,k){
+            translations[v.iso] = true;
+        });
+
+
         this.state = {
             typology : props.typology ? JSON.parse(atob(props.typology)) : '',
-            fieldsList : FIELDS
+            fieldsList : FIELDS,
+            translations: translations,
         };
     }
 
@@ -49,10 +57,7 @@ export default class TypologyForm extends Component {
                       label : this.state.typology.icon
                     },
                     template: "",
-                    slugOn: false,
-                    slugCa: "",
-                    slugEs: "",
-                    slugEn: "",
+                    slug: null,
                     categories: false,
                     tags: false,
                 }
@@ -69,7 +74,8 @@ export default class TypologyForm extends Component {
         return (
             <div>
                 <TypologyContainer
-                ref={(typologyContainer) => this.typologyContainer = typologyContainer}
+                  translations={this.state.translations}
+                  ref={(typologyContainer) => this.typologyContainer = typologyContainer}
                 />
             </div>
         );
