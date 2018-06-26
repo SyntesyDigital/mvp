@@ -21,7 +21,8 @@ class Language extends Model
      */
     protected $fillable = [
         'name',
-        'iso'
+        'iso',
+        'default'
     ];
 
     /**

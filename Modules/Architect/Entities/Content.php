@@ -66,6 +66,11 @@ class Content extends Model
         return $this->belongsToMany('\Modules\Architect\Entities\Tag', 'contents_tags');
     }
 
+    public function languages()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Language', 'contents_languages');
+    }
+
     public function categories()
     {
         return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'content_id', 'category_id');
@@ -78,7 +83,7 @@ class Content extends Model
 
     public function page()
     {
-        return $this->hasOne('\Modules\Architect\Entities\Page', "id", "page_id");
+        return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
     }
 
     public function getStringStatus()

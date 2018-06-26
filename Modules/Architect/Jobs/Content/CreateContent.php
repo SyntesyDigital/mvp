@@ -24,7 +24,8 @@ class CreateContent
             'fields',
             'category_id',
             'tags',
-            'page'
+            'page',
+            'translations'
         ]);
     }
 
@@ -44,6 +45,7 @@ class CreateContent
 
         $this->saveCategories();
         $this->saveTags();
+        $this->saveLanguages();
 
         if(isset($this->attributes['page'])) {
             $this->savePage();
@@ -95,7 +97,6 @@ class CreateContent
         }
     }
 
-
     public function saveTags()
     {
         $this->content->tags()->detach();
@@ -109,6 +110,19 @@ class CreateContent
         }
 
         $this->content->load('tags');
+    }
+
+    public function saveLanguages()
+    {
+        $this->content->languages()->detach();
+
+        foreach($this->attributes['translations'] as $iso => $value) {
+            $language = $value ? Language::where('iso', $iso)->first() : null;
+
+            if($language) {
+                $this->content->languages()->attach($language);
+            }
+        }
     }
 
     function savePageBuilderFields(&$nodes) {
@@ -137,12 +151,9 @@ class CreateContent
 
     public function savePage()
     {
-        $page = Page::create([
+        return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
-        ]);
-
-        $this->content->update([
-            'page_id' => $page ? $page->id : null
+            'content_id' => $this->content->id
         ]);
     }
 

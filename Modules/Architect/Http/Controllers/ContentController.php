@@ -74,7 +74,7 @@ class ContentController extends Controller
         }
 
         return view('architect::contents.show', [
-            'content' => $content->load('tags', 'categories'),
+            'content' => $content->load('tags', 'categories', 'languages'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
             'page' => $content->page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,

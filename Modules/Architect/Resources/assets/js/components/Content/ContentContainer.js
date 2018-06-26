@@ -19,10 +19,22 @@ class ContentContainer extends Component {
   constructor(props) {
      super(props);
 
-     // Set translations
+     var self = this;
+     
+     // Build translations state from content languages fields
      var translations = {};
-     LANGUAGES.map(function(v,k){
-         translations[v.iso] = true;
+     LANGUAGES.map(function(language){
+         if(self.props.content) {
+             var exist = false;
+            self.props.content.languages.map(function(contentLanguage){
+                if(contentLanguage.iso == language.iso) {
+                    exist = true;
+                }
+            });  
+            translations[language.iso] = exist;
+         } else {
+             translations[language.iso] = true;
+         }
      });
 
      //console.log("ContentContainer :: content => ", props.content);
@@ -72,7 +84,7 @@ class ContentContainer extends Component {
      this.handleContentCancel = this.handleContentCancel.bind(this);
  }
 
-
+ 
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -186,8 +198,9 @@ class ContentContainer extends Component {
   }
 
   getFormData()
-  {
+  {      
       return {
+          translations : this.state.translations,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           typology_id : this.state.typology.id,
           status : this.state.status,

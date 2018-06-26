@@ -24,7 +24,8 @@ class UpdateContent
              'fields',
              'category_id',
              'tags',
-             'page'
+             'page',
+             'translations'
          ]);
      }
 
@@ -42,6 +43,7 @@ class UpdateContent
 
         $this->saveCategories();
         $this->saveTags();
+        $this->saveLanguages();
 
         if(isset($this->attributes['page'])) {
             $this->savePage();
@@ -93,6 +95,19 @@ class UpdateContent
         }
     }
 
+    public function saveLanguages()
+    {
+        $this->content->languages()->detach();
+
+        foreach($this->attributes['translations'] as $iso => $value) {
+            $language = $value ? Language::where('iso', $iso)->first() : null;
+
+            if($language) {
+                $this->content->languages()->attach($language);
+            }
+        }
+    }
+
     public function saveTags()
     {
         $this->content->tags()->detach();
@@ -130,17 +145,11 @@ class UpdateContent
 
     public function savePage()
     {
-        //$this->content->page->delete();
-        $oldPage = $this->content->page;
+        $this->content->page->delete();
 
-        $page = Page::create([
+        return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
+            'content_id' => $this->content->id
         ]);
-
-        if($this->content->update([
-            'page_id' => $page ? $page->id : null
-        ])) {
-            $oldPage->delete();
-        }
     }
 }

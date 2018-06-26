@@ -12,6 +12,7 @@ class Page extends Model
     protected $table = 'pages';
 
     protected $fillable = [
+        'content_id',
         'definition'
     ];
 
@@ -24,4 +25,9 @@ class Page extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function content()
+    {
+        return $this->hasOne('\Modules\Architect\Entities\Content');
+    }
 }
