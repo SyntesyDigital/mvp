@@ -6,24 +6,6 @@ import CustomFieldTypes from './../../common/CustomFieldTypes';
 const TYPE_YOUTUBE = "youtube";
 const TYPE_VIMEO = "vimeo";
 
-/*
-
-values :  {
-  ca : "Hola",
-  es : "Hola",
-  en : "Hola",
-
-  linkType : "youtube",
-  linkValues : {
-    ca : "http://",
-    es : "http://",
-    en : "http://",
-  }
-
-}
-
-*/
-
 class VideoField extends Component
 {
   constructor(props)
@@ -32,61 +14,88 @@ class VideoField extends Component
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleLinkChange = this.handleLinkChange.bind(this);
-    this.handleLinkTypeChange = this.handleLinkTypeChange.bind(this);
+
+    this.state = {
+      title : {},
+      linkValues : {}
+    };
   }
 
   componentDidMount()
   {
-    if(this.props.field.values === undefined || this.props.field.values == null){
-      this.updateByType(TYPE_YOUTUBE);
+    var title = {};
+    var linkValues = {};
+
+    if(this.props.field.value === undefined || this.props.field.value == null){
+      linkValues = {};
     }
+    else {
+
+      if(this.props.field.value.title !== undefined && this.props.field.value.title != null){
+        title = this.props.field.value.title;
+      }
+
+      if(this.props.field.value.url !== undefined){
+        linkValues = this.props.field.value.url;
+      }
+
+      this.setState({
+        title : title,
+        linkValues : linkValues
+      });
+    }
+
   }
 
-  onContentSelect(event) {
-      event.preventDefault();
-      this.props.onContentSelect(this.props.field.identifier);
+  componentWillReceiveProps(nextProps){
+
+    var title = null;
+    var linkValues = null;
+
+    if(nextProps.field.value === undefined || nextProps.field.value == null){
+      title = {};
+      linkValues = {};
+    }
+    else {
+
+      if(nextProps.field.value.title !== undefined && nextProps.field.value.title != null){
+        title = nextProps.field.value.title;
+      }
+
+      if(nextProps.field.value.url !== undefined && nextProps.field.value.url != null){
+        linkValues = nextProps.field.value.url;
+      }
+      else {
+        linkValues = {};
+      }
+
+      this.setState({
+        title : title,
+        linkValues : linkValues
+      });
+
+    }
+
   }
+
 
   handleOnChange(event)
   {
     const language = $(event.target).closest('.form-control').attr('language');
-    const values = this.props.field.values ? this.props.field.values : {};
-    values[language] = event.target.value;
+    const value = this.props.field.value !== undefined && this.props.field.value != null ?
+      this.props.field.value : {};
+
+    //console.log("LinkField :: handleOnChange ",value);
+    if(value.title === undefined){
+      value.title = {};
+    }
+
+    value.title[language] = event.target.value;
 
     var field = {
       identifier : this.props.field.identifier,
-      values : values
+      value : value
     };
-
-    this.props.onFieldChange(field);
-  }
-
-  handleLinkTypeChange(event)
-  {
-    this.updateByType(event.target.value);
-  }
-
-  updateByType(type)
-  {
-
-    const values = this.props.field.values ? this.props.field.values : {};
-
-    values.linkType = type;
-
-    var linkValues = {
-          ca : "http://",
-          es : "http://",
-          en : "http://"
-        };
-
-    values.linkValues = linkValues;
-
-    var field = {
-      identifier : this.props.field.identifier,
-      values : values
-    };
-
-    console.log(field);
 
     this.props.onFieldChange(field);
   }
@@ -95,18 +104,18 @@ class VideoField extends Component
   {
 
     const language = $(event.target).closest('.form-control').attr('language');
-    const values = this.props.field.values ? this.props.field.values : {};
+    const value = this.props.field.value ? this.props.field.value : {};
 
-    var linkValues = this.props.field.values !== undefined && this.props.field.values.linkValues !== undefined
-      && this.props.field.values.linkValues != null ?
-      this.props.field.values.linkValues : {};
+    var linkValues = this.props.field.value !== undefined && this.props.field.value.url !== undefined
+      && this.props.field.value.url != null ?
+      this.props.field.value.url : {};
 
     linkValues[language] = event.target.value;
-    values.linkValues = linkValues;
+    value.url = linkValues;
 
     var field = {
       identifier : this.props.field.identifier,
-      values : values
+      value : value
     };
 
     this.props.onFieldChange(field);
@@ -118,10 +127,9 @@ class VideoField extends Component
     for(var key in this.props.translations){
       if(this.props.translations[key]){
           var value = '';
-          console.log(this.props.field);
 
-          if(this.props.field.values) {
-              value = this.props.field.values[key] ? this.props.field.values[key] : '';
+          if(this.state.title !== undefined && this.state.title != null ) {
+              value = this.state.title[key] ? this.state.title[key] : '';
           }
 
         inputs.push(
@@ -134,50 +142,6 @@ class VideoField extends Component
     }
 
     return inputs;
-  }
-
-  renderRadio() {
-
-    const linkType = this.props.field.values !== undefined && this.props.field.values.linkType !== undefined ?
-      this.props.field.values.linkType : TYPE_YOUTUBE;
-
-    return (
-
-      <div className="radio-form">
-
-        <br/>
-
-        <label className="form-check-label" >
-            <input className="form-check-input" type="radio"
-              checked={linkType == TYPE_YOUTUBE}
-              name={"linkType"+this.props.field.identifier}
-              value={TYPE_YOUTUBE}
-              onChange={this.handleLinkTypeChange}
-            /> &nbsp;
-            YouTube
-            &nbsp;&nbsp;
-        </label>
-
-        &nbsp;
-
-        <label className="form-check-label">
-            <input className="form-check-input" type="radio"
-              checked={linkType == TYPE_VIMEO}
-              name={"linkType"+this.props.field.identifier}
-              value={TYPE_VIMEO}
-              onChange={this.handleLinkTypeChange}
-            /> &nbsp;
-            Vimeo
-            &nbsp;&nbsp;
-        </label>
-
-        <br/>
-        <br/>
-
-      </div>
-
-
-    );
   }
 
   renderLinks(linkValues)
@@ -207,11 +171,7 @@ class VideoField extends Component
 
   render() {
 
-    const linkType = this.props.field.values !== undefined && this.props.field.values.linkType !== undefined ?
-      this.props.field.values.linkType : TYPE_YOUTUBE;
-
-    const linkValues = this.props.field.values !== undefined && this.props.field.values.linkValues !== undefined ?
-      this.props.field.values.linkValues : null;
+    const linkValues = this.state.linkValues;
 
     return (
       <div className="field-item">
@@ -231,7 +191,11 @@ class VideoField extends Component
 
             {this.renderTitle()}
 
-            {this.renderRadio()}
+            <hr/>
+            <br/>
+            <label className="bmd-label-floating">Enllaç de YouTube o Vimeo :</label>
+            <br/>
+            <br/>
 
             {this.renderLinks(linkValues)}
 

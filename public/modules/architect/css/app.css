@@ -15432,6 +15432,12 @@ nav.main-nav ul li.active a {
   margin-bottom: 20px;
 }
 
+.content .field-group .field-item .field-name {
+  line-height: 45px;
+  text-align: left;
+  padding-left: 30px;
+}
+
 .content .field-group .field-item button.btn,
 .content .field-group .field-item div.btn {
   display: block;

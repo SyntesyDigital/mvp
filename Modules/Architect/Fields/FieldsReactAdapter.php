@@ -135,6 +135,22 @@ class FieldsReactAdapter
                 $typologyField->value = $values;
             break;
 
+            case 'video':
+                $values = null;
+                $childs = $this->content->getFieldChilds($contentField);
+
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+                      if($v->language_id) {
+                          $iso = $this->getLanguageIsoFromId($v->language_id);
+                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                      }
+                  }
+                }
+
+                $typologyField->value = $values;
+            break;
+
             default:
                 $values = isset($typologyField->value) ? $typologyField->value : $contentField->value;
 
