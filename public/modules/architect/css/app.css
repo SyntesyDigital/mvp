@@ -16184,6 +16184,22 @@ nav.main-nav ul li.active a {
   border-bottom: 2px solid #f44336;
 }
 
+.block-div {
+  position: absolute;
+  top: 6px;
+  left: 0px;
+  width: 100%;
+  height: 59%;
+  z-index: 10;
+  background-color: rgba(227, 227, 227, 0.5);
+}
+
+.block-div i.fa {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
 .map-container {
   margin-bottom: 20px;
 }

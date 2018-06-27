@@ -27,6 +27,20 @@ export default class TypologyForm extends Component {
         };
     }
 
+    exploteToObject(fields) {
+
+  		if(fields == null){
+  			return null;
+  		}
+
+  		var result = {};
+
+  		for(var i=0;i<fields.length;i++){
+  			result[fields[i]] = null;
+  		}
+  		return result;
+  	}
+
     componentDidMount()
     {
         if(this.state.typology) {
@@ -41,8 +55,10 @@ export default class TypologyForm extends Component {
                     identifier : field.identifier,
                     type : field.type,
                     rules : field.rules,
-                    settings : field.settings
+                    settings : field.settings,
+                    saved : true
                 });
+                //console.log("field text => ",field);
             });
 
             this.typologyContainer.setState({
@@ -62,6 +78,28 @@ export default class TypologyForm extends Component {
                     tags: false,
                 }
             });
+        }
+        else {
+          var fields = [];
+          fields.push({
+            icon : FIELDS.TEXT.icon,
+            id : 0,
+            label : FIELDS.TEXT.name,
+            name : "Títol",
+            identifier : "title",
+            type : FIELDS.TEXT.type,
+            rules : this.exploteToObject(FIELDS.TEXT.rules),
+      			settings : this.exploteToObject(FIELDS.TEXT.settings),
+            saved : false
+          });
+
+          fields[0].rules["required"] = true;
+          fields[0].settings["entryTitle"] = true;
+
+          this.typologyContainer.setState({
+            fields : fields
+          });
+
         }
 
         this.typologyContainer.setState({

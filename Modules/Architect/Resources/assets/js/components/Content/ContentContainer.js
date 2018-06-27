@@ -205,6 +205,10 @@ class ContentContainer extends Component {
          .then((response) => {
              if(response.data.success) {
                  _this.onSaveSuccess(response.data);
+
+                 setTimeout(function(){
+                     window.location.href = routes.showContent.replace(':id',response.data.content.id);
+                 },1500);
              }
          })
          .catch((error) => {

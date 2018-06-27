@@ -258,6 +258,13 @@ class TypologyContainer extends Component {
         .then((response) => {
             if(response.data.success) {
                 _this.onSaveSuccess(response.data);
+
+                //console.log(response.data);
+
+                setTimeout(function(){
+                    window.location.href = routes.showTypology.replace(':id',response.data.typology.id);
+                },1500);
+
             }
         })
         .catch((error) => {
@@ -317,8 +324,21 @@ class TypologyContainer extends Component {
     }
 
      onSaveSuccess(response) {
+
+          //set all fields to saved
+          //console.log("onSaveSuccess => ",response);
+
+          const fields = this.state.fields;
+
+          for(var i=0;i<fields.length;i++){
+            fields[i].saved = true;
+          }
+
+          console.log("TypologySaved : ",fields);
+
          this.setState({
-             typology : response.typology
+             typology : response.typology,
+             fields : fields
          })
 
          toastr.success('Ok');
@@ -374,6 +394,7 @@ class TypologyContainer extends Component {
                 <div className="col-md-9 page-content">
                   <TypologyDropZone
                     errors={this.state.errors}
+                    created={this.state.typology !== undefined && this.state.typology != null}
                     fields={this.state.fields}
                     onFieldAdded={this.handleFieldAdded}
                     onFieldChanged={this.handleFieldChange}
