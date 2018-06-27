@@ -56,7 +56,8 @@ export default class TypologyForm extends Component {
                     type : field.type,
                     rules : field.rules,
                     settings : field.settings,
-                    saved : true
+                    saved : true,
+                    editable : field.type == FIELDS.SLUG.type ? false : true
                 });
                 //console.log("field text => ",field);
             });
@@ -81,6 +82,8 @@ export default class TypologyForm extends Component {
         }
         else {
           var fields = [];
+
+          //add title
           fields.push({
             icon : FIELDS.TEXT.icon,
             id : 0,
@@ -90,17 +93,37 @@ export default class TypologyForm extends Component {
             type : FIELDS.TEXT.type,
             rules : this.exploteToObject(FIELDS.TEXT.rules),
       			settings : this.exploteToObject(FIELDS.TEXT.settings),
-            saved : false
+            saved : false,
+            editable : true
           });
 
           fields[0].rules["required"] = true;
           fields[0].settings["entryTitle"] = true;
+
+          //add slug
+          fields.push({
+            icon : FIELDS.SLUG.icon,
+            id : 1,
+            label : FIELDS.SLUG.name,
+            name : "Slug",
+            identifier : "slug",
+            type : FIELDS.SLUG.type,
+            rules : this.exploteToObject(FIELDS.SLUG.rules),
+      			settings : this.exploteToObject(FIELDS.SLUG.settings),
+            saved : false,
+            editable : false
+          });
+
+          fields[1].rules["required"] = true;
+          fields[1].rules["unique"] = true;
 
           this.typologyContainer.setState({
             fields : fields
           });
 
         }
+
+
 
         this.typologyContainer.setState({
             fieldsList: this.state.fieldsList

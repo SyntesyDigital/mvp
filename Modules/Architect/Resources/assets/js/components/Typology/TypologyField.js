@@ -98,7 +98,7 @@ class TypologyField extends Component {
 
 	componentWillReceiveProps(nextProps) {
 
-    console.log("TypologyField ::will recieve props : =>",nextProps);
+    //console.log("TypologyField ::will recieve props : =>",nextProps);
 	}
 
 	onRemoveField(event) {
@@ -179,6 +179,8 @@ class TypologyField extends Component {
 
   render() {
 
+		//console.log("is editable => ",this.props.editable);
+
 	var isEntryTitle = false;
 	if(this.props.settings != null &&
 		this.props.settings.entryTitle !== undefined &&
@@ -205,18 +207,25 @@ class TypologyField extends Component {
         <div className="field-inputs">
           <div className="row">
             <div className="field-name col-xs-6">
-              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
+              <input disabled={this.props.editable ? false : true} type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
             <div className="field-id col-xs-6">
-							<SlugInput
-								className="form-control"
-								name="identifier"
-								placeholder="Idenfiticador"
-								sourceValue={this.state.name}
-								value={this.state.identifier}
-								blocked={this.props.saved}
-								onFieldChange={this.handleIdentifierChange.bind(this)}
-							/>
+
+							{this.props.editable &&
+								<SlugInput
+									className="form-control"
+									name="identifier"
+									placeholder="Idenfiticador"
+									sourceValue={this.state.name}
+									value={this.state.identifier}
+									blocked={this.props.saved}
+									onFieldChange={this.handleIdentifierChange.bind(this)}
+								/>
+							}
+
+							{!this.props.editable &&
+									<input disabled type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} onChange={this.handleChange}/>
+							}
 
 							{/*
 							<input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
@@ -226,9 +235,11 @@ class TypologyField extends Component {
         </div>
 
         <div className="field-actions">
-			<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
-			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
-			&nbsp;&nbsp;
+
+					<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
+					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+					&nbsp;&nbsp;
+
         </div>
       </div>),
     );

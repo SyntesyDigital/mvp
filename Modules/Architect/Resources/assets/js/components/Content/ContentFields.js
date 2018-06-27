@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 
 import TextField from './ContentFields/TextField';
+import SlugField from './ContentFields/SlugField';
 import RichTextField from './ContentFields/RichTextField';
 import ImageField from './ContentFields/ImageField';
 import DateField from './ContentFields/DateField';
@@ -22,11 +23,27 @@ class ContentFields extends Component {
         fields : [],
         errors : this.props.errors
     };
+
+    this.entryTitleKey = this.getEntryTitleKey();
+  }
+
+  getEntryTitleKey() {
+    for(var key in this.props.fields){
+      if(this.props.fields[key].type == FIELDS.TEXT.type){
+        if(this.props.fields[key].settings.entryTitle){
+          return key;
+        }
+      }
+    }
+
+    return null;
   }
 
   renderFields() {
     var fields = [];
     var _this = this;
+
+    console.log("fields => ",_this.props.fields);
 
     Object.keys(_this.props.fields).map(function(k){
         switch(_this.props.fields[k].type) {
@@ -36,6 +53,19 @@ class ContentFields extends Component {
                     errors={_this.props.errors[k]}
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                  />
+                );
+            break;
+
+            case FIELDS.SLUG.type:
+                fields.push(
+                  <SlugField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    sourceField={_this.entryTitleKey != null ? _this.props.fields[_this.entryTitleKey] : null}
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
                   />

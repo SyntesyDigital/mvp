@@ -62,7 +62,8 @@ class TypologyDropZone extends Component {
 			identifier : "",
 			rules : this.exploteToObject(field.rules),
 			settings : this.exploteToObject(field.settings),
-			saved : false
+			saved : false,
+			editable : field.type == FIELDS.SLUG.type ? false : true
 		};
 
 		this.props.onFieldAdded(field);
@@ -96,6 +97,7 @@ class TypologyDropZone extends Component {
 				<TypologyField
 					created={this.props.created}
 					saved={item.saved}
+					editable={item.editable}
 					key={item.id}
 					index={i}
 					id={item.id}

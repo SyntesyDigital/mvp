@@ -65,7 +65,7 @@ class SlugInput extends Component
 
   onFieldChange(event){
 
-    console.log("SlugInput :: onFieldChange : =>",event.target.value, this.state.blocked);
+    //console.log("SlugInput :: onFieldChange : =>",event.target.value, this.state.blocked);
 
     if(this.state.manualUnblocked || !this.state.blocked){
 
@@ -103,7 +103,7 @@ class SlugInput extends Component
 
   render() {
 
-    console.log("SlugInput :: render blocked => ",this.state.blocked);
+    //console.log("SlugInput :: render blocked => ",this.state.blocked);
 
     return (
       <div>
@@ -111,6 +111,7 @@ class SlugInput extends Component
           <i className="fa fa-lock"></i>
         </div>
         <input
+          language={this.props.language}
           type="text"
           className={this.props.className}
           name={this.props.name}

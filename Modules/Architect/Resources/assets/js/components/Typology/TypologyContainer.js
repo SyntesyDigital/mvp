@@ -369,6 +369,24 @@ class TypologyContainer extends Component {
         }
     }
 
+    renderFields() {
+
+      var result = null;
+
+      if(this.state.fieldsList){
+
+        var fieldList = Object.keys(this.state.fieldsList).filter((k,i) =>
+          k != "SLUG"
+        );
+        result = fieldList.map((k,i) =>
+          <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
+        )
+      }
+
+      return result;
+    }
+
+
     render() {
 
         return (
@@ -413,11 +431,7 @@ class TypologyContainer extends Component {
                   translations={this.props.translations}
                 >
 
-                {
-                    this.state.fieldsList && Object.keys(this.state.fieldsList).map((k,i) =>
-                        <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
-                    )
-                }
+                {this.renderFields()}
 
                 </TypologySidebar>
 
