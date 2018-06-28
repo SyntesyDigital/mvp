@@ -49,12 +49,13 @@ export default class TypologyForm extends Component {
                       label : this.state.typology.icon
                     },
                     template: "",
-                    slugOn: false,
+                    slugOn: this.state.typology.has_slug,
+                    slug: this.getSlugFromTypology(),
                     slugCa: "",
                     slugEs: "",
                     slugEn: "",
-                    categories: false,
-                    tags: false,
+                    categories: this.state.typology.has_categories,
+                    tags: this.state.typology.has_tags,
                 }
             });
         }
@@ -62,13 +63,35 @@ export default class TypologyForm extends Component {
         this.typologyContainer.setState({
             fieldsList: this.state.fieldsList
         });
+    }
 
+    getSlugFromTypology()
+    {
+        if(!this.state.typology) {
+            return null;
+        }
+
+        var slugs = this.state.typology.attrs.filter(function(attr){
+            return (attr.name == "slug");
+        });
+
+        var _slug = {};
+        slugs.map(function(slug){
+            return LANGUAGES.map(function(language){
+                if(slug.language_id == language.id) {
+                    _slug[language.iso] = slug.value;
+                }
+            });
+        });
+
+        return _slug;
     }
 
     render() {
         return (
             <div>
                 <TypologyContainer
+                typology={this.state.typology ? this.state.typology : null}
                 ref={(typologyContainer) => this.typologyContainer = typologyContainer}
                 />
             </div>

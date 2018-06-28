@@ -4,8 +4,10 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Typology extends Model
 {
+
     /**
      * The database table used by the model.
      *
@@ -22,8 +24,9 @@ class Typology extends Model
         'name',
         'icon',
         'identifier',
-        // 'is_page',
-        // 'display_pagebuilder'
+        'has_categories',
+        'has_tags',
+        'has_slug'
     ];
 
     /**
@@ -57,6 +60,11 @@ class Typology extends Model
         return $this->hasMany('\Modules\Architect\Entities\Field');
     }
 
+    public function attrs()
+    {
+        return $this->hasMany('\Modules\Architect\Entities\TypologyAttribut');
+    }
+
     public function getIndexField()
     {
         foreach($this->fields as $field) {
@@ -69,4 +77,12 @@ class Typology extends Model
         return null;
     }
 
+
+    public static function whereAttribute($name, $value)
+    {
+        return self::whereHas('attrs', function ($q) use ($name, $value) {
+            $q->where('name', $name);
+            $q->where('value', $value);
+        });
+    }
 }

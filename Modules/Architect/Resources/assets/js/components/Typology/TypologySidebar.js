@@ -90,7 +90,30 @@ class TypologySidebar extends Component {
     this.props.onFieldChange(field);
  }
 
+ renderSlugInputs() {
+
+     if(!this.props.fields.slugOn) {
+         return null;
+     }
+
+     var inputs = [];
+     var self = this;
+     var slug = self.props.fields.slug ? self.props.fields.slug : null;
+
+     LANGUAGES.map(function(language){
+         var value = slug && slug[language.iso] ? slug[language.iso] : null;
+
+         inputs.push(
+             <div key={'slug_' + language.iso} className="form-group bmd-form-group">
+                <input type="text" className="form-control" id={"slug-" + language.iso} placeholder={"Slug - " + language.name} name={"slug[" + language.iso + "]"} value={value} onChange={self.handleChange} />
+             </div>
+         );
+     });
+     return inputs;
+ }
+
   render() {
+
     return (
       <div className="sidebar">
         <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
@@ -132,19 +155,11 @@ class TypologySidebar extends Component {
           </label>
         </div>
 
-        {this.props.fields.slugOn &&
+
           <div>
-            <div className="form-group bmd-form-group">
-               <input type="text" className="form-control" id="slug-ca" placeholder="Slug - català" name="slugCa" value={this.props.fields.slugCa} onChange={this.handleChange} />
-            </div>
-            <div className="form-group bmd-form-group">
-               <input type="text" className="form-control" id="slug-es" placeholder="Slug - español" name="slugEs" value={this.props.fields.slugEs} onChange={this.handleChange} />
-            </div>
-            <div className="form-group bmd-form-group">
-               <input type="text" className="form-control" id="slug-en" placeholder="Slug - english" name="slugEn" value={this.props.fields.slugEn} onChange={this.handleChange} />
-            </div>
+            {this.renderSlugInputs()}
           </div>
-        }
+
 
 
         <hr/>

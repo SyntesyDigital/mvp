@@ -16,7 +16,6 @@ trait HasFields
         return sizeof($arr) ? collect($arr) : null;
     }
 
-
     public function fields()
     {
         return $this->hasMany($this->fieldModel);

@@ -43,7 +43,7 @@ class TypologyController extends Controller
     public function show(Typology $typology)
     {
         return view('architect::typologies.form', [
-            'typology' => $typology->load('fields')
+            'typology' => $typology->load('fields', 'attrs')
         ]);
     }
 

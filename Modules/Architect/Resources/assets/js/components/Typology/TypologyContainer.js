@@ -26,11 +26,12 @@ class TypologyContainer extends Component {
              icon: "",
              template: "",
              slugOn: false,
-             slugCa: "",
-             slugEs: "",
-             slugEn: "",
-             categories: false,
-             tags: false
+             slugs: {},
+             // slugCa: "",
+             // slugEs: "",
+             // slugEn: "",
+             categories: props.typology ? props.typology.has_categories : false,
+             tags: props.typology ? props.typology.has_tags : false,
          },
          errors: {
              name: null,
@@ -59,7 +60,23 @@ class TypologyContainer extends Component {
 
      const inputs = this.state.inputs;
 
-     inputs[field.name] = field.value;
+     var braket = field.name.match(/\[(.*?)\]/i);
+
+     if(braket) { // Build field array from name slug[ca]
+         var fieldName = field.name.replace(braket[0], "");
+         var fieldKey = braket[1];
+
+         if(inputs[fieldName] === undefined) {
+             var obj = {};
+             obj[fieldKey] = field.value;
+
+             inputs[fieldName] = obj;
+         } else {
+             inputs[fieldName][fieldKey] = field.value;
+         }
+     } else {
+         inputs[field.name] = field.value;
+     }
 
      this.setState({
          inputs: inputs
@@ -165,17 +182,9 @@ class TypologyContainer extends Component {
 
      settingsField[field.source][field.name] = field.value;
 
-
-     console.log("handleSettingsChanged =>", settingsField);
-
-     //console.log("TypologyContainer :: handleSettingsChange :: chaging settings, settings field :");
-     //console.log(settingsField);
-
      const {fields} = this.state;
 
      if(field.name == "entryTitle" && field.value == true){
-     //tryingn to update entry title remove if others
-
        for(var key in fields){
          var tempField = fields[key];
          if(tempField.settings != null && tempField.settings.entryTitle !== undefined){
@@ -186,11 +195,7 @@ class TypologyContainer extends Component {
            }
          }
        }
-
      }
-
-     console.log(fields);
-
 
      this.setState({
          fields : fields,
@@ -233,7 +238,7 @@ class TypologyContainer extends Component {
 
      handleSubmitForm(e) {
          e.preventDefault();
-         
+
          this.setState({
              errors :  {
                  name: null,
@@ -241,7 +246,7 @@ class TypologyContainer extends Component {
                  fields: null,
              }
          });
-         
+
          if(this.state.typology) {
              this.update();
          } else {
@@ -251,6 +256,10 @@ class TypologyContainer extends Component {
 
      getFormData() {
          return {
+             has_slug : this.state.inputs.slugOn,
+             slug : this.state.inputs.slug,
+             has_tags : this.state.inputs.tags,
+             has_categories : this.state.inputs.categories,
              name : this.state.inputs.name,
              identifier : this.state.inputs.identifier,
              fields : this.state.fields,
@@ -260,7 +269,7 @@ class TypologyContainer extends Component {
 
      create() {
          var _this = this;
-         
+
          axios.post('/architect/typologies', this.getFormData())
             .then((response) => {
                 if(response.data.success) {
@@ -392,10 +401,10 @@ class TypologyContainer extends Component {
                 </div>
 
                 <TypologySidebar
-                  fields={this.state.inputs}
-                  errors={this.state.errors}
-                  onFieldChange={this.handleInputChange}
-                  deleteHandler={this.delete}
+                    fields={this.state.inputs}
+                    errors={this.state.errors}
+                    onFieldChange={this.handleInputChange}
+                    deleteHandler={this.delete}
                 >
 
                 {

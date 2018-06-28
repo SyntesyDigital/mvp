@@ -4,7 +4,9 @@ namespace Modules\Architect\Jobs\Typology;
 
 use Modules\Architect\Http\Requests\Typology\UpdateTypologyRequest;
 use Modules\Architect\Entities\Typology;
+use Modules\Architect\Entities\TypologyAttribut;
 use Modules\Architect\Entities\Field;
+use Modules\Architect\Entities\Language;
 
 class UpdateTypology
 {
@@ -16,6 +18,10 @@ class UpdateTypology
             'fields',
             'identifier',
             'icon',
+            'has_categories',
+            'has_tags',
+            'has_slug',
+            'slug'
         ]);
     }
 
@@ -30,9 +36,13 @@ class UpdateTypology
             'name' => $this->attributes["name"],
             'identifier' => $this->attributes["identifier"],
             'icon' => isset($this->attributes["icon"]) ? $this->attributes["icon"] : null,
+            'has_categories' => isset($this->attributes["has_categories"]) ? $this->attributes["has_categories"] : null,
+            'has_tags' => isset($this->attributes["has_tags"]) ? $this->attributes["has_tags"] : null,
+            'has_slug' => isset($this->attributes["has_slug"]) ? $this->attributes["has_slug"] : null,
         ]);
 
         $this->typology->fields()->delete();
+        $this->typology->attrs()->delete();
 
         foreach($this->attributes["fields"] as $field) {
             $this->typology->fields()->save(new Field([
@@ -45,6 +55,20 @@ class UpdateTypology
             ]));
         }
 
-        return $this->typology->load('fields');
+        if(isset($this->attributes["slug"]) && $this->typology->has_slug) {
+            foreach($this->attributes["slug"] as $iso => $value) {
+                $language = Language::where('iso', $iso)->first();
+
+                if($language) {
+                    $this->typology->attrs()->save(new TypologyAttribut([
+                        'name' => 'slug',
+                        'value' => $value,
+                        'language_id' => $language->id
+                    ]));
+                }
+            }
+        }
+
+        return $this->typology->load('fields', 'attrs');
     }
 }
