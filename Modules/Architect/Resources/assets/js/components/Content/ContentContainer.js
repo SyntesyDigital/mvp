@@ -446,6 +446,7 @@ class ContentContainer extends Component {
                 onFieldChange={this.handleCustomFieldChange}
                 onImageSelect={this.handleImageSelect}
                 onContentSelect={this.handleContentSelect}
+                saved={this.props.saved}
               />
             }
             </DragDropContextProvider>

@@ -77,7 +77,7 @@ class SlugField extends Component
   									placeholder="Idenfiticador"
   									sourceValue={sourceValue}
   									value={value}
-  									blocked={false}
+  									blocked={this.props.blocked}
                     onFieldChange={this.handleOnChange.bind(this,key)}
   								/>
 

@@ -69,7 +69,13 @@ class SlugInput extends Component
 
     if(this.state.manualUnblocked || !this.state.blocked){
 
-      this.props.onFieldChange(event.target.value);
+      var value = slugify(event.target.value, {
+				replacement: '-',
+				remove: /[$*+~.()'"!:@]/g,
+				lower: true
+			});
+
+      this.props.onFieldChange(value);
     }
   }
 

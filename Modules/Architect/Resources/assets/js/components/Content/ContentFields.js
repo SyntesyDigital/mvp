@@ -66,6 +66,7 @@ class ContentFields extends Component {
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}
                     sourceField={_this.entryTitleKey != null ? _this.props.fields[_this.entryTitleKey] : null}
+                    blocked={_this.props.saved}
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
                   />
