@@ -101,7 +101,7 @@ class ContentsField extends Component {
     var fields = [];
     var _this = this;
 
-    if(this.props.field.value) {
+    if(this.props.field.value !== undefined && this.props.field.value != null) {
         this.props.field.value.map(function(content, i){
             fields.push(
                 <ContentsDragField
@@ -111,7 +111,7 @@ class ContentsField extends Component {
                    type = {_this.props.field.type}
                    label = {content.typology.name}
                    icon = {content.typology.icon}
-                   name = {content.title}
+                   name = {content.title !== undefined && content.title != null ? content.title : ''}
                    moveField = {_this.moveField}
                    onRemoveField = {_this.handleRemoveField}  />
             );
@@ -124,10 +124,13 @@ class ContentsField extends Component {
 
 
   render() {
+
+    const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
+
     return (
       <div className="field-item contents-field">
 
-        <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
+        <button style={{display:(hideTab ? 'none' : 'block')}} id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
             <i className={"fa "+FIELDS.CONTENTS.icon}></i> {FIELDS.CONTENTS.name}
           </span>

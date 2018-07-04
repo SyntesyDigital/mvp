@@ -49,10 +49,47 @@ class FieldsReactPageBuilderAdapter
 
         switch($field["type"]) {
             case 'richtext':
+            case 'slug':
             case 'text':
                 return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
                     return [$field->language->iso => $field->value];
                 })->toArray();
+            break;
+            case 'image':
+
+                $contentField = ContentField::where('name', $fieldName)->first();
+                if($contentField != null){
+                  return Media::find($contentField->value);
+                }
+            break;
+            case 'localization':
+                $contentField = ContentField::where('name', $fieldName)->first();
+                if($contentField != null){
+                  return json_decode($contentField->value, true);
+                }
+            break;
+            case 'images':
+                //FIXME only return one element
+                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
+                    return [Media::find($field->value)];
+                })->toArray();
+
+            break;
+            case 'contents':
+                $contentField = ContentField::where('name', $fieldName)->first();
+                if($contentField != null){
+                  $values[] = Content::find($contentField->value)->load('fields');
+                  return $values;
+                }
+            break;
+            case 'video':
+                return null;
+            break;
+            case 'link':
+                return null;
+            break;
+            default:
+                return ContentField::where('name', $fieldName)->first()->value;
             break;
         }
 

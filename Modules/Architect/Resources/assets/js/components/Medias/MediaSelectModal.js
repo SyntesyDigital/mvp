@@ -282,8 +282,11 @@ class MediaSelectModal extends Component {
 
 
     render() {
+
+        var zIndex = this.props.zIndex !== undefined ? this.props.zIndex : 10000;
+
         return (
-          <div>
+          <div style={{zIndex:zIndex}}>
 
             <MediaEditModal
               ref={m => { this._mediaEditModal = m; }}
