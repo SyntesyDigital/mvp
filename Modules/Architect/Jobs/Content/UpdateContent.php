@@ -99,11 +99,13 @@ class UpdateContent
     {
         $this->content->languages()->detach();
 
-        foreach($this->attributes['translations'] as $iso => $value) {
-            $language = $value ? Language::where('iso', $iso)->first() : null;
+        if(isset($this->attributes['translations'])) {
+            foreach($this->attributes['translations'] as $iso => $value) {
+                $language = $value ? Language::where('iso', $iso)->first() : null;
 
-            if($language) {
-                $this->content->languages()->attach($language);
+                if($language) {
+                    $this->content->languages()->attach($language);
+                }
             }
         }
     }
@@ -145,7 +147,8 @@ class UpdateContent
 
     public function savePage()
     {
-        $this->content->page->delete();
+        $this->content->fields()->delete();
+        $this->content->page()->delete();
 
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
