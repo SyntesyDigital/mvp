@@ -21,8 +21,6 @@ export default class ContentForm extends Component {
             saved : props.content || props.page ? true : false
         };
 
-
-
         console.log("ContentForm :: saved ",this.state.saved);
 
     }

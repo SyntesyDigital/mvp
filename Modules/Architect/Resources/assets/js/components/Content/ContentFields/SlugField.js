@@ -20,7 +20,7 @@ class SlugField extends Component
 
   componentWillReceiveProps(nextProps) {
 
-    console.log("SlugField ::will recieve props : =>",nextProps);
+    //console.log("SlugField ::will recieve props : =>",nextProps);
 
     //this.props.sourceField = nextProps.sourceField;
 
@@ -37,7 +37,7 @@ class SlugField extends Component
     const values = this.props.field.value ? this.props.field.value : {};
     values[language] = value;
 
-    console.log("SlugField :: handleOnChange :: values => ",values);
+    //console.log("SlugField :: handleOnChange :: values => ",values);
 
     this.props.onFieldChange({
       identifier : this.props.field.identifier,
@@ -55,13 +55,13 @@ class SlugField extends Component
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
-          console.log("source field )=> ",this.state.sourceField);
+          //console.log("source field )=> ",this.state.sourceField);
 
           var sourceValue = this.state.sourceField != null && this.state.sourceField.value !== undefined &&
             this.state.sourceField.value != null && this.state.sourceField.value[key] !== undefined ?
             this.state.sourceField.value[key] : '';
 
-          console.log("source value )=> ",sourceValue);
+          //console.log("source value )=> ",sourceValue);
 
           inputs.push(
               <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
@@ -74,7 +74,7 @@ class SlugField extends Component
   									className="form-control"
                     language={key}
   									name="name"
-  									placeholder="Idenfiticador"
+  									placeholder=""
   									sourceValue={sourceValue}
   									value={value}
   									blocked={this.props.blocked}

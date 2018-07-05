@@ -34,7 +34,7 @@ class ModalEditItem extends Component {
     field.value = props.item.data.field !== undefined &&
       props.item.data.field.value !== undefined ? props.item.data.field.value : null;
 
-    // 
+    //
     // console.log("ModalEditItem :: field after process : ",field);
 
     return field;
@@ -147,8 +147,9 @@ class ModalEditItem extends Component {
             <ImageField
                 //errors={_this.props.errors[k]}
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
-                onFieldChange={this.props.onFieldChange}
+                onImageSelect={this.props.onImageSelect}
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
@@ -156,6 +157,7 @@ class ModalEditItem extends Component {
           return (
             <DateField
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
             />
@@ -164,6 +166,7 @@ class ModalEditItem extends Component {
           return (
             <ImagesField
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
                 onImageSelect={this.props.onImageSelect}
@@ -173,6 +176,7 @@ class ModalEditItem extends Component {
           return (
             <ContentsField
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
                 onContentSelect={this.props.onContentSelect}
@@ -182,6 +186,7 @@ class ModalEditItem extends Component {
           return (
             <BooleanField
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
             />
@@ -190,14 +195,26 @@ class ModalEditItem extends Component {
           return (
             <LinkField
                 field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
+                onContentSelect={this.props.onContentSelect}
             />
           );
         case FIELDS.VIDEO.type:
           return (
             <VideoField
                 field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
+        case FIELDS.LOCALIZATION.type:
+          return (
+            <LocalizationField
+                field={this.state.field}
+                hideTab={true}
                 translations={this.props.translations}
                 onFieldChange={this.onFieldChange.bind(this)}
             />
@@ -210,7 +227,7 @@ class ModalEditItem extends Component {
   render() {
 
     return (
-      <div className="custom-modal" id="modal-edit-item">
+      <div className="custom-modal" id="modal-edit-item" style={{zIndex:this.props.zIndex}}>
         <div className="modal-background"></div>
 
 

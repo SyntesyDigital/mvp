@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 
 import TextField from './../ContentFields/TextField';
+import SlugField from './../ContentFields/SlugField';
 
 import FirstEmptyRow from './RowTypes/FirstEmptyRow';
 import Row from './RowTypes/Row';
 
 import ModalSelectItem from './ModalSelectItem';
 import ModalEditItem from './ModalEditItem';
+import MediaSelectModal from './../../Medias/MediaSelectModal';
+import ContentSelectModal from './../ContentSelectModal';
 
 
 class PageBuilder extends Component {
@@ -35,6 +38,8 @@ class PageBuilder extends Component {
 
         displayItemModal : false,
         displayEditItemModal : false,
+        displayMediaModal: false,
+        displayContentModal: false,
         pathToIndex : null,
         editItemData : null,
         addPosition : null
@@ -47,10 +52,13 @@ class PageBuilder extends Component {
     this.handleItemSelect = this.handleItemSelect.bind(this);
     this.handleItemCancel = this.handleItemCancel.bind(this);
     this.handleItemSelected = this.handleItemSelected.bind(this);
+    this.handleContentSelect = this.handleContentSelect.bind(this);
+    this.handleContentSelected = this.handleContentSelected.bind(this);
+    this.handleContentCancel = this.handleContentCancel.bind(this);
 
   }
 
-  componentWillRecieveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
 
     console.log("PageBuilder :: componentWillRecieveProps => ",nextProps);
 
@@ -58,14 +66,19 @@ class PageBuilder extends Component {
 
       //a change has been done to layout
 
-      this.setState({
-        displayItemModal : false,
-        displayEditItemModal : false,
-        pathToIndex : null,
-        addPosition : null,
-        editItemData : null,
-        addPosition : null
-      });
+      if(!this.state.displayEditItemModal){
+        //if the modal is not displaying, don't close the modal yet
+
+        this.setState({
+          displayItemModal : false,
+          displayEditItemModal : false,
+          displayContentModal : false,
+          pathToIndex : null,
+          addPosition : null,
+          editItemData : null,
+          addPosition : null
+        });
+      }
     }
   }
 
@@ -245,6 +258,9 @@ class PageBuilder extends Component {
     }
   }
 
+  /**
+  *   Method to change the value of a vield by its path to Index.
+  */
   changeItem(layout,currentIndex,pathToIndex,data){
     currentIndex++;
 
@@ -265,7 +281,63 @@ class PageBuilder extends Component {
     }
   }
 
-  removeRow(layout,currentIndex,pathToIndex){
+  /**
+  *   Method to change the content value of the link
+  */
+  changeLinkContent(layout,currentIndex,pathToIndex,data,callback){
+    currentIndex++;
+
+    if(currentIndex == pathToIndex.length -1){
+
+      layout[pathToIndex[currentIndex]].field = callback(
+        layout[pathToIndex[currentIndex]].field,data
+      );
+      return layout;
+    }
+    else {
+
+      layout[pathToIndex[currentIndex]].children = this.changeLinkContent(
+        layout[pathToIndex[currentIndex]].children,
+        currentIndex,
+        pathToIndex,
+        data,
+        callback
+      );
+
+      return layout;
+    }
+  }
+
+  /**
+  *   Method to add a new element to a field value array. Use for images and contents.
+  */
+  addItem(layout,currentIndex,pathToIndex,data){
+    currentIndex++;
+
+    if(currentIndex == pathToIndex.length -1){
+
+      if(layout[pathToIndex[currentIndex]].field.value === undefined ||
+        layout[pathToIndex[currentIndex]].field.value == null){
+          layout[pathToIndex[currentIndex]].field.value = [];
+        }
+
+      layout[pathToIndex[currentIndex]].field.value.push(data);
+      return layout;
+    }
+    else {
+
+      layout[pathToIndex[currentIndex]].children = this.addItem(
+        layout[pathToIndex[currentIndex]].children,
+        currentIndex,
+        pathToIndex,
+        data
+      );
+
+      return layout;
+    }
+  }
+
+  removeItem(layout,currentIndex,pathToIndex){
     currentIndex++;
 
     if(currentIndex == pathToIndex.length -1){
@@ -274,10 +346,30 @@ class PageBuilder extends Component {
     }
     else {
 
-      layout[pathToIndex[currentIndex]].children = this.removeRow(
+      layout[pathToIndex[currentIndex]].children = this.removeItem(
         layout[pathToIndex[currentIndex]].children,
         currentIndex,
         pathToIndex
+      );
+
+      return layout;
+    }
+  }
+
+  changeItemChildren(layout,currentIndex,pathToIndex,callback){
+    currentIndex++;
+
+    if(currentIndex == pathToIndex.length -1){
+      layout = callback(layout,pathToIndex[currentIndex]);
+      return layout;
+    }
+    else {
+
+      layout[pathToIndex[currentIndex]].children = this.changeItemChildren(
+        layout[pathToIndex[currentIndex]].children,
+        currentIndex,
+        pathToIndex,
+        callback
       );
 
       return layout;
@@ -290,20 +382,86 @@ class PageBuilder extends Component {
 
     var layout = this.props.layout;
 
-    layout = this.removeRow(layout,-1,pathToIndex);
+    layout = this.removeItem(layout,-1,pathToIndex);
 
     console.log("handleDeleteRow : layout : ",layout);
-
-    /*
-    this.setState({
-      layout : layout
-    });
-    */
 
     this.props.updateLayout(layout);
 
   }
 
+
+  handleDeleteItem(item){
+
+    var layout = this.props.layout;
+
+    layout = this.removeItem(layout,-1,item.pathToIndex);
+
+    this.props.updateLayout(layout);
+  }
+
+  handlePullUpItem(pathToIndex) {
+    console.log("handlePullUpItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      if(children.length > 1 && index > 0 ){
+        var temp = children[index-1];
+        children[index-1] = children[index];
+        children[index] = temp;
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+  }
+
+  handlePullDownItem(pathToIndex) {
+    console.log("handlePullDownItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      if(children.length > 1 && index < children.length-1 ){
+        var temp = children[index+1];
+        children[index+1] = children[index];
+        children[index] = temp;
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+
+  }
+
+  handleCopyItem(pathToIndex) {
+    //console.log("handleCopyItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      var copy = jQuery.extend(true, {}, children[index]);
+
+      if(index == children.length-1){
+        //if is the last
+        children.push(copy);
+      }
+      else {
+        children.splice(index+1,0,copy);
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+
+  }
 
 
   handleEditItem(item){
@@ -334,11 +492,16 @@ class PageBuilder extends Component {
             index={index}
             key={index}
             data={item}
+            childrenLength={layout.length}
             onDeleteRow={this.handleDeleteRow}
             colTypeSelect={this.handleColTypeSelected}
             onColsChanged={this.handleColChanged}
             onSelectItem={this.handleItemSelect}
             onEditItem={this.handleEditItem.bind(this)}
+            onPullUpItem={this.handlePullUpItem.bind(this)}
+            onPullDownItem={this.handlePullDownItem.bind(this)}
+            onCopyItem={this.handleCopyItem.bind(this)}
+            onDeleteItem={this.handleDeleteItem.bind(this)}
             pathToIndex={[parseInt(index)]}
             onSelectItemBefore={this.handleSelectItemBefore.bind(this)}
             onSelectItemAfter={this.handleItemSelect}
@@ -369,6 +532,110 @@ class PageBuilder extends Component {
 
   }
 
+  /******** Images  ********/
+
+  handleImageSelect(identifier) {
+      console.log('handleImageSelect => ', identifier);
+
+    this.setState({
+      displayMediaModal : true
+    });
+
+  }
+
+  handleImageCancel(){
+    this.setState({
+      displayMediaModal : false
+    });
+  }
+
+  handleImageSelected(media){
+      this.updateImage(media);
+  }
+
+  updateImage(media){
+
+      var layout = this.props.layout;
+      var field = this.state.editItemData.data.field;
+
+      switch (field.type) {
+          case FIELDS.IMAGES.type:
+              layout = this.addItem(layout,-1,this.state.editItemData.pathToIndex,media);
+              break;
+
+          case FIELDS.IMAGE.type:
+              layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,media);
+              break;
+      }
+
+      this.setState({
+        displayMediaModal : false
+      });
+
+      this.props.updateLayout(layout);
+
+  }
+
+  /******** Contents  ********/
+
+  handleContentSelect(identifier) {
+
+    this.setState({
+      displayContentModal : true
+    });
+
+  }
+
+  handleContentCancel(){
+    this.setState({
+      displayContentModal : false
+    });
+  }
+
+  handleContentSelected(content){
+      this.updateContent(content);
+  }
+
+  updateContent(content){
+
+    var layout = this.props.layout;
+    var field = this.state.editItemData.data.field;
+
+    switch (field.type) {
+        case FIELDS.CONTENTS.type:
+            layout = this.addItem(layout,-1,this.state.editItemData.pathToIndex,content);
+            break;
+
+        case FIELDS.LINK.type:
+            layout = this.changeLinkContent(layout,-1,this.state.editItemData.pathToIndex,content,
+                function(field,data){
+
+                    console.log("field => ",field);
+                    console.log("data => ",data);
+
+
+                    if(field.value == null){
+                      field.value = {};
+                    }
+                    else if(field.value.url !== undefined){
+                      delete field.value['url'];
+                    }
+                    field.value.content = content;
+                    console.log("field al final => ",field);
+
+                    return field;
+                }
+            );
+            break;
+    }
+
+    this.setState({
+      displayContentModal : false
+    });
+
+    this.props.updateLayout(layout);
+
+  }
 
 
   render() {
@@ -376,10 +643,26 @@ class PageBuilder extends Component {
     return (
       <div className="col-xs-9 page-content page-builder">
 
+        <MediaSelectModal
+          display={this.state.displayMediaModal}
+          onImageSelected={this.handleImageSelected.bind(this)}
+          onImageCancel={this.handleImageCancel.bind(this)}
+          zIndex={10000}
+        />
+
+        <ContentSelectModal
+          display={this.state.displayContentModal}
+          onContentSelected={this.handleContentSelected}
+          onContentCancel={this.handleContentCancel}
+          zIndex={10000}
+        />
+
         <ModalSelectItem
           display={this.state.displayItemModal}
           onItemSelected={this.handleItemSelected}
+          onContentSelect={this.handleContentSelect}
           onItemCancel={this.handleItemCancel}
+          zIndex={9000}
         />
 
         <ModalEditItem
@@ -388,11 +671,22 @@ class PageBuilder extends Component {
           item={this.state.editItemData}
           translations={this.props.translations}
           onSubmitData={this.handleOnEditField.bind(this)}
+          onImageSelect={this.handleImageSelect.bind(this)}
+          onContentSelect={this.handleContentSelect.bind(this)}
+          zIndex={9000}
         />
 
         <div className="field-group">
           <TextField
             field={this.props.title}
+            translations={this.props.translations}
+            onFieldChange={this.props.onFieldChange}
+          />
+
+          <SlugField
+            field={this.props.slug}
+            sourceField={this.props.title}
+            blocked={this.props.saved}
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
           />

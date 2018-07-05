@@ -30,11 +30,14 @@ class MapComponent extends Component
 
     this.updatePosition = this.updatePosition.bind(this);
 
-
   }
 
   componentDidMount() {
     const leafletMap = this.leafletMap.leafletElement;
+
+    setTimeout(function(){
+        leafletMap.invalidateSize();
+    },1000);
 
   }
 

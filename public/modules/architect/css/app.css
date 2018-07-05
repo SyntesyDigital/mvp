@@ -16232,6 +16232,10 @@ nav.main-nav ul li.active a {
   z-index: 400;
 }
 
+.page-builder {
+  /*** preview *****/
+}
+
 .page-builder .empty-item {
   border: 1px dashed #ccc;
 }
@@ -16469,6 +16473,81 @@ nav.main-nav ul li.active a {
 .page-builder .row-container .row-container-body .row-container-body-bottom a.btn.btn-link {
   padding: 0;
   color: #acacac;
+}
+
+.page-builder .page-row.item-filled .item-header {
+  background-color: #dadada;
+  border: 1px solid #ccc;
+  height: 30px;
+  z-index: 10;
+}
+
+.page-builder .page-row.item-filled .item-header a.btn-link {
+  display: inline;
+  margin: 0;
+  padding: 0 4px;
+}
+
+.page-builder .page-row.item-filled .item-header .left-buttons {
+  display: inline-block;
+  float: left;
+  padding-left: 10px;
+}
+
+.page-builder .page-row.item-filled .item-header .right-buttons {
+  display: inline-block;
+  float: right;
+  padding-right: 10px;
+}
+
+.page-builder .page-row.item-filled .item-header .btn-link {
+  padding: 5px 7px;
+  color: #455660;
+}
+
+.page-builder .page-row.item-filled .item-header .btn-link.text-danger,
+.page-builder .page-row.item-filled .item-header .content .tags .tag i.btn-link.fa:hover,
+.content .tags .tag .page-builder .page-row.item-filled .item-header i.btn-link.fa:hover {
+  color: #455660;
+}
+
+.page-builder .page-row.item-filled .item-header .btn-link.text-danger:hover,
+.page-builder .page-row.item-filled .item-header .content .tags .tag i.btn-link.fa:hover,
+.content .tags .tag .page-builder .page-row.item-filled .item-header i.btn-link.fa:hover {
+  color: #fc4b6c;
+}
+
+.page-builder .page-row.item-filled a.text-preview p {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  padding-bottom: 0px;
+  padding-top: 15px;
+}
+
+.page-builder .page-row.item-filled a.richtext-preview {
+  padding: 15px;
+  text-transform: none;
+  text-align: left;
+}
+
+.page-builder .page-row.item-filled a.richtext-preview p {
+  text-align: left;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
+  padding-bottom: 0px;
+}
+
+.page-builder .page-row.item-filled a.image-preview {
+  display: block;
+  width: 100%;
+  height: 170px;
+}
+
+.page-builder .page-row.item-filled a.image-preview .background-image {
+  background-size: contain;
+  background-position: center;
 }
 
 body.dragging,

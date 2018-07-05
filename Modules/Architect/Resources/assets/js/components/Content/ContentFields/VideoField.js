@@ -172,11 +172,12 @@ class VideoField extends Component
   render() {
 
     const linkValues = this.state.linkValues;
+    const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
 
     return (
       <div className="field-item">
 
-        <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
+        <button style={{display:(hideTab ? 'none' : 'block')}} id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
             <i className={"fa " + CustomFieldTypes.VIDEO.icon}></i> {CustomFieldTypes.VIDEO.name}
           </span>

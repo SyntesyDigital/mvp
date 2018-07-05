@@ -34,12 +34,17 @@ class Col extends Component {
               <Row
                 key={key}
                 index={parseInt(key)}
+                childrenLength={this.props.data.children.length}
                 onSelectItem={this.props.onSelectItem}
                 onColsChanged={this.props.onColsChanged}
                 onDeleteRow={this.props.onDeleteRow}
                 data={item}
                 pathToIndex={this.getPathToIndex(key)}
                 onEditItem={this.props.onEditItem}
+                onPullDownItem={this.props.onPullDownItem}
+                onPullUpItem={this.props.onPullUpItem}
+                onCopyItem={this.props.onCopyItem}
+                onDeleteItem={this.props.onDeleteItem}
                 onSelectItemBefore={this.props.onSelectItemBefore}
                 onSelectItemAfter={this.props.onSelectItemAfter}
               />
@@ -49,9 +54,14 @@ class Col extends Component {
             children.push(
               <PageItem
                 key={key}
+                childrenLength={this.props.data.children.length}
                 data={item}
                 pathToIndex={this.getPathToIndex(key)}
                 onEditItem={this.props.onEditItem}
+                onCopyItem={this.props.onCopyItem}
+                onPullDownItem={this.props.onPullDownItem}
+                onPullUpItem={this.props.onPullUpItem}
+                onDeleteItem={this.props.onDeleteItem}
               />
             );
           }

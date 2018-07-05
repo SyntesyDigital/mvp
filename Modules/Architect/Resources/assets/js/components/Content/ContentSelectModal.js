@@ -54,8 +54,11 @@ class ContentSelectModal extends Component {
     }
 
     render() {
+
+        var zIndex = this.props.zIndex !== undefined ? this.props.zIndex : 10000;
+
         return (
-          <div>
+          <div style={{zIndex:zIndex}}>
             <div className="custom-modal" id="content-select">
               <div className="modal-background"></div>
 

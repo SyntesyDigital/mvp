@@ -39,10 +39,13 @@ class ImagesField extends Component {
     const field = this.props.field;
     const dragField = field.value[dragIndex]
 
-    var result = update(field,{
-      value : {
-        $splice: [[dragIndex, 1], [hoverIndex, 0, dragField]],
-      }
+    var result = update(field, {
+        value: {
+            $splice: [
+                [dragIndex, 1],
+                [hoverIndex, 0, dragField]
+            ],
+        }
     });
 
     var newField = {
@@ -50,7 +53,10 @@ class ImagesField extends Component {
       value : result.value
     };
 
-    this.props.onFieldChange(newField);
+    this.props.onFieldChange({
+        identifier: this.props.field.identifier,
+        value: result.value
+    });
 
 	}
 
@@ -109,10 +115,10 @@ class ImagesField extends Component {
     return (
 			images.map((item, i) => (
   					<ImagesDragField
-  						key={i}
-  						index={i}
+  						key={item.id}
+  						index = {i}
   						id={item.id}
-                        media={item}
+              media={item}
   						moveField={this.moveField}
   						onRemoveField={this.handleRemoveField}
   					/>
@@ -124,10 +130,13 @@ class ImagesField extends Component {
 
 
   render() {
+
+    const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
+
     return (
       <div className="field-item contents-field images-field">
 
-        <button id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
+        <button style={{display:(hideTab ? 'none' : 'block')}}  id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
             <i className={"fa "+ FIELDS.IMAGES.icon}></i> {FIELDS.IMAGES.name}
           </span>

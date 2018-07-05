@@ -6,8 +6,7 @@ import ContentBar from './../ContentBar';
 import ContentSidebar from './../ContentSidebar';
 import ContentFields from './../ContentFields';
 import CustomFieldTypes from './../../common/CustomFieldTypes';
-import MediaSelectModal from './../../Medias/MediaSelectModal';
-import ContentSelectModal from './../ContentSelectModal';
+
 import PageBuilder from './PageBuilder';
 import moment from 'moment';
 import axios from 'axios';
@@ -38,6 +37,12 @@ class PageContainer extends Component {
            value:{},
            name:"Títol"
          },
+         slug : {
+           id:1,
+           identifier:"slug",
+           value:{},
+           name:"Enllaç permanent"
+         },
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
@@ -46,11 +51,6 @@ class PageContainer extends Component {
          layout : props.page ? props.page : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
-         displayMediaModal: false,
-         sourceField: null,
-         displayContentModal: false,
-         contentSourceField: null
      };
 
 
@@ -62,12 +62,6 @@ class PageContainer extends Component {
      this.handleRemoveTag = this.handleRemoveTag.bind(this);
      this.handleTranslationChange = this.handleTranslationChange.bind(this);
      this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
-     this.handleImageSelect = this.handleImageSelect.bind(this);
-     this.handleImageSelected = this.handleImageSelected.bind(this);
-     this.handleImageCancel = this.handleImageCancel.bind(this);
-     this.handleContentSelect = this.handleContentSelect.bind(this);
-     this.handleContentSelected = this.handleContentSelected.bind(this);
-     this.handleContentCancel = this.handleContentCancel.bind(this);
      this.handleUpdateLayout = this.handleUpdateLayout.bind(this);
  }
 
@@ -80,106 +74,6 @@ class PageContainer extends Component {
             layout : layout
         });
     }
-
-  /******** Images  ********/
-
-  handleImageSelect(identifier) {
-
-    this.setState({
-      displayMediaModal : true,
-      sourceField : identifier
-    });
-
-  }
-
-  handleImageCancel(){
-    this.setState({
-      displayMediaModal : false,
-      sourceField : null
-    });
-  }
-
-  handleImageSelected(image){
-    this.updateImage(this.state.sourceField,image);
-  }
-
-  updateImage(identifier,image){
-
-    const {typology} = this.state;
-
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-      if(item.identifier == identifier ){
-
-        if(item.type == FIELDS.IMAGES.type){
-          typology.fields[i].values.push(image);
-          break;
-        }
-        else if(item.type == FIELDS.IMAGE.type){
-          typology.fields[i].values = image;
-          break;
-        }
-      }
-    }
-
-    this.setState({
-      typology : typology,
-      displayMediaModal : false,
-      sourceField : null
-    });
-
-  }
-
-  /******** Contents  ********/
-
-  handleContentSelect(identifier) {
-
-    this.setState({
-      displayContentModal : true,
-      contentSourceField : identifier
-    });
-
-  }
-
-  handleContentCancel(){
-    this.setState({
-      displayContentModal : false,
-      contentSourceField : null
-    });
-  }
-
-  handleContentSelected(content){
-      this.updateContent(this.state.contentSourceField,content);
-  }
-
-  updateContent(identifier,content){
-
-    const {typology} = this.state;
-
-    for(var i=0;i<typology.fields.length;i++) {
-      var item = typology.fields[i];
-
-      if(item.identifier == identifier){
-
-        if(typology.fields[i].type == "link"){
-            typology.fields[i].values.linkValues = content;
-        }
-        else {
-            typology.fields[i].values.push(content);
-        }
-
-
-        break;
-      }
-    }
-
-    this.setState({
-        typology : typology,
-        displayContentModal : false,
-        contentSourceField : null
-    });
-
-  }
 
   /********  Form ********/
 
@@ -419,19 +313,7 @@ class PageContainer extends Component {
     return (
       <div>
 
-        <MediaSelectModal
-          display={this.state.displayMediaModal}
-          field={this.state.sourceField}
-          onImageSelected={this.handleImageSelected}
-          onImageCancel={this.handleImageCancel}
-        />
 
-        <ContentSelectModal
-          display={this.state.displayContentModal}
-          field={this.state.contentSourceField}
-          onContentSelected={this.handleContentSelected}
-          onContentCancel={this.handleContentCancel}
-        />
 
         <ContentBar
           icon={'fa-file-o'}
@@ -467,6 +349,8 @@ class PageContainer extends Component {
                 translations={this.state.translations}
                 onFieldChange={this.handleFieldChange}
                 title={this.state.title}
+                slug={this.state.slug}
+                saved={this.props.saved}
               />
             {/*  } */}
             </DragDropContextProvider>
