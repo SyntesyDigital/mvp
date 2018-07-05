@@ -51,17 +51,22 @@ class ContentController extends Controller
 
     public function data(Request $request)
     {
-        $where = $request->get('typology_id') ? [
-            'typology_id' => $request->get('typology_id')
-        ] : null;
+        $options = [];
 
-        if($request->get('display_pages')) {
-            $where = [
-                ['page_id','<>', null]
+        if($request->get('typology_id')) {
+            $options['where'] = [
+                ['typology_id', '=', $request->get('typology_id')]
             ];
         }
 
-        return $this->contents->getDatatable($where);
+        if($request->get('display_pages')) {
+            $options["whereHas"] = [
+                'page' => ['content_id','<>', null]
+            ];
+        }
+
+
+        return $this->contents->getDatatable($options);
     }
 
     public function modalData(Request $request)
