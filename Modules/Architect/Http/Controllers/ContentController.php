@@ -88,7 +88,7 @@ class ContentController extends Controller
             'content' => $content->load('tags', 'categories', 'languages'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
-            'page' => $content->page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
+            'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()

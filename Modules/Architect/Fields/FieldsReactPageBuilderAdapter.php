@@ -23,7 +23,7 @@ class FieldsReactPageBuilderAdapter
     public function get()
     {
         $nodes = json_decode($this->page->definition, true);
-        return $this->getFields($nodes);
+        return $this->getPage($nodes);
     }
 
 
@@ -39,23 +39,26 @@ class FieldsReactPageBuilderAdapter
     }
 
 
-    function getFields(&$nodes) {
-        foreach ($nodes as $key => $node) {
-            if(isset($node['children'])) {
-                $nodes[$key]['children'] = $this->getFields($node['children']);
-            } else {
-                if(isset($node['field'])) {
-                    $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
-                    $nodes[$key]['field']['name'] = $node['field']['type'];
-                    $nodes[$key]['field']['value'] = $this->build($node['field']);
+    function getPage(&$nodes) {
+        if($nodes) {
+            foreach ($nodes as $key => $node) {
+                if(isset($node['children'])) {
+                    $nodes[$key]['children'] = $this->getPage($node['children']);
+                } else {
+                    if(isset($node['field'])) {
+                        $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
+                        $nodes[$key]['field']['name'] = $node['field']['type'];
+                        $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
+                    }
                 }
             }
         }
+
         return $nodes;
     }
 
 
-    private function build($field)
+    private function buildPageField($field)
     {
         $fieldName = isset($field['name']) ? $field['name'] : null;
 

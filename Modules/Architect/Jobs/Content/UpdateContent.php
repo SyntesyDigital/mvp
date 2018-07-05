@@ -11,6 +11,8 @@ use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Entities\Language;
 
+use Modules\Architect\Fields\Types\Text as TextField;
+
 class UpdateContent
 {
      public function __construct(Content $content, $attributes)
@@ -25,7 +27,8 @@ class UpdateContent
              'category_id',
              'tags',
              'page',
-             'translations'
+             'translations',
+             'is_page'
          ]);
      }
 
@@ -44,11 +47,10 @@ class UpdateContent
         $this->saveCategories();
         $this->saveTags();
         $this->saveLanguages();
+        $this->saveFields();
 
-        if(isset($this->attributes['page'])) {
+        if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
-        } else {
-            $this->saveFields();
         }
 
         return $this->content;
@@ -123,23 +125,27 @@ class UpdateContent
     }
 
     function savePageBuilderFields(&$nodes) {
-        foreach ($nodes as $key => $node) {
-            if(isset($node['children'])) {
-                $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
-            } else {
-                if(isset($node['field'])) {
-                    $field = $node['field'];
 
-                    $fieldName = uniqid('pagefield_');
-                    $fieldValue = isset($field['value']) ? $field['value'] : null;
+        if($nodes) {
+            foreach ($nodes as $key => $node) {
+                if(isset($node['children'])) {
+                    $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
+                } else {
+                    if(isset($node['field'])) {
+                        $field = $node['field'];
 
-                    (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
-                    unset($nodes[$key]['field']['value']);
+                        $fieldName = uniqid('pagefield_');
+                        $fieldValue = isset($field['value']) ? $field['value'] : null;
 
-                    $nodes[$key]['field']['name'] = $fieldName;
+                        (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                        unset($nodes[$key]['field']['value']);
+
+                        $nodes[$key]['field']['name'] = $fieldName;
+                    }
                 }
             }
         }
+
 
         return $nodes;
     }
@@ -149,6 +155,13 @@ class UpdateContent
     {
         $this->content->fields()->delete();
         $this->content->page()->delete();
+
+        foreach($this->attributes["fields"] as $field) {
+            $fieldValue = isset($field['value']) ? $field['value'] : null;
+            (new TextField)->save($this->content, $field["identifier"], $fieldValue, $this->languages);
+        }
+
+
 
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),

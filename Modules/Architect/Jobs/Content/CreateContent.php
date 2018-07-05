@@ -25,7 +25,8 @@ class CreateContent
             'category_id',
             'tags',
             'page',
-            'translations'
+            'translations',
+            'is_page'
         ]);
     }
 
@@ -47,7 +48,7 @@ class CreateContent
         $this->saveTags();
         $this->saveLanguages();
 
-        if(isset($this->attributes['page'])) {
+        if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
         } else {
             $this->saveFields();
@@ -128,21 +129,23 @@ class CreateContent
     }
 
     function savePageBuilderFields(&$nodes) {
-        foreach ($nodes as $key => $node) {
+        if($nodes) {
+            foreach ($nodes as $key => $node) {
 
-            if(isset($node['children'])) {
-                $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
-            } else {
-                if(isset($node['field'])) {
-                    $field = $node['field'];
+                if(isset($node['children'])) {
+                    $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
+                } else {
+                    if(isset($node['field'])) {
+                        $field = $node['field'];
 
-                    $fieldName = uniqid('pagefield_');
-                    $fieldValue = isset($field['value']) ? $field['value'] : null;
+                        $fieldName = uniqid('pagefield_');
+                        $fieldValue = isset($field['value']) ? $field['value'] : null;
 
-                    (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
-                    unset($nodes[$key]['field']['value']);
+                        (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                        unset($nodes[$key]['field']['value']);
 
-                    $nodes[$key]['field']['name'] = $fieldName;
+                        $nodes[$key]['field']['name'] = $fieldName;
+                    }
                 }
             }
         }

@@ -23,6 +23,41 @@ class PageContainer extends Component {
      });
 
      console.log('LAYOUT LOADED', props.page);
+     console.log('CONTENT LOADED', props.content);
+     
+        var titleField = {
+            id:0,
+            identifier:"title",
+            value:{},
+            name:"Títol"
+        };
+        
+        var slugField = {
+          id:1,
+          identifier:"slug",
+          value:{},
+          name:"Enllaç permanent"
+        };
+    
+    if(props.content) {
+        // Builds fields values
+        LANGUAGES.map(function(language,k){
+            props.content.fields.map(function(field){
+                if(field.name == "title") {
+                    if(language.id == field.language_id) {
+                        titleField.value[language.iso] = field.value;
+                    }
+                }
+                
+                if(field.name == "slug") {
+                    if(language.id == field.language_id) {
+                        slugField.value[language.iso] = field.value;
+                    }
+                }
+            });
+        });
+    }
+     
 
      // Build state...
      this.state = {
@@ -31,18 +66,8 @@ class PageContainer extends Component {
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
          tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
-         title : {
-           id:0,
-           identifier:"title",
-           value:{},
-           name:"Títol"
-         },
-         slug : {
-           id:1,
-           identifier:"slug",
-           value:{},
-           name:"Enllaç permanent"
-         },
+         title : titleField,
+         slug : slugField,
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
@@ -92,13 +117,17 @@ class PageContainer extends Component {
   getFormData()
   {
       return {
+          fields : {
+              title : this.state.title,
+              slug : this.state.slug,
+          },
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           status : this.state.status,
           is_page : true,
           page: this.state.layout,
           category : this.state.category,
           tags : this.state.tags,
-          fields : this.state.fields,
+          //fields : this.state.fields,
           author_id : this.state.author
       };
   }

@@ -15,7 +15,7 @@ class CreateContentRequest extends FormRequest
      */
     public function rules()
     {
-        if(request('page')) {
+        if(request('is_page')) {
             return [
                 'status' => 'required',
                 'author_id' => 'required',
