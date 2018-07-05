@@ -13,11 +13,33 @@ export default class TypologyForm extends Component {
     {
         super(props);
 
+        // Set translations
+        var translations = {};
+        LANGUAGES.map(function(v,k){
+            translations[v.iso] = true;
+        });
+
+
         this.state = {
             typology : props.typology ? JSON.parse(atob(props.typology)) : '',
-            fieldsList : FIELDS
+            fieldsList : FIELDS,
+            translations: translations,
         };
     }
+
+    exploteToObject(fields) {
+
+  		if(fields == null){
+  			return null;
+  		}
+
+  		var result = {};
+
+  		for(var i=0;i<fields.length;i++){
+  			result[fields[i]] = null;
+  		}
+  		return result;
+  	}
 
     componentDidMount()
     {
@@ -33,8 +55,11 @@ export default class TypologyForm extends Component {
                     identifier : field.identifier,
                     type : field.type,
                     rules : field.rules,
-                    settings : field.settings
+                    settings : field.settings,
+                    saved : true,
+                    editable : field.type == FIELDS.SLUG.type ? false : true
                 });
+                //console.log("field text => ",field);
             });
 
             this.typologyContainer.setState({
@@ -49,16 +74,58 @@ export default class TypologyForm extends Component {
                       label : this.state.typology.icon
                     },
                     template: "",
-                    slugOn: this.state.typology.has_slug,
-                    slug: this.getSlugFromTypology(),
-                    slugCa: "",
-                    slugEs: "",
-                    slugEn: "",
+                    slug: null,
+                    categories: false,
+                    tags: false,
                     categories: this.state.typology.has_categories,
-                    tags: this.state.typology.has_tags,
+                    tags: this.state.typology.has_tags
                 }
             });
         }
+        else {
+          var fields = [];
+
+          //add title
+          fields.push({
+            icon : FIELDS.TEXT.icon,
+            id : 0,
+            label : FIELDS.TEXT.name,
+            name : "Títol",
+            identifier : "title",
+            type : FIELDS.TEXT.type,
+            rules : this.exploteToObject(FIELDS.TEXT.rules),
+      			settings : this.exploteToObject(FIELDS.TEXT.settings),
+            saved : false,
+            editable : true
+          });
+
+          fields[0].rules["required"] = true;
+          fields[0].settings["entryTitle"] = true;
+
+          //add slug
+          fields.push({
+            icon : FIELDS.SLUG.icon,
+            id : 1,
+            label : FIELDS.SLUG.name,
+            name : "Slug",
+            identifier : "slug",
+            type : FIELDS.SLUG.type,
+            rules : this.exploteToObject(FIELDS.SLUG.rules),
+      			settings : this.exploteToObject(FIELDS.SLUG.settings),
+            saved : false,
+            editable : false
+          });
+
+          fields[1].rules["required"] = true;
+          fields[1].rules["unique"] = true;
+
+          this.typologyContainer.setState({
+            fields : fields
+          });
+
+        }
+
+
 
         this.typologyContainer.setState({
             fieldsList: this.state.fieldsList
@@ -91,8 +158,9 @@ export default class TypologyForm extends Component {
         return (
             <div>
                 <TypologyContainer
-                typology={this.state.typology ? this.state.typology : null}
-                ref={(typologyContainer) => this.typologyContainer = typologyContainer}
+                    typology={this.state.typology ? this.state.typology : null}
+                    ref={(typologyContainer) => this.typologyContainer = typologyContainer}
+                    translations={this.state.translations}
                 />
             </div>
         );

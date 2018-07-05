@@ -32,56 +32,10 @@ class TypologyDropZone extends Component {
 	constructor(props){
     super(props);
 
-		this.currentId = this.props.fields.length;
-
 		this.moveField = this.moveField.bind(this);
 		this.handleRemoveField = this.handleRemoveField.bind(this);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 		this.handleOpenSettings = this.handleOpenSettings.bind(this);
-	}
-
-
-	/**
-	* TODO : Pensar de donde viene esta información para construir el settings.
-	*/
-	getSettingsStructure(type) {
-
-		switch(type) {
-			case CustomFieldTypes.TEXT.value :
-				return {
-					required : false
-				};
-			case CustomFieldTypes.RICH.value :
-				return {
-					required : false,
-					maxCharacters : {
-						checkbox : false,
-						input : ""
-					},
-					fieldHeight : {
-						checkbox : false,
-						input : ""
-					}
-				};
-			case CustomFieldTypes.CONTENTS.value :
-				return {
-					required : false,
-					typesAllowed : {
-						checkbox : false,
-						fields : []
-					}
-				};
-			case CustomFieldTypes.LIST.value :
-				return {
-					required : false,
-					selectedList : ""
-				};
-			default:
-				return {
-					required : false
-				};
-		}
-
 	}
 
 	exploteToObject(fields) {
@@ -100,7 +54,7 @@ class TypologyDropZone extends Component {
 
 	addField(field) {
 		var field = {
-			id : this.currentId,
+			id : this.props.fields.length + 1,
 			type : field.type,
 			label : field.label,
 			icon : field.icon,
@@ -108,9 +62,9 @@ class TypologyDropZone extends Component {
 			identifier : "",
 			rules : this.exploteToObject(field.rules),
 			settings : this.exploteToObject(field.settings),
+			saved : false,
+			editable : field.type == FIELDS.SLUG.type ? false : true
 		};
-
-		this.currentId++;
 
 		this.props.onFieldAdded(field);
 	}
@@ -141,6 +95,9 @@ class TypologyDropZone extends Component {
 		return (
 			fields.map((item, i) => (
 				<TypologyField
+					created={this.props.created}
+					saved={item.saved}
+					editable={item.editable}
 					key={item.id}
 					index={i}
 					id={item.id}

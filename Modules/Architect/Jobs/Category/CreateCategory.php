@@ -17,7 +17,7 @@ class CreateCategory
             ->keys()
             ->toArray();
         $this->attributes = array_only($attributes['fields'], $fields);
-        $this->parent_id = isset($attributes['parent_id']) ? $attributes['parent_id'] : null;
+        $this->parent_id = isset($attributes['parent_id']) && $attributes['parent_id'] > 0 ? $attributes['parent_id'] : null;
     }
 
     public static function fromRequest(CreateCategoryRequest $request)
@@ -27,8 +27,21 @@ class CreateCategory
 
     public function handle()
     {
+
+        $order = 0;
+
+        if($this->parent_id != null){
+          $order = Category::where("parent_id",$this->parent_id)->max('order');
+				  $order = $order + 1;
+        }
+        else {
+          $order = Category::where("parent_id",null)->max('order');
+          $order = $order + 1;
+        }
+
         $category = Category::create([
-            'parent_id' => $this->parent_id
+            'parent_id' => $this->parent_id,
+            'order' => $order
         ]);
 
         foreach($this->attributes as $identifier => $field) {

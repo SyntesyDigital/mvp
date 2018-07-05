@@ -18,7 +18,13 @@ export default class ContentForm extends Component {
             tags : props.tags ? JSON.parse(atob(props.tags)) : '',
             page : props.page ? JSON.parse(atob(props.page)) : '',
             categories : props.categories ? JSON.parse(atob(props.categories)) : '',
+            saved : props.content || props.page ? true : false
         };
+
+
+
+        console.log("ContentForm :: saved ",this.state.saved);
+
     }
 
     componentDidMount()
@@ -43,6 +49,7 @@ export default class ContentForm extends Component {
                     fields={this.state.fields}
                     categories={this.state.categories}
                     tags={this.state.tags}
+                    saved={this.state.saved}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                 />
                 }
@@ -52,6 +59,7 @@ export default class ContentForm extends Component {
                     authors={this.state.authors}
                     content={this.state.content}
                     page={this.state.page}
+                    saved={this.state.saved}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                   />
                 }

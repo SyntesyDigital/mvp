@@ -25,11 +25,7 @@ class TypologyContainer extends Component {
              identifier: "",
              icon: "",
              template: "",
-             slugOn: false,
-             slugs: {},
-             // slugCa: "",
-             // slugEs: "",
-             // slugEn: "",
+             slug : null,
              categories: props.typology ? props.typology.has_categories : false,
              tags: props.typology ? props.typology.has_tags : false,
          },
@@ -77,6 +73,8 @@ class TypologyContainer extends Component {
      } else {
          inputs[field.name] = field.value;
      }
+
+     //console.log("TypologyContainer :: handleInputChange => ",inputs);
 
      this.setState({
          inputs: inputs
@@ -255,6 +253,7 @@ class TypologyContainer extends Component {
      }
 
      getFormData() {
+
          return {
              has_slug : this.state.inputs.slugOn,
              slug : this.state.inputs.slug,
@@ -263,7 +262,8 @@ class TypologyContainer extends Component {
              name : this.state.inputs.name,
              identifier : this.state.inputs.identifier,
              fields : this.state.fields,
-             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null
+             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null,
+             slug : this.state.inputs.slug
          };
      }
 
@@ -274,6 +274,13 @@ class TypologyContainer extends Component {
             .then((response) => {
                 if(response.data.success) {
                     _this.onSaveSuccess(response.data);
+
+                    //console.log(response.data);
+
+                    setTimeout(function(){
+                        window.location.href = routes.showTypology.replace(':id',response.data.typology.id);
+                    },1500);
+
                 }
             })
             .catch((error) => {
@@ -333,8 +340,21 @@ class TypologyContainer extends Component {
     }
 
      onSaveSuccess(response) {
+
+          //set all fields to saved
+          //console.log("onSaveSuccess => ",response);
+
+          const fields = this.state.fields;
+
+          for(var i=0;i<fields.length;i++){
+            fields[i].saved = true;
+          }
+
+          console.log("TypologySaved : ",fields);
+
          this.setState({
-             typology : response.typology
+             typology : response.typology,
+             fields : fields
          })
 
          toastr.success('Ok');
@@ -365,6 +385,24 @@ class TypologyContainer extends Component {
         }
     }
 
+    renderFields() {
+
+      var result = null;
+
+      if(this.state.fieldsList){
+
+        var fieldList = Object.keys(this.state.fieldsList).filter((k,i) =>
+          k != "SLUG"
+        );
+        result = fieldList.map((k,i) =>
+          <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
+        )
+      }
+
+      return result;
+    }
+
+
     render() {
 
         return (
@@ -390,6 +428,7 @@ class TypologyContainer extends Component {
                 <div className="col-md-9 page-content">
                   <TypologyDropZone
                     errors={this.state.errors}
+                    created={this.state.typology !== undefined && this.state.typology != null}
                     fields={this.state.fields}
                     onFieldAdded={this.handleFieldAdded}
                     onFieldChanged={this.handleFieldChange}
@@ -405,13 +444,10 @@ class TypologyContainer extends Component {
                     errors={this.state.errors}
                     onFieldChange={this.handleInputChange}
                     deleteHandler={this.delete}
+                    translations={this.props.translations}
                 >
 
-                {
-                    this.state.fieldsList && Object.keys(this.state.fieldsList).map((k,i) =>
-                        <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
-                    )
-                }
+                {this.renderFields()}
 
                 </TypologySidebar>
 

@@ -16,6 +16,8 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 
     // Categories
     Route::get('/categories', 'CategoryController@index')->name('categories');
+    Route::get('/categories/data', 'CategoryController@data')->name('categories.data');
+    Route::post('/categories/update-order', 'CategoryController@updateOrder')->name('categories.update-order');
     Route::post('/categories', 'CategoryController@store')->name('categories.store');
     Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
     Route::put('/categories/{category?}/update', 'CategoryController@update')->name('categories.update');

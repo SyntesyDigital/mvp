@@ -79,6 +79,7 @@ class FieldsReactAdapter
         switch($typologyField->type) {
             // Translatable fields
             case 'richtext':
+            case 'slug':
             case 'text':
                 $iso = $this->getLanguageIsoFromId($contentField->language_id);
                 $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
@@ -128,6 +129,22 @@ class FieldsReactAdapter
                           if(explode('.', $v->name)[1] == 'content') {
                               $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
                           }
+                      }
+                  }
+                }
+
+                $typologyField->value = $values;
+            break;
+
+            case 'video':
+                $values = null;
+                $childs = $this->content->getFieldChilds($contentField);
+
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+                      if($v->language_id) {
+                          $iso = $this->getLanguageIsoFromId($v->language_id);
+                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
                       }
                   }
                 }

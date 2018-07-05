@@ -6,6 +6,8 @@ import { DragSource, DropTarget } from 'react-dnd'
 import FieldTypes from './FieldTypes';
 import flow from 'lodash/flow';
 
+import SlugInput from '../common/SlugInput';
+
 const style = {
 	cursor: 'move',
 }
@@ -86,7 +88,7 @@ class TypologyField extends Component {
 
 		this.state = {
             name : this.props.name,
-			identifier : this.props.identifier
+						identifier : this.props.identifier
         };
 
 	    this.onRemoveField = this.onRemoveField.bind(this);
@@ -94,9 +96,37 @@ class TypologyField extends Component {
 	    this.onOpenSettings = this.onOpenSettings.bind(this);
 	}
 
+	componentWillReceiveProps(nextProps) {
+
+    //console.log("TypologyField ::will recieve props : =>",nextProps);
+	}
+
 	onRemoveField(event) {
-	    event.preventDefault();
-	    this.props.onRemoveField(this.props.id);
+
+		event.preventDefault();
+		var self = this;
+
+		bootbox.confirm({
+				message: "Estas segur d'esborrar permanentment aquest camp ?",
+				buttons: {
+						confirm: {
+								label: 'Sí',
+								className: 'btn-primary'
+						},
+						cancel: {
+								label: 'No',
+								className: 'btn-default'
+						}
+				},
+				callback: function (result) {
+					if(result){
+						self.props.onRemoveField(self.props.id);
+					}
+				}
+		});
+
+
+
 	}
 
 	onOpenSettings(event) {
@@ -106,37 +136,50 @@ class TypologyField extends Component {
 
 	handleChange(event)
 	{
+
+		var identifier = this.state.identifier;
 		var name = event.target.value;
-		var identifier = slugify(event.target.value, {
-			replacement: '-',
-			remove: /[$*+~.()'"!\-:@]/g,
-			lower: true
-		});
 
 		this.setState({
 			name : name,
 			identifier : identifier
 		});
 
-	    var field = null;
-	    if (event.target.type == "text") {
-	        field = {
-	            id: this.props.id,
-				name : name,
-				identifier : identifier
-	        };
-	    }
+    var field = {
+      id: this.props.id,
+			name : name,
+			identifier : identifier
+    };
 
-	    if (field != null) {
-			this.props.onFieldChange(field);
-		}
+	  this.props.onFieldChange(field);
 
 	}
 
+	handleIdentifierChange(value) {
 
+		var identifier = value;
+		var name = this.state.name;
 
+		this.setState({
+			name : name,
+			identifier : identifier
+		});
+
+    var field = {
+      id: this.props.id,
+			name : name,
+			identifier : identifier
+    };
+
+		//console.log("TypologyField :: handleIdentifierChange => ",field);
+
+	  this.props.onFieldChange(field);
+
+	}
 
   render() {
+
+		//console.log("is editable => ",this.props.editable);
 
 	var isEntryTitle = false;
 	if(this.props.settings != null &&
@@ -164,18 +207,39 @@ class TypologyField extends Component {
         <div className="field-inputs">
           <div className="row">
             <div className="field-name col-xs-6">
-              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
+              <input disabled={this.props.editable ? false : true} type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
             <div className="field-id col-xs-6">
-              <input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
+
+							{this.props.editable &&
+								<SlugInput
+									className="form-control"
+									name="identifier"
+									placeholder="Idenfiticador"
+									sourceValue={this.state.name}
+									value={this.state.identifier}
+									blocked={this.props.saved}
+									onFieldChange={this.handleIdentifierChange.bind(this)}
+								/>
+							}
+
+							{!this.props.editable &&
+									<input disabled type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} onChange={this.handleChange}/>
+							}
+
+							{/*
+							<input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
+							*/}
             </div>
           </div>
         </div>
 
         <div className="field-actions">
-			<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
-			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
-			&nbsp;&nbsp;
+
+					<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
+					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+					&nbsp;&nbsp;
+
         </div>
       </div>),
     );

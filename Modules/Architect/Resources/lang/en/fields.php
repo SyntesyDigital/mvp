@@ -11,5 +11,6 @@ return [
     'boolean' => 'Booleà',
     'link' => 'Enllaç',
     'video' => 'Video',
-    'localization' => 'Localització'
+    'localization' => 'Localització',
+    'slug' => 'Slug',
 ];

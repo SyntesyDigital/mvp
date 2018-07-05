@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\ContentRepository;
+use Modules\Architect\Repositories\CategoryRepository;
 
 // Jobs & Requests
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
@@ -36,8 +37,9 @@ use Modules\Architect\Fields\FieldsReactPageBuilderAdapter;
 class ContentController extends Controller
 {
 
-    public function __construct(ContentRepository $contents) {
+    public function __construct(ContentRepository $contents, CategoryRepository $categories) {
         $this->contents = $contents;
+        $this->categories = $categories;
     }
 
     public function index(Request $request)
@@ -84,7 +86,7 @@ class ContentController extends Controller
             'page' => $content->page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
             'users' => User::all(),
             'tags' => Tag::all(),
-            'categories' => Category::all()
+            'categories' => $this->categories->getTree()
         ]);
     }
 
@@ -96,7 +98,7 @@ class ContentController extends Controller
             'page' => null,
             'users' => User::all(),
             'tags' => Tag::all(),
-            'categories' => Category::all()
+            'categories' => $this->categories->getTree()
         ]);
     }
 
