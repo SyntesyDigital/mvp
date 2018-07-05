@@ -28,6 +28,7 @@ class PageContainer extends Component {
      this.state = {
          status: 0,
          template: "",
+         parent_id:"",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
          tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
@@ -330,6 +331,13 @@ class PageContainer extends Component {
                 onTranslationChange={this.handleTranslationChange}
                 onTagAdded={this.handleTagAdded}
                 onRemoveTag={this.handleRemoveTag}
+                parent_id={this.state.parent_id}
+                pages={[
+                  {id:0,name:"------"},
+                  {id:1,name:"Page 1"},
+                  {id:2,name:"Page 2"},
+                  {id:3,name:"Page 3"}
+                ]}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
