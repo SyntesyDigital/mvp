@@ -115,14 +115,16 @@ class CreateContent
     public function saveLanguages()
     {
         $this->content->languages()->detach();
+        if(isset($this->attributes['translations'])) {
+            foreach($this->attributes['translations'] as $iso => $value) {
+                $language = $value ? Language::where('iso', $iso)->first() : null;
 
-        foreach($this->attributes['translations'] as $iso => $value) {
-            $language = $value ? Language::where('iso', $iso)->first() : null;
-
-            if($language) {
-                $this->content->languages()->attach($language);
+                if($language) {
+                    $this->content->languages()->attach($language);
+                }
             }
         }
+
     }
 
     function savePageBuilderFields(&$nodes) {

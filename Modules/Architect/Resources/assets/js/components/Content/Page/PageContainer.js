@@ -291,35 +291,44 @@ class PageContainer extends Component {
      }
  }
 
-  handlePublish(e) {
+     publishToogle()
+     {
+         var _this = this;
 
-    e.preventDefault();
+         axios.put('/architect/contents/' + this.state.content.id + '/publish', {
+             status : _this.state.status
+         })
+             .then((response) => {
+                 if(response.data.success) {
+                     toastr.success('ok');
+                 }
+             })
+             .catch((error) => {
+                 toastr.error('Error !');
+             });
+     }
 
-    this.setState({
-      status : 1
-    });
+    handlePublish(e)
+    {
+        e.preventDefault();
 
-    console.log("publish!");
-    console.log(this.state);
+        this.setState({
+            status : 1
+        });
 
-    //TODO
+        this.publishToogle();
+    }
 
-  }
+    handleUnpublish(e)
+    {
+        e.preventDefault();
 
-  handleUnpublish(e) {
+        this.setState({
+            status : 0
+        });
 
-    e.preventDefault();
-
-    this.setState({
-      status : 0
-    });
-
-    console.log("unpublish!");
-    console.log(this.state);
-
-    //TODO
-
-  }
+        this.publishToogle();
+    }
 
     handleFieldChange(field) {
 

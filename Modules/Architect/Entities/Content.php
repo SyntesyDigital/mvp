@@ -33,7 +33,8 @@ class Content extends Model
         'typology_id',
         'user_id',
         'author_id',
-        'page_id'
+        'page_id',
+        'published_at'
     ];
 
     /**
@@ -53,7 +54,8 @@ class Content extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'published_at'
     ];
 
     public function typology()

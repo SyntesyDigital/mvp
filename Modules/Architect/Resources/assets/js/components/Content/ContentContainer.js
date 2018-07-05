@@ -20,7 +20,7 @@ class ContentContainer extends Component {
      super(props);
 
      var self = this;
-     
+
      // Build translations state from content languages fields
      var translations = {};
      LANGUAGES.map(function(language){
@@ -30,7 +30,7 @@ class ContentContainer extends Component {
                 if(contentLanguage.iso == language.iso) {
                     exist = true;
                 }
-            });  
+            });
             translations[language.iso] = exist;
          } else {
              translations[language.iso] = true;
@@ -41,7 +41,7 @@ class ContentContainer extends Component {
 
      // Build state
      this.state = {
-         status: 0,
+         status: this.props.content ? this.props.content.status : 0,
          template: "",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
@@ -84,7 +84,7 @@ class ContentContainer extends Component {
      this.handleContentCancel = this.handleContentCancel.bind(this);
  }
 
- 
+
   /******** Images  ********/
 
   handleImageSelect(identifier) {
@@ -198,7 +198,7 @@ class ContentContainer extends Component {
   }
 
   getFormData()
-  {      
+  {
       return {
           translations : this.state.translations,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
@@ -298,42 +298,48 @@ class ContentContainer extends Component {
      }
  }
 
-  handlePublish(e) {
+     publishToogle()
+     {
+         var _this = this;
 
-    e.preventDefault();
+         axios.put('/architect/contents/' + this.state.content.id + '/publish', {
+             status : _this.state.status
+         })
+             .then((response) => {
+                 if(response.data.success) {
+                     toastr.success('ok');
+                 }
+             })
+             .catch((error) => {
+                 toastr.error('Error !');
+             });
+     }
 
-    this.setState({
-      status : 1
-    });
+    handlePublish(e)
+    {
+        e.preventDefault();
 
-    console.log("publish!");
-    console.log(this.state);
+        this.setState({
+            status : 1
+        });
 
-    //TODO
+        this.publishToogle();
+    }
 
-  }
+    handleUnpublish(e)
+    {
+        e.preventDefault();
 
-  handleUnpublish(e) {
+        this.setState({
+            status : 0
+        });
 
-    e.preventDefault();
-
-    this.setState({
-      status : 0
-    });
-
-    console.log("unpublish!");
-    console.log(this.state);
-
-    //TODO
-  }
+        this.publishToogle();
+    }
 
     handleFieldChange(field) {
         const result = {};
         result[field.name] = field.value;
-
-        console.log("handleFieldChange =====>", result);
-
-
         this.setState(result);
     }
 

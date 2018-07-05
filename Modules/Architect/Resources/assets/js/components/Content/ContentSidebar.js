@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Select from 'react-select';
 
 import TagManager from "./Tags/TagManager";
+import moment from 'moment';
 
 class ContentSidebar extends Component {
 
@@ -65,20 +66,16 @@ class ContentSidebar extends Component {
         {this.props.status == 1 &&
           <div className="publish-form sidebar-item">
               <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
-
               <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
-
-              <p className="field-help">Publicat el 14, Oct, 2018</p>
+              <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
           </div>
         }
 
         {this.props.status == 0 &&
           <div className="publish-form sidebar-item">
               <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
-
               <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
-
-              <p className="field-help">Publicat el 14, Oct, 2018</p>
+              <p className="field-help"></p>
           </div>
         }
 

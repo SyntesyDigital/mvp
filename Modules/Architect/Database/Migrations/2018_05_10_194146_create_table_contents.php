@@ -22,6 +22,7 @@ class CreateTableContents extends Migration
             $table->foreign('author_id')->references('id')->on('users');
 
             $table->string('status');
+            $table->timestamp('published_at')->nullable();
 
             $table->timestamps();
         });

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/contents/{typology}/create', 'ContentController@create')->name('contents.create');
     Route::get('/contents/{content?}', 'ContentController@show')->name('contents.show');
     Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');
+    Route::put('/contents/{content?}/publish', 'ContentController@publish')->name('contents.publish');
     Route::delete('/contents/{content?}/delete', 'ContentController@delete')->name('contents.delete');
 
     // Medias

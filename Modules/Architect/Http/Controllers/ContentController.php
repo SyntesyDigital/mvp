@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\ContentRepository;
 
+// Jobs & Requests
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Jobs\Content\CreateContent;
 
@@ -17,6 +18,9 @@ use Modules\Architect\Jobs\Content\UpdateContent;
 
 use Modules\Architect\Http\Requests\Content\DeleteContentRequest;
 use Modules\Architect\Jobs\Content\DeleteContent;
+
+use Modules\Architect\Http\Requests\Content\PublishContentRequest;
+use Modules\Architect\Jobs\Content\PublishContent;
 
 // Models
 use Modules\Architect\Entities\Typology;
@@ -104,6 +108,19 @@ class ContentController extends Controller
             'success' => true,
             'content' => $content
         ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function publish(Content $content, PublishContentRequest $request)
+    {
+        if(dispatch_now(PublishContent::fromRequest($content, $request))) {
+            return response()->json([
+                'success' => true
+            ]);
+        }
+
+        return response()->json([
             'success' => false
         ], 500);
     }
