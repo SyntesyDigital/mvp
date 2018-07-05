@@ -7,7 +7,11 @@
 <div class="container leftbar-page">
 
 
-  @include('architect::partials.content-nav',['typologies' => $typologies, 'typology_id' => Request('typology_id')])
+  @include('architect::partials.content-nav',[
+    'typologies' => $typologies,
+    'typology_id' => Request('typology_id'),
+    'display_pages' => Request('display_pages')
+  ])
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 

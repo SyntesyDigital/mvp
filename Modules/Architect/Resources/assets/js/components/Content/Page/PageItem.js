@@ -16,6 +16,50 @@ class PageItem extends Component {
     this.props.onEditItem(this.props);
   }
 
+  onDeleteItem(e) {
+    e.preventDefault();
+    var self = this;
+
+    bootbox.confirm({
+				message: "Estas segur d'esborrar permanentment aquest camp ?",
+				buttons: {
+						confirm: {
+								label: 'Sí',
+								className: 'btn-primary'
+						},
+						cancel: {
+								label: 'No',
+								className: 'btn-default'
+						}
+				},
+				callback: function (result) {
+					if(result){
+						self.props.onDeleteItem(self.props);
+					}
+				}
+		});
+
+  }
+
+  onPullDownItem(e) {
+    e.preventDefault();
+
+    this.props.onPullDownItem(this.props.pathToIndex);
+
+  }
+
+  onPullUpItem(e) {
+    e.preventDefault();
+
+    this.props.onPullUpItem(this.props.pathToIndex);
+  }
+
+  onCopyItem(e) {
+    e.preventDefault();
+
+    this.props.onCopyItem(this.props.pathToIndex);
+  }
+
   renderTextPreview() {
     var value = null;
 
@@ -113,11 +157,39 @@ class PageItem extends Component {
 
   render() {
 
-    console.log("PageItem => ",this.props);
+    //console.log("PageItem => ",this.props);
+    const childrenIndex = this.props.pathToIndex[this.props.pathToIndex.length-1];
+    const childrenLength = this.props.childrenLength;
 
     return (
-      <div className="row page-row item-filled" onClick={this.onEditItem.bind(this)}>
+      <div className="row page-row item-filled">
+
+        <div className="item-header">
+          <div className="left-buttons">
+            { childrenIndex > 0 &&
+              <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
+                <i className="fa fa-arrow-up"></i>
+              </a>
+            }
+            {childrenIndex < childrenLength - 1 &&
+              <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
+                <i className="fa fa-arrow-down"></i>
+              </a>
+            }
+          </div>
+          <div className="right-buttons">
+            <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
+              <i className="fa fa-files-o"></i>
+            </a>
+            <a href="" className="btn btn-link text-danger" onClick={this.onDeleteItem.bind(this)}>
+              <i className="fa fa-trash"></i>
+            </a>
+          </div>
+        </div>
+
+        <div className="item-content" onClick={this.onEditItem.bind(this)}>
           {this.renderPreview()}
+        </div>
       </div>
     );
   }

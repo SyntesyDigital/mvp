@@ -65,6 +65,10 @@ class Row extends Component {
                 onDeleteRow={this.props.onDeleteRow}
                 pathToIndex={this.getPathToIndex(key)}
                 onEditItem={this.props.onEditItem}
+                onPullDownItem={this.props.onPullDownItem}
+                onPullUpItem={this.props.onPullUpItem}
+                onCopyItem={this.props.onCopyItem}
+                onDeleteItem={this.props.onDeleteItem}
                 onSelectItemBefore={this.props.onSelectItemBefore}
                 onSelectItemAfter={this.props.onSelectItemAfter}
               />
@@ -80,10 +84,46 @@ class Row extends Component {
 
     e.preventDefault();
 
-    //console.log("this.props.pathToIndex => ",this.props.pathToIndex);
+    var self = this;
 
-    this.props.onDeleteRow(this.props.pathToIndex);
+    bootbox.confirm({
+				message: "Estas segur d'esborrar permanentment aquesta fila i els seus continguts ?",
+				buttons: {
+						confirm: {
+								label: 'Sí',
+								className: 'btn-primary'
+						},
+						cancel: {
+								label: 'No',
+								className: 'btn-default'
+						}
+				},
+				callback: function (result) {
+					if(result){
+						self.props.onDeleteRow(self.props.pathToIndex);
+					}
+				}
+		});
 
+  }
+
+  onPullDownItem(e) {
+    e.preventDefault();
+
+    this.props.onPullDownItem(this.props.pathToIndex);
+
+  }
+
+  onPullUpItem(e) {
+    e.preventDefault();
+
+    this.props.onPullUpItem(this.props.pathToIndex);
+  }
+
+  onCopyItem(e) {
+    e.preventDefault();
+
+    this.props.onCopyItem(this.props.pathToIndex);
   }
 
   toggleColumns(e) {
@@ -96,9 +136,33 @@ class Row extends Component {
 
   handleColTypeSelect(cols) {
 
-    //this.props.colTypeSelect(this.props.index,cols);
+    var self = this;
+    const children = this.props.data.children;
 
-    this.setColType(cols);
+    if(cols.length < children.length ){
+
+      bootbox.confirm({
+  				message: "La selecció d'un nombre inferior de columnes, pot causar la perdua de contingut. Estas segur de continuar?",
+  				buttons: {
+  						confirm: {
+  								label: 'Sí',
+  								className: 'btn-primary'
+  						},
+  						cancel: {
+  								label: 'No',
+  								className: 'btn-default'
+  						}
+  				},
+  				callback: function (result) {
+  					if(result){
+              self.setColType(cols);
+  					}
+  				}
+  		});
+    }
+    else {
+      self.setColType(cols);
+    }
   }
 
   renderColTypes() {
@@ -133,17 +197,21 @@ class Row extends Component {
       //TODO como mejora unir las filas para no perder hijos
     }
 
+    console.log("children actual => ",children);
+
     var resultChildren = [];
 
     for(var i=0;i<cols.length;i++){
       resultChildren.push({
         type : 'col',
         colClass : cols[i],
-        //children : children[i] !== undefined && children[i] != null ? children : []
-        children : []
+        children : children[i] !== undefined && children[i] != null ? children[i].children : []
+        //children : []
       });
 
     }
+
+    console.log("children final => ",resultChildren);
 
     //var pathToIndex = [];
     //pathToIndex.push(this.props.index);
@@ -170,23 +238,30 @@ class Row extends Component {
 
   render() {
 
+    const childrenIndex = this.props.pathToIndex[this.props.pathToIndex.length-1];
+    const childrenLength = this.props.childrenLength;
+
     return (
       <div className="page-row filled">
         <div className="row-container">
           <div className="row-container-header">
             <div className="left-buttons">
-              <a href="" className="btn btn-link">
-                <i className="fa fa-arrow-up"></i>
-              </a>
-              <a href="" className="btn btn-link">
-                <i className="fa fa-arrow-down"></i>
-              </a>
+              { childrenIndex > 0 &&
+                <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
+                  <i className="fa fa-arrow-up"></i>
+                </a>
+              }
+              {childrenIndex < childrenLength - 1 &&
+                <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
+                  <i className="fa fa-arrow-down"></i>
+                </a>
+              }
               <a href="" className="btn btn-link" onClick={this.toggleColumns}>
                 <i className="fa fa-columns"></i>
               </a>
             </div>
             <div className="right-buttons">
-              <a href="" className="btn btn-link">
+              <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
                 <i className="fa fa-files-o"></i>
               </a>
               <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>

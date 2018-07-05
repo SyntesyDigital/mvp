@@ -23,8 +23,8 @@ const fieldSource = {
 
 const fieldTarget = {
 	hover(props, monitor, component) {
-		const dragIndex = monitor.getItem().index
-		const hoverIndex = props.index
+		const dragIndex = monitor.getItem().index;
+		const hoverIndex = props.index;
 
 		// Don't replace items with themselves
 		if (dragIndex === hoverIndex) {
@@ -86,6 +86,8 @@ class ImagesDragField extends Component {
 
 	constructor(props){
 		super(props);
+
+		//console.log("ImagesDragField => ",props);
 
 		this.onRemoveField = this.onRemoveField.bind(this);
 	}

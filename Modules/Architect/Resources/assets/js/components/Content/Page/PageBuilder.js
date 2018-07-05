@@ -337,7 +337,7 @@ class PageBuilder extends Component {
     }
   }
 
-  removeRow(layout,currentIndex,pathToIndex){
+  removeItem(layout,currentIndex,pathToIndex){
     currentIndex++;
 
     if(currentIndex == pathToIndex.length -1){
@@ -346,10 +346,30 @@ class PageBuilder extends Component {
     }
     else {
 
-      layout[pathToIndex[currentIndex]].children = this.removeRow(
+      layout[pathToIndex[currentIndex]].children = this.removeItem(
         layout[pathToIndex[currentIndex]].children,
         currentIndex,
         pathToIndex
+      );
+
+      return layout;
+    }
+  }
+
+  changeItemChildren(layout,currentIndex,pathToIndex,callback){
+    currentIndex++;
+
+    if(currentIndex == pathToIndex.length -1){
+      layout = callback(layout,pathToIndex[currentIndex]);
+      return layout;
+    }
+    else {
+
+      layout[pathToIndex[currentIndex]].children = this.changeItemChildren(
+        layout[pathToIndex[currentIndex]].children,
+        currentIndex,
+        pathToIndex,
+        callback
       );
 
       return layout;
@@ -362,20 +382,86 @@ class PageBuilder extends Component {
 
     var layout = this.props.layout;
 
-    layout = this.removeRow(layout,-1,pathToIndex);
+    layout = this.removeItem(layout,-1,pathToIndex);
 
     console.log("handleDeleteRow : layout : ",layout);
-
-    /*
-    this.setState({
-      layout : layout
-    });
-    */
 
     this.props.updateLayout(layout);
 
   }
 
+
+  handleDeleteItem(item){
+
+    var layout = this.props.layout;
+
+    layout = this.removeItem(layout,-1,item.pathToIndex);
+
+    this.props.updateLayout(layout);
+  }
+
+  handlePullUpItem(pathToIndex) {
+    console.log("handlePullUpItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      if(children.length > 1 && index > 0 ){
+        var temp = children[index-1];
+        children[index-1] = children[index];
+        children[index] = temp;
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+  }
+
+  handlePullDownItem(pathToIndex) {
+    console.log("handlePullDownItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      if(children.length > 1 && index < children.length-1 ){
+        var temp = children[index+1];
+        children[index+1] = children[index];
+        children[index] = temp;
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+
+  }
+
+  handleCopyItem(pathToIndex) {
+    //console.log("handleCopyItem => ", pathToIndex);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemChildren(layout,-1,pathToIndex,function(children,index){
+
+      var copy = jQuery.extend(true, {}, children[index]);
+
+      if(index == children.length-1){
+        //if is the last
+        children.push(copy);
+      }
+      else {
+        children.splice(index+1,0,copy);
+      }
+
+      return children;
+    });
+
+    this.props.updateLayout(layout);
+
+  }
 
 
   handleEditItem(item){
@@ -406,11 +492,16 @@ class PageBuilder extends Component {
             index={index}
             key={index}
             data={item}
+            childrenLength={layout.length}
             onDeleteRow={this.handleDeleteRow}
             colTypeSelect={this.handleColTypeSelected}
             onColsChanged={this.handleColChanged}
             onSelectItem={this.handleItemSelect}
             onEditItem={this.handleEditItem.bind(this)}
+            onPullUpItem={this.handlePullUpItem.bind(this)}
+            onPullDownItem={this.handlePullDownItem.bind(this)}
+            onCopyItem={this.handleCopyItem.bind(this)}
+            onDeleteItem={this.handleDeleteItem.bind(this)}
             pathToIndex={[parseInt(index)]}
             onSelectItemBefore={this.handleSelectItemBefore.bind(this)}
             onSelectItemAfter={this.handleItemSelect}
