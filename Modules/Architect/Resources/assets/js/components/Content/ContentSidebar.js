@@ -114,6 +114,23 @@ class ContentSidebar extends Component {
           </div>
         }
 
+        {this.props.pages !== undefined && this.props.pages != null &&
+          <div>
+            <div className="form-group bmd-form-group sidebar-item">
+               <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
+               <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
+                  {
+                    this.props.pages.map(function(page, i){
+                      return <option value={page.id} key={i}>{page.name}</option>
+                    })
+                  }
+               </select>
+
+            </div>
+            <hr/>
+          </div>
+        }
+
         <div className="form-group bmd-form-group has-danger">
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
