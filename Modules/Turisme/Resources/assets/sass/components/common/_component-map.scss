@@ -1,0 +1,115 @@
+#component-map {
+    .component-map_map {
+
+        height: 360px;
+        width: 100%;
+
+        .leaflet-container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .marker {
+            border: 1px solid #848484;
+            background-color: #FFFFFF;
+        }
+
+        .marker-active {
+            border: 1px solid #848484;
+            background-color: #FFBA00;
+        }
+
+        .marker-cluster-small div {
+            background-color: #FFFFFF;
+        }
+
+        .marker-cluster {
+            border: 1px solid #848484;
+            background-color: #FFFFFF;
+            height: 16px !important;
+            width: 16px !important;
+            margin-left: -8px !important;
+            margin-top: -8px !important;
+            border-radius: 0;
+
+            div {
+                width: 14px;
+                height: 14px;
+                margin-left: 0px;
+                margin-top: 0px;
+                text-align: center;
+                border-radius: 0;
+                font: 11px "Helvetica Neue",Arial,Helvetica,sans-serif;
+            }
+
+            span {
+                line-height: 15px;
+            }
+        }
+
+    }
+
+    .component-map_slider {
+        padding: 20px 30px;
+
+        .slick-arrow {
+            box-shadow: none;
+            background-color: transparent;
+        }
+
+        .slick-next {
+            right: 0;
+        }
+
+        .slick-prev {
+            left: 0;
+        }
+
+        .item {
+            display: inline-block;
+            padding: 7.5px;
+            cursor: pointer;
+
+            .image {
+                @extend .animate;
+                width: 72px;
+                height: 72px;
+                border: 2px solid #fff;
+                overflow: hidden;
+
+                background-size:cover;
+                background-position:center;
+
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                    vertical-align: middle;
+                }
+            }
+
+
+            &:hover {
+                .image {
+                    border: 2px solid #f00!important;
+                    overflow: hidden;
+                }
+            }
+
+
+            &.checked {
+              .image {
+                  border: 2px solid $brand-color-1 !important;
+                  overflow: hidden;
+              }
+            }
+
+            p.title {
+                width: 72px;
+                @include font(10,12,400);
+                text-align: center;
+                padding-top: 7px;
+            }
+        }
+    }
+}

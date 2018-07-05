@@ -6,11 +6,6 @@
 return [
 
      'domain-localization' => [
-         'www.chrysaly-mariage.com' => 'fr',
-         'www.chrysaly-mariage.fr' => 'fr',
-         'www.chrysaly-novias.es' => 'es',
-         'www.chrysaly-wedding.com' => 'en',
-         'www.chrysaly-weddings.com' => 'en'
      ]
 
 ];

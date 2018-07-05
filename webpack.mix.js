@@ -6,6 +6,9 @@ mix.react('resources/assets/js/app.js', 'public/js')
 mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js')
   .sass('Modules/Architect/Resources/assets/sass/architect/app.scss', 'modules/architect/css');
 
+mix.react('Modules/Turisme/Resources/assets/js/app.js', 'modules/turisme/js')
+  .sass('Modules/Turisme/Resources/assets/sass/app.scss', 'modules/turisme/css');
+
 // Compile Architect lib
 mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.js',
