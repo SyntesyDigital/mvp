@@ -61,7 +61,21 @@ export default class TypologyForm extends Component {
                 });
                 //console.log("field text => ",field);
             });
-
+            
+            var slug = {};
+            if(this.state.typology.attrs) {
+                var self = this;
+                LANGUAGES.map(function(language){
+                    self.state.typology.attrs.map(function(attr){
+                        if(attr.name == "slug" && language.id == attr.language_id) {
+                            slug[language.iso] = attr.value;
+                        }
+                    })
+                });
+            }        
+            
+            
+            
             this.typologyContainer.setState({
                 typology : this.state.typology,
                 fields : fields,
@@ -74,7 +88,7 @@ export default class TypologyForm extends Component {
                       label : this.state.typology.icon
                     },
                     template: "",
-                    slug: null,
+                    slug: Object.keys(slug).length !== 0 ? slug : null,
                     categories: false,
                     tags: false,
                     categories: this.state.typology.has_categories,

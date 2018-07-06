@@ -17,7 +17,9 @@ class TypologyContainer extends Component {
 
   constructor(props) {
      super(props);
+     
 
+     
      this.state = {
          typology : null,
          inputs: {
@@ -255,7 +257,7 @@ class TypologyContainer extends Component {
      getFormData() {
 
          return {
-             has_slug : this.state.inputs.slugOn,
+             has_slug : this.state.inputs.slug ? true : false,
              slug : this.state.inputs.slug,
              has_tags : this.state.inputs.tags,
              has_categories : this.state.inputs.categories,
