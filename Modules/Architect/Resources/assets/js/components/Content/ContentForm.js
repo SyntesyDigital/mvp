@@ -17,6 +17,7 @@ export default class ContentForm extends Component {
             fields : props.fields ? JSON.parse(atob(props.fields)) : '',
             tags : props.tags ? JSON.parse(atob(props.tags)) : '',
             page : props.page ? JSON.parse(atob(props.page)) : '',
+            pages : props.pages ? JSON.parse(atob(props.pages)) : '',
             categories : props.categories ? JSON.parse(atob(props.categories)) : '',
             saved : props.content || props.page ? true : false
         };
@@ -56,7 +57,10 @@ export default class ContentForm extends Component {
                   <PageContainer
                     authors={this.state.authors}
                     content={this.state.content}
+                    categories={this.state.categories}
+                    tags={this.state.tags}
                     page={this.state.page}
+                    pages={this.state.pages}
                     saved={this.state.saved}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                   />
@@ -75,7 +79,8 @@ if (document.getElementById('content-form')) {
     var fields = element.getAttribute('fields');
     var tags = element.getAttribute('tags');
     var page = element.getAttribute('page');
+    var pages = element.getAttribute('pages');
     var categories = element.getAttribute('categories');
 
-    ReactDOM.render(<ContentForm page={page} tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
+    ReactDOM.render(<ContentForm page={page} pages={pages} tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
 }

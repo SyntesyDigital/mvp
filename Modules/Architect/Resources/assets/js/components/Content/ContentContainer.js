@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
 import ContentBar from './ContentBar';
 import ContentSidebar from './ContentSidebar';
 import ContentFields from './ContentFields';
-
 import MediaSelectModal from './../Medias/MediaSelectModal';
 import ContentSelectModal from './ContentSelectModal';
-
 import moment from 'moment';
-
 import axios from 'axios';
 
 class ContentContainer extends Component {
@@ -45,7 +41,7 @@ class ContentContainer extends Component {
          template: "",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
-         tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
+         tags : this.props.content.tags ? this.props.content.tags : [],   // Los tags del contenido que hay que guardar
          tagsList : props.tags ? props.tags : [], // La lista de los tags
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
@@ -56,7 +52,7 @@ class ContentContainer extends Component {
          languages: LANGUAGES,
          fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
+         parent_id : this.props.content ? this.props.content.parent_id : null,
          //modal states
          displayMediaModal: false,
          sourceField: null,
@@ -200,6 +196,7 @@ class ContentContainer extends Component {
   getFormData()
   {
       return {
+          parent_id: this.state.parent_id,
           translations : this.state.translations,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           typology_id : this.state.typology.id,
@@ -207,7 +204,8 @@ class ContentContainer extends Component {
           category_id : this.state.category,
           tags : this.state.tags,
           fields : this.state.fields,
-          author_id : this.state.author
+          author_id : this.state.author,
+          translations : this.state.translations
       };
   }
 
@@ -359,7 +357,9 @@ class ContentContainer extends Component {
     }
 
   handleTagAdded(tag) {
-
+      
+      console.log("handleTagAdded => ", tag);
+      
     const {tags} = this.state;
 
     var found = false;
@@ -407,8 +407,6 @@ class ContentContainer extends Component {
       });
   }
 
-
-
   render() {
 
     return (
@@ -443,6 +441,7 @@ class ContentContainer extends Component {
                 template={this.state.template}
                 category={this.state.category}
                 categories={this.state.categories}
+                tags={this.state.tags}
                 tagsList={this.state.tagsList}
                 translations={this.state.translations}
                 author={this.state.author}

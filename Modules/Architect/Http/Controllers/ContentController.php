@@ -65,7 +65,6 @@ class ContentController extends Controller
             ];
         }
 
-
         return $this->contents->getDatatable($options);
     }
 
@@ -89,6 +88,7 @@ class ContentController extends Controller
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
             'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
+            'pages' => $this->contents->findWhere(['is_page' => 1]),
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
@@ -101,6 +101,7 @@ class ContentController extends Controller
             'typology' => $typology != null ? $typology->load('fields') : null,
             'fields' => $typology != null ? (new FieldsReactAdapter($typology))->get() : null,
             'page' => null,
+            'pages' => $this->contents->findWhere(['is_page' => 1]),
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()

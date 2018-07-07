@@ -33,7 +33,8 @@ class Content extends Model
         'typology_id',
         'user_id',
         'author_id',
-        'page_id',
+        'parent_id',
+        'is_page',
         'published_at'
     ];
 
@@ -105,7 +106,7 @@ class Content extends Model
     public function getTitleAttribute()
     {
 
-        if($this->page_id) {
+        if($this->page) {
             return $this->getFieldValue('title');
         }
 

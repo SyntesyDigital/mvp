@@ -33,6 +33,15 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::delete('/tags/{tag?}/delete', 'TagController@delete')->name('tags.delete');
     Route::get('/tags/{tag?}', 'TagController@show')->name('tags.show');
 
+    // Users
+    Route::get('/users', 'UserController@index')->name('users');
+    Route::get('/users/data', 'UserController@data')->name('users.data');
+    Route::post('/users', 'UserController@store')->name('users.store');
+    Route::get('/users/create', 'UserController@create')->name('users.create');
+    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
+    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
+    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
+
     // Contents
     Route::get('/contents', 'ContentController@index')->name('contents');
     Route::get('/contents/data', 'ContentController@data')->name('contents.data');

@@ -17,7 +17,6 @@ class UpdateTableTypologyAddCategoriesAndTagsBool extends Migration
             $table->boolean('has_categories')->nullable();
             $table->boolean('has_tags')->nullable();
             $table->boolean('has_slug')->nullable();
-
         });
     }
 

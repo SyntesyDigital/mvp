@@ -16,11 +16,6 @@ class PageContainer extends Component {
   constructor(props) {
      super(props);
 
-     // Set translations
-     var translations = {};
-     LANGUAGES.map(function(v,k){
-         translations[v.iso] = true;
-     });
 
      console.log('LAYOUT LOADED', props.page);
      console.log('CONTENT LOADED', props.content);
@@ -39,6 +34,22 @@ class PageContainer extends Component {
           name:"Enllaç permanent"
         };
     
+    // Build translations state from content languages fields
+    var translations = {};
+    LANGUAGES.map(function(language){
+        if(props.content) {
+            var exist = false;
+           props.content.languages.map(function(contentLanguage){
+               if(contentLanguage.iso == language.iso) {
+                   exist = true;
+               }
+           });
+           translations[language.iso] = exist;
+        } else {
+            translations[language.iso] = true;
+        }
+    });
+        
     if(props.content) {
         // Builds fields values
         LANGUAGES.map(function(language,k){
@@ -58,22 +69,26 @@ class PageContainer extends Component {
         });
     }
      
-
+    
      // Build state...
      this.state = {
          status: 0,
          template: "",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
+         categories: props.categories,
+         tags : this.props.content.tags ? this.props.content.tags : [], 
          errors : {},
-         tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
+         tagsList : props.tags ? props.tags : [], // La lista de los tags
          title : titleField,
          slug : slugField,
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
          content: props.content,
+         pages: props.pages ? props.pages : null,
          languages: props.languages,
          layout : props.page ? props.page : null,
+         parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
      };
@@ -121,14 +136,16 @@ class PageContainer extends Component {
               title : this.state.title,
               slug : this.state.slug,
           },
+          parent_id: this.state.parent_id,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           status : this.state.status,
           is_page : true,
           page: this.state.layout,
-          category : this.state.category,
+          category_id : this.state.category,
           tags : this.state.tags,
           //fields : this.state.fields,
-          author_id : this.state.author
+          author_id : this.state.author,
+          translations : this.state.translations
       };
   }
 
@@ -342,8 +359,6 @@ class PageContainer extends Component {
     return (
       <div>
 
-
-
         <ContentBar
           icon={'fa-file-o'}
           name={'Pàgina'}
@@ -355,9 +370,13 @@ class PageContainer extends Component {
             <ContentSidebar
                 errors={this.state.errors}
                 status={this.state.status}
+                pages={this.state.pages}
+                content={this.state.content}
                 template={null}
                 category={this.state.category}
+                categories={this.state.categories}
                 tags={this.state.tags}
+                tagsList={this.state.tagsList}
                 translations={this.state.translations}
                 author={this.state.author}
                 authors={this.state.authors}
