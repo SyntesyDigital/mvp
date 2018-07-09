@@ -16,7 +16,7 @@ class TypologySlug extends Component {
 
   componentWillReceiveProps(nextProps){
 
-    //console.log("TypologySlug :: componentWillReceiveProps",nextProps)
+    console.log("TypologySlug :: componentWillReceiveProps",nextProps)
 
     var checkbox = false;
     var value = null;

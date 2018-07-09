@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\ContentRepository;
 use Modules\Architect\Repositories\CategoryRepository;
 
+// Jobs & Requests
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
 use Modules\Architect\Jobs\Content\CreateContent;
 
@@ -18,6 +19,9 @@ use Modules\Architect\Jobs\Content\UpdateContent;
 
 use Modules\Architect\Http\Requests\Content\DeleteContentRequest;
 use Modules\Architect\Jobs\Content\DeleteContent;
+
+use Modules\Architect\Http\Requests\Content\PublishContentRequest;
+use Modules\Architect\Jobs\Content\PublishContent;
 
 // Models
 use Modules\Architect\Entities\Typology;
@@ -47,17 +51,21 @@ class ContentController extends Controller
 
     public function data(Request $request)
     {
-        $where = $request->get('typology_id') ? [
-            'typology_id' => $request->get('typology_id')
-        ] : null;
+        $options = [];
 
-        if($request->get('display_pages')) {
-            $where = [
-                ['page_id','<>', null]
+        if($request->get('typology_id')) {
+            $options['where'] = [
+                ['typology_id', '=', $request->get('typology_id')]
             ];
         }
 
-        return $this->contents->getDatatable($where);
+        if($request->get('display_pages')) {
+            $options["whereHas"] = [
+                'page' => ['content_id','<>', null]
+            ];
+        }
+
+        return $this->contents->getDatatable($options);
     }
 
     public function modalData(Request $request)
@@ -76,10 +84,11 @@ class ContentController extends Controller
         }
 
         return view('architect::contents.show', [
-            'content' => $content->load('tags', 'categories'),
+            'content' => $content->load('tags', 'categories', 'languages'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
-            'page' => $content->page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
+            'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
+            'pages' => $this->contents->findWhere(['is_page' => 1]),
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
@@ -92,6 +101,7 @@ class ContentController extends Controller
             'typology' => $typology != null ? $typology->load('fields') : null,
             'fields' => $typology != null ? (new FieldsReactAdapter($typology))->get() : null,
             'page' => null,
+            'pages' => $this->contents->findWhere(['is_page' => 1]),
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
@@ -106,6 +116,19 @@ class ContentController extends Controller
             'success' => true,
             'content' => $content
         ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function publish(Content $content, PublishContentRequest $request)
+    {
+        if(dispatch_now(PublishContent::fromRequest($content, $request))) {
+            return response()->json([
+                'success' => true
+            ]);
+        }
+
+        return response()->json([
             'success' => false
         ], 500);
     }

@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Select from 'react-select';
 
 import TagManager from "./Tags/TagManager";
+import moment from 'moment';
 
 class ContentSidebar extends Component {
 
@@ -83,20 +84,16 @@ class ContentSidebar extends Component {
         {this.props.status == 1 &&
           <div className="publish-form sidebar-item">
               <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
-
               <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
-
-              <p className="field-help">Publicat el 14, Oct, 2018</p>
+              <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
           </div>
         }
 
         {this.props.status == 0 &&
           <div className="publish-form sidebar-item">
               <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
-
               <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
-
-              <p className="field-help">Publicat el 14, Oct, 2018</p>
+              <p className="field-help"></p>
           </div>
         }
 
@@ -111,11 +108,29 @@ class ContentSidebar extends Component {
                   <option name="" value="2"> Plantilla 2 </option>
                   <option name="" value="3"> Plantilla 3 </option>
                </select>
-
             </div>
             <hr/>
           </div>
         }
+        
+        
+        {this.props.pages != null &&
+          <div>
+            <div className="form-group bmd-form-group sidebar-item">
+               <label htmlFor="parent_id" className="bmd-label-floating">Page parent</label>
+               <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
+                    <option value="">---</option>
+                   {
+                     this.props.pages && this.props.pages.map(function(page, i) {
+                         return <option value={page.id} key={i} selected={self.props.content && self.props.content.parent_id == page.id ? "selected" : ""}>{page.title}</option>
+                     })
+                   }
+               </select>
+            </div>
+            <hr/>
+          </div>
+        }
+
 
         {this.props.pages !== undefined && this.props.pages != null &&
           <div>
@@ -137,6 +152,7 @@ class ContentSidebar extends Component {
         <div className="form-group bmd-form-group has-danger">
            <label htmlFor="template" className="bmd-label-floating">Categoria</label>
            <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
+                <option value="">---</option>
                {
                  this.props.categories && this.props.categories.map(function(category, i) {
                    return <option value={category.id} key={i}>{self.printSpace(category.level)}{category.name}</option>

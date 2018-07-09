@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
 import ContentBar from './ContentBar';
 import ContentSidebar from './ContentSidebar';
 import ContentFields from './ContentFields';
-
 import MediaSelectModal from './../Medias/MediaSelectModal';
 import ContentSelectModal from './ContentSelectModal';
-
 import moment from 'moment';
-
 import axios from 'axios';
 
 class ContentContainer extends Component {
@@ -19,21 +15,33 @@ class ContentContainer extends Component {
   constructor(props) {
      super(props);
 
-     // Set translations
+     var self = this;
+
+     // Build translations state from content languages fields
      var translations = {};
-     LANGUAGES.map(function(v,k){
-         translations[v.iso] = true;
+     LANGUAGES.map(function(language){
+         if(self.props.content) {
+             var exist = false;
+            self.props.content.languages.map(function(contentLanguage){
+                if(contentLanguage.iso == language.iso) {
+                    exist = true;
+                }
+            });
+            translations[language.iso] = exist;
+         } else {
+             translations[language.iso] = true;
+         }
      });
 
      //console.log("ContentContainer :: content => ", props.content);
 
      // Build state
      this.state = {
-         status: 0,
+         status: this.props.content ? this.props.content.status : 0,
          template: "",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          errors : {},
-         tags : this.props.content.tags ? this.props.content.tags : [],  // Los tags del contenido que hay que guardar
+         tags : this.props.content.tags ? this.props.content.tags : [],   // Los tags del contenido que hay que guardar
          tagsList : props.tags ? props.tags : [], // La lista de los tags
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
@@ -44,7 +52,7 @@ class ContentContainer extends Component {
          languages: LANGUAGES,
          fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
+         parent_id : this.props.content ? this.props.content.parent_id : null,
          //modal states
          displayMediaModal: false,
          sourceField: null,
@@ -188,13 +196,16 @@ class ContentContainer extends Component {
   getFormData()
   {
       return {
+          parent_id: this.state.parent_id,
+          translations : this.state.translations,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
           typology_id : this.state.typology.id,
           status : this.state.status,
           category_id : this.state.category,
           tags : this.state.tags,
           fields : this.state.fields,
-          author_id : this.state.author
+          author_id : this.state.author,
+          translations : this.state.translations
       };
   }
 
@@ -289,42 +300,48 @@ class ContentContainer extends Component {
      }
  }
 
-  handlePublish(e) {
+     publishToogle()
+     {
+         var _this = this;
 
-    e.preventDefault();
+         axios.put('/architect/contents/' + this.state.content.id + '/publish', {
+             status : _this.state.status
+         })
+             .then((response) => {
+                 if(response.data.success) {
+                     toastr.success('ok');
+                 }
+             })
+             .catch((error) => {
+                 toastr.error('Error !');
+             });
+     }
 
-    this.setState({
-      status : 1
-    });
+    handlePublish(e)
+    {
+        e.preventDefault();
 
-    console.log("publish!");
-    console.log(this.state);
+        this.setState({
+            status : 1
+        });
 
-    //TODO
+        this.publishToogle();
+    }
 
-  }
+    handleUnpublish(e)
+    {
+        e.preventDefault();
 
-  handleUnpublish(e) {
+        this.setState({
+            status : 0
+        });
 
-    e.preventDefault();
-
-    this.setState({
-      status : 0
-    });
-
-    console.log("unpublish!");
-    console.log(this.state);
-
-    //TODO
-  }
+        this.publishToogle();
+    }
 
     handleFieldChange(field) {
         const result = {};
         result[field.name] = field.value;
-
-        console.log("handleFieldChange =====>", result);
-
-
         this.setState(result);
     }
 
@@ -340,7 +357,9 @@ class ContentContainer extends Component {
     }
 
   handleTagAdded(tag) {
-
+      
+      console.log("handleTagAdded => ", tag);
+      
     const {tags} = this.state;
 
     var found = false;
@@ -388,8 +407,6 @@ class ContentContainer extends Component {
       });
   }
 
-
-
   render() {
 
     return (
@@ -424,6 +441,7 @@ class ContentContainer extends Component {
                 template={this.state.template}
                 category={this.state.category}
                 categories={this.state.categories}
+                tags={this.state.tags}
                 tagsList={this.state.tagsList}
                 translations={this.state.translations}
                 author={this.state.author}

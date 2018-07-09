@@ -2,24 +2,37 @@
 
 namespace Modules\Architect\Repositories;
 
-use App\Role;
+use App\Models\Role;
 use App\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
 use DB;
+use Datatables;
 
 class UserRepository extends BaseRepository
 {
     public function model()
     {
-        return 'App\\User';
+        return 'App\\Models\\User';
     }
 
-    public function getDatatableData()
+    public function getDatatable()
     {
-        return User::select([
+        $users = User::select([
             'users.*',
             DB::raw("CONCAT(users.firstname,' ',users.lastname) as full_name"),
         ]);
+
+        return Datatables::of($users)
+            ->addColumn('name', function ($item) {
+                return $item->full_name;
+            })
+            ->addColumn('action', function ($item) {
+                return '
+                <a href="' . route('users.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('users.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                ';
+            })
+            ->make(true);
     }
 
     public function getAllByRoles($roles)

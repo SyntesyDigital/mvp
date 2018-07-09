@@ -61,7 +61,21 @@ export default class TypologyForm extends Component {
                 });
                 //console.log("field text => ",field);
             });
-
+            
+            var slug = {};
+            if(this.state.typology.attrs) {
+                var self = this;
+                LANGUAGES.map(function(language){
+                    self.state.typology.attrs.map(function(attr){
+                        if(attr.name == "slug" && language.id == attr.language_id) {
+                            slug[language.iso] = attr.value;
+                        }
+                    })
+                });
+            }        
+            
+            
+            
             this.typologyContainer.setState({
                 typology : this.state.typology,
                 fields : fields,
@@ -74,9 +88,11 @@ export default class TypologyForm extends Component {
                       label : this.state.typology.icon
                     },
                     template: "",
-                    slug: null,
+                    slug: Object.keys(slug).length !== 0 ? slug : null,
                     categories: false,
                     tags: false,
+                    categories: this.state.typology.has_categories,
+                    tags: this.state.typology.has_tags
                 }
             });
         }
@@ -128,15 +144,37 @@ export default class TypologyForm extends Component {
         this.typologyContainer.setState({
             fieldsList: this.state.fieldsList
         });
+    }
 
+    getSlugFromTypology()
+    {
+        if(!this.state.typology) {
+            return null;
+        }
+
+        var slugs = this.state.typology.attrs.filter(function(attr){
+            return (attr.name == "slug");
+        });
+
+        var _slug = {};
+        slugs.map(function(slug){
+            return LANGUAGES.map(function(language){
+                if(slug.language_id == language.id) {
+                    _slug[language.iso] = slug.value;
+                }
+            });
+        });
+
+        return _slug;
     }
 
     render() {
         return (
             <div>
                 <TypologyContainer
-                  translations={this.state.translations}
-                  ref={(typologyContainer) => this.typologyContainer = typologyContainer}
+                    typology={this.state.typology ? this.state.typology : null}
+                    ref={(typologyContainer) => this.typologyContainer = typologyContainer}
+                    translations={this.state.translations}
                 />
             </div>
         );

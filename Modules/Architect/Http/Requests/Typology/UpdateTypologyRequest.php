@@ -4,6 +4,8 @@ namespace Modules\Architect\Http\Requests\Typology;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Modules\Architect\Rules\TypologyFields;
+
 class UpdateTypologyRequest extends FormRequest
 {
     /**
@@ -13,11 +15,11 @@ class UpdateTypologyRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name' => 'required',
-            'fields' => 'required',
-            'identifier' => 'required',
-            'fields' => 'required'
+            'fields' => ['required', new TypologyFields],
+            'identifier' => 'required'
         ];
     }
 

@@ -4,6 +4,8 @@ namespace Modules\Architect\Http\Requests\Typology;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Modules\Architect\Rules\TypologyFields;
+
 class CreateTypologyRequest extends FormRequest
 {
     /**
@@ -15,7 +17,7 @@ class CreateTypologyRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'fields' => 'required',
+            'fields' => ['required', new TypologyFields],
             'identifier' => 'required|unique:typologies',
         ];
     }

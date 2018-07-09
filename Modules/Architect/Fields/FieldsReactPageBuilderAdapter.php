@@ -23,27 +23,42 @@ class FieldsReactPageBuilderAdapter
     public function get()
     {
         $nodes = json_decode($this->page->definition, true);
-        return $this->getFields($nodes);
+        return $this->getPage($nodes);
     }
 
 
-    function getFields(&$nodes) {
-        foreach ($nodes as $key => $node) {
-            if(isset($node['children'])) {
-                $nodes[$key]['children'] = $this->getFields($node['children']);
-            } else {
-                if(isset($node['field'])) {
-                    $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
-                    $nodes[$key]['field']['name'] = $node['field']['type'];
-                    $nodes[$key]['field']['value'] = $this->build($node['field']);
+    private function getLanguageIsoFromId($id)
+    {
+        foreach($this->languages as $language) {
+            if($language->id == $id) {
+                return $language->iso;
+            }
+        }
+
+        return false;
+    }
+
+
+    function getPage(&$nodes) {
+        if($nodes) {
+            foreach ($nodes as $key => $node) {
+                if(isset($node['children'])) {
+                    $nodes[$key]['children'] = $this->getPage($node['children']);
+                } else {
+                    if(isset($node['field'])) {
+                        $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
+                        $nodes[$key]['field']['name'] = $node['field']['type'];
+                        $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
+                    }
                 }
             }
         }
+
         return $nodes;
     }
 
 
-    private function build($field)
+    private function buildPageField($field)
     {
         $fieldName = isset($field['name']) ? $field['name'] : null;
 
@@ -55,41 +70,78 @@ class FieldsReactPageBuilderAdapter
                     return [$field->language->iso => $field->value];
                 })->toArray();
             break;
-            case 'image':
 
+            case 'image':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){
                   return Media::find($contentField->value);
                 }
             break;
+
             case 'localization':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){
                   return json_decode($contentField->value, true);
                 }
             break;
-            case 'images':
-                //FIXME only return one element
-                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
-                    return [Media::find($field->value)];
-                })->toArray();
 
+            case 'images':
+                return ContentField::where('name', $fieldName)->get()->map(function($field){
+                    return Media::find($field->value);
+                })->toArray();
             break;
+
             case 'contents':
-                $contentField = ContentField::where('name', $fieldName)->first();
-                if($contentField != null){
-                  $values[] = Content::find($contentField->value)->load('fields');
-                  return $values;
-                }
+                return ContentField::where('name', $fieldName)->get()->map(function($field){
+                    return Content::find($field->value);
+                })->toArray();
             break;
+
             case 'video':
-                return null;
+                $field = ContentField::where('name', $fieldName)->first();
+                $values = null;
+
+                if($field) {
+                    $childs = $this->content->getFieldChilds($field);
+
+                    if($childs != null){
+                      foreach($childs as $k => $v) {
+                          if($v->language_id) {
+                              $iso = $this->getLanguageIsoFromId($v->language_id);
+                              $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                          }
+                      }
+                    }
+                }
+                return $values;
             break;
+
             case 'link':
-                return null;
+                $field = ContentField::where('name', $fieldName)->first();
+                $values = null;
+
+                if($field) {
+                    $childs = $this->content->getFieldChilds($field);
+
+                    if($childs != null){
+                      foreach($childs as $k => $v) {
+                          if($v->language_id) {
+                              $iso = $this->getLanguageIsoFromId($v->language_id);
+                              $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                          } else {
+                              if(explode('.', $v->name)[1] == 'content') {
+                                  $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                              }
+                          }
+                      }
+                    }
+                }
+                return $values;
             break;
+
             default:
-                return ContentField::where('name', $fieldName)->first()->value;
+                $fields = ContentField::where('name', $fieldName)->first();
+                return $fields ? $fields->value : null;
             break;
         }
 

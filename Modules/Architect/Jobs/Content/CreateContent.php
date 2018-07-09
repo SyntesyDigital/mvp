@@ -18,13 +18,16 @@ class CreateContent
     {
         $this->languages = Language::all();
         $this->attributes = array_only($attributes, [
-            'status',
             'typology_id',
             'author_id',
-            'fields',
             'category_id',
+            'parent_id',
+            'status',
+            'fields',
             'tags',
-            'page'
+            'page',
+            'translations',
+            'is_page',
         ]);
     }
 
@@ -40,12 +43,15 @@ class CreateContent
             'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
             'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
             'author_id' => $this->attributes['author_id'],
+            'is_page' => isset($this->attributes['is_page']) ? $this->attributes['is_page'] : 0,
+            'parent_id' => isset($this->attributes['parent_id']) ? $this->attributes['parent_id'] : null,
         ]);
 
         $this->saveCategories();
         $this->saveTags();
+        $this->saveLanguages();
 
-        if(isset($this->attributes['page'])) {
+        if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
         } else {
             $this->saveFields();
@@ -95,7 +101,6 @@ class CreateContent
         }
     }
 
-
     public function saveTags()
     {
         $this->content->tags()->detach();
@@ -111,22 +116,39 @@ class CreateContent
         $this->content->load('tags');
     }
 
+    public function saveLanguages()
+    {
+        $this->content->languages()->detach();
+        if(isset($this->attributes['translations'])) {
+            foreach($this->attributes['translations'] as $iso => $value) {
+                $language = $value ? Language::where('iso', $iso)->first() : null;
+
+                if($language) {
+                    $this->content->languages()->attach($language);
+                }
+            }
+        }
+
+    }
+
     function savePageBuilderFields(&$nodes) {
-        foreach ($nodes as $key => $node) {
+        if($nodes) {
+            foreach ($nodes as $key => $node) {
 
-            if(isset($node['children'])) {
-                $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
-            } else {
-                if(isset($node['field'])) {
-                    $field = $node['field'];
+                if(isset($node['children'])) {
+                    $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
+                } else {
+                    if(isset($node['field'])) {
+                        $field = $node['field'];
 
-                    $fieldName = uniqid('pagefield_');
-                    $fieldValue = isset($field['value']) ? $field['value'] : null;
+                        $fieldName = uniqid('pagefield_');
+                        $fieldValue = isset($field['value']) ? $field['value'] : null;
 
-                    (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
-                    unset($nodes[$key]['field']['value']);
+                        (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                        unset($nodes[$key]['field']['value']);
 
-                    $nodes[$key]['field']['name'] = $fieldName;
+                        $nodes[$key]['field']['name'] = $fieldName;
+                    }
                 }
             }
         }
@@ -137,12 +159,9 @@ class CreateContent
 
     public function savePage()
     {
-        $page = Page::create([
+        return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
-        ]);
-
-        $this->content->update([
-            'page_id' => $page ? $page->id : null
+            'content_id' => $this->content->id
         ]);
     }
 

@@ -16,7 +16,7 @@ class ContentRepository extends BaseRepository
         return "Modules\\Architect\\Entities\\Content";
     }
 
-    public function getDatatable($where = null)
+    public function getDatatable($options = [])
     {
         $results = Content::leftJoin('contents_fields', 'contents.id', '=', 'contents_fields.content_id')
             ->leftJoin('users', 'contents.author_id', '=', 'users.id')
@@ -27,9 +27,28 @@ class ContentRepository extends BaseRepository
             )
             ->groupBy('contents.id');
 
-        if($where) {
-            $results->where($where);
+        if(isset($options["where"])) {
+            foreach($options["where"] as $where) {
+                if(sizeof($where) > 2) {
+                    $results->where($where[0], $where[1], $where[2]);
+                } else {
+                    $results->where($where[0], $where[1]);
+                }
+            }
         }
+
+        if(isset($options["whereHas"])) {
+            foreach($options["whereHas"] as $relation => $where) {
+                $results->whereHas($relation, function ($query) use($relation, $where) {
+                    if(sizeof($where) > 2) {
+                        $query->where($where[0], $where[1], $where[2]);
+                    } else {
+                        $query->where($where[0], $where[1]);
+                    }
+                });
+            }
+        }
+
 
         $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
         $titleFields = ['title'];

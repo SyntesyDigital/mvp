@@ -33,7 +33,9 @@ class Content extends Model
         'typology_id',
         'user_id',
         'author_id',
-        'page_id'
+        'parent_id',
+        'is_page',
+        'published_at'
     ];
 
     /**
@@ -53,7 +55,8 @@ class Content extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'published_at'
     ];
 
     public function typology()
@@ -64,6 +67,11 @@ class Content extends Model
     public function tags()
     {
         return $this->belongsToMany('\Modules\Architect\Entities\Tag', 'contents_tags');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Language', 'contents_languages');
     }
 
     public function categories()
@@ -78,7 +86,7 @@ class Content extends Model
 
     public function page()
     {
-        return $this->hasOne('\Modules\Architect\Entities\Page', "id", "page_id");
+        return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
     }
 
     public function getStringStatus()
@@ -98,7 +106,7 @@ class Content extends Model
     public function getTitleAttribute()
     {
 
-        if($this->page_id) {
+        if($this->page) {
             return $this->getFieldValue('title');
         }
 

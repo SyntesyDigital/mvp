@@ -100,9 +100,11 @@ class TypologySidebar extends Component {
    //console.log("TypologySidebar => ",field);
 
    this.props.onFieldChange(field);
+
  }
 
   render() {
+
     return (
       <div className="sidebar">
         <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
@@ -136,6 +138,7 @@ class TypologySidebar extends Component {
         </div>
 
         <hr/>
+
 
         <TypologySlug
           translations={this.props.translations}
