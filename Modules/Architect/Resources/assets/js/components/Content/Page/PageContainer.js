@@ -19,21 +19,21 @@ class PageContainer extends Component {
 
      console.log('LAYOUT LOADED', props.page);
      console.log('CONTENT LOADED', props.content);
-     
+
         var titleField = {
             id:0,
             identifier:"title",
             value:{},
             name:"Títol"
         };
-        
+
         var slugField = {
           id:1,
           identifier:"slug",
           value:{},
           name:"Enllaç permanent"
         };
-    
+
     // Build translations state from content languages fields
     var translations = {};
     LANGUAGES.map(function(language){
@@ -49,7 +49,7 @@ class PageContainer extends Component {
             translations[language.iso] = true;
         }
     });
-        
+
     if(props.content) {
         // Builds fields values
         LANGUAGES.map(function(language,k){
@@ -59,7 +59,7 @@ class PageContainer extends Component {
                         titleField.value[language.iso] = field.value;
                     }
                 }
-                
+
                 if(field.name == "slug") {
                     if(language.id == field.language_id) {
                         slugField.value[language.iso] = field.value;
@@ -68,16 +68,16 @@ class PageContainer extends Component {
             });
         });
     }
-     
-    
+
+
      // Build state...
      this.state = {
-         status: 0,
+         status: props.content ? props.content.status : 0,
          template: "",
-         parent_id:"",
+         parent_id: props.content && props.content.parent_id != null ? props.content.parent_id : "",
          category: props.content && props.content.categories && props.content.categories.length > 0 ? props.content.categories[0].id : null,
          categories: props.categories,
-         tags : this.props.content.tags ? this.props.content.tags : [], 
+         tags : this.props.content.tags ? this.props.content.tags : [],
          errors : {},
          tagsList : props.tags ? props.tags : [], // La lista de los tags
          title : titleField,
@@ -236,12 +236,12 @@ class PageContainer extends Component {
      }
  }
 
-     publishToogle()
+     publishToogle(newStatus)
      {
          var _this = this;
 
          axios.put('/architect/contents/' + this.state.content.id + '/publish', {
-             status : _this.state.status
+             status : newStatus
          })
              .then((response) => {
                  if(response.data.success) {
@@ -257,22 +257,26 @@ class PageContainer extends Component {
     {
         e.preventDefault();
 
+        const newStatus = 1;
+
         this.setState({
-            status : 1
+            status : newStatus
         });
 
-        this.publishToogle();
+        this.publishToogle(newStatus);
     }
 
     handleUnpublish(e)
     {
         e.preventDefault();
 
+        const newStatus = 0;
+
         this.setState({
-            status : 0
+            status : newStatus
         });
 
-        this.publishToogle();
+        this.publishToogle(newStatus);
     }
 
     handleFieldChange(field) {
@@ -361,6 +365,7 @@ class PageContainer extends Component {
       <div>
 
         <ContentBar
+          content={this.state.content}
           icon={'fa-file-o'}
           name={'Pàgina'}
           onSubmitForm={this.handleSubmitForm}

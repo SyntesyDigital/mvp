@@ -3,9 +3,15 @@
 return [
     'text' => 'Text',
     'richtext' => 'Richtext',
-    'image' => 'Image',
-    'images' => 'Images',
+    'image' => 'Imatge',
+    'images' => 'Imatges',
     'contents' => 'Continguts',
     'date' => 'Data',
-    'contentlist' => 'Lists'
+    'contentlist' => 'Llista',
+    'boolean' => 'Booleà',
+    'link' => 'Enllaç',
+    'video' => 'Video',
+    'localization' => 'Localització',
+    'slug' => 'Slug',
+    'url' => 'URL',
 ];

@@ -112,12 +112,11 @@ class ContentSidebar extends Component {
             <hr/>
           </div>
         }
-        
-        
-        {this.props.pages != null &&
+
+        {this.props.pages !== undefined && this.props.pages != null &&
           <div>
             <div className="form-group bmd-form-group sidebar-item">
-               <label htmlFor="parent_id" className="bmd-label-floating">Page parent</label>
+               <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
                <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
                     <option value="">---</option>
                    {
@@ -126,53 +125,45 @@ class ContentSidebar extends Component {
                      })
                    }
                </select>
+
             </div>
             <hr/>
           </div>
         }
 
+        {this.props.enableCategories == 1 &&
+          <div>
+            <div className="form-group bmd-form-group has-danger">
+               <label htmlFor="template" className="bmd-label-floating">Categoria</label>
+               <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
+                    <option value="">---</option>
+                   {
+                     this.props.categories && this.props.categories.map(function(category, i) {
+                       return <option value={category.id} key={i}>{self.printSpace(category.level)}{category.name}</option>
+                     })
+                   }
+               </select>
+            </div>
 
-        {this.props.pages !== undefined && this.props.pages != null &&
+
+            <hr/>
+          </div>
+        }
+
+        {this.props.enableTags  == 1 &&
           <div>
             <div className="form-group bmd-form-group sidebar-item">
-               <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
-               <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
-                  {
-                    this.props.pages.map(function(page, i){
-                      return <option value={page.id} key={i}>{page.name}</option>
-                    })
-                  }
-               </select>
-
+              <TagManager
+                tagsList={this.props.tagsList}
+                content={this.props.content}
+                onTagAdded={this.props.onTagAdded}
+                onRemoveTag={this.props.onRemoveTag}
+              />
             </div>
+
             <hr/>
           </div>
         }
-
-        <div className="form-group bmd-form-group has-danger">
-           <label htmlFor="template" className="bmd-label-floating">Categoria</label>
-           <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
-                <option value="">---</option>
-               {
-                 this.props.categories && this.props.categories.map(function(category, i) {
-                   return <option value={category.id} key={i}>{self.printSpace(category.level)}{category.name}</option>
-                 })
-               }
-           </select>
-        </div>
-
-        <hr/>
-
-        <div className="form-group bmd-form-group sidebar-item">
-          <TagManager
-            tagsList={this.props.tagsList}
-            content={this.props.content}
-            onTagAdded={this.props.onTagAdded}
-            onRemoveTag={this.props.onRemoveTag}
-          />
-        </div>
-
-        <hr/>
 
         <div className="form-group bmd-form-group sidebar-item">
            <label className="bmd-label-floating">Traduccions</label>

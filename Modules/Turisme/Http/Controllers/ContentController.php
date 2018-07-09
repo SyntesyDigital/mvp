@@ -36,6 +36,20 @@ class ContentController extends Controller
 
     }
 
+    public function preview(Request $request,$id)
+    {
+
+      $content = Content::find($id);
+
+      $pageBuilderAdapter = new FieldsReactPageBuilderAdapter($content);
+
+      if($request->has('debug'))
+        dd($pageBuilderAdapter->get());
+
+      return view('turisme::contents.page',['page' => $pageBuilderAdapter->get()]);
+
+    }
+
 
 
 }

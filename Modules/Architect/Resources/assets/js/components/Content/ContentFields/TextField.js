@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-import CustomFieldTypes from './../../common/CustomFieldTypes';
-
 class TextField extends Component
 {
   constructor(props)
@@ -26,13 +24,13 @@ class TextField extends Component
 
   renderInputs()
   {
-      
+
     var inputs = [];
     for(var key in this.props.translations){
         if(this.props.translations[key]){
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
-          
+
           inputs.push(
               <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
                   <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
@@ -47,7 +45,7 @@ class TextField extends Component
 
 
   render() {
-      
+
     const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
 
     return (

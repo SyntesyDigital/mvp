@@ -27,11 +27,14 @@
 @import 'rightbar-page';
 @import 'leftbar-page';
 @import 'modal';
-@import 'content';
 @import 'medias';
 @import 'autosuggest';
 @import 'datatable';
 @import 'form';
 @import 'map';
-@import 'page-builder';
+
+@import 'content/content';
+@import 'content/page-builder';
+@import 'content/widgets';
+
 @import 'sortable';

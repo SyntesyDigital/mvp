@@ -19,6 +19,8 @@ class RichTextField extends Component {
         }
     }
 
+    console.log("RichTextField :: constructor : ",values);
+
     this.state = {
         value : values
     };
@@ -45,7 +47,8 @@ class RichTextField extends Component {
     for(var key in this.props.translations){
       if(this.props.translations[key]){
 
-          var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
+        var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
+        var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
         inputs.push(
         <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
@@ -54,7 +57,7 @@ class RichTextField extends Component {
             id={key}
             language={key}
             parent={this}
-            value={this.state.value[key]}
+            value={value}
             onChange={this.handleOnChange}
           />
         </div>
