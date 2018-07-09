@@ -13,6 +13,7 @@ import BooleanField from './ContentFields/BooleanField';
 import LinkField from './ContentFields/LinkField';
 import VideoField from './ContentFields/VideoField';
 import LocalizationField from './ContentFields/LocalizationField';
+import UrlField from './ContentFields/UrlField';
 
 class ContentFields extends Component {
 
@@ -171,6 +172,19 @@ class ContentFields extends Component {
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
                 />
+                );
+            break;
+
+            case FIELDS.URL.type:
+                fields.push(
+                  <UrlField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onContentSelect={_this.props.onContentSelect}
+                  />
                 );
             break;
 

@@ -15364,326 +15364,6 @@ nav.main-nav ul li.active a {
   /*padding-bottom:0px;*/
 }
 
-.content {
-  /*
-  .input-button{
-    position: absolute;
-    z-index:100;
-    right: 0px;
-    top:0px;
-    display: inline-block;
-
-  }
-  */
-  /** IMAGES AND IMAGES **/
-  /** DATE  **/
-  /** DATE  **/
-  /**** Contents *****/
-}
-
-.content .tag-manager .tags {
-  padding-top: 10px;
-}
-
-.content .react-autosuggest__suggestions-container--open {
-  display: block;
-  position: absolute;
-  top: 38px;
-  width: 100%;
-  border: none;
-  background-color: #fafafa;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 300;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  z-index: 2;
-  max-height: 40vh;
-  overflow-y: hidden;
-}
-
-.content .react-autosuggest__suggestion--highlighted {
-  background-color: #f2f2f2;
-  color: #5b9fef;
-}
-
-.content .publish-form .btn {
-  width: 100%;
-}
-
-.content .sidebar-item {
-  padding: 10px 0;
-}
-
-.content .sidebar {
-  padding-bottom: 50px;
-}
-
-.content .tags .tag {
-  margin-right: 15px;
-}
-
-.content .tags .tag i.fa {
-  font-size: 18px;
-}
-
-.content .field-group .field-item {
-  border-left: 2px solid #ccc;
-  margin-bottom: 20px;
-}
-
-.content .field-group .field-item .field-name {
-  line-height: 45px;
-  text-align: left;
-  padding-left: 30px;
-}
-
-.content .field-group .field-item button.btn,
-.content .field-group .field-item div.btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  border: 1px solid #ccc;
-  border-radius: 0px !important;
-  background-color: #dadada;
-  text-decoration: none;
-  margin: 0;
-}
-
-.content .field-group .field-item button.btn:not(.collapsed):before,
-.content .field-group .field-item div.btn:not(.collapsed):before {
-  content: "\25BE";
-  margin-right: 0px;
-  position: absolute;
-  top: 9px;
-  right: 19px;
-  font-size: 18px;
-  color: #455660;
-}
-
-.content .field-group .field-item button.btn.collapsed:before,
-.content .field-group .field-item div.btn.collapsed:before {
-  content: "\25B8";
-  margin-right: 0px;
-  position: absolute;
-  top: 9px;
-  right: 19px;
-  font-size: 18px;
-  color: #455660;
-}
-
-.content .field-group .field-item button.btn .field-type,
-.content .field-group .field-item div.btn .field-type {
-  color: #a0a6a9;
-  text-transform: capitalize;
-  padding-right: 10px;
-  border-right: 1px solid #ccc;
-}
-
-.content .field-group .field-item button.btn .field-type i,
-.content .field-group .field-item div.btn .field-type i {
-  position: relative;
-  font-size: 22px;
-  padding-right: 10px;
-  color: #a0a6a9;
-}
-
-.content .field-group .field-item button.btn .field-name,
-.content .field-group .field-item div.btn .field-name {
-  color: #455660;
-  padding-left: 10px;
-  text-transform: capitalize;
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: 400;
-}
-
-.content .field-group .field-item .ql-editor {
-  height: 100px;
-}
-
-.content .field-group .field-item .field-form {
-  padding: 20px 20px 20px 30px;
-}
-
-.content .ql-container.ql-snow {
-  background-color: #fafafa;
-}
-
-.content .image-field-container {
-  text-align: center;
-}
-
-.content .image-field-container .image-field {
-  height: 180px;
-  width: 200px;
-  border: 1px dashed #ccc;
-  margin: 0 auto;
-  /*background-color:$cms-light-color-5;*/
-}
-
-.content .image-field-container .image {
-  height: 100%;
-  width: 100%;
-  background-size: contain;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 10;
-}
-
-.content .image-field-container .add-button {
-  padding-top: 60px;
-  z-index: 20;
-}
-
-.content .image-field-container .field-help {
-  padding-top: 10px;
-}
-
-.content .image-field-container.images-gallery {
-  text-align: left;
-}
-
-.content .image-field-container.images-gallery .image-field {
-  display: inline-block;
-  margin: 10px 10px;
-  text-align: center;
-}
-
-.content .image-field-container.images-gallery a.btn.btn-link {
-  position: absolute;
-  top: -30px;
-  right: -22px;
-  z-index: 100;
-}
-
-.content .image-field-container.images-gallery a.btn.btn-link i.fa {
-  font-size: 25px;
-}
-
-.content .image-field-container.images-gallery a.btn.btn-link:hover i.fa {
-  color: #fc4b6c;
-}
-
-.content .field-form .toggle {
-  float: none;
-  margin-left: 30px;
-}
-
-.content .react-datepicker-popper {
-  z-index: 1000;
-}
-
-.content .react-datepicker-wrapper {
-  display: block;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-}
-
-.content .react-datepicker-wrapper .react-datepicker__input-container {
-  display: block;
-}
-
-.content .react-datepicker__day-name,
-.content .react-datepicker__day,
-.content .react-datepicker__time-name {
-  font-size: 12px;
-  line-height: 30px;
-  font-weight: 300;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-  width: 30px;
-}
-
-.content .react-datepicker__current-month,
-.content .react-datepicker-time__header {
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 400;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-}
-
-.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
-  padding: 0px;
-  font-size: 12px;
-  line-height: 20px;
-  font-weight: 300;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-}
-
-.content .react-datepicker__time-container {
-  width: 90px;
-}
-
-.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
-  width: 90px;
-}
-
-.content .react-datepicker__day--selected,
-.content .react-datepicker__day--in-selecting-range,
-.content .react-datepicker__day--in-range {
-  background-color: #5b9fef;
-}
-
-.content .react-datepicker__day--selected:hover,
-.content .react-datepicker__day--in-selecting-range:hover,
-.content .react-datepicker__day--in-range:hover {
-  background-color: #5b9fef;
-}
-
-.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
-  background-color: #5b9fef;
-}
-
-.content .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
-  right: 100px;
-}
-
-.content .contents-field .fields-list-container {
-  border: none;
-  margin-bottom: 0px;
-  padding-bottom: 0px !important;
-}
-
-.content .contents-field .add-content-button {
-  border: 1px dashed #ccc;
-  padding: 0 20px;
-  margin-left: 20px;
-  text-align: center;
-  margin-right: 20px;
-}
-
-.content .contents-field .field-type {
-  font-weight: 300 !important;
-  color: #b4b4b4 !important;
-  text-align: left;
-}
-
-.content .contents-field .field-inputs .field-name {
-  line-height: 45px;
-  text-align: left;
-  padding-left: 30px;
-}
-
-.content .contents-field.images-field .image {
-  width: 51px;
-  height: 40px;
-  background-size: cover;
-  position: absolute;
-  top: 5px;
-  left: 155px;
-}
-
-.content .contents-field.images-field .field-name {
-  padding-left: 60px;
-}
-
-.content .table-contents {
-  width: 100%;
-}
-
 .medias .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;
@@ -16232,6 +15912,326 @@ nav.main-nav ul li.active a {
   z-index: 400;
 }
 
+.content {
+  /*
+  .input-button{
+    position: absolute;
+    z-index:100;
+    right: 0px;
+    top:0px;
+    display: inline-block;
+
+  }
+  */
+  /** IMAGES AND IMAGES **/
+  /** DATE  **/
+  /** DATE  **/
+  /**** Contents *****/
+}
+
+.content .tag-manager .tags {
+  padding-top: 10px;
+}
+
+.content .react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 38px;
+  width: 100%;
+  border: none;
+  background-color: #fafafa;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 300;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+  max-height: 40vh;
+  overflow-y: hidden;
+}
+
+.content .react-autosuggest__suggestion--highlighted {
+  background-color: #f2f2f2;
+  color: #5b9fef;
+}
+
+.content .publish-form .btn {
+  width: 100%;
+}
+
+.content .sidebar-item {
+  padding: 10px 0;
+}
+
+.content .sidebar {
+  padding-bottom: 50px;
+}
+
+.content .tags .tag {
+  margin-right: 15px;
+}
+
+.content .tags .tag i.fa {
+  font-size: 18px;
+}
+
+.content .field-group .field-item {
+  border-left: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.content .field-group .field-item .field-name {
+  line-height: 45px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.content .field-group .field-item button.btn,
+.content .field-group .field-item div.btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 0px !important;
+  background-color: #dadada;
+  text-decoration: none;
+  margin: 0;
+}
+
+.content .field-group .field-item button.btn:not(.collapsed):before,
+.content .field-group .field-item div.btn:not(.collapsed):before {
+  content: "\25BE";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #455660;
+}
+
+.content .field-group .field-item button.btn.collapsed:before,
+.content .field-group .field-item div.btn.collapsed:before {
+  content: "\25B8";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #455660;
+}
+
+.content .field-group .field-item button.btn .field-type,
+.content .field-group .field-item div.btn .field-type {
+  color: #a0a6a9;
+  text-transform: capitalize;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.content .field-group .field-item button.btn .field-type i,
+.content .field-group .field-item div.btn .field-type i {
+  position: relative;
+  font-size: 22px;
+  padding-right: 10px;
+  color: #a0a6a9;
+}
+
+.content .field-group .field-item button.btn .field-name,
+.content .field-group .field-item div.btn .field-name {
+  color: #455660;
+  padding-left: 10px;
+  text-transform: capitalize;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.content .field-group .field-item .ql-editor {
+  height: 100px;
+}
+
+.content .field-group .field-item .field-form {
+  padding: 20px 20px 20px 30px;
+}
+
+.content .ql-container.ql-snow {
+  background-color: #fafafa;
+}
+
+.content .image-field-container {
+  text-align: center;
+}
+
+.content .image-field-container .image-field {
+  height: 180px;
+  width: 200px;
+  border: 1px dashed #ccc;
+  margin: 0 auto;
+  /*background-color:$cms-light-color-5;*/
+}
+
+.content .image-field-container .image {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+}
+
+.content .image-field-container .add-button {
+  padding-top: 60px;
+  z-index: 20;
+}
+
+.content .image-field-container .field-help {
+  padding-top: 10px;
+}
+
+.content .image-field-container.images-gallery {
+  text-align: left;
+}
+
+.content .image-field-container.images-gallery .image-field {
+  display: inline-block;
+  margin: 10px 10px;
+  text-align: center;
+}
+
+.content .image-field-container.images-gallery a.btn.btn-link {
+  position: absolute;
+  top: -30px;
+  right: -22px;
+  z-index: 100;
+}
+
+.content .image-field-container.images-gallery a.btn.btn-link i.fa {
+  font-size: 25px;
+}
+
+.content .image-field-container.images-gallery a.btn.btn-link:hover i.fa {
+  color: #fc4b6c;
+}
+
+.content .field-form .toggle {
+  float: none;
+  margin-left: 30px;
+}
+
+.content .react-datepicker-popper {
+  z-index: 1000;
+}
+
+.content .react-datepicker-wrapper {
+  display: block;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.content .react-datepicker-wrapper .react-datepicker__input-container {
+  display: block;
+}
+
+.content .react-datepicker__day-name,
+.content .react-datepicker__day,
+.content .react-datepicker__time-name {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 300;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  width: 30px;
+}
+
+.content .react-datepicker__current-month,
+.content .react-datepicker-time__header {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  padding: 0px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 300;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.content .react-datepicker__time-container {
+  width: 90px;
+}
+
+.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 90px;
+}
+
+.content .react-datepicker__day--selected,
+.content .react-datepicker__day--in-selecting-range,
+.content .react-datepicker__day--in-range {
+  background-color: #5b9fef;
+}
+
+.content .react-datepicker__day--selected:hover,
+.content .react-datepicker__day--in-selecting-range:hover,
+.content .react-datepicker__day--in-range:hover {
+  background-color: #5b9fef;
+}
+
+.content .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #5b9fef;
+}
+
+.content .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 100px;
+}
+
+.content .contents-field .fields-list-container {
+  border: none;
+  margin-bottom: 0px;
+  padding-bottom: 0px !important;
+}
+
+.content .contents-field .add-content-button {
+  border: 1px dashed #ccc;
+  padding: 0 20px;
+  margin-left: 20px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.content .contents-field .field-type {
+  font-weight: 300 !important;
+  color: #b4b4b4 !important;
+  text-align: left;
+}
+
+.content .contents-field .field-inputs .field-name {
+  line-height: 45px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.content .contents-field.images-field .image {
+  width: 51px;
+  height: 40px;
+  background-size: cover;
+  position: absolute;
+  top: 5px;
+  left: 155px;
+}
+
+.content .contents-field.images-field .field-name {
+  padding-left: 60px;
+}
+
+.content .table-contents {
+  width: 100%;
+}
+
 .page-builder {
   /*** preview *****/
 }
@@ -16548,6 +16548,85 @@ nav.main-nav ul li.active a {
 .page-builder .page-row.item-filled a.image-preview .background-image {
   background-size: contain;
   background-position: center;
+}
+
+.widget-item .field-item {
+  border-left: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.widget-item .field-item .field-name {
+  line-height: 45px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.widget-item .field-item button.btn,
+.widget-item .field-item div.btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 0px !important;
+  background-color: #dadada;
+  text-decoration: none;
+  margin: 0;
+}
+
+.widget-item .field-item button.btn:not(.collapsed):before,
+.widget-item .field-item div.btn:not(.collapsed):before {
+  content: "\25BE";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #455660;
+}
+
+.widget-item .field-item button.btn.collapsed:before,
+.widget-item .field-item div.btn.collapsed:before {
+  content: "\25B8";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #455660;
+}
+
+.widget-item .field-item button.btn .field-type,
+.widget-item .field-item div.btn .field-type {
+  color: #a0a6a9;
+  text-transform: capitalize;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.widget-item .field-item button.btn .field-type i,
+.widget-item .field-item div.btn .field-type i {
+  position: relative;
+  font-size: 22px;
+  padding-right: 10px;
+  color: #a0a6a9;
+}
+
+.widget-item .field-item button.btn .field-name,
+.widget-item .field-item div.btn .field-name {
+  color: #455660;
+  padding-left: 10px;
+  text-transform: capitalize;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.widget-item .field-item .ql-editor {
+  height: 100px;
+}
+
+.widget-item .field-item .field-form {
+  padding: 20px 20px 20px 30px;
 }
 
 body.dragging,

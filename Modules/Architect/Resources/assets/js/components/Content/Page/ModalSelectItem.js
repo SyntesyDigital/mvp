@@ -84,24 +84,46 @@ class ModalSelectItem extends Component {
     });
   }
 
+  addWidget(e) {
+
+    e.preventDefault()
+
+    this.props.onItemSelected({
+      type : 'item',
+      field : {
+        'class' : "",
+        'rules' : null,
+        "label": "WIDGET",
+        "name": "Widget",
+        "type": "widget",
+        "icon": "fa-file-o",
+        "settings": null
+      }
+    });
+  }
+
   renderFields() {
 
     var fields = [];
 
+    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["BOOLEAN"].type];
+
     for( var key in FIELDS){
 
-      fields.push(
-        <div className="col-xs-3" key={key}>
-          <a href="" onClick={this.addItem.bind(this,FIELDS[key])}>
-            <div className="grid-item">
-              <i className={"fa "+FIELDS[key].icon}></i>
-              <p className="grid-item-name">
-                {FIELDS[key].name}
-              </p>
-            </div>
-          </a>
-        </div>
-      );
+      if(nonAllowed.indexOf(FIELDS[key].type) == -1){
+        fields.push(
+          <div className="col-xs-3" key={key}>
+            <a href="" onClick={this.addItem.bind(this,FIELDS[key])}>
+              <div className="grid-item">
+                <i className={"fa "+FIELDS[key].icon}></i>
+                <p className="grid-item-name">
+                  {FIELDS[key].name}
+                </p>
+              </div>
+            </a>
+          </div>
+        );
+      }
 
     }
 
@@ -152,6 +174,25 @@ class ModalSelectItem extends Component {
                         {this.renderFields()}
 
                       </div>
+
+                      <hr />
+
+                      <div className="row">
+
+                        <div className="col-xs-3">
+                          <a href="" onClick={this.addWidget.bind(this)}>
+                            <div className="grid-item">
+                              <i className="fa fa-file-o"></i>
+                              <p className="grid-item-name">
+                                Widget Simple
+                              </p>
+                            </div>
+                          </a>
+                        </div>
+
+                      </div>
+
+
                     </div>
 
                   </div>

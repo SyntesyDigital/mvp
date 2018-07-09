@@ -13,6 +13,8 @@ import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 
+import TitleImageWidget from './../Widgets/TitleImageWidget';
+
 class ModalEditItem extends Component {
 
   constructor(props){
@@ -94,6 +96,8 @@ class ModalEditItem extends Component {
   }
 
   onFieldChange(field) {
+
+    console.log("ModalEditItem :: onFieldChange => ",field);
 
     var stateField = this.state.field;
     stateField.value = field.value;
@@ -219,6 +223,16 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
+        case "widget":
+          return (
+            <TitleImageWidget
+              field={this.state.field}
+              hideTab={true}
+              translations={this.props.translations}
+              onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
+
       default :
         return null;
     }

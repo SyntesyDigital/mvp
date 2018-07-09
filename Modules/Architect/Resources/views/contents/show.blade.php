@@ -37,7 +37,8 @@ var routes = {
   'medias.delete' : '{{ route('medias.delete') }}',
   'medias.update' : '{{ route('medias.update') }}',
   'contents.data' : '{{ route('contents.modal.data') }}',
-  'showContent' : "{{route('contents.show',['id' => ':id'])}}"
+  'showContent' : "{{route('contents.show',['id' => ':id'])}}",
+  'previewContent' : "{{route('preview',['id' => ':id'])}}"
 };
 </script>
 @endpush

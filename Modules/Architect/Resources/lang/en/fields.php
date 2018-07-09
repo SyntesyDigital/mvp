@@ -13,4 +13,5 @@ return [
     'video' => 'Video',
     'localization' => 'Localització',
     'slug' => 'Slug',
+    'url' => 'URL',
 ];

@@ -2,8 +2,8 @@
     "/modules/architect/js/app.js": "/modules/architect/js/app.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/modules/architect/css/app.css": "/modules/architect/css/app.css",
     "/modules/turisme/css/app.css": "/modules/turisme/css/app.css",
     "/modules/turisme/js/app.js": "/modules/turisme/js/app.js",
-    "/modules/architect/js/architect.js": "/modules/architect/js/architect.js"
+    "/modules/architect/js/architect.js": "/modules/architect/js/architect.js",
+    "/modules/architect/css/app.css": "/modules/architect/css/app.css"
 }

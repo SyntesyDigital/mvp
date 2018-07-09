@@ -155,6 +155,7 @@ class ContentContainer extends Component {
     Object.keys(fields).map(function(k){
         if(fields[k].identifier == identifier){
             switch(fields[k].type) {
+                case FIELDS.URL.type:
                 case FIELDS.LINK.type:
 
                     if(fields[identifier].value == null){
@@ -300,12 +301,12 @@ class ContentContainer extends Component {
      }
  }
 
-     publishToogle()
+     publishToogle(newStatus)
      {
          var _this = this;
 
          axios.put('/architect/contents/' + this.state.content.id + '/publish', {
-             status : _this.state.status
+             status : newStatus
          })
              .then((response) => {
                  if(response.data.success) {
@@ -321,22 +322,26 @@ class ContentContainer extends Component {
     {
         e.preventDefault();
 
+        const newStatus = 1;
+
         this.setState({
-            status : 1
+            status : newStatus
         });
 
-        this.publishToogle();
+        this.publishToogle(newStatus);
     }
 
     handleUnpublish(e)
     {
         e.preventDefault();
 
+        const newStatus = 0;
+
         this.setState({
-            status : 0
+            status : newStatus
         });
 
-        this.publishToogle();
+        this.publishToogle(newStatus);
     }
 
     handleFieldChange(field) {
@@ -357,9 +362,9 @@ class ContentContainer extends Component {
     }
 
   handleTagAdded(tag) {
-      
+
       console.log("handleTagAdded => ", tag);
-      
+
     const {tags} = this.state;
 
     var found = false;
@@ -427,6 +432,7 @@ class ContentContainer extends Component {
         />
 
         <ContentBar
+          content={this.state.content}
           icon={this.state.typology.icon}
           name={this.state.typology.name}
           onSubmitForm={this.handleSubmitForm}
@@ -436,6 +442,8 @@ class ContentContainer extends Component {
 
             <ContentSidebar
                 content={this.state.content}
+                enableCategories={this.state.typology.has_categories}
+                enableTags={this.state.typology.has_tags}
                 errors={this.state.errors}
                 status={this.state.status}
                 template={this.state.template}

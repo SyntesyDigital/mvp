@@ -117,6 +117,7 @@ class FieldsReactAdapter
                 $typologyField->value = $values;
             break;
 
+            case 'url':
             case 'link':
                 $values = null;
                 $childs = $this->content->getFieldChilds($contentField);
