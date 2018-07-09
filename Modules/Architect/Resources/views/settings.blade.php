@@ -14,7 +14,7 @@
         <div class="row">
 
             <div class="col-xs-3">
-                <a href="">
+                <a href="{{route('users')}}">
                   <div class="grid-item">
                       <i class="fa fa-users"></i>
                       <p class="grid-item-name">

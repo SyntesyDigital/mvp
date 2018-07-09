@@ -5,7 +5,7 @@ namespace Modules\Architect\Jobs\User;
 use Modules\Architect\Http\Requests\User\CreateUserRequest;
 
 use App\Models\User;
-use Modules\Architect\Entities\Language;
+use Hash;
 
 class CreateUser
 {
@@ -27,7 +27,11 @@ class CreateUser
 
     public function handle()
     {
+        $this->attributes['password'] = trim(Hash::make($this->attributes['password']));
+
         $user = User::create($this->attributes);
+
+        // $user->roles()->sync($this->roleId);
 
         return $user;
     }

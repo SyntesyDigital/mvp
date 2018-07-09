@@ -9,14 +9,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname',
-            'lastname',
-            'email',
-            'password',
-            'image',
+            'email' => 'email|required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            //'password' => request()->get('password') ? 'required|confirmed' : null
         ];
     }
-
 
     public function authorize()
     {

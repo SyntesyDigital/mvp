@@ -5,7 +5,7 @@ namespace Modules\Architect\Jobs\User;
 use Modules\Architect\Http\Requests\User\UpdateUserRequest;
 
 use App\Models\User;
-use Modules\Architect\Entities\Language;
+use Hash;
 
 class UpdateUser
 {
@@ -29,6 +29,16 @@ class UpdateUser
 
     public function handle()
     {
+        if(trim($this->attributes['password']) !== '') {
+            $this->attributes['password'] = Hash::make(trim($this->attributes['password']));
+        } else {
+            array_forget($this->attributes, 'password');
+        }
+
+        // if (isset($this->attributes['role_id'])) {
+        //     $this->user->roles()->sync($this->attributes['role_id']);
+        // }
+
         return $this->user->update($this->attributes);
     }
 }

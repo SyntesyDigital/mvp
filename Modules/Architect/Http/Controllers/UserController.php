@@ -14,8 +14,8 @@ use App\Models\User;
 use App\Models\Role;
 
 // Create
-use Modules\Architect\Http\Requests\Users\CreateUserRequest;
-use Modules\Architect\Jobs\Users\CreateUser;
+use Modules\Architect\Http\Requests\User\CreateUserRequest;
+use Modules\Architect\Jobs\User\CreateUser;
 
 // Update
 use Modules\Architect\Http\Requests\User\UpdateUserRequest;
@@ -46,14 +46,59 @@ class UserController extends Controller
     }
 
     public function create()
-    {}
+    {
+        return view('architect::users.form');
+    }
 
-    public function show()
-    {}
+    public function show(User $user)
+    {
+        return view('architect::users.form', [
+            'user' => $user
+        ]);
+    }
 
-    public function store()
-    {}
+    public function update(User $user, UpdateUserRequest $request)
+    {
+        try {
+            if(!dispatch_now(UpdateUser::fromRequest($user, $request))) {
+                throw new \Exception('Error occured while saving...');
+            }
 
-    public function delete()
-    {}
+            return redirect(route('users.show', $user))->with('success', 'User successfully saved');
+        } catch (\Exception $ex) {
+            $error = $ex->getMessage();
+        }
+
+        return redirect(route('users.show', $user))
+            ->with('error', $error)
+            ->withInput($request->input());
+    }
+
+    public function store(CreateUserRequest $request)
+    {
+        try {
+            $user = dispatch_now(CreateUser::fromRequest($request));
+
+            if(!$user) {
+                throw new \Exception('Error occured while saving...');
+            }
+
+            return redirect(route('users.show', $user))->with('success', 'User successfully saved');
+        } catch (\Exception $ex) {
+            $error = $ex->getMessage();
+        }
+
+        return redirect(route('users.create'))
+            ->with('error', $error)
+            ->withInput($request->input());
+    }
+
+    public function delete(User $user, DeleteUserRequest $request)
+    {
+        return dispatch_now(DeleteUser::fromRequest($user, $request)) ? response()->json([
+            'success' => true
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
 }

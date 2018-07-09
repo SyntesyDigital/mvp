@@ -9,11 +9,10 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname',
-            'lastname',
-            'email',
-            'password',
-            'image',
+            'email' => 'required|unique:users|email',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'password' => 'required|confirmed'
         ];
     }
 
