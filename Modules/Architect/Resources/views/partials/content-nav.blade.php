@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul>
     <li class="{{ isset($display_pages) ? 'active' : '' }}">
-      <a href="?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
+      <a href="{{route('contents')}}?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
     </li>
   </ul>
   <hr />

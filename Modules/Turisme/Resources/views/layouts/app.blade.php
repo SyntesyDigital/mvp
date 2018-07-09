@@ -31,20 +31,17 @@
 
 
         <link href="{{asset('modules/turisme/css/app.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('modules/turisme/css/turisme.css')}}" rel="stylesheet" type="text/css" />
         @stack('styles')
 
     </head>
-    <body>
+    <body class="home">
 
         @stack('modal')
 
-        <header class="container">
+        @include ('turisme::partials.header')
 
-        </header>
-
-        <section id="container">
-          @yield('content')
-        </section>
+        @yield('content')
 
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('turisme::partials.footer')
