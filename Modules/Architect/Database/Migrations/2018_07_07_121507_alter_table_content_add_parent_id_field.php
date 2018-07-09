@@ -26,12 +26,13 @@ class AlterTableContentAddParentIdField extends Migration
      */
     public function down()
     {
-        Schema::enableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
 
         Schema::table('contents', function($table){
+            $table->dropForeign('contents_parent_id_foreign');
             $table->dropColumn('parent_id');
         });
 
-        Schema::disableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
     }
 }
