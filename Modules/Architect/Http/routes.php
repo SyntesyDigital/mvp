@@ -1,7 +1,11 @@
 <?php
 
+
+Auth::routes();
+
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespace' => 'Modules\Architect\Http\Controllers'], function()
 {
+
     Route::get('/', 'ArchitectController@index')->name('home');
     Route::get('/settings', 'ArchitectController@settings')->name('settings');
     Route::post('/save', 'ArchitectController@save')->name('save');

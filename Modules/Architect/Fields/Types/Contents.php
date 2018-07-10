@@ -20,9 +20,10 @@ class Contents extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'typologiesAllowed'
+        'typologiesAllowed',
+        'htmlId',
+        'htmlClass'
     ];
-
 
     public function save($content, $identifier, $values, $languages = null)
     {

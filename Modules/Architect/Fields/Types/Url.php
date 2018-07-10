@@ -19,7 +19,10 @@ class Url extends Field implements FieldInterface
         'required'
     ];
 
-    public $settings = [];
+    public $settings = [
+      'htmlId',
+      'htmlClass'
+    ];
 
     public function validate($request)
     {}

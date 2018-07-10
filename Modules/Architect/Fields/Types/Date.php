@@ -16,6 +16,9 @@ class Date extends Field implements FieldInterface
         'required'
     ];
 
-    public $settings = [];
+    public $settings = [
+      'htmlId',
+      'htmlClass'
+    ];
 }
 ?>

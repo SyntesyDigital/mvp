@@ -284,7 +284,7 @@ class PageBuilder extends Component {
   /**
   *   Method to change the content value of the link
   */
-  changeLinkContent(layout,currentIndex,pathToIndex,data,callback){
+  changeItemWithCallback(layout,currentIndex,pathToIndex,data,callback){
     currentIndex++;
 
     if(currentIndex == pathToIndex.length -1){
@@ -296,7 +296,7 @@ class PageBuilder extends Component {
     }
     else {
 
-      layout[pathToIndex[currentIndex]].children = this.changeLinkContent(
+      layout[pathToIndex[currentIndex]].children = this.changeItemWithCallback(
         layout[pathToIndex[currentIndex]].children,
         currentIndex,
         pathToIndex,
@@ -511,14 +511,22 @@ class PageBuilder extends Component {
 
   }
 
-  handleOnEditField(data) {
+  handleOnEditField(field) {
+
+    var data = field;
 
     //update data to pathToIndex
     console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
 
     var layout = this.props.layout;
 
-    layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,data);
+    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data,
+      function(field,newField){
+         //field.value = newField.value;
+         //field.settings = newField.settings;
+         return newField;
+      }
+    );
 
     console.log("handleOnEditField : layout : ",layout);
 
@@ -566,6 +574,19 @@ class PageBuilder extends Component {
           case FIELDS.IMAGE.type:
               layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,media);
               break;
+
+          case "widget":
+              layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,media,
+                  function(field,media){
+
+                      if(field.value == null){
+                        field.value = { image : null};
+                      }
+                      field.value.image = media;
+                      return field;
+                  }
+              );
+              break;
       }
 
       this.setState({
@@ -602,17 +623,14 @@ class PageBuilder extends Component {
     var field = this.state.editItemData.data.field;
 
     switch (field.type) {
+
         case FIELDS.CONTENTS.type:
             layout = this.addItem(layout,-1,this.state.editItemData.pathToIndex,content);
             break;
 
         case FIELDS.LINK.type:
-            layout = this.changeLinkContent(layout,-1,this.state.editItemData.pathToIndex,content,
+            layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
                 function(field,data){
-
-                    console.log("field => ",field);
-                    console.log("data => ",data);
-
 
                     if(field.value == null){
                       field.value = {};
@@ -621,6 +639,26 @@ class PageBuilder extends Component {
                       delete field.value['url'];
                     }
                     field.value.content = content;
+                    console.log("field al final => ",field);
+
+                    return field;
+                }
+            );
+            break;
+
+        case "widget":
+            layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
+                function(field,data){
+
+                    console.log(field);
+
+                    if(field.value == null){
+                      field.value = { url : {}};
+                    }
+                    field.value.url = {
+                      content : content
+                    };
+
                     console.log("field al final => ",field);
 
                     return field;

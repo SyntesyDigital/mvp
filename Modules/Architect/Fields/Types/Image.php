@@ -18,7 +18,9 @@ class Image extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'cropsAllowed'
+        'cropsAllowed',
+        'htmlId',
+        'htmlClass'
     ];
 
     public function save($content, $identifier, $media, $languages = null)

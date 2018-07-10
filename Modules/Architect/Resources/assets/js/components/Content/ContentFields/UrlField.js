@@ -4,6 +4,35 @@ import { render } from 'react-dom';
 const TYPE_INTERNAL = "internal";
 const TYPE_EXTERNAL = "external";
 
+/**
+*
+* Field that contains two kind of values inside, or url or content.
+Inner state :
+
+{
+    type :
+    linkValues : always the value directly depending on type (ca : "ad", etc) or {id:1,name:"dfdsf"} for content
+}
+
+Rertuns a field with two kind of values, url
+
+value.url : {
+   ca : "sdf",
+   ...
+}
+
+or
+
+value.content : {
+    id : 1,
+    ...
+}
+
+The inner state process the difference bewtween the output and the input from props.
+Every change of the components a new field is dispatched, waiting for the componentWillRecieveProps,
+to update the inner state,
+
+*/
 class UrlField extends Component
 {
   constructor(props)
@@ -23,6 +52,8 @@ class UrlField extends Component
   }
 
   componentDidMount() {
+
+    //console.log("UrlField :: componentWillReceiveProps => ",this.props);
 
     var type = TYPE_INTERNAL;
     var linkValues = this.getDefaultValue(TYPE_INTERNAL);
@@ -48,7 +79,7 @@ class UrlField extends Component
 
   componentWillReceiveProps(nextProps){
 
-    console.log("UrlField :: componentWillReceiveProps => ",nextProps);
+    //console.log("UrlField :: componentWillReceiveProps => ",nextProps);
 
     var type = TYPE_INTERNAL;
     var linkValues = this.getDefaultValue(TYPE_INTERNAL);

@@ -18,7 +18,9 @@ class Richtext extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'fieldHeight'
+        'fieldHeight',
+        'htmlId',
+        'htmlClass'
     ];
 }
 ?>

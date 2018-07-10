@@ -15,6 +15,10 @@ import LocalizationField from './../ContentFields/LocalizationField';
 
 import TitleImageWidget from './../Widgets/TitleImageWidget';
 
+import InputSettingsField from './../../Typology/Settings/InputSettingsField';
+import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
+import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
+
 class ModalEditItem extends Component {
 
   constructor(props){
@@ -65,7 +69,7 @@ class ModalEditItem extends Component {
         this.modalClose();
     }
 
-    // console.log("componentWillReceiveProps :: =>",field);
+     //console.log("ModalEditItem :: componentWillReceiveProps :: =>",field);
 
     this.setState({
       field : field
@@ -97,7 +101,7 @@ class ModalEditItem extends Component {
 
   onFieldChange(field) {
 
-    console.log("ModalEditItem :: onFieldChange => ",field);
+    //console.log("ModalEditItem :: onFieldChange => ",field);
 
     var stateField = this.state.field;
     stateField.value = field.value;
@@ -110,9 +114,9 @@ class ModalEditItem extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const {value} = this.state.field;
+    const field = this.state.field;
 
-    this.props.onSubmitData(value);
+    this.props.onSubmitData(field);
 
     /*
     this.setState({
@@ -230,12 +234,92 @@ class ModalEditItem extends Component {
               hideTab={true}
               translations={this.props.translations}
               onFieldChange={this.onFieldChange.bind(this)}
+              onContentSelect={this.props.onContentSelect}
+              onImageSelect={this.props.onImageSelect}
             />
           );
 
       default :
         return null;
     }
+  }
+
+  handleFieldSettingsChange(field) {
+
+      console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+
+      const stateField = this.state.field;
+
+      stateField[field.source][field.name] = field.value;
+
+      this.setState({
+          field : stateField
+      });
+  }
+
+  getCropsformats() {
+      var formats = [];
+      IMAGES_FORMATS.map(function(format, k){
+          formats.push({
+              name : format.name,
+              value : format.name
+          });
+      });
+
+      return formats;
+  }
+
+  renderSettings() {
+
+    console.log("renderSettings!",this.state.field);
+
+    return (
+      <div>
+
+        <h6>Configuració</h6>
+
+        <InputSettingsField
+          field={this.state.field}
+          name="htmlId"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Html ID"
+          inputLabel="Indica el Id html del camp"
+        />
+
+        <InputSettingsField
+          field={this.state.field}
+          name="htmlClass"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Html Class"
+          inputLabel="Indica la clase CSS personalitzada"
+        />
+
+        <RadioSettingsField
+          field={this.state.field}
+          name="cropsAllowed"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Mides permeses"
+          options={this.getCropsformats()}
+        />
+
+        <CheckboxesSettingsField
+          field={this.state.field}
+          name="typologiesAllowed"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Tipologies permeses"
+          options={TYPOLOGIES}
+        />
+
+      </div>
+
+
+    );
+
+
   }
 
   render() {
@@ -264,11 +348,14 @@ class ModalEditItem extends Component {
             <div className="modal-content">
               <div className="container">
                 <div className="row">
-                  <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                  <div className="col-xs-8 field-col">
 
                     {this.state.field != null &&
                       this.renderField()}
 
+                  </div>
+                  <div className="col-xs-4 settings-col">
+                    {this.renderSettings()}
                   </div>
                 </div>
               </div>

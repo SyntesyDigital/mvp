@@ -17,7 +17,10 @@ class Localization extends Field implements FieldInterface
         'required'
     ];
 
-    public $settings = [];
+    public $settings = [
+      'htmlId',
+      'htmlClass'
+    ];
 
     public function save($content, $identifier, $values, $languages = null)
     {

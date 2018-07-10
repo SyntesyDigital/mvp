@@ -17,7 +17,11 @@ import UrlField from './../ContentFields/UrlField';
     richtect : {
       "ca" : "sfasdfasdf",
       "es" : "asfasdfasdf"
-    }
+    },
+    url : {
+      url :
+      content :
+    },
 
 }
 *
@@ -29,99 +33,92 @@ class TitleImageWidget extends Component
     super(props);
 
     this.state = {
-      title : {
+      image : {
         id : 0,
+        identifier : "image",
+        value : null,
+        name : "Imatge"
+      },
+      title : {
+        id : 1,
         identifier : "title",
         value : {},
         name : "Títol"
       },
       richtext : {
-        id : 1,
+        id : 2,
         identifier : "richtext",
         value : {},
         name : "Descripció"
       },
       url : {
-        id : 1,
+        id : 3,
         identifier : "url",
         value : {},
         name : "URL"
-      },
-
+      }
     }
+
+  }
+
+  getStateFromProms(props) {
+
+    console.log("TitleImageWidget :: getStateFromProms => ",props);
+
+    const state = this.state;
+
+    var titleValue = {};
+    var richtextValue = {};
+    var urlValue = {};
+    var imageValue = null;
+    var settings = null;
+
+    if(props.field.value !== undefined && props.field.value != null){
+
+      settings = props.field.settings;
+
+      if(props.field.value.title !== undefined && props.field.value.title != null){
+        titleValue = props.field.value.title;
+      }
+
+      if(props.field.value.richtext !== undefined && props.field.value.richtext != null){
+        richtextValue = props.field.value.richtext;
+      }
+
+      //field value.value url came with url or content depending on type
+      if(props.field.value.url !== undefined && props.field.value.url != null){
+        urlValue = props.field.value.url;
+      }
+
+      if(props.field.value.image !== undefined && props.field.value.image != null){
+        imageValue = props.field.value.image;
+      }
+    }
+
+    state["title"].value = titleValue;
+    state["richtext"].value = richtextValue;
+    state["url"].value = urlValue;
+    state["image"].value = imageValue;
+    state["image"].settings = settings;
+
+    return state;
 
   }
 
   componentDidMount() {
 
-    var titleValue = {};
-    var richtextValue = {};
-    var urlValue = {};
-
-    console.log("TitleImageWIdget :: componentDidMount => ",this.props);
-
-    if(this.props.field.value !== undefined && this.props.field.value != null){
-
-      if(this.props.field.value.title !== undefined && this.props.field.value.title != null){
-        titleValue = this.props.field.value.title;
-      }
-
-      if(this.props.field.value.richtext !== undefined && this.props.field.value.richtext != null){
-        richtextValue = this.props.field.value.richtext;
-      }
-
-      if(this.props.field.value.url !== undefined && this.props.field.value.url != null){
-        urlValue = this.props.field.value.url;
-      }
-    }
-
-    const state = this.state;
-    state["title"].value = titleValue;
-    state["richtext"].value = richtextValue;
-    state["url"].value = urlValue;
-
-
-    console.log("TitleImageWidget state : ",state);
-
-    this.setState(state);
+    this.setState(this.getStateFromProms(this.props));
 
   }
 
   componentWillReceiveProps(nextProps){
 
-    var titleValue = {};
-    var richtextValue = {};
-    var urlValue = {};
-
-    if(nextProps.field.value !== undefined && nextProps.field.value != null){
-
-      if(nextProps.field.value.title !== undefined && nextProps.field.value.title != null){
-        titleValue = nextProps.field.value.title;
-      }
-
-      if(nextProps.field.value.richtext !== undefined && nextProps.field.value.richtext != null){
-        richtextValue = nextProps.field.value.richtext;
-      }
-
-      if(this.props.field.value.url !== undefined && this.props.field.value.url != null){
-        urlValue = this.props.field.value.url;
-      }
-    }
-
-    const state = this.state;
-    state["title"].value = titleValue;
-    state["richtext"].value = richtextValue;
-    state["url"].value = urlValue;
-
-    console.log("TitleImageWidget state : ",state);
-
-    this.setState(state);
-
+    this.setState(this.getStateFromProms(nextProps));
   }
 
   onFieldChange(field) {
 
-    //console.log("onFieldChange => ",field);
+    console.log("TitleImageWidget :: onFieldChange => ",field);
 
     const value = this.props.field.value !== undefined && this.props.field.value != null ?
       this.props.field.value : {};
@@ -137,7 +134,6 @@ class TitleImageWidget extends Component
     this.props.onFieldChange(field);
   }
 
-
   render() {
 
     const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
@@ -145,28 +141,35 @@ class TitleImageWidget extends Component
     return (
       <div className="widget-item">
 
-        <TextField
-          field={this.state.title}
-          translations={this.props.translations}
-          onFieldChange={this.onFieldChange.bind(this)}
+          <ImageField
+            field={this.state.image}
+            onFieldChange={this.onFieldChange.bind(this)}
+            onImageSelect={this.props.onImageSelect}
+          />
 
-        />
+          <TextField
+            field={this.state.title}
+            translations={this.props.translations}
+            onFieldChange={this.onFieldChange.bind(this)}
 
-        <RichTextField
-          field={this.state.richtext}
-          translations={this.props.translations}
-          onFieldChange={this.onFieldChange.bind(this)}
+          />
 
-        />
+          <RichTextField
+            field={this.state.richtext}
+            translations={this.props.translations}
+            onFieldChange={this.onFieldChange.bind(this)}
 
-        <UrlField
-          field={this.state.url}
-          translations={this.props.translations}
-          onFieldChange={this.onFieldChange.bind(this)}
-          //onContentSelect={this.props.onContentSelect}
-        />
+          />
+
+          <UrlField
+            field={this.state.url}
+            translations={this.props.translations}
+            onFieldChange={this.onFieldChange.bind(this)}
+            onContentSelect={this.props.onContentSelect}
+          />
 
       </div>
+
     );
   }
 

@@ -76,3 +76,16 @@
 
   }
 }
+
+#modal-edit-item{
+
+  .field-col{
+    height: calc(100vh - 250px);
+    overflow-y: scroll;
+  }
+
+  .settings-col{
+    height: calc(100vh - 250px);
+    overflow-y: scroll;
+  }
+}

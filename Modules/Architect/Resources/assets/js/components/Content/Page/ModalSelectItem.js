@@ -72,11 +72,28 @@ class ModalSelectItem extends Component {
     });
   }
 
+  exploteToObject(fields) {
+
+    if(fields == null){
+      return null;
+    }
+
+    var result = {};
+
+    for(var i=0;i<fields.length;i++){
+      result[fields[i]] = null;
+    }
+    return result;
+  }
+
   addItem(field,e) {
 
     e.preventDefault();
 
     var newField = JSON.parse(JSON.stringify(field));
+
+    newField.rules = this.exploteToObject(newField.rules);
+    newField.settings = this.exploteToObject(newField.settings);
 
     this.props.onItemSelected({
       type : 'item',
@@ -97,7 +114,7 @@ class ModalSelectItem extends Component {
         "name": "Widget",
         "type": "widget",
         "icon": "fa-file-o",
-        "settings": null
+        "settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed'])
       }
     });
   }
@@ -106,7 +123,7 @@ class ModalSelectItem extends Component {
 
     var fields = [];
 
-    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["BOOLEAN"].type];
+    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["BOOLEAN"].type,FIELDS["URL"].type];
 
     for( var key in FIELDS){
 

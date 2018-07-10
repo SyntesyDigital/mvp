@@ -32,6 +32,8 @@ TODO
 - typologiesAllowed
 - cropsAllowed
 - listAllowed
+- htmlId
+- htmlClass
 
 
 ### Laravel => React Content fields JSON format

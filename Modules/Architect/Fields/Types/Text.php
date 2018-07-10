@@ -20,7 +20,9 @@ class Text extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'entryTitle'
+        'entryTitle',
+        'htmlId',
+        'htmlClass'
     ];
 }
 ?>
