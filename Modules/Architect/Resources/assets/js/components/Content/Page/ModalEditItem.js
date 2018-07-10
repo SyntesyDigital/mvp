@@ -14,26 +14,43 @@ import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 
 import TitleImageWidget from './../Widgets/TitleImageWidget';
+import TitleImageWidgetList from './../Widgets/TitleImageWidgetList';
 
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
 
+import ModalEditListItem from './ModalEditListItem';
+
 class ModalEditItem extends Component {
 
+  /*
+    listItemInfo = {
+      identifier : this.props.field.identifier,
+      field : field,
+      index : index //fields array index,
+      type : 'list-item'
+    };
+  */
   constructor(props){
     super(props);
 
     // console.log(" ModalEditItem :: construct ",props);
 
     this.state = {
-      field : null
+      field : null,
+
+      displayListItemModal : false,
+      listItemInfo : null
+
     };
 
     this.onModalClose = this.onModalClose.bind(this);
   }
 
   processProps(props) {
+
+    //console.log(" ModalEditItem :: processProps ",props);
 
     var field = JSON.parse(JSON.stringify(props.item.data.field));
     field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
@@ -57,7 +74,7 @@ class ModalEditItem extends Component {
   componentWillReceiveProps(nextProps)
   {
 
-    // console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
+    console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
 
     var field = null;
 
@@ -118,11 +135,6 @@ class ModalEditItem extends Component {
 
     this.props.onSubmitData(field);
 
-    /*
-    this.setState({
-      field : null
-    });
-    */
   }
 
   renderField() {
@@ -238,11 +250,71 @@ class ModalEditItem extends Component {
               onImageSelect={this.props.onImageSelect}
             />
           );
+        case "widget-2":
+          return (
+            <TitleImageWidgetList
+              field={this.state.field}
+              hideTab={true}
+              translations={this.props.translations}
+              onFieldChange={this.onFieldChange.bind(this)}
+              onAddField={this.props.onAddField}
+              onListItemEdit={this.handleListItemEdit.bind(this)}
+            />
+          );
 
       default :
         return null;
     }
   }
+
+
+  /**************** MODAL LIST *******************/
+
+  handleListItemEdit(editInfo) {
+
+    this.setState({
+      displayListItemModal : true,
+      listItemInfo : editInfo
+    });
+
+  }
+
+  handleListItemCancel() {
+
+    this.setState({
+      displayListItemModal : false,
+      listItemInfo : null
+    });
+
+  }
+
+  handleSubmitListItem(field) {
+
+    var stateField = this.state.field;
+    stateField.value[this.state.listItemInfo.index] = field;
+
+    this.setState({
+        field : stateField,
+        displayListItemModal : false,
+        listItemInfo : null
+    });
+
+  }
+
+  handleImageSelect(field) {
+    console.log("ModalEditItem :: handleImageSelect => ",field);
+
+    this.props.onImageSelect(this.state.listItemInfo);
+  }
+
+  handleContentSelect(field) {
+    console.log("ModalEditItem :: handleContentSelect => ",field);
+
+    this.props.onContentSelect(this.state.listItemInfo);
+  }
+
+
+  /*************** SETTINGS **********************/
 
   handleFieldSettingsChange(field) {
 
@@ -325,47 +397,62 @@ class ModalEditItem extends Component {
   render() {
 
     return (
-      <div className="custom-modal" id="modal-edit-item" style={{zIndex:this.props.zIndex}}>
-        <div className="modal-background"></div>
+      <div>
+
+        <ModalEditListItem
+          display={this.state.displayListItemModal}
+          item={this.state.listItemInfo}
+          translations={this.props.translations}
+          onItemCancel={this.handleListItemCancel.bind(this)}
+          onSubmitData={this.handleSubmitListItem.bind(this)}
+          onImageSelect={this.handleImageSelect.bind(this)}
+          onContentSelect={this.handleContentSelect.bind(this)}
+          zIndex={9500}
+        />
 
 
-          <div className="modal-container">
+        <div className="custom-modal" id="modal-edit-item" style={{zIndex:this.props.zIndex}}>
+          <div className="modal-background"></div>
 
-            {this.state.field != null &&
-              <div className="modal-header">
 
-                  <i className={"fa "+this.state.field.icon}></i>
-                  <h2>{this.state.field.name} | Edició</h2>
+            <div className="modal-container">
 
-                <div className="modal-buttons">
-                  <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
-                    <i className="fa fa-times"></i>
-                  </a>
-                </div>
-              </div>
-            }
+              {this.state.field != null &&
+                <div className="modal-header">
 
-            <div className="modal-content">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xs-8 field-col">
+                    <i className={"fa "+this.state.field.icon}></i>
+                    <h2>{this.state.field.name} | Edició</h2>
 
-                    {this.state.field != null &&
-                      this.renderField()}
-
+                  <div className="modal-buttons">
+                    <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
+                      <i className="fa fa-times"></i>
+                    </a>
                   </div>
-                  <div className="col-xs-4 settings-col">
-                    {this.renderSettings()}
+                </div>
+              }
+
+              <div className="modal-content">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-xs-8 field-col">
+
+                      {this.state.field != null &&
+                        this.renderField()}
+
+                    </div>
+                    <div className="col-xs-4 settings-col">
+                      {this.renderSettings()}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="modal-footer">
-                <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> Acceptar </a> &nbsp;
-              </div>
+                <div className="modal-footer">
+                  <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
+                  <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> Acceptar </a> &nbsp;
+                </div>
 
-            </div>
+              </div>
+          </div>
         </div>
       </div>
     );

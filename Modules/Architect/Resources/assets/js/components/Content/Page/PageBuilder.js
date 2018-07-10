@@ -42,7 +42,8 @@ class PageBuilder extends Component {
         displayContentModal: false,
         pathToIndex : null,
         editItemData : null,
-        addPosition : null
+        addPosition : null,
+        listItemIndex : -1,
     };
 
     this.handleAddRow = this.handleAddRow.bind(this);
@@ -540,20 +541,60 @@ class PageBuilder extends Component {
 
   }
 
+  handleOnAddListField(field) {
+
+    var data = field;
+
+    //update data to pathToIndex
+    console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data,
+      function(field,data){
+         if(field.value === undefined || field.value == null){
+           field.value = [];
+         }
+         field.value.push(data);
+         return field;
+      }
+    );
+
+    console.log("handleOnEditField : layout : ",layout);
+
+    /*
+    this.setState({
+      displayEditItemModal : false,
+      editItemData : null
+    });
+    */
+
+    this.props.updateLayout(layout);
+
+  }
+
   /******** Images  ********/
 
-  handleImageSelect(identifier) {
-      console.log('handleImageSelect => ', identifier);
+  handleImageSelect(field) {
+
+    var listItemIndex = -1;
+    //FIXME try to find a more elegant way
+    if(field.type !== undefined && field.type == "list-item"){
+      //if the event came from the list item, then save the array of the fields
+      listItemIndex = field.index;
+    }
 
     this.setState({
-      displayMediaModal : true
+      displayMediaModal : true,
+      listItemIndex : listItemIndex
     });
 
   }
 
   handleImageCancel(){
     this.setState({
-      displayMediaModal : false
+      displayMediaModal : false,
+      listItemIndex : -1
     });
   }
 
@@ -565,6 +606,7 @@ class PageBuilder extends Component {
 
       var layout = this.props.layout;
       var field = this.state.editItemData.data.field;
+      var self = this;
 
       switch (field.type) {
           case FIELDS.IMAGES.type:
@@ -587,10 +629,33 @@ class PageBuilder extends Component {
                   }
               );
               break;
+
+          case "widget-2":
+              layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,media,
+                  function(field,media){
+
+                      var listIndex = self.state.listItemIndex;
+
+                      if(listIndex == -1 || field.value[listIndex] === undefined ) {
+                        console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
+                        return field;
+                      }
+
+                      if(field.value[listIndex].value == null){
+                        field.value[listIndex].value = { image : null};
+                      }
+
+                      field.value[listIndex].value.image = media;
+
+                      return field;
+                  }
+              );
+              break;
       }
 
       this.setState({
-        displayMediaModal : false
+        displayMediaModal : false,
+        listItemIndex : -1
       });
 
       this.props.updateLayout(layout);
@@ -599,17 +664,26 @@ class PageBuilder extends Component {
 
   /******** Contents  ********/
 
-  handleContentSelect(identifier) {
+  handleContentSelect(field) {
+
+    var listItemIndex = -1;
+    //FIXME try to find a more elegant way
+    if(field.type !== undefined && field.type == "list-item"){
+      //if the event came from the list item, then save the array of the fields
+      listItemIndex = field.index;
+    }
 
     this.setState({
-      displayContentModal : true
+      displayContentModal : true,
+      listItemIndex : listItemIndex
     });
 
   }
 
   handleContentCancel(){
     this.setState({
-      displayContentModal : false
+      displayContentModal : false,
+      listItemIndex : -1
     });
   }
 
@@ -619,6 +693,7 @@ class PageBuilder extends Component {
 
   updateContent(content){
 
+    var self = this;
     var layout = this.props.layout;
     var field = this.state.editItemData.data.field;
 
@@ -659,7 +734,28 @@ class PageBuilder extends Component {
                       content : content
                     };
 
-                    console.log("field al final => ",field);
+                    return field;
+                }
+            );
+            break;
+        case "widget-2":
+            layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
+                function(field,data){
+
+                    var listIndex = self.state.listItemIndex;
+
+                    if(listIndex == -1 || field.value[listIndex] === undefined ) {
+                      console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
+                      return field;
+                    }
+
+                    if(field.value[listIndex].value == null){
+                      field.value[listIndex].value = { url : {}};
+                    }
+
+                    field.value[listIndex].value.url = {
+                      content : content
+                    };;
 
                     return field;
                 }
@@ -668,7 +764,8 @@ class PageBuilder extends Component {
     }
 
     this.setState({
-      displayContentModal : false
+      displayContentModal : false,
+      listItemIndex : -1
     });
 
     this.props.updateLayout(layout);
@@ -711,6 +808,7 @@ class PageBuilder extends Component {
           onSubmitData={this.handleOnEditField.bind(this)}
           onImageSelect={this.handleImageSelect.bind(this)}
           onContentSelect={this.handleContentSelect.bind(this)}
+          onAddField={this.handleOnAddListField.bind(this)}
           zIndex={9000}
         />
 

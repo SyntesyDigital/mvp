@@ -119,6 +119,26 @@ class ModalSelectItem extends Component {
     });
   }
 
+  addWidget2(e) {
+
+    e.preventDefault()
+
+    this.props.onItemSelected({
+      type : 'item',
+      field : {
+        'class' : "",
+        'rules' : null,
+        "label": "WIDGET-2",
+        "name": "Widget 2",
+        "type": "widget-2",
+        "icon": "fa-file",
+        "settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed'])
+      }
+    });
+  }
+
+
+
   renderFields() {
 
     var fields = [];
@@ -202,6 +222,17 @@ class ModalSelectItem extends Component {
                               <i className="fa fa-file-o"></i>
                               <p className="grid-item-name">
                                 Widget Simple
+                              </p>
+                            </div>
+                          </a>
+                        </div>
+
+                        <div className="col-xs-3">
+                          <a href="" onClick={this.addWidget2.bind(this)}>
+                            <div className="grid-item">
+                              <i className="fa fa-file-o"></i>
+                              <p className="grid-item-name">
+                                Widget List
                               </p>
                             </div>
                           </a>
