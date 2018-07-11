@@ -18,7 +18,7 @@ class UpdateUser
             'lastname',
             'email',
             'password',
-            'image',
+            'role_id',
         ]);
     }
 
@@ -29,15 +29,14 @@ class UpdateUser
 
     public function handle()
     {
+
         if(trim($this->attributes['password']) !== '') {
             $this->attributes['password'] = Hash::make(trim($this->attributes['password']));
         } else {
             array_forget($this->attributes, 'password');
         }
 
-        // if (isset($this->attributes['role_id'])) {
-        //     $this->user->roles()->sync($this->attributes['role_id']);
-        // }
+        $this->user->roles()->sync($this->attributes['role_id']);
 
         return $this->user->update($this->attributes);
     }

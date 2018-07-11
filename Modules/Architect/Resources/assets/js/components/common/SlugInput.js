@@ -113,9 +113,19 @@ class SlugInput extends Component
 
     return (
       <div>
+        {!architect.currentUserHasRole('author') &&
         <div className="block-div" onClick={this.toggleBlock.bind(this)} style={{display: this.state.blocked ? 'display' : 'none'}}>
           <i className="fa fa-lock"></i>
         </div>
+        }
+        
+        {architect.currentUserHasRole('author') &&
+        <div className="block-div" style={{display: 'block'}}>
+          <i className="fa fa-lock"></i>
+        </div>
+        }
+        
+        
         <input
           language={this.props.language}
           type="text"

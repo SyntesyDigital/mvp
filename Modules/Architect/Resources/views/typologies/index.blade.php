@@ -13,7 +13,7 @@
           <div class="row">
               @foreach($typologies as $typology)
                 <div class="col-xs-3">
-                    <a href="{{ route('typologies.show', $typology)}}">
+                    <a href="{{ route('typologies.show', $typology) }}">
                       <div class="grid-item">
                           <i class="fa {{$typology->icon}}"></i>
                           <p class="grid-item-name">

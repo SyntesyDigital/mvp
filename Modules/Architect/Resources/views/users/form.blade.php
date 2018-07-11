@@ -122,6 +122,24 @@
 
 
             <div class="row">
+                <div class="col-md-12">
+                    <label>Role</label>
+                    {!!
+                        Form::select(
+                            'role_id',
+                            App\Models\Role::pluck('display_name', 'id'),
+                            isset($user) && $user->roles ? $user->roles->first()->id : old('role'),
+                            [
+                                'class' => 'form-control',
+                                'placeholder'=> '---'
+                            ]
+                        )
+                    !!}
+                </div>
+            </div>
+
+
+            <div class="row">
                 <div class="col-md-12 text-right">
                     {!!
                         Form::submit('Guardar', [

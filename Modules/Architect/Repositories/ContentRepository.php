@@ -49,7 +49,6 @@ class ContentRepository extends BaseRepository
             }
         }
 
-
         $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
         $titleFields = ['title'];
 
@@ -60,12 +59,21 @@ class ContentRepository extends BaseRepository
         }
 
         return Datatables::of($results)
+
+            ->addColumn('author', function ($item) {
+                return isset($item->author) ? $item->author->full_name : null;
+            })
+            ->filterColumn('author', function ($query, $author_id) {
+                $query->whereRaw("contents.author_id = ?", $author_id);
+            })
+
             ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
                 $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
             })
             ->addColumn('title', function ($item) {
                 return isset($item->title) ? $item->title : null;
             })
+
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
@@ -73,15 +81,12 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
-                if($item->page_id) {
+                if($item->page) {
                     return 'Page';
                 }
+                return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
+            })
 
-                return isset($item->typology) ? $item->typology->name : null;
-            })
-            ->addColumn('author', function ($item) {
-                return isset($item->author) ? $item->author->full_name : null;
-            })
             ->addColumn('action', function ($item) {
                 return '
                 <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;

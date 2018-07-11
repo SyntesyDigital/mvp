@@ -30,7 +30,7 @@ class ContentBar extends Component {
 
               <div className="float-buttons pull-right">
 
-              { this.props.content !== undefined && this.props.content != null &&
+              { this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
                 <div className="actions-dropdown">
                   <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
                     Accions

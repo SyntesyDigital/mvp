@@ -13,6 +13,7 @@ class UpdateUserRequest extends FormRequest
             'firstname' => 'required',
             'lastname' => 'required',
             //'password' => request()->get('password') ? 'required|confirmed' : null
+            'role_id' => 'required',
         ];
     }
 

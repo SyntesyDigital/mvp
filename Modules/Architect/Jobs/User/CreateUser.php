@@ -16,7 +16,7 @@ class CreateUser
             'lastname',
             'email',
             'password',
-            'image',
+            'role_id',
         ]);
     }
 
@@ -31,7 +31,9 @@ class CreateUser
 
         $user = User::create($this->attributes);
 
-        // $user->roles()->sync($this->roleId);
+        if(isset($this->attribute['role_id'])) {
+            $user->roles()->sync($this->attributes['role_id']);
+        }
 
         return $user;
     }
