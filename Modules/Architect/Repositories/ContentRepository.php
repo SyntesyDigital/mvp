@@ -115,10 +115,10 @@ class ContentRepository extends BaseRepository
                 return $item->getStringStatus();
             })
             ->addColumn('typology', function ($item) {
-                if($item->page_id) {
+                if($item->page) {
                     return 'Page';
                 }
-                return isset($item->typology) ? $item->typology->name : null;
+                return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
             ->addColumn('author', function ($item) {
                 return isset($item->author) ? $item->author->full_name : null;

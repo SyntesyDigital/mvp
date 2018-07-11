@@ -69,7 +69,6 @@ class PageContainer extends Component {
         });
     }
 
-
      // Build state...
      this.state = {
          status: props.content ? props.content.status : 0,
@@ -394,12 +393,6 @@ class PageContainer extends Component {
                 onTagAdded={this.handleTagAdded}
                 onRemoveTag={this.handleRemoveTag}
                 parent_id={this.state.parent_id}
-                pages={[
-                  {id:0,name:"------"},
-                  {id:1,name:"Page 1"},
-                  {id:2,name:"Page 2"},
-                  {id:3,name:"Page 3"}
-                ]}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
