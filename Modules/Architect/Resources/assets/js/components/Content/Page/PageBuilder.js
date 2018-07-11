@@ -9,6 +9,7 @@ import Row from './RowTypes/Row';
 
 import ModalSelectItem from './ModalSelectItem';
 import ModalEditItem from './ModalEditItem';
+import ModalEditClass from './ModalEditClass';
 import MediaSelectModal from './../../Medias/MediaSelectModal';
 import ContentSelectModal from './../ContentSelectModal';
 
@@ -37,9 +38,12 @@ class PageBuilder extends Component {
         */
 
         displayItemModal : false,
+        displayClassModal : false,
         displayEditItemModal : false,
         displayMediaModal: false,
         displayContentModal: false,
+        displayClassModal: false,
+
         pathToIndex : null,
         editItemData : null,
         addPosition : null,
@@ -72,6 +76,7 @@ class PageBuilder extends Component {
 
         this.setState({
           displayItemModal : false,
+          displayClassModal : false,
           displayEditItemModal : false,
           displayContentModal : false,
           pathToIndex : null,
@@ -145,7 +150,71 @@ class PageBuilder extends Component {
 
   }
 
+  /******** Modal Edit Class  ********/
+
+  handleItemClassSelect(item) {
+
+    console.log("PageBuilder :: handleItemClassSelect ",item);
+
+    this.setState({
+      displayClassModal : true,
+      editItemData : item
+    });
+
+  }
+
+  handleItemClassCancel(){
+    this.setState({
+      displayClassModal : false,
+      editItemData : null
+    });
+  }
+
+  handleItemClassSelected(field){
+
+    console.log("handleItemClassSelected => ", field);
+
+    var layout = this.props.layout;
+
+    layout = this.changeRowColWithCallback(layout,-1,field.pathToIndex,field.data,
+      function(field,data){
+
+          console.log("changeRowColWithCallback :: ",field,data);
+
+         field.settings = data.settings;
+         return field;
+      }
+    );
+
+    console.log("layout final  => ",layout);
+
+
+    this.setState({
+      displayClassModal : false,
+      editItemData : null
+    });
+
+
+    this.props.updateLayout(layout);
+
+  }
+
+
   /****************/
+
+  exploteToObject(fields) {
+
+    if(fields == null){
+      return null;
+    }
+
+    var result = {};
+
+    for(var i=0;i<fields.length;i++){
+      result[fields[i]] = null;
+    }
+    return result;
+  }
 
   handleAddRow(e) {
 
@@ -159,9 +228,11 @@ class PageBuilder extends Component {
 
     layout.push({
         type : 'row',
+        settings : this.exploteToObject(ROW_SETTINGS),
         children : [
           {
             type : 'col',
+            settings : this.exploteToObject(COL_SETTINGS),
             colClass : 'col-xs-12',
             children : []
           }
@@ -298,6 +369,32 @@ class PageBuilder extends Component {
     else {
 
       layout[pathToIndex[currentIndex]].children = this.changeItemWithCallback(
+        layout[pathToIndex[currentIndex]].children,
+        currentIndex,
+        pathToIndex,
+        data,
+        callback
+      );
+
+      return layout;
+    }
+  }
+
+  changeRowColWithCallback(layout,currentIndex,pathToIndex,data,callback){
+    currentIndex++;
+
+    if(currentIndex == pathToIndex.length -1){
+
+      console.log("changeRowColWithCallback : row col found :: => ", layout[pathToIndex[currentIndex]]);
+
+      layout[pathToIndex[currentIndex]] = callback(
+        layout[pathToIndex[currentIndex]],data
+      );
+      return layout;
+    }
+    else {
+
+      layout[pathToIndex[currentIndex]].children = this.changeRowColWithCallback(
         layout[pathToIndex[currentIndex]].children,
         currentIndex,
         pathToIndex,
@@ -503,6 +600,7 @@ class PageBuilder extends Component {
             onPullDownItem={this.handlePullDownItem.bind(this)}
             onCopyItem={this.handleCopyItem.bind(this)}
             onDeleteItem={this.handleDeleteItem.bind(this)}
+            onEditClass={this.handleItemClassSelect.bind(this)}
             pathToIndex={[parseInt(index)]}
             onSelectItemBefore={this.handleSelectItemBefore.bind(this)}
             onSelectItemAfter={this.handleItemSelect}
@@ -790,6 +888,15 @@ class PageBuilder extends Component {
           onContentSelected={this.handleContentSelected}
           onContentCancel={this.handleContentCancel}
           zIndex={10000}
+        />
+
+        {/* Modal to Edit the class or the id of the rows and the cols, */}
+        <ModalEditClass
+          display={this.state.displayClassModal}
+          item={this.state.editItemData}
+          onSubmit={this.handleItemClassSelected.bind(this)}
+          onCancel={this.handleItemClassCancel.bind(this)}
+          zIndex={9000}
         />
 
         <ModalSelectItem

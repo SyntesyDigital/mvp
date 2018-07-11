@@ -56,15 +56,31 @@ class ModalSelectItem extends Component {
       }});
   }
 
+  exploteToObject(fields) {
+
+    if(fields == null){
+      return null;
+    }
+
+    var result = {};
+
+    for(var i=0;i<fields.length;i++){
+      result[fields[i]] = null;
+    }
+    return result;
+  }
+
   addRow(e) {
 
     e.preventDefault();
 
     this.props.onItemSelected({
       type : 'row',
+      settings : this.exploteToObject(ROW_SETTINGS),
       children : [
         {
           type : 'col',
+          settings : this.exploteToObject(COL_SETTINGS),
           colClass : 'col-xs-12',
           children : []
         }

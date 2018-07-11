@@ -24,6 +24,8 @@
           const CURRENT_USER = {!! json_encode(Auth::user(), JSON_PRETTY_PRINT) !!};
           const LANGUAGES = {!! json_encode(Modules\Architect\Entities\Language::all(), JSON_PRETTY_PRINT) !!};
           const TYPOLOGIES = {!! json_encode(Modules\Architect\Entities\Typology::all(), JSON_PRETTY_PRINT) !!};
+          const ROW_SETTINGS = ['htmlId','htmlClass','hasContainer'];
+          const COL_SETTINGS = ['htmlId','htmlClass'];
         </script>
 
         <!-- Jquery -->

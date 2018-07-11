@@ -44,6 +44,7 @@ class Col extends Component {
                 onPullDownItem={this.props.onPullDownItem}
                 onPullUpItem={this.props.onPullUpItem}
                 onCopyItem={this.props.onCopyItem}
+                onEditClass={this.props.onEditClass}
                 onDeleteItem={this.props.onDeleteItem}
                 onSelectItemBefore={this.props.onSelectItemBefore}
                 onSelectItemAfter={this.props.onSelectItemAfter}
@@ -59,6 +60,7 @@ class Col extends Component {
                 pathToIndex={this.getPathToIndex(key)}
                 onEditItem={this.props.onEditItem}
                 onCopyItem={this.props.onCopyItem}
+                onEditClass={this.props.onEditClass}
                 onPullDownItem={this.props.onPullDownItem}
                 onPullUpItem={this.props.onPullUpItem}
                 onDeleteItem={this.props.onDeleteItem}
@@ -100,6 +102,12 @@ class Col extends Component {
     this.props.onSelectItemBefore(this.props.pathToIndex);
   }
 
+  onEditClass(e) {
+    e.preventDefault();
+
+    this.props.onEditClass(this.props);
+  }
+
 
   render() {
 
@@ -111,6 +119,10 @@ class Col extends Component {
           <div className="row-container-body-top">
             <a href="" className="btn btn-link" onClick={this.onSelectItemBefore.bind(this)}>
               <i className="fa fa-plus"></i>
+            </a>
+            &nbsp;&nbsp;
+            <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
+              <i className="fa fa-pencil"></i>
             </a>
           </div>
 
