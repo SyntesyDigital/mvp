@@ -109,8 +109,8 @@ class ContentsField extends Component {
                    index = {i}
                    id = {content.id}
                    type = {_this.props.field.type}
-                   label = {content.typology.name}
-                   icon = {content.typology.icon}
+                   label = {content.typology !== undefined ? content.typology.name : null}
+                   icon = {content.typology !== undefined ? content.typology.icon : 'fa-file-o'}
                    name = {content.title !== undefined && content.title != null ? content.title : ''}
                    moveField = {_this.moveField}
                    onRemoveField = {_this.handleRemoveField}  />

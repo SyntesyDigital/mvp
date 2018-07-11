@@ -164,8 +164,6 @@ class UpdateContent
             (new TextField)->save($this->content, $field["identifier"], $fieldValue, $this->languages);
         }
 
-
-
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
             'content_id' => $this->content->id

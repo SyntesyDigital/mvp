@@ -78,6 +78,8 @@ class ContentSidebar extends Component {
   render() {
 
     var self = this;
+    
+    console.log('CONTENTSIDEBAR PAGES =>', this.props.pages);
 
     return (
       <div className="sidebar">

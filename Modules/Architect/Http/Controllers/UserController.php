@@ -59,38 +59,17 @@ class UserController extends Controller
 
     public function update(User $user, UpdateUserRequest $request)
     {
-        try {
-            if(!dispatch_now(UpdateUser::fromRequest($user, $request))) {
-                throw new \Exception('Error occured while saving...');
-            }
-
-            return redirect(route('users.show', $user))->with('success', 'User successfully saved');
-        } catch (\Exception $ex) {
-            $error = $ex->getMessage();
-        }
+        dispatch_now(UpdateUser::fromRequest($user, $request));
 
         return redirect(route('users.show', $user))
-            ->with('error', $error)
-            ->withInput($request->input());
+            ->with('success', 'User successfully saved');
     }
 
     public function store(CreateUserRequest $request)
     {
-        try {
-            $user = dispatch_now(CreateUser::fromRequest($request));
+        $user = dispatch_now(CreateUser::fromRequest($request));
 
-            if(!$user) {
-                throw new \Exception('Error occured while saving...');
-            }
-
-            return redirect(route('users.show', $user))->with('success', 'User successfully saved');
-        } catch (\Exception $ex) {
-            $error = $ex->getMessage();
-        }
-
-        return redirect(route('users.create'))
-            ->with('error', $error)
-            ->withInput($request->input());
+        return redirect(route('users.show', $user))->with('success', 'User successfully saved');
     }
 
     public function delete(User $user, DeleteUserRequest $request)

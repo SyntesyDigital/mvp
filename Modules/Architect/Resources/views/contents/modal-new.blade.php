@@ -27,6 +27,7 @@
               <div class="grid-items">
                 <div class="row">
 
+                    @if(Auth::user()->hasRole(["admin", "editor"]))
                   <div class="col-xs-3">
                     <a href="{{route('contents.page.create')}}">
                       <div class="grid-item">
@@ -37,6 +38,7 @@
                       </div>
                     </a>
                   </div>
+                    @endif
 
                     @foreach(Modules\Architect\Entities\Typology::all() as $typology)
                         <div class="col-xs-3">

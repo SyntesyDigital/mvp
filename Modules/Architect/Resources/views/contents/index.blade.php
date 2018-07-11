@@ -6,7 +6,6 @@
 
 <div class="container leftbar-page">
 
-
   @include('architect::partials.content-nav',[
     'typologies' => $typologies,
     'typology_id' => Request('typology_id'),
@@ -24,7 +23,7 @@
                <th>Nom</th>
                <th>Tipus</th>
                <th>Actualiztat</th>
-               <th>Autor</th>
+               <th data-filter="select" data-values="{{base64_encode($users->toJson())}}">Autor</th>
                <th>Estat</th>
                <th></th>
            </tr>
@@ -50,7 +49,6 @@
 @push('plugins')
     {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
     {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
-
     {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
     {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
     {{ Html::script('/modules/architect/js/architect.js') }}

@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
-
+use Modules\Architect\Fields\Types\Text as TextField;
 class CreateContent
 {
 
@@ -50,11 +50,10 @@ class CreateContent
         $this->saveCategories();
         $this->saveTags();
         $this->saveLanguages();
+        $this->saveFields();
 
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
-        } else {
-            $this->saveFields();
         }
 
         return $this->content;
@@ -159,6 +158,11 @@ class CreateContent
 
     public function savePage()
     {
+        foreach($this->attributes["fields"] as $field) {
+            $fieldValue = isset($field['value']) ? $field['value'] : null;
+            (new TextField)->save($this->content, $field["identifier"], $fieldValue, $this->languages);
+        }
+
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
             'content_id' => $this->content->id

@@ -13,26 +13,32 @@
                 <div class="col-md-8">
                   <nav class="main-nav">
                     <ul>
+                        @if(Auth::user()->hasRole(["admin", "editor"]))
                       <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">
                           Tipologies
                         </a>
                       </li>
+                        @endif
                       <li class="{{ Request::is('architect/contents*') ? 'active' : '' }}">
                         <a href="{{route('contents')}}">
                         Content
                         </a>
                       </li>
+
                       <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
                         <a href="{{route('medias.index')}}">
                           Medias
                         </a>
                       </li>
+
+                       @if(Auth::user()->hasRole(["admin"]))
                       <li class="{{ Request::is('architect/settings*') ? 'active' : '' }}">
                         <a href="{{route('settings')}}">
                           Configuració
                         </a>
                       </li>
+                      @endif
                     </ul>
                   </nav>
                 </div>

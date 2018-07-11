@@ -45,7 +45,10 @@ class ContentController extends Controller
     public function index(Request $request)
     {
         return view('architect::contents.index', [
-            "typologies" => Typology::all()
+            "typologies" => Typology::all(),
+            "users" => User::all()->mapWithKeys(function($user){
+                return [$user->id => $user->full_name];
+            })
         ]);
     }
 
