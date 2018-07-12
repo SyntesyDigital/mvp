@@ -48,7 +48,13 @@ class FieldsReactPageBuilderAdapter
                     if(isset($node['field'])) {
                         $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
                         $nodes[$key]['field']['name'] = $node['field']['type'];
-                        $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
+
+                        if($nodes[$key]['field']['type'] == "widget") {
+                            $nodes[$key]['field']['fields'] = $this->buildPageField($node['field']);
+                        } else {
+                            $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
+                        }
+
                     }
                 }
             }
@@ -58,9 +64,13 @@ class FieldsReactPageBuilderAdapter
     }
 
 
-    private function buildPageField($field)
+    private function buildPageField($field, $name = null)
     {
         $fieldName = isset($field['name']) ? $field['name'] : null;
+
+        if($name) {
+            $fieldName = $name;
+        }
 
         switch($field["type"]) {
             case 'richtext':
@@ -137,6 +147,24 @@ class FieldsReactPageBuilderAdapter
                     }
                 }
                 return $values;
+            break;
+
+            case 'widget':
+                $widget = (new $field['class']); //->getPageBuilderFields($field['fieldname']);
+
+                $fields = [];
+                foreach($widget->fields as $_field) {
+                    if(!isset($_field['value'])) {
+                        $_field['value'] = [];
+                    }
+
+                    $fieldName = $field['fieldname'] . "_" . $_field['identifier'];
+
+                    $_field["value"] = $this->buildPageField($_field, $fieldName);
+
+                    $fields[] = $_field;
+                }
+                return $fields;
             break;
 
             default:
