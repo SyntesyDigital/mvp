@@ -10,6 +10,10 @@ import UrlField from './../ContentFields/UrlField';
 /**
 
 {
+    image : {
+      id :
+      url :
+    },
     title : {
       "ca" : "asdfasdfasdf",
       "es" : "sdfasdfsdf"

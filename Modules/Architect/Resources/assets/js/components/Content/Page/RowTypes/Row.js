@@ -68,6 +68,7 @@ class Row extends Component {
                 onPullDownItem={this.props.onPullDownItem}
                 onPullUpItem={this.props.onPullUpItem}
                 onCopyItem={this.props.onCopyItem}
+                onEditClass={this.props.onEditClass}
                 onDeleteItem={this.props.onDeleteItem}
                 onSelectItemBefore={this.props.onSelectItemBefore}
                 onSelectItemAfter={this.props.onSelectItemAfter}
@@ -124,6 +125,12 @@ class Row extends Component {
     e.preventDefault();
 
     this.props.onCopyItem(this.props.pathToIndex);
+  }
+
+  onEditClass(e) {
+    e.preventDefault();
+
+    this.props.onEditClass(this.props);
   }
 
   toggleColumns(e) {
@@ -188,6 +195,20 @@ class Row extends Component {
 
   }
 
+  exploteToObject(fields) {
+
+    if(fields == null){
+      return null;
+    }
+
+    var result = {};
+
+    for(var i=0;i<fields.length;i++){
+      result[fields[i]] = null;
+    }
+    return result;
+  }
+
   setColType(cols) {
 
     const children = this.props.data.children;
@@ -204,6 +225,7 @@ class Row extends Component {
     for(var i=0;i<cols.length;i++){
       resultChildren.push({
         type : 'col',
+        settings : this.exploteToObject(COL_SETTINGS),
         colClass : cols[i],
         children : children[i] !== undefined && children[i] != null ? children[i].children : []
         //children : []
@@ -261,6 +283,9 @@ class Row extends Component {
               </a>
             </div>
             <div className="right-buttons">
+              <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
+                <i className="fa fa-pencil"></i>
+              </a>
               <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
                 <i className="fa fa-files-o"></i>
               </a>
