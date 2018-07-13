@@ -98,8 +98,7 @@ class ContentsDragField extends Component {
 
 	onEditField(event) {
 		event.preventDefault();
-
-		this.props.onEditField(this.props.id);
+		this.props.onEditField(this.props.index);
 	}
 
   render() {

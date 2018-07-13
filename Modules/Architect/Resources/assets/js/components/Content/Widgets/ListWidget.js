@@ -11,6 +11,7 @@ class ListWidget extends Component
     super(props);
 
     this.moveField = this.moveField.bind(this);
+    this.handleEditField = this.handleEditField.bind(this);
 
     this.state = {
       fields : []
@@ -38,24 +39,26 @@ class ListWidget extends Component
 
   }
 
-  handleEditField(fieldId) {
+  handleEditField(index) {
+
+      // console.log('PROPS ====>', _this.props);
 
     const fields = this.props.field.value;
-
-    var field = null;
-    var index = -1;
-
-    for (var i = 0; i < fields.length; i++) {
-        if (fieldId == fields[i].id) {
-            field = fields[i];
-            index = i;
-            break;
-        }
-    }
-
-    if(field == null){
-      return;
-    }
+    var field = fields[index];
+    // var field = null;
+    // var index = -1;
+    //
+    // for (var i = 0; i < fields.length; i++) {
+    //     if (fieldId == fields[i].id) {
+    //         field = fields[i];
+    //         index = i;
+    //         break;
+    //     }
+    // }
+    //
+    // if(field == null){
+    //     return;
+    // }
 
     var editInfo = {
       identifier : this.props.field.identifier,
@@ -65,7 +68,6 @@ class ListWidget extends Component
     };
 
     this.props.onListItemEdit(editInfo);
-
   }
 
   handleRemoveField(fieldId) {
@@ -113,7 +115,7 @@ class ListWidget extends Component
     var field = this.props.field;
     field.index = index;
     field.id = index;
-    //field.type = 'widget';
+    field.type = 'widget';
 
     // var field = {
     //     'index' : index,

@@ -32,7 +32,11 @@ class ModalEditListItem extends Component {
 
     if(field.type != "widget-list") {
         field.value = field !== undefined && field.value !== undefined ? field.value : null;
-    } else {}
+    } else {
+        console.log('INDEX ====>', props.item);
+    }
+
+    console.log("processProps ======>", field);
 
     // console.log("ModalEditItem :: field after process : ",field);
 
@@ -110,6 +114,8 @@ class ModalEditListItem extends Component {
   }
 
   renderWidget() {
+
+
 
     switch(this.state.field.type) {
         case "widget-list":

@@ -46,20 +46,5 @@ class WidgetList1 extends Widget implements WidgetInterface
         'htmlClass',
         'allowedTypologies'
     ];
-
-
-    // public function save($content, $identifier, $fields)
-    // {
-    //     foreach($fields as $field) {
-    //         foreach($field['fields'] as $k => $f) {
-    //             $fieldName = $identifier . "_" . $k . "_" . $f['identifier'];
-    //             $fieldValue = isset($f['value']) ? $f['value'] : null;
-    //             (new $f['class'])->save($content, $fieldName, $fieldValue);
-    //         }
-    //     }
-    //
-    //     return true;
-    // }
-
 }
 ?>

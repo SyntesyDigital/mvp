@@ -23,7 +23,6 @@ class FieldsReactPageBuilderAdapter
     public function get()
     {
         $nodes = json_decode($this->page->definition, true);
-
         return $this->getPage($nodes);
     }
 
