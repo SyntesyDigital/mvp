@@ -138,7 +138,8 @@ class ModalSelectItem extends Component {
   addWidget2(e) {
 
     e.preventDefault()
-
+    
+    
     this.props.onItemSelected({
       type : 'item',
       field : {

@@ -138,21 +138,37 @@ class UpdateContent
                         $field = $node['field'];
                         $type = isset($field['type']) ? $field['type'] : null;
 
-                        if($type == "widget") {
-                            $fieldName = uniqid('pagewidget_');
-                            $fields = isset($field['fields']) ? $field['fields'] : null;
-                            (new $field['class'])->save($this->content, $fieldName, $fields);
+                        switch($type) {
+                            case 'widget-list':
+                                $widgets = isset($field['value']) ? $field['value'] : null;
+                                $fieldsNames = [];
+                                foreach($widgets as $widget) {
+                                    $fieldName = uniqid('pagewidget_');
+                                    (new $field['class'])->save($this->content, $fieldName, $widget["fields"]);
+                                    $fieldsNames[] = $fieldName;
+                                }
+                                $nodes[$key]['field']['fields'] = $fieldsNames;
+                            break;
 
-                            unset($nodes[$key]['field']['fields']);
-                            $nodes[$key]['field']['fieldname'] = $fieldName;
-                        } else {
-                            $fieldName = uniqid('pagefield_');
-                            $fieldValue = isset($field['value']) ? $field['value'] : null;
+                            case 'widget':
+                                $fieldName = uniqid('pagewidget_');
+                                $fields = isset($field['fields']) ? $field['fields'] : null;
 
-                            (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                                (new $field['class'])->save($this->content, $fieldName, $fields);
 
-                            $nodes[$key]['field']['name'] = $fieldName;
+                                $nodes[$key]['field']['fieldname'] = $fieldName;
+                                unset($nodes[$key]['field']['fields']);
+                            break;
+
+                            default:
+                                $fieldName = uniqid('pagefield_');
+                                $fieldValue = isset($field['value']) ? $field['value'] : null;
+
+                                (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+
+                                $nodes[$key]['field']['name'] = $fieldName;
                         }
+
 
                         unset($nodes[$key]['field']['value']);
                     }

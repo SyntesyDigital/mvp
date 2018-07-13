@@ -3,28 +3,8 @@ import { render } from 'react-dom';
 import update from 'immutability-helper'
 import ItemListDragField from './ItemListDragField';
 
-/**
 
-[
-  {
-      title : {
-        "ca" : "asdfasdfasdf",
-        "es" : "sdfasdfsdf"
-      },
-      richtect : {
-        "ca" : "sfasdfasdf",
-        "es" : "asfasdfasdf"
-      },
-      url : {
-        url :
-        content :
-      },
-
-  }
-]
-*
-*/
-class TitleImageWidgetList extends Component
+class ListWidget extends Component
 {
   constructor(props)
   {
@@ -51,10 +31,6 @@ class TitleImageWidgetList extends Component
           }
       });
 
-      // console.log("\n\nResult value : ");
-      // console.log(field.value);
-      // console.log(result);
-
       this.props.onFieldChange({
           identifier: this.props.field.identifier,
           value: result.value
@@ -78,7 +54,6 @@ class TitleImageWidgetList extends Component
     }
 
     if(field == null){
-      console.error("TitleImageWidgetList :: Field not found with id : "+fieldId);
       return;
     }
 
@@ -135,35 +110,42 @@ class TitleImageWidgetList extends Component
 
     var index = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value.length : 0;
 
-    var field = {
-        'index' : index,
-        'id' : index,
-        'class' : "Modules\Architect\Widgets\Types\TitleImage",
-        'rules' : null,
-        "label": "WIDGET",
-        "name": "TITLE_IMAGE",
-        "type": "widget",
-        "icon": "fa-file-o",
-        "fields" : [
-            {
-                "class" : 'Modules\Architect\Fields\Types\Text',
-                "identifier" : "title",
-                "type" : "text",
-                "name" : "Títol",
-            },{
-                "class" : 'Modules\Architect\Fields\Types\Text',
-                "identifier" : "slug",
-                "type" : "text",
-                "name" : "Slug" 
-            },{
-                "class" : 'Modules\Architect\Fields\Types\Image',
-                "identifier" : "image",
-                "type" : "image",
-                "name" : "Image" 
-            }
-        ]
-        //"settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed']),
-    };
+    var field = this.props.field;
+    field.index = index;
+    field.id = index;
+    //field.type = 'widget';
+
+    // var field = {
+    //     'index' : index,
+    //     'id' : index,
+    //     'class' : "Modules\Architect\Widgets\Types\TitleImage",
+    //     'rules' : null,
+    //     "label": "WIDGET",
+    //     "name": "TITLE_IMAGE",
+    //     "type": "widget",
+    //     "icon": "fa-file-o",
+    //     "fields" : [
+    //         {
+    //             "class" : 'Modules\Architect\Fields\Types\Text',
+    //             "identifier" : "title",
+    //             "type" : "text",
+    //             "name" : "Títol",
+    //         },{
+    //             "class" : 'Modules\Architect\Fields\Types\Text',
+    //             "identifier" : "slug",
+    //             "type" : "text",
+    //             "name" : "Slug"
+    //         },{
+    //             "class" : 'Modules\Architect\Fields\Types\Image',
+    //             "identifier" : "image",
+    //             "type" : "image",
+    //             "name" : "Image"
+    //         }
+    //     ]
+    //     //"settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed']),
+    // };
+
+    console.log('PROPS', this.props);
 
     this.props.onAddField(field);
 
@@ -172,8 +154,6 @@ class TitleImageWidgetList extends Component
   renderInputs() {
      var fields = [];
      var _this = this;
-
-     console.log("TitleImageWidgetList :: renderInputs => ",this.props.field);
 
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){
@@ -230,4 +210,4 @@ class TitleImageWidgetList extends Component
   }
 
 }
-export default TitleImageWidgetList;
+export default ListWidget;

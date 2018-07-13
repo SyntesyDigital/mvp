@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-import TitleImageWidget from './../Widgets/TitleImageWidget';
+// WIDGETS LIST
+import CommonWidget from './../Widgets/CommonWidget';
+//import TitleImageWidget from './../Widgets/TitleImageWidget';
 
 class ModalEditListItem extends Component {
 
@@ -9,6 +11,10 @@ class ModalEditListItem extends Component {
     super(props);
 
     // console.log(" ModalEditItem :: construct ",props);
+
+    this.widgets = {
+        CommonWidget: CommonWidget
+    };
 
     this.state = {
       field : null
@@ -22,11 +28,12 @@ class ModalEditListItem extends Component {
     console.log(" ModalEditListItem :: processProps ",props);
 
     var field = JSON.parse(JSON.stringify(props.item.field));
-    field.identifier = "temp_"+JSON.stringify(props.item.id);
-    field.value = field !== undefined &&
-      field.value !== undefined ? field.value : null;
+    //field.identifier = "temp_"+JSON.stringify(props.item.id);
 
-    //
+    if(field.type != "widget-list") {
+        field.value = field !== undefined && field.value !== undefined ? field.value : null;
+    } else {}
+
     // console.log("ModalEditItem :: field after process : ",field);
 
     return field;
@@ -104,18 +111,32 @@ class ModalEditListItem extends Component {
 
   renderWidget() {
 
-    switch(this.state.field.type ) {
+    switch(this.state.field.type) {
+        case "widget-list":
         case "widget":
-          return (
-            <TitleImageWidget
-              field={this.state.field}
-              hideTab={true}
-              translations={this.props.translations}
-              onFieldChange={this.onFieldChange.bind(this)}
-              onContentSelect={this.props.onContentSelect}
-              onImageSelect={this.props.onImageSelect}
-            />
-          );
+            const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
+            return (
+                <Widget
+                    field={this.state.field}
+                    hideTab={true}
+                    translations={this.props.translations}
+                    onFieldChange={this.onFieldChange.bind(this)}
+                    onContentSelect={this.props.onContentSelect}
+                    onImageSelect={this.props.onImageSelect}
+                />
+            );
+
+        // case "widget":
+        //   return (
+        //     <TitleImageWidget
+        //       field={this.state.field}
+        //       hideTab={true}
+        //       translations={this.props.translations}
+        //       onFieldChange={this.onFieldChange.bind(this)}
+        //       onContentSelect={this.props.onContentSelect}
+        //       onImageSelect={this.props.onImageSelect}
+        //     />
+        //   );
 
       default :
         return null;

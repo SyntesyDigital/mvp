@@ -9,11 +9,11 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
-class Widget1 extends Widget implements WidgetInterface
+class TitleImage extends Widget implements WidgetInterface
 {
     public $type = 'widget';
     public $icon = 'fa-font';
-    public $name = 'WIDGET_1';
+    public $name = 'TITLE_IMAGE';
     public $component = 'CommonWidget';
 
     public $fields = [
@@ -30,10 +30,10 @@ class Widget1 extends Widget implements WidgetInterface
             "name" => "Slug" // <= FIXME : translate it!
         ],
         [
-            "class" => 'Modules\Architect\Fields\Types\Link',
-            "identifier" => "link",
-            "type" => "link", // <= FIXME
-            "name" => "Link" // <= FIXME : translate it!
+            "class" => 'Modules\Architect\Fields\Types\Image',
+            "identifier" => "image",
+            "type" => "image", // <= FIXME
+            "name" => "Image" // <= FIXME : translate it!
         ],
     ];
 
@@ -43,8 +43,7 @@ class Widget1 extends Widget implements WidgetInterface
 
     public $settings = [
         'htmlId',
-        'htmlClass',
-        'allowedTypologies'
+        'htmlClass'
     ];
 
 }

@@ -16,8 +16,8 @@ import LocalizationField from './../ContentFields/LocalizationField';
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
+import ListWidget from './../Widgets/ListWidget';
 import TitleImageWidget from './../Widgets/TitleImageWidget';
-import TitleImageWidgetList from './../Widgets/TitleImageWidgetList';
 
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
@@ -25,10 +25,7 @@ import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSetting
 import ModalEditListItem from './ModalEditListItem';
 
 class ModalEditItem extends Component {
-    
-    
 
-    
   /*
     listItemInfo = {
       identifier : this.props.field.identifier,
@@ -39,70 +36,57 @@ class ModalEditItem extends Component {
   */
   constructor(props){
     super(props);
-    
+
     this.widgets = {
         CommonWidget: CommonWidget,
-        TitleImageWidget: TitleImageWidget,
-        TitleImageWidgetList: TitleImageWidgetList
+        TitleImageWidget: TitleImageWidget
     };
 
     // console.log(" ModalEditItem :: construct ",props);
 
     this.state = {
-      field : null,
-
-      displayListItemModal : false,
-      listItemInfo : null
-
+        field : null,
+        displayListItemModal : false,
+        listItemInfo : null
     };
 
     this.onModalClose = this.onModalClose.bind(this);
   }
 
   processProps(props) {
-
-    //console.log(" ModalEditItem :: processProps ",props);
-
     var field = JSON.parse(JSON.stringify(props.item.data.field));
-    field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
-    field.value = props.item.data.field !== undefined &&
-      props.item.data.field.value !== undefined ? props.item.data.field.value : null;
+    //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
 
-    //
-    // console.log("ModalEditItem :: field after process : ",field);
+    if(field.type != "widget-list") {
+        field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
+            ? props.item.data.field.value
+            : null;
+    } else {}
+
 
     return field;
   }
 
   componentDidMount() {
-
     if(this.props.display){
         this.modalOpen();
     }
-
   }
 
   componentWillReceiveProps(nextProps)
   {
-
-    console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
-
     var field = null;
 
     if(nextProps.display){
         this.modalOpen();
         field = this.processProps(nextProps);
-
     } else {
         this.modalClose();
     }
 
-     //console.log("ModalEditItem :: componentWillReceiveProps :: =>",field);
-
     this.setState({
       field : field
     });
-
   }
 
   onModalClose(e){
@@ -110,13 +94,11 @@ class ModalEditItem extends Component {
       this.props.onItemCancel();
   }
 
-  modalOpen()
-  {
+  modalOpen() {
     TweenMax.to($("#modal-edit-item"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
   }
 
   modalClose() {
-
     var self =this;
       TweenMax.to($("#modal-edit-item"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
         /*
@@ -141,11 +123,8 @@ class ModalEditItem extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const field = this.state.field;
-
     this.props.onSubmitData(field);
-
   }
 
   renderField() {
@@ -250,11 +229,11 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
-         
-        
-        case "widget":    
+
+
+        case "widget":
             const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
-            return <Widget 
+            return <Widget
                 field={this.state.field}
                 hideTab={true}
                 translations={this.props.translations}
@@ -263,18 +242,26 @@ class ModalEditItem extends Component {
                 onImageSelect={this.props.onImageSelect}
             />
 
-          
-        case "widget-2":
-          return (
-            <TitleImageWidgetList
-              field={this.state.field}
-              hideTab={true}
-              translations={this.props.translations}
-              onFieldChange={this.onFieldChange.bind(this)}
-              onAddField={this.props.onAddField}
-              onListItemEdit={this.handleListItemEdit.bind(this)}
+        case "widget-list":
+            return <ListWidget
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onFieldChange={this.onFieldChange.bind(this)}
+                onAddField={this.props.onAddField}
+                onListItemEdit={this.handleListItemEdit.bind(this)}
             />
-          );
+        // case "widget-2":
+        //   return (
+        //     <TitleImageWidgetList
+        //       field={this.state.field}
+        //       hideTab={true}
+        //       translations={this.props.translations}
+        //       onFieldChange={this.onFieldChange.bind(this)}
+        //       onAddField={this.props.onAddField}
+        //       onListItemEdit={this.handleListItemEdit.bind(this)}
+        //     />
+        //   );
 
       default :
         return null;

@@ -121,16 +121,16 @@ class ContentsDragField extends Component {
 
         <div className="field-inputs">
           <div className="row">
-						<div className="field-name col-xs-6">
-							{this.props.name}
+		  	<div className="field-name col-xs-6">
+				{this.props.name}
             </div>
           </div>
         </div>
 
         <div className="field-actions">
-					<a href="" className="" onClick={this.onEditField}> <i className="fa fa-pencil"></i> Editar </a> &nbsp;
-					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
-					&nbsp;&nbsp;
+			<a href="" className="" onClick={this.onEditField}> <i className="fa fa-pencil"></i> Editar </a> &nbsp;
+			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+			&nbsp;&nbsp;
         </div>
       </div>),
     );

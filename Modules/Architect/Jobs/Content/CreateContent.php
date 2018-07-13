@@ -142,8 +142,10 @@ class CreateContent
                         if($type == "widget") {
                             $fieldName = uniqid('pagewidget_');
                             $fields = isset($field['fields']) ? $field['fields'] : null;
+
                             (new $field['class'])->save($this->content, $fieldName, $fields);
 
+                            $nodes[$key]['field']['fieldname'] = $fieldName;
                             unset($nodes[$key]['field']['fields']);
                         } else {
                             $fieldName = uniqid('pagefield_');

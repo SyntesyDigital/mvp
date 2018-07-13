@@ -9,11 +9,11 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
-class Widget1 extends Widget implements WidgetInterface
+class WidgetList1 extends Widget implements WidgetInterface
 {
-    public $type = 'widget';
+    public $type = 'widget-list';
     public $icon = 'fa-font';
-    public $name = 'WIDGET_1';
+    public $name = 'WIDGET_LIST_1';
     public $component = 'CommonWidget';
 
     public $fields = [
@@ -46,6 +46,20 @@ class Widget1 extends Widget implements WidgetInterface
         'htmlClass',
         'allowedTypologies'
     ];
+
+
+    // public function save($content, $identifier, $fields)
+    // {
+    //     foreach($fields as $field) {
+    //         foreach($field['fields'] as $k => $f) {
+    //             $fieldName = $identifier . "_" . $k . "_" . $f['identifier'];
+    //             $fieldValue = isset($f['value']) ? $f['value'] : null;
+    //             (new $f['class'])->save($content, $fieldName, $fieldValue);
+    //         }
+    //     }
+    //
+    //     return true;
+    // }
 
 }
 ?>

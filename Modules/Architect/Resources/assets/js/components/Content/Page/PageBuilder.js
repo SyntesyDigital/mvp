@@ -644,21 +644,19 @@ class PageBuilder extends Component {
     var data = field;
 
     //update data to pathToIndex
-    console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
+    //console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
 
     var layout = this.props.layout;
 
-    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data,
-      function(field,data){
+    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data, function(field,data){
          if(field.value === undefined || field.value == null){
            field.value = [];
          }
          field.value.push(data);
          return field;
-      }
-    );
+     });
 
-    console.log("handleOnEditField : layout : ",layout);
+    //console.log("handleOnEditField : layout : ",layout);
 
     /*
     this.setState({
@@ -748,6 +746,8 @@ class PageBuilder extends Component {
                       return field;
                   }
               );
+              console.log('LAYOUT => ', layout);
+
               break;
       }
 
@@ -836,29 +836,29 @@ class PageBuilder extends Component {
                 }
             );
             break;
-        case "widget-2":
-            layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
-                function(field,data){
-
-                    var listIndex = self.state.listItemIndex;
-
-                    if(listIndex == -1 || field.value[listIndex] === undefined ) {
-                      console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
-                      return field;
-                    }
-
-                    if(field.value[listIndex].value == null){
-                      field.value[listIndex].value = { url : {}};
-                    }
-
-                    field.value[listIndex].value.url = {
-                      content : content
-                    };;
-
-                    return field;
-                }
-            );
-            break;
+        // case "widget-2":
+        //     layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
+        //         function(field,data){
+        //
+        //             var listIndex = self.state.listItemIndex;
+        //
+        //             if(listIndex == -1 || field.value[listIndex] === undefined ) {
+        //               console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
+        //               return field;
+        //             }
+        //
+        //             if(field.value[listIndex].value == null){
+        //               field.value[listIndex].value = { url : {}};
+        //             }
+        //
+        //             field.value[listIndex].value.url = {
+        //               content : content
+        //             };;
+        //
+        //             return field;
+        //         }
+        //     );
+        //     break;
     }
 
     this.setState({

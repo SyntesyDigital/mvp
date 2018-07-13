@@ -1,1 +1,437 @@
-var architect={currentUserHasRole:function(t){var e=CURRENT_USER;return!!e&&e.roles.filter(function(e){if(e.name==t)return e}).length>0}};architect.dialog={confirm:function(t,e){bootbox.confirm({message:t,buttons:{confirm:{label:"Sí",className:"btn-primary"},cancel:{label:"No",className:"btn-default"}},callback:function(t){e(t)}})}},architect.medias={_dropzone:null,_settings:null,_defaults:{acceptedFiles:"image/jpeg,image/png,image/gif",maxFilesize:20,paramName:"file"},init:function(t){this._settings=$.extend({},this._defaults,t),this.initDropzone(),this.setDatatable()},initDropzone:function(){var t=this,e={url:t._settings.urls.store,uploadMultiple:!1,parallelUploads:1,createImageThumbnails:!1,addRemoveLinks:!1,maxFilesize:t._settings.maxFilesize,paramName:t._settings.paramName};this._dropzone=new Dropzone(t._settings.identifier,e),this._dropzone.on("error",function(t,e){toastr.error(e.errors.file[0])}),this._dropzone.on("totaluploadprogress",function(t){$(".progress-bar").parent().addClass("progress-striped active"),$(".progress-bar").width(t+"%"),$(".progress-bar").html(t+"%")}),this._dropzone.on("maxfilesreached",function(){toastr.error("Too many files added !")}),this._dropzone.on("dragenter",function(){$(".medias-dropfiles").addClass("active")}),this._dropzone.on("dragleave dragend dragover",function(){$(".medias-dropfiles").removeClass("active")}),this._dropzone.on("maxfilesexceeded",function(t){toastr.error("File "+t.name+" is too big !")}),this._dropzone.on("queuecomplete",function(e,a){setTimeout(function(){$(".progress-bar").parent().removeClass("progress-striped active"),$(".progress-bar").width("0%"),$(".progress-bar").html("")},2e3),t._dropzone.removeAllFiles(!0)}),this._dropzone.on("success",function(e,a){t.onSuccessUpload(t)})},onSuccessUpload:function(t){toastr.success("File save correctly"),t.refresh()},setDatatable:function(){var t=this;t._settings.table.DataTable({language:{url:"/modules/architect/plugins/datatables/locales/french.json"},processing:!0,serverSide:!0,pageLength:20,language:{url:"//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"},ajax:t._settings.table.data("url"),columns:[{data:"preview",name:"preview"},{data:"uploaded_filename",name:"uploaded_filename"},{data:"type",name:"type"},{data:"author",name:"author"},{data:"action",name:"action",orderable:!1,searchable:!1}],initComplete:function(e,a){DataTableTools.init(this,{onDelete:function(e){toastr.success(e.message,"Succès !",{timeOut:3e3}),t.refresh()}}),t.initEvents()}})},refresh:function(){var t=this,e=this._settings.table,a=e.DataTable();a.ajax.reload(function(){t.initEvents(),e.find('[data-toogle="delete"]').each(function(t,e){DataTableTools._delete(a,$(this))})})},initEvents:function(){var t=this;t._settings.table.find(".toogle-edit").off("click").on("click",function(e){e.preventDefault(),void 0!==t._editModal&&t._editModal.modalOpen($(this).data("id"))})}},architect.contents={_settings:null,_defaults:{},init:function(t){this._settings=$.extend({},this._defaults,t),this.setDatatable()},setDatatable:function(){var t=this;t._settings.table.DataTable({processing:!0,serverSide:!0,pageLength:20,language:{url:"//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"},ajax:t._settings.table.data("url"),columns:[{data:"title",name:"title"},{data:"typology",name:"typology"},{data:"updated",name:"updated"},{data:"author",name:"author"},{data:"status",name:"status"},{data:"action",name:"action",orderable:!1,searchable:!1}],initComplete:function(e,a){DataTableTools.init(this,{onDelete:function(e){toastr.success(e.message,"Succès !",{timeOut:3e3}),t.refresh()}}),t.initEvents()}})},refresh:function(){var t=this,e=this._settings.table,a=e.DataTable();a.ajax.reload(function(){t.initEvents(),e.find('[data-toogle="delete"]').each(function(t,e){DataTableTools._delete(a,$(this))})})},initEvents:function(){var t=this;t._settings.table.find(".toogle-edit").off("click").on("click",function(e){e.preventDefault(),void 0!==t._editModal&&t._editModal.modalOpen($(this).data("id"))})}},architect.tags={_settings:null,_defaults:{},init:function(t){this._settings=$.extend({},this._defaults,t),this.setDatatable()},setDatatable:function(){var t=this;t._settings.table.DataTable({processing:!0,serverSide:!0,pageLength:20,language:{url:"//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"},ajax:t._settings.table.data("url"),columns:[{data:"name",name:"name"},{data:"action",name:"action",orderable:!1,searchable:!1}],initComplete:function(e,a){DataTableTools.init(this,{onDelete:function(e){toastr.success(e.message,"Success !",{timeOut:3e3}),t.refresh()}}),t.initEvents()}})},refresh:function(){var t=this,e=this._settings.table,a=e.DataTable();a.ajax.reload(function(){t.initEvents(),e.find('[data-toogle="delete"]').each(function(t,e){DataTableTools._delete(a,$(this))})})},initEvents:function(){var t=this;t._settings.table.find(".toogle-edit").off("click").on("click",function(e){e.preventDefault(),void 0!==t._editModal&&t._editModal.modalOpen($(this).data("id"))})}},architect.users={_settings:null,_defaults:{},init:function(t){this._settings=$.extend({},this._defaults,t),this.setDatatable()},setDatatable:function(){var t=this;t._settings.table.DataTable({processing:!0,serverSide:!0,pageLength:20,language:{url:"//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"},ajax:t._settings.table.data("url"),columns:[{data:"name",name:"name"},{data:"action",name:"action",orderable:!1,searchable:!1}],initComplete:function(e,a){DataTableTools.init(this,{onDelete:function(e){toastr.success(e.message,"Success !",{timeOut:3e3}),t.refresh()}}),t.initEvents()}})},refresh:function(){var t=this,e=this._settings.table,a=e.DataTable();a.ajax.reload(function(){t.initEvents(),e.find('[data-toogle="delete"]').each(function(t,e){DataTableTools._delete(a,$(this))})})},initEvents:function(){var t=this;t._settings.table.find(".toogle-edit").off("click").on("click",function(e){e.preventDefault(),void 0!==t._editModal&&t._editModal.modalOpen($(this).data("id"))})}};
+//------------------------------------------//
+//      BOOTSTRAP FOR ARCHITECT LIB
+//      @syntey-digital - 2018
+//------------------------------------------//
+var architect = {
+
+    currentUserHasRole: function(roleName) {
+        var user = CURRENT_USER;
+
+        if(!user) {
+            return false;
+        }
+
+        var role = user.roles.filter(function(r){
+            if(r.name == roleName) {
+                return r;
+            }
+        });
+
+        return role.length > 0 ? true : false;
+    },
+
+};
+
+//------------------------------------------//
+//      ARCHITECT DIALOG
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.dialog = {
+
+    confirm: function(msg, _callback) {
+        bootbox.confirm({
+            message: msg,
+            buttons: {
+                confirm: {
+                    label: 'Sí',
+                    className: 'btn-primary'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-default'
+                }
+            },
+            callback: function (result) {
+                _callback(result);
+            }
+        });
+    }
+
+};
+
+//------------------------------------------//
+//      ARCHITECT MEDIAS MANAGER
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.medias = {
+
+    _dropzone: null,
+    _settings: null,
+    _defaults: {
+        acceptedFiles : 'image/jpeg,image/png,image/gif',
+        maxFilesize : 20, // MB
+        paramName : 'file'
+    },
+
+    init: function(options)
+    {
+        this._settings = $.extend({}, this._defaults, options);
+        this.initDropzone();
+        this.setDatatable();
+    },
+
+
+    initDropzone: function()
+    {
+        var _this = this;
+
+        var settings = {
+            url: _this._settings.urls.store,
+            uploadMultiple: false,
+            parallelUploads: 1,
+            createImageThumbnails : false,
+            // acceptedFiles: _this._settings.acceptedFiles,
+            addRemoveLinks: false,
+            maxFilesize: _this._settings.maxFilesize,
+            paramName: _this._settings.paramName,
+            /*
+            thumbnail: function(file, dataUrl) {
+                return false;
+            }*/
+        };
+
+        this._dropzone = new Dropzone(_this._settings.identifier, settings);
+
+        this._dropzone.on("error", function(file, response) {
+            toastr.error(response.errors.file[0]);
+        });
+
+        this._dropzone.on("totaluploadprogress", function(progress) {
+            $(".progress-bar").parent().addClass("progress-striped active");
+            $(".progress-bar").width(progress + "%");
+            $(".progress-bar").html(progress + "%");
+        });
+
+        this._dropzone.on("maxfilesreached", function() {
+            toastr.error('Too many files added !');
+        });
+
+        this._dropzone.on("dragenter", function() {
+            $('.medias-dropfiles').addClass("active");
+        });
+
+        this._dropzone.on("dragleave dragend dragover", function() {
+            $('.medias-dropfiles').removeClass("active");
+        });
+
+        this._dropzone.on("maxfilesexceeded", function(file) {
+            toastr.error('File ' + file.name + ' is too big !');
+        });
+
+        this._dropzone.on("queuecomplete", function(file, response) {
+            setTimeout(function() {
+                $(".progress-bar").parent().removeClass("progress-striped active");
+                $(".progress-bar").width("0%");
+                $(".progress-bar").html("");
+            }, 2000);
+
+            _this._dropzone.removeAllFiles(true);
+        });
+
+
+        this._dropzone.on("success", function(file, response) {
+            _this.onSuccessUpload(_this);
+        });
+    },
+
+    onSuccessUpload: function(_this)
+    {
+        toastr.success('File save correctly');
+        _this.refresh();
+    },
+
+    setDatatable: function()
+    {
+        var _this = this;
+
+        var table = _this._settings.table.DataTable({
+    	    language: {
+    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
+    	    },
+    		processing: true,
+          serverSide: true,
+    	    pageLength: 20,
+          language: {
+              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+          },
+    	    ajax: _this._settings.table.data('url'),
+    	    columns: [
+    	        // {data: 'id', name: 'id', width: '40'},
+                {data: 'preview', name: 'preview'},
+    	        {data: 'uploaded_filename', name: 'uploaded_filename'},
+                {data: 'type', name: 'type'},
+                {data: 'author', name: 'author'},
+    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+    	    ],
+            initComplete: function(settings, json) {
+                DataTableTools.init(this, {
+                    onDelete: function(response) {
+                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                        _this.refresh();
+                    }
+                });
+
+                _this.initEvents();
+    	    }
+        });
+    },
+
+    refresh: function()
+    {
+        var _this = this;
+        var table = this._settings.table;
+        var datatable = table.DataTable();
+
+        datatable.ajax.reload(function(){
+            _this.initEvents();
+
+            // FIXME : Find a better way :)
+            table.find('[data-toogle="delete"]').each(function(k,v){
+                DataTableTools._delete(datatable, $(this));
+            });
+        });
+    },
+
+    initEvents: function()
+    {
+        var _this = this;
+        _this._settings.table.find('.toogle-edit')
+            .off('click')
+            .on('click', function(e) {
+                e.preventDefault();
+
+                if(_this._editModal !== undefined) {
+                    _this._editModal.modalOpen($(this).data('id'));
+                }
+            });
+    }
+}
+
+//------------------------------------------//
+//      ARCHITECT CONTENT MANAGER
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.contents = {
+
+    _settings: null,
+    _defaults: {},
+
+    init: function(options)
+    {
+        this._settings = $.extend({}, this._defaults, options);
+        this.setDatatable();
+    },
+
+    setDatatable: function()
+    {
+        var _this = this;
+
+        var table = _this._settings.table.DataTable({
+    		processing: true,
+            serverSide: true,
+    	    pageLength: 20,
+              language: {
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+              },
+    	    ajax: _this._settings.table.data('url'),
+    	    columns: [
+                {data: 'title', name: 'title'},
+                {data: 'typology', name: 'typology'},
+                {data: 'updated', name: 'updated'},
+                {data: 'author', name: 'author'},
+                {data: 'status', name: 'status'},
+    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+    	    ],
+            initComplete: function(settings, json) {
+                DataTableTools.init(this, {
+                    onDelete: function(response) {
+                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                        _this.refresh();
+                    }
+                });
+
+                _this.initEvents();
+    	    }
+        });
+    },
+
+    refresh: function()
+    {
+        var _this = this;
+        var table = this._settings.table;
+        var datatable = table.DataTable();
+
+        datatable.ajax.reload(function(){
+            _this.initEvents();
+
+            // FIXME : Find a better way :)
+            table.find('[data-toogle="delete"]').each(function(k,v){
+                DataTableTools._delete(datatable, $(this));
+            });
+        });
+    },
+
+    initEvents: function()
+    {
+        var _this = this;
+        _this._settings.table.find('.toogle-edit')
+            .off('click')
+            .on('click', function(e) {
+                e.preventDefault();
+
+                if(_this._editModal !== undefined) {
+                    _this._editModal.modalOpen($(this).data('id'));
+                }
+            });
+    }
+}
+
+//------------------------------------------//
+//      ARCHITECT TAG MANAGER
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.tags = {
+
+    _settings: null,
+    _defaults: {},
+
+    init: function(options)
+    {
+        this._settings = $.extend({}, this._defaults, options);
+        this.setDatatable();
+    },
+
+    setDatatable: function()
+    {
+        var _this = this;
+
+        var table = _this._settings.table.DataTable({
+    		processing: true,
+            serverSide: true,
+    	    pageLength: 20,
+              language: {
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+              },
+    	    ajax: _this._settings.table.data('url'),
+    	    columns: [
+                {data: 'name', name: 'name'},
+    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+    	    ],
+            initComplete: function(settings, json) {
+                DataTableTools.init(this, {
+                    onDelete: function(response) {
+                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        _this.refresh();
+                    }
+                });
+
+                _this.initEvents();
+    	    }
+        });
+    },
+
+    refresh: function()
+    {
+        var _this = this;
+        var table = this._settings.table;
+        var datatable = table.DataTable();
+
+        datatable.ajax.reload(function(){
+            _this.initEvents();
+
+            // FIXME : Find a better way :)
+            table.find('[data-toogle="delete"]').each(function(k,v){
+                DataTableTools._delete(datatable, $(this));
+            });
+        });
+    },
+
+    initEvents: function()
+    {
+        var _this = this;
+        _this._settings.table.find('.toogle-edit')
+            .off('click')
+            .on('click', function(e) {
+                e.preventDefault();
+
+                if(_this._editModal !== undefined) {
+                    _this._editModal.modalOpen($(this).data('id'));
+                }
+            });
+    }
+}
+
+//------------------------------------------//
+//      ARCHITECT USERS MANAGER
+//      @syntey-digital - 2018
+//------------------------------------------//
+architect.users = {
+
+    _settings: null,
+    _defaults: {},
+
+    init: function(options)
+    {
+        this._settings = $.extend({}, this._defaults, options);
+        this.setDatatable();
+    },
+
+    setDatatable: function()
+    {
+        var _this = this;
+
+        var table = _this._settings.table.DataTable({
+    		processing: true,
+            serverSide: true,
+    	    pageLength: 20,
+              language: {
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+              },
+    	    ajax: _this._settings.table.data('url'),
+    	    columns: [
+                {data: 'name', name: 'name'},
+    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+    	    ],
+            initComplete: function(settings, json) {
+                DataTableTools.init(this, {
+                    onDelete: function(response) {
+                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        _this.refresh();
+                    }
+                });
+
+                _this.initEvents();
+    	    }
+        });
+    },
+
+    refresh: function()
+    {
+        var _this = this;
+        var table = this._settings.table;
+        var datatable = table.DataTable();
+
+        datatable.ajax.reload(function(){
+            _this.initEvents();
+
+            // FIXME : Find a better way :)
+            table.find('[data-toogle="delete"]').each(function(k,v){
+                DataTableTools._delete(datatable, $(this));
+            });
+        });
+    },
+
+    initEvents: function()
+    {
+        var _this = this;
+        _this._settings.table.find('.toogle-edit')
+            .off('click')
+            .on('click', function(e) {
+                e.preventDefault();
+
+                if(_this._editModal !== undefined) {
+                    _this._editModal.modalOpen($(this).data('id'));
+                }
+            });
+    }
+}
