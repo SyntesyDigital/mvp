@@ -136,19 +136,29 @@ class UpdateContent
                 } else {
                     if(isset($node['field'])) {
                         $field = $node['field'];
+                        $type = isset($field['type']) ? $field['type'] : null;
 
-                        $fieldName = uniqid('pagefield_');
-                        $fieldValue = isset($field['value']) ? $field['value'] : null;
+                        if($type == "widget") {
+                            $fieldName = uniqid('pagewidget_');
+                            $fields = isset($field['fields']) ? $field['fields'] : null;
+                            (new $field['class'])->save($this->content, $fieldName, $fields);
 
-                        (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                            unset($nodes[$key]['field']['fields']);
+                            $nodes[$key]['field']['fieldname'] = $fieldName;
+                        } else {
+                            $fieldName = uniqid('pagefield_');
+                            $fieldValue = isset($field['value']) ? $field['value'] : null;
+
+                            (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+
+                            $nodes[$key]['field']['name'] = $fieldName;
+                        }
+
                         unset($nodes[$key]['field']['value']);
-
-                        $nodes[$key]['field']['name'] = $fieldName;
                     }
                 }
             }
         }
-
 
         return $nodes;
     }

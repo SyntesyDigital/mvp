@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
+// CONTENT FIELDS
 import TextField from './../ContentFields/TextField';
 import RichTextField from './../ContentFields/RichTextField';
 import ImageField from './../ContentFields/ImageField';
@@ -13,16 +14,20 @@ import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 
+// WIDGETS LIST
+import CommonWidget from './../Widgets/CommonWidget';
 import TitleImageWidget from './../Widgets/TitleImageWidget';
 import TitleImageWidgetList from './../Widgets/TitleImageWidgetList';
 
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
-
 import ModalEditListItem from './ModalEditListItem';
 
 class ModalEditItem extends Component {
+
+
+
 
   /*
     listItemInfo = {
@@ -34,6 +39,12 @@ class ModalEditItem extends Component {
   */
   constructor(props){
     super(props);
+
+    this.widgets = {
+        CommonWidget: CommonWidget,
+        TitleImageWidget: TitleImageWidget,
+        TitleImageWidgetList: TitleImageWidgetList
+    };
 
     // console.log(" ModalEditItem :: construct ",props);
 
@@ -128,6 +139,28 @@ class ModalEditItem extends Component {
 
   }
 
+  onWidgetChange(field) {
+
+    var stateField = this.state.field;
+    stateField.fields = field.fields;
+    this.setState({
+        field : stateField
+    });
+
+  }
+
+  onWidgetContentSelect(field) {
+
+    console.log("ModalEditItem :: onWidgetContentSelect");
+
+  }
+
+  onWidgetImageSelect(field) {
+
+    console.log("ModalEditItem :: onWidgetImageSelect");
+
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -139,7 +172,7 @@ class ModalEditItem extends Component {
 
   renderField() {
 
-    switch(this.state.field.type ) {
+    switch(this.state.field.type) {
       case FIELDS.TEXT.type:
         return (
           <TextField
@@ -239,17 +272,19 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
+
         case "widget":
-          return (
-            <TitleImageWidget
-              field={this.state.field}
-              hideTab={true}
-              translations={this.props.translations}
-              onFieldChange={this.onFieldChange.bind(this)}
-              onContentSelect={this.props.onContentSelect}
-              onImageSelect={this.props.onImageSelect}
+            const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
+            return <Widget
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onWidgetChange={this.onWidgetChange.bind(this)}
+                onContentSelect={this.onWidgetContentSelect.bind(this)}
+                onImageSelect={this.onWidgetImageSelect.bind(this)}
             />
-          );
+
+
         case "widget-2":
           return (
             <TitleImageWidgetList

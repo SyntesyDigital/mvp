@@ -119,8 +119,8 @@ class ModalSelectItem extends Component {
 
   addWidget(e) {
 
-    e.preventDefault()
-
+    e.preventDefault();
+    
     this.props.onItemSelected({
       type : 'item',
       field : {
@@ -182,9 +182,48 @@ class ModalSelectItem extends Component {
 
     return fields;
   }
+  
+  renderWidget() {
+      var widgets = [];
 
+      var nonAllowed = [
+      ];
+
+      for( var key in WIDGETS){
+
+        if(nonAllowed.indexOf(WIDGETS[key].type) == -1){
+          widgets.push(
+            <div className="col-xs-3" key={key}>
+              <a href="" onClick={this.addItem.bind(this,WIDGETS[key])}>
+                <div className="grid-item">
+                  <i className={"fa "+ WIDGETS[key].icon}></i>
+                  <p className="grid-item-name">
+                    {WIDGETS[key].name}
+                  </p>
+                </div>
+              </a>
+            </div>
+          );
+        }
+
+      }
+
+      return widgets;
+  }
+  
   render() {
-
+      
+      // <div className="col-xs-3">
+      //   <a href="" onClick={this.addWidget.bind(this)}>
+      //     <div className="grid-item">
+      //       <i className="fa fa-file-o"></i>
+      //       <p className="grid-item-name">
+      //         Widget Simple
+      //       </p>
+      //     </div>
+      //   </a>
+      // </div>
+      
     return (
       <div className="custom-modal no-buttons" id="select-item-modal">
         <div className="modal-background"></div>
@@ -231,18 +270,7 @@ class ModalSelectItem extends Component {
                       <hr />
 
                       <div className="row">
-
-                        <div className="col-xs-3">
-                          <a href="" onClick={this.addWidget.bind(this)}>
-                            <div className="grid-item">
-                              <i className="fa fa-file-o"></i>
-                              <p className="grid-item-name">
-                                Widget Simple
-                              </p>
-                            </div>
-                          </a>
-                        </div>
-
+                        
                         <div className="col-xs-3">
                           <a href="" onClick={this.addWidget2.bind(this)}>
                             <div className="grid-item">
@@ -253,9 +281,10 @@ class ModalSelectItem extends Component {
                             </div>
                           </a>
                         </div>
-
+                        
+                        {this.renderWidget()}
+                        
                       </div>
-
 
                     </div>
 

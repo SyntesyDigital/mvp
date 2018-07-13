@@ -13,7 +13,6 @@ use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
 class CreateContent
 {
-
     public function __construct($attributes)
     {
         $this->languages = Language::all();
@@ -133,20 +132,29 @@ class CreateContent
     function savePageBuilderFields(&$nodes) {
         if($nodes) {
             foreach ($nodes as $key => $node) {
-
                 if(isset($node['children'])) {
                     $nodes[$key]['children'] = $this->savePageBuilderFields($node['children']);
                 } else {
                     if(isset($node['field'])) {
                         $field = $node['field'];
+                        $type = isset($field['type']) ? $field['type'] : null;
 
-                        $fieldName = uniqid('pagefield_');
-                        $fieldValue = isset($field['value']) ? $field['value'] : null;
+                        if($type == "widget") {
+                            $fieldName = uniqid('pagewidget_');
+                            $fields = isset($field['fields']) ? $field['fields'] : null;
+                            (new $field['class'])->save($this->content, $fieldName, $fields);
 
-                        (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+                            unset($nodes[$key]['field']['fields']);
+                        } else {
+                            $fieldName = uniqid('pagefield_');
+                            $fieldValue = isset($field['value']) ? $field['value'] : null;
+
+                            (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
+
+                            $nodes[$key]['field']['name'] = $fieldName;
+                        }
+
                         unset($nodes[$key]['field']['value']);
-
-                        $nodes[$key]['field']['name'] = $fieldName;
                     }
                 }
             }
@@ -168,7 +176,5 @@ class CreateContent
             'content_id' => $this->content->id
         ]);
     }
-
-
 
 }
