@@ -3,6 +3,7 @@
     <div id="{{$node['settings']['htmlId'] or ''}}" class="row {{$node['settings']['htmlClass'] or ''}}">
       @if($node['settings']['hasContainer'])
         <div class="container">
+          <div class="row">
       @endif
 @endif
 
@@ -47,6 +48,7 @@
 {{-- CLOSE ROW AND COL --}}
 @if($node['type'] == "row" || $node['type'] == "col")
       @if(isset($node['settings']['hasContainer']) && $node['settings']['hasContainer'])
+          </div>
         </div>
       @endif
     </div>

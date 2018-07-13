@@ -81,6 +81,30 @@ class PageItem extends Component {
     }
   }
 
+  renderLinkPreview() {
+    var value = null;
+
+    console.log("this.props.data.field.value => ",this.props.data.field.value);
+
+    if(this.props.data.field.value !== undefined && this.props.data.field.value != null
+      && this.props.data.field.value.title !== undefined && this.props.data.field.value.title != null
+      && this.props.data.field.value.title.ca !== undefined ){
+
+      value = this.props.data.field.value.title.ca;
+    }
+
+    if(value != null) {
+      return (
+        <a href="" className="text-preview">
+          <p>{value}</p>
+        </a>
+      );
+    }
+    else {
+      return this.renderDefaultPreview();
+    }
+  }
+
   renderRichTextPreview() {
     var value = null;
 
@@ -112,8 +136,13 @@ class PageItem extends Component {
       this.props.data.field.value != null ){
 
       //console.log("renderImagePreview => ",this.props.data.field.value);
+      var crop = 'original';
 
-      value = this.props.data.field.value.urls.thumbnail;
+      if(this.props.data.field.settings.cropsAllowed != null){
+        crop = this.props.data.field.settings.cropsAllowed;
+      }
+
+      value = this.props.data.field.value.urls[crop];
     }
 
     if(value != null) {
@@ -149,6 +178,8 @@ class PageItem extends Component {
         return this.renderRichTextPreview();
       case FIELDS.IMAGE.type:
         return this.renderImagePreview();
+      case FIELDS.LINK.type:
+        return this.renderLinkPreview();
 
       default :
         return this.renderDefaultPreview();
