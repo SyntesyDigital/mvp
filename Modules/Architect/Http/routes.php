@@ -46,6 +46,13 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
     Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
+    // Layouts
+    Route::post('/page-layouts', 'PageLayoutController@store')->name('pagelayouts.store');
+    Route::get('/page-layouts', 'PageLayoutController@index')->name('pagelayouts');
+    Route::get('/page-layouts/{pageLayout?}/show', 'PageLayoutController@show')->name('pagelayouts.show');
+    Route::get('/page-layouts/data', 'PageLayoutController@data')->name('pagelayouts.data');
+    Route::delete('/page-layouts/{pageLayout?}/delete', 'PageLayoutController@delete')->name('pagelayouts.delete');
+
     // Contents
     Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');
     Route::get('/contents', 'ContentController@index')->name('contents');

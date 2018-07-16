@@ -20,6 +20,16 @@ class ContentBar extends Component {
           });
   }
 
+  saveLayout(e) {
+      e.preventDefault();
+      this.props.onLayoutSave != undefined ? this.props.onLayoutSave() : null;
+  }
+
+  loadLayout(e) {
+      e.preventDefault();
+      this.props.onLoadLayout != undefined ? this.props.onLoadLayout() : null;
+  }
+
   render() {
     return (
       <div className="page-bar">
@@ -35,7 +45,6 @@ class ContentBar extends Component {
                 {'\u00A0'}
 
                 { this.props.name != "" ? this.props.name : "Nou contingut" }
-
               </h1>
 
               <div className="float-buttons pull-right">
@@ -61,6 +70,25 @@ class ContentBar extends Component {
                                 &nbsp;Duplicar
                             </a>
                         </li>
+
+                        {this.props.onLoadLayout &&
+                        <li>
+                            <a href="#" onClick={this.loadLayout.bind(this)}>
+                                <i className="fa fa-download"></i>
+                                &nbsp;Load layout
+                            </a>
+                        </li>
+                        }
+
+                        {this.props.onLayoutSave &&
+                        <li>
+                            <a href="#" onClick={this.saveLayout.bind(this)}>
+                                <i className="fa fa-upload"></i>
+                                &nbsp;Save as layout
+                            </a>
+                        </li>
+                        }
+
                         <li>
                             <a href="#" className="text-danger">
                                 <i className="fa fa-trash text-danger"></i>

@@ -44,6 +44,7 @@ class PageBuilder extends Component {
         displayContentModal: false,
         displayClassModal: false,
 
+
         pathToIndex : null,
         editItemData : null,
         addPosition : null,
@@ -60,6 +61,7 @@ class PageBuilder extends Component {
     this.handleContentSelect = this.handleContentSelect.bind(this);
     this.handleContentSelected = this.handleContentSelected.bind(this);
     this.handleContentCancel = this.handleContentCancel.bind(this);
+
 
   }
 
@@ -87,6 +89,10 @@ class PageBuilder extends Component {
       }
     }
   }
+
+
+
+
 
   /******** Modal Items  ********/
 
@@ -882,6 +888,7 @@ class PageBuilder extends Component {
           onImageCancel={this.handleImageCancel.bind(this)}
           zIndex={10000}
         />
+
 
         <ContentSelectModal
           display={this.state.displayContentModal}
