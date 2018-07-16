@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
     // Contents
+    Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');
     Route::get('/contents', 'ContentController@index')->name('contents');
     Route::get('/contents/data', 'ContentController@data')->name('contents.data');
     Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');
     Route::put('/contents/{content?}/publish', 'ContentController@publish')->name('contents.publish');
     Route::delete('/contents/{content?}/delete', 'ContentController@delete')->name('contents.delete');
+
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');

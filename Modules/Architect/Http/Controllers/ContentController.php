@@ -23,6 +23,9 @@ use Modules\Architect\Jobs\Content\DeleteContent;
 use Modules\Architect\Http\Requests\Content\PublishContentRequest;
 use Modules\Architect\Jobs\Content\PublishContent;
 
+use Modules\Architect\Http\Requests\Content\DuplicateContentRequest;
+use Modules\Architect\Jobs\Content\DuplicateContent;
+
 // Models
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Content;
@@ -157,4 +160,16 @@ class ContentController extends Controller
         ], 500);
     }
 
+
+    public function duplicate(Content $content, DuplicateContentRequest $request)
+    {
+        $content = dispatch_now(DuplicateContent::fromRequest($content, $request));
+
+        return $content ? response()->json([
+            'success' => true,
+            'content' => $content
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
 }

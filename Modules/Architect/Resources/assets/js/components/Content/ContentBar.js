@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import axios from 'axios';
 
 class ContentBar extends Component {
 
   constructor(props){
     super(props);
+  }
 
-    console.log("ContentBar => ",props);
-
+  duplicate(){
+      axios.post('/architect/contents/' + this.props.content.id + '/duplicate', {})
+          .then((response) => {
+              if(response.data.content) {
+                  window.location.href = "/architect/contents/" + response.data.content.id;
+              }
+          })
+          .catch((error) => {
+              //console.log(error.config);
+          });
   }
 
   render() {
@@ -46,7 +56,7 @@ class ContentBar extends Component {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" onClick={this.duplicate.bind(this)}>
                                 <i className="fa fa-files-o"></i>
                                 &nbsp;Duplicar
                             </a>
