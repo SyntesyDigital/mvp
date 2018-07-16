@@ -14,28 +14,29 @@ class WidgetList1 extends Widget implements WidgetInterface
     public $type = 'widget-list';
     public $icon = 'fa-font';
     public $name = 'WIDGET_LIST_1';
+
     public $component = 'CommonWidget';
 
-    public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "title",
-            "type" => "text", // <= FIXME : ex : Text::getType()
-            "name" => "Títol", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "slug",
-            "type" => "text", // <= FIXME
-            "name" => "Slug" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Link',
-            "identifier" => "link",
-            "type" => "link", // <= FIXME
-            "name" => "Link" // <= FIXME : translate it!
-        ],
-    ];
+    // public $fields = [
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Text',
+    //         "identifier" => "title",
+    //         "type" => "text", // <= FIXME : ex : Text::getType()
+    //         "name" => "Títol", // <= FIXME : translate it!
+    //     ],
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Text',
+    //         "identifier" => "slug",
+    //         "type" => "text", // <= FIXME
+    //         "name" => "Slug" // <= FIXME : translate it!
+    //     ],
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Link',
+    //         "identifier" => "link",
+    //         "type" => "link", // <= FIXME
+    //         "name" => "Link" // <= FIXME : translate it!
+    //     ],
+    // ];
 
     public $rules = [
         'required'
