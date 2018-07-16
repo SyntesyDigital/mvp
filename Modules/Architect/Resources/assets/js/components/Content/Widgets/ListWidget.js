@@ -3,15 +3,37 @@ import { render } from 'react-dom';
 import update from 'immutability-helper'
 import ItemListDragField from './ItemListDragField';
 
+/**
 
+[
+  {
+      title : {
+        "ca" : "asdfasdfasdf",
+        "es" : "sdfasdfsdf"
+      },
+      richtect : {
+        "ca" : "sfasdfasdf",
+        "es" : "asfasdfasdf"
+      },
+      url : {
+        url :
+        content :
+      },
+
+  }
+]
+*
+*/
 class ListWidget extends Component
 {
   constructor(props)
   {
+
+    console.log("ListWidget :: constructor");
+
     super(props);
 
     this.moveField = this.moveField.bind(this);
-    this.handleEditField = this.handleEditField.bind(this);
 
     this.state = {
       fields : []
@@ -32,6 +54,10 @@ class ListWidget extends Component
           }
       });
 
+      // console.log("\n\nResult value : ");
+      // console.log(field.value);
+      // console.log(result);
+
       this.props.onFieldChange({
           identifier: this.props.field.identifier,
           value: result.value
@@ -39,26 +65,25 @@ class ListWidget extends Component
 
   }
 
-  handleEditField(index) {
-
-      // console.log('PROPS ====>', _this.props);
+  handleEditField(fieldId) {
 
     const fields = this.props.field.value;
-    var field = fields[index];
-    // var field = null;
-    // var index = -1;
-    //
-    // for (var i = 0; i < fields.length; i++) {
-    //     if (fieldId == fields[i].id) {
-    //         field = fields[i];
-    //         index = i;
-    //         break;
-    //     }
-    // }
-    //
-    // if(field == null){
-    //     return;
-    // }
+
+    var field = null;
+    var index = -1;
+
+    for (var i = 0; i < fields.length; i++) {
+        if (fieldId == fields[i].id) {
+            field = fields[i];
+            index = i;
+            break;
+        }
+    }
+
+    if(field == null){
+      console.error("ListWidget :: Field not found with id : "+fieldId);
+      return;
+    }
 
     var editInfo = {
       identifier : this.props.field.identifier,
@@ -68,6 +93,7 @@ class ListWidget extends Component
     };
 
     this.props.onListItemEdit(editInfo);
+
   }
 
   handleRemoveField(fieldId) {
@@ -112,42 +138,10 @@ class ListWidget extends Component
 
     var index = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value.length : 0;
 
-    var field = this.props.field;
-    field.index = index;
-    field.id = index;
-    field.type = 'widget';
+    //FIXME to replace with text provided by widget configuration
+    var field = WIDGETS['TITLE_IMAGE'];
 
-    // var field = {
-    //     'index' : index,
-    //     'id' : index,
-    //     'class' : "Modules\Architect\Widgets\Types\TitleImage",
-    //     'rules' : null,
-    //     "label": "WIDGET",
-    //     "name": "TITLE_IMAGE",
-    //     "type": "widget",
-    //     "icon": "fa-file-o",
-    //     "fields" : [
-    //         {
-    //             "class" : 'Modules\Architect\Fields\Types\Text',
-    //             "identifier" : "title",
-    //             "type" : "text",
-    //             "name" : "Títol",
-    //         },{
-    //             "class" : 'Modules\Architect\Fields\Types\Text',
-    //             "identifier" : "slug",
-    //             "type" : "text",
-    //             "name" : "Slug"
-    //         },{
-    //             "class" : 'Modules\Architect\Fields\Types\Image',
-    //             "identifier" : "image",
-    //             "type" : "image",
-    //             "name" : "Image"
-    //         }
-    //     ]
-    //     //"settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed']),
-    // };
-
-    console.log('PROPS', this.props);
+    console.log("ListWidget :: onAddField => ",field);
 
     this.props.onAddField(field);
 
@@ -157,8 +151,13 @@ class ListWidget extends Component
      var fields = [];
      var _this = this;
 
+     console.log("ListWidget :: renderInputs => ",this.props.field);
+
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){
+
+              console.log("ListWidget :: renderInputs =>",widget);
+
              fields.push(
                  <ItemListDragField
                     key = {widget.index}
@@ -197,16 +196,6 @@ class ListWidget extends Component
         </div>
 
       </div>
-
-
-      //click botton to add field of some type
-        //create field from field type ( widget type )
-        //add the field to array from layot, with no value
-        //open modalEditListItem with widget field type to edit
-          //edit is the same with no settigns intherited,
-        //images and contents, got directly to layout, with pathToIndex,
-          //and field array index
-
 
     );
   }

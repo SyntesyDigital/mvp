@@ -33,42 +33,7 @@ class CommonWidget extends Component
 
     const state = this.state;
 
-    // var titleValue = {};
-    // var richtextValue = {};
-    // var urlValue = {};
-    // var imageValue = null;
-    // var settings = null;
-    //
-    // if(props.field.value !== undefined && props.field.value != null){
-    //
-    //   settings = props.field.settings;
-    //
-    //   if(props.field.value.title !== undefined && props.field.value.title != null){
-    //     titleValue = props.field.value.title;
-    //   }
-    //
-    //   if(props.field.value.richtext !== undefined && props.field.value.richtext != null){
-    //     richtextValue = props.field.value.richtext;
-    //   }
-    //
-    //   //field value.value url came with url or content depending on type
-    //   if(props.field.value.url !== undefined && props.field.value.url != null){
-    //     urlValue = props.field.value.url;
-    //   }
-    //
-    //   if(props.field.value.image !== undefined && props.field.value.image != null){
-    //     imageValue = props.field.value.image;
-    //   }
-    // }
-    //
-    // state["title"].value = titleValue;
-    // state["richtext"].value = richtextValue;
-    // state["url"].value = urlValue;
-    // state["image"].value = imageValue;
-    // state["image"].settings = settings;
-
     return state;
-
   }
 
   componentDidMount() {
@@ -92,18 +57,6 @@ class CommonWidget extends Component
 
 
     this.props.onWidgetChange(stateField);
-
-    //
-    // const value = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value : {};
-    // value[field.identifier] = field.value;
-    //
-    // var field = {
-    //   identifier : this.props.field.identifier,
-    //   value : value
-    // };
-    //
-    // //propagate the state to its parent
-    // this.props.onFieldChange(field);
   }
 
   renderFields() {

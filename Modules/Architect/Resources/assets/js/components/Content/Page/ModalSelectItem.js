@@ -120,7 +120,7 @@ class ModalSelectItem extends Component {
   addWidget(e) {
 
     e.preventDefault();
-    
+
     this.props.onItemSelected({
       type : 'item',
       field : {
@@ -138,8 +138,8 @@ class ModalSelectItem extends Component {
   addWidget2(e) {
 
     e.preventDefault()
-    
-    
+
+
     this.props.onItemSelected({
       type : 'item',
       field : {
@@ -147,7 +147,7 @@ class ModalSelectItem extends Component {
         'rules' : null,
         "label": "WIDGET-2",
         "name": "Widget 2",
-        "type": "widget-2",
+        "type": "widget-list",
         "icon": "fa-file",
         "settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed'])
       }
@@ -183,7 +183,7 @@ class ModalSelectItem extends Component {
 
     return fields;
   }
-  
+
   renderWidget() {
       var widgets = [];
 
@@ -211,9 +211,9 @@ class ModalSelectItem extends Component {
 
       return widgets;
   }
-  
+
   render() {
-      
+
       // <div className="col-xs-3">
       //   <a href="" onClick={this.addWidget.bind(this)}>
       //     <div className="grid-item">
@@ -224,7 +224,7 @@ class ModalSelectItem extends Component {
       //     </div>
       //   </a>
       // </div>
-      
+
     return (
       <div className="custom-modal no-buttons" id="select-item-modal">
         <div className="modal-background"></div>
@@ -271,7 +271,7 @@ class ModalSelectItem extends Component {
                       <hr />
 
                       <div className="row">
-                        
+
                         <div className="col-xs-3">
                           <a href="" onClick={this.addWidget2.bind(this)}>
                             <div className="grid-item">
@@ -282,9 +282,9 @@ class ModalSelectItem extends Component {
                             </div>
                           </a>
                         </div>
-                        
+
                         {this.renderWidget()}
-                        
+
                       </div>
 
                     </div>

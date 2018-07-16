@@ -19,6 +19,7 @@ import CommonWidget from './../Widgets/CommonWidget';
 import ListWidget from './../Widgets/ListWidget';
 import TitleImageWidget from './../Widgets/TitleImageWidget';
 
+
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
@@ -154,6 +155,8 @@ class ModalEditItem extends Component {
 
   renderField() {
 
+    console.log("ModalEditItem : renderField => ",this.state.field);
+
     switch(this.state.field.type) {
       case FIELDS.TEXT.type:
         return (
@@ -267,25 +270,17 @@ class ModalEditItem extends Component {
             />
 
         case "widget-list":
-            return <ListWidget
-                field={this.state.field}
-                hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
-                onAddField={this.props.onAddField}
-                onListItemEdit={this.handleListItemEdit.bind(this)}
+
+          return (
+            <ListWidget
+              field={this.state.field}
+              hideTab={true}
+              translations={this.props.translations}
+              onFieldChange={this.onFieldChange.bind(this)}
+              onAddField={this.props.onAddField}
+              onListItemEdit={this.handleListItemEdit.bind(this)}
             />
-        // case "widget-2":
-        //   return (
-        //     <TitleImageWidgetList
-        //       field={this.state.field}
-        //       hideTab={true}
-        //       translations={this.props.translations}
-        //       onFieldChange={this.onFieldChange.bind(this)}
-        //       onAddField={this.props.onAddField}
-        //       onListItemEdit={this.handleListItemEdit.bind(this)}
-        //     />
-        //   );
+          );
 
       default :
         return null;
