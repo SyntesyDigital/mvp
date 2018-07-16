@@ -6,11 +6,11 @@
             <div class="container">
               <div class="row">
 
-                <div id="logo-wrapper" class="col-md-2">
+                <div id="logo-wrapper" class="col-xs-2">
                     <img src="{{asset('modules/architect/images/client-logo.jpg')}}" alt="Logo" />
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
                         @if(Auth::user()->hasRole(["admin", "editor"]))
@@ -43,7 +43,7 @@
                   </nav>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-xs-2">
 
                   <div class="topbar-right">
 

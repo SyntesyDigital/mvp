@@ -47,12 +47,5 @@ class Widget3 extends Widget implements WidgetInterface
         'allowedTypologies'
     ];
 
-    public function save($content, $identifier, $values, $languages = null)
-    {
-        // foreach( $fields as $field){
-        //     $field->save();
-        // }
-    }
-
 }
 ?>

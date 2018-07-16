@@ -14,18 +14,21 @@ class MapComponent extends Component
   {
     super(props);
 
-    this.state = {
-      center: {
-        lat: 41.38641962447808,
-        lng: 2.16962680220604,
-      },
-      zoom: 13,
-      draggable: true,
-    };
-
-    this.markerDefaultPosition = {
+    var markerPosition = {
       lat: 41.38641962447808,
       lng: 2.16962680220604,
+    };
+
+    if(props.markerPosition != null && props.markerPosition.lat !== undefined
+      && props.markerPosition.lat != ""){
+      markerPosition = props.markerPosition;
+    }
+
+    this.state = {
+      center: markerPosition,
+      markerPosition : markerPosition,
+      zoom: 13,
+      draggable: true,
     };
 
     this.updatePosition = this.updatePosition.bind(this);
@@ -54,7 +57,7 @@ class MapComponent extends Component
 
     const position = [this.state.center.lat, this.state.center.lng]
 
-    var markerPosition = this.markerDefaultPosition;
+    var markerPosition = this.state.markerPosition;
     if(this.props.markerPosition != null && this.props.markerPosition.lat !== undefined
       && this.props.markerPosition.lat != ""){
       markerPosition = this.props.markerPosition;

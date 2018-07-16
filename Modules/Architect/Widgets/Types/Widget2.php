@@ -18,9 +18,10 @@ class Widget2 extends Widget implements WidgetInterface
 
     public $fields = [
         [
+            "class" => 'Modules\Architect\Fields\Types\Text',
             "identifier" => "title",
             "type" => "text", // <= FIXME : ex : Text::getType()
-            "name" => "Títol" // <= FIXME : translate it!
+            "name" => "Títol", // <= FIXME : translate it!
         ]
     ];
 
@@ -33,13 +34,6 @@ class Widget2 extends Widget implements WidgetInterface
         'htmlClass',
         'allowedTypologies'
     ];
-
-    public function save($content, $identifier, $values, $languages = null)
-    {
-      // foreach( $fields as $field){
-      //     $field->save();
-      // }
-    }
 
 }
 ?>

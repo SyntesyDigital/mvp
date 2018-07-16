@@ -26,6 +26,9 @@ import ModalEditListItem from './ModalEditListItem';
 
 class ModalEditItem extends Component {
 
+
+
+
   /*
     listItemInfo = {
       identifier : this.props.field.identifier,
@@ -118,6 +121,28 @@ class ModalEditItem extends Component {
     this.setState({
         field : stateField
     });
+
+  }
+
+  onWidgetChange(field) {
+
+    var stateField = this.state.field;
+    stateField.fields = field.fields;
+    this.setState({
+        field : stateField
+    });
+
+  }
+
+  onWidgetContentSelect(field) {
+
+    console.log("ModalEditItem :: onWidgetContentSelect");
+
+  }
+
+  onWidgetImageSelect(field) {
+
+    console.log("ModalEditItem :: onWidgetImageSelect");
 
   }
 
@@ -230,16 +255,15 @@ class ModalEditItem extends Component {
             />
           );
 
-
         case "widget":
             const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
             return <Widget
                 field={this.state.field}
                 hideTab={true}
                 translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
-                onContentSelect={this.props.onContentSelect}
-                onImageSelect={this.props.onImageSelect}
+                onWidgetChange={this.onWidgetChange.bind(this)}
+                onContentSelect={this.onWidgetContentSelect.bind(this)}
+                onImageSelect={this.onWidgetImageSelect.bind(this)}
             />
 
         case "widget-list":

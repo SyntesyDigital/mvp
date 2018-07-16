@@ -34,7 +34,7 @@ class Widget1 extends Widget implements WidgetInterface
             "identifier" => "link",
             "type" => "link", // <= FIXME
             "name" => "Link" // <= FIXME : translate it!
-        ],
+        ]
     ];
 
     public $rules = [
