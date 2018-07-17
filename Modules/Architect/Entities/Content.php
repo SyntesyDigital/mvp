@@ -4,10 +4,11 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Content extends Model
 {
-    use HasFields;
+    use HasFields, NodeTrait;
 
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
@@ -87,6 +88,11 @@ class Content extends Model
     public function page()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
+    }
+
+    public function parent()
+    {
+    	return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
     }
 
     public function getStringStatus()

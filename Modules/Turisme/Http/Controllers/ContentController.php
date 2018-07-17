@@ -28,11 +28,12 @@ class ContentController extends Controller
       return view('turisme::contents.page',['page' => $pageBuilderAdapter->get()]);
     }
 
-    public function show(Request $request,$slug)
+    public function show(Request $request, $slug)
     {
       $slug = $request->segment(count($request->segments()));
 
-      $content = Content::whereField('slug',$slug)->first();
+      $content = Content::whereField('slug', $slug)->first();
+
 
       /*
       $breadcrumb = $content->getBreadCrump();
@@ -114,7 +115,10 @@ class ContentController extends Controller
       if($request->has('debug'))
         dd($pageBuilderAdapter->get());
 
-      return view('turisme::contents.page',['page' => $pageBuilderAdapter->get()]);
+
+      return view('turisme::contents.page',[
+          'page' => $pageBuilderAdapter->get()
+      ]);
 
     }
 
