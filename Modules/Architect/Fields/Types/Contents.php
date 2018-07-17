@@ -27,6 +27,10 @@ class Contents extends Field implements FieldInterface
 
     public function save($content, $identifier, $values, $languages = null)
     {
+        if(!$values) {
+            return false;
+        }
+        
         foreach($values as $value) {
             $id = isset($value['id']) ? $value['id'] : null;
 

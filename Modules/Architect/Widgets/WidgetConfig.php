@@ -26,7 +26,8 @@ class WidgetConfig
                 'icon' => $widget->getIcon(),
                 'settings' => $widget->getSettings() ?: null,
                 'fields' => $widget->getFields(),
-                'component' => $widget->getComponent()
+                'component' => $widget->getComponent(),
+                'widget' => $widget->getWidget()
             ];
         }
 

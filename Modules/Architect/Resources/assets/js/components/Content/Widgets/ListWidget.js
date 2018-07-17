@@ -140,10 +140,9 @@ class ListWidget extends Component
 
     event.preventDefault();
 
-
-
     //FIXME to replace with text provided by widget configuration
-    const widgetIdentifier = 'WIDGET_1';
+    const widgetIdentifier = this.props.field.widget;
+    console.log("FIELDS ======>", this.props.field);
 
     var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
     field["index"] = this.currentIndex;
