@@ -48,7 +48,8 @@ class PageBuilder extends Component {
         editItemData : null,
         addPosition : null,
         listItemIndex : -1,
-        imageCallback : null
+        imageCallback : null,
+        contentCallback : null,
     };
 
     this.handleAddRow = this.handleAddRow.bind(this);
@@ -83,7 +84,8 @@ class PageBuilder extends Component {
           pathToIndex : null,
           addPosition : null,
           editItemData : null,
-          addPosition : null
+          addPosition : null,
+          contentCallback : null,
         });
       }
     }
@@ -750,7 +752,7 @@ class PageBuilder extends Component {
 
   /******** Contents  ********/
 
-  handleContentSelect(field) {
+  handleContentSelect(field,callback) {
 
     var listItemIndex = -1;
     //FIXME try to find a more elegant way
@@ -761,7 +763,8 @@ class PageBuilder extends Component {
 
     this.setState({
       displayContentModal : true,
-      listItemIndex : listItemIndex
+      listItemIndex : listItemIndex,
+      contentCallback : callback !== undefined ? callback : null
     });
 
   }
@@ -769,7 +772,8 @@ class PageBuilder extends Component {
   handleContentCancel(){
     this.setState({
       displayContentModal : false,
-      listItemIndex : -1
+      listItemIndex : -1,
+      contentCallback : null
     });
   }
 
@@ -800,7 +804,7 @@ class PageBuilder extends Component {
                       delete field.value['url'];
                     }
                     field.value.content = content;
-                    console.log("field al final => ",field);
+                    //console.log("field al final => ",field);
 
                     return field;
                 }
@@ -808,50 +812,19 @@ class PageBuilder extends Component {
             break;
 
         case "widget":
-            layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
-                function(field,data){
-
-                    console.log(field);
-
-                    if(field.value == null){
-                      field.value = { url : {}};
-                    }
-                    field.value.url = {
-                      content : content
-                    };
-
-                    return field;
-                }
+        case "widget-list":
+            layout = this.changeItemWithCallback(layout,
+              -1,this.state.editItemData.pathToIndex,content,
+              this.state.contentCallback
             );
             break;
-        // case "widget-2":
-        //     layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,content,
-        //         function(field,data){
-        //
-        //             var listIndex = self.state.listItemIndex;
-        //
-        //             if(listIndex == -1 || field.value[listIndex] === undefined ) {
-        //               console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
-        //               return field;
-        //             }
-        //
-        //             if(field.value[listIndex].value == null){
-        //               field.value[listIndex].value = { url : {}};
-        //             }
-        //
-        //             field.value[listIndex].value.url = {
-        //               content : content
-        //             };;
-        //
-        //             return field;
-        //         }
-        //     );
-        //     break;
+
     }
 
     this.setState({
       displayContentModal : false,
-      listItemIndex : -1
+      listItemIndex : -1,
+      contentCallback : null
     });
 
     this.props.updateLayout(layout);

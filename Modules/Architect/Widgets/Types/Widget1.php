@@ -24,16 +24,34 @@ class Widget1 extends Widget implements WidgetInterface
             "name" => "Títol", // <= FIXME : translate it!
         ],
         [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "slug",
-            "type" => "text", // <= FIXME
-            "name" => "Slug" // <= FIXME : translate it!
-        ],
-        [
             "class" => 'Modules\Architect\Fields\Types\Link',
             "identifier" => "link",
             "type" => "link", // <= FIXME
             "name" => "Link" // <= FIXME : translate it!
+        ],
+        [
+            "class" => 'Modules\Architect\Fields\Types\Contents',
+            "identifier" => "contents",
+            "type" => "contents", // <= FIXME
+            "name" => "Contents" // <= FIXME : translate it!
+        ],
+        [
+            "class" => 'Modules\Architect\Fields\Types\Url',
+            "identifier" => "url",
+            "type" => "url", // <= FIXME
+            "name" => "Url" // <= FIXME : translate it!
+        ],
+        [
+            "class" => 'Modules\Architect\Fields\Types\Localization',
+            "identifier" => "map",
+            "type" => "localization", // <= FIXME
+            "name" => "Map" // <= FIXME : translate it!
+        ],
+        [
+            "class" => 'Modules\Architect\Fields\Types\Image',
+            "identifier" => "image",
+            "type" => "image", // <= FIXME
+            "name" => "Image" // <= FIXME : translate it!
         ]
     ];
 

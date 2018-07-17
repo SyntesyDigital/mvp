@@ -148,9 +148,96 @@ class ModalEditItem extends Component {
 
   }
 
-  onWidgetContentSelect(field) {
+  onWidgetContentSelect(identifier) {
 
-    console.log("ModalEditItem :: onWidgetContentSelect");
+    console.log("ModalEditItem :: onWidgetContentSelect",identifier);
+
+    var self = this;
+
+    const fields = this.state.field.fields;
+    const index = this.getFieldArrayIndex(fields,identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : ",fields,identifier);
+        return;
+    }
+
+    this.props.onContentSelect(identifier, function (field, content){
+
+      console.log("ModalEditItem :: current field => ",field);
+
+      field.fields[index] = self.processContentField(field.fields[index],content);
+
+      return field;
+
+    });
+
+  }
+
+  processContentField(field,content) {
+
+    switch (field.type) {
+
+      case FIELDS.LINK.type:
+        if(field.value == null){
+          field.value = {};
+        }
+        else if(field.value.url !== undefined){
+          delete field.value['url'];
+        }
+        field.value.content = content;
+
+        return field;
+
+      case FIELDS.URL.type:
+        if(field.value == null){
+          field.value = {};
+        }
+        else if(field.value.url !== undefined){
+          delete field.value['url'];
+        }
+        field.value.content = content;
+
+        return field;
+
+      case FIELDS.CONTENTS.type:
+
+        if(field.value === undefined || field.value == null){
+          field.value = [];
+        }
+
+        field.value.push(content);
+
+        return field;
+    }
+
+  }
+
+  handleListContentSelect(identifier) {
+
+    var self = this;
+    const {listItemInfo} = this.state;
+
+    const fields = this.state.field.value[listItemInfo.index].fields;
+    const index = this.getFieldArrayIndex(fields,identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+identifier);
+        return;
+    }
+
+    console.log("ModalEditItem :: handleListContentSelect => ",fields,index);
+
+    this.props.onContentSelect(identifier, function (field, content){
+
+      field.value[listItemInfo.index].fields[index] = self.processContentField(
+        field.value[listItemInfo.index].fields[index],
+        content
+      );
+
+      return field;
+
+    });
 
   }
 
@@ -177,7 +264,7 @@ class ModalEditItem extends Component {
     const index = this.getFieldArrayIndex(fields,field.identifier);
 
     if(index == -1){
-        console.error("ModalEditItem :: id not found : "+identifier);
+        console.error("ModalEditItem :: id not found : "+field.identifier);
         return;
     }
 
@@ -214,41 +301,20 @@ class ModalEditItem extends Component {
   }
 
 
+
+
   onSubmit(e) {
     e.preventDefault();
     const field = this.state.field;
     this.props.onSubmitData(field);
   }
 
-  /**
-  *   Metodo para actualizar el state del ModalEditItem. Aqui hay un lio
-  *   porque para poder usar las modales, en el page builder, es necesario que el campo
-  *   exista, al mismo tiempo, no podemos actuailzar el state de este componente
-  *   siempre porque se perderia los cambios que no han sido guardados en react,
-  *   TODO idealmente la modal tendria que estar vinculada solo al componente actual
-  *   que se esta editando.
-  */
   onAddListField(field) {
-
-    /*
-    const stateField = this.state.field;
-    if(stateField.value === undefined || stateField.value == null){
-      stateField.value = [];
-    }
-    stateField.value.push(field);
-    this.setState({
-        field : stateField
-    });
-    */
-
     this.props.onAddField(field);
-
   }
 
   onRemoveListField(index) {
-
     this.props.onRemoveField(index);
-
   }
 
   renderField() {
@@ -337,6 +403,7 @@ class ModalEditItem extends Component {
                 onContentSelect={this.props.onContentSelect}
             />
           );
+
         case FIELDS.VIDEO.type:
           return (
             <VideoField
@@ -355,6 +422,8 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
+
+
 
         case "widget":
             const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
@@ -527,7 +596,7 @@ class ModalEditItem extends Component {
           onItemCancel={this.handleListItemCancel.bind(this)}
           onSubmitData={this.handleSubmitListItem.bind(this)}
           onImageSelect={this.handleListImageSelect.bind(this)}
-          onContentSelect={this.handleContentSelect.bind(this)}
+          onContentSelect={this.handleListContentSelect.bind(this)}
           zIndex={9500}
         />
 

@@ -143,7 +143,7 @@ class ListWidget extends Component
 
 
     //FIXME to replace with text provided by widget configuration
-    const widgetIdentifier = 'TITLE_IMAGE';
+    const widgetIdentifier = 'WIDGET_1';
 
     var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
     field["index"] = this.currentIndex;
