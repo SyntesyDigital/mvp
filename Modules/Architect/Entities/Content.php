@@ -135,4 +135,18 @@ class Content extends Model
         return null;
     }
 
+    public function getFullSlug()
+    {
+        // FIXME : cache-it with a key that use updated_at, like md5(content_[id]_fullslug_[updated_at])
+        // WARNING : If we use cache we need to think what happen when slug's children change.
+        $nodes = self::with('fields')->ancestorsOf($this->id);
+        $slug = '';
+        
+        foreach($nodes as $node) {
+            $slug = $slug . '/' . $node->getFieldValue('slug');
+        }
+
+        return $slug . '/' . $this->getFieldValue('slug');
+    }
+
 }

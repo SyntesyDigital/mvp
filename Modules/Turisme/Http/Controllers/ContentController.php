@@ -34,7 +34,6 @@ class ContentController extends Controller
 
       $content = Content::whereField('slug', $slug)->first();
 
-
       /*
       $breadcrumb = $content->getBreadCrump();
 
