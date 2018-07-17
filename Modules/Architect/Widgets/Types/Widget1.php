@@ -17,42 +17,12 @@ class Widget1 extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "title",
-            "type" => "text", // <= FIXME : ex : Text::getType()
-            "name" => "Títol", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Link',
-            "identifier" => "link",
-            "type" => "link", // <= FIXME
-            "name" => "Link" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Contents',
-            "identifier" => "contents",
-            "type" => "contents", // <= FIXME
-            "name" => "Contents" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Url',
-            "identifier" => "url",
-            "type" => "url", // <= FIXME
-            "name" => "Url" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Localization',
-            "identifier" => "map",
-            "type" => "localization", // <= FIXME
-            "name" => "Map" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Image',
-            "identifier" => "image",
-            "type" => "image", // <= FIXME
-            "name" => "Image" // <= FIXME : translate it!
-        ]
+        'title' => 'Modules\Architect\Fields\Types\Text',
+        'link' => 'Modules\Architect\Fields\Types\Link',
+        'contents' => 'Modules\Architect\Fields\Types\Contents',
+        'url' => 'Modules\Architect\Fields\Types\Contents',
+        'map' => 'Modules\Architect\Fields\Types\Localization',
+        'image' => 'Modules\Architect\Fields\Types\Image',
     ];
 
     public $rules = [

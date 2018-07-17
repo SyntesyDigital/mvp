@@ -17,25 +17,31 @@ class TitleImage extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "title",
-            "type" => "text", // <= FIXME : ex : Text::getType()
-            "name" => "Títol", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "slug",
-            "type" => "text", // <= FIXME
-            "name" => "Slug" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Image',
-            "identifier" => "image",
-            "type" => "image", // <= FIXME
-            "name" => "Image" // <= FIXME : translate it!
-        ],
+        'title' => 'Modules\Architect\Fields\Types\Text',
+        'slug' => 'Modules\Architect\Fields\Types\Slug',
+        'image' => 'Modules\Architect\Fields\Types\Image',
     ];
+
+    // public $fields = [
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Text',
+    //         "identifier" => "title",
+    //         "type" => "text", // <= FIXME : ex : Text::getType()
+    //         "name" => "Títol", // <= FIXME : translate it!
+    //     ],
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Text',
+    //         "identifier" => "slug",
+    //         "type" => "text", // <= FIXME
+    //         "name" => "Slug" // <= FIXME : translate it!
+    //     ],
+    //     [
+    //         "class" => 'Modules\Architect\Fields\Types\Image',
+    //         "identifier" => "image",
+    //         "type" => "image", // <= FIXME
+    //         "name" => "Image" // <= FIXME : translate it!
+    //     ],
+    // ];
 
     public $rules = [
         'required'

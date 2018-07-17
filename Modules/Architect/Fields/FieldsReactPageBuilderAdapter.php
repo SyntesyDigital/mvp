@@ -45,7 +45,7 @@ class FieldsReactPageBuilderAdapter
                 } else {
                     if(isset($node['field'])) {
                         $nodes[$key]['field']['fieldname'] = $nodes[$key]['field']['name'];
-                        $nodes[$key]['field']['name'] = $node['field']['type'];
+                        //$nodes[$key]['field']['name'] = $node['field']['type'];
 
                         switch($nodes[$key]['field']['type']) {
                             case "widget-list":
