@@ -46,7 +46,15 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
     Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
+    // Layouts
+    Route::post('/page-layouts', 'PageLayoutController@store')->name('pagelayouts.store');
+    Route::get('/page-layouts', 'PageLayoutController@index')->name('pagelayouts');
+    Route::get('/page-layouts/{pageLayout?}/show', 'PageLayoutController@show')->name('pagelayouts.show');
+    Route::get('/page-layouts/data', 'PageLayoutController@data')->name('pagelayouts.data');
+    Route::delete('/page-layouts/{pageLayout?}/delete', 'PageLayoutController@delete')->name('pagelayouts.delete');
+
     // Contents
+    Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');
     Route::get('/contents', 'ContentController@index')->name('contents');
     Route::get('/contents/data', 'ContentController@data')->name('contents.data');
     Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
@@ -58,6 +66,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::put('/contents/{content?}/update', 'ContentController@update')->name('contents.update');
     Route::put('/contents/{content?}/publish', 'ContentController@publish')->name('contents.publish');
     Route::delete('/contents/{content?}/delete', 'ContentController@delete')->name('contents.delete');
+
 
     // Medias
     Route::get('/medias', 'MediaController@index')->name('medias.index');

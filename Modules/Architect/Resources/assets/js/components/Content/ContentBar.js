@@ -1,13 +1,33 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import axios from 'axios';
 
 class ContentBar extends Component {
 
   constructor(props){
     super(props);
+  }
 
-    console.log("ContentBar => ",props);
+  duplicate(){
+      axios.post('/architect/contents/' + this.props.content.id + '/duplicate', {})
+          .then((response) => {
+              if(response.data.content) {
+                  window.location.href = "/architect/contents/" + response.data.content.id;
+              }
+          })
+          .catch((error) => {
+              //console.log(error.config);
+          });
+  }
 
+  saveLayout(e) {
+      e.preventDefault();
+      this.props.onLayoutSave != undefined ? this.props.onLayoutSave() : null;
+  }
+
+  loadLayout(e) {
+      e.preventDefault();
+      this.props.onLoadLayout != undefined ? this.props.onLoadLayout() : null;
   }
 
   render() {
@@ -25,7 +45,6 @@ class ContentBar extends Component {
                 {'\u00A0'}
 
                 { this.props.name != "" ? this.props.name : "Nou contingut" }
-
               </h1>
 
               <div className="float-buttons pull-right">
@@ -46,11 +65,30 @@ class ContentBar extends Component {
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" onClick={this.duplicate.bind(this)}>
                                 <i className="fa fa-files-o"></i>
                                 &nbsp;Duplicar
                             </a>
                         </li>
+
+                        {this.props.onLoadLayout &&
+                        <li>
+                            <a href="#" onClick={this.loadLayout.bind(this)}>
+                                <i className="fa fa-download"></i>
+                                &nbsp;Load layout
+                            </a>
+                        </li>
+                        }
+
+                        {this.props.onLayoutSave &&
+                        <li>
+                            <a href="#" onClick={this.saveLayout.bind(this)}>
+                                <i className="fa fa-upload"></i>
+                                &nbsp;Save as layout
+                            </a>
+                        </li>
+                        }
+
                         <li>
                             <a href="#" className="text-danger">
                                 <i className="fa fa-trash text-danger"></i>

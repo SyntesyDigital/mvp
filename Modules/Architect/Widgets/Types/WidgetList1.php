@@ -17,6 +17,7 @@ class WidgetList1 extends Widget implements WidgetInterface
 
     public $component = 'CommonWidget';
 
+
     public $fields = [];
     //     [
     //         "class" => 'Modules\Architect\Fields\Types\Text',

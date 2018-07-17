@@ -11,6 +11,8 @@ import PageBuilder from './PageBuilder';
 import moment from 'moment';
 import axios from 'axios';
 
+import LayoutSelectModal from './LayoutSelectModal';
+
 class PageContainer extends Component {
 
   constructor(props) {
@@ -91,6 +93,8 @@ class PageContainer extends Component {
          parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
+
+         displayLayoutModal: false,
      };
 
 
@@ -103,8 +107,15 @@ class PageContainer extends Component {
      this.handleTranslationChange = this.handleTranslationChange.bind(this);
      this.handleCustomFieldChange = this.handleCustomFieldChange.bind(this);
      this.handleUpdateLayout = this.handleUpdateLayout.bind(this);
+     this.handleLayoutSave = this.handleLayoutSave.bind(this);
+     this.handleLoadLayout = this.handleLoadLayout.bind(this);
+     this.handleLayoutSelected = this.handleLayoutSelected.bind(this);
  }
 
+
+     handleLayoutSelected(layout) {
+         alert('layout !');
+     }
 
     handleUpdateLayout(layout) {
 
@@ -112,6 +123,52 @@ class PageContainer extends Component {
 
         this.setState({
             layout : layout
+        });
+    }
+
+    handleLoadLayout()
+    {
+        var _this = this;
+        bootbox.confirm({
+			message: "Loading layout will erase current page builder, do you really want ?",
+			buttons: {
+				confirm: {
+						label: 'Sí',
+						className: 'btn-primary'
+				},
+				cancel: {
+						label: 'No',
+						className: 'btn-default'
+				}
+			},
+			callback: function (result) {
+                if(result) {
+                    axios.get('/architect/page-layouts/1/show')
+                        .then((response) => {
+                            _this.setState({
+                                layout : JSON.parse(response.data.definition)
+                            });
+                            toastr.success('Layout loaded !');
+                        })
+                        .catch((error) => {
+                            toastr.error('Error !');
+                        });
+                }
+			}
+		});
+    }
+
+    handleLayoutSave()
+    {
+        axios.post('/architect/page-layouts', {
+            name : 'My Layout',
+            definition : this.state.layout
+        })
+        .then((response) => {
+            toastr.success('Layout saved !');
+        })
+        .catch((error) => {
+            toastr.error('Error !');
         });
     }
 
@@ -357,17 +414,24 @@ class PageContainer extends Component {
   }
 
 
-
   render() {
 
     return (
       <div>
+
+          <LayoutSelectModal
+            display={true}
+            onLayoutSelected={this.handleLayoutSelected}
+            zIndex={10000}
+          />
 
         <ContentBar
           content={this.state.content}
           icon={'fa-file-o'}
           name={'Pàgina'}
           onSubmitForm={this.handleSubmitForm}
+          onLayoutSave={this.handleLayoutSave}
+          onLoadLayout={this.handleLoadLayout}
         />
 
         <div className="container rightbar-page content">
