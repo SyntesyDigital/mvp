@@ -50,7 +50,6 @@ class FieldsReactPageBuilderAdapter
                         switch($nodes[$key]['field']['type']) {
                             case "widget-list":
                                 $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
-                                $nodes[$key]['field']['fields'] = (new $nodes[$key]['field']['class'])->fields;
                             break;
 
                             case "widget":
@@ -60,8 +59,6 @@ class FieldsReactPageBuilderAdapter
                             default:
                                 $nodes[$key]['field']['value'] = $this->buildPageField($node['field']);
                         }
-
-
                     }
                 }
             }
@@ -172,24 +169,21 @@ class FieldsReactPageBuilderAdapter
 
 
             case 'widget-list':
-                $widget = (new $field['class']);
-                $values = null;
-                foreach($field['fields'] as $fieldName) {
+                foreach($field["value"] as $k => $w) {
+                    $widget = (new $w['class']);
                     $fields = [];
                     foreach($widget->fields as $_field) {
-                        $fieldName = $fieldName . "_" . $_field['identifier'];
-
                         if(!isset($_field['value'])) {
                             $_field['value'] = [];
                         }
 
+                        $fieldName = $w['fieldname'] . "_" . $_field['identifier'];
                         $_field["value"] = $this->buildPageField($_field, $fieldName);
                         $fields[] = $_field;
                     }
-                    $field["fields"] = $fields;
-                    $values[] = $field;
+                    $field["value"][$k]["fields"] = $fields;
                 }
-                return $values;
+                return $field["value"];
             break;
 
             default:

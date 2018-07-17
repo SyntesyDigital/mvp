@@ -139,18 +139,7 @@ class UpdateContent
                         $type = isset($field['type']) ? $field['type'] : null;
 
                         switch($type) {
-                            case 'widget-list':
-                                $widgets = isset($field['value']) ? $field['value'] : null;
-                                $fieldsNames = [];
-                                foreach($widgets as $widget) {
-                                    $fieldName = uniqid('pagewidget_');
-                                    (new $field['class'])->save($this->content, $fieldName, $widget["fields"]);
-                                    $fieldsNames[] = $fieldName;
-                                }
-                                $nodes[$key]['field']['fields'] = $fieldsNames;
-                            break;
-
-                            case 'widget':
+                            case "widget":
                                 $fieldName = uniqid('pagewidget_');
                                 $fields = isset($field['fields']) ? $field['fields'] : null;
 
@@ -158,6 +147,25 @@ class UpdateContent
 
                                 $nodes[$key]['field']['fieldname'] = $fieldName;
                                 unset($nodes[$key]['field']['fields']);
+                                unset($nodes[$key]['field']['value']);
+                            break;
+
+                            case "widget-list":
+                                $widgets = isset($field['value']) ? $field['value'] : null;
+
+                                foreach($widgets as $k => $widget) {
+                                    $fieldName = uniqid('pagewidget_');
+                                    $fields = isset($widget['fields']) ? $widget['fields'] : null;
+                                    $nodes[$key]['field']['value'][$k]['fieldname'] = $fieldName;
+
+                                    (new $widget['class'])->save($this->content, $fieldName, $fields);
+
+                                    foreach($widget["fields"] as $k2 => $v) {
+                                        if(isset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"])) {
+                                            unset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"]);
+                                        }
+                                    }
+                                }
                             break;
 
                             default:
@@ -167,10 +175,11 @@ class UpdateContent
                                 (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
 
                                 $nodes[$key]['field']['name'] = $fieldName;
+                                unset($nodes[$key]['field']['value']);
+                            break;
+
                         }
 
-
-                        unset($nodes[$key]['field']['value']);
                     }
                 }
             }

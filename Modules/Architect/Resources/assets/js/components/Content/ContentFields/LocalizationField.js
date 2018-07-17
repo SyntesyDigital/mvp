@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-import CustomFieldTypes from './../../common/CustomFieldTypes';
+
 import MapComponent from './../../common/MapComponent';
 
 class LocalizationField extends Component
@@ -92,13 +92,17 @@ class LocalizationField extends Component
   render() {
 
     const hideTab = this.props.hideTab !== undefined && this.props.hideTab == true ? true : false;
+    const value = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value : null;
+
+    const lat = value != null && value.lat !== undefined ? value.lat : "";
+    const lng = value != null && value.lng !== undefined ? value.lng : "";
 
     return (
       <div className="field-item">
 
         <button  style={{display:(hideTab ? 'none' : 'block')}} id={"heading"+this.props.field.identifier} className="btn btn-link" data-toggle="collapse" data-target={"#collapse"+this.props.field.identifier} aria-expanded="true" aria-controls={"collapse"+this.props.field.identifier}>
           <span className="field-type">
-            <i className={"fa " + CustomFieldTypes.MAP.icon}></i> {CustomFieldTypes.MAP.name}
+            <i className={"fa " + FIELDS.LOCALIZATION.icon}></i> {FIELDS.LOCALIZATION.name}
           </span>
           <span className="field-name">
             {this.props.field.name}
@@ -110,7 +114,7 @@ class LocalizationField extends Component
           <div className="field-form">
 
             <MapComponent
-              markerPosition={this.props.field.value}
+              markerPosition={lat && lng ? value : ''}
               onLatLngChange={this.handleLatLngChange}
             />
 

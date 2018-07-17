@@ -51,7 +51,7 @@ abstract class Widget
 
     public function getRules()
     {
-        return $this->rules;
+        return isset($this->rules) ? $this->rules : null;
     }
 
     public function getSettings()
@@ -61,12 +61,18 @@ abstract class Widget
 
     public function getFields()
     {
-        return $this->fields;
+        return isset($this->fields) ? $this->fields : null;
     }
 
     public function getComponent()
     {
-        return $this->component;
+        return isset($this->component) ? $this->component : null;
+    }
+
+
+    public function getWidget()
+    {
+        return isset($this->widget) ? $this->widget : null;
     }
 }
 ?>
