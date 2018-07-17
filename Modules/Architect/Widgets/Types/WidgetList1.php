@@ -14,8 +14,6 @@ class WidgetList1 extends Widget implements WidgetInterface
     public $type = 'widget-list';
     public $icon = 'fa-font';
     public $name = 'WIDGET_LIST_1';
-    public $fields = [];
-    public $component = 'CommonWidget';
     public $widget = 'WIDGET_2';
 
     public $rules = [
