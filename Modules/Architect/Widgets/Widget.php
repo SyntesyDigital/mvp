@@ -68,5 +68,11 @@ abstract class Widget
     {
         return $this->component;
     }
+
+
+    public function getWidget()
+    {
+        return isset($this->widget) ? $this->widget : null;
+    }
 }
 ?>
