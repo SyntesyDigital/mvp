@@ -38,6 +38,8 @@ class ListWidget extends Component
     this.state = {
       fields : []
     };
+
+    this.currentIndex = props.field.value !== undefined && props.field.value != null ? props.field.value.length : 0;
   }
 
   moveField(dragIndex, hoverIndex) {
@@ -69,6 +71,8 @@ class ListWidget extends Component
 
     const fields = this.props.field.value;
 
+    console.log("ListWidget :: handleEditField => ",fieldId,fields);
+
     var field = null;
     var index = -1;
 
@@ -99,23 +103,23 @@ class ListWidget extends Component
   handleRemoveField(fieldId) {
 
       const fields = this.props.field.value;
+      var index = -1;
 
       if(fields) {
           for (var i = 0; i < fields.length; i++) {
               if (fieldId == fields[i].id) {
-                  fields.splice(i, 1);
+                  index = i;
                   break;
               }
           }
       }
 
-      var field = {
-          identifier: this.props.field.identifier,
-          value: fields
-      };
-
-      this.props.onFieldChange(field);
-
+      if(index != -1){
+        this.props.onRemoveField(index);
+      }
+      else {
+        console.error("handleRemoveField field Id not found : "+fieldId);
+      }
   }
 
   exploteToObject(fields) {
@@ -136,12 +140,18 @@ class ListWidget extends Component
 
     event.preventDefault();
 
-    var index = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value.length : 0;
+
 
     //FIXME to replace with text provided by widget configuration
-    var field = WIDGETS['TITLE_IMAGE'];
+    const widgetIdentifier = 'TITLE_IMAGE';
 
-    console.log("ListWidget :: onAddField => ",field);
+    var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
+    field["index"] = this.currentIndex;
+    field["id"] = this.currentIndex;
+
+    this.currentIndex++;
+
+    console.log("ListWidget :: onAddField with value => ",field);
 
     this.props.onAddField(field);
 

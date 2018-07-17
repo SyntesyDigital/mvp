@@ -32,6 +32,7 @@ class CommonWidget extends Component
   getStateFromProms(props) {
 
     const state = this.state;
+    state.field = props.field;
 
     return state;
   }

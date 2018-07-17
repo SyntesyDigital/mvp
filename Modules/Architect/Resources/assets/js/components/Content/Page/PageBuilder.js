@@ -48,6 +48,7 @@ class PageBuilder extends Component {
         editItemData : null,
         addPosition : null,
         listItemIndex : -1,
+        imageCallback : null
     };
 
     this.handleAddRow = this.handleAddRow.bind(this);
@@ -657,21 +658,31 @@ class PageBuilder extends Component {
      });
 
     //console.log("handleOnEditField : layout : ",layout);
-
-    /*
-    this.setState({
-      displayEditItemModal : false,
-      editItemData : null
-    });
-    */
-
     this.props.updateLayout(layout);
 
   }
 
+  handleOnRemoveField(index) {
+
+    var data = null;
+
+    //update data to pathToIndex
+    //console.log("handleOnEditField => ", this.state.editItemData.pathToIndex, data);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data, function(field,data){
+         field.value.splice(index, 1);
+         return field;
+     });
+
+    //console.log("handleOnEditField : layout : ",layout);
+    this.props.updateLayout(layout);
+  }
+
   /******** Images  ********/
 
-  handleImageSelect(field) {
+  handleImageSelect(field,callback) {
 
     var listItemIndex = -1;
     //FIXME try to find a more elegant way
@@ -682,7 +693,8 @@ class PageBuilder extends Component {
 
     this.setState({
       displayMediaModal : true,
-      listItemIndex : listItemIndex
+      listItemIndex : listItemIndex,
+      imageCallback : callback !== undefined ? callback : null
     });
 
   }
@@ -690,7 +702,8 @@ class PageBuilder extends Component {
   handleImageCancel(){
     this.setState({
       displayMediaModal : false,
-      listItemIndex : -1
+      listItemIndex : -1,
+      imageCallback : null
     });
   }
 
@@ -704,60 +717,35 @@ class PageBuilder extends Component {
       var field = this.state.editItemData.data.field;
       var self = this;
 
+
       switch (field.type) {
           case FIELDS.IMAGES.type:
               layout = this.addItem(layout,-1,this.state.editItemData.pathToIndex,media);
+              updateLayout = true;
               break;
 
           case FIELDS.IMAGE.type:
               layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,media);
+              updateLayout = true;
               break;
 
           case "widget":
-              layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,media,
-                  function(field,media){
-
-                      if(field.value == null){
-                        field.value = { image : null};
-                      }
-                      field.value.image = media;
-                      return field;
-                  }
+          case "widget-list":
+              layout = this.changeItemWithCallback(layout,
+                -1,this.state.editItemData.pathToIndex,media,
+                this.state.imageCallback
               );
-              break;
-
-          case "widget-2":
-              layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,media,
-                  function(field,media){
-
-                      var listIndex = self.state.listItemIndex;
-
-                      if(listIndex == -1 || field.value[listIndex] === undefined ) {
-                        console.error("Widget 2 edit :: listItemIndex == -1 or undefined ");
-                        return field;
-                      }
-
-                      if(field.value[listIndex].value == null){
-                        field.value[listIndex].value = { image : null};
-                      }
-
-                      field.value[listIndex].value.image = media;
-
-                      return field;
-                  }
-              );
-              console.log('LAYOUT => ', layout);
 
               break;
-      }
+        }
 
-      this.setState({
-        displayMediaModal : false,
-        listItemIndex : -1
-      });
+        this.setState({
+          displayMediaModal : false,
+          listItemIndex : -1,
+          imageCallback : null
+        });
 
-      this.props.updateLayout(layout);
-
+        this.props.updateLayout(layout);
   }
 
   /******** Contents  ********/
@@ -916,6 +904,7 @@ class PageBuilder extends Component {
           onImageSelect={this.handleImageSelect.bind(this)}
           onContentSelect={this.handleContentSelect.bind(this)}
           onAddField={this.handleOnAddListField.bind(this)}
+          onRemoveField={this.handleOnRemoveField.bind(this)}
           zIndex={9000}
         />
 

@@ -58,15 +58,28 @@ class ModalEditItem extends Component {
   }
 
   processProps(props) {
+
+    // var field = JSON.parse(JSON.stringify(props.item.data.field));
+    // //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    //
+    // if(field.type != "widget-list") {
+    //     field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
+    //         ? props.item.data.field.value
+    //         : null;
+    // } else {}
+    //
+    //
+    // return field;
+
+    //console.log(" ModalEditItem :: processProps ",props);
+
     var field = JSON.parse(JSON.stringify(props.item.data.field));
-    //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    field.value = props.item.data.field !== undefined &&
+      props.item.data.field.value !== undefined ? props.item.data.field.value : null;
 
-    if(field.type != "widget-list") {
-        field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
-            ? props.item.data.field.value
-            : null;
-    } else {}
-
+    //
+    // console.log("ModalEditItem :: field after process : ",field);
 
     return field;
   }
@@ -141,16 +154,101 @@ class ModalEditItem extends Component {
 
   }
 
-  onWidgetImageSelect(field) {
+  getFieldArrayIndex(fields, identifier) {
 
-    console.log("ModalEditItem :: onWidgetImageSelect");
+    for(var i=0;i<fields.length;i++){
+      if(fields[i].identifier == identifier){
+        return i;
+      }
+    }
+
+
+
+    return -1;
 
   }
+
+  onWidgetImageSelect(field) {
+
+    //console.log("ModalEditItem :: onWidgetImageSelect => ",field);
+    var self = this;
+
+    const fields = this.state.field.fields;
+    const index = this.getFieldArrayIndex(fields,field.identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+identifier);
+        return;
+    }
+
+    this.props.onImageSelect(field, function (field, media){
+
+      field.fields[index].value = media;
+      return field;
+
+    });
+
+  }
+
+  handleListImageSelect(field) {
+
+    const {listItemInfo} = this.state;
+
+    const fields = this.state.field.value[listItemInfo.index].fields;
+    const index = this.getFieldArrayIndex(fields,field.identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+identifier);
+        return;
+    }
+
+    console.log("ModalEditItem :: handleListImageSelect => ",fields,index);
+
+    this.props.onImageSelect(field, function (field, media){
+
+      field.value[listItemInfo.index].fields[index].value = media;
+      return field;
+
+    });
+
+  }
+
 
   onSubmit(e) {
     e.preventDefault();
     const field = this.state.field;
     this.props.onSubmitData(field);
+  }
+
+  /**
+  *   Metodo para actualizar el state del ModalEditItem. Aqui hay un lio
+  *   porque para poder usar las modales, en el page builder, es necesario que el campo
+  *   exista, al mismo tiempo, no podemos actuailzar el state de este componente
+  *   siempre porque se perderia los cambios que no han sido guardados en react,
+  *   TODO idealmente la modal tendria que estar vinculada solo al componente actual
+  *   que se esta editando.
+  */
+  onAddListField(field) {
+
+    /*
+    const stateField = this.state.field;
+    if(stateField.value === undefined || stateField.value == null){
+      stateField.value = [];
+    }
+    stateField.value.push(field);
+    this.setState({
+        field : stateField
+    });
+    */
+
+    this.props.onAddField(field);
+
+  }
+
+  onRemoveListField(index) {
+
+    this.props.onRemoveField(index);
+
   }
 
   renderField() {
@@ -277,7 +375,8 @@ class ModalEditItem extends Component {
               hideTab={true}
               translations={this.props.translations}
               onFieldChange={this.onFieldChange.bind(this)}
-              onAddField={this.props.onAddField}
+              onAddField={this.onAddListField.bind(this)}
+              onRemoveField={this.onRemoveListField.bind(this)}
               onListItemEdit={this.handleListItemEdit.bind(this)}
             />
           );
@@ -416,6 +515,8 @@ class ModalEditItem extends Component {
 
   render() {
 
+    console.log("ModalEditItem :: render field => ",this.state.field);
+
     return (
       <div>
 
@@ -425,7 +526,7 @@ class ModalEditItem extends Component {
           translations={this.props.translations}
           onItemCancel={this.handleListItemCancel.bind(this)}
           onSubmitData={this.handleSubmitListItem.bind(this)}
-          onImageSelect={this.handleImageSelect.bind(this)}
+          onImageSelect={this.handleListImageSelect.bind(this)}
           onContentSelect={this.handleContentSelect.bind(this)}
           zIndex={9500}
         />
