@@ -34,8 +34,10 @@ class TurismeServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        //
+    {   
+        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename){
+            require_once($filename);
+        }
     }
 
     /**

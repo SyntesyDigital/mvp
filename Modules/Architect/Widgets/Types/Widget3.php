@@ -17,24 +17,7 @@ class Widget3 extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "title",
-            "type" => "text", // <= FIXME : ex : Text::getType()
-            "name" => "Títol", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\RichText',
-            "identifier" => "description",
-            "type" => "richtext", // <= FIXME : ex : Text::getType()
-            "name" => "Description", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Image',
-            "identifier" => "image",
-            "type" => "image", // <= FIXME : ex : Text::getType()
-            "name" => "Image", // <= FIXME : translate it!
-        ],
+        'title' => 'Modules\Architect\Fields\Types\Text'
     ];
 
     public $rules = [

@@ -4,10 +4,11 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Content extends Model
 {
-    use HasFields;
+    use HasFields, NodeTrait;
 
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
@@ -89,6 +90,11 @@ class Content extends Model
         return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
     }
 
+    public function parent()
+    {
+    	return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
+    }
+
     public function getStringStatus()
     {
 
@@ -127,6 +133,20 @@ class Content extends Model
         }
 
         return null;
+    }
+
+    public function getFullSlug()
+    {
+        // FIXME : cache-it with a key that use updated_at, like md5(content_[id]_fullslug_[updated_at])
+        // WARNING : If we use cache we need to think what happen when slug's children change.
+        $nodes = self::with('fields')->ancestorsOf($this->id);
+        $slug = '';
+        
+        foreach($nodes as $node) {
+            $slug = $slug . '/' . $node->getFieldValue('slug');
+        }
+
+        return $slug . '/' . $this->getFieldValue('slug');
     }
 
 }
