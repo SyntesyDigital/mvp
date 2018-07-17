@@ -58,7 +58,7 @@ class ImageField extends Component {
         ? this.getImageFormat(this.props.field.settings.cropsAllowed)
         : null;
 
-    var url = this.props.field.value != null ? this.props.field.value.urls.original : null;
+    var url = this.props.field.value != null && this.props.field.value.urls ? this.props.field.value.urls.original : null;
 
 
     if(format && this.props.field.value && this.props.field.value.urls) {
