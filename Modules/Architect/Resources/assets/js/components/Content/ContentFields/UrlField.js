@@ -264,9 +264,21 @@ class UrlField extends Component
         <div className="field-form fields-list-container">
 
           <div className="typology-field">
-            <div className="field-type">
-              <i className={"fa "+pageValues.typology.icon}></i> &nbsp; {pageValues.typology.name}
-            </div>
+            {pageValues.typology !== undefined &&
+              <div className="field-type">
+                {pageValues.typology.icon !== undefined &&
+                  <i className={"fa "+pageValues.typology.icon}></i>
+                }
+                &nbsp; {pageValues.typology.name !== undefined ? pageValues.typology.name : ''}
+              </div>
+            }
+
+            {pageValues.typology === undefined &&
+              <div className="field-type">
+                <i className="fa fa-file-o"></i>
+                &nbsp; Pàgina
+              </div>
+            }
 
             <div className="field-inputs">
               <div className="row">

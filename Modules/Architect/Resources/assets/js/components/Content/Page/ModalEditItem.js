@@ -19,6 +19,7 @@ import CommonWidget from './../Widgets/CommonWidget';
 import ListWidget from './../Widgets/ListWidget';
 import TitleImageWidget from './../Widgets/TitleImageWidget';
 
+
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
@@ -57,15 +58,28 @@ class ModalEditItem extends Component {
   }
 
   processProps(props) {
+
+    // var field = JSON.parse(JSON.stringify(props.item.data.field));
+    // //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    //
+    // if(field.type != "widget-list") {
+    //     field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
+    //         ? props.item.data.field.value
+    //         : null;
+    // } else {}
+    //
+    //
+    // return field;
+
+    //console.log(" ModalEditItem :: processProps ",props);
+
     var field = JSON.parse(JSON.stringify(props.item.data.field));
-    //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
+    field.value = props.item.data.field !== undefined &&
+      props.item.data.field.value !== undefined ? props.item.data.field.value : null;
 
-    if(field.type != "widget-list") {
-        field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
-            ? props.item.data.field.value
-            : null;
-    } else {}
-
+    //
+    // console.log("ModalEditItem :: field after process : ",field);
 
     return field;
   }
@@ -134,17 +148,160 @@ class ModalEditItem extends Component {
 
   }
 
-  onWidgetContentSelect(field) {
+  onWidgetContentSelect(identifier) {
 
-    console.log("ModalEditItem :: onWidgetContentSelect");
+    console.log("ModalEditItem :: onWidgetContentSelect",identifier);
+
+    var self = this;
+
+    const fields = this.state.field.fields;
+    const index = this.getFieldArrayIndex(fields,identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : ",fields,identifier);
+        return;
+    }
+
+    this.props.onContentSelect(identifier, function (field, content){
+
+      console.log("ModalEditItem :: current field => ",field);
+
+      field.fields[index] = self.processContentField(field.fields[index],content);
+
+      return field;
+
+    });
+
+  }
+
+  processContentField(field,content) {
+
+    switch (field.type) {
+
+      case FIELDS.LINK.type:
+        if(field.value == null){
+          field.value = {};
+        }
+        else if(field.value.url !== undefined){
+          delete field.value['url'];
+        }
+        field.value.content = content;
+
+        return field;
+
+      case FIELDS.URL.type:
+        if(field.value == null){
+          field.value = {};
+        }
+        else if(field.value.url !== undefined){
+          delete field.value['url'];
+        }
+        field.value.content = content;
+
+        return field;
+
+      case FIELDS.CONTENTS.type:
+
+        if(field.value === undefined || field.value == null){
+          field.value = [];
+        }
+
+        field.value.push(content);
+
+        return field;
+    }
+
+  }
+
+  handleListContentSelect(identifier) {
+
+    var self = this;
+    const {listItemInfo} = this.state;
+
+    const fields = this.state.field.value[listItemInfo.index].fields;
+    const index = this.getFieldArrayIndex(fields,identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+identifier);
+        return;
+    }
+
+    console.log("ModalEditItem :: handleListContentSelect => ",fields,index);
+
+    this.props.onContentSelect(identifier, function (field, content){
+
+      field.value[listItemInfo.index].fields[index] = self.processContentField(
+        field.value[listItemInfo.index].fields[index],
+        content
+      );
+
+      return field;
+
+    });
+
+  }
+
+  getFieldArrayIndex(fields, identifier) {
+
+    for(var i=0;i<fields.length;i++){
+      if(fields[i].identifier == identifier){
+        return i;
+      }
+    }
+
+
+
+    return -1;
 
   }
 
   onWidgetImageSelect(field) {
 
-    console.log("ModalEditItem :: onWidgetImageSelect");
+    //console.log("ModalEditItem :: onWidgetImageSelect => ",field);
+    var self = this;
+
+    const fields = this.state.field.fields;
+    const index = this.getFieldArrayIndex(fields,field.identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+field.identifier);
+        return;
+    }
+
+    this.props.onImageSelect(field, function (field, media){
+
+      field.fields[index].value = media;
+      return field;
+
+    });
 
   }
+
+  handleListImageSelect(field) {
+
+    const {listItemInfo} = this.state;
+
+    const fields = this.state.field.value[listItemInfo.index].fields;
+    const index = this.getFieldArrayIndex(fields,field.identifier);
+
+    if(index == -1){
+        console.error("ModalEditItem :: id not found : "+identifier);
+        return;
+    }
+
+    console.log("ModalEditItem :: handleListImageSelect => ",fields,index);
+
+    this.props.onImageSelect(field, function (field, media){
+
+      field.value[listItemInfo.index].fields[index].value = media;
+      return field;
+
+    });
+
+  }
+
+
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -152,7 +309,17 @@ class ModalEditItem extends Component {
     this.props.onSubmitData(field);
   }
 
+  onAddListField(field) {
+    this.props.onAddField(field);
+  }
+
+  onRemoveListField(index) {
+    this.props.onRemoveField(index);
+  }
+
   renderField() {
+
+    console.log("ModalEditItem : renderField => ",this.state.field);
 
     switch(this.state.field.type) {
       case FIELDS.TEXT.type:
@@ -236,6 +403,7 @@ class ModalEditItem extends Component {
                 onContentSelect={this.props.onContentSelect}
             />
           );
+
         case FIELDS.VIDEO.type:
           return (
             <VideoField
@@ -255,6 +423,8 @@ class ModalEditItem extends Component {
             />
           );
 
+
+
         case "widget":
             const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
             return <Widget
@@ -267,25 +437,18 @@ class ModalEditItem extends Component {
             />
 
         case "widget-list":
-            return <ListWidget
-                field={this.state.field}
-                hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
-                onAddField={this.props.onAddField}
-                onListItemEdit={this.handleListItemEdit.bind(this)}
+
+          return (
+            <ListWidget
+              field={this.state.field}
+              hideTab={true}
+              translations={this.props.translations}
+              onFieldChange={this.onFieldChange.bind(this)}
+              onAddField={this.onAddListField.bind(this)}
+              onRemoveField={this.onRemoveListField.bind(this)}
+              onListItemEdit={this.handleListItemEdit.bind(this)}
             />
-        // case "widget-2":
-        //   return (
-        //     <TitleImageWidgetList
-        //       field={this.state.field}
-        //       hideTab={true}
-        //       translations={this.props.translations}
-        //       onFieldChange={this.onFieldChange.bind(this)}
-        //       onAddField={this.props.onAddField}
-        //       onListItemEdit={this.handleListItemEdit.bind(this)}
-        //     />
-        //   );
+          );
 
       default :
         return null;
@@ -421,6 +584,8 @@ class ModalEditItem extends Component {
 
   render() {
 
+    console.log("ModalEditItem :: render field => ",this.state.field);
+
     return (
       <div>
 
@@ -430,8 +595,8 @@ class ModalEditItem extends Component {
           translations={this.props.translations}
           onItemCancel={this.handleListItemCancel.bind(this)}
           onSubmitData={this.handleSubmitListItem.bind(this)}
-          onImageSelect={this.handleImageSelect.bind(this)}
-          onContentSelect={this.handleContentSelect.bind(this)}
+          onImageSelect={this.handleListImageSelect.bind(this)}
+          onContentSelect={this.handleListContentSelect.bind(this)}
           zIndex={9500}
         />
 

@@ -133,35 +133,18 @@ class TitleImageWidgetList extends Component
 
     event.preventDefault();
 
-    var index = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value.length : 0;
+    var index = this.props.field.value !== undefined && this.props.field.value != null ?
+      this.props.field.value.length : 0;
 
     var field = {
         'index' : index,
         'id' : index,
-        'class' : "Modules\Architect\Widgets\Types\TitleImage",
+        'class' : "",
         'rules' : null,
         "label": "WIDGET",
-        "name": "TITLE_IMAGE",
+        "name": "Widget",
         "type": "widget",
         "icon": "fa-file-o",
-        "fields" : [
-            {
-                "class" : 'Modules\Architect\Fields\Types\Text',
-                "identifier" : "title",
-                "type" : "text",
-                "name" : "Títol",
-            },{
-                "class" : 'Modules\Architect\Fields\Types\Text',
-                "identifier" : "slug",
-                "type" : "text",
-                "name" : "Slug" 
-            },{
-                "class" : 'Modules\Architect\Fields\Types\Image',
-                "identifier" : "image",
-                "type" : "image",
-                "name" : "Image" 
-            }
-        ]
         //"settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed']),
     };
 

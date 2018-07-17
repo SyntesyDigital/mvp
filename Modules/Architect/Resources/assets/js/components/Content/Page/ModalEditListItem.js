@@ -29,16 +29,7 @@ class ModalEditListItem extends Component {
 
     var field = JSON.parse(JSON.stringify(props.item.field));
     //field.identifier = "temp_"+JSON.stringify(props.item.id);
-
-    if(field.type != "widget-list") {
-        field.value = field !== undefined && field.value !== undefined ? field.value : null;
-    } else {
-        console.log('INDEX ====>', props.item);
-    }
-
-    console.log("processProps ======>", field);
-
-    // console.log("ModalEditItem :: field after process : ",field);
+    field.value = field !== undefined && field.value !== undefined ? field.value : null;
 
     return field;
   }
@@ -92,12 +83,10 @@ class ModalEditListItem extends Component {
       }});
   }
 
-  onFieldChange(field) {
-
-    //console.log("ModalEditItem :: onFieldChange => ",field);
+  onWidgetChange(field) {
 
     var stateField = this.state.field;
-    stateField.value = field.value;
+    stateField.fields = field.fields;
     this.setState({
         field : stateField
     });
@@ -115,10 +104,7 @@ class ModalEditListItem extends Component {
 
   renderWidget() {
 
-
-
     switch(this.state.field.type) {
-        case "widget-list":
         case "widget":
             const Widget = this.widgets[this.state.field.component || 'CommonWidget'];
             return (
@@ -126,23 +112,11 @@ class ModalEditListItem extends Component {
                     field={this.state.field}
                     hideTab={true}
                     translations={this.props.translations}
-                    onFieldChange={this.onFieldChange.bind(this)}
+                    onWidgetChange={this.onWidgetChange.bind(this)}
                     onContentSelect={this.props.onContentSelect}
                     onImageSelect={this.props.onImageSelect}
                 />
             );
-
-        // case "widget":
-        //   return (
-        //     <TitleImageWidget
-        //       field={this.state.field}
-        //       hideTab={true}
-        //       translations={this.props.translations}
-        //       onFieldChange={this.onFieldChange.bind(this)}
-        //       onContentSelect={this.props.onContentSelect}
-        //       onImageSelect={this.props.onImageSelect}
-        //     />
-        //   );
 
       default :
         return null;
