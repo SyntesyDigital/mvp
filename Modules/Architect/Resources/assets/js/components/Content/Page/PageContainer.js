@@ -113,8 +113,49 @@ class PageContainer extends Component {
  }
 
 
-     handleLayoutSelected(layout) {
-         alert('layout !');
+     handleLayoutSelected(layoutId) {
+
+       console.log("PageContainer :: handleLayoutSelected => "+layoutId);
+
+       var _this = this;
+
+       bootbox.confirm({
+          message: "Carregar una plantilla borrarà el contingut introduit, vols continuar ?",
+          buttons: {
+            confirm: {
+                label: 'Sí',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+          },
+          callback: function (result) {
+             if(result) {
+               axios.get('/architect/page-layouts/'+layoutId+'/show')
+                   .then((response) => {
+                       _this.setState({
+                           layout : JSON.parse(response.data.definition)
+                       });
+                       toastr.success('Plantilla carregada !');
+                   })
+                   .catch((error) => {
+                       toastr.error('Error !');
+                   });
+             }
+          }
+        });
+
+        this.setState({
+          displayLayoutModal : false
+        })
+     }
+
+     handleLayoutCancel() {
+       this.setState({
+         displayLayoutModal : false
+       });
      }
 
     handleUpdateLayout(layout) {
@@ -128,48 +169,32 @@ class PageContainer extends Component {
 
     handleLoadLayout()
     {
-        var _this = this;
-        bootbox.confirm({
-			message: "Loading layout will erase current page builder, do you really want ?",
-			buttons: {
-				confirm: {
-						label: 'Sí',
-						className: 'btn-primary'
-				},
-				cancel: {
-						label: 'No',
-						className: 'btn-default'
-				}
-			},
-			callback: function (result) {
-                if(result) {
-                    axios.get('/architect/page-layouts/1/show')
-                        .then((response) => {
-                            _this.setState({
-                                layout : JSON.parse(response.data.definition)
-                            });
-                            toastr.success('Layout loaded !');
-                        })
-                        .catch((error) => {
-                            toastr.error('Error !');
-                        });
-                }
-			}
-		});
+        this.setState({
+          displayLayoutModal : true
+        })
     }
 
     handleLayoutSave()
     {
-        axios.post('/architect/page-layouts', {
-            name : 'My Layout',
-            definition : this.state.layout
-        })
-        .then((response) => {
-            toastr.success('Layout saved !');
-        })
-        .catch((error) => {
-            toastr.error('Error !');
+
+        var self = this;
+
+        bootbox.prompt("Introdueix el nom de la plantilla :", function(result){
+          if(result != null){
+            axios.post('/architect/page-layouts', {
+                name : result,
+                definition : self.state.layout
+            })
+            .then((response) => {
+                toastr.success('Plantilla guardad !');
+            })
+            .catch((error) => {
+                toastr.error('Error !');
+            });
+          }
         });
+
+
     }
 
   /********  Form ********/
@@ -420,8 +445,9 @@ class PageContainer extends Component {
       <div>
 
           <LayoutSelectModal
-            display={true}
+            display={this.state.displayLayoutModal}
             onLayoutSelected={this.handleLayoutSelected}
+            onContentCancel={this.handleLayoutCancel.bind(this)}
             zIndex={10000}
           />
 

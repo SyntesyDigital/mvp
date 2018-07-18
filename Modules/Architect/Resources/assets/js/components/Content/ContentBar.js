@@ -75,7 +75,7 @@ class ContentBar extends Component {
                         <li>
                             <a href="#" onClick={this.loadLayout.bind(this)}>
                                 <i className="fa fa-download"></i>
-                                &nbsp;Load layout
+                                &nbsp;Carregar plantilla
                             </a>
                         </li>
                         }
@@ -84,7 +84,7 @@ class ContentBar extends Component {
                         <li>
                             <a href="#" onClick={this.saveLayout.bind(this)}>
                                 <i className="fa fa-upload"></i>
-                                &nbsp;Save as layout
+                                &nbsp;Guardar plantilla
                             </a>
                         </li>
                         }

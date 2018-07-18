@@ -38,6 +38,11 @@ class PageLayoutController extends Controller
         return $this->pageLayouts->getDatatable();
     }
 
+    public function modalData(Request $request)
+    {
+        return $this->pageLayouts->getModalDatatable();
+    }
+
     public function show(PageLayout $pageLayout, Request $request)
     {
         return response()->json($pageLayout);

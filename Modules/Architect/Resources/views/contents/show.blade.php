@@ -36,7 +36,8 @@ var routes = {
   'medias.update' : '{{ route('medias.update') }}',
   'contents.data' : '{{ route('contents.modal.data') }}',
   'showContent' : "{{route('contents.show',['id' => ':id'])}}",
-  'previewContent' : "{{route('preview',['id' => ':id'])}}"
+  'previewContent' : "{{route('preview',['id' => ':id'])}}",
+  'pagelayouts.data' : '{{ route('pagelayouts.modal.data') }}'
 };
 </script>
 @endpush

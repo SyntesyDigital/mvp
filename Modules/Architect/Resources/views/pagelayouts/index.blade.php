@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container leftbar-page">
-  <div class="col-xs-offset-2 col-xs-10 page-content">
+  <div class="col-xs-offset-2 col-xs-8 page-content">
 
     <h3 class="card-title">Layouts</h3>
 

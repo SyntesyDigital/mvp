@@ -19,8 +19,18 @@ class PageLayoutRepository extends BaseRepository
         return Datatables::of(PageLayout::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="#" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
                 <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('pagelayouts.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                ';
+            })
+            ->make(true);
+    }
+
+    public function getModalDatatable($options = [])
+    {
+        return Datatables::of(PageLayout::all())
+            ->addColumn('action', function ($item) {
+                return '
+                <a href="#" data-id="'.$item->id.'" id="item-'.$item->id.'" class="btn btn-link add-item" data-toogle="delete" ><i class="fa fa-plus"></i> Afegir &nbsp;
                 ';
             })
             ->make(true);
