@@ -177,7 +177,6 @@ class UpdateContent
                                 $nodes[$key]['field']['fieldname'] = $fieldName;
                                 unset($nodes[$key]['field']['value']);
                             break;
-
                         }
 
                     }
