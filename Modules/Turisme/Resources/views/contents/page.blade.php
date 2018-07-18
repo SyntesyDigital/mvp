@@ -3,6 +3,7 @@
 @section('content')
 
     {!! breadcrumb(Modules\Architect\Entities\Content::find(4)) !!}
+
 <!-- ARTICLE -->
 <article>
     @if($page)
@@ -12,7 +13,6 @@
           ])
       @endforeach
     @endif
-
 </article>
 <!-- END ARTICLE -->
 @endsection

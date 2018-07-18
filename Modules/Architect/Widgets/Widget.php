@@ -22,9 +22,9 @@ abstract class Widget
 
                 $fields[] = [
                     'class' => $class,
-                    'identifier' => 'title',
+                    'identifier' => $identifier,
                     'type' => $fieldObject->getType(),
-                    'name' =>  $fieldObject->getName(),
+                    'name' => trans('architect::fields.' . $identifier),
                 ];
             }
 
