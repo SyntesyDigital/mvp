@@ -574,6 +574,15 @@ class ModalEditItem extends Component {
           options={TYPOLOGIES}
         />
 
+        <InputSettingsField
+          field={this.props.field}
+          name="maxItems"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange}
+          label="Número màxim d'elements"
+          inputLabel="Indica el número màxim"
+        />
+
       </div>
 
 

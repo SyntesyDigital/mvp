@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {!! breadcrumb(Modules\Architect\Entities\Content::find(4)) !!}
+    {!! breadcrumb($content) !!}
 
 <!-- ARTICLE -->
 <article>

@@ -10,5 +10,8 @@ return [
     'BANNER_SLIDE' => 'Slide Banner',
     'BANNER_CAROUSEL' => 'Rotatori Banners',
     'IMAGE_TEXT_LIST' => 'Llista Imatge Text',
-    'WIDGET_LIST_1' => 'Widget List 1'
+    'THUMB_CAROUSEL' => 'Rotatori Thumbnails',
+    'TYPOLOGY_LAST' => 'Ultims elements',
+    'TWITTER_FEED' => 'Twitter',
+    'BANNER' => 'Banner',
 ];

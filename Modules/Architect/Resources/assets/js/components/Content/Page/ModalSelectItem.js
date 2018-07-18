@@ -117,45 +117,6 @@ class ModalSelectItem extends Component {
     });
   }
 
-  addWidget(e) {
-
-    e.preventDefault();
-
-    this.props.onItemSelected({
-      type : 'item',
-      field : {
-        'class' : "",
-        'rules' : null,
-        "label": "WIDGET",
-        "name": "Widget",
-        "type": "widget",
-        "icon": "fa-file-o",
-        "settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed'])
-      }
-    });
-  }
-
-  addWidget2(e) {
-
-    e.preventDefault()
-
-
-    this.props.onItemSelected({
-      type : 'item',
-      field : {
-        'class' : "",
-        'rules' : null,
-        "label": "WIDGET-2",
-        "name": "Widget 2",
-        "type": "widget-list",
-        "icon": "fa-file",
-        "settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed'])
-      }
-    });
-  }
-
-
-
   renderFields() {
 
     var fields = [];
@@ -269,19 +230,9 @@ class ModalSelectItem extends Component {
                       </div>
 
                       <hr />
+                      <br />
 
                       <div className="row">
-
-                        <div className="col-xs-3">
-                          <a href="" onClick={this.addWidget2.bind(this)}>
-                            <div className="grid-item">
-                              <i className="fa fa-file-o"></i>
-                              <p className="grid-item-name">
-                                Widget List
-                              </p>
-                            </div>
-                          </a>
-                        </div>
 
                         {this.renderWidget()}
 

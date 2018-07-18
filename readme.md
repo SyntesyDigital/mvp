@@ -23,8 +23,7 @@ TODO
 - unique
 - minCharacters
 - maxCharacters
-- maxItems
-- minItems
+
 
 ### Settings
 
@@ -34,6 +33,8 @@ TODO
 - listAllowed
 - htmlId
 - htmlClass
+- maxItems
+- minItems
 
 
 ### Laravel => React Content fields JSON format
