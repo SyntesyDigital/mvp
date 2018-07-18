@@ -46,7 +46,7 @@ abstract class Field
 
     public function getName()
     {
-        return $this->name;
+        return trans('architect::fields.' . $this->getType());
     }
 
     public function getIcon()

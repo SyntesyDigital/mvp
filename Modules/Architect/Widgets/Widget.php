@@ -13,6 +13,26 @@ abstract class Widget
         return "Modules\\Architect\\Entities\\ContentField";
     }
 
+    public function __construct()
+    {
+        if(isset($this->fields)) {
+            $fields = [];
+            foreach($this->fields as $identifier => $class) {
+                $fieldObject = new $class;
+
+                $fields[] = [
+                    'class' => $class,
+                    'identifier' => 'title',
+                    'type' => $fieldObject->getType(),
+                    'name' =>  $fieldObject->getName(),
+                ];
+            }
+
+            $this->fields = $fields;
+        }
+
+    }
+
     public function getLanguageFromIso($iso, $languages)
     {
         foreach($languages as $language) {

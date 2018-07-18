@@ -17,30 +17,10 @@ class BannerSlide extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Image',
-            "identifier" => "image",
-            "type" => "image", // <= FIXME
-            "name" => "Imatge" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "title",
-            "type" => "text", // <= FIXME
-            "name" => "Títol" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Text',
-            "identifier" => "subtitle",
-            "type" => "text", // <= FIXME
-            "name" => "Subtítol" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Url',
-            "identifier" => "url",
-            "type" => "url", // <= FIXME : ex : Text::getType()
-            "name" => "Enllaç", // <= FIXME : translate it!
-        ]
+        'image' => 'Modules\Architect\Fields\Types\Image',
+        'text' => 'Modules\Architect\Fields\Types\Text',
+        'subtitle' => 'Modules\Architect\Fields\Types\Text',
+        'url' => 'Modules\Architect\Fields\Types\Url'
     ];
 
     public $rules = [

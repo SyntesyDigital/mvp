@@ -14,8 +14,10 @@ class AlterTableContentAddParentIdField extends Migration
     public function up()
     {
         Schema::table('contents', function($table){
-            $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('contents');
+            // $table->integer('parent_id')->unsigned()->nullable();
+            // $table->foreign('parent_id')->references('id')->on('contents');
+
+            $table->nestedSet();
         });
     }
 
@@ -29,8 +31,9 @@ class AlterTableContentAddParentIdField extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::table('contents', function($table){
-            $table->dropForeign('contents_parent_id_foreign');
-            $table->dropColumn('parent_id');
+            // $table->dropForeign('contents_parent_id_foreign');
+            // $table->dropColumn('parent_id');
+            $table->dropNestedSet();
         });
 
         Schema::enableForeignKeyConstraints();

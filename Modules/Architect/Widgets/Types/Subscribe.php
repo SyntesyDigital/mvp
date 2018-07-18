@@ -17,12 +17,7 @@ class Subscribe extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Link',
-            "identifier" => "link",
-            "type" => "link", // <= FIXME
-            "name" => "Enllaç" // <= FIXME : translate it!
-        ]
+        'link' => 'Modules\Architect\Fields\Types\Link'
     ];
 
     public $rules = [

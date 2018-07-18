@@ -17,25 +17,9 @@ class ImageTextLink extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        [
-            "class" => 'Modules\Architect\Fields\Types\Image',
-            "identifier" => "image",
-            "type" => "image", // <= FIXME
-            "name" => "Imatge" // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\Link',
-            "identifier" => "link",
-            "type" => "link", // <= FIXME : ex : Text::getType()
-            "name" => "Enllaç", // <= FIXME : translate it!
-        ],
-        [
-            "class" => 'Modules\Architect\Fields\Types\RichText',
-            "identifier" => "rich",
-            "type" => "richtext", // <= FIXME : ex : Text::getType()
-            "name" => "Descripció", // <= FIXME : translate it!
-        ]
-
+        'image' => 'Modules\Architect\Fields\Types\Image',
+        'link' => 'Modules\Architect\Fields\Types\Link',
+        'richtext' => 'Modules\Architect\Fields\Types\RichText'
     ];
 
     public $rules = [

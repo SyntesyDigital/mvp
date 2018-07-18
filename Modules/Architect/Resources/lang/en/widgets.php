@@ -10,4 +10,5 @@ return [
     'BANNER_SLIDE' => 'Slide Banner',
     'BANNER_CAROUSEL' => 'Rotatori Banners',
     'IMAGE_TEXT_LIST' => 'Llista Imatge Text'
+    'WIDGET_LIST_1' => 'Widget List 1'
 ];

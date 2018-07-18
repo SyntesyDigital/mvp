@@ -43,8 +43,14 @@ class CreateMedia
 
             // Build others image formats
             foreach(config('images.formats') as $format) {
-                $imageData = Image::make(storage_path() . '/app/' . $this->filePath)
-                    ->fit($format["width"], $format["height"])
+
+                $image = Image::make(storage_path() . '/app/' . $this->filePath);
+
+                $width = $image->width() > $format["width"] ? $format["width"] : $image->width();
+                $height = $image->height() > $format["height"] ? $format["height"] : $image->height();
+
+                $imageData = $image
+                    ->fit($width, $height)
                     ->encode();
 
                 $path = sprintf('%s/%s/%s',
