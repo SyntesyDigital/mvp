@@ -175,7 +175,7 @@ class CreateContent
 
                                 (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
 
-                                $nodes[$key]['field']['name'] = $fieldName;
+                                $nodes[$key]['field']['fieldname'] = $fieldName;
                                 unset($nodes[$key]['field']['value']);
                             break;
 

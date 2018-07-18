@@ -23,6 +23,7 @@ class FieldsReactPageBuilderAdapter
     public function get()
     {
         $nodes = json_decode($this->page->definition, true);
+
         return $this->getPage($nodes);
     }
 
@@ -69,7 +70,7 @@ class FieldsReactPageBuilderAdapter
 
     private function buildPageField($field, $name = null)
     {
-        $fieldName = isset($field['name']) ? $field['name'] : null;
+        $fieldName = isset($field['fieldname']) ? $field['fieldname'] : null;
 
         if($name) {
             $fieldName = $name;
