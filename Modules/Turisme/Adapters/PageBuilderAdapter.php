@@ -69,7 +69,7 @@ class PageBuilderAdapter
 
     private function buildPageField($field, $name = null)
     {
-        $fieldName = isset($field['name']) ? $field['name'] : null;
+        $fieldName = isset($field['fieldname']) ? $field['fieldname'] : null;
 
         if($name) {
             $fieldName = $name;

@@ -1,7 +1,7 @@
 @php
   $crop = "original";
 
-  if(isset($settings['cropsAllowed']) && $settings['cropsAllowed'] != null){
+  if(isset($settings) && isset($settings['cropsAllowed']) && $settings['cropsAllowed'] != null){
     $crop = $settings['cropsAllowed'];
   }
 @endphp

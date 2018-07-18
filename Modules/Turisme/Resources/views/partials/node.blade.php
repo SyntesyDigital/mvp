@@ -25,14 +25,17 @@
         ]
       )
 
-    @elseif(isset($node['field']['type']) && isset($node['field']['value']))
+    @else
 
-      @include('turisme::partials.fields.'.$node['field']['type'],
-        [
-          "field" => $node['field'],
-          "settings" => $node['field']['settings']
-        ]
-      )
+      @if(isset($node['field']['type']) && isset($node['field']['value']))
+
+        @include('turisme::partials.fields.'.$node['field']['type'],
+          [
+            "field" => $node['field'],
+            "settings" => $node['field']['settings']
+          ]
+        )
+      @endif
 
     @endif
 
