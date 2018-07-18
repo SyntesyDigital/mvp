@@ -174,7 +174,7 @@ class UpdateContent
 
                                 (new $field['class'])->save($this->content, $fieldName, $fieldValue, $this->languages);
 
-                                $nodes[$key]['field']['name'] = $fieldName;
+                                //$nodes[$key]['field']['name'] = $fieldName;
                                 unset($nodes[$key]['field']['value']);
                             break;
 
