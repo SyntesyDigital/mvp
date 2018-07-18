@@ -1,77 +1,32 @@
-<div id="carousel-full" class="carousel slide {{$field['settings']['htmlClass'] or ''}}" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carousel-full" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-full" data-slide-to="1"></li>
-      <li data-target="#carousel-full" data-slide-to="2"></li>
-    </ol>
+<div class="item {{$class}} {{$settings['htmlClass'] or ''}}">
 
-    <div class="carousel-inner" role="listbox">
+  @include('turisme::partials.fields.'.$field['fields'][0]['type'],
+    [
+      "field" => $field['fields'][0],
+      "settings" => $settings,
+      "div" => false,
+      "class" => 'center-block'
+    ]
+  )
 
-      <div class="item active">
-        @include('turisme::partials.fields.'.$field['fields'][0]['type'],
-          [
-            "field" => $field['fields'][0],
-            "settings" => $field['settings'],
-            "div" => false,
-            "class" => 'center-block'
-          ]
-        )
-
-        <div class="carousel-caption">
-          <h3>
-            @include('turisme::partials.fields.'.$field['fields'][1]['type'],
-              [
-                "field" => $field['fields'][1],
-                "settings" => $field['settings'],
-                "div" => false
-              ]
-            )
-          </h3>
-          <p>
-            @include('turisme::partials.fields.'.$field['fields'][2]['type'],
-              [
-                "field" => $field['fields'][2],
-                "settings" => $field['settings'],
-                "div" => false
-              ]
-            )
-          </p>
-        </div>
-      </div>
-
-      <div class="item">
-        @include('turisme::partials.fields.'.$field['fields'][0]['type'],
-          [
-            "field" => $field['fields'][0],
-            "settings" => $field['settings'],
-            "div" => false,
-            "class" => 'center-block'
-          ]
-        )
-
-        <div class="carousel-caption">
-          <h3>
-            @include('turisme::partials.fields.'.$field['fields'][1]['type'],
-              [
-                "field" => $field['fields'][1],
-                "settings" => $field['settings'],
-                "div" => false
-              ]
-            )
-          </h3>
-          <p>
-            @include('turisme::partials.fields.'.$field['fields'][2]['type'],
-              [
-                "field" => $field['fields'][2],
-                "settings" => $field['settings'],
-                "div" => false
-              ]
-            )
-          </p>
-        </div>
-      </div>
-
-    </div>
-    <a class="left carousel-control" href="#carousel-full" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#carousel-full" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>
-
+  <div class="carousel-caption">
+    <h3>
+      @include('turisme::partials.fields.'.$field['fields'][1]['type'],
+        [
+          "field" => $field['fields'][1],
+          "settings" => $settings,
+          "div" => false
+        ]
+      )
+    </h3>
+    <p>
+      @include('turisme::partials.fields.'.$field['fields'][2]['type'],
+        [
+          "field" => $field['fields'][2],
+          "settings" => $settings,
+          "div" => false
+        ]
+      )
+    </p>
+  </div>
 </div>
