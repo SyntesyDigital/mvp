@@ -8,11 +8,11 @@ Homestead.json
 /rec
 /node_modules
 /public/hot
-/public/storage/debugbar
-/public/storage/framework
-/public/storage/logs
-/storage/*.key
+/public/storage/
 /storage/debugbar
+/storage/framework
+/storage/logs
+/storage/medias
 /vendor
 /.idea
 /.vagrant
