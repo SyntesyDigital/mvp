@@ -12,7 +12,6 @@ Homestead.json
 /storage/debugbar
 /storage/framework
 /storage/logs
-/storage/medias
 /vendor
 /.idea
 /.vagrant
