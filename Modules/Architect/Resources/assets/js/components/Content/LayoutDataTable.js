@@ -64,7 +64,7 @@ class LayoutDataTable extends Component {
     initEvents()
     {
         var _this = this;
-        $(document).on('click','.add-item',function(e){
+        $(document).on('click','#table-layouts .add-item',function(e){
           e.preventDefault();
           var content = $(this).data('id');
           _this.props.onSelectItem(content);
