@@ -11,7 +11,7 @@
   <img
     id="{{$settings['htmlId'] or ''}}"
     class="{{$settings['htmlClass'] or ''}}"
-    src="{{asset($field['value']->getUrlsAttribute()[$crop])}}"
+    src="{{ isset($field['value']->getUrlsAttribute()[$crop]) ? asset($field['value']->getUrlsAttribute()[$crop]) : null }}"
     alt="{{$field['value']->metadata['fields']['alt'][App::getLocale()]['value'] or ''}}"
     title="{{$field['value']->metadata['fields']['title'][App::getLocale()]['value'] or ''}}"
     width="{{$width or ''}}"
