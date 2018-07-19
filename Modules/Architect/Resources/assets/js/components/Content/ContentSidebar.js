@@ -146,8 +146,6 @@ class ContentSidebar extends Component {
                    }
                </select>
             </div>
-
-
             <hr/>
           </div>
         }

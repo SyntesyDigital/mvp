@@ -22,19 +22,19 @@ class PageContainer extends Component {
      console.log('LAYOUT LOADED', props.page);
      console.log('CONTENT LOADED', props.content);
 
-        var titleField = {
-            id:0,
-            identifier:"title",
-            value:{},
-            name:"Títol"
-        };
+    var titleField = {
+        id:0,
+        identifier:"title",
+        value:{},
+        name:"Títol"
+    };
 
-        var slugField = {
-          id:1,
-          identifier:"slug",
-          value:{},
-          name:"Enllaç permanent"
-        };
+    var slugField = {
+      id:1,
+      identifier:"slug",
+      value:{},
+      name:"Enllaç permanent"
+    };
 
     // Build translations state from content languages fields
     var translations = {};
@@ -96,7 +96,6 @@ class PageContainer extends Component {
 
          displayLayoutModal: false,
      };
-
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);

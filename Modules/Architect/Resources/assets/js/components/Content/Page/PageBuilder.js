@@ -44,7 +44,6 @@ class PageBuilder extends Component {
         displayContentModal: false,
         displayClassModal: false,
 
-
         pathToIndex : null,
         editItemData : null,
         addPosition : null,

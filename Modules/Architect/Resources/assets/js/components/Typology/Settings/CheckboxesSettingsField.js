@@ -18,34 +18,33 @@ class CheckboxesSettingsField extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps){
-
+  componentWillReceiveProps(nextProps)
+  {
     var checkbox = null;
     var display = false;
     var fields = [];
 
-    if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
-      nextProps.field[nextProps.source][nextProps.name] !== undefined){
-
+    if(nextProps.field != null 
+        && nextProps.field[nextProps.source] != null 
+        && nextProps.field[nextProps.source][nextProps.name] !== undefined)
+    {
       checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
       display = true;
       fields = nextProps.field[nextProps.source][nextProps.name];
     }
 
     this.setState({
-      checkbox : checkbox,
-      fields : fields,
-      display : display
+        checkbox : checkbox,
+        fields : fields,
+        display : display
     });
-
   }
 
   handleFieldChange(event) {
-
     var field = {
-      name : this.props.name,
-      source : this.props.source,
-      value : event.target.checked ? [] : null
+        name : this.props.name,
+        source : this.props.source,
+        value : event.target.checked ? [] : null
     };
 
     this.props.onFieldChange(field);
@@ -150,10 +149,7 @@ class CheckboxesSettingsField extends Component {
           <div className="setup-field-config" style={{display : checkbox != null && checkbox ? "block" : "none" }}>
 
             <div className="form-group bmd-form-group">
-
               {this.renderOptions()}
-
-
             </div>
           </div>
 

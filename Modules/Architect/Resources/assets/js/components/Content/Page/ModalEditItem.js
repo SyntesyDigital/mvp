@@ -23,6 +23,8 @@ import TitleImageWidget from './../Widgets/TitleImageWidget';
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
+import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
+
 import ModalEditListItem from './ModalEditListItem';
 
 class ModalEditItem extends Component {
@@ -573,7 +575,35 @@ class ModalEditItem extends Component {
           label="Tipologies permeses"
           options={TYPOLOGIES}
         />
-
+        
+        <SelectorSettingsField
+          field={this.state.field}
+          name="typology"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Tipologie"
+          options={TYPOLOGIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
+        />
+        
+        <SelectorSettingsField
+          field={this.state.field}
+          name="category"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Categorie"
+          options={CATEGORIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
+        />
+        
         <InputSettingsField
           field={this.props.field}
           name="maxItems"
@@ -582,7 +612,7 @@ class ModalEditItem extends Component {
           label="Número màxim d'elements"
           inputLabel="Indica el número màxim"
         />
-
+        
       </div>
 
 
