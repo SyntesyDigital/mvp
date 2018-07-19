@@ -36,7 +36,7 @@ class SlugInput extends Component
 
 		  value = slugify(sourceValue, {
 				replacement: '-',
-				remove: /[$*+~.()'"!\-:@]/g,
+				remove: /[$*+~.()'"!\-\?`´:@]/g,
 				lower: true
 			});
 
@@ -118,14 +118,14 @@ class SlugInput extends Component
           <i className="fa fa-lock"></i>
         </div>
         }
-        
+
         {architect.currentUserHasRole('author') &&
         <div className="block-div" style={{display: 'block'}}>
           <i className="fa fa-lock"></i>
         </div>
         }
-        
-        
+
+
         <input
           language={this.props.language}
           type="text"
