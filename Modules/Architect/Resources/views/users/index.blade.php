@@ -7,8 +7,8 @@
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 
-    <h3 class="card-title">Utilisateurs</h3>
-    <a href="{{route('users.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir usuario</a>
+    <h3 class="card-title">Usuaris</h3>
+    <a href="{{route('users.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir usuari</a>
 
     <table class="table" id="table" data-url="{{route('users.data')}}">
         <thead>
