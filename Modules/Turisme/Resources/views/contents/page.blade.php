@@ -2,7 +2,38 @@
 
 @section('content')
 
-    {!! breadcrumb($content) !!}
+
+@if(isset($content) && $content->parent_id != null)
+<div class="single trade">
+  <div class="grey no-margin">
+       <div class="container">
+        <div class="row">
+          <div class="detalls-single">
+      		  <div class="col-md-8  col-sm-6 col-xs-12">
+      		  	<div class="ariadna">
+                {!! breadcrumb($content) !!}
+              </div>
+      		  </div>
+
+            <!--
+      		  <div class="col-md-2  col-sm-3 col-xs-6">
+      		  	<div class="navegacio">
+      				<span class="back glyphicon glyphicon-menu-left"></span><a href="#" >Anterior</a>
+      				<a href="#" >Següent</a><span class="next glyphicon glyphicon-menu-right"></span>
+      		  	  </div>
+      		  </div>
+      		  <div class="col-md-2  col-sm-3 col-xs-6">
+      		  	<div class="seleccio"><span>5</span><a href="#">La meva sel.lecció</a></div>
+      		  </div>
+            -->
+    	   </div>
+  		 </div>
+  	</div>
+  </div>
+</div>
+@endif
+
+
 
 <!-- ARTICLE -->
 <article>

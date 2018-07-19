@@ -84,6 +84,7 @@ class PageBuilderAdapter
                 })->toArray();
             break;
 
+            case 'file':
             case 'image':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){

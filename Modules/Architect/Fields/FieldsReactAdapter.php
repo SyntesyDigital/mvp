@@ -100,6 +100,7 @@ class FieldsReactAdapter
                 $typologyField->value = json_decode($contentField->value, true);
             break;
 
+            case 'file':
             case 'image':
                 $typologyField->value = Media::find($contentField->value);
             break;

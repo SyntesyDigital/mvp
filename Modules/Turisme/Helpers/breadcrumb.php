@@ -25,14 +25,20 @@ if (!function_exists('breadcrumb')) {
         ];
 
         // Build HTML
-        $html = '<ul>';
+        $html = '';
         foreach($breadcrumb as $k => $v) {
-            $html .= sprintf('<li><a href="%s">%s</a></li>',
+
+            $arrow = "";
+            if($k != sizeof($breadcrumb)-1){
+              $arrow = " > ";
+            }
+
+            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '</ul>';
+        $html .= '';
 
         return $html;
     }

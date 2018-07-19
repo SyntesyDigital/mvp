@@ -113,6 +113,7 @@ class ContentContainer extends Component {
               fields[field.identifier].value.push(media);
               break;
 
+          case FIELDS.FILE.type:
           case FIELDS.IMAGE.type:
               fields[field.identifier].value = media;
               break;

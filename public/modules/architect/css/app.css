@@ -15763,6 +15763,32 @@ nav.main-nav ul li.active a {
   display: none;
 }
 
+.file-field .pdf-preview {
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 130px;
+  height: 100px;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.file-field .pdf-preview i.fa {
+  font-size: 50px;
+  line-height: 60px;
+  color: #b4b4b4;
+}
+
+.file-field ul {
+  padding-top: 20px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.file-field ul li {
+  list-style-type: none;
+}
+
 .react-autosuggest__container {
   position: relative;
 }
