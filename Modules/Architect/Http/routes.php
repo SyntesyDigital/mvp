@@ -52,6 +52,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/page-layouts/{pageLayout?}/show', 'PageLayoutController@show')->name('pagelayouts.show');
     Route::get('/page-layouts/data', 'PageLayoutController@data')->name('pagelayouts.data');
     Route::delete('/page-layouts/{pageLayout?}/delete', 'PageLayoutController@delete')->name('pagelayouts.delete');
+    Route::get('/page-layouts/modal-data', 'PageLayoutController@modalData')->name('pagelayouts.modal.data');
 
     // Contents
     Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');

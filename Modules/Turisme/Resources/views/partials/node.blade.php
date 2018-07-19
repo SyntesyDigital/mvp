@@ -17,13 +17,25 @@
 @if($node['type'] == "item")
   @if(isset($node['field']))
 
-    @if(isset($node['field']['type']) && isset($node['field']['value']))
+    @if(isset($node['field']['type']) && ( $node['field']['type'] == "widget" || $node['field']['type'] == "widget-list") )
 
-      @include('turisme::partials.fields.'.$node['field']['type'],
+      @include('turisme::partials.widgets.'.strtolower($node['field']['label']),
         [
           "field" => $node['field'],
         ]
       )
+
+    @else
+
+      @if(isset($node['field']['type']) && isset($node['field']['value']))
+
+        @include('turisme::partials.fields.'.$node['field']['type'],
+          [
+            "field" => $node['field'],
+            "settings" => $node['field']['settings']
+          ]
+        )
+      @endif
 
     @endif
 

@@ -4,6 +4,6 @@
   $value = $carbon->formatLocalized('%A %d %B %Y');
 @endphp
 
-<div id="{{$field['settings']['htmlId'] or ''}}" class="{{$field['settings']['htmlClass'] or ''}}">
+<div id="{{$settings['htmlId'] or ''}}" class="{{$settings['htmlClass'] or ''}}">
   {{$value or ''}}
 </div>

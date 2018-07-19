@@ -729,12 +729,10 @@ class PageBuilder extends Component {
       switch (field.type) {
           case FIELDS.IMAGES.type:
               layout = this.addItem(layout,-1,this.state.editItemData.pathToIndex,media);
-              updateLayout = true;
               break;
 
           case FIELDS.IMAGE.type:
               layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,media);
-              updateLayout = true;
               break;
 
           case "widget":

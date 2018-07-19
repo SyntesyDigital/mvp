@@ -58,7 +58,7 @@
             </div>
 
             <div class="col-xs-3">
-                <a href="">
+                <a href="{{route('pagelayouts')}}">
                   <div class="grid-item">
                       <i class="fa fa-columns"></i>
                       <p class="grid-item-name">

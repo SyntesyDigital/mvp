@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import LayoutDataTable from './../LayoutDataTable';
+
 class LayoutSelectModal extends Component {
 
     constructor(props)
@@ -8,67 +10,8 @@ class LayoutSelectModal extends Component {
         super(props);
     }
 
-    componentDidMount()
-    {
-        this.setDatatable();
-    }
+    componentDidMount(){
 
-    setDatatable()
-    {
-        var _this = this;
-
-        var table = $('#table-layouts').DataTable({
-    	    language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
-    	    },
-    		processing: true,
-            serverSide: true,
-    	    pageLength: 20,
-              language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
-              },
-    	    ajax: '/architect/page-layouts',
-    	    columns: [
-                {data: 'name', name: 'name'},
-    	        {data: 'action', name: 'action', orderable: false, searchable: false}
-    	    ],
-            initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
-
-                _this.initEvents();
-    	    }
-        });
-    }
-
-    refresh()
-    {
-        var _this = this;
-        var table = $('#table-layouts');
-        var datatable = table.DataTable();
-
-        datatable.ajax.reload(function(){
-            _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
-        });
-    }
-
-    initEvents()
-    {
-        var _this = this;
-        $(document).on('click','.select-layout',function(e){
-          e.preventDefault();
-
-          alert('Layout selected !');
-        });
     }
 
     componentWillReceiveProps(nextProps)
@@ -82,22 +25,20 @@ class LayoutSelectModal extends Component {
 
     onModalClose(e){
         e.preventDefault();
+        this.props.onContentCancel();
     }
 
     modalOpen()
     {
-        TweenMax.to($("#media-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+        TweenMax.to($("#layout-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
     }
 
     modalClose() {
       var self =this;
-        TweenMax.to($("#media-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
-          self.setState({
-            imageSelected : null
-          });
+        TweenMax.to($("#layout-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
+
         }});
     }
-
 
     render() {
 
@@ -105,39 +46,42 @@ class LayoutSelectModal extends Component {
 
         return (
           <div style={{zIndex:zIndex}}>
-            <div className="custom-modal">
+            <div className="custom-modal" id="layout-select">
               <div className="modal-background"></div>
+
 
                 <div className="modal-container">
                     <div className="modal-header">
 
-                        <h2>Seleccionar layout</h2>
+                      <h2>Seleccionar plantilla</h2>
 
                       <div className="modal-buttons">
-                        <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
+                        <a className="btn btn-default close-button-modal" onClick={this.onModalClose.bind(this)}>
                           <i className="fa fa-times"></i>
                         </a>
                       </div>
                     </div>
-
                   <div className="modal-content">
                     <div className="container">
                       <div className="row">
-                        <div className="col-xs-8 grid-col">
+                        <div className="col-xs-12">
 
-                          <div className="grid-items">
-                            Modal...
-                          </div>
-
+                          <LayoutDataTable
+                            route={routes["pagelayouts.data"]}
+                            onSelectItem={this.props.onLayoutSelected}
+                          />
 
                         </div>
-
                       </div>
                     </div>
 
-                  </div>
-              </div>
+                    <div className="modal-footer">
+                      <a href="" className="btn btn-default" onClick={this.onModalClose.bind(this)}> Cancel·lar </a> &nbsp;
+                    </div>
 
+                  </div>
+
+              </div>
             </div>
           </div>
         );
