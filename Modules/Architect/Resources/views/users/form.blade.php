@@ -45,7 +45,7 @@
                     @if(isset($user))
                     <h1>{{ $user->full_name }}</h1>
                     @else
-                    <h1>Create user</h1>
+                    <h1>Crear usuari</h1>
                     @endif
                 </div>
             </div>

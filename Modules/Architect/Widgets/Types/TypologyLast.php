@@ -29,6 +29,7 @@ class TypologyLast extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'typologiesAllowed'
+        //categoriesAllowed
     ];
 
 }
