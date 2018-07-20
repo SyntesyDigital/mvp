@@ -91,6 +91,8 @@ class ModalEditListItem extends Component {
         field : stateField
     });
 
+    //this.props.onUpdateData(stateField);
+
   }
 
   onSubmit(e) {

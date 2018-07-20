@@ -59,19 +59,7 @@ class ModalEditItem extends Component {
 
   processProps(props) {
 
-    // var field = JSON.parse(JSON.stringify(props.item.data.field));
-    // //field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
-    //
-    // if(field.type != "widget-list") {
-    //     field.value = props.item.data.field !== undefined && props.item.data.field.value !== undefined
-    //         ? props.item.data.field.value
-    //         : null;
-    // } else {}
-    //
-    //
-    // return field;
-
-    //console.log(" ModalEditItem :: processProps ",props);
+    console.log("ModalEditItem :: field processProps ",props);
 
     var field = JSON.parse(JSON.stringify(props.item.data.field));
     field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
@@ -79,7 +67,7 @@ class ModalEditItem extends Component {
       props.item.data.field.value !== undefined ? props.item.data.field.value : null;
 
     //
-    // console.log("ModalEditItem :: field after process : ",field);
+    console.log("ModalEditItem :: field after process : ",field);
 
     return field;
   }
@@ -136,6 +124,8 @@ class ModalEditItem extends Component {
         field : stateField
     });
 
+    this.props.onUpdateData(stateField);
+
   }
 
   onWidgetChange(field) {
@@ -145,6 +135,8 @@ class ModalEditItem extends Component {
     this.setState({
         field : stateField
     });
+
+    this.props.onUpdateData(stateField);
 
   }
 
@@ -299,9 +291,6 @@ class ModalEditItem extends Component {
     });
 
   }
-
-
-
 
   onSubmit(e) {
     e.preventDefault();
@@ -487,16 +476,28 @@ class ModalEditItem extends Component {
         listItemInfo : null
     });
 
+    this.props.onUpdateData(stateField);
+  }
+
+  handleUpdateListItem(field) {
+    var stateField = this.state.field;
+    stateField.value[this.state.listItemInfo.index] = field;
+
+    this.setState({
+        field : stateField
+    });
+
+    this.props.onUpdateData(stateField);
   }
 
   handleImageSelect(field) {
-    console.log("ModalEditItem :: handleImageSelect => ",field);
+    //console.log("ModalEditItem :: handleImageSelect => ",field);
 
     this.props.onImageSelect(this.state.listItemInfo);
   }
 
   handleContentSelect(field) {
-    console.log("ModalEditItem :: handleContentSelect => ",field);
+    //console.log("ModalEditItem :: handleContentSelect => ",field);
 
     this.props.onContentSelect(this.state.listItemInfo);
   }
@@ -506,7 +507,7 @@ class ModalEditItem extends Component {
 
   handleFieldSettingsChange(field) {
 
-      console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+      //console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
 
       const stateField = this.state.field;
 
@@ -531,7 +532,7 @@ class ModalEditItem extends Component {
 
   renderSettings() {
 
-    console.log("renderSettings!",this.state.field);
+    //console.log("renderSettings!",this.state.field);
 
     return (
       <div>
@@ -593,7 +594,9 @@ class ModalEditItem extends Component {
 
   render() {
 
-    console.log("ModalEditItem :: render field => ",this.state.field);
+    //console.log("ModalEditItem :: render field => ",this.state.field);
+
+    //onUpdateData={this.handleUpdateListItem.bind(this)}
 
     return (
       <div>
@@ -603,6 +606,7 @@ class ModalEditItem extends Component {
           item={this.state.listItemInfo}
           translations={this.props.translations}
           onItemCancel={this.handleListItemCancel.bind(this)}
+
           onSubmitData={this.handleSubmitListItem.bind(this)}
           onImageSelect={this.handleListImageSelect.bind(this)}
           onContentSelect={this.handleListContentSelect.bind(this)}
