@@ -14,4 +14,9 @@ return [
     'TYPOLOGY_LAST' => 'Ultims elements',
     'TWITTER_FEED' => 'Twitter',
     'BANNER' => 'Banner',
+    'TITLE_TEXT' => 'Títol Text',
+    'COLLAPSE_TABS' => 'FAQ',
+    'IMAGE_TEXT_FILE' => 'Highlight',
+    'HIGHLIGHTS' => 'Llista highlights',
+    'VIDEO' => 'Video'
 ];

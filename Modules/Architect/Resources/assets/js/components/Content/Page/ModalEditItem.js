@@ -476,7 +476,7 @@ class ModalEditItem extends Component {
         listItemInfo : null
     });
 
-    this.props.onUpdateData(stateField);
+    //this.props.onUpdateData(stateField);
   }
 
   handleUpdateListItem(field) {
@@ -487,7 +487,7 @@ class ModalEditItem extends Component {
         field : stateField
     });
 
-    this.props.onUpdateData(stateField);
+    //this.props.onUpdateData(stateField);
   }
 
   handleImageSelect(field) {
@@ -596,6 +596,7 @@ class ModalEditItem extends Component {
 
     //console.log("ModalEditItem :: render field => ",this.state.field);
 
+    //FIXME el ModalEditListItem sigue sin actualizar bien la primera vez
     //onUpdateData={this.handleUpdateListItem.bind(this)}
 
     return (
