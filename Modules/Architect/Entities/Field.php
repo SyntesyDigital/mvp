@@ -59,4 +59,5 @@ class Field extends Model
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
     }
 
+
 }

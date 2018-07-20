@@ -81,7 +81,6 @@ class FieldsReactAdapter
             case 'richtext':
             case 'slug':
             case 'text':
-
                 $iso = $this->getLanguageIsoFromId($contentField->language_id);
                 $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
 

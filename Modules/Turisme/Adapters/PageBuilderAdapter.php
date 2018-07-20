@@ -55,9 +55,11 @@ class PageBuilderAdapter
                             case "widget":
                                 $nodes[$key]['field']['fields'] = $this->buildPageField($node['field']);
 
-                                if(isset($nodes[$key]['field']['settings']['typology'])) {
-                                    $content = Content::where('typology_id', $nodes[$key]['field']['settings']['typology']);
-                                    $categoryId = isset($nodes[$key]['field']['settings']['category']) ? $nodes[$key]['field']['settings']['category'] : null;
+                                $typologyId = isset($nodes[$key]['field']['settings']['typology']) ? $nodes[$key]['field']['settings']['typology'] : null;
+                                $categoryId = isset($nodes[$key]['field']['settings']['category']) ? $nodes[$key]['field']['settings']['category'] : null;
+
+                                if($typologyId) {
+                                    $content = Content::where('typology_id', $typologyId);
 
                                     if($categoryId) {
                                         $content->whereHas('categories', function($q) use ($categoryId){
@@ -65,7 +67,7 @@ class PageBuilderAdapter
                                         });
                                     }
 
-                                    $nodes[$key]['field']['contents'] = $content->with('fields')->get();
+                                    $nodes[$key]['field']['contents'] = $content->with('fields', 'categories')->get();
                                 }
                             break;
 

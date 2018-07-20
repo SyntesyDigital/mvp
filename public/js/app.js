@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 536);
+/******/ 	return __webpack_require__(__webpack_require__.s = 537);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -38445,18 +38445,18 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 536:
+/***/ 537:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(537);
-__webpack_require__(541);
-__webpack_require__(543);
-module.exports = __webpack_require__(544);
+__webpack_require__(538);
+__webpack_require__(542);
+__webpack_require__(544);
+module.exports = __webpack_require__(545);
 
 
 /***/ }),
 
-/***/ 537:
+/***/ 538:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -38466,7 +38466,7 @@ module.exports = __webpack_require__(544);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(538);
+__webpack_require__(539);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -38474,11 +38474,11 @@ __webpack_require__(538);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(540);
+__webpack_require__(541);
 
 /***/ }),
 
-/***/ 538:
+/***/ 539:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -38494,7 +38494,7 @@ window.Popper = __webpack_require__(351).default;
 try {
   window.$ = window.jQuery = __webpack_require__(86);
 
-  __webpack_require__(539);
+  __webpack_require__(540);
 } catch (e) {}
 
 /**
@@ -38540,7 +38540,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 539:
+/***/ 540:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -42441,7 +42441,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 540:
+/***/ 541:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42514,14 +42514,7 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 541:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 543:
+/***/ 542:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -42529,6 +42522,13 @@ if (document.getElementById('example')) {
 /***/ }),
 
 /***/ 544:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 545:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

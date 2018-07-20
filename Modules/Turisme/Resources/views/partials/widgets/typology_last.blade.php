@@ -9,26 +9,16 @@
     )
   </h3>
   <ul>
-    <li>
-      <p class="image"><img src="images/img-medium.png"  alt=""/></p>
-      <p class="text"><span class="data">30-11-2016</span> | <span class="categoria">Categoria </span></p>
-      <a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a>
-     </li>
-    <li>
-      <p class="image"><img src="images/img-medium.png"  alt=""/></p>
-      <p class="text"><span class="data">30-11-2016</span> | <span class="categoria">Categoria </span></p>
-      <a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a>
-     </li>
-    <li>
-      <p class="image"><img src="images/img-medium.png"  alt=""/></p>
-      <p class="text"><span class="data">30-11-2016</span> | <span class="categoria">Categoria </span></p>
-      <a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a>
-     </li>
-    <li>
-      <p class="image"><img src="images/img-medium.png"  alt=""/></p>
-      <p class="text"><span class="data">30-11-2016</span> | <span class="categoria">Categoria </span></p>
-      <a href="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </a>
-     </li>
+      @if((isset($field["contents"])) && $field["contents"])
+        @foreach($field["contents"] as $content)
+        <li>
+            <p class="image"><img src="images/img-medium.png"  alt=""/></p>
+            <p class="text"><span class="data">{{$content->created_at->format('Y-m-d')}}</span> | <span class="categoria">{{ $content->categories->first()->name }} </span></p>
+            <a href="{{ route('content.show', $content->getFullSlug()) }}">{{$content->title}}</a>
+        </li>
+        @endforeach()
+    @endif
+
   </ul>
   <p class="button">
     @include('turisme::partials.fields.'.$field['fields'][1]['type'],
