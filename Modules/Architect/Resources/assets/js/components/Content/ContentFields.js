@@ -5,6 +5,7 @@ import TextField from './ContentFields/TextField';
 import SlugField from './ContentFields/SlugField';
 import RichTextField from './ContentFields/RichTextField';
 import ImageField from './ContentFields/ImageField';
+import FileField from './ContentFields/FileField';
 import DateField from './ContentFields/DateField';
 import ImagesField from './ContentFields/ImagesField';
 import ListField from './ContentFields/ListField';
@@ -89,6 +90,19 @@ class ContentFields extends Component {
             case FIELDS.IMAGE.type:
                 fields.push(
                 <ImageField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onImageSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+
+            case FIELDS.FILE.type:
+                fields.push(
+                <FileField
                     errors={_this.props.errors[k]}
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}

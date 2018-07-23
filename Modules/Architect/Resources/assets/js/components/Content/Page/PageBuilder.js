@@ -647,6 +647,31 @@ class PageBuilder extends Component {
 
   }
 
+  handleOnUpdateField(field) {
+
+    var data = field;
+
+    //update data to pathToIndex
+    console.log("handleOnUpdateField => ", this.state.editItemData.pathToIndex, data);
+
+    var layout = this.props.layout;
+
+    layout = this.changeItemWithCallback(layout,-1,this.state.editItemData.pathToIndex,data,
+      function(field,newField){
+         //field.value = newField.value;
+         //field.settings = newField.settings;
+         return newField;
+      }
+    );
+
+    console.log("handleOnUpdateField : layout : ",layout);
+
+    this.props.updateLayout(layout);
+
+  }
+
+
+
   handleOnAddListField(field) {
 
     var data = field;
@@ -877,6 +902,7 @@ class PageBuilder extends Component {
           onItemCancel={this.handleEditItemCancel.bind(this)}
           item={this.state.editItemData}
           translations={this.props.translations}
+          onUpdateData={this.handleOnUpdateField.bind(this)}
           onSubmitData={this.handleOnEditField.bind(this)}
           onImageSelect={this.handleImageSelect.bind(this)}
           onContentSelect={this.handleContentSelect.bind(this)}

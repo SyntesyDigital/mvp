@@ -11,13 +11,16 @@ use Modules\Architect\Entities\Page;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 
+use Modules\Architect\Transformers\ContentTransformer;
+use Modules\Architect\Ressources\ContentCollection;
+
 class PageBuilderAdapter
 {
-    public function __construct(Content $content)
+    public function __construct(Content $content, $languages = null)
     {
         $this->content = $content;
         $this->page = $content->page;
-        $this->languages = Language::all();
+        $this->languages = $languages ? $languages : Language::all();
     }
 
     public function get()
@@ -38,6 +41,7 @@ class PageBuilderAdapter
     }
 
     function getPage(&$nodes) {
+
         if($nodes) {
             foreach ($nodes as $key => $node) {
                 if(isset($node['children'])) {
@@ -59,6 +63,7 @@ class PageBuilderAdapter
                                 $categoryId = isset($nodes[$key]['field']['settings']['category']) ? $nodes[$key]['field']['settings']['category'] : null;
 
                                 if($typologyId) {
+
                                     $content = Content::where('typology_id', $typologyId);
 
                                     if($categoryId) {
@@ -67,7 +72,9 @@ class PageBuilderAdapter
                                         });
                                     }
 
-                                    $nodes[$key]['field']['contents'] = $content->with('fields', 'categories')->get();
+                                    $nodes[$key]['field']['contents'] = $content->with('fields', 'categories')->get()->map(function($content) {
+                                        return (new ContentTransformer($content))->toArray(request());
+                                    });
                                 }
                             break;
 
@@ -99,6 +106,7 @@ class PageBuilderAdapter
                 })->toArray();
             break;
 
+            case 'file':
             case 'image':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){

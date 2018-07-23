@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Modules\Architect\Entities\Content;
-use Modules\Api\Ressources\ContentCollection;
+use Modules\Architect\Ressources\ContentCollection;
 
 class ContentController extends Controller
 {
@@ -16,7 +16,7 @@ class ContentController extends Controller
         $typologyId = $request->get('typology_id');
         $categoryId = $request->get('category_id');
 
-        $collection = Content::with('fields');
+        $collection = Content::with('fields')->where('id', 1);
 
         if($typologyId) {
             $collection->where('typology_id', $typologyId);
@@ -28,6 +28,8 @@ class ContentController extends Controller
             });
         }
 
-        return new ContentCollection($collection->get());
+        return new ContentCollection($collection->paginate(20));
     }
+
+
 }

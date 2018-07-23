@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Api\Ressources;
+namespace Modules\Architect\Ressources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-use Modules\Api\Transformers\ContentTransformer;
+use Modules\Architect\Transformers\ContentTransformer;
 
 class ContentCollection extends ResourceCollection
 {

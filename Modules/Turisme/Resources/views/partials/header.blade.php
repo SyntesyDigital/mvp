@@ -4,7 +4,7 @@
 	<div class="container">
 			<div class="row">
 				<div class="col-md-2 col-sm-3 col-xs-6">
-					<div class="corporatiu"><a href="#"><img src="{{asset('modules/turisme/images/logo-corporatiu-barcelona-turisme.png')}}" alt="Turisme Barcelona"/></a></div>
+					<div class="corporatiu"><a href="{{route('home')}}"><img src="{{asset('modules/turisme/images/logo-corporatiu-barcelona-turisme.png')}}" alt="Turisme Barcelona"/></a></div>
 			</div>
 				<div class="col-md-3 col-sm-4 col-xs-4 pull-right">
 					<div class="idiomes">
@@ -12,7 +12,6 @@
 				<li class="current"> <a href=""> Català</a></li>
 				<li> <a href=""> Español</a></li>
 				<li> <a href=""> English</a></li>
-				<li> <a href=""> Français</a></li>
 			</ul>
 			</div>
 			</div>

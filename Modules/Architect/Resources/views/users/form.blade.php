@@ -45,7 +45,7 @@
                     @if(isset($user))
                     <h1>{{ $user->full_name }}</h1>
                     @else
-                    <h1>Create user</h1>
+                    <h1>Crear usuari</h1>
                     @endif
                 </div>
             </div>
@@ -128,7 +128,7 @@
                         Form::select(
                             'role_id',
                             App\Models\Role::pluck('display_name', 'id'),
-                            isset($user) && $user->roles ? $user->roles->first()->id : old('role'),
+                            isset($user) && $user->roles && $user->roles->count() > 1 ? $user->roles->first()->id : old('role'),
                             [
                                 'class' => 'form-control',
                                 'placeholder'=> '---'

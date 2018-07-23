@@ -14,6 +14,7 @@ return [
     'localization' => 'Localització',
     'slug' => 'Slug',
     'url' => 'URL',
+    'file' => 'Arxiu',
 
     'title' => 'Title',
 ];

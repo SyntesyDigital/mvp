@@ -1,7 +1,6 @@
 /vendor
 /node_modules
 /Modules/Architect/node_modules
-/public/storage
 Homestead.yaml
 Homestead.json
 .env
@@ -9,12 +8,10 @@ Homestead.json
 /rec
 /node_modules
 /public/hot
-/public/storage/debugbar
-/public/storage/framework
-/public/storage/logs
-/public/storage/medias
-/storage/*.key
+/public/storage/
 /storage/debugbar
+/storage/framework
+/storage/logs
 /vendor
 /.idea
 /.vagrant
