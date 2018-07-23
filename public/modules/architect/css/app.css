@@ -14718,6 +14718,24 @@ nav.main-nav ul li.active a {
   margin: 0;
 }
 
+.grid-items .grid-item.with-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 40px;
+  height: 140px;
+}
+
+.grid-items .grid-item.with-image p.grid-item-name {
+  position: absolute;
+  bottom: -27px;
+  text-align: center;
+  width: 100%;
+  left: 0px;
+  height: 20px;
+  overflow: hidden;
+}
+
 .grid-items a {
   display: block;
   color: #455660;
@@ -16495,6 +16513,10 @@ nav.main-nav ul li.active a {
 .page-builder .row-container .row-container-body .row-container-body-top a.btn.btn-link {
   padding: 0;
   color: #acacac;
+}
+
+.page-builder .row-container .row-container-body .row-container-body-bottom {
+  min-height: 15px;
 }
 
 .page-builder .row-container .row-container-body .row-container-body-bottom a.btn.btn-link {
