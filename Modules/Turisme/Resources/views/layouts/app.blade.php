@@ -33,6 +33,8 @@
         <link href="{{asset('modules/turisme/css/app.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('modules/turisme/css/turisme.css')}}" rel="stylesheet" type="text/css" />
         @stack('styles')
+        <link href="http://www.edittio.com/turisme/professionals/css/general.css" rel="stylesheet" type="text/css" />
+
 
     </head>
     <body class="home">

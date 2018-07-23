@@ -62,14 +62,14 @@ class UserController extends Controller
         dispatch_now(UpdateUser::fromRequest($user, $request));
 
         return redirect(route('users.show', $user))
-            ->with('success', 'User successfully saved');
+            ->with('success', 'Usuari guardat satisfactoriament');
     }
 
     public function store(CreateUserRequest $request)
     {
         $user = dispatch_now(CreateUser::fromRequest($request));
 
-        return redirect(route('users.show', $user))->with('success', 'User successfully saved');
+        return redirect(route('users.show', $user))->with('success', 'Usuari guardat satisfactoriament');
     }
 
     public function delete(User $user, DeleteUserRequest $request)

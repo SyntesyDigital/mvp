@@ -11,7 +11,6 @@ class ModalSelectItem extends Component {
     this.onModalClose = this.onModalClose.bind(this);
     this.handleSelectItem = this.handleSelectItem.bind(this);
 
-
   }
 
   componentDidMount() {
@@ -153,7 +152,7 @@ class ModalSelectItem extends Component {
 
       for( var key in WIDGETS){
 
-        if(nonAllowed.indexOf(WIDGETS[key].type) == -1){
+        if(nonAllowed.indexOf(WIDGETS[key].type) == -1 && !WIDGETS[key].hidden){
           widgets.push(
             <div className="col-xs-4" key={key}>
               <a href="" onClick={this.addItem.bind(this,WIDGETS[key])}>

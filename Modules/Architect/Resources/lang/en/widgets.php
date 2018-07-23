@@ -16,7 +16,7 @@ return [
     'BANNER' => 'Banner',
     'TITLE_TEXT' => 'Títol Text',
     'COLLAPSE_TABS' => 'FAQ',
-    'IMAGE_TEXT_FILE' => 'Highlight',
+    'IMAGE_TEXT_FILE' => 'Imatge Text Arxiu',
     'HIGHLIGHTS' => 'Llista highlights',
     'VIDEO' => 'Video'
 ];
