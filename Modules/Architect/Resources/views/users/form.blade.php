@@ -128,7 +128,7 @@
                         Form::select(
                             'role_id',
                             App\Models\Role::pluck('display_name', 'id'),
-                            isset($user) && $user->roles ? $user->roles->first()->id : old('role'),
+                            isset($user) && $user->roles && $user->roles->count() > 1 ? $user->roles->first()->id : old('role'),
                             [
                                 'class' => 'form-control',
                                 'placeholder'=> '---'
