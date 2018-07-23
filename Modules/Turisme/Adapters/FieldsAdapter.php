@@ -10,6 +10,9 @@ use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 
+use Modules\Architect\Transformers\ContentTransformer;
+use Modules\Architect\Ressources\ContentCollection;
+
 class FieldsAdapter
 {
     private $fields = [];
@@ -114,6 +117,11 @@ class FieldsAdapter
             case 'contents':
                 $values = isset($typologyField->value) ? $typologyField->value : [];
                 $values[] = Content::find($contentField->value)->load('fields');
+                // return ContentField::where('name', $fieldName)->get()->map(function($field){
+                //     return Content::find($field->value);
+                // })->map(function($content) {
+                //     return (new ContentTransformer($content))->toArray(request());
+                // });
                 $typologyField->value = $values;
             break;
 

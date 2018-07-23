@@ -130,7 +130,9 @@ class PageBuilderAdapter
             case 'contents':
                 return ContentField::where('name', $fieldName)->get()->map(function($field){
                     return Content::find($field->value);
-                })->toArray();
+                })->map(function($content) {
+                    return (new ContentTransformer($content))->toArray(request());
+                });
             break;
 
             case 'video':

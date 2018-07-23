@@ -9,6 +9,7 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 
+// FIXME : move this or find a better way :)
 use Modules\Turisme\Adapters\PageBuilderAdapter;
 
 class ContentTransformer extends Resource
