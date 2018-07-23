@@ -31,7 +31,7 @@ class CreateUser
 
         $user = User::create($this->attributes);
 
-        if(isset($this->attribute['role_id'])) {
+        if(isset($this->attributes['role_id'])) {
             $user->roles()->sync($this->attributes['role_id']);
         }
 

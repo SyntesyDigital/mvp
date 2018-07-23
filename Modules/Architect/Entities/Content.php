@@ -215,7 +215,6 @@ class Content extends Model
                 $values = null;
                 $childs = $this->getFieldChilds($field);
 
-
                 if($childs != null){
                   foreach($childs as $k => $v) {
 
