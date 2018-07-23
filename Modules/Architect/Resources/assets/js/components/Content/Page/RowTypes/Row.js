@@ -262,6 +262,7 @@ class Row extends Component {
 
     const childrenIndex = this.props.pathToIndex[this.props.pathToIndex.length-1];
     const childrenLength = this.props.childrenLength;
+    const isWrapper = this.props.data.wrapper !== undefined ? this.props.data.wrapper : false ;
 
     return (
       <div className="page-row filled">
@@ -286,12 +287,16 @@ class Row extends Component {
               <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
                 <i className="fa fa-pencil"></i>
               </a>
-              <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-                <i className="fa fa-files-o"></i>
-              </a>
-              <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>
-                <i className="fa fa-trash"></i>
-              </a>
+              {!isWrapper &&
+                <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
+                  <i className="fa fa-files-o"></i>
+                </a>
+              }
+              {!isWrapper &&
+                <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>
+                  <i className="fa fa-trash"></i>
+                </a>
+              }
             </div>
           </div>
 

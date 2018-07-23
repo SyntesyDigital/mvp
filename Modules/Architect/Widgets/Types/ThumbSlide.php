@@ -25,6 +25,8 @@ class ThumbSlide extends Widget implements WidgetInterface
         'required'
     ];
 
+    public $hidden = true;
+
     public $settings = [
         'htmlId',
         'htmlClass',
