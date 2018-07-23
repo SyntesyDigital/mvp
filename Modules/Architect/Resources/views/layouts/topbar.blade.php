@@ -51,16 +51,16 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              Hola,
+                              Hola {{Auth::user()->firstname}},
                               <b class="caret"></b>
                               <div class="ripple-container"></div>
                             </a>
                               <ul class="dropdown-menu dropdown-menu-right default-padding">
                                   <li class="dropdown-header"></li>
                                   <li>
-                                      <a href="{{route('account')}}">
-                                          <i class="fa fa-user-circle-o"></i>
-                                          &nbsp;Mi cuenta
+                                      <a href="{{route('users.show',Auth::user()->id)}}">
+                                          <i class="fa fa-user"></i>
+                                          &nbsp;El meu compte
                                       </a>
                                   </li>
                                   <li>

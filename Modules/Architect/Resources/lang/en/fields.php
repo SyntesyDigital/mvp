@@ -17,4 +17,6 @@ return [
     'file' => 'Arxiu',
 
     'title' => 'Title',
+    'description' => 'Descripció',
+    'subtitle' => 'Subtítol'
 ];

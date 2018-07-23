@@ -111,15 +111,21 @@ class Col extends Component {
 
   render() {
 
+    const childrenLength = this.props.data.children != null && this.props.data.children !== undefined &&
+       this.props.data.children.length > 0 ? this.props.data.children.length : 0;
+
     return (
 
       <div className={this.props.colClass}>
         <div className="row-container-body-content">
 
           <div className="row-container-body-top">
-            <a href="" className="btn btn-link" onClick={this.onSelectItemBefore.bind(this)}>
-              <i className="fa fa-plus"></i>
-            </a>
+
+            {childrenLength > 0 &&
+              <a href="" className="btn btn-link" onClick={this.onSelectItemBefore.bind(this)}>
+                <i className="fa fa-plus"></i>
+              </a>
+            }
             &nbsp;&nbsp;
             <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
               <i className="fa fa-pencil"></i>
@@ -131,9 +137,11 @@ class Col extends Component {
 
 
           <div className="row-container-body-bottom">
-            <a href="" className="btn btn-link" onClick={this.onSelectItemAfter.bind(this)}>
-              <i className="fa fa-plus"></i>
-            </a>
+            {childrenLength > 0 &&
+              <a href="" className="btn btn-link" onClick={this.onSelectItemAfter.bind(this)}>
+                <i className="fa fa-plus"></i>
+              </a>
+            }
           </div>
 
         </div>

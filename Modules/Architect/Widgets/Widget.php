@@ -79,6 +79,16 @@ abstract class Widget
         return $this->settings;
     }
 
+    public function getDefaultSettings()
+    {
+        return isset($this->defaultSettings) ? $this->defaultSettings : null;
+    }
+
+    public function getHidden()
+    {
+      return isset($this->hidden) ? $this->hidden : false;
+    }
+
     public function getFields()
     {
         return isset($this->fields) ? $this->fields : null;

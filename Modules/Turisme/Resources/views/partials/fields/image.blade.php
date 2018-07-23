@@ -4,10 +4,13 @@
   if(isset($settings) && isset($settings['cropsAllowed']) && $settings['cropsAllowed'] != null){
     $crop = $settings['cropsAllowed'];
   }
+  $url = isset($field['value']) && isset($field['value']->getUrlsAttribute()[$crop]) ? asset($field['value']->getUrlsAttribute()[$crop]) : null;
 @endphp
 @if(!isset($div))
 <div>
 @endif
+
+@if(isset($url))
   <img
     id="{{$settings['htmlId'] or ''}}"
     class="{{$settings['htmlClass'] or ''}}"
@@ -17,6 +20,8 @@
     width="{{$width or ''}}"
     height="{{$height or ''}}"
   />
+@endif
+
 @if(!isset($div))
 </div>
 @endif

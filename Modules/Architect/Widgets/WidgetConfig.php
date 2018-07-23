@@ -27,7 +27,9 @@ class WidgetConfig
                 'settings' => $widget->getSettings() ?: null,
                 'fields' => $widget->getFields(),
                 'component' => $widget->getComponent(),
-                'widget' => $widget->getWidget()
+                'widget' => $widget->getWidget(),
+                'hidden' => $widget->getHidden(),
+                'defaultSettings' => $widget->getDefaultSettings()
             ];
         }
 
