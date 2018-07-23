@@ -53,28 +53,42 @@ class Media extends Model
 
     public function getUrlsAttribute()
     {
+
         $config = config('images');
 
-        $urls = [
-            'original' => sprintf('%s/original/%s',
-                str_replace('public', 'storage', $config['storage_directory']),
-                $this->stored_filename
-            )
-        ];
-
-        foreach($config["formats"] as $format) {
-            $path = sprintf('%s/%s/%s',
-                str_replace('public', 'storage', $config['storage_directory']),
-                $format['directory'],
-                $this->stored_filename
-            );
-
-            if(stream_resolve_include_path($path)) {
-                $urls[ $format['name'] ] = $path;
-            }
+        if(strpos($this->type, 'application') !== false ){
+          $urls = [
+              'files' => sprintf('%s/files/%s',
+                  str_replace('public', 'storage', $config['storage_directory']),
+                  $this->stored_filename
+              )
+          ];
+          return $urls;
         }
+        else {
 
-        return $urls;
+          $urls = [
+              'original' => sprintf('%s/original/%s',
+                  str_replace('public', 'storage', $config['storage_directory']),
+                  $this->stored_filename
+              )
+          ];
+
+          foreach($config["formats"] as $format) {
+              $path = sprintf('%s/%s/%s',
+                  str_replace('public', 'storage', $config['storage_directory']),
+                  $format['directory'],
+                  $this->stored_filename
+              );
+
+              if(stream_resolve_include_path($path)) {
+                  $urls[ $format['name'] ] = $path;
+              }
+          }
+
+          return $urls;
+
+        }
     }
 
 }

@@ -13,6 +13,7 @@ import BooleanField from './../ContentFields/BooleanField';
 import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
+import FileField from './../ContentFields/FileField';
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
@@ -336,6 +337,17 @@ class ModalEditItem extends Component {
         case FIELDS.IMAGE.type:
           return (
             <ImageField
+                //errors={_this.props.errors[k]}
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onImageSelect={this.props.onImageSelect}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
+        case FIELDS.FILE.type:
+          return (
+            <FileField
                 //errors={_this.props.errors[k]}
                 field={this.state.field}
                 hideTab={true}

@@ -1,5 +1,5 @@
 @php
-  $url = isset($field['value']) && isset($field['value']->getUrlsAttribute()['original']) ? asset($field['value']->getUrlsAttribute()['original']) : null;
+  $url = isset($field['value']) && isset($field['value']->getUrlsAttribute()['files']) ? asset($field['value']->getUrlsAttribute()['files']) : null;
 @endphp
 @if(!isset($div))
 <div>
@@ -8,6 +8,7 @@
   <a
     id="{{$settings['htmlId'] or ''}}"
     class="{{$settings['htmlClass'] or ''}} {{$class or ''}}"
+    target="_blank"
     href="{{$url}}"
   >
     Descarregar arxiu

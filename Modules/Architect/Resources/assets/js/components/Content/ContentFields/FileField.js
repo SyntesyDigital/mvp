@@ -58,8 +58,8 @@ class FileField extends Component {
 
     //console.log("FileField :: url => ",this.props.field);
 
-    if(this.props.field.value != null && this.props.field.value.type == "application"){
-      url = this.props.field.value.urls.original;
+    if(this.props.field.value != null && this.props.field.value.type.indexOf("application") != -1){
+      url = this.props.field.value.urls.files;
     }
 
     return (
@@ -85,6 +85,7 @@ class FileField extends Component {
 
           {defined && value.url != "" &&
             <div className="image-buttons">
+              <a href={ASSETS+url} className="btn btn-link" target="_blank"><i className="fa fa-eye"></i> Veure</a> &nbsp;&nbsp;
               <a href="" className="btn btn-link text-danger" onClick={this.cancelFile}><i className="fa fa-times"></i> Cancel·lar</a>
             </div>
            }
