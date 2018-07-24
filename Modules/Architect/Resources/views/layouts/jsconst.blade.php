@@ -9,4 +9,5 @@
   const TYPOLOGIES = {!! json_encode(Modules\Architect\Entities\Typology::all(), JSON_PRETTY_PRINT) !!};
   const ROW_SETTINGS = ['htmlId','htmlClass','hasContainer'];
   const COL_SETTINGS = ['htmlId','htmlClass'];
+  const CATEGORIES = {!! json_encode(Modules\Architect\Entities\Category::all(), JSON_PRETTY_PRINT) !!};
 </script>

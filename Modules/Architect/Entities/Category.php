@@ -5,13 +5,13 @@ namespace Modules\Architect\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
 use Kalnoy\Nestedset\NodeTrait;
+use Modules\Architect\Entities\ContentCategory;
 
 class Category extends Model
 {
     use HasFields, NodeTrait;
 
     protected $fieldModel = 'Modules\Architect\Entities\CategoryField';
-
     protected $appends = ['name'];
 
     const FIELDS = [
@@ -48,7 +48,8 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id','order',
+        'parent_id',
+        'order',
     ];
 
     /**
@@ -100,14 +101,22 @@ class Category extends Model
 
     public static function getTreeIds($id)
     {
-    	$ids = [];
-      $categories = Category::descendantsOf($id);
+        $ids = [];
+        $categories = Category::descendantsOf($id);
 
-      foreach($categories as $category){
-        $ids[] = $category->id;
-      }
+        foreach($categories as $category){
+            $ids[] = $category->id;
+        }
 
-      return $ids;
+        return $ids;
     }
+
+
+    // public static function getByTypologyId()
+    // {
+    //     return ContentCategory::whereHas('', function($q){
+    //
+    //     })->get();
+    // }
 
 }

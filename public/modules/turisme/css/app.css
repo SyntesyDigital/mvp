@@ -9924,6 +9924,12 @@ body {
   min-height: 100%;
 }
 
+/*
+article.page-builder{
+  overflow: hidden;
+}
+*/
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;

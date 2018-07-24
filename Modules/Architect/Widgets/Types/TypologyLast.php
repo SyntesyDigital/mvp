@@ -30,9 +30,10 @@ class TypologyLast extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'typologiesAllowed'
+        'typology',
+        'category'
+        //'typologiesAllowed'
         //categoriesAllowed
     ];
-
 }
 ?>

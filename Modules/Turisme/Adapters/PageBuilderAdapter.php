@@ -11,13 +11,16 @@ use Modules\Architect\Entities\Page;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 
+use Modules\Architect\Transformers\ContentTransformer;
+use Modules\Architect\Ressources\ContentCollection;
+
 class PageBuilderAdapter
 {
-    public function __construct(Content $content)
+    public function __construct(Content $content, $languages = null)
     {
         $this->content = $content;
         $this->page = $content->page;
-        $this->languages = Language::all();
+        $this->languages = $languages ? $languages : Language::all();
     }
 
     public function get()
@@ -38,6 +41,7 @@ class PageBuilderAdapter
     }
 
     function getPage(&$nodes) {
+
         if($nodes) {
             foreach ($nodes as $key => $node) {
                 if(isset($node['children'])) {
@@ -54,6 +58,24 @@ class PageBuilderAdapter
 
                             case "widget":
                                 $nodes[$key]['field']['fields'] = $this->buildPageField($node['field']);
+
+                                $typologyId = isset($nodes[$key]['field']['settings']['typology']) ? $nodes[$key]['field']['settings']['typology'] : null;
+                                $categoryId = isset($nodes[$key]['field']['settings']['category']) ? $nodes[$key]['field']['settings']['category'] : null;
+
+                                if($typologyId) {
+
+                                    $content = Content::where('typology_id', $typologyId);
+
+                                    if($categoryId) {
+                                        $content->whereHas('categories', function($q) use ($categoryId){
+                                            $q->where('category_id', $categoryId);
+                                        });
+                                    }
+
+                                    $nodes[$key]['field']['contents'] = $content->with('fields', 'categories')->get()->map(function($content) {
+                                        return (new ContentTransformer($content))->toArray(request());
+                                    });
+                                }
                             break;
 
                             default:
@@ -108,7 +130,9 @@ class PageBuilderAdapter
             case 'contents':
                 return ContentField::where('name', $fieldName)->get()->map(function($field){
                     return Content::find($field->value);
-                })->toArray();
+                })->map(function($content) {
+                    return (new ContentTransformer($content))->toArray(request());
+                });
             break;
 
             case 'video':
