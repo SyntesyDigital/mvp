@@ -86,7 +86,7 @@ class Category extends Model
 
     public function contents()
     {
-        return $this->belongsToMany('\Modules\Architect\Entities\Content');
+        return $this->belongsToMany('\Modules\Architect\Entities\Content', 'contents_categories');
     }
 
     public function parent()
