@@ -88,24 +88,28 @@ trait HasFields
     {
         $field = $this->getFieldByIdentifier($identifier);
 
+        if(!$field) {
+            return null;
+        }
+        
         switch($type) {
             case 'richtext':
             case 'slug':
             case 'text':
-                $values = [];
-                if(is_array($field)) {
-                    return collect($field)->mapWithKeys(function($f) use ($languages) {
-                        $iso = null;
-                        foreach($languages as $l) {
-                            if($f->language_id == $l->id) {
-                                $iso = $l->iso;
-                            }
+                //$values = [];
+                $field = !is_array($field) ? [$field] : $field;
+                return collect($field)->mapWithKeys(function($f) use ($languages) {
+                    $iso = null;
+                    foreach($languages as $l) {
+                        if($f->language_id == $l->id) {
+                            $iso = $l->iso;
                         }
+                    }
 
-                        return [$iso => $f->value];
-                    })->toArray();
-                }
-                return isset($field->value) ? $field->value : null;
+                    return [$iso => $f->value];
+                })->toArray();
+
+                // return isset($field->value) ? $field->value : null;
             break;
 
             case 'localization':
@@ -115,12 +119,12 @@ trait HasFields
             case 'images':
             case 'image':
                 $field = !is_array($field) ? [$field] : $field;
-                return Media::whereIn('id', collect($field)->pluck('value'))->get();
+                return Media::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
 
             case 'contents':
                 $field = !is_array($field) ? [$field] : $field;
-                return Content::whereIn('id', collect($field)->pluck('value'))->get();
+                return Content::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
 
             case 'url':
@@ -175,20 +179,17 @@ trait HasFields
             break;
 
             default:
-                $values = [];
-                if(is_array($field)) {
-                    return collect($field)->mapWithKeys(function($f) use ($languages) {
-                        $iso = null;
-                        foreach($languages as $l) {
-                            if($f->language_id == $l->id) {
-                                $iso = $l->iso;
-                            }
+                $field = !is_array($field) ? [$field] : $field;
+                return collect($field)->mapWithKeys(function($f) use ($languages) {
+                    $iso = null;
+                    foreach($languages as $l) {
+                        if($f->language_id == $l->id) {
+                            $iso = $l->iso;
                         }
+                    }
 
-                        return [$iso => $f->value];
-                    })->toArray();
-                }
-                return isset($field->value) ? $field->value : null;
+                    return [$iso => $f->value];
+                })->toArray();
             break;
         }
     }
