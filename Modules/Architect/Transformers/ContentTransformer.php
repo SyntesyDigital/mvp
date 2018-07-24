@@ -48,7 +48,7 @@ class ContentTransformer extends Resource
                     $field->type,
                     $languages
                 );
-                $fields[$field->identifier] = $field;
+                $fields[$field->identifier] = $field->toArray();
             }
         } else {
             $fields['title'] = $this->resource->getFieldValues(

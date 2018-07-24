@@ -63,7 +63,6 @@ class PageBuilderAdapter
                                 $categoryId = isset($nodes[$key]['field']['settings']['category']) ? $nodes[$key]['field']['settings']['category'] : null;
 
                                 if($typologyId) {
-
                                     $content = Content::where('typology_id', $typologyId);
 
                                     if($categoryId) {
@@ -74,7 +73,7 @@ class PageBuilderAdapter
 
                                     $nodes[$key]['field']['contents'] = $content->with('fields', 'categories')->get()->map(function($content) {
                                         return (new ContentTransformer($content))->toArray(request());
-                                    });
+                                    })->toArray();
                                 }
                             break;
 
@@ -132,7 +131,7 @@ class PageBuilderAdapter
                     return Content::find($field->value);
                 })->map(function($content) {
                     return (new ContentTransformer($content))->toArray(request());
-                });
+                })->toArray();
             break;
 
             case 'video':
