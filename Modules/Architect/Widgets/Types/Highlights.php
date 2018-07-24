@@ -20,7 +20,7 @@ class Highlights extends Widget implements WidgetInterface
         'required'
     ];
 
-    public $hidden = true;
+    public $hidden = false;
 
     public $settings = [
         'htmlId',

@@ -30,6 +30,7 @@ class UpdateContent
              'page',
              'translations',
              'is_page',
+             'settings'
          ]);
      }
 
@@ -200,6 +201,7 @@ class UpdateContent
 
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
             'content_id' => $this->content->id
         ]);
     }

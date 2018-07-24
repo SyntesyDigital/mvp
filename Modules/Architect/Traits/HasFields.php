@@ -2,11 +2,19 @@
 
 namespace Modules\Architect\Traits;
 
+use Modules\Architect\Entities\Media;
+use Modules\Architect\Entities\Content;
+
 trait HasFields
 {
     public function getFieldChilds($field)
     {
         $arr = [];
+
+        if(!$field) {
+            return null;
+        }
+
         foreach($this->fields as $f) {
             if($f->parent_id == $field->id) {
                 $arr[] = $f;
@@ -52,5 +60,141 @@ trait HasFields
             $q->where('name', $name);
             $q->where('value', $value);
         });
+    }
+
+
+    public function getFieldByIdentifier($identifier)
+    {
+        $field = null;
+        foreach($this->fields as $f) {
+            if($identifier == $f->name) {
+                if($field != null) {
+                    if(is_array($field)) {
+                        $field[] = $f;
+                    } else {
+                        $field = [$field, $f];
+                    }
+                } else {
+                    $field = $f;
+                }
+            }
+        }
+
+        return $field;
+    }
+
+
+    public function getFieldValues($identifier, $type, $languages)
+    {
+        $field = $this->getFieldByIdentifier($identifier);
+
+        if(!$field) {
+            return null;
+        }
+
+        switch($type) {
+            case 'richtext':
+            case 'slug':
+            case 'text':
+                //$values = [];
+                $field = !is_array($field) ? [$field] : $field;
+                return collect($field)->mapWithKeys(function($f) use ($languages) {
+                    $iso = null;
+                    foreach($languages as $l) {
+                        if($f->language_id == $l->id) {
+                            $iso = $l->iso;
+                        }
+                    }
+
+                    return [$iso => $f->value];
+                })->toArray();
+
+                // return isset($field->value) ? $field->value : null;
+            break;
+
+            case 'localization':
+                return json_decode($field->value, true);
+            break;
+
+            case 'file':
+            case 'image':
+                return Media::find($field->value)->toArray();
+            break;
+
+            case 'images':
+                $field = !is_array($field) ? [$field] : $field;
+                return Media::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
+            break;
+
+            case 'contents':
+                $field = !is_array($field) ? [$field] : $field;
+                return Content::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
+            break;
+
+            case 'url':
+            case 'link':
+                $values = null;
+                $childs = $this->getFieldChilds($field);
+
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+
+                      if($v->language_id) {
+                          $iso = null;
+                          foreach($languages as $l) {
+                              if($v->language_id == $l->id) {
+                                  $iso = $l->iso;
+                              }
+                          }
+
+                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                      } else {
+                          if(explode('.', $v->name)[1] == 'content') {
+                              $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                          }
+                      }
+                  }
+                }
+
+                return $values;
+            break;
+
+            case 'video':
+                $values = null;
+                $childs = $this->getFieldChilds($field);
+
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+                      if($v->language_id) {
+
+                          $iso = null;
+                          foreach($languages as $l) {
+                              if($v->language_id == $l->id) {
+                                  $iso = $l->iso;
+                              }
+                          }
+
+                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                      }
+                  }
+                }
+
+                return $values;
+            break;
+
+            default:
+                $field = !is_array($field) ? [$field] : $field;
+                return collect($field)->mapWithKeys(function($f) use ($languages) {
+                    $iso = null;
+                    foreach($languages as $l) {
+                        if($f->language_id == $l->id) {
+                            $iso = $l->iso;
+                        }
+                    }
+
+                    return [$iso => $f->value];
+                })->toArray();
+            break;
+        }
     }
 }

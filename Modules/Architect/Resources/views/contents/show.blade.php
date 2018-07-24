@@ -9,6 +9,7 @@ categories="{{ isset($categories) ? base64_encode(json_encode($categories)) : nu
 fields="{{ isset($fields) ? base64_encode($fields->toJson()) : null }}"
 page="{{ isset($page) ? base64_encode(json_encode($page, true)) : null }}"
 pages="{{ isset($pages) ? base64_encode($pages->toJson()) : null }}"
+settings="{{ isset($settings) ? base64_encode($settings) : null }}"
 @if(isset($typology)) typology="{{base64_encode($typology->toJson())}}" @endif
 @if(isset($content)) content="{{base64_encode($content->toJson())}}" @endif
 ></div>

@@ -204,7 +204,7 @@ class ModalSelectItem extends Component {
             <div className="modal-content">
               <div className="container">
                 <div className="row">
-                  <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                  <div className="col-xs-12 col-md-10 col-md-offset-1">
 
                     <h3 className="card-title">Nou element</h3>
                     <h6>Selecciona de la llista el element que vols afegir: </h6>

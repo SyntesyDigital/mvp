@@ -14,6 +14,7 @@ import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 import UrlField from './../ContentFields/UrlField';
+import FileField from './../ContentFields/FileField';
 
 class CommonWidget extends Component
 {
@@ -116,6 +117,18 @@ class CommonWidget extends Component
                 );
             break;
 
+            case FIELDS.FILE.type:
+                fields.push(
+                <FileField
+                    field={stateFields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.onFieldChange}
+                    onImageSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+
             case FIELDS.DATE.type:
                 fields.push(
                 <DateField
@@ -138,6 +151,8 @@ class CommonWidget extends Component
                 />
                 );
             break;
+
+
 
             case FIELDS.CONTENTS.type:
                 fields.push(

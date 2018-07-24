@@ -22,19 +22,19 @@ class PageContainer extends Component {
      console.log('LAYOUT LOADED', props.page);
      console.log('CONTENT LOADED', props.content);
 
-        var titleField = {
-            id:0,
-            identifier:"title",
-            value:{},
-            name:"Títol"
-        };
+    var titleField = {
+        id:0,
+        identifier:"title",
+        value:{},
+        name:"Títol"
+    };
 
-        var slugField = {
-          id:1,
-          identifier:"slug",
-          value:{},
-          name:"Enllaç permanent"
-        };
+    var slugField = {
+      id:1,
+      identifier:"slug",
+      value:{},
+      name:"Enllaç permanent"
+    };
 
     // Build translations state from content languages fields
     var translations = {};
@@ -90,13 +90,12 @@ class PageContainer extends Component {
          pages: props.pages ? props.pages : null,
          languages: props.languages,
          layout : props.page ? props.page : null,
+         settings : props.settings ? props.settings : this.exploteToObject(PAGE_SETTINGS),
          parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
          displayLayoutModal: false,
      };
-
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
      this.handlePublish = this.handlePublish.bind(this);
@@ -112,6 +111,20 @@ class PageContainer extends Component {
      this.handleLayoutSelected = this.handleLayoutSelected.bind(this);
  }
 
+
+     exploteToObject(fields) {
+
+       if(fields == null){
+         return null;
+       }
+
+       var result = {};
+
+       for(var i=0;i<fields.length;i++){
+         result[fields[i]] = null;
+       }
+       return result;
+     }
 
      handleLayoutSelected(layoutId) {
 
@@ -223,6 +236,7 @@ class PageContainer extends Component {
           status : this.state.status,
           is_page : true,
           page: this.state.layout,
+          settings : this.state.settings,
           category_id : this.state.category,
           tags : this.state.tags,
           //fields : this.state.fields,
@@ -438,6 +452,11 @@ class PageContainer extends Component {
 
   }
 
+  handleUpdateSettings(settings){
+    this.setState({
+      settings : settings
+    });
+  }
 
   render() {
 
@@ -483,6 +502,8 @@ class PageContainer extends Component {
                 onTagAdded={this.handleTagAdded}
                 onRemoveTag={this.handleRemoveTag}
                 parent_id={this.state.parent_id}
+                settings={this.state.settings}
+                onUpdateSettings={this.handleUpdateSettings.bind(this)}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>

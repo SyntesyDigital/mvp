@@ -18,12 +18,10 @@ export default class ContentForm extends Component {
             tags : props.tags ? JSON.parse(atob(props.tags)) : '',
             page : props.page ? JSON.parse(atob(props.page)) : '',
             pages : props.pages ? JSON.parse(atob(props.pages)) : '',
+            settings : props.settings ? JSON.parse(atob(props.settings)) : '',
             categories : props.categories ? JSON.parse(atob(props.categories)) : '',
             saved : props.content || props.page ? true : false
         };
-
-        console.log("ContentForm :: saved ",this.state.saved);
-
     }
 
     componentDidMount()
@@ -61,6 +59,7 @@ export default class ContentForm extends Component {
                     tags={this.state.tags}
                     page={this.state.page}
                     pages={this.state.pages}
+                    settings={this.state.settings}
                     saved={this.state.saved}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                   />
@@ -81,6 +80,7 @@ if (document.getElementById('content-form')) {
     var page = element.getAttribute('page');
     var pages = element.getAttribute('pages');
     var categories = element.getAttribute('categories');
+    var settings = element.getAttribute('settings');
 
-    ReactDOM.render(<ContentForm page={page} pages={pages} tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
+    ReactDOM.render(<ContentForm settings={settings} page={page} pages={pages} tags={tags} categories={categories} fields={fields} typology={typology} content={content} users={users} />, element);
 }

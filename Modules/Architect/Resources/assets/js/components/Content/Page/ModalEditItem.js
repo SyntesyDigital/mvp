@@ -13,6 +13,7 @@ import BooleanField from './../ContentFields/BooleanField';
 import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
+import FileField from './../ContentFields/FileField';
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
@@ -23,6 +24,8 @@ import TitleImageWidget from './../Widgets/TitleImageWidget';
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
+import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
+
 import ModalEditListItem from './ModalEditListItem';
 
 class ModalEditItem extends Component {
@@ -53,6 +56,20 @@ class ModalEditItem extends Component {
         displayListItemModal : false,
         listItemInfo : null
     };
+
+    this.categories = [
+      {
+        value:'',
+        name:'----'
+      }
+    ];
+
+    for(var key in CATEGORIES){
+      this.categories.push({
+        value: CATEGORIES[key].id,
+        name: CATEGORIES[key].name,
+      });
+    }
 
     this.onModalClose = this.onModalClose.bind(this);
   }
@@ -344,6 +361,17 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
+        case FIELDS.FILE.type:
+          return (
+            <FileField
+                //errors={_this.props.errors[k]}
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onImageSelect={this.props.onImageSelect}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
         case FIELDS.DATE.type:
           return (
             <DateField
@@ -573,6 +601,29 @@ class ModalEditItem extends Component {
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Tipologies permeses"
           options={TYPOLOGIES}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="typology"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Tipologia"
+          options={TYPOLOGIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="category"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Categoria"
+          options={this.categories}
         />
 
         <InputSettingsField

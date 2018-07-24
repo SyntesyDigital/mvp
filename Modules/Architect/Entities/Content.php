@@ -141,12 +141,23 @@ class Content extends Model
         // WARNING : If we use cache we need to think what happen when slug's children change.
         $nodes = self::with('fields')->ancestorsOf($this->id);
         $slug = '';
-        
+
         foreach($nodes as $node) {
             $slug = $slug . '/' . $node->getFieldValue('slug');
         }
 
         return $slug . '/' . $this->getFieldValue('slug');
     }
+
+    public function getSettings()
+    {
+        if($this->page && $this->page->settings && $this->page->settings != null) {
+          return json_decode($this->page->settings);
+        }
+
+        return null;
+    }
+
+
 
 }
