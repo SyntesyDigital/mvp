@@ -70,7 +70,7 @@ class PageContainer extends Component {
             });
         });
     }
-
+        
      // Build state...
      this.state = {
          status: props.content ? props.content.status : 0,
@@ -90,6 +90,7 @@ class PageContainer extends Component {
          pages: props.pages ? props.pages : null,
          languages: props.languages,
          layout : props.page ? props.page : null,
+         settings : props.settings ? props.settings : null,
          parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
@@ -222,6 +223,7 @@ class PageContainer extends Component {
           status : this.state.status,
           is_page : true,
           page: this.state.layout,
+          settings : this.state.settings,
           category_id : this.state.category,
           tags : this.state.tags,
           //fields : this.state.fields,
@@ -482,6 +484,7 @@ class PageContainer extends Component {
                 onTagAdded={this.handleTagAdded}
                 onRemoveTag={this.handleRemoveTag}
                 parent_id={this.state.parent_id}
+                settings={this.state.settings}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>
