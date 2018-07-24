@@ -91,7 +91,7 @@ trait HasFields
         if(!$field) {
             return null;
         }
-        
+
         switch($type) {
             case 'richtext':
             case 'slug':
@@ -116,6 +116,7 @@ trait HasFields
                 return json_decode($field->value, true);
             break;
 
+            case 'file':
             case 'images':
             case 'image':
                 $field = !is_array($field) ? [$field] : $field;
