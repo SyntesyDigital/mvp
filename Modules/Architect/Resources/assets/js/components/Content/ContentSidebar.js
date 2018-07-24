@@ -83,25 +83,30 @@ class ContentSidebar extends Component {
 
       //console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
 
-      const stateField = this.state.field;
+      const settings = this.props.settings;
 
-      stateField[field.source][field.name] = field.value;
+      settings[field.name] = field.value;
 
-      this.setState({
-          field : stateField
-      });
+      this.props.onUpdateSettings(settings);
   }
 
   renderSettings()
   {
+
+    console.log("settings => ",this.props.settings)
+
+    const field = {
+      settings : this.props.settings
+    };
+
     return (
       <InputSettingsField
-        field={this.props}
+        field={field}
         name="htmlClass"
         source="settings"
-        //onFieldChange={this.handleFieldSettingsChange.bind(this)}
-        label="Html Class"
-        inputLabel="Indica la clase CSS personalitzada"
+        onFieldChange={this.handleFieldSettingsChange.bind(this)}
+        label="Clase HTML"
+        inputLabel="Indica la clase CSS"
       />
     )
   }
@@ -219,9 +224,14 @@ class ContentSidebar extends Component {
         </div>
 
         {this.props.settings !== undefined &&
-          <div className="form-group bmd-form-group sidebar-item">
-             <label className="bmd-label-floating">Configuració</label>
-             {this.renderSettings()}
+
+          <div>
+            <hr/>
+
+            <div className="form-group bmd-form-group sidebar-item">
+               <label className="bmd-label-floating">CONFIGURACIÓ</label>
+               {this.renderSettings()}
+            </div>
           </div>
         }
 

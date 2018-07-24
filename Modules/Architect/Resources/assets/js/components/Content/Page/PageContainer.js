@@ -90,7 +90,7 @@ class PageContainer extends Component {
          pages: props.pages ? props.pages : null,
          languages: props.languages,
          layout : props.page ? props.page : null,
-         settings : props.settings ? props.settings : null,
+         settings : props.settings ? props.settings : this.exploteToObject(PAGE_SETTINGS),
          parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
@@ -111,6 +111,20 @@ class PageContainer extends Component {
      this.handleLayoutSelected = this.handleLayoutSelected.bind(this);
  }
 
+
+     exploteToObject(fields) {
+
+       if(fields == null){
+         return null;
+       }
+
+       var result = {};
+
+       for(var i=0;i<fields.length;i++){
+         result[fields[i]] = null;
+       }
+       return result;
+     }
 
      handleLayoutSelected(layoutId) {
 
@@ -438,6 +452,11 @@ class PageContainer extends Component {
 
   }
 
+  handleUpdateSettings(settings){
+    this.setState({
+      settings : settings
+    });
+  }
 
   render() {
 
@@ -484,6 +503,7 @@ class PageContainer extends Component {
                 onRemoveTag={this.handleRemoveTag}
                 parent_id={this.state.parent_id}
                 settings={this.state.settings}
+                onUpdateSettings={this.handleUpdateSettings.bind(this)}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>

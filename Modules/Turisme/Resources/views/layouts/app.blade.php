@@ -37,7 +37,7 @@
 
 
     </head>
-    <body class="home">
+    <body class="{{$mainClass or ''}}">
 
         @stack('modal')
 
