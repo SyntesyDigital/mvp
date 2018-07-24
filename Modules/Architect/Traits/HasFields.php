@@ -117,8 +117,11 @@ trait HasFields
             break;
 
             case 'file':
-            case 'images':
             case 'image':
+                return Media::find($field->value)->toArray();
+            break;
+
+            case 'images':
                 $field = !is_array($field) ? [$field] : $field;
                 return Media::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
