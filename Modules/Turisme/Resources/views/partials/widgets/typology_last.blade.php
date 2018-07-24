@@ -8,18 +8,12 @@
       ]
     )
   </h3>
-  <ul>
-      @if((isset($field["contents"])) && $field["contents"])
-        @foreach($field["contents"] as $content)
-        <li>
-            <p class="image"><img src="images/img-medium.png"  alt=""/></p>
-            <p class="text"><span class="data">{{$content->created_at->format('Y-m-d')}}</span> | <span class="categoria">{{ $content->categories->first()->name }} </span></p>
-            <a href="{{ route('content.show', $content->getFullSlug()) }}">{{$content->title}}</a>
-        </li>
-        @endforeach()
-    @endif
 
-  </ul>
+  <div id="typology-last"
+    field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
+  >
+  </div>
+
   <p class="button">
     @include('turisme::partials.fields.'.$field['fields'][1]['type'],
       [

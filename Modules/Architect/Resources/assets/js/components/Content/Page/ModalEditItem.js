@@ -13,6 +13,7 @@ import BooleanField from './../ContentFields/BooleanField';
 import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
+import FileField from './../ContentFields/FileField';
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
@@ -55,6 +56,20 @@ class ModalEditItem extends Component {
         displayListItemModal : false,
         listItemInfo : null
     };
+
+    this.categories = [
+      {
+        value:'',
+        name:'----'
+      }
+    ];
+
+    for(var key in CATEGORIES){
+      this.categories.push({
+        value: CATEGORIES[key].id,
+        name: CATEGORIES[key].name,
+      });
+    }
 
     this.onModalClose = this.onModalClose.bind(this);
   }
@@ -346,6 +361,17 @@ class ModalEditItem extends Component {
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );
+        case FIELDS.FILE.type:
+          return (
+            <FileField
+                //errors={_this.props.errors[k]}
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onImageSelect={this.props.onImageSelect}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
         case FIELDS.DATE.type:
           return (
             <DateField
@@ -576,13 +602,13 @@ class ModalEditItem extends Component {
           label="Tipologies permeses"
           options={TYPOLOGIES}
         />
-        
+
         <SelectorSettingsField
           field={this.state.field}
           name="typology"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologie"
+          label="Tipologia"
           options={TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
@@ -590,21 +616,16 @@ class ModalEditItem extends Component {
               };
           })}
         />
-        
+
         <SelectorSettingsField
           field={this.state.field}
           name="category"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Categorie"
-          options={CATEGORIES.map(function(obj){
-              return {
-                  value: obj.id,
-                  name: obj.name
-              };
-          })}
+          label="Categoria"
+          options={this.categories}
         />
-        
+
         <InputSettingsField
           field={this.props.field}
           name="maxItems"
@@ -613,7 +634,7 @@ class ModalEditItem extends Component {
           label="Número màxim d'elements"
           inputLabel="Indica el número màxim"
         />
-        
+
       </div>
 
 

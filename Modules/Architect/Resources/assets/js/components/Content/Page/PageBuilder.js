@@ -52,7 +52,7 @@ class PageBuilder extends Component {
         contentCallback : null,
     };
 
-    //this.handleAddRow = this.handleAddRow.bind(this);
+    this.handleAddRow = this.handleAddRow.bind(this);
     this.handleDeleteRow = this.handleDeleteRow.bind(this);
     this.handleColTypeSelected = this.handleColTypeSelected.bind(this);
     this.handleColChanged = this.handleColChanged.bind(this);
@@ -66,12 +66,14 @@ class PageBuilder extends Component {
 
   }
 
+  /*
   componentDidMount() {
 
     if(this.props.layout == null){
       this.setFirstRow();
     }
   }
+  */
 
   componentWillReceiveProps(nextProps) {
 
@@ -231,7 +233,7 @@ class PageBuilder extends Component {
     return result;
   }
 
-  /*
+
   handleAddRow(e) {
 
     e.preventDefault();
@@ -258,11 +260,11 @@ class PageBuilder extends Component {
 
     console.log("handleAddRow : layout : ",layout);
 
-    //this.props.updateLayout(layout);
+    this.props.updateLayout(layout);
 
   }
-  */
 
+  /*
   setFirstRow() {
 
     var {layout} = this.props;
@@ -288,6 +290,7 @@ class PageBuilder extends Component {
 
     this.props.updateLayout(layout);
   }
+  */
 
   handleColTypeSelected(index,cols){
 
@@ -959,11 +962,9 @@ class PageBuilder extends Component {
             this.renderRows()
           }
 
-          {/*
           <FirstEmptyRow
             onAddRow={this.handleAddRow}
           />
-          */}
 
         </div>
       </div>

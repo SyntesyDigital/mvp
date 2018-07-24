@@ -36,7 +36,7 @@
 
 
 <!-- ARTICLE -->
-<article>
+<article class="page-builder">
     @if($page)
       @foreach($page as $node)
           @include('turisme::partials.node', [
