@@ -103,7 +103,7 @@ trait HasFields
                         }
 
                         return [$iso => $f->value];
-                    });
+                    })->toArray();
                 }
                 return isset($field->value) ? $field->value : null;
             break;
@@ -186,9 +186,9 @@ trait HasFields
                         }
 
                         return [$iso => $f->value];
-                    });
+                    })->toArray();
                 }
-                return $field->value;
+                return isset($field->value) ? $field->value : null;
             break;
         }
     }
