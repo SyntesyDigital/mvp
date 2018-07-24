@@ -21,6 +21,7 @@ class PageLayout extends Model
     protected $fillable = [
         'name',
         'definition',
+        'settings'
     ];
 
     /**

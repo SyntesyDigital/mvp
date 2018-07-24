@@ -13,7 +13,8 @@ class Page extends Model
 
     protected $fillable = [
         'content_id',
-        'definition'
+        'definition',
+        'settings'
     ];
 
     protected $hidden = [

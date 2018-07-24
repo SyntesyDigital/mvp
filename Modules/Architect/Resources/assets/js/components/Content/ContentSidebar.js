@@ -10,6 +10,8 @@ class ContentSidebar extends Component {
   constructor(props) {
 
     super(props);
+    
+    console.log('PROPS ======>', props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
