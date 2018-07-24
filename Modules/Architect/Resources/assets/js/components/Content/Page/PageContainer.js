@@ -70,7 +70,7 @@ class PageContainer extends Component {
             });
         });
     }
-        
+
      // Build state...
      this.state = {
          status: props.content ? props.content.status : 0,
@@ -94,7 +94,6 @@ class PageContainer extends Component {
          parent_id : this.props.content ? this.props.content.parent_id : null,
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
-
          displayLayoutModal: false,
      };
 
