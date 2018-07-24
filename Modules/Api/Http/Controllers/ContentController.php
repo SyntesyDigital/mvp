@@ -16,7 +16,7 @@ class ContentController extends Controller
         $typologyId = $request->get('typology_id');
         $categoryId = $request->get('category_id');
 
-        $collection = Content::with('fields')->where('id', 8);
+        $collection = Content::with('fields');
 
         if($typologyId) {
             $collection->where('typology_id', $typologyId);

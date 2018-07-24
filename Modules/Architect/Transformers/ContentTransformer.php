@@ -30,7 +30,8 @@ class ContentTransformer extends Resource
             'title' => $this->resource->title,
             'fields' => $this->getFields($languages),
             'is_page' => boolval($this->resource->is_page),
-            'page' => $this->resource->is_page ? $this->getPage($languages) : null
+            'page' => $this->resource->is_page ? $this->getPage($languages) : null,
+            'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
         ];
     }
 
@@ -48,7 +49,7 @@ class ContentTransformer extends Resource
                     $field->type,
                     $languages
                 );
-                $fields[$field->identifier] = $field;
+                $fields[$field->identifier] = $field->toArray();
             }
         } else {
             $fields['title'] = $this->resource->getFieldValues(
