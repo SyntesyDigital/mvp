@@ -14,6 +14,7 @@ class SavePageLayout
         $this->attributes = array_only($attributes, [
             'name',
             'definition',
+            'settings'
         ]);
     }
 
@@ -21,7 +22,6 @@ class SavePageLayout
     {
         return new self($request->all());
     }
-
 
     function removeLayoutValues(&$nodes) {
         if($nodes) {
@@ -33,13 +33,11 @@ class SavePageLayout
                         if(isset($nodes[$key]['field']['fields']['value'])) {
                             unset($nodes[$key]['field']['fields']['value']);
                         }
-
                         unset($nodes[$key]['field']['value']);
                     }
                 }
             }
         }
-
         return $nodes;
     }
 
@@ -48,6 +46,7 @@ class SavePageLayout
         return PageLayout::create([
             'name' => $this->attributes['name'],
             'definition' => json_encode($this->removeLayoutValues($this->attributes['definition'])),
+            'settings' => isset($this->attributes['settings']) ? $this->attributes['settings'] : null,
         ]);
     }
 }

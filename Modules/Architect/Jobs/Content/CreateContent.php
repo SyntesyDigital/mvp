@@ -27,6 +27,7 @@ class CreateContent
             'page',
             'translations',
             'is_page',
+            'settings'
         ]);
     }
 
@@ -200,6 +201,7 @@ class CreateContent
 
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
+            'settings' => isset($this->attributes['settings']) ? $this->attributes['settings'] : null,
             'content_id' => $this->content->id
         ]);
     }
