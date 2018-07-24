@@ -191,7 +191,7 @@ trait HasFields
                             $iso = $l->iso;
                         }
                     }
-                    
+
                     return [$iso => $f->value];
                 })->toArray();
             break;

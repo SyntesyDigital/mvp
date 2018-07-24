@@ -57,6 +57,20 @@ class ModalEditItem extends Component {
         listItemInfo : null
     };
 
+    this.categories = [
+      {
+        value:'',
+        name:'----'
+      }
+    ];
+
+    for(var key in CATEGORIES){
+      this.categories.push({
+        value: CATEGORIES[key].id,
+        name: CATEGORIES[key].name,
+      });
+    }
+
     this.onModalClose = this.onModalClose.bind(this);
   }
 
@@ -609,12 +623,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Categoria"
-          options={CATEGORIES.map(function(obj){
-              return {
-                  value: obj.id,
-                  name: obj.name
-              };
-          })}
+          options={this.categories}
         />
 
         <InputSettingsField

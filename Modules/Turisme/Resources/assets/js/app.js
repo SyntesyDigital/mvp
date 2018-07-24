@@ -15,4 +15,7 @@ require('./libs/tweenMax/tweenmax.js');
 
 
 require('./components/Home');
+
 require('./components/Fields/MapField');
+
+require('./components/Widgets/TypologyLast');
