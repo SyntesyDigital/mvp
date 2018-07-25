@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
 use Kalnoy\Nestedset\NodeTrait;
 
+use Modules\Architect\Entities\Language;
+
 class Content extends Model
 {
     use HasFields, NodeTrait;
@@ -111,9 +113,11 @@ class Content extends Model
 
     public function getTitleAttribute()
     {
+        $defaultLanguage = Language::getDefault();
+        $defaultLanguageId = isset($defaultLanguage->id) ? $defaultLanguage->id : null;
 
         if($this->page) {
-            return $this->getFieldValue('title');
+            return $this->getFieldValue('title', $defaultLanguageId);
         }
 
         if(!$this->fields || !$this->typology) {
@@ -128,7 +132,7 @@ class Content extends Model
 
         foreach($this->fields as $field) {
             if($field->name == $index) {
-                return $this->getFieldValue($index);
+                return $this->getFieldValue($index, $defaultLanguageId);
             }
         }
 
@@ -150,6 +154,6 @@ class Content extends Model
     }
 
 
-    
+
 
 }
