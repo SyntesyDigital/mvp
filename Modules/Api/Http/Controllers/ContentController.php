@@ -22,7 +22,7 @@ class ContentController extends Controller
 
         $size = $request->get('size') ? $request->get('size') : 20;
 
-        $collection = Content::with('fields');
+        $collection = Content::with('fields')->where('is_page', 0);
 
         if($typologyId) {
             $collection->where('typology_id', $typologyId);
