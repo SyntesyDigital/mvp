@@ -71405,9 +71405,12 @@ __webpack_require__(801);
 __webpack_require__(803);
 __webpack_require__(804);
 __webpack_require__(805);
-__webpack_require__(806);
+
+//require('./components/Home');
 __webpack_require__(807);
 __webpack_require__(808);
+__webpack_require__(839);
+__webpack_require__(841);
 
 /***/ }),
 /* 801 */
@@ -82315,30 +82318,7 @@ var _gsScope = "undefined" != typeof module && module.exports && "undefined" != 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 806 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-
-
-
-console.log("hello!");
-
-if (document.getElementById('home')) {
-
-  Object(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    null,
-    'Hello!'
-  ), document.getElementById('home'));
-}
-
-/***/ }),
+/* 806 */,
 /* 807 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82696,6 +82676,253 @@ var ImageField = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (ImageField);
+
+/***/ }),
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */,
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(809);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_Paginator__ = __webpack_require__(841);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var TypologyPaginated = function (_Component) {
+  _inherits(TypologyPaginated, _Component);
+
+  function TypologyPaginated(props) {
+    _classCallCheck(this, TypologyPaginated);
+
+    var _this = _possibleConstructorReturn(this, (TypologyPaginated.__proto__ || Object.getPrototypeOf(TypologyPaginated)).call(this, props));
+
+    _this.state = {
+      field: props.field ? JSON.parse(atob(props.field)) : '',
+      items: null,
+      lastPage: null,
+      currPage: null
+    };
+    return _this;
+  }
+
+  _createClass(TypologyPaginated, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
+      var self = this;
+      var field = this.state.field;
+
+      var typology = field.settings.typology;
+      var category = field.settings.category;
+
+      axios.get(ASSETS + 'api/contents?size=1&typology_id=' + typology).then(function (response) {
+        var items = [];
+        if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+          items = response.data.data;
+        }
+
+        self.setState({
+          items: items,
+          lastPage: response.data.meta.last_page,
+          currPage: response.data.meta.current_page
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'renderItems',
+    value: function renderItems() {
+      return this.state.items.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          { key: index },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'image' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
+              field: item.fields.imatge
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'text' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'data' },
+              '30-11-2016'
+            ),
+            ' | ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'categoria' },
+              'Categoria '
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '' },
+            item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : ''
+          )
+        );
+      });
+    }
+  }, {
+    key: 'onPageChange',
+    value: function onPageChange() {
+      console.log('page change...');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+        this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          Lang.get('widgets.last_typology.empty')
+        ),
+        this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          this.renderItems()
+        ),
+        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange })
+      );
+    }
+  }]);
+
+  return TypologyPaginated;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (TypologyPaginated);
+
+
+if (document.getElementById('typology-paginated')) {
+  var element = document.getElementById('typology-paginated');
+  var field = element.getAttribute('field');
+
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologyPaginated, {
+    field: field
+  }), element);
+}
+
+/***/ }),
+/* 840 */,
+/* 841 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Paginator = function (_Component) {
+    _inherits(Paginator, _Component);
+
+    function Paginator(props) {
+        _classCallCheck(this, Paginator);
+
+        var _this = _possibleConstructorReturn(this, (Paginator.__proto__ || Object.getPrototypeOf(Paginator)).call(this, props));
+
+        _this.state = {
+            currPage: props.currPage,
+            lastPage: props.lastPage,
+            onPageChange: props.onPageChange
+        };
+
+        console.log('props', props);
+        return _this;
+    }
+
+    _createClass(Paginator, [{
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'ul',
+                    null,
+                    Array.apply(null, Array(this.state.lastPage)).map(function (item, i) {
+                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'li',
+                            { key: i },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '' },
+                                i
+                            )
+                        );
+                    }, this)
+                )
+            );
+        }
+    }]);
+
+    return Paginator;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Paginator);
 
 /***/ })
 /******/ ]);

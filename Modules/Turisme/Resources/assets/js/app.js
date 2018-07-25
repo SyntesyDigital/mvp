@@ -11,6 +11,9 @@ require('./bootstrap');
 require('./libs/jquery-ui-1.12.1/jquery-ui.min.js');
 require('./libs/slick/slick.js');
 require('./libs/tweenMax/tweenmax.js');
-require('./components/Home');
+
+//require('./components/Home');
 require('./components/Fields/MapField');
 require('./components/Widgets/TypologyLast');
+require('./components/Widgets/TypologyPaginated');
+require('./components/Common/Paginator');
