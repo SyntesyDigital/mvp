@@ -1,4 +1,5 @@
 @extends('turisme::layouts.app',[
+  'title' => isset($content) ? $content->getFieldValue('title') : '',
   'mainClass' => isset($settings) && isset($settings->htmlClass) ? $settings->htmlClass : ''
 ])
 

@@ -204,7 +204,7 @@ class LinkField extends Component
   {
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
+      //if(this.props.translations[key]){
           var value = '';
 
           if(this.state.title !== undefined && this.state.title != null ) {
@@ -217,7 +217,7 @@ class LinkField extends Component
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
           </div>
         );
-      }
+      //}
     }
 
     return inputs;
@@ -271,7 +271,7 @@ class LinkField extends Component
 
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
+      //if(this.props.translations[key]){
           var value = '';
 
 
@@ -285,7 +285,7 @@ class LinkField extends Component
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
-      }
+      //}
     }
 
     return inputs;

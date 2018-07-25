@@ -234,7 +234,7 @@ class UrlField extends Component
 
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
+      //if(this.props.translations[key]){
           var value = '';
 
 
@@ -248,7 +248,7 @@ class UrlField extends Component
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
-      }
+      //}
     }
 
     return inputs;

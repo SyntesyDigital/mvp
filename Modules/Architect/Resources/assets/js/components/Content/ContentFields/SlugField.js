@@ -51,7 +51,7 @@ class SlugField extends Component
 
     var inputs = [];
     for(var key in this.props.translations){
-        if(this.props.translations[key]){
+        //if(this.props.translations[key]){
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
@@ -83,7 +83,7 @@ class SlugField extends Component
 
               </div>
           );
-        }
+        //}
     }
 
     return inputs;

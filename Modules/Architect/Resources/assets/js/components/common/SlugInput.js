@@ -36,7 +36,7 @@ class SlugInput extends Component
 
 		  value = slugify(sourceValue, {
 				replacement: '-',
-				remove: /[$*+~.()'"!\-\?`´:@]/g,
+				remove: /[$*+~.()'"!\-\?\¿`´:@]/g,
 				lower: true
 			});
 

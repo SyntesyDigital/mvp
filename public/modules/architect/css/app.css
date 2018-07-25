@@ -16285,6 +16285,10 @@ nav.main-nav ul li.active a {
   border: 1px dashed #ccc;
 }
 
+.page-builder .empty-item a.btn.btn-link {
+  padding: 12px 0px;
+}
+
 .page-builder .page-row {
   border: 1px dashed #ccc;
   text-align: center;
