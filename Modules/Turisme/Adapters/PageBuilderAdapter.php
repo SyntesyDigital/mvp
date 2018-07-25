@@ -25,6 +25,10 @@ class PageBuilderAdapter
 
     public function get()
     {
+        if(!$this->page) {
+            return null;
+        }
+
         $nodes = json_decode($this->page->definition, true);
         return $this->getPage($nodes);
     }

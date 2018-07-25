@@ -12,27 +12,27 @@
         <meta name="keywords" lang="{{App::getLocale()}}" content="" />
         <meta name="description" lang="{{App::getLocale()}}" content="" />
         <meta name="abstract" content="" />
-		    <meta name="author" content="" />
-
+	    <meta name="author" content="" />
 
         <!-- twitter -->
         <meta name="twitter:card" content="summary_large_image"/>
-    		<meta name="twitter:site" content=""/>
-    		<meta name="twitter:creator" content=""/>
-    		<meta name="twitter:title" content=""/>
-    		<meta name="twitter:description" content=""/>
+		<meta name="twitter:site" content=""/>
+		<meta name="twitter:creator" content=""/>
+		<meta name="twitter:title" content=""/>
+		<meta name="twitter:description" content=""/>
 
         <!-- facebook -->
-    		<meta property="og:url" content="" />
-    		<meta property="og:image" content="" />
-    		<meta property="og:title" content=""/>
-    		<meta property="og:description" content=""/>
-    		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta property="og:title" content=""/>
+		<meta property="og:description" content=""/>
+		<meta property="og:type" content="website"/>
 
 
         <link href="{{asset('modules/turisme/css/app.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('modules/turisme/css/turisme.css')}}" rel="stylesheet" type="text/css" />
         @stack('styles')
+
         <link href="http://www.edittio.com/turisme/professionals/css/general.css" rel="stylesheet" type="text/css" />
 
 
@@ -51,13 +51,19 @@
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';
           const LOCALE = '{{App::getLocale()}}';
-
         </script>
-        <script type="text/javascript" src="{{route('messages',App::getLocale())}}" ></script>
+        <script type="text/javascript" src="{{route('messages', App::getLocale())}}" ></script>
 
         @stack('javascripts-libs')
 
+        <!-- Language -->
+        <script type="text/javascript" src="{{asset('modules/turisme/js/lang.dist.js')}}" ></script>
+        <script>
+            Lang.setLocale('{{App::getLocale()}}');
+        </script>
+
         <script type="text/javascript" src="{{asset('modules/turisme/js/app.js')}}" ></script>
+
 
         @stack('javascripts')
     </body>

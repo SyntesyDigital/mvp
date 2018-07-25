@@ -26,6 +26,13 @@
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
         {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
 
+        <!-- Language -->
+        {{ Html::script('/modules/architect/js/lang.dist.js') }}
+        <script>
+            Lang.setLocale('{{App::getLocale()}}');
+        </script>
+
+
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>
 

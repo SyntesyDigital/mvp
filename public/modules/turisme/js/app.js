@@ -71402,15 +71402,11 @@ module.exports = __webpack_require__(800);
 __webpack_require__(801);
 
 //libs
-
 __webpack_require__(803);
 __webpack_require__(804);
 __webpack_require__(805);
-
 __webpack_require__(806);
-
 __webpack_require__(807);
-
 __webpack_require__(808);
 
 /***/ }),
@@ -82515,9 +82511,6 @@ var TypologyLast = function (_Component) {
       field: props.field ? JSON.parse(atob(props.field)) : '',
       items: null
     };
-
-    console.log("TypologyLast :: field => ", _this.state.field);
-
     return _this;
   }
 
@@ -82534,12 +82527,9 @@ var TypologyLast = function (_Component) {
       var categoryQuery = category != null ? "&category_id=" + category : '';
 
       axios.get(ASSETS + 'api/contents?typology_id=' + typology + categoryQuery).then(function (response) {
-
-        console.log("Response => ", response);
         var items = [];
 
         if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
-
           items = response.data.data;
         }
 
@@ -82553,9 +82543,6 @@ var TypologyLast = function (_Component) {
   }, {
     key: 'renderItems',
     value: function renderItems() {
-
-      console.log("TypologyLast :: renderItems ", this.state.items);
-
       return this.state.items.map(function (item, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'li',
@@ -82601,7 +82588,7 @@ var TypologyLast = function (_Component) {
         this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
           null,
-          "No s'ha trobat cap resultat"
+          Lang.get('widgets.last_typology.empty')
         ),
         this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'ul',
