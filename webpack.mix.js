@@ -1,4 +1,18 @@
 let mix = require('laravel-mix');
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
+mix.webpackConfig({
+    plugins: [
+        new WebpackShellPlugin({
+            onBuildStart: [
+                'php artisan lang:js public/modules/architect/js/lang.dist.js -s Modules/Architect/Resources/lang',
+                'php artisan lang:js public/modules/turisme/js/lang.dist.js -s Modules/Turisme/Resources/lang'
+            ],
+            onBuildEnd: []
+        }),
+    ]
+});
+
 
 mix.react('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
@@ -19,5 +33,6 @@ mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.users.js',
   'Modules/Architect/Resources/assets/js/architect/architect.pageLayouts.js'
 ], 'public/modules/architect/js/architect.js');
+
 
 mix.browserSync('http://localhost:8000');
