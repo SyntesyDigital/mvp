@@ -27,7 +27,8 @@ class ContentController extends Controller
 
       return view('turisme::contents.page',[
         'content' => $content,
-        'page' => $pageBuilderAdapter->get()
+        'page' => $pageBuilderAdapter->get(),
+        'settings' => $content->getSettings()
       ]);
     }
 
@@ -45,7 +46,8 @@ class ContentController extends Controller
 
       return view('turisme::contents.page',[
           'content' => $content,
-          'page' => $pageBuilderAdapter->get()
+          'page' => $pageBuilderAdapter->get(),
+          'settings' => $content->getSettings()
       ]);
 
     }
@@ -62,8 +64,9 @@ class ContentController extends Controller
 
       return view('turisme::contents.page',[
         'content' => $content,
-        'page' => $pageBuilderAdapter->get()]
-      );
+        'page' => $pageBuilderAdapter->get(),
+        'settings' => $content->getSettings()
+      ]);
 
     }
 

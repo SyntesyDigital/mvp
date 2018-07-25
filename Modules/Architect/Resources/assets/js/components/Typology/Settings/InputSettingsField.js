@@ -21,8 +21,15 @@ class InputSettingsField extends Component {
 
   }
 
-  componentWillReceiveProps(nextProps){
+  componentDidMount(){
+    this.processProps(this.props);
+  }
 
+  componentWillReceiveProps(nextProps){
+    this.processProps(nextProps);
+  }
+
+  processProps(nextProps){
     var checkbox = null;
     var input = "";
     var display = false;
@@ -44,7 +51,6 @@ class InputSettingsField extends Component {
       input : input,
       display : display
     });
-
   }
 
   handleFieldChange(event) {

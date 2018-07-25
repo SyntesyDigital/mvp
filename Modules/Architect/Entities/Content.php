@@ -153,7 +153,13 @@ class Content extends Model
         return $slug . '/' . $this->getFieldValue('slug');
     }
 
+    public function getSettings()
+    {
+        if($this->page && $this->page->settings && $this->page->settings != null) {
+          return json_decode($this->page->settings);
+        }
 
-
+        return null;
+    }
 
 }

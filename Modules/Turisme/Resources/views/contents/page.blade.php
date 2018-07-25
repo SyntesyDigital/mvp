@@ -1,7 +1,8 @@
-@extends('turisme::layouts.app')
+@extends('turisme::layouts.app',[
+  'mainClass' => isset($settings) && isset($settings->htmlClass) ? $settings->htmlClass : ''
+])
 
 @section('content')
-
 
 @if(isset($content) && $content->parent_id != null)
 <div class="single trade">
@@ -37,6 +38,7 @@
 
 <!-- ARTICLE -->
 <article class="page-builder">
+
     @if($page)
       @foreach($page as $node)
           @include('turisme::partials.node', [

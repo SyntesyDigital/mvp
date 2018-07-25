@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import Select from 'react-select';
 
 import TagManager from "./Tags/TagManager";
+import InputSettingsField from './../Typology/Settings/InputSettingsField';
+
 import moment from 'moment';
 
 class ContentSidebar extends Component {
@@ -10,7 +12,7 @@ class ContentSidebar extends Component {
   constructor(props) {
 
     super(props);
-    
+
     console.log('PROPS ======>', props);
 
     this.handleChange = this.handleChange.bind(this);
@@ -77,10 +79,42 @@ class ContentSidebar extends Component {
     return spaces;
   }
 
+  handleFieldSettingsChange(field) {
+
+      //console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+
+      const settings = this.props.settings;
+
+      settings[field.name] = field.value;
+
+      this.props.onUpdateSettings(settings);
+  }
+
+  renderSettings()
+  {
+
+    console.log("settings => ",this.props.settings)
+
+    const field = {
+      settings : this.props.settings
+    };
+
+    return (
+      <InputSettingsField
+        field={field}
+        name="htmlClass"
+        source="settings"
+        onFieldChange={this.handleFieldSettingsChange.bind(this)}
+        label="Clase HTML"
+        inputLabel="Indica la clase CSS"
+      />
+    )
+  }
+
   render() {
 
     var self = this;
-    
+
     console.log('CONTENTSIDEBAR PAGES =>', this.props.pages);
 
     return (
@@ -188,6 +222,18 @@ class ContentSidebar extends Component {
            <p className="field-help">Creat el {this.props.createdAt}</p>
 
         </div>
+
+        {this.props.settings !== undefined &&
+
+          <div>
+            <hr/>
+
+            <div className="form-group bmd-form-group sidebar-item">
+               <label className="bmd-label-floating">CONFIGURACIÓ</label>
+               {this.renderSettings()}
+            </div>
+          </div>
+        }
 
 
       </div>
