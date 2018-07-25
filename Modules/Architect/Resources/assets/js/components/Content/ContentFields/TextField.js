@@ -27,7 +27,7 @@ class TextField extends Component
 
     var inputs = [];
     for(var key in this.props.translations){
-        if(this.props.translations[key]){
+        //if(this.props.translations[key]){
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
@@ -37,7 +37,7 @@ class TextField extends Component
                   <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
               </div>
           );
-        }
+        //}
     }
 
     return inputs;

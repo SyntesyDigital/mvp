@@ -50,4 +50,9 @@ class Language extends Model
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
     }
 
+    public static function getDefault()
+    {
+        return self::where('default', 1)->first();
+    }
+
 }

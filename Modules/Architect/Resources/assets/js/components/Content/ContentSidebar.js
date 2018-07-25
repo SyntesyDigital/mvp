@@ -57,7 +57,13 @@ class ContentSidebar extends Component {
         <div className="togglebutton" key={k}>
             <label>
               {language.name}
-              <input type="checkbox" name={language.iso} checked={this.props.translations[language.iso]} onChange={this.handleTranslationChange} />
+              {language.iso == DEFAULT_LOCALE &&
+                <input type="checkbox" name={language.iso} checked="true" disabled="true" />
+              }
+              {language.iso != DEFAULT_LOCALE &&
+                <input type="checkbox" name={language.iso} checked={this.props.translations[language.iso]} onChange={this.handleTranslationChange} />
+              }
+
             </label>
         </div>
     )));

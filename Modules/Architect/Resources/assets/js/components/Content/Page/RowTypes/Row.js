@@ -21,7 +21,8 @@ class Row extends Component {
       ['col-xs-4','col-xs-8'],
       ['col-xs-8','col-xs-4'],
       ['col-xs-4','col-xs-4','col-xs-4'],
-      ['col-xs-3','col-xs-3','col-xs-3','col-xs-3']
+      ['col-xs-3','col-xs-3','col-xs-3','col-xs-3'],
+      ['col-xs-1','col-xs-10','col-xs-1']
     ];
 
     this.deleteRow = this.deleteRow.bind(this);

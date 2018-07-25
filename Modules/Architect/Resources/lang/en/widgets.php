@@ -18,5 +18,6 @@ return [
     'COLLAPSE_TABS' => 'FAQ',
     'IMAGE_TEXT_FILE' => 'Imatge Text Arxiu',
     'HIGHLIGHTS' => 'Llista highlights',
-    'VIDEO' => 'Video'
+    'VIDEO' => 'Video',
+    'BUTTON' => 'Botó'
 ];

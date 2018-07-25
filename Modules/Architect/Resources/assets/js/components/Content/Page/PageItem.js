@@ -64,9 +64,9 @@ class PageItem extends Component {
     var value = null;
 
     if(this.props.data.field.value !== undefined &&
-      this.props.data.field.value.ca !== undefined ){
+      this.props.data.field.value[DEFAULT_LOCALE] !== undefined ){
 
-      value = this.props.data.field.value.ca;
+      value = this.props.data.field.value[DEFAULT_LOCALE];
     }
 
     if(value != null) {
@@ -88,9 +88,9 @@ class PageItem extends Component {
 
     if(this.props.data.field.value !== undefined && this.props.data.field.value != null
       && this.props.data.field.value.title !== undefined && this.props.data.field.value.title != null
-      && this.props.data.field.value.title.ca !== undefined ){
+      && this.props.data.field.value.title[DEFAULT_LOCALE] !== undefined ){
 
-      value = this.props.data.field.value.title.ca;
+      value = this.props.data.field.value.title[DEFAULT_LOCALE];
     }
 
     if(value != null) {
@@ -109,9 +109,9 @@ class PageItem extends Component {
     var value = null;
 
     if(this.props.data.field.value !== undefined &&
-      this.props.data.field.value.ca !== undefined ){
+      this.props.data.field.value[DEFAULT_LOCALE] !== undefined ){
 
-      value = this.props.data.field.value.ca;
+      value = this.props.data.field.value[DEFAULT_LOCALE];
     }
 
     if(value != null) {

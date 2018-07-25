@@ -125,7 +125,7 @@ class VideoField extends Component
   {
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
+      //if(this.props.translations[key]){
           var value = '';
 
           if(this.state.title !== undefined && this.state.title != null ) {
@@ -138,7 +138,7 @@ class VideoField extends Component
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
           </div>
         );
-      }
+      //}
     }
 
     return inputs;
@@ -149,7 +149,7 @@ class VideoField extends Component
 
     var inputs = [];
     for(var key in this.props.translations){
-      if(this.props.translations[key]){
+      //if(this.props.translations[key]){
           var value = '';
           console.log(this.props.field);
 
@@ -163,7 +163,7 @@ class VideoField extends Component
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
-      }
+      //}
     }
 
     return inputs;
