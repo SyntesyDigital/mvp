@@ -58,7 +58,8 @@ class ContentContainer extends Component {
          sourceField: null,
 
          displayContentModal: false,
-         contentSourceField: null
+         contentSourceField: null,
+         sourceLanguage : null
      };
 
      console.log('CONTENT =>', props.content);
@@ -81,16 +82,17 @@ class ContentContainer extends Component {
  }
 
 
- 
+
 
   /******** Images  ********/
 
-  handleImageSelect(identifier) {
+  handleImageSelect(identifier,language) {
       console.log('handleImageSelect => ', identifier);
 
     this.setState({
       displayMediaModal : true,
-      sourceField : identifier
+      sourceField : identifier,
+      sourceLanguage : language !== undefined ? language : null
     });
 
   }
@@ -98,7 +100,8 @@ class ContentContainer extends Component {
   handleImageCancel(){
     this.setState({
       displayMediaModal : false,
-      sourceField : null
+      sourceField : null,
+      sourceLanguage : null
     });
   }
 
@@ -119,12 +122,23 @@ class ContentContainer extends Component {
           case FIELDS.IMAGE.type:
               fields[field.identifier].value = media;
               break;
+
+          case FIELDS.TRANSLATED_FILE.type:
+
+              if(fields[field.identifier].value === undefined || fields[field.identifier].value == null ){
+                fields[field.identifier].value = {};
+              }
+
+              fields[field.identifier].value[this.state.sourceLanguage] = media;
+              break;
+
       }
 
     this.setState({
       fields : fields,
       displayMediaModal : false,
-      sourceField : null
+      sourceField : null,
+      sourceLanguage : null
     });
 
   }

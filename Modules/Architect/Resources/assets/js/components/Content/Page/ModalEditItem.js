@@ -14,6 +14,8 @@ import LinkField from './../ContentFields/LinkField';
 import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 import FileField from './../ContentFields/FileField';
+import TranslatedFileField from './../ContentFields/TranslatedFileField';
+
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
@@ -264,9 +266,28 @@ class ModalEditItem extends Component {
 
   }
 
-  onWidgetImageSelect(field) {
+  onTranslatedFileSelect(field,language) {
 
-    //console.log("ModalEditItem :: onWidgetImageSelect => ",field);
+    console.log("ModalEditItem :: onTranslatedFileSelect => ",field,language);
+
+    var self = this;
+
+    this.props.onImageSelect(field, function (field, media){
+
+      if(field.value === undefined || field.value == null ){
+        field.value = {};
+      }
+
+      field.value[language] = media;
+      return field;
+
+    });
+
+  }
+
+  onWidgetImageSelect(field,language) {
+
+    console.log("ModalEditItem :: onWidgetImageSelect => ",field,language);
     var self = this;
 
     const fields = this.state.field.fields;
@@ -277,16 +298,34 @@ class ModalEditItem extends Component {
         return;
     }
 
-    this.props.onImageSelect(field, function (field, media){
+    if(language !== undefined){
 
-      field.fields[index].value = media;
-      return field;
+      //es un campo con localización
+      this.props.onImageSelect(field, function (field, media){
 
-    });
+        if(field.fields[index].value === undefined || field.fields[index].value == null ){
+          field.fields[index].value = {};
+        }
 
+        field.fields[index].value[language] = media;
+        //console.log("ModalEditItem :: Field after => ",field);
+        return field;
+
+      });
+    }
+    else {
+
+      //es un campo image o file sin localización
+      this.props.onImageSelect(field, function (field, media){
+
+        field.fields[index].value = media;
+        return field;
+
+      });
+    }
   }
 
-  handleListImageSelect(field) {
+  handleListImageSelect(field,language) {
 
     const {listItemInfo} = this.state;
 
@@ -300,12 +339,32 @@ class ModalEditItem extends Component {
 
     console.log("ModalEditItem :: handleListImageSelect => ",fields,index);
 
-    this.props.onImageSelect(field, function (field, media){
+    if(language !== undefined){
 
-      field.value[listItemInfo.index].fields[index].value = media;
-      return field;
+      this.props.onImageSelect(field, function (field, media){
 
-    });
+        if(field.value[listItemInfo.index].fields[index].value === undefined ||
+          field.value[listItemInfo.index].fields[index].value == null ){
+
+          field.value[listItemInfo.index].fields[index].value = {};
+        }
+
+        field.value[listItemInfo.index].fields[index].value[language] = media;
+        //console.log("ModalEditItem :: Field after => ",field);
+        return field;
+
+      });
+    }
+    else {
+
+      this.props.onImageSelect(field, function (field, media){
+
+        field.value[listItemInfo.index].fields[index].value = media;
+        return field;
+
+      });
+
+    }
 
   }
 
@@ -369,6 +428,17 @@ class ModalEditItem extends Component {
                 hideTab={true}
                 translations={this.props.translations}
                 onImageSelect={this.props.onImageSelect}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
+        case FIELDS.TRANSLATED_FILE.type:
+          return (
+            <TranslatedFileField
+                //errors={_this.props.errors[k]}
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onFileSelect={this.onTranslatedFileSelect.bind(this)}
                 onFieldChange={this.onFieldChange.bind(this)}
             />
           );

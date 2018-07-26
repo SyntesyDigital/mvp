@@ -791,8 +791,16 @@ class PageBuilder extends Component {
               layout = this.changeItem(layout,-1,this.state.editItemData.pathToIndex,media);
               break;
 
+          case FIELDS.TRANSLATED_FILE.type:
+              layout = this.changeItemWithCallback(layout,-1,
+                this.state.editItemData.pathToIndex,media,
+                this.state.imageCallback
+              );
+              break;
+
           case "widget":
           case "widget-list":
+
               layout = this.changeItemWithCallback(layout,
                 -1,this.state.editItemData.pathToIndex,media,
                 this.state.imageCallback

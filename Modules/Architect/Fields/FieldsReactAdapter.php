@@ -104,6 +104,21 @@ class FieldsReactAdapter
                 $typologyField->value = Media::find($contentField->value);
             break;
 
+            case 'translated_file':
+                $iso = $this->getLanguageIsoFromId($contentField->language_id);
+                $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
+
+                if($values) {
+                    $values[$iso] = Media::find($contentField->value);
+                } else {
+                    $values = [
+                        $iso => Media::find($contentField->value)
+                    ];
+                }
+
+                $typologyField->value = $values;
+            break;
+
             case 'images':
                 $values = isset($typologyField->value) ? $typologyField->value : null;
                 $values[] = Media::find($contentField->value);

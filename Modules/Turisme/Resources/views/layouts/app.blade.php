@@ -12,21 +12,22 @@
         <meta name="keywords" lang="{{App::getLocale()}}" content="" />
         <meta name="description" lang="{{App::getLocale()}}" content="" />
         <meta name="abstract" content="" />
-	    <meta name="author" content="" />
+  	    <meta name="author" content="" />
+        <meta name="robots" content="noindex,nofollow">
 
         <!-- twitter -->
         <meta name="twitter:card" content="summary_large_image"/>
-		<meta name="twitter:site" content=""/>
-		<meta name="twitter:creator" content=""/>
-		<meta name="twitter:title" content=""/>
-		<meta name="twitter:description" content=""/>
+    		<meta name="twitter:site" content=""/>
+    		<meta name="twitter:creator" content=""/>
+    		<meta name="twitter:title" content=""/>
+    		<meta name="twitter:description" content=""/>
 
         <!-- facebook -->
-		<meta property="og:url" content="" />
-		<meta property="og:image" content="" />
-		<meta property="og:title" content=""/>
-		<meta property="og:description" content=""/>
-		<meta property="og:type" content="website"/>
+    		<meta property="og:url" content="" />
+    		<meta property="og:image" content="" />
+    		<meta property="og:title" content=""/>
+    		<meta property="og:description" content=""/>
+    		<meta property="og:type" content="website"/>
 
 
         <link href="{{asset('modules/turisme/css/app.css')}}" rel="stylesheet" type="text/css" />
