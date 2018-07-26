@@ -46,6 +46,7 @@ class UpdateContent
             'author_id' => $this->attributes['author_id'],
             'is_page' => isset($this->attributes['is_page']) ? $this->attributes['is_page'] : 0,
             'parent_id' => isset($this->attributes['parent_id']) ? $this->attributes['parent_id'] : null,
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
         $this->saveCategories();
@@ -201,7 +202,6 @@ class UpdateContent
 
         return Page::create([
             'definition' => json_encode($this->savePageBuilderFields($this->attributes['page'])),
-            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
             'content_id' => $this->content->id
         ]);
     }

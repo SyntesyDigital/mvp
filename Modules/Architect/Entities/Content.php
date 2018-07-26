@@ -38,7 +38,8 @@ class Content extends Model
         'author_id',
         'parent_id',
         'is_page',
-        'published_at'
+        'published_at',
+        'settings'
     ];
 
     /**
