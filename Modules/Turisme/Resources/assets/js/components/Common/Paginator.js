@@ -24,7 +24,7 @@ class Paginator extends Component {
                 {Array.apply(null, Array(this.state.lastPage)).map(function(item, i){
                     return (
                       <li key={i}>
-                          <a href="">{i}</a>
+                          <a href="#" onClick={this.state.onPageChange(i)}>{i}</a>
                       </li>
                     );
                 }, this)}
