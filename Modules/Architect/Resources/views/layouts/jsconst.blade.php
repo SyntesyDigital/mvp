@@ -10,6 +10,7 @@
   const ROW_SETTINGS = ['htmlId','htmlClass','hasContainer'];
   const COL_SETTINGS = ['htmlId','htmlClass'];
   const PAGE_SETTINGS = ['htmlClass'];
+  const CONTENT_SETTINGS = ['htmlClass'];
   const CATEGORIES = {!! json_encode(Modules\Architect\Entities\Category::all(), JSON_PRETTY_PRINT) !!};
   const DEFAULT_LOCALE = '{{ Modules\Architect\Entities\Language::getDefault()->iso}}';
 </script>
