@@ -18,7 +18,7 @@
       <div class="modal-content">
         <div class="container">
           <div class="row">
-            <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+            <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
               <h3 class="card-title">Nou contingut</h3>
               <h6>Selecciona de la llista el tipus de contingut que vols crear : </h6>

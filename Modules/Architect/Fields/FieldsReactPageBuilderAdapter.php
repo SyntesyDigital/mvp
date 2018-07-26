@@ -22,8 +22,11 @@ class FieldsReactPageBuilderAdapter
 
     public function get()
     {
-        $nodes = json_decode($this->page->definition, true);
+        if(!$this->page) {
+            return null;
+        }
 
+        $nodes = json_decode($this->page->definition, true);
         return $this->getPage($nodes);
     }
 
@@ -91,6 +94,12 @@ class FieldsReactPageBuilderAdapter
                 if($contentField != null){
                   return Media::find($contentField->value);
                 }
+            break;
+
+            case 'translated_file':
+                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
+                    return [$field->language->iso => Media::find($field->value)];
+                })->toArray();
             break;
 
             case 'localization':

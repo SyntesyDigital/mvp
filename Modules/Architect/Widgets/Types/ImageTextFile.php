@@ -20,7 +20,7 @@ class ImageTextFile extends Widget implements WidgetInterface
         'image' => 'Modules\Architect\Fields\Types\Image',
         'link' => 'Modules\Architect\Fields\Types\Link',
         'description' => 'Modules\Architect\Fields\Types\RichText',
-        'file' => 'Modules\Architect\Fields\Types\File'
+        'file' => 'Modules\Architect\Fields\Types\TranslatedFile'
     ];
 
     public $rules = [

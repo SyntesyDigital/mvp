@@ -12,8 +12,8 @@
         <meta name="keywords" lang="{{App::getLocale()}}" content="" />
         <meta name="description" lang="{{App::getLocale()}}" content="" />
         <meta name="abstract" content="" />
-		    <meta name="author" content="" />
-
+  	    <meta name="author" content="" />
+        <meta name="robots" content="noindex,nofollow">
 
         <!-- twitter -->
         <meta name="twitter:card" content="summary_large_image"/>
@@ -33,6 +33,7 @@
         <link href="{{asset('modules/turisme/css/app.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('modules/turisme/css/turisme.css')}}" rel="stylesheet" type="text/css" />
         @stack('styles')
+
         <link href="http://www.edittio.com/turisme/professionals/css/general.css" rel="stylesheet" type="text/css" />
 
 
@@ -51,13 +52,19 @@
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';
           const LOCALE = '{{App::getLocale()}}';
-
         </script>
-        <script type="text/javascript" src="{{route('messages',App::getLocale())}}" ></script>
+        <script type="text/javascript" src="{{route('messages', App::getLocale())}}" ></script>
 
         @stack('javascripts-libs')
 
+        <!-- Language -->
+        <script type="text/javascript" src="{{asset('modules/turisme/js/lang.dist.js')}}" ></script>
+        <script>
+            Lang.setLocale('{{App::getLocale()}}');
+        </script>
+
         <script type="text/javascript" src="{{asset('modules/turisme/js/app.js')}}" ></script>
+
 
         @stack('javascripts')
     </body>

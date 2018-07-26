@@ -15,6 +15,7 @@ import VideoField from './../ContentFields/VideoField';
 import LocalizationField from './../ContentFields/LocalizationField';
 import UrlField from './../ContentFields/UrlField';
 import FileField from './../ContentFields/FileField';
+import TranslatedFileField from './../ContentFields/TranslatedFileField';
 
 class CommonWidget extends Component
 {
@@ -125,6 +126,18 @@ class CommonWidget extends Component
                     key={k}
                     onFieldChange={_this.onFieldChange}
                     onImageSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+
+            case FIELDS.TRANSLATED_FILE.type:
+                fields.push(
+                <TranslatedFileField
+                    field={stateFields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.onFieldChange}
+                    onFileSelect={_this.props.onImageSelect}
                 />
                 );
             break;

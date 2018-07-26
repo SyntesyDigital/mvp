@@ -9,6 +9,7 @@
         <title>{{env('APP_NAME')}}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow">
 
         <!-- Global style -->
         <link rel="stylesheet" media="all" href="{{ asset('modules/architect/css/app.css')}}" />
@@ -25,6 +26,13 @@
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
         {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+
+        <!-- Language -->
+        {{ Html::script('/modules/architect/js/lang.dist.js') }}
+        <script>
+            Lang.setLocale('{{App::getLocale()}}');
+        </script>
+
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>

@@ -13,9 +13,6 @@ export default class TypologyLast extends Component {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null
         };
-
-        console.log("TypologyLast :: field => ",this.state.field);
-
     }
 
     componentDidMount() {
@@ -30,14 +27,11 @@ export default class TypologyLast extends Component {
 
       axios.get(ASSETS+'api/contents?typology_id='+typology+categoryQuery)
         .then(response => {
-
-          console.log("Response => ",response);
           var items = [];
 
           if(response.status == 200 && response.data.data !== undefined
             && response.data.data.length > 0){
-
-              items = response.data.data;
+                items = response.data.data;
           }
 
           self.setState({
@@ -52,22 +46,17 @@ export default class TypologyLast extends Component {
     }
 
     renderItems() {
-
-      console.log("TypologyLast :: renderItems ",this.state.items);
-
       return this.state.items.map((item,index) =>
         <li key={index}>
           <p className="image">
             <ImageField
               field={item.fields.imatge}
             />
-
           </p>
           <p className="text"><span className="data">30-11-2016</span> | <span className="categoria">Categoria </span></p>
           <a href="">{item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }</a>
          </li>
       );
-
     }
 
     render() {
@@ -82,7 +71,7 @@ export default class TypologyLast extends Component {
 
               {this.state.items != null && this.state.items.length == 0 &&
                 <p>
-                  {"No s'ha trobat cap resultat"}
+                  {Lang.get('widgets.last_typology.empty')}
                 </p>
               }
 
