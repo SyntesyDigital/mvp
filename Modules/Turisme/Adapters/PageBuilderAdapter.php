@@ -163,6 +163,7 @@ class PageBuilderAdapter
                 return $values;
             break;
 
+            case 'url':
             case 'link':
                 $field = ContentField::where('name', $fieldName)->first();
                 $values = null;
