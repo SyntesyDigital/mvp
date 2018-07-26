@@ -149,7 +149,8 @@ class PageContainer extends Component {
                axios.get('/architect/page-layouts/'+layoutId+'/show')
                    .then((response) => {
                        _this.setState({
-                           layout : JSON.parse(response.data.definition)
+                           layout : JSON.parse(response.data.definition),
+                           settings : JSON.parse(response.data.settings),
                        });
                        toastr.success('Plantilla carregada !');
                    })
@@ -196,7 +197,8 @@ class PageContainer extends Component {
           if(result != null){
             axios.post('/architect/page-layouts', {
                 name : result,
-                definition : self.state.layout
+                definition : self.state.layout,
+                settings : self.state.settings
             })
             .then((response) => {
                 toastr.success('Plantilla guardad !');

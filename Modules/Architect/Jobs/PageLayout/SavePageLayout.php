@@ -46,7 +46,7 @@ class SavePageLayout
         return PageLayout::create([
             'name' => $this->attributes['name'],
             'definition' => json_encode($this->removeLayoutValues($this->attributes['definition'])),
-            'settings' => isset($this->attributes['settings']) ? $this->attributes['settings'] : null,
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
     }
 }
