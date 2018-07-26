@@ -10,6 +10,7 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Category;
 use Modules\Architect\Ressources\ContentCollection;
 use Modules\Architect\Ressources\CategoryCollection;
+use Modules\Architect\Ressources\CategoryTreeCollection;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,25 @@ class CategoryController extends Controller
         }
 
         return new CategoryCollection($collection->paginate($size));
+    }
+
+    public function tree(Request $request)
+    {
+        $categoryId = $request->get('category_id');
+        $collection = Category::with('descendants', 'contents','descendants.contents');
+
+        // Add automaticly descendants on request parameters
+        $loads = explode(',', $request->get('loads'));
+        $loads[] = 'descendants';
+        $request->merge([
+            'loads' => implode(',',$loads)
+        ]);
+
+        if($categoryId) {
+            $collection->where('id', $categoryId);
+        }
+
+        return new CategoryTreeCollection($collection->get()->toTree());
     }
 
 }

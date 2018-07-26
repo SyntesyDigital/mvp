@@ -15,5 +15,6 @@ require('./libs/tweenMax/tweenmax.js');
 //require('./components/Home');
 require('./components/Fields/MapField');
 require('./components/Widgets/TypologyLast');
-require('./components/Widgets/TypologyPaginated');
+require('./components/Widgets/PDFTypologyPaginated');
+require('./components/Widgets/ContentsByCategories');
 require('./components/Common/Paginator');

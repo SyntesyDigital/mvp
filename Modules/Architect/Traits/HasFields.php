@@ -131,6 +131,10 @@ trait HasFields
                 return Content::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
 
+            case 'date':
+                return date('Y-m-d H:i:s', $field->value);
+            break;
+
             case 'url':
             case 'link':
                 $values = null;
