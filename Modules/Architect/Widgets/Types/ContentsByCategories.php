@@ -9,11 +9,11 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
-class TypologyPaginated extends Widget implements WidgetInterface
+class ContentsByCategories extends Widget implements WidgetInterface
 {
     public $type = 'widget';
     public $icon = 'fa-file-o';
-    public $name = 'TYPOLOGY_PAGINATED';
+    public $name = 'CONTENTS_BY_CATEGORIES';
     public $component = 'CommonWidget';
 
     public $fields = [
@@ -29,7 +29,7 @@ class TypologyPaginated extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'typology',
+        'category',
     ];
 }
 ?>

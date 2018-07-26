@@ -4,4 +4,5 @@ Route::group(['middleware' => 'web', 'prefix' => 'api', 'namespace' => 'Modules\
 {
     Route::get('/contents', 'ContentController@index');
     Route::get('/categories', 'CategoryController@index');
+    Route::get('/categories/tree', 'CategoryController@tree');
 });

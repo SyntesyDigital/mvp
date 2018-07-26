@@ -9,7 +9,7 @@
     )
   </h3>
 
-  <div id="typology-paginated"
+  <div id="pdf-typology-paginated"
     field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
   >
   </div>

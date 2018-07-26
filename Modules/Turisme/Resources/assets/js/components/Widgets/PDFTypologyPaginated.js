@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ImageField from './../Fields/ImageField';
 import Paginator from './../Common/Paginator';
 
-export default class TypologyPaginated extends Component {
+export default class PDFTypologyPaginated extends Component {
 
     constructor(props)
     {
@@ -30,7 +29,7 @@ export default class TypologyPaginated extends Component {
         const typology = field.settings.typology;
         const category = field.settings.category;
 
-        axios.get(ASSETS+'api/contents?size=1&typology_id='+typology + '&page=' + (page ? page : null))
+        axios.get(ASSETS+'api/contents?size=2&typology_id='+typology + '&page=' + (page ? page : null))
           .then(response => {
               var items = [];
               if(response.status == 200 
@@ -54,13 +53,10 @@ export default class TypologyPaginated extends Component {
     renderItems() {
       return this.state.items.map((item,index) =>
         <li key={index}>
-          <p className="image">
-            <ImageField
-              field={item.fields.imatge}
-            />
-          </p>
-          <p className="text"><span className="data">30-11-2016</span> | <span className="categoria">Categoria </span></p>
-          <a href="">{item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }</a>
+            {item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }<br />
+            {item.fields.publicacio.values}<br />
+            {item.fields.publicacio.autor !== undefined  ? item.fields.publicacio.autor.values[LOCALE] : null}<br />
+            <a href="#">{Lang.get('widgets.typology_paginated.download_pdf')}</a>
          </li>
       );
     }
@@ -99,11 +95,11 @@ export default class TypologyPaginated extends Component {
 }
 
 
-if (document.getElementById('typology-paginated')) {
-    var element = document.getElementById('typology-paginated');
+if (document.getElementById('pdf-typology-paginated')) {
+    var element = document.getElementById('pdf-typology-paginated');
     var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyPaginated
+    ReactDOM.render(<PDFTypologyPaginated
         field={field}
       />, element);
 }

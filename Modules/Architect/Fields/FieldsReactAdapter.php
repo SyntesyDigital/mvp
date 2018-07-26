@@ -111,6 +111,10 @@ class FieldsReactAdapter
                 $typologyField->value = $values;
             break;
 
+            case 'date':
+                $typologyField->value = date('Y-m-d H:i:s', $contentField->value);
+            break;
+
             case 'contents':
                 $values = isset($typologyField->value) ? $typologyField->value : [];
                 $values[] = Content::find($contentField->value)->load('fields');

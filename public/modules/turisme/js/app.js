@@ -71594,7 +71594,8 @@ __webpack_require__(807);
 //require('./components/Home');
 __webpack_require__(808);
 __webpack_require__(809);
-__webpack_require__(810);
+__webpack_require__(840);
+__webpack_require__(841);
 __webpack_require__(539);
 
 /***/ }),
@@ -82779,7 +82780,37 @@ if (document.getElementById('typology-last')) {
 }
 
 /***/ }),
-/* 810 */
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */,
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82788,8 +82819,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(538);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_Paginator__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(539);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82803,132 +82833,249 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var PDFTypologyPaginated = function (_Component) {
+    _inherits(PDFTypologyPaginated, _Component);
 
-var TypologyPaginated = function (_Component) {
-  _inherits(TypologyPaginated, _Component);
+    function PDFTypologyPaginated(props) {
+        _classCallCheck(this, PDFTypologyPaginated);
 
-  function TypologyPaginated(props) {
-    _classCallCheck(this, TypologyPaginated);
+        var _this = _possibleConstructorReturn(this, (PDFTypologyPaginated.__proto__ || Object.getPrototypeOf(PDFTypologyPaginated)).call(this, props));
 
-    var _this = _possibleConstructorReturn(this, (TypologyPaginated.__proto__ || Object.getPrototypeOf(TypologyPaginated)).call(this, props));
-
-    _this.state = {
-      field: props.field ? JSON.parse(atob(props.field)) : '',
-      items: null,
-      lastPage: null,
-      currPage: null
-    };
-    _this.onPageChange.bind(_this);
-    return _this;
-  }
-
-  _createClass(TypologyPaginated, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.query(1);
+        _this.state = {
+            field: props.field ? JSON.parse(atob(props.field)) : '',
+            items: null,
+            lastPage: null,
+            currPage: null
+        };
+        _this.onPageChange.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'query',
-    value: function query(page) {
-      var self = this;
-      var field = this.state.field;
 
-      var typology = field.settings.typology;
-      var category = field.settings.category;
-
-      axios.get(ASSETS + 'api/contents?size=1&typology_id=' + typology + '&page=' + (page ? page : null)).then(function (response) {
-        var items = [];
-        if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
-          items = response.data.data;
+    _createClass(PDFTypologyPaginated, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.query(1);
         }
+    }, {
+        key: 'query',
+        value: function query(page) {
+            var self = this;
+            var field = this.state.field;
 
-        self.setState({
-          items: items,
-          lastPage: response.data.meta.last_page,
-          currPage: response.data.meta.current_page
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
-  }, {
-    key: 'renderItems',
-    value: function renderItems() {
-      return this.state.items.map(function (item, index) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'li',
-          { key: index },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'p',
-            { className: 'image' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
-              field: item.fields.imatge
-            })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'p',
-            { className: 'text' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'data' },
-              '30-11-2016'
-            ),
-            ' | ',
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'span',
-              { className: 'categoria' },
-              'Categoria '
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
-            { href: '' },
-            item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : ''
-          )
-        );
-      });
-    }
-  }, {
-    key: 'onPageChange',
-    value: function onPageChange(page) {
-      this.query(page);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
+            var typology = field.settings.typology;
+            var category = field.settings.category;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
-        this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          null,
-          Lang.get('widgets.last_typology.empty')
-        ),
-        this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'ul',
-          null,
-          this.renderItems()
-        ),
-        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
-      );
-    }
-  }]);
+            axios.get(ASSETS + 'api/contents?size=2&typology_id=' + typology + '&page=' + (page ? page : null)).then(function (response) {
+                var items = [];
+                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+                    items = response.data.data;
+                }
 
-  return TypologyPaginated;
+                self.setState({
+                    items: items,
+                    lastPage: response.data.meta.last_page,
+                    currPage: response.data.meta.current_page
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'renderItems',
+        value: function renderItems() {
+            return this.state.items.map(function (item, index) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'li',
+                    { key: index },
+                    item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    item.fields.publicacio.values,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    item.fields.publicacio.autor !== undefined ? item.fields.publicacio.autor.values[LOCALE] : null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { href: '#' },
+                        Lang.get('widgets.typology_paginated.download_pdf')
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'onPageChange',
+        value: function onPageChange(page) {
+            this.query(page);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+                this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    Lang.get('widgets.last_typology.empty')
+                ),
+                this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'ul',
+                    null,
+                    this.renderItems()
+                ),
+                this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
+            );
+        }
+    }]);
+
+    return PDFTypologyPaginated;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (TypologyPaginated);
+/* harmony default export */ __webpack_exports__["default"] = (PDFTypologyPaginated);
 
 
-if (document.getElementById('typology-paginated')) {
-  var element = document.getElementById('typology-paginated');
-  var field = element.getAttribute('field');
+if (document.getElementById('pdf-typology-paginated')) {
+    var element = document.getElementById('pdf-typology-paginated');
+    var field = element.getAttribute('field');
 
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologyPaginated, {
-    field: field
-  }), element);
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PDFTypologyPaginated, {
+        field: field
+    }), element);
+}
+
+/***/ }),
+/* 841 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(539);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var ContentsByCategories = function (_Component) {
+    _inherits(ContentsByCategories, _Component);
+
+    function ContentsByCategories(props) {
+        _classCallCheck(this, ContentsByCategories);
+
+        var _this = _possibleConstructorReturn(this, (ContentsByCategories.__proto__ || Object.getPrototypeOf(ContentsByCategories)).call(this, props));
+
+        _this.state = {
+            field: props.field ? JSON.parse(atob(props.field)) : '',
+            items: null,
+            lastPage: null,
+            currPage: null
+        };
+        _this.onPageChange.bind(_this);
+        return _this;
+    }
+
+    _createClass(ContentsByCategories, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.query(1);
+        }
+    }, {
+        key: 'query',
+        value: function query(page) {
+            var self = this;
+            var field = this.state.field;
+
+            var categoryId = 3;
+
+            axios.get(ASSETS + 'api/categories/tree?loads=contents&category_id=' + categoryId + '&page=' + (page ? page : null)).then(function (response) {
+                var items = [];
+                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+                    items = response.data.data;
+                }
+
+                self.setState({
+                    items: items,
+                    lastPage: response.data.meta.last_page,
+                    currPage: response.data.meta.current_page
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'renderItems',
+        value: function renderItems() {
+            return this.state.items.map(function (item, index) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'li',
+                    { key: index },
+                    item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    item.fields.publicacio.values,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    item.fields.publicacio.autor !== undefined ? item.fields.publicacio.autor.values[LOCALE] : null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { href: '#' },
+                        Lang.get('widgets.typology_paginated.download_pdf')
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'onPageChange',
+        value: function onPageChange(page) {
+            this.query(page);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+                this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    Lang.get('widgets.last_typology.empty')
+                ),
+                this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'ul',
+                    null,
+                    this.renderItems()
+                ),
+                this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
+            );
+        }
+    }]);
+
+    return ContentsByCategories;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ContentsByCategories);
+
+
+if (document.getElementById('contents-by-categories')) {
+    var element = document.getElementById('pdf-typology-paginated');
+    var field = element.getAttribute('field');
+
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ContentsByCategories, {
+        field: field
+    }), element);
 }
 
 /***/ })
