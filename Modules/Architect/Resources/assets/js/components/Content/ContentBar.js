@@ -30,6 +30,14 @@ class ContentBar extends Component {
       this.props.onLoadLayout != undefined ? this.props.onLoadLayout() : null;
   }
 
+  onSubmitForm(e) {
+
+    e.preventDefault();
+
+    if(!this.props.saving)
+      this.props.onSubmitForm(e);
+  }
+
   render() {
     return (
       <div className="page-bar">
@@ -49,7 +57,7 @@ class ContentBar extends Component {
 
               <div className="float-buttons pull-right">
 
-              { this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
+              { this.props.saved && this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
                 <div className="actions-dropdown">
                   <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
                     Accions
@@ -100,10 +108,10 @@ class ContentBar extends Component {
                   </div>
                 }
 
-                { this.props.content !== undefined && this.props.content != null &&
+                {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
                   <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
                 }
-                <a href="" className="btn btn-primary" onClick={this.props.onSubmitForm} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+                <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
               </div>
 
             </div>

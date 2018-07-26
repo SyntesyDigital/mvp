@@ -64,6 +64,7 @@
         </script>
 
         <script type="text/javascript" src="{{asset('modules/turisme/js/app.js')}}" ></script>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
         @stack('javascripts')

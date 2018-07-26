@@ -19,5 +19,8 @@ return [
 
     'title' => 'Title',
     'description' => 'Descripció',
-    'subtitle' => 'Subtítol'
+    'subtitle' => 'Subtítol',
+    'message' => 'Missatge',
+    'author' => 'Autor',
+    'company' => 'Empresa'
 ];

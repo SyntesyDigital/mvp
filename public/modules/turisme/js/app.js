@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 800);
+/******/ 	return __webpack_require__(__webpack_require__.s = 802);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71122,8 +71122,191 @@ ZoomControl.propTypes = {
 /* 536 */,
 /* 537 */,
 /* 538 */,
-/* 539 */,
-/* 540 */,
+/* 539 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var ImageField = function (_Component) {
+  _inherits(ImageField, _Component);
+
+  function ImageField(props) {
+    _classCallCheck(this, ImageField);
+
+    var _this = _possibleConstructorReturn(this, (ImageField.__proto__ || Object.getPrototypeOf(ImageField)).call(this, props));
+
+    console.log("ImageField :: props => ", props);
+
+    var crop = "original";
+    if (props.field.settings != null && props.field.settings.cropsAllowed !== undefined && props.field.settings.cropsAllowed != null) {
+
+      crop = props.field.settings.cropsAllowed;
+    }
+
+    var url = null;
+    var alt = "";
+    var title = "";
+    if (props.field.values !== undefined && props.field.values != null) {
+      if (props.field.values.urls[crop] !== undefined) {
+        url = props.field.values.urls[crop];
+      }
+      //alt = props.field.values.metadata.fields.alt[LOCALE].value;
+      //title = props.field.values.metadata.fields.title[LOCALE].value;
+    }
+
+    _this.state = {
+      id: null,
+      className: null,
+      url: url,
+      alt: alt,
+      title: title
+    };
+
+    console.log("ImageField :: state => ", _this.state);
+
+    return _this;
+  }
+
+  _createClass(ImageField, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'render',
+    value: function render() {
+
+      //alt={this.state.alt}
+      //title={this.state.title}
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+        id: this.state.id,
+        className: this.state.className,
+        src: ASSETS + this.state.url
+      });
+    }
+  }]);
+
+  return ImageField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ImageField);
+
+/***/ }),
+/* 540 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Paginator = function (_Component) {
+    _inherits(Paginator, _Component);
+
+    function Paginator(props) {
+        _classCallCheck(this, Paginator);
+
+        var _this = _possibleConstructorReturn(this, (Paginator.__proto__ || Object.getPrototypeOf(Paginator)).call(this, props));
+
+        _this.onPageChange.bind(_this);
+        return _this;
+    }
+
+    _createClass(Paginator, [{
+        key: 'onPageChange',
+        value: function onPageChange(page, e) {
+            e.preventDefault();
+            this.props.onChange(page);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            var prevPage = this.props.currPage > 2 ? this.props.currPage - 1 : 1;
+            var nextPage = this.props.currPage < this.props.lastPage ? this.props.currPage + 1 : this.props.lastPage;
+            var currPage = this.props.currPage;
+            var lastPage = this.props.lastPage;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'ul',
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '#', onClick: function onClick(e) {
+                                    return _this2.onPageChange(prevPage, e);
+                                } },
+                            'Prev'
+                        )
+                    ),
+                    Array.apply(null, Array(this.props.lastPage + 1)).map(function (item, i) {
+                        var _this3 = this;
+
+                        if (i > 0) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'li',
+                            { key: i, className: i == currPage ? 'active' : null },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { href: '#', onClick: function onClick(e) {
+                                        return _this3.onPageChange(i, e);
+                                    } },
+                                i
+                            )
+                        );
+                    }, this),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '#', onClick: function onClick(e) {
+                                    return _this2.onPageChange(nextPage, e);
+                                } },
+                            'Next'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Paginator;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Paginator);
+
+/***/ }),
 /* 541 */,
 /* 542 */,
 /* 543 */,
@@ -71383,14 +71566,16 @@ ZoomControl.propTypes = {
 /* 797 */,
 /* 798 */,
 /* 799 */,
-/* 800 */
+/* 800 */,
+/* 801 */,
+/* 802 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(801);
+module.exports = __webpack_require__(803);
 
 
 /***/ }),
-/* 801 */
+/* 803 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -71400,18 +71585,21 @@ module.exports = __webpack_require__(801);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(802);
+__webpack_require__(804);
 
 //libs
-__webpack_require__(804);
-__webpack_require__(805);
 __webpack_require__(806);
 __webpack_require__(807);
 __webpack_require__(808);
+
+//require('./components/Home');
 __webpack_require__(809);
+__webpack_require__(810);
+__webpack_require__(811);
+__webpack_require__(540);
 
 /***/ }),
-/* 802 */
+/* 804 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -71426,7 +71614,7 @@ window._ = __webpack_require__(177);
 try {
   window.$ = window.jQuery = __webpack_require__(86);
 
-  __webpack_require__(803);
+  __webpack_require__(805);
 } catch (e) {}
 
 /**
@@ -71469,7 +71657,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 803 */
+/* 805 */
 /***/ (function(module, exports) {
 
 /*!
@@ -73852,7 +74040,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 804 */
+/* 806 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -77369,7 +77557,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 805 */
+/* 807 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -80125,7 +80313,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 806 */
+/* 808 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -82316,31 +82504,7 @@ var _gsScope = "undefined" != typeof module && module.exports && "undefined" != 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 807 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-
-
-
-console.log("hello!");
-
-if (document.getElementById('home')) {
-
-  Object(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    null,
-    'Hello!'
-  ), document.getElementById('home'));
-}
-
-/***/ }),
-/* 808 */
+/* 809 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82477,7 +82641,7 @@ if (document.getElementById('map-field')) {
 }
 
 /***/ }),
-/* 809 */
+/* 810 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82486,7 +82650,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(810);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(539);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82616,14 +82780,17 @@ if (document.getElementById('typology-last')) {
 }
 
 /***/ }),
-/* 810 */
+/* 811 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_Paginator__ = __webpack_require__(540);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82635,68 +82802,135 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var ImageField = function (_Component) {
-  _inherits(ImageField, _Component);
 
-  function ImageField(props) {
-    _classCallCheck(this, ImageField);
 
-    var _this = _possibleConstructorReturn(this, (ImageField.__proto__ || Object.getPrototypeOf(ImageField)).call(this, props));
 
-    console.log("ImageField :: props => ", props);
+var TypologyPaginated = function (_Component) {
+  _inherits(TypologyPaginated, _Component);
 
-    var crop = "original";
-    if (props.field.settings != null && props.field.settings.cropsAllowed !== undefined && props.field.settings.cropsAllowed != null) {
+  function TypologyPaginated(props) {
+    _classCallCheck(this, TypologyPaginated);
 
-      crop = props.field.settings.cropsAllowed;
-    }
-
-    var url = null;
-    var alt = "";
-    var title = "";
-    if (props.field.values !== undefined && props.field.values != null) {
-      if (props.field.values.urls[crop] !== undefined) {
-        url = props.field.values.urls[crop];
-      }
-      //alt = props.field.values.metadata.fields.alt[LOCALE].value;
-      //title = props.field.values.metadata.fields.title[LOCALE].value;
-    }
+    var _this = _possibleConstructorReturn(this, (TypologyPaginated.__proto__ || Object.getPrototypeOf(TypologyPaginated)).call(this, props));
 
     _this.state = {
-      id: null,
-      className: null,
-      url: url,
-      alt: alt,
-      title: title
+      field: props.field ? JSON.parse(atob(props.field)) : '',
+      items: null,
+      lastPage: null,
+      currPage: null
     };
-
-    console.log("ImageField :: state => ", _this.state);
-
+    _this.onPageChange.bind(_this);
     return _this;
   }
 
-  _createClass(ImageField, [{
+  _createClass(TypologyPaginated, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.query(1);
+    }
+  }, {
+    key: 'query',
+    value: function query(page) {
+      var self = this;
+      var field = this.state.field;
+
+      var typology = field.settings.typology;
+      var category = field.settings.category;
+
+      axios.get(ASSETS + 'api/contents?size=1&typology_id=' + typology + '&page=' + (page ? page : null)).then(function (response) {
+        var items = [];
+        if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+          items = response.data.data;
+        }
+
+        self.setState({
+          items: items,
+          lastPage: response.data.meta.last_page,
+          currPage: response.data.meta.current_page
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'renderItems',
+    value: function renderItems() {
+      return this.state.items.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          { key: index },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'image' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
+              field: item.fields.imatge
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'text' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'data' },
+              '30-11-2016'
+            ),
+            ' | ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'categoria' },
+              'Categoria '
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '' },
+            item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : ''
+          )
+        );
+      });
+    }
+  }, {
+    key: 'onPageChange',
+    value: function onPageChange(page) {
+      this.query(page);
+    }
   }, {
     key: 'render',
     value: function render() {
 
-      //alt={this.state.alt}
-      //title={this.state.title}
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-        id: this.state.id,
-        className: this.state.className,
-        src: ASSETS + this.state.url
-      });
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+        this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          Lang.get('widgets.last_typology.empty')
+        ),
+        this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          this.renderItems()
+        ),
+        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
+      );
     }
   }]);
 
-  return ImageField;
+  return TypologyPaginated;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (ImageField);
+/* harmony default export */ __webpack_exports__["default"] = (TypologyPaginated);
+
+
+if (document.getElementById('typology-paginated')) {
+  var element = document.getElementById('typology-paginated');
+  var field = element.getAttribute('field');
+
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologyPaginated, {
+    field: field
+  }), element);
+}
 
 /***/ })
 /******/ ]);
