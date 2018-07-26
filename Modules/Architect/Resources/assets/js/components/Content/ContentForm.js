@@ -47,6 +47,7 @@ export default class ContentForm extends Component {
                     categories={this.state.categories}
                     tags={this.state.tags}
                     saved={this.state.saved}
+                    settings={this.state.settings}
                     ref={(contentContainer) => this.contentContainer = contentContainer}
                 />
                 }
