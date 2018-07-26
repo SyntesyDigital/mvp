@@ -71232,36 +71232,69 @@ var Paginator = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Paginator.__proto__ || Object.getPrototypeOf(Paginator)).call(this, props));
 
-        _this.state = {
-            currPage: props.currPage,
-            lastPage: props.lastPage,
-            onPageChange: props.onPageChange
-        };
-
-        console.log('props', props);
+        _this.onPageChange.bind(_this);
         return _this;
     }
 
     _createClass(Paginator, [{
+        key: 'onPageChange',
+        value: function onPageChange(page, e) {
+            e.preventDefault();
+            this.props.onChange(page);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var prevPage = this.props.currPage > 2 ? this.props.currPage - 1 : 1;
+            var nextPage = this.props.currPage < this.props.lastPage ? this.props.currPage + 1 : this.props.lastPage;
+            var currPage = this.props.currPage;
+            var lastPage = this.props.lastPage;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'ul',
                     null,
-                    Array.apply(null, Array(this.state.lastPage)).map(function (item, i) {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '#', onClick: function onClick(e) {
+                                    return _this2.onPageChange(prevPage, e);
+                                } },
+                            'Prev'
+                        )
+                    ),
+                    Array.apply(null, Array(this.props.lastPage + 1)).map(function (item, i) {
+                        var _this3 = this;
+
+                        if (i > 0) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'li',
-                            { key: i },
+                            { key: i, className: i == currPage ? 'active' : null },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'a',
-                                { href: '#', onClick: this.state.onPageChange(i) },
+                                { href: '#', onClick: function onClick(e) {
+                                        return _this3.onPageChange(i, e);
+                                    } },
                                 i
                             )
                         );
-                    }, this)
+                    }, this),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'li',
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '#', onClick: function onClick(e) {
+                                    return _this2.onPageChange(nextPage, e);
+                                } },
+                            'Next'
+                        )
+                    )
                 )
             );
         }
@@ -82785,20 +82818,25 @@ var TypologyPaginated = function (_Component) {
       lastPage: null,
       currPage: null
     };
+    _this.onPageChange.bind(_this);
     return _this;
   }
 
   _createClass(TypologyPaginated, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-
+      this.query(1);
+    }
+  }, {
+    key: 'query',
+    value: function query(page) {
       var self = this;
       var field = this.state.field;
 
       var typology = field.settings.typology;
       var category = field.settings.category;
 
-      axios.get(ASSETS + 'api/contents?size=1&typology_id=' + typology).then(function (response) {
+      axios.get(ASSETS + 'api/contents?size=1&typology_id=' + typology + '&page=' + (page ? page : null)).then(function (response) {
         var items = [];
         if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
           items = response.data.data;
@@ -82852,8 +82890,8 @@ var TypologyPaginated = function (_Component) {
     }
   }, {
     key: 'onPageChange',
-    value: function onPageChange() {
-      console.log('page change...');
+    value: function onPageChange(page) {
+      this.query(page);
     }
   }, {
     key: 'render',
@@ -82873,7 +82911,7 @@ var TypologyPaginated = function (_Component) {
           null,
           this.renderItems()
         ),
-        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange })
+        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
       );
     }
   }]);

@@ -16,39 +16,40 @@ export default class TypologyPaginated extends Component {
             lastPage : null,
             currPage : null
         };
+        this.onPageChange.bind(this);
     }
 
     componentDidMount() {
-        
-      var self = this;
-      const field = this.state.field;
-
-      const typology = field.settings.typology;
-      const category = field.settings.category;
-
-
-      axios.get(ASSETS+'api/contents?size=1&typology_id='+typology)
-        .then(response => {
-          var items = [];
-          if(response.status == 200 
-              && response.data.data !== undefined 
-              && response.data.data.length > 0)
-          {
-                items = response.data.data;
-          }
-
-          self.setState({
-            items : items,
-            lastPage : response.data.meta.last_page,
-            currPage : response.data.meta.current_page,
-          });
-
-        })
-         .catch(function (error) {
-           console.log(error);
-         });
-
+      this.query(1);
     }
+    
+    query(page) {
+        var self = this;
+        const field = this.state.field;
+
+        const typology = field.settings.typology;
+        const category = field.settings.category;
+
+        axios.get(ASSETS+'api/contents?size=1&typology_id='+typology + '&page=' + (page ? page : null))
+          .then(response => {
+              var items = [];
+              if(response.status == 200 
+                  && response.data.data !== undefined 
+                  && response.data.data.length > 0)
+              {
+                  items = response.data.data;
+              }
+
+              self.setState({
+                  items : items,
+                  lastPage : response.data.meta.last_page,
+                  currPage : response.data.meta.current_page,
+              });
+          }).catch(function (error) {
+             console.log(error);
+           });
+    }
+    
 
     renderItems() {
       return this.state.items.map((item,index) =>
@@ -64,8 +65,8 @@ export default class TypologyPaginated extends Component {
       );
     }
 
-    onPageChange() {
-        console.log('page change...');
+    onPageChange(page) {
+        this.query(page);
     }
     
     render() {
@@ -90,7 +91,7 @@ export default class TypologyPaginated extends Component {
                 </ul>
               } 
                 {this.state.lastPage && 
-                <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange} />
+                <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange.bind(this)} />
                 }
             </div>
         );
