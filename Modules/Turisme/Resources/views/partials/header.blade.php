@@ -9,8 +9,8 @@
 				<div class="col-md-3 col-sm-4 col-xs-4 pull-right">
 					<div class="idiomes">
 					<ul>
-				<li class="current"> <a href=""> Català</a></li>
-				<li> <a href=""> Español</a></li>
+				<li class="current"> <a href=""> Español</a></li>
+				<li > <a href=""> Català</a></li>
 				<li> <a href=""> English</a></li>
 			</ul>
 			</div>
