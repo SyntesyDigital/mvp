@@ -25,6 +25,7 @@
       )
     </p>
 
+    <div class="intro">
     @include('turisme::partials.fields.'.$field['fields'][2]['type'],
       [
         "field" => $field['fields'][2],
@@ -32,6 +33,7 @@
         "div" => false
       ]
     )
+    </div>
 
     @include('turisme::partials.fields.'.$field['fields'][3]['type'],
       [

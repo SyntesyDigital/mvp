@@ -1,5 +1,8 @@
+@php
+  $title = isset($field['settings']['title']) && isset($field['settings']['title'][App::getLocale()]) ? $field['settings']['title'][App::getLocale()] : '';
+@endphp
 <div id="{{$field['settings']['htmlId'] or ''}}"  class="widget corpo slider list-items banners {{$field['settings']['htmlClass'] or ''}}">
-  <h3><a href="#">Lista Banners</a></h3>
+  <h3><a href="#">{{$title}}</a></h3>
   <div id="carousel-multiple2" class="carousel carousel-multiple slide" data-ride="carousel-multiple2">
     <div class="carousel-inner" role="listbox">
       @foreach($field['value'] as $index => $widget)

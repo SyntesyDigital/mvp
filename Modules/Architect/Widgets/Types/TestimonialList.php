@@ -22,7 +22,8 @@ class TestimonialList extends Widget implements WidgetInterface
 
     public $settings = [
         'htmlId',
-        'htmlClass'
+        'htmlClass',
+        'title'
     ];
 }
 ?>

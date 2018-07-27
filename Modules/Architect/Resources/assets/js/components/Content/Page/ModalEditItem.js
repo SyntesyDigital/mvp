@@ -27,6 +27,8 @@ import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
+import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
+
 
 import ModalEditListItem from './ModalEditListItem';
 
@@ -636,6 +638,18 @@ class ModalEditItem extends Component {
       <div>
 
         <h6>Configuració</h6>
+
+        <InputTranslatedSettingsField
+          field={this.state.field}
+          name="title"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Títol"
+          inputLabel="Indica el títol"
+          translations={this.props.translations}
+        />
+
+
 
         <InputSettingsField
           field={this.state.field}

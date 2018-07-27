@@ -1,5 +1,9 @@
+@php
+  $title = isset($field['settings']['title']) && isset($field['settings']['title'][App::getLocale()]) ? $field['settings']['title'][App::getLocale()] : '';
+@endphp
+
 <div id="{{$field['settings']['htmlId'] or ''}}"  class="widget corpo slider list-items banners {{$field['settings']['htmlClass'] or ''}}">
-   <h3><a href="#">Rotatorio testimonios </a></h3>
+   <h3><a href="#">{{$title}}</a></h3>
    <div id="testimonial" class="carousel testimonial slide" data-ride="testimonial">
      <div class="carousel-inner" role="listbox">
        @foreach($field['value'] as $index => $widget)

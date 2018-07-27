@@ -15373,6 +15373,10 @@ nav.main-nav ul li.active a {
   padding-left: 53px;
 }
 
+.custom-modal .setup-field.input-translated .form-group {
+  padding-left: 0px;
+}
+
 .custom-modal.no-buttons .modal-header {
   border-bottom: none;
   background-color: #fff;

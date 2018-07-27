@@ -1,4 +1,4 @@
-<div id="{{$field['settings']['htmlId'] or ''}}" class="widget {{$field['settings']['htmlClass'] or ''}}">
+<div id="{{$field['settings']['htmlId'] or ''}}" class="widget image_text_link image {{$field['settings']['htmlClass'] or ''}}">
 
 
     <p class="image">

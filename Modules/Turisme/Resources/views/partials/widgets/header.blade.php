@@ -1,4 +1,4 @@
-<div id="{{$field['settings']['htmlId'] or ''}}" class="grey-intro no-margin {{$field['settings']['htmlClass'] or ''}}">
+<div id="{{$field['settings']['htmlId'] or ''}}" class="grey-intro {{$field['settings']['htmlClass'] or ''}}">
   <div class="container">
       <div class="row">
 	    <div class="claim trade col-md-9 col-sm-10 col-xs-12 centered">

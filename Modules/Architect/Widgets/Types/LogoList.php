@@ -23,7 +23,8 @@ class LogoList extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'cropsAllowed'
+        'cropsAllowed',
+        'title'
     ];
 }
 ?>

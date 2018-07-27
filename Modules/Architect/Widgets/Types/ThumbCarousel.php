@@ -24,6 +24,7 @@ class ThumbCarousel extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'cropsAllowed',
+        'title'
     ];
 }
 ?>

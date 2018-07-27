@@ -160,6 +160,10 @@
     .form-group{
       padding-left: 53px;
     }
+
+    &.input-translated .form-group{
+      padding-left: 0px;
+    }
   }
 
   &.no-buttons {

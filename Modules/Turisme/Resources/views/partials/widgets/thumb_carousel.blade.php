@@ -1,5 +1,8 @@
+@php
+  $title = isset($field['settings']['title']) && isset($field['settings']['title'][App::getLocale()]) ? $field['settings']['title'][App::getLocale()] : '';
+@endphp
 <div  id="{{$field['settings']['htmlId'] or ''}}" class="widget slider promo trade {{$field['settings']['htmlClass'] or ''}}">
-  <h3>Per què Barcelona?</h3>
+  <h3>{{$title}}</h3>
   <div id="carousel2" class="carousel slide" data-ride="carousel">
 
     <div class="carousel-inner" role="listbox">
