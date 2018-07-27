@@ -10,6 +10,7 @@ Homestead.json
 /node_modules
 /public/hot
 /public/storage
+/public/.htpasswd
 /storage/*.key
 /storage/debugbar
 /vendor
