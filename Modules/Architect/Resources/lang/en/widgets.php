@@ -23,5 +23,6 @@ return [
     'TESTIMONIAL' => 'Testimoni',
     'TESTIMONIAL_LIST' => 'Llista testimonis',
     'LOGO' => 'Logo',
-    'LOGO_LIST' => 'Llista Logos'
+    'LOGO_LIST' => 'Llista Logos',
+    'HEADER' => 'Capçalera'
 ];

@@ -156,8 +156,8 @@ class Content extends Model
 
     public function getSettings()
     {
-        if($this->page && $this->page->settings && $this->page->settings != null) {
-          return json_decode($this->page->settings);
+        if($this->settings && $this->settings != null) {
+          return json_decode($this->settings,true);
         }
 
         return null;

@@ -17,12 +17,12 @@ class Row extends Component {
 
     this.colTypes = [
       ['col-xs-12'],
-      ['col-xs-6','col-xs-6'],
-      ['col-xs-4','col-xs-8'],
-      ['col-xs-8','col-xs-4'],
-      ['col-xs-4','col-xs-4','col-xs-4'],
-      ['col-xs-3','col-xs-3','col-xs-3','col-xs-3'],
-      ['col-xs-1','col-xs-10','col-xs-1']
+      ['col-xs-12 col-sm-6','col-xs-12 col-sm-6'],
+      ['col-xs-12 col-sm-4','col-xs-12 col-sm-8'],
+      ['col-xs-12 col-sm-8','col-xs-12  col-sm-4'],
+      ['col-xs-12  col-sm-4','col-xs-12 col-sm-4','col-xs-12 col-sm-4'],
+      ['col-xs-12 col-sm-6 col-md-3','col-xs-12  col-sm-6 col-md-3','col-xs-12  col-sm-6 col-md-3','col-xs-12 col-sm-6 col-md-3'],
+      ['col-xs-12 col-sm-offset-1 col-sm-10 columna central']
     ];
 
     this.deleteRow = this.deleteRow.bind(this);
