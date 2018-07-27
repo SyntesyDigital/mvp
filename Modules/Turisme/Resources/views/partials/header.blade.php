@@ -45,16 +45,17 @@
 					<li  class="col-sm-8">
 						<ul>
 							<li class="col-sm-4">
-								<a href="#">Per què Barcelona?</a>
+								<a href="{{route('content.show',['slug' => 'por-que-barcelona-razon-ejemplo'])}}">Por qué Barcelona?</a>
 							</li>
 							<li class="col-sm-4">
-								<a href="#">Productes turístics</a>
+								<a href="{{route('content.show',['slug' => 'productos-turisticos'])}}">Productos turísticos</a>
 							</li>
 							<li class="col-sm-4">
-								<a href="#">Enllaços d'interès</a>
+								<a href="{{route('content.show',['slug' => 'catalogo-de-productos'])}}">Catálogo de productos</a>
 							</li>
+
 							<li class="col-sm-4">
-								<a href="#">Preguntes freqüents</a>
+								<a href="{{route('content.show',['slug' => 'faq'])}}">FAQ</a>
 							</li>
 						</ul>
 					</li>
