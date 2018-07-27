@@ -101,7 +101,7 @@ class FieldsReactPageBuilderAdapter
                     return [$field->language->iso => Media::find($field->value)];
                 })->toArray();
             break;
-            
+
             case 'date':
                 return date('Y-m-d H:i:s', $contentField->value);
             break;
