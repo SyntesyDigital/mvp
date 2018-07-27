@@ -95,6 +95,7 @@ class PageContainer extends Component {
          //fields: props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
          displayLayoutModal: false,
+         saving : false
      };
 
      this.handleSubmitForm = this.handleSubmitForm.bind(this);
@@ -224,6 +225,10 @@ class PageContainer extends Component {
     } else {
         this.create();
     }
+
+    this.setState({
+      saving : true
+    });
   }
 
   getFormData()
@@ -295,7 +300,12 @@ class PageContainer extends Component {
 
   onSaveSuccess(response)
   {
-      toastr.success('ok page!');
+      toastr.success('Contingut guardat correctament!');
+
+      //si no esta gurdada todavia ponemos que sigue guardandose hasta la recarga
+      this.setState({
+        saving : !this.props.saved ? true : false
+      });
   }
 
 
@@ -321,17 +331,17 @@ class PageContainer extends Component {
             stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
 
-         this.setState({
-             errors : stateErrors
-         });
      }
 
-
+     this.setState({
+       saving : false,
+       errors : stateErrors
+     });
 
      if(response.message) {
          toastr.error(response.message);
      }
- }
+   }
 
      publishToogle(newStatus)
      {
@@ -479,6 +489,8 @@ class PageContainer extends Component {
           onSubmitForm={this.handleSubmitForm}
           onLayoutSave={this.handleLayoutSave}
           onLoadLayout={this.handleLoadLayout}
+          saved={this.props.saved}
+          saving={this.state.saving}
         />
 
         <div className="container rightbar-page content">
@@ -506,6 +518,7 @@ class PageContainer extends Component {
                 parent_id={this.state.parent_id}
                 settings={this.state.settings}
                 onUpdateSettings={this.handleUpdateSettings.bind(this)}
+                saved={this.props.saved}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>

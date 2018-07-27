@@ -15,8 +15,12 @@ return [
     'slug' => 'Slug',
     'url' => 'URL',
     'file' => 'Arxiu',
+    'translated_file' => 'Arxiu traduit',
 
     'title' => 'Title',
     'description' => 'Descripció',
-    'subtitle' => 'Subtítol'
+    'subtitle' => 'Subtítol',
+    'message' => 'Missatge',
+    'author' => 'Autor',
+    'company' => 'Empresa'
 ];

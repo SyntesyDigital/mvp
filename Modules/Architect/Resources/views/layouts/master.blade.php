@@ -9,6 +9,7 @@
         <title>{{env('APP_NAME')}}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow">
 
         <!-- Global style -->
         <link rel="stylesheet" media="all" href="{{ asset('modules/architect/css/app.css')}}" />

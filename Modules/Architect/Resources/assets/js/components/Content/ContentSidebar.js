@@ -125,23 +125,30 @@ class ContentSidebar extends Component {
 
     return (
       <div className="sidebar">
-        {this.props.status == 1 &&
-          <div className="publish-form sidebar-item">
-              <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
-              <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
-              <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
+        { this.props.saved &&
+          <div className="publish-group">
+            { this.props.status == 1 &&
+              <div className="publish-form sidebar-item">
+                  <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
+                  <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
+                  <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
+              </div>
+            }
+
+            {this.props.status == 0 &&
+              <div className="publish-form sidebar-item">
+                  <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
+                  <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
+                  <p className="field-help"></p>
+              </div>
+            }
+
+            <hr/>
+
           </div>
         }
 
-        {this.props.status == 0 &&
-          <div className="publish-form sidebar-item">
-              <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
-              <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
-              <p className="field-help"></p>
-          </div>
-        }
 
-        <hr/>
 
         {this.props.template != null &&
           <div>

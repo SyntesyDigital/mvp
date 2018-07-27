@@ -53,12 +53,16 @@ class ContentContainer extends Component {
          fields: props.fields ? props.fields : props.typology.fields,
          created_at: props.content ? moment(props.content.created_at).format('DD/MM/YYYY') : null,
          parent_id : this.props.content ? this.props.content.parent_id : null,
+         settings : props.settings ? props.settings : this.exploteToObject(CONTENT_SETTINGS),
+         saving : false,
+
          //modal states
          displayMediaModal: false,
          sourceField: null,
 
          displayContentModal: false,
-         contentSourceField: null
+         contentSourceField: null,
+         sourceLanguage : null
      };
 
      console.log('CONTENT =>', props.content);
@@ -80,17 +84,30 @@ class ContentContainer extends Component {
      this.handleContentCancel = this.handleContentCancel.bind(this);
  }
 
+ exploteToObject(fields) {
 
- 
+   if(fields == null){
+     return null;
+   }
+
+   var result = {};
+
+   for(var i=0;i<fields.length;i++){
+     result[fields[i]] = null;
+   }
+   return result;
+ }
+
 
   /******** Images  ********/
 
-  handleImageSelect(identifier) {
+  handleImageSelect(identifier,language) {
       console.log('handleImageSelect => ', identifier);
 
     this.setState({
       displayMediaModal : true,
-      sourceField : identifier
+      sourceField : identifier,
+      sourceLanguage : language !== undefined ? language : null
     });
 
   }
@@ -98,7 +115,8 @@ class ContentContainer extends Component {
   handleImageCancel(){
     this.setState({
       displayMediaModal : false,
-      sourceField : null
+      sourceField : null,
+      sourceLanguage : null
     });
   }
 
@@ -119,12 +137,23 @@ class ContentContainer extends Component {
           case FIELDS.IMAGE.type:
               fields[field.identifier].value = media;
               break;
+
+          case FIELDS.TRANSLATED_FILE.type:
+
+              if(fields[field.identifier].value === undefined || fields[field.identifier].value == null ){
+                fields[field.identifier].value = {};
+              }
+
+              fields[field.identifier].value[this.state.sourceLanguage] = media;
+              break;
+
       }
 
     this.setState({
       fields : fields,
       displayMediaModal : false,
-      sourceField : null
+      sourceField : null,
+      sourceLanguage : null
     });
 
   }
@@ -195,6 +224,10 @@ class ContentContainer extends Component {
     e.preventDefault();
 
     this.state.content ? this.update() : this.create();
+
+    this.setState({
+      saving : true
+    });
   }
 
   getFormData()
@@ -209,8 +242,15 @@ class ContentContainer extends Component {
           tags : this.state.tags,
           fields : this.state.fields,
           author_id : this.state.author,
-          translations : this.state.translations
+          translations : this.state.translations,
+          settings : this.state.settings,
       };
+  }
+
+  handleUpdateSettings(settings){
+    this.setState({
+      settings : settings
+    });
   }
 
   create()
@@ -263,9 +303,10 @@ class ContentContainer extends Component {
   {
       if(response.content) {
           this.setState({
-              content : response.content
+              content : response.content,
+              saving : !this.props.saved ? true : false
           });
-          toastr.success('ok');
+          toastr.success('Contingut guardar correctament');
       }
   }
 
@@ -291,12 +332,12 @@ class ContentContainer extends Component {
          if(errors['author_id'] !== undefined) {
             stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
-
-         this.setState({
-             errors : stateErrors
-         });
      }
 
+     this.setState({
+       saving : false,
+       errors : stateErrors
+     });
 
 
      if(response.message) {
@@ -439,6 +480,8 @@ class ContentContainer extends Component {
           icon={this.state.typology.icon}
           name={this.state.typology.name}
           onSubmitForm={this.handleSubmitForm}
+          saved={this.props.saved}
+          saving={this.state.saving}
         />
 
         <div className="container rightbar-page content">
@@ -464,6 +507,9 @@ class ContentContainer extends Component {
                 onTranslationChange={this.handleTranslationChange}
                 onTagAdded={this.handleTagAdded}
                 onRemoveTag={this.handleRemoveTag}
+                settings={this.state.settings}
+                onUpdateSettings={this.handleUpdateSettings.bind(this)}
+                saved={this.props.saved}
             />
 
             <DragDropContextProvider backend={HTML5Backend}>

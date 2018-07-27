@@ -19,7 +19,7 @@ export default class ContentsByCategories extends Component {
     }
 
     componentDidMount() {
-      this.query(1);
+      //this.query(1);
     }
     
     query(page) {
@@ -27,25 +27,29 @@ export default class ContentsByCategories extends Component {
         const field = this.state.field;
         
         const categoryId = 3;
+        
+        console.log('QUERYING....');
 
-        axios.get(ASSETS+'api/categories/tree?loads=contents&category_id=' + categoryId + '&page=' + (page ? page : null))
-          .then(response => {
-              var items = [];
-              if(response.status == 200 
-                  && response.data.data !== undefined 
-                  && response.data.data.length > 0)
-              {
-                  items = response.data.data;
-              }
-
-              self.setState({
-                  items : items,
-                  lastPage : response.data.meta.last_page,
-                  currPage : response.data.meta.current_page,
-              });
-          }).catch(function (error) {
-             console.log(error);
-           });
+        // axios.get(ASSETS + 'api/categories/tree?loads=contents&category_id=' + categoryId + '&page=' + (page ? page : null))
+        //   .then(response => {
+        // 
+        //       if(response.status == 200 
+        //           && response.data.data !== undefined 
+        //           && response.data.data.length > 0)
+        //       {
+        //           console.log('RESPONSE =====>', response.data);
+        // 
+        //           self.setState({
+        //               items : response.data.data,
+        //               lastPage : response.data.meta.last_page,
+        //               currPage : response.data.meta.current_page,
+        //           });
+        //       }
+        // 
+        // 
+        //   }).catch(function (error) {
+        //      console.log(error);
+        //    });
     }
     
 
@@ -68,26 +72,11 @@ export default class ContentsByCategories extends Component {
 
         return (
             <div>
-              {this.state.items == null &&
-                <p>
-                  {/*Carregant dades...*/}
-                </p>
-              }
-
               {this.state.items != null && this.state.items.length == 0 &&
                 <p>
                   {Lang.get('widgets.last_typology.empty')}
                 </p>
               }
-
-              {this.state.items != null && this.state.items.length > 0 &&
-                <ul>
-                  {this.renderItems()}
-                </ul>
-              } 
-                {this.state.lastPage && 
-                <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange.bind(this)} />
-                }
             </div>
         );
     }

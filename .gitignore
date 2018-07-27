@@ -8,7 +8,8 @@ Homestead.json
 /rec
 /node_modules
 /public/hot
-/public/storage/
+/public/storage
+/public/.htpasswd
 /storage/debugbar
 /storage/framework
 /storage/logs

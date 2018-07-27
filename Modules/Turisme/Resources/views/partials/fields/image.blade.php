@@ -1,6 +1,9 @@
 @php
   $crop = "original";
 
+  $settings = isset($settings) ? $settings : $field['settings'];
+  $settings = json_decode(json_encode($settings), true);
+
   if(isset($settings) && isset($settings['cropsAllowed']) && $settings['cropsAllowed'] != null){
     $crop = $settings['cropsAllowed'];
   }

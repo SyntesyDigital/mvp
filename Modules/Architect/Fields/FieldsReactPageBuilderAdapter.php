@@ -96,6 +96,12 @@ class FieldsReactPageBuilderAdapter
                 }
             break;
 
+            case 'translated_file':
+                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
+                    return [$field->language->iso => Media::find($field->value)];
+                })->toArray();
+            break;
+
             case 'date':
                 return date('Y-m-d H:i:s', $contentField->value);
             break;

@@ -117,6 +117,12 @@ class PageBuilderAdapter
                 }
             break;
 
+            case 'translated_file':
+                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
+                    return [$field->language->iso => Media::find($field->value)];
+                })->toArray();
+            break;
+
             case 'localization':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){
@@ -161,6 +167,7 @@ class PageBuilderAdapter
                 return $values;
             break;
 
+            case 'url':
             case 'link':
                 $field = ContentField::where('name', $fieldName)->first();
                 $values = null;

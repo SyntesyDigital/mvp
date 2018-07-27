@@ -6,6 +6,7 @@ import SlugField from './ContentFields/SlugField';
 import RichTextField from './ContentFields/RichTextField';
 import ImageField from './ContentFields/ImageField';
 import FileField from './ContentFields/FileField';
+import TranslatedFileField from './ContentFields/TranslatedFileField';
 import DateField from './ContentFields/DateField';
 import ImagesField from './ContentFields/ImagesField';
 import ListField from './ContentFields/ListField';
@@ -112,6 +113,21 @@ class ContentFields extends Component {
                 />
                 );
             break;
+
+            case FIELDS.TRANSLATED_FILE.type:
+                fields.push(
+                <TranslatedFileField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onFileSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+
+
 
             case FIELDS.DATE.type:
                 fields.push(

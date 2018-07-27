@@ -19,5 +19,9 @@ return [
     'IMAGE_TEXT_FILE' => 'Imatge Text Arxiu',
     'HIGHLIGHTS' => 'Llista highlights',
     'VIDEO' => 'Video',
-    'BUTTON' => 'Botó'
+    'BUTTON' => 'Botó',
+    'TESTIMONIAL' => 'Testimoni',
+    'TESTIMONIAL_LIST' => 'Llista testimonis',
+    'LOGO' => 'Logo',
+    'LOGO_LIST' => 'Llista Logos'
 ];
