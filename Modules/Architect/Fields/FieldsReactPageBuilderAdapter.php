@@ -102,6 +102,10 @@ class FieldsReactPageBuilderAdapter
                 })->toArray();
             break;
 
+            case 'date':
+                return date('Y-m-d H:i:s', $contentField->value);
+            break;
+
             case 'localization':
                 $contentField = ContentField::where('name', $fieldName)->first();
                 if($contentField != null){
@@ -164,35 +168,39 @@ class FieldsReactPageBuilderAdapter
             break;
 
             case 'widget':
-                $widget = (new $field['class']);
-                $fields = [];
-                foreach($widget->fields as $_field) {
-                    if(!isset($_field['value'])) {
-                        $_field['value'] = [];
-                    }
-
-                    $fieldName = $field['fieldname'] . "_" . $_field['identifier'];
-                    $_field["value"] = $this->buildPageField($_field, $fieldName);
-                    $fields[] = $_field;
-                }
-                return $fields;
-            break;
-
-
-            case 'widget-list':
-                foreach($field["value"] as $k => $w) {
-                    $widget = (new $w['class']);
+                if(class_exists($field['class'])) {
+                    $widget = (new $field['class']);
                     $fields = [];
                     foreach($widget->fields as $_field) {
                         if(!isset($_field['value'])) {
                             $_field['value'] = [];
                         }
 
-                        $fieldName = $w['fieldname'] . "_" . $_field['identifier'];
+                        $fieldName = $field['fieldname'] . "_" . $_field['identifier'];
                         $_field["value"] = $this->buildPageField($_field, $fieldName);
                         $fields[] = $_field;
                     }
-                    $field["value"][$k]["fields"] = $fields;
+                    return $fields;
+                }
+            break;
+
+
+            case 'widget-list':
+                foreach($field["value"] as $k => $w) {
+                    if(class_exists($w['class'])) {
+                        $widget = (new $w['class']);
+                        $fields = [];
+                        foreach($widget->fields as $_field) {
+                            if(!isset($_field['value'])) {
+                                $_field['value'] = [];
+                            }
+
+                            $fieldName = $w['fieldname'] . "_" . $_field['identifier'];
+                            $_field["value"] = $this->buildPageField($_field, $fieldName);
+                            $fields[] = $_field;
+                        }
+                        $field["value"][$k]["fields"] = $fields;
+                    }
                 }
                 return $field["value"];
             break;
