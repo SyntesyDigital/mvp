@@ -82790,7 +82790,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(810);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82805,114 +82805,118 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var PDFTypologyPaginated = function (_Component) {
-    _inherits(PDFTypologyPaginated, _Component);
+  _inherits(PDFTypologyPaginated, _Component);
 
-    function PDFTypologyPaginated(props) {
-        _classCallCheck(this, PDFTypologyPaginated);
+  function PDFTypologyPaginated(props) {
+    _classCallCheck(this, PDFTypologyPaginated);
 
-        var _this = _possibleConstructorReturn(this, (PDFTypologyPaginated.__proto__ || Object.getPrototypeOf(PDFTypologyPaginated)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (PDFTypologyPaginated.__proto__ || Object.getPrototypeOf(PDFTypologyPaginated)).call(this, props));
 
-        _this.state = {
-            field: props.field ? JSON.parse(atob(props.field)) : '',
-            items: null,
-            lastPage: null,
-            currPage: null
-        };
-        _this.onPageChange.bind(_this);
-        return _this;
+    _this.state = {
+      field: props.field ? JSON.parse(atob(props.field)) : '',
+      items: null
+    };
+    return _this;
+  }
+
+  _createClass(PDFTypologyPaginated, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
+      var self = this;
+      var field = this.state.field;
+
+      var typology = field.settings.typology;
+      var category = field.settings.category;
+
+      var categoryQuery = category != null ? "&category_id=" + category : '';
+
+      axios.get(ASSETS + 'api/contents?typology_id=' + typology + categoryQuery).then(function (response) {
+        var items = [];
+
+        if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+          items = response.data.data;
+        }
+
+        self.setState({
+          items: items
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
+  }, {
+    key: 'renderItems',
+    value: function renderItems() {
+      return this.state.items.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          { key: index },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'image' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
+              field: item.fields.imatge
+            })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            { className: 'text' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'data' },
+              '30-11-2016'
+            ),
+            ' | ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'span',
+              { className: 'categoria' },
+              'Categoria '
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '' },
+            item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : ''
+          )
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
 
-    _createClass(PDFTypologyPaginated, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.query(1);
-        }
-    }, {
-        key: 'query',
-        value: function query(page) {
-            var self = this;
-            var field = this.state.field;
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+        this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          Lang.get('widgets.last_typology.empty')
+        ),
+        this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          this.renderItems()
+        )
+      );
+    }
+  }]);
 
-            var typology = field.settings.typology;
-            var category = field.settings.category;
-
-            axios.get(ASSETS + 'api/contents?size=2&typology_id=' + typology + '&page=' + (page ? page : null)).then(function (response) {
-                var items = [];
-                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
-                    items = response.data.data;
-                }
-
-                self.setState({
-                    items: items,
-                    lastPage: response.data.meta.last_page,
-                    currPage: response.data.meta.current_page
-                });
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    }, {
-        key: 'renderItems',
-        value: function renderItems() {
-            return this.state.items.map(function (item, index) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'li',
-                    { key: index },
-                    item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '',
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                    item.fields.publicacio.values,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                    item.fields.publicacio.autor !== undefined ? item.fields.publicacio.autor.values[LOCALE] : null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'a',
-                        { href: '#' },
-                        Lang.get('widgets.typology_paginated.download_pdf')
-                    )
-                );
-            });
-        }
-    }, {
-        key: 'onPageChange',
-        value: function onPageChange(page) {
-            this.query(page);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                null,
-                this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
-                this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'p',
-                    null,
-                    Lang.get('widgets.last_typology.empty')
-                ),
-                this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'ul',
-                    null,
-                    this.renderItems()
-                ),
-                this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
-            );
-        }
-    }]);
-
-    return PDFTypologyPaginated;
+  return PDFTypologyPaginated;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (PDFTypologyPaginated);
 
 
 if (document.getElementById('pdf-typology-paginated')) {
-    var element = document.getElementById('pdf-typology-paginated');
-    var field = element.getAttribute('field');
+  var element = document.getElementById('pdf-typology-paginated');
+  var field = element.getAttribute('field');
 
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PDFTypologyPaginated, {
-        field: field
-    }), element);
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PDFTypologyPaginated, {
+    field: field
+  }), element);
 }
 
 /***/ }),
@@ -82960,7 +82964,7 @@ var ContentsByCategories = function (_Component) {
     _createClass(ContentsByCategories, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.query(1);
+            //this.query(1);
         }
     }, {
         key: 'query',
@@ -82970,20 +82974,28 @@ var ContentsByCategories = function (_Component) {
 
             var categoryId = 3;
 
-            axios.get(ASSETS + 'api/categories/tree?loads=contents&category_id=' + categoryId + '&page=' + (page ? page : null)).then(function (response) {
-                var items = [];
-                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
-                    items = response.data.data;
-                }
+            console.log('QUERYING....');
 
-                self.setState({
-                    items: items,
-                    lastPage: response.data.meta.last_page,
-                    currPage: response.data.meta.current_page
-                });
-            }).catch(function (error) {
-                console.log(error);
-            });
+            // axios.get(ASSETS + 'api/categories/tree?loads=contents&category_id=' + categoryId + '&page=' + (page ? page : null))
+            //   .then(response => {
+            // 
+            //       if(response.status == 200 
+            //           && response.data.data !== undefined 
+            //           && response.data.data.length > 0)
+            //       {
+            //           console.log('RESPONSE =====>', response.data);
+            // 
+            //           self.setState({
+            //               items : response.data.data,
+            //               lastPage : response.data.meta.last_page,
+            //               currPage : response.data.meta.current_page,
+            //           });
+            //       }
+            // 
+            // 
+            //   }).catch(function (error) {
+            //      console.log(error);
+            //    });
         }
     }, {
         key: 'renderItems',
@@ -83018,18 +83030,11 @@ var ContentsByCategories = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
                 this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'p',
                     null,
                     Lang.get('widgets.last_typology.empty')
-                ),
-                this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'ul',
-                    null,
-                    this.renderItems()
-                ),
-                this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], { currPage: this.state.currPage, lastPage: this.state.lastPage, onChange: this.onPageChange.bind(this) })
+                )
             );
         }
     }]);

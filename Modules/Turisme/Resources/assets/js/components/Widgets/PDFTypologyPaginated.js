@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Paginator from './../Common/Paginator';
+import ImageField from './../Fields/ImageField';
 
 export default class PDFTypologyPaginated extends Component {
 
@@ -11,60 +11,54 @@ export default class PDFTypologyPaginated extends Component {
 
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
-            items : null,
-            lastPage : null,
-            currPage : null
+            items : null
         };
-        this.onPageChange.bind(this);
     }
 
     componentDidMount() {
-      this.query(1);
+
+      var self = this;
+      const field = this.state.field;
+
+      const typology = field.settings.typology;
+      const category = field.settings.category;
+
+      const categoryQuery = category != null ? "&category_id="+category : '';
+
+      axios.get(ASSETS+'api/contents?typology_id='+typology+categoryQuery)
+        .then(response => {
+          var items = [];
+
+          if(response.status == 200 && response.data.data !== undefined
+            && response.data.data.length > 0){
+                items = response.data.data;
+          }
+
+          self.setState({
+            items : items
+          });
+
+        })
+         .catch(function (error) {
+           console.log(error);
+         });
+
     }
-    
-    query(page) {
-        var self = this;
-        const field = this.state.field;
-
-        const typology = field.settings.typology;
-        const category = field.settings.category;
-
-        axios.get(ASSETS+'api/contents?size=2&typology_id='+typology + '&page=' + (page ? page : null))
-          .then(response => {
-              var items = [];
-              if(response.status == 200 
-                  && response.data.data !== undefined 
-                  && response.data.data.length > 0)
-              {
-                  items = response.data.data;
-              }
-
-              self.setState({
-                  items : items,
-                  lastPage : response.data.meta.last_page,
-                  currPage : response.data.meta.current_page,
-              });
-          }).catch(function (error) {
-             console.log(error);
-           });
-    }
-    
 
     renderItems() {
       return this.state.items.map((item,index) =>
         <li key={index}>
-            {item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }<br />
-            {item.fields.publicacio.values}<br />
-            {item.fields.publicacio.autor !== undefined  ? item.fields.publicacio.autor.values[LOCALE] : null}<br />
-            <a href="#">{Lang.get('widgets.typology_paginated.download_pdf')}</a>
+          <p className="image">
+            <ImageField
+              field={item.fields.imatge}
+            />
+          </p>
+          <p className="text"><span className="data">30-11-2016</span> | <span className="categoria">Categoria </span></p>
+          <a href="">{item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }</a>
          </li>
       );
     }
 
-    onPageChange(page) {
-        this.query(page);
-    }
-    
     render() {
 
         return (
@@ -85,10 +79,8 @@ export default class PDFTypologyPaginated extends Component {
                 <ul>
                   {this.renderItems()}
                 </ul>
-              } 
-                {this.state.lastPage && 
-                <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange.bind(this)} />
-                }
+              }
+
             </div>
         );
     }
