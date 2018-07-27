@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 540);
+/******/ 	return __webpack_require__(__webpack_require__.s = 539);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -330,7 +330,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(5);
 var transformData = __webpack_require__(105);
 var isCancel = __webpack_require__(51);
-var defaults = __webpack_require__(31);
+var defaults = __webpack_require__(32);
 var isAbsoluteURL = __webpack_require__(106);
 var combineURLs = __webpack_require__(107);
 
@@ -613,7 +613,7 @@ var emptyObject = __webpack_require__(38);
 var invariant = __webpack_require__(17);
 var warning = __webpack_require__(18);
 var emptyFunction = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(32);
+var checkPropTypes = __webpack_require__(33);
 
 // TODO: this is special because it gets imported during build.
 
@@ -1985,7 +1985,7 @@ var shallowEqual = __webpack_require__(115);
 var containsNode = __webpack_require__(116);
 var focusNode = __webpack_require__(119);
 var emptyObject = __webpack_require__(38);
-var checkPropTypes = __webpack_require__(32);
+var checkPropTypes = __webpack_require__(33);
 var hyphenateStyleName = __webpack_require__(88);
 var camelizeStyleName = __webpack_require__(89);
 
@@ -35214,6 +35214,13 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /***/ 31:
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(92);
+
+/***/ }),
+
+/***/ 32:
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -35316,7 +35323,7 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35383,7 +35390,7 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ 352:
+/***/ 353:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37830,13 +37837,6 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
-/***/ 37:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(92);
-
-/***/ }),
-
 /***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38445,18 +38445,18 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 540:
+/***/ 539:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(541);
-__webpack_require__(545);
-__webpack_require__(547);
-module.exports = __webpack_require__(548);
+__webpack_require__(540);
+__webpack_require__(544);
+__webpack_require__(546);
+module.exports = __webpack_require__(547);
 
 
 /***/ }),
 
-/***/ 541:
+/***/ 540:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -38466,7 +38466,7 @@ module.exports = __webpack_require__(548);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(542);
+__webpack_require__(541);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -38474,16 +38474,16 @@ __webpack_require__(542);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(544);
+__webpack_require__(543);
 
 /***/ }),
 
-/***/ 542:
+/***/ 541:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(177);
-window.Popper = __webpack_require__(352).default;
+window.Popper = __webpack_require__(353).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -38494,7 +38494,7 @@ window.Popper = __webpack_require__(352).default;
 try {
   window.$ = window.jQuery = __webpack_require__(86);
 
-  __webpack_require__(543);
+  __webpack_require__(542);
 } catch (e) {}
 
 /**
@@ -38503,7 +38503,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(37);
+window.axios = __webpack_require__(31);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -38540,7 +38540,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 543:
+/***/ 542:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -38549,7 +38549,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(86), __webpack_require__(352)) :
+	 true ? factory(exports, __webpack_require__(86), __webpack_require__(353)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -42441,7 +42441,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 544:
+/***/ 543:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42514,7 +42514,14 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 545:
+/***/ 544:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 546:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -42522,13 +42529,6 @@ if (document.getElementById('example')) {
 /***/ }),
 
 /***/ 547:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 548:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -53286,7 +53286,7 @@ module.exports = emptyFunction;
 var utils = __webpack_require__(5);
 var bind = __webpack_require__(48);
 var Axios = __webpack_require__(94);
-var defaults = __webpack_require__(31);
+var defaults = __webpack_require__(32);
 
 /**
  * Create an instance of Axios
@@ -53371,7 +53371,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(31);
+var defaults = __webpack_require__(32);
 var utils = __webpack_require__(5);
 var InterceptorManager = __webpack_require__(103);
 var dispatchRequest = __webpack_require__(104);

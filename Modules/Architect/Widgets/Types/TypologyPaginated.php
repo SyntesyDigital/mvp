@@ -9,11 +9,11 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
-class PdfTypologyPaginated extends Widget implements WidgetInterface
+class TypologyPaginated extends Widget implements WidgetInterface
 {
     public $type = 'widget';
     public $icon = 'fa-file-o';
-    public $name = 'PDF_TYPOLOGY_PAGINATED';
+    public $name = 'TYPOLOGY_PAGINATED';
     public $component = 'CommonWidget';
 
     public $fields = [

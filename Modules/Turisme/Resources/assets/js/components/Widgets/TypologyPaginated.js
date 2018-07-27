@@ -2,48 +2,46 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Paginator from './../Common/Paginator';
+import axios from 'axios';
 
-export default class PDFTypologyPaginated extends Component {
+
+export default class TypologyPaginated extends Component {
 
     constructor(props)
     {
         super(props);
-
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
-            items : null,
+            items : [],
             lastPage : null,
-            currPage : null
+            currPage : null,
+            loaded: false,
         };
         this.onPageChange.bind(this);
     }
-
-    componentDidMount() {
-      this.query(1);
-    }
     
-    query(page) {
-        var self = this;
+    componentDidMount() {
+        this.query(1);   
+    }
+
+     query(page) {
         const field = this.state.field;
-
-        const typology = field.settings.typology;
-        const category = field.settings.category;
-
-        axios.get(ASSETS+'api/contents?size=2&typology_id='+typology + '&page=' + (page ? page : null))
-          .then(response => {
-              var items = [];
+        var self = this;
+     
+        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + '&page=' + (page ? page : null))
+          .then(function (response) {
               if(response.status == 200 
                   && response.data.data !== undefined 
                   && response.data.data.length > 0)
               {
-                  items = response.data.data;
+                  self.setState({
+                      items : response.data.data,
+                      lastPage : response.data.meta.last_page,
+                      currPage : response.data.meta.current_page,
+                  });
               }
-
-              self.setState({
-                  items : items,
-                  lastPage : response.data.meta.last_page,
-                  currPage : response.data.meta.current_page,
-              });
+        
+        
           }).catch(function (error) {
              console.log(error);
            });
@@ -66,7 +64,6 @@ export default class PDFTypologyPaginated extends Component {
     }
     
     render() {
-
         return (
             <div>
               {this.state.items == null &&
@@ -95,11 +92,11 @@ export default class PDFTypologyPaginated extends Component {
 }
 
 
-if (document.getElementById('pdf-typology-paginated')) {
-    var element = document.getElementById('pdf-typology-paginated');
+if (document.getElementById('typology-paginated')) {
+    var element = document.getElementById('typology-paginated');
     var field = element.getAttribute('field');
 
-    ReactDOM.render(<PDFTypologyPaginated
+    ReactDOM.render(<TypologyPaginated
         field={field}
       />, element);
 }
