@@ -17,4 +17,5 @@ require('./components/Fields/MapField');
 require('./components/Widgets/TypologyLast');
 require('./components/Widgets/TypologyPaginated');
 require('./components/Widgets/ContentsByCategories');
+require('./components/Widgets/TypologyByCategory');
 require('./components/Common/Paginator');

@@ -8,40 +8,53 @@ class ImageField extends Component {
     {
         super(props);
 
-        console.log("ImageField :: props => ",props);
-
-        var crop = "original";
-        if(props.field.settings != null && props.field.settings.cropsAllowed !== undefined
-          && props.field.settings.cropsAllowed != null ){
-
-              crop = props.field.settings.cropsAllowed;
-        }
-
-        var url = null;
-        var alt = "";
-        var title = "";
-        if(props.field.values !== undefined && props.field.values != null){
-          if(props.field.values.urls[crop] !== undefined){
-            url = props.field.values.urls[crop];
-          }
-          //alt = props.field.values.metadata.fields.alt[LOCALE].value;
-          //title = props.field.values.metadata.fields.title[LOCALE].value;
-        }
-
         this.state = {
           id : null,
           className : null,
-          url : url,
-          alt : alt,
-          title : title
+          url : "",
+          alt : "",
+          title : ""
         };
-
-        console.log("ImageField :: state => ",this.state);
 
     }
 
     componentDidMount() {
+      this.processProps(this.props);
+    }
 
+    processProps(props) {
+
+      console.log("ImageField :: props => ",props);
+
+      var crop = "original";
+      if(props.field.settings != null && props.field.settings.cropsAllowed !== undefined
+        && props.field.settings.cropsAllowed != null ){
+
+            crop = props.field.settings.cropsAllowed;
+      }
+
+      var url = null;
+      var alt = "";
+      var title = "";
+      if(props.field.values !== undefined && props.field.values != null){
+        if(props.field.values.urls[crop] !== undefined){
+          url = props.field.values.urls[crop];
+        }
+        //alt = props.field.values.metadata.fields.alt[LOCALE].value;
+        //title = props.field.values.metadata.fields.title[LOCALE].value;
+      }
+
+      this.setState({
+        url : url,
+        alt : alt,
+        title : title
+      });
+    }
+
+    componentWillReceiveProps(nextProps) {
+      console.log("ImageField :: componentWillRecieveProps :: props => ",nextProps);
+
+      this.processProps(nextProps);
     }
 
     render() {

@@ -9939,3 +9939,16 @@ article.page-builder{
   z-index: 400;
 }
 
+.paginator ul li {
+  display: inline-block;
+  padding: 0 8px;
+}
+
+.paginator ul li.active a {
+  color: #c54345;
+}
+
+.paginator ul li a {
+  margin-left: 0px !important;
+}
+

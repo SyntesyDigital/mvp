@@ -116,6 +116,20 @@ trait HasFields
                 return json_decode($field->value, true);
             break;
 
+            case 'translated_file':
+                //$values = [];
+                $field = !is_array($field) ? [$field] : $field;
+                return collect($field)->mapWithKeys(function($f) use ($languages) {
+                    $iso = null;
+                    foreach($languages as $l) {
+                        if($f->language_id == $l->id) {
+                            $iso = $l->iso;
+                        }
+                    }
+                    return [$iso => Media::find($f->value)->toArray()];
+                })->toArray();
+            break;
+
             case 'file':
             case 'image':
                 return Media::find($field->value)->toArray();

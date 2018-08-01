@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ImageField from './../Fields/ImageField';
+import ListItem from './../Common/ListItem';
 
 export default class TypologyLast extends Component {
 
@@ -46,19 +46,23 @@ export default class TypologyLast extends Component {
     }
 
     renderItems() {
-      return this.state.items.map((item,index) =>
-        <li key={index}>
-          <p className="image">
-            {item.fields.imatge &&
-            <ImageField
-              field={item.fields.imatge}
-            />
-            }
-          </p>
-          <p className="text"><span className="data">30-11-2016</span> | <span className="categoria">Categoria </span></p>
-          <a href="">{item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }</a>
-         </li>
-      );
+
+      var result = [];
+
+      const {items} = this.state;
+
+      for(var key in items){
+        console.log("TypologyLast => ",items[key]);
+
+        result.push(
+          <ListItem
+            key={key}
+            field={items[key]}
+          />
+        );
+      }
+
+      return result;
     }
 
     render() {

@@ -8,21 +8,23 @@ class Paginator extends Component {
         super(props);
         this.onPageChange.bind(this);
     }
-    
+
     onPageChange(page, e) {
         e.preventDefault();
         this.props.onChange(page);
     }
 
     render() {
-        
+
         const prevPage = this.props.currPage > 2 ? (this.props.currPage - 1) : 1;
         const nextPage = this.props.currPage < this.props.lastPage ? (this.props.currPage + 1) : this.props.lastPage;
         const currPage = this.props.currPage;
         const lastPage = this.props.lastPage;
-        
+
+        console.log("Paginator :: currPage => ",currPage);
+
         return (
-            <div>
+            <div className="paginator">
                 <ul>
                 <li><a href="#" onClick={(e) => this.onPageChange(prevPage, e)}>Prev</a></li>
                 {Array.apply(null, Array(this.props.lastPage + 1)).map(function(item, i){
