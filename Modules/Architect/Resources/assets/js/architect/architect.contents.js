@@ -20,7 +20,7 @@ architect.contents = {
         var table = _this._settings.table.DataTable({
     		processing: true,
             serverSide: true,
-    	    pageLength: 20,
+    	    pageLength: 30,
               language: {
                   url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
               },

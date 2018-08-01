@@ -49,9 +49,11 @@ export default class TypologyLast extends Component {
       return this.state.items.map((item,index) =>
         <li key={index}>
           <p className="image">
+            {item.fields.imatge &&
             <ImageField
               field={item.fields.imatge}
             />
+            }
           </p>
           <p className="text"><span className="data">30-11-2016</span> | <span className="categoria">Categoria </span></p>
           <a href="">{item.fields.title.values[LOCALE] !== undefined ? item.fields.title.values[LOCALE] : '' }</a>
