@@ -129,19 +129,11 @@
 					</li>
 				</ul>
 			</li>
-					<li class="">
+			<li class="">
 				<a href="#">Blog</a>
-
 			</li>
-					 <li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Accés de membres <span class="caret"></span></a>
-					<form class="dropdown-menu">
-				<p class="col-12"><label>Usuari</label><input placeholder="Usuari" type="text"></p>
-				<p class="col-12"><label>Mot clau</label><input placeholder="Mot clau" type="password"></p>
-				<p class="col-12"><input type="button" value="enviar"></p>
-				 </form>
-					</li>
-		</ul>
+
+			</ul>
 
 				<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
 

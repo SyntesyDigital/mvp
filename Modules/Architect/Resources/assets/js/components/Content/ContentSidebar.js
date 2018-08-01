@@ -4,6 +4,7 @@ import Select from 'react-select';
 
 import TagManager from "./Tags/TagManager";
 import InputSettingsField from './../Typology/Settings/InputSettingsField';
+import SelectorSettingsField from './../Typology/Settings/SelectorSettingsField';
 
 import moment from 'moment';
 
@@ -106,14 +107,44 @@ class ContentSidebar extends Component {
     };
 
     return (
-      <InputSettingsField
-        field={field}
-        name="htmlClass"
-        source="settings"
-        onFieldChange={this.handleFieldSettingsChange.bind(this)}
-        label="Clase HTML"
-        inputLabel="Indica la clase CSS"
-      />
+      <div>
+        <div className="form-group bmd-form-group sidebar-item">
+          <SelectorSettingsField
+            field={field}
+            name="pageType"
+            source="settings"
+            onFieldChange={this.handleFieldSettingsChange.bind(this)}
+            label="Tipus de pàgina"
+            options={[
+              {
+                value : 'single',
+                name : 'Simple'
+              },
+              {
+                value : 'landing',
+                name : 'Landing'
+              },
+              {
+                value : 'home',
+                name : 'Home'
+              }
+            ]}
+          />
+        </div>
+        <div className="form-group bmd-form-group sidebar-item">
+          <InputSettingsField
+            field={field}
+            name="htmlClass"
+            source="settings"
+            onFieldChange={this.handleFieldSettingsChange.bind(this)}
+            label="Clase HTML"
+            inputLabel="Indica la clase CSS"
+          />
+        </div>
+
+      </div>
+
+
     )
   }
 
@@ -241,10 +272,12 @@ class ContentSidebar extends Component {
           <div>
             <hr/>
 
-            <div className="form-group bmd-form-group sidebar-item">
+            <div className="sidebar-item">
                <label className="bmd-label-floating">CONFIGURACIÓ</label>
                {this.renderSettings()}
             </div>
+
+
           </div>
         }
 

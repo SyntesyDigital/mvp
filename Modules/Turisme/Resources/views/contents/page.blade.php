@@ -1,6 +1,12 @@
+@php
+  $htmlClass = isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '';
+  $pageType = isset($contentSettings) && isset($contentSettings['pageType']) ? $contentSettings['pageType'] : '';
+  $idClass = isset($content) ? "id_".$content->id : '';
+@endphp
+
 @extends('turisme::layouts.app',[
   'title' => isset($content) ? $content->getFieldValue('title') : '',
-  'mainClass' => isset($settings) && isset($settings->htmlClass) ? $settings->htmlClass : ''
+  'mainClass' => $pageType.' '.$htmlClass.' '.$idClass
 ])
 
 @section('content')
