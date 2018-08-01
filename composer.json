@@ -22,7 +22,7 @@
         "nwidart/laravel-modules": "^3.0",
         "prettus/l5-repository": "^2.6",
         "tightenco/ziggy": "^0.6.6",
-        "yajra/laravel-datatables-oracle": "~8.0",
+        "yajra/laravel-datatables-oracle": "~7.0",
         "zizaco/entrust": "^1.9"
     },
     "require-dev": {

@@ -66,25 +66,20 @@ export default class TypologyPaginated extends Component {
     render() {
         return (
             <div>
-              {this.state.items == null &&
-                <p>
-                  {/*Carregant dades...*/}
-                </p>
-              }
+                {this.state.items == null &&
+                    <p>{/*Carregant dades...*/}</p>
+                }
 
-              {this.state.items != null && this.state.items.length == 0 &&
-                <p>
-                  {Lang.get('widgets.last_typology.empty')}
-                </p>
-              }
+                {this.state.items != null && this.state.items.length == 0 &&
+                    <p>{Lang.get('widgets.last_typology.empty')}</p>
+                }
 
-              {this.state.items != null && this.state.items.length > 0 &&
-                <ul>
-                  {this.renderItems()}
-                </ul>
-              } 
+                {this.state.items != null && this.state.items.length > 0 &&
+                    <ul>{this.renderItems()}</ul>
+                } 
+                
                 {this.state.lastPage && 
-                <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange.bind(this)} />
+                    <Paginator currPage={this.state.currPage} lastPage={this.state.lastPage} onChange={this.onPageChange.bind(this)} />
                 }
             </div>
         );
