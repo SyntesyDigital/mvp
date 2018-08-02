@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import News from './../Typologies/News';
 import Publication from './../Typologies/Publication';
+import Link from './../Typologies/Link';
+import Note from './../Typologies/Note';
 
 class ListItem extends Component {
 
@@ -21,9 +23,21 @@ class ListItem extends Component {
                 field={this.props.field}
               />
            );
+       case 'notes' :
+         return (
+             <Note
+               field={this.props.field}
+             />
+          );
         case 'publication' :
           return (
             <Publication
+              field={this.props.field}
+            />
+          )
+        case 'link' :
+          return (
+            <Link
               field={this.props.field}
             />
           )
@@ -33,11 +47,8 @@ class ListItem extends Component {
     }
 
     render() {
-
         return (
-            <li>
-              {this.renderItem()}
-            </li>
+            this.renderItem()
         );
     }
 }

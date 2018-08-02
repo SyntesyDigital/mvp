@@ -20,19 +20,22 @@ export default class TypologyByCategory extends Component {
       var self = this;
       const field = this.state.field;
 
-      //const typology = field.settings.typology;
+      const typology = field.settings.typology;
       const category = field.settings.category;
 
       const categoryQuery = category != null ? "&category_id="+category : '';
+      const typologyQuery = typology != null ? "&typology_id="+typology : '';
 
-      axios.get(ASSETS+'api/categories/tree?loads=contents'+categoryQuery)
+
+      axios.get(ASSETS+'api/categories/tree?loads=contents'+categoryQuery+typologyQuery)
         .then(response => {
-          var items = [];
+          var items = {};
 
-          if(response.status == 200 && response.data.data !== undefined
-            && response.data.data.length > 0){
-                items = response.data.data;
+          if(response.data !== undefined){
+            items = response.data;
           }
+
+          console.log("TypologyByCategory :: componentDidMount => ",items);
 
           self.setState({
             items : items
@@ -45,27 +48,55 @@ export default class TypologyByCategory extends Component {
 
     }
 
-    renderItems() {
+    renderContents(items) {
 
       var result = [];
-
-      const {items} = this.state;
 
       for(var key in items){
         console.log("TypologyByCategory => ",items[key]);
 
         result.push(
-          <ListItem
-            key={key}
-            field={items[key]}
-          />
+          <li key={key}>
+            <ListItem
+              field={items[key]}
+            />
+          </li>
         );
       }
 
       return result;
     }
 
+    renderDescendants(items) {
+
+      var result = [];
+
+      for(var key in items){
+        result.push(
+          this.renderItem(items[key],key)
+        );
+      }
+
+      return result;
+    }
+
+    renderItem(item,key){
+
+      return (
+        <div className="hierachy-item" key={key}>
+          <h2>{item['name']}</h2>
+          <ul>
+            {this.renderContents(item['contents'])}
+          </ul>
+          {this.renderDescendants(item['descendants'])}
+        </div>
+      );
+    }
+
     render() {
+
+        const isEmpty = this.state.items == null || ( this.state.items.data.contents.length == 0 &&
+          this.state.items.data.descendants.length == 0 ) ? true : false;
 
         return (
             <div>
@@ -75,15 +106,15 @@ export default class TypologyByCategory extends Component {
                 </p>
               }
 
-              {this.state.items != null && this.state.items.length == 0 &&
+              {this.state.items != null && isEmpty &&
                 <p>
                   {Lang.get('widgets.last_typology.empty')}
                 </p>
               }
 
-              {this.state.items != null && this.state.items.length > 0 &&
+              {this.state.items != null && !isEmpty &&
                 <ul>
-                  {this.renderItems()}
+                  {this.renderItem(this.state.items.data,0)}
                 </ul>
               }
 

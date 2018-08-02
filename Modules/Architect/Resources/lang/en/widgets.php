@@ -24,5 +24,11 @@ return [
     'TESTIMONIAL_LIST' => 'Llista testimonis',
     'LOGO' => 'Logo',
     'LOGO_LIST' => 'Llista Logos',
-    'HEADER' => 'Capçalera'
+    'HEADER' => 'Capçalera',
+    'TYPOLOGY_SEARCH_DATE' => 'Llista amb cerca i data',
+    'TYPOLOGY_PAGINATED' => 'Llista paginada',
+    'TYPOLOGY_BY_CATEGORY' => 'Llista per categories',
+    'TYPOLOGY_CAROUSEL' => 'Rotatori tipologia',
+    'TYPOLOGY_SELECTION_FILTERS' => 'Llista amb selecció'
+
 ];

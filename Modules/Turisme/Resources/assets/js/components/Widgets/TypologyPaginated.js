@@ -58,10 +58,11 @@ export default class TypologyPaginated extends Component {
         console.log("TypologyPaginated => ",items[key]);
 
         result.push(
-          <ListItem
-            key={key}
-            field={items[key]}
-          />
+          <li key={key}>
+            <ListItem
+              field={items[key]}
+            />
+          </li>
         );
       }
 

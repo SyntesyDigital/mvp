@@ -719,6 +719,24 @@ class ModalEditItem extends Component {
           inputLabel="Indica el número màxim"
         />
 
+        <InputSettingsField
+          field={this.state.field}
+          name="textIdentifier"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Camp de cerca"
+          inputLabel="Indica el identificador del text de la tipologia"
+        />
+
+        <InputSettingsField
+          field={this.state.field}
+          name="dateIdentifier"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Camp de data"
+          inputLabel="Indica el identificador de la data de la tipologia"
+        />
+
       </div>
 
 

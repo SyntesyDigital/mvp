@@ -9924,6 +9924,10 @@ body {
   min-height: 100%;
 }
 
+form.nova-cerca {
+  overflow: inherit !important;
+}
+
 /*
 article.page-builder{
   overflow: hidden;
@@ -9939,6 +9943,75 @@ article.page-builder{
   z-index: 400;
 }
 
+/** DATE  **/
+
+.react-datepicker-popper {
+  z-index: 10000 !important;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+  font-family: Arial, sans-serif;
+}
+
+.react-datepicker-wrapper .react-datepicker__input-container {
+  display: block;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+  width: 30px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: Arial, sans-serif;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  padding: 0px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+}
+
+.react-datepicker__time-container {
+  width: 90px;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 90px;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background-color: #3097D1;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover {
+  background-color: #3097D1;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #3097D1;
+}
+
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 100px;
+}
+
 .paginator ul li {
   display: inline-block;
   padding: 0 8px;
@@ -9950,5 +10023,28 @@ article.page-builder{
 
 .paginator ul li a {
   margin-left: 0px !important;
+}
+
+.filter-bar form.nova-cerca input {
+  display: inline-block;
+  width: 20%;
+  float: left;
+  margin-right: 2%;
+}
+
+.filter-bar form.nova-cerca .input-date {
+  display: inline-block;
+  width: auto;
+  float: left;
+  margin-right: 2%;
+}
+
+.filter-bar form.nova-cerca .input-date + div {
+  display: inline-block;
+  width: auto;
+}
+
+.filter-bar form.nova-cerca .input-date input.input-date {
+  width: auto;
 }
 

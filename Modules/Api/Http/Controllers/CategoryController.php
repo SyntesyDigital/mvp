@@ -34,6 +34,7 @@ class CategoryController extends Controller
     public function tree(Request $request)
     {
         $categoryId = $request->get('category_id');
+        $typologyId = $request->get('typology_id');
         $collection = Category::with('descendants', 'contents','descendants.contents');
 
         // Add automaticly descendants on request parameters
@@ -46,6 +47,15 @@ class CategoryController extends Controller
         if($categoryId) {
             $collection->where('id', $categoryId);
         }
+
+        /*
+        FIXME no funciona, 
+        if($typologyId) {
+            $collection->whereHas('contents', function($q) use($typologyId) {
+                $q->where('contents.typology_id', $typologyId);
+            });
+        }
+        */
 
         return new CategoryTreeCollection($collection->get()->toTree());
     }
