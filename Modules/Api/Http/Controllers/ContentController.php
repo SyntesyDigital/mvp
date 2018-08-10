@@ -12,35 +12,42 @@ use Modules\Architect\Entities\Language;
 use Modules\Architect\Ressources\ContentCollection;
 use Modules\Architect\Ressources\CategoryCollection;
 
+use Modules\Api\Repositories\ContentRepository;
+use DB;
+
 class ContentController extends Controller
 {
+
+    public function __construct(ContentRepository $contents)
+    {
+        $this->contents = $contents;
+    }
+
     public function index(Request $request)
     {
         $typologyId = $request->get('typology_id');
         $categoryId = $request->get('category_id');
         $acceptLang = $request->get('accept_lang');
-
+        $order = $request->get('order');
+        $fields = $request->get('fields') ? json_decode($request->get('fields')) : null;
         $size = $request->get('size') ? $request->get('size') : 20;
 
-        $collection = Content::with('fields')->where('is_page', 0);
+        $collection = Content::with('fields')
+            ->isNotPage()
+            ->typologyId($typologyId)
+            ->categoryId($categoryId)
+            ->languageIso($acceptLang)
+            ->whereFields($fields);
 
-        if($typologyId) {
-            $collection->where('typology_id', $typologyId);
+        if($order) {
+            $order = explode(",", $order);
+
+            if(sizeof($order) > 1) {
+                $collection->orderByField($order[0], $order[1]);
+            }
         }
 
-        if($categoryId) {
-            $collection->whereHas('categories', function($q) use($categoryId) {
-                $q->where('category_id', $categoryId);
-            });
-        }
-
-        if($acceptLang) {
-            $language = Language::where('iso', $acceptLang)->first();
-            $collection->whereHas('languages', function($q) use($language) {
-                $q->where('language_id', $language->id);
-            });
-        }
-
-        return new ContentCollection($collection->paginate($size));
+        return response()->json(new ContentCollection($collection->paginate($size)));
     }
+
 }

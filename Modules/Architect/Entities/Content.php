@@ -8,6 +8,8 @@ use Kalnoy\Nestedset\NodeTrait;
 
 use Modules\Architect\Entities\Language;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Content extends Model
 {
     use HasFields, NodeTrait;
@@ -161,6 +163,48 @@ class Content extends Model
         }
 
         return null;
+    }
+
+
+    public function scopeField($query, $name, $value)
+    {
+        return $query->where([
+            'name' => $name,
+            'value' => $value,
+        ]);
+    }
+
+    public function scopeTypologyId($query, $typologyId)
+    {
+        return $typologyId ? $query->where('typology_id', (int) $typologyId) : $query;
+    }
+
+    public function scopeCategoryId($query, $categoryId)
+    {
+        return $categoryId ? $query->whereHas('categories', function($q) use($categoryId) {
+            $q->where('category_id', $categoryId);
+        }) : $query;
+    }
+
+
+    /*
+     *  Scopes
+     */
+    public function scopeIsPage(Builder $query)
+    {
+        return $query->where('is_page', 1);
+    }
+
+    public function scopeIsNotPage(Builder $query)
+    {
+        return $query->where('is_page', 0);
+    }
+
+    public function scopeLanguageIso(Builder $query, $acceptLang)
+    {
+        return $acceptLang ? $query->whereHas('languages', function($q) use($acceptLang) {
+            $q->where('iso', $acceptLang);
+        }) : $query;
     }
 
 }
