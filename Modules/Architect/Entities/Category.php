@@ -111,6 +111,18 @@ class Category extends Model
         return $ids;
     }
 
+    public function scopeByTypologyId($query, $typologyId)
+    {
+        return $typologyId ? $query->whereHas('contents', function($q) use($typologyId) {
+            $q->where('typology_id', $typologyId);
+        }) : $query;
+    }
+
+    public function scopeById($query, $id)
+    {
+        return $id ? $query->where('id', $id) : $query;
+    }
+
 
     // public static function getByTypologyId()
     // {

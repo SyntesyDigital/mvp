@@ -35,7 +35,10 @@ class CategoryController extends Controller
     {
         $categoryId = $request->get('category_id');
         $typologyId = $request->get('typology_id');
-        $collection = Category::with('descendants', 'contents','descendants.contents');
+
+        $collection = Category::with('descendants', 'contents', 'descendants.contents')
+            ->byId($categoryId)
+            ->byTypologyId($typologyId);
 
         // Add automaticly descendants on request parameters
         $loads = explode(',', $request->get('loads'));
@@ -43,19 +46,6 @@ class CategoryController extends Controller
         $request->merge([
             'loads' => implode(',',$loads)
         ]);
-
-        if($categoryId) {
-            $collection->where('id', $categoryId);
-        }
-
-        /*
-        FIXME no funciona, 
-        if($typologyId) {
-            $collection->whereHas('contents', function($q) use($typologyId) {
-                $q->where('contents.typology_id', $typologyId);
-            });
-        }
-        */
 
         return new CategoryTreeCollection($collection->get()->toTree());
     }

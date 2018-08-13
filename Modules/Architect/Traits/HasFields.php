@@ -263,7 +263,7 @@ trait HasFields
                 $condition = strtolower($v);
             }
         }
-        
+
         return $query;
     }
 
