@@ -32,6 +32,7 @@ class ContentTransformer extends Resource
             'is_page' => boolval($this->resource->is_page),
             'page' => $this->resource->is_page ? $this->getPage($languages) : null,
             'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
+            'full_slug' => $this->resource->getFullSlug()
         ];
     }
 
