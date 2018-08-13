@@ -48,8 +48,6 @@ class ContentController extends Controller
         }
 
         return new ContentCollection($collection->paginate($size));
-
-        return response()->json(new ContentCollection($collection->paginate($size)));
     }
 
 }

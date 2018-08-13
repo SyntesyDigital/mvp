@@ -25,7 +25,6 @@ class Publication extends Component {
 
       const fields = this.props.field.fields;
 
-      console.log("Publication => ",fields);
 
       const title = this.processText(fields,'title');
       const format = this.processText(fields,'format');
@@ -37,6 +36,9 @@ class Publication extends Component {
       const price = this.processText(fields,'preu');
 
       const selectable = this.props.selectable !== undefined ? this.props.selectable : false;
+      const selected = this.props.selected !== undefined ? this.props.selected : false;
+
+      console.log("Publication => ",fields,selected);
 
       return (
         <div className="publication">
@@ -57,7 +59,7 @@ class Publication extends Component {
             </li>
           </ul>
           {selectable &&
-            <button type="button" className="btn " onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
           }
 
         </div>

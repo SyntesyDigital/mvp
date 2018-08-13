@@ -47,22 +47,28 @@ export default class TypologySearchDate extends Component {
         const {textIdentifier,dateIdentifier,field} = this.state;
 
         if(filters != null){
+
+          var fieldsQuery = '&fields=[:query]';
+
           if(textIdentifier != null && filters.text != null){
-            searchQuery = "&"+textIdentifier+"="+filters.text;
+            searchQuery = '["'+textIdentifier+'","like","%'+filters.text+'%"]';
           }
           if(dateIdentifier != null && filters.startDate != null && filters.endDate != null) {
-            datesQuery = "&"+dateIdentifier+"=["+filters.startDate+":"+filters.endDate+"]";
+            datesQuery = '["'+dateIdentifier+'",">=","'+filters.startDate+'"]';
+            datesQuery += ',["'+dateIdentifier+'","<=","'+filters.endDate+'"]';
           }
 
+          var query = searchQuery+(searchQuery != '' && datesQuery != '' ? ',':'')+datesQuery;
+          fieldsQuery = fieldsQuery.replace(':query',query);
         }
 
+        //console.log("TypologySearchDate :: query : "+fieldsQuery);
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + searchQuery + datesQuery +'&page=' + (page ? page : null))
+        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + fieldsQuery +'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
-                  && response.data.data !== undefined
-                  && response.data.data.length > 0)
+                  && response.data.data !== undefined)
               {
                   self.setState({
                       items : response.data.data,
