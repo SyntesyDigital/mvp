@@ -218,20 +218,21 @@ trait HasFields
     }
 
 
-    public function scopeByField(Builder $query, $name, $value, $boolean = 'and')
+    public function scopeByField(Builder $query, $name, $value, $operator = "=", $boolean = 'and')
     {
+
         if ($boolean == 'or') {
-            return $query->orWhereHas('fields', function ($q) use ($name, $value, $boolean) {
+            return $query->orWhereHas('fields', function ($q) use ($name, $value, $operator, $boolean) {
                 $q
                     ->where('name', $name)
-                    ->where('value', $value, $boolean);
+                    ->where('value', $operator, $value);
             });
         }
 
-        return $query->whereHas('fields', function ($q) use ($name, $value, $boolean) {
+        return $query->whereHas('fields', function ($q) use ($name, $value, $operator, $boolean) {
             $q
                 ->where('name', $name)
-                ->where('value', $value, $boolean);
+                ->where('value', $operator, $value);
         });
     }
 
@@ -243,7 +244,7 @@ trait HasFields
 
         if (!is_array($arr[0])) {
             if(sizeof($arr) > 2) {
-                return $query->byField($arr[0], $arr[1], $arr[2], $boolean);
+                return $query->byField($arr[0], $arr[2], $arr[1], $boolean);
             } else {
                 return $query->byField($arr[0], $arr[1], $boolean);
             }
@@ -253,17 +254,16 @@ trait HasFields
         foreach ($arr as $k => $v) {
             if (is_array($v)) {
                 if(sizeof($v) > 2) {
-                    $query->byField($v[0], $v[1],$v[2], $condition);
+                    $query->byField($v[0],$v[2], $v[1], $condition);
                 } else {
                     $query->byField($v[0], $v[1], $condition);
                 }
-
                 $condition = 'and';
             } else {
                 $condition = strtolower($v);
             }
         }
-
+        
         return $query;
     }
 
