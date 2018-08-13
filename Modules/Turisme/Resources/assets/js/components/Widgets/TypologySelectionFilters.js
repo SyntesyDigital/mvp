@@ -66,8 +66,8 @@ export default class TypologySelectionFilters extends Component {
               {
                   self.setState({
                       items : response.data.data,
-                      lastPage : response.data.meta.last_page,
-                      currPage : response.data.meta.current_page,
+                      //lastPage : response.data.meta.last_page,
+                      //currPage : response.data.meta.current_page,
                       filters : filters
                   });
               }
@@ -78,6 +78,9 @@ export default class TypologySelectionFilters extends Component {
            });
     }
 
+    handleOnSelect(field){
+      console.log("TypologySelectionFilters :: => handleOnSelect ",field);
+    }
 
     renderItems() {
 
@@ -92,6 +95,8 @@ export default class TypologySelectionFilters extends Component {
           <li key={key}>
             <ListItem
               field={items[key]}
+              selectable={true}
+              onSelect={this.handleOnSelect.bind(this)}
             />
           </li>
         );

@@ -32808,7 +32808,9 @@ var ListItem = function (_Component) {
           });
         case 'publication':
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Typologies_Publication__["a" /* default */], {
-            field: this.props.field
+            field: this.props.field,
+            selectable: this.props.selectable,
+            onSelect: this.props.onSelect
           });
         case 'link':
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Typologies_Link__["a" /* default */], {
@@ -106767,6 +106769,8 @@ var Publication = function (_Component) {
       var languages = this.processText(fields, 'idiomes');
       var price = this.processText(fields, 'preu');
 
+      var selectable = this.props.selectable !== undefined ? this.props.selectable : false;
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'publication' },
@@ -106825,6 +106829,11 @@ var Publication = function (_Component) {
               field: fields.descargable
             })
           )
+        ),
+        selectable && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { type: 'button', className: 'btn ', onClick: this.props.onSelect.bind(this, this.props.field) },
+          Lang.get('widgets.select')
         )
       );
     }
@@ -107776,14 +107785,19 @@ var TypologySelectionFilters = function (_Component) {
                 if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
                     self.setState({
                         items: response.data.data,
-                        lastPage: response.data.meta.last_page,
-                        currPage: response.data.meta.current_page,
+                        //lastPage : response.data.meta.last_page,
+                        //currPage : response.data.meta.current_page,
                         filters: filters
                     });
                 }
             }).catch(function (error) {
                 console.log(error);
             });
+        }
+    }, {
+        key: 'handleOnSelect',
+        value: function handleOnSelect(field) {
+            console.log("TypologySelectionFilters :: => handleOnSelect ", field);
         }
     }, {
         key: 'renderItems',
@@ -107801,7 +107815,9 @@ var TypologySelectionFilters = function (_Component) {
                     'li',
                     { key: key },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_ListItem__["a" /* default */], {
-                        field: items[key]
+                        field: items[key],
+                        selectable: true,
+                        onSelect: this.handleOnSelect.bind(this)
                     })
                 ));
             }

@@ -67,6 +67,6 @@ class Kernel extends HttpKernel
         'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
         'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
-        'profileJsonResponse' => \Modules\Api\Http\Middleware\ProfileJsonResponse::class
+        //'profileJsonResponse' => \Modules\Api\Http\Middleware\ProfileJsonResponse::class
     ];
 }

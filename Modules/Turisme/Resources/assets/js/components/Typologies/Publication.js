@@ -36,6 +36,8 @@ class Publication extends Component {
       const languages = this.processText(fields,'idiomes');
       const price = this.processText(fields,'preu');
 
+      const selectable = this.props.selectable !== undefined ? this.props.selectable : false;
+
       return (
         <div className="publication">
           <p className="titol">{title}</p>
@@ -54,6 +56,10 @@ class Publication extends Component {
               />
             </li>
           </ul>
+          {selectable &&
+            <button type="button" className="btn " onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+          }
+
         </div>
       );
 
