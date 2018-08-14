@@ -29,8 +29,8 @@ class ContentController extends Controller
         $categoryId = $request->get('category_id');
         $acceptLang = $request->get('accept_lang');
         $tags = $request->get('tags') ? json_decode($request->get('tags'), true) : null;
-        $order = $request->get('order');
         $fields = $request->get('fields') ? json_decode($request->get('fields')) : null;
+        $order = $request->get('order');
         $size = $request->get('size') ? $request->get('size') : 20;
 
         $collection = Content::with('fields')

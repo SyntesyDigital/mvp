@@ -9,13 +9,15 @@ use Modules\Architect\Ressources\CategoryTreeCollection;
 
 class CategoryTransformer extends Resource
 {
-    public function toArray($request)
+    public function toArray($request, $language = null)
     {
+        $languageId = $language ? $language->id : null;
+
         $data = [
             'id' => $this->id,
-            'name' => $this->getFieldValue('name'),
-            'slug' => $this->getFieldValue('slug'),
-            'description' => $this->getFieldValue('description')
+            'name' => $this->getFieldValue('name', $languageId),
+            'slug' => $this->getFieldValue('slug', $languageId),
+            'description' => $this->getFieldValue('description', $languageId)
         ];
 
         if($request->get('loads')) {
