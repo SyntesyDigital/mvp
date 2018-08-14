@@ -70,9 +70,14 @@ export default class TypologySelectionFilters extends Component {
           filtersQuery = filters.query;
         }
 
-        console.log("TypologySearchDate :: query : "+filtersQuery);
+        var params = {
+            size : 2,
+            typology_id : field.settings.typology,
+            fields : filtersQuery,
+            page : page ? page : null
+        };
 
-        axios.get(ASSETS+'api/contents?size=6&typology_id=' + field.settings.typology + filtersQuery +'&page=' + (page ? page : null))
+        axios.post(ASSETS+'api/contents',params)
           .then(function (response) {
 
               if(response.status == 200
@@ -258,8 +263,6 @@ export default class TypologySelectionFilters extends Component {
 
         return (
             <div>
-
-              <ModalForm />
 
               {area &&
                 this.renderSelectionArea()
