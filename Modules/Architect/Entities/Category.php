@@ -122,13 +122,4 @@ class Category extends Model
     {
         return $id ? $query->where('id', $id) : $query;
     }
-
-
-    // public static function getByTypologyId()
-    // {
-    //     return ContentCategory::whereHas('', function($q){
-    //
-    //     })->get();
-    // }
-
 }

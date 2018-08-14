@@ -4,6 +4,8 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Language extends Model
 {
 
@@ -64,6 +66,15 @@ class Language extends Model
         }
 
         return $language;
+    }
+
+
+    /*
+     *  Scopes
+     */
+    public function scopeByIso(Builder $query, $iso)
+    {
+        return $query->where('iso', $iso);
     }
 
 }
