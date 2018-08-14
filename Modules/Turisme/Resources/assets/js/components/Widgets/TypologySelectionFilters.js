@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Paginator from './../Common/Paginator';
 import FilterBar from './../Common/FilterBar';
 import FilterBarPublication from './../Common/FilterBarPublication';
+import FilterBarStatistics from './../Common/FilterBarStatistics';
 
 import ListItem from './../Common/ListItem';
 import ListSelectedItem from './../Common/ListSelectedItem';
@@ -11,6 +12,10 @@ import ModalForm from './../Common/ModalForm';
 import OrderBar from './../Common/OrderBar';
 
 
+const STATISTCS_ID = 6;
+const PUBLICATIONS_ID = 4;
+const CARTOGRAPHY_ID = 7;
+//const LOGOS_ID =
 
 export default class TypologySelectionFilters extends Component {
 
@@ -214,19 +219,41 @@ export default class TypologySelectionFilters extends Component {
 
     }
 
+    renderFilterBar() {
+
+      console.log("TypologySelectionFilters :: renderFilterBar => ",this.state.field.settings.typology,PUBLICATIONS_ID);
+
+      switch(parseInt(this.state.field.settings.typology)){
+        case PUBLICATIONS_ID :
+          return (
+            <div>
+              <FilterBarPublication
+                onSubmit={this.handleFilterSubmit.bind(this)}
+              />
+              <OrderBar
+                fieldName="title"
+                onSubmit={this.handleOrderChange.bind(this)}
+              />
+            </div>
+          );
+
+        case STATISTCS_ID :
+          return (
+            <div>
+              <FilterBarStatistics
+                onSubmit={this.handleFilterSubmit.bind(this)}
+              />
+            </div>
+          );
+      }
+
+    }
+
     renderSelectionArea() {
       return (
         <div>
 
-            <FilterBarPublication
-              onSubmit={this.handleFilterSubmit.bind(this)}
-            />
-
-            <OrderBar
-              fieldName="title"
-              onSubmit={this.handleOrderChange.bind(this)}
-            />
-
+            {this.renderFilterBar()}
 
             {this.state.items == null &&
                 <p>{/*Carregant dades...*/}</p>

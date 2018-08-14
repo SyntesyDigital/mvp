@@ -5,6 +5,8 @@ import News from './../Typologies/News';
 import Publication from './../Typologies/Publication';
 import Link from './../Typologies/Link';
 import Note from './../Typologies/Note';
+import Statistics from './../Typologies/Statistics';
+
 
 class ListItem extends Component {
 
@@ -32,6 +34,15 @@ class ListItem extends Component {
         case 'publication' :
           return (
             <Publication
+              field={this.props.field}
+              selectable={this.props.selectable}
+              selected={this.props.selected}
+              onSelect={this.props.onSelect}
+            />
+          )
+        case 'estadistica' :
+          return (
+            <Statistics
               field={this.props.field}
               selectable={this.props.selectable}
               selected={this.props.selected}

@@ -9,6 +9,7 @@ class News extends Component {
     constructor(props)
     {
         super(props);
+        moment.locale(LOCALE);
     }
 
     componentDidMount() {
@@ -17,10 +18,10 @@ class News extends Component {
 
     render() {
 
-      moment.locale(LOCALE);
-
       const fields = this.props.field.fields;
       console.log("News => ",this.props.field);
+
+      const category = this.props.field.category != null ? this.props.field.category.name : null;
 
       var data = fields.data.values != null ? fields.data.values : null;
       if(data != null){
@@ -44,8 +45,14 @@ class News extends Component {
                 </span>
               }
 
-            |
-            <span className="categoria">Categoria </span></p>
+            {category != null && data != null ? '|' : ''}
+
+            {category != null &&
+              <span className="categoria">{category} </span>
+            }
+
+          </p>
+
           <a href="">{fields.title.values[LOCALE] !== undefined ?
             fields.title.values[LOCALE] : '' }</a>
         </div>

@@ -32768,6 +32768,7 @@ function updateLink (link, options, obj) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Typologies_Publication__ = __webpack_require__(818);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Typologies_Link__ = __webpack_require__(557);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Typologies_Note__ = __webpack_require__(558);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Typologies_Statistics__ = __webpack_require__(859);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32775,6 +32776,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -32808,6 +32810,13 @@ var ListItem = function (_Component) {
           });
         case 'publication':
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Typologies_Publication__["a" /* default */], {
+            field: this.props.field,
+            selectable: this.props.selectable,
+            selected: this.props.selected,
+            onSelect: this.props.onSelect
+          });
+        case 'estadistica':
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Typologies_Statistics__["a" /* default */], {
             field: this.props.field,
             selectable: this.props.selectable,
             selected: this.props.selected,
@@ -95078,7 +95087,10 @@ var News = function (_Component) {
   function News(props) {
     _classCallCheck(this, News);
 
-    return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+
+    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
+    return _this;
   }
 
   _createClass(News, [{
@@ -95088,10 +95100,10 @@ var News = function (_Component) {
     key: 'render',
     value: function render() {
 
-      __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
-
       var fields = this.props.field.fields;
       console.log("News => ", this.props.field);
+
+      var category = this.props.field.category != null ? this.props.field.category.name : null;
 
       var data = fields.data.values != null ? fields.data.values : null;
       if (data != null) {
@@ -95116,11 +95128,12 @@ var News = function (_Component) {
             { className: 'data' },
             data
           ),
-          '|',
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          category != null && data != null ? '|' : '',
+          category != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
             { className: 'categoria' },
-            'Categoria '
+            category,
+            ' '
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -107737,10 +107750,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_FilterBar__ = __webpack_require__(559);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__ = __webpack_require__(825);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_ListItem__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Common_ListSelectedItem__ = __webpack_require__(826);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Common_ModalForm__ = __webpack_require__(828);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__ = __webpack_require__(829);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_FilterBarStatistics__ = __webpack_require__(860);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Common_ListItem__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Common_ListSelectedItem__ = __webpack_require__(826);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Common_ModalForm__ = __webpack_require__(828);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Common_OrderBar__ = __webpack_require__(829);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107760,6 +107774,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
+var STATISTCS_ID = 6;
+var PUBLICATIONS_ID = 4;
+var CARTOGRAPHY_ID = 7;
+//const LOGOS_ID =
 
 var TypologySelectionFilters = function (_Component) {
   _inherits(TypologySelectionFilters, _Component);
@@ -107911,7 +107931,7 @@ var TypologySelectionFilters = function (_Component) {
         result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'li',
           { key: key, className: 'col-md-3 col-sm-4 col-xs-12' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Common_ListItem__["a" /* default */], {
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Common_ListItem__["a" /* default */], {
             field: items[key],
             selectable: true,
             selected: selected,
@@ -107936,7 +107956,7 @@ var TypologySelectionFilters = function (_Component) {
         result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'li',
           { key: key, className: 'col-md-3 col-sm-4 col-xs-12' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Common_ListSelectedItem__["a" /* default */], {
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Common_ListSelectedItem__["a" /* default */], {
             field: selectedItems[key],
             onRemove: this.handleOnRemove.bind(this)
           })
@@ -107982,18 +108002,42 @@ var TypologySelectionFilters = function (_Component) {
       console.log("TypologySelectionFilters :: open form");
     }
   }, {
+    key: 'renderFilterBar',
+    value: function renderFilterBar() {
+
+      console.log("TypologySelectionFilters :: renderFilterBar => ", this.state.field.settings.typology, PUBLICATIONS_ID);
+
+      switch (parseInt(this.state.field.settings.typology)) {
+        case PUBLICATIONS_ID:
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__["a" /* default */], {
+              onSubmit: this.handleFilterSubmit.bind(this)
+            }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__Common_OrderBar__["a" /* default */], {
+              fieldName: 'title',
+              onSubmit: this.handleOrderChange.bind(this)
+            })
+          );
+
+        case STATISTCS_ID:
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Common_FilterBarStatistics__["a" /* default */], {
+              onSubmit: this.handleFilterSubmit.bind(this)
+            })
+          );
+      }
+    }
+  }, {
     key: 'renderSelectionArea',
     value: function renderSelectionArea() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__["a" /* default */], {
-          onSubmit: this.handleFilterSubmit.bind(this)
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__["a" /* default */], {
-          fieldName: 'title',
-          onSubmit: this.handleOrderChange.bind(this)
-        }),
+        this.renderFilterBar(),
         this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
         this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
@@ -108744,6 +108788,285 @@ var OrderBar = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (OrderBar);
+
+/***/ }),
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */,
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Fields_TranslatedFileField__ = __webpack_require__(493);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+var Statistics = function (_Component) {
+  _inherits(Statistics, _Component);
+
+  function Statistics(props) {
+    _classCallCheck(this, Statistics);
+
+    var _this = _possibleConstructorReturn(this, (Statistics.__proto__ || Object.getPrototypeOf(Statistics)).call(this, props));
+
+    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
+    return _this;
+  }
+
+  _createClass(Statistics, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'processText',
+    value: function processText(fields, fieldName) {
+      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var fields = this.props.field.fields;
+
+      var data = fields.data.values != null ? fields.data.values : null;
+      if (data != null) {
+        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
+      }
+
+      var title = this.processText(fields, 'title');
+      var description = this.processText(fields, 'descripcio');
+
+      var selectable = this.props.selectable !== undefined ? this.props.selectable : false;
+      var selected = this.props.selected !== undefined ? this.props.selected : false;
+
+      console.log("Statistics => ", fields, selected);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'statistics' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          { className: 'titol' },
+          title
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          { className: 'data' },
+          data
+        ),
+        selectable && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { type: 'button', className: "btn " + (selected ? 'selected' : ''), onClick: this.props.onSelect.bind(this, this.props.field) },
+          Lang.get('widgets.select')
+        )
+      );
+    }
+  }]);
+
+  return Statistics;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Statistics);
+
+/***/ }),
+/* 860 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var FilterBarStatistics = function (_Component) {
+  _inherits(FilterBarStatistics, _Component);
+
+  function FilterBarStatistics(props) {
+    _classCallCheck(this, FilterBarStatistics);
+
+    var _this = _possibleConstructorReturn(this, (FilterBarStatistics.__proto__ || Object.getPrototypeOf(FilterBarStatistics)).call(this, props));
+
+    _this.currentYear = new Date().getFullYear();
+    _this.minYear = 2000;
+
+    _this.state = {
+      year: _this.currentYear
+    };
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(FilterBarStatistics, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+
+      var state = this.state;
+
+      var query = [];
+
+      if (this.state.language != '' && this.state.language != null) {
+        query.push('["idiomes","like","%' + this.state.language + '%"]');
+      }
+
+      if (this.state.free) {
+        query.push('["es-de-pagament","=","1"]');
+      }
+
+      this.props.onSubmit({
+        text: this.state.language != '' ? this.state.language : null,
+        free: this.state.free,
+        query: this.processQuery(query)
+      });
+    }
+  }, {
+    key: 'processQuery',
+    value: function processQuery(filtersArray) {
+
+      var fieldsQuery = '';
+
+      if (filtersArray != null && filtersArray.length > 0) {
+
+        var fieldsQuery = '[';
+
+        for (var key in filtersArray) {
+          fieldsQuery += (key > 0 ? ',' : '') + filtersArray[key];
+        }
+        fieldsQuery += ']';
+      }
+
+      return fieldsQuery;
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      event.preventDefault();
+
+      var state = this.state;
+      var year = event.target.value;
+
+      state[event.target.name] = year;
+      this.setState(state);
+
+      var initYear = parseInt(year);
+      var endYear = initYear + 1;
+
+      var initTimestamp = Math.floor(new Date(initYear, 0, 1).getTime() / 1000);
+      var endTimestamp = Math.floor(new Date(endYear, 0, 1).getTime() / 1000);
+
+      var query = [];
+      query.push('["data",">=","' + initTimestamp + '"]');
+      query.push('["data","<","' + endTimestamp + '"]');
+
+      this.props.onSubmit({
+        year: event.target.value,
+        query: this.processQuery(query)
+      });
+    }
+  }, {
+    key: 'renderYears',
+    value: function renderYears() {
+      var years = [];
+      for (var i = this.currentYear; i >= this.minYear; i--) {
+        years.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'option',
+          { key: i, value: i },
+          i
+        ));
+      }
+      return years;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'filter-bar' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'form',
+          { onSubmit: this.handleSubmit.bind(this), className: 'nova-cerca' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-xs-3' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'p',
+              null,
+              'Selecciona a\xF1o de consulta :'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'select',
+            _defineProperty({ name: 'year', className: 'col-xs-3', value: this.state.year, onChange: this.handleChange }, 'value', this.state.language),
+            this.renderYears()
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator' })
+        )
+      );
+    }
+  }]);
+
+  return FilterBarStatistics;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (FilterBarStatistics);
 
 /***/ })
 /******/ ]);
