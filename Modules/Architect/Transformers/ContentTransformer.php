@@ -12,8 +12,8 @@ use Modules\Architect\Entities\Language;
 // FIXME : move this or find a better way :)
 use Modules\Turisme\Adapters\PageBuilderAdapter;
 
-use Modules\Architect\Ressources\TagCollection;
 use Modules\Architect\Transformers\TagTransformer;
+use Modules\Architect\Transformers\CategoryTransformer;
 
 class ContentTransformer extends Resource
 {
@@ -39,7 +39,10 @@ class ContentTransformer extends Resource
             'full_slug' => $this->resource->getFullSlug(),
             'tags' => $this->resource->tags->map(function($tag) use ($request, $language){
                 return (new TagTransformer($tag))->toArray($request, $language);
-            })
+            }),
+            'category' => $this->resource->categories->map(function($category) use ($request, $language){
+                return (new CategoryTransformer($category))->toArray($request, $language);
+            })->first()
         ];
 
         // $this->resource->tags ? (new TagCollection($this->resource->tags))->toArray() : null
