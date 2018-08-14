@@ -95091,7 +95091,7 @@ var News = function (_Component) {
       __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
 
       var fields = this.props.field.fields;
-      //console.log("News => ",this.props.field);
+      console.log("News => ", this.props.field);
 
       var data = fields.data.values != null ? fields.data.values : null;
       if (data != null) {
@@ -107739,6 +107739,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_ListItem__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Common_ListSelectedItem__ = __webpack_require__(826);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Common_ModalForm__ = __webpack_require__(828);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__ = __webpack_require__(858);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107746,6 +107747,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -107812,7 +107814,7 @@ var TypologySelectionFilters = function (_Component) {
     }
   }, {
     key: 'query',
-    value: function query(page, filters) {
+    value: function query(page, filters, order) {
       var self = this;
 
       var _state = this.state,
@@ -107831,6 +107833,7 @@ var TypologySelectionFilters = function (_Component) {
         size: 2,
         typology_id: field.settings.typology,
         fields: filtersQuery,
+        order: order,
         page: page ? page : null
       };
 
@@ -107841,7 +107844,8 @@ var TypologySelectionFilters = function (_Component) {
             items: response.data.data,
             lastPage: response.data.meta.last_page,
             currPage: response.data.meta.current_page,
-            filters: filters
+            filters: filters,
+            order: order
           });
         }
       }).catch(function (error) {
@@ -107942,18 +107946,32 @@ var TypologySelectionFilters = function (_Component) {
   }, {
     key: 'onPageChange',
     value: function onPageChange(page) {
-      var filters = this.state.filters;
+      var _state3 = this.state,
+          filters = _state3.filters,
+          order = _state3.order;
 
 
-      this.query(page, filters);
+      this.query(page, filters, order);
     }
   }, {
     key: 'handleFilterSubmit',
     value: function handleFilterSubmit(filters) {
+      var order = this.state.order;
+
 
       console.log("TypologySelectionFilters :: handleFilterSubmit => ", filters);
 
-      this.query(1, filters);
+      this.query(1, filters, order);
+    }
+  }, {
+    key: 'handleOrderChange',
+    value: function handleOrderChange(order) {
+      var filters = this.state.filters;
+
+
+      console.log("TypologySelectionFilters :: handleOrderChange => ", order);
+
+      this.query(1, filters, order);
     }
   }, {
     key: 'onOpenForm',
@@ -107969,6 +107987,10 @@ var TypologySelectionFilters = function (_Component) {
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__["a" /* default */], {
           onSubmit: this.handleFilterSubmit.bind(this)
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__["a" /* default */], {
+          fieldName: 'title',
+          onSubmit: this.handleOrderChange.bind(this)
         }),
         this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
         this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -108634,6 +108656,121 @@ var ModalForm = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* unused harmony default export */ var _unused_webpack_default_export = (ModalForm);
+
+/***/ }),
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */,
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var OrderBar = function (_Component) {
+  _inherits(OrderBar, _Component);
+
+  function OrderBar(props) {
+    _classCallCheck(this, OrderBar);
+
+    var _this = _possibleConstructorReturn(this, (OrderBar.__proto__ || Object.getPrototypeOf(OrderBar)).call(this, props));
+
+    _this.state = {
+      order: ''
+    };
+    return _this;
+  }
+
+  _createClass(OrderBar, [{
+    key: 'onToggleOrder',
+    value: function onToggleOrder(event) {
+      event.preventDefault();
+
+      console.log("OrderBar :: onToggleOrder => ");
+
+      var order = this.state.order;
+
+      var newOrder = '';
+
+      if (order == '') {
+        newOrder = 'asc';
+      } else if (order == 'asc') {
+        newOrder = 'desc';
+      }
+
+      this.setState({
+        order: newOrder
+      });
+
+      var query = '';
+      if (newOrder != '') {
+        query = this.props.fieldName + ',' + newOrder;
+      }
+
+      this.props.onSubmit(query);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var order = this.state.order;
+
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'order-bar centered' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: '', onClick: this.onToggleOrder.bind(this) },
+          'Ordenar por nombre \xA0',
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa fa-sort" + (order != '' ? '-' + order : '') })
+        )
+      );
+    }
+  }]);
+
+  return OrderBar;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (OrderBar);
 
 /***/ })
 /******/ ]);

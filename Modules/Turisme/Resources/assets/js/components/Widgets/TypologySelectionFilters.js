@@ -8,6 +8,8 @@ import FilterBarPublication from './../Common/FilterBarPublication';
 import ListItem from './../Common/ListItem';
 import ListSelectedItem from './../Common/ListSelectedItem';
 import ModalForm from './../Common/ModalForm';
+import OrderBar from './../Common/OrderBar';
+
 
 
 export default class TypologySelectionFilters extends Component {
@@ -59,7 +61,7 @@ export default class TypologySelectionFilters extends Component {
         this.query(1,filters);
     }
 
-    query(page,filters) {
+    query(page,filters,order) {
         var self = this;
 
         const {textIdentifier,dateIdentifier,field} = this.state;
@@ -74,6 +76,7 @@ export default class TypologySelectionFilters extends Component {
             size : 2,
             typology_id : field.settings.typology,
             fields : filtersQuery,
+            order : order,
             page : page ? page : null
         };
 
@@ -87,7 +90,8 @@ export default class TypologySelectionFilters extends Component {
                       items : response.data.data,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
-                      filters : filters
+                      filters : filters,
+                      order : order
                   });
               }
 
@@ -180,16 +184,27 @@ export default class TypologySelectionFilters extends Component {
     }
 
     onPageChange(page) {
-        const {filters} = this.state;
+        const {filters,order} = this.state;
 
-        this.query(page,filters);
+        this.query(page,filters,order);
     }
 
     handleFilterSubmit(filters) {
 
+      const {order} = this.state;
+
       console.log("TypologySelectionFilters :: handleFilterSubmit => ",filters);
 
-      this.query(1,filters);
+      this.query(1,filters,order);
+    }
+
+    handleOrderChange(order) {
+
+      const {filters} = this.state;
+
+      console.log("TypologySelectionFilters :: handleOrderChange => ",order);
+
+      this.query(1,filters,order);
     }
 
     onOpenForm() {
@@ -204,6 +219,11 @@ export default class TypologySelectionFilters extends Component {
 
             <FilterBarPublication
               onSubmit={this.handleFilterSubmit.bind(this)}
+            />
+
+            <OrderBar
+              fieldName="title"
+              onSubmit={this.handleOrderChange.bind(this)}
             />
 
 

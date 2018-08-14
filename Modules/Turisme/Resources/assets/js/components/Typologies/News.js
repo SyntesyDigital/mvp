@@ -20,7 +20,7 @@ class News extends Component {
       moment.locale(LOCALE);
 
       const fields = this.props.field.fields;
-      //console.log("News => ",this.props.field);
+      console.log("News => ",this.props.field);
 
       var data = fields.data.values != null ? fields.data.values : null;
       if(data != null){
