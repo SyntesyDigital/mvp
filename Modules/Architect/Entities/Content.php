@@ -188,7 +188,7 @@ class Content extends Model
 
      public function scopeCategoryId($query, $categoryId)
      {
-         $categoryId = $tagsId && !is_array($categoryId) ? array($categoryId) : null;
+         $categoryId = $categoryId && !is_array($categoryId) ? array($categoryId) : null;
 
          return $categoryId ? $query->whereHas('categories', function($q) use($categoryId) {
              $q->whereIn('category_id', $categoryId);
