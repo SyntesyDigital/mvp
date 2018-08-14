@@ -47,7 +47,7 @@ class ContentController extends Controller
             }
         }
 
-        return response()->json(new ContentCollection($collection->paginate($size)));
+        return new ContentCollection($collection->paginate($size));
     }
 
 }

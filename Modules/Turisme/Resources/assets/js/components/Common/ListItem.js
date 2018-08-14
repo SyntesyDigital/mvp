@@ -33,6 +33,9 @@ class ListItem extends Component {
           return (
             <Publication
               field={this.props.field}
+              selectable={this.props.selectable}
+              selected={this.props.selected}
+              onSelect={this.props.onSelect}
             />
           )
         case 'link' :

@@ -115,6 +115,10 @@ trait HasFields
                 // return isset($field->value) ? $field->value : null;
             break;
 
+            case 'boolean':
+                return $field->value;
+            break;
+
             case 'localization':
                 return json_decode($field->value, true);
             break;

@@ -32808,7 +32808,10 @@ var ListItem = function (_Component) {
           });
         case 'publication':
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Typologies_Publication__["a" /* default */], {
-            field: this.props.field
+            field: this.props.field,
+            selectable: this.props.selectable,
+            selected: this.props.selected,
+            onSelect: this.props.onSelect
           });
         case 'link':
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Typologies_Link__["a" /* default */], {
@@ -106637,7 +106640,9 @@ if (document.getElementById('typology-last')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(492);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -106645,6 +106650,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -106667,7 +106673,15 @@ var News = function (_Component) {
     key: 'render',
     value: function render() {
 
+      __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
+
       var fields = this.props.field.fields;
+      //console.log("News => ",this.props.field);
+
+      var data = fields.data.values != null ? fields.data.values : null;
+      if (data != null) {
+        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
+      }
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -106675,19 +106689,19 @@ var News = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
           { className: 'image' },
-          fields.imatge && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
+          fields.imatge && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__["a" /* default */], {
             field: fields.imatge
           })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
           { className: 'text' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          data != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
             { className: 'data' },
-            '30-11-2016'
+            data
           ),
-          ' | ',
+          '|',
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
             { className: 'categoria' },
@@ -106756,8 +106770,6 @@ var Publication = function (_Component) {
 
       var fields = this.props.field.fields;
 
-      console.log("Publication => ", fields);
-
       var title = this.processText(fields, 'title');
       var format = this.processText(fields, 'format');
       var type = this.processText(fields, 'tipus');
@@ -106766,6 +106778,11 @@ var Publication = function (_Component) {
       var description = this.processText(fields, 'descripcio');
       var languages = this.processText(fields, 'idiomes');
       var price = this.processText(fields, 'preu');
+
+      var selectable = this.props.selectable !== undefined ? this.props.selectable : false;
+      var selected = this.props.selected !== undefined ? this.props.selected : false;
+
+      console.log("Publication => ", fields, selected);
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
@@ -106825,6 +106842,11 @@ var Publication = function (_Component) {
               field: fields.descargable
             })
           )
+        ),
+        selectable && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { type: 'button', className: "btn " + (selected ? 'selected' : ''), onClick: this.props.onSelect.bind(this, this.props.field) },
+          Lang.get('widgets.select')
         )
       );
     }
@@ -107437,17 +107459,26 @@ var TypologySearchDate = function (_Component) {
 
 
             if (filters != null) {
+
+                var fieldsQuery = '&fields=[:query]';
+
                 if (textIdentifier != null && filters.text != null) {
-                    searchQuery = "&" + textIdentifier + "=" + filters.text;
+                    searchQuery = '["' + textIdentifier + '","like","%' + filters.text + '%"]';
                 }
                 if (dateIdentifier != null && filters.startDate != null && filters.endDate != null) {
-                    datesQuery = "&" + dateIdentifier + "=[" + filters.startDate + ":" + filters.endDate + "]";
+                    datesQuery = '["' + dateIdentifier + '",">=","' + filters.startDate + '"]';
+                    datesQuery += ',["' + dateIdentifier + '","<=","' + filters.endDate + '"]';
                 }
+
+                var query = searchQuery + (searchQuery != '' && datesQuery != '' ? ',' : '') + datesQuery;
+                fieldsQuery = fieldsQuery.replace(':query', query);
             }
 
-            axios.get(ASSETS + 'api/contents?size=2&typology_id=' + field.settings.typology + searchQuery + datesQuery + '&page=' + (page ? page : null)).then(function (response) {
+            //console.log("TypologySearchDate :: query : "+fieldsQuery);
 
-                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+            axios.get(ASSETS + 'api/contents?size=2&typology_id=' + field.settings.typology + fieldsQuery + '&page=' + (page ? page : null)).then(function (response) {
+
+                if (response.status == 200 && response.data.data !== undefined) {
                     self.setState({
                         items: response.data.data,
                         lastPage: response.data.meta.last_page,
@@ -107697,7 +107728,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_FilterBar__ = __webpack_require__(556);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_ListItem__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__ = __webpack_require__(825);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_ListItem__ = __webpack_require__(94);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107713,159 +107745,415 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
 var TypologySelectionFilters = function (_Component) {
-    _inherits(TypologySelectionFilters, _Component);
+  _inherits(TypologySelectionFilters, _Component);
 
-    function TypologySelectionFilters(props) {
-        _classCallCheck(this, TypologySelectionFilters);
+  function TypologySelectionFilters(props) {
+    _classCallCheck(this, TypologySelectionFilters);
 
-        var _this = _possibleConstructorReturn(this, (TypologySelectionFilters.__proto__ || Object.getPrototypeOf(TypologySelectionFilters)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (TypologySelectionFilters.__proto__ || Object.getPrototypeOf(TypologySelectionFilters)).call(this, props));
 
-        var field = props.field ? JSON.parse(atob(props.field)) : '';
-        var textIdentifier = field.settings.textIdentifier !== undefined ? field.settings.textIdentifier : null;
-        var dateIdentifier = field.settings.dateIdentifier !== undefined ? field.settings.dateIdentifier : null;
+    var field = props.field ? JSON.parse(atob(props.field)) : '';
+    var textIdentifier = field.settings.textIdentifier !== undefined ? field.settings.textIdentifier : null;
+    var dateIdentifier = field.settings.dateIdentifier !== undefined ? field.settings.dateIdentifier : null;
 
-        console.log("TypologySelectionFilters => ", field);
+    console.log("TypologySelectionFilters => ", field);
 
-        _this.state = {
-            field: field,
-            items: null,
-            lastPage: null,
-            currPage: null,
-            loaded: false,
-            textIdentifier: textIdentifier,
-            dateIdentifier: dateIdentifier,
-            filters: null
-        };
-        return _this;
+    _this.state = {
+      field: field,
+      items: null,
+      lastPage: null,
+      currPage: null,
+      loaded: false,
+      textIdentifier: textIdentifier,
+      dateIdentifier: dateIdentifier,
+      filters: null,
+      selectedItems: {},
+      area: true
+    };
+
+    $("#selected-items").css({ display: 'block' });
+    $("#selected-items").on('click', _this.onAreaToggle.bind(_this));
+    return _this;
+  }
+
+  _createClass(TypologySelectionFilters, [{
+    key: 'onAreaToggle',
+    value: function onAreaToggle(event) {
+      event.preventDefault();
+
+      console.log("toggle!");
+      var area = !this.state.area;
+
+      this.setState({
+        area: area
+      });
     }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var filters = this.state.filters;
 
-    _createClass(TypologySelectionFilters, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var filters = this.state.filters;
+
+      this.query(1, filters);
+    }
+  }, {
+    key: 'query',
+    value: function query(page, filters) {
+      var self = this;
+
+      var _state = this.state,
+          textIdentifier = _state.textIdentifier,
+          dateIdentifier = _state.dateIdentifier,
+          field = _state.field;
 
 
-            this.query(1, filters);
+      var filtersQuery = '';
+
+      if (filters != null) {
+        filtersQuery = filters.query;
+      }
+
+      console.log("TypologySearchDate :: query : " + filtersQuery);
+
+      axios.get(ASSETS + 'api/contents?size=2&typology_id=' + field.settings.typology + filtersQuery + '&page=' + (page ? page : null)).then(function (response) {
+
+        if (response.status == 200 && response.data.data !== undefined) {
+          self.setState({
+            items: response.data.data,
+            lastPage: response.data.meta.last_page,
+            currPage: response.data.meta.current_page,
+            filters: filters
+          });
         }
-    }, {
-        key: 'query',
-        value: function query(page, filters) {
-            var self = this;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'handleOnSelect',
+    value: function handleOnSelect(field) {
+      console.log("TypologySelectionFilters :: => handleOnSelect ", field);
 
-            var searchQuery = '';
-            var datesQuery = '';
-
-            var _state = this.state,
-                textIdentifier = _state.textIdentifier,
-                dateIdentifier = _state.dateIdentifier,
-                field = _state.field;
+      var selectedItems = this.state.selectedItems;
 
 
-            if (filters != null) {
-                if (textIdentifier != null && filters.text != null) {
-                    searchQuery = "&" + textIdentifier + "=" + filters.text;
-                }
-                if (dateIdentifier != null && filters.startDate != null && filters.endDate != null) {
-                    datesQuery = "&" + dateIdentifier + "=[" + filters.startDate + ":" + filters.endDate + "]";
-                }
-            }
+      if (selectedItems[field.id] === undefined) {
+        selectedItems[field.id] = field;
+      }
 
-            axios.get(ASSETS + 'api/contents?size=2&typology_id=' + field.settings.typology + searchQuery + datesQuery + '&page=' + (page ? page : null)).then(function (response) {
+      this.setState({
+        selectedItems: selectedItems
+      });
 
-                if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
-                    self.setState({
-                        items: response.data.data,
-                        lastPage: response.data.meta.last_page,
-                        currPage: response.data.meta.current_page,
-                        filters: filters
-                    });
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    }, {
-        key: 'renderItems',
-        value: function renderItems() {
+      var size = Object.keys(selectedItems).length;
+      $("#selected-items #number").html(size);
+    }
+  }, {
+    key: 'renderItems',
+    value: function renderItems() {
 
-            var result = [];
+      var result = [];
 
-            var items = this.state.items;
+      var _state2 = this.state,
+          items = _state2.items,
+          selectedItems = _state2.selectedItems;
 
 
-            for (var key in items) {
-                console.log("TypologyPaginated => ", items[key]);
+      for (var key in items) {
 
-                result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'li',
-                    { key: key },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_ListItem__["a" /* default */], {
-                        field: items[key]
-                    })
-                ));
-            }
+        var selected = selectedItems[items[key].id] !== undefined ? true : false;
+        //console.log("TypologyPaginated => ",items[key],selectedItems,selected);
 
-            return result;
-        }
-    }, {
-        key: 'onPageChange',
-        value: function onPageChange(page) {
-            var filters = this.state.filters;
+        result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          { key: key },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Common_ListItem__["a" /* default */], {
+            field: items[key],
+            selectable: true,
+            selected: selected,
+            onSelect: this.handleOnSelect.bind(this)
+          })
+        ));
+      }
+
+      return result;
+    }
+  }, {
+    key: 'renderSelectedItems',
+    value: function renderSelectedItems() {
+
+      var result = [];
+
+      var selectedItems = this.state.selectedItems;
 
 
-            this.query(page, filters);
-        }
-    }, {
-        key: 'handleFilterSubmit',
-        value: function handleFilterSubmit(filters) {
-            this.query(1, filters);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_FilterBar__["a" /* default */], {
-                    displayText: this.state.textIdentifier != null ? true : false,
-                    displayDates: this.state.dateIdentifier != null ? true : false,
-                    onSubmit: this.handleFilterSubmit.bind(this)
-                }),
-                this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
-                this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'p',
-                    null,
-                    Lang.get('widgets.last_typology.empty')
-                ),
-                this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'ul',
-                    null,
-                    this.renderItems()
-                ),
-                this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], {
-                    currPage: this.state.currPage,
-                    lastPage: this.state.lastPage,
-                    onChange: this.onPageChange.bind(this)
-                })
-            );
-        }
-    }]);
+      for (var key in selectedItems) {
 
-    return TypologySelectionFilters;
+        result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'li',
+          { key: key },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Common_ListItem__["a" /* default */], {
+            field: selectedItems[key]
+          })
+        ));
+      }
+
+      return result;
+    }
+  }, {
+    key: 'onPageChange',
+    value: function onPageChange(page) {
+      var filters = this.state.filters;
+
+
+      this.query(page, filters);
+    }
+  }, {
+    key: 'handleFilterSubmit',
+    value: function handleFilterSubmit(filters) {
+
+      console.log("TypologySelectionFilters :: handleFilterSubmit => ", filters);
+
+      this.query(1, filters);
+    }
+  }, {
+    key: 'renderSelectionArea',
+    value: function renderSelectionArea() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_FilterBarPublication__["a" /* default */], {
+          onSubmit: this.handleFilterSubmit.bind(this)
+        }),
+        this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
+        this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          Lang.get('widgets.last_typology.empty')
+        ),
+        this.state.items != null && this.state.items.length > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          this.renderItems()
+        ),
+        this.state.lastPage && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_Paginator__["default"], {
+          currPage: this.state.currPage,
+          lastPage: this.state.lastPage,
+          onChange: this.onPageChange.bind(this)
+        })
+      );
+    }
+  }, {
+    key: 'renderSelectedList',
+    value: function renderSelectedList() {
+
+      var size = Object.keys(this.state.selectedItems).length;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        size == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          Lang.get('widgets.selected_void')
+        ),
+        size > 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          this.renderSelectedItems()
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var area = this.state.area;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        area && this.renderSelectionArea(),
+        !area && this.renderSelectedList()
+      );
+    }
+  }]);
+
+  return TypologySelectionFilters;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (TypologySelectionFilters);
 
 
 if (document.getElementById('typology-selection-filters')) {
-    var element = document.getElementById('typology-selection-filters');
-    var field = element.getAttribute('field');
+  var element = document.getElementById('typology-selection-filters');
+  var field = element.getAttribute('field');
 
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologySelectionFilters, {
-        field: field
-    }), element);
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TypologySelectionFilters, {
+    field: field
+  }), element);
 }
+
+/***/ }),
+/* 825 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var FilterBarPublication = function (_Component) {
+  _inherits(FilterBarPublication, _Component);
+
+  function FilterBarPublication(props) {
+    _classCallCheck(this, FilterBarPublication);
+
+    var _this = _possibleConstructorReturn(this, (FilterBarPublication.__proto__ || Object.getPrototypeOf(FilterBarPublication)).call(this, props));
+
+    _this.state = {
+      language: '',
+      free: false
+    };
+
+    _this.handleChange = _this.handleChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(FilterBarPublication, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+
+      var state = this.state;
+
+      var query = [];
+
+      if (this.state.language != '' && this.state.language != null) {
+        query.push('["idiomes","like","%' + this.state.language + '%"]');
+      }
+
+      if (this.state.free) {
+        query.push('["es-de-pagament","=","1"]');
+      }
+
+      this.props.onSubmit({
+        text: this.state.language != '' ? this.state.language : null,
+        free: this.state.free,
+        query: this.processQuery(query)
+      });
+    }
+  }, {
+    key: 'processQuery',
+    value: function processQuery(filtersArray) {
+
+      var fieldsQuery = '';
+
+      if (filtersArray != null && filtersArray.length > 0) {
+
+        var fieldsQuery = '&fields=[';
+
+        for (var key in filtersArray) {
+          fieldsQuery += (key > 0 ? ',' : '') + filtersArray[key];
+        }
+        fieldsQuery += ']';
+      }
+
+      return fieldsQuery;
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      event.preventDefault();
+
+      var state = this.state;
+      state[event.target.name] = event.target.value;
+
+      this.setState(state);
+    }
+  }, {
+    key: 'handleCheckboxChange',
+    value: function handleCheckboxChange(event) {
+
+      var state = this.state;
+      state[event.target.name] = event.target.checked;
+
+      this.setState(state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'filter-bar' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'form',
+          { onSubmit: this.handleSubmit.bind(this), className: 'nova-cerca' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'select',
+            { name: 'language', className: 'col-xs-3', onChange: this.handleChange, value: this.state.language },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: '' },
+              '----'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'catal\xE0' },
+              'Catal\xE0'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'castellano' },
+              'Castellano'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'english' },
+              'English'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-xs-3 checkbox', style: { paddingLeft: 40 } },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: 'col-md-4 col-sm-6 col-xs-12' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+                type: 'checkbox',
+                name: 'free',
+                checked: this.state.free,
+                onChange: this.handleCheckboxChange.bind(this)
+              }),
+              'Gratuitas'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: Lang.get('widgets.search'), className: 'btn' }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator' })
+        )
+      );
+    }
+  }]);
+
+  return FilterBarPublication;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (FilterBarPublication);
 
 /***/ })
 /******/ ]);

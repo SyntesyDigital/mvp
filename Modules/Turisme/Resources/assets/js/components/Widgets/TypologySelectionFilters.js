@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Paginator from './../Common/Paginator';
 import FilterBar from './../Common/FilterBar';
+import FilterBarPublication from './../Common/FilterBarPublication';
+
 import ListItem from './../Common/ListItem';
 
 
@@ -27,8 +29,25 @@ export default class TypologySelectionFilters extends Component {
             loaded: false,
             textIdentifier : textIdentifier,
             dateIdentifier : dateIdentifier,
-            filters : null
+            filters : null,
+            selectedItems : {},
+            area : true
         };
+
+        $("#selected-items").css({display:'block'});
+        $("#selected-items").on('click',this.onAreaToggle.bind(this));
+    }
+
+    onAreaToggle(event){
+      event.preventDefault();
+
+      console.log("toggle!");
+      const area = !this.state.area;
+
+      this.setState({
+        area : area
+      });
+
     }
 
     componentDidMount() {
@@ -41,28 +60,21 @@ export default class TypologySelectionFilters extends Component {
     query(page,filters) {
         var self = this;
 
-        var searchQuery = '';
-        var datesQuery = '';
-
         const {textIdentifier,dateIdentifier,field} = this.state;
 
-        if(filters != null){
-          if(textIdentifier != null && filters.text != null){
-            searchQuery = "&"+textIdentifier+"="+filters.text;
-          }
-          if(dateIdentifier != null && filters.startDate != null && filters.endDate != null) {
-            datesQuery = "&"+dateIdentifier+"=["+filters.startDate+":"+filters.endDate+"]";
-          }
+        var filtersQuery = '';
 
+        if(filters != null){
+          filtersQuery = filters.query;
         }
 
+        console.log("TypologySearchDate :: query : "+filtersQuery);
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + searchQuery + datesQuery +'&page=' + (page ? page : null))
+        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + filtersQuery +'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
-                  && response.data.data !== undefined
-                  && response.data.data.length > 0)
+                  && response.data.data !== undefined)
               {
                   self.setState({
                       items : response.data.data,
@@ -78,20 +90,62 @@ export default class TypologySelectionFilters extends Component {
            });
     }
 
+    handleOnSelect(field){
+      console.log("TypologySelectionFilters :: => handleOnSelect ",field);
+
+      const {selectedItems} = this.state;
+
+      if(selectedItems[field.id] === undefined){
+        selectedItems[field.id] = field;
+      }
+
+      this.setState({
+        selectedItems : selectedItems
+      });
+
+      var size = Object.keys(selectedItems).length;
+      $("#selected-items #number").html(size);
+
+    }
 
     renderItems() {
 
       var result = [];
 
-      const {items} = this.state;
+      const {items,selectedItems} = this.state;
 
       for(var key in items){
-        console.log("TypologyPaginated => ",items[key]);
+
+        var selected = selectedItems[items[key].id] !== undefined ? true : false;
+        //console.log("TypologyPaginated => ",items[key],selectedItems,selected);
 
         result.push(
           <li key={key}>
             <ListItem
               field={items[key]}
+              selectable={true}
+              selected={selected}
+              onSelect={this.handleOnSelect.bind(this)}
+            />
+          </li>
+        );
+      }
+
+      return result;
+    }
+
+    renderSelectedItems() {
+
+      var result = [];
+
+      const {selectedItems} = this.state;
+
+      for(var key in selectedItems){
+
+        result.push(
+          <li key={key}>
+            <ListItem
+              field={selectedItems[key]}
             />
           </li>
         );
@@ -107,39 +161,77 @@ export default class TypologySelectionFilters extends Component {
     }
 
     handleFilterSubmit(filters) {
+
+      console.log("TypologySelectionFilters :: handleFilterSubmit => ",filters);
+
       this.query(1,filters);
     }
 
+    renderSelectionArea() {
+      return (
+        <div>
+
+            <FilterBarPublication
+              onSubmit={this.handleFilterSubmit.bind(this)}
+            />
+
+
+            {this.state.items == null &&
+                <p>{/*Carregant dades...*/}</p>
+            }
+
+            {this.state.items != null && this.state.items.length == 0 &&
+                <p>{Lang.get('widgets.last_typology.empty')}</p>
+            }
+
+            {this.state.items != null && this.state.items.length > 0 &&
+                <ul>{this.renderItems()}</ul>
+            }
+
+            {this.state.lastPage &&
+                <Paginator
+                  currPage={this.state.currPage}
+                  lastPage={this.state.lastPage}
+                  onChange={this.onPageChange.bind(this)}
+                />
+            }
+        </div>
+      );
+    }
+
+    renderSelectedList() {
+
+      var size = Object.keys(this.state.selectedItems).length;
+
+      return (
+        <div>
+
+            {size == 0 &&
+                <p>{Lang.get('widgets.selected_void')}</p>
+            }
+
+            {size > 0 &&
+                <ul>{this.renderSelectedItems()}</ul>
+            }
+
+        </div>
+      );
+    }
+
     render() {
+
+        const area = this.state.area;
+
         return (
             <div>
+              {area &&
+                this.renderSelectionArea()
+              }
 
-                <FilterBar
-                  displayText={this.state.textIdentifier != null ? true : false}
-                  displayDates={this.state.dateIdentifier != null ? true : false}
-                  onSubmit={this.handleFilterSubmit.bind(this)}
-                />
+              {!area &&
+                this.renderSelectedList()
+              }
 
-
-                {this.state.items == null &&
-                    <p>{/*Carregant dades...*/}</p>
-                }
-
-                {this.state.items != null && this.state.items.length == 0 &&
-                    <p>{Lang.get('widgets.last_typology.empty')}</p>
-                }
-
-                {this.state.items != null && this.state.items.length > 0 &&
-                    <ul>{this.renderItems()}</ul>
-                }
-
-                {this.state.lastPage &&
-                    <Paginator
-                      currPage={this.state.currPage}
-                      lastPage={this.state.lastPage}
-                      onChange={this.onPageChange.bind(this)}
-                    />
-                }
             </div>
         );
     }
