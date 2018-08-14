@@ -44,7 +44,7 @@ class FilterBarPublication extends Component {
 
       if(filtersArray != null && filtersArray.length > 0){
 
-        var fieldsQuery = '&fields=[';
+        var fieldsQuery = '[';
 
         for(var key in filtersArray){
           fieldsQuery += (key > 0 ? ',' : '')+filtersArray[key];

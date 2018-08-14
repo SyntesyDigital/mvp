@@ -6,6 +6,8 @@ import FilterBar from './../Common/FilterBar';
 import FilterBarPublication from './../Common/FilterBarPublication';
 
 import ListItem from './../Common/ListItem';
+import ListSelectedItem from './../Common/ListSelectedItem';
+import ModalForm from './../Common/ModalForm';
 
 
 export default class TypologySelectionFilters extends Component {
@@ -68,9 +70,14 @@ export default class TypologySelectionFilters extends Component {
           filtersQuery = filters.query;
         }
 
-        console.log("TypologySearchDate :: query : "+filtersQuery);
+        var params = {
+            size : 2,
+            typology_id : field.settings.typology,
+            fields : filtersQuery,
+            page : page ? page : null
+        };
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + filtersQuery +'&page=' + (page ? page : null))
+        axios.post(ASSETS+'api/contents',params)
           .then(function (response) {
 
               if(response.status == 200
@@ -108,6 +115,23 @@ export default class TypologySelectionFilters extends Component {
 
     }
 
+    handleOnRemove(field) {
+      console.log("TypologySelectionFilters :: => handleOnRemove ",field);
+
+      const {selectedItems} = this.state;
+
+      if(selectedItems[field.id] !== undefined){
+        delete selectedItems[field.id];
+      }
+
+      this.setState({
+        selectedItems : selectedItems
+      });
+
+      var size = Object.keys(selectedItems).length;
+      $("#selected-items #number").html(size);
+    }
+
     renderItems() {
 
       var result = [];
@@ -120,7 +144,7 @@ export default class TypologySelectionFilters extends Component {
         //console.log("TypologyPaginated => ",items[key],selectedItems,selected);
 
         result.push(
-          <li key={key}>
+          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
             <ListItem
               field={items[key]}
               selectable={true}
@@ -143,9 +167,10 @@ export default class TypologySelectionFilters extends Component {
       for(var key in selectedItems){
 
         result.push(
-          <li key={key}>
-            <ListItem
+          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
+            <ListSelectedItem
               field={selectedItems[key]}
+              onRemove={this.handleOnRemove.bind(this)}
             />
           </li>
         );
@@ -165,6 +190,12 @@ export default class TypologySelectionFilters extends Component {
       console.log("TypologySelectionFilters :: handleFilterSubmit => ",filters);
 
       this.query(1,filters);
+    }
+
+    onOpenForm() {
+
+      console.log("TypologySelectionFilters :: open form");
+
     }
 
     renderSelectionArea() {
@@ -211,8 +242,16 @@ export default class TypologySelectionFilters extends Component {
             }
 
             {size > 0 &&
-                <ul>{this.renderSelectedItems()}</ul>
+                <div>
+                  <ul>{this.renderSelectedItems()}</ul>
+
+                  <div className="centered form-button-wrapper">
+                    <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{Lang.get('widgets.open_form')}</button>
+                  </div>
+                </div>
             }
+
+
 
         </div>
       );
@@ -224,6 +263,7 @@ export default class TypologySelectionFilters extends Component {
 
         return (
             <div>
+
               {area &&
                 this.renderSelectionArea()
               }

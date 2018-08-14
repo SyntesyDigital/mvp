@@ -48,7 +48,7 @@ export default class TypologySearchDate extends Component {
 
         if(filters != null){
 
-          var fieldsQuery = '&fields=[:query]';
+          var fieldsQuery = '[:query]';
 
           if(textIdentifier != null && filters.text != null){
             searchQuery = '["'+textIdentifier+'","like","%'+filters.text+'%"]';
@@ -64,7 +64,14 @@ export default class TypologySearchDate extends Component {
 
         //console.log("TypologySearchDate :: query : "+fieldsQuery);
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + fieldsQuery +'&page=' + (page ? page : null))
+        var params = {
+            size : 2,
+            typology_id : field.settings.typology,
+            fields : fieldsQuery,
+            page : page ? page : null
+        };
+
+        axios.post(ASSETS+'api/contents',params)
           .then(function (response) {
 
               if(response.status == 200
