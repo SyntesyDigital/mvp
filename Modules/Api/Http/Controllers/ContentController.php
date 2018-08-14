@@ -49,6 +49,9 @@ class ContentController extends Controller
             }
         }
 
+        print_r($fields);
+        exit();
+
         return new ContentCollection($collection->paginate($size));
     }
 
