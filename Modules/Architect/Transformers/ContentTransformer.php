@@ -12,6 +12,9 @@ use Modules\Architect\Entities\Language;
 // FIXME : move this or find a better way :)
 use Modules\Turisme\Adapters\PageBuilderAdapter;
 
+use Modules\Architect\Ressources\TagCollection;
+use Modules\Architect\Transformers\TagTransformer;
+
 class ContentTransformer extends Resource
 {
 
@@ -21,8 +24,9 @@ class ContentTransformer extends Resource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request, $language = null)
     {
+        // FIXME : find a better way
         $languages = Language::all();
 
         return [
@@ -32,8 +36,13 @@ class ContentTransformer extends Resource
             'is_page' => boolval($this->resource->is_page),
             'page' => $this->resource->is_page ? $this->getPage($languages) : null,
             'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
-            'full_slug' => $this->resource->getFullSlug()
+            'full_slug' => $this->resource->getFullSlug(),
+            'tags' => $this->resource->tags->map(function($tag) use ($request, $language){
+                return (new TagTransformer($tag))->toArray($request, $language);
+            })
         ];
+
+        // $this->resource->tags ? (new TagCollection($this->resource->tags))->toArray() : null
     }
 
     private function getFields($languages)

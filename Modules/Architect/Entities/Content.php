@@ -166,30 +166,35 @@ class Content extends Model
     }
 
 
-    public function scopeField($query, $name, $value)
-    {
-        return $query->where([
-            'name' => $name,
-            'value' => $value,
-        ]);
-    }
 
-    public function scopeTypologyId($query, $typologyId)
-    {
-        return $typologyId ? $query->where('typology_id', (int) $typologyId) : $query;
-    }
-
-    public function scopeCategoryId($query, $categoryId)
-    {
-        return $categoryId ? $query->whereHas('categories', function($q) use($categoryId) {
-            $q->where('category_id', $categoryId);
-        }) : $query;
-    }
 
 
     /*
      *  Scopes
      */
+
+     public function scopeField($query, $name, $value)
+     {
+         return $query->where([
+             'name' => $name,
+             'value' => $value,
+         ]);
+     }
+
+     public function scopeTypologyId($query, $typologyId)
+     {
+         return $typologyId ? $query->where('typology_id', (int) $typologyId) : $query;
+     }
+
+     public function scopeCategoryId($query, $categoryId)
+     {
+         $categoryId = $tagsId && !is_array($categoryId) ? array($categoryId) : null;
+
+         return $categoryId ? $query->whereHas('categories', function($q) use($categoryId) {
+             $q->whereIn('category_id', $categoryId);
+         }) : $query;
+     }
+
     public function scopeIsPage(Builder $query)
     {
         return $query->where('is_page', 1);
@@ -204,6 +209,15 @@ class Content extends Model
     {
         return $acceptLang ? $query->whereHas('languages', function($q) use($acceptLang) {
             $q->where('iso', $acceptLang);
+        }) : $query;
+    }
+
+    public function scopeByTagsIds(Builder $query, $tagsId)
+    {
+        $tagsId = $tagsId && !is_array($tagsId) ? array($tagsId) : null;
+
+        return $tagsId ? $query->whereHas('tags', function($q) use($tagsId) {
+            $q->whereIn('tag_id', $tagsId);
         }) : $query;
     }
 

@@ -28,6 +28,7 @@ class ContentController extends Controller
         $typologyId = $request->get('typology_id');
         $categoryId = $request->get('category_id');
         $acceptLang = $request->get('accept_lang');
+        $tags = $request->get('tags') ? json_decode($request->get('tags'), true) : null;
         $order = $request->get('order');
         $fields = $request->get('fields') ? json_decode($request->get('fields')) : null;
         $size = $request->get('size') ? $request->get('size') : 20;
@@ -37,7 +38,8 @@ class ContentController extends Controller
             ->typologyId($typologyId)
             ->categoryId($categoryId)
             ->languageIso($acceptLang)
-            ->whereFields($fields);
+            ->whereFields($fields)
+            ->byTagsIds($tags);
 
         if($order) {
             $order = explode(",", $order);
