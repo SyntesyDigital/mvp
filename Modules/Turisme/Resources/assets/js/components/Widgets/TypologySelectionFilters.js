@@ -77,7 +77,8 @@ export default class TypologySelectionFilters extends Component {
             typology_id : field.settings.typology,
             fields : filtersQuery,
             order : order,
-            page : page ? page : null
+            page : page ? page : null,
+            accept_lang : LOCALE
         };
 
         axios.post(ASSETS+'api/contents',params)

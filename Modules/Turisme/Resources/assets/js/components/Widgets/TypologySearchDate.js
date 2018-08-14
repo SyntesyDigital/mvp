@@ -68,7 +68,8 @@ export default class TypologySearchDate extends Component {
             size : 2,
             typology_id : field.settings.typology,
             fields : fieldsQuery,
-            page : page ? page : null
+            page : page ? page : null,
+            accept_lang : LOCALE
         };
 
         axios.post(ASSETS+'api/contents',params)

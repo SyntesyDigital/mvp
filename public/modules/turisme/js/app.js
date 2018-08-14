@@ -107480,7 +107480,8 @@ var TypologySearchDate = function (_Component) {
                 size: 2,
                 typology_id: field.settings.typology,
                 fields: fieldsQuery,
-                page: page ? page : null
+                page: page ? page : null,
+                accept_lang: LOCALE
             };
 
             axios.post(ASSETS + 'api/contents', params).then(function (response) {
@@ -107739,7 +107740,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_ListItem__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Common_ListSelectedItem__ = __webpack_require__(826);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Common_ModalForm__ = __webpack_require__(828);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__ = __webpack_require__(858);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Common_OrderBar__ = __webpack_require__(829);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107834,7 +107835,8 @@ var TypologySelectionFilters = function (_Component) {
         typology_id: field.settings.typology,
         fields: filtersQuery,
         order: order,
-        page: page ? page : null
+        page: page ? page : null,
+        accept_lang: LOCALE
       };
 
       axios.post(ASSETS + 'api/contents', params).then(function (response) {
@@ -108658,36 +108660,7 @@ var ModalForm = function (_Component) {
 /* unused harmony default export */ var _unused_webpack_default_export = (ModalForm);
 
 /***/ }),
-/* 829 */,
-/* 830 */,
-/* 831 */,
-/* 832 */,
-/* 833 */,
-/* 834 */,
-/* 835 */,
-/* 836 */,
-/* 837 */,
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */,
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */,
-/* 854 */,
-/* 855 */,
-/* 856 */,
-/* 857 */,
-/* 858 */
+/* 829 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
