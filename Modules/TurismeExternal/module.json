@@ -1,0 +1,16 @@
+{
+    "name": "TurismeExternal",
+    "alias": "turismeexternal",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\TurismeExternal\\Providers\\TurismeExternalServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
