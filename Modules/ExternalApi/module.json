@@ -1,0 +1,16 @@
+{
+    "name": "ExternalApi",
+    "alias": "externalapi",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\ExternalApi\\Providers\\ExternalApiServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
