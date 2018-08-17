@@ -5,68 +5,27 @@ namespace Modules\ExternalApi\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\ExternalApi\Collections\AgencyCategoryCollection;
+use Modules\ExternalApi\Entities\AgencyCategory;
+use Modules\ExternalApi\Repositories\AgencyCategoryRepository;
 
 class AgencyCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
+    public function __construct(AgencyCategoryRepository $categories)
     {
-        return view('externalapi::index');
+        $this->categories = $categories;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function all()
     {
-        return view('externalapi::create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-    }
+        $category = AgencyCategory::find(1);
 
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('externalapi::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('externalapi::edit');
-    }
+        $categories = $this->categories
+            ->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'))
+            ->paginate(20);
 
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
+        return new AgencyCategoryCollection($categories);
     }
 }

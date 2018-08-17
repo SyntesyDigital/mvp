@@ -6,21 +6,29 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\ExternalApi\Collections\CompanyCollection;
+use Modules\ExternalApi\Collections\IndicatorCollection;
 use Modules\ExternalApi\Repositories\IndicatorRepository;
 
 class IndicatorController extends Controller
 {
 
+    /**
+     * @var AxeRepository
+     */
+    private $indicators;
+
     public function __construct(IndicatorRepository $indicators)
     {
-        $this->indicators = $indicators;
+        $this->axes = $indicators;
     }
 
-    public function companies($id,Request $request)
+    public function all()
     {
-        $this->indicators->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria')); // Check Request Criteria https://github.com/andersao/l5-repository
+        $indicators = $this->axes
+            ->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'))
+            ->paginate(20);
 
-        return new CompanyCollection($this->indicators->find($id)->companies()->paginate(20));
+        return new IndicatorCollection($indicators);
     }
 
 }
