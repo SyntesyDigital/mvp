@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $imagesUpload = ['image'];git s
+    protected $imagesUpload = ['image'];
 
     /**
      * The attributes that are mass assignable.
