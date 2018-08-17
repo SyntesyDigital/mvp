@@ -21,12 +21,13 @@ class AxeController extends Controller
         $this->axes = $axes;
     }
 
-    public function indicators($id)
+    public function all()
     {
-        $this->axes->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria')); // Check Request Criteria https://github.com/andersao/l5-repository
+        $axes = $this->axes
+            ->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'))
+            ->paginate(20);
 
-        return new AxeCollection($this->axes->find($id)->indicators()->paginate(20));
+        return new AxeCollection($axes);
     }
-
 
 }

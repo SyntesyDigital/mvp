@@ -11,19 +11,25 @@ namespace Modules\ExternalApi\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class AgencyCategoryRepository extends BaseRepository
+class CompanyRepository extends BaseRepository
 {
+
     protected $fieldSearchable = [
         'id',
+        'company_id',
+        'indicator_id',
         'name',
         'description_ca',
         'description_es',
         'description_en',
+        'address',
+        'postcode',
+        'web',
+        'indicators.id_axe',
     ];
 
     public function model()
     {
-        return "Modules\\ExternalApi\\Entities\\AgencyCategory";
+        return "Modules\\ExternalApi\\Entities\\Company";
     }
-
 }

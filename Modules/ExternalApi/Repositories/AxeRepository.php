@@ -15,9 +15,11 @@ class AxeRepository extends BaseRepository
 {
 
     protected $fieldSearchable = [
+        'id',
         'description_ca',
         'description_es',
         'description_en',
+        'companies.name',
     ];
 
     public function model()

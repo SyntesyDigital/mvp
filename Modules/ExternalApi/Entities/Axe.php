@@ -24,7 +24,12 @@ class Axe extends Model
 
     public function indicators()
     {
-        return $this->hasMany('\Modules\ExternalApi\Entities\Indicator', 'indicator_id');
+        return $this->hasMany('\Modules\ExternalApi\Entities\Indicator', 'id_axe');
+    }
+
+    public function companies()
+    {
+        return $this->hasManyThrough('\Modules\ExternalApi\Entities\Company', '\Modules\ExternalApi\Entities\Indicator', 'id_axe');
     }
 
 }

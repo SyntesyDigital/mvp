@@ -28,6 +28,6 @@ class Company extends Model
 
     public function indicators()
     {
-        return $this->hasOne('\Modules\ExternalApi\Entities\Indicator');
+        return $this->hasMany('\Modules\ExternalApi\Entities\Indicator', 'id');
     }
 }
