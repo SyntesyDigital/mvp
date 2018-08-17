@@ -195,6 +195,17 @@ class Content extends Model
          }) : $query;
      }
 
+    public function scopeIsPublished(Builder $query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeIsNotPublished(Builder $query)
+    {
+        return $query->where('status', 0);
+    }
+
+
     public function scopeIsPage(Builder $query)
     {
         return $query->where('is_page', 1);
