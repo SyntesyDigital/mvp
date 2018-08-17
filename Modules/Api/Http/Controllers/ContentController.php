@@ -35,6 +35,7 @@ class ContentController extends Controller
 
         $collection = Content::with('fields')
             ->isNotPage()
+            ->isPublished()
             ->typologyId($typologyId)
             ->categoryId($categoryId)
             ->languageIso($acceptLang)
