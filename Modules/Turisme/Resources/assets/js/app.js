@@ -20,4 +20,5 @@ require('./components/Widgets/TypologyByCategory');
 require('./components/Widgets/TypologySearchDate');
 require('./components/Widgets/TypologyCarousel');
 require('./components/Widgets/TypologySelectionFilters');
+require('./components/Widgets/ContactForm');
 require('./components/Common/Paginator');

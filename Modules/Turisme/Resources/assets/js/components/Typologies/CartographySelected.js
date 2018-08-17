@@ -10,6 +10,24 @@ class CartographySelected extends Component {
     constructor(props)
     {
         super(props);
+
+        var inputs = {
+          size : 'a3',
+          format : 'jpg',
+          resolution : '72'
+        };
+
+        if(this.props.field.inputs !== undefined){
+          inputs = this.props.field.inputs;
+        }
+
+        this.props.inputs
+
+        this.state = {
+          inputs : inputs
+        };
+
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
@@ -21,9 +39,23 @@ class CartographySelected extends Component {
         fields[fieldName].values[LOCALE] : '' ;
     }
 
+    onChange(event){
+
+      const {inputs} = this.state;
+
+      inputs[event.target.name] = event.target.value;
+
+      this.setState({
+        inputs : inputs
+      });
+
+      this.props.onItemChange(inputs,this.props.field.id);
+    }
+
     render() {
 
       const fields = this.props.field.fields;
+      const inputs = this.state.inputs;
 
       const title = this.processText(fields,'title');
 
@@ -44,28 +76,28 @@ class CartographySelected extends Component {
             <ul className="detalls">
 
               <li className="list-forms">
-                <label for="Autor">Mides</label>
-                <select name="Autor" id="select">
-                  <option>A3 (42 x 29,7 cm)</option>
-                  <option>A2 (29,7 x 21 cm)</option>
+                <label htmlFor="Autor">Mides</label>
+                <select name="size" id="select" onChange={this.onChange} value={inputs.size}>
+                  <option value="a3">A3 (42 x 29,7 cm)</option>
+                  <option value="a2">A2 (29,7 x 21 cm)</option>
                 </select>
               </li>
 
               <li className="list-forms">
-                <label for="Format">Format</label>
-                <select name="Format" id="select2">
-                  <option>JPG</option>
-                  <option>PNG</option>
-                  <option>PDF</option>
+                <label htmlFor="Format">Format</label>
+                <select name="format" id="select2" onChange={this.onChange} value={inputs.format}>
+                  <option value="jpg">JPG</option>
+                  <option value="png">PNG</option>
+                  <option value="pdf">PDF</option>
                 </select>
               </li>
 
               <li className="list-forms">
-                <label for="Ressolucio">Ressolució</label>
-                <select name="Ressolucio" id="select3">
-                  <option>72 dpi</option>
-                  <option>150 dpi</option>
-                  <option>300 dpi</option>
+                <label htmlFor="Ressolucio">Ressolució</label>
+                <select name="resolution" id="select3" onChange={this.onChange} value={inputs.resolution}>
+                  <option value="72">72 dpi</option>
+                  <option value="150">150 dpi</option>
+                  <option value="300">300 dpi</option>
                 </select>
               </li>
             </ul>

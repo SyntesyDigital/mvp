@@ -29,7 +29,7 @@ class TypologySelectionFilters extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'typology'
+        'selectableTypology'
     ];
 }
 ?>

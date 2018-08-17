@@ -75,6 +75,17 @@ class ModalEditItem extends Component {
       });
     }
 
+    this.SELECTABLE_TYPOLOGIES = [];
+    const selectableArray = [4,6,7,14];
+
+    for(var key in TYPOLOGIES){
+      if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
+        this.SELECTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
+      }
+    }
+
+    console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
+
     this.onModalClose = this.onModalClose.bind(this);
   }
 
@@ -694,6 +705,20 @@ class ModalEditItem extends Component {
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Tipologia"
           options={TYPOLOGIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="selectableTypology"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Tipologia"
+          options={this.SELECTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name

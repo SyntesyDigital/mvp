@@ -183,12 +183,23 @@ export default class TypologySelectionFilters extends Component {
             <ListSelectedItem
               field={selectedItems[key]}
               onRemove={this.handleOnRemove.bind(this)}
+              onItemChange={this.handleOnSelectedChange.bind(this)}
             />
           </li>
         );
       }
 
       return result;
+    }
+
+    handleOnSelectedChange(inputs,id){
+      const {selectedItems} = this.state;
+
+      selectedItems[id].inputs = inputs;
+
+      this.setState({
+        selectedItems : selectedItems
+      });
     }
 
     onPageChange(page) {

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import News from './../Typologies/News';
 import PublicationSelected from './../Typologies/PublicationSelected';
 import StatisticsSelected from './../Typologies/StatisticsSelected';
 import CartographySelected from './../Typologies/CartographySelected';
+import LogosSelected from './../Typologies/LogosSelected';
 
-import Link from './../Typologies/Link';
-import Note from './../Typologies/Note';
 
 class ListSelectedItem extends Component {
 
@@ -20,29 +18,12 @@ class ListSelectedItem extends Component {
     renderItem() {
 
       switch(this.props.field.typology.identifier){
-        case 'news' :
-          return (
-              <News
-                field={this.props.field}
-              />
-           );
-       case 'notes' :
-         return (
-             <Note
-               field={this.props.field}
-             />
-          );
         case 'publication' :
           return (
             <PublicationSelected
               field={this.props.field}
               onRemove={this.props.onRemove}
-            />
-          )
-        case 'link' :
-          return (
-            <Link
-              field={this.props.field}
+              onItemChange={this.props.onItemChange}
             />
           )
         case 'estadistica' :
@@ -50,6 +31,7 @@ class ListSelectedItem extends Component {
             <StatisticsSelected
               field={this.props.field}
               onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
             />
           )
         case 'cartografia' :
@@ -57,6 +39,15 @@ class ListSelectedItem extends Component {
             <CartographySelected
               field={this.props.field}
               onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
+            />
+          )
+        case 'logo' :
+          return (
+            <LogosSelected
+              field={this.props.field}
+              onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
             />
           )
 

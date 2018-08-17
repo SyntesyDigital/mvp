@@ -7,6 +7,7 @@ import Link from './../Typologies/Link';
 import Note from './../Typologies/Note';
 import Statistics from './../Typologies/Statistics';
 import Cartography from './../Typologies/Cartography';
+import Logos from './../Typologies/Logos';
 
 
 
@@ -59,6 +60,15 @@ class ListItem extends Component {
               selected={this.props.selected}
               onSelect={this.props.onSelect}
             />
+          )
+        case 'logo' :
+          return (
+              <Logos
+                field={this.props.field}
+                selectable={this.props.selectable}
+                selected={this.props.selected}
+                onSelect={this.props.onSelect}
+              />
           )
         case 'link' :
           return (
