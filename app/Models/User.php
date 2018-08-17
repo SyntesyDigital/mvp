@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -10,13 +11,17 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use EntrustUserTrait;
+    use SoftDeletes, EntrustUserTrait {
+        SoftDeletes::restore insteadof EntrustUserTrait;
+        EntrustUserTrait::restore insteadof SoftDeletes;
+    }
+
     use Notifiable;
     use ImageUpload;
 
     protected $table = 'users';
 
-    protected $imagesUpload = ['image'];
+    protected $imagesUpload = ['image'];git s
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +35,8 @@ class User extends Authenticatable
         'password',
         'image',
     ];
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.

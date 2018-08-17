@@ -232,4 +232,8 @@ class Content extends Model
         }) : $query;
     }
 
+    public function scopeByAuthorId(Builder $query, $authorId)
+    {
+        return $query->where('author_id', $authorId);
+    }
 }

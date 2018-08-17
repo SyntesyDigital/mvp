@@ -24,7 +24,7 @@ class FieldValidator
 
             if(is_array($rules)) {
                 foreach($rules as $rule => $param) {
-                    $error = $this->validateField($rule, $values, $param);
+                    $error = $this->validateField($rule, $values, $param, $identifier);
 
                     if($error) {
                         $errors[$identifier] = $error;
@@ -38,9 +38,9 @@ class FieldValidator
     }
 
 
-    public function validateField($rule, $values, $param)
+    public function validateField($rule, $values, $param, $identifier)
     {
-        return isset($this->rules[$rule]) ? $this->rules[$rule]->validate($values, $param) : null;
+        return isset($this->rules[$rule]) ? $this->rules[$rule]->validate($values, $param, $identifier) : null;
     }
 
 }

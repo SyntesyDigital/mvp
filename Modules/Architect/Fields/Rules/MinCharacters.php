@@ -6,7 +6,7 @@ class MinCharacters
 {
     public $name = "minCharacters";
 
-    public function validate($value, $param)
+    public function validate($value, $param, $identifier)
     {
         $values = !is_array($value) ? [$value] : $value;
         $errors = [];
