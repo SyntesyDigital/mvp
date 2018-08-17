@@ -186,6 +186,10 @@ class FieldsReactPageBuilderAdapter
 
 
             case 'widget-list':
+                if(!isset($field["value"])) {
+                    return null;
+                }
+
                 foreach($field["value"] as $k => $w) {
                     if(class_exists($w['class'])) {
                         $widget = (new $w['class']);
@@ -202,6 +206,8 @@ class FieldsReactPageBuilderAdapter
                         $field["value"][$k]["fields"] = $fields;
                     }
                 }
+
+
                 return $field["value"];
             break;
 
