@@ -63,7 +63,9 @@ export default class TypologySelectionFilters extends Component {
 
         const {filters} = this.state;
 
-        this.query(1,filters);
+        if(parseInt(this.state.field.settings.typology) != STATISTCS_ID){
+          this.query(1,filters);
+        }
     }
 
     query(page,filters,order) {
@@ -181,12 +183,23 @@ export default class TypologySelectionFilters extends Component {
             <ListSelectedItem
               field={selectedItems[key]}
               onRemove={this.handleOnRemove.bind(this)}
+              onItemChange={this.handleOnSelectedChange.bind(this)}
             />
           </li>
         );
       }
 
       return result;
+    }
+
+    handleOnSelectedChange(inputs,id){
+      const {selectedItems} = this.state;
+
+      selectedItems[id].inputs = inputs;
+
+      this.setState({
+        selectedItems : selectedItems
+      });
     }
 
     onPageChange(page) {

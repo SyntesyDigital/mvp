@@ -9,6 +9,8 @@ Route::group([
 
     Route::get('/preview/{id}', 'ContentController@preview')->name('preview');
 
+    Route::put('/contact/save', 'ContactController@save')->name('contact.save');
+
     Route::get('/', 'ContentController@index')->name('home');
 
 
@@ -20,4 +22,3 @@ Route::group([
     // Localization to JS
     Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
 });
-

@@ -41,7 +41,7 @@ class Statistics extends Component {
       console.log("Statistics => ",fields,selected);
 
       return (
-        <div className="statistics">
+        <div className="statistics banc-media list-items buttons">
           <p className="titol">{title}</p>
           <p className="data">{data}</p>
 

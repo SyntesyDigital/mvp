@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import News from './../Typologies/News';
 import PublicationSelected from './../Typologies/PublicationSelected';
-import Link from './../Typologies/Link';
-import Note from './../Typologies/Note';
+import StatisticsSelected from './../Typologies/StatisticsSelected';
+import CartographySelected from './../Typologies/CartographySelected';
+import LogosSelected from './../Typologies/LogosSelected';
+
 
 class ListSelectedItem extends Component {
 
@@ -17,31 +18,39 @@ class ListSelectedItem extends Component {
     renderItem() {
 
       switch(this.props.field.typology.identifier){
-        case 'news' :
-          return (
-              <News
-                field={this.props.field}
-              />
-           );
-       case 'notes' :
-         return (
-             <Note
-               field={this.props.field}
-             />
-          );
         case 'publication' :
           return (
             <PublicationSelected
               field={this.props.field}
               onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
             />
           )
-        case 'link' :
+        case 'estadistica' :
           return (
-            <Link
+            <StatisticsSelected
               field={this.props.field}
+              onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
             />
           )
+        case 'cartografia' :
+          return (
+            <CartographySelected
+              field={this.props.field}
+              onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
+            />
+          )
+        case 'logo' :
+          return (
+            <LogosSelected
+              field={this.props.field}
+              onRemove={this.props.onRemove}
+              onItemChange={this.props.onItemChange}
+            />
+          )
+
         default :
           return null;
       }
