@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 
 import News from './../Typologies/News';
 import PublicationSelected from './../Typologies/PublicationSelected';
+import StatisticsSelected from './../Typologies/StatisticsSelected';
+import CartographySelected from './../Typologies/CartographySelected';
+
 import Link from './../Typologies/Link';
 import Note from './../Typologies/Note';
 
@@ -42,6 +45,21 @@ class ListSelectedItem extends Component {
               field={this.props.field}
             />
           )
+        case 'estadistica' :
+          return (
+            <StatisticsSelected
+              field={this.props.field}
+              onRemove={this.props.onRemove}
+            />
+          )
+        case 'cartografia' :
+          return (
+            <CartographySelected
+              field={this.props.field}
+              onRemove={this.props.onRemove}
+            />
+          )
+
         default :
           return null;
       }

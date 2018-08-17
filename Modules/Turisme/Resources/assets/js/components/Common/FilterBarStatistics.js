@@ -17,6 +17,10 @@ class FilterBarStatistics extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+      this.submitYear(this.currentYear);
+    }
+
     handleSubmit(event) {
       event.preventDefault();
 
@@ -61,8 +65,15 @@ class FilterBarStatistics extends Component {
     handleChange(event) {
       event.preventDefault();
 
-      const state = this.state;
       const year = event.target.value;
+
+      this.submitYear(year);
+
+    }
+
+    submitYear(year) {
+
+      const state = this.state;
 
       state[event.target.name] = year;
       this.setState(state);

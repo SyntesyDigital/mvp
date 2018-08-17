@@ -63,7 +63,9 @@ export default class TypologySelectionFilters extends Component {
 
         const {filters} = this.state;
 
-        this.query(1,filters);
+        if(parseInt(this.state.field.settings.typology) != STATISTCS_ID){
+          this.query(1,filters);
+        }
     }
 
     query(page,filters,order) {
