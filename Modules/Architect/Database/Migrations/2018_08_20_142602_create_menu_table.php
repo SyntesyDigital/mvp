@@ -28,8 +28,8 @@ class CreateMenuTable extends Migration
 
         Schema::create('menus_elements_fields', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('element_id')->unsigned();
-            $table->foreign('element_id')->references('id')->on('menus_elements')->onDelete('cascade');
+            $table->integer('menu_element_id')->unsigned();
+            $table->foreign('menu_element_id')->references('id')->on('menus_elements')->onDelete('cascade');
 
             $table->integer('language_id')->unsigned()->nullable();
             $table->foreign('language_id')->references('id')->on('languages');

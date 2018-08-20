@@ -47,7 +47,7 @@
             </div>
 
             <div class="col-xs-3">
-                <a href="">
+                <a href="{{route('menu.index')}}">
                   <div class="grid-item">
                       <i class="fa fa-list"></i>
                       <p class="grid-item-name">
@@ -67,7 +67,6 @@
                   </div>
                 </a>
             </div>
-
 
         </div>
       </div>

@@ -7,8 +7,16 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 {
 
     Route::get('/', 'ArchitectController@index')->name('home');
-    Route::get('/settings', 'ArchitectController@settings')->name('settings');
+    // ????
     Route::post('/save', 'ArchitectController@save')->name('save');
+    Route::get('/settings', 'ArchitectController@settings')->name('settings');
+
+    // Menu
+    Route::get('/settings/menu', 'MenuController@index')->name('menu.index');
+    Route::get('/settings/menu/create', 'MenuController@create')->name('menu.create');
+    Route::post('/settings/menu/save', 'MenuController@create')->name('menu.save');
+    Route::get('/settings/menu/{id}/tree', 'MenuController@elementsTree')->name('menu.show.tree');
+    Route::get('/settings/menu/{id}', 'MenuController@show')->name('menu.show');
 
     // Typologies
     Route::get('/typologies', 'TypologyController@index')->name('typologies');
