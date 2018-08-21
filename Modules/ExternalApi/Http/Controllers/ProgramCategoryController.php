@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ninidc
- * Date: 15/08/2018
- * Time: 14:42
- */
-
 namespace Modules\ExternalApi\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,8 +6,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\ExternalApi\Repositories\ProgramCategoryRepository;
 use Modules\ExternalApi\Collections\MemberCollection;
+use Modules\ExternalApi\Collections\CategoryCollection;
 
-class CategoryController extends Controller
+class ProgramCategoryController extends Controller
 {
 
     /**
@@ -27,6 +21,12 @@ class CategoryController extends Controller
         $this->categories = $categories;
     }
 
+    public function all(Request $request)
+    {
+        $this->categories->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria')); // Check Request Criteria https://github.com/andersao/l5-repository
+
+        return new CategoryCollection($this->categories->all());
+    }
 
     public function members($code, Request $request)
     {
