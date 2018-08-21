@@ -95788,9 +95788,6 @@ var ModalForm = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (ModalForm);
 
 /***/ }),
-<<<<<<< HEAD
-/* 559 */,
-=======
 /* 559 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -95848,7 +95845,6 @@ var ListExternalItem = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (ListExternalItem);
 
 /***/ }),
->>>>>>> dev-sergi
 /* 560 */,
 /* 561 */,
 /* 562 */,
@@ -96132,11 +96128,8 @@ __webpack_require__(829);
 __webpack_require__(830);
 __webpack_require__(838);
 __webpack_require__(89);
-<<<<<<< HEAD
-=======
 __webpack_require__(839);
 __webpack_require__(841);
->>>>>>> dev-sergi
 
 /***/ }),
 /* 811 */
@@ -107674,194 +107667,6 @@ var UrlField = function (_Component) {
 
 /***/ }),
 /* 822 */
-<<<<<<< HEAD
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_TranslatedFileField__ = __webpack_require__(49);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-var Note = function (_Component) {
-  _inherits(Note, _Component);
-
-  function Note(props) {
-    _classCallCheck(this, Note);
-
-    return _possibleConstructorReturn(this, (Note.__proto__ || Object.getPrototypeOf(Note)).call(this, props));
-  }
-
-  _createClass(Note, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
-    key: 'processText',
-    value: function processText(fields, fieldName) {
-      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      var fields = this.props.field.fields;
-
-      console.log("Note => ", fields);
-
-      var title = this.processText(fields, 'title');
-      var description = this.processText(fields, 'descripcio');
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'publication' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          { className: 'image' },
-          fields.imatge && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Fields_ImageField__["a" /* default */], {
-            field: fields.imatge
-          })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          { className: 'titol' },
-          title
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'intro',
-          dangerouslySetInnerHTML: { __html: description }
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'ul',
-          { className: 'opcions app' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Fields_TranslatedFileField__["a" /* default */], {
-              field: fields.pdf
-            })
-          )
-        )
-      );
-    }
-  }]);
-
-  return Note;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (Note);
-
-/***/ }),
-/* 823 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Fields_TranslatedFileField__ = __webpack_require__(49);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-
-var Statistics = function (_Component) {
-  _inherits(Statistics, _Component);
-
-  function Statistics(props) {
-    _classCallCheck(this, Statistics);
-
-    var _this = _possibleConstructorReturn(this, (Statistics.__proto__ || Object.getPrototypeOf(Statistics)).call(this, props));
-
-    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
-    return _this;
-  }
-
-  _createClass(Statistics, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
-    key: 'processText',
-    value: function processText(fields, fieldName) {
-      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      var fields = this.props.field.fields;
-
-      var data = fields.data.values != null ? fields.data.values : null;
-      if (data != null) {
-        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
-      }
-
-      var title = this.processText(fields, 'title');
-      var description = this.processText(fields, 'descripcio');
-
-      var selectable = this.props.selectable !== undefined ? this.props.selectable : false;
-      var selected = this.props.selected !== undefined ? this.props.selected : false;
-
-      console.log("Statistics => ", fields, selected);
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'statistics banc-media list-items buttons' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          { className: 'titol' },
-          title
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          { className: 'data' },
-          data
-        ),
-        selectable && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'button',
-          { type: 'button', className: "btn " + (selected ? 'selected' : ''), onClick: this.props.onSelect.bind(this, this.props.field) },
-          Lang.get('widgets.select')
-        )
-      );
-    }
-  }]);
-
-  return Statistics;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (Statistics);
-
-/***/ }),
-/* 824 */
-=======
->>>>>>> dev-sergi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110287,8 +110092,6 @@ var LogosSelected = function (_Component) {
 
 /***/ }),
 /* 838 */
-<<<<<<< HEAD
-=======
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110628,7 +110431,6 @@ var Member = function (_Component) {
 
 /***/ }),
 /* 841 */
->>>>>>> dev-sergi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110638,14 +110440,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(89);
-<<<<<<< HEAD
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ListItem__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_ModalForm__ = __webpack_require__(558);
-=======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ListExternalItem__ = __webpack_require__(559);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_OrderBar__ = __webpack_require__(494);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_FilterBarMembers__ = __webpack_require__(842);
->>>>>>> dev-sergi
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
