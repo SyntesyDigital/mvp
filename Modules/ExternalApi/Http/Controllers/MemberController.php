@@ -10,13 +10,12 @@ use Modules\ExternalApi\Repositories\MemberRepository;
 
 class MemberController extends Controller
 {
-
     public function __construct(MemberRepository $members)
     {
         $this->members = $members;
     }
 
-    public function index(Request $request)
+    public function all(Request $request)
     {
         $this->members->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria')); // Check Request Criteria https://github.com/andersao/l5-repository
 

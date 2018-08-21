@@ -12,6 +12,19 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class ProgramCategoryRepository extends BaseRepository
 {
+
+    protected $fieldSearchable = [
+        'code',
+        'description_ca',
+        'description_es',
+        'description_en',
+        'members.name',
+        'members.code',
+        'members.email',
+        'members.id',
+        'programs.code',
+    ];
+
     public function model()
     {
         return "Modules\\ExternalApi\\Entities\\ProgramCategory";
