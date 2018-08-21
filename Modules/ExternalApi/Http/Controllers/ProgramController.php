@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Modules\ExternalApi\Collections\MemberCollection;
+use Modules\ExternalApi\Collections\ProgramCollection;
+
 use Modules\ExternalApi\Repositories\MemberRepository;
 use Modules\ExternalApi\Repositories\ProgramRepository;
 
@@ -17,6 +19,13 @@ class ProgramController extends Controller
     {
         $this->members = $members;
         $this->programs = $programs;
+    }
+
+    public function all(Request $request)
+    {
+        $this->programs->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria')); // Check Request Criteria https://github.com/andersao/l5-repository
+
+        return new ProgramCollection($this->programs->all());
     }
 
     public function members($code, Request $request)

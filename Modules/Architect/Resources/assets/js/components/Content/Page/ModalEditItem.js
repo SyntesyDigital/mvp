@@ -84,6 +84,16 @@ class ModalEditItem extends Component {
       }
     }
 
+    this.PROGRAMS = [{
+        value: 1,
+        name: 'Programa 1',
+      },
+      {
+        value: 2,
+        name: 'Programa 2',
+      }
+    ];
+
     console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
 
     this.onModalClose = this.onModalClose.bind(this);
@@ -721,6 +731,20 @@ class ModalEditItem extends Component {
           options={this.SELECTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="program"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Programa"
+          options={this.PROGRAMS.map(function(obj){
+              return {
+                  value: obj.value,
                   name: obj.name
               };
           })}

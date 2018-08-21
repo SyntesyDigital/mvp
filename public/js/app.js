@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 558);
+/******/ 	return __webpack_require__(__webpack_require__.s = 560);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -74,7 +74,7 @@
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-  module.exports = __webpack_require__(115);
+  module.exports = __webpack_require__(116);
 }
 
 
@@ -129,6 +129,93 @@ module.exports = emptyFunction;
 "use strict";
 
 
+var defaults = __webpack_require__(32);
+var utils = __webpack_require__(5);
+var InterceptorManager = __webpack_require__(109);
+var dispatchRequest = __webpack_require__(110);
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = utils.merge({
+      url: arguments[0]
+    }, arguments[1]);
+  }
+
+  config = utils.merge(defaults, {method: 'get'}, this.defaults, config);
+  config.method = config.method.toLowerCase();
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var utils = __webpack_require__(5);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
@@ -143,7 +230,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 /***/ }),
 
-/***/ 101:
+/***/ 102:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -177,7 +264,7 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 102:
+/***/ 103:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -206,7 +293,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 /***/ }),
 
-/***/ 103:
+/***/ 104:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -280,7 +367,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 104:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -341,7 +428,7 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 105:
+/***/ 106:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -417,7 +504,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 106:
+/***/ 107:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -461,7 +548,7 @@ module.exports = btoa;
 
 /***/ }),
 
-/***/ 107:
+/***/ 108:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -522,7 +609,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 108:
+/***/ 109:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -582,18 +669,18 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 109:
+/***/ 110:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(5);
-var transformData = __webpack_require__(110);
+var transformData = __webpack_require__(111);
 var isCancel = __webpack_require__(54);
-var defaults = __webpack_require__(31);
-var isAbsoluteURL = __webpack_require__(111);
-var combineURLs = __webpack_require__(112);
+var defaults = __webpack_require__(32);
+var isAbsoluteURL = __webpack_require__(112);
+var combineURLs = __webpack_require__(113);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -676,7 +763,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 110:
+/***/ 111:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -704,7 +791,7 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 111:
+/***/ 112:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -726,7 +813,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-/***/ 112:
+/***/ 113:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -748,7 +835,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 113:
+/***/ 114:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -813,7 +900,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 114:
+/***/ 115:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -848,7 +935,7 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-/***/ 115:
+/***/ 116:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -874,7 +961,7 @@ var emptyObject = __webpack_require__(38);
 var invariant = __webpack_require__(17);
 var warning = __webpack_require__(18);
 var emptyFunction = __webpack_require__(10);
-var checkPropTypes = __webpack_require__(32);
+var checkPropTypes = __webpack_require__(33);
 
 // TODO: this is special because it gets imported during build.
 
@@ -2213,7 +2300,7 @@ module.exports = react;
 
 /***/ }),
 
-/***/ 116:
+/***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2237,18 +2324,18 @@ if (true) {
 var React = __webpack_require__(1);
 var invariant = __webpack_require__(17);
 var warning = __webpack_require__(18);
-var ExecutionEnvironment = __webpack_require__(117);
+var ExecutionEnvironment = __webpack_require__(118);
 var _assign = __webpack_require__(30);
 var emptyFunction = __webpack_require__(10);
-var EventListener = __webpack_require__(118);
-var getActiveElement = __webpack_require__(119);
-var shallowEqual = __webpack_require__(120);
-var containsNode = __webpack_require__(121);
-var focusNode = __webpack_require__(124);
+var EventListener = __webpack_require__(119);
+var getActiveElement = __webpack_require__(120);
+var shallowEqual = __webpack_require__(121);
+var containsNode = __webpack_require__(122);
+var focusNode = __webpack_require__(125);
 var emptyObject = __webpack_require__(38);
-var checkPropTypes = __webpack_require__(32);
-var hyphenateStyleName = __webpack_require__(91);
-var camelizeStyleName = __webpack_require__(92);
+var checkPropTypes = __webpack_require__(33);
+var hyphenateStyleName = __webpack_require__(92);
+var camelizeStyleName = __webpack_require__(93);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -17615,7 +17702,7 @@ module.exports = reactDom;
 
 /***/ }),
 
-/***/ 117:
+/***/ 118:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17655,7 +17742,7 @@ module.exports = ExecutionEnvironment;
 
 /***/ }),
 
-/***/ 118:
+/***/ 119:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17736,7 +17823,7 @@ module.exports = EventListener;
 
 /***/ }),
 
-/***/ 119:
+/***/ 120:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17779,7 +17866,7 @@ module.exports = getActiveElement;
 
 /***/ }),
 
-/***/ 120:
+/***/ 121:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17851,7 +17938,7 @@ module.exports = shallowEqual;
 
 /***/ }),
 
-/***/ 121:
+/***/ 122:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17866,7 +17953,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(122);
+var isTextNode = __webpack_require__(123);
 
 /*eslint-disable no-bitwise */
 
@@ -17895,7 +17982,7 @@ module.exports = containsNode;
 
 /***/ }),
 
-/***/ 122:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17910,7 +17997,7 @@ module.exports = containsNode;
  * @typechecks
  */
 
-var isNode = __webpack_require__(123);
+var isNode = __webpack_require__(124);
 
 /**
  * @param {*} object The object to check.
@@ -17924,7 +18011,7 @@ module.exports = isTextNode;
 
 /***/ }),
 
-/***/ 123:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17953,7 +18040,7 @@ module.exports = isNode;
 
 /***/ }),
 
-/***/ 124:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17984,7 +18071,7 @@ module.exports = focusNode;
 
 /***/ }),
 
-/***/ 125:
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18021,7 +18108,7 @@ module.exports = hyphenate;
 
 /***/ }),
 
-/***/ 126:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18226,7 +18313,7 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-  module.exports = __webpack_require__(116);
+  module.exports = __webpack_require__(117);
 }
 
 
@@ -35447,11 +35534,18 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /***/ 31:
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(98);
+
+/***/ }),
+
+/***/ 32:
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(5);
-var normalizeHeaderName = __webpack_require__(100);
+var normalizeHeaderName = __webpack_require__(101);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -35545,11 +35639,11 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(90)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(91)))
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35616,13 +35710,6 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ 37:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(97);
-
-/***/ }),
-
 /***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35647,7 +35734,7 @@ module.exports = emptyObject;
 
 /***/ }),
 
-/***/ 494:
+/***/ 495:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38101,7 +38188,7 @@ Popper.Defaults = Defaults;
 
 
 var bind = __webpack_require__(51);
-var isBuffer = __webpack_require__(98);
+var isBuffer = __webpack_require__(99);
 
 /*global toString:true*/
 
@@ -38460,12 +38547,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(5);
-var settle = __webpack_require__(101);
-var buildURL = __webpack_require__(103);
-var parseHeaders = __webpack_require__(104);
-var isURLSameOrigin = __webpack_require__(105);
+var settle = __webpack_require__(102);
+var buildURL = __webpack_require__(104);
+var parseHeaders = __webpack_require__(105);
+var isURLSameOrigin = __webpack_require__(106);
 var createError = __webpack_require__(53);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(106);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(107);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -38562,7 +38649,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(107);
+      var cookies = __webpack_require__(108);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -38647,7 +38734,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(102);
+var enhanceError = __webpack_require__(103);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -38707,18 +38794,18 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 558:
+/***/ 560:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(559);
-__webpack_require__(563);
-__webpack_require__(564);
-module.exports = __webpack_require__(565);
+__webpack_require__(561);
+__webpack_require__(565);
+__webpack_require__(566);
+module.exports = __webpack_require__(567);
 
 
 /***/ }),
 
-/***/ 559:
+/***/ 561:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -38728,7 +38815,7 @@ module.exports = __webpack_require__(565);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(560);
+__webpack_require__(562);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -38736,16 +38823,16 @@ __webpack_require__(560);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(562);
+__webpack_require__(564);
 
 /***/ }),
 
-/***/ 560:
+/***/ 562:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(304);
-window.Popper = __webpack_require__(494).default;
+window.Popper = __webpack_require__(495).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -38754,9 +38841,9 @@ window.Popper = __webpack_require__(494).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(89);
+  window.$ = window.jQuery = __webpack_require__(90);
 
-  __webpack_require__(561);
+  __webpack_require__(563);
 } catch (e) {}
 
 /**
@@ -38765,7 +38852,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(37);
+window.axios = __webpack_require__(31);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -38802,7 +38889,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 561:
+/***/ 563:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -38811,7 +38898,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(89), __webpack_require__(494)) :
+	 true ? factory(exports, __webpack_require__(90), __webpack_require__(495)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -42703,7 +42790,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 562:
+/***/ 564:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42776,21 +42863,21 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 563:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 564:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 565:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 566:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 567:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -42817,7 +42904,35 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 89:
+/***/ 9:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -53189,35 +53304,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 9:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 90:
+/***/ 91:
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -53408,7 +53495,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 91:
+/***/ 92:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53423,7 +53510,7 @@ process.umask = function() { return 0; };
 
 
 
-var hyphenate = __webpack_require__(125);
+var hyphenate = __webpack_require__(126);
 
 var msPattern = /^ms-/;
 
@@ -53451,7 +53538,7 @@ module.exports = hyphenateStyleName;
 
 /***/ }),
 
-/***/ 92:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53466,7 +53553,7 @@ module.exports = hyphenateStyleName;
 
 
 
-var camelize = __webpack_require__(126);
+var camelize = __webpack_require__(127);
 
 var msPattern = /^-ms-/;
 
@@ -53495,7 +53582,7 @@ module.exports = camelizeStyleName;
 
 /***/ }),
 
-/***/ 97:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53503,8 +53590,8 @@ module.exports = camelizeStyleName;
 
 var utils = __webpack_require__(5);
 var bind = __webpack_require__(51);
-var Axios = __webpack_require__(99);
-var defaults = __webpack_require__(31);
+var Axios = __webpack_require__(100);
+var defaults = __webpack_require__(32);
 
 /**
  * Create an instance of Axios
@@ -53538,14 +53625,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(55);
-axios.CancelToken = __webpack_require__(113);
+axios.CancelToken = __webpack_require__(114);
 axios.isCancel = __webpack_require__(54);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(114);
+axios.spread = __webpack_require__(115);
 
 module.exports = axios;
 
@@ -53555,7 +53642,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, exports) {
 
 /*!
@@ -53579,93 +53666,6 @@ function isBuffer (obj) {
 function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var defaults = __webpack_require__(31);
-var utils = __webpack_require__(5);
-var InterceptorManager = __webpack_require__(108);
-var dispatchRequest = __webpack_require__(109);
-
-/**
- * Create a new instance of Axios
- *
- * @param {Object} instanceConfig The default config for the instance
- */
-function Axios(instanceConfig) {
-  this.defaults = instanceConfig;
-  this.interceptors = {
-    request: new InterceptorManager(),
-    response: new InterceptorManager()
-  };
-}
-
-/**
- * Dispatch a request
- *
- * @param {Object} config The config specific for this request (merged with this.defaults)
- */
-Axios.prototype.request = function request(config) {
-  /*eslint no-param-reassign:0*/
-  // Allow for axios('example/url'[, config]) a la fetch API
-  if (typeof config === 'string') {
-    config = utils.merge({
-      url: arguments[0]
-    }, arguments[1]);
-  }
-
-  config = utils.merge(defaults, {method: 'get'}, this.defaults, config);
-  config.method = config.method.toLowerCase();
-
-  // Hook up interceptors middleware
-  var chain = [dispatchRequest, undefined];
-  var promise = Promise.resolve(config);
-
-  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-    chain.unshift(interceptor.fulfilled, interceptor.rejected);
-  });
-
-  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-    chain.push(interceptor.fulfilled, interceptor.rejected);
-  });
-
-  while (chain.length) {
-    promise = promise.then(chain.shift(), chain.shift());
-  }
-
-  return promise;
-};
-
-// Provide aliases for supported request methods
-utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
-  /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url
-    }));
-  };
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, data, config) {
-    return this.request(utils.merge(config || {}, {
-      method: method,
-      url: url,
-      data: data
-    }));
-  };
-});
-
-module.exports = Axios;
 
 
 /***/ })

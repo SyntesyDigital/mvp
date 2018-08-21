@@ -30,6 +30,7 @@ return [
     'TYPOLOGY_BY_CATEGORY' => 'Llista per categories',
     'TYPOLOGY_CAROUSEL' => 'Rotatori tipologia',
     'TYPOLOGY_SELECTION_FILTERS' => 'Llista amb selecció',
-    'CONTACT_FORM' => 'Formulari contacte'
-
+    'CONTACT_FORM' => 'Formulari contacte',
+    'MEMBERS_BY_PROGRAM' => 'Membres per Programa',
+    'MEMBERS' => 'Llista de Membres'
 ];

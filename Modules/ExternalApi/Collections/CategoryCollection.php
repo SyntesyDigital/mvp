@@ -1,12 +1,4 @@
-
 <?php
-/**
- * Created by PhpStorm.
- * User: ninidc
- * Date: 15/08/2018
- * Time: 14:18
- */
-
 namespace Modules\ExternalApi\Collections;
 
 
