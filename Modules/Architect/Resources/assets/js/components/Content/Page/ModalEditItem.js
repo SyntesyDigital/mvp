@@ -29,8 +29,9 @@ import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSetting
 import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
 import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
 
-
 import ModalEditListItem from './ModalEditListItem';
+
+import axios from 'axios';
 
 class ModalEditItem extends Component {
 
@@ -58,7 +59,9 @@ class ModalEditItem extends Component {
     this.state = {
         field : null,
         displayListItemModal : false,
-        listItemInfo : null
+        listItemInfo : null,
+        programs : [],
+        axes : []
     };
 
     this.categories = [
@@ -99,6 +102,31 @@ class ModalEditItem extends Component {
     this.onModalClose = this.onModalClose.bind(this);
   }
 
+  loadAxes() {
+    var self = this;
+
+    axios.get(ASSETS+'externalapi/axes')
+      .then(function (response) {
+
+          if(response.status == 200
+              && response.data.data !== undefined
+              && response.data.data.length > 0)
+          {
+              self.setState({
+                  axes : response.data.data
+              });
+          }
+
+
+      }).catch(function (error) {
+         console.log(error);
+       });
+  }
+
+  loadPrograms() {
+
+  }
+
   processProps(props) {
 
     console.log("ModalEditItem :: field processProps ",props);
@@ -118,6 +146,8 @@ class ModalEditItem extends Component {
     if(this.props.display){
         this.modalOpen();
     }
+
+    this.loadAxes();
   }
 
   componentWillReceiveProps(nextProps)
@@ -746,6 +776,20 @@ class ModalEditItem extends Component {
               return {
                   value: obj.value,
                   name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="axe"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Eix"
+          options={this.state.axes.map(function(item){
+              return {
+                  value: item.id_axe,
+                  name: item.description_es,
               };
           })}
         />

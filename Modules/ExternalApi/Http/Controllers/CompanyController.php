@@ -23,7 +23,7 @@ class CompanyController extends Controller
     {
         $companies = $this->companies
             ->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'))
-            ->paginate(20);
+            ->paginate(6);
 
         return new CompanyCollection($companies);
     }

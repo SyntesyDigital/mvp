@@ -109,13 +109,16 @@ class ExternalApiDatabaseSeeder extends Seeder
 
             $company = Company::create([
               'indicator_id' => $i.$j,
-              'name' => 'Company '.$i.'-'.$j,
-              'description_ca' => 'Description description_ca '.$i.'-'.$j,
-              'description_es' => 'Description description_es '.$i.'-'.$j,
-              'description_en'=> 'Description description_en '.$i.'-'.$j,
-              'address' => 'Address',
-              'postcode' => 'Postcode',
-              'web' => 'web'
+              'name' => 'ADFO-CET '.$i.'-'.$j,
+              'description_ca' => 'Empresa social que trabaja para conseguir la integración laboral de las personas con
+discapacidad física severa. Ofrecen servicios de telemarketing y secretariado. '.$i.'-'.$j,
+              'description_es' => 'Empresa social que trabaja para conseguir la integración laboral de las personas con
+discapacidad física severa. Ofrecen servicios de telemarketing y secretariado. '.$i.'-'.$j,
+              'description_en'=> 'Empresa social que trabaja para conseguir la integración laboral de las personas con
+discapacidad física severa. Ofrecen servicios de telemarketing y secretariado. '.$i.'-'.$j,
+              'address' => 'Sant Pere 9 baixos',
+              'postcode' => '08500',
+              'web' => 'www.web.cat'
             ]);
 
           }

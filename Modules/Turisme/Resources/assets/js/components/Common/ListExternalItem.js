@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Member from './../Typologies/Member';
+import Company from './../Typologies/Company';
 
 
 class ListExternalItem extends Component {
@@ -21,6 +22,12 @@ class ListExternalItem extends Component {
                 field={this.props.field}
               />
            );
+       case 'company' :
+         return (
+             <Company
+               field={this.props.field}
+             />
+          );
         default :
           return null;
       }
