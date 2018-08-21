@@ -21,10 +21,8 @@ class CompanyController extends Controller
 
     public function all()
     {
-        $companies = $this->companies
-            ->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'))
-            ->paginate(20);
+        $this->companies->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
 
-        return new CompanyCollection($companies);
+        return new CompanyCollection($this->companies->paginate(20));
     }
 }
