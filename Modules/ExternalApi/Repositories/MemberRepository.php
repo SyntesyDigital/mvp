@@ -12,7 +12,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class MemberRepository extends BaseRepository
 {
-
     protected $fieldSearchable = [
         'code',
         'name',
@@ -20,12 +19,12 @@ class MemberRepository extends BaseRepository
         'postcode',
         'city',
         'phone_number',
-        'email'
+        'email',
+        'programs.id',
+        'programs.code',
+        'categories.id',
+        'categories.code'
     ];
-
-    public function boot(){
-        //$this->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-    }
 
 
     public function model()

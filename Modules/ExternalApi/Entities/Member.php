@@ -33,7 +33,7 @@ class Member extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('\Modules\ExternalApi\Entities\ProgramCategory', 'members_programs');
+        return $this->belongsToMany('\Modules\ExternalApi\Entities\ProgramCategory', 'members_programs', 'member_id', 'category_id');
     }
 
 }

@@ -4,7 +4,7 @@ namespace Modules\ExternalApi\Collections;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CategoryCollection extends ResourceCollection
+class ProgramCategoryCollection extends ResourceCollection
 {
     public function toArray($request)
     {
