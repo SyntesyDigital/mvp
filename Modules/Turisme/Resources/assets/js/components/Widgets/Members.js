@@ -31,7 +31,7 @@ export default class Members extends Component {
 
       const {filters} = this.state;
 
-      console.log("TypologySelectionFilters :: handleOrderChange => ",order);
+      console.log("Members :: handleOrderChange => ",order);
 
       this.query(1,filters,order);
     }
@@ -40,7 +40,7 @@ export default class Members extends Component {
 
       const {order} = this.state;
 
-      console.log("TypologySelectionFilters :: handleFilterSubmit => ",filters);
+      console.log("Members :: handleFilterSubmit => ",filters);
 
       this.query(1,filters,order);
     }
@@ -57,27 +57,21 @@ export default class Members extends Component {
 
         var filterQuery = ''
         if(filters != null && filters != ''){
-
+          filterQuery = filters.query;
         }
 
-        var url = ASSETS+'externalapi/members?'+orderQuery+'&page=' + (page ? page : null);
-
-        if(filterQuery != ''){
-          
-        }
-
-        axios.get(ASSETS+'externalapi/members?'+orderQuery+'&page=' + (page ? page : null))
+        axios.get(ASSETS+'externalapi/members?'+orderQuery+filterQuery+'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
-                  && response.data.data !== undefined
-                  && response.data.data.length > 0)
+                  && response.data.data !== undefined)
               {
                   self.setState({
                       items : response.data.data,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
-                      order : order
+                      order : order,
+                      filters : filters
                   });
               }
 

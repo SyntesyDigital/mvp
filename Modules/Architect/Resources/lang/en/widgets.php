@@ -33,5 +33,6 @@ return [
     'CONTACT_FORM' => 'Formulari contacte',
     'MEMBERS_BY_PROGRAM' => 'Membres per Programa',
     'MEMBERS' => 'Llista de Membres',
-    'COMPANIES' => 'Recursos y Sostenibilidad'
+    'COMPANIES' => 'Recursos y Sostenibilidad',
+    'AGENCIES' => 'Agencias de Viajes'
 ];

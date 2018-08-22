@@ -6,18 +6,23 @@ var DataTableTools = {
     {
         var self = this;
 
+        var instanceId = "#"+instance.attr('id');
+
         this._settings = $.extend({}, this._settings, options);
 
         $(instance).find('[data-filter="select"]').each(function(k,v){
             self._select(instance, $(this));
         });
 
-        $(instance).find('[data-toogle="delete"]').each(function(k,v){
-            self._delete(instance, $(this));
-        });
-
         $(instance).find('[data-toogle="save-onchange"]').each(function(k,v){
             self._saveOnChange(instance, $(this));
+        });
+
+        //init events
+        $(document).on('click',instanceId+' [data-toogle="delete"]',function(e){
+          e.preventDefault();
+          var button = $(e.target).closest('[data-toogle="delete"]');
+          self._delete(instance, button);
         });
     },
 
@@ -119,50 +124,46 @@ var DataTableTools = {
     {
         var _this = this;
 
-        el.off('click')
-            .on('click', function(e){
-                e.preventDefault();
+        var ajax = el.data('ajax');
+        var redirect = el.data('redirect');
+        var confirmMessage = el.data('confirm-message');
 
-                var ajax = $(this).data('ajax');
-                var redirect = $(this).data('redirect');
-                var confirmMessage = $(this).data('confirm-message');
+        architect.dialog.confirm(confirmMessage, function(result){
+            if(result) {
 
-                architect.dialog.confirm(confirmMessage, function(result){
-                    if(result) {
+                if(redirect) {
+                    window.location = redirect;
+                    return;
+                }
 
-                        if(redirect) {
-                            window.location = redirect;
-                            return;
+                if(ajax) {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: ajax,
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
                         }
-
-                        if(ajax) {
-                            $.ajax({
-                                method: 'DELETE',
-                                url: ajax,
-                                data: {
-                                    _token: $('meta[name="csrf-token"]').attr('content'),
-                                }
-                            })
-                            .done(function(response) {
-                                if(response.success) {
-                                    if(_this._settings.onDelete !== undefined) {
-                                        _this._settings.onDelete(response);
-                                    } else {
-                                        instance.DataTable().ajax.reload();
-                                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                                    }
-                                } else {
-                                    toastr.error(response.message, 'Erreur !', {timeOut: 3000});
-                                }
-                            }).fail(function(response){
-                                toastr.error(response.message, 'Erreur !', {timeOut: 3000});
-                            });
-                            return;
+                    })
+                    .done(function(response) {
+                        if(response.success) {
+                            if(_this._settings.onDelete !== undefined) {
+                                _this._settings.onDelete(response);
+                            } else {
+                                instance.DataTable().ajax.reload();
+                                toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                            }
+                        } else {
+                            toastr.error(response.message, 'Erreur !', {timeOut: 3000});
                         }
+                    }).fail(function(response){
+                        toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                    });
+                    return;
+                }
 
-                    }
-                });
-            });
+            }
+        });
+
     }
 
 }

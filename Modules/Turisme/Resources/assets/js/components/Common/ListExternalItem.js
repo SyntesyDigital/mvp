@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Member from './../Typologies/Member';
+import Agency from './../Typologies/Agency';
 import Company from './../Typologies/Company';
 
 
@@ -28,6 +29,12 @@ class ListExternalItem extends Component {
                field={this.props.field}
              />
           );
+      case 'agency' :
+        return (
+            <Agency
+              field={this.props.field}
+            />
+         );
         default :
           return null;
       }

@@ -44,12 +44,11 @@ export default class MembersByProgram extends Component {
           orderQuery = '&orderBy='+orderArray[0]+'&sortedBy='+orderArray[1];
         }
 
-        axios.get(ASSETS+'externalapi/members?search=program_id:1'+orderQuery+'&page=' + (page ? page : null))
+        axios.get(ASSETS+'externalapi/members?search=programs.id:'+field.settings.program+orderQuery+'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
-                  && response.data.data !== undefined
-                  && response.data.data.length > 0)
+                  && response.data.data !== undefined)
               {
                   self.setState({
                       items : response.data.data,

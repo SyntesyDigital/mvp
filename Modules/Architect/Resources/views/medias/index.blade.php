@@ -82,11 +82,11 @@
         'identifier' : '.medias-dropfiles',
         'table' : $('#table-medias'),
         'urls': {
-            'index' : '{{ route('medias.index') }}',
-            'store' : '{{ route('medias.store') }}',
-            'show' : '{{ route('medias.show') }}',
-            'delete' : '{{ route('medias.delete') }}',
-            'update' : '{{ route('medias.update') }}'
+          'index' : '{{ route('medias.index') }}',
+          'store' : '{{ route('medias.store') }}',
+          'show' : '{{ route('medias.show') }}',
+          'delete' : '{{ route('medias.delete') }}',
+          'update' : '{{ route('medias.update') }}'
         }
     })
 </script>

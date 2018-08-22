@@ -53,7 +53,7 @@ class MediaRepository extends BaseRepository
                     $html .= '<a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;';
                 }
 
-                $html .= '<a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;';
+                $html .= '<a href="#" class="btn btn-link text-danger toogle-delete" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;';
 
                 return $html;
             })
