@@ -20,7 +20,7 @@ class Company extends Model
         'description_en',
         'address',
         'postcode',
-        'web'
+        'web',
     ];
 
     public $timestamps = false;
@@ -30,4 +30,9 @@ class Company extends Model
     {
         return $this->hasMany('\Modules\ExternalApi\Entities\Indicator', 'indicator_id');
     }
+
+    // public function axes()
+    // {
+    //     return $this->belongsToMany('\Modules\ExternalApi\Entities\Member', 'members_programs', 'category_id', 'member_id');
+    // }
 }
