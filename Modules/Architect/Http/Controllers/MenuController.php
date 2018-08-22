@@ -30,9 +30,12 @@ class MenuController extends Controller
 
     public function index()
     {
-        return view('architect::menu.index', [
-            'menus' => $this->menus->all()
-        ]);
+        return view('architect::menu.index');
+    }
+
+    public function data()
+    {
+        return $this->menus->getDatatable();
     }
 
     public function elementsTree($id)

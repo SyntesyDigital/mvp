@@ -23,7 +23,7 @@ class ContentDataTable extends Component {
     setDatatable()
     {
 
-        console.log("MediaSelectModal :: setDatatable");
+        console.log("MediaSelectModal :: setDatatable route : ",this.props.route);
 
         var _this = this;
 
@@ -49,13 +49,6 @@ class ContentDataTable extends Component {
               {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
-
                 _this.initEvents();
     	    }
         });

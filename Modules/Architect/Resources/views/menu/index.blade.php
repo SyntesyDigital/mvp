@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container leftbar-page">
-  <div class="col-xs-offset-2 col-xs-10 page-content">
+  <div class="col-xs-offset-2 col-xs-8 page-content">
 
     <h3 class="card-title">Menus</h3>
     <a href="{{route('menu.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir menu</a>
 
-    <table class="table" id="table">
+    <table class="table" id="table" data-url="{{route('menu.data')}}">
         <thead>
            <tr>
                <th>Nom</th>
@@ -16,14 +16,10 @@
         </thead>
 
         <tbody>
-            @foreach($menus as $menu)
-                <tr>
-                    <th>
-                        <a href="{{route('menu.show', $menu)}}">{{$menu->name}}</a>
-                    </th>
-                    <th></th>
-                </tr>
-            @endforeach()
+          <tr>
+              <th></th>
+              <th></th>
+          </tr>
         </tbody>
     </table>
 
@@ -42,13 +38,8 @@
 
 @push('javascripts-libs')
 <script>
-    // architect.users.init({
-    //     'table' : $('#table'),
-    //     'urls': {
-    //         'index' : '{{ route('users.data') }}',
-    //         'show' : '{{ route('users.show') }}',
-    //         'delete' : '{{ route('users.delete') }}',
-    //     }
-    // })
+    architect.menu.init({
+        'table' : $('#table')
+    })
 </script>
 @endpush

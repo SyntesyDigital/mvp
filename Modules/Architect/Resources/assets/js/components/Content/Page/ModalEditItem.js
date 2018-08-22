@@ -798,7 +798,7 @@ class ModalEditItem extends Component {
           label="Eix"
           options={this.state.axes.map(function(item){
               return {
-                  value: item.id_axe,
+                  value: item.id,
                   name: item.description_es,
               };
           })}

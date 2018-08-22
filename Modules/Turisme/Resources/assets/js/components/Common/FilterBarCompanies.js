@@ -24,7 +24,7 @@ class FilterBarCompanies extends Component {
 
       var self = this;
 
-      axios.get(ASSETS+'externalapi/indicators?search=id_axe:'+this.props.axe)
+      axios.get(ASSETS+'externalapi/indicators?search=axe_id:'+this.props.axe)
         .then(function (response) {
 
             if(response.status == 200
@@ -51,6 +51,11 @@ class FilterBarCompanies extends Component {
       var query = [];
 
       //search=name:ADFO;indicator_id:10&searchFields=name:like;indicator_id:=&searchJoin=and
+
+      query.push({
+        search : 'indicator.axe_id:'+this.props.axe,
+        searchFields : 'indicator.axe_id:='
+      });
 
       if(this.state.category != ''){
           query.push({
@@ -107,7 +112,7 @@ class FilterBarCompanies extends Component {
 
     renderCategories() {
       return this.state.categories.map((item,key) =>
-        <option key={key} value={item.indicator_id}>{item['description_'+LOCALE]}</option>
+        <option key={key} value={item.id}>{item['description_'+LOCALE]}</option>
       );
     }
 
