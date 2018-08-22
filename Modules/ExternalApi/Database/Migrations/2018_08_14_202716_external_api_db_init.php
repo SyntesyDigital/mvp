@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DbInit extends Migration
+class ExternalApiDbInit extends Migration
 {
     /**
      * Run the migrations.
@@ -104,9 +104,9 @@ class DbInit extends Migration
 
         // COMPANIES
         Schema::connection('turisme_external')
-            ->create('entities', function($table) {
-                $table->increments('id');
-                $table->integer('company_id')->nullable();
+            ->create('companies', function($table) {
+                $table->integer('id')->unique();
+                $table->primary('id');
                 $table->integer('indicator_id')->nullable();
                 $table->string('name');
                 $table->longText('description_ca')->nullable();
@@ -119,9 +119,9 @@ class DbInit extends Migration
 
         Schema::connection('turisme_external')
             ->create('indicators', function($table) {
-                $table->increments('id');
-                $table->integer('indicator_id')->nullable();
-                $table->integer('id_axe');
+                $table->integer('id')->unique();
+                $table->primary('id');
+                $table->integer('axe_id');
                 $table->longText('description_ca')->nullable();
                 $table->longText('description_es')->nullable();
                 $table->longText('description_en')->nullable();
@@ -129,8 +129,8 @@ class DbInit extends Migration
 
         Schema::connection('turisme_external')
             ->create('axes', function($table) {
-                $table->increments('id');
-                $table->integer('id_axe');
+                $table->integer('id')->unique();
+                $table->primary('id');
                 $table->longText('description_ca')->nullable();
                 $table->longText('description_es')->nullable();
                 $table->longText('description_en')->nullable();

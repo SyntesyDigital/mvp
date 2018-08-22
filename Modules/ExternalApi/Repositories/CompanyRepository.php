@@ -1,22 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ninidc
- * Date: 16/08/2018
- * Time: 19:10
- */
 
 namespace Modules\ExternalApi\Repositories;
-
 
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class CompanyRepository extends BaseRepository
 {
-
     protected $fieldSearchable = [
         'id',
-        'company_id',
         'indicator_id',
         'name',
         'description_ca',
@@ -25,7 +16,9 @@ class CompanyRepository extends BaseRepository
         'address',
         'postcode',
         'web',
-        'indicators.id_axe',
+        'indicator.id',
+        'indicator.axe_id',
+        'axes.id'
     ];
 
     public function model()

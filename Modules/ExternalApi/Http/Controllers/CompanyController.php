@@ -5,11 +5,14 @@ namespace Modules\ExternalApi\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+
+use Modules\ExternalApi\Repositories\CompanyRepository;
 use Modules\ExternalApi\Collections\CompanyCollection;
+
 use Modules\ExternalApi\Entities\Axe;
 use Modules\ExternalApi\Entities\Company;
 use Modules\ExternalApi\Entities\Indicator;
-use Modules\ExternalApi\Repositories\CompanyRepository;
+
 
 class CompanyController extends Controller
 {

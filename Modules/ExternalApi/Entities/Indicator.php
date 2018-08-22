@@ -12,8 +12,7 @@ class Indicator extends Model
 
     protected $fillable = [
         'id',
-        'indicator_id',
-        'id_axe',
+        'axe_id',
         'description_ca',
         'description_es',
         'description_en',
@@ -24,13 +23,11 @@ class Indicator extends Model
 
     public function companies()
     {
-        return $this->hasMany('\Modules\ExternalApi\Entities\Company', 'indicator_id');
+        return $this->hasMany('\Modules\ExternalApi\Entities\Company');
     }
 
-    /*
-    public function category()
+    public function axe()
     {
-        return $this->hasOne('\Modules\ExternalApi\Entities\ProgramCategory', 'program_id', 'id');
+        return $this->belongsTo('\Modules\ExternalApi\Entities\Axe');
     }
-    */
 }
