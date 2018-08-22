@@ -10,6 +10,16 @@ use App\Models\User;
 use Auth;
 use Session;
 
+
+use Modules\Architect\Http\Requests\Menu\CreateMenuRequest;
+use Modules\Architect\Jobs\Menu\CreateMenu;
+
+use Modules\Architect\Http\Requests\Menu\UpdateMenuRequest;
+use Modules\Architect\Jobs\Menu\UpdateMenu;
+
+use Modules\Architect\Http\Requests\Menu\DeleteMenuRequest;
+use Modules\Architect\Jobs\Menu\DeleteMenu;
+
 class MenuController extends Controller
 {
     public function __construct(MenuRepository $menus)
@@ -41,4 +51,40 @@ class MenuController extends Controller
     {
         return view('architect::menu.form');
     }
+
+    public function store(CreateMenuRequest $request)
+    {
+        $menu = dispatch_now(CreateMenu::fromRequest($request));
+
+        return $menu ? response()->json([
+            'success' => true,
+            'menu' => $menu
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function update(Menu $menu, CreateMenuRequest $request)
+    {
+        $menu = dispatch_now(UpdateMenu::fromRequest($Menu, $request));
+
+        return $menu ? response()->json([
+            'success' => true,
+            'menu' => $menu
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+    public function delete(Menu $menu, DeleteMenuRequest $request)
+    {
+        return dispatch_now(DeleteMenu::fromRequest($menu, $request)) ? response()->json([
+            'success' => true
+        ]) : response()->json([
+            'success' => false
+        ], 500);
+    }
+
+
+
 }
