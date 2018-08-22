@@ -84,14 +84,16 @@ class ExternalApiDatabaseSeeder extends Seeder
 
         DB::table('turismobcn_external.axes')->delete();
         DB::table('turismobcn_external.indicators')->delete();
-        DB::table('turismobcn_external.entities')->delete();
+        DB::table('turismobcn_external.companies')->delete();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         //Create BST
         for($i = 0; $i < 5; $i++) {
+            $axeId = Axe::count() + 1;
+
           $axe = Axe::create([
-              'id_axe' => $i,
+              'id' => $axeId,
               'description_ca' => 'Axe '.$i,
               'description_es' => 'Axe '.$i,
               'description_en'=> 'Axe '.$i
@@ -99,23 +101,27 @@ class ExternalApiDatabaseSeeder extends Seeder
 
           for($j = 0; $j < 3; $j++) {
 
+            $indicadorId = Indicator::count() + 1;
+            $companyId = Company::count() + 1;
+
             $indicator = Indicator::create([
-              'id_axe' => $i,
-              'indicator_id' => $i.$j,
-              'description_ca' => 'Indicator description_ca '.$i.'-'.$j,
-              'description_es' => 'Indicator description_es '.$i.'-'.$j,
-              'description_en'=> 'Indicator description_en '.$i.'-'.$j
+                'id' => $indicadorId,
+                'axe_id' => $axeId,
+                'description_ca' => 'Indicator description_ca '.$i.'-'.$j,
+                'description_es' => 'Indicator description_es '.$i.'-'.$j,
+                'description_en'=> 'Indicator description_en '.$i.'-'.$j
             ]);
 
             $company = Company::create([
-              'indicator_id' => $i.$j,
-              'name' => 'Company '.$i.'-'.$j,
-              'description_ca' => 'Description description_ca '.$i.'-'.$j,
-              'description_es' => 'Description description_es '.$i.'-'.$j,
-              'description_en'=> 'Description description_en '.$i.'-'.$j,
-              'address' => 'Address',
-              'postcode' => 'Postcode',
-              'web' => 'web'
+                'id' => $companyId,
+                'indicator_id' => $indicadorId,
+                'name' => 'Company '.$i.'-'.$j,
+                'description_ca' => 'Description description_ca '.$i.'-'.$j,
+                'description_es' => 'Description description_es '.$i.'-'.$j,
+                'description_en'=> 'Description description_en '.$i.'-'.$j,
+                'address' => 'Address',
+                'postcode' => 'Postcode',
+                'web' => 'web'
             ]);
 
           }

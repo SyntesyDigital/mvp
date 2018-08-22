@@ -13,7 +13,6 @@ class Axe extends Model
 
     protected $fillable = [
         'id',
-        'id_axe',
         'description_ca',
         'description_es',
         'description_en'
@@ -24,12 +23,12 @@ class Axe extends Model
 
     public function indicators()
     {
-        return $this->hasMany('\Modules\ExternalApi\Entities\Indicator', 'id_axe');
+        return $this->hasMany('\Modules\ExternalApi\Entities\Indicator');
     }
 
     public function companies()
     {
-        return $this->hasManyThrough('\Modules\ExternalApi\Entities\Company', '\Modules\ExternalApi\Entities\Indicator', 'id_axe', null, null, 'indicator_id');
+        return $this->hasManyThrough('\Modules\ExternalApi\Entities\Company', '\Modules\ExternalApi\Entities\Indicator');
     }
 
 }

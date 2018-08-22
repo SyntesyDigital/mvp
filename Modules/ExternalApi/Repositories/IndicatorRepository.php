@@ -13,14 +13,13 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class IndicatorRepository extends BaseRepository
 {
-
     protected $fieldSearchable = [
         'id',
-        'indicator_id',
-        'id_axe',
+        'axe_id',
         'description_ca',
         'description_es',
         'description_en',
+        'axe.id'
     ];
 
     public function model()
