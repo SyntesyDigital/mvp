@@ -26,6 +26,7 @@ class CompanyRepository extends BaseRepository
         'postcode',
         'web',
         'indicators.id_axe',
+        'axes.id_axe'
     ];
 
     public function model()

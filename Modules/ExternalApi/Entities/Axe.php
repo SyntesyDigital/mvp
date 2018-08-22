@@ -29,7 +29,7 @@ class Axe extends Model
 
     public function companies()
     {
-        return $this->hasManyThrough('\Modules\ExternalApi\Entities\Company', '\Modules\ExternalApi\Entities\Indicator', 'id_axe');
+        return $this->hasManyThrough('\Modules\ExternalApi\Entities\Company', '\Modules\ExternalApi\Entities\Indicator', 'id_axe', null, null, 'indicator_id');
     }
 
 }
