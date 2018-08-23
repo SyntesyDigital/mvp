@@ -13,6 +13,8 @@ class Menu extends Model
         'name',
     ];
 
+    public $timestamps = false;
+
     public function elements()
     {
         return $this->hasMany('\Modules\Architect\Entities\MenuElement');

@@ -16,7 +16,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/settings/menu/data', 'MenuController@data')->name('menu.data');
     Route::post('/settings/menu/store', 'MenuController@store')->name('menu.store');
     Route::get('/settings/menu/create', 'MenuController@create')->name('menu.create');
-    Route::put('/settings/menu/{id}/update', 'MenuController@show')->name('menu.update');
+    Route::put('/settings/menu/{menu}/update', 'MenuController@update')->name('menu.update');
     Route::get('/settings/menu/{id}/tree', 'MenuController@elementsTree')->name('menu.show.tree');
     Route::get('/settings/menu/{id}', 'MenuController@show')->name('menu.show');
     Route::delete('/settings/menu/{id}/delete', 'MenuController@delete')->name('menu.delete');

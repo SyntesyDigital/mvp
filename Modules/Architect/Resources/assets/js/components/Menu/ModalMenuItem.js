@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // CONTENT FIELDS
 import LinkField from './../Content/ContentFields/LinkField';
 import ContentSelectModal from './../Content/ContentSelectModal';
+import InputSettingsField from './../Typology/Settings/InputSettingsField';
 
 import axios from 'axios';
 
@@ -36,7 +37,8 @@ export default class ModalMenuItem extends Component {
           id:0,
           identifier:"link",
           value:{},
-          name:"Enllaç"
+          name:"Enllaç",
+          settings:{htmlId:null,htmlClass:null}
       };
 
       this.setState({
@@ -47,7 +49,7 @@ export default class ModalMenuItem extends Component {
   }
 
   read(field,itemId) {
-    console.log("ModalMenuItem :: read => ",field);
+    console.log("ModalMenuItem :: read => ",JSON.parse(field),itemId);
 
     this.setState({
       field : JSON.parse(field),
@@ -181,6 +183,44 @@ export default class ModalMenuItem extends Component {
     });
   }
 
+  handleFieldSettingsChange(field) {
+
+      const stateField = this.state.field;
+
+      stateField[field.source][field.name] = field.value;
+
+      this.setState({
+          field : stateField
+      });
+  }
+
+  renderSettings() {
+    return (
+      <div>
+
+        <h6>Configuració</h6>
+
+        <InputSettingsField
+          field={this.state.field}
+          name="htmlId"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Html ID"
+          inputLabel="Indica el Id html del camp"
+        />
+
+        <InputSettingsField
+          field={this.state.field}
+          name="htmlClass"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Html Class"
+          inputLabel="Indica la clase CSS personalitzada"
+        />
+      </div>
+    );
+  }
+
   render() {
 
     return (
@@ -217,7 +257,7 @@ export default class ModalMenuItem extends Component {
               <div className="modal-content">
                 <div className="container">
                   <div className="row">
-                    <div className="col-xs-8 col-xs-offset-2 field-col">
+                    <div className="col-xs-8 field-col">
 
                       {this.state.field != null &&
                         <LinkField
@@ -229,6 +269,9 @@ export default class ModalMenuItem extends Component {
                         />
                       }
 
+                    </div>
+                    <div className="col-xs-4 settings-col">
+                      {this.renderSettings()}
                     </div>
 
                   </div>

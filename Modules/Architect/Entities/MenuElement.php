@@ -22,6 +22,8 @@ class MenuElement extends Model
         'order',
     ];
 
+    public $timestamps = false;
+
     public function menu()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Menu');

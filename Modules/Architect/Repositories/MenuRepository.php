@@ -64,11 +64,18 @@ class MenuRepository extends BaseRepository
       $languages = Language::all();
   		$level = 1;
 
-  		$traverse = function (&$menuElementsTree,$menuElements,$level) use (&$traverse) {
+  		$traverse = function (&$menuElementsTree,$menuElements,$level) use (&$traverse,$languages) {
 
   			  $level++;
 
           foreach ($menuElements as $menuElement) {
+
+            $field = [
+              "id" => $menuElement->id,
+              "identifier" => "link",
+              "value" => $menuElement->getFieldValues('link','link',$languages),
+              "name" => "Enllaç"
+            ];
 
       			array_push($menuElementsTree,array(
       				"name" => $menuElement->getFieldValue('link.title'),
@@ -76,7 +83,7 @@ class MenuRepository extends BaseRepository
       				"parent_id" => $menuElement->parent_id,
       				"order" => $menuElement->order,
       				"level" => $level,
-              "field" => $menuElement->getFieldValues('link','link',$languages),
+              "field" => $field,
       			));
 
             $traverse($menuElementsTree,$menuElement->children,$level);
@@ -89,6 +96,13 @@ class MenuRepository extends BaseRepository
 
   			if(!$menuElement->parent_id) {
 
+          $field = [
+            "id" => $menuElement->id,
+            "identifier" => "link",
+            "value" => $menuElement->getFieldValues('link','link',$languages),
+            "name" => "Enllaç"
+          ];
+
   				array_push($menuElementsTree,array(
 						//"name" => $menuElement->getFieldValue('title'),
             "name" => $menuElement->getFieldValue('link.title'),
@@ -96,7 +110,7 @@ class MenuRepository extends BaseRepository
 						"parent_id" => $menuElement->parent_id,
 						"order" => $menuElement->order,
 						"level" => $level,
-            "field" => $menuElement->getFieldValues('link','link',$languages),
+            "field" => $field,
 					));
 
   				//all parents

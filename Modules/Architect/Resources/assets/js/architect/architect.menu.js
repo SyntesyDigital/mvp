@@ -76,6 +76,12 @@ architect.menu = {
 
 }
 
+
+//------------------------------------------//
+//      ARCHITECT MENU FORM
+//      @syntey-digital - 2018
+//------------------------------------------//
+
 architect.menu.form = {
     _settings: null,
     _defaults: {},
@@ -118,6 +124,12 @@ architect.menu.form = {
           _this.editItem($(e.target).closest('.menu-item'));
       });
 
+      $("#menu-form").submit(function(e){
+        e.preventDefault();
+
+        _this.submitForm();
+      });
+
 
     },
 
@@ -130,8 +142,8 @@ architect.menu.form = {
     {
         var classSelector = "";
 
-    		console.log(item);
-    		console.log(item.parent_id);
+    		console.log("architect.menu :: appendItem => ",item);
+    		//console.log(item.parent_id);
 
         if(item.parent_id == null){
     			classSelector = ".sortable-list";
@@ -140,8 +152,8 @@ architect.menu.form = {
     			classSelector = ".category-container-"+item.parent_id;
     		}
 
-        var fieldJSON = JSON.stringify(item.field);
-        console.log("Field JSON => ",fieldJSON);
+        //var fieldJSON = JSON.stringify(item.field);
+        //console.log("Field JSON => ",fieldJSON);
 
     		var divItem = $(classSelector).append(''+
     			'<li id="menu-'+item.id+'" class="item menu-item drag" data-id="'+item.id+'" data-class="category" >'+
@@ -274,31 +286,90 @@ architect.menu.form = {
         architect.dialog.confirm("Estas segur ? ", function(result){
             if(result) {
 
-                if(ajax) {
-                    $.ajax({
-                        method: 'DELETE',
-                        url: ajax,
-                        data: {
-                            _token: csrf_token,
-                        }
-                    })
-                    .done(function(response) {
-                        if(response.success) {
-                            toastr.success("Esborrat correctament", '', {timeOut: 3000});
-                            window.location.href = "";
+                var itemId = item.attr('id').split('-')[1];
+                var parent = item.parent();
 
-                        } else {
-                            toastr.error("Error al esborrar", '', {timeOut: 3000});
-                        }
-                    }).fail(function(response){
-                        toastr.error("Error al esborrar", '', {timeOut: 3000});
-                    });
-                    return;
-                }
+                item.find('.category-container-'+itemId).contents().appendTo(parent);
+                item.remove();
 
             }
         });
-    }
+    },
 
+
+    /************** SAVE ***************/
+
+    submitForm : function(){
+
+      var params = {
+        fields : this.group.sortable("serialize").get(),
+        name : $("#name").val(),
+        settings : null,
+        _token: csrf_token
+      }
+
+      if(this._settings.menuId != null){
+        this.update(params);
+      }
+      else {
+        this.create(params);
+      }
+
+    },
+
+    create : function(params)
+    {
+        var self = this;
+
+        $.ajax({
+            method: 'POST',
+            url: routes.menuCreate,
+            data: params
+        })
+        .done(function(response) {
+            if(response.success) {
+                self.onSaveSuccess(response);
+            } else {
+                self.onSaveError(response);
+            }
+        }).fail(function(response){
+            self.onSaveError(response);
+        });
+    },
+
+    update : function(params)
+    {
+        var self = this;
+
+        $.ajax({
+            method: 'PUT',
+            url: routes.menuUpdate,
+            data: params
+        })
+        .done(function(response) {
+            if(response.success) {
+                self.onSaveSuccess(response);
+            } else {
+                self.onSaveError(response);
+            }
+        }).fail(function(response){
+            self.onSaveError(response);
+        });
+    },
+
+    onSaveSuccess : function(response)
+    {
+        toastr.success('Menu guardat correctament!');
+    },
+
+
+   onSaveError : function(response)
+   {
+       var errors = response.errors ? response.errors : null;
+
+       if(response.message) {
+           toastr.error(response.message);
+       }
+     }
 
 }
