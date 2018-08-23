@@ -35,6 +35,11 @@ class MenuController extends Controller
         ]);
     }
 
+    public function element($id)
+    {
+        return $this->menus->getElement($id);
+    }
+
     public function elementsTree($id)
     {
         return $this->menus->getElementTree($id);
