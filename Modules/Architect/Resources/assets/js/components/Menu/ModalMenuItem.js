@@ -13,6 +13,7 @@ export default class ModalMenuItem extends Component {
     super(props);
 
     this.state = {
+      editing : false,
       itemId : null,
       field : null,
       displayContentModal: false,
@@ -39,14 +40,19 @@ export default class ModalMenuItem extends Component {
       };
 
       this.setState({
-          field : field
+          field : field,
+          editing : false,
+          itemId : null,
       });
   }
 
-  read(itemId) {
-    console.log("ModalMenuItem :: read "+itemId);
+  read(field,itemId) {
+    console.log("ModalMenuItem :: read => ",field);
+
     this.setState({
-      itemId : itemId
+      field : JSON.parse(field),
+      itemId : itemId,
+      editing : true
     });
   }
 
@@ -61,10 +67,12 @@ export default class ModalMenuItem extends Component {
       this.modalClose();
   }
 
-  modalOpen(itemId) {
+  modalOpen(field,itemId) {
 
-    if(itemId != null){
-      this.read(itemId);
+    console.log("itemID => ",itemId);
+
+    if(field != null){
+      this.read(field,itemId);
     }
     else {
       this.initFields();
@@ -79,7 +87,9 @@ export default class ModalMenuItem extends Component {
     TweenMax.to($("#modal-edit-menu"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
 
       self.setState({
-        field : null
+        field : null,
+        itemId : null,
+        editing : false
       });
 
     }});
@@ -105,7 +115,7 @@ export default class ModalMenuItem extends Component {
 
     var _this = this;
 
-    if(this.state.content) {
+    if(this.state.editing) {
         this.update();
     } else {
         this.create();
@@ -121,59 +131,15 @@ export default class ModalMenuItem extends Component {
 
   create()
   {
-      var _this = this;
-      axios.post('/architect/menu/'+this.props.menu+'/create/', this.getFormData())
-         .then((response) => {
-             if(response.data.success) {
-                 _this.onSaveSuccess(response.data);
-             }
-         })
-         .catch((error) => {
-             if (error.response) {
-                 _this.onSaveError(error.response.data);
-             } else if (error.message) {
-                 toastr.error(error.message);
-             } else {
-                 console.log('Error', error.message);
-             }
-         });
+      architect.menu.form.createItem(this.state.field);
+      this.modalClose();
   }
 
   update()
   {
-      var _this = this;
-      axios.put('/architect/menu/'+this.props.menu+'/' + this.state.itemId + '/update', this.getFormData())
-          .then((response) => {
-              if(response.data.success) {
-                  _this.onSaveSuccess(response.data);
-              }
-          })
-          .catch((error) => {
-              if (error.response) {
-                  _this.onSaveError(error.response.data);
-              } else if (error.message) {
-                  toastr.error(error.message);
-              } else {
-                  console.log('Error', error.message);
-              }
-          });
+    architect.menu.form.updateItem(this.state.field,this.state.itemId);
+    this.modalClose();
   }
-
-  onSaveSuccess(response)
-  {
-      toastr.success('Menu guardat correctament!');
-
-      this.modalClose();
-      architect.menu.form.refresh();
-  }
-
-
- onSaveError(response)
- {
-     if(response.message) {
-         toastr.error(response.message);
-     }
-   }
 
   /**************** CONTENT MODAL ********************/
 

@@ -150,9 +150,9 @@
   var routes = {
     'contents.data' : '{{ route('contents.modal.data') }}',
     //'menu.tree' : '{{route("menu.show.tree", $menu)}}',
+    getData : '{{route("menu.show.tree",$menu->id) }}',
     showItem : '{{route("categories.show",["id"=>":id"])}}',
     deleteItem : '{{ route("categories.delete",["id"=>":id"]) }}',
-    getData : '{{route("categories.data") }}',
     updateOrder : '{{route("categories.update-order")}}'
   };
 
