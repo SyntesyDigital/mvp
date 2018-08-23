@@ -10,7 +10,6 @@ use App\Models\User;
 use Auth;
 use Session;
 
-
 use Modules\Architect\Http\Requests\Menu\CreateMenuRequest;
 use Modules\Architect\Jobs\Menu\CreateMenu;
 
@@ -19,6 +18,8 @@ use Modules\Architect\Jobs\Menu\UpdateMenu;
 
 use Modules\Architect\Http\Requests\Menu\DeleteMenuRequest;
 use Modules\Architect\Jobs\Menu\DeleteMenu;
+
+use Modules\Architect\Entities\Menu;
 
 class MenuController extends Controller
 {
@@ -85,7 +86,7 @@ class MenuController extends Controller
     }
 
     public function delete(Menu $menu, DeleteMenuRequest $request)
-    {
+    {        
         return dispatch_now(DeleteMenu::fromRequest($menu, $request)) ? response()->json([
             'success' => true
         ]) : response()->json([

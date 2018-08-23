@@ -11,7 +11,7 @@ class DeleteMenu
 {
     public function __construct(Menu $menu)
     {
-        $this->Menu = $menu;
+        $this->menu = $menu;
     }
 
     public static function fromRequest(Menu $menu, DeleteMenuRequest $request)
@@ -21,10 +21,6 @@ class DeleteMenu
 
     public function handle()
     {
-        Schema::disableForeignKeyConstraints();
-        $result = $this->Menu->delete();
-        Schema::enableForeignKeyConstraints();
-
-        return $result;
+        return $this->menu->delete();
     }
 }
