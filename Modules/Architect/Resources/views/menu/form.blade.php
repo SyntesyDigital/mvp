@@ -3,15 +3,13 @@
 @section('content')
 
 
-    <!-- React Modal Edit Menu -->
-    <div id="menu-edit-modal"
-      menu="{{$menu->id or null}}"
-    ></div>
+
 
     {!!
         Form::open([
             'url' => '',
             'method' => 'POST',
+            'id' => 'menu-form'
         ])
     !!}
 
@@ -70,7 +68,12 @@
       </div>
     </div>
 
-    <div class="container rightbar-page content">
+    <div class="container rightbar-page content page-builder menu">
+
+        <!-- React Modal Edit Menu -->
+        <div id="menu-edit-modal"
+          menu="{{$menu->id or null}}"
+        ></div>
 
         <div class="sidebar">
 
@@ -99,7 +102,9 @@
           <div class="grid-items">
             <div class="row">
               <ol class='sortable-list'>
-                Carregant items...
+                <p class="loading-message">
+                  Carregant menú...
+                </p>
               </ol>
             </div>
           </div>
@@ -149,18 +154,18 @@
 
   var routes = {
     'contents.data' : '{{ route('contents.modal.data') }}',
-    //'menu.tree' : '{{route("menu.show.tree", $menu)}}',
-    showItem : '{{route("categories.show",["id"=>":id"])}}',
-    deleteItem : '{{ route("categories.delete",["id"=>":id"]) }}',
-    getData : '{{route("categories.data") }}',
-    updateOrder : '{{route("categories.update-order")}}'
+    getData : '{{route("menu.show.tree",$menu->id) }}',
+    menuStore : '{{route("menu.store")}}',
+    menuUpdate : '{{route("menu.update",$menu->id)}}',
   };
 
   var csrf_token = "{{csrf_token()}}";
 
   $(function(){
 
-    architect.menu.form.init();
+    architect.menu.form.init({
+      menuId : {{$menu->id or null}}
+    });
 
   });
 </script>

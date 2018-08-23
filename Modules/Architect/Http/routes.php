@@ -17,11 +17,12 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::post('/settings/menu/store', 'MenuController@store')->name('menu.store');
     Route::get('/settings/menu/create', 'MenuController@create')->name('menu.create');
     Route::get('/settings/menu/element/{id}', 'MenuController@element')->name('menu.element');
-    Route::put('/settings/menu/{menu?}/update', 'MenuController@show')->name('menu.update');
+    Route::put('/settings/menu/{menu}/update', 'MenuController@update')->name('menu.update');
     Route::get('/settings/menu/{menu?}/tree', 'MenuController@elementsTree')->name('menu.show.tree');
     Route::get('/settings/menu/{menu?}', 'MenuController@show')->name('menu.show');
     Route::delete('/settings/menu/{menu?}/delete', 'MenuController@delete')->name('menu.delete');
 
+    Route::get('/settings/menu/element/{id}', 'MenuController@element')->name('menu.element');
 
     // Typologies
     Route::get('/typologies', 'TypologyController@index')->name('typologies');

@@ -592,6 +592,12 @@ architect.menu = {
 
 }
 
+
+//------------------------------------------//
+//      ARCHITECT MENU FORM
+//      @syntey-digital - 2018
+//------------------------------------------//
+
 architect.menu.form = {
     _settings: null,
     _defaults: {},
@@ -600,7 +606,9 @@ architect.menu.form = {
     {
         this._settings = $.extend({}, this._defaults, options);
         this.initEvents();
-        this.loadCategories();
+        this.loadMenuItems();
+
+        this.currentId = 1000; // FIXME que sea otro valor
 
     },
 
@@ -623,8 +631,22 @@ architect.menu.form = {
       $(document).on('click','.btn-delete',function(e){
           e.preventDefault();
 
-          _this.deleteItem($(e.target).closest('.btn-delete'));
+          _this.deleteItem($(e.target).closest('.menu-item'));
       });
+
+      $(document).on('click','.btn-edit',function(e){
+          e.preventDefault();
+
+          _this.editItem($(e.target).closest('.menu-item'));
+      });
+
+      $("#menu-form").submit(function(e){
+        e.preventDefault();
+
+        _this.submitForm();
+      });
+
+
     },
 
     refresh : function()
@@ -632,40 +654,47 @@ architect.menu.form = {
       console.log("architect.menu.form :: refresh");
     },
 
-    appendCategory : function(category)
+    appendItem : function(item)
     {
         var classSelector = "";
 
-    		console.log(category);
-    		console.log(category.parent_id);
+    		console.log("architect.menu :: appendItem => ",item);
+    		//console.log(item.parent_id);
 
-        if(category.parent_id == null){
+        if(item.parent_id == null){
     			classSelector = ".sortable-list";
     		}
     		else {
-    			classSelector = ".category-container-"+category.parent_id;
+    			classSelector = ".category-container-"+item.parent_id;
     		}
 
-    		$(classSelector).append(''+
-    			'<li class="item drag" data-id="'+category.id+'" data-class="category">'+
+        //var fieldJSON = JSON.stringify(item.field);
+        //console.log("Field JSON => ",fieldJSON);
+
+    		var divItem = $(classSelector).append(''+
+    			'<li id="menu-'+item.id+'" class="item menu-item drag" data-id="'+item.id+'" data-class="category" >'+
               '<div class="item-bar">'+
-      	  			'<i class="fa fa-bars"></i> &nbsp; '+category.name+
+      	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+item.name+'</span>'+
       	  			'<div class="actions">'+
-      		  			'<a href="'+routes.showItem.replace(':id',category.id)+'" class="btn btn-link"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
-      		  			'<a href="#" data-ajax="'+routes.deleteItem.replace(':id',category.id)+'" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
+      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
+      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
       		  		'</div>'+
               '</div>'+
-    	  			'<ol class="category-container-'+category.id+'">'+
+    	  			'<ol class="category-container-'+item.id+'">'+
     			  	'</ol>'+
     	  		'</li>'
     		);
+
+        $("#menu-"+item.id).data('field',JSON.stringify(item.field));
     },
 
-    loadCategories : function() {
+    loadMenuItems : function() {
 
       var self = this;
 
       $.getJSON(routes.getData,function(data){
+
+        console.log("architect.menu :: loadData :: ",data);
 
     		//create tree
     		var items = data;
@@ -675,7 +704,7 @@ architect.menu.form = {
 
     		for(var id in items){
     			item = items[id];
-    			self.appendCategory(item);
+    			self.appendItem(item);
     		}
 
         self.group = $("ol.sortable-list").sortable({
@@ -685,7 +714,9 @@ architect.menu.form = {
               var data = self.group.sortable("serialize").get();
     			    _super($item, container);
 
-              self.updateOrder();
+              console.log("architect.menu.form :: Data => ",data)
+
+              //self.updateOrder();
     			}
     		});
 
@@ -693,7 +724,23 @@ architect.menu.form = {
 
     },
 
-    updateOrder() {
+    createItem : function(field) {
+
+      console.log("createItem : "+field);
+
+      var data = {
+      	"name": field.value.title['es'],
+      	"id": this.currentId++,
+      	"parent_id": null,
+      	"order": null,
+      	"level": null,
+        "field" : field
+      };
+
+      this.appendItem(data);
+    },
+
+    updateOrder : function() {
 
       var self = this;
 
@@ -727,38 +774,118 @@ architect.menu.form = {
 
     },
 
-    deleteItem(item)
+    editItem : function(item) {
+
+      var itemId = item.attr('id').split('-')[1];
+      console.log("architect.menu editItem => ",itemId);
+
+      this._editModal.modalOpen(
+        item.data('field'),
+        item.attr('id').split('-')[1]
+      );
+
+    },
+
+    updateItem : function(field,itemId) {
+
+      console.log("architect.menu.updateItem => ",field,itemId);
+
+      $("#menu-"+itemId).data('field',JSON.stringify(field));
+      $("#menu-"+itemId+" #item-name").html(field.value.title['es']);
+
+    },
+
+    deleteItem : function(item)
     {
         var ajax = item.data('ajax');
 
         architect.dialog.confirm("Estas segur ? ", function(result){
             if(result) {
 
-                if(ajax) {
-                    $.ajax({
-                        method: 'DELETE',
-                        url: ajax,
-                        data: {
-                            _token: csrf_token,
-                        }
-                    })
-                    .done(function(response) {
-                        if(response.success) {
-                            toastr.success("Esborrat correctament", '', {timeOut: 3000});
-                            window.location.href = "";
+                var itemId = item.attr('id').split('-')[1];
+                var parent = item.parent();
 
-                        } else {
-                            toastr.error("Error al esborrar", '', {timeOut: 3000});
-                        }
-                    }).fail(function(response){
-                        toastr.error("Error al esborrar", '', {timeOut: 3000});
-                    });
-                    return;
-                }
+                item.find('.category-container-'+itemId).contents().appendTo(parent);
+                item.remove();
 
             }
         });
-    }
+    },
 
+
+    /************** SAVE ***************/
+
+    submitForm : function(){
+
+      var params = {
+        fields : this.group.sortable("serialize").get(),
+        name : $("#name").val(),
+        settings : null,
+        _token: csrf_token
+      }
+
+      if(this._settings.menuId != null){
+        this.update(params);
+      }
+      else {
+        this.create(params);
+      }
+
+    },
+
+    create : function(params)
+    {
+        var self = this;
+
+        $.ajax({
+            method: 'POST',
+            url: routes.menuCreate,
+            data: params
+        })
+        .done(function(response) {
+            if(response.success) {
+                self.onSaveSuccess(response);
+            } else {
+                self.onSaveError(response);
+            }
+        }).fail(function(response){
+            self.onSaveError(response);
+        });
+    },
+
+    update : function(params)
+    {
+        var self = this;
+
+        $.ajax({
+            method: 'PUT',
+            url: routes.menuUpdate,
+            data: params
+        })
+        .done(function(response) {
+            if(response.success) {
+                self.onSaveSuccess(response);
+            } else {
+                self.onSaveError(response);
+            }
+        }).fail(function(response){
+            self.onSaveError(response);
+        });
+    },
+
+    onSaveSuccess : function(response)
+    {
+        toastr.success('Menu guardat correctament!');
+    },
+
+
+   onSaveError : function(response)
+   {
+       var errors = response.errors ? response.errors : null;
+
+       if(response.message) {
+           toastr.error(response.message);
+       }
+     }
 
 }
