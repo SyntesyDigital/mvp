@@ -76,11 +76,7 @@ class ContentController extends Controller
 
     public function modalData(Request $request)
     {
-        $where = $request->get('typology_id') ? [
-            'typology_id' => $request->get('typology_id')
-        ] : null;
-
-        return $this->contents->getModalDatatable($where);
+        return $this->contents->getModalDatatable();
     }
 
     public function show(Content $content, Request $request)
