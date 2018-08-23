@@ -13,10 +13,11 @@ class UpdateMenu
 {
      public function __construct(Menu $menu, $attributes)
      {
-         $this->menu = $Menu;
+         $this->menu = $menu;
          $this->attributes = array_only($attributes, [
              'name',
-             'fields'
+             'fields',
+             'settings'
          ]);
      }
 
@@ -28,7 +29,8 @@ class UpdateMenu
     public function handle()
     {
         $this->menu->update([
-            'name' => $this->attributes['name'] ? $this->attributes['name'] : null
+            'name' => $this->attributes['name'] ? $this->attributes['name'] : null,
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
         $this->menu->elements()->delete();

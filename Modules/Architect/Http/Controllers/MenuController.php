@@ -86,7 +86,7 @@ class MenuController extends Controller
     }
 
     public function delete(Menu $menu, DeleteMenuRequest $request)
-    {        
+    {
         return dispatch_now(DeleteMenu::fromRequest($menu, $request)) ? response()->json([
             'success' => true
         ]) : response()->json([
