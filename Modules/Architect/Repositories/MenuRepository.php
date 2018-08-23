@@ -53,4 +53,9 @@ class MenuRepository extends BaseRepository
 
         return $traverse($nodes);
     }
+
+    public function getElement($id)
+    {
+        return MenuElement::find($id);
+    }
 }
