@@ -23,7 +23,7 @@ class ContentDataTable extends Component {
     setDatatable()
     {
 
-        console.log("MediaSelectModal :: setDatatable");
+        console.log("MediaSelectModal :: setDatatable route : ",this.props.route);
 
         var _this = this;
 
@@ -32,8 +32,9 @@ class ContentDataTable extends Component {
     	        "url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		processing: true,
-          serverSide: true,
-    	    pageLength: 20,
+          //serverSide: true,
+          order: [],
+    	    pageLength: 15,
           language: {
               url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
           },
@@ -48,13 +49,6 @@ class ContentDataTable extends Component {
               {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
-
                 _this.initEvents();
     	    }
         });

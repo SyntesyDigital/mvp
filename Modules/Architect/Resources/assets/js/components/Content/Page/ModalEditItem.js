@@ -29,8 +29,9 @@ import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSetting
 import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
 import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
 
-
 import ModalEditListItem from './ModalEditListItem';
+
+import axios from 'axios';
 
 class ModalEditItem extends Component {
 
@@ -58,7 +59,9 @@ class ModalEditItem extends Component {
     this.state = {
         field : null,
         displayListItemModal : false,
-        listItemInfo : null
+        listItemInfo : null,
+        programs : [],
+        axes : []
     };
 
     this.categories = [
@@ -84,19 +87,53 @@ class ModalEditItem extends Component {
       }
     }
 
-    this.PROGRAMS = [{
-        value: 1,
-        name: 'Programa 1',
-      },
-      {
-        value: 2,
-        name: 'Programa 2',
-      }
-    ];
-
     console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
 
     this.onModalClose = this.onModalClose.bind(this);
+  }
+
+  loadAxes() {
+    var self = this;
+
+    axios.get(ASSETS+'externalapi/axes')
+      .then(function (response) {
+
+          if(response.status == 200
+              && response.data.data !== undefined
+              && response.data.data.length > 0)
+          {
+              self.setState({
+                  axes : response.data.data
+              });
+          }
+
+
+      }).catch(function (error) {
+         console.log(error);
+       });
+  }
+
+
+
+  loadPrograms() {
+    var self = this;
+
+    axios.get(ASSETS+'externalapi/programs')
+      .then(function (response) {
+
+          if(response.status == 200
+              && response.data.data !== undefined
+              && response.data.data.length > 0)
+          {
+              self.setState({
+                  programs : response.data.data
+              });
+          }
+
+
+      }).catch(function (error) {
+         console.log(error);
+       });
   }
 
   processProps(props) {
@@ -118,6 +155,9 @@ class ModalEditItem extends Component {
     if(this.props.display){
         this.modalOpen();
     }
+
+    this.loadAxes();
+    this.loadPrograms();
   }
 
   componentWillReceiveProps(nextProps)
@@ -742,10 +782,24 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Programa"
-          options={this.PROGRAMS.map(function(obj){
+          options={this.state.programs.map(function(obj){
               return {
-                  value: obj.value,
-                  name: obj.name
+                  value: obj.id,
+                  name: obj.description_es
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="axe"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Eix"
+          options={this.state.axes.map(function(item){
+              return {
+                  value: item.id,
+                  name: item.description_es,
               };
           })}
         />

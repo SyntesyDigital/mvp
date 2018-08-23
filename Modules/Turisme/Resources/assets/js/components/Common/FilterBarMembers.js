@@ -24,7 +24,7 @@ class FilterBarMembers extends Component {
 
       var self = this;
 
-      axios.get(ASSETS+'externalapi/programs-categories/all')
+      axios.get(ASSETS+'externalapi/programs-categories')
         .then(function (response) {
 
             if(response.status == 200
@@ -51,11 +51,17 @@ class FilterBarMembers extends Component {
       var query = [];
 
       if(this.state.category != ''){
-          query.push('');
+          query.push({
+            search : 'categories.code:'+this.state.category,
+            searchFields : 'categories.code:='
+          });
       }
 
       if(this.state.text != ''){
-          query.push('&search='+text+'&searchFields=name:like');
+        query.push({
+          search : 'name:'+this.state.text,
+          searchFields : 'name:like'
+        });
       }
 
       this.props.onSubmit({
@@ -68,19 +74,23 @@ class FilterBarMembers extends Component {
 
     processQuery(filtersArray) {
 
-      var fieldsQuery = '';
+      var query = '&search=:search-query&searchFields=:search-fields&searchJoin=and';
+
+      var searchQuery = '';
+      var searchFields = '';
 
       if(filtersArray != null && filtersArray.length > 0){
 
-        var fieldsQuery = '[';
-
         for(var key in filtersArray){
-          fieldsQuery += (key > 0 ? ',' : '')+filtersArray[key];
+          searchQuery += (key > 0 ? ';' : '')+filtersArray[key]['search'];
+          searchFields += (key > 0 ? ';' : '')+filtersArray[key]['searchFields'];
         }
-        fieldsQuery+=']';
       }
 
-      return fieldsQuery;
+      query = query.replace(':search-query',searchQuery);
+      query = query.replace(':search-fields',searchFields);
+
+      return query;
 
     }
 

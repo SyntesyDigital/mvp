@@ -32,5 +32,7 @@ return [
     'TYPOLOGY_SELECTION_FILTERS' => 'Llista amb selecció',
     'CONTACT_FORM' => 'Formulari contacte',
     'MEMBERS_BY_PROGRAM' => 'Membres per Programa',
-    'MEMBERS' => 'Llista de Membres'
+    'MEMBERS' => 'Llista de Membres',
+    'COMPANIES' => 'Recursos y Sostenibilidad',
+    'AGENCIES' => 'Agencias de Viajes'
 ];

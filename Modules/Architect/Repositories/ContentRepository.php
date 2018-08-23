@@ -25,7 +25,8 @@ class ContentRepository extends BaseRepository
                 'users.firstname',
                 'users.lastname'
             )
-            ->groupBy('contents.id');
+            ->groupBy('contents.id')
+            ->orderBy('contents.updated_at','DESC');
 
         if(isset($options["where"])) {
             foreach($options["where"] as $where) {
@@ -98,7 +99,7 @@ class ContentRepository extends BaseRepository
 
     public function getModalDatatable($where = null)
     {
-        $results = $this->model->with('fields');
+        $results = $this->model->orderBy('updated_at','DESC')->with('fields');
 
         if($where) {
             $results->where($where);
