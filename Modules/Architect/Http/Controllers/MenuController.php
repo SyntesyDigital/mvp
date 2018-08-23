@@ -21,8 +21,6 @@ use Modules\Architect\Jobs\Menu\UpdateMenu;
 use Modules\Architect\Http\Requests\Menu\DeleteMenuRequest;
 use Modules\Architect\Jobs\Menu\DeleteMenu;
 
-use Modules\Architect\Entities\Menu;
-
 class MenuController extends Controller
 {
     public function __construct(MenuRepository $menus)
