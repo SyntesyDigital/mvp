@@ -249,7 +249,7 @@ trait HasFields
             if(sizeof($arr) > 2) {
                 return $query->byField($arr[0], $arr[2], $arr[1], $boolean);
             } else {
-                return $query->byField($arr[0], $arr[1], $boolean);
+                return $query->byField($arr[0], "=", $arr[1], $boolean);
             }
         }
 
@@ -259,7 +259,7 @@ trait HasFields
                 if(sizeof($v) > 2) {
                     $query->byField($v[0],$v[2], $v[1], $condition);
                 } else {
-                    $query->byField($v[0], $v[1], $condition);
+                    $query->byField($v[0], "=", $v[1], $condition);
                 }
                 $condition = 'and';
             } else {
