@@ -77,7 +77,8 @@ class MenuRepository extends BaseRepository
                         "id" => $menuElement->id,
                         "identifier" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
-                        "name" => "Enllaç"
+                        "name" => "Enllaç",
+                        "settings" => json_decode($menuElement->settings),
                     ],
                 ));
 
@@ -100,7 +101,8 @@ class MenuRepository extends BaseRepository
                         "id" => $menuElement->id,
                         "identifier" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
-                        "name" => "Enllaç"
+                        "name" => "Enllaç",
+                        "settings" => json_decode($menuElement->settings),
                     ],
                 ));
 

@@ -16716,6 +16716,10 @@ nav.main-nav ul li.active a {
   min-height: auto;
 }
 
+.menu.page-builder .page-row.has-error {
+  border: 1px dashed #fc4b6c;
+}
+
 .menu p.loading-message {
   border: 1px dashed #ccc;
   text-align: center;

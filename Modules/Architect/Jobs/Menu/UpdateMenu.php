@@ -84,6 +84,7 @@ class UpdateMenu
         }
 
         $menuField->parent_id = $parent_id;
+        $menuField->settings = json_encode($field["settings"]);
         $menuField->save();
 
         return $menuField;

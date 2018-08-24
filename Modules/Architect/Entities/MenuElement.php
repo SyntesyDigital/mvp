@@ -20,6 +20,7 @@ class MenuElement extends Model
     protected $fillable = [
         'menu_id',
         'order',
+        'settings'
     ];
 
     public $timestamps = false;
