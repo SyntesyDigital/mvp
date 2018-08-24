@@ -79,7 +79,7 @@ class UpdateMenu
                 'name' => $name  . '.content',
                 'value' => $contentId,
                 'parent_id' => $menuElementField->id,
-                'relations' => 'contents'
+                'relation' => 'content'
             ]));
         }
 

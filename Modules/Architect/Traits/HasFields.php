@@ -170,10 +170,9 @@ trait HasFields
                                     $iso = $l->iso;
                                 }
                             }
-
                             $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
                         } else {
-                            if (explode('.', $v->name)[1] == 'content') {
+                            if (strtolower(explode('.', $v->name)[1]) == 'content') {
                                 $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
                             }
                         }

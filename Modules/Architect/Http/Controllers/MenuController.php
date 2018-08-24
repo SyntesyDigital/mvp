@@ -44,9 +44,9 @@ class MenuController extends Controller
         return $this->menus->getElement($id);
     }
 
-    public function elementsTree($id)
+    public function elementsTree(Menu $menu)
     {
-        return $this->menus->getElementTree($id);
+        return $this->menus->getElementTree($menu);
     }
 
     public function show($id)

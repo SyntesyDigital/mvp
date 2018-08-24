@@ -110,7 +110,7 @@ class CreateMenu
                             'value' => $contentId,
                             'language_id' => Language::byIso($iso)->id,
                             'parent_id' => $field->id,
-                            'relations' => 'contents'
+                            'relation' => 'content'
                         ]));
                     }
                 break;
