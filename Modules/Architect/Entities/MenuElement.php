@@ -19,7 +19,10 @@ class MenuElement extends Model
 
     protected $fillable = [
         'menu_id',
+        'order',
     ];
+
+    public $timestamps = false;
 
     public function menu()
     {

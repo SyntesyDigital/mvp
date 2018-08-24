@@ -10,6 +10,8 @@ use App\Models\User;
 use Auth;
 use Session;
 
+use Modules\Architect\Entities\Menu;
+
 use Modules\Architect\Http\Requests\Menu\CreateMenuRequest;
 use Modules\Architect\Jobs\Menu\CreateMenu;
 
@@ -18,8 +20,6 @@ use Modules\Architect\Jobs\Menu\UpdateMenu;
 
 use Modules\Architect\Http\Requests\Menu\DeleteMenuRequest;
 use Modules\Architect\Jobs\Menu\DeleteMenu;
-
-use Modules\Architect\Entities\Menu;
 
 class MenuController extends Controller
 {
@@ -75,7 +75,8 @@ class MenuController extends Controller
 
     public function update(Menu $menu, CreateMenuRequest $request)
     {
-        $menu = dispatch_now(UpdateMenu::fromRequest($Menu, $request));
+
+        $menu = dispatch_now(UpdateMenu::fromRequest($menu, $request));
 
         return $menu ? response()->json([
             'success' => true,
@@ -93,7 +94,5 @@ class MenuController extends Controller
             'success' => false
         ], 500);
     }
-
-
 
 }

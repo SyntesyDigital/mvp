@@ -18,6 +18,8 @@ class MenuElementField extends Model
         'relation',
     ];
 
+    public $timestamps = false;
+
     public function element()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Element');
