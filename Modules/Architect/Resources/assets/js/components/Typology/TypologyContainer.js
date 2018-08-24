@@ -17,9 +17,9 @@ class TypologyContainer extends Component {
 
   constructor(props) {
      super(props);
-     
 
-     
+
+
      this.state = {
          typology : null,
          inputs: {
@@ -393,9 +393,11 @@ class TypologyContainer extends Component {
 
       if(this.state.fieldsList){
 
+
         var fieldList = Object.keys(this.state.fieldsList).filter((k,i) =>
           k != "SLUG"
         );
+
         result = fieldList.map((k,i) =>
           <TypologyDragField definition={this.state.fieldsList[k]} key={i}/>
         )
