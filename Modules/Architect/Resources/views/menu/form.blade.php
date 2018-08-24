@@ -154,9 +154,10 @@
 
   var routes = {
     'contents.data' : '{{ route('contents.modal.data') }}',
-    getData : '{{route("menu.show.tree",$menu->id) }}',
+    getData : '{{route("menu.show.tree",isset($menu) ? $menu->id : 0) }}',
     menuStore : '{{route("menu.store")}}',
-    menuUpdate : '{{route("menu.update",$menu->id)}}',
+    menuUpdate : '{{route("menu.update",isset($menu) ? $menu->id : 0)}}',
+    menuShow : '{{route("menu.show",":id")}}',
   };
 
   var csrf_token = "{{csrf_token()}}";
@@ -164,7 +165,7 @@
   $(function(){
 
     architect.menu.form.init({
-      menuId : {{$menu->id or null}}
+      menuId : {{$menu->id or 'null'}}
     });
 
   });

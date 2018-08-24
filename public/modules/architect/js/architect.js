@@ -606,7 +606,13 @@ architect.menu.form = {
     {
         this._settings = $.extend({}, this._defaults, options);
         this.initEvents();
-        this.loadMenuItems();
+
+        if(this._settings.menuId != null){
+          this.loadMenuItems();
+        }
+        else {
+          this.initSortable(null);
+        }
 
         this.currentId = 1000; // FIXME que sea otro valor
 
@@ -688,6 +694,35 @@ architect.menu.form = {
         $("#menu-"+item.id).data('field',JSON.stringify(item.field));
     },
 
+    initSortable : function(items) {
+
+      $(".sortable-list").empty();
+
+      var self = this;
+
+      if(items != null) {
+        var item;
+        for(var id in items){
+          item = items[id];
+          self.appendItem(item);
+        }
+      }
+
+      self.group = $("ol.sortable-list").sortable({
+        onDrop: function ($item, container, _super) {
+
+            var parent = container.el.parent();
+            var data = self.group.sortable("serialize").get();
+            _super($item, container);
+
+            console.log("architect.menu.form :: Data => ",data)
+
+            //self.updateOrder();
+        }
+      });
+
+    },
+
     loadMenuItems : function() {
 
       var self = this;
@@ -698,27 +733,8 @@ architect.menu.form = {
 
     		//create tree
     		var items = data;
-        var item;
 
-    		$(".sortable-list").empty();
-
-    		for(var id in items){
-    			item = items[id];
-    			self.appendItem(item);
-    		}
-
-        self.group = $("ol.sortable-list").sortable({
-          onDrop: function ($item, container, _super) {
-
-    			    var parent = container.el.parent();
-              var data = self.group.sortable("serialize").get();
-    			    _super($item, container);
-
-              console.log("architect.menu.form :: Data => ",data)
-
-              //self.updateOrder();
-    			}
-    		});
+        self.initSortable(items)
 
       });
 
@@ -838,13 +854,18 @@ architect.menu.form = {
         var self = this;
 
         $.ajax({
-            method: 'POST',
-            url: routes.menuCreate,
+            method: 'PUT',
+            url: routes.menuStore,
             data: params
         })
         .done(function(response) {
             if(response.success) {
                 self.onSaveSuccess(response);
+
+                setTimeout(function(){
+                    window.location.href = routes.menuShow.replace(':id',response.menu.id);
+                },1500);
+
             } else {
                 self.onSaveError(response);
             }

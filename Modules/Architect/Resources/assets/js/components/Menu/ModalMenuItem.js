@@ -234,7 +234,7 @@ export default class ModalMenuItem extends Component {
           zIndex={11000}
         />
 
-        <div className="custom-modal" id="modal-edit-menu" style={{zIndex:this.props.zIndex}}>
+        <div className="custom-modal page-content" id="modal-edit-menu" style={{zIndex:this.props.zIndex}}>
           <div className="modal-background"></div>
 
 
