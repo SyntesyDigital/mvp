@@ -6,14 +6,14 @@
 				<div class="col-md-2 col-sm-3 col-xs-6">
 					<div class="corporatiu"><a href="{{route('home')}}"><img src="{{asset('modules/turisme/images/logo-corporatiu-barcelona-turisme.png')}}" alt="Turisme Barcelona"/></a></div>
 			</div>
-				<div class="col-md-3 col-sm-4 col-xs-4 pull-right">
-					<div class="idiomes">
+			<div class="col-md-3 col-sm-4 col-xs-4 pull-right">
+				<div class="idiomes">
 					<ul>
-				<li class="current"> <a href=""> Español</a></li>
-				<li > <a href=""> Català</a></li>
-				<li> <a href=""> English</a></li>
-			</ul>
-			</div>
+						<li class="current"> <a href=""> Español</a></li>
+						<li > <a href=""> Català</a></li>
+						<li> <a href=""> English</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -28,15 +28,17 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-
 	</div>
 
 	<div class="collapse navbar-collapse js-navbar-collapse">
-	 <!-- buscador -->
-								<form class="col-md-12 buscar">
-							<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
-										 </form>
-	<!-- end buscador -->
+
+		{!! display_menu('menu') !!}
+		
+		 <!-- buscador -->
+		<form class="col-md-12 buscar">
+			<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
+		</form>
+		<!-- end buscador -->
 
 		<ul class="nav navbar-nav menu-general">
 			<li class="dropdown mega-dropdown active">

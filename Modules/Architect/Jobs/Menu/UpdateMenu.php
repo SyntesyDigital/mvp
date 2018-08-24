@@ -27,7 +27,7 @@ class UpdateMenu
         return new self($menu, $request->all());
     }
 
-    private function saveField($field,$order,$parent_id)
+    private function saveField($field, $order, $parent_id)
     {
         $name = "link";
         $values = $field["value"];
@@ -91,7 +91,6 @@ class UpdateMenu
 
     public function handle()
     {
-
         $fields = $this->attributes['fields'];
         $order = 1;
 
@@ -100,110 +99,28 @@ class UpdateMenu
             'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
-        //return true;
+        // Reset cached menu
+        Cache::forget(sprintf("menu_%s", $this->menu->name));
 
         $this->menu->elements()->delete();
 
         $traverse = function ($parent_id,$children) use (&$traverse) {
+            $order = 1;
+            foreach ($children as $menuItem) {
+                $field = json_decode($menuItem['field'],true);
+                $menuField = $this->saveField($field,$order,$parent_id);
 
-    				$order = 1;
+                if(isset($menuItem['children'])){
+                    $children = $menuItem['children'][0];
+                    $traverse($menuField->id,$children);
+                }
 
-    				foreach ($children as $menuItem) {
-
-    					$field = json_decode($menuItem['field'],true);
-              $menuField = $this->saveField($field,$order,$parent_id);
-
-    					$order++;
-
-    					if(isset($menuItem['children'])){
-    						$children = $menuItem['children'][0];
-
-    						$traverse($menuField->id,$children);
-    					}
+                $order++;
             }
-    	  };
+        };
 
-        $traverse(null,$fields[0]);
+        $traverse(null, $fields[0]);
 
         return true;
-
-/*
-        $this->menu->elements()->delete();
-
-
-
-        foreach($this->attributes['fields'] as $name => $values) {
-
-            $element = MenuElement::create([
-                'menu_id' => $this->menu->id
-            ]);
-
-
-
-            $values = !is_array($values) ? [$values] : $values;
-
-            switch($name) {
-                case "name":
-                    foreach($values as $iso => $value) {
-                        $element->fields()->save(new MenuElementField([
-                            'name' => $name,
-                            'value' => $value,
-                            'language_id' => Language::byIso($iso)->id
-                        ]));
-                    }
-                break;
-
-                case "link":
-                    // Save father field
-                    $field = MenuElementField::create([
-                        'name' => $name,
-                        'value' => '',
-                        'menu_id' => $this->menu->id
-                    ]);
-
-                    // Save TITLE child fields
-                    if(isset($values['title'])) {
-                        foreach($values['title'] as $iso => $value) {
-                            $element->fields()->save(new MenuElementField([
-                                'name' => $name  . '.title',
-                                'value' => $value,
-                                'language_id' => Language::byIso($iso)->id,
-                                'parent_id' => $field->id
-                            ]));
-                        }
-                    }
-
-                    // Save URL child fields
-                    if(isset($values['url'])) {
-                        foreach($values['url'] as $iso => $value) {
-                            $element->fields()->save(new MenuElementField([
-                                'name' => $name  . '.url',
-                                'value' => $value,
-                                'language_id' => Language::byIso($iso)->id,
-                                'parent_id' => $field->id
-                            ]));
-                        }
-                    }
-
-                    // Save CONTENT child field
-                    $contentId = (isset($values['content'])) && isset($values['content']['id'])
-                        ? $values['content']['id']
-                        : null;
-
-                    if($contentId) {
-                        $element->fields()->save(new MenuElementField([
-                            'name' => $name  . '.content',
-                            'value' => $contentId,
-                            'language_id' => Language::byIso($iso)->id,
-                            'parent_id' => $field->id,
-                            'relations' => 'contents'
-                        ]));
-                    }
-                break;
-            }
-        }
-
-        */
-
     }
 }
