@@ -24,7 +24,7 @@ class MenuRepository extends BaseRepository
         return Datatables::of(Menu::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="'.route('menu.show',$item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
+                <a href="'.route('menu.show', $item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
                 <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('menu.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
                 ';
             })
@@ -57,72 +57,60 @@ class MenuRepository extends BaseRepository
     }
     */
 
-    public function getElementTree()
-  	{
+    public function getElementTree($menu)
+    {
+        $menuElementsTree = array();
+        $languages = Language::all();
+        $level = 1;
 
-  		$menuElementsTree = array();
-      $languages = Language::all();
-  		$level = 1;
+        $traverse = function (&$menuElementsTree, $menuElements, $level) use (&$traverse, $languages) {
+            $level++;
 
-  		$traverse = function (&$menuElementsTree,$menuElements,$level) use (&$traverse,$languages) {
+            foreach ($menuElements as $menuElement) {
+                array_push($menuElementsTree, array(
+                    "name" => $menuElement->getFieldValue('link.title'),
+                    "id" => $menuElement->id,
+                    "parent_id" => $menuElement->parent_id,
+                    "order" => $menuElement->order,
+                    "level" => $level,
+                    "settings" => json_decode($menuElement->settings)
+                    "field" => [
+                        "id" => $menuElement->id,
+                        "identifier" => "link",
+                        "value" => $menuElement->getFieldValues('link', 'link', $languages),
+                        "name" => "Enllaç"
+                    ],
+                ));
 
-  			  $level++;
+                $traverse($menuElementsTree, $menuElement->children, $level);
+            }
+        };
 
-          foreach ($menuElements as $menuElement) {
+        $menuElements = $menu->elements()->orderBy('order', 'ASC')->get();
 
-            $field = [
-              "id" => $menuElement->id,
-              "identifier" => "link",
-              "value" => $menuElement->getFieldValues('link','link',$languages),
-              "name" => "Enllaç",
-              "settings" => json_decode($menuElement->settings)
-            ];
+        foreach ($menuElements as $menuElement) {
+            if (!$menuElement->parent_id) {
+                array_push($menuElementsTree, array(
+                    //"name" => $menuElement->getFieldValue('title'),
+                    "name" => $menuElement->getFieldValue('link.title'),
+                    "id" => $menuElement->id,
+                    "parent_id" => $menuElement->parent_id,
+                    "order" => $menuElement->order,
+                    "level" => $level,
+                    "settings" => json_decode($menuElement->settings)
+                    "field" => [
+                        "id" => $menuElement->id,
+                        "identifier" => "link",
+                        "value" => $menuElement->getFieldValues('link', 'link', $languages),
+                        "name" => "Enllaç"
+                    ],
+                ));
 
-      			array_push($menuElementsTree,array(
-      				"name" => $menuElement->getFieldValue('link.title'),
-      				"id" => $menuElement->id,
-      				"parent_id" => $menuElement->parent_id,
-      				"order" => $menuElement->order,
-      				"level" => $level,
-              "field" => $field,
-      			));
-
-            $traverse($menuElementsTree,$menuElement->children,$level);
-          }
-      };
-
-      $menuElements = MenuElement::orderBy('order','ASC')->get();
-
-  		foreach($menuElements as $menuElement) {
-
-  			if(!$menuElement->parent_id) {
-
-          $field = [
-            "id" => $menuElement->id,
-            "identifier" => "link",
-            "value" => $menuElement->getFieldValues('link','link',$languages),
-            "name" => "Enllaç",
-            "settings" => json_decode($menuElement->settings)
-          ];
-
-  				array_push($menuElementsTree,array(
-						//"name" => $menuElement->getFieldValue('title'),
-            "name" => $menuElement->getFieldValue('link.title'),
-						"id" => $menuElement->id,
-						"parent_id" => $menuElement->parent_id,
-						"order" => $menuElement->order,
-						"level" => $level,
-            "field" => $field,
-					));
-
-  				//all parents
-          $traverse($menuElementsTree,MenuElement::getTree($menuElement->id), $level);
+                //all parents
+                $traverse($menuElementsTree, MenuElement::getTree($menuElement->id), $level);
+            }
         }
-      }
 
-      return  $menuElementsTree;
-
+        return $menuElementsTree;
     }
-
-
 }

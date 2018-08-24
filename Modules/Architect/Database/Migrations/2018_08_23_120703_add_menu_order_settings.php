@@ -20,7 +20,6 @@ class AddMenuOrderSettings extends Migration
         Schema::table('menus_elements', function (Blueprint $table) {
           $table->longText('settings')->nullable();
           $table->integer('order');
-
         });
 
     }

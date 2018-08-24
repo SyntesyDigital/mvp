@@ -15,7 +15,8 @@ class CreateMenu
         $this->languages = Language::all();
         $this->attributes = array_only($attributes, [
             'name',
-            'fields'
+            'fields',
+            'settings'
         ]);
         $this->languages = Language::all()->pluck('id','iso');
     }
@@ -92,7 +93,8 @@ class CreateMenu
     public function handle()
     {
         $this->menu = Menu::create([
-            'name' => $this->attributes['name'] ? $this->attributes['name'] : null
+            'name' => $this->attributes['name'] ? $this->attributes['name'] : null,
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
         $fields = $this->attributes['fields'];

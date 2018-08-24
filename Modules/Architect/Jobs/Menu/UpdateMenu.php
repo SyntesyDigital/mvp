@@ -16,7 +16,8 @@ class UpdateMenu
          $this->menu = $menu;
          $this->attributes = array_only($attributes, [
              'name',
-             'fields'
+             'fields',
+             'settings'
          ]);
          $this->languages = Language::all()->pluck('id','iso');
      }
@@ -78,7 +79,7 @@ class UpdateMenu
                 'name' => $name  . '.content',
                 'value' => $contentId,
                 'parent_id' => $menuElementField->id,
-                'relations' => 'contents'
+                'relation' => 'content'
             ]));
         }
 
@@ -96,7 +97,8 @@ class UpdateMenu
         $order = 1;
 
         $this->menu->update([
-            'name' => $this->attributes['name'] ? $this->attributes['name'] : null
+            'name' => $this->attributes['name'] ? $this->attributes['name'] : null,
+            'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
         //return true;

@@ -11,6 +11,23 @@ use Modules\Architect\Entities\Field;
 
 class ContentRepository extends BaseRepository
 {
+    protected $fieldSearchable = [
+    	'typology_id',
+        'author_id',
+        'parent_id',
+        'is_page',
+        'published_at',
+        'typology.identifier',
+        'typology.has_categories',
+        'typology.has_tags',
+        'typology.has_slug'
+    ];
+
+    public function boot()
+    {
+        $this->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+    }
+
     public function model()
     {
         return "Modules\\Architect\\Entities\\Content";
@@ -97,15 +114,13 @@ class ContentRepository extends BaseRepository
             ->make(true);
     }
 
-    public function getModalDatatable($where = null)
+    public function getModalDatatable()
     {
-        $results = $this->model->orderBy('updated_at','DESC')->with('fields');
+        $query = $this
+            ->orderBy('updated_at','DESC')
+            ->all();
 
-        if($where) {
-            $results->where($where);
-        }
-
-        return Datatables::of($results)
+        return Datatables::of($query)
             ->addColumn('title', function ($item) {
                 return isset($item->title) ? $item->title : null;
             })
