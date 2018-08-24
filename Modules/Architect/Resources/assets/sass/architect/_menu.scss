@@ -3,11 +3,18 @@
     display: inline-block;
   }
 
+
+
   &.page-builder .page-row{
     width:50vw;
     margin-top: 10px;
     padding:0;
     min-height: auto;
+
+    &.has-error{
+      border: 1px dashed $brand-danger;
+    }
+
   }
 
   p.loading-message{

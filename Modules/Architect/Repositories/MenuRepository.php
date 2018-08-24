@@ -73,12 +73,12 @@ class MenuRepository extends BaseRepository
                     "parent_id" => $menuElement->parent_id,
                     "order" => $menuElement->order,
                     "level" => $level,
-                    "settings" => json_decode($menuElement->settings)
                     "field" => [
                         "id" => $menuElement->id,
                         "identifier" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
-                        "name" => "Enllaç"
+                        "name" => "Enllaç",
+                        "settings" => json_decode($menuElement->settings),
                     ],
                 ));
 
@@ -97,12 +97,12 @@ class MenuRepository extends BaseRepository
                     "parent_id" => $menuElement->parent_id,
                     "order" => $menuElement->order,
                     "level" => $level,
-                    "settings" => json_decode($menuElement->settings)
                     "field" => [
                         "id" => $menuElement->id,
                         "identifier" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
-                        "name" => "Enllaç"
+                        "name" => "Enllaç",
+                        "settings" => json_decode($menuElement->settings),
                     ],
                 ));
 

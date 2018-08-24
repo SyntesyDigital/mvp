@@ -70,11 +70,6 @@
 
     <div class="container rightbar-page content page-builder menu">
 
-        <!-- React Modal Edit Menu -->
-        <div id="menu-edit-modal"
-          menu="{{$menu->id or null}}"
-        ></div>
-
         <div class="sidebar">
 
           <div>
@@ -91,6 +86,11 @@
         </div><!-- end sidebar -->
 
         <div class="col-xs-9 page-content">
+
+          <!-- React Modal Edit Menu -->
+          <div id="menu-edit-modal"
+            menu="{{$menu->id or null}}"
+          ></div>
 
           @if (session('success'))
               <div class="alert alert-success">

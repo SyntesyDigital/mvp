@@ -566,11 +566,6 @@ architect.menu = {
 
         datatable.ajax.reload(function(){
             _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
         });
     },
 
@@ -716,8 +711,6 @@ architect.menu.form = {
             _super($item, container);
 
             console.log("architect.menu.form :: Data => ",data)
-
-            //self.updateOrder();
         }
       });
 
@@ -754,40 +747,8 @@ architect.menu.form = {
       };
 
       this.appendItem(data);
-    },
 
-    updateOrder : function() {
-
-      var self = this;
-
-      var newOrder = this.group.sortable("serialize").get();
-
-      console.log("update Order => ",newOrder);
-
-      $.ajax({
-            type: 'POST',
-            url: routes.updateOrder,
-            data: {
-              _token: csrf_token,
-              order : newOrder
-            },
-            dataType: 'html',
-            success: function(data){
-
-                var rep = JSON.parse(data);
-
-                if(rep.success){
-                    //change
-                    toastr.success('Ordre guardat amb éxit', '', {timeOut: 3000});
-                    //location.reload();
-                }
-                else {
-                  //error
-                  toastr.error('Error al guardar el nou ordre', '', {timeOut: 3000});
-                }
-            }
-      });
-
+      $(".add-row-block").removeClass('has-error');
     },
 
     editItem : function(item) {
@@ -833,6 +794,9 @@ architect.menu.form = {
 
     submitForm : function(){
 
+      $("#name").closest('.form-group').removeClass('has-error');
+      $(".add-row-block").removeClass('has-error');
+
       var params = {
         fields : this.group.sortable("serialize").get(),
         name : $("#name").val(),
@@ -859,6 +823,9 @@ architect.menu.form = {
             data: params
         })
         .done(function(response) {
+
+            console.log("Response errors => ",response);
+
             if(response.success) {
                 self.onSaveSuccess(response);
 
@@ -870,7 +837,7 @@ architect.menu.form = {
                 self.onSaveError(response);
             }
         }).fail(function(response){
-            self.onSaveError(response);
+            self.onSaveError(response.responseJSON);
         });
     },
 
@@ -890,12 +857,14 @@ architect.menu.form = {
                 self.onSaveError(response);
             }
         }).fail(function(response){
-            self.onSaveError(response);
+            self.onSaveError(response.responseJSON);
         });
     },
 
     onSaveSuccess : function(response)
     {
+
+
         toastr.success('Menu guardat correctament!');
     },
 
@@ -904,9 +873,16 @@ architect.menu.form = {
    {
        var errors = response.errors ? response.errors : null;
 
-       if(response.message) {
-           toastr.error(response.message);
+       if(errors.name !== undefined){
+         $("#name").closest('.form-group').addClass('has-error');
        }
+
+       if(errors.fields !== undefined){
+         $(".add-row-block").addClass('has-error');
+       }
+
+       toastr.error('Algun error al guardar');
+
      }
 
 }
