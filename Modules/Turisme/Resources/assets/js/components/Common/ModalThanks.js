@@ -7,6 +7,8 @@ export default class ModalThanks extends Component {
     constructor(props)
     {
         super(props);
+
+        this.isIn = false;
     }
 
     componentDidMount() {
@@ -23,18 +25,23 @@ export default class ModalThanks extends Component {
     }
 
     openModal() {
-      $("#modal-thanks").css({
-          display:"block",
-          zIndex:1000
-      });
 
-      $('body').css({overflow:'hidden'});
+      if(!this.isIn){
+        this.isIn = true;
 
-      TweenMax.to($("#modal-thanks"),1,{
-          delay : 0.25,
-          opacity:1,
-          ease: Power2.easeInOut
-      });
+        $("#modal-thanks").css({
+            display:"block",
+            zIndex:1000
+        });
+
+        $('body').css({overflow:'hidden'});
+
+        TweenMax.to($("#modal-thanks"),1,{
+            delay : 0.25,
+            opacity:1,
+            ease: Power2.easeInOut
+        });
+      }
     }
 
     onModalClose(e) {
@@ -44,14 +51,21 @@ export default class ModalThanks extends Component {
     }
 
     hideModal() {
-      TweenMax.to($("#modal-thanks"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
-            $("#modal-thanks").css({
-                opacity:0,
-                display:'none',
-                zIndex:0
-            });
-            $('body').css({overflow:'auto'});
-        }});
+
+      if(this.isIn){
+
+        this.isIn = false;
+
+        TweenMax.to($("#modal-thanks"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
+              $("#modal-thanks").css({
+                  opacity:0,
+                  display:'none',
+                  zIndex:0
+              });
+              $('body').css({overflow:'auto'});
+          }});
+
+      }
     }
 
     render() {

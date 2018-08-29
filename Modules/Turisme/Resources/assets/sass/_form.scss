@@ -4,6 +4,14 @@ form.contact-form {
   border:none;
   text-align: left;
 
+  .form-group{
+    min-height: 38px;
+  }
+
+  .react-datepicker-wrapper{
+    width:100%;
+  }
+
   h2{
     text-align: center;
   }
@@ -12,7 +20,7 @@ form.contact-form {
     padding:0 15px;
   }
 
-  input.error,select.error{
+  input.error,select.error,textarea.error{
     border: 1px solid rgba(197,67,69,1);
   }
 
@@ -57,4 +65,9 @@ form.contact-form {
       height:auto;
     }
   }
+}
+
+.banner.newsletter form{
+  position: relative !important;
+  margin-top:10px;
 }

@@ -95924,7 +95924,10 @@ var ModalThanks = function (_Component) {
   function ModalThanks(props) {
     _classCallCheck(this, ModalThanks);
 
-    return _possibleConstructorReturn(this, (ModalThanks.__proto__ || Object.getPrototypeOf(ModalThanks)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ModalThanks.__proto__ || Object.getPrototypeOf(ModalThanks)).call(this, props));
+
+    _this.isIn = false;
+    return _this;
   }
 
   _createClass(ModalThanks, [{
@@ -95944,18 +95947,23 @@ var ModalThanks = function (_Component) {
   }, {
     key: 'openModal',
     value: function openModal() {
-      $("#modal-thanks").css({
-        display: "block",
-        zIndex: 1000
-      });
 
-      $('body').css({ overflow: 'hidden' });
+      if (!this.isIn) {
+        this.isIn = true;
 
-      TweenMax.to($("#modal-thanks"), 1, {
-        delay: 0.25,
-        opacity: 1,
-        ease: Power2.easeInOut
-      });
+        $("#modal-thanks").css({
+          display: "block",
+          zIndex: 1000
+        });
+
+        $('body').css({ overflow: 'hidden' });
+
+        TweenMax.to($("#modal-thanks"), 1, {
+          delay: 0.25,
+          opacity: 1,
+          ease: Power2.easeInOut
+        });
+      }
     }
   }, {
     key: 'onModalClose',
@@ -95967,14 +95975,20 @@ var ModalThanks = function (_Component) {
   }, {
     key: 'hideModal',
     value: function hideModal() {
-      TweenMax.to($("#modal-thanks"), 0.75, { opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {
-          $("#modal-thanks").css({
-            opacity: 0,
-            display: 'none',
-            zIndex: 0
-          });
-          $('body').css({ overflow: 'auto' });
-        } });
+
+      if (this.isIn) {
+
+        this.isIn = false;
+
+        TweenMax.to($("#modal-thanks"), 0.75, { opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {
+            $("#modal-thanks").css({
+              opacity: 0,
+              display: 'none',
+              zIndex: 0
+            });
+            $('body').css({ overflow: 'auto' });
+          } });
+      }
     }
   }, {
     key: 'render',
@@ -96331,6 +96345,8 @@ __webpack_require__(847);
 __webpack_require__(851);
 __webpack_require__(853);
 __webpack_require__(855);
+__webpack_require__(857);
+__webpack_require__(888);
 
 /***/ }),
 /* 813 */
@@ -112850,6 +112866,1559 @@ var FilterBarCompanies = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (FilterBarCompanies);
+
+/***/ }),
+/* 857 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_ModalFormNewsletter__ = __webpack_require__(887);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ModalThanks__ = __webpack_require__(560);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var Subscribe = function (_Component) {
+  _inherits(Subscribe, _Component);
+
+  function Subscribe(props) {
+    _classCallCheck(this, Subscribe);
+
+    var _this = _possibleConstructorReturn(this, (Subscribe.__proto__ || Object.getPrototypeOf(Subscribe)).call(this, props));
+
+    var field = props.field ? JSON.parse(atob(props.field)) : '';
+
+    _this.state = {
+      field: field,
+      displayModal: false,
+      displayThanks: false,
+      email: ''
+    };
+    return _this;
+  }
+
+  _createClass(Subscribe, [{
+    key: 'onFieldChange',
+    value: function onFieldChange(e) {
+
+      var state = this.state;
+
+      state[e.target.name] = e.target.value;
+
+      this.setState(state);
+    }
+  }, {
+    key: 'openForm',
+    value: function openForm(event) {
+      event.preventDefault();
+
+      this.setState({
+        displayModal: true
+      });
+    }
+  }, {
+    key: 'handleModalClose',
+    value: function handleModalClose() {
+      this.setState({
+        displayModal: false
+      });
+    }
+  }, {
+    key: 'handleFormSubmited',
+    value: function handleFormSubmited() {
+      this.setState({
+        displayModal: false,
+        displayThanks: true
+      });
+    }
+  }, {
+    key: 'handleThanksClose',
+    value: function handleThanksClose() {
+      this.setState({
+        displayThanks: false
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var fields = this.state.field.fields;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Common_ModalFormNewsletter__["a" /* default */], {
+          csrf_token: this.props.csrf_token,
+          initEmail: this.state.email,
+          display: this.state.displayModal,
+          onModalClose: this.handleModalClose.bind(this),
+          onSubmitSuccess: this.handleFormSubmited.bind(this)
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Common_ModalThanks__["a" /* default */], {
+          display: this.state.displayThanks,
+          onModalClose: this.handleThanksClose.bind(this)
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'form',
+          { action: '#', className: 'subscribe-form' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'email', name: 'email', value: this.state.email, onChange: this.onFieldChange.bind(this) }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', className: 'email-btn', onClick: this.openForm.bind(this) })
+        )
+      );
+    }
+  }]);
+
+  return Subscribe;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Subscribe);
+
+
+if (document.getElementById('subscribe')) {
+  var element = document.getElementById('subscribe');
+  var field = element.getAttribute('field');
+  var csrf_token = element.getAttribute('csrf_token');
+
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Subscribe, {
+    field: field,
+    csrf_token: csrf_token
+  }), element);
+}
+
+/***/ }),
+/* 858 */,
+/* 859 */,
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */,
+/* 865 */,
+/* 866 */,
+/* 867 */,
+/* 868 */,
+/* 869 */,
+/* 870 */,
+/* 871 */,
+/* 872 */,
+/* 873 */,
+/* 874 */,
+/* 875 */,
+/* 876 */,
+/* 877 */,
+/* 878 */,
+/* 879 */,
+/* 880 */,
+/* 881 */,
+/* 882 */,
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var ModalFormNewsletter = function (_Component) {
+  _inherits(ModalFormNewsletter, _Component);
+
+  function ModalFormNewsletter(props) {
+    _classCallCheck(this, ModalFormNewsletter);
+
+    var _this2 = _possibleConstructorReturn(this, (ModalFormNewsletter.__proto__ || Object.getPrototypeOf(ModalFormNewsletter)).call(this, props));
+
+    _this2.state = {
+      fields: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        email_confirmation: '',
+        country: '',
+        company: '',
+        occupation: '',
+        comment: '',
+        privacity: false,
+        newsletter: false,
+        accept: false,
+        programCheckboxes: {}
+      },
+      programs: [],
+      savig: false,
+      errors: {}
+    };
+
+    _this2.isIn = false;
+
+    _this2.hideModal = _this2.hideModal.bind(_this2);
+    _this2.onFieldChange = _this2.onFieldChange.bind(_this2);
+    _this2.onCheckboxChange = _this2.onCheckboxChange.bind(_this2);
+
+    return _this2;
+  }
+
+  _createClass(ModalFormNewsletter, [{
+    key: 'loadPrograms',
+    value: function loadPrograms() {
+      var self = this;
+
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get(ASSETS + 'externalapi/programs').then(function (response) {
+
+        if (response.status == 200 && response.data.data !== undefined && response.data.data.length > 0) {
+          self.setState({
+            programs: response.data.data
+          });
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.loadPrograms();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+
+      if (nextProps.display) {
+        this.openModal();
+      } else {
+        this.hideModal();
+      }
+    }
+  }, {
+    key: 'getFormData',
+    value: function getFormData() {
+      var fields = this.state.fields;
+
+
+      fields['_token'] = this.props.csrf_token;
+
+      return fields;
+    }
+  }, {
+    key: 'onFieldChange',
+    value: function onFieldChange(event) {
+      var fields = this.state.fields;
+
+
+      fields[event.target.name] = event.target.value;
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'onCheckboxChange',
+    value: function onCheckboxChange(event) {
+      var fields = this.state.fields;
+
+
+      fields[event.target.name] = event.target.checked;
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'onProgramChange',
+    value: function onProgramChange(event) {
+      var fields = this.state.fields;
+
+
+      if (event.target.checked) {
+        fields.programCheckboxes[event.target.name] = event.target.checked;
+      } else {
+        delete fields.programCheckboxes[event.target.name];
+      }
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+
+      this.setState({
+        saving: true,
+        errors: {}
+      });
+
+      var _this = this;
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put(WEBROOT + '/contact/newsletter', this.getFormData()).then(function (response) {
+        if (response.data.success) {
+          _this.onSaveSuccess(response.data);
+        }
+      }).catch(function (error) {
+        if (error.response) {
+          _this.onSaveError(error.response.data);
+        } else if (error.message) {
+          //toastr.error(error.message);
+        } else {
+          console.log('Error', error.message);
+        }
+        //console.log(error.config);
+      });
+    }
+  }, {
+    key: 'onSaveSuccess',
+    value: function onSaveSuccess(response) {
+      this.setState({
+        errors: {},
+        saving: false
+      });
+
+      this.props.onSubmitSuccess();
+    }
+  }, {
+    key: 'onSaveError',
+    value: function onSaveError(response) {
+
+      console.log("onSaveError => ", response);
+
+      var errors = response.errors ? response.errors : null;
+      var _this = this;
+      var stateErrors = this.state.errors;
+
+      if (errors) {
+        var fields = errors ? errors : null;
+
+        if (fields) {
+          Object.keys(fields).map(function (identifier) {
+            stateErrors[identifier] = true;
+          });
+        }
+      }
+
+      this.setState({
+        saving: false,
+        errors: stateErrors
+      });
+
+      if (response.message) {
+        //toastr.error(response.message);
+      }
+    }
+  }, {
+    key: 'openModal',
+    value: function openModal() {
+
+      if (!this.isIn) {
+        this.isIn = true;
+
+        var fields = this.state.fields;
+
+
+        fields['email'] = this.props.initEmail;
+
+        this.setState({
+          fields: fields
+        });
+
+        $("#modal-form").css({
+          display: "block",
+          zIndex: 1000
+        });
+
+        $('body').css({ overflow: 'hidden' });
+
+        TweenMax.to($("#modal-form"), 1, {
+          delay: 0.25,
+          opacity: 1,
+          ease: Power2.easeInOut
+        });
+      }
+    }
+  }, {
+    key: 'onModalClose',
+    value: function onModalClose(e) {
+      e.preventDefault();
+
+      this.props.onModalClose();
+    }
+  }, {
+    key: 'hideModal',
+    value: function hideModal() {
+
+      if (this.isIn) {
+        this.isIn = false;
+        TweenMax.to($("#modal-form"), 0.75, { opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {
+            $("#modal-form").css({
+              opacity: 0,
+              display: 'none',
+              zIndex: 0
+            });
+            $('body').css({ overflow: 'auto' });
+          } });
+      }
+    }
+  }, {
+    key: 'hasErrors',
+    value: function hasErrors(name) {
+      if (this.state.errors[name] !== undefined) {
+        return 'error';
+      }
+
+      return '';
+    }
+  }, {
+    key: 'renderCheckboxes',
+    value: function renderCheckboxes() {
+
+      var result = [];
+
+      var programValues = this.state.fields.programCheckboxes;
+      var programs = this.state.programs;
+
+      //console.log("renderCheckboxes :: ",programValues,programs);
+
+      for (var key in programs) {
+        result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'label',
+          { className: 'col-xs-12 col-md-6', key: key },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', name: key, value: '', id: 'checkbox_1', onChange: this.onProgramChange.bind(this), checked: programValues[key] !== undefined }),
+          programs[key]['description_' + LOCALE]
+        ));
+      }
+
+      return result;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var errors = Object.keys(this.state.errors).length > 0 ? true : false;
+      var _state = this.state,
+          programs = _state.programs,
+          fields = _state.fields;
+
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'custom-modal', id: 'modal-form' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'modal-container' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'modal-content' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'modal-buttons' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'a',
+                { className: 'close-button-modal', href: '#', onClick: this.onModalClose.bind(this) },
+                'x'
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'row' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'col-xs-10 col-xs-offset-1' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'form',
+                  { className: 'nova-cerca contact-form', onSubmit: this.handleSubmit.bind(this) },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h2',
+                    null,
+                    'Suscripci\xF3n Newsletter'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    'Si deseas recibir el Newsletter Profesional de Turisme de Barcelona rellena el siguiente formulario:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('firstname'), name: 'firstname', value: fields.firstname, placeholder: 'Nombre', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('lastname'), name: 'lastname', value: fields.lastname, placeholder: 'Apellidos', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'select',
+                          { className: this.hasErrors('country'), name: 'country', value: fields.country, onChange: this.onFieldChange },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: '' },
+                            'Nacionalidad'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'ES' },
+                            'Espa\xF1a'
+                          )
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'select',
+                          { className: this.hasErrors('language'), name: 'language', value: fields.language, onChange: this.onFieldChange },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: '' },
+                            'Preferencia idioma'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'CA' },
+                            'Catal\xE1n'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'ES' },
+                            'Castellano'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'EN' },
+                            'Ingl\xE9s'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'FR' },
+                            'Franc\xE9s'
+                          )
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('company'), name: 'company', placeholder: 'Empresa', value: fields.company, onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('occupation'), name: 'occupation', placeholder: 'Cargo / Profesi\xF3n', value: fields.occupation, onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('email'), name: 'email', value: fields.email, placeholder: 'E-mail', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('email'), name: 'email_confirmation', value: fields.email_confirmation, placeholder: 'Repetir E-mail', onChange: this.onFieldChange })
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    'Sector de inter\xE9s:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row checkbox' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-offset-1 col-md-10' },
+                      this.renderCheckboxes()
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'p',
+                        null,
+                        'Si deseas dejar un comentario:'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'col-xs-12', name: 'comment', value: fields.comment, onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row checkbox' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'label',
+                        { className: "col-xs-12 " + this.hasErrors('privacity') },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', className: this.hasErrors('privacity'), name: 'privacity', value: fields.comment, onChange: this.onCheckboxChange }),
+                        'He le\xEDdo y acepto la pol\xEDtica de privacidad (RGPD).'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'label',
+                        { className: "col-xs-12 " + this.hasErrors('newsletter') },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', className: this.hasErrors('newsletter'), name: 'newsletter', value: fields.newsletter, onChange: this.onCheckboxChange }),
+                        'Quiero recibir m\xE1s informaci\xF3n de Turisme de Barcelona (NewsleJer Profesional)'
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 40 } }),
+                  errors && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'error-message' },
+                    'El envio no ha sido completado. Por favor comprueva los campos en rojo.'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: 'Enviar', className: 'btn' })
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ModalFormNewsletter;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ModalFormNewsletter);
+
+/***/ }),
+/* 888 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_Paginator__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ListItem__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Common_ModalFormPress__ = __webpack_require__(889);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Common_ModalThanks__ = __webpack_require__(560);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+
+var ContactFormPress = function (_Component) {
+  _inherits(ContactFormPress, _Component);
+
+  function ContactFormPress(props) {
+    _classCallCheck(this, ContactFormPress);
+
+    var _this = _possibleConstructorReturn(this, (ContactFormPress.__proto__ || Object.getPrototypeOf(ContactFormPress)).call(this, props));
+
+    var field = props.field ? JSON.parse(atob(props.field)) : '';
+
+    _this.state = {
+      field: field,
+      displayModal: false,
+      displayThanks: false
+    };
+    return _this;
+  }
+
+  _createClass(ContactFormPress, [{
+    key: 'processText',
+    value: function processText(fields, fieldName) {
+      return fields[fieldName].value != null && fields[fieldName].value[LOCALE] !== undefined ? fields[fieldName].value[LOCALE] : '';
+    }
+  }, {
+    key: 'openForm',
+    value: function openForm(event) {
+      event.preventDefault();
+
+      this.setState({
+        displayModal: true
+      });
+    }
+  }, {
+    key: 'handleModalClose',
+    value: function handleModalClose() {
+      this.setState({
+        displayModal: false
+      });
+    }
+  }, {
+    key: 'handleFormSubmited',
+    value: function handleFormSubmited() {
+      this.setState({
+        displayModal: false,
+        displayThanks: true
+      });
+    }
+  }, {
+    key: 'handleThanksClose',
+    value: function handleThanksClose() {
+      this.setState({
+        displayThanks: false
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var fields = this.state.field.fields;
+
+      var title = this.processText(fields, 0);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Common_ModalFormPress__["a" /* default */], {
+          csrf_token: this.props.csrf_token,
+          display: this.state.displayModal,
+          onModalClose: this.handleModalClose.bind(this),
+          onSubmitSuccess: this.handleFormSubmited.bind(this)
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Common_ModalThanks__["a" /* default */], {
+          display: this.state.displayThanks,
+          onModalClose: this.handleThanksClose.bind(this)
+        }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { type: 'button', className: 'btn', onClick: this.openForm.bind(this) },
+          title
+        )
+      );
+    }
+  }]);
+
+  return ContactFormPress;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ContactFormPress);
+
+
+if (document.getElementById('contact-form-press')) {
+  var element = document.getElementById('contact-form-press');
+  var field = element.getAttribute('field');
+  var csrf_token = element.getAttribute('csrf_token');
+
+  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ContactFormPress, {
+    field: field,
+    csrf_token: csrf_token
+  }), element);
+}
+
+/***/ }),
+/* 889 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_datepicker__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+
+var ModalFormPress = function (_Component) {
+  _inherits(ModalFormPress, _Component);
+
+  function ModalFormPress(props) {
+    _classCallCheck(this, ModalFormPress);
+
+    var _this2 = _possibleConstructorReturn(this, (ModalFormPress.__proto__ || Object.getPrototypeOf(ModalFormPress)).call(this, props));
+
+    _this2.state = {
+      fields: {
+        media_type: '',
+        media_name: '',
+        media_distribution: '',
+        media_country: '',
+        media_web: '',
+        media_email: '',
+        media_comment: '',
+
+        firstname: '',
+        lastname: '',
+        gender: '',
+        country: '',
+        occupation: '',
+        email: '',
+        web: '',
+        language: '',
+        dateStart: null,
+        dateEnd: null,
+        comment: '',
+
+        privacity: false,
+        newsletter: false
+      },
+      saving: false,
+      errors: {}
+    };
+
+    _this2.isIn = false;
+
+    _this2.hideModal = _this2.hideModal.bind(_this2);
+    _this2.onFieldChange = _this2.onFieldChange.bind(_this2);
+    _this2.onCheckboxChange = _this2.onCheckboxChange.bind(_this2);
+
+    return _this2;
+  }
+
+  _createClass(ModalFormPress, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.openModal();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+
+      if (nextProps.display) {
+        this.openModal();
+      } else {
+        this.hideModal();
+      }
+    }
+  }, {
+    key: 'getFormData',
+    value: function getFormData() {
+      var fields = this.state.fields;
+
+
+      fields['_token'] = this.props.csrf_token;
+
+      return fields;
+    }
+  }, {
+    key: 'onFieldChange',
+    value: function onFieldChange(event) {
+      var fields = this.state.fields;
+
+
+      fields[event.target.name] = event.target.value;
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'handleDateChange',
+    value: function handleDateChange(name, date) {
+      console.log("handleDateChange => ", date, name);
+
+      var fields = this.state.fields;
+
+      fields[name] = date;
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'onCheckboxChange',
+    value: function onCheckboxChange(event) {
+      var fields = this.state.fields;
+
+
+      fields[event.target.name] = event.target.checked;
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'onProgramChange',
+    value: function onProgramChange(event) {
+      var fields = this.state.fields;
+
+
+      if (event.target.checked) {
+        fields.programCheckboxes[event.target.name] = event.target.checked;
+      } else {
+        delete fields.programCheckboxes[event.target.name];
+      }
+
+      this.setState({
+        fields: fields
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+
+      this.setState({
+        saving: true,
+        errors: {}
+      });
+
+      var _this = this;
+      __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put(WEBROOT + '/contact/save-press', this.getFormData()).then(function (response) {
+        if (response.data.success) {
+          _this.onSaveSuccess(response.data);
+        }
+      }).catch(function (error) {
+        if (error.response) {
+          _this.onSaveError(error.response.data);
+        } else if (error.message) {
+          //toastr.error(error.message);
+        } else {
+          console.log('Error', error.message);
+        }
+        //console.log(error.config);
+      });
+    }
+  }, {
+    key: 'onSaveSuccess',
+    value: function onSaveSuccess(response) {
+      this.setState({
+        errors: {},
+        saving: false
+      });
+
+      this.props.onSubmitSuccess();
+    }
+  }, {
+    key: 'onSaveError',
+    value: function onSaveError(response) {
+
+      console.log("onSaveError => ", response);
+
+      var errors = response.errors ? response.errors : null;
+      var _this = this;
+      var stateErrors = this.state.errors;
+
+      if (errors) {
+        var fields = errors ? errors : null;
+
+        if (fields) {
+          Object.keys(fields).map(function (identifier) {
+            stateErrors[identifier] = true;
+          });
+        }
+      }
+
+      this.setState({
+        saving: false,
+        errors: stateErrors
+      });
+
+      if (response.message) {
+        //toastr.error(response.message);
+      }
+    }
+  }, {
+    key: 'openModal',
+    value: function openModal() {
+
+      if (!this.isIn) {
+        this.isIn = true;
+
+        var fields = this.state.fields;
+
+
+        fields['email'] = this.props.initEmail;
+
+        this.setState({
+          fields: fields
+        });
+
+        $("#modal-form").css({
+          display: "block",
+          zIndex: 1000
+        });
+
+        $('body').css({ overflow: 'hidden' });
+
+        TweenMax.to($("#modal-form"), 1, {
+          delay: 0.25,
+          opacity: 1,
+          ease: Power2.easeInOut
+        });
+      }
+    }
+  }, {
+    key: 'onModalClose',
+    value: function onModalClose(e) {
+      e.preventDefault();
+
+      this.props.onModalClose();
+    }
+  }, {
+    key: 'hideModal',
+    value: function hideModal() {
+
+      if (this.isIn) {
+        this.isIn = false;
+        TweenMax.to($("#modal-form"), 0.75, { opacity: 0, ease: Power2.easeInOut, onComplete: function onComplete() {
+            $("#modal-form").css({
+              opacity: 0,
+              display: 'none',
+              zIndex: 0
+            });
+            $('body').css({ overflow: 'auto' });
+          } });
+      }
+    }
+  }, {
+    key: 'hasErrors',
+    value: function hasErrors(name) {
+      if (this.state.errors[name] !== undefined) {
+        return 'error';
+      }
+
+      return '';
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var errors = Object.keys(this.state.errors).length > 0 ? true : false;
+      var _state = this.state,
+          programs = _state.programs,
+          fields = _state.fields;
+
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'custom-modal', id: 'modal-form' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'modal-container' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'modal-content' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'modal-buttons' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'a',
+                { className: 'close-button-modal', href: '#', onClick: this.onModalClose.bind(this) },
+                'x'
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'row' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'col-xs-10 col-xs-offset-1' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'form',
+                  { className: 'nova-cerca contact-form', onSubmit: this.handleSubmit.bind(this) },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h2',
+                    null,
+                    'Formulario Prensa'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    'Gracias por contactar con ',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'b',
+                      null,
+                      'Prensa'
+                    ),
+                    ' de Turisme de Barcelona'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    'Por favor, rellena el siguiente formulario:'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'p',
+                      null,
+                      'DATOS DEL MEDIO'
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'select',
+                          { className: this.hasErrors('media_type'), name: 'media_type', value: fields.media_type, onChange: this.onFieldChange },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: '' },
+                            'Tipo de medio'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'TV' },
+                            'TV'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'Prensa' },
+                            'Prensa'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'Prensa online' },
+                            'Prensa online'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'Travel Blogger' },
+                            'Travel Blogger'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'Travel Guide' },
+                            'Travel Guide'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'Otros' },
+                            'Otros'
+                          )
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('media_name'), name: 'media_name', value: fields.media_name, placeholder: 'Nombre del Medio', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'select',
+                          { className: this.hasErrors('media_distribution'), name: 'media_distribution', value: fields.media_distribution, onChange: this.onFieldChange },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: '' },
+                            'Distribuci\xF3n'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'ES' },
+                            'Espa\xF1a'
+                          )
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'select',
+                          { className: this.hasErrors('media_country'), name: 'media_country', value: fields.media_country, onChange: this.onFieldChange },
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: '' },
+                            'Pais del Medio'
+                          ),
+                          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'option',
+                            { value: 'ES' },
+                            'Espa\xF1a'
+                          )
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('media_web'), name: 'media_web', value: fields.media_web, placeholder: 'Web / Twitter del Medio', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12 col-md-6' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group ' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('media_email'), name: 'media_email', value: fields.media_email, placeholder: 'Email del medio', onChange: this.onFieldChange })
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'row' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-xs-12' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'p',
+                          null,
+                          'Tem\xE1tica o t\xEDtulo del art\xEDculo:'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: "col-xs-12 " + this.hasErrors('media_comment'), name: 'media_comment', value: fields.media_comment, onChange: this.onFieldChange })
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'p',
+                      null,
+                      'JOURNALIST DATA'
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('firstname'), name: 'firstname', value: fields.firstname, placeholder: 'Nombre', onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('lastname'), name: 'lastname', value: fields.lastname, placeholder: 'Apellidos', onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'select',
+                        { className: this.hasErrors('gender'), name: 'gender', value: fields.gender, onChange: this.onFieldChange },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: '' },
+                          'Genero'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'm' },
+                          'Masculino'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'f' },
+                          'Femenino'
+                        )
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'select',
+                        { className: this.hasErrors('country'), name: 'country', value: fields.country, onChange: this.onFieldChange },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: '' },
+                          'Nacionalidad'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'ES' },
+                          'Espa\xF1a'
+                        )
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('occupation'), name: 'occupation', placeholder: 'Cargo / posici\xF3n', value: fields.occupation, onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('email'), name: 'email', value: fields.email, placeholder: 'E-mail', onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: this.hasErrors('web'), name: 'web', value: fields.web, placeholder: 'Web / Twitter ', onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'select',
+                        { className: this.hasErrors('language'), name: 'language', value: fields.language, onChange: this.onFieldChange },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: '' },
+                          'Preferencia idioma'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'CA' },
+                          'Catal\xE1n'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'ES' },
+                          'Castellano'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'EN' },
+                          'Ingl\xE9s'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'option',
+                          { value: 'FR' },
+                          'Franc\xE9s'
+                        )
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'p',
+                      null,
+                      'Fechas de estancia en Barcelona'
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_datepicker__["a" /* default */], {
+                        className: "input-date " + this.hasErrors('dateStart'),
+                        selected: fields.dateStart,
+                        selectsStart: true,
+                        startDate: fields.dateStart,
+                        endDate: fields.dateEnd,
+                        onChange: this.handleDateChange.bind(this, 'dateStart'),
+                        locale: 'ca-es'
+                      })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12 col-md-6' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'form-group ' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_datepicker__["a" /* default */], {
+                        className: "input-date " + this.hasErrors('dateEnd'),
+                        selected: fields.dateEnd,
+                        selectsEnd: true,
+                        startDate: fields.dateStart,
+                        minDate: fields.dateStart,
+                        endDate: fields.dateEnd,
+                        onChange: this.handleDateChange.bind(this, 'dateEnd'),
+                        locale: 'ca-es'
+                      })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'p',
+                        null,
+                        'Si deseas dejar un comentario:'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: "col-xs-12 " + this.hasErrors('comment'), name: 'comment', value: fields.comment, onChange: this.onFieldChange })
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 30 } }),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row checkbox' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'col-xs-12' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'label',
+                        { className: "col-xs-12 " + this.hasErrors('privacity') },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', className: this.hasErrors('privacity'), name: 'privacity', value: fields.comment, onChange: this.onCheckboxChange }),
+                        'He le\xEDdo y acepto la pol\xEDtica de privacidad (RGPD).'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'label',
+                        { className: "col-xs-12 " + this.hasErrors('newsletter') },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', className: this.hasErrors('newsletter'), name: 'newsletter', value: fields.newsletter, onChange: this.onCheckboxChange }),
+                        'Quiero recibir m\xE1s informaci\xF3n de Turisme de Barcelona (NewsleJer Profesional)'
+                      )
+                    )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'separator', style: { height: 40 } }),
+                  errors && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'error-message' },
+                    'El envio no ha sido completado. Por favor comprueva los campos en rojo.'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: 'Enviar', className: 'btn' })
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ModalFormPress;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ModalFormPress);
 
 /***/ })
 /******/ ]);
