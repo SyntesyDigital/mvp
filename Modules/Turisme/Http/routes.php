@@ -10,6 +10,7 @@ Route::group([
     Route::get('/preview/{id}', 'ContentController@preview')->name('preview');
 
     Route::put('/contact/save', 'ContactController@save')->name('contact.save');
+    Route::put('/contact/save-with-selection', 'ContactController@saveWithSelection')->name('contact.save.selection');
 
     Route::get('/', 'ContentController@index')->name('home');
 
