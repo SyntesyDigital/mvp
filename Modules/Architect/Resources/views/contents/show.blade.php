@@ -37,6 +37,7 @@ var routes = {
   'medias.update' : '{{ route('medias.update') }}',
   'contents.data' : '{{ route('contents.modal.data') }}',
   'showContent' : "{{route('contents.show',['id' => ':id'])}}",
+  'contents.page.create' : "{{route('contents.page.create')}}",
   'previewContent' : ASSETS+DEFAULT_LOCALE+"/preview/:id",
   'pagelayouts.data' : '{{ route('pagelayouts.modal.data') }}'
 };

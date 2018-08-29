@@ -38,6 +38,76 @@ class ContentBar extends Component {
       this.props.onSubmitForm(e);
   }
 
+  renderUnsavedMenu() {
+    return (
+      <ul className="dropdown-menu dropdown-menu-right default-padding">
+          <li className="dropdown-header"></li>
+          <li>
+              <a href={routes['contents.page.create']}>
+                  <i className="fa fa-plus-circle"></i>
+                  &nbsp;Nou
+              </a>
+          </li>
+          {this.props.onLoadLayout &&
+          <li>
+              <a href="#" onClick={this.loadLayout.bind(this)}>
+                  <i className="fa fa-download"></i>
+                  &nbsp;Carregar plantilla
+              </a>
+          </li>
+          }
+      </ul>
+    );
+  }
+
+  renderFullMenu() {
+
+    return (
+      <ul className="dropdown-menu dropdown-menu-right default-padding">
+          <li className="dropdown-header"></li>
+          <li>
+              <a href={routes['contents.page.create']}>
+                  <i className="fa fa-plus-circle"></i>
+                  &nbsp;Nou
+              </a>
+          </li>
+          <li>
+              <a href="#" onClick={this.duplicate.bind(this)}>
+                  <i className="fa fa-files-o"></i>
+                  &nbsp;Duplicar
+              </a>
+          </li>
+
+          {this.props.onLoadLayout &&
+          <li>
+              <a href="#" onClick={this.loadLayout.bind(this)}>
+                  <i className="fa fa-download"></i>
+                  &nbsp;Carregar plantilla
+              </a>
+          </li>
+          }
+
+          {this.props.onLayoutSave &&
+          <li>
+              <a href="#" onClick={this.saveLayout.bind(this)}>
+                  <i className="fa fa-upload"></i>
+                  &nbsp;Guardar plantilla
+              </a>
+          </li>
+          }
+
+          <li>
+              <a href="#" className="text-danger">
+                  <i className="fa fa-trash text-danger"></i>
+                  &nbsp;
+                  <span className="text-danger">Esborrar</span>
+              </a>
+          </li>
+      </ul>
+    );
+
+  }
+
   render() {
     return (
       <div className="page-bar">
@@ -57,56 +127,21 @@ class ContentBar extends Component {
 
               <div className="float-buttons pull-right">
 
-              { this.props.saved && this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
+
                 <div className="actions-dropdown">
                   <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
                     Accions
                     <b className="caret"></b>
                     <div className="ripple-container"></div>
                   </a>
-                    <ul className="dropdown-menu dropdown-menu-right default-padding">
-                        <li className="dropdown-header"></li>
-                        <li>
-                            <a href="#">
-                                <i className="fa fa-plus-circle"></i>
-                                &nbsp;Nou
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" onClick={this.duplicate.bind(this)}>
-                                <i className="fa fa-files-o"></i>
-                                &nbsp;Duplicar
-                            </a>
-                        </li>
+                    { this.props.saved && this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
+                      this.renderFullMenu()
+                    }
 
-                        {this.props.onLoadLayout &&
-                        <li>
-                            <a href="#" onClick={this.loadLayout.bind(this)}>
-                                <i className="fa fa-download"></i>
-                                &nbsp;Carregar plantilla
-                            </a>
-                        </li>
-                        }
-
-                        {this.props.onLayoutSave &&
-                        <li>
-                            <a href="#" onClick={this.saveLayout.bind(this)}>
-                                <i className="fa fa-upload"></i>
-                                &nbsp;Guardar plantilla
-                            </a>
-                        </li>
-                        }
-
-                        <li>
-                            <a href="#" className="text-danger">
-                                <i className="fa fa-trash text-danger"></i>
-                                &nbsp;
-                                <span className="text-danger">Esborrar</span>
-                            </a>
-                        </li>
-                    </ul>
+                    { !this.props.saved && !architect.currentUserHasRole('author') &&
+                      this.renderUnsavedMenu()
+                    }
                   </div>
-                }
 
                 {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
                   <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
