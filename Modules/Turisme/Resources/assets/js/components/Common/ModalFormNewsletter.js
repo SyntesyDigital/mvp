@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
+import CountriesSelect from './CountriesSelect';
+
 export default class ModalFormNewsletter extends Component {
 
     constructor(props)
@@ -14,13 +16,13 @@ export default class ModalFormNewsletter extends Component {
             lastname : '',
             email : '',
             email_confirmation : '',
+            language : '',
             country : '',
             company : '',
             occupation : '',
             comment : '',
             privacity : false,
             newsletter : false,
-            accept : false,
             programCheckboxes : {}
           },
           programs : [],
@@ -206,14 +208,14 @@ export default class ModalFormNewsletter extends Component {
           fields : fields
         });
 
-        $("#modal-form").css({
+        $("#modal-newsletter").css({
             display:"block",
             zIndex:1000
         });
 
         $('body').css({overflow:'hidden'});
 
-        TweenMax.to($("#modal-form"),1,{
+        TweenMax.to($("#modal-newsletter"),1,{
             delay : 0.25,
             opacity:1,
             ease: Power2.easeInOut
@@ -231,8 +233,8 @@ export default class ModalFormNewsletter extends Component {
 
       if(this.isIn){
         this.isIn = false;
-        TweenMax.to($("#modal-form"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
-              $("#modal-form").css({
+        TweenMax.to($("#modal-newsletter"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
+              $("#modal-newsletter").css({
                   opacity:0,
                   display:'none',
                   zIndex:0
@@ -280,7 +282,7 @@ export default class ModalFormNewsletter extends Component {
         const {programs,fields} = this.state;
 
         return (
-            <div className="custom-modal" id="modal-form">
+            <div className="custom-modal" id="modal-newsletter">
               <div className="modal-background"></div>
               <div className="modal-container">
                 <div className="modal-content">
@@ -320,10 +322,11 @@ export default class ModalFormNewsletter extends Component {
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <select className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}>
-                                <option value="">Nacionalidad</option>
-                                <option value="ES">España</option>
-                              </select>
+
+                              <CountriesSelect
+                                  className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}
+                              />
+
                             </div>
                           </div>
 

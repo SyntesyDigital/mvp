@@ -1,11 +1,16 @@
 <?php
 
 
+
+Route::get('sitemap.xml', 'Modules\Turisme\Http\Controllers\SitemapController@sitemap')->name('sitemap');
+
 Route::group([
   'prefix' => LaravelLocalization::setLocale(),
   'middleware' => ['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
   'namespace' => 'Modules\Turisme\Http\Controllers'
 ], function() {
+
+    Route::get('/countries/list', 'CountriesController@list')->name('countries.list');
 
     Route::get('/preview/{id}', 'ContentController@preview')->name('preview');
 

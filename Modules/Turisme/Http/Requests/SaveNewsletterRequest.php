@@ -23,7 +23,7 @@ class SaveNewsletterRequest extends FormRequest
             'company' => 'required',
             'occupation' => 'required',
             'privacity' => 'required|accepted',
-            'newsletter' => 'required|accepted',
+            //'newsletter' => 'required|accepted',
         ];
     }
 

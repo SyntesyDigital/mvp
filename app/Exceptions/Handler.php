@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App;
 
 class Handler extends ExceptionHandler
 {
@@ -48,16 +49,22 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        // 404 page when a model is not found
-       if ($e instanceof ModelNotFoundException) {
-           return response()->view('turisme::errors.404', [], 404);
-       }
 
-       // custom error message
-       if ($e instanceof \ErrorException) {
-           return response()->view('turisme::errors.500', [], 500);
-       } else {
-           return parent::render($request, $e);
-       }
+        if(App::environment() == 'local'){
+          return parent::render($request, $e);
+        }
+        else {
+            // 404 page when a model is not found
+           if ($e instanceof \ModelNotFoundException) {
+               return response()->view('turisme::errors.404', [], 404);
+           }
+
+           // custom error message
+           if ($e instanceof \ErrorException) {
+               return response()->view('turisme::errors.500', [], 500);
+           } else {
+               return parent::render($request, $e);
+           }
+        }
     }
 }

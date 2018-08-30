@@ -6,6 +6,8 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
+import CountriesSelect from './CountriesSelect';
+
 export default class ModalFormPress extends Component {
 
     constructor(props)
@@ -51,7 +53,7 @@ export default class ModalFormPress extends Component {
     }
 
     componentDidMount() {
-      this.openModal();
+      //this.openModal();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -209,14 +211,14 @@ export default class ModalFormPress extends Component {
           fields : fields
         });
 
-        $("#modal-form").css({
+        $("#modal-press").css({
             display:"block",
             zIndex:1000
         });
 
         $('body').css({overflow:'hidden'});
 
-        TweenMax.to($("#modal-form"),1,{
+        TweenMax.to($("#modal-press"),1,{
             delay : 0.25,
             opacity:1,
             ease: Power2.easeInOut
@@ -234,8 +236,8 @@ export default class ModalFormPress extends Component {
 
       if(this.isIn){
         this.isIn = false;
-        TweenMax.to($("#modal-form"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
-              $("#modal-form").css({
+        TweenMax.to($("#modal-press"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
+              $("#modal-press").css({
                   opacity:0,
                   display:'none',
                   zIndex:0
@@ -259,7 +261,7 @@ export default class ModalFormPress extends Component {
         const {programs,fields} = this.state;
 
         return (
-            <div className="custom-modal" id="modal-form">
+            <div className="custom-modal" id="modal-press">
               <div className="modal-background"></div>
               <div className="modal-container">
                 <div className="modal-content">
@@ -326,10 +328,11 @@ export default class ModalFormPress extends Component {
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <select className={this.hasErrors('media_country')} name="media_country" value={fields.media_country} onChange={this.onFieldChange}>
-                                <option value="">Pais del Medio</option>
-                                <option value="ES">España</option>
-                              </select>
+
+                              <CountriesSelect
+                                  className={this.hasErrors('media_country')} name="media_country" value={fields.media_country} onChange={this.onFieldChange}
+                              />
+
                             </div>
                           </div>
 
@@ -392,10 +395,11 @@ export default class ModalFormPress extends Component {
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <select className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}>
-                              <option value="">Nacionalidad</option>
-                              <option value="ES">España</option>
-                            </select>
+
+                            <CountriesSelect
+                                className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}
+                            />
+
                           </div>
                         </div>
 
@@ -441,12 +445,13 @@ export default class ModalFormPress extends Component {
                           <div className="form-group ">
                             <DatePicker
                                 className={"input-date "+this.hasErrors('dateStart')}
-                                selected={fields.dateStart}
+                                selected={fields.dateStart ? fields.dateStart : moment()}
                                 selectsStart
                                 startDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateStart')}
                                 locale="ca-es"
+
                             />
                           </div>
                         </div>
@@ -455,13 +460,14 @@ export default class ModalFormPress extends Component {
                           <div className="form-group ">
                             <DatePicker
                                 className={"input-date "+this.hasErrors('dateEnd')}
-                                selected={fields.dateEnd}
+                                selected={fields.dateEnd ? fields.dateEnd : moment()}
                                 selectsEnd
                                 startDate={fields.dateStart}
                                 minDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateEnd')}
                                 locale="ca-es"
+
                             />
                           </div>
                         </div>
@@ -491,11 +497,12 @@ export default class ModalFormPress extends Component {
                               He leído y acepto la política de privacidad (RGPD).
                             </label>
 
+                            {/*
                             <label className={"col-xs-12 "+this.hasErrors('newsletter')}>
                               <input type="checkbox" className={this.hasErrors('newsletter')} name="newsletter" value={fields.newsletter} onChange={this.onCheckboxChange}  />
                               Quiero recibir más información de Turisme de Barcelona (NewsleJer Profesional)
                             </label>
-
+                            */}
                           </div>
 
                         </div>

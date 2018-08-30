@@ -4,12 +4,23 @@ namespace Modules\Turisme\Jobs\Contact;
 
 use Modules\Turisme\Http\Requests\SaveContactWithSelectionRequest;
 
+use  Modules\Turisme\Entities\ContactWithSelection;
+
 class SaveContactWithSelection
 {
     public function __construct($attributes)
     {
         $this->attributes = array_only($attributes, [
-            'typology_id'
+            'firstname',
+            'lastname',
+            'email',
+            'country',
+            'company',
+            'comment',
+            'privacity',
+            'newsletter',
+            'conditions',
+            'items'
         ]);
     }
 
@@ -21,7 +32,18 @@ class SaveContactWithSelection
 
     public function handle()
     {
-        return true;
+        return ContactWithSelection::create([
+          'firstname' => $this->attributes['firstname'],
+          'lastname' => $this->attributes['lastname'],
+          'email'=> $this->attributes['email'],
+          'country'=> $this->attributes['country'],
+          'company'=> $this->attributes['company'],
+          'comment'=> $this->attributes['comment'],
+          'privacity'=> $this->attributes['privacity'],
+          'newsletter'=> $this->attributes['newsletter'],
+          'conditions'=> $this->attributes['conditions'],
+          'items' => json_encode($this->attributes['items']),
+        ]);
     }
 
 }

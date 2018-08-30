@@ -82,4 +82,16 @@ class Tag extends Model
         return null;
     }
 
+    public function contents()
+    {
+        return $this->belongsToMany('\Modules\Architect\Entities\Content', 'contents_tags');
+    }
+
+    public function scopeByTypologyId($query, $typologyId)
+    {
+        return $typologyId ? $query->whereHas('contents', function($q) use($typologyId) {
+            $q->where('typology_id', $typologyId);
+        }) : $query;
+    }
+
 }

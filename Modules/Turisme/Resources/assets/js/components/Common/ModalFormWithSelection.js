@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import ListSelectedSummary from './ListSelectedSummary';
+import CountriesSelect from './CountriesSelect';
 
 export default class ModalFormWithSelection extends Component {
 
@@ -28,7 +29,7 @@ export default class ModalFormWithSelection extends Component {
           comment : '',
           privacity : false,
           newsletter : false,
-          accept : false,
+          conditions : false,
           programCheckboxes : programCheckboxes,
           initProgram : initProgram,
         },
@@ -293,10 +294,9 @@ export default class ModalFormWithSelection extends Component {
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <select className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}>
-                              <option value="">Nacionalidad</option>
-                              <option value="ES">España</option>
-                            </select>
+                            <CountriesSelect
+                                className={this.hasErrors('country')} name="country" value={fields.country} onChange={this.onFieldChange}
+                            />
                           </div>
                         </div>
 
