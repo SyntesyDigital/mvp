@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-xs-3">
-                <a href="">
+                <a href="{{route('languages')}}">
                   <div class="grid-item">
                       <i class="fa fa-flag"></i>
                       <p class="grid-item-name">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="col-xs-3">
-                <a href="">
+                <a href="{{route('translations')}}">
                   <div class="grid-item">
                       <i class="fa fa-list-alt"></i>
                       <p class="grid-item-name">
