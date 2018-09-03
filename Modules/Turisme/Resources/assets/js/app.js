@@ -28,3 +28,4 @@ require('./components/Widgets/Agencies');
 require('./components/Widgets/Companies');
 require('./components/Widgets/Subscribe');
 require('./components/Widgets/ContactFormPress');
+require('./components/Widgets/MenuBanner');
