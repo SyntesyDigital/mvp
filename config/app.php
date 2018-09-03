@@ -214,7 +214,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Datatables' => Yajra\DataTables\Facades\DataTables::class
+        'Datatables' => Yajra\DataTables\Facades\DataTables::class,
+        'Countries' => PeterColes\Countries\CountriesFacade::class,
     ],
 
 ];

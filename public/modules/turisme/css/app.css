@@ -10029,11 +10029,42 @@ article.page-builder{
   padding-bottom: 20px;
 }
 
+#modal-thanks.custom-modal .modal-container {
+  padding: 40px 20vw;
+}
+
+#modal-thanks h2 {
+  font-size: 50px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  font-weight: 100;
+  padding-bottom: 0px;
+}
+
+#modal-thanks p.links {
+  border-top: 1px solid #e5e5e5;
+  margin-top: 50px;
+  padding-top: 20px;
+  margin-bottom: 40px !important;
+}
+
+#modal-thanks p.links a {
+  color: #9a9a9a;
+}
+
 form.contact-form {
   padding-top: 40px;
   padding-bottom: 60px;
   border: none;
   text-align: left;
+}
+
+form.contact-form .form-group {
+  min-height: 38px;
+}
+
+form.contact-form .react-datepicker-wrapper {
+  width: 100%;
 }
 
 form.contact-form h2 {
@@ -10045,7 +10076,8 @@ form.contact-form input[type="text"] {
 }
 
 form.contact-form input.error,
-form.contact-form select.error {
+form.contact-form select.error,
+form.contact-form textarea.error {
   border: 1px solid #c54345;
 }
 
@@ -10066,6 +10098,25 @@ form.contact-form .error-message {
 
 form.contact-form .checkbox {
   text-align: left;
+}
+
+.summary-list ul li {
+  list-style-type: none;
+}
+
+.summary-list .summary-item ul li {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.summary-list .summary-item img {
+  width: 100px;
+  height: auto;
+}
+
+.banner.newsletter form {
+  position: relative !important;
+  margin-top: 10px;
 }
 
 .map-container .leaflet-container {

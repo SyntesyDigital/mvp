@@ -97,3 +97,30 @@
   }
 
 }
+
+#modal-thanks {
+  &.custom-modal .modal-container{
+    padding: 40px 20vw;
+  }
+
+  h2{
+    font-size: 50px;
+    margin-bottom: 40px;
+    margin-top:40px;
+    font-weight: 100;
+    padding-bottom: 0px;
+  }
+
+  p.links {
+    border-top: 1px solid rgba(229,229,229,1.00);
+    margin-top: 50px;
+    padding-top: 20px;
+    margin-bottom: 40px !important;
+
+
+    a {
+      color: rgba(154,154,154,1.00);
+    }
+
+  }
+}

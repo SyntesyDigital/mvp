@@ -19,10 +19,10 @@ class SaveContactRequest extends FormRequest
             'email' => 'required|email',
             'country' => 'required',
             'company' => 'required',
-            'company_type' => 'required',
+            //'company_type' => 'required',
             'privacity' => 'required|accepted',
             //'newsletter' => 'required|accepted',
-            'conditions' => 'required|accepted',
+            //'conditions' => 'required|accepted',
         ];
     }
 

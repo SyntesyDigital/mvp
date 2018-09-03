@@ -12,7 +12,7 @@
 @section('content')
 
 @if(isset($content) && $content->parent_id != null)
-<div class="single trade">
+<div class="single">
   <div class="grey no-margin">
        <div class="container">
         <div class="row">

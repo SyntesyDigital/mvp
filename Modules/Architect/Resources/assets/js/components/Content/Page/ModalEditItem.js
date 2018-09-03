@@ -125,6 +125,12 @@ class ModalEditItem extends Component {
               && response.data.data !== undefined
               && response.data.data.length > 0)
           {
+
+              response.data.data.unshift({
+                "id": '',
+          			"description_es": "Sin programa",
+              });
+
               self.setState({
                   programs : response.data.data
               });

@@ -30,7 +30,7 @@ class PageLayoutRepository extends BaseRepository
         return Datatables::of(PageLayout::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="#" data-id="'.$item->id.'" id="item-'.$item->id.'" class="btn btn-link add-item" data-toogle="delete" ><i class="fa fa-plus"></i> Afegir &nbsp;
+                <a href="#" data-id="'.$item->id.'" id="item-'.$item->id.'" class="btn btn-link add-item" ><i class="fa fa-plus"></i> Afegir &nbsp;
                 ';
             })
             ->make(true);

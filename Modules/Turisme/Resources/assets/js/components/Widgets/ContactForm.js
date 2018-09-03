@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import Paginator from './../Common/Paginator';
 import ListItem from './../Common/ListItem';
 import ModalForm from './../Common/ModalForm';
+import ModalThanks from './../Common/ModalThanks';
+
 
 
 export default class ContactForm extends Component {
@@ -11,8 +13,14 @@ export default class ContactForm extends Component {
     constructor(props)
     {
         super(props);
+
+        const field = props.field ? JSON.parse(atob(props.field)) : '';
+
         this.state = {
-            field : props.field ? JSON.parse(atob(props.field)) : ''
+            field : field,
+            displayModal : false,
+            displayThanks : false,
+            initProgram : field.settings.program
         };
     }
 
@@ -24,14 +32,33 @@ export default class ContactForm extends Component {
     openForm(event) {
       event.preventDefault();
 
+      this.setState({
+        displayModal : true
+      });
+    }
 
+    handleModalClose() {
+      this.setState({
+        displayModal : false
+      });
+    }
+
+    handleFormSubmited() {
+      this.setState({
+        displayModal : false,
+        displayThanks : true
+      });
+    }
+
+    handleThanksClose() {
+      this.setState({
+        displayThanks : false
+      });
     }
 
     render() {
 
         const fields = this.state.field.fields;
-
-        console.log("ContactForm :: ",fields);
 
         const title = this.processText(fields,0);
 
@@ -40,9 +67,18 @@ export default class ContactForm extends Component {
 
                 <ModalForm
                   csrf_token={this.props.csrf_token}
+                  initProgram={this.state.initProgram}
+                  display={this.state.displayModal}
+                  onModalClose={this.handleModalClose.bind(this)}
+                  onSubmitSuccess={this.handleFormSubmited.bind(this)}
                 />
 
-                <button type="button" className="btn" onClick={this.openForm}>
+                <ModalThanks
+                  display={this.state.displayThanks}
+                  onModalClose={this.handleThanksClose.bind(this)}
+                />
+
+                <button type="button" className="btn" onClick={this.openForm.bind(this)}>
                   {title}
                 </button>
             </div>

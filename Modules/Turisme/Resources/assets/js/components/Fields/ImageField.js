@@ -61,12 +61,16 @@ class ImageField extends Component {
 
       //alt={this.state.alt}
       //title={this.state.title}
+      const width = this.props.width !== undefined ? this.props.width : 'auto';
+      const height = this.props.height !== undefined ? this.props.height : 'auto';
 
       return (
         <img
           id={this.state.id}
           className={this.state.className}
           src={ASSETS+this.state.url}
+          width={width}
+          height={height}
         />
       );
 

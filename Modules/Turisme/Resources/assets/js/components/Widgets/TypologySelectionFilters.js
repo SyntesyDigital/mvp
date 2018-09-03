@@ -11,6 +11,9 @@ import ListSelectedItem from './../Common/ListSelectedItem';
 import ModalForm from './../Common/ModalForm';
 import OrderBar from './../Common/OrderBar';
 
+import ModalFormWithSelection from './../Common/ModalFormWithSelection';
+import ModalThanks from './../Common/ModalThanks';
+
 
 const STATISTCS_ID = 6;
 const PUBLICATIONS_ID = 4;
@@ -26,12 +29,13 @@ export default class TypologySelectionFilters extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const textIdentifier =  field.settings.textIdentifier !== undefined ? field.settings.textIdentifier : null;
         const dateIdentifier =  field.settings.dateIdentifier !== undefined ? field.settings.dateIdentifier : null;
-
+        const typology = field.settings.selectableTypology !== undefined ?  field.settings.selectableTypology : null;
 
         console.log("TypologySelectionFilters => ",field);
 
         this.state = {
             field : field,
+            typology : typology,
             items : null,
             lastPage : null,
             currPage : null,
@@ -40,7 +44,9 @@ export default class TypologySelectionFilters extends Component {
             dateIdentifier : dateIdentifier,
             filters : null,
             selectedItems : {},
-            area : true
+            area : true,
+            displayModal : false,
+            displayThanks : false,
         };
 
         $("#selected-items").css({display:'block'});
@@ -63,7 +69,7 @@ export default class TypologySelectionFilters extends Component {
 
         const {filters} = this.state;
 
-        if(parseInt(this.state.field.settings.typology) != STATISTCS_ID){
+        if(parseInt(this.state.typology) != STATISTCS_ID){
           this.query(1,filters);
         }
     }
@@ -71,7 +77,7 @@ export default class TypologySelectionFilters extends Component {
     query(page,filters,order) {
         var self = this;
 
-        const {textIdentifier,dateIdentifier,field} = this.state;
+        const {textIdentifier,dateIdentifier,field,typology} = this.state;
 
         var filtersQuery = '';
 
@@ -81,7 +87,7 @@ export default class TypologySelectionFilters extends Component {
 
         var params = {
             size : 2,
-            typology_id : field.settings.typology,
+            typology_id : typology,
             fields : filtersQuery,
             order : order,
             page : page ? page : null,
@@ -226,17 +232,11 @@ export default class TypologySelectionFilters extends Component {
       this.query(1,filters,order);
     }
 
-    onOpenForm() {
-
-      console.log("TypologySelectionFilters :: open form");
-
-    }
-
     renderFilterBar() {
 
-      console.log("TypologySelectionFilters :: renderFilterBar => ",this.state.field.settings.typology,PUBLICATIONS_ID);
+      console.log("TypologySelectionFilters :: renderFilterBar => ",this.state.typology,PUBLICATIONS_ID);
 
-      switch(parseInt(this.state.field.settings.typology)){
+      switch(parseInt(this.state.typology)){
         case PUBLICATIONS_ID :
           return (
             <div>
@@ -312,18 +312,63 @@ export default class TypologySelectionFilters extends Component {
                 </div>
             }
 
-
-
         </div>
       );
+    }
+
+    onOpenForm(event) {
+      event.preventDefault();
+
+      this.setState({
+        displayModal : true
+      });
+    }
+
+    handleModalClose() {
+      this.setState({
+        displayModal : false
+      });
+    }
+
+    handleFormSubmited() {
+      this.setState({
+        displayModal : false,
+        displayThanks : true
+      });
+    }
+
+    handleThanksClose() {
+
+      this.setState({
+        displayThanks : false,
+        selectedItems : {},
+        area : true
+      });
+
+      $("#selected-items #number").html(0);
     }
 
     render() {
 
         const area = this.state.area;
 
+
+
         return (
             <div>
+
+              <ModalFormWithSelection
+                csrf_token={this.props.csrf_token}
+                display={this.state.displayModal}
+                onModalClose={this.handleModalClose.bind(this)}
+                items={this.state.selectedItems}
+                onSubmitSuccess={this.handleFormSubmited.bind(this)}
+              />
+
+              <ModalThanks
+                display={this.state.displayThanks}
+                onModalClose={this.handleThanksClose.bind(this)}
+              />
 
               {area &&
                 this.renderSelectionArea()

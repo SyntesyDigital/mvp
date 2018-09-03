@@ -32,24 +32,49 @@ class ContentController extends Controller
       ]);
     }
 
+    private function renderPage($request,$content) {
+
+        $pageBuilderAdapter = new PageBuilderAdapter($content);
+
+        if($request->has('debug'))
+          dd($pageBuilderAdapter->get());
+
+        return view('turisme::contents.page',[
+            'content' => $content,
+            'page' => $pageBuilderAdapter->get(),
+            'contentSettings' => $content->getSettings()
+        ]);
+    }
+
+    private function renderTypology($request,$content) {
+
+        if($request->has('debug'))
+          dd($content->toArray());
+
+        return view('turisme::contents.'.strtolower($content->typology->name),[
+            'content' => $content,
+            'contentSettings' => $content->getSettings()
+        ]);
+    }
+
     public function show(Request $request, $slug)
     {
       $slug = $request->segment(count($request->segments()));
 
       $content = Content::whereField('slug', $slug)->first();
 
-      $pageBuilderAdapter = new PageBuilderAdapter($content);
+      if($content == null){
+        abort(404);
+      }
 
-      if($request->has('debug'))
-        dd($pageBuilderAdapter->get());
+      if($content->is_page){
+        return $this->renderPage($request,$content);
+      }
+      else if(isset($content->typology) && $content->typology->has_slug){
+        return $this->renderTypology($request,$content);
+      }
 
-
-      return view('turisme::contents.page',[
-          'content' => $content,
-          'page' => $pageBuilderAdapter->get(),
-          'contentSettings' => $content->getSettings()
-      ]);
-
+      abort(404);
     }
 
     public function preview(Request $request,$id)
