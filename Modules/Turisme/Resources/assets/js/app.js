@@ -26,3 +26,4 @@ require('./components/Widgets/MembersByProgram');
 require('./components/Widgets/Members');
 require('./components/Widgets/Agencies');
 require('./components/Widgets/Companies');
+require('./components/Widgets/Blog');

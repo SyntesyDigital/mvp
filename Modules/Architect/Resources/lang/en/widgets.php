@@ -34,5 +34,6 @@ return [
     'MEMBERS_BY_PROGRAM' => 'Membres per Programa',
     'MEMBERS' => 'Llista de Membres',
     'COMPANIES' => 'Recursos y Sostenibilidad',
-    'AGENCIES' => 'Agencias de Viajes'
+    'AGENCIES' => 'Agencias de Viajes',
+    'BLOG' => 'Blog'
 ];
