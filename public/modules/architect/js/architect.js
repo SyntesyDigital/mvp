@@ -266,11 +266,6 @@ architect.contents = {
 
         datatable.ajax.reload(function(){
             _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
         });
     },
 
@@ -341,11 +336,6 @@ architect.tags = {
 
         datatable.ajax.reload(function(){
             _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
         });
     },
 
@@ -416,11 +406,6 @@ architect.users = {
 
         datatable.ajax.reload(function(){
             _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
         });
     },
 
@@ -491,11 +476,6 @@ architect.pageLayouts = {
 
         datatable.ajax.reload(function(){
             _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
         });
     },
 
