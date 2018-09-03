@@ -10218,6 +10218,13 @@ form.contact-form .checkbox {
   margin-right: 2%;
 }
 
+.filter-bar form.nova-cerca select {
+  display: inline-block;
+  width: 15%;
+  float: left;
+  margin-right: 2%;
+}
+
 .filter-bar form.nova-cerca .input-date {
   display: inline-block;
   width: auto;
