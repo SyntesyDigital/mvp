@@ -32,7 +32,9 @@ mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.tags.js',
   'Modules/Architect/Resources/assets/js/architect/architect.users.js',
   'Modules/Architect/Resources/assets/js/architect/architect.pageLayouts.js',
-  'Modules/Architect/Resources/assets/js/architect/architect.menu.js'
+  'Modules/Architect/Resources/assets/js/architect/architect.menu.js',
+  'Modules/Architect/Resources/assets/js/architect/architect.languages.js',
+  'Modules/Architect/Resources/assets/js/architect/architect.translations.js'
 ], 'public/modules/architect/js/architect.js');
 
 
