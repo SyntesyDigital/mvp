@@ -28,8 +28,6 @@
 
 	<div class="collapse navbar-collapse js-navbar-collapse">
 
-		{!! display_menu('header') !!}
-
 		 		<!-- buscador -->
 				<form class="col-md-12 buscar">
 					<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
