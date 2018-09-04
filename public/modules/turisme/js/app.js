@@ -85341,206 +85341,6 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
     return createChainableTypeChecker(validate);
   }
 
-<<<<<<< HEAD
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(PopperComponent, {
-      className: this.props.popperClassName,
-      hidePopper: !this.state.open || this.props.disabled,
-      popperModifiers: this.props.popperModifiers,
-      targetComponent: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "react-datepicker__input-container" },
-        this.renderDateInput(),
-        this.renderClearButton()
-      ),
-      popperContainer: this.props.popperContainer,
-      popperComponent: calendar,
-      popperPlacement: this.props.popperPlacement
-    });
-  };
-
-  return DatePicker;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-DatePicker.propTypes = {
-  adjustDateOnChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  allowSameDay: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  autoComplete: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  autoFocus: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  calendarClassName: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  calendarContainer: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  children: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.node,
-  className: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  customInput: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.element,
-  customInputRef: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  // eslint-disable-next-line react/no-unused-prop-types
-  dateFormat: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array]),
-  dateFormatCalendar: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  dayClassName: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  disabled: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  disabledKeyboardNavigation: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  dropdownMode: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOf(["scroll", "select"]).isRequired,
-  endDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  excludeDates: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  filterDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  fixedHeight: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  formatWeekNumber: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  highlightDates: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  id: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  includeDates: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  includeTimes: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  injectTimes: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  inline: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  isClearable: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  locale: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  maxDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  minDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  monthsShown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-  name: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  onBlur: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
-  onSelect: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onWeekSelect: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onClickOutside: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onChangeRaw: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onFocus: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onKeyDown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onMonthChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  onYearChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  openToDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  peekNextMonth: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  placeholderText: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  popperContainer: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  popperClassName: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string, // <PopperComponent/> props
-  popperModifiers: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object, // <PopperComponent/> props
-  popperPlacement: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOf(popperPlacementPositions), // <PopperComponent/> props
-  preventOpenOnFocus: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  readOnly: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  required: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  scrollableYearDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  scrollableMonthYearDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  selected: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  selectsEnd: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  selectsStart: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showMonthDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showMonthYearDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showWeekNumbers: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showYearDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  forceShowMonthNavigation: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showDisabledMonthNavigation: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  startDate: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  startOpen: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  tabIndex: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-  timeCaption: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  title: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  todayButton: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  useWeekdaysShort: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  formatWeekDay: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  utcOffset: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-  value: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  weekLabel: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  withPortal: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  yearDropdownItemNumber: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-  shouldCloseOnSelect: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showTimeSelect: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  showTimeSelectOnly: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  timeFormat: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  timeIntervals: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-  minTime: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  maxTime: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  excludeTimes: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array,
-  useShortMonthInDropdown: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  clearButtonTitle: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
-
-
-/***/ }),
-/* 342 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-			return classNames;
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
-
-/***/ }),
-/* 343 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export IGNORE_CLASS_NAME */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-
-
-
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-=======
   function createNodeChecker() {
     function validate(props, propName, componentName, location, propFullName) {
       if (!isNode(props[propName])) {
@@ -85549,7 +85349,6 @@ function _objectWithoutProperties(source, excluded) {
       return null;
     }
     return createChainableTypeChecker(validate);
->>>>>>> c9b98f967c2c51db6a2982ed2d9c85c4a12b1af3
   }
 
   function createShapeTypeChecker(shapeTypes) {
@@ -86038,7 +85837,7 @@ webpackContext.id = 337;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2017 Jed Watson.
+  Copyright (c) 2016 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -86060,11 +85859,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg) && arg.length) {
-				var inner = classNames.apply(null, arg);
-				if (inner) {
-					classes.push(inner);
-				}
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
 			} else if (argType === 'object') {
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
@@ -86078,7 +85874,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
-		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
 		// register as 'classnames', consistent with npm package name

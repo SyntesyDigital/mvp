@@ -6,12 +6,18 @@ use Illuminate\Http\Resources\Json\Resource;
 
 use Modules\Architect\Transformers\ContentTransformer;
 use Modules\Architect\Ressources\CategoryTreeCollection;
+use Modules\Architect\Entities\Language;
 
 class CategoryTransformer extends Resource
 {
     public function toArray($request, $language = null)
     {
         $languageId = $language ? $language->id : null;
+
+        if($request->get('accept_lang')) {
+            $language = Language::byIso($request->get('accept_lang'))->first();
+            $languageId = $language ? $language->id : null;
+        }
 
         $data = [
             'id' => $this->id,
