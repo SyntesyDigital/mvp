@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
 
-        if(App::environment() == 'local'){
+        if(App::environment() == 'local' || App::environment() == 'development'){
           return parent::render($request, $e);
         }
         else {
