@@ -35,6 +35,7 @@
 <!-- ARTICLE -->
 <article class="content">
   {{$content->getFieldValue('title')}}
+
 </article>
 <!-- END ARTICLE -->
 @endsection
