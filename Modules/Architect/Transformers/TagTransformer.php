@@ -18,8 +18,12 @@ class TagTransformer extends Resource
     public function toArray($request, $language = null)
     {
         //$languages = Language::all();
-
         $languageId = $language ? $language->id : null;
+
+        if($request->get('accept_lang')) {
+            $language = Language::byIso($request->get('accept_lang'))->first();
+            $languageId = $language ? $language->id : null;
+        }
 
         return [
             'id' => $this->resource->id,
