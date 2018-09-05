@@ -45,7 +45,7 @@ class NewsBlog extends Component {
             {data != null ? data : ''}
             {category != null && data != null ? '|' : ''}
             {category != null &&
-              <a href={'/blog/category/'+category_slug}>{category} </a>
+              <a href={'/category/'+category_slug}>{category} </a>
             }  
           </p>
           <p className="image">

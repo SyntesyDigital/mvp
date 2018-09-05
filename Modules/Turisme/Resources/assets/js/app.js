@@ -29,7 +29,6 @@ require('./components/Widgets/Companies');
 require('./components/Widgets/Subscribe');
 require('./components/Widgets/ContactFormPress');
 require('./components/Widgets/Blog');
-require('./components/Widgets/BlogFilter');
 require('./components/Widgets/RelatedNews');
 
 

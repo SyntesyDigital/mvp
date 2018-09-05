@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::get('sitemap.xml', 'Modules\Turisme\Http\Controllers\SitemapController@sitemap')->name('sitemap');
 
 Route::group([
@@ -19,6 +17,8 @@ Route::group([
     Route::put('/contact/save-with-selection', 'ContactController@saveWithSelection')->name('contact.save.selection');
     Route::put('/contact/save-press', 'ContactController@savePress')->name('contact.save.press');
 
+    Route::get(LaravelLocalization::transRoute('routes.category'), 'CategoryController@index')->name('category.index');
+    Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('tag.index');
 
     Route::get('/', 'ContentController@index')->name('home');
 
@@ -26,6 +26,7 @@ Route::group([
     Route::get('/{slug}','ContentController@show')
       ->where('slug', '([A-Za-z0-9\-\/]+)')
       ->name('content.show');
+
 
 
     // Localization to JS

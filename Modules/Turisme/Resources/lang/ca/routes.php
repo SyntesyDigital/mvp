@@ -1,7 +1,7 @@
 <?php
 
 return [
-  /*
-  "search" => "cerca"
-  */
+	"category" =>    "categoria/{slug}",
+	"tag.index" =>    "tag/{slug}"
+
 ];
