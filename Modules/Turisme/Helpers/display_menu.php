@@ -12,6 +12,10 @@ if (!function_exists('display_menu')) {
 
         $menu = Modules\Architect\Entities\Menu::hasName($key)->first();
 
+        if(!$menu) {
+            return null;
+        }
+
         $menuRepository = App::make('Modules\Architect\Repositories\MenuRepository');
         $array = $menuRepository->getElementTree($menu);
 

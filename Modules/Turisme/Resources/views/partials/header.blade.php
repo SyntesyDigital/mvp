@@ -27,22 +27,21 @@
 	</div>
 
 	<div class="collapse navbar-collapse js-navbar-collapse">
-
 		{!! display_menu('header') !!}
 
-		 		<!-- buscador -->
-				<form class="col-md-12 buscar">
-					<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
-				</form>
-				<!-- end buscador -->
+ 		<!-- buscador -->
+		<form class="col-md-12 buscar">
+			<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
+		</form>
+		<!-- end buscador -->
 
-				@include('turisme::partials.menu')
+		@include('turisme::partials.menu')
 
-				<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
+		<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
 
-				<li class="link-twitter"><a href="">@BarcelonaTurism</a></li>
-				<li class="boto-search">Buscar</li>
-			</ul>
+		<li class="link-twitter"><a href="">@BarcelonaTurism</a></li>
+			<li class="boto-search">Buscar</li>
+		</ul>
 	</div><!-- /.nav-collapse -->
 	</nav>
 </div>
