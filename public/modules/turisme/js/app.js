@@ -85837,7 +85837,7 @@ webpackContext.id = 337;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
+  Copyright (c) 2017 Jed Watson.
   Licensed under the MIT License (MIT), see
   http://jedwatson.github.io/classnames
 */
@@ -85859,8 +85859,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 			if (argType === 'string' || argType === 'number') {
 				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
 			} else if (argType === 'object') {
 				for (var key in arg) {
 					if (hasOwn.call(arg, key) && arg[key]) {
@@ -85874,6 +85877,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 
 	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
 		module.exports = classNames;
 	} else if (true) {
 		// register as 'classnames', consistent with npm package name
@@ -107639,6 +107643,7 @@ var TypologyLast = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
+        window.localization['MENU_FOOTER_1'],
         this.state.items == null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', null),
         this.state.items != null && this.state.items.length == 0 && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
