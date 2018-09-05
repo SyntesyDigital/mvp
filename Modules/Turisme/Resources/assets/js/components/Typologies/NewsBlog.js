@@ -24,7 +24,7 @@ class NewsBlog extends Component {
     render() {
 
       const fields = this.props.field.fields;
-      console.log("News => ",this.props.field);
+   //  console.log("News => ",this.props.field);
 
       const category = this.props.field.category != null ? this.props.field.category.name : null;
       const category_slug = this.props.field.category != null ? this.props.field.category.slug : null;

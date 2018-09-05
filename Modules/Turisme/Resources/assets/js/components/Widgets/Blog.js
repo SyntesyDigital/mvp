@@ -18,29 +18,58 @@ export default class Blog extends Component {
         super(props);
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
+        const init = props.init ? props.init : '1';
+        const showTags = props.showTags ? props.showTags : '1';
+        const showFilter = props.showFilter ? props.showFilter : '1';
+        const categoryId = props.categoryId ? props.categoryId : null;
+        const tagId = props.tagId ? props.tagId : null;
+        const entrevistas = props.entrevistas ? props.entrevistas : null;
 
+        var filters = {};
+        if(categoryId != null){
+          filters.category =categoryId;
+        }
 
-        console.log("Blog => ",field);
+        if(tagId != null){
+          filters.tag =tagId;
+        }
+
+        if(entrevistas != null){
+          filters.entrevistas = entrevistas;
+        }
+
+        if(filters.category == null && filters.tag == null && filters.entrevistas == null){
+          filters= null;
+        }
+
 
         this.state = {
             field : field,
+            init: init,
+            showTags: showTags,
             items : null,
-            categoryId : null,
             currPage : null,
             loaded: false,
             textIdentifier : '',
             dateIdentifier : '',
-            filters : null,
-            tags : null
+            filters : filters,
+            tags : null,
+            showFilter:showFilter,
         };
     }
 
     componentDidMount() {
 
         const {filters} = this.state;
+        const {init} = this.state;
+        const {showTags} = this.state;
 
-        this.query(1,filters);
-        this.queryTags();
+        if(init == '1'){
+          this.query(1,filters);
+        }
+        if(showTags == '1'){
+          this.queryTags();
+        }
     }
 
     query(page,filters) {
@@ -48,6 +77,7 @@ export default class Blog extends Component {
 
         var searchQuery = '';
         var datesQuery = '';
+        var entrevistaQuery = '';
 
         const {field} = this.state;
 
@@ -63,22 +93,27 @@ export default class Blog extends Component {
             datesQuery += ',["data","<=","'+filters.endDate+'"]';
           }
 
-          var query = searchQuery+(searchQuery != '' && datesQuery != '' ? ',':'')+datesQuery;
+          if(filters.entrevistas != null && filters.entrevistas == '1' ){
+            entrevistaQuery = '["es-entrevista","=",'+filters.entrevistas+']';
+          }
+
+          var query = searchQuery+(searchQuery != '' && datesQuery != '' ? ',':'')+datesQuery+((searchQuery != '' || datesQuery != '') && entrevistaQuery != '' ? ',':'')+entrevistaQuery;
           fieldsQuery = fieldsQuery.replace(':query',query);
         }
 
-        //console.log("Blog :: query : "+fieldsQuery);
+        console.log("Blog :: query : "+fieldsQuery);
 
         var params = {
             size : 9,
             typology_id : 2,
-            category_id : filters != null?filters.category:null,
+            category_id : filters!= null && filters.category != null?filters.category:null,
+            tags : filters!= null && filters.tag != null?filters.tag:null,
             fields : fieldsQuery,
             page : page ? page : null,
             accept_lang : LOCALE,
             orderBy : 'data',
-            sortedBy : 'desc'
-        };
+            sortedBy : 'desc'        
+          };
 
         axios.post(ASSETS+'api/contents',params)
           .then(function (response) {
@@ -132,7 +167,7 @@ export default class Blog extends Component {
       const {items} = this.state;
       var classEntrevista = '';
       for(var key in items){
-        console.log("TypologyPaginated => ",items[key]);
+       // console.log("TypologyPaginated => ",items[key]);
 
         if(null != items[key].fields["es-entrevista"].values && items[key].fields["es-entrevista"].values == '1'){
           classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12 entrevista';
@@ -172,9 +207,7 @@ export default class Blog extends Component {
 
       var result = [];
       const tags = this.state.tags;
-                  console.log('AAAA');
-
-            console.log(tags);
+           // console.log(tags);
 
       for(var key in tags){
         result.push(
@@ -198,13 +231,19 @@ export default class Blog extends Component {
     }
 
     render() {
+        const {showFilter} = this.state;
+        var filterBar = '';
+        if(showFilter == '1'){
+          filterBar = <FilterBarBlog 
+                  onSubmit={this.handleFilterSubmit.bind(this)}
+                />;
+        }
+
         return (
             <div className="blog-home">
 
-                <FilterBarBlog 
-                  onSubmit={this.handleFilterSubmit.bind(this)}
-                />
-
+                
+              {filterBar}
 
                 {this.state.items == null &&
                     <p>{/*Carregant dades...*/}</p>
@@ -247,8 +286,20 @@ export default class Blog extends Component {
 if (document.getElementById('blog')) {
     var element = document.getElementById('blog');
     var field = element.getAttribute('field');
+    var init = element.getAttribute('init');
+    var showTags = element.getAttribute('showTags');
+    var showFilter = element.getAttribute('showFilter');
+    var categoryId = element.getAttribute('categoryId');
+    var tagId = element.getAttribute('tagId');
+    var entrevistas = element.getAttribute('entrevistas');
 
     ReactDOM.render(<Blog
         field={field}
+        init={init} 
+        showTags={showTags} 
+        showFilter={showFilter} 
+        categoryId={categoryId} 
+        tagId={tagId} 
+        entrevistas={entrevistas} 
       />, element);
 }

@@ -43,7 +43,7 @@ class FilterBarBlog extends Component {
     }
 
     handleDateChange(name,date){
-      console.log("handleDateChange => ",date,name);
+    //  console.log("handleDateChange => ",date,name);
 
       const state = this.state;
       state[name] = date;
@@ -91,11 +91,11 @@ class FilterBarBlog extends Component {
           <div className="grey">
             <div className="row">
               <div className="container">
-                <form className="blog-search">
+                <form onSubmit={this.handleSubmit.bind(this)} className="blog-search">
                 
                   <div className="row">
                     <label className="col-md-3 col-sm-4 col-xs-12">Selecciona una categoria </label>
-                    <select name="category" className="col-md-9 col-sm-8 col-xs-12">
+                    <select name="category" className="col-md-9 col-sm-8 col-xs-12" onChange={this.handleChange} value={this.state.category}>
                         <option disabled value="">{Lang.get('widgets.select_category')}</option>
                         {this.renderCategories()}
                           </select>
@@ -129,8 +129,7 @@ class FilterBarBlog extends Component {
                     </div>
 
                     <div className="row">
-                      <label className="col-md-3 col-sm-4 col-xs-12">Escribe texto</label>
-                      <input className="col-md-9 col-sm-8 col-xs-12" placeholder="Escribe texto" type="text"/>
+                      <input className="col-md-9 col-sm-8 col-xs-12" value={this.state.text} name="text" onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} type="text"/>
                     </div> 
                     <div className="row">
                       <input value="Submit" className="btn" type="submit"/>
@@ -139,53 +138,7 @@ class FilterBarBlog extends Component {
 
                 </form>
               </div>
-          </div>
-
-        {/*    <div className="filter-bar">
-              <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
-                <div className="fields">
-                  <select name="category" className="col-xs-3" onChange={this.handleChange} value={this.state.category}>
-                    <option value="">{Lang.get('widgets.select_indicator')}</option>
-                    {this.renderCategories()}
-                  </select>
-
-
-                    <div className="input-date">
-                      <DatePicker
-                          className="input-date"
-                          selected={this.state.dateStart}
-                          selectsStart
-                          startDate={this.state.dateStart}
-                          endDate={this.state.dateEnd}
-                          onChange={this.handleDateChange.bind(this,'dateStart')}
-                          locale="ca-es"
-                      />
-                    </div>
-
-                    <div className="input-date">
-                      <DatePicker
-                          className="input-date"
-                          selected={this.state.dateEnd}
-                          selectsEnd
-                          startDate={this.state.dateStart}
-                          minDate={this.state.dateStart}
-                          endDate={this.state.dateEnd}
-                          onChange={this.handleDateChange.bind(this,'dateEnd')}
-                          locale="ca-es"
-                      />
-                    </div>
-
-
-                  <input type="text" name="text" value={this.state.text} onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} />
-
-                </div>
-
-                <input type="submit" value={Lang.get('widgets.search')} className="btn" />
-                <div className="separator"></div>
-              </form>
-            </div> */}
-
-
+            </div>
           </div>
 
         );
