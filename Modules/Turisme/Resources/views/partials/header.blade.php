@@ -41,7 +41,7 @@
 		<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
 
 		<li class="link-twitter"><a href="">@BarcelonaTurism</a></li>
-			<li class="boto-search">Buscar</li>
+			<li class="boto-search">Buscar </li>
 		</ul>
 	</div><!-- /.nav-collapse -->
 	</nav>
