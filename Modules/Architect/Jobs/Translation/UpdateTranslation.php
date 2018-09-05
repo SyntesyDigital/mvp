@@ -6,6 +6,8 @@ use Modules\Architect\Http\Requests\Translation\UpdateTranslationRequest;
 
 use Modules\Architect\Entities\Translation;
 use Modules\Architect\Entities\TranslationField;
+use Modules\Architect\Entities\Language;
+use Cache;
 
 class UpdateTranslation
 {
@@ -39,6 +41,11 @@ class UpdateTranslation
                 'value' => is_array($value) ? json_encode($value) : $value,
                 'language_id' => $languageId
             ]));
+        }
+
+        // OPTIMIZE : create task for it :)
+        foreach(Language::all() as $language) {
+            Cache::forget('localization.' . $language->iso);
         }
 
         return $this->translation;

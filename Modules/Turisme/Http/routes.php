@@ -30,4 +30,5 @@ Route::group([
 
     // Localization to JS
     Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
+    Route::get('js/localization-{locale}.js', 'LocalizationController@localization')->name('localization.js');
 });

@@ -6,17 +6,17 @@ use Modules\Architect\Http\Requests\Translation\CreateTranslationRequest;
 
 use Modules\Architect\Entities\Translation;
 use Modules\Architect\Entities\TranslationField;
+use Modules\Architect\Entities\Language;
+use Cache;
 
 class CreateTranslation
 {
     public function __construct($attributes)
     {
-
         $this->attributes = array_only($attributes, [
             'name',
             'fields'
-          ]);
-
+        ]);
     }
 
     public static function fromRequest(CreateTranslationRequest $request)
@@ -26,12 +26,11 @@ class CreateTranslation
 
     public function handle()
     {
-
         $translation = Translation::create([
           'name' => $this->attributes['name']
         ]);
 
-        foreach($this->attributes['fields']['value'] as $languageId => $value) {
+        foreach ($this->attributes['fields']['value'] as $languageId => $value) {
             $translation->fields()->save(new TranslationField([
                 'translation_id' => $translation->id,
                 'name' => $this->attributes['name'],
@@ -40,7 +39,11 @@ class CreateTranslation
             ]));
         }
 
-        return $translation;
+        // OPTIMIZE : create task for it :)
+        foreach(Language::all() as $language) {
+            Cache::forget('localization.' . $language->iso);
+        }
 
+        return $translation;
     }
 }

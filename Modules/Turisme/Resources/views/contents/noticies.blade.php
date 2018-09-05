@@ -20,9 +20,8 @@
       		  <div class="col-md-10  col-sm-9 col-xs-12">
       		  	<div class="ariadna">
                 {!! breadcrumb($content) !!}
-              </div>
+                </div>
       		  </div>
-
     	   </div>
   		 </div>
   	</div>
@@ -30,14 +29,12 @@
 </div>
 @endif
 
-
-
 <!-- ARTICLE -->
 <article class="content">
   {{$content->getFieldValue('title')}}
-
 </article>
 <!-- END ARTICLE -->
+
 @endsection
 
 @push('javascripts')
