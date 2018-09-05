@@ -17,6 +17,7 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
+
       $content = Content::whereField('slug','home')->first();
       $content->load('fields', 'page');
 
