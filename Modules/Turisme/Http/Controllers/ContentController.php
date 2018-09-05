@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Modules\Turisme\Adapters\PageBuilderAdapter;
+use Modules\Turisme\Adapters\FieldsAdapter;
 use Modules\Architect\Entities\Content;
 
 class ContentController extends Controller
@@ -52,8 +53,12 @@ class ContentController extends Controller
         if($request->has('debug'))
           dd($content->toArray());
 
+          // print_r((new FieldsAdapter($content))->get()->get('title')->value);
+          // exit();
+
         return view('turisme::contents.'.strtolower($content->typology->name),[
             'content' => $content,
+            'fields' => (new FieldsAdapter($content))->get(),
             'contentSettings' => $content->getSettings()
         ]);
     }
