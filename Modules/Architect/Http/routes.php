@@ -7,6 +7,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 {
 
     Route::get('/', 'ArchitectController@index')->name('home');
+    Route::get('/dani-test', 'ArchitectController@daniTest')->name('dani.test');
     // ????
     Route::post('/save', 'ArchitectController@save')->name('save');
     Route::get('/settings', 'ArchitectController@settings')->name('settings');

@@ -17,7 +17,6 @@ class TypologySearchAndDate extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        'title' => 'Modules\Architect\Fields\Types\Text'
     ];
 
     public $rules = [

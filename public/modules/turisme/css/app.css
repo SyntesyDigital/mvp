@@ -10119,6 +10119,75 @@ form.contact-form .checkbox {
   margin-top: 10px;
 }
 
+/** DATE  **/
+
+.react-datepicker-popper {
+  z-index: 1000;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.react-datepicker-wrapper .react-datepicker__input-container {
+  display: block;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 30px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  padding: 0px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.react-datepicker__time-container {
+  width: 90px;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 90px;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background-color: #3097D1;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover {
+  background-color: #3097D1;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #3097D1;
+}
+
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 100px;
+}
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;
@@ -10217,6 +10286,13 @@ form.contact-form .checkbox {
   margin-right: 2%;
 }
 
+.filter-bar form.nova-cerca select {
+  display: inline-block;
+  width: 15%;
+  float: left;
+  margin-right: 2%;
+}
+
 .filter-bar form.nova-cerca .input-date {
   display: inline-block;
   width: auto;
@@ -10231,5 +10307,10 @@ form.contact-form .checkbox {
 
 .filter-bar form.nova-cerca .input-date input.input-date {
   width: auto;
+}
+
+.blog-home .grey {
+  overflow: inherit !important;
+  padding-bottom: 1px;
 }
 
