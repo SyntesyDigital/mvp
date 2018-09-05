@@ -14,6 +14,10 @@ if (!function_exists('get_menu')) {
         if(!isset($menu))
           return null;
 
+        if(!$menu) {
+            return null;
+        }
+
         $menuRepository = App::make('Modules\Architect\Repositories\MenuRepository');
         $menuTree = $menuRepository->getDisplayTree($menu);
 
