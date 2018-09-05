@@ -18,6 +18,7 @@ class LocalizationController extends Controller
     {
         $language = Language::byIso($locale)->first();
         $cacheKey = 'localization.' . $locale;
+
         if(!$language) {
             abort(404);
         }
