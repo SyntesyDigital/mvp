@@ -2,7 +2,7 @@
 
 namespace Modules\Turisme\Adapters;
 
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+//use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 use Modules\Architect\Entities\Media;
 use Modules\Architect\Entities\Content;
@@ -12,6 +12,8 @@ use Modules\Architect\Fields\FieldConfig;
 
 use Modules\Architect\Transformers\ContentTransformer;
 use Modules\Architect\Ressources\ContentCollection;
+
+use  Modules\Turisme\Adapters\FieldsCollection;
 
 class FieldsAdapter
 {
@@ -61,7 +63,8 @@ class FieldsAdapter
             if($this->content) {
                 foreach($this->content->fields as $k => $contentField) {
                     if($typologyField->identifier == $contentField->name) {
-                        $this->build($typologyField, $contentField);
+                        $typologyField->value = $this->content->getFieldValues($typologyField->identifier, $typologyField->type, $this->languages);
+                        $this->fields[$typologyField->identifier] = $typologyField;
                     }
                 }
             }
@@ -72,112 +75,7 @@ class FieldsAdapter
             }
         }
 
-        return new EloquentCollection($this->fields);
+        return new FieldsCollection($this->fields);
     }
-
-
-
-    private function build($typologyField, $contentField)
-    {
-        switch($typologyField->type) {
-            // Translatable fields
-            case 'richtext':
-            case 'slug':
-            case 'text':
-
-                $iso = $this->getLanguageIsoFromId($contentField->language_id);
-                $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
-
-                if($values) {
-                    $values[$iso] = $contentField->value;
-                } else {
-                    $values = [
-                        $iso => $contentField->value
-                    ];
-                }
-
-                $typologyField->value = $values;
-            break;
-
-            case 'localization':
-                $typologyField->value = json_decode($contentField->value, true);
-            break;
-
-            case 'image':
-                $typologyField->value = Media::find($contentField->value);
-            break;
-
-            case 'images':
-                $values = isset($typologyField->value) ? $typologyField->value : null;
-                $values[] = Media::find($contentField->value);
-
-                $typologyField->value = $values;
-            break;
-
-            case 'contents':
-                $values = isset($typologyField->value) ? $typologyField->value : [];
-                $values[] = Content::find($contentField->value)->load('fields');
-                // return ContentField::where('name', $fieldName)->get()->map(function($field){
-                //     return Content::find($field->value);
-                // })->map(function($content) {
-                //     return (new ContentTransformer($content))->toArray(request());
-                // });
-                $typologyField->value = $values;
-            break;
-
-            case 'url':
-            case 'link':
-                $values = null;
-                $childs = $this->content->getFieldChilds($contentField);
-
-                if($childs != null){
-                  foreach($childs as $k => $v) {
-                      if($v->language_id) {
-                          $iso = $this->getLanguageIsoFromId($v->language_id);
-                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
-                      } else {
-                          if(explode('.', $v->name)[1] == 'content') {
-                              $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
-                          }
-                      }
-                  }
-                }
-
-                $typologyField->value = $values;
-            break;
-
-            case 'video':
-                $values = null;
-                $childs = $this->content->getFieldChilds($contentField);
-
-                if($childs != null){
-                  foreach($childs as $k => $v) {
-                      if($v->language_id) {
-                          $iso = $this->getLanguageIsoFromId($v->language_id);
-                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
-                      }
-                  }
-                }
-
-                $typologyField->value = $values;
-            break;
-
-            default:
-                $values = isset($typologyField->value) ? $typologyField->value : $contentField->value;
-
-                if($values && !is_array($values)) {
-                    $values = [$values];
-                    $values[] = $contentField->value;
-                }
-
-                $typologyField->value = $contentField->value;
-            break;
-        }
-
-        $this->fields[$typologyField->identifier] = $typologyField;
-    }
-
-
-
 }
 ?>

@@ -31,7 +31,7 @@
 
 <!-- ARTICLE -->
 <article class="content">
-  {{ $fields->get('title')->value[App::getLocale()] }}
+  {{ $fields->getValue('title') }}
 </article>
 <!-- END ARTICLE -->
 
