@@ -185,11 +185,7 @@ architect.medias = {
         var table = this._settings.table;
         var datatable = table.DataTable();
 
-        /*
-        datatable.ajax.reload(function(){
-            _this.initEvents();
-        });
-        */
+        datatable.ajax.reload();
     },
 
     initEvents: function()

@@ -80,10 +80,12 @@ export default class MenuBanner extends Component {
 
 
 if (document.getElementById('menu_banner')) {
-    var element = document.getElementById('menu_banner');
-    var name = element.getAttribute('name');
-
-    ReactDOM.render(<MenuBanner
-        name={name}
-      />, element);
+    document.querySelectorAll('[id=menu_banner]').forEach( element =>
+        ReactDOM.render(
+          <MenuBanner
+            name={element.getAttribute('name')}
+          />,
+          element
+        )
+    );
 }

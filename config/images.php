@@ -7,20 +7,33 @@ return [
 
     'formats' => [
         [
+            'name' => 'large',
+            'directory' => 'large',
+            'ratio' => '16:9',
+            'width' => 1366,
+            'height' => 768
+        ],
+        [
+            'name' => 'medium',
+            'directory' => 'medium',
+            'ratio' => '16:9',
+            'width' => 768,
+            'height' => 432
+        ],
+        [
+            'name' => 'small',
+            'directory' => 'small',
+            'ratio' => '16:9',
+            'width' => 480,
+            'height' => 270
+        ],
+        [
             'name' => 'thumbnail',
             'directory' => 'thumbnail',
             'ratio' => '1:1',
-            'width' => 500,
-            'height' => 500
-        ],
-
-        [
-            'name' => 'banner',
-            'directory' => 'banner',
-            'ratio' => '2:1',
-            'width' => 1000,
-            'height' => 500
-        ],
+            'width' => 320,
+            'height' => 320
+        ]
     ]
 
 ];

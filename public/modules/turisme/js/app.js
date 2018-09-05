@@ -114554,12 +114554,11 @@ var MenuBanner = function (_Component) {
 
 
 if (document.getElementById('menu_banner')) {
-    var element = document.getElementById('menu_banner');
-    var name = element.getAttribute('name');
-
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MenuBanner, {
-        name: name
-    }), element);
+    document.querySelectorAll('[id=menu_banner]').forEach(function (element) {
+        return __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(MenuBanner, {
+            name: element.getAttribute('name')
+        }), element);
+    });
 }
 
 /***/ })

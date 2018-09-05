@@ -8,6 +8,7 @@ use Modules\Architect\Entities\Menu;
 use Modules\Architect\Entities\MenuElement;
 use Modules\Architect\Entities\MenuElementField;
 use Modules\Architect\Entities\Language;
+use Cache;
 
 class UpdateMenu
 {

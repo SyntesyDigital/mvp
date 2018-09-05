@@ -1,8 +1,8 @@
 <?php
 
-if (!function_exists('display_menu')) {
+if (!function_exists('get_menu')) {
 
-    function display_menu($key)
+    function get_menu($key)
     {
         $cacheKey = sprintf("menu_%s", $key);
 
@@ -11,33 +11,53 @@ if (!function_exists('display_menu')) {
         }
 
         $menu = Modules\Architect\Entities\Menu::hasName($key)->first();
+        if(!isset($menu))
+          return null;
 
         $menuRepository = App::make('Modules\Architect\Repositories\MenuRepository');
-        $array = $menuRepository->getElementTree($menu);
+        $menuTree = $menuRepository->getDisplayTree($menu);
 
-        //FIXME we need $this->menus->getElementTree($menu); to get all hierarchy
+        //dd($menuTree);
 
-        $locale = App::getLocale();
+        Cache::forever($cacheKey, $menuTree);
 
-        $html = "<ul>";
-        foreach($menu->elements as $element) {
-            $values = $element->getFieldValues("link", "link", Modules\Architect\Entities\Language::all());
-            $title = (isset($values["title"])) && isset($values["title"][$locale]) ? $values["title"][$locale] : null;
-
-            $url = (isset($values["url"])) && isset($values["url"][$locale]) ? $values["url"][$locale] : null;
-            $content = isset($values["content"]) ? $values["content"] : null;
-
-            if($content) {
-                $url = $content->getFullSlug();
-            }
-
-            $html .= sprintf('<li><a href="%s">%s</a></li>', $url, $title);
-        }
-        $html .= "</ul>";
-
-        Cache::forever($cacheKey, $html);
-
-        return $html;
+        return $menuTree;
     }
+}
 
+if (!function_exists('format_link')) {
+
+    function format_link($menuElement) {
+
+      if(!isset($menuElement["name"][App::getLocale()]) ||
+        $menuElement["name"][App::getLocale()] == '')
+        return null;
+
+      $target = null;
+      $url = "";
+      if(isset($menuElement["link"]["url"]) &&
+        isset($menuElement["link"]["url"][App::getLocale()])){
+
+        $url = $menuElement["link"]["url"][App::getLocale()];
+        $target = "_blank";
+      }
+      else if(isset($menuElement["link"]["content"])){
+        $url = $menuElement["link"]["content"]->getFullSlug();
+      }
+      else {
+        return null;
+      }
+
+      $result = [
+        "url" => $url,
+        "name" => $menuElement["name"][App::getLocale()],
+        "class" => isset($menuElement["settings"]["htmlClass"]) ?
+          $menuElement["settings"]["htmlClass"] : '',
+        "id" => isset($menuElement["settings"]["htmlId"]) ?
+          $menuElement["settings"]["htmlId"] : '',
+        "target" => $target
+      ];
+
+      return $result;
+    }
 }
