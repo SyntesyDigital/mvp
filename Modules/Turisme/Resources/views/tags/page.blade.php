@@ -1,6 +1,6 @@
 
 @extends('turisme::layouts.app',[
-  'name => isset($tag) ? $tag->getFieldValue('name') : '',
+  'name' => isset($tag) ? $tag->getFieldValue('name') : '',
 ])
 
 @section('content')
@@ -13,7 +13,7 @@
        <div class="container">
         <div class="row">
         <div class="claim">
-        <h1>{{$tag->getFieldValue('name)}}</h1>
+        <h1>{{$tag->getFieldValue('name')}}</h1>
         <p>
             {!!$tag->getFieldValue('description')!!}
         </p>
@@ -24,7 +24,7 @@
   </div>
 
 
-  <div id="blog" init="0" showTags="0"  showTags ="0" showFilter="0" tagId="{{$tag->tag_id}}" ></div>
+  <div id="blog" showTags="0"  showTags ="0" showFilter="0" tagId="{{$tag->id}}" ></div>
     
 </div>
 </article>

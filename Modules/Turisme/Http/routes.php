@@ -7,6 +7,7 @@ Route::group([
   'middleware' => ['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
   'namespace' => 'Modules\Turisme\Http\Controllers'
 ], function() {
+    Route::get('/prueba/{slug}', 'CategoryController@index')->name('tag.index');
 
     Route::get('/countries/list', 'CountriesController@list')->name('countries.list');
 
