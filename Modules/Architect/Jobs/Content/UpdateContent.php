@@ -8,10 +8,13 @@ use Modules\Architect\Entities\Page;
 use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\ContentField;
-use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Entities\Language;
+use Modules\Architect\Entities\Menu;
 
+
+use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
+use Cache;
 
 class UpdateContent
 {
@@ -56,6 +59,12 @@ class UpdateContent
 
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
+        }
+
+        // RESET CACHE MENU
+        $menu = Menu::hasContent($this->content)->first();
+        if($menu) {
+            Cache::forget(sprintf("menu_%s", $menu->name));
         }
 
         return $this->content;

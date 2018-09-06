@@ -6,11 +6,8 @@ Route::group([
   'middleware' => ['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
   'namespace' => 'Modules\Turisme\Http\Controllers'
 ], function() {
-
     Route::get('/countries/list', 'CountriesController@list')->name('countries.list');
-
     Route::get('/preview/{id}', 'ContentController@preview')->name('preview');
-
     Route::put('/contact/save', 'ContactController@save')->name('contact.save');
     Route::put('/contact/newsletter', 'ContactController@saveNewsletter')->name('contact.newsletter');
     Route::put('/contact/save-with-selection', 'ContactController@saveWithSelection')->name('contact.save.selection');
@@ -21,13 +18,11 @@ Route::group([
 
     Route::get('/', 'ContentController@index')->name('home');
 
-
     Route::get('/{slug}','ContentController@show')
       ->where('slug', '([A-Za-z0-9\-\/]+)')
       ->name('content.show');
 
-
-
     // Localization to JS
     Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
+    Route::get('js/localization-{locale}.js', 'LocalizationController@localization')->name('localization.js');
 });

@@ -31,10 +31,10 @@ class MenuRepository extends BaseRepository
             ->make(true);
     }
 
-    /*
-    public function getElementTree()
+
+    public function getDisplayTree($menu)
     {
-        $nodes = MenuElement::get()->toTree();
+        $menuElements = $menu->elements()->orderBy('order', 'ASC')->get();
         $languages = Language::all();
         $tree = [];
 
@@ -44,18 +44,35 @@ class MenuRepository extends BaseRepository
                 $tree[] = [
                     "id" => $element->id,
                     "link" => $element->getFieldValues('link', 'link', $languages),
-                    "name" =>  $element->getFieldValues('name', 'text', $languages),
-                    "childrens" => $element->children ? $traverse($element->children) : null,
+                    "name" =>  $element->getFieldValues('link.title', 'text', $languages),
+                    "parent_id" => $element->parent_id,
+                    "settings" => json_decode($element->settings,true),
+                    "children" => $element->children ? $traverse($element->children) : null,
                 ];
             }
 
             return $tree;
         };
 
-        return $traverse($nodes);
+        foreach ($menuElements as $element) {
+            if (!$element->parent_id) {
+
+              $tree[] = [
+                  "id" => $element->id,
+                  "link" => $element->getFieldValues('link', 'link', $languages),
+                  "name" =>  $element->getFieldValues('link.title', 'text', $languages),
+                  "parent_id" => $element->parent_id,
+                  "settings" => json_decode($element->settings,true),
+                  "children" => $element->children ? $traverse( MenuElement::getTree($element->id)) : null,
+              ];
+
+            }
+        }
+
+        return $tree;
 
     }
-    */
+
 
     public function getElementTree($menu)
     {

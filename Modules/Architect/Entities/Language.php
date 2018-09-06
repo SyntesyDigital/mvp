@@ -57,8 +57,12 @@ class Language extends Model
     {
         $language = cache('defaultLanguage');
 
-        if(!$language) {
+        if(!isset($language)) {
             $language = self::where('default', 1)->first();
+
+            if(!isset($language)){
+              $language = self::first();
+            }
 
             cache([
                 'defaultLanguage' => $language

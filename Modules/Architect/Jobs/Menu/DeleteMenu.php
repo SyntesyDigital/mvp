@@ -6,6 +6,7 @@ use Modules\Architect\Http\Requests\Menu\DeleteMenuRequest;
 use Modules\Architect\Entities\Menu;
 
 use Illuminate\Support\Facades\Schema;
+use Cache;
 
 class DeleteMenu
 {
@@ -21,6 +22,7 @@ class DeleteMenu
 
     public function handle()
     {
+        Cache::forget(sprintf("menu_%s", $this->menu->name));
         return $this->menu->delete();
     }
 }

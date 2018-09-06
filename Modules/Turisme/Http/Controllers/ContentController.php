@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Modules\Turisme\Adapters\PageBuilderAdapter;
+use Modules\Turisme\Adapters\FieldsAdapter;
 use Modules\Architect\Entities\Content;
 
 class ContentController extends Controller
@@ -17,6 +18,7 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
+
       $content = Content::whereField('slug','home')->first();
       $content->load('fields', 'page');
 
@@ -48,13 +50,16 @@ class ContentController extends Controller
 
     private function renderTypology($request,$content) {
 
-        if($request->has('debug'))
-          dd($content->toArray());
+        $data = [
+          'content' => $content,
+          'fields' => (new FieldsAdapter($content))->get()->toArray(),
+          'contentSettings' => $content->getSettings()
+        ];
 
-        return view('turisme::contents.'.strtolower($content->typology->name),[
-            'content' => $content,
-            'contentSettings' => $content->getSettings()
-        ]);
+        if($request->has('debug'))
+          dd($data);
+
+        return view('turisme::contents.'.strtolower($content->typology->name),$data);
     }
 
     public function show(Request $request, $slug)

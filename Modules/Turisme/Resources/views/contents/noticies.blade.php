@@ -20,9 +20,8 @@
       		  <div class="col-md-10  col-sm-9 col-xs-12">
       		  	<div class="ariadna">
                 {!! breadcrumb($content) !!}
-              </div>
+                </div>
       		  </div>
-
     	   </div>
   		 </div>
   	</div>
@@ -30,15 +29,14 @@
 </div>
 @endif
 
-
-
 <!-- ARTICLE -->
 <article class="content">
    <!-- Col 12 -->
-  <div class="grey-intro no-margin">    
+  <div class="grey-intro no-margin">
        <div class="container">
         <div class="row">
         <div class="claim">
+
         <h1>{{$content->getFieldValue('title')}}</h1>
         <p>
             {!!$content->getFieldValue('descripcio')!!}
@@ -55,7 +53,7 @@
       <div class="container">
         <div class="row">
             <div class="col-md-9 col-sm-10 col-xs-12 centered">
-              
+
             @if( null !== $content->getFieldValue('rotatorio'))
               @php $i=0; $images = $content->getFieldValues('rotatorio','images',[]) @endphp
 
@@ -96,7 +94,7 @@
                 @endphp
                 <div id="{{$field['settings']['htmlId'] or ''}}" class="{{$field['settings']['htmlClass'] or ''}}">
                   <iframe  src="https://www.youtube.com/embed/{{$youtube_id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-                </div> 
+                </div>
             @endif
 
 
@@ -112,13 +110,13 @@
           <div class="col-md-9 col-sm-10 col-xs-12 centered">
             @php  $categories = $content->categories->all(); $first_cat = true; @endphp
             <p class="details">
-              {{null !== $content->getFieldValue('data')? date('d-m-Y',$content->getFieldValue('data')):""}} 
+              {{null !== $content->getFieldValue('data')? date('d-m-Y',$content->getFieldValue('data')):""}}
               @foreach($categories as $cat)
                 @if($first_cat)
-                  | 
+                  |
                   @php $first_cat = false; @endphp
                 @else
-                   · 
+                   ·
                 @endif
                 <a href="/category/{{$cat->getFieldValue('slug')}}">{{$cat->getFieldValue('name')}}</a>
               @endforeach
@@ -126,14 +124,14 @@
                | <span>{{$content->author->firstname.' '.$content->author->lastname }}</span>
               </p>
               {!! $content->getFieldValue('contingut') !!}
-    
+
           <ul class="tags_blog">
             @php  $tags = $content->tags->all(); @endphp
               @foreach($tags as $tag)
                 <li  href="{{$tag->getFieldValue('slug')}}"><a href="/tags/{{$tag->getFieldValue('slug')}}" >{{$tag->getFieldValue('name')}}</a></li>
               @endforeach
-          </ul>    
-    
+          </ul>
+
         </div>
       </div>
     </div>
@@ -144,12 +142,13 @@
     <div id="blog" init="0" showTags="0" ></div>
 
   </div>
-     
-    
-    
+
+
+
 </div>
 </article>
 <!-- END ARTICLE -->
+
 @endsection
 
 @push('javascripts')

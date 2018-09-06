@@ -10310,3 +10310,8 @@ form.contact-form .checkbox {
   width: auto;
 }
 
+.blog-home .grey {
+  overflow: inherit !important;
+  padding-bottom: 1px;
+}
+

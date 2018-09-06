@@ -183,12 +183,14 @@ class Content extends Model
 
      public function scopeTypologyId($query, $typologyId)
      {
-         return $typologyId ? $query->where('typology_id', (int) $typologyId) : $query;
+         $typologyId = $typologyId && !is_array($typologyId) ? array($typologyId) : $typologyId;
+
+         return $typologyId ? $query->whereIn('typology_id', $typologyId) : $query;
      }
 
      public function scopeCategoryId($query, $categoryId)
      {
-         $categoryId = $categoryId && !is_array($categoryId) ? array($categoryId) : null;
+         $categoryId = $categoryId && !is_array($categoryId) ? array($categoryId) : $categoryId;
 
          return $categoryId ? $query->whereHas('categories', function($q) use($categoryId) {
              $q->whereIn('category_id', $categoryId);
@@ -225,7 +227,7 @@ class Content extends Model
 
     public function scopeByTagsIds(Builder $query, $tagsId)
     {
-        $tagsId = $tagsId && !is_array($tagsId) ? array($tagsId) : null;
+        $tagsId = $tagsId && !is_array($tagsId) ? array($tagsId) : $tagsId;
 
         return $tagsId ? $query->whereHas('tags', function($q) use($tagsId) {
             $q->whereIn('tag_id', $tagsId);
