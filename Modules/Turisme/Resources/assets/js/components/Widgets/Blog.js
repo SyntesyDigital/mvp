@@ -23,7 +23,7 @@ export default class Blog extends Component {
         const showFilter = props.showFilter ? props.showFilter : '1';
         const categoryId = props.categoryId ? props.categoryId : null;
         const tagId = props.tagId ? props.tagId : null;
-        const entrevistas = props.entrevistas ? props.entrevistas : null;
+        const interviews = props.interviews ? props.interviews : null;
 
         var filters = {};
         if(categoryId != null){
@@ -34,11 +34,11 @@ export default class Blog extends Component {
           filters.tag =tagId;
         }
 
-        if(entrevistas != null){
-          filters.entrevistas = entrevistas;
+        if(interviews != null){
+          filters.interviews = interviews;
         }
 
-        if(filters.category == null && filters.tag == null && filters.entrevistas == null){
+        if(filters.category == null && filters.tag == null && filters.interviews == null){
           filters= null;
         }
 
@@ -93,8 +93,8 @@ export default class Blog extends Component {
             datesQuery += ',["data","<=","'+filters.endDate+'"]';
           }
 
-          if(filters.entrevistas != null && filters.entrevistas == '1' ){
-            entrevistaQuery = '["es-entrevista","=",'+filters.entrevistas+']';
+          if(filters.interviews != null && filters.interviews == '1' ){
+            entrevistaQuery = '["es-entrevista","=",'+filters.interviews+']';
           }
 
           var query = searchQuery+(searchQuery != '' && datesQuery != '' ? ',':'')+datesQuery+((searchQuery != '' || datesQuery != '') && entrevistaQuery != '' ? ',':'')+entrevistaQuery;
@@ -291,7 +291,7 @@ if (document.getElementById('blog')) {
     var showFilter = element.getAttribute('showFilter');
     var categoryId = element.getAttribute('categoryId');
     var tagId = element.getAttribute('tagId');
-    var entrevistas = element.getAttribute('entrevistas');
+    var interviews = element.getAttribute('interviews');
 
     ReactDOM.render(<Blog
         field={field}
@@ -300,6 +300,6 @@ if (document.getElementById('blog')) {
         showFilter={showFilter} 
         categoryId={categoryId} 
         tagId={tagId} 
-        entrevistas={entrevistas} 
+        interviews={interviews} 
       />, element);
 }
