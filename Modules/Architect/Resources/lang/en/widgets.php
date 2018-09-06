@@ -35,5 +35,6 @@ return [
     'MEMBERS' => 'Llista de Membres',
     'COMPANIES' => 'Recursos y Sostenibilidad',
     'AGENCIES' => 'Agencias de Viajes',
-    'CONTACT_FORM_PRESS' => 'Formulario Prensa'
+    'CONTACT_FORM_PRESS' => 'Formulario Prensa',
+    'BLOG' => 'Blog'
 ];

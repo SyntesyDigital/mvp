@@ -8,6 +8,7 @@ use Modules\Architect\Entities\Menu;
 use Modules\Architect\Entities\MenuElement;
 use Modules\Architect\Entities\MenuElementField;
 use Modules\Architect\Entities\Language;
+use Cache;
 
 class UpdateMenu
 {
@@ -27,7 +28,7 @@ class UpdateMenu
         return new self($menu, $request->all());
     }
 
-    private function saveField($field,$order,$parent_id)
+    private function saveField($field, $order, $parent_id)
     {
         $name = "link";
         $values = $field["value"];
@@ -92,7 +93,6 @@ class UpdateMenu
 
     public function handle()
     {
-
         $fields = $this->attributes['fields'];
         $order = 1;
 
@@ -101,32 +101,28 @@ class UpdateMenu
             'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,
         ]);
 
-        //return true;
+        // Reset cached menu
+        Cache::forget(sprintf("menu_%s", $this->menu->name));
 
         $this->menu->elements()->delete();
 
         $traverse = function ($parent_id,$children) use (&$traverse) {
+            $order = 1;
+            foreach ($children as $menuItem) {
+                $field = json_decode($menuItem['field'],true);
+                $menuField = $this->saveField($field,$order,$parent_id);
 
-    				$order = 1;
+                if(isset($menuItem['children'])){
+                    $children = $menuItem['children'][0];
+                    $traverse($menuField->id,$children);
+                }
 
-    				foreach ($children as $menuItem) {
-
-    					$field = json_decode($menuItem['field'],true);
-              $menuField = $this->saveField($field,$order,$parent_id);
-
-    					$order++;
-
-    					if(isset($menuItem['children'])){
-    						$children = $menuItem['children'][0];
-
-    						$traverse($menuField->id,$children);
-    					}
+                $order++;
             }
-    	  };
+        };
 
-        $traverse(null,$fields[0]);
+        $traverse(null, $fields[0]);
 
         return true;
-
     }
 }

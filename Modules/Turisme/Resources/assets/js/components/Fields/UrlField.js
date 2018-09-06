@@ -29,7 +29,7 @@ class UrlField extends Component {
           url = field.values.url[LOCALE];
         }
         else if(field.values.content !== undefined){
-          url = WEBROOT+this.getPageSlug(field.values.content);
+          url = WEBROOT+'/'+this.getPageSlug(field.values.content);
         }
       }
 

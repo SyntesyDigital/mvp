@@ -1,7 +1,6 @@
 <?php
 
 if (!function_exists('breadcrumb')) {
-
     function breadcrumb($content)
     {
         $nodes = Modules\Architect\Entities\Content::with('fields')->ancestorsOf($content->id);
@@ -27,7 +26,6 @@ if (!function_exists('breadcrumb')) {
         // Build HTML
         $html = '';
         foreach($breadcrumb as $k => $v) {
-
             $arrow = "";
             if($k != sizeof($breadcrumb)-1){
               $arrow = " > ";

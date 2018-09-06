@@ -7,6 +7,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
 {
 
     Route::get('/', 'ArchitectController@index')->name('home');
+    Route::get('/dani-test', 'ArchitectController@daniTest')->name('dani.test');
     // ????
     Route::post('/save', 'ArchitectController@save')->name('save');
     Route::get('/settings', 'ArchitectController@settings')->name('settings');
@@ -50,6 +51,24 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::put('/tags/{tag?}/update', 'TagController@update')->name('tags.update');
     Route::delete('/tags/{tag?}/delete', 'TagController@delete')->name('tags.delete');
     Route::get('/tags/{tag?}', 'TagController@show')->name('tags.show');
+
+    // Languages
+    Route::get('/languages', 'LanguageController@index')->name('languages');
+    Route::get('/languages/data', 'LanguageController@data')->name('languages.data');
+    Route::post('/languages', 'LanguageController@store')->name('languages.store');
+    Route::get('/languages/create', 'LanguageController@create')->name('languages.create');
+    Route::put('/languages/{language?}/update', 'LanguageController@update')->name('languages.update');
+    Route::delete('/languages/{language?}/delete', 'LanguageController@delete')->name('languages.delete');
+    Route::get('/languages/{language?}', 'LanguageController@show')->name('languages.show');
+
+    // Translations
+    Route::get('/translations', 'TranslationController@index')->name('translations');
+    Route::get('/translations/data', 'TranslationController@data')->name('translations.data');
+    Route::post('/translations', 'TranslationController@store')->name('translations.store');
+    Route::get('/translations/create', 'TranslationController@create')->name('translations.create');
+    Route::put('/translations/{translation?}/update', 'TranslationController@update')->name('translations.update');
+    Route::delete('/translations/{translation?}/delete', 'TranslationController@delete')->name('translations.delete');
+    Route::get('/translations/{translation?}', 'TranslationController@show')->name('translations.show');
 
     // Users
     Route::get('/users', 'UserController@index')->name('users');

@@ -57,7 +57,8 @@
           const ASSETS = '{{asset('')}}';
           const LOCALE = '{{App::getLocale()}}';
         </script>
-        <script type="text/javascript" src="{{route('messages', App::getLocale())}}" ></script>
+        {{-- <script type="text/javascript" src="{{route('messages', App::getLocale())}}" ></script> --}}
+        <script type="text/javascript" src="{{route('localization.js', App::getLocale())}}" ></script>
 
         @stack('javascripts-libs')
 

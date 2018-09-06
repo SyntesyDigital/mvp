@@ -29,21 +29,31 @@ class ContentTransformer extends Resource
         // FIXME : find a better way
         $languages = Language::all();
 
-        return [
+        $data = [
             'id' => $this->resource->id,
             'title' => $this->resource->title,
             'fields' => $this->getFields($languages),
             'is_page' => boolval($this->resource->is_page),
             'page' => $this->resource->is_page ? $this->getPage($languages) : null,
             'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
-            'full_slug' => $this->resource->getFullSlug(),
-            'tags' => $this->resource->tags->map(function($tag) use ($request, $language){
-                return (new TagTransformer($tag))->toArray($request, $language);
-            }),
-            'category' => $this->resource->categories->map(function($category) use ($request, $language){
-                return (new CategoryTransformer($category))->toArray($request, $language);
-            })->first()
+            'full_slug' => $this->resource->getFullSlug()
         ];
+
+        if($request->get('loads')) {
+            if(in_array('tags', explode(',',$request->get('loads')))) {
+                $data['tags'] = $this->resource->tags->map(function($tag) use ($request, $language){
+                    return (new TagTransformer($tag))->toArray($request, $language);
+                })->toArray();
+            }
+
+            if(in_array('category', explode(',',$request->get('loads')))) {
+                $data['category'] = $this->resource->categories->map(function($category) use ($request, $language){
+                    return (new CategoryTransformer($category))->toArray($request, $language);
+                })->first();
+            }
+        }
+
+        return $data;
 
         // $this->resource->tags ? (new TagCollection($this->resource->tags))->toArray() : null
     }

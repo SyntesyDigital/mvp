@@ -16,6 +16,11 @@ class ArchitectController extends Controller
         return view('architect::index');
     }
 
+    public function daniTest()
+    {
+        return view('architect::dani-test');
+    }
+
     public function settings()
     {
         return view('architect::settings');

@@ -70,6 +70,7 @@ export default class TypologyLast extends Component {
 
         return (
             <div>
+              {window.localization['MENU_FOOTER_1']}
               {this.state.items == null &&
                 <p>
                   {/*Carregant dades...*/}
