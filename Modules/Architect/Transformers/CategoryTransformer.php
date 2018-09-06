@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Language;
 
 class CategoryTransformer extends Resource
 {
-    public function toArray($request, $language = null)
+    public function toArray($request, $language = null, $recursive = false)
     {
         $languageId = $language ? $language->id : null;
 

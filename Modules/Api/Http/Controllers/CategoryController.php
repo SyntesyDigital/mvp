@@ -47,6 +47,7 @@ class CategoryController extends Controller
             'loads' => implode(',',$loads)
         ]);
 
+        
         return new CategoryTreeCollection($collection->get()->toTree());
     }
 

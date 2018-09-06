@@ -25,9 +25,9 @@ class ContentController extends Controller
 
     public function index(Request $request)
     {
-        $typologyId = $request->get('typology_id');
-        $categoryId = $request->get('category_id');
         $acceptLang = $request->get('accept_lang');
+        $typologyId = $request->get('typology_id') ? json_decode($request->get('typology_id'), true) : null;
+        $categoryId = $request->get('category_id') ? json_decode($request->get('category_id'), true) : null;
         $tags = $request->get('tags') ? json_decode($request->get('tags'), true) : null;
         $fields = $request->get('fields') ? json_decode($request->get('fields')) : null;
         $order = $request->get('order');

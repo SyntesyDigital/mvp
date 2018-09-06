@@ -17,10 +17,15 @@ class CategoryTreeCollection extends ResourceCollection
      public function toArray($request)
     {
         $traverse = function ($categories) use (&$traverse, $request) {
+
+            $categoriesArray = [];
             foreach ($categories as $category) {
+                
                 $traverse($category->descendants);
-                return (new CategoryTransformer($category))->toArray($request);
+                $categoriesArray[] = (new CategoryTransformer($category))->toArray($request);
             }
+
+            return $categoriesArray;
         };
 
         return [
