@@ -22,10 +22,12 @@ export default class TypologyLast extends Component {
 
       const typology = field.settings.typology;
       const category = field.settings.category;
+      const size = parseInt(field.settings.maxItems);
 
       const categoryQuery = category != null ? "&category_id="+category : '';
+      const sizeQuery = size != null && !isNaN(size) ? "&size="+size : '';
 
-      axios.get(ASSETS+'api/contents?typology_id='+typology+categoryQuery)
+      axios.get(ASSETS+'api/contents?typology_id='+typology+categoryQuery+sizeQuery)
         .then(response => {
           var items = [];
 

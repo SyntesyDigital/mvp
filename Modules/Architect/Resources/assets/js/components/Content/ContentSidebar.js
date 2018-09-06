@@ -117,6 +117,10 @@ class ContentSidebar extends Component {
             label="Tipus de pàgina"
             options={[
               {
+                value : '',
+                name : '---'
+              },
+              {
                 value : 'single',
                 name : 'Simple'
               },

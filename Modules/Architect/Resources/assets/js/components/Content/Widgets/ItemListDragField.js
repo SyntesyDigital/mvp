@@ -80,7 +80,7 @@ function collectSource(connect, monitor) {
   };
 }
 
-class ContentsDragField extends Component {
+class ItemListDragField extends Component {
 
 
 	constructor(props){
@@ -107,7 +107,10 @@ class ContentsDragField extends Component {
 			isDragging,
 			connectDragSource,
 			connectDropTarget,
-		} = this.props
+		} = this.props;
+
+		console.log("ItemListDragField :: props => ",this.props);
+
 		const opacity = isDragging ? 0 : 1
 
     return connectDragSource(
@@ -137,7 +140,7 @@ class ContentsDragField extends Component {
 
 }
 
-ContentsDragField.propTypes = {
+ItemListDragField.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
@@ -152,4 +155,4 @@ ContentsDragField.propTypes = {
 export default flow(
   DragSource(DragFieldTypes.FIELD, fieldSource, collectSource),
   DropTarget(DragFieldTypes.FIELD, fieldTarget, collectTarget)
-)(ContentsDragField);
+)(ItemListDragField);

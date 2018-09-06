@@ -156,16 +156,33 @@ class ListWidget extends Component
 
   }
 
+
+  findName(fields){
+    for(var key in fields){
+
+      console.log("findName => ",fields[key]);
+
+      if(fields[key].type == "text"){
+        if(fields[key].value !== undefined && fields[key].value != null
+          && fields[key].value[DEFAULT_LOCALE] !== undefined){
+          return fields[key].value[DEFAULT_LOCALE];
+        }
+      }
+    }
+    return '';
+  }
+
   renderInputs() {
      var fields = [];
      var _this = this;
 
-     console.log("ListWidget :: renderInputs => ",this.props.field);
+     //console.log("ListWidget :: renderInputs => ",this.props.field);
 
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){
 
-              console.log("ListWidget :: renderInputs =>",widget);
+              console.log("ListWidget :: renderInputs =>",widget.fields);
+              const name = _this.findName(widget.fields);
 
              fields.push(
                  <ItemListDragField
@@ -175,7 +192,7 @@ class ListWidget extends Component
                     type = {widget.type}
                     label = {widget.name}
                     icon = {widget.icon}
-                    name = {widget.title !== undefined && widget.title != null ? widget.title : ''}
+                    name = {name}
                     moveField = {_this.moveField}
                     onEditField = {_this.handleEditField.bind(_this)}
                     onRemoveField = {_this.handleRemoveField.bind(_this)}
