@@ -1,6 +1,6 @@
 
 @extends('turisme::layouts.app',[
-  'name => isset($category) ? $category->getFieldValue('name') : '',
+  'name' => isset($category) ? $category->getFieldValue('name') : '',
 ])
 
 @section('content')
@@ -13,7 +13,7 @@
        <div class="container">
         <div class="row">
         <div class="claim">
-        <h1>{{$category->getFieldValue('name)}}</h1>
+        <h1>{{$category->getFieldValue('name')}}</h1>
         <p>
             {!!$category->getFieldValue('description')!!}
         </p>
@@ -23,7 +23,7 @@
 
   </div>
 
-  <div id="blog" init="0" showTags="0"  showTags ="0" showFilter="0" categoryId="{{$category->category_id}}" ></div>
+  <div id="blog" showTags="0"  showTags ="0" showFilter="0" categoryId="{{$category->id}}" ></div>
        
 </div>
 </article>
@@ -32,6 +32,9 @@
 
 @push('javascripts')
 <script>
+    routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
+
     $(function(){
 
     });

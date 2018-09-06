@@ -17,13 +17,11 @@ class TagController extends Controller
      */
     public function index(Request $request, $slug)
     {
-      //$slug = $request->segment(count($request->segments()));
       $tag = Tag::whereField('slug', $slug)->first();
 
       if($tag == null){
         abort(404);
       }
-
       return view('turisme::tags.page',[
           'tag' => $tag,
       ]);
