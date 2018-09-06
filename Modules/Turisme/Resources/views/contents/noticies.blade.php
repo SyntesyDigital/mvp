@@ -123,6 +123,10 @@
 
                | <span>{{$content->author->firstname.' '.$content->author->lastname }}</span>
               </p>
+              @if($content->getFieldValue('es-entrevista'))
+                <p>{{$content->getFieldValue('nom')}}</p>
+                <p>{{$content->getFieldValue('carrec')}}</p>   
+              @endif
               {!! $content->getFieldValue('contingut') !!}
 
           <ul class="tags_blog">

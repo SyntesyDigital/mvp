@@ -33,11 +33,15 @@ class NewsBlog extends Component {
       const slug = this.processText(fields,'slug');
       const title = this.processText(fields,'title');
       const descripcio = this.processText(fields,'descripcio');
-
-
+      const nom = this.processText(fields,'nom');
+      const carrec = this.processText(fields,'carrec');
+      var results = [];
       if(data != null){
         data = moment(data).format('L');
       }
+
+
+
 
       return (
         <div className="post">
@@ -56,6 +60,8 @@ class NewsBlog extends Component {
             }
           </p>
           <h3><a href={'/blog/'+slug }>{ title}</a></h3>
+          <p>{nom}</p>
+          <p>{carrec}</p>   
           <p>
             <span dangerouslySetInnerHTML={{__html: descripcio }} / >
           </p>
