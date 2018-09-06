@@ -4,6 +4,7 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Modules\Architect\Traits\HasUrl;
 use Kalnoy\Nestedset\NodeTrait;
 
 use Modules\Architect\Entities\Language;
@@ -12,14 +13,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Content extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields, HasUrl, NodeTrait;
 
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
 
     protected $fieldModel = 'Modules\Architect\Entities\ContentField';
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'url'];
 
     /**
      * The database table used by the model.
@@ -64,6 +65,7 @@ class Content extends Model
         'deleted_at',
         'published_at'
     ];
+
 
     public function typology()
     {

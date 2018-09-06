@@ -4,15 +4,16 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Modules\Architect\Traits\HasUrl;
 use Kalnoy\Nestedset\NodeTrait;
 use Modules\Architect\Entities\ContentCategory;
 
 class Category extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields, HasUrl, NodeTrait;
 
     protected $fieldModel = 'Modules\Architect\Entities\CategoryField';
-    protected $appends = ['name'];
+    protected $appends = ['name', 'url'];
 
     const FIELDS = [
         [
@@ -109,6 +110,20 @@ class Category extends Model
         }
 
         return $ids;
+    }
+
+    public function getFullSlug($languageId = null)
+    {
+        // FIXME : cache-it with a key that use updated_at, like md5(content_[id]_fullslug_[updated_at])
+        // WARNING : If we use cache we need to think what happen when slug's children change.
+        $nodes = self::with('fields')->ancestorsOf($this->id);
+        $slug = '';
+
+        foreach($nodes as $node) {
+            $slug = $slug . '/' . $node->getFieldValue('slug', $languageId);
+        }
+
+        return $slug . '/' . $this->getFieldValue('slug', $languageId);
     }
 
     public function scopeByTypologyId($query, $typologyId)
