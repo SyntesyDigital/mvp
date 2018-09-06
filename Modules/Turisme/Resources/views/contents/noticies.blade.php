@@ -5,7 +5,7 @@
 @endphp
 
 @extends('turisme::layouts.app',[
-  'title' => isset($content) ? $content->getFieldValue('title') : '',
+  'title' => isset($fields) ? $fields->get('title')['fr'] : '',
   'mainClass' => $pageType.' '.$htmlClass.' '.$idClass
 ])
 
@@ -31,7 +31,7 @@
 
 <!-- ARTICLE -->
 <article class="content">
-  {{$content->getFieldValue('title')}}
+  {{ $fields->getValue('title') }}
 </article>
 <!-- END ARTICLE -->
 

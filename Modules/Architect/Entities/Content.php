@@ -183,7 +183,9 @@ class Content extends Model
 
      public function scopeTypologyId($query, $typologyId)
      {
-         return $typologyId ? $query->where('typology_id', (int) $typologyId) : $query;
+         $typologyId = $typologyId && !is_array($typologyId) ? array($typologyId) : null;
+
+         return $typologyId ? $query->whereIn('typology_id', $typologyId) : $query;
      }
 
      public function scopeCategoryId($query, $categoryId)
