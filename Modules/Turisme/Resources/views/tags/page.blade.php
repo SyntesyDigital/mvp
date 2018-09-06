@@ -33,6 +33,9 @@
 
 @push('javascripts')
 <script>
+    routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
+          
     $(function(){
 
     });

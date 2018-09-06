@@ -143,47 +143,6 @@
 
     <div id="blog" init="0" showTags="0" ></div>
 
-
-    <!--div class="grey">
-      <div class="row">
-        <div class="container">
-          <form class="blog-search">
-          
-        <div class="row">
-          <label class="col-md-3 col-sm-4 col-xs-12">Selecciona una categoria </label>
-          <select name="select" class="col-md-9 col-sm-8 col-xs-12">
-            <option disabled="" selected="" value="">Selecciona una categoria </option>
-            <option>Opción 2</option>
-            <option>Opción 3</option>
-                </select>
-            </div>
-        <div class="row">
-          <label class="col-md-3 col-sm-4 col-xs-12">Any</label>
-          <select name="select" class="col-md-9 col-sm-8 col-xs-12">
-            <option disabled="" selected="" value="">Any</option>
-            <option>Opción 2</option>
-            <option>Opción 3</option>
-                </select>
-            </div>
-        <div class="row">
-          <label class="col-md-3 col-sm-4 col-xs-12">Mes</label>
-          <select name="select" class="col-md-9 col-sm-8 col-xs-12">
-            <option disabled="" selected="" value="">Mes</option>
-            <option>Opción 2</option>
-            <option>Opción 3</option>
-                </select>
-            </div>
-             <div class="row">
-          <label class="col-md-3 col-sm-4 col-xs-12">Escribe texto</label>
-          <input class="col-md-9 col-sm-8 col-xs-12" placeholder="Escribe texto" type="text">
-            </div> 
-              <div class="row">
-          <input value="Submit" class="btn" type="submit">
-        </div>
-            
-          </form>
-        </div>
-    </div-->
   </div>
      
     
@@ -195,6 +154,8 @@
 
 @push('javascripts')
 <script>
+    routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
     $(function(){
 
     });

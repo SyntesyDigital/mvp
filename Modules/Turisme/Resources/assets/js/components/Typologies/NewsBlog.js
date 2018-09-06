@@ -45,7 +45,7 @@ class NewsBlog extends Component {
             {data != null ? data : ''}
             {category != null && data != null ? '|' : ''}
             {category != null &&
-              <a href={'/category/'+category_slug}>{category} </a>
+              <a href={routes["categoryNews"].replace(":slug",category_slug)}>{category} </a>
             }  
           </p>
           <p className="image">

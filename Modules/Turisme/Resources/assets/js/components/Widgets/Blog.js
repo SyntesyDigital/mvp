@@ -212,7 +212,7 @@ export default class Blog extends Component {
       for(var key in tags){
         result.push(
           <li key={key}>
-              <a href={'/tags/'+tags[key].slug}> {tags[key].name}</a>
+              <a href={routes["tagNews"].replace(":slug",tags[key].slug)}> {tags[key].name}</a>
           </li>
         );
       } 

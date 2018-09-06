@@ -7,7 +7,7 @@ Route::group([
   'middleware' => ['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
   'namespace' => 'Modules\Turisme\Http\Controllers'
 ], function() {
-    Route::get('/prueba/{slug}', 'CategoryController@index')->name('tag.index');
+  //  Route::get('/prueba/{slug}', 'CategoryController@index')->name('tag.index');
 
     Route::get('/countries/list', 'CountriesController@list')->name('countries.list');
 
@@ -18,8 +18,8 @@ Route::group([
     Route::put('/contact/save-with-selection', 'ContactController@saveWithSelection')->name('contact.save.selection');
     Route::put('/contact/save-press', 'ContactController@savePress')->name('contact.save.press');
 
-    Route::get(LaravelLocalization::transRoute('routes.category'), 'CategoryController@index')->name('category.index');
-    Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('tag.index');
+    Route::get(LaravelLocalization::transRoute('routes.category.index'), 'CategoryController@index')->name('blog.category.index');
+    Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('blog.tag.index');
 
     Route::get('/', 'ContentController@index')->name('home');
 

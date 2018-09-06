@@ -1,6 +1,6 @@
 <?php
 
 return [
-	"categoryd" =>    "categoria/{slug}",
+	"category.index" =>    "categoria/{slug}",
 	"tag.index" =>    "tag/{slug}"
 ];
