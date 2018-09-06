@@ -15,7 +15,7 @@ export default class RelatedNews extends Component {
         const content = props.content ? props.content : '';
 
 
-        console.log("Related => ",category);
+        console.log("Related => ",tags);
 
         this.state = {
             category : category,
@@ -44,7 +44,7 @@ export default class RelatedNews extends Component {
             accept_lang : LOCALE,
             orderBy : 'data',
             sortedBy : 'desc',
-            tags:tags[0] //ONLY FIRST TAG IS CONSIDERED BY THE MOMENT
+            tags:1 //ONLY FIRST TAG IS CONSIDERED BY THE MOMENT
         };
 
         axios.post(ASSETS+'api/contents',params)

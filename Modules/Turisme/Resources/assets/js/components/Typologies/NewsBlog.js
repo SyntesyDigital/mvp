@@ -59,7 +59,7 @@ class NewsBlog extends Component {
             />
             }
           </p>
-          <h3><a href={'/blog/'+slug }>{ title}</a></h3>
+          <h3><a href={'/'+slug }>{ title}</a></h3>
           <p>{nom}</p>
           <p>{carrec}</p>   
           <p>

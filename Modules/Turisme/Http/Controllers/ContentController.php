@@ -92,11 +92,19 @@ class ContentController extends Controller
       if($request->has('debug'))
         dd($pageBuilderAdapter->get());
 
-      return view('turisme::contents.page',[
-        'content' => $content,
-        'page' => $pageBuilderAdapter->get(),
-        'contentSettings' => $content->getSettings()
-      ]);
+
+      if($content->is_page){
+         return view('turisme::contents.page',[
+            'content' => $content,
+            'page' => $pageBuilderAdapter->get(),
+            'contentSettings' => $content->getSettings()
+          ]);      
+      }
+      else if(isset($content->typology) && $content->typology->has_slug){
+        return $this->renderTypology($request,$content);
+      }
+      
+      abort(404);
 
     }
 

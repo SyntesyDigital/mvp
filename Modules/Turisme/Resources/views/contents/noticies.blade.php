@@ -118,7 +118,7 @@
                 @else
                    ·
                 @endif
-                <a href="/category/{{$cat->getFieldValue('slug')}}">{{$cat->getFieldValue('name')}}</a>
+                <a href="{{route('blog.category.index' , $cat->getFieldValue('slug'))}}">{{$cat->getFieldValue('name')}}</a>
               @endforeach
 
                | <span>{{$content->author->firstname.' '.$content->author->lastname }}</span>
@@ -132,7 +132,7 @@
           <ul class="tags_blog">
             @php  $tags = $content->tags->all(); @endphp
               @foreach($tags as $tag)
-                <li  href="{{$tag->getFieldValue('slug')}}"><a href="/tags/{{$tag->getFieldValue('slug')}}" >{{$tag->getFieldValue('name')}}</a></li>
+                <li  href="{{$tag->getFieldValue('slug')}}"><a href="{{route('blog.tag.index' ,$tag->getFieldValue('slug'))}}" >{{$tag->getFieldValue('name')}}</a></li>
               @endforeach
           </ul>
 
