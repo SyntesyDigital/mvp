@@ -98,12 +98,12 @@ class ContentController extends Controller
             'content' => $content,
             'page' => $pageBuilderAdapter->get(),
             'contentSettings' => $content->getSettings()
-          ]);      
+          ]);
       }
       else if(isset($content->typology) && $content->typology->has_slug){
         return $this->renderTypology($request,$content);
       }
-      
+
       abort(404);
 
     }

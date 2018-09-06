@@ -2,6 +2,6 @@
 
 return [
 	"category.index" =>    "categoria/{slug}",
-	"tag.index" =>    "tag/{slug}"
+	"tag.index" =>    "etiqueta/{slug}"
 
 ];
