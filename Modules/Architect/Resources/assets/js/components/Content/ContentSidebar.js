@@ -203,7 +203,7 @@ class ContentSidebar extends Component {
                     <option value="">---</option>
                    {
                      this.props.pages && Object.keys(this.props.pages).map(function(id) {
-                         return <option value={self.props.pages[id]} key={id} selected={self.props.content && self.props.content.parent_id == id ? "selected" : ""}>{self.props.pages[id]}</option>
+                         return <option value={id} key={id} selected={self.props.content && self.props.content.parent_id == id ? "selected" : ""}>{self.props.pages[id]}</option>
                      })
                    }
                </select>
