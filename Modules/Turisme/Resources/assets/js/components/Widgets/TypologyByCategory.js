@@ -24,7 +24,7 @@ export default class TypologyByCategory extends Component {
       const category = field.settings.category;
 
       const categoryQuery = category != null ? "&category_id="+category : '';
-      const typologyQuery = typology != null ? "&typology_id="+typology : '';
+      const typologyQuery = typology != null && false ? "&typology_id="+typology : '';
 
 
       axios.get(ASSETS+'api/categories/tree?loads=contents'+categoryQuery+typologyQuery)
@@ -93,10 +93,17 @@ export default class TypologyByCategory extends Component {
       );
     }
 
+    renderItems(items){
+
+      return items.map((item,key) =>
+          this.renderItem(item,key)
+      );
+
+    }
+
     render() {
 
-        const isEmpty = this.state.items == null || ( this.state.items.data.contents.length == 0 &&
-          this.state.items.data.descendants.length == 0 ) ? true : false;
+        const isEmpty = this.state.items == null || ( this.state.items.data.length == 0 ) ? true : false;
 
         return (
             <div>
@@ -114,7 +121,7 @@ export default class TypologyByCategory extends Component {
 
               {this.state.items != null && !isEmpty &&
                 <ul>
-                  {this.renderItem(this.state.items.data,0)}
+                  {this.renderItems(this.state.items.data)}
                 </ul>
               }
 

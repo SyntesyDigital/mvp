@@ -112,7 +112,8 @@ export default class Blog extends Component {
             page : page ? page : null,
             accept_lang : LOCALE,
             orderBy : 'data',
-            sortedBy : 'desc'        
+            sortedBy : 'desc',
+            loads : 'category'
           };
 
         axios.post(ASSETS+'api/contents',params)
@@ -197,7 +198,7 @@ export default class Blog extends Component {
                 {result}
             </Masonry>
         );
-    
+
 
     //  return result;
     }
@@ -215,7 +216,7 @@ export default class Blog extends Component {
               <a href={routes["tagNews"].replace(":slug",tags[key].slug)}> {tags[key].name}</a>
           </li>
         );
-      } 
+      }
 
       return result;
     }
@@ -234,7 +235,7 @@ export default class Blog extends Component {
         const {showFilter} = this.state;
         var filterBar = '';
         if(showFilter == '1'){
-          filterBar = <FilterBarBlog 
+          filterBar = <FilterBarBlog
                   onSubmit={this.handleFilterSubmit.bind(this)}
                 />;
         }
@@ -242,7 +243,7 @@ export default class Blog extends Component {
         return (
             <div className="blog-home">
 
-                
+
               {filterBar}
 
                 {this.state.items == null &&
@@ -270,7 +271,7 @@ export default class Blog extends Component {
                       onChange={this.onPageChange.bind(this)}
                     />
                 }
-                
+
                 {this.state.tags != null && this.state.tags.length > 0 &&
                   <ul className="tags_blog">
                     {this.renderTags()}
@@ -295,11 +296,11 @@ if (document.getElementById('blog')) {
 
     ReactDOM.render(<Blog
         field={field}
-        init={init} 
-        showTags={showTags} 
-        showFilter={showFilter} 
-        categoryId={categoryId} 
-        tagId={tagId} 
-        interviews={interviews} 
+        init={init}
+        showTags={showTags}
+        showFilter={showFilter}
+        categoryId={categoryId}
+        tagId={tagId}
+        interviews={interviews}
       />, element);
 }

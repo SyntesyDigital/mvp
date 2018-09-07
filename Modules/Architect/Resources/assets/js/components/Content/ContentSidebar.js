@@ -117,6 +117,10 @@ class ContentSidebar extends Component {
             label="Tipus de pàgina"
             options={[
               {
+                value : '',
+                name : '---'
+              },
+              {
                 value : 'single',
                 name : 'Simple'
               },
@@ -202,8 +206,8 @@ class ContentSidebar extends Component {
                <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
                     <option value="">---</option>
                    {
-                     this.props.pages && this.props.pages.map(function(page, i) {
-                         return <option value={page.id} key={i} selected={self.props.content && self.props.content.parent_id == page.id ? "selected" : ""}>{page.title}</option>
+                     this.props.pages && Object.keys(this.props.pages).map(function(id) {
+                         return <option value={id} key={id} selected={self.props.content && self.props.content.parent_id == id ? "selected" : ""}>{self.props.pages[id]}</option>
                      })
                    }
                </select>

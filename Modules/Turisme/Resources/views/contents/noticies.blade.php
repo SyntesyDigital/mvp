@@ -1,5 +1,5 @@
 @php
-  $htmlClass = isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '';
+  $htmlClass = 'blog '.(isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '');
   $pageType = isset($content->typology->name) ? $content->typology->name : '';
   $idClass = isset($content) ? "id_".$content->id : '';
 @endphp
@@ -137,7 +137,7 @@
               </p>
               @if($content->getFieldValue('es-entrevista'))
                 <p>{{$content->getFieldValue('nom')}}</p>
-                <p>{{$content->getFieldValue('carrec')}}</p>   
+                <p>{{$content->getFieldValue('carrec')}}</p>
               @endif
               {!! $content->getFieldValue('contingut') !!}
 

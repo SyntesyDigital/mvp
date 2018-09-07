@@ -1,6 +1,7 @@
 
 @extends('turisme::layouts.app',[
   'name' => isset($tag) ? $tag->getFieldValue('name') : '',
+  'mainClass' => 'blog tag'
 ])
 
 @section('content')
@@ -9,7 +10,7 @@
 <!-- ARTICLE -->
 <article class="content">
    <!-- Col 12 -->
-  <div class="grey-intro no-margin">    
+  <div class="grey-intro no-margin">
        <div class="container">
         <div class="row">
         <div class="claim">
@@ -25,7 +26,7 @@
 
 
   <div id="blog" showTags="0"  showTags ="0" showFilter="0" tagId="{{$tag->id}}" ></div>
-    
+
 </div>
 </article>
 <!-- END ARTICLE -->
@@ -35,7 +36,7 @@
 <script>
     routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
               "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
-          
+
     $(function(){
 
     });
