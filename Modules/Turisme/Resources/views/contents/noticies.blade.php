@@ -54,6 +54,29 @@
         <div class="row">
             <div class="col-md-9 col-sm-10 col-xs-12 centered">
 
+        <!--     @if (isset($fields['rotatorio']['id']))
+                                  <div id="typology-carousel"
+                  field="{{ base64_encode(json_encode($fields['rotatorio'])) }}"
+                >
+                </div>
+
+            @endif-->
+
+
+            @if (isset($fields['video']['value']['url'][App::getLocale()]))
+              @include('turisme::partials.fields.video',  [
+                 "field" => $fields['video'],
+                ])
+            @endif
+
+
+     <!--      @if (isset($fields['imatge']['value']['id']))
+              @include('turisme::partials.fields.image',  [
+                 "field" => $fields['imatge']
+                ])
+            @endif -->
+          
+   <!--  
             @if( null !== $content->getFieldValue('rotatorio'))
               @php $i=0; $images = $content->getFieldValues('rotatorio','images',[]) @endphp
 
@@ -82,20 +105,9 @@
               </div>
               <a class="left carousel-control" href="#carousel-full" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#carousel-full" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a>
 
-            @endif
+            @endif-->
 
-            @if( null !== $content->getFieldValue('video'))
-               @php
-                  $link = $content->getFieldValue('video.url');
 
-                  $youtube_id = explode('/',$link);
-                  $youtube_id = $youtube_id[sizeof($youtube_id)-1];
-
-                @endphp
-                <div id="{{$field['settings']['htmlId'] or ''}}" class="{{$field['settings']['htmlClass'] or ''}}">
-                  <iframe  src="https://www.youtube.com/embed/{{$youtube_id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-                </div>
-            @endif
 
 
             </div>

@@ -44,7 +44,7 @@ export default class RelatedNews extends Component {
             accept_lang : LOCALE,
             orderBy : 'data',
             sortedBy : 'desc',
-            tags:1 //ONLY FIRST TAG IS CONSIDERED BY THE MOMENT
+            tags:tags
         };
 
         axios.post(ASSETS+'api/contents',params)
