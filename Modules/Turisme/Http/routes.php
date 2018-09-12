@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::get('sitemap.xml', 'Modules\Turisme\Http\Controllers\SitemapController@sitemap')->name('sitemap');
 
 Route::group([

@@ -13,14 +13,19 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Content extends Model
 {
-    use HasFields, HasUrl, NodeTrait;
+    use HasFields,
+        HasUrl,
+        NodeTrait;
 
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
 
     protected $fieldModel = 'Modules\Architect\Entities\ContentField';
 
-    protected $appends = ['title', 'url'];
+    protected $appends = [
+        'title',
+        'url'
+    ];
 
     /**
      * The database table used by the model.
@@ -66,7 +71,9 @@ class Content extends Model
         'published_at'
     ];
 
-
+    /*
+     *  Relations
+     */
     public function typology()
     {
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
@@ -104,7 +111,6 @@ class Content extends Model
 
     public function getStringStatus()
     {
-
         $status = [
             1 => trans('architect::contents.published'),
             0 => trans('architect::contents.draft'),
@@ -144,20 +150,6 @@ class Content extends Model
         return null;
     }
 
-    public function getFullSlug()
-    {
-        // FIXME : cache-it with a key that use updated_at, like md5(content_[id]_fullslug_[updated_at])
-        // WARNING : If we use cache we need to think what happen when slug's children change.
-        $nodes = self::with('fields')->ancestorsOf($this->id);
-        $slug = '';
-
-        foreach($nodes as $node) {
-            $slug = $slug . '/' . $node->getFieldValue('slug');
-        }
-
-        return $slug . '/' . $this->getFieldValue('slug');
-    }
-
     public function getSettings()
     {
         if($this->settings && $this->settings != null) {
@@ -168,13 +160,9 @@ class Content extends Model
     }
 
 
-
-
-
     /*
      *  Scopes
      */
-
      public function scopeField($query, $name, $value)
      {
          return $query->where([
@@ -208,7 +196,6 @@ class Content extends Model
     {
         return $query->where('status', 0);
     }
-
 
     public function scopeIsPage(Builder $query)
     {

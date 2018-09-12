@@ -11,6 +11,9 @@ use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
+
+use Modules\Architect\Tasks\Urls\CreateUrlsContent;
+
 class CreateContent
 {
     public function __construct($attributes)
@@ -56,6 +59,8 @@ class CreateContent
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
         }
+
+        (new CreateUrlsContent($this->content))->run();
 
         return $this->content;
     }

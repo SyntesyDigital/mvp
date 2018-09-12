@@ -59,12 +59,11 @@ class ContentSidebar extends Component {
             <label>
               {language.name}
               {language.iso == DEFAULT_LOCALE &&
-                <input type="checkbox" name={language.iso} checked="true" disabled="true" />
+                <input type="checkbox" name={language.iso} value={true} checked="true" disabled="true" />
               }
               {language.iso != DEFAULT_LOCALE &&
                 <input type="checkbox" name={language.iso} checked={this.props.translations[language.iso]} onChange={this.handleTranslationChange} />
               }
-
             </label>
         </div>
     )));

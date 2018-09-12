@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Entities\Menu;
-
+use Modules\Architect\Tasks\Urls\UpdateUrlsContent;
 
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
@@ -66,6 +66,8 @@ class UpdateContent
         if($menu) {
             Cache::forget(sprintf("menu_%s", $menu->name));
         }
+
+        (new UpdateUrlsContent($this->content))->run();
 
         return $this->content;
     }

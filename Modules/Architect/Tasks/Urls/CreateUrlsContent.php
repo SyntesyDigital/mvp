@@ -21,8 +21,20 @@ class CreateUrlsContent
 
     private function createPageUrl()
     {
+        $content = $this->content;
 
-        return false;
+        Language::all()->map(function($language) use ($content) {
+            $url = $content->getFullSlug($language->id);
+
+            if($url) {
+                $content->urls()->create([
+                    'language_id' => $language->id,
+                    'url' => $language->iso . "/" . $url
+                ]);
+            }
+        });
+
+        return true;
     }
 
     /*
@@ -49,17 +61,22 @@ class CreateUrlsContent
 
                 //  '/' . (isset($typologySlug->value) ? $typologySlug->value : null)
             return [
-                $language->id => '/' . $language->iso
+                $language->id => '/' . $language->iso . '/' . $typologySlug
             ];
         })->toArray();
 
 
+        // Save category slug by languages
         if($this->content->typology->has_categories) {
             foreach($urls as $languageId => $url) {
-                $urls[$languageId] .= $this->content->categories->first()->getFullSlug($languageId);
+                $category = $this->content->categories->first();
+                if($category) {
+                    $urls[$languageId] .= $category->getFullSlug($languageId);
+                }
             }
         }
 
+        // Save URLs
         foreach($urls as $languageId => $url) {
             $content->urls()->create([
                 'language_id' => $languageId,
@@ -67,6 +84,6 @@ class CreateUrlsContent
             ]);
         }
 
-        return false;
+        return true;
     }
 }

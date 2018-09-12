@@ -4,9 +4,11 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Modules\Architect\Traits\HasUrl;
 
 class Typology extends Model
 {
+    use HasUrl;
 
     /**
      * The database table used by the model.
