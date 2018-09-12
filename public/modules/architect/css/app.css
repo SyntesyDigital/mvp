@@ -16618,6 +16618,16 @@ nav.main-nav ul li.active a {
   padding-left: 30px;
 }
 
+.widget-item .field-item .field-image {
+  width: 44px;
+  height: 44px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  left: 8px;
+  float: left;
+}
+
 .widget-item .field-item button.btn,
 .widget-item .field-item div.btn {
   display: block;

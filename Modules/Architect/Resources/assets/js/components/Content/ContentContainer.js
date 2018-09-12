@@ -284,6 +284,7 @@ class ContentContainer extends Component {
       axios.put('/architect/contents/' + this.state.content.id + '/update', this.getFormData())
           .then((response) => {
               if(response.data.success) {
+
                   _this.onSaveSuccess(response.data);
               }
           })
@@ -407,7 +408,7 @@ class ContentContainer extends Component {
 
   handleTagAdded(tag) {
 
-      console.log("handleTagAdded => ", tag);
+    console.log("handleTagAdded => ", tag);
 
     const {tags} = this.state;
 

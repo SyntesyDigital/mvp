@@ -89,7 +89,17 @@ class ContentRepository extends BaseRepository
                 $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
             })
             ->addColumn('title', function ($item) {
-                return isset($item->title) ? $item->title : null;
+
+                $title = isset($item->title) ? $item->title : '';
+
+                if($item->is_page){
+                  if(isset($item->parent)){
+                    $parent = $item->parent()->first();
+                    $title = ( $parent->title ? $parent->title.' / ' : '' ) . $title;
+                  }
+                }
+
+                return $title;
             })
 
             ->addColumn('updated', function ($item) {
