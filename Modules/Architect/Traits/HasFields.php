@@ -4,6 +4,7 @@ namespace Modules\Architect\Traits;
 
 use Modules\Architect\Entities\Media;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Language;
 
 use Illuminate\Database\Eloquent\Builder;
 use DB;
@@ -270,18 +271,26 @@ trait HasFields
         return $query;
     }
 
-    public function scopeOrderByField(Builder $query, $column, $mode)
+    public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
     {
+        if(in_array($column, $this->fillable) || $column == "id") {
+            return $query->orderBy($column, $mode);
+        }
+
+        $language = $iso ? Language::byIso($iso)->first() : Language::getDefault();
+        $columnName = $column . '_order';
+
         $sql = DB::raw(sprintf('(
             SELECT contents_fields.value
             FROM contents_fields
             WHERE contents_fields.content_id = contents.id
             AND contents_fields.name = "%s"
+            AND contents_fields.language_id = "%d"
             LIMIT 1
-        ) AS %s', $column, $column));
+        ) AS %s', $column, $language->id, $columnName));
 
         return $query
             ->select('*', $sql)
-            ->orderBy($column, $mode);
+            ->orderBy($columnName, $mode);
     }
 }
