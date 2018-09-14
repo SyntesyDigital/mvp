@@ -119,7 +119,44 @@
                                                           $fieldName,
                                                           isset($category) ? $category->getFieldValue($field['identifier'], $language->id) : old($fieldName),
                                                           [
-                                                              'class' => 'form-control'
+                                                              'class' => 'form-control input-source',
+                                                              'data-lang' => $language->iso
+                                                          ]
+                                                      )
+                                                  !!}
+                                              </div>
+                                          @endforeach()
+                                      </div>
+                                  </div>
+                              </div>
+                          @break
+
+                          @case('slug')
+                              <div class="field-item">
+                                  <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $field['identifier'] }}" aria-expanded="true" aria-controls="collapse{{ $field['identifier'] }}">
+                                      <span class="field-type">
+                                          <i class="fa fa-font"></i> {{ ucfirst($field['type']) }}
+                                      </span>
+                                      <span class="field-name">
+                                          {{ $field['name'] }}
+                                      </span>
+                                  </div>
+
+                                  <div id="collapse{{ $field['identifier'] }}" class="collapse in" aria-labelledby="heading{{ $field['identifier'] }}" aria-expanded="true" aria-controls="collapse{{ $field['identifier'] }}">
+                                      <div class="field-form">
+                                          @foreach(Modules\Architect\Entities\Language::all() as $language)
+                                              <div class='form-group bmd-form-group'>
+                                                  <label class="bmd-label-floating">{{ $field['name'] }} - {{ $language->name }}</label>
+                                                  @php
+                                                      $fieldName = "fields[" . $field['name'] . "][" . $language->id . "]";
+                                                  @endphp
+                                                  {!!
+                                                      Form::text(
+                                                          $fieldName,
+                                                          isset($category) ? $category->getFieldValue($field['identifier'], $language->id) : old($fieldName),
+                                                          [
+                                                            'class' => 'form-control input-target ',
+                                                            'data-lang' => $language->iso
                                                           ]
                                                       )
                                                   !!}
@@ -154,7 +191,7 @@
                                                           $fieldName,
                                                           isset($category) ? $category->getFieldValue($field['identifier'], $language->id) : old($fieldName),
                                                           [
-                                                              'class' => 'form-control'
+                                                              'class' => 'form-control',
                                                           ]
                                                       )
                                                   !!}
@@ -222,4 +259,29 @@
 
 @push('javascripts-libs')
 
+@endpush
+
+@push('javascripts')
+<script>
+
+  $(function(){
+
+    var slugifyTitle = function(sourceValue){
+      return slugify(sourceValue, {
+				replacement: '-',
+				remove: /[$*+~.,()'"!\-\?\¿`´:@]/g,
+				lower: true
+			});
+    };
+
+    $(".input-source").keyup(function(e){
+      var isoCode = $(e.target).data('lang');
+      var slug = slugifyTitle(e.target.value);
+      $(".input-target[data-lang='"+isoCode+"']").val(slug);
+      
+    });
+
+  });
+
+</script>
 @endpush

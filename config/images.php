@@ -31,8 +31,8 @@ return [
             'name' => 'thumbnail',
             'directory' => 'thumbnail',
             'ratio' => '1:1',
-            'width' => 320,
-            'height' => 320
+            'width' => 225,
+            'height' => 225
         ]
     ]
 

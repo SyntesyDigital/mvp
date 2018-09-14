@@ -160,7 +160,7 @@ class ListWidget extends Component
   findName(fields){
     for(var key in fields){
 
-      console.log("findName => ",fields[key]);
+      //console.log("findName => ",fields[key]);
 
       if(fields[key].type == "text"){
         if(fields[key].value !== undefined && fields[key].value != null
@@ -170,6 +170,20 @@ class ListWidget extends Component
       }
     }
     return '';
+  }
+
+  findImage(fields){
+    for(var key in fields){
+
+      //console.log("findImage => ",fields[key]);
+
+      if(fields[key].type == "image"){
+        if(fields[key].value !== undefined && fields[key].value != null){
+          return fields[key].value.urls.thumbnail;
+        }
+      }
+    }
+    return null;
   }
 
   renderInputs() {
@@ -183,6 +197,7 @@ class ListWidget extends Component
 
               console.log("ListWidget :: renderInputs =>",widget.fields);
               const name = _this.findName(widget.fields);
+              const image = _this.findImage(widget.fields);
 
              fields.push(
                  <ItemListDragField
@@ -193,6 +208,7 @@ class ListWidget extends Component
                     label = {widget.name}
                     icon = {widget.icon}
                     name = {name}
+                    image = {image}
                     moveField = {_this.moveField}
                     onEditField = {_this.handleEditField.bind(_this)}
                     onRemoveField = {_this.handleRemoveField.bind(_this)}
@@ -207,22 +223,23 @@ class ListWidget extends Component
   render() {
 
     return (
-      <div className="field-item contents-field">
+      <div className="widget-item">
+        <div className="field-item contents-field">
 
-        <div>
+          <div>
 
-          <div className="field-form fields-list-container">
-            {this.renderInputs()}
-          </div>
+            <div className="field-form fields-list-container">
+              {this.renderInputs()}
+            </div>
 
-          <div className="add-content-button">
-            <a href="" className="btn btn-default" onClick={this.onAddField.bind(this)}><i className="fa fa-plus-circle"></i> Afegir </a>
+            <div className="add-content-button">
+              <a href="" className="btn btn-default" onClick={this.onAddField.bind(this)}><i className="fa fa-plus-circle"></i> Afegir </a>
+            </div>
+
           </div>
 
         </div>
-
       </div>
-
     );
   }
 

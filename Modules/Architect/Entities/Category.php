@@ -24,7 +24,7 @@ class Category extends Model
         [
             'name' => 'slug',
             'identifier' => 'slug',
-            'type' => 'text',
+            'type' => 'slug',
             'required' => true
         ],
         [

@@ -62,10 +62,10 @@ class TagController extends Controller
             $tag = dispatch_now(CreateTag::fromRequest($request));
 
             if(!$tag) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception('Error al guardar la etiqueta...');
             }
 
-            return redirect(route('tags.show', $tag))->with('success', 'Tag successfully saved');
+            return redirect(route('tags.show', $tag))->with('success', 'Etiqueta guardada correctament');
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
@@ -79,10 +79,10 @@ class TagController extends Controller
             $tag = dispatch_now(UpdateTag::fromRequest($tag, $request));
 
             if(!$tag) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception('Error al guardar la etiqueta...');
             }
 
-            return redirect(route('tags.show', $tag))->with('success', 'Tag successfully saved');
+            return redirect(route('tags.show', $tag))->with('success', 'Etiqueta guardada correctament');
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
