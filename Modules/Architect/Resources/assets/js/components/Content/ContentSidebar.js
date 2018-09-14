@@ -11,10 +11,9 @@ import moment from 'moment';
 class ContentSidebar extends Component {
 
   constructor(props) {
-
     super(props);
 
-    console.log('PROPS ======>', props);
+    //console.log('PROPS ======>', props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
@@ -156,7 +155,7 @@ class ContentSidebar extends Component {
 
     var self = this;
 
-    console.log('CONTENTSIDEBAR PAGES =>', this.props.pages);
+    //console.log('CONTENTSIDEBAR PAGES =>', this.props.pages);
 
     return (
       <div className="sidebar">
@@ -180,22 +179,6 @@ class ContentSidebar extends Component {
 
             <hr/>
 
-          </div>
-        }
-
-
-
-        {this.props.template != null &&
-          <div>
-            <div className="form-group bmd-form-group sidebar-item">
-               <label htmlFor="template" className="bmd-label-floating">Plantilla</label>
-               <select className="form-control" id="template" name="template" value={this.props.template}  onChange={this.handleChange}>
-                  <option name="" value="1"> Plantilla 1 </option>
-                  <option name="" value="2"> Plantilla 2 </option>
-                  <option name="" value="3"> Plantilla 3 </option>
-               </select>
-            </div>
-            <hr/>
           </div>
         }
 
@@ -238,6 +221,7 @@ class ContentSidebar extends Component {
           <div>
             <div className="form-group bmd-form-group sidebar-item">
               <TagManager
+                tags={this.props.tags}
                 tagsList={this.props.tagsList}
                 content={this.props.content}
                 onTagAdded={this.props.onTagAdded}

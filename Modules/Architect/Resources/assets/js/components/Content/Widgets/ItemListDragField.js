@@ -123,8 +123,12 @@ class ItemListDragField extends Component {
 
         <div className="field-inputs">
           <div className="row">
-		  	<div className="field-name col-xs-6">
-				{this.props.name}
+						{this.props.image != null &&
+							<div className="field-image" style={{backgroundImage:'url('+ ASSETS + this.props.image + ')'}}>
+							</div>
+						}
+				  	<div className="field-name col-xs-6">
+							{this.props.name}
             </div>
           </div>
         </div>

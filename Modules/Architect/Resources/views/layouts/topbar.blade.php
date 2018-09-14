@@ -22,13 +22,13 @@
                         @endif
                       <li class="{{ Request::is('architect/contents*') ? 'active' : '' }}">
                         <a href="{{route('contents')}}">
-                        Content
+                        Continguts
                         </a>
                       </li>
 
                       <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
                         <a href="{{route('medias.index')}}">
-                          Medias
+                          Mitjants
                         </a>
                       </li>
 

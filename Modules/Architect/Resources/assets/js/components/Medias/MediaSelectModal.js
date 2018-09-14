@@ -122,7 +122,7 @@ class MediaSelectModal extends Component {
 
     onSuccessUpload(_this)
     {
-        toastr.success('File save correctly');
+        toastr.success('Arxiu guardat correctament');
         _this.refresh();
     }
 
@@ -155,7 +155,7 @@ class MediaSelectModal extends Component {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                        toastr.success(response.message, 'Èxit !', {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -172,12 +172,7 @@ class MediaSelectModal extends Component {
         var datatable = table.DataTable();
 
         datatable.ajax.reload(function(){
-            _this.initEvents();
-
-            // FIXME : Find a better way :)
-            table.find('[data-toogle="delete"]').each(function(k,v){
-                DataTableTools._delete(datatable, $(this));
-            });
+            //_this.initEvents();
         });
     }
 

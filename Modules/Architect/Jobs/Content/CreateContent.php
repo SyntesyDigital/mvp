@@ -105,9 +105,7 @@ class CreateContent
     {
         $this->content->tags()->detach();
 
-        $tags = isset($this->attributes['tags']) ? Tag::whereIn('id', collect($this->attributes['tags'])->filter(function($tag){
-            return isset($tag['id']) ? $tag['id'] : false;
-        }))->get() : null;
+        $tags = isset($this->attributes['tags']) ? Tag::whereIn('id', collect($this->attributes['tags'])->pluck('id')->toArray())->get() : null;
 
         if($tags) {
             $this->content->tags()->attach($tags);

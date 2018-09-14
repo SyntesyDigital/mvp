@@ -15,9 +15,9 @@ const charMap = {
 class TagManager extends Component {
 
   constructor(props){
-    super(props);    
+    super(props);
     this.suggestions = props.tagsList ? props.tagsList : [];
-    
+
     this.state = {
         value: '',
         suggestions: this.suggestions
@@ -27,11 +27,6 @@ class TagManager extends Component {
     this.handleClickOnSuggest = this.handleClickOnSuggest.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-
-  loadTags() {
-    //TODO hacer la petición a la api que devuelva los tags disponibles
   }
 
   onChange(event, { newValue })
@@ -94,9 +89,9 @@ class TagManager extends Component {
   {
       var self = this;
 
-      this.suggestions.map((item, _tag) => {
-          if(_tag.id === id) {
-              self.props.onTagAdded(_tag);
+      this.suggestions.map((item, index) => {
+          if(item.id === id) {
+              self.props.onTagAdded(item);
           }
       });
   }
@@ -119,17 +114,12 @@ class TagManager extends Component {
   }
 
   renderTags() {
-      
-      if(!this.props.tagsList) {
-          return;
-      }
-      
-    var tagsIds = this.props.content && this.props.content.tags ? this.props.content.tags.map(tag => tag.id) : [];
-    
+
+    if(this.props.tags ===undefined)
+      return;
+
     return (
-      this.props.tagsList.filter(function(tag) {
-        return tagsIds.indexOf(tag.id) > -1 ? tag : false;
-      }).map((tag,i) => (
+      this.props.tags.map((tag,i) => (
         <span key={i} className="tag"> {tag.name} <a href="" className="remove-btn" id={tag.id} onClick={this.onRemoveTag}> <i className="fa fa-times-circle"></i> </a> </span>
       ))
     );
