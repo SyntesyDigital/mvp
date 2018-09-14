@@ -59,9 +59,8 @@ class FilterBarBlog extends Component {
     loadCategories() {
 
       var self = this;
-     // axios.get(ASSETS+'api/categories/tree?accept_lang=es')
 
-      axios.get(ASSETS+'api/categories/tree?category_id=1')
+      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE+'&category_id=1')
         .then(function (response) {
             if(response.status == 200
                 && response.data.data !== undefined
