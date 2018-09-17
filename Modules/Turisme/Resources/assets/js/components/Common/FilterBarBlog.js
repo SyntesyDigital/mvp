@@ -62,7 +62,6 @@ class FilterBarBlog extends Component {
 
       axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE+'&category_id=1')
         .then(function (response) {
-                       console.log(response.data.data[0].descendants);
             if(response.status == 200
                 && response.data.data !== undefined
                 && response.data.data[0].descendants.length > 0)
@@ -82,7 +81,7 @@ class FilterBarBlog extends Component {
 
 
 
-    /* printSpace(level)
+     printSpace(level)
     {
 
       if(level <= 1)
@@ -98,17 +97,14 @@ class FilterBarBlog extends Component {
       return spaces;
     }
 
-    printCategories(categories, level){
-      var self = this;
-      var html = ''; 
+    printCategories(categories, level, html){
       level++;
       for (var i = 0; i< categories.length; i++ ){
-          html +=  '<option key={categories[i].id} value={categories[i].id}>{self.printSpace(level)}{categories[i].name}</option>';
+          html.push(<option key={categories[i].id} value={categories[i].id}>{this.printSpace(level)}{categories[i].name}</option>);
           if(categories[i].descendants.length > 0){
-            html += self.printCategories(categories[i].descendants,categories[i].level);
+             this.printCategories(categories[i].descendants,level, html);
           }
       }
-      return html;
 
     }
 
@@ -116,16 +112,10 @@ class FilterBarBlog extends Component {
     renderCategories() {
       var level = 0; 
       var self = this;
-      var html =  self.printCategories(this.state.categories, level); 
-      console.log(html);
+      var html = [];
+      self.printCategories(this.state.categories, level, html); 
+      console.log('RESULTAT:',html);
       return html;
-    }*/
-
-
-    renderCategories() {
-      return this.state.categories.map((item,key) =>
-        <option key={key} value={item.id}>{item.name}</option>
-      );
     }
 
     render() {
@@ -152,6 +142,7 @@ class FilterBarBlog extends Component {
                             startDate={this.state.dateStart}
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateStart')}
+                            placeholderText={Lang.get('message.from')}
                             locale="ca-es"
                         />
                       </div>
@@ -166,6 +157,7 @@ class FilterBarBlog extends Component {
                             minDate={this.state.dateStart}
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateEnd')}
+                            placeholderText={Lang.get('message.to')}
                             locale="ca-es"
                         />
                       </div>  
