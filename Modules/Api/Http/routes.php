@@ -9,4 +9,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'api', 'namespace' => 'Modules\
     Route::get('/categories/tree', 'CategoryController@tree');
 
     Route::get('/tags', 'TagController@index');
+
+    Route::get('/search', 'SearchController@search');
 });

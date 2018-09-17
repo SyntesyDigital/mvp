@@ -67,6 +67,8 @@ class UpdateContent
             Cache::forget(sprintf("menu_%s", $menu->name));
         }
 
+        $this->content->index();
+
         return $this->content;
     }
 
