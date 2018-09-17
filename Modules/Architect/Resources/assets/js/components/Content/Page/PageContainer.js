@@ -491,6 +491,7 @@ class PageContainer extends Component {
           onLoadLayout={this.handleLoadLayout}
           saved={this.props.saved}
           saving={this.state.saving}
+          hasPreview={true}
         />
 
         <div className="container rightbar-page content">

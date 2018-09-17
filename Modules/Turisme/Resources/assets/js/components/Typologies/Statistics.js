@@ -35,19 +35,39 @@ class Statistics extends Component {
       const title = this.processText(fields,'title');
       const description = this.processText(fields,'descripcio');
 
-      const selectable = this.props.selectable !== undefined ? this.props.selectable : false;
-      const selected = this.props.selected !== undefined ? this.props.selected : false;
-
-      console.log("Statistics => ",fields,selected);
+      const selectable = this.props.selectable !== undefined && fields.index.values != null ? this.props.selectable : false;
+      var selected = this.props.selected !== undefined ? this.props.selected : false;
 
       return (
         <div className="statistics banc-media list-items buttons">
           <p className="titol">{title}</p>
           <p className="data">{data}</p>
 
-          {selectable &&
-            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
-          }
+          {/*if has index then is necessary to select and send email*/}
+          {/*if don't has index, then you can download directly*/}
+
+            <ul className="opcions app">
+              {fields.index.values != null &&
+                <li>
+                  <TranslatedFileField
+                    field={fields.index}
+                    label={Lang.get('widgets.see_index')}
+                  />
+                </li>
+              }
+              {fields.index.values == null &&
+                <li>
+                  <TranslatedFileField
+                    field={fields.pdf}
+                  />
+                </li>
+              }
+              {selectable &&
+                <li>
+                  <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+                </li>
+              }
+            </ul>
 
         </div>
       );

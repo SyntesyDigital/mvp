@@ -482,6 +482,7 @@ class ContentContainer extends Component {
           name={this.state.typology.name}
           onSubmitForm={this.handleSubmitForm}
           saved={this.props.saved}
+          hasPreview={this.state.typology.has_slug == 1 ? true : false}
           saving={this.state.saving}
         />
 

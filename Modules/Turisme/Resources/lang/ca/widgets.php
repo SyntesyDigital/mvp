@@ -2,6 +2,7 @@
 
 return [
   'download_pdf' => 'Descargar PDF',
+  'see_index' => 'Ver indice',
   'search' => 'Buscar',
   'search_placeholder' => 'Introduce texto a buscar...',
   'select' => 'Seleccionar',

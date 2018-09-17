@@ -252,7 +252,7 @@ architect.menu.form = {
       console.log("architect.menu.updateItem => ",field,itemId);
 
       $("#menu-"+itemId).data('field',JSON.stringify(field));
-      $("#menu-"+itemId+" #item-name").html(field.value.title['es']);
+      $("#menu-"+itemId).find('#item-name').first().html(field.value.title['es']);
 
     },
 

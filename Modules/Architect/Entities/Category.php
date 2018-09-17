@@ -113,9 +113,12 @@ class Category extends Model
 
     public function scopeByTypologyId($query, $typologyId)
     {
-        return $typologyId ? $query->whereHas('contents', function($q) use($typologyId) {
+        $result = $typologyId ? $query->whereHas('contents', function($q) use($typologyId) {
             $q->where('typology_id', $typologyId);
         }) : $query;
+
+        return $result;
+
     }
 
     public function scopeById($query, $id)
