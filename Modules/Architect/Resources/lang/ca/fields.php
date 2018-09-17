@@ -14,4 +14,13 @@ return [
     'localization' => 'Localització',
     'slug' => 'Slug',
     'url' => 'URL',
+    'file' => 'Arxiu',
+    'translated_file' => 'Arxiu traduit',
+
+    'title' => 'Title',
+    'description' => 'Descripció',
+    'subtitle' => 'Subtítol',
+    'message' => 'Missatge',
+    'author' => 'Autor',
+    'company' => 'Empresa'
 ];

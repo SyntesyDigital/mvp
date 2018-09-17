@@ -24,10 +24,10 @@ export default class TypologyByCategory extends Component {
       const category = field.settings.category;
 
       const categoryQuery = category != null ? "&category_id="+category : '';
-      const typologyQuery = typology != null && false ? "&typology_id="+typology : '';
+      //const typologyQuery = typology != null && false ? "&typology_id="+typology : '';
 
 
-      axios.get(ASSETS+'api/categories/tree?loads=contents'+categoryQuery+typologyQuery)
+      axios.get(ASSETS+'api/categories/tree?loads=contents'+categoryQuery)
         .then(response => {
           var items = {};
 

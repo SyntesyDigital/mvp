@@ -27,7 +27,12 @@ export default class TypologyPaginated extends Component {
         const field = this.state.field;
         var self = this;
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + '&page=' + (page ? page : null))
+        const category = field.settings.category;
+        const maxItems = parseInt(field.settings.maxItems);
+
+        const categoryQuery = category != null ? "&category_id="+category : '';
+
+        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200

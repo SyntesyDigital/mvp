@@ -30,6 +30,8 @@ class TypologyPaginated extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'typology',
+        'category',
+        'maxItems'
     ];
 }
 ?>

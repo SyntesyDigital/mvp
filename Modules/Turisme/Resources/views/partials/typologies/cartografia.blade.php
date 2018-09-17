@@ -5,7 +5,6 @@
     $title = isset($item['title']['values'][App::getLocale()]) ? $item['title']['values'][App::getLocale()] : '' ;
     $image = isset($item['imatge']['values']['urls'][$crop]) ? $item['imatge']['values']['urls'][$crop] : '' ;
   }
-
 @endphp
 
 @if(isset($item))

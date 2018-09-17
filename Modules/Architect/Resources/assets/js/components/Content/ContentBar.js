@@ -144,6 +144,7 @@ class ContentBar extends Component {
                   </div>
 
                 {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
+                  this.props.hasPreview && 
                   <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
                 }
                 <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
