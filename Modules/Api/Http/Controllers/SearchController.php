@@ -21,8 +21,13 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        $content = Content::find(146);
-        $content->index();
+
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return [
+                'message' => 'Elasticsearch is not active in you config file (.env)',
+                'success' => false
+            ];
+        }
 
         $query = $request->get('q') ?: abort(404);
         $size = request('size', 20);

@@ -10,6 +10,10 @@ trait Searchable
 {
     public function index()
     {
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return null;
+        }
+
         return $this->getElasticSearchClient()->index([
             'index' => $this->getSearchableIndex(),
             'type' => $this->getSearchableType(),
@@ -20,12 +24,27 @@ trait Searchable
 
     public function unindex()
     {
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return null;
+        }
+
         return $this->getElasticSearchClient()->delete([
             'index' => $this->getSearchableIndex(),
             'type' => $this->getSearchableType(),
             'id' => $this->id,
         ]);
     }
+
+
+    public static function search(array $parameters)
+    {
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return null;
+        }
+
+        return $this->getElasticSearchClient()->search($parameters);
+    }
+
 
     public function getSearchableIndex()
     {
@@ -37,13 +56,13 @@ trait Searchable
         return $this->typology ? $this->typology->identifier : 'page';
     }
 
-    public static function search(array $parameters)
-    {
-        return $this->getElasticSearchClient()->search($parameters);
-    }
 
     private function getElasticSearchClient()
     {
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return null;
+        }
+        
         return ClientBuilder::create()
                 ->setHosts(config('elasticsearch.hosts'))
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))

@@ -18,8 +18,12 @@ class ContentRepository extends BaseRepository
 
     public function search($query)
     {
+        if(!config('architect.elasticsearch.hosts.enabled')) {
+            return null;
+        }
+
         $client = ClientBuilder::create()
-                ->setHosts(config('elasticsearch.hosts'))
+                ->setHosts(config('architect.elasticsearch.hosts'))
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))
                 ->build();
 
