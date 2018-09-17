@@ -59,4 +59,48 @@ class CategoryRepository extends BaseRepository
       return  $categoryTree;
 
     }
+
+    public function getTreeWithHyphens()
+    {
+
+      $categoryTree = array();
+      $level = 1;
+
+      $traverse = function (&$categoryTree,$categories, $fieldname,$level) use (&$traverse) {
+          $level++;
+          $prev_string = '';
+          if($level >= 1){
+            for($i=1;$i<$level;$i++){
+
+              $prev_string .= "-";
+
+            }
+            $prev_string .= " ";
+          }
+
+          foreach ($categories as $category) {
+
+            $categoryTree[$category->id] = $prev_string.$category->getNameAttribute();
+
+            $traverse($categoryTree,$category->children, $fieldname,$level);
+          }
+      };
+
+      $categories = Category::orderBy('order','ASC')->get();
+
+      foreach($categories as $category) {
+
+        if(!$category->parent_id) {
+
+          $categoryTree[$category->id] = $category->getNameAttribute();
+
+          //all parents
+          $traverse($categoryTree,Category::getTree($category->id), 'category_id',$level);
+        }
+      }
+
+
+      return  $categoryTree;
+
+    }
 }

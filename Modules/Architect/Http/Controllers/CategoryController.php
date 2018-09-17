@@ -58,7 +58,9 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
-        return view('architect::categories.form');
+        return view('architect::categories.form', [
+                "categories" => $this->categories->getTreeWithHyphens()
+            ]);
     }
 
     public function store(CreateCategoryRequest $request)

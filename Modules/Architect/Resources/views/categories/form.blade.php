@@ -218,7 +218,7 @@
                       <div id="collapse_parent_id" class="collapse in" aria-labelledby="heading-collapse" aria-expanded="true" aria-controls="collapse-collapse">
                           <div class="field-form">
                               @php
-                                  $categories = Modules\Architect\Entities\Category::all()->pluck('name', 'id');
+
                                   if(isset($category)) {
                                       $categories->forget($category->id);
                                   }
@@ -228,7 +228,7 @@
                               {!!
                                   Form::select(
                                       'parent_id',
-                                      ['' =>'---'] + $categories->toArray(),
+                                      $categories,
                                       isset($category) ? $category->parent_id : null,
                                       [
                                           'class' => 'form-control'
