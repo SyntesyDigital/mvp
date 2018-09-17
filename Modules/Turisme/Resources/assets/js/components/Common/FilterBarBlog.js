@@ -59,6 +59,7 @@ class FilterBarBlog extends Component {
     loadCategories() {
 
       var self = this;
+     // axios.get(ASSETS+'api/categories/tree?accept_lang=es')
 
       axios.get(ASSETS+'api/categories/tree?category_id=1')
         .then(function (response) {
