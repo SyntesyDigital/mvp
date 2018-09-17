@@ -152,7 +152,7 @@
       </div>
     </div>
 
-    <div id="related-news" content="{{$content->id}}" tags="{{$content->tags->pluck('id')}}" category="{{$content->categories()->first()->id }}" ></div>
+    <div id="related-news" content="{{$content->id}}" tags="{{$content->tags->pluck('id')}}" category="{{null !== $content->categories->first()?$content->categories()->first()->id:null }}" ></div>
 
 
     <div id="blog" init="0" showTags="0" ></div>
