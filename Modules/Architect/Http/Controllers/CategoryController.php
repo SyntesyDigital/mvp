@@ -53,6 +53,7 @@ class CategoryController extends Controller
     {
         return view('architect::categories.form', [
             'category' => $category,
+             "categories" => $this->categories->getTreeWithHyphens()
         ]);
     }
 

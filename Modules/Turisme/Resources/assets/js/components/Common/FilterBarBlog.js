@@ -62,12 +62,14 @@ class FilterBarBlog extends Component {
 
       axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE+'&category_id=1')
         .then(function (response) {
+                       console.log(response.data.data[0].descendants);
             if(response.status == 200
                 && response.data.data !== undefined
-                && response.data.data.descendants.length > 0)
+                && response.data.data[0].descendants.length > 0)
             {
+
                 self.setState({
-                    categories : response.data.data.descendants
+                    categories : response.data.data[0].descendants
                 });
             }
 
@@ -77,6 +79,47 @@ class FilterBarBlog extends Component {
          });
 
     }
+
+
+
+    /* printSpace(level)
+    {
+
+      if(level <= 1)
+        return null;
+
+      var spaces = [];
+      for(var i=1;i<level;i++){
+        spaces.push(
+          "- "
+        );
+      }
+
+      return spaces;
+    }
+
+    printCategories(categories, level){
+      var self = this;
+      var html = ''; 
+      level++;
+      for (var i = 0; i< categories.length; i++ ){
+          html +=  '<option key={categories[i].id} value={categories[i].id}>{self.printSpace(level)}{categories[i].name}</option>';
+          if(categories[i].descendants.length > 0){
+            html += self.printCategories(categories[i].descendants,categories[i].level);
+          }
+      }
+      return html;
+
+    }
+
+
+    renderCategories() {
+      var level = 0; 
+      var self = this;
+      var html =  self.printCategories(this.state.categories, level); 
+      console.log(html);
+      return html;
+    }*/
 
 
     renderCategories() {

@@ -220,7 +220,7 @@
                               @php
 
                                   if(isset($category)) {
-                                      $categories->forget($category->id);
+                                      unset($categories[$category->id]);
                                   }
 
                               @endphp
