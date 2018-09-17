@@ -281,11 +281,16 @@ trait HasFields
         $columnName = $column . '_order';
 
         $sql = DB::raw(sprintf('(
-            SELECT contents_fields.value
-            FROM contents_fields
-            WHERE contents_fields.content_id = contents.id
-            AND contents_fields.name = "%s"
-            AND contents_fields.language_id = "%d"
+            SELECT
+                contents_fields.value
+            FROM
+                contents_fields
+            WHERE
+                contents_fields.content_id = contents.id
+            AND
+                contents_fields.name = "%s"
+            AND
+                contents_fields.language_id = "%d"
             LIMIT 1
         ) AS %s', $column, $language->id, $columnName));
 

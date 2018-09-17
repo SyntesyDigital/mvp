@@ -57,6 +57,8 @@ class CreateContent
             $this->savePage();
         }
 
+        $this->content->index();
+
         return $this->content;
     }
 

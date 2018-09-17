@@ -24,7 +24,7 @@ class ContentTransformer extends Resource
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function toArray($request, $language = null)
+    public function toArray($request, $language = null, $loadFields = true)
     {
         // FIXME : find a better way
         $languages = Language::all();
@@ -32,11 +32,12 @@ class ContentTransformer extends Resource
         $data = [
             'id' => $this->resource->id,
             'title' => $this->resource->title,
-            'fields' => $this->getFields($languages),
+            'fields' => $loadFields ? $this->getFields($languages) : null,
             'is_page' => boolval($this->resource->is_page),
-            'page' => $this->resource->is_page ? $this->getPage($languages) : null,
+            'page' => ($loadFields && $this->resource->is_page) ? $this->getPage($languages) : null,
             'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
-            'full_slug' => $this->resource->getFullSlug()
+            'full_slug' => $this->resource->getFullSlug(),
+            'url' => $this->resource->url
         ];
 
         if($request->get('loads')) {
@@ -54,8 +55,6 @@ class ContentTransformer extends Resource
         }
 
         return $data;
-
-        // $this->resource->tags ? (new TagCollection($this->resource->tags))->toArray() : null
     }
 
     private function getFields($languages)
@@ -87,7 +86,6 @@ class ContentTransformer extends Resource
                 $languages
             );
         }
-
 
         return $fields;
     }

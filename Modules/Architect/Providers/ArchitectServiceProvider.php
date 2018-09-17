@@ -36,6 +36,11 @@ class ArchitectServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->commands([
+            \Modules\Architect\Console\ElasticSearchIndexAllContents::class,
+            \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
+            \Modules\Architect\Console\ElasticSearchRemoveAllIndexes::class,
+        ]);
     }
 
     /**

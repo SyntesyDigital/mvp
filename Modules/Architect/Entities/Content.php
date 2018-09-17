@@ -4,6 +4,7 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Modules\Architect\Traits\Searchable;
 use Kalnoy\Nestedset\NodeTrait;
 
 use Modules\Architect\Entities\Language;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Content extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields, NodeTrait, Searchable;
 
     const STATUS_PUBLISHED = 'PUBLISHED';
     const STATUS_DRAFT = 'DRAFT';
@@ -114,9 +115,9 @@ class Content extends Model
     }
 
 
-    public function getTitleAttribute()
+    public function getTitleAttribute($language = null)
     {
-        $defaultLanguage = Language::getDefault();
+        $defaultLanguage = $language ? $language : Language::getDefault();
         $defaultLanguageId = isset($defaultLanguage->id) ? $defaultLanguage->id : null;
 
         if($this->page) {
