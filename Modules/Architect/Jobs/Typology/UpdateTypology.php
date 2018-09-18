@@ -8,6 +8,8 @@ use Modules\Architect\Entities\TypologyAttribut;
 use Modules\Architect\Entities\Field;
 use Modules\Architect\Entities\Language;
 
+use Modules\Architect\Tasks\Urls\UpdateUrlsTypology;
+
 class UpdateTypology
 {
     public function __construct(Typology $typology, $attributes)
@@ -68,6 +70,8 @@ class UpdateTypology
                 }
             }
         }
+
+        (new UpdateUrlsTypology($this->typology))->run();
 
         return $this->typology->load('fields', 'attrs');
     }

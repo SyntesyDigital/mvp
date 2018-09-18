@@ -10,7 +10,7 @@ trait Searchable
 {
     public function index()
     {
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
 
@@ -24,7 +24,7 @@ trait Searchable
 
     public function unindex()
     {
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
 
@@ -38,7 +38,7 @@ trait Searchable
 
     public static function search(array $parameters)
     {
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
 
@@ -59,10 +59,10 @@ trait Searchable
 
     private function getElasticSearchClient()
     {
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
-        
+
         return ClientBuilder::create()
                 ->setHosts(config('elasticsearch.hosts'))
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))

@@ -40,6 +40,7 @@ class ArchitectServiceProvider extends ServiceProvider
             \Modules\Architect\Console\ElasticSearchIndexAllContents::class,
             \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
             \Modules\Architect\Console\ElasticSearchRemoveAllIndexes::class,
+            \Modules\Architect\Console\BuildAllUrls::class,
         ]);
     }
 
@@ -53,12 +54,10 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Config/config.php' => config_path('architect.php'),
             __DIR__.'/../Config/fields.php' => config_path('fields.php'),
-            __DIR__.'/../Config/fields.php' => config_path('elasticsearch.php'),
         ], 'config');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'architect',
-            __DIR__.'/../Config/elasticsearch.php', 'elasticsearch'
+            __DIR__.'/../Config/config.php', 'architect'
         );
     }
 

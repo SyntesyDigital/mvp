@@ -2,8 +2,11 @@
 
 return [
     'name' => 'Architect',
+
     'elasticsearch' => [
-        'enable' => env('ELASTICSEARCH_ENABLED', false),
+
+        'enabled' => env('ELASTICSEARCH_ENABLED', false),
+
         'hosts' => [
             [
                 'host' => env('ELASTICSEARCH_HOST', 'localhost'),

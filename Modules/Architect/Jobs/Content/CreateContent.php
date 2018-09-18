@@ -11,6 +11,9 @@ use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
+
+use Modules\Architect\Tasks\Urls\CreateUrlsContent;
+
 class CreateContent
 {
     public function __construct($attributes)
@@ -57,6 +60,10 @@ class CreateContent
             $this->savePage();
         }
 
+        // Create Url Content
+        (new CreateUrlsContent($this->content))->run();
+
+        // Index or reindex content on elasticsearch
         $this->content->index();
 
         return $this->content;

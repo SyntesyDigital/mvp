@@ -7,6 +7,7 @@ use Modules\Architect\Http\Requests\Category\CreateCategoryRequest;
 use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\CategoryField;
 use Modules\Architect\Entities\Language;
+use Modules\Architect\Tasks\Urls\CreateUrlsCategory;
 
 class CreateCategory
 {
@@ -53,6 +54,8 @@ class CreateCategory
                 ]));
             }
         }
+
+        (new CreateUrlsCategory($category))->run();
 
         return $category;
     }

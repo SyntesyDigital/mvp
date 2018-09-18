@@ -31,13 +31,13 @@ class ContentTransformer extends Resource
 
         $data = [
             'id' => $this->resource->id,
-            'title' => $this->resource->title,
+            'title' => $this->resource->getTitleAttribute($language),
             'fields' => $loadFields ? $this->getFields($languages) : null,
             'is_page' => boolval($this->resource->is_page),
             'page' => ($loadFields && $this->resource->is_page) ? $this->getPage($languages) : null,
             'typology' => !$this->resource->is_page ? $this->resource->typology->toArray() : null,
-            'full_slug' => $this->resource->getFullSlug(),
-            'url' => $this->resource->url
+            'slug' => $this->resource->getFullSlug(),
+            'url' => $this->resource->getUrlAttribute($language)
         ];
 
         if($request->get('loads')) {

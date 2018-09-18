@@ -22,7 +22,7 @@ class SearchController extends Controller
     public function search(Request $request)
     {
 
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return [
                 'message' => 'Elasticsearch is not active in you config file (.env)',
                 'success' => false

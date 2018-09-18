@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Entities\Menu;
-
+use Modules\Architect\Tasks\Urls\UpdateUrlsContent;
 
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
@@ -67,6 +67,10 @@ class UpdateContent
             Cache::forget(sprintf("menu_%s", $menu->name));
         }
 
+        // Update url
+        (new UpdateUrlsContent($this->content))->run();
+
+        // Elasticsearch indexation
         $this->content->index();
 
         return $this->content;

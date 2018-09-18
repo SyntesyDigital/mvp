@@ -8,6 +8,8 @@ use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\CategoryField;
 use Modules\Architect\Entities\Language;
 
+use Modules\Architect\Tasks\Urls\UpdateUrlsCategory;
+
 class UpdateCategory
 {
     public function __construct(Category $category, $attributes)
@@ -60,6 +62,8 @@ class UpdateCategory
                 ]));
             }
         }
+
+        (new UpdateUrlsCategory($this->category))->run();
 
         return $this->category;
     }

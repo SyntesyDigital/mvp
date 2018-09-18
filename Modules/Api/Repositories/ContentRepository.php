@@ -18,7 +18,7 @@ class ContentRepository extends BaseRepository
 
     public function search($query)
     {
-        if(!config('architect.elasticsearch.hosts.enabled')) {
+        if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
 

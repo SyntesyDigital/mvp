@@ -4,15 +4,16 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Modules\Architect\Traits\HasUrl;
 use Kalnoy\Nestedset\NodeTrait;
 use Modules\Architect\Entities\ContentCategory;
 
 class Category extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields, HasUrl, NodeTrait;
 
     protected $fieldModel = 'Modules\Architect\Entities\CategoryField';
-    protected $appends = ['name'];
+    protected $appends = ['name', 'url'];
 
     const FIELDS = [
         [
