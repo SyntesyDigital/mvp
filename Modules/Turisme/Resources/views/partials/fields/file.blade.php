@@ -1,5 +1,10 @@
 @php
-  $url = isset($field['value']) && isset($field['value']->getUrlsAttribute()['files']) ? asset($field['value']->getUrlsAttribute()['files']) : null;
+
+  $fieldValue = isset($field['value']) ? $field['value'] : (isset($field['values']) ? $field['values'] : null);
+
+  $url = isset($fieldValue) && isset($fieldValue['urls']['files']) ? asset($fieldValue['urls']['files']) : null;
+  $label = (isset($labelFieldName) && $labelFieldName ? $field['name'] : lang('widgets.download_pdf') );
+
 @endphp
 @if(!isset($div))
 <div>
@@ -11,7 +16,7 @@
     target="_blank"
     href="{{$url}}"
   >
-    Descarregar arxiu
+    {{$label}}
   </a>
 @endif
 @if(!isset($div))

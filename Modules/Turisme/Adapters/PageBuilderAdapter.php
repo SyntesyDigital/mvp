@@ -131,6 +131,7 @@ class PageBuilderAdapter
             break;
 
             case 'date':
+                $contentField = ContentField::where('name', $fieldName)->first();
                 return date('Y-m-d H:i:s', $contentField->value);
             break;
 

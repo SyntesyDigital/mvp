@@ -6,7 +6,7 @@
   }
 @endphp
 
-<div class="widget banc-media">
+<div class="dossier">
   <p class="image">
     @include('turisme::partials.fields.image_object',[
       "field" => $item['image']
@@ -19,9 +19,58 @@
     ])
   </p>
   <p class="text">
-    <a href="" >Català</a> |
-    <a href="" >Español</a> |
-    <a href="" >English</a> |
-    <a href="" >Français</a> |
-    <a href="" >русский</a> | <a href="" >中国</a>| </p>
+    @include('turisme::partials.fields.file',[
+      "field" => $item['catala'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['espanol'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['japanese'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['english'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['francais'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['italian'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['portuguese'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['arabic'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['czech'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['german'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['chinese'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['russian'],
+      "labelFieldName" => true
+    ])
+    @include('turisme::partials.fields.file',[
+      "field" => $item['polish'],
+      "labelFieldName" => true
+    ])
+
+
 </div>

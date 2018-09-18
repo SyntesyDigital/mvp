@@ -33,7 +33,7 @@ class DateField extends Component {
 
          <DatePicker
              className="form-control"
-             selected={ this.props.field.value ? moment(this.props.field.value) : moment() }
+             selected={ this.props.field.value ? moment(this.props.field.value) : null }
              onChange={this.handleOnChange}
              showTimeSelect
              timeFormat="HH:mm"

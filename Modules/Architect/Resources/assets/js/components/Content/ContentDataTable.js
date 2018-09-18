@@ -14,24 +14,22 @@ class ContentDataTable extends Component {
 
     componentDidMount()
     {
-
-      this._table = $('#table-contents');
-
       this.setDatatable();
     }
 
     setDatatable()
     {
 
-        console.log("MediaSelectModal :: setDatatable route : ",this.props.route);
+        console.log("MediaSelectModal :: setDatatable route : ",this.props.route,$(this.refs.main));
 
         var _this = this;
 
-        var table = this._table.DataTable({
-    	    language: {
+
+        var table = $(this.refs.main).DataTable({
+          language: {
     	        "url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
-    		processing: true,
+    		  processing: true,
           //serverSide: true,
           order: [],
     	    pageLength: 15,
@@ -74,7 +72,7 @@ class ContentDataTable extends Component {
     render() {
         return (
           <div>
-            <table className="table" id="table-contents" style={{width:"100%"}}>
+            <table ref="main" className="table" id="table-contents" style={{width:"100%"}}>
                 <thead>
                    <tr>
                        <th>Nom</th>

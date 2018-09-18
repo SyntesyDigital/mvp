@@ -28,6 +28,8 @@ import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
 import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
+import BooleanSettingsField from './../../Typology/Settings/BooleanSettingsField';
+
 
 import ModalEditListItem from './ModalEditListItem';
 
@@ -78,12 +80,28 @@ class ModalEditItem extends Component {
       });
     }
 
-    this.SELECTABLE_TYPOLOGIES = [];
+    this.SELECTABLE_TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
+    this.LISTABLE_TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
     const selectableArray = [4,6,7,14];
+    const selectableTypologies = [2,3,4,5,6,8,9,10,11,13,14];
 
     for(var key in TYPOLOGIES){
       if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
         this.SELECTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
+      }
+    }
+
+    for(var key in TYPOLOGIES){
+      if(selectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
+        this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
       }
     }
 
@@ -760,7 +778,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Tipologia"
-          options={TYPOLOGIES.map(function(obj){
+          options={this.LISTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name
@@ -844,6 +862,14 @@ class ModalEditItem extends Component {
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Camp de data"
           inputLabel="Indica el identificador de la data de la tipologia"
+        />
+
+        <BooleanSettingsField
+          field={this.state.field}
+          name="extended"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Versió extesa"
         />
 
       </div>

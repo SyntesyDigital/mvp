@@ -38,6 +38,7 @@ var routes = {
   'contents.data' : '{{ route('contents.modal.data') }}',
   'showContent' : "{{route('contents.show',['id' => ':id'])}}",
   'contents.page.create' : "{{route('contents.page.create')}}",
+  'contents.create' : "{{route('contents.create',['typology' => ':id'])}}",
   'previewContent' : ASSETS+DEFAULT_LOCALE+"/preview/:id",
   'pagelayouts.data' : '{{ route('pagelayouts.modal.data') }}'
 };
