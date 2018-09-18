@@ -14,6 +14,8 @@ trait Searchable
             return null;
         }
 
+        $this->setElasticSearchReadOnlyAllowDelete();
+
         return $this->getElasticSearchClient()->index([
             'index' => $this->getSearchableIndex(),
             'type' => $this->getSearchableType(),
@@ -22,11 +24,31 @@ trait Searchable
         ]);
     }
 
+
+    public function setElasticSearchReadOnlyAllowDelete()
+    {
+        $this->getElasticSearchClient()
+            ->indices()
+            ->putSettings([
+                'index' => $this->getSearchableIndex(),
+                'body' => [
+                    'index' => [
+                        'blocks' => [
+                            'read_only_allow_delete' => null
+                        ]
+                    ]
+                ]
+            ]);
+    }
+
+
     public function unindex()
     {
         if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
+
+        $this->setElasticSearchReadOnlyAllowDelete();
 
         return $this->getElasticSearchClient()->delete([
             'index' => $this->getSearchableIndex(),

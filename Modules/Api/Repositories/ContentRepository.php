@@ -16,7 +16,7 @@ class ContentRepository extends BaseRepository
         return Content::class;
     }
 
-    public function search($query)
+    public function search($text)
     {
         if(!config('architect.elasticsearch.enabled')) {
             return null;
@@ -27,18 +27,19 @@ class ContentRepository extends BaseRepository
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))
                 ->build();
 
-        $acceptLang = request('accept_lang', Language::getDefault()->iso);
+        $acceptLang = request('accept_lang', Language::getCurrentLanguage()->iso);
 
         $params = array(
-            'index' => '*',
+            'index' => '_all',
             'body' => [
                 'query' => [
                     'multi_match' => [
-                        "query" => $query,
+                        "query" => $text,
                         "fields" => ["$acceptLang.*"],
                         "type" => "phrase_prefix"
                     ]
-                ]
+                ],
+                '_source' => ["$acceptLang.*"]
             ]
         );
 
