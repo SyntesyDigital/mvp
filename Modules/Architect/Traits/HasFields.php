@@ -33,16 +33,16 @@ trait HasFields
         return $this->hasMany($this->fieldModel);
     }
 
-    public function getField($name)
+    public function getField($identifier)
     {
-        $attr = $this->fields->where('name', $name)->first();
+        $attr = $this->fields->where('name', $identifier)->first();
 
         return $attr ? $attr->value : null;
     }
 
-    public function field($name, $languageId = false, $decodeJson = false)
+    public function field($identifier, $languageId = false, $decodeJson = false)
     {
-        $field = $this->fields->where('name', $name);
+        $field = $this->fields->where('name', $identifier);
 
         if ($languageId) {
             $field = $field->where('language_id', $languageId);
@@ -51,9 +51,17 @@ trait HasFields
         return $field->first();
     }
 
-    public function getFieldValue($name, $languageId = false)
+
+    public function getFieldValue($identifier, $languageId = null)
     {
-        $field = $this->field($name, $languageId);
+        if($languageId === false) {
+            $field = $this->fields->where('name', $identifier)->first();
+            return isset($field) ? $field->value : null;
+        }
+
+        $languageId = $languageId ?: Language::getDefault()->id;
+
+        $field = $this->field($identifier, $languageId);
 
         return isset($field) ? $field->value : null;
     }
@@ -65,7 +73,6 @@ trait HasFields
             $q->where('value', $value);
         });
     }
-
 
     public function getFieldByIdentifier($identifier)
     {
