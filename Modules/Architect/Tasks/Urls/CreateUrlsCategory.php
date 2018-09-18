@@ -17,7 +17,7 @@ class CreateUrlsCategory
     {
         $category = $this->category;
 
-        Language::all()->map(function($language) use ($category) {
+        Language::getAllCached()->map(function($language) use ($category) {
             $slug = $category->getFullSlug($language->id);
 
             if($slug) {

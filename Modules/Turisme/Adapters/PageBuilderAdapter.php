@@ -14,13 +14,16 @@ use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Transformers\ContentTransformer;
 use Modules\Architect\Ressources\ContentCollection;
 
+use Cache;
+
 class PageBuilderAdapter
 {
     public function __construct(Content $content, $languages = null)
     {
         $this->content = $content;
         $this->page = $content->page;
-        $this->languages = $languages ? $languages : Language::all();
+        $this->languages = $languages ? $languages : Language::getAllCached();
+        $this->loadRelationsFields();
     }
 
     public function get()
@@ -35,17 +38,24 @@ class PageBuilderAdapter
 
     private function getLanguageIsoFromId($id)
     {
-        foreach($this->languages as $language) {
-            if($language->id == $id) {
-                return $language->iso;
-            }
-        }
+        $language = Language::getCachedLanguageById($id);
 
-        return false;
+        return $language ? $language->iso : false;
     }
 
-    function getPage(&$nodes) {
+    private function loadRelationsFields()
+    {
+        // Medias
+        $mediasId = $this->content->fields->where('relation', 'medias')->pluck('value');
+        $this->medias = $mediasId ? Media::whereIn('id', $mediasId)->get() : null;
 
+        // Contents
+        $contentsId = $this->content->fields->where('relation', 'contents')->pluck('value');
+        $this->contents = $contentsId ? Content::whereIn('id', $contentsId)->get() : null;
+    }
+
+    function getPage(&$nodes)
+    {
         if($nodes) {
             foreach ($nodes as $key => $node) {
                 if(isset($node['children'])) {
@@ -104,27 +114,31 @@ class PageBuilderAdapter
             case 'richtext':
             case 'slug':
             case 'text':
-                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
-                    return [$field->language->iso => $field->value];
+                return $this->content->fields->where('name', $fieldName)->mapWithKeys(function($field) {
+                    $language = Language::getCachedLanguageById($field->language_id);
+                    return [$language->iso => $field->value];
                 })->toArray();
             break;
 
             case 'file':
             case 'image':
-                $contentField = ContentField::where('name', $fieldName)->first();
+                $contentField = $this->content->fields->where('name', $fieldName)->first();
                 if($contentField != null){
-                  return Media::find($contentField->value);
+                    return $this->medias->where('id', $contentField->value)->first();
+                    //Media::find($contentField->value);
                 }
             break;
 
             case 'translated_file':
-                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
-                    return [$field->language->iso => Media::find($field->value)];
+                $self = $this;
+                return $this->content->fields->where('name', $fieldName)->mapWithKeys(function($field) use ($self) {
+                    $language = Language::getCachedLanguageById($field->language_id);
+                    return [$language->iso => $self->medias->where('id', $contentField->value)->first()];
                 })->toArray();
             break;
 
             case 'localization':
-                $contentField = ContentField::where('name', $fieldName)->first();
+                $contentField = $this->content->fields->where('name', $fieldName)->first();
                 if($contentField != null){
                   return json_decode($contentField->value, true);
                 }
@@ -135,21 +149,25 @@ class PageBuilderAdapter
             break;
 
             case 'images':
-                return ContentField::where('name', $fieldName)->get()->map(function($field){
-                    return Media::find($field->value);
+                $self = $this;
+                return $this->content->fields->where('name', $fieldName)->map(function($field) use ($self){
+                    //return Media::find($field->value);
+                    return $self->medias->where('id', $field->value)->first();
                 })->toArray();
             break;
 
             case 'contents':
-                return ContentField::where('name', $fieldName)->get()->map(function($field){
-                    return Content::find($field->value);
+                $self = $this;
+                return $this->content->fields->where('name', $fieldName)->map(function($field) use ($self){
+                    //return Content::find($field->value);
+                    return $self->contents->where('id', $field->value)->first();
                 })->map(function($content) {
                     return (new ContentTransformer($content))->toArray(request());
                 })->toArray();
             break;
 
             case 'video':
-                $field = ContentField::where('name', $fieldName)->first();
+                $field = $this->content->fields->where('name', $fieldName)->first();
                 $values = null;
 
                 if($field) {
@@ -169,7 +187,7 @@ class PageBuilderAdapter
 
             case 'url':
             case 'link':
-                $field = ContentField::where('name', $fieldName)->first();
+                $field = $this->content->fields->where('name', $fieldName)->first();
                 $values = null;
 
                 if($field) {
@@ -235,7 +253,7 @@ class PageBuilderAdapter
             break;
 
             default:
-                $fields = ContentField::where('name', $fieldName)->first();
+                $fields = $this->content->fields->where('name', $fieldName)->first();
                 return $fields ? $fields->value : null;
             break;
         }

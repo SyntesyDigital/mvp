@@ -27,7 +27,7 @@ class ContentTransformer extends Resource
     public function toArray($request, $language = null, $loadFields = true)
     {
         // FIXME : find a better way
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         $data = [
             'id' => $this->resource->id,

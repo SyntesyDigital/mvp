@@ -16,7 +16,7 @@ class LanguageRepository extends BaseRepository
 
     public function getDatatable($options = [])
     {
-        return Datatables::of(Language::all())
+        return Datatables::of(Language::getAllCached())
             ->addColumn('default', function ($item) {
               return isset($item->default) && $item->default == 1 ? "<i class='fa fa-check-circle'></i>" : "<i class='fa fa-circle-thin'></i>";
             })

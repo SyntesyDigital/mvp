@@ -16,7 +16,7 @@ class CreateUrlsTypology
     {
         $typology = $this->typology;
 
-        Language::all()->map(function($language) use ($typology) {
+        Language::getAllCached()->map(function($language) use ($typology) {
             $slug = $typologytypology->getSlug($language->id);
             if($slug) {
                 $typology->urls()->create([

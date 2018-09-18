@@ -29,7 +29,7 @@ class Link extends Field implements FieldInterface
 
     public function save($content, $identifier, $values, $languages = null)
     {
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         // Save father field
         $field = ContentField::create([

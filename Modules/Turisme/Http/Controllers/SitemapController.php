@@ -24,7 +24,7 @@ class SitemapController extends Controller
 		public function sitemap()
 		{
 
-			$languages = Language::all();
+			$languages = Language::getAllCached();
       $contents = $this->contents->findWhere(['is_page'=>1]);
 
       //get all contents with url

@@ -26,7 +26,7 @@ class UpdateUrlsTypology
         $typology->urls()->delete();
 
         // Create Typology URL
-        Language::all()->map(function($language) use ($typology) {
+        Language::getAllCached()->map(function($language) use ($typology) {
             $attr = $typology->attrs->where('name', 'slug')
                 ->where('language_id', $language->id)
                 ->first();

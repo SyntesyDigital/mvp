@@ -23,7 +23,7 @@ class CreateUrlsContent
     {
         $content = $this->content;
 
-        Language::all()->map(function($language) use ($content) {
+        Language::getAllCached()->map(function($language) use ($content) {
             $url = $content->getFullSlug($language->id);
 
             if($url) {
@@ -53,7 +53,7 @@ class CreateUrlsContent
         }
 
         // Prepare array of urls indexed with language ID and Typology Slug
-        $urls = Language::all()->mapWithKeys(function($language) use ($content) {
+        $urls = Language::getAllCached()->mapWithKeys(function($language) use ($content) {
             return [
                 $language->id => '/' . $language->iso . '/' . $this->content->typology->getSlug($language->id)
             ];

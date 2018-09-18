@@ -75,7 +75,7 @@ trait Searchable
             //'published_at' => $this->published_at
         ];
 
-        foreach(Language::all() as $language) {
+        foreach(Language::getAllCached() as $language) {
             $searchableArray[$language->iso] = [];
 
             if($this->typology) {
@@ -104,7 +104,7 @@ trait Searchable
         return $searchableArray;
     }
 
-    function getPageBody(&$nodes, $language, &$fields)
+    public function getPageBody(&$nodes, $language, &$fields)
     {
         if(!$nodes) {
             return null;

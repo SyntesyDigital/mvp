@@ -30,7 +30,7 @@ class UpdateUrlsContent
     private function updatePageUrl()
     {
         $content = $this->content;
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         $languages->map(function($language) use ($content) {
             if(in_array($language->id, $content->languages->pluck('id')->toArray())) {
@@ -81,7 +81,7 @@ class UpdateUrlsContent
          }
 
          // Prepare array of urls indexed with language ID and Typology Slug
-         $urls = Language::all()->mapWithKeys(function($language) use ($content) {
+         $urls = Language::getAllCached()->mapWithKeys(function($language) use ($content) {
              $attr = $this->content->typology->attrs
                  ->where('name', 'slug')
                  ->where('language_id', $language->id)

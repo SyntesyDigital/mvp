@@ -23,7 +23,7 @@ class UpdateUrlsCategory
         (new CreateUrlsCategory($this->category))->run();
 
         // Update Category childrens urls & childrens contents Urls
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         $traverse = function ($categories) use (&$traverse, $languages) {
             foreach ($categories as $category) {

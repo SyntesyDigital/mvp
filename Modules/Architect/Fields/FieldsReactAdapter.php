@@ -26,7 +26,7 @@ class FieldsReactAdapter
             $this->content = $object->load('fields');
         }
 
-        $this->languages = Language::all();
+        $this->languages = Language::getAllCached();
     }
 
 

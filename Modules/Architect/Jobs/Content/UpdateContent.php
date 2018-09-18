@@ -21,7 +21,7 @@ class UpdateContent
      public function __construct(Content $content, $attributes)
      {
          $this->content = $content;
-         $this->languages = Language::all();
+         $this->languages = Language::getAllCached();
          $this->attributes = array_only($attributes, [
              'typology_id',
              'author_id',

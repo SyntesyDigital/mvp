@@ -18,7 +18,7 @@ class CreateContent
 {
     public function __construct($attributes)
     {
-        $this->languages = Language::all();
+        $this->languages = Language::getAllCached();
         $this->attributes = array_only($attributes, [
             'typology_id',
             'author_id',
