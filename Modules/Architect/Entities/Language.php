@@ -5,6 +5,7 @@ namespace Modules\Architect\Entities;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Builder;
+use Cache;
 
 class Language extends Model
 {
@@ -55,7 +56,8 @@ class Language extends Model
 
     public static function getDefault()
     {
-        $language = cache('defaultLanguage');
+        $key = 'languages.default';
+        $language = cache($key);
 
         if(!isset($language)) {
             $language = self::where('default', 1)->first();
@@ -65,13 +67,47 @@ class Language extends Model
             }
 
             cache([
-                'defaultLanguage' => $language
-            ], now()->addSeconds(180));
+                $key => $language
+            ], now()->addSeconds(5 * 60));
         }
 
         return $language;
     }
 
+
+    public function save(array $options = [])
+    {
+        // Remove caches
+        Cache::forget('languages.default');
+        Cache::forget('languages.all');
+
+        parent::save($options);
+    }
+
+
+    public static function getCachedLanguageById($languageId)
+    {
+        $key = "languages.all";
+        $languages = cache($key);
+
+        return $languages->where('id', $languageId)->first();
+    }
+
+    public static function getAllCached()
+    {
+        $key = "languages.all";
+        $languages = cache($key);
+
+        if(!isset($languages)) {
+            $languages = self::all();
+
+            cache([
+                $key => $languages
+            ], now()->addSeconds(5 * 60));
+        }
+
+        return $languages;
+    }
 
     /*
      *  Scopes

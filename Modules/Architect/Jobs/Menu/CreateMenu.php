@@ -12,13 +12,13 @@ class CreateMenu
 {
     public function __construct($attributes)
     {
-        $this->languages = Language::all();
+        $this->languages = Language::getAllCached();
         $this->attributes = array_only($attributes, [
             'name',
             'fields',
             'settings'
         ]);
-        $this->languages = Language::all()->pluck('id','iso');
+        $this->languages = Language::getAllCached()->pluck('id','iso');
     }
 
     public static function fromRequest(CreateMenuRequest $request)

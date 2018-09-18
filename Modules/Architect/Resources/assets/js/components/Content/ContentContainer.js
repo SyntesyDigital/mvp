@@ -32,6 +32,7 @@ class ContentContainer extends Component {
              translations[language.iso] = true;
          }
      });
+     translations[DEFAULT_LOCALE] = true;
 
      //console.log("ContentContainer :: content => ", props.content);
 

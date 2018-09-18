@@ -7,6 +7,7 @@ use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\TypologyAttribut;
 use Modules\Architect\Entities\Field;
 use Modules\Architect\Entities\Language;
+use Modules\Architect\Tasks\CreateUrlsTypology;
 
 class CreateTypology
 {
@@ -65,6 +66,8 @@ class CreateTypology
                 }
             }
         }
+
+        (new CreateUrlsTypology($typology))->run();
 
         return $typology;
     }

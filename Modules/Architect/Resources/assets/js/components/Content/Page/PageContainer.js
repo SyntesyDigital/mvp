@@ -51,7 +51,8 @@ class PageContainer extends Component {
             translations[language.iso] = true;
         }
     });
-
+    translations[DEFAULT_LOCALE] = true;
+    
     if(props.content) {
         // Builds fields values
         LANGUAGES.map(function(language,k){
@@ -246,7 +247,6 @@ class PageContainer extends Component {
           settings : this.state.settings,
           category_id : this.state.category,
           tags : this.state.tags,
-          //fields : this.state.fields,
           author_id : this.state.author,
           translations : this.state.translations
       };

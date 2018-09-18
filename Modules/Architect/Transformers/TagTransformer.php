@@ -17,7 +17,7 @@ class TagTransformer extends Resource
      */
     public function toArray($request, $language = null)
     {
-        //$languages = Language::all();
+        //$languages = Language::getAllCached();
         $languageId = $language ? $language->id : null;
 
         if($request->get('accept_lang')) {

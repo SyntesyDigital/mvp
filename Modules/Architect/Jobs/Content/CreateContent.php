@@ -11,11 +11,14 @@ use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
+
+use Modules\Architect\Tasks\Urls\CreateUrlsContent;
+
 class CreateContent
 {
     public function __construct($attributes)
     {
-        $this->languages = Language::all();
+        $this->languages = Language::getAllCached();
         $this->attributes = array_only($attributes, [
             'typology_id',
             'author_id',
@@ -56,6 +59,12 @@ class CreateContent
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
         }
+
+        // Create Url Content
+        (new CreateUrlsContent($this->content))->run();
+
+        // Index or reindex content on elasticsearch
+        $this->content->index();
 
         return $this->content;
     }

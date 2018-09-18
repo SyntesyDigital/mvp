@@ -22,7 +22,7 @@ class DeleteTranslation
     public function handle()
     {
         // OPTIMIZE : create task for it :)
-        foreach(Language::all() as $language) {
+        foreach(Language::getAllCached() as $language) {
             Cache::forget('localization.' . $language->iso);
         }
 

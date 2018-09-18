@@ -4,6 +4,7 @@ namespace Modules\Architect\Traits;
 
 use Modules\Architect\Entities\Media;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Language;
 
 use Illuminate\Database\Eloquent\Builder;
 use DB;
@@ -32,16 +33,16 @@ trait HasFields
         return $this->hasMany($this->fieldModel);
     }
 
-    public function getField($name)
+    public function getField($identifier)
     {
-        $attr = $this->fields->where('name', $name)->first();
+        $attr = $this->fields->where('name', $identifier)->first();
 
         return $attr ? $attr->value : null;
     }
 
-    public function field($name, $languageId = false, $decodeJson = false)
+    public function field($identifier, $languageId = false, $decodeJson = false)
     {
-        $field = $this->fields->where('name', $name);
+        $field = $this->fields->where('name', $identifier);
 
         if ($languageId) {
             $field = $field->where('language_id', $languageId);
@@ -50,9 +51,17 @@ trait HasFields
         return $field->first();
     }
 
-    public function getFieldValue($name, $languageId = false)
+
+    public function getFieldValue($identifier, $languageId = null)
     {
-        $field = $this->field($name, $languageId);
+        if($languageId === false) {
+            $field = $this->fields->where('name', $identifier)->first();
+            return isset($field) ? $field->value : null;
+        }
+
+        $languageId = $languageId ?: Language::getDefault()->id;
+
+        $field = $this->field($identifier, $languageId);
 
         return isset($field) ? $field->value : null;
     }
@@ -64,7 +73,6 @@ trait HasFields
             $q->where('value', $value);
         });
     }
-
 
     public function getFieldByIdentifier($identifier)
     {
@@ -270,18 +278,31 @@ trait HasFields
         return $query;
     }
 
-    public function scopeOrderByField(Builder $query, $column, $mode)
+    public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
     {
+        if(in_array($column, $this->fillable) || $column == "id") {
+            return $query->orderBy($column, $mode);
+        }
+
+        $language = $iso ? Language::byIso($iso)->first() : Language::getDefault();
+        $columnName = $column . '_order';
+
         $sql = DB::raw(sprintf('(
-            SELECT contents_fields.value
-            FROM contents_fields
-            WHERE contents_fields.content_id = contents.id
-            AND contents_fields.name = "%s"
+            SELECT
+                contents_fields.value
+            FROM
+                contents_fields
+            WHERE
+                contents_fields.content_id = contents.id
+            AND
+                contents_fields.name = "%s"
+            AND
+                contents_fields.language_id = "%d"
             LIMIT 1
-        ) AS %s', $column, $column));
+        ) AS %s', $column, $language->id, $columnName));
 
         return $query
             ->select('*', $sql)
-            ->orderBy($column, $mode);
+            ->orderBy($columnName, $mode);
     }
 }

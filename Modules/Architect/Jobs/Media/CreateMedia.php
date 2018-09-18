@@ -50,7 +50,8 @@ class CreateMedia
                 $height = $image->height() > $format["height"] ? $format["height"] : $image->height();
 
                 $imageData = $image
-                    ->fit($width, $height)
+                    ->fit($width, $height, null, "center")
+                    ->crop($width, $height)
                     ->encode();
 
                 $path = sprintf('%s/%s/%s',

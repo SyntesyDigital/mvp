@@ -15,13 +15,13 @@ class ContentCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request, $loadFields = true)
     {
         $language = $request->get('accept_lang') ? Language::byIso($request->get('accept_lang'))->first() : Language::getDefault();
 
         return [
-            'data' => $this->collection->map(function($content) use ($request, $language){
-                return (new ContentTransformer($content))->toArray($request, $language);
+            'data' => $this->collection->map(function($content) use ($request, $language, $loadFields){
+                return (new ContentTransformer($content, $loadFields))->toArray($request, $language, $loadFields);
             })
         ];
     }
