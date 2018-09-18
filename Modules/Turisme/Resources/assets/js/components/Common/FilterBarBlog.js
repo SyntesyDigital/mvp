@@ -22,15 +22,63 @@ class FilterBarBlog extends Component {
 
     handleSubmit(event) {
       event.preventDefault();
+      var params = '';
+      var first = true;
+      if(this.state.category != null && this.state.category != '')
+      {
+        if(first)
+        {
+          first = false;
+          params = '?';
+        }
+        else
+        {
+          params = '&'
+        }
+        params +='category='+this.state.category;
+      }
+      if(this.state.text != null && this.state.text != '')
+      {
+        if(first)
+        {
+          first = false;
+          params = '?';
+        }
+        else
+        {
+          params += '&'
+        }
+        params +='text='+this.state.text;
+      }
+      if(this.state.dateStart != null && this.state.dateStart != '')
+      {
+        if(first)
+        {
+          first = false;
+          params = '?';
+        }
+        else
+        {
+          params += '&'
+        }
+        params +='startDate='+this.state.dateStart;
+      }
+      if(this.state.dateEnd != null && this.state.dateEnd != '')
+      {
+        if(first)
+        {
+          first = false;
+          params = '?';
+        }
+        else
+        {
+          params += '&'
+        }
+        params +='endDate='+this.state.dateEnd;
+      }
 
-      const state = this.state;
+      window.location.href = '/'+LOCALE+'/blog/'+params;
 
-      this.props.onSubmit({
-        category : this.state.category != null ? this.state.category : null,
-        text : this.state.text != '' ? this.state.text : null,
-        startDate : this.state.dateStart != null ? this.state.dateStart : null,
-        endDate : this.state.dateEnd != null ? this.state.dateEnd : null,
-      });
     }
 
     handleChange(event) {
@@ -110,10 +158,10 @@ class FilterBarBlog extends Component {
 
 
     renderCategories() {
-      var level = 0; 
+      var level = 0;
       var self = this;
       var html = [];
-      self.printCategories(this.state.categories, level, html); 
+      self.printCategories(this.state.categories, level, html);
       console.log('RESULTAT:',html);
       return html;
     }
@@ -125,7 +173,7 @@ class FilterBarBlog extends Component {
             <div className="row">
               <div className="container">
                 <form onSubmit={this.handleSubmit.bind(this)} className="blog-search">
-                
+
                   <div className="row">
                     <label className="col-md-3 col-sm-4 col-xs-12">Selecciona una categoria </label>
                     <select name="category" className="col-md-9 col-sm-8 col-xs-12" onChange={this.handleChange} value={this.state.category}>
@@ -160,12 +208,12 @@ class FilterBarBlog extends Component {
                             placeholderText={Lang.get('messages.to_datepicker')}
                             locale="{LOCALE}"
                         />
-                      </div>  
+                      </div>
                     </div>
 
                     <div className="row">
                       <input className="col-md-9 col-sm-8 col-xs-12" value={this.state.text} name="text" onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} type="text"/>
-                    </div> 
+                    </div>
                     <div className="row">
                       <input value={Lang.get('widgets.search')} className="btn" type="submit"/>
                     </div>

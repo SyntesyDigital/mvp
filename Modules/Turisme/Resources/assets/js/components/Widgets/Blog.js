@@ -24,6 +24,9 @@ export default class Blog extends Component {
         const categoryId = props.categoryId ? props.categoryId : null;
         const tagId = props.tagId ? props.tagId : null;
         const interviews = props.interviews ? props.interviews : null;
+        const text = props.text ? props.text : null;
+        const startDate = props.startDate ? props.startDate : null;
+        const endDate = props.endDate ? props.endDate : null;
 
         var filters = {};
         if(categoryId != null){
@@ -38,7 +41,18 @@ export default class Blog extends Component {
           filters.interviews = interviews;
         }
 
-        if(filters.category == null && filters.tag == null && filters.interviews == null){
+        if(text != null){
+          filters.text = text;
+        }
+        if(startDate != null){
+          filters.startDate = startDate;
+        }
+        if(endDate != null){
+          filters.endDate = endDate;
+        }
+
+        if(filters.category == null && filters.tag == null && filters.interviews == null
+           && filters.text == null && filters.startDate == null && filters.endDate == null){
           filters= null;
         }
 
@@ -293,6 +307,10 @@ if (document.getElementById('blog')) {
        var categoryId = element.getAttribute('categoryId');
        var tagId = element.getAttribute('tagId');
        var interviews = element.getAttribute('interviews');
+       var text =  element.getAttribute('text');
+       var startDate =  element.getAttribute('startDate');
+       var endDate =  element.getAttribute('endDate');
+
        ReactDOM.render(<Blog
            field={field}
            init={init}
@@ -301,6 +319,9 @@ if (document.getElementById('blog')) {
            categoryId={categoryId}
            tagId={tagId}
            interviews={interviews}
+           text={text}
+           startDate={startDate}
+           endDate={endDate}
          />, element);
    });
 }
