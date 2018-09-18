@@ -14,4 +14,6 @@ return [
     'last_typology' => [
         'empty' => 'No se ha encontrado ningú contenido',
     ],
+    'more_results' => 'Más resultats',
+    'related_news' => 'Noticias relacionadas',
 ];

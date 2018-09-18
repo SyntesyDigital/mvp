@@ -143,7 +143,7 @@ class FilterBarBlog extends Component {
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateStart')}
                             placeholderText={Lang.get('messages.from_datepicker')}
-                            locale="ca-es"
+                            locale="{LOCALE}"
                         />
                       </div>
                     </div>
@@ -158,7 +158,7 @@ class FilterBarBlog extends Component {
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateEnd')}
                             placeholderText={Lang.get('messages.to_datepicker')}
-                            locale="ca-es"
+                            locale="{LOCALE}"
                         />
                       </div>  
                     </div>
@@ -167,7 +167,7 @@ class FilterBarBlog extends Component {
                       <input className="col-md-9 col-sm-8 col-xs-12" value={this.state.text} name="text" onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} type="text"/>
                     </div> 
                     <div className="row">
-                      <input value="Submit" className="btn" type="submit"/>
+                      <input value={Lang.get('widgets.search')} className="btn" type="submit"/>
                     </div>
                   <div className="separator"></div>
 
