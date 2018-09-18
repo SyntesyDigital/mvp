@@ -15,7 +15,7 @@ export default class RelatedNews extends Component {
         const content = props.content ? props.content : '';
 
 
-        console.log("Related => ",tags);
+        console.log("tags => ",tags);
 
         this.state = {
             category : category,
@@ -38,13 +38,11 @@ export default class RelatedNews extends Component {
         const {tags} = this.state;
 
         var params = {
-            size : 4,
+            size : 10,
             typology_id : 2,
             category_id : category,
             accept_lang : LOCALE,
-            orderBy : 'data',
-            sortedBy : 'desc',
-            tags:tags
+            order : 'data,desc'
         };
 
         axios.post(ASSETS+'api/contents',params)
@@ -67,11 +65,21 @@ export default class RelatedNews extends Component {
            });
     }
 
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+        }
+    }
 
     render() {
       var result = [];
-      const {items} = this.state;
-      const {content} = this.state;
+      const {items, content} = this.state;
+
+      if(items != null && items.length > 0){
+            this.shuffleArray(items);
+            console.log('Shuffled related results =>',items);
+      }
 
       var classEntrevista = '';
       var count = 0;
@@ -96,7 +104,7 @@ export default class RelatedNews extends Component {
 
         }
 
-        
+
       }
 
 
@@ -112,7 +120,7 @@ export default class RelatedNews extends Component {
                   </ul>
                 </div>
               </div>
-            </div>                   
+            </div>
       );
     }
 }

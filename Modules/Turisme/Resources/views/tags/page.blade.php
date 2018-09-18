@@ -26,6 +26,7 @@
 
 
   <div id="blog" showTags="0"  showTags ="0" showFilter="0" tagId="{{$tag->id}}" ></div>
+  <div id="blog" init="0" showTags="0" ></div>
 
 </div>
 </article>

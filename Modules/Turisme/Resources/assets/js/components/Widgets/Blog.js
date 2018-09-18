@@ -283,24 +283,24 @@ export default class Blog extends Component {
     }
 }
 
-
 if (document.getElementById('blog')) {
-    var element = document.getElementById('blog');
-    var field = element.getAttribute('field');
-    var init = element.getAttribute('init');
-    var showTags = element.getAttribute('showTags');
-    var showFilter = element.getAttribute('showFilter');
-    var categoryId = element.getAttribute('categoryId');
-    var tagId = element.getAttribute('tagId');
-    var interviews = element.getAttribute('interviews');
 
-    ReactDOM.render(<Blog
-        field={field}
-        init={init}
-        showTags={showTags}
-        showFilter={showFilter}
-        categoryId={categoryId}
-        tagId={tagId}
-        interviews={interviews}
-      />, element);
+   document.querySelectorAll('[id=blog]').forEach(function(element){
+       var field = element.getAttribute('field');
+       var init = element.getAttribute('init');
+       var showTags = element.getAttribute('showTags');
+       var showFilter = element.getAttribute('showFilter');
+       var categoryId = element.getAttribute('categoryId');
+       var tagId = element.getAttribute('tagId');
+       var interviews = element.getAttribute('interviews');
+       ReactDOM.render(<Blog
+           field={field}
+           init={init}
+           showTags={showTags}
+           showFilter={showFilter}
+           categoryId={categoryId}
+           tagId={tagId}
+           interviews={interviews}
+         />, element);
+   });
 }
