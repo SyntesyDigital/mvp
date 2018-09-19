@@ -486,6 +486,7 @@ class PageContainer extends Component {
           content={this.state.content}
           icon={'fa-file-o'}
           name={'Pàgina'}
+          typologyId={null}
           onSubmitForm={this.handleSubmitForm}
           onLayoutSave={this.handleLayoutSave}
           onLoadLayout={this.handleLoadLayout}

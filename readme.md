@@ -35,6 +35,7 @@ TODO
 - htmlClass
 - maxItems
 - minItems
+- extended
 
 
 ### Laravel => React Content fields JSON format

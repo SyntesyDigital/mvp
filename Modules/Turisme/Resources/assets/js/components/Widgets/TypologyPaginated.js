@@ -32,7 +32,7 @@ export default class TypologyPaginated extends Component {
 
         const categoryQuery = category != null ? "&category_id="+category : '';
 
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
+        axios.get(ASSETS+'api/contents?size=6&loads=category&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
@@ -57,7 +57,9 @@ export default class TypologyPaginated extends Component {
 
       var result = [];
 
-      const {items} = this.state;
+      const {items,field} = this.state;
+
+      const extended = field.settings.extended != null ? field.settings.extended : false;
 
       for(var key in items){
         console.log("TypologyPaginated => ",items[key]);
@@ -66,6 +68,7 @@ export default class TypologyPaginated extends Component {
           <li key={key}>
             <ListItem
               field={items[key]}
+              extended={extended}
             />
           </li>
         );

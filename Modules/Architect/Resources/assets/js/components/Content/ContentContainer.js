@@ -481,6 +481,7 @@ class ContentContainer extends Component {
           content={this.state.content}
           icon={this.state.typology.icon}
           name={this.state.typology.name}
+          typologyId={this.state.typology.id}
           onSubmitForm={this.handleSubmitForm}
           saved={this.props.saved}
           hasPreview={this.state.typology.has_slug == 1 ? true : false}

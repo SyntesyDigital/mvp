@@ -32,7 +32,8 @@ class TypologyLast extends Widget implements WidgetInterface
         'htmlClass',
         'typology',
         'category',
-        'maxItems'
+        'maxItems',
+        'extended'
         //'typologiesAllowed'
         //categoriesAllowed
     ];
