@@ -9,14 +9,20 @@ class FilterBarBlog extends Component {
     constructor(props)
     {
         super(props);
+        const category = props.category ? props.category : '';
+        const text = props.text ? props.text : '';
+        const startDate = props.startDate ? props.startDate : null;
+        const endDate = props.endDate ? props.endDate : null;
 
         this.state = {
-          category:'',
-          text : '',
+          category:category,
+          text : text,
+          startDate : startDate,
+          endDate : endDate,
           categories : [],
 
         };
-
+        //AQUI HAY LIO PORQUE LO QUE USA ESTE COMPONNTE ES dateStart y yo tengo startDAte
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -166,8 +172,19 @@ class FilterBarBlog extends Component {
       return html;
     }
 
-    render() {
+    timeConverter(timestamp){
+      var a = new Date(timestamp * 1000);
+      var year = a.getFullYear();
+      var month = a.getMonth()+1;
+      if(month<10){
+          month='0'+month;
+      }
+      var day = a.getDate();
+      var date = day+'/'+month+'/'+year;
+      return date;
+    }
 
+    render() {
         return (
           <div className="grey">
             <div className="row">

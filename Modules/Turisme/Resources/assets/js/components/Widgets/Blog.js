@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Masonry from 'react-masonry-component';
 
-import Paginator from './../Common/Paginator';
+import MoreResults from './../Common/MoreResults';
 import FilterBarBlog from './../Common/FilterBarBlog';
 import NewsBlog from './../Typologies/NewsBlog';
 
@@ -136,8 +136,15 @@ export default class Blog extends Component {
               if(response.status == 200
                   && response.data.data !== undefined)
               {
+                var old_items = self.state.items;
+                if(old_items !== null){
+                  old_items.push.apply(old_items, response.data.data);
+                }else{
+                  old_items =response.data.data;
+                }
+                console.log("OLD ITEMS : ",old_items);
                   self.setState({
-                      items : response.data.data,
+                      items : old_items,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
                       filters : filters
@@ -250,6 +257,10 @@ export default class Blog extends Component {
         var filterBar = '';
         if(showFilter == '1'){
           filterBar = <FilterBarBlog
+                  category={this.state.filters && this.state.filters.category?this.state.filters.category:null }
+                  text={this.state.filters && this.state.filters.text?this.state.filters.text:null}
+                  startDate= {this.state.filters && this.state.filters.startDate? this.state.filters.startDate:null}
+                  endDate={this.state.filters && this.state.filters.endDate? this.state.filters.endDate:null}
                   onSubmit={this.handleFilterSubmit.bind(this)}
                 />;
         }
@@ -279,7 +290,7 @@ export default class Blog extends Component {
                 }
 
                 {this.state.lastPage &&
-                    <Paginator
+                    <MoreResults
                       currPage={this.state.currPage}
                       lastPage={this.state.lastPage}
                       onChange={this.onPageChange.bind(this)}

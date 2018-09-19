@@ -22,6 +22,7 @@ require('./components/Widgets/TypologyCarousel');
 require('./components/Widgets/TypologySelectionFilters');
 require('./components/Widgets/ContactForm');
 require('./components/Common/Paginator');
+require('./components/Common/MoreResults');
 require('./components/Widgets/MembersByProgram');
 require('./components/Widgets/Members');
 require('./components/Widgets/Agencies');
