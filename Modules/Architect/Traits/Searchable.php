@@ -27,6 +27,13 @@ trait Searchable
 
     public function setElasticSearchReadOnlyAllowDelete()
     {
+
+        if(!$this->getElasticSearchClient()->indices()->exists([
+            'index' => $this->getSearchableIndex()
+        ])) {
+            return false;
+        }
+
         $this->getElasticSearchClient()
             ->indices()
             ->putSettings([
@@ -110,6 +117,10 @@ trait Searchable
                         case 'richtext':
                             $searchableArray[$language->iso][$field->identifier] = strip_tags($this->getFieldValue($field->identifier, $language->id));
                         break;
+
+                        // case 'image':
+                        //     $searchableArray[$language->iso]['image'] = $this->getFieldValue($field->identifier, $language->id);
+                        // break;
                     }
                 }
             }
