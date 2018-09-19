@@ -67,12 +67,15 @@ class ContentRepository extends BaseRepository
             }
         }
 
+        // Array of all entryTitle
         $fields = Field::where('settings', 'LIKE', '%"entryTitle":true%')->get();
         $titleFields = ['title'];
 
         if($fields) {
             foreach($fields as $k => $v) {
-                $titleFields[] = $v->identifier;
+                if(!in_array($v->identifier, $titleFields)) {
+                    $titleFields[] = $v->identifier ;
+                }
             }
         }
 
@@ -86,10 +89,24 @@ class ContentRepository extends BaseRepository
             })
 
             ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
-                $query->whereRaw("contents_fields.value LIKE ? AND contents_fields.name IN (?)", ["%{$keyword}%", implode(",", $titleFields)]);
+                // $query->whereRaw("contents_fields.value LIKE '%bar%'
+                //      AND
+                //      contents_fields.name IN ('title')");
+                // $query->whereRaw("
+                //     contents_fields.value LIKE ?
+                //     AND
+                //     contents_fields.name IN (?)",
+                // [
+                //     "%{$keyword}%",
+                //     implode(",", $titleFields)
+                // ]);
+
+                $query->whereRaw("
+                    contents_fields.value LIKE '%{$keyword}%'
+                    AND contents_fields.name IN ('".implode(",", $titleFields)."')
+                ");
             })
             ->addColumn('title', function ($item) {
-
                 $title = isset($item->title) ? $item->title : '';
 
                 if($item->is_page){
