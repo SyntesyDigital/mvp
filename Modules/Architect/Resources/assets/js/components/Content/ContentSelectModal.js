@@ -10,7 +10,8 @@ class ContentSelectModal extends Component {
         super(props);
 
         this.state = {
-          contentSelected : null
+          contentSelected : null,
+          isOpen : false,
         };
 
         this.onModalClose = this.onModalClose.bind(this);
@@ -42,13 +43,17 @@ class ContentSelectModal extends Component {
     modalOpen()
     {
         TweenMax.to($("#content-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+        this.setState({
+          isOpen : true
+        });
     }
 
     modalClose() {
       var self =this;
         TweenMax.to($("#content-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({
-            imageSelected : null
+            imageSelected : null,
+            isOpen : false
           });
         }});
     }
@@ -80,6 +85,7 @@ class ContentSelectModal extends Component {
                         <div className="col-xs-12">
 
                             <ContentDataTable
+                              init={this.state.isOpen}
                               route={routes["contents.data"]}
                               onSelectItem={this.handleSelectItem}
                             />

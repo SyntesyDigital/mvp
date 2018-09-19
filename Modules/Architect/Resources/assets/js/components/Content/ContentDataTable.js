@@ -8,13 +8,26 @@ class ContentDataTable extends Component {
         super(props);
 
         this.state = {
-          fields : []
+          fields : [],
+          init : false
         };
     }
 
     componentDidMount()
     {
-      this.setDatatable();
+      //this.setDatatable();
+    }
+
+    componentWillReceiveProps(nextProps)
+    {
+      if(nextProps.init !== undefined && nextProps.init == true){
+        if(!this.state.init){
+          this.setState({
+            init : true
+          });
+          this.setDatatable();
+        }
+      }
     }
 
     setDatatable()
