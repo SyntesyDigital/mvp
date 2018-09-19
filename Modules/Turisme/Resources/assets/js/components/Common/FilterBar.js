@@ -70,7 +70,8 @@ class FilterBar extends Component {
                           startDate={this.state.dateStart}
                           endDate={this.state.dateEnd}
                           onChange={this.handleDateChange.bind(this,'dateStart')}
-                          locale="ca-es"
+                          placeholderText={Lang.get('messages.from_datepicker')}
+                          locale="{LOCALE}"
                       />
                     </div>
 
@@ -83,7 +84,8 @@ class FilterBar extends Component {
                           minDate={this.state.dateStart}
                           endDate={this.state.dateEnd}
                           onChange={this.handleDateChange.bind(this,'dateEnd')}
-                          locale="ca-es"
+                          placeholderText={Lang.get('messages.to_datepicker')}
+                          locale="{LOCALE}"
                       />
                     </div>
                   </div>

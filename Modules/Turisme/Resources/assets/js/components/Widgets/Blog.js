@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Masonry from 'react-masonry-component';
 
-import Paginator from './../Common/Paginator';
+import MoreResults from './../Common/MoreResults';
 import FilterBarBlog from './../Common/FilterBarBlog';
 import NewsBlog from './../Typologies/NewsBlog';
 
@@ -24,6 +24,9 @@ export default class Blog extends Component {
         const categoryId = props.categoryId ? props.categoryId : null;
         const tagId = props.tagId ? props.tagId : null;
         const interviews = props.interviews ? props.interviews : null;
+        const text = props.text ? props.text : null;
+        const startDate = props.startDate ? props.startDate : null;
+        const endDate = props.endDate ? props.endDate : null;
 
         var filters = {};
         if(categoryId != null){
@@ -38,7 +41,18 @@ export default class Blog extends Component {
           filters.interviews = interviews;
         }
 
-        if(filters.category == null && filters.tag == null && filters.interviews == null){
+        if(text != null){
+          filters.text = text;
+        }
+        if(startDate != null){
+          filters.startDate = startDate;
+        }
+        if(endDate != null){
+          filters.endDate = endDate;
+        }
+
+        if(filters.category == null && filters.tag == null && filters.interviews == null
+           && filters.text == null && filters.startDate == null && filters.endDate == null){
           filters= null;
         }
 
@@ -104,7 +118,7 @@ export default class Blog extends Component {
         console.log("Blog :: query : "+fieldsQuery);
 
         var params = {
-            size : 9,
+            size : 2,
             typology_id : 2,
             category_id : filters!= null && filters.category != null?filters.category:null,
             tags : filters!= null && filters.tag != null?filters.tag:null,
@@ -122,8 +136,15 @@ export default class Blog extends Component {
               if(response.status == 200
                   && response.data.data !== undefined)
               {
+                var old_items = self.state.items;
+                if(old_items !== null){
+                  old_items.push.apply(old_items, response.data.data);
+                }else{
+                  old_items =response.data.data;
+                }
+                console.log("OLD ITEMS : ",old_items);
                   self.setState({
-                      items : response.data.data,
+                      items : old_items,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
                       filters : filters
@@ -236,6 +257,10 @@ export default class Blog extends Component {
         var filterBar = '';
         if(showFilter == '1'){
           filterBar = <FilterBarBlog
+                  category={this.state.filters && this.state.filters.category?this.state.filters.category:null }
+                  text={this.state.filters && this.state.filters.text?this.state.filters.text:null}
+                  startDate= {this.state.filters && this.state.filters.startDate? this.state.filters.startDate:null}
+                  endDate={this.state.filters && this.state.filters.endDate? this.state.filters.endDate:null}
                   onSubmit={this.handleFilterSubmit.bind(this)}
                 />;
         }
@@ -265,7 +290,7 @@ export default class Blog extends Component {
                 }
 
                 {this.state.lastPage &&
-                    <Paginator
+                    <MoreResults
                       currPage={this.state.currPage}
                       lastPage={this.state.lastPage}
                       onChange={this.onPageChange.bind(this)}
@@ -283,24 +308,31 @@ export default class Blog extends Component {
     }
 }
 
-
 if (document.getElementById('blog')) {
-    var element = document.getElementById('blog');
-    var field = element.getAttribute('field');
-    var init = element.getAttribute('init');
-    var showTags = element.getAttribute('showTags');
-    var showFilter = element.getAttribute('showFilter');
-    var categoryId = element.getAttribute('categoryId');
-    var tagId = element.getAttribute('tagId');
-    var interviews = element.getAttribute('interviews');
 
-    ReactDOM.render(<Blog
-        field={field}
-        init={init}
-        showTags={showTags}
-        showFilter={showFilter}
-        categoryId={categoryId}
-        tagId={tagId}
-        interviews={interviews}
-      />, element);
+   document.querySelectorAll('[id=blog]').forEach(function(element){
+       var field = element.getAttribute('field');
+       var init = element.getAttribute('init');
+       var showTags = element.getAttribute('showTags');
+       var showFilter = element.getAttribute('showFilter');
+       var categoryId = element.getAttribute('categoryId');
+       var tagId = element.getAttribute('tagId');
+       var interviews = element.getAttribute('interviews');
+       var text =  element.getAttribute('text');
+       var startDate =  element.getAttribute('startDate');
+       var endDate =  element.getAttribute('endDate');
+
+       ReactDOM.render(<Blog
+           field={field}
+           init={init}
+           showTags={showTags}
+           showFilter={showFilter}
+           categoryId={categoryId}
+           tagId={tagId}
+           interviews={interviews}
+           text={text}
+           startDate={startDate}
+           endDate={endDate}
+         />, element);
+   });
 }

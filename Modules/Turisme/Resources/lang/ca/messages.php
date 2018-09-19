@@ -8,5 +8,6 @@ return [
 
     "page_not_found_title" => "Pàgina no trobada",
     "page_not_found" => "La pàgina %s no s'ha trobat",
-
+    "from_datepicker" => "De",
+    "to_datepicker"   => "Fins",
 ];

@@ -8,5 +8,6 @@ return [
 
     "page_not_found_title" => "Page not found",
     "page_not_found" => "Page %s not found",
-
+    "from_datepicker" => "From",
+    "to_datepicker"   => "To",
 ];

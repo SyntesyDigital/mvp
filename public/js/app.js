@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 636);
+/******/ 	return __webpack_require__(__webpack_require__.s = 637);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -46840,7 +46840,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 589:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49287,18 +49287,18 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
-/***/ 636:
+/***/ 637:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(637);
-__webpack_require__(641);
+__webpack_require__(638);
 __webpack_require__(642);
-module.exports = __webpack_require__(643);
+__webpack_require__(643);
+module.exports = __webpack_require__(644);
 
 
 /***/ }),
 
-/***/ 637:
+/***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -49308,7 +49308,7 @@ module.exports = __webpack_require__(643);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(638);
+__webpack_require__(639);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -49316,16 +49316,16 @@ __webpack_require__(638);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(640);
+__webpack_require__(641);
 
 /***/ }),
 
-/***/ 638:
+/***/ 639:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(351);
-window.Popper = __webpack_require__(589).default;
+window.Popper = __webpack_require__(590).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -49336,7 +49336,7 @@ window.Popper = __webpack_require__(589).default;
 try {
   window.$ = window.jQuery = __webpack_require__(106);
 
-  __webpack_require__(639);
+  __webpack_require__(640);
 } catch (e) {}
 
 /**
@@ -49382,7 +49382,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 639:
+/***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -49391,7 +49391,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(106), __webpack_require__(589)) :
+	 true ? factory(exports, __webpack_require__(106), __webpack_require__(590)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -53283,7 +53283,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 640:
+/***/ 641:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53356,13 +53356,6 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 641:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 642:
 /***/ (function(module, exports) {
 
@@ -53371,6 +53364,13 @@ if (document.getElementById('example')) {
 /***/ }),
 
 /***/ 643:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 644:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
