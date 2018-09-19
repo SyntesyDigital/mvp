@@ -19,7 +19,7 @@ architect.contents = {
 
         var table = _this._settings.table.DataTable({
     		processing: true,
-            //serverSide: true,
+            serverSide: true,
             order: [],
              pageLength: 30,
               language: {
