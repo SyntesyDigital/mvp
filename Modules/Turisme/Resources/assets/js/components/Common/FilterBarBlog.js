@@ -17,12 +17,11 @@ class FilterBarBlog extends Component {
         this.state = {
           category:category,
           text : text,
-          startDate : startDate,
-          endDate : endDate,
+          dateStart :  startDate?moment.unix(startDate/1000):null,
+          dateEnd : endDate?moment.unix(endDate/1000):null,
           categories : [],
 
         };
-        //AQUI HAY LIO PORQUE LO QUE USA ESTE COMPONNTE ES dateStart y yo tengo startDAte
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -172,18 +171,6 @@ class FilterBarBlog extends Component {
       return html;
     }
 
-    timeConverter(timestamp){
-      var a = new Date(timestamp * 1000);
-      var year = a.getFullYear();
-      var month = a.getMonth()+1;
-      if(month<10){
-          month='0'+month;
-      }
-      var day = a.getDate();
-      var date = day+'/'+month+'/'+year;
-      return date;
-    }
-
     render() {
         return (
           <div className="grey">
@@ -202,7 +189,8 @@ class FilterBarBlog extends Component {
                       <div className="input-date">
                         <DatePicker
                             className="input-date"
-                            selected={this.state.dateStart}
+                            selected={this.state.dateStart?  this.state.dateStart : ''}
+
                             selectsStart
                             startDate={this.state.dateStart}
                             endDate={this.state.dateEnd}
@@ -216,7 +204,7 @@ class FilterBarBlog extends Component {
                       <div className="input-date">
                         <DatePicker
                             className="input-date"
-                            selected={this.state.dateEnd}
+                            selected={ this.state.dateEnd ? this.state.dateEnd : '' }
                             selectsEnd
                             startDate={this.state.dateStart}
                             minDate={this.state.dateStart}
