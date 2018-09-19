@@ -15,7 +15,7 @@ class ContentCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request
      * @return array
      */
-    public function toArray($request, $loadFields = true)
+    public function toArray($request, $loadFields = true, $options = [])
     {
         $language = $request->get('accept_lang') ? Language::byIso($request->get('accept_lang'))->first() : Language::getDefault();
 

@@ -59,7 +59,7 @@ trait HasFields
             return isset($field) ? $field->value : null;
         }
 
-        $languageId = $languageId ?: Language::getDefault()->id;
+        $languageId = $languageId ?: Language::getCurrentLanguage()->id;
 
         $field = $this->field($identifier, $languageId);
 

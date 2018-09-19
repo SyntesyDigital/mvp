@@ -133,7 +133,7 @@ class PageBuilderAdapter
                 $self = $this;
                 return $this->content->fields->where('name', $fieldName)->mapWithKeys(function($field) use ($self) {
                     $language = Language::getCachedLanguageById($field->language_id);
-                    return [$language->iso => $self->medias->where('id', $contentField->value)->first()];
+                    return [$language->iso => $self->medias->where('id', $field->value)->first()];
                 })->toArray();
             break;
 

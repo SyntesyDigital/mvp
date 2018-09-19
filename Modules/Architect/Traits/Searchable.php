@@ -14,6 +14,8 @@ trait Searchable
             return null;
         }
 
+        $this->setElasticSearchReadOnlyAllowDelete();
+
         return $this->getElasticSearchClient()->index([
             'index' => $this->getSearchableIndex(),
             'type' => $this->getSearchableType(),
@@ -22,11 +24,38 @@ trait Searchable
         ]);
     }
 
+
+    public function setElasticSearchReadOnlyAllowDelete()
+    {
+
+        if(!$this->getElasticSearchClient()->indices()->exists([
+            'index' => $this->getSearchableIndex()
+        ])) {
+            return false;
+        }
+
+        $this->getElasticSearchClient()
+            ->indices()
+            ->putSettings([
+                'index' => $this->getSearchableIndex(),
+                'body' => [
+                    'index' => [
+                        'blocks' => [
+                            'read_only_allow_delete' => null
+                        ]
+                    ]
+                ]
+            ]);
+    }
+
+
     public function unindex()
     {
         if(!config('architect.elasticsearch.enabled')) {
             return null;
         }
+
+        $this->setElasticSearchReadOnlyAllowDelete();
 
         return $this->getElasticSearchClient()->delete([
             'index' => $this->getSearchableIndex(),
@@ -88,6 +117,10 @@ trait Searchable
                         case 'richtext':
                             $searchableArray[$language->iso][$field->identifier] = strip_tags($this->getFieldValue($field->identifier, $language->id));
                         break;
+
+                        // case 'image':
+                        //     $searchableArray[$language->iso]['image'] = $this->getFieldValue($field->identifier, $language->id);
+                        // break;
                     }
                 }
             }

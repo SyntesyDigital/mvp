@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Builder;
 use Cache;
+use App;
 
 class Language extends Model
 {
@@ -84,13 +85,15 @@ class Language extends Model
         parent::save($options);
     }
 
+    public static function getCurrentLanguage()
+    {
+        return self::getAllCached()->where('iso', App::getLocale())->first();
+    }
+
 
     public static function getCachedLanguageById($languageId)
     {
-        $key = "languages.all";
-        $languages = cache($key);
-
-        return $languages->where('id', $languageId)->first();
+        return self::getAllCached()->where('id', $languageId)->first();
     }
 
     public static function getAllCached()

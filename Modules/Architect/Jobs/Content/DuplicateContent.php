@@ -7,6 +7,7 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentTag;
 
 use Illuminate\Support\Facades\Schema;
+use Auth;
 
 class DuplicateContent
 {
@@ -37,9 +38,20 @@ class DuplicateContent
 
         // Fields
         if($this->content->fields) {
-            foreach($this->content->fields as $item){
-                unset($item->id);
-                $content->fields()->create($item->toArray());
+            foreach($this->content->fields as $field){
+                unset($field->id);
+
+                switch($field->name) {
+                    case 'slug':
+                        $field->value = $field->value . '-' . $content->id;
+                    break;
+
+                    case 'title':
+                        $field->value = $field->value . ' (duplicated) ';
+                    break;
+                }
+
+                $content->fields()->create($field->toArray());
             }
         }
 
@@ -57,6 +69,11 @@ class DuplicateContent
         if($this->content->categories) {
             $content->categories()->attach($this->content->categories->pluck('id')->toArray());
         }
+
+        $this->content->update([
+            'status' => Content::STATUS_DRAFT,
+            'author_id' => Auth::user()->id
+        ]);
 
         return $content;
     }
