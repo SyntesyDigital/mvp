@@ -181,7 +181,7 @@ class FilterBarBlog extends Component {
                   <div className="row">
                     <label className="col-md-3 col-sm-4 col-xs-12">Selecciona una categoria </label>
                     <select name="category" className="col-md-9 col-sm-8 col-xs-12" onChange={this.handleChange} value={this.state.category}>
-                        <option disabled value="">{Lang.get('widgets.select_category')}</option>
+                        <option value="">{Lang.get('widgets.select_category')}</option>
                         {this.renderCategories()}
                           </select>
                       </div>
