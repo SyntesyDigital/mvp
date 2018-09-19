@@ -17,7 +17,7 @@ class MoreResults extends Component {
     render() {
 
         const nextPage = this.props.currPage < this.props.lastPage ? (this.props.currPage + 1) : this.props.lastPage;
-        const load_more = this.props.currPage < this.props.lastPage?<li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> LOAD MORE</a></li>:'';
+        const load_more = this.props.currPage < this.props.lastPage && null !== this.props.maxItems && this.props.maxItems > this.props.currentItems ?<li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> LOAD MORE</a></li>:'';
 
 
         return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Paginator from './../Common/Paginator';
+import MoreResults from './../Common/MoreResults';
 import ListItem from './../Common/ListItem';
 
 
@@ -26,21 +26,29 @@ export default class TypologyPaginated extends Component {
     query(page) {
         const field = this.state.field;
         var self = this;
-
+        const size = 2;
         const category = field.settings.category;
         const maxItems = parseInt(field.settings.maxItems);
-
+        var size_limited = size;
         const categoryQuery = category != null ? "&category_id="+category : '';
-
-        axios.get(ASSETS+'api/contents?size=2&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
+        if(this.state.lastPage){
+          size_limited = maxItems - this.state.items.length;
+        }
+        axios.get(ASSETS+'api/contents?size='+size_limited+'&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
                   && response.data.data !== undefined
                   && response.data.data.length > 0)
               {
+                  var old_items = self.state.items;
+                  if(old_items !== null){
+                    old_items.push.apply(old_items, response.data.data);
+                  }else{
+                    old_items =response.data.data;
+                  }
                   self.setState({
-                      items : response.data.data,
+                      items : old_items,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
                   });
@@ -79,6 +87,7 @@ export default class TypologyPaginated extends Component {
     }
 
     render() {
+
         return (
             <div>
                 {this.state.items == null &&
@@ -94,9 +103,11 @@ export default class TypologyPaginated extends Component {
                 }
 
                 {this.state.lastPage &&
-                    <Paginator
+                    <MoreResults
                       currPage={this.state.currPage}
                       lastPage={this.state.lastPage}
+                      maxItems={this.state.field.settings.maxItems}
+                      currentItems={this.state.items.length}
                       onChange={this.onPageChange.bind(this)}
                     />
                 }
