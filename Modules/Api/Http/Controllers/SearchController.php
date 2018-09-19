@@ -23,13 +23,6 @@ class SearchController extends Controller
         $this->contents = $contents;
     }
 
-// {
-//     'content' : {....},
-//     'title' : '...',
-//     'description' : '...',
-//     'url' : '...'
-// }
-
     public function search(Request $request)
     {
 
@@ -93,6 +86,8 @@ class SearchController extends Controller
 
         $acceptLang = request('accept_lang', Language::getCurrentLanguage()->iso);
 
+
+
         $params = array(
             'index' => '_all',
             'body' => [
@@ -106,6 +101,63 @@ class SearchController extends Controller
             ]
         );
 
+
+        //         {
+        //     "query": {
+        //         "bool": {
+        //             "must": [
+        //                 {"term": {"shape": "round"}},
+        //                 {"bool": {
+        //                     "should": [
+        //                         {"term": {"color": "red"}},
+        //                         {"term": {"color": "blue"}}
+        //                     ]
+        //                 }}
+        //             ]
+        //         }
+        //     }
+        // }
+
+
+
+        $text = sizeof(explode(' ', $text)) > 1 ? explode(' ', $text) : $text;
+        $query = [];
+
+        if(is_array($text)) {
+
+            foreach($text as $k => $v) {
+                $query[] = [
+                    'multi_match' => [
+                        'query' => $v,
+                        'fields' => ["$acceptLang.*"],
+                        'type' => 'phrase_prefix'
+                    ]
+                ];
+            }
+
+        } else {
+            $query = [
+                'multi_match' => [
+                    'query' => $text,
+                    'fields' => ["$acceptLang.*"],
+                    'type' => 'phrase_prefix'
+                ]
+            ];
+        }
+
+        $params = array(
+            'index' => '_all',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'should' => $query
+                    ]
+                ],
+            ]
+        );
+        //
+        // print_r($client->search($params));
+        // exit();
         return $client->search($params);
     }
 
