@@ -118,7 +118,7 @@ export default class Blog extends Component {
         console.log("Blog :: query : "+fieldsQuery);
 
         var params = {
-            size : 9,
+            size : 2,
             typology_id : 2,
             category_id : filters!= null && filters.category != null?filters.category:null,
             tags : filters!= null && filters.tag != null?filters.tag:null,
