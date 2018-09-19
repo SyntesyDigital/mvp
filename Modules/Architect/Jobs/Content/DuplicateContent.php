@@ -70,7 +70,7 @@ class DuplicateContent
             $content->categories()->attach($this->content->categories->pluck('id')->toArray());
         }
 
-        $this->content->update([
+        $content->update([
             'status' => Content::STATUS_DRAFT,
             'author_id' => Auth::user()->id
         ]);
