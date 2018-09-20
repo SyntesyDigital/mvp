@@ -25,7 +25,6 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-
         if(!config('architect.elasticsearch.enabled')) {
             return [
                 'message' => 'Elasticsearch is not active in you config file (.env)',
@@ -58,22 +57,11 @@ class SearchController extends Controller
 
         if(sizeof($order) > 1) {
             $collection->orderByField($order[0], $order[1], $request->get('accept_lang'));
+        } else {
+            $collection->orderByHits($hits);
         }
 
         return (new ContentSearchCollection($collection->paginate($size)))->toArray($request, $hits);
-
-        // $collection = $this->contents
-        //     ->search($query)
-        //     ->isPublished()
-        //     ->typologyId($typologyId)
-        //     ->categoryId($categoryId)
-        //     ->byTagsIds($tags);
-        //
-        // if(sizeof($order) > 1) {
-        //     $collection->orderByField($order[0], $order[1], $request->get('accept_lang'));
-        // }
-        //
-        // return (new ContentCollection($collection->paginate($size)))->toArray($request, false);
     }
 
 
@@ -84,9 +72,7 @@ class SearchController extends Controller
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))
                 ->build();
 
-        $acceptLang = request('accept_lang', Language::getCurrentLanguage()->iso);
-
-
+        $acceptLang = request('accept_lang', Language::getDefault()->iso);
 
         $params = array(
             'index' => '_all',
@@ -100,25 +86,6 @@ class SearchController extends Controller
                 ],
             ]
         );
-
-
-        //         {
-        //     "query": {
-        //         "bool": {
-        //             "must": [
-        //                 {"term": {"shape": "round"}},
-        //                 {"bool": {
-        //                     "should": [
-        //                         {"term": {"color": "red"}},
-        //                         {"term": {"color": "blue"}}
-        //                     ]
-        //                 }}
-        //             ]
-        //         }
-        //     }
-        // }
-
-
 
         $text = sizeof(explode(' ', $text)) > 1 ? explode(' ', $text) : $text;
         $query = [];
@@ -155,9 +122,7 @@ class SearchController extends Controller
                 ],
             ]
         );
-        //
-        // print_r($client->search($params));
-        // exit();
+
         return $client->search($params);
     }
 
