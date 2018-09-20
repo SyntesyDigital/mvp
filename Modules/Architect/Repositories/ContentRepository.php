@@ -9,6 +9,8 @@ use Storage;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Field;
 
+use Modules\Architect\Repositories\Criterias\ModalDatatableCriteria;
+
 class ContentRepository extends BaseRepository
 {
     protected $fieldSearchable = [
@@ -89,18 +91,6 @@ class ContentRepository extends BaseRepository
             })
 
             ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
-                // $query->whereRaw("contents_fields.value LIKE '%bar%'
-                //      AND
-                //      contents_fields.name IN ('title')");
-                // $query->whereRaw("
-                //     contents_fields.value LIKE ?
-                //     AND
-                //     contents_fields.name IN (?)",
-                // [
-                //     "%{$keyword}%",
-                //     implode(",", $titleFields)
-                // ]);
-
                 $query->whereRaw("
                     contents_fields.value LIKE '%{$keyword}%'
                     AND contents_fields.name IN ('".implode(",", $titleFields)."')
@@ -144,13 +134,12 @@ class ContentRepository extends BaseRepository
     public function getModalDatatable()
     {
         $query = $this
+            ->skipCriteria()
+            ->pushCriteria(new ModalDatatableCriteria())
             ->orderBy('updated_at','DESC')
             ->all();
 
         return Datatables::of($query)
-            ->addColumn('title', function ($item) {
-                return isset($item->title) ? $item->title : null;
-            })
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
