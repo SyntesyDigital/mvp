@@ -23,7 +23,13 @@ class DuplicateContent
 
     public function handle()
     {
-        $this->content->load('fields', 'page', 'tags', 'languages', 'categories');
+        $this->content->load(
+            'fields',
+            'page',
+            'tags',
+            'languages',
+            'categories'
+        );
 
         $content = $this->content->replicate();
         $content->push();
@@ -72,7 +78,8 @@ class DuplicateContent
 
         $content->update([
             'status' => Content::STATUS_DRAFT,
-            'author_id' => Auth::user()->id
+            'author_id' => Auth::user()->id,
+            'parent_id' => $this->content->parent_id
         ]);
 
         return $content;
