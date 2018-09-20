@@ -23,16 +23,8 @@ class SearchController extends Controller
         $this->contents = $contents;
     }
 
-// {
-//     'content' : {....},
-//     'title' : '...',
-//     'description' : '...',
-//     'url' : '...'
-// }
-
     public function search(Request $request)
     {
-
         if(!config('architect.elasticsearch.enabled')) {
             return [
                 'message' => 'Elasticsearch is not active in you config file (.env)',
@@ -65,22 +57,11 @@ class SearchController extends Controller
 
         if(sizeof($order) > 1) {
             $collection->orderByField($order[0], $order[1], $request->get('accept_lang'));
+        } else {
+            $collection->orderByHits($hits);
         }
 
         return (new ContentSearchCollection($collection->paginate($size)))->toArray($request, $hits);
-
-        // $collection = $this->contents
-        //     ->search($query)
-        //     ->isPublished()
-        //     ->typologyId($typologyId)
-        //     ->categoryId($categoryId)
-        //     ->byTagsIds($tags);
-        //
-        // if(sizeof($order) > 1) {
-        //     $collection->orderByField($order[0], $order[1], $request->get('accept_lang'));
-        // }
-        //
-        // return (new ContentCollection($collection->paginate($size)))->toArray($request, false);
     }
 
 
@@ -91,7 +72,7 @@ class SearchController extends Controller
                 ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))
                 ->build();
 
-        $acceptLang = request('accept_lang', Language::getCurrentLanguage()->iso);
+        $acceptLang = request('accept_lang', Language::getDefault()->iso);
 
         $params = array(
             'index' => '_all',
@@ -101,6 +82,42 @@ class SearchController extends Controller
                         "query" => $text,
                         "fields" => ["$acceptLang.*"],
                         "type" => "phrase_prefix"
+                    ]
+                ],
+            ]
+        );
+
+        $text = sizeof(explode(' ', $text)) > 1 ? explode(' ', $text) : $text;
+        $query = [];
+
+        if(is_array($text)) {
+
+            foreach($text as $k => $v) {
+                $query[] = [
+                    'multi_match' => [
+                        'query' => $v,
+                        'fields' => ["$acceptLang.*"],
+                        'type' => 'phrase_prefix'
+                    ]
+                ];
+            }
+
+        } else {
+            $query = [
+                'multi_match' => [
+                    'query' => $text,
+                    'fields' => ["$acceptLang.*"],
+                    'type' => 'phrase_prefix'
+                ]
+            ];
+        }
+
+        $params = array(
+            'index' => '_all',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'should' => $query
                     ]
                 ],
             ]

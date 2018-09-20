@@ -5,6 +5,7 @@ namespace Modules\Architect\Traits;
 use Elasticsearch\ClientBuilder;
 
 use Modules\Architect\Entities\Language;
+use Illuminate\Database\Eloquent\Builder;
 
 trait Searchable
 {
@@ -183,5 +184,19 @@ trait Searchable
         }
 
         return $fields;
+    }
+
+
+    public function scopeOrderByHits(Builder $query, $hits)
+    {
+        $case = implode(' ', array_map(function($hit) {
+            return 'WHEN id = '.$hit['_id'].' THEN '.$hit['_score'];
+        }, $hits));
+
+        return $query->orderByRaw("
+            CASE
+                {$case}
+            END DESC
+        ");
     }
 }
