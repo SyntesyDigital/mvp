@@ -19,8 +19,8 @@ class Content extends Model
         NodeTrait,
         Searchable;
 
-    const STATUS_PUBLISHED = 'PUBLISHED';
-    const STATUS_DRAFT = 'DRAFT';
+    const STATUS_PUBLISHED = 1;
+    const STATUS_DRAFT = 0;
 
     protected $fieldModel = 'Modules\Architect\Entities\ContentField';
 
