@@ -173,4 +173,51 @@ class ContentRepository extends BaseRepository
             })
             ->make(true);
     }
+
+    public function getTreeWithHyphens()
+    {
+      $index = 0;
+      $pageTree = array();
+      $level = 1;
+
+      $traverse = function (&$pageTree,$pages, &$index,$level) use (&$traverse) {
+          $level++;
+          $prev_string = '';
+          if($level >= 1){
+            for($i=1;$i<$level;$i++){
+
+              $prev_string .= "-";
+
+            }
+            $prev_string .= " ";
+          }
+
+          foreach ($pages as $page) {
+
+            $pageTree[$index]['id']= $page->id;
+            $pageTree[$index]['title']= $prev_string.$page->getTitleAttribute();
+            $index ++;
+            $traverse($pageTree,$page->children, $index,$level);
+          }
+      };
+
+      $pages = Content::where('is_page', 1)->get();
+
+
+      foreach($pages as $page) {
+
+        if(!$page->parent_id) {
+
+          $pageTree[$index]['id']= $page->id;
+          $pageTree[$index]['title']= $page->getTitleAttribute();
+          $index++;
+          //all parents
+
+          $traverse($pageTree,Content::getTree($page->id), $index,$level);
+        }
+      }
+      return  $pageTree;
+
+    }
+
 }
