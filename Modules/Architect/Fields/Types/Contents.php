@@ -20,7 +20,7 @@ class Contents extends Field implements FieldInterface
     ];
 
     public $settings = [
-        'typologiesAllowed',
+        'typologyAllowed',
         'htmlId',
         'htmlClass'
     ];
@@ -30,7 +30,7 @@ class Contents extends Field implements FieldInterface
         if(!$values) {
             return false;
         }
-        
+
         foreach($values as $value) {
             $id = isset($value['id']) ? $value['id'] : null;
 

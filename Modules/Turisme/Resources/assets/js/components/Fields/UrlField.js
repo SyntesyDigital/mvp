@@ -10,11 +10,9 @@ class UrlField extends Component {
     }
 
     getPageSlug(content) {
-      //FIXME esto deberia venir directamente del fullSlug
-      for(var key in content.fields){
-        if(content.fields[key].name == 'slug'){
-          return content.fields[key].value;
-        }
+
+      if(content != null && content.url !== undefined){
+          return content.url;
       }
       return '';
     }
@@ -33,11 +31,20 @@ class UrlField extends Component {
         }
       }
 
-      return (
-        <a href={url} target={this.props.target}>
-          {this.props.children}
-        </a>
-      );
+      if(url != ''){
+        return (
+          <a href={url} target={this.props.target}>
+            {this.props.children}
+          </a>
+        );
+      }
+      else {
+        return (
+          <p className="titol">
+            {this.props.children}
+          </p>
+        )
+      }
 
     }
 }

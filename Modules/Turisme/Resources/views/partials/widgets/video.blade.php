@@ -1,8 +1,9 @@
 @php
 
   $video = null;
-  if(isset($field['fields'][0])){
-      $video = $field['fields'][0]['value'][0];
+
+  if(isset($field['fields'][0]) && isset($field['fields'][0]['value']) && sizeof($field['fields'][0]['value'] > 0)){
+      $video = array_pop($field['fields'][0]['value']);
   }
 
 @endphp

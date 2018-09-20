@@ -25,15 +25,23 @@ class ContentDataTable extends Component {
           this.setState({
             init : true
           });
-          this.setDatatable();
+          this.setDatatable(nextProps.route);
+        }
+      }
+      else {
+        if(this.state.init){
+          this.setState({
+            init : false
+          });
+          this.destroyDatatable();
         }
       }
     }
 
-    setDatatable()
+    setDatatable(route)
     {
 
-        console.log("MediaSelectModal :: setDatatable route : ",this.props.route,$(this.refs.main));
+        console.log("ContentDataTable :: setDatatable route : ",route,$(this.refs.main));
 
         var _this = this;
 
@@ -49,7 +57,7 @@ class ContentDataTable extends Component {
           language: {
               url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
           },
-    	    ajax: this.props.route,
+    	    ajax: route,
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},
               {data: 'title', name: 'title'},
@@ -63,6 +71,13 @@ class ContentDataTable extends Component {
                 _this.initEvents();
     	    }
         });
+    }
+
+    destroyDatatable() {
+
+      console.log("ContentDataTable :: destroy datatable ");
+
+      $(this.refs.main).DataTable().destroy();
     }
 
     addField()

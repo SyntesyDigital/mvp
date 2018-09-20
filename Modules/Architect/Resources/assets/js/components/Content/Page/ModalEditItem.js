@@ -80,6 +80,12 @@ class ModalEditItem extends Component {
       });
     }
 
+    this.TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
+
     this.SELECTABLE_TYPOLOGIES = [{
           id:'',
           name:'----'
@@ -103,6 +109,10 @@ class ModalEditItem extends Component {
       if(selectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
         this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
       }
+    }
+
+    for(var key in TYPOLOGIES){
+      this.TYPOLOGIES.push(TYPOLOGIES[key]);
     }
 
     console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
@@ -763,13 +773,18 @@ class ModalEditItem extends Component {
           options={this.getCropsformats()}
         />
 
-        <CheckboxesSettingsField
+        <SelectorSettingsField
           field={this.state.field}
-          name="typologiesAllowed"
+          name="typologyAllowed"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologies permeses"
-          options={TYPOLOGIES}
+          label="Tipologia permesa"
+          options={this.TYPOLOGIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
         />
 
         <SelectorSettingsField

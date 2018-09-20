@@ -902,6 +902,8 @@ class PageBuilder extends Component {
 
   render() {
 
+    //console.log("PageBuilder :: editItemData => ",this.state.editItemData);
+
     return (
       <div className="col-xs-9 page-content page-builder">
 
@@ -912,9 +914,9 @@ class PageBuilder extends Component {
           zIndex={10000}
         />
 
-
         <ContentSelectModal
           display={this.state.displayContentModal}
+          field={this.state.editItemData != null ? this.state.editItemData.data.field : null}
           onContentSelected={this.handleContentSelected}
           onContentCancel={this.handleContentCancel}
           zIndex={10000}

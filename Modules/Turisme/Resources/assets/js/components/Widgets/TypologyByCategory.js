@@ -84,7 +84,7 @@ export default class TypologyByCategory extends Component {
 
       return (
         <div className="hierachy-item" key={key}>
-          <h2>{item['name']}</h2>
+          <h3>{item['name']}</h3>
           <ul>
             {this.renderContents(item['contents'])}
           </ul>

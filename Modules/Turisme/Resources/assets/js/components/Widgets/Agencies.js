@@ -24,7 +24,7 @@ export default class Agencies extends Component {
     }
 
     componentDidMount() {
-        this.query(1);
+        //this.query(1);
     }
 
     handleOrderChange(order) {
@@ -128,10 +128,12 @@ export default class Agencies extends Component {
                   onSubmit={this.handleFilterSubmit.bind(this)}
                 />
 
-                <OrderBar
-                  fieldName="name"
-                  onSubmit={this.handleOrderChange.bind(this)}
-                />
+                {this.state.items != null &&
+                  <OrderBar
+                    fieldName="name"
+                    onSubmit={this.handleOrderChange.bind(this)}
+                  />
+                }
 
 
                 {this.state.items == null &&

@@ -2,9 +2,12 @@
 
   $banner = null;
   $crop = 'original';
+
   if(isset($field['fields'][0])){
-    if(isset($field['fields'][0]['value'][0]['fields'])){
-      $banner = $field['fields'][0]['value'][0]['fields'];
+    if(isset($field['fields'][0]['value']) && sizeof($field['fields'][0]['value'] > 0)){
+
+      $banner = array_pop($field['fields'][0]['value']);
+      $banner = $banner['fields'];
 
       $url = isset($banner['url']['values']['url'][App::getLocale()]) ? $banner['url']['values']['url'][App::getLocale()] : '' ;
       $title = isset($banner['title']['values'][App::getLocale()]) ? $banner['title']['values'][App::getLocale()] : '' ;

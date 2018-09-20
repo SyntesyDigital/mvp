@@ -460,6 +460,8 @@ class ContentContainer extends Component {
 
   render() {
 
+    const {fields,contentSourceField} = this.state;
+
     return (
       <div>
 
@@ -472,7 +474,7 @@ class ContentContainer extends Component {
 
         <ContentSelectModal
           display={this.state.displayContentModal}
-          field={this.state.contentSourceField}
+          field={contentSourceField != null && fields != null ? fields[contentSourceField] : null}
           onContentSelected={this.handleContentSelected}
           onContentCancel={this.handleContentCancel}
         />
