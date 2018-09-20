@@ -6,6 +6,7 @@ use Elasticsearch\ClientBuilder;
 
 use Modules\Architect\Entities\Language;
 use Illuminate\Database\Eloquent\Builder;
+use Elasticsearch\Common\Exceptions\Missing404Exception;
 
 trait Searchable
 {
@@ -58,11 +59,13 @@ trait Searchable
 
         $this->setElasticSearchReadOnlyAllowDelete();
 
-        return $this->getElasticSearchClient()->delete([
-            'index' => $this->getSearchableIndex(),
-            'type' => $this->getSearchableType(),
-            'id' => $this->id,
-        ]);
+        try {
+            $this->getElasticSearchClient()->delete([
+                'index' => $this->getSearchableIndex(),
+                'type' => $this->getSearchableType(),
+                'id' => $this->id,
+            ]);
+        } catch (Missing404Exception $ex) {}
     }
 
 
