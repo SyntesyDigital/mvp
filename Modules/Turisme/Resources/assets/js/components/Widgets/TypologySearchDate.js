@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Paginator from './../Common/Paginator';
+import MoreResults from './../Common/MoreResults';
 import FilterBar from './../Common/FilterBar';
 import ListItem from './../Common/ListItem';
 
@@ -78,8 +78,14 @@ export default class TypologySearchDate extends Component {
               if(response.status == 200
                   && response.data.data !== undefined)
               {
+                var old_items = self.state.items;
+                if(old_items !== null){
+                  old_items.push.apply(old_items, response.data.data);
+                }else{
+                  old_items =response.data.data;
+                }
                   self.setState({
-                      items : response.data.data,
+                      items : old_items,
                       lastPage : response.data.meta.last_page,
                       currPage : response.data.meta.current_page,
                       filters : filters
@@ -148,7 +154,7 @@ export default class TypologySearchDate extends Component {
                 }
 
                 {this.state.lastPage &&
-                    <Paginator
+                    <MoreResults
                       currPage={this.state.currPage}
                       lastPage={this.state.lastPage}
                       onChange={this.onPageChange.bind(this)}

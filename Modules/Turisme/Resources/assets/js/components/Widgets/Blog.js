@@ -142,7 +142,6 @@ export default class Blog extends Component {
                 }else{
                   old_items =response.data.data;
                 }
-                console.log("OLD ITEMS : ",old_items);
                   self.setState({
                       items : old_items,
                       lastPage : response.data.meta.last_page,
