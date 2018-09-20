@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 637);
+/******/ 	return __webpack_require__(__webpack_require__.s = 638);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -51468,18 +51468,18 @@ module.exports = {
 
 /***/ }),
 
-/***/ 637:
+/***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(638);
-__webpack_require__(642);
+__webpack_require__(639);
 __webpack_require__(643);
-module.exports = __webpack_require__(644);
+__webpack_require__(644);
+module.exports = __webpack_require__(645);
 
 
 /***/ }),
 
-/***/ 638:
+/***/ 639:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -51489,7 +51489,7 @@ module.exports = __webpack_require__(644);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(639);
+__webpack_require__(640);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -51497,11 +51497,11 @@ __webpack_require__(639);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(641);
+__webpack_require__(642);
 
 /***/ }),
 
-/***/ 639:
+/***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -51517,7 +51517,7 @@ window.Popper = __webpack_require__(106).default;
 try {
   window.$ = window.jQuery = __webpack_require__(107);
 
-  __webpack_require__(640);
+  __webpack_require__(641);
 } catch (e) {}
 
 /**
@@ -51563,7 +51563,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 640:
+/***/ 641:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -55514,7 +55514,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 641:
+/***/ 642:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55587,13 +55587,6 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 642:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 643:
 /***/ (function(module, exports) {
 
@@ -55602,6 +55595,13 @@ if (document.getElementById('example')) {
 /***/ }),
 
 /***/ 644:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 645:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

@@ -142,6 +142,23 @@ class Content extends Model
         return null;
     }
 
+    public static function getTree($id)
+    {
+      return Content::descendantsOf($id)->toTree($id);
+    }
+
+    public static function getTreeIds($id)
+    {
+        $ids = [];
+        $contents = Content::descendantsOf($id);
+
+        foreach($contents as $content){
+            $ids[] = $content->id;
+        }
+
+        return $ids;
+    }
+
     public function getFullSlug()
     {
         // FIXME : cache-it with a key that use updated_at, like md5(content_[id]_fullslug_[updated_at])

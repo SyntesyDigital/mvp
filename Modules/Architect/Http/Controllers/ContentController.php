@@ -91,7 +91,7 @@ class ContentController extends Controller
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
             'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
             'settings' => $content->settings,
-            'pages' => $this->contents->findWhere(['is_page' => 1])->pluck('title','id')->toArray(),
+            'pages' => $this->contents->getTreeWithHyphens(),
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
