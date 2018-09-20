@@ -123,12 +123,14 @@ export default class TypologyPaginated extends Component {
     }
 }
 
-
 if (document.getElementById('typology-paginated')) {
-    var element = document.getElementById('typology-paginated');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyPaginated
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-paginated]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologyPaginated
+          field={field}
+        />, element);
+    });
 }

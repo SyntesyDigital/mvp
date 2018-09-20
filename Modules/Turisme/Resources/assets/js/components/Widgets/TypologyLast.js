@@ -96,12 +96,14 @@ export default class TypologyLast extends Component {
     }
 }
 
-
 if (document.getElementById('typology-last')) {
-    var element = document.getElementById('typology-last');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyLast
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-last]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologyLast
+          field={field}
+        />, element);
+    });
 }

@@ -83,14 +83,16 @@ export default class ContactFormPress extends Component {
     }
 }
 
-
 if (document.getElementById('contact-form-press')) {
-    var element = document.getElementById('contact-form-press');
-    var field = element.getAttribute('field');
-    var csrf_token = element.getAttribute('csrf_token');
 
-    ReactDOM.render(<ContactFormPress
-        field={field}
-        csrf_token={csrf_token}
-      />, element);
+    document.querySelectorAll('[id=contact-form-press]').forEach( element => {
+
+        var field = element.getAttribute('field');
+        var csrf_token = element.getAttribute('csrf_token');
+
+        ReactDOM.render(<ContactFormPress
+            field={field}
+            csrf_token={csrf_token}
+          />, element);
+    });
 }
