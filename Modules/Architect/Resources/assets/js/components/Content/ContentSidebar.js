@@ -155,8 +155,6 @@ class ContentSidebar extends Component {
 
     var self = this;
 
-    //console.log('CONTENTSIDEBAR PAGES =>', this.props.pages);
-
     return (
       <div className="sidebar">
         { this.props.saved &&
@@ -190,7 +188,7 @@ class ContentSidebar extends Component {
                     <option value="">---</option>
                    {
                      this.props.pages && Object.keys(this.props.pages).map(function(id) {
-                         return <option value={id} key={id} selected={self.props.content && self.props.content.parent_id == id ? "selected" : ""}>{self.props.pages[id]}</option>
+                         return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
                      })
                    }
                </select>

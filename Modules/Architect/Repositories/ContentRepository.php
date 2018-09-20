@@ -159,11 +159,11 @@ class ContentRepository extends BaseRepository
 
     public function getTreeWithHyphens()
     {
-
+      $index = 0;
       $pageTree = array();
       $level = 1;
 
-      $traverse = function (&$pageTree,$pages, $fieldname,$level) use (&$traverse) {
+      $traverse = function (&$pageTree,$pages, &$index,$level) use (&$traverse) {
           $level++;
           $prev_string = '';
           if($level >= 1){
@@ -177,26 +177,28 @@ class ContentRepository extends BaseRepository
 
           foreach ($pages as $page) {
 
-            $pageTree[$page->id] = $prev_string.$page->getTitleAttribute();
-
-            $traverse($pageTree,$page->children, $fieldname,$level);
+            $pageTree[$index]['id']= $page->id;
+            $pageTree[$index]['title']= $prev_string.$page->getTitleAttribute();
+            $index ++;
+            $traverse($pageTree,$page->children, $index,$level);
           }
       };
 
       $pages = Content::where('is_page', 1)->get();
 
+
       foreach($pages as $page) {
 
         if(!$page->parent_id) {
 
-          $pageTree[$page->id] = $page->getTitleAttribute();
-
+          $pageTree[$index]['id']= $page->id;
+          $pageTree[$index]['title']= $page->getTitleAttribute();
+          $index++;
           //all parents
-          $traverse($pageTree,Content::getTree($page->id), 'page_id',$level);
+
+          $traverse($pageTree,Content::getTree($page->id), $index,$level);
         }
       }
-
-
       return  $pageTree;
 
     }
