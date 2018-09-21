@@ -2,21 +2,6 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import KeyValueField from './KeyValueField';
 
-/*
-values :
-
-  [{
-      "name" : "Català",
-      "key" : "",
-      "value" : 1
-  },{
-      "name" : "Català",
-      "key" : "",
-      "value" : 1
-  }]
-
-*/
-
 class KeyValuesField extends Component {
 
   constructor(props){
@@ -27,7 +12,7 @@ class KeyValuesField extends Component {
   }
 
   componentDidMount(){
-      console.log('KeyValues =>', this.props.field);
+      //console.log('KeyValues =>', this.props.field);
 
     if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length == 0){
       //setup value if not yet defined
@@ -38,19 +23,25 @@ class KeyValuesField extends Component {
 
       this.props.onFieldChange(newField);
 
-      console.log('componentDidMount =>', this.props.field);
+      //console.log('componentDidMount =>', this.props.field);
 
     }
   }
 
-  handleOnChange(event) {
-      this.props.field.value = event.target.value;
-      this.props.onFieldChange(this.props.field);
+  handleOnChange(e,index) {
+
+      const field = this.props.field;
+
+      field.value[index][e.target.name] = e.target.value;
+
+      //console.log("KeyValuesField :: handleOnChange => ",e,index);
+
+      this.props.onFieldChange(field);
   }
 
-  handleRemoveField(e,index) {
+  handleRemoveField(index) {
 
-    e.preventDefault();
+    //console.log("KeyValuesField :: handleRemoveField => ",index);
 
       const fields = this.props.field.value;
 
@@ -71,6 +62,8 @@ class KeyValuesField extends Component {
       return;
     }
 
+    console.log("KeyValuesField => ",this.props.field.value);
+
     const images = this.props.field.value;
 
     return (
@@ -79,7 +72,9 @@ class KeyValuesField extends Component {
               key={i}
   						index = {i}
               name = {item.name}
+              identifier = {item.identifier}
               value = {item.value}
+              onChangeField={this.handleOnChange}
               onRemoveField={this.handleRemoveField}
   					/>
 				))
@@ -90,7 +85,7 @@ class KeyValuesField extends Component {
   onAddItem(e){
     e.preventDefault();
 
-    console.log("KeyValuesField :: on AddItem");
+    //console.log("KeyValuesField :: on AddItem");
 
     const field = this.props.field;
 

@@ -21,6 +21,18 @@ export default class PublicationSummary extends Component {
         fields[fieldName].values[LOCALE] : '' ;
     }
 
+    renderLanguages(inputs) {
+      var result=[];
+      for(var key in inputs){
+        result.push(
+          <li key={key}>
+            {key+" ("+inputs[key]+")"}
+          </li>
+        );
+      }
+      return result;
+    }
+
     render() {
 
       const fields = this.props.field.fields;
@@ -33,6 +45,8 @@ export default class PublicationSummary extends Component {
       const languages = this.processText(fields,'idiomes');
       const price = this.processText(fields,'preu');
 
+      const inputs = this.props.field.inputs !== undefined ? this.props.field.inputs : null;
+
       console.log("PublicationSummary => ",this.props.field);
 
 
@@ -42,7 +56,9 @@ export default class PublicationSummary extends Component {
               <li className="title">
                 {title}
               </li>
-              
+              {inputs != null &&
+                this.renderLanguages(inputs)
+              }
             </ul>
         </div>
       );

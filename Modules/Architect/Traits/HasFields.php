@@ -191,6 +191,19 @@ trait HasFields
                 return $values;
             break;
 
+            case 'key_values':
+                $values = null;
+                $childs = $this->getFieldChilds($field);
+
+                if ($childs != null) {
+                    foreach ($childs as $k => $v) {
+                        $values[explode('.', $v->name)[1]][ explode('.', $v->name)[2] ] = $v->value;
+                    }
+                }
+
+                return $values;
+            break;
+
             case 'video':
                 $values = null;
                 $childs = $this->getFieldChilds($field);

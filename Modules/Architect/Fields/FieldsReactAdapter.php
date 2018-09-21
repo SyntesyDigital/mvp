@@ -154,7 +154,24 @@ class FieldsReactAdapter
                   }
                 }
 
+
+
                 $typologyField->value = $values;
+            break;
+
+            case 'key_values':
+                $values = null;
+
+                $childs = $this->content->getFieldChilds($contentField);
+
+                if($childs != null){
+                  foreach($childs as $k => $v) {
+                    $values[explode('.', $v->name)[1]][ explode('.', $v->name)[2] ] = $v->value;
+                  }
+                }
+
+                $typologyField->value = $values;
+
             break;
 
             case 'video':
