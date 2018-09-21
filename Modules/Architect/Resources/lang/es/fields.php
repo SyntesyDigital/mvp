@@ -16,6 +16,7 @@ return [
     'url' => 'URL',
     'file' => 'Arxiu',
     'translated_file' => 'Arxiu traduit',
+    'key_values' => 'Clau/Valor',
 
     'title' => 'Title',
     'description' => 'Descripció',

@@ -16720,6 +16720,20 @@ nav.main-nav ul li.active a {
   padding: 12px 0px;
 }
 
+.key-value-field.row {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.key-value-field .col {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.key-value-field .remove-field-btn {
+  line-height: 32px;
+}
+
 .menu .grid-items a {
   display: inline-block;
 }
