@@ -4,7 +4,7 @@
   $crop = 'original';
 
   if(isset($field['fields'][0])){
-    if(isset($field['fields'][0]['value']) && sizeof($field['fields'][0]['value'] > 0)){
+    if(isset($field['fields'][0]['value']) && sizeof($field['fields'][0]['value']) > 0){
 
       $banner = array_pop($field['fields'][0]['value']);
       $banner = $banner['fields'];
