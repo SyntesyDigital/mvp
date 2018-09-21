@@ -120,7 +120,8 @@ class ModalSelectItem extends Component {
 
     var fields = [];
 
-    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["IMAGES"].type,FIELDS["BOOLEAN"].type,FIELDS["URL"].type];
+    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["KEY_VALUES"].type,
+      FIELDS["IMAGES"].type,FIELDS["BOOLEAN"].type,FIELDS["URL"].type];
 
     for( var key in FIELDS){
 

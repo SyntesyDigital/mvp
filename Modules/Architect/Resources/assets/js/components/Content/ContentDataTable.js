@@ -44,32 +44,27 @@ class ContentDataTable extends Component {
         console.log("ContentDataTable :: setDatatable route : ",route,$(this.refs.main));
 
         var _this = this;
-
-
         var table = $(this.refs.main).DataTable({
-          language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
-    	    },
-    		  processing: true,
-          //serverSide: true,
-          order: [],
-    	    pageLength: 10,
-          language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
-          },
-    	    ajax: route,
-    	    columns: [
-    	        // {data: 'id', name: 'id', width: '40'},
-              {data: 'title', name: 'title'},
-              {data: 'typology', name: 'typology'},
-              {data: 'updated', name: 'updated'},
-              {data: 'author', name: 'author'},
-              {data: 'status', name: 'status'},
-              {data: 'action', name: 'action', orderable: false, searchable: false}
-    	    ],
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+            },
+            processing: true,
+            serverSide: true,
+            order: [],
+            pageLength: 10,
+            ajax: route,
+            columns: [
+                // {data: 'id', name: 'id', width: '40'},
+                {data: 'title', name: 'title'},
+                {data: 'typology', name: 'typology'},
+                {data: 'updated', name: 'updated'},
+                {data: 'author', name: 'author'},
+                {data: 'status', name: 'status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
             initComplete: function(settings, json) {
                 _this.initEvents();
-    	    }
+            }
         });
     }
 

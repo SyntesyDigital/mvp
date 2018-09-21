@@ -68,11 +68,11 @@ class ContentSelectModal extends Component {
 
       if(field != null){
         if(field.type == "link" || field.type == "url"){
-          return route+'?search=typology.has_slug:1;is_page:1';
+          return route+'?has_page=1';
         }
         else if(field.type == "widget" || field.type == "contents"){
           if(field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
-            return route+'?search=typology_id:'+field.settings.typologyAllowed;
+            return route+'?typology_id='+field.settings.typologyAllowed;
           }
         }
       }

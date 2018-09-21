@@ -6,6 +6,8 @@ use Modules\Architect\Http\Requests\Content\DuplicateContentRequest;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentTag;
 
+use Modules\Architect\Tasks\Urls\CreateUrlsContent;
+
 use Illuminate\Support\Facades\Schema;
 use Auth;
 
@@ -81,6 +83,12 @@ class DuplicateContent
             'author_id' => Auth::user()->id,
             'parent_id' => $this->content->parent_id
         ]);
+
+        // Create Url Content
+        (new CreateUrlsContent($content))->run();
+
+        // Index or reindex content on elasticsearch
+        $content->index();
 
         return $content;
     }
