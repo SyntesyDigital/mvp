@@ -73,13 +73,6 @@ class ModalEditItem extends Component {
       }
     ];
 
-    for(var key in CATEGORIES){
-      this.categories.push({
-        value: CATEGORIES[key].id,
-        name: CATEGORIES[key].name,
-      });
-    }
-
     this.TYPOLOGIES = [{
           id:'',
           name:'----'
@@ -170,6 +163,57 @@ class ModalEditItem extends Component {
        });
   }
 
+  loadCategories() {
+
+    var self = this;
+
+
+    axios.get(ASSETS+'api/categories/tree?accept_lang=es')
+      .then(function (response) {
+          if(response.status == 200
+              && response.data.data !== undefined
+              && response.data.data[0].descendants.length > 0)
+          {
+            var categories = response.data.data[0].descendants
+            self.push_categories(response.data.data, 0,self.categories);
+          }
+
+
+      }).catch(function (error) {
+         console.log(error);
+       });
+
+  }
+  printSpace(level)
+ {
+
+   if(level <= 1)
+     return '';
+
+   var spaces = [];
+   for(var i=1;i<level;i++){
+     spaces.push(
+       "- "
+     );
+   }
+
+   return spaces;
+ }
+
+ push_categories(categories_from, level, categories_to){
+   level++;
+   for (var i = 0; i< categories_from.length; i++ ){
+        categories_to.push({
+          value: categories_from[i].id,
+          name: this.printSpace(level)+categories_from[i].name,
+        });
+       if(categories_from[i].descendants.length > 0){
+          this.push_categories(categories_from[i].descendants,level, categories_to);
+       }
+   }
+
+ }
+
   processProps(props) {
 
     console.log("ModalEditItem :: field processProps ",props);
@@ -192,6 +236,8 @@ class ModalEditItem extends Component {
 
     this.loadAxes();
     this.loadPrograms();
+    this.loadCategories();
+
   }
 
   componentWillReceiveProps(nextProps)
@@ -724,6 +770,11 @@ class ModalEditItem extends Component {
 
       return formats;
   }
+
+
+
+
+
 
   renderSettings() {
 

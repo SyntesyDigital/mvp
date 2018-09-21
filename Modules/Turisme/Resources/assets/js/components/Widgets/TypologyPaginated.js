@@ -31,7 +31,10 @@ export default class TypologyPaginated extends Component {
         const maxItems = field.settings.maxItems?parseInt(field.settings.maxItems):null;
         var size_limited = size;
         const categoryQuery = category != null ? "&category_id="+category : '';
-        if(this.state.lastPage && maxItems){
+        console.log('LAST:',this.state.lastPage );
+        console.log('CURR:',this.state.currPage );
+
+        if(this.state.lastPage && this.state.lastPage == this.state.currPage+1 && maxItems){
           size_limited = maxItems - this.state.items.length;
         }
 
