@@ -493,7 +493,8 @@ class ModalEditItem extends Component {
         }
 
         field.value[listItemInfo.index].fields[index].value[language] = media;
-        //console.log("ModalEditItem :: Field after => ",field);
+        console.log("ModalEditItem :: onImageSelect :: Field after => ",field,language);
+
         return field;
 
       });
@@ -690,6 +691,8 @@ class ModalEditItem extends Component {
 
   handleListItemEdit(editInfo) {
 
+    console.log("ModalEditItem :: handleListItemEdit :: editInfo => ",editInfo);
+
     this.setState({
       displayListItemModal : true,
       listItemInfo : editInfo
@@ -709,7 +712,11 @@ class ModalEditItem extends Component {
   handleSubmitListItem(field) {
 
     var stateField = this.state.field;
+
     stateField.value[this.state.listItemInfo.index] = field;
+
+    console.log("ModalEditItem :: handleSubmitListItem :: listItemInfo => ",this.state.listItemInfo);
+    console.log("ModalEditItem :: handleSubmitListItem => ",stateField);
 
     this.setState({
         field : stateField,
@@ -717,18 +724,34 @@ class ModalEditItem extends Component {
         listItemInfo : null
     });
 
-    //this.props.onUpdateData(stateField);
+    //Iniclamente comentado
+
+
+
+    this.props.onUpdateData(stateField);
   }
 
-  handleUpdateListItem(field) {
+  handleListItemChange(field) {
+
     var stateField = this.state.field;
+    const {listItemInfo} = this.state;
+
     stateField.value[this.state.listItemInfo.index] = field;
 
+    //update the field used to comunicate between the ListWidget and the Modal
+    listItemInfo.field = field;
+
+    console.log("ModalEditItem :: handleListItemChange :: listItemInfo => ",this.state.listItemInfo);
+    console.log("ModalEditItem :: handleListItemChange => ",stateField);
+
     this.setState({
-        field : stateField
+        field : stateField,
+        listItemInfo : listItemInfo
     });
 
-    //this.props.onUpdateData(stateField);
+
+
+    this.props.onUpdateData(stateField);
   }
 
   handleImageSelect(field) {
@@ -946,12 +969,11 @@ class ModalEditItem extends Component {
 
   }
 
+
+
   render() {
 
     //console.log("ModalEditItem :: render field => ",this.state.field);
-
-    //FIXME el ModalEditListItem sigue sin actualizar bien la primera vez
-    //onUpdateData={this.handleUpdateListItem.bind(this)}
 
     return (
       <div>
@@ -965,6 +987,7 @@ class ModalEditItem extends Component {
           onSubmitData={this.handleSubmitListItem.bind(this)}
           onImageSelect={this.handleListImageSelect.bind(this)}
           onContentSelect={this.handleListContentSelect.bind(this)}
+          onUpdateData={this.handleListItemChange.bind(this)}
           zIndex={9500}
         />
 

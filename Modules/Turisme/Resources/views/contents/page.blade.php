@@ -14,7 +14,7 @@
 
 @if(isset($content) && $content->parent_id != null)
 <div class="single">
-  <div class="grey no-margin">
+  <div class="breadcrumb">
        <div class="container">
         <div class="row">
           <div class="detalls-single">

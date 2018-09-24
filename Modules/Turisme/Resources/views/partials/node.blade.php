@@ -32,7 +32,7 @@
         @includeIf('turisme::partials.fields.'.$node['field']['type'],
           [
             "field" => $node['field'],
-            "settings" => $node['field']['settings']
+            "settings" => $node['field']['settings'],
           ]
         )
       @endif

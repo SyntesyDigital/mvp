@@ -18,5 +18,14 @@
         ]
       )
     </p>
+    <p class="subtitle">
+      @include('turisme::partials.fields.'.$field['fields'][2]['type'],
+        [
+          "field" => $field['fields'][2],
+          "settings" => $settings,
+          "div" => false
+        ]
+      )
+    </p>
   </div>
 </div>
