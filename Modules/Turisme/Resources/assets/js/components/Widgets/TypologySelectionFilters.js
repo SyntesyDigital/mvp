@@ -389,12 +389,14 @@ export default class TypologySelectionFilters extends Component {
     }
 }
 
-
 if (document.getElementById('typology-selection-filters')) {
-    var element = document.getElementById('typology-selection-filters');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologySelectionFilters
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-selection-filters]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologySelectionFilters
+          field={field}
+        />, element);
+    });
 }

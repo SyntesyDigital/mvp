@@ -16,12 +16,18 @@ class News extends Component {
 
     }
 
+    processText(fields,fieldName){
+      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ?
+        fields[fieldName].values[LOCALE] : '' ;
+    }
+
     render() {
 
       const fields = this.props.field.fields;
       console.log("News => ",this.props.field);
 
       const category = this.props.field.category != null ? this.props.field.category.name : null;
+      const description = this.processText(fields,'descripcio');
 
       var data = fields.data.values != null ? fields.data.values : null;
       if(data != null){
@@ -54,7 +60,16 @@ class News extends Component {
           </p>
 
           <a href="">{fields.title.values[LOCALE] !== undefined ?
-            fields.title.values[LOCALE] : '' }</a>
+            fields.title.values[LOCALE] : '' }
+          </a>
+
+          {this.props.extended &&
+            <div className="intro"
+              dangerouslySetInnerHTML={{__html: description}}
+            >
+            </div>
+          }
+
         </div>
       );
 

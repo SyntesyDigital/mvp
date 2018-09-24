@@ -35,7 +35,7 @@ class MenuRepository extends BaseRepository
     public function getDisplayTree($menu)
     {
         $menuElements = $menu->elements()->orderBy('order', 'ASC')->get();
-        $languages = Language::all();
+        $languages = Language::getAllCached();
         $tree = [];
 
         $traverse = function ($elements) use (&$traverse, $languages) {
@@ -77,7 +77,7 @@ class MenuRepository extends BaseRepository
     public function getElementTree($menu)
     {
         $menuElementsTree = array();
-        $languages = Language::all();
+        $languages = Language::getAllCached();
         $level = 1;
 
         $traverse = function (&$menuElementsTree, $menuElements, $level) use (&$traverse, $languages) {
@@ -93,6 +93,7 @@ class MenuRepository extends BaseRepository
                     "field" => [
                         "id" => $menuElement->id,
                         "identifier" => "link",
+                        "type" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
                         "name" => "Enllaç",
                         "settings" => json_decode($menuElement->settings),
@@ -117,6 +118,7 @@ class MenuRepository extends BaseRepository
                     "field" => [
                         "id" => $menuElement->id,
                         "identifier" => "link",
+                        "type" => "link",
                         "value" => $menuElement->getFieldValues('link', 'link', $languages),
                         "name" => "Enllaç",
                         "settings" => json_decode($menuElement->settings),

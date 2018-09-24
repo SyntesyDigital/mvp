@@ -89,12 +89,14 @@ export default class TypologyCarousel extends Component {
     }
 }
 
-
 if (document.getElementById('typology-carousel')) {
-    var element = document.getElementById('typology-carousel');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyCarousel
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-carousel]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologyCarousel
+          field={field}
+        />, element);
+    });
 }

@@ -32,12 +32,9 @@ export default class TypologyPaginated extends Component {
         var size_limited = size;
         const categoryQuery = category != null ? "&category_id="+category : '';
 
-
-
           if(maxItems && size > maxItems){
             size_limited = maxItems;
           }
-        console.log('NUMITEMS:',size_limited );
 
         axios.get(ASSETS+'api/contents?size='+size_limited+'&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
           .then(function (response) {
@@ -76,7 +73,9 @@ export default class TypologyPaginated extends Component {
 
       var result = [];
 
-      const {items} = this.state;
+      const {items,field} = this.state;
+
+      const extended = field.settings.extended != null ? field.settings.extended : false;
 
       for(var key in items){
         console.log("TypologyPaginated => ",items[key]);
@@ -85,6 +84,7 @@ export default class TypologyPaginated extends Component {
           <li key={key}>
             <ListItem
               field={items[key]}
+              extended={extended}
             />
           </li>
         );
@@ -127,12 +127,14 @@ export default class TypologyPaginated extends Component {
     }
 }
 
-
 if (document.getElementById('typology-paginated')) {
-    var element = document.getElementById('typology-paginated');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyPaginated
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-paginated]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologyPaginated
+          field={field}
+        />, element);
+    });
 }

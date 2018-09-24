@@ -42,6 +42,13 @@ class Publication extends Component {
 
       return (
         <div className="publication">
+          <p className="image">
+            {fields.image &&
+            <ImageField
+              field={fields.image}
+            />
+            }
+          </p>
           <p className="titol">{title}</p>
           <ul className="detalls">
             <li>Tipus: {type}</li>

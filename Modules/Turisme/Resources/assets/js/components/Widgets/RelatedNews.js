@@ -127,14 +127,17 @@ export default class RelatedNews extends Component {
 
 
 if (document.getElementById('related-news')) {
-    var element = document.getElementById('related-news');
-    var tags = element.getAttribute('tags');
-    var category = element.getAttribute('category');
-    var content = element.getAttribute('content');
 
-    ReactDOM.render(<RelatedNews
-        tags={tags}
-        category={category}
-        content={content}
-      />, element);
+    document.querySelectorAll('[id=related-news]').forEach( element => {
+
+        var tags = element.getAttribute('tags');
+        var category = element.getAttribute('category');
+        var content = element.getAttribute('content');
+
+        ReactDOM.render(<RelatedNews
+            tags={tags}
+            category={category}
+            content={content}
+          />, element);
+    });
 }

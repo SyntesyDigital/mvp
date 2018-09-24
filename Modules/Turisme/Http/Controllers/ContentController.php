@@ -82,7 +82,7 @@ class ContentController extends Controller
       abort(404);
     }
 
-    public function preview(Request $request,$id)
+    public function preview(Request $request, $id)
     {
 
       $content = Content::find($id);

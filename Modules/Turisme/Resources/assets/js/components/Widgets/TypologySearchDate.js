@@ -165,12 +165,14 @@ export default class TypologySearchDate extends Component {
     }
 }
 
-
 if (document.getElementById('typology-search-date')) {
-    var element = document.getElementById('typology-search-date');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologySearchDate
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-search-date]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologySearchDate
+          field={field}
+        />, element);
+    });
 }

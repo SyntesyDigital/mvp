@@ -32,6 +32,7 @@ class ContentContainer extends Component {
              translations[language.iso] = true;
          }
      });
+     translations[DEFAULT_LOCALE] = true;
 
      //console.log("ContentContainer :: content => ", props.content);
 
@@ -459,6 +460,8 @@ class ContentContainer extends Component {
 
   render() {
 
+    const {fields,contentSourceField} = this.state;
+
     return (
       <div>
 
@@ -471,7 +474,7 @@ class ContentContainer extends Component {
 
         <ContentSelectModal
           display={this.state.displayContentModal}
-          field={this.state.contentSourceField}
+          field={contentSourceField != null && fields != null ? fields[contentSourceField] : null}
           onContentSelected={this.handleContentSelected}
           onContentCancel={this.handleContentCancel}
         />
@@ -480,6 +483,7 @@ class ContentContainer extends Component {
           content={this.state.content}
           icon={this.state.typology.icon}
           name={this.state.typology.name}
+          typologyId={this.state.typology.id}
           onSubmitForm={this.handleSubmitForm}
           saved={this.props.saved}
           hasPreview={this.state.typology.has_slug == 1 ? true : false}

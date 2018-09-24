@@ -4,6 +4,8 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Architect\Traits\HasFields;
+use Modules\Architect\Traits\HasUrl;
+use Modules\Architect\Traits\Searchable;
 use Kalnoy\Nestedset\NodeTrait;
 
 use Modules\Architect\Entities\Language;
@@ -12,14 +14,20 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Content extends Model
 {
-    use HasFields, NodeTrait;
+    use HasFields,
+        HasUrl,
+        NodeTrait,
+        Searchable;
 
-    const STATUS_PUBLISHED = 'PUBLISHED';
-    const STATUS_DRAFT = 'DRAFT';
+    const STATUS_PUBLISHED = 1;
+    const STATUS_DRAFT = 0;
 
     protected $fieldModel = 'Modules\Architect\Entities\ContentField';
 
-    protected $appends = ['title'];
+    protected $appends = [
+        'title',
+        'url'
+    ];
 
     /**
      * The database table used by the model.
@@ -65,6 +73,9 @@ class Content extends Model
         'published_at'
     ];
 
+    /*
+     *  Relations
+     */
     public function typology()
     {
         return $this->hasOne('\Modules\Architect\Entities\Typology', "id", "typology_id");
@@ -102,7 +113,6 @@ class Content extends Model
 
     public function getStringStatus()
     {
-
         $status = [
             1 => trans('architect::contents.published'),
             0 => trans('architect::contents.draft'),
@@ -114,9 +124,9 @@ class Content extends Model
     }
 
 
-    public function getTitleAttribute()
+    public function getTitleAttribute($language = null)
     {
-        $defaultLanguage = Language::getDefault();
+        $defaultLanguage = $language ? $language : Language::getDefault();
         $defaultLanguageId = isset($defaultLanguage->id) ? $defaultLanguage->id : null;
 
         if($this->page) {
@@ -183,13 +193,9 @@ class Content extends Model
     }
 
 
-
-
-
     /*
      *  Scopes
      */
-
      public function scopeField($query, $name, $value)
      {
          return $query->where([
@@ -223,7 +229,6 @@ class Content extends Model
     {
         return $query->where('status', 0);
     }
-
 
     public function scopeIsPage(Builder $query)
     {

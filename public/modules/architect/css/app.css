@@ -14215,6 +14215,11 @@ section#content .body {
   right: 40px;
 }
 
+#logo-wrapper img {
+  width: 100%;
+  max-width: 287px;
+}
+
 aside.sidebar {
   width: 0;
   position: fixed;
@@ -14915,6 +14920,7 @@ nav.main-nav ul li.active a {
 
 .leftbar-page .page-content {
   padding-top: 20px;
+  padding-bottom: 60px;
 }
 
 .leftbar-page .page-content h3 {
@@ -16630,6 +16636,20 @@ nav.main-nav ul li.active a {
 
 .translated-file a.btn.btn-link {
   padding: 12px 0px;
+}
+
+.key-value-field.row {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.key-value-field .col {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.key-value-field .remove-field-btn {
+  line-height: 32px;
 }
 
 .menu .grid-items a {

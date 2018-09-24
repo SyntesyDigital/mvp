@@ -36,6 +36,12 @@ class ArchitectServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->commands([
+            \Modules\Architect\Console\ElasticSearchIndexAllContents::class,
+            \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
+            \Modules\Architect\Console\ElasticSearchRemoveAllIndexes::class,
+            \Modules\Architect\Console\BuildAllUrls::class,
+        ]);
     }
 
     /**
@@ -49,6 +55,7 @@ class ArchitectServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('architect.php'),
             __DIR__.'/../Config/fields.php' => config_path('fields.php'),
         ], 'config');
+
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'architect'
         );

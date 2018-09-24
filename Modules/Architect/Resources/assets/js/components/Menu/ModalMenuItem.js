@@ -229,6 +229,7 @@ export default class ModalMenuItem extends Component {
 
         <ContentSelectModal
           display={this.state.displayContentModal}
+          field={this.state.field}
           onContentSelected={this.handleContentSelected.bind(this)}
           onContentCancel={this.handleContentCancel.bind(this)}
           zIndex={11000}

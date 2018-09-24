@@ -10,7 +10,8 @@ class ContentSelectModal extends Component {
         super(props);
 
         this.state = {
-          contentSelected : null
+          contentSelected : null,
+          isOpen : false,
         };
 
         this.onModalClose = this.onModalClose.bind(this);
@@ -29,6 +30,8 @@ class ContentSelectModal extends Component {
     onModalClose(e){
         e.preventDefault();
         this.props.onContentCancel();
+
+
     }
 
     componentDidMount(){
@@ -42,20 +45,50 @@ class ContentSelectModal extends Component {
     modalOpen()
     {
         TweenMax.to($("#content-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+        this.setState({
+          isOpen : true
+        });
     }
 
     modalClose() {
       var self =this;
         TweenMax.to($("#content-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({
-            imageSelected : null
+            imageSelected : null,
+            isOpen : false
           });
         }});
     }
 
+    getModalRoute() {
+
+      const field = this.props.field;
+
+      var route = routes["contents.data"];
+
+      if(field != null){
+        if(field.type == "link" || field.type == "url"){
+          return route+'?has_page=1';
+        }
+        else if(field.type == "widget" || field.type == "contents"){
+          if(field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
+            return route+'?typology_id='+field.settings.typologyAllowed;
+          }
+        }
+      }
+
+      return route;
+
+    }
+
+
     render() {
 
         var zIndex = this.props.zIndex !== undefined ? this.props.zIndex : 10000;
+        //only linkable contents
+        var route = this.getModalRoute();
+
+        console.log("ContentSelectModal :: Field => ",this.props.field,route);
 
         return (
           <div style={{zIndex:zIndex}}>
@@ -80,7 +113,8 @@ class ContentSelectModal extends Component {
                         <div className="col-xs-12">
 
                             <ContentDataTable
-                              route={routes["contents.data"]}
+                              init={this.state.isOpen}
+                              route={route}
                               onSelectItem={this.handleSelectItem}
                             />
 

@@ -44,7 +44,7 @@ class UpdateTranslation
         }
 
         // OPTIMIZE : create task for it :)
-        foreach(Language::all() as $language) {
+        foreach(Language::getAllCached() as $language) {
             Cache::forget('localization.' . $language->iso);
         }
 

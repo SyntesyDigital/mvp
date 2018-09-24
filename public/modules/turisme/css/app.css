@@ -10280,6 +10280,15 @@ form.contact-form .checkbox {
   margin-left: 0px !important;
 }
 
+.press a:after {
+  content: '|';
+  padding-left: 6px;
+}
+
+.press a:last-child:after {
+  content: none;
+}
+
 .filter-bar form.nova-cerca input {
   display: inline-block;
   width: 20%;

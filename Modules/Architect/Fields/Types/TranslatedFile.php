@@ -26,7 +26,7 @@ class TranslatedFile extends Field implements FieldInterface
     public function save($content, $identifier, $values, $languages = null)
     {
 
-        $languages = Language::all();
+        $languages = Language::getAllCached();
         $values = !is_array($values) ? [$values] : $values;
 
         foreach($values as $iso => $value) {

@@ -10,15 +10,74 @@ class PublicationSelected extends Component {
     constructor(props)
     {
         super(props);
+
+        this.state = {
+          inputs : {}
+        };
     }
 
     componentDidMount() {
 
     }
 
+    onChange(event){
+
+      const {inputs} = this.state;
+
+      inputs[event.target.name] = event.target.value;
+
+      this.setState({
+        inputs : inputs
+      });
+
+      this.props.onItemChange(inputs,this.props.field.id);
+    }
+
     processText(fields,fieldName){
       return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ?
         fields[fieldName].values[LOCALE] : '' ;
+    }
+
+    renderOptions(max){
+
+      if(max === undefined || max == null){
+        max = 0;
+      }
+      else {
+        max = parseInt(max);
+      }
+
+      var options = [];
+      for(var i=0;i<=max;i++){
+        options.push(
+          <option key={i} value={i}>{i}</option>
+        );
+      }
+      return options;
+    }
+
+    renderLanguages(){
+      const fields = this.props.field.fields;
+
+      console.log("PublicationSelected :: renderLanguages => ",fields);
+      var result = [];
+
+      if(fields.stock !== undefined && fields.stock.values !== undefined){
+
+        for(var key in fields.stock.values){
+          var item = fields.stock.values[key];
+          result.push(
+            <li key={key} className={"list-forms "+(item.value !== undefined && parseInt(item.value) != 0 ? '' : 'empty')}>
+              <label htmlFor={item.identifier}>{item.name}</label>
+              <select name={item.name} id={item.identifier} onChange={this.onChange.bind(this)} >
+                {this.renderOptions(item.value)}
+              </select>
+            </li>
+          );
+        }
+      }
+
+      return result;
     }
 
     render() {
@@ -40,46 +99,18 @@ class PublicationSelected extends Component {
 
       return (
         <div className="publication">
+            <p className="image">
+              {fields.image &&
+              <ImageField
+                field={fields.image}
+              />
+              }
+            </p>
             <p className="media"><img src="images/img-medium.png" alt=""/></p>
             <p className="expand"><a href=""><img src="images/expand.png" alt=""/></a></p>
             <p className="titol">{title}</p>
             <ul className="detalls">
-              <li className="list-forms">
-                <label htmlFor="Catala">Català</label>
-                <select name="Catala" id="Catala">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </li>
-              <li className="list-forms">
-                <label className="Espanol">Español</label>
-                <select name="Espanol" id="Espanol">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </li>
-              <li className="list-forms">
-                <label className="English">English</label>
-                <select name="English" id="English">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </li>
-              <li className="list-forms empty">
-                <label className="Francais">Français</label>
-                <select name="Francais" id="select5">
-                  <option>0</option>
-                </select>
-              </li>
+              {this.renderLanguages()}
             </ul>
             <button type="button" className="btn" onClick={this.props.onRemove.bind(this,this.props.field)}>{Lang.get('widgets.remove')}</button>
         </div>

@@ -20,7 +20,7 @@ class UpdateMenu
              'fields',
              'settings'
          ]);
-         $this->languages = Language::all()->pluck('id','iso');
+         $this->languages = Language::getAllCached()->pluck('id','iso');
      }
 
     public static function fromRequest(Menu $menu, CreateMenuRequest $request)

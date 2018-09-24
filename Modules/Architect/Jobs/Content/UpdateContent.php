@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 use Modules\Architect\Entities\Menu;
-
+use Modules\Architect\Tasks\Urls\UpdateUrlsContent;
 
 use Modules\Architect\Fields\FieldConfig;
 use Modules\Architect\Fields\Types\Text as TextField;
@@ -21,7 +21,7 @@ class UpdateContent
      public function __construct(Content $content, $attributes)
      {
          $this->content = $content;
-         $this->languages = Language::all();
+         $this->languages = Language::getAllCached();
          $this->attributes = array_only($attributes, [
              'typology_id',
              'author_id',
@@ -66,6 +66,12 @@ class UpdateContent
         if($menu) {
             Cache::forget(sprintf("menu_%s", $menu->name));
         }
+
+        // Update url
+        (new UpdateUrlsContent($this->content))->run();
+
+        // Elasticsearch indexation
+        $this->content->index();
 
         return $this->content;
     }

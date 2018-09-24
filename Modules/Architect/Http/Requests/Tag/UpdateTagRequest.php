@@ -20,7 +20,7 @@ class UpdateTagRequest extends FormRequest
     private function buildRules()
     {
         $rules = [];
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         // print_r(request()->all());
         // exit();
@@ -43,7 +43,7 @@ class UpdateTagRequest extends FormRequest
     public function messages()
     {
         $messages = [];
-        $languages = Language::all();
+        $languages = Language::getAllCached();
 
         foreach(Tag::FIELDS as $field) {
             foreach($languages as $language) {

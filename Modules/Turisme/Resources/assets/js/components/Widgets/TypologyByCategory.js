@@ -84,7 +84,7 @@ export default class TypologyByCategory extends Component {
 
       return (
         <div className="hierachy-item" key={key}>
-          <h2>{item['name']}</h2>
+          <h3>{item['name']}</h3>
           <ul>
             {this.renderContents(item['contents'])}
           </ul>
@@ -130,12 +130,14 @@ export default class TypologyByCategory extends Component {
     }
 }
 
-
 if (document.getElementById('typology-by-category')) {
-    var element = document.getElementById('typology-by-category');
-    var field = element.getAttribute('field');
 
-    ReactDOM.render(<TypologyByCategory
-        field={field}
-      />, element);
+    document.querySelectorAll('[id=typology-by-category]').forEach( element => {
+
+      var field = element.getAttribute('field');
+
+      ReactDOM.render(<TypologyByCategory
+          field={field}
+        />, element);
+    });
 }

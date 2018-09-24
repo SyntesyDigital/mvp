@@ -6,6 +6,14 @@ class ContentBar extends Component {
 
   constructor(props){
     super(props);
+
+    if(props.typologyId != null){
+      this.createRoute = routes['contents.create'].replace(':id',props.typologyId);
+    }
+    else {
+      this.createRoute = routes['contents.page.create'];
+    }
+
   }
 
   duplicate(){
@@ -39,11 +47,15 @@ class ContentBar extends Component {
   }
 
   renderUnsavedMenu() {
+
+
+
+
     return (
       <ul className="dropdown-menu dropdown-menu-right default-padding">
           <li className="dropdown-header"></li>
           <li>
-              <a href={routes['contents.page.create']}>
+              <a href={this.createRoute}>
                   <i className="fa fa-plus-circle"></i>
                   &nbsp;Nou
               </a>
@@ -66,7 +78,7 @@ class ContentBar extends Component {
       <ul className="dropdown-menu dropdown-menu-right default-padding">
           <li className="dropdown-header"></li>
           <li>
-              <a href={routes['contents.page.create']}>
+              <a href={this.createRoute}>
                   <i className="fa fa-plus-circle"></i>
                   &nbsp;Nou
               </a>
@@ -144,7 +156,7 @@ class ContentBar extends Component {
                   </div>
 
                 {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
-                  this.props.hasPreview && 
+                  this.props.hasPreview &&
                   <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
                 }
                 <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>

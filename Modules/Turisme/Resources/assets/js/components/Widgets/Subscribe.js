@@ -86,14 +86,16 @@ export default class Subscribe extends Component {
     }
 }
 
-
 if (document.getElementById('subscribe')) {
-    var element = document.getElementById('subscribe');
-    var field = element.getAttribute('field');
-    var csrf_token = element.getAttribute('csrf_token');
 
-    ReactDOM.render(<Subscribe
-        field={field}
-        csrf_token={csrf_token}
-      />, element);
+    document.querySelectorAll('[id=subscribe]').forEach( element => {
+
+      var field = element.getAttribute('field');
+      var csrf_token = element.getAttribute('csrf_token');
+
+      ReactDOM.render(<Subscribe
+          field={field}
+          csrf_token={csrf_token}
+        />, element);
+    });
 }

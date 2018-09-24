@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content-form"
-languages="{{ base64_encode(Modules\Architect\Entities\Language::all()) }}"
+languages="{{ base64_encode(Modules\Architect\Entities\Language::getAllCached()) }}"
 users="{{ $users ? base64_encode($users->toJson()) : null }}"
 tags="{{ isset($tags) ? base64_encode($tags->toJson()) : null }}"
 categories="{{ isset($categories) ? base64_encode(json_encode($categories)) : null }}"
@@ -38,6 +38,7 @@ var routes = {
   'contents.data' : '{{ route('contents.modal.data') }}',
   'showContent' : "{{route('contents.show',['id' => ':id'])}}",
   'contents.page.create' : "{{route('contents.page.create')}}",
+  'contents.create' : "{{route('contents.create',['typology' => ':id'])}}",
   'previewContent' : ASSETS+DEFAULT_LOCALE+"/preview/:id",
   'pagelayouts.data' : '{{ route('pagelayouts.modal.data') }}'
 };

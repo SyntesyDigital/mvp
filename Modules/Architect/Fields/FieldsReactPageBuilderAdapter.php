@@ -17,7 +17,7 @@ class FieldsReactPageBuilderAdapter
     {
         $this->content = $content;
         $this->page = $content->page;
-        $this->languages = Language::all();
+        $this->languages = Language::getAllCached();
     }
 
     public function get()
@@ -103,6 +103,7 @@ class FieldsReactPageBuilderAdapter
             break;
 
             case 'date':
+                $contentField = ContentField::where('name', $fieldName)->first();
                 return date('Y-m-d H:i:s', $contentField->value);
             break;
 

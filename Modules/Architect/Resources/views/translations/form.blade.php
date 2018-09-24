@@ -150,7 +150,7 @@
 
                               <div id="collapse{{ $field['identifier'] }}" class="collapse in" aria-labelledby="heading{{ $field['identifier'] }}" aria-expanded="true" aria-controls="collapse{{ $field['identifier'] }}">
                                   <div class="field-form">
-                                      @foreach(Modules\Architect\Entities\Language::all() as $language)
+                                      @foreach(Modules\Architect\Entities\Language::getAllCached() as $language)
 
                                           <div class='form-group bmd-form-group'>
                                               <label class="bmd-label-floating">{{ $field['name'] }} - {{ $language->name }}</label>

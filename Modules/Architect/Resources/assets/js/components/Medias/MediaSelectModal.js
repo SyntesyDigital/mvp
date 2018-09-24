@@ -17,7 +17,8 @@ class MediaSelectModal extends Component {
         super(props);
 
         this.state = {
-          imageSelected : null
+          imageSelected : null,
+          isOpen : false
         };
 
         this._dropzone = null;
@@ -41,7 +42,7 @@ class MediaSelectModal extends Component {
       console.log("MediaSelectModal :: componentDidMount");
 
       this.initDropzone();
-      this.setDatatable();
+      //this.setDatatable();
 
     }
 
@@ -129,7 +130,7 @@ class MediaSelectModal extends Component {
     setDatatable()
     {
 
-        console.log("MediaSelectModal :: setDatatable");
+        //console.log("MediaSelectModal :: setDatatable");
 
         var _this = this;
 
@@ -192,6 +193,13 @@ class MediaSelectModal extends Component {
     componentWillReceiveProps(nextProps)
     {
       if(nextProps.display){
+          if(!this.state.isOpen){
+            this.setDatatable();
+            this.setState({
+              isOpen : true
+            });
+          }
+
           this.modalOpen();
       } else {
           this.modalClose();

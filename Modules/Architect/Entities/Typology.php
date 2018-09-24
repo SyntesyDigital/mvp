@@ -4,9 +4,11 @@ namespace Modules\Architect\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Modules\Architect\Traits\HasUrl;
 
 class Typology extends Model
 {
+    use HasUrl;
 
     /**
      * The database table used by the model.
@@ -84,5 +86,19 @@ class Typology extends Model
             $q->where('name', $name);
             $q->where('value', $value);
         });
+    }
+
+    public function getSlug($languageId)
+    {
+        if(!$this->has_slug) {
+            return false;
+        }
+
+        $attr = $this->attrs
+            ->where('name', 'slug')
+            ->where('language_id', $languageId)
+            ->first();
+
+        return $attr ? $attr->value : null;
     }
 }

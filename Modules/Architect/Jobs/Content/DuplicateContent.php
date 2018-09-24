@@ -6,7 +6,10 @@ use Modules\Architect\Http\Requests\Content\DuplicateContentRequest;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentTag;
 
+use Modules\Architect\Tasks\Urls\CreateUrlsContent;
+
 use Illuminate\Support\Facades\Schema;
+use Auth;
 
 class DuplicateContent
 {
@@ -22,7 +25,13 @@ class DuplicateContent
 
     public function handle()
     {
-        $this->content->load('fields', 'page', 'tags', 'languages', 'categories');
+        $this->content->load(
+            'fields',
+            'page',
+            'tags',
+            'languages',
+            'categories'
+        );
 
         $content = $this->content->replicate();
         $content->push();
@@ -37,9 +46,20 @@ class DuplicateContent
 
         // Fields
         if($this->content->fields) {
-            foreach($this->content->fields as $item){
-                unset($item->id);
-                $content->fields()->create($item->toArray());
+            foreach($this->content->fields as $field){
+                unset($field->id);
+
+                switch($field->name) {
+                    case 'slug':
+                        $field->value = $field->value . '-' . $content->id;
+                    break;
+
+                    case 'title':
+                        $field->value = $field->value . ' (duplicated) ';
+                    break;
+                }
+
+                $content->fields()->create($field->toArray());
             }
         }
 
@@ -57,6 +77,18 @@ class DuplicateContent
         if($this->content->categories) {
             $content->categories()->attach($this->content->categories->pluck('id')->toArray());
         }
+
+        $content->update([
+            'status' => Content::STATUS_DRAFT,
+            'author_id' => Auth::user()->id,
+            'parent_id' => $this->content->parent_id
+        ]);
+
+        // Create Url Content
+        (new CreateUrlsContent($content))->run();
+
+        // Index or reindex content on elasticsearch
+        $content->index();
 
         return $content;
     }

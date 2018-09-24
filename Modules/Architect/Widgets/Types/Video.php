@@ -27,7 +27,7 @@ class Video extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'typologiesAllowed',
+        'typologyAllowed',
         'maxItems'
     ];
 

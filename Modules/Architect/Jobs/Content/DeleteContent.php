@@ -22,6 +22,7 @@ class DeleteContent
     public function handle()
     {
         Schema::disableForeignKeyConstraints();
+        $this->content->unindex();
         $result = $this->content->delete();
         Schema::enableForeignKeyConstraints();
 

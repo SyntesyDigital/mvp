@@ -35,6 +35,7 @@ TODO
 - htmlClass
 - maxItems
 - minItems
+- extended
 
 
 ### Laravel => React Content fields JSON format
@@ -125,3 +126,11 @@ TODO
 }
 
 ]
+
+## Crear un nuevo Field
+
+- Crear el field dentro de Fields/Types
+- Añadir la traducción de la clave a los ficheros lang
+- Crear el Field en React para poder ser añadido
+- Añadir el Field dentro de ContentFields.js
+- Definir el save dentro del php del campo

@@ -86,14 +86,16 @@ export default class ContactForm extends Component {
     }
 }
 
-
 if (document.getElementById('contact-form')) {
-    var element = document.getElementById('contact-form');
-    var field = element.getAttribute('field');
-    var csrf_token = element.getAttribute('csrf_token');
 
-    ReactDOM.render(<ContactForm
-        field={field}
-        csrf_token={csrf_token}
-      />, element);
+    document.querySelectorAll('[id=contact-form]').forEach( element => {
+
+        var field = element.getAttribute('field');
+        var csrf_token = element.getAttribute('csrf_token');
+
+        ReactDOM.render(<ContactForm
+            field={field}
+            csrf_token={csrf_token}
+          />, element);
+    });
 }

@@ -24,14 +24,15 @@ class CreateLanguage
 
     public function handle()
     {
-
         if(isset($this->attributes['default']) && $this->attributes['default'] == "on"){
           $this->attributes['default'] = 1;
+
           //check default to null
-          Language::where('default',1)->update(['default' => null]);
-        }
-        else {
-          $this->attributes['default'] = null;
+          Language::where('default',1)->update([
+              'default' => null
+          ]);
+        } else {
+            $this->attributes['default'] = null;
         }
 
         return Language::create($this->attributes);

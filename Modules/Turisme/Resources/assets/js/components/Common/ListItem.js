@@ -8,6 +8,8 @@ import Note from './../Typologies/Note';
 import Statistics from './../Typologies/Statistics';
 import Cartography from './../Typologies/Cartography';
 import Logos from './../Typologies/Logos';
+import Event from './../Typologies/Event';
+import Press from './../Typologies/Press';
 
 
 
@@ -26,6 +28,7 @@ class ListItem extends Component {
           return (
               <News
                 field={this.props.field}
+                extended={this.props.extended}
               />
            );
        case 'notes' :
@@ -73,6 +76,18 @@ class ListItem extends Component {
         case 'link' :
           return (
             <Link
+              field={this.props.field}
+            />
+          )
+        case 'lets-meet' :
+          return (
+            <Event
+              field={this.props.field}
+            />
+          )
+        case 'dossier' :
+          return (
+            <Press
               field={this.props.field}
             />
           )

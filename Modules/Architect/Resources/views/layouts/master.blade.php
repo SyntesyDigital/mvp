@@ -33,6 +33,20 @@
             Lang.setLocale('{{App::getLocale()}}');
         </script>
 
+        <!-- code to fix jquery slowing down the browser -->
+        <script>
+          $(function(){
+            jQuery.event.special.touchstart = {
+              setup: function( _, ns, handle ){
+                if ( ns.includes("noPreventDefault") ) {
+                  this.addEventListener("touchstart", handle, { passive: false });
+                } else {
+                  this.addEventListener("touchstart", handle, { passive: true });
+                }
+              }
+            };
+          });
+        </script>
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>

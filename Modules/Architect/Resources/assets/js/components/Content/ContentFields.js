@@ -16,6 +16,7 @@ import LinkField from './ContentFields/LinkField';
 import VideoField from './ContentFields/VideoField';
 import LocalizationField from './ContentFields/LocalizationField';
 import UrlField from './ContentFields/UrlField';
+import KeyValuesField from './ContentFields/KeyValuesField';
 
 class ContentFields extends Component {
 
@@ -150,6 +151,18 @@ class ContentFields extends Component {
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
                     onImageSelect={_this.props.onImageSelect}
+                />
+                );
+            break;
+
+            case FIELDS.KEY_VALUES.type:
+                fields.push(
+                <KeyValuesField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
                 />
                 );
             break;

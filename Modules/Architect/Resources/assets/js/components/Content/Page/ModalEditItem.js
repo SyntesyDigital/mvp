@@ -28,6 +28,8 @@ import RadioSettingsField from './../../Typology/Settings/RadioSettingsField';
 import CheckboxesSettingsField from './../../Typology/Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsField';
 import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
+import BooleanSettingsField from './../../Typology/Settings/BooleanSettingsField';
+
 
 import ModalEditListItem from './ModalEditListItem';
 
@@ -71,13 +73,39 @@ class ModalEditItem extends Component {
       }
     ];
 
-    this.SELECTABLE_TYPOLOGIES = [];
+    this.TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
+
+    this.SELECTABLE_TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
+    this.LISTABLE_TYPOLOGIES = [{
+          id:'',
+          name:'----'
+        }
+    ];
     const selectableArray = [4,6,7,14];
+    const selectableTypologies = [2,3,4,5,6,8,9,10,11,13,14];
 
     for(var key in TYPOLOGIES){
       if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
         this.SELECTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
       }
+    }
+
+    for(var key in TYPOLOGIES){
+      if(selectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
+        this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
+      }
+    }
+
+    for(var key in TYPOLOGIES){
+      this.TYPOLOGIES.push(TYPOLOGIES[key]);
     }
 
     console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
@@ -140,14 +168,14 @@ class ModalEditItem extends Component {
     var self = this;
 
 
-    axios.get(ASSETS+'api/categories/tree?accept_lang=es&category_id=1')
+    axios.get(ASSETS+'api/categories/tree?accept_lang=es')
       .then(function (response) {
           if(response.status == 200
               && response.data.data !== undefined
               && response.data.data[0].descendants.length > 0)
           {
             var categories = response.data.data[0].descendants
-            self.push_categories(response.data.data[0].descendants, 0,self.categories);
+            self.push_categories(response.data.data, 0,self.categories);
           }
 
 
@@ -796,13 +824,18 @@ class ModalEditItem extends Component {
           options={this.getCropsformats()}
         />
 
-        <CheckboxesSettingsField
+        <SelectorSettingsField
           field={this.state.field}
-          name="typologiesAllowed"
+          name="typologyAllowed"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologies permeses"
-          options={TYPOLOGIES}
+          label="Tipologia permesa"
+          options={this.TYPOLOGIES.map(function(obj){
+              return {
+                  value: obj.id,
+                  name: obj.name
+              };
+          })}
         />
 
         <SelectorSettingsField
@@ -811,7 +844,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Tipologia"
-          options={TYPOLOGIES.map(function(obj){
+          options={this.LISTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name
@@ -895,6 +928,14 @@ class ModalEditItem extends Component {
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Camp de data"
           inputLabel="Indica el identificador de la data de la tipologia"
+        />
+
+        <BooleanSettingsField
+          field={this.state.field}
+          name="extended"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Versió extesa"
         />
 
       </div>

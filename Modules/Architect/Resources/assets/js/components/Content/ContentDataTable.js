@@ -8,50 +8,71 @@ class ContentDataTable extends Component {
         super(props);
 
         this.state = {
-          fields : []
+          fields : [],
+          init : false
         };
     }
 
     componentDidMount()
     {
-
-      this._table = $('#table-contents');
-
-      this.setDatatable();
+      //this.setDatatable();
     }
 
-    setDatatable()
+    componentWillReceiveProps(nextProps)
+    {
+      if(nextProps.init !== undefined && nextProps.init == true){
+        if(!this.state.init){
+          this.setState({
+            init : true
+          });
+          this.setDatatable(nextProps.route);
+        }
+      }
+      else {
+        if(this.state.init){
+          this.setState({
+            init : false
+          });
+          this.destroyDatatable();
+        }
+      }
+    }
+
+    setDatatable(route)
     {
 
-        console.log("MediaSelectModal :: setDatatable route : ",this.props.route);
+        console.log("ContentDataTable :: setDatatable route : ",route,$(this.refs.main));
 
         var _this = this;
-
-        var table = this._table.DataTable({
-    	    language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
-    	    },
-    		processing: true,
-          //serverSide: true,
-          order: [],
-    	    pageLength: 15,
-          language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
-          },
-    	    ajax: this.props.route,
-    	    columns: [
-    	        // {data: 'id', name: 'id', width: '40'},
-              {data: 'title', name: 'title'},
-              {data: 'typology', name: 'typology'},
-              {data: 'updated', name: 'updated'},
-              {data: 'author', name: 'author'},
-              {data: 'status', name: 'status'},
-              {data: 'action', name: 'action', orderable: false, searchable: false}
-    	    ],
+        var table = $(this.refs.main).DataTable({
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+            },
+            processing: true,
+            serverSide: true,
+            order: [],
+            pageLength: 10,
+            ajax: route,
+            columns: [
+                // {data: 'id', name: 'id', width: '40'},
+                {data: 'title', name: 'title'},
+                {data: 'typology', name: 'typology'},
+                {data: 'updated', name: 'updated'},
+                {data: 'author', name: 'author'},
+                {data: 'status', name: 'status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
             initComplete: function(settings, json) {
                 _this.initEvents();
-    	    }
+            }
         });
+    }
+
+    destroyDatatable() {
+
+      console.log("ContentDataTable :: destroy datatable ");
+
+      $(this.refs.main).DataTable().destroy();
     }
 
     addField()
@@ -74,7 +95,7 @@ class ContentDataTable extends Component {
     render() {
         return (
           <div>
-            <table className="table" id="table-contents" style={{width:"100%"}}>
+            <table ref="main" className="table" id="table-contents" style={{width:"100%"}}>
                 <thead>
                    <tr>
                        <th>Nom</th>
