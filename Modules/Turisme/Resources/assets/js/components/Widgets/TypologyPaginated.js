@@ -31,12 +31,14 @@ export default class TypologyPaginated extends Component {
         const maxItems = field.settings.maxItems?parseInt(field.settings.maxItems):null;
         var size_limited = size;
         const categoryQuery = category != null ? "&category_id="+category : '';
-        console.log('LAST:',this.state.lastPage );
-        console.log('CURR:',this.state.currPage );
 
-        if(this.state.lastPage && this.state.lastPage == this.state.currPage+1 && maxItems){
-          size_limited = maxItems - this.state.items.length;
-        }
+
+
+          if(maxItems && size > maxItems){
+            size_limited = maxItems;
+          }
+        console.log('NUMITEMS:',size_limited );
+
         axios.get(ASSETS+'api/contents?size='+size_limited+'&typology_id=' + field.settings.typology + categoryQuery + '&page=' + (page ? page : null))
           .then(function (response) {
 
@@ -46,7 +48,13 @@ export default class TypologyPaginated extends Component {
               {
                   var old_items = self.state.items;
                   if(old_items !== null){
-                    old_items.push.apply(old_items, response.data.data);
+                    if(maxItems &&  ((self.state.currPage+1) * size) > maxItems){
+                      console.log('HOLA');
+                      old_items.push.apply(old_items, response.data.data.slice(0,maxItems - self.state.currPage * size));
+                    }else{
+                      old_items.push.apply(old_items, response.data.data);
+                    }
+
                   }else{
                     old_items =response.data.data;
                   }
