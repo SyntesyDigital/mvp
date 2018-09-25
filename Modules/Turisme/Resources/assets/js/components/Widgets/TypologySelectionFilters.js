@@ -47,6 +47,7 @@ export default class TypologySelectionFilters extends Component {
             area : true,
             displayModal : false,
             displayThanks : false,
+            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
         };
 
         $("#selected-items").css({display:'block'});
@@ -89,7 +90,7 @@ export default class TypologySelectionFilters extends Component {
         }
 
         var params = {
-            size : 2,
+            size : this.state.size,
             typology_id : typology,
             fields : filtersQuery,
             order : order,

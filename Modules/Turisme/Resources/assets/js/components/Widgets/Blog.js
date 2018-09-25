@@ -69,6 +69,7 @@ export default class Blog extends Component {
             filters : filters,
             tags : null,
             showFilter:showFilter,
+            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
         };
     }
 
@@ -118,7 +119,7 @@ export default class Blog extends Component {
         console.log("Blog :: query : "+fieldsQuery);
 
         var params = {
-            size : 2,
+            size : this.state.size,
             typology_id : 2,
             category_id : filters!= null && filters.category != null?filters.category:null,
             tags : filters!= null && filters.tag != null?filters.tag:null,

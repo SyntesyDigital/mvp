@@ -11,13 +11,16 @@ export default class MembersByProgram extends Component {
     constructor(props)
     {
         super(props);
+
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null,
             lastPage : null,
             currPage : null,
             loaded: false,
-            order : null
+            order : null,
+            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
+
         };
     }
 
@@ -44,7 +47,7 @@ export default class MembersByProgram extends Component {
           orderQuery = '&orderBy='+orderArray[0]+'&sortedBy='+orderArray[1];
         }
 
-        axios.get(ASSETS+'externalapi/members?search=programs.id:'+field.settings.program+orderQuery+'&page=' + (page ? page : null))
+        axios.get(ASSETS+'externalapi/members?search=programs.id:'+field.settings.program+orderQuery+'&size='+this.state.size+'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200

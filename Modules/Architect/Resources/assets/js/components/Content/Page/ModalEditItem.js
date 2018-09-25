@@ -914,6 +914,15 @@ class ModalEditItem extends Component {
 
         <InputSettingsField
           field={this.state.field}
+          name="itemsPerPage"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Número d'elements per pagina"
+          inputLabel="Indica el número d'elements per pagina"
+        />
+
+        <InputSettingsField
+          field={this.state.field}
           name="textIdentifier"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}

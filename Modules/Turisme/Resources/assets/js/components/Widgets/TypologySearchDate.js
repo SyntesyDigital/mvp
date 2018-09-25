@@ -27,7 +27,8 @@ export default class TypologySearchDate extends Component {
             loaded: false,
             textIdentifier : textIdentifier,
             dateIdentifier : dateIdentifier,
-            filters : null
+            filters : null,
+            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
         };
     }
 
@@ -65,7 +66,7 @@ export default class TypologySearchDate extends Component {
         //console.log("TypologySearchDate :: query : "+fieldsQuery);
 
         var params = {
-            size : 2,
+            size : this.state.size,
             typology_id : field.settings.typology,
             fields : fieldsQuery,
             page : page ? page : null,

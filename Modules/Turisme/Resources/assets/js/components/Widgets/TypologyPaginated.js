@@ -10,12 +10,14 @@ export default class TypologyPaginated extends Component {
     constructor(props)
     {
         super(props);
+
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null,
             lastPage : null,
             currPage : null,
             loaded: false,
+            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
         };
     }
 
@@ -26,7 +28,7 @@ export default class TypologyPaginated extends Component {
     query(page) {
         const field = this.state.field;
         var self = this;
-        const size = 2;
+        const size = this.state.size;
         const category = field.settings.category;
         const maxItems = field.settings.maxItems?parseInt(field.settings.maxItems):null;
         var size_limited = size;

@@ -27,7 +27,8 @@ class Companies extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'axe'
+        'axe',
+        'itemsPerPage',
     ];
 }
 ?>

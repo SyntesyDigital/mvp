@@ -12,6 +12,7 @@ export default class Members extends Component {
     constructor(props)
     {
         super(props);
+
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null,
@@ -19,7 +20,8 @@ export default class Members extends Component {
             currPage : null,
             loaded: false,
             order : null,
-            filters : null
+            filters : null,
+            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
         };
     }
 
@@ -60,7 +62,7 @@ export default class Members extends Component {
           filterQuery = filters.query;
         }
 
-        axios.get(ASSETS+'externalapi/members?'+orderQuery+filterQuery+'&page=' + (page ? page : null))
+        axios.get(ASSETS+'externalapi/members?'+orderQuery+filterQuery+'&size='+this.state.size+'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
