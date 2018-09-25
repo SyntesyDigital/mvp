@@ -209,4 +209,86 @@ class ContentRepository extends BaseRepository
 
     }
 
+    public function getPagesGraph()
+    {
+      $nodes = array();
+      $links = array();
+      $level = 1;
+
+      $traverse = function (&$pageTree,$pages, &$nodes,&$links,$level) use (&$traverse) {
+          $level++;
+
+          foreach ($pages as $page) {
+
+            $nodes[] = [
+              "id" => $page->id,
+              "title" => $page->getTitleAttribute(),
+              "level" => $level,
+              "status" => $page->status,
+              "author" => $page->author->getFullNameAttribute(),
+              "url" => $page->url
+            ];
+
+            $links[] = [
+              "source" => $page->parent_id,
+              "target" => $page->id
+            ];
+
+            $traverse($pageTree,$page->children, $nodes,$links,$level);
+          }
+      };
+
+      $pages = Content::where('is_page', 1)->get();
+      $homeId = null;
+
+      foreach($pages as $page) {
+        if($page->url == ''){
+
+          $homeId = $page->id;
+
+          $nodes[] = [
+            "id" => $page->id,
+            "title" => 'Inici',
+            "level" => $level,
+            "status" => $page->status,
+            "author" => $page->author->getFullNameAttribute(),
+            "url" => $page->url
+          ];
+
+          $level++;
+          break;
+        }
+      }
+
+      foreach($pages as $page) {
+
+        if(!$page->parent_id && $page->id != $homeId) {
+
+          $nodes[] = [
+            "id" => $page->id,
+            "title" => $page->getTitleAttribute(),
+            "level" => $level,
+            "status" => $page->status,
+            "author" => $page->author->getFullNameAttribute(),
+            "url" => $page->url
+          ];
+
+          if($homeId != null){
+            $links[] = [
+              "source" => $homeId,
+              "target" => $page->id
+            ];
+          }
+
+          $traverse($pageTree,Content::getTree($page->id), $nodes,$links,$level);
+        }
+      }
+
+      return  [
+        "nodes" => $nodes,
+        "links" => $links
+      ];
+
+    }
+
 }

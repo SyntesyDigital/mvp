@@ -35,4 +35,5 @@ require('./components/Typology/ModalSettings');
 require('./components/Medias/MediaEditModal');
 require('./components/Content/ContentForm');
 require('./components/Menu/ModalMenuItem');
-require('./components/DaniTest');
+require('./components/Dashboard/Table');
+require('./components/Dashboard/SiteMap');
