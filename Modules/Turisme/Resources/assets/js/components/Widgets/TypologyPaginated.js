@@ -44,7 +44,7 @@ export default class TypologyPaginated extends Component {
                   && response.data.data.length > 0)
               {
                   var old_items = self.state.items;
-                  if(old_items !== null){
+                  if(response.data.meta.current_page != 1){
                     if(maxItems &&  ((self.state.currPage+1) * size) > maxItems){
                       console.log('HOLA');
                       old_items.push.apply(old_items, response.data.data.slice(0,maxItems - self.state.currPage * size));

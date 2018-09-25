@@ -67,7 +67,7 @@ export default class Agencies extends Component {
                   && response.data.data !== undefined)
               {
                 var old_items = self.state.items;
-                if(old_items !== null){
+                if(response.data.meta.current_page != 1){
                   old_items.push.apply(old_items, response.data.data);
                 }else{
                   old_items =response.data.data;

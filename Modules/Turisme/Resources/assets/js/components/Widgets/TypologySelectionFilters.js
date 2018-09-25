@@ -80,9 +80,12 @@ export default class TypologySelectionFilters extends Component {
         const {textIdentifier,dateIdentifier,field,typology} = this.state;
 
         var filtersQuery = '';
-
+        var filtersCategory = null;
         if(filters != null){
           filtersQuery = filters.query;
+          if(filters.category_id != null){
+            filtersCategory =filters.category_id;
+          }
         }
 
         var params = {
@@ -91,17 +94,17 @@ export default class TypologySelectionFilters extends Component {
             fields : filtersQuery,
             order : order,
             page : page ? page : null,
-            accept_lang : LOCALE
+            accept_lang : LOCALE,
+            category_id : filtersCategory
         };
 
         axios.post(ASSETS+'api/contents',params)
           .then(function (response) {
-
               if(response.status == 200
                   && response.data.data !== undefined)
               {
                 var old_items = self.state.items;
-                if(old_items !== null){
+                if(response.data.meta.current_page != 1){
                   old_items.push.apply(old_items, response.data.data);
                 }else{
                   old_items =response.data.data;
