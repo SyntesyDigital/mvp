@@ -48,7 +48,14 @@ return [
             'engine' => null,
         ],
 
-        
+        'sqlite_testing' => [
+            'driver'   => 'sqlite',
+            //'database' => database_path('database_testing.sqlite'),
+            'database' => ':memory:',
+            'prefix'   => '',
+            'exec'     => 'PRAGMA foreign_keys = ON;',  //enable delete cascade
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

@@ -92,9 +92,14 @@ class CreateContent
             $type = isset($field["type"]) ? $field["type"] : null;
 
             if($values && $type && $identifier) {
-                $this
-                    ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($this->content, $identifier, $values, $this->languages);
+                $_field = $this
+                    ->getFieldObject($type, $fieldObjects); // <= Better into FieldObject like FieldHandler ?
+
+                if(!$_field) {
+                    throw new \Exception('Field ' . $identifier . ' (type: '.$type.') not exist');
+                }
+
+                $_field->save($this->content, $identifier, $values, $this->languages);
             }
         }
     }
