@@ -809,16 +809,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.69",
+            "version": "v0.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "6e2507a5bb39d970ae98cc2f1421012e7b38248f"
+                "reference": "759a1a246409eae1c723abc72d817205a1d5549f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/6e2507a5bb39d970ae98cc2f1421012e7b38248f",
-                "reference": "6e2507a5bb39d970ae98cc2f1421012e7b38248f",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/759a1a246409eae1c723abc72d817205a1d5549f",
+                "reference": "759a1a246409eae1c723abc72d817205a1d5549f",
                 "shasum": ""
             },
             "require": {
@@ -842,20 +842,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-09-08 00:22:43"
+            "time": "2018-09-16 00:22:55"
         },
         {
             "name": "google/auth",
-            "version": "v1.3.3",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "af72b3f50420c801dc35cc07b1fa429ae027b847"
+                "reference": "196237248e636a3554a7d9e4dfddeb97f450ab5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/af72b3f50420c801dc35cc07b1fa429ae027b847",
-                "reference": "af72b3f50420c801dc35cc07b1fa429ae027b847",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/196237248e636a3554a7d9e4dfddeb97f450ab5c",
+                "reference": "196237248e636a3554a7d9e4dfddeb97f450ab5c",
                 "shasum": ""
             },
             "require": {
@@ -889,7 +889,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2018-08-27 19:47:35"
+            "time": "2018-09-17 20:29:21"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1765,26 +1765,26 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.46",
+            "version": "1.0.47",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2"
+                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
-                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
+                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
                 "shasum": ""
             },
             "require": {
+                "ext-fileinfo": "*",
                 "php": ">=5.5.9"
             },
             "conflict": {
                 "league/flysystem-sftp": "<1.0.6"
             },
             "require-dev": {
-                "ext-fileinfo": "*",
                 "phpspec/phpspec": "^3.4",
                 "phpunit/phpunit": "^5.7.10"
             },
@@ -1845,7 +1845,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-08-22 07:45:22"
+            "time": "2018-09-14 15:30:29"
         },
         {
             "name": "mariuzzo/laravel-js-localization",
@@ -2125,16 +2125,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
                 "shasum": ""
             },
             "require": {
@@ -2172,7 +2172,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-07-15 17:25:16"
+            "time": "2018-09-18 07:03:24"
         },
         {
             "name": "nwidart/laravel-modules",
@@ -4263,67 +4263,6 @@
     ],
     "packages-dev": [
         {
-            "name": "babenkoivan/scout-elasticsearch-driver",
-            "version": "v3.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/babenkoivan/scout-elasticsearch-driver.git",
-                "reference": "be363a67ff280924e726df12b290c294a3d736d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/babenkoivan/scout-elasticsearch-driver/zipball/be363a67ff280924e726df12b290c294a3d736d7",
-                "reference": "be363a67ff280924e726df12b290c294a3d736d7",
-                "shasum": ""
-            },
-            "require": {
-                "elasticsearch/elasticsearch": "6.*",
-                "laravel/scout": "4.*",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "mockery/mockery": "1.*",
-                "phpunit/phpunit": "7.*"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "ScoutElastic\\ScoutElasticServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ScoutElastic\\Tests\\": "tests/",
-                    "ScoutElastic\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Babenko Ivan",
-                    "email": "babenko.i.a@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The Elasticsearch Driver for Laravel Scout",
-            "homepage": "https://babenkoivan.github.io/scout-elasticsearch-driver/",
-            "keywords": [
-                "driver",
-                "elastic",
-                "elasticsearch",
-                "engine",
-                "laravel",
-                "scout",
-                "search"
-            ],
-            "time": "2018-09-07 19:09:32"
-        },
-        {
             "name": "barryvdh/laravel-debugbar",
             "version": "v3.2.0",
             "source": {
@@ -4601,71 +4540,6 @@
                 "test"
             ],
             "time": "2016-01-20 08:20:44"
-        },
-        {
-            "name": "laravel/scout",
-            "version": "v4.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/scout.git",
-                "reference": "f1b5d65a7d4a70bafaba7ec996176e95341c44ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/f1b5d65a7d4a70bafaba7ec996176e95341c44ec",
-                "reference": "f1b5d65a7d4a70bafaba7ec996176e95341c44ec",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/bus": "~5.4",
-                "illuminate/contracts": "~5.4",
-                "illuminate/database": "~5.4",
-                "illuminate/pagination": "~5.4",
-                "illuminate/queue": "~5.4",
-                "illuminate/support": "~5.4",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "algolia/algoliasearch-client-php": "^1.10",
-                "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~6.0"
-            },
-            "suggest": {
-                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^1.10)."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Scout\\ScoutServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Scout\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
-            "keywords": [
-                "algolia",
-                "laravel",
-                "search"
-            ],
-            "time": "2018-05-24 13:35:34"
         },
         {
             "name": "maximebf/debugbar",
@@ -5287,20 +5161,23 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "cecbc684605bb0cc288828eb5d65d93d5c676d3c"
+                "reference": "050bedf145a257b1ff02746c31894800e5122946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cecbc684605bb0cc288828eb5d65d93d5c676d3c",
-                "reference": "cecbc684605bb0cc288828eb5d65d93d5c676d3c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/050bedf145a257b1ff02746c31894800e5122946",
+                "reference": "050bedf145a257b1ff02746c31894800e5122946",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1"
             },
             "type": "library",
             "extra": {
@@ -5330,7 +5207,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2018-06-11 11:44:00"
+            "time": "2018-09-13 20:33:42"
         },
         {
             "name": "phpunit/php-text-template",
