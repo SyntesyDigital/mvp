@@ -168,7 +168,7 @@ class TasksUrlsTest extends TestCase
     {
         $attributes = $attributes ? $attributes : $this->attributes['content'];
 
-        $attributes['typology_id'] = Typology::first()->id;
+        $attributes['typology_id'] = !$attributes['is_page'] ? Typology::first()->id : null;
         $attributes['author_id'] = User::first()->id;
 
         return (new CreateContent($attributes))->handle();
@@ -275,8 +275,10 @@ class TasksUrlsTest extends TestCase
      */
     public function testCreateCategoryWithParentUrl()
     {
+        // 1. Create first category
         $category = $this->createCategory();
 
+        // 2. Create second category
         $attributes = $this->attributes['category'];
 
         $attributes['parent_id'] = $category->id;
@@ -294,6 +296,7 @@ class TasksUrlsTest extends TestCase
 
         $category = $this->createCategory($attributes);
 
+        // 3. Test second category URLS
         foreach($category->urls as $url) {
             $language = Language::find($url->language_id);
 
@@ -303,6 +306,330 @@ class TasksUrlsTest extends TestCase
                 $language->iso,
                 $this->attributes['category']['fields']['slug'][$language->id],
                 $attributes['fields']['slug'][$language->id]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+    }
+
+
+    /*
+     *  [TEST] URLs where we create a category and add children
+     */
+    public function testCreateCategoryWithParentsUrl()
+    {
+        // 1. Create first category
+        $category = $this->createCategory();
+
+        // 2. Create second category
+        $attributes2 = $this->attributes['category'];
+
+        $attributes2['parent_id'] = $category->id;
+        $attributes2['fields']['name'] = [
+            1 => 'Mi categori 2', // CA
+            2 => 'Mi Categoria 2', // ES
+            3 => 'My category 2' // EN
+        ];
+
+        $attributes2['fields']['slug'] = [
+            1 => 'mi-categori-2',
+            2 => 'mi-categoria-2',
+            3 => 'my-category-2'
+        ];
+
+        $category2 = $this->createCategory($attributes2);
+
+        // 2. Create third category
+        $attributes3 = $this->attributes['category'];
+
+        $attributes3['parent_id'] = $category2->id;
+        $attributes3['fields']['name'] = [
+            1 => 'Mi categori 3', // CA
+            2 => 'Mi Categoria 3', // ES
+            3 => 'My category 3' // EN
+        ];
+
+        $attributes3['fields']['slug'] = [
+            1 => 'mi-categori-3',
+            2 => 'mi-categoria-3',
+            3 => 'my-category-3'
+        ];
+
+        $category3 = $this->createCategory($attributes3);
+
+        // 3. Test third category URLS
+        foreach($category3->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s/%s',
+                $language->iso,
+                $this->attributes['category']['fields']['slug'][$language->id],
+                $attributes2['fields']['slug'][$language->id],
+                $attributes3['fields']['slug'][$language->id]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+
+
+        // 4. Test second category URLS
+        foreach($category2->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s',
+                $language->iso,
+                $this->attributes['category']['fields']['slug'][$language->id],
+                $attributes2['fields']['slug'][$language->id]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+    }
+
+
+    /*
+     *  [TEST] URLs where we update a category with children
+     */
+    public function testUpdateCategoryWithParentsUrl()
+    {
+        // 1. Create first category
+        $category = $this->createCategory();
+
+        // 2. Create second category
+        $attributes2 = $this->attributes['category'];
+
+        $attributes2['parent_id'] = $category->id;
+        $attributes2['fields']['name'] = [
+            1 => 'Mi categori 2', // CA
+            2 => 'Mi Categoria 2', // ES
+            3 => 'My category 2' // EN
+        ];
+
+        $attributes2['fields']['slug'] = [
+            1 => 'mi-categori-2',
+            2 => 'mi-categoria-2',
+            3 => 'my-category-2'
+        ];
+
+        $category2 = $this->createCategory($attributes2);
+
+        // 2. Create third category
+        $attributes3 = $this->attributes['category'];
+
+        $attributes3['parent_id'] = $category2->id;
+        $attributes3['fields']['name'] = [
+            1 => 'Mi categori 3', // CA
+            2 => 'Mi Categoria 3', // ES
+            3 => 'My category 3' // EN
+        ];
+
+        $attributes3['fields']['slug'] = [
+            1 => 'mi-categori-3',
+            2 => 'mi-categoria-3',
+            3 => 'my-category-3'
+        ];
+
+        $category3 = $this->createCategory($attributes3);
+
+
+        // 3. Update Category 2
+        $attributes2['fields']['slug'] = [
+            1 => 'mi-categori-2-modified',
+            2 => 'mi-categoria-2-modified',
+            3 => 'my-category-2-modified'
+        ];
+        $category2 = (new UpdateCategory($category2, $attributes2))->handle();
+
+
+        // 4. Test Category 2 URLS
+        foreach($category2->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s',
+                $language->iso,
+                $this->attributes['category']['fields']['slug'][$language->id],
+                $attributes2['fields']['slug'][$language->id]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+
+
+        // 5. Update Category 3
+        $attributes3['fields']['slug'] = [
+            1 => 'mi-categori-3-modified',
+            2 => 'mi-categoria-3-modified',
+            3 => 'my-category-3-modified'
+        ];
+        $category3 = (new UpdateCategory($category3, $attributes3))->handle();
+
+        // 5. Test Category 3 URLS
+        foreach($category3->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s/%s',
+                $language->iso,
+                $this->attributes['category']['fields']['slug'][$language->id],
+                $attributes2['fields']['slug'][$language->id],
+                $attributes3['fields']['slug'][$language->id]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+    }
+
+
+    /*
+     *  [TEST] URLs where we create a page and add children
+     */
+    public function testCreatePageWithParentsUrl()
+    {
+        // 1. Create Page 1
+        $attributes1 = $this->attributes['content'];
+        $attributes1['is_page'] = true;
+        $attributes1['definition'] = [];
+        $attributes1["fields"][1]["value"] = [
+            'es' => 'mi-pagina-1',
+            'en' => 'my-page-1',
+            'ca' => 'mi-pagine-1'
+        ];
+
+        $page1 = $this->createContent($attributes1);
+
+        // 2. Test Page 1 URLS
+        foreach($page1->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s',
+                $language->iso,
+                $attributes1['fields'][1]['value'][$language->iso]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+
+        // 3. Create Page 2
+        $attributes2 = $this->attributes['content'];
+        $attributes2['is_page'] = true;
+        $attributes2['definition'] = [];
+        $attributes2['parent_id'] = $page1->id;
+        $attributes2["fields"][1]["value"] = [
+            'es' => 'mi-pagina-2',
+            'en' => 'my-page-2',
+            'ca' => 'mi-pagine-2'
+        ];
+
+        $page2 = $this->createContent($attributes2);
+
+
+        // 4. Test Page 2 URLS
+        foreach($page2->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s',
+                $language->iso,
+                $attributes1['fields'][1]['value'][$language->iso],
+                $attributes2['fields'][1]['value'][$language->iso]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+    }
+
+    /*
+     *  [TEST] URLs where we update a page and add children
+     */
+    public function testUpdatePageWithParentsUrl()
+    {
+        // 1. Create Page 1
+        $attributes1 = $this->attributes['content'];
+        $attributes1['is_page'] = true;
+        $attributes1['definition'] = [];
+        $attributes1["fields"][1]["value"] = [
+            'es' => 'mi-pagina-1',
+            'en' => 'my-page-1',
+            'ca' => 'mi-pagine-1'
+        ];
+        $page1 = $this->createContent($attributes1);
+
+
+        // 2. Create Page 2
+        $attributes2 = $this->attributes['content'];
+        $attributes2['is_page'] = true;
+        $attributes2['definition'] = [];
+        $attributes2['parent_id'] = $page1->id;
+        $attributes2["fields"][1]["value"] = [
+            'es' => 'mi-pagina-2',
+            'en' => 'my-page-2',
+            'ca' => 'mi-pagine-2'
+        ];
+        $page2 = $this->createContent($attributes2);
+
+
+        // 3. Update Page 1
+        $attributes1['author_id'] = User::first()->id;
+        $attributes1["fields"][1]["value"] = [
+            'es' => 'mi-pagina-1-modificada',
+            'en' => 'my-page-1-modified',
+            'ca' => 'mi-pagine-1-modificada'
+        ];
+        $page1 = (new UpdateContent($page1, $attributes1))->handle();
+
+
+        // 4. Test Page 1 URLS
+        foreach($page1->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s',
+                $language->iso,
+                $attributes1['fields'][1]['value'][$language->iso]
+            );
+
+            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+
+            $this->assertSame($excepted, $actual, $message);
+        }
+
+
+        // 5. Test children Page 2 URLS
+        $page2 = Content::find($page2->id);
+        foreach($page2->urls as $url) {
+            $language = Language::find($url->language_id);
+
+            $actual = $url->url;
+
+            $excepted = sprintf('/%s/%s/%s',
+                $language->iso,
+                $attributes1['fields'][1]['value'][$language->iso],
+                $attributes2['fields'][1]['value'][$language->iso]
             );
 
             $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;

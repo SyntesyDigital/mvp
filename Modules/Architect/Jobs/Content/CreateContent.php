@@ -113,6 +113,8 @@ class CreateContent
         if($category) {
             $this->content->categories()->attach($category);
         }
+
+        $this->content->load('categories');
     }
 
     public function saveTags()

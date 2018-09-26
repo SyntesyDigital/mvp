@@ -29,7 +29,7 @@ class CreateUrlsContent
             if($url) {
                 $content->urls()->create([
                     'language_id' => $language->id,
-                    'url' => $language->iso . "/" . $url
+                    'url' => '/' . $language->iso . "/" . $url
                 ]);
             }
         });
