@@ -25,7 +25,7 @@ class ContentModalDatatableCriteria implements CriteriaInterface
             ->whereFields($fields)
             ->where(function ($query) use ($hasSlug, $isPage, $typologyId) {
                 if($isPage) {
-                    $query->where('is_page', 1);
+                    $query->orWhere('is_page', 1);
                 }
 
                 if($typologyId) {
@@ -34,8 +34,8 @@ class ContentModalDatatableCriteria implements CriteriaInterface
                 }
 
                 if($hasSlug) {
-                    $query->whereHas('typology', function($query){
-                        $query->orWhere('has_slug', true);
+                    $query->orWhereHas('typology', function($query){
+                        $query->where('has_slug', true);
                     });
                 }
             })->with('author', 'typology', 'urls', 'page', 'fields');
