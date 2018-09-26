@@ -133,7 +133,7 @@ class ContentRepository extends BaseRepository
 
     public function getModalDatatable()
     {
-        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria())->all())
+        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria()))
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
