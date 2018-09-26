@@ -28,6 +28,7 @@ class Members extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

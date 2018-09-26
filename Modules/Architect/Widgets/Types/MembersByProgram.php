@@ -29,6 +29,7 @@ class MembersByProgram extends Widget implements WidgetInterface
         'htmlClass',
         'program',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

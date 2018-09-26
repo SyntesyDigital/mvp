@@ -12,6 +12,8 @@ export default class MembersByProgram extends Component {
     {
         super(props);
 
+        const field = props.field ? JSON.parse(atob(props.field)) : '';
+
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null,
@@ -19,7 +21,7 @@ export default class MembersByProgram extends Component {
             currPage : null,
             loaded: false,
             order : null,
-            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
+            size:field.settings.itemsPerPage !== undefined && field.settings.itemsPerPage != null ?  field.settings.itemsPerPage : 3,
 
         };
     }
@@ -84,7 +86,7 @@ export default class MembersByProgram extends Component {
         console.log("MembersByProgram => ",items[key]);
 
         result.push(
-          <li key={key} className="col-md-4 col-xs-6">
+          <li key={key}>
             <ListExternalItem
               field={items[key]}
               type='member'
