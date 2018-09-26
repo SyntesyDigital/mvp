@@ -9,7 +9,7 @@ use Storage;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Field;
 
-use Modules\Architect\Repositories\Criterias\ModalDatatableCriteria;
+use Modules\Architect\Repositories\Criterias\ContentModalDatatableCriteria;
 
 class ContentRepository extends BaseRepository
 {
@@ -133,7 +133,7 @@ class ContentRepository extends BaseRepository
 
     public function getModalDatatable()
     {
-        return Datatables::of($this->getByCriteria(new ModalDatatableCriteria())->all())
+        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria())->all())
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })

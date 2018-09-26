@@ -5,7 +5,7 @@ namespace Modules\Architect\Repositories\Criterias;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use Prettus\Repository\Contracts\CriteriaInterface;
 
-class ModalDatatableCriteria implements CriteriaInterface
+class ContentModalDatatableCriteria implements CriteriaInterface
 {
 
     public function apply($model, RepositoryInterface $repository)
