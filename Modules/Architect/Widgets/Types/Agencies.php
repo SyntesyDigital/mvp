@@ -28,6 +28,7 @@ class Agencies extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

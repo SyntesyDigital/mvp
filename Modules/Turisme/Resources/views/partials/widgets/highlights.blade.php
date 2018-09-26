@@ -2,7 +2,8 @@
   $settings = isset($settings) ? $settings : $field['settings'];
   $settings = json_decode(json_encode($settings), true);
 @endphp
-<div id="{{$settings['htmlId'] or ''}}" class="highlights {{$settings['htmlClass'] or ''}}">
+<div id="{{$settings['htmlId'] or ''}}"
+  class="highlights {{$settings['htmlClass'] or ''}} {{$field['settings']['columns'] or ''}}">
   <ul class="list-items">
 
     @foreach($field['value'] as $index => $widget)

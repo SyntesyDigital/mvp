@@ -12,6 +12,9 @@ export default class Companies extends Component {
     constructor(props)
     {
         super(props);
+
+        const field = props.field ? JSON.parse(atob(props.field)) : '';
+
         this.state = {
             field : props.field ? JSON.parse(atob(props.field)) : '',
             items : null,
@@ -20,7 +23,7 @@ export default class Companies extends Component {
             loaded: false,
             order : null,
             filters : null,
-            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
+            size:field.settings.itemsPerPage !== undefined && field.settings.itemsPerPage != null ?  field.settings.itemsPerPage : 3,
         };
     }
 
@@ -94,7 +97,7 @@ export default class Companies extends Component {
         console.log("Companies => ",items[key]);
 
         result.push(
-          <li key={key} className="col-xs-12">
+          <li key={key}>
             <ListExternalItem
               field={items[key]}
               type='company'
