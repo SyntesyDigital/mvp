@@ -11,13 +11,15 @@ export default class TypologyPaginated extends Component {
     {
         super(props);
 
+        const field = props.field ? JSON.parse(atob(props.field)) : '';
+
         this.state = {
-            field : props.field ? JSON.parse(atob(props.field)) : '',
+            field : field,
             items : null,
             lastPage : null,
             currPage : null,
             loaded: false,
-            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
+            size:field.settings.itemsPerPage !== undefined && field.settings.itemsPerPage != null ?  field.settings.itemsPerPage : 3,
         };
     }
 

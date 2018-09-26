@@ -970,6 +970,36 @@ class ModalEditItem extends Component {
           label="Versió extesa"
         />
 
+        <SelectorSettingsField
+          field={this.state.field}
+          name="columns"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Columnes del llistat"
+          options={[
+              {
+                  value: "",
+                  name: "---",
+              },
+              {
+                  value: "col-1",
+                  name: "1 columna",
+              },
+              {
+                  value: "col-2",
+                  name: "2 columnes",
+              },
+              {
+                  value: "col-3",
+                  name: "3 columnes",
+              },
+              {
+                  value: "col-4",
+                  name: "4 columnes",
+              }
+          ]}
+        />
+
       </div>
 
 

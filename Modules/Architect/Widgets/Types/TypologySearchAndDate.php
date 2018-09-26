@@ -32,6 +32,7 @@ class TypologySearchAndDate extends Widget implements WidgetInterface
         'textIdentifier',
         'dateIdentifier',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

@@ -172,7 +172,7 @@ export default class TypologySelectionFilters extends Component {
         //console.log("TypologyPaginated => ",items[key],selectedItems,selected);
 
         result.push(
-          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
+          <li key={key}>
             <ListItem
               field={items[key]}
               selectable={true}
@@ -195,7 +195,7 @@ export default class TypologySelectionFilters extends Component {
       for(var key in selectedItems){
 
         result.push(
-          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
+          <li key={key}>
             <ListSelectedItem
               field={selectedItems[key]}
               onRemove={this.handleOnRemove.bind(this)}
@@ -313,9 +313,10 @@ export default class TypologySelectionFilters extends Component {
             }
 
             {size > 0 &&
-                <div>
-                  <ul>{this.renderSelectedItems()}</ul>
-
+                <div className="selected-list-wrapper">
+                  <div className="selected-list">
+                    <ul>{this.renderSelectedItems()}</ul>
+                  </div>
                   <div className="centered form-button-wrapper">
                     <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{Lang.get('widgets.open_form')}</button>
                   </div>
