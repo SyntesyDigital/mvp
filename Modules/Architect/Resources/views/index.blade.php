@@ -45,7 +45,7 @@
               <!-- React Table.js -->
               <div id="dashboard-table"
                 title="Últimes 25 pàgines"
-                route={{route('contents.data')."?has_page=1&size=4"}}
+                route={{route('contents.modal.data')."?is_page=1"}}
               ></div>
             </div>
 
@@ -53,7 +53,7 @@
               <!-- React Table.js -->
               <div id="dashboard-table"
                 title="Últimes 25 notícies"
-                route={{route('contents.data')."?typology_id=2"}}
+                route={{route('contents.modal.data')."?typology_id=2"}}
               ></div>
             </div>
 
