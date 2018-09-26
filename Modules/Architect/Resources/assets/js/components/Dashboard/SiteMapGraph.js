@@ -67,7 +67,7 @@ export default class SiteMapGraph extends Component {
       //.strength(0.5)
     )
     .force("charge", d3.forceManyBody()
-      .strength(-300)
+      .strength(-200)
       .distanceMax(r*45)
     )
     //.force("collide", d3.forceCollide(r*1.25))
@@ -96,7 +96,7 @@ export default class SiteMapGraph extends Component {
       //console.log("AuthorsGraph :: "+selectedId);
       d3.select('#node-'+selectedId).classed("selected",true);
 
-      this.centerOnNode(selectedId);
+      //this.centerOnNode(selectedId);
 
       /*
       this.setState({
@@ -249,6 +249,17 @@ export default class SiteMapGraph extends Component {
           });
 
       this.node
+          .append("text")
+          .style("font-size",10)
+          .style("font-weight",100)
+          //.style("font-family",'Open Sans')
+          .attr("dx", 0)
+          .attr("dy", 20)
+          .attr("text-anchor","middle")
+          .text(function(d) { return d.title })
+          .style("fill", "#000");
+
+      this.node
       /*
         .append("svg:image")
         .attr("xlink:href",  function(d) { return '/images/josep-sqr.jpg';})
@@ -278,7 +289,7 @@ export default class SiteMapGraph extends Component {
     // Update and restart the simulation.
     this.simulation.nodes(this.graph.nodes).on("tick", this.ticked);
     this.simulation.force("link").links(this.graph.links);
-    this.simulation.alpha(1).restart();
+    this.simulation.alpha(0.5).restart();
 
   }
 
