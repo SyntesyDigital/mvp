@@ -29,7 +29,7 @@ class ListWidget extends Component
   constructor(props)
   {
 
-    console.log("ListWidget :: constructor");
+    //console.log("ListWidget :: constructor");
 
     super(props);
 
@@ -71,7 +71,7 @@ class ListWidget extends Component
 
     const fields = this.props.field.value;
 
-    console.log("ListWidget :: handleEditField => ",fieldId,fields);
+    //console.log("ListWidget :: handleEditField => ",fieldId,fields);
 
     var field = null;
     var index = -1;
@@ -142,7 +142,7 @@ class ListWidget extends Component
 
     //FIXME to replace with text provided by widget configuration
     const widgetIdentifier = this.props.field.widget;
-    console.log("FIELDS ======>", this.props.field);
+    //console.log("FIELDS ======>", this.props.field);
 
     var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
     field["index"] = this.currentIndex;
@@ -150,7 +150,7 @@ class ListWidget extends Component
 
     this.currentIndex++;
 
-    console.log("ListWidget :: onAddField with value => ",field);
+    //console.log("ListWidget :: onAddField with value => ",field);
 
     this.props.onAddField(field);
 

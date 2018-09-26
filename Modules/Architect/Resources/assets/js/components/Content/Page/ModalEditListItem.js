@@ -25,7 +25,7 @@ class ModalEditListItem extends Component {
 
   processProps(props) {
 
-    console.log(" ModalEditListItem :: processProps ",props);
+    //console.log(" ModalEditListItem :: processProps ",props);
 
     var field = JSON.parse(JSON.stringify(props.item.field));
     //field.identifier = "temp_"+JSON.stringify(props.item.id);
@@ -45,7 +45,7 @@ class ModalEditListItem extends Component {
   componentWillReceiveProps(nextProps)
   {
 
-    // console.log(" ModalEditItem :: componentWillReceiveProps ",nextProps);
+    //console.log(" ModalEditListItem :: componentWillReceiveProps ",nextProps);
 
     var field = null;
 
@@ -57,7 +57,7 @@ class ModalEditListItem extends Component {
         this.modalClose();
     }
 
-     //console.log("ModalEditItem :: componentWillReceiveProps :: =>",field);
+    //console.log("ModalEditListItem :: componentWillReceiveProps :: =>",field);
 
     this.setState({
       field : field
@@ -85,13 +85,17 @@ class ModalEditListItem extends Component {
 
   onWidgetChange(field) {
 
-    var stateField = this.state.field;
-    stateField.fields = field.fields;
+    //const stateField = this.state.field;
+
+    /*
     this.setState({
         field : stateField
     });
+    */
 
-    //this.props.onUpdateData(stateField);
+    //console.log("ModalEditListItem :: onWidgetChange :: =>",field);
+
+    this.props.onUpdateData(field);
 
   }
 

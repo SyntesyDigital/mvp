@@ -10,7 +10,7 @@
   $url = isset($field['value']) && isset($field['value']->getUrlsAttribute()[$crop]) ? asset($field['value']->getUrlsAttribute()[$crop]) : null;
 @endphp
 @if(!isset($div))
-<div>
+<p class="{{$settings['htmlClass'] or ''}}">
 @endif
 
 @if(isset($url))
@@ -26,5 +26,5 @@
 @endif
 
 @if(!isset($div))
-</div>
+</p>
 @endif

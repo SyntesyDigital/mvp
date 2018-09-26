@@ -18,7 +18,8 @@ class ThumbSlide extends Widget implements WidgetInterface
 
     public $fields = [
         'image' => 'Modules\Architect\Fields\Types\Image',
-        'link' => 'Modules\Architect\Fields\Types\Link'
+        'link' => 'Modules\Architect\Fields\Types\Link',
+        'subtitle' => 'Modules\Architect\Fields\Types\Text'
     ];
 
     public $rules = [
