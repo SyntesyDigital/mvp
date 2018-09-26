@@ -134,6 +134,20 @@ class ContentRepository extends BaseRepository
     public function getModalDatatable()
     {
         return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria()))
+            /*
+            ->addColumn('title', function ($item) {
+                $title = isset($item->title) ? $item->title : '';
+
+                if($item->is_page){
+                  if(isset($item->parent)){
+                    $parent = $item->parent->title;
+                    $title = ( $parent ? $parent.' / ' : '' ) . $title;
+                  }
+                }
+
+                return $title;
+            })
+            */
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
@@ -151,7 +165,7 @@ class ContentRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="" id="item-'.$item->id.'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->title.'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
+                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
                 ';
             })
             ->make(true);

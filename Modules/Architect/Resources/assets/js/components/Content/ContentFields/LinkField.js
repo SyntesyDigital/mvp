@@ -310,7 +310,7 @@ class LinkField extends Component
               </div>
             }
 
-            {pageValues.typology === undefined &&
+            {(pageValues.typology === undefined || pageValues.typology == null) &&
               <div className="field-type">
                 <i className="fa fa-file-o"></i>
                 &nbsp; Pàgina

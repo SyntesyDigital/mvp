@@ -16,6 +16,7 @@ class ContentDataTable extends Component {
     componentDidMount()
     {
       //this.setDatatable();
+      this.initEvents();
     }
 
     componentWillReceiveProps(nextProps)
@@ -63,7 +64,7 @@ class ContentDataTable extends Component {
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             initComplete: function(settings, json) {
-                _this.initEvents();
+                //_this.initEvents();
             }
         });
     }

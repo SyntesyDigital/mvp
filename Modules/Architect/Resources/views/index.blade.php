@@ -41,7 +41,6 @@
               "route" => route('languages')
             ])
 
-
             <div class="col-xs-6">
               <!-- React Table.js -->
               <div id="dashboard-table"
