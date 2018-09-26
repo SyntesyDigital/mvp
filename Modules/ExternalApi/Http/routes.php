@@ -22,4 +22,7 @@ Route::group([
 
     Route::get('/agencies', 'AgencyController@all')->name('agencies.all');
     Route::get('/agencies-categories', 'AgencyCategoryController@all')->name('agencies-categories.all');
+
+
+    Route::post('/stocks/update', 'StockController@update')->name('stocks.update');
 });
