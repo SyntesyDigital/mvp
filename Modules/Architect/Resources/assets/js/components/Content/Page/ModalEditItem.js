@@ -90,7 +90,7 @@ class ModalEditItem extends Component {
         }
     ];
     const selectableArray = [4,6,7,14];
-    const selectableTypologies = [2,3,4,5,6,8,9,10,11,13,14];
+    const nonSelectableTypologies = [1];
 
     for(var key in TYPOLOGIES){
       if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
@@ -99,7 +99,7 @@ class ModalEditItem extends Component {
     }
 
     for(var key in TYPOLOGIES){
-      if(selectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
+      if(nonSelectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) == -1){
         this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
       }
     }
