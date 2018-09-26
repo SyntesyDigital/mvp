@@ -1,4 +1,4 @@
-<div id="{{$field['settings']['htmlId'] or ''}}" class="widget list-items {{$field['settings']['htmlClass'] or ''}}">
+<div id="{{$field['settings']['htmlId'] or ''}}" class="widget-selection {{$field['settings']['htmlClass'] or ''}}">
   <h3>
     @include('turisme::partials.fields.'.$field['fields'][0]['type'],
       [

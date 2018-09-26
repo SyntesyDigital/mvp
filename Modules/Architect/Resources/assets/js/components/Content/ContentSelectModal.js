@@ -66,6 +66,8 @@ class ContentSelectModal extends Component {
 
       var route = routes["contents.data"];
 
+      return route+'?typology_id='+2;
+
       if(field != null){
         if(field.type == "link" || field.type == "url"){
           return route+'?has_page=1';

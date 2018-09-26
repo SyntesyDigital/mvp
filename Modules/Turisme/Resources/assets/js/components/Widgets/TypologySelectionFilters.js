@@ -270,7 +270,7 @@ export default class TypologySelectionFilters extends Component {
 
     renderSelectionArea() {
       return (
-        <div>
+        <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
             {this.renderFilterBar()}
 
@@ -302,8 +302,8 @@ export default class TypologySelectionFilters extends Component {
       var size = Object.keys(this.state.selectedItems).length;
 
       return (
-        <div>
-
+        <div className="row grey">
+          <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
             {size == 0 &&
                 <p>{Lang.get('widgets.selected_void')}</p>
             }
@@ -317,7 +317,7 @@ export default class TypologySelectionFilters extends Component {
                   </div>
                 </div>
             }
-
+          </div>
         </div>
       );
     }
@@ -376,13 +376,9 @@ export default class TypologySelectionFilters extends Component {
                 onModalClose={this.handleThanksClose.bind(this)}
               />
 
-              {area &&
-                this.renderSelectionArea()
-              }
+              {this.renderSelectionArea()}
 
-              {!area &&
-                this.renderSelectedList()
-              }
+              {this.renderSelectedList()}
 
             </div>
         );
