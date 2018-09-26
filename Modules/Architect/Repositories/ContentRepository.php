@@ -133,7 +133,7 @@ class ContentRepository extends BaseRepository
 
     public function getModalDatatable()
     {
-        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria())->all())
+        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria()))
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })
@@ -151,7 +151,7 @@ class ContentRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->load('fields')->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
+                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->fields->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
                 ';
             })
             ->make(true);
