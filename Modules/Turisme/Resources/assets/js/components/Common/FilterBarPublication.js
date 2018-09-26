@@ -9,10 +9,16 @@ class FilterBarPublication extends Component {
 
         this.state = {
           language : '',
-          free : false
+          free : false,
+          categories : [],
+          category:''
         };
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+      this.loadCategories();
     }
 
     handleSubmit(event) {
@@ -33,7 +39,8 @@ class FilterBarPublication extends Component {
       this.props.onSubmit({
         text : this.state.language != '' ? this.state.language : null,
         free : this.state.free,
-        query : this.processQuery(query)
+        query : this.processQuery(query),
+        category_id : this.state.category
       });
 
     }
@@ -56,6 +63,29 @@ class FilterBarPublication extends Component {
 
     }
 
+
+    loadCategories() {
+
+      var self = this;
+
+      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE)
+        .then(function (response) {
+            if(response.status == 200
+                && response.data.data !== undefined
+                && response.data.data[0].descendants.length > 0)
+            {
+                self.setState({
+                    categories : response.data.data
+                });
+            }
+
+
+        }).catch(function (error) {
+           console.log(error);
+         });
+
+    }
+
     handleChange(event) {
       event.preventDefault();
 
@@ -73,11 +103,53 @@ class FilterBarPublication extends Component {
       this.setState(state);
     }
 
+    printSpace(level)
+   {
+
+     if(level <= 1)
+       return null;
+
+     var spaces = [];
+     for(var i=1;i<level;i++){
+       spaces.push(
+         "- "
+       );
+     }
+
+     return spaces;
+   }
+
+   printCategories(categories, level, html){
+     level++;
+     for (var i = 0; i< categories.length; i++ ){
+         html.push(<option key={categories[i].id} value={categories[i].id}>{this.printSpace(level)}{categories[i].name}</option>);
+         if(categories[i].descendants.length > 0){
+            this.printCategories(categories[i].descendants,level, html);
+         }
+     }
+
+   }
+
+   renderCategories() {
+     var level = 0;
+     var self = this;
+     var html = [];
+     self.printCategories(this.state.categories, level, html);
+     console.log('RESULTAT:',html);
+     return html;
+   }
+
     render() {
 
         return (
             <div className="filter-bar">
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
+
+                <select name="category" className="col-xs-3" onChange={this.handleChange}  value={this.state.category}>
+                  <option value="">{Lang.get('widgets.select_category')}</option>
+                  {this.renderCategories()}
+                </select>
+
 
                 <select name="language" className="col-xs-3" onChange={this.handleChange} value={this.state.language}>
                   <option value="">----</option>

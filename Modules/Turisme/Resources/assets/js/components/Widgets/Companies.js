@@ -19,7 +19,8 @@ export default class Companies extends Component {
             currPage : null,
             loaded: false,
             order : null,
-            filters : null
+            filters : null,
+            size:props.field.settings.itemsPerPage !== undefined ?  props.field.settings.itemsPerPage : null,
         };
     }
 
@@ -56,14 +57,14 @@ export default class Companies extends Component {
           filterQuery = filters.query;
         }
 
-        axios.get(ASSETS+'externalapi/companies?'+orderQuery+filterQuery+'&page=' + (page ? page : null))
+        axios.get(ASSETS+'externalapi/companies?'+orderQuery+filterQuery+'&size='+this.state.size+'&page=' + (page ? page : null))
           .then(function (response) {
 
               if(response.status == 200
                   && response.data.data !== undefined)
               {
                 var old_items = self.state.items;
-                if(old_items !== null){
+                if(response.data.meta.current_page != 1){
                   old_items.push.apply(old_items, response.data.data);
                 }else{
                   old_items =response.data.data;

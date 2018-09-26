@@ -27,7 +27,8 @@ class MembersByProgram extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'program'
+        'program',
+        'itemsPerPage',
     ];
 }
 ?>
