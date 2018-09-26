@@ -66,11 +66,11 @@ class ContentSelectModal extends Component {
 
       var route = routes["contents.data"];
 
-      //return route+'?typology_id='+2;
+      return route+'?typology_id='+2;
 
       if(field != null){
         if(field.type == "link" || field.type == "url"){
-          return route+'?has_page=1';
+          return route+'?is_page=1';
         }
         else if(field.type == "widget" || field.type == "contents"){
           if(field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
