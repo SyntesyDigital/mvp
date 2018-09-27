@@ -45,7 +45,15 @@ class ContentRepository extends BaseRepository
                 'users.lastname'
             )
             ->groupBy('contents.id')
-            ->orderBy('contents.updated_at','DESC');
+            ->orderBy('contents.updated_at','DESC')
+            ->with(
+                'author',
+                'typology',
+                'urls',
+                'page',
+                'fields',
+                'parent'
+            );
 
         if(isset($options["where"])) {
             foreach($options["where"] as $where) {
@@ -134,7 +142,7 @@ class ContentRepository extends BaseRepository
     public function getModalDatatable()
     {
         return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria()))
-            /*
+
             ->addColumn('title', function ($item) {
                 $title = isset($item->title) ? $item->title : '';
 
@@ -147,7 +155,7 @@ class ContentRepository extends BaseRepository
 
                 return $title;
             })
-            */
+
             ->addColumn('updated', function ($item) {
                 return $item->updated_at->format('d, M, Y');
             })

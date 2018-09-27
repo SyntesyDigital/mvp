@@ -38,7 +38,14 @@ class ContentModalDatatableCriteria implements CriteriaInterface
                         $query->where('has_slug', true);
                     });
                 }
-            })->with('author', 'typology', 'urls', 'page', 'fields');
+            })->with(
+                'author',
+                'typology',
+                'urls',
+                'page',
+                'fields',
+                'parent'
+            );
 
         return $query;
     }
