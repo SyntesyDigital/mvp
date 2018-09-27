@@ -52,7 +52,7 @@ class PageContainer extends Component {
         }
     });
     translations[DEFAULT_LOCALE] = true;
-    
+
     if(props.content) {
         // Builds fields values
         LANGUAGES.map(function(language,k){
@@ -298,6 +298,32 @@ class PageContainer extends Component {
           });
   }
 
+  handleDeleteContent()
+  {
+      var _this = this;
+      axios.delete('/architect/contents/' + this.state.content.id + '/delete', this.getFormData())
+          .then((response) => {
+              if(response.data.success) {
+
+                  toastr.success('Esborrat! Redirigint ...');
+                  setTimeout(function(){
+                    window.location.href= "/architect/contents/";
+                  },1000);
+
+              }
+          })
+          .catch((error) => {
+              if (error.response) {
+                  _this.onSaveError(error.response.data);
+              } else if (error.message) {
+                  toastr.error(error.message);
+              } else {
+                  console.log('Error', error.message);
+              }
+              //console.log(error.config);
+          });
+  }
+
   onSaveSuccess(response)
   {
       toastr.success('Contingut guardat correctament!');
@@ -488,6 +514,7 @@ class PageContainer extends Component {
           name={'Pàgina'}
           typologyId={null}
           onSubmitForm={this.handleSubmitForm}
+          onDelete={this.handleDeleteContent.bind(this)}
           onLayoutSave={this.handleLayoutSave}
           onLoadLayout={this.handleLoadLayout}
           saved={this.props.saved}

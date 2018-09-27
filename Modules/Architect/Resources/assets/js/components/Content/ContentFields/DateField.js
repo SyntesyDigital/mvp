@@ -38,8 +38,8 @@ class DateField extends Component {
              showTimeSelect
              timeFormat="HH:mm"
              timeIntervals={15}
-             dateFormat="LLL"
-             timeCaption="time"
+             dateFormat="DD/MM/YYYY HH:mm"
+             timeCaption="Hora"
              locale="ca-es"
          />
 

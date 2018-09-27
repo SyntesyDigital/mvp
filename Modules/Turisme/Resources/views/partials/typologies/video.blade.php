@@ -1,4 +1,7 @@
 @php
+
+  $settings = isset($settings) ? $settings : $field['settings'];
+
   $link = isset($field['fields']['video']['values']['url'][App::getLocale()]) ? $field['fields']['video']['values']['url'][App::getLocale()] : null;
   if($link != null){
     $title = isset($field['fields']['video']['values']['title'][App::getLocale()]) ? $field['fields']['video']['values']['title'][App::getLocale()] : '';
@@ -11,8 +14,7 @@
 @endphp
 
 @if(isset($link))
-
-<div class="widget banc-media video">
+<div id="{{$settings['htmlId'] or ''}}" class="widget banc-media video {{$settings['htmlClass'] or ''}}">
   <p class="medias">
     <iframe width="100%" src="https://www.youtube.com/embed/{{$youtube_id}}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
   </p>
