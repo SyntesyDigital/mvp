@@ -7,35 +7,38 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 use Modules\Architect\Entities\ContentField;
-use Modules\Architect\Entities\Language;
+
 
 class StockController extends Controller
 {
+
     public function update(Request $request)
     {
-        $data = $request->all();
+        $data = json_decode($request->getContent(), true);
+        $count = 0;
 
-        if($data) {
-            foreach($data as $k => $values) {
+        foreach($data as $k => $v) {
+            $field = ContentField::where('name', 'LIKE', 'stock.%.identifier')
+                ->where('value', $k)
+                ->first();
 
-                foreach($values as $iso => $value) {
-                    $language = Language::byIso($iso)->first();
+            if($field) {
+                $index = isset(explode('.', $field->name)[1]) ? explode('.', $field->name)[1] : null;
 
-                    $field = ContentField::where('name', 'LIKE', 'stock.%')
-                        ->where('value', $k)
-                        ->where('language_id', $language->id)
-                        ->first();
-
-
-                    print_r($k);
+                if($index !== null) {
+                    if(ContentField::where('name', 'LIKE', sprintf("stock.%d.value", $index))->update([
+                        'value' => $v
+                    ])) {
+                        $count++;
+                    }
                 }
-
-                //
-                // print_R($field);
             }
         }
 
+        return [
+            'success' => true,
+            'rows_updated' => $count
+        ];
 
-        return '';
     }
 }

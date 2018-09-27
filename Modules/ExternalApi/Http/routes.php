@@ -10,7 +10,6 @@ Route::group([
     // Route::get('/programs/{code}/members', 'ProgramController@members')->name('programs.members');
     // Route::get('/programs-categories/all', 'ProgramCategoryController@all')->name('programs-categories.all');
     // Route::get('/programs-categories/{code}/members', 'ProgramCategoryController@members')->name('programs-categories.members');
-    //
 
     Route::get('/members', 'MemberController@all')->name('members.all');
     Route::get('/programs', 'ProgramController@all')->name('programs.all');
@@ -22,7 +21,6 @@ Route::group([
 
     Route::get('/agencies', 'AgencyController@all')->name('agencies.all');
     Route::get('/agencies-categories', 'AgencyCategoryController@all')->name('agencies-categories.all');
-
 
     Route::post('/stocks/update', 'StockController@update')->name('stocks.update');
 });
