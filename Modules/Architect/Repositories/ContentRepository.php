@@ -250,13 +250,13 @@ class ContentRepository extends BaseRepository
       $homeId = null;
 
       foreach($pages as $page) {
-        if($page->url == ''){
+        if(strtolower($page->title) == 'home'){
 
           $homeId = $page->id;
 
           $nodes[] = [
             "id" => $page->id,
-            "title" => 'Inici',
+            "title" => $page->title,
             "level" => $level,
             "status" => $page->status,
             "author" => $page->author->getFullNameAttribute(),
