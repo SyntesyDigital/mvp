@@ -44,7 +44,7 @@ class MediaSelectModal extends Component {
       this.initDropzone();
       //this.setDatatable();
 
-      _this.initEvents();
+      this.initEvents();
 
     }
 
