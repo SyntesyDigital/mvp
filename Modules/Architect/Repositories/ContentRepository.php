@@ -98,12 +98,6 @@ class ContentRepository extends BaseRepository
                 $query->whereRaw("contents.author_id = ?", $author_id);
             })
 
-            ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
-                $query->whereRaw("
-                    contents_fields.value LIKE '%{$keyword}%'
-                    AND contents_fields.name IN ('".implode(",", $titleFields)."')
-                ");
-            })
             ->addColumn('title', function ($item) {
                 $title = isset($item->title) ? $item->title : '';
 
@@ -115,6 +109,12 @@ class ContentRepository extends BaseRepository
                 }
 
                 return $title;
+            })
+            ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
+                $query->whereRaw("
+                    contents_fields.value LIKE '%{$keyword}%'
+                    AND contents_fields.name IN ('".implode(",", $titleFields)."')
+                ");
             })
 
             ->addColumn('updated', function ($item) {
@@ -129,11 +129,10 @@ class ContentRepository extends BaseRepository
                 }
                 return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
-
             ->addColumn('action', function ($item) {
                 return '
-                <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                    <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
+                    <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
                 ';
             })
             ->make(true);

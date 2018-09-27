@@ -32,18 +32,20 @@ class SearchController extends Controller
             ];
         }
 
+        // Query parameters
         $query = $request->get('q') ?: abort(404);
         $size = request('size', 20);
         $order = explode(",", request('order'));
-
         $typologyId = $request->get('typology_id') ? json_decode($request->get('typology_id'), true) : null;
         $categoryId = $request->get('category_id') ? json_decode($request->get('category_id'), true) : null;
         $tags = $request->get('tags') ? json_decode($request->get('tags'), true) : null;
 
+        // Make Elasticsearch query
         $result = $this->query($query);
 
-        $total = $result['hits']['total'];
-        $hits = $result['hits']['hits'];
+        // Extract data of the results
+        $total = isset($result['hits']['total']) ? $result['hits']['total'] : null;
+        $hits = isset($result['hits']['hits']) ? $result['hits']['hits'] : [];
 
         $ids = array_map(function($hit) {
             return $hit['_id'];
@@ -56,7 +58,11 @@ class SearchController extends Controller
             ->byTagsIds($tags);
 
         if(sizeof($order) > 1) {
-            $collection->orderByField($order[0], $order[1], $request->get('accept_lang'));
+            $collection->orderByField(
+                $order[0],
+                $order[1],
+                $request->get('accept_lang')
+            );
         } else {
             $collection->orderByHits($hits);
         }
