@@ -109,7 +109,7 @@ class ContentBar extends Component {
           }
 
           <li>
-              <a href="#" className="text-danger">
+              <a href="#" className="text-danger" onClick={this.props.onDelete}>
                   <i className="fa fa-trash text-danger"></i>
                   &nbsp;
                   <span className="text-danger">Esborrar</span>
