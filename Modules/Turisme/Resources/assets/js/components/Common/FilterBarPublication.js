@@ -68,14 +68,14 @@ class FilterBarPublication extends Component {
 
       var self = this;
 
-      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE)
+      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE+'&category_id=15')
         .then(function (response) {
             if(response.status == 200
                 && response.data.data !== undefined
                 && response.data.data[0].descendants.length > 0)
             {
                 self.setState({
-                    categories : response.data.data
+                    categories : response.data.data[0].descendants
                 });
             }
 
