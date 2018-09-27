@@ -10,6 +10,8 @@ import Cartography from './../Typologies/Cartography';
 import Logos from './../Typologies/Logos';
 import Event from './../Typologies/Event';
 import Press from './../Typologies/Press';
+import Hemeroteca from './../Typologies/Hemeroteca';
+import App from './../Typologies/App';
 
 
 
@@ -88,6 +90,18 @@ class ListItem extends Component {
         case 'dossier' :
           return (
             <Press
+              field={this.props.field}
+            />
+          )
+        case 'hemeroteca' :
+          return (
+            <Hemeroteca
+              field={this.props.field}
+            />
+          )
+        case 'app' :
+          return (
+            <App
               field={this.props.field}
             />
           )

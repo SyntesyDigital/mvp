@@ -44,6 +44,8 @@ class MediaSelectModal extends Component {
       this.initDropzone();
       //this.setDatatable();
 
+      _this.initEvents();
+
     }
 
     handleCancelImage(e){
@@ -154,14 +156,7 @@ class MediaSelectModal extends Component {
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Èxit !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
 
-                _this.initEvents();
     	    }
         });
     }

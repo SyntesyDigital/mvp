@@ -48,6 +48,7 @@ class PageBuilder extends Component {
         editItemData : null,
         addPosition : null,
         listItemIndex : -1,
+        mediaType : null,
         imageCallback : null,
         contentCallback : null,
     };
@@ -755,8 +756,11 @@ class PageBuilder extends Component {
       listItemIndex = field.index;
     }
 
+    console.log("PageBuilder :: handleImageSelect :: field.type => ",field.type);
+
     this.setState({
       displayMediaModal : true,
+      mediaType : field.type ,
       listItemIndex : listItemIndex,
       imageCallback : callback !== undefined ? callback : null
     });
@@ -766,6 +770,7 @@ class PageBuilder extends Component {
   handleImageCancel(){
     this.setState({
       displayMediaModal : false,
+      mediaType : null ,
       listItemIndex : -1,
       imageCallback : null
     });
@@ -812,6 +817,7 @@ class PageBuilder extends Component {
         this.setState({
           displayMediaModal : false,
           listItemIndex : -1,
+          mediaType : null ,
           imageCallback : null
         });
 
@@ -911,6 +917,7 @@ class PageBuilder extends Component {
           display={this.state.displayMediaModal}
           onImageSelected={this.handleImageSelected.bind(this)}
           onImageCancel={this.handleImageCancel.bind(this)}
+          mediaType={this.state.mediaType}
           zIndex={10000}
         />
 

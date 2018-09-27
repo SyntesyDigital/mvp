@@ -12,6 +12,6 @@
 @if(isset($video))
   @include('turisme::partials.typologies.video',[
     "field" => $video,
-    "test" => 1
+    "settings" => $field['settings']
   ])
 @endif

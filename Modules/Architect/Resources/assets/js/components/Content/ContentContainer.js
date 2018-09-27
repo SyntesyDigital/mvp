@@ -301,6 +301,32 @@ class ContentContainer extends Component {
           });
   }
 
+  handleDeleteContent()
+  {
+      var _this = this;
+      axios.delete('/architect/contents/' + this.state.content.id + '/delete', this.getFormData())
+          .then((response) => {
+              if(response.data.success) {
+
+                  toastr.success('Esborrat! Redirigint ...');
+                  setTimeout(function(){
+                    window.location.href= "/architect/contents/";
+                  },1000);
+
+              }
+          })
+          .catch((error) => {
+              if (error.response) {
+                  _this.onSaveError(error.response.data);
+              } else if (error.message) {
+                  toastr.error(error.message);
+              } else {
+                  console.log('Error', error.message);
+              }
+              //console.log(error.config);
+          });
+  }
+
   onSaveSuccess(response)
   {
       if(response.content) {
@@ -485,6 +511,7 @@ class ContentContainer extends Component {
           name={this.state.typology.name}
           typologyId={this.state.typology.id}
           onSubmitForm={this.handleSubmitForm}
+          onDelete={this.handleDeleteContent.bind(this)}
           saved={this.props.saved}
           hasPreview={this.state.typology.has_slug == 1 ? true : false}
           saving={this.state.saving}
