@@ -487,6 +487,7 @@ class ContentContainer extends Component {
   render() {
 
     const {fields,contentSourceField} = this.state;
+    const mediaType = this.state.sourceField != null ? this.state.sourceField.type : null;
 
     return (
       <div>
@@ -496,6 +497,7 @@ class ContentContainer extends Component {
           field={this.state.sourceField}
           onImageSelected={this.handleImageSelected}
           onImageCancel={this.handleImageCancel}
+          mediaType={mediaType}
         />
 
         <ContentSelectModal

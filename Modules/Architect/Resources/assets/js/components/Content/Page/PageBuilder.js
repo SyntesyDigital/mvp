@@ -49,6 +49,7 @@ class PageBuilder extends Component {
         addPosition : null,
         listItemIndex : -1,
         mediaType : null,
+        contentField : null,
         imageCallback : null,
         contentCallback : null,
     };
@@ -92,6 +93,7 @@ class PageBuilder extends Component {
           displayClassModal : false,
           displayEditItemModal : false,
           displayContentModal : false,
+          contentField : null,
           pathToIndex : null,
           addPosition : null,
           editItemData : null,
@@ -826,17 +828,27 @@ class PageBuilder extends Component {
 
   /******** Contents  ********/
 
-  handleContentSelect(field,callback) {
+  handleContentSelect(identifier,callback,field) {
 
     var listItemIndex = -1;
     //FIXME try to find a more elegant way
-    if(field.type !== undefined && field.type == "list-item"){
+    if(identifier.type !== undefined && identifier.type == "list-item"){
       //if the event came from the list item, then save the array of the fields
-      listItemIndex = field.index;
+      listItemIndex = identifier.index;
     }
+
+    var contentField = this.state.editItemData != null ?
+      this.state.editItemData.data.field : null;
+
+    if(field !== undefined){
+      contentField = field;
+    }
+
+    console.log("PageBuilder :: handleContentSelect :: contentField => ",contentField);
 
     this.setState({
       displayContentModal : true,
+      contentField : contentField,
       listItemIndex : listItemIndex,
       contentCallback : callback !== undefined ? callback : null
     });
@@ -846,6 +858,7 @@ class PageBuilder extends Component {
   handleContentCancel(){
     this.setState({
       displayContentModal : false,
+      contentField : null,
       listItemIndex : -1,
       contentCallback : null
     });
@@ -897,6 +910,7 @@ class PageBuilder extends Component {
 
     this.setState({
       displayContentModal : false,
+      contentField : null,
       listItemIndex : -1,
       contentCallback : null
     });
@@ -923,7 +937,7 @@ class PageBuilder extends Component {
 
         <ContentSelectModal
           display={this.state.displayContentModal}
-          field={this.state.editItemData != null ? this.state.editItemData.data.field : null}
+          field={this.state.contentField}
           onContentSelected={this.handleContentSelected}
           onContentCancel={this.handleContentCancel}
           zIndex={10000}

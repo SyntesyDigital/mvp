@@ -324,7 +324,7 @@ class ModalEditItem extends Component {
 
       return field;
 
-    });
+    },fields[index]);
 
   }
 
@@ -391,7 +391,7 @@ class ModalEditItem extends Component {
 
       return field;
 
-    });
+    },fields[index]);
 
   }
 

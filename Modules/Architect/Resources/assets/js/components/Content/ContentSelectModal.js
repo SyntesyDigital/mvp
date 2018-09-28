@@ -67,6 +67,8 @@ class ContentSelectModal extends Component {
 
       const field = this.props.field;
 
+      console.log("handleContentSelect => ContentSelectModal :: this.props.field => ",field);
+
       var route = routes["contents.data"];
 
       if(field != null){

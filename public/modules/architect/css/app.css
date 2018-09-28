@@ -15906,6 +15906,11 @@ nav.main-nav ul li.active a {
   margin-bottom: 0px;
 }
 
+.table.dataTable a.title {
+  color: #455660;
+  font-weight: 100;
+}
+
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -17030,6 +17035,10 @@ line.links {
 
 .key-value-field .remove-field-btn {
   line-height: 32px;
+}
+
+.ql-editor p {
+  padding-bottom: 10px !important;
 }
 
 .menu .grid-items a {
