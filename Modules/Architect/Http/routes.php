@@ -66,6 +66,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/translations/data', 'TranslationController@data')->name('translations.data');
     Route::post('/translations', 'TranslationController@store')->name('translations.store');
     Route::get('/translations/create', 'TranslationController@create')->name('translations.create');
+    Route::post('/translations/update-order', 'TranslationController@updateOrder')->name('translations.order');
     Route::put('/translations/{translation?}/update', 'TranslationController@update')->name('translations.update');
     Route::delete('/translations/{translation?}/delete', 'TranslationController@delete')->name('translations.delete');
     Route::get('/translations/{translation?}', 'TranslationController@show')->name('translations.show');

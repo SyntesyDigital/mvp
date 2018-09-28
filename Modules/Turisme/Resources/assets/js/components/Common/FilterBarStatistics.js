@@ -113,7 +113,7 @@ class FilterBarStatistics extends Component {
 
                 <div className="col-xs-3">
                   <p>
-                    Selecciona año de consulta :
+                    {window.localization['WIDGET_BAR_CONSULTA_SELECT_YEAR']}
                   </p>
                 </div>
                 <select name="year" className="col-xs-3" value={this.state.year} onChange={this.handleChange} value={this.state.language}>

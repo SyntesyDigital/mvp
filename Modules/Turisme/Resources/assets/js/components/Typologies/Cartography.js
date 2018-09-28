@@ -46,7 +46,7 @@ class Cartography extends Component {
           <p className="titol">{title}</p>
 
           {selectable &&
-            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_SELECT']}</button>
           }
 
         </div>

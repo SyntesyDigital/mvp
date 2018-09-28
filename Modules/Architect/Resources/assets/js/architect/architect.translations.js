@@ -18,7 +18,7 @@ architect.translations = {
         var _this = this;
 
         var table = _this._settings.table.DataTable({
-    		processing: true,
+    		    processing: true,
             serverSide: true,
     	      pageLength: 20,
             language: {
@@ -26,20 +26,65 @@ architect.translations = {
             },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
+                {data: 'order', name: 'order'},
                 {data: 'name', name: 'name'},
                 {data: 'value', name: 'value'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
-            initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
+          rowReorder: {
+            dataSrc: 'order'
+          },
+          initComplete: function(settings, json) {
+            DataTableTools.init(this, {
+                onDelete: function(response) {
+                    toastr.success(response.message, 'Success !', {timeOut: 3000});
+                    _this.refresh();
+                }
+            });
 
-                _this.initEvents();
+            _this.initEvents();
     	    }
+        });
+
+
+        table.on('row-reorder', function ( e, diff, edit ) {
+          var newOrder = [];
+
+          for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+            var rowData = table.row( diff[i].node ).data();
+            newOrder.push({
+              id : rowData['id'],
+              newOrder : diff[i].newData
+            });
+          }
+
+          if(newOrder.length > 0){
+
+            $.ajax({
+              type: 'POST',
+              url: update_order_url,
+              data: {
+                _token: csrf_token,
+                order : newOrder
+              },
+              dataType: 'html',
+              success: function(data){
+                console.log(data);
+                  var rep = JSON.parse(data);
+                  if(rep.code == 200){
+                      //change
+                      toastr.success('Enregistrement effectué avec succès.', 'Sauvegardé !', {timeOut: 3000});
+                  }
+                  else if(rep.code == 400){
+                    //error
+                    toastr.error('Une erreur s\'est produite lors de l\'enregistrement', 'Erreur !', {timeOut: 3000});
+                  }
+                  else {
+                    //nothing to change
+                  }
+              }
+            });
+          }
         });
     },
 

@@ -282,9 +282,9 @@ export default class TypologySelectionFilters extends Component {
                     <p>{/*Carregant dades...*/}</p>
                 }
 
-                {this.state.items != null && this.state.items.length == 0 &&
-                    <p>{Lang.get('widgets.last_typology.empty')}</p>
-                }
+            {this.state.items != null && this.state.items.length == 0 &&
+                <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
+            }
 
                 {this.state.items != null && this.state.items.length > 0 &&
                     <ul>{this.renderItems()}</ul>
@@ -312,11 +312,10 @@ export default class TypologySelectionFilters extends Component {
           <div className="container">
             <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
-              <h2>Mi selección</h2>
+            {size == 0 &&
+                <p>{window.localization['GENERAL_WIDGET_SELECTED_VOID']}</p>
+            }
 
-              {size == 0 &&
-                  <p>{Lang.get('widgets.selected_void')}</p>
-              }
 
               {size > 0 &&
                   <div className="selected-list-wrapper">
@@ -324,7 +323,7 @@ export default class TypologySelectionFilters extends Component {
                       <ul>{this.renderSelectedItems()}</ul>
                     </div>
                     <div className="centered form-button-wrapper">
-                      <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{Lang.get('widgets.open_form')}</button>
+                      <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{window.localization['GENERAL_WIDGET_OPEN_FORM']}</button>
                     </div>
                   </div>
               }

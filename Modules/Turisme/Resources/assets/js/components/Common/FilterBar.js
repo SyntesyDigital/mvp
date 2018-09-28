@@ -57,7 +57,7 @@ class FilterBar extends Component {
             <div className="filter-bar">
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
                 {this.props.displayText &&
-                  <input type="text" name="text" value={this.state.text} onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} />
+                  <input type="text" name="text" value={this.state.text} onChange={this.handleChange} placeholder={window.localization['GENERAL_FORM_SEND']} />
                 }
 
                 {this.props.displayDates &&
@@ -70,7 +70,7 @@ class FilterBar extends Component {
                           startDate={this.state.dateStart}
                           endDate={this.state.dateEnd}
                           onChange={this.handleDateChange.bind(this,'dateStart')}
-                          placeholderText={Lang.get('messages.from_datepicker')}
+                          placeholderText={window.localization['GENERAL_WIDGET_FROM']}
                           locale="{LOCALE}"
                       />
                     </div>
@@ -84,14 +84,14 @@ class FilterBar extends Component {
                           minDate={this.state.dateStart}
                           endDate={this.state.dateEnd}
                           onChange={this.handleDateChange.bind(this,'dateEnd')}
-                          placeholderText={Lang.get('messages.to_datepicker')}
+                          placeholderText={window.localization['GENERAL_WIDGET_TO']}
                           locale="{LOCALE}"
                       />
                     </div>
                   </div>
                 }
 
-                <input type="submit" value={Lang.get('widgets.search')} className="btn" />
+                <input type="submit" value={window.localization['GENERAL_BUTTON_SEARCH']} className="btn" />
                 <div className="separator"></div>
               </form>
             </div>

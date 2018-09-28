@@ -17,13 +17,15 @@ class MoreResults extends Component {
     render() {
 
         const nextPage = this.props.currPage < this.props.lastPage ? (this.props.currPage + 1) : this.props.lastPage;
-        const load_more = this.props.currPage < this.props.lastPage && (null == this.props.maxItems || this.props.maxItems > this.props.currentItems) ?<li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> LOAD MORE</a></li>:'';
+        const display_button = this.props.currPage < this.props.lastPage && (null == this.props.maxItems || this.props.maxItems > this.props.currentItems) ?true:false;
 
-
-        return (
-                <ul className="navigation">
-                    {load_more }
-                </ul>
+        return ( <div>
+                    {display_button &&
+                      <ul className="navigation">
+                        <li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> {window.localization['GENERAL_READ_MORE']}</a></li>
+                      </ul>
+                    }
+                </div>
         );
     }
 }

@@ -275,13 +275,13 @@ export default class ModalFormPress extends Component {
                   <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
                       <form className="nova-cerca contact-form" onSubmit={this.handleSubmit.bind(this)}>
-                        <h2>Formulario Prensa</h2>
+                        <h2>{window.localization['PRESS_FORM_TITLE']}</h2>
 
-                        <p>
-                          Gracias por contactar con <b>Prensa</b> de Turisme de Barcelona
+                        <p dangerouslySetInnerHTML={{__html: window.localization['PRESS_FORM_SUBTITLE'] }}>
                         </p>
                         <p>
-                          Por favor, rellena el siguiente formulario:
+                          {window.localization['PRESS_FORM_SUBTITLE2']}
+
                         </p>
 
                         <div className="separator" style={{height:30}}></div>
@@ -289,7 +289,8 @@ export default class ModalFormPress extends Component {
 
                         <div className="col-xs-12">
                           <p>
-                            DATOS DEL MEDIO
+                          { window.localization['PRESS_FORM_SUBTITLE3']}
+
                           </p>
                         </div>
 
@@ -298,20 +299,20 @@ export default class ModalFormPress extends Component {
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
                               <select className={this.hasErrors('media_type')} name="media_type" value={fields.media_type} onChange={this.onFieldChange}>
-                                <option value="">Tipo de medio</option>
+                                <option value="">{ window.localization['PRESS_FORM_MEDIA_TYPE']}</option>
                                 <option value="TV">TV</option>
-                                <option value="Prensa">Prensa</option>
-                                <option value="Prensa online">Prensa online</option>
-                                <option value="Travel Blogger">Travel Blogger</option>
-                                <option value="Travel Guide">Travel Guide</option>
-                                <option value="Otros">Otros</option>
+                                <option value="Prensa">{ window.localization['PRESS_FORM_OPTION_PRESS']}</option>
+                                <option value="Prensa online">{ window.localization['PRESS_FORM_OPTION_ONLINE_PRESS']}</option>
+                                <option value="Travel Blogger">{ window.localization['PRESS_FORM_OPTION_TRAVEL_BLOGGER']}Travel Blogger</option>
+                                <option value="Travel Guide">{ window.localization['PRESS_FORM_OPTION_TRAVEL_GUIDE']}></option>
+                                <option value="Otros">{ window.localization['GENERAL_FORM_OTHERS']}</option>
                               </select>
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('media_name')} name="media_name" value={fields.media_name} placeholder="Nombre del Medio" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('media_name')} name="media_name" value={fields.media_name} placeholder={ window.localization['PRESS_FORM_MEDIA_NAME']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
@@ -319,8 +320,8 @@ export default class ModalFormPress extends Component {
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
                               <select className={this.hasErrors('media_distribution')} name="media_distribution" value={fields.media_distribution} onChange={this.onFieldChange}>
-                                <option value="">Distribución</option>
-                                <option value="ES">España</option>
+                                <option value="">{ window.localization['PRESS_FORM_DISTRIBUTION']}</option>
+                                <option value="ES">{ window.localization['GENERAL_FORM_SPAIN']}</option>
                               </select>
                             </div>
                           </div>
@@ -338,20 +339,21 @@ export default class ModalFormPress extends Component {
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('media_web')} name="media_web" value={fields.media_web} placeholder="Web / Twitter del Medio" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('media_web')} name="media_web" value={fields.media_web} placeholder={ window.localization['PRESS_FORM_WEB']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('media_email')} name="media_email" value={fields.media_email} placeholder="Email del medio" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('media_email')} name="media_email" value={fields.media_email} placeholder={ window.localization['PRESS_FORM_EMAIL']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="row">
                             <div className="col-xs-12">
                               <p>
-                              Temática o título del artículo:
+                              { window.localization['PRESS_FORM_SUBTITLE4']}
+
                               </p>
                               <textarea className={"col-xs-12 "+this.hasErrors('media_comment')} name="media_comment" value={fields.media_comment} onChange={this.onFieldChange} />
 
@@ -366,29 +368,30 @@ export default class ModalFormPress extends Component {
 
                         <div className="col-xs-12">
                           <p>
-                            JOURNALIST DATA
+                            { window.localization['PRESS_FORM_SUBTITLE5']}
+
                           </p>
                         </div>
 
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder="Nombre" onChange={this.onFieldChange} />
+                            <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder={ window.localization['GENERAL_FORM_NAME']} onChange={this.onFieldChange} />
                           </div>
                         </div>
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder="Apellidos" onChange={this.onFieldChange} />
+                            <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder={ window.localization['GENERAL_FORM_SURNAME']} onChange={this.onFieldChange} />
                           </div>
                         </div>
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
                             <select className={this.hasErrors('gender')} name="gender" value={fields.gender} onChange={this.onFieldChange}>
-                              <option value="">Genero</option>
-                              <option value="m">Masculino</option>
-                              <option value="f">Femenino</option>
+                              <option value="">{ window.localization['GENERAL_FORM_GENDER']}</option>
+                              <option value="m">{ window.localization['GENERAL_FORM_GENDER_MASCULINE']}</option>
+                              <option value="f">{ window.localization['GENERAL_FORM_GENDER_FEMENINE']}</option>
                             </select>
                           </div>
                         </div>
@@ -405,30 +408,30 @@ export default class ModalFormPress extends Component {
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('occupation')} name="occupation" placeholder="Cargo / posición" value={fields.occupation} onChange={this.onFieldChange} />
+                            <input type="text" className={this.hasErrors('occupation')} name="occupation" placeholder={ window.localization['GENERAL_FORM_POSITION']} value={fields.occupation} onChange={this.onFieldChange} />
                           </div>
                         </div>
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder="E-mail" onChange={this.onFieldChange}  />
+                            <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder={ window.localization['GENERAL_FORM_MAIL']} onChange={this.onFieldChange}  />
                           </div>
                         </div>
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('web')} name="web" value={fields.web} placeholder="Web / Twitter " onChange={this.onFieldChange} />
+                            <input type="text" className={this.hasErrors('web')} name="web" value={fields.web} placeholder={ window.localization['GENERAL_FORM_WEB_TWITTER']} onChange={this.onFieldChange} />
                           </div>
                         </div>
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
                             <select className={this.hasErrors('language')} name="language" value={fields.language} onChange={this.onFieldChange}>
-                              <option value="">Preferencia idioma</option>
-                              <option value="CA">Catalán</option>
-                              <option value="ES">Castellano</option>
-                              <option value="EN">Inglés</option>
-                              <option value="FR">Francés</option>
+                              <option value="">{ window.localization['GENERAL_FORM_PREF_LANG']}</option>
+                              <option value="CA">{ window.localization['GENERAL_FORM_LANG_CAT']}</option>
+                              <option value="ES">{ window.localization['GENERAL_FORM_LANG_SPA']}</option>
+                              <option value="EN">{ window.localization['GENERAL_FORM_LANG_ENG']}</option>
+                              <option value="FR">{ window.localization['GENERAL_FORM_LANG_FRENCH']}</option>
                             </select>
                           </div>
                         </div>
@@ -437,7 +440,8 @@ export default class ModalFormPress extends Component {
 
                         <div className="col-xs-12">
                           <p>
-                            Fechas de estancia en Barcelona
+                            { window.localization['PRESS_FORM_SUBTITLE6']}
+
                           </p>
                         </div>
 
@@ -450,7 +454,7 @@ export default class ModalFormPress extends Component {
                                 startDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateStart')}
-                                locale="ca-es"
+                                locale="{LOCALE}"
 
                             />
                           </div>
@@ -466,7 +470,7 @@ export default class ModalFormPress extends Component {
                                 minDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateEnd')}
-                                locale="ca-es"
+                                locale="{LOCALE}"
 
                             />
                           </div>
@@ -478,7 +482,8 @@ export default class ModalFormPress extends Component {
                         <div className="row">
                           <div className="col-xs-12">
                             <p>
-                            Si deseas dejar un comentario:
+                            { window.localization['GENERAL_FORM_COMMENT_TITLE']}
+
                             </p>
 
                             <textarea className={"col-xs-12 "+this.hasErrors('comment')} name="comment" value={fields.comment} onChange={this.onFieldChange} />
@@ -494,7 +499,8 @@ export default class ModalFormPress extends Component {
 
                             <label className={"col-xs-12 "+this.hasErrors('privacity')}>
                               <input type="checkbox" className={this.hasErrors('privacity')} name="privacity" value={fields.comment} onChange={this.onCheckboxChange}  />
-                              He leído y acepto la política de privacidad (RGPD).
+                              { window.localization['GENERAL_FORM_CHECKBOX_RGPD']}
+
                             </label>
 
                             {/*
@@ -511,11 +517,11 @@ export default class ModalFormPress extends Component {
 
                         {errors &&
                           <p className="error-message">
-                            El envio no ha sido completado. Por favor comprueva los campos en rojo.
+                            { window.localization['GENERAL_FORM_ERROR']}
                           </p>
                         }
 
-                        <input type="submit" value="Enviar" className="btn" />
+                        <input type="submit" value={ window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                       </form>
 

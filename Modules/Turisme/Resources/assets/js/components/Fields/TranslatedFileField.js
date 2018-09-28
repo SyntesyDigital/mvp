@@ -13,7 +13,8 @@ class TranslatedFileField extends Component {
 
       const field = this.props.field;
       var url = '';
-      const label = this.props.label !== undefined ? this.props.label : Lang.get('widgets.download_pdf');
+      const label = this.props.label !== undefined ?
+        this.props.label : window.localization['GENERAL_WIDGET_DOWNLOAD_PDF'];
 
       console.log("TranslatedFileField => ",field);
 

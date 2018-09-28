@@ -51,12 +51,12 @@ class Publication extends Component {
           </p>
           <p className="titol">{title}</p>
           <ul className="detalls">
-            <li>Tipus: {type}</li>
-            <li>Num Pàgines: {pageNum}</li>
-            <li>Format: {format}</li>
-            <li>Idiomes: {languages}</li>
-            <li>Ultima edició: {lastEdition}</li>
-            <li>Preu: {price}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_TIPUS']}: {type}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_NUM_PAGES']}: {pageNum}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_FORMAT']}: {format}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_LANGUAGES']}: {languages}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_LAST_EDITION']}: {lastEdition}</li>
+            <li>{window.localization['PUBLICATION_WIDGET_PRICE']}: {price}</li>
           </ul>
           <ul className="opcions app">
             <li>
@@ -66,7 +66,7 @@ class Publication extends Component {
             </li>
           </ul>
           {selectable &&
-            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_SELECT']}</button>
           }
 
         </div>

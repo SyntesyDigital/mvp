@@ -98,4 +98,28 @@ class TranslationController extends Controller
         ], 500);
     }
 
+
+    public function updateOrder(Request $request)
+    {
+
+      if($request->exists('order')){
+        $order = $request->get('order');
+
+        foreach($order as $row){
+          Translation::where('id', $row["id"])->update(['order' => $row["newOrder"]]);
+          }
+
+        return Response::json([
+                'error' => false,
+                'code'  => 200
+            ], 200);
+      }
+
+      return Response::json([
+                'error' => true,
+                'code'  => 400
+            ], 400);
+
+    }
+
 }

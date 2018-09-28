@@ -73,7 +73,7 @@ export default class TypologyCarousel extends Component {
             <div className="carousel-inner" role="listbox">
               {this.state.items != null && this.state.items.length == 0 &&
                 <p>
-                  {Lang.get('widgets.last_typology.empty')}
+                  {window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}
                 </p>
               }
 

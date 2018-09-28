@@ -179,9 +179,9 @@ class FilterBarBlog extends Component {
                 <form onSubmit={this.handleSubmit.bind(this)} className="blog-search">
 
                   <div className="row">
-                    <label className="col-md-3 col-sm-4 col-xs-12">Selecciona una categoria </label>
+                    <label className="col-md-3 col-sm-4 col-xs-12">{window.localization['GENERAL_WIDGET_SELECT_CATEGORY']}</label>
                     <select name="category" className="col-md-9 col-sm-8 col-xs-12" onChange={this.handleChange} value={this.state.category}>
-                        <option value="">{Lang.get('widgets.select_category')}</option>
+                        <option value="">{window.localization['GENERAL_WIDGET_SELECT_CATEGORY']}</option>
                         {this.renderCategories()}
                           </select>
                       </div>
@@ -195,7 +195,7 @@ class FilterBarBlog extends Component {
                             startDate={this.state.dateStart}
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateStart')}
-                            placeholderText={Lang.get('messages.from_datepicker')}
+                            placeholderText={window.localization['GENERAL_WIDGET_FROM']}
                             locale="{LOCALE}"
                         />
                       </div>
@@ -210,17 +210,17 @@ class FilterBarBlog extends Component {
                             minDate={this.state.dateStart}
                             endDate={this.state.dateEnd}
                             onChange={this.handleDateChange.bind(this,'dateEnd')}
-                            placeholderText={Lang.get('messages.to_datepicker')}
+                            placeholderText={window.localization['GENERAL_WIDGET_TO']}
                             locale="{LOCALE}"
                         />
                       </div>
                     </div>
 
                     <div className="row">
-                      <input className="col-md-9 col-sm-8 col-xs-12" value={this.state.text} name="text" onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} type="text"/>
+                        <input className="col-md-9 col-sm-8 col-xs-12" value={this.state.text} name="text" onChange={this.handleChange} placeholder={window.localization['WIDGET_BLOG_TEXT_TO_SEARCH']} type="text"/>
                     </div>
                     <div className="row">
-                      <input value={Lang.get('widgets.search')} className="btn" type="submit"/>
+                      <input value={window.localization['GENERAL_BUTTON_SEARCH']} className="btn" type="submit"/>
                     </div>
                   <div className="separator"></div>
 

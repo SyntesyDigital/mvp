@@ -115,7 +115,7 @@ export default class TypologyByCategory extends Component {
 
               {this.state.items != null && isEmpty &&
                 <p>
-                  {Lang.get('widgets.last_typology.empty')}
+                  {window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}
                 </p>
               }
 

@@ -68,14 +68,14 @@ class FilterBarPublication extends Component {
 
       var self = this;
 
-      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE)
+      axios.get(ASSETS+'api/categories/tree?accept_lang='+LOCALE+'&category_id=15')
         .then(function (response) {
             if(response.status == 200
                 && response.data.data !== undefined
                 && response.data.data[0].descendants.length > 0)
             {
                 self.setState({
-                    categories : response.data.data
+                    categories : response.data.data[0].descendants
                 });
             }
 
@@ -146,16 +146,16 @@ class FilterBarPublication extends Component {
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
 
                 <select name="category" className="col-xs-3" onChange={this.handleChange}  value={this.state.category}>
-                  <option value="">{Lang.get('widgets.select_category')}</option>
+                  <option value="">{window.localization['GENERAL_WIDGET_SELECT_CATEGORY']}</option>
                   {this.renderCategories()}
                 </select>
 
 
                 <select name="language" className="col-xs-3" onChange={this.handleChange} value={this.state.language}>
                   <option value="">----</option>
-                  <option value="català">Català</option>
-                  <option value="castellano">Castellano</option>
-                  <option value="english">English</option>
+                  <option value="català">{window.localization['GENERAL_FORM_LANG_CAT']}</option>
+                  <option value="castellano">{window.localization['GENERAL_FORM_LANG_SPA']}</option>
+                  <option value="english">{window.localization['GENERAL_FORM_LANG_ENG']}</option>
                 </select>
 
                 <div className="col-xs-3 checkbox" style={{paddingLeft:40}}>
@@ -170,7 +170,7 @@ class FilterBarPublication extends Component {
                   </label>
                 </div>
 
-                <input type="submit" value={Lang.get('widgets.search')} className="btn" />
+                <input type="submit" value={window.localization['GENERAL_BUTTON_SEARCH']} className="btn" />
                 <div className="separator"></div>
               </form>
             </div>

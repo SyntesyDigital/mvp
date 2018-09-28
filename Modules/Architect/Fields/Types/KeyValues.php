@@ -55,6 +55,13 @@ class KeyValues extends Field implements FieldInterface
                       'parent_id' => $field->id
                   ]));
               }
+              else {
+                $content->fields()->save(new ContentField([
+                    'name' => $identifier . '.'.$index.'.value',
+                    'value' => 0,
+                    'parent_id' => $field->id
+                ]));
+              }
           }
 
         }

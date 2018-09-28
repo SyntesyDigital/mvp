@@ -43,10 +43,10 @@ class Hemeroteca extends Component {
         <div className="hemeroteca">
           <p className="titol">{title}</p>
           <ul className="detalls">
-            <li>Nom publicació: {name}</li>
-            <li>Format: {format}</li>
-            <li>Autor: {author}</li>
-            <li>Idiomes: {language}</li>
+            <li>{window.localization['HEMEROTECA_WIDGET_NOM']}: {name}</li>
+            <li>{window.localization['HEMEROTECA_WIDGET_FORMAT']}: {format}</li>
+            <li>{window.localization['HEMEROTECA_WIDGET_AUTOR']}: {author}</li>
+            <li>{window.localization['HEMEROTECA_WIDGET_LANGUAGES']}: {language}</li>
           </ul>
           <ul className="opcions app">
             <li>

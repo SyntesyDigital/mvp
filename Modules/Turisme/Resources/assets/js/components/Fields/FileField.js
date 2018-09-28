@@ -15,7 +15,7 @@ class FileField extends Component {
       const fieldLabel = this.props.labelFieldName !== undefined ? this.props.labelFieldName : false;
       var url = '';
       const label = this.props.label !== undefined ? this.props.label :
-        (fieldLabel ? this.props.field.name : Lang.get('widgets.download_pdf'));
+        (fieldLabel ? this.props.field.name : window.localization['GENERAL_WIDGET_DOWNLOAD_PDF']);
 
       console.log("FileField => ",field);
 
@@ -32,7 +32,7 @@ class FileField extends Component {
           </a>
         );
       }
-      
+
       return null;
 
     }

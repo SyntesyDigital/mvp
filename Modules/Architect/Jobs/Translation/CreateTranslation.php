@@ -27,7 +27,8 @@ class CreateTranslation
     public function handle()
     {
         $translation = Translation::create([
-          'name' => $this->attributes['name']
+          'name' => $this->attributes['name'],
+          'order' => null !== Translation::max('order')? (Translation::max('order') + 1):0
         ]);
 
         foreach ($this->attributes['fields']['value'] as $languageId => $value) {
