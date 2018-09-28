@@ -28,7 +28,7 @@ class TypologyModal extends Component {
       var formats = [];
       IMAGES_FORMATS.map(function(format, k){
           formats.push({
-              name : format.name,
+              name : format.name+" ("+format.width+"x"+format.height+")",
               value : format.name
           });
       });

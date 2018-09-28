@@ -9,11 +9,14 @@
 
 	<ul class="nav navbar-nav menu-general">
 		@foreach($menu as $index => $menuElement)
-		<li class="dropdown mega-dropdown">
-			@php
-				$link = format_link($menuElement);
-				$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
-			@endphp
+
+		@php
+			$link = format_link($menuElement);
+			$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
+		@endphp
+
+		<li class="dropdown mega-dropdown {{ Request::is('*'.$link['url'].'*') ? 'active' : '' }}">
+
 			@if(isset($link))
 					<a href="{{$link["url"]}}" id="{{$link["id"]}}" class="{{$hasChildren ? 'dropdown-toggle' : ''}} {{$link["class"]}}" @if($hasChildren)data-toggle="dropdown"@endif>{{$link["name"]}}</a>
 

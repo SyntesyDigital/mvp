@@ -51,18 +51,16 @@ export default class TypologySelectionFilters extends Component {
         };
 
         $("#selected-items").css({display:'block'});
-        $("#selected-items").on('click',this.onAreaToggle.bind(this));
+        $("#selected-items").on('click',this.onShoppingCartClick.bind(this));
     }
 
-    onAreaToggle(event){
+    onShoppingCartClick(event){
       event.preventDefault();
 
-      console.log("toggle!");
-      const area = !this.state.area;
-
-      this.setState({
-        area : area
-      });
+      TweenMax.to($('html, body'),1.5, {
+          scrollTop: $(".selected-list-row").offset().top,
+          ease:Power2.easeInOut
+        });
 
     }
 
@@ -310,7 +308,7 @@ export default class TypologySelectionFilters extends Component {
       var size = Object.keys(this.state.selectedItems).length;
 
       return (
-        <div className="row grey">
+        <div className="row grey selected-list-row">
           <div className="container">
             <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
