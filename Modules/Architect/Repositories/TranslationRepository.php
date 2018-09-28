@@ -22,6 +22,9 @@ class TranslationRepository extends BaseRepository
             ->orderBy('translations.updated_at','DESC');
 
         return Datatables::of(Translation::all())
+            ->addColumn('order', function ($item) {
+                return isset($item->order) ? $item->order : null;
+            })
             ->addColumn('name', function ($item) {
                 return isset($item->name) ? $item->name : null;
             })

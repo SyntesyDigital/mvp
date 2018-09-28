@@ -10,6 +10,7 @@
     <table class="table" id="table" data-url="{{route('translations.data')}}">
         <thead>
            <tr>
+               <th>Order</th>
                <th>Identificador</th>
                <th>Valor per defecte</th>
                <th></th>
@@ -17,6 +18,7 @@
         </thead>
         <tfoot>
            <tr>
+               <th></th>
                <th></th>
                <th></th>
                <th></th>
@@ -41,5 +43,7 @@
     architect.translations.init({
         'table' : $('#table')
     })
+    var update_order_url = '{{route('translations.order')}}';
+    var csrf_token = "{{csrf_token()}}";
 </script>
 @endpush
