@@ -9,6 +9,8 @@ use Storage;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Field;
 
+use App;
+
 use Modules\Architect\Repositories\Criterias\ContentModalDatatableCriteria;
 
 class ContentRepository extends BaseRepository
@@ -107,8 +109,7 @@ class ContentRepository extends BaseRepository
                     $title = ( $parent->title ? $parent->title.' / ' : '' ) . $title;
                   }
                 }
-
-                return $title;
+                return '<a class="title" href="' . route('contents.show', $item) . '" >'.$title.'</a>';
             })
             ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
                 $query->whereRaw("
@@ -130,11 +131,19 @@ class ContentRepository extends BaseRepository
                 return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
             ->addColumn('action', function ($item) {
-                return '
-                    <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
-                    <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+
+                $buttons = '';
+
+                if($item->page) {
+                  $buttons = '<a title="Previsualitzar" href="/'.App::getLocale().'/preview/'.$item->id.'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
+                }
+
+                return $buttons.'
+                    <a title="Editar" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp;
+                    <a title="Esborrar" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> </a> &nbsp;
                 ';
             })
+            ->rawColumns(['title', 'action'])
             ->make(true);
     }
 
