@@ -46,7 +46,8 @@ class OrderBar extends Component {
         return (
             <div className="order-bar centered">
               <a href="" onClick={this.onToggleOrder.bind(this)}>
-                Ordenar por nombre &nbsp;
+                window.localization['WIDGET_ORDER_BAR_BY_NAME']   &nbsp;
+
                 <i className={"fa fa-sort"+(order != '' ? '-'+order : '')}></i>
               </a>
             </div>

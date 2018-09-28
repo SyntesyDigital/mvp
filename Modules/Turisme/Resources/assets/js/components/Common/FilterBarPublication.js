@@ -153,9 +153,9 @@ class FilterBarPublication extends Component {
 
                 <select name="language" className="col-xs-3" onChange={this.handleChange} value={this.state.language}>
                   <option value="">----</option>
-                  <option value="català">Català</option>
-                  <option value="castellano">Castellano</option>
-                  <option value="english">English</option>
+                  <option value="català">window.localization['GENERAL_FORM_LANG_CAT']</option>
+                  <option value="castellano">window.localization['GENERAL_FORM_LANG_SPA']</option>
+                  <option value="english">window.localization['GENERAL_FORM_LANG_ENG']</option>
                 </select>
 
                 <div className="col-xs-3 checkbox" style={{paddingLeft:40}}>
