@@ -13,12 +13,8 @@ class ArchitectController extends Controller
 {
     public function index()
     {
-        return view('architect::index');
-    }
 
-    public function daniTest()
-    {
-        return view('architect::dani-test');
+        return view('architect::index');
     }
 
     public function settings()

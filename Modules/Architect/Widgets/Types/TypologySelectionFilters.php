@@ -31,6 +31,7 @@ class TypologySelectionFilters extends Widget implements WidgetInterface
         'htmlClass',
         'selectableTypology',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

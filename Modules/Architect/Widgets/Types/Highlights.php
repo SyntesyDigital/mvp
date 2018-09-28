@@ -26,6 +26,7 @@ class Highlights extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'cropsAllowed',
+        'columns'
     ];
 }
 ?>

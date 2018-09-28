@@ -34,6 +34,7 @@ class TypologyPaginated extends Widget implements WidgetInterface
         'maxItems',
         'extended',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

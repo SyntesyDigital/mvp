@@ -74,6 +74,11 @@ class ContentController extends Controller
         return $this->contents->getDatatable($options);
     }
 
+    public function pagesTree(Request $request)
+    {
+      return $this->contents->getPagesGraph();
+    }
+
     public function modalData(Request $request)
     {
         return $this->contents->getModalDatatable();

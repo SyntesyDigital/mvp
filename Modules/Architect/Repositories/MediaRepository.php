@@ -8,6 +8,8 @@ use DataTables;
 use Storage;
 use Modules\Architect\Entities\Media;
 
+use Modules\Architect\Repositories\Criterias\MediaModalDatatableCriteria;
+
 class MediaRepository extends BaseRepository
 {
     public function model()
@@ -22,9 +24,11 @@ class MediaRepository extends BaseRepository
                 'medias.*',
                 'users.firstname',
                 'users.lastname'
-            );
+            )
+            ->type(request('type'))
+            ->orderBy('created_at', 'desc');
 
-        return Datatables::of($medias->orderBy('created_at', 'desc'))
+        return Datatables::of($medias)
             ->filterColumn('author', function ($query, $keyword) {
                 $query->whereRaw("CONCAT(users.firstname,' ',users.lastname) like ?", ["%{$keyword}%"]);
             })

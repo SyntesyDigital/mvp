@@ -5,6 +5,8 @@ namespace Modules\Architect\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Storage;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Media extends Model
 {
     protected $casts = [
@@ -51,6 +53,7 @@ class Media extends Model
         return json_encode($this->metadata);
     }
 
+
     public function getUrlsAttribute()
     {
 
@@ -89,6 +92,16 @@ class Media extends Model
           return $urls;
 
         }
+    }
+
+    public function scopeNotType(Builder $builder, $type = null)
+    {
+        return $type ? $builder->whereNot('type', 'LIKE', str_replace('*', '%', $type)) : $builder;
+    }
+
+    public function scopeType(Builder $builder, $type = null)
+    {
+        return $type ? $builder->where('type', 'LIKE', str_replace('*', '%', $type)) : $builder;
     }
 
 }

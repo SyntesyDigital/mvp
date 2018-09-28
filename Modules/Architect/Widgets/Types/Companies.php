@@ -29,6 +29,7 @@ class Companies extends Widget implements WidgetInterface
         'htmlClass',
         'axe',
         'itemsPerPage',
+        'columns'
     ];
 }
 ?>

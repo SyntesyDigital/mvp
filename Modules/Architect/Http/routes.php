@@ -6,8 +6,8 @@ Auth::routes();
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespace' => 'Modules\Architect\Http\Controllers'], function()
 {
 
-    Route::get('/', 'ArchitectController@index')->name('home');
-    Route::get('/dani-test', 'ArchitectController@daniTest')->name('dani.test');
+    Route::get('/', 'ArchitectController@index')->name('dashboard');
+
     // ????
     Route::post('/save', 'ArchitectController@save')->name('save');
     Route::get('/settings', 'ArchitectController@settings')->name('settings');
@@ -92,6 +92,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'architect', 'namespa
     Route::get('/contents', 'ContentController@index')->name('contents');
     Route::get('/contents/data', 'ContentController@data')->name('contents.data');
     Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
+    Route::get('/contents/pages-tree', 'ContentController@pagesTree')->name('contents.pages-tree');
     Route::post('/contents', 'ContentController@store')->name('contents.store');
     Route::get('/contents/show', 'ContentController@show')->name('contents.show');
     Route::get('/contents/page/create', 'ContentController@create')->name('contents.page.create');

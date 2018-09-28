@@ -9,7 +9,9 @@ use Storage;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Field;
 
-use Modules\Architect\Repositories\Criterias\ModalDatatableCriteria;
+use App;
+
+use Modules\Architect\Repositories\Criterias\ContentModalDatatableCriteria;
 
 class ContentRepository extends BaseRepository
 {
@@ -45,7 +47,15 @@ class ContentRepository extends BaseRepository
                 'users.lastname'
             )
             ->groupBy('contents.id')
-            ->orderBy('contents.updated_at','DESC');
+            ->orderBy('contents.updated_at','DESC')
+            ->with(
+                'author',
+                'typology',
+                'urls',
+                'page',
+                'fields',
+                'parent'
+            );
 
         if(isset($options["where"])) {
             foreach($options["where"] as $where) {
@@ -90,12 +100,6 @@ class ContentRepository extends BaseRepository
                 $query->whereRaw("contents.author_id = ?", $author_id);
             })
 
-            ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
-                $query->whereRaw("
-                    contents_fields.value LIKE '%{$keyword}%'
-                    AND contents_fields.name IN ('".implode(",", $titleFields)."')
-                ");
-            })
             ->addColumn('title', function ($item) {
                 $title = isset($item->title) ? $item->title : '';
 
@@ -103,6 +107,57 @@ class ContentRepository extends BaseRepository
                   if(isset($item->parent)){
                     $parent = $item->parent()->first();
                     $title = ( $parent->title ? $parent->title.' / ' : '' ) . $title;
+                  }
+                }
+                return '<a class="title" href="' . route('contents.show', $item) . '" >'.$title.'</a>';
+            })
+            ->filterColumn('title', function ($query, $keyword) use ($titleFields) {
+                $query->whereRaw("
+                    contents_fields.value LIKE '%{$keyword}%'
+                    AND contents_fields.name IN ('".implode(",", $titleFields)."')
+                ");
+            })
+
+            ->addColumn('updated', function ($item) {
+                return $item->updated_at->format('d, M, Y');
+            })
+            ->addColumn('status', function ($item) {
+                return $item->getStringStatus();
+            })
+            ->addColumn('typology', function ($item) {
+                if($item->page) {
+                    return 'Page';
+                }
+                return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
+            })
+            ->addColumn('action', function ($item) {
+
+                $buttons = '';
+
+                if($item->page) {
+                  $buttons = '<a title="Previsualitzar" href="/'.App::getLocale().'/preview/'.$item->id.'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
+                }
+
+                return $buttons.'
+                    <a title="Editar" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp;
+                    <a title="Esborrar" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> </a> &nbsp;
+                ';
+            })
+            ->rawColumns(['title', 'action'])
+            ->make(true);
+    }
+
+    public function getModalDatatable()
+    {
+        return Datatables::of($this->getByCriteria(new ContentModalDatatableCriteria()))
+
+            ->addColumn('title', function ($item) {
+                $title = isset($item->title) ? $item->title : '';
+
+                if($item->is_page){
+                  if(isset($item->parent)){
+                    $parent = $item->parent->title;
+                    $title = ( $parent ? $parent.' / ' : '' ) . $title;
                   }
                 }
 
@@ -121,43 +176,12 @@ class ContentRepository extends BaseRepository
                 }
                 return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
-
-            ->addColumn('action', function ($item) {
-                return '
-                <a href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
-                ';
-            })
-            ->make(true);
-    }
-
-    public function getModalDatatable()
-    {
-        $query = $this
-            ->skipCriteria()
-            ->pushCriteria(new ModalDatatableCriteria())
-            ->orderBy('updated_at','DESC')
-            ->all();
-
-        return Datatables::of($query)
-            ->addColumn('updated', function ($item) {
-                return $item->updated_at->format('d, M, Y');
-            })
-            ->addColumn('status', function ($item) {
-                return $item->getStringStatus();
-            })
-            ->addColumn('typology', function ($item) {
-                if($item->page) {
-                    return 'Page';
-                }
-                return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
-            })
             ->addColumn('author', function ($item) {
                 return isset($item->author) ? $item->author->full_name : null;
             })
             ->addColumn('action', function ($item) {
                 return '
-                <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->load('fields')->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
+                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> Afegir</a> &nbsp;
                 ';
             })
             ->make(true);
@@ -206,6 +230,88 @@ class ContentRepository extends BaseRepository
         }
       }
       return  $pageTree;
+
+    }
+
+    public function getPagesGraph()
+    {
+      $nodes = array();
+      $links = array();
+      $level = 1;
+
+      $traverse = function (&$pageTree,$pages, &$nodes,&$links,$level) use (&$traverse) {
+          $level++;
+
+          foreach ($pages as $page) {
+
+            $nodes[] = [
+              "id" => $page->id,
+              "title" => $page->getTitleAttribute(),
+              "level" => $level,
+              "status" => $page->status,
+              "author" => $page->author->getFullNameAttribute(),
+              "url" => $page->url
+            ];
+
+            $links[] = [
+              "source" => $page->parent_id,
+              "target" => $page->id
+            ];
+
+            $traverse($pageTree,$page->children, $nodes,$links,$level);
+          }
+      };
+
+      $pages = Content::where('is_page', 1)->get();
+      $homeId = null;
+
+      foreach($pages as $page) {
+        if(strtolower($page->title) == 'home'){
+
+          $homeId = $page->id;
+
+          $nodes[] = [
+            "id" => $page->id,
+            "title" => $page->title,
+            "level" => $level,
+            "status" => $page->status,
+            "author" => $page->author->getFullNameAttribute(),
+            "url" => $page->url
+          ];
+
+          $level++;
+          break;
+        }
+      }
+
+      foreach($pages as $page) {
+
+        if(!$page->parent_id && $page->id != $homeId) {
+
+          $nodes[] = [
+            "id" => $page->id,
+            "title" => $page->getTitleAttribute(),
+            "level" => $level,
+            "status" => $page->status,
+            "author" => $page->author->getFullNameAttribute(),
+            "url" => $page->url
+          ];
+
+          if($homeId != null){
+            $links[] = [
+              "source" => $homeId,
+              "target" => $page->id
+            ];
+          }
+
+          $traverse($pageTree,Content::getTree($page->id), $nodes,$links,$level);
+        }
+      }
+
+      return  [
+        "nodes" => $nodes,
+        "links" => $links
+      ];
 
     }
 

@@ -13,6 +13,13 @@
                 <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
+
+                      <li class="{{ Request::is('architect') ? 'active' : '' }}">
+                        <a href="{{route('dashboard')}}">
+                        Inici
+                        </a>
+                      </li>
+
                         @if(Auth::user()->hasRole(["admin", "editor"]))
                       <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">
@@ -28,7 +35,7 @@
 
                       <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
                         <a href="{{route('medias.index')}}">
-                          Mitjants
+                          Mitjans
                         </a>
                       </li>
 

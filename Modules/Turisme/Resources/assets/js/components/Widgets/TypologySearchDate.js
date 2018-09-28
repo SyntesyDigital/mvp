@@ -28,7 +28,7 @@ export default class TypologySearchDate extends Component {
             textIdentifier : textIdentifier,
             dateIdentifier : dateIdentifier,
             filters : null,
-            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
+            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : 3,
         };
     }
 

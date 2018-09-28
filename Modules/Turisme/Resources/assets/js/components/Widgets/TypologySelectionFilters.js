@@ -47,7 +47,7 @@ export default class TypologySelectionFilters extends Component {
             area : true,
             displayModal : false,
             displayThanks : false,
-            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
+            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : 3,
         };
 
         $("#selected-items").css({display:'block'});
@@ -172,7 +172,7 @@ export default class TypologySelectionFilters extends Component {
         //console.log("TypologyPaginated => ",items[key],selectedItems,selected);
 
         result.push(
-          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
+          <li key={key} className={selected ? 'selected' : ''}>
             <ListItem
               field={items[key]}
               selectable={true}
@@ -195,7 +195,7 @@ export default class TypologySelectionFilters extends Component {
       for(var key in selectedItems){
 
         result.push(
-          <li key={key} className="col-md-3 col-sm-4 col-xs-12">
+          <li key={key}>
             <ListSelectedItem
               field={selectedItems[key]}
               onRemove={this.handleOnRemove.bind(this)}
@@ -274,29 +274,33 @@ export default class TypologySelectionFilters extends Component {
 
     renderSelectionArea() {
       return (
-        <div>
+        <div className="row">
+          <div className="container">
+            <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
-            {this.renderFilterBar()}
+                {this.renderFilterBar()}
 
-            {this.state.items == null &&
-                <p>{/*Carregant dades...*/}</p>
-            }
+                {this.state.items == null &&
+                    <p>{/*Carregant dades...*/}</p>
+                }
 
             {this.state.items != null && this.state.items.length == 0 &&
                 <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
             }
 
-            {this.state.items != null && this.state.items.length > 0 &&
-                <ul>{this.renderItems()}</ul>
-            }
+                {this.state.items != null && this.state.items.length > 0 &&
+                    <ul>{this.renderItems()}</ul>
+                }
 
-            {this.state.lastPage &&
-                <MoreResults
-                  currPage={this.state.currPage}
-                  lastPage={this.state.lastPage}
-                  onChange={this.onPageChange.bind(this)}
-                />
-            }
+                {this.state.lastPage &&
+                    <MoreResults
+                      currPage={this.state.currPage}
+                      lastPage={this.state.lastPage}
+                      onChange={this.onPageChange.bind(this)}
+                    />
+                }
+            </div>
+          </div>
         </div>
       );
     }
@@ -306,22 +310,27 @@ export default class TypologySelectionFilters extends Component {
       var size = Object.keys(this.state.selectedItems).length;
 
       return (
-        <div>
+        <div className="row grey">
+          <div className="container">
+            <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
             {size == 0 &&
                 <p>{window.localization['GENERAL_WIDGET_SELECTED_VOID']}</p>
             }
 
-            {size > 0 &&
-                <div>
-                  <ul>{this.renderSelectedItems()}</ul>
 
-                  <div className="centered form-button-wrapper">
-                    <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{window.localization['GENERAL_WIDGET_OPEN_FORM']}</button>
+              {size > 0 &&
+                  <div className="selected-list-wrapper">
+                    <div className="selected-list">
+                      <ul>{this.renderSelectedItems()}</ul>
+                    </div>
+                    <div className="centered form-button-wrapper">
+                      <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{window.localization['GENERAL_WIDGET_OPEN_FORM']}</button>
+                    </div>
                   </div>
-                </div>
-            }
-
+              }
+            </div>
+          </div>
         </div>
       );
     }
@@ -380,13 +389,9 @@ export default class TypologySelectionFilters extends Component {
                 onModalClose={this.handleThanksClose.bind(this)}
               />
 
-              {area &&
-                this.renderSelectionArea()
-              }
+              {this.renderSelectionArea()}
 
-              {!area &&
-                this.renderSelectedList()
-              }
+              {this.renderSelectedList()}
 
             </div>
         );

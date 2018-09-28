@@ -13968,6 +13968,10 @@ nav.main-nav ul li a,
 #media-crops.custom-modal .crop-item,
 #media-crops.custom-modal .crop-item:hover .crop-title,
 #media-crops.custom-modal .crop-item.selected .crop-title,
+.dashboard .dashboard-item,
+.dashboard .dashboard-item .left-part i,
+.dashboard .dashboard-item .right-part p,
+.dashboard .dashboard-table tbody tr,
 .page-builder .page-row .col-types-container {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -15819,6 +15823,11 @@ nav.main-nav ul li.active a {
   margin-bottom: 0px;
 }
 
+.table.dataTable a.title {
+  color: #455660;
+  font-weight: 100;
+}
+
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -15882,6 +15891,299 @@ nav.main-nav ul li.active a {
 
 .map-container .leaflet-control-container {
   z-index: 400;
+}
+
+.dashboard .dashboard-items {
+  padding-top: 20px;
+}
+
+.dashboard .dashboard-items a {
+  display: inline-block;
+  width: 100%;
+}
+
+.dashboard .dashboard-item {
+  background-color: #fff;
+  text-align: center;
+  padding: 21px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  cursor: pointer;
+  height: 105px;
+}
+
+.dashboard .dashboard-item .left-part {
+  float: left;
+  width: 30%;
+  text-align: right;
+}
+
+.dashboard .dashboard-item .left-part i {
+  color: #455660;
+  padding-right: 4px;
+}
+
+.dashboard .dashboard-item .right-part {
+  width: 70%;
+  float: right;
+}
+
+.dashboard .dashboard-item .right-part p {
+  text-align: left;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  color: #455660;
+}
+
+.dashboard .dashboard-item p.grid-item-name {
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  padding-top: 2px;
+  padding-left: 3px;
+}
+
+.dashboard .dashboard-item p.grid-item-value {
+  font-size: 34px;
+  line-height: 40px;
+  font-weight: 100;
+}
+
+.dashboard .dashboard-item:hover {
+  color: #4a9fea;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard .dashboard-item:hover p {
+  color: #4a9fea;
+}
+
+.dashboard .dashboard-item:hover i {
+  color: #4a9fea;
+}
+
+.dashboard .dashboard-table {
+  background-color: #fff;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  height: 400px;
+}
+
+.dashboard .dashboard-table .dashboard-table-header {
+  height: 80px;
+  padding: 21px;
+}
+
+.dashboard .dashboard-table .dashboard-table-body {
+  height: calc(400px - 80px);
+  overflow-y: scroll;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.dashboard .dashboard-table table {
+  width: 100%;
+}
+
+.dashboard .dashboard-table h3 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.dashboard .dashboard-table thead {
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard .dashboard-table thead th {
+  padding-bottom: 10px;
+}
+
+.dashboard .dashboard-table tr td,
+.dashboard .dashboard-table tr th {
+  text-align: center;
+  width: 20%;
+}
+
+.dashboard .dashboard-table tr td:first-child,
+.dashboard .dashboard-table tr th:first-child {
+  text-align: left;
+  width: 50%;
+}
+
+.dashboard .dashboard-table tr td:last-child,
+.dashboard .dashboard-table tr th:last-child {
+  text-align: right;
+  width: 30%;
+}
+
+.dashboard .dashboard-table tbody tr:hover {
+  color: #4a9fea;
+  cursor: pointer;
+}
+
+.dashboard .dashboard-table tbody tr td {
+  padding: 10px 3px;
+  border-top: 1px solid #ddd;
+}
+
+.dashboard .dashboard-table tbody tr:first-child td {
+  border-top: none;
+}
+
+.dashboard .dashboard-table tbody i {
+  font-size: 12px;
+}
+
+.dashboard .dashboard-table tbody i.published {
+  color: #47daa4;
+}
+
+.dashboard .dashboard-table tbody i.draft {
+  color: #ffb22b;
+}
+
+.dashboard .dashboard-graph {
+  background-color: #fff;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  height: 500px;
+}
+
+.dashboard .dashboard-header {
+  text-align: left;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.dashboard .dashboard-header .actions {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.dashboard .dashboard-header .actions a.btn-link {
+  padding: 5px;
+  width: 25px;
+  margin: 0;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.dashboard .dashboard-body .sidebar {
+  border-right: 1px solid #ccc;
+  height: 460px;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard .dashboard-body .sidebar .form-group {
+  margin: 0px;
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard .dashboard-body .sidebar .form-group .form-control,
+.dashboard .dashboard-body .sidebar .form-group .cke_textarea_inline {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0 10px;
+}
+
+.dashboard .dashboard-body .sidebar .form-group label {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 100;
+  text-align: left;
+  width: 100%;
+}
+
+.dashboard .dashboard-body .sidebar .legend ul {
+  padding: 20px;
+}
+
+.dashboard .dashboard-body .sidebar .legend ul li {
+  list-style-type: none;
+  padding-bottom: 10px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+}
+
+.dashboard .dashboard-body .sidebar .legend ul li i {
+  font-size: 12px;
+  padding-right: 15px;
+}
+
+.dashboard .dashboard-body .sidebar .item-info {
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  width: 100%;
+}
+
+.dashboard .dashboard-body .sidebar .item-info a {
+  display: inline-block;
+  width: auto;
+  padding-right: 5px;
+  padding-left: 10px;
+}
+
+.dashboard .dashboard-body .sidebar .item-info a:first-child {
+  padding-left: 0px;
+}
+
+.dashboard .dashboard-body .sidebar .item-info ul {
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard .dashboard-body .sidebar .item-info li {
+  text-align: left;
+  list-style-type: none;
+  padding-bottom: 5px;
+}
+
+.graph-wrapper {
+  padding: 0px;
+}
+
+.graph-wrapper .leaflet-top,
+.graph-wrapper .leaflet-bottom {
+  z-index: 0;
+}
+
+line.links {
+  stroke: none;
+  stroke-opacity: 0.3;
+}
+
+.node.selected circle {
+  stroke: #959595;
+  stroke-width: 2px;
+}
+
+.node text {
+  font-family: 'Open Sans';
+  font-weight: 100;
 }
 
 .content {
@@ -16650,6 +16952,10 @@ nav.main-nav ul li.active a {
 
 .key-value-field .remove-field-btn {
   line-height: 32px;
+}
+
+.ql-editor p {
+  padding-bottom: 10px !important;
 }
 
 .menu .grid-items a {

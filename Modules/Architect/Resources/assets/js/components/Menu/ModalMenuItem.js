@@ -38,6 +38,7 @@ export default class ModalMenuItem extends Component {
           identifier:"link",
           value:{},
           name:"Enllaç",
+          type:"link",
           settings:{htmlId:null,htmlClass:null}
       };
 

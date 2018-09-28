@@ -44,6 +44,8 @@ class MediaSelectModal extends Component {
       this.initDropzone();
       //this.setDatatable();
 
+      this.initEvents();
+
     }
 
     handleCancelImage(e){
@@ -127,24 +129,32 @@ class MediaSelectModal extends Component {
         _this.refresh();
     }
 
-    setDatatable()
+    getRoute(mediaType){
+      if(mediaType == "file" || mediaType == "translated_file"){
+          return routes["medias.data"]+"?type=application";
+      }
+
+      return routes["medias.data"]+"?type=image";
+    }
+
+    setDatatable(mediaType)
     {
 
-        //console.log("MediaSelectModal :: setDatatable");
+        console.log("MediaSelectModal :: setDatatable route : ",mediaType,$(this.refs.main));
 
         var _this = this;
 
-        var table = $('#table-medias').DataTable({
+        var table = $(this.refs.main).DataTable({
     	    language: {
     	        "url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		processing: true,
-          //serverSide: true,
+          serverSide: true,
     	    pageLength: 20,
           language: {
               url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
           },
-    	    ajax: routes["medias.data"],
+    	    ajax: this.getRoute(mediaType),
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},
                 {data: 'preview', name: 'preview'},
@@ -154,27 +164,25 @@ class MediaSelectModal extends Component {
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
-                DataTableTools.init(this, {
-                    onDelete: function(response) {
-                        toastr.success(response.message, 'Èxit !', {timeOut: 3000});
-                        _this.refresh();
-                    }
-                });
 
-                _this.initEvents();
     	    }
         });
     }
 
+    destroyDatatable() {
+
+      console.log("MediaSelectModal :: destroy datatable ");
+
+      $(this.refs.main).DataTable().destroy();
+    }
+
     refresh()
     {
-        var _this = this;
-        var table = $('#table-medias');
-        var datatable = table.DataTable();
 
-        datatable.ajax.reload(function(){
-            //_this.initEvents();
-        });
+        console.log("MediaSelectModal :: refresh ");
+
+        var datatable = $(this.refs.main).DataTable();
+        datatable.ajax.reload();
     }
 
     initEvents()
@@ -194,7 +202,7 @@ class MediaSelectModal extends Component {
     {
       if(nextProps.display){
           if(!this.state.isOpen){
-            this.setDatatable();
+            this.setDatatable(nextProps.mediaType);
             this.setState({
               isOpen : true
             });
@@ -202,6 +210,13 @@ class MediaSelectModal extends Component {
 
           this.modalOpen();
       } else {
+
+          if(this.state.isOpen){
+            this.destroyDatatable();
+            this.setState({
+              isOpen : false
+            });
+          }
           this.modalClose();
       }
     }
@@ -258,7 +273,7 @@ class MediaSelectModal extends Component {
     renderImages() {
 
       return (
-          <table className="table" id="table-medias">
+          <table ref="main" className="table" id="table-medias">
               <thead>
                  <tr>
                      <th></th>

@@ -90,7 +90,7 @@ class ModalEditItem extends Component {
         }
     ];
     const selectableArray = [4,6,7,14];
-    const selectableTypologies = [2,3,4,5,6,8,9,10,11,13,14];
+    const nonSelectableTypologies = [1];
 
     for(var key in TYPOLOGIES){
       if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
@@ -99,7 +99,7 @@ class ModalEditItem extends Component {
     }
 
     for(var key in TYPOLOGIES){
-      if(selectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
+      if(nonSelectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) == -1){
         this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
       }
     }
@@ -324,7 +324,7 @@ class ModalEditItem extends Component {
 
       return field;
 
-    });
+    },fields[index]);
 
   }
 
@@ -391,7 +391,7 @@ class ModalEditItem extends Component {
 
       return field;
 
-    });
+    },fields[index]);
 
   }
 
@@ -968,6 +968,36 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Versió extesa"
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="columns"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Columnes del llistat"
+          options={[
+              {
+                  value: "",
+                  name: "---",
+              },
+              {
+                  value: "col-1",
+                  name: "1 columna",
+              },
+              {
+                  value: "col-2",
+                  name: "2 columnes",
+              },
+              {
+                  value: "col-3",
+                  name: "3 columnes",
+              },
+              {
+                  value: "col-4",
+                  name: "4 columnes",
+              }
+          ]}
         />
 
       </div>

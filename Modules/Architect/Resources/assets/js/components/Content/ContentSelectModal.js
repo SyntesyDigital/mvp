@@ -39,6 +39,9 @@ class ContentSelectModal extends Component {
     }
 
     handleSelectItem(item){
+
+      console.log("ContentSelectModal :: handleSelectItem => ",item);
+
       this.props.onContentSelected(item);
     }
 
@@ -64,11 +67,13 @@ class ContentSelectModal extends Component {
 
       const field = this.props.field;
 
+      console.log("handleContentSelect => ContentSelectModal :: this.props.field => ",field);
+
       var route = routes["contents.data"];
 
       if(field != null){
         if(field.type == "link" || field.type == "url"){
-          return route+'?has_page=1';
+          return route+'?is_page=1&has_slug=1';
         }
         else if(field.type == "widget" || field.type == "contents"){
           if(field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
