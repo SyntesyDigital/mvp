@@ -113,7 +113,7 @@ export default class RelatedNews extends Component {
             <div className="white">
               <div className="row">
                 <div className="container">
-                  <h2 className="subtitle-blog">{Lang.get('widgets.related_news')}</h2>
+                  <h2 className="subtitle-blog">{window.localization['GENERAL_WIDGET_RELATED_NEWS']}</h2>
                   <ul className="list-blog">
                       {result}
 

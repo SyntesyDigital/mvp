@@ -124,13 +124,13 @@ class FilterBarMembers extends Component {
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
 
                 <select name="category" className="col-xs-3" onChange={this.handleChange} value={this.state.language}>
-                  <option value="">{Lang.get('widgets.select_category')}</option>
+                  <option value="">{window.localization['GENERAL_WIDGET_SELECT_CATEGORY']}</option>
                   {this.renderCategories()}
                 </select>
 
-                <input type="text" name="text" value={this.state.text} onChange={this.handleChange} placeholder={Lang.get('widgets.search_placeholder')} style={{marginLeft:20}} />
+                <input type="text" name="text" value={this.state.text} onChange={this.handleChange} placeholder={window.localization['GENERAL_BUTTON_SEARCH']} style={{marginLeft:20}} />
 
-                <input type="submit" value={Lang.get('widgets.search')} className="btn" />
+                <input type="submit" value={window.localization['GENERAL_BUTTON_SEARCH']} className="btn" />
                 <div className="separator"></div>
               </form>
             </div>

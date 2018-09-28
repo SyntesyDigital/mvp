@@ -51,7 +51,7 @@ class Statistics extends Component {
                 <li>
                   <TranslatedFileField
                     field={fields.index}
-                    label={Lang.get('widgets.see_index')}
+                    label={window.localization['GENERAL_WIDGET_SEE_INDEX']}
                   />
                 </li>
               }
@@ -64,7 +64,7 @@ class Statistics extends Component {
               }
               {selectable &&
                 <li>
-                  <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+                  <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_SELECT']}</button>
                 </li>
               }
             </ul>

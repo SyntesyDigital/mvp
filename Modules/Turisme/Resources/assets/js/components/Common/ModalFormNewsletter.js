@@ -296,11 +296,10 @@ export default class ModalFormNewsletter extends Component {
                   <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
                       <form className="nova-cerca contact-form" onSubmit={this.handleSubmit.bind(this)}>
-                        <h2>Suscripción Newsletter</h2>
+                        <h2>{ window.localization['NEWSLETTER_FORM_TITLE']}</h2>
 
                         <p>
-                        Si deseas recibir el Newsletter Profesional de Turisme de Barcelona rellena
-                        el siguiente formulario:
+                        { window.localization['NEWSLETTER_FORM_SUBTITLE']}
                         </p>
 
                         <div className="separator" style={{height:30}}></div>
@@ -310,13 +309,13 @@ export default class ModalFormNewsletter extends Component {
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
                               {/*<label htmlFor="title" >Nombre</label>*/}
-                              <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder="Nombre" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder={ window.localization['GENERAL_FORM_NAME']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder="Apellidos" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder={ window.localization['GENERAL_FORM_SURNAME']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
@@ -333,36 +332,36 @@ export default class ModalFormNewsletter extends Component {
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
                               <select className={this.hasErrors('language')} name="language" value={fields.language} onChange={this.onFieldChange}>
-                                <option value="">Preferencia idioma</option>
-                                <option value="CA">Catalán</option>
-                                <option value="ES">Castellano</option>
-                                <option value="EN">Inglés</option>
-                                <option value="FR">Francés</option>
+                                <option value="">{ window.localization['GENERAL_FORM_PREF_LANG']}</option>
+                                <option value="CA">{ window.localization['GENERAL_FORM_LANG_CAT']}</option>
+                                <option value="ES">{ window.localization['GENERAL_FORM_LANG_SPA']}</option>
+                                <option value="EN">{ window.localization['GENERAL_FORM_LANG_ENG']}</option>
+                                <option value="FR">{ window.localization['GENERAL_FORM_LANG_FRENCH']}</option>
                               </select>
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('company')} name="company" placeholder="Empresa" value={fields.company} onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('company')} name="company" placeholder={ window.localization['GENERAL_FORM_ENTERPRISE']} value={fields.company} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('occupation')} name="occupation" placeholder="Cargo / Profesión" value={fields.occupation} onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('occupation')} name="occupation" placeholder={ window.localization['GENERAL_FORM_POSITION']} value={fields.occupation} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder="E-mail" onChange={this.onFieldChange}  />
+                              <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder={ window.localization['GENERAL_FORM_MAIL']} onChange={this.onFieldChange}  />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('email')} name="email_confirmation" value={fields.email_confirmation} placeholder="Repetir E-mail" onChange={this.onFieldChange}  />
+                              <input type="text" className={this.hasErrors('email')} name="email_confirmation" value={fields.email_confirmation} placeholder={ window.localization['GENERAL_FORM_REPEAT_MAIL']} onChange={this.onFieldChange}  />
                             </div>
                           </div>
 
@@ -371,7 +370,7 @@ export default class ModalFormNewsletter extends Component {
                         <div className="separator" style={{height:30}}></div>
 
                         <p>
-                        Sector de interés:
+                        { window.localization['NEWSLETTER_FORM_SUBTITLE2']}
                         </p>
 
                         <div className="separator" style={{height:30}}></div>
@@ -391,7 +390,7 @@ export default class ModalFormNewsletter extends Component {
                         <div className="row">
                           <div className="col-xs-12">
                             <p>
-                            Si deseas dejar un comentario:
+                            { window.localization['GENERAL_FORM_COMMENT_TITLE']}
                             </p>
 
                             <textarea className="col-xs-12" name="comment" value={fields.comment} onChange={this.onFieldChange} />
@@ -407,12 +406,12 @@ export default class ModalFormNewsletter extends Component {
 
                             <label className={"col-xs-12 "+this.hasErrors('privacity')}>
                               <input type="checkbox" className={this.hasErrors('privacity')} name="privacity" value={fields.comment} onChange={this.onCheckboxChange}  />
-                              He leído y acepto la política de privacidad (RGPD).
+                              {window.localization['GENERAL_FORM_CHECKBOX_RGPD']}
                             </label>
 
                             <label className={"col-xs-12 "+this.hasErrors('newsletter')}>
                               <input type="checkbox" className={this.hasErrors('newsletter')} name="newsletter" value={fields.newsletter} onChange={this.onCheckboxChange}  />
-                              Quiero recibir más información de Turisme de Barcelona (NewsleJer Profesional)
+                              {window.localization['GENERAL_FORM_CHECKBOX_NEWS']}
                             </label>
 
                           </div>
@@ -423,11 +422,11 @@ export default class ModalFormNewsletter extends Component {
 
                         {errors &&
                           <p className="error-message">
-                            El envio no ha sido completado. Por favor comprueva los campos en rojo.
+                            {window.localization['GENERAL_FORM_ERROR']}
                           </p>
                         }
 
-                        <input type="submit" value="Enviar" className="btn" />
+                        <input type="submit" value={window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                       </form>
 

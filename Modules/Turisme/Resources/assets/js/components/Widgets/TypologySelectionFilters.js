@@ -283,7 +283,7 @@ export default class TypologySelectionFilters extends Component {
             }
 
             {this.state.items != null && this.state.items.length == 0 &&
-                <p>{Lang.get('widgets.last_typology.empty')}</p>
+                <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
             }
 
             {this.state.items != null && this.state.items.length > 0 &&
@@ -309,7 +309,7 @@ export default class TypologySelectionFilters extends Component {
         <div>
 
             {size == 0 &&
-                <p>{Lang.get('widgets.selected_void')}</p>
+                <p>{window.localization['GENERAL_WIDGET_SELECTED_VOID']}</p>
             }
 
             {size > 0 &&
@@ -317,7 +317,7 @@ export default class TypologySelectionFilters extends Component {
                   <ul>{this.renderSelectedItems()}</ul>
 
                   <div className="centered form-button-wrapper">
-                    <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{Lang.get('widgets.open_form')}</button>
+                    <button type="button" className="btn" onClick={this.onOpenForm.bind(this)}>{window.localization['GENERAL_WIDGET_OPEN_FORM']}</button>
                   </div>
                 </div>
             }

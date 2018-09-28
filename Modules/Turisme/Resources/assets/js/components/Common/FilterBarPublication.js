@@ -146,7 +146,7 @@ class FilterBarPublication extends Component {
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
 
                 <select name="category" className="col-xs-3" onChange={this.handleChange}  value={this.state.category}>
-                  <option value="">{Lang.get('widgets.select_category')}</option>
+                  <option value="">{window.localization['GENERAL_WIDGET_SELECT_CATEGORY']}</option>
                   {this.renderCategories()}
                 </select>
 
@@ -170,7 +170,7 @@ class FilterBarPublication extends Component {
                   </label>
                 </div>
 
-                <input type="submit" value={Lang.get('widgets.search')} className="btn" />
+                <input type="submit" value={window.localization['GENERAL_BUTTON_SEARCH']} className="btn" />
                 <div className="separator"></div>
               </form>
             </div>

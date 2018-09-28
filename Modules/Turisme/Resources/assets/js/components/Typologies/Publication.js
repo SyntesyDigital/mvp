@@ -66,7 +66,7 @@ class Publication extends Component {
             </li>
           </ul>
           {selectable &&
-            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{Lang.get('widgets.select')}</button>
+            <button type="button" className={"btn "+(selected ? 'selected' : '')} onClick={this.props.onSelect.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_SELECT']}</button>
           }
 
         </div>

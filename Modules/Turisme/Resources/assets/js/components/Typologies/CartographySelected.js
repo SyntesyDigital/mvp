@@ -102,7 +102,7 @@ class CartographySelected extends Component {
               </li>
             </ul>
 
-            <button type="button" className="btn" onClick={this.props.onRemove.bind(this,this.props.field)}>{Lang.get('widgets.remove')}</button>
+            <button type="button" className="btn" onClick={this.props.onRemove.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_REMOVE']}</button>
         </div>
       );
 

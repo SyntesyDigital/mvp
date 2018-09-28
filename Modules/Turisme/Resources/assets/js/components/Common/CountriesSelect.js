@@ -51,7 +51,7 @@ export default class CountriesSelect extends Component {
               value={this.props.value}
               onChange={this.props.onChange}
             >
-              <option value="">Nacionalidad</option>
+              <option value="">{window.localization['GENERAL_FORM_NATIONALITY']}</option>
               {this.renderCountries()}
             </select>
         );

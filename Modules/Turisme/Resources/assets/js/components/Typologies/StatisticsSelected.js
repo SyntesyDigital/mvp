@@ -41,7 +41,7 @@ class StatisticsSelected extends Component {
         <div className="statistics selected">
             <p className="titol">{title}</p>
             <p className="data">{data}</p>
-            <button type="button" className="btn" onClick={this.props.onRemove.bind(this,this.props.field)}>{Lang.get('widgets.remove')}</button>
+            <button type="button" className="btn" onClick={this.props.onRemove.bind(this,this.props.field)}>{window.localization['GENERAL_WIDGET_REMOVE']}</button>
         </div>
       );
 

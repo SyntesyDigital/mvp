@@ -286,22 +286,22 @@ class ModalForm extends Component {
                   <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
                       <form className="nova-cerca contact-form" onSubmit={this.handleSubmit.bind(this)}>
-                        <h2>Formulario de Contacto</h2>
+                        <h2>{window.localization['CONTACT_FORM_TITLE']}</h2>
 
                         {initProgram != null && programs[initProgram] !== undefined &&
-                          <p>
-                            Gracias por contactar con el Programa <b> {programs[initProgram]['description_'+LOCALE]} </b> de Turisme de Barcelona <br/>
+                          <p>{window.localization['CONTACT_FORM_THANKS'].replace("%s", "<b>"+programs[initProgram]['description_'+LOCALE]+"</b>")}
+                             <br/>
                           </p>
                         }
 
                         {initProgram == null &&
-                          <p>
-                            Gracias por contactar con el <b>departamento de Promoción</b> de Turisme de Barcelona
+                          <p dangerouslySetInnerHTML={{__html: window.localization['CONTACT_FORM_SUBTITLE'] }}>
                           </p>
                         }
 
                         <p>
-                          Por favor, rellena el siguiente formulario:
+                          {window.localization['CONTACT_FORM_SUBTITLE2']}
+
                         </p>
 
                         <div className="separator" style={{height:30}}></div>
@@ -311,19 +311,19 @@ class ModalForm extends Component {
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
                               {/*<label htmlFor="title" >Nombre</label>*/}
-                              <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder="Nombre" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('firstname')} name="firstname" value={fields.firstname} placeholder={window.localization['GENERAL_FORM_NAME']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder="Apellidos" onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('lastname')} name="lastname" value={fields.lastname} placeholder={window.localization['GENERAL_FORM_SURNAME']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder="E-mail" onChange={this.onFieldChange}  />
+                              <input type="text" className={this.hasErrors('email')} name="email" value={fields.email} placeholder={window.localization['GENERAL_FORM_MAIL']} onChange={this.onFieldChange}  />
                             </div>
                           </div>
 
@@ -339,7 +339,7 @@ class ModalForm extends Component {
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <input type="text" className={this.hasErrors('company')} name="company" placeholder="Empresa" value={fields.company} onChange={this.onFieldChange} />
+                              <input type="text" className={this.hasErrors('company')} name="company" placeholder={window.localization['GENERAL_FORM_ENTERPRISE']} value={fields.company} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
@@ -347,10 +347,10 @@ class ModalForm extends Component {
                             <div className="col-xs-12 col-md-6">
                               <div className="form-group ">
                                 <select className={this.hasErrors('company_type')} name="company_type" value={fields.company_type} onChange={this.onFieldChange}>
-                                  <option value="">Tipo de empresa</option>
+                                  <option value="">{window.localization['GENERAL_FORM_ENTERPRISE_TYPE']}</option>
                                   <option value="ttoo">TTOO</option>
                                   <option value="aavv">AAVV</option>
-                                  <option value="otros">Otros</option>
+                                  <option value="otros">{window.localization['GENERAL_FORM_OTHERS']}</option>
                                 </select>
                               </div>
                             </div>
@@ -366,7 +366,8 @@ class ModalForm extends Component {
                           </p>
                         }
                         <p>
-                        Selecciona si te interesa otro sector de lo que Turisme de Barcelona trabaja:
+                        {window.localization['CONTACT_FORM_SUBTEXT']}
+
                         </p>
 
                         <div className="separator" style={{height:30}}></div>
@@ -386,7 +387,7 @@ class ModalForm extends Component {
                         <div className="row">
                           <div className="col-xs-12">
                             <p>
-                            Si deseas dejar un comentario:
+                            {window.localization['GENERAL_FORM_COMMENT_TITLE']}
                             </p>
 
                             <textarea className="col-xs-12" name="comment" value={fields.comment} onChange={this.onFieldChange} />
@@ -402,12 +403,12 @@ class ModalForm extends Component {
 
                             <label className={"col-xs-12 "+this.hasErrors('privacity')}>
                               <input type="checkbox" className={this.hasErrors('privacity')} name="privacity" value={fields.comment} onChange={this.onCheckboxChange}  />
-                              He leído y acepto la política de privacidad (RGPD).
+                              {window.localization['GENERAL_FORM_CHECKBOX_RGPD']}
                             </label>
 
                             <label className={"col-xs-12 "+this.hasErrors('newsletter')}>
                               <input type="checkbox" className={this.hasErrors('newsletter')} name="newsletter" value={fields.newsletter} onChange={this.onCheckboxChange}  />
-                              Quiero recibir más información de Turisme de Barcelona (NewsleJer Profesional)
+                              {window.localization['GENERAL_FORM_CHECKBOX_NEWS']}
                             </label>
 
                             {/*
@@ -426,12 +427,12 @@ class ModalForm extends Component {
 
                         {errors &&
                           <p className="error-message">
-                            El envio no ha sido completado. Por favor comprueva los campos en rojo.
+                            {window.localization['GENERAL_FORM_ERROR']}
                           </p>
                         }
 
 
-                        <input type="submit" value="Enviar" className="btn" />
+                        <input type="submit" value={window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                       </form>
 

@@ -107,7 +107,7 @@ export default class TypologyPaginated extends Component {
                 }
 
                 {this.state.items != null && this.state.items.length == 0 &&
-                    <p>{Lang.get('widgets.last_typology.empty')}</p>
+                    <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
                 }
 
                 {this.state.items != null && this.state.items.length > 0 &&
