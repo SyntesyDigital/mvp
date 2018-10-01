@@ -252,7 +252,7 @@ class ModalForm extends Component {
       for(var key in programs){
         result.push(
           <label className="col-xs-12 col-md-6" key={key}>
-            <input type="checkbox" name={key} value="" id="checkbox_1" onChange={this.onProgramChange.bind(this)} checked={programValues[key] !== undefined} />
+            <input type="checkbox" name={programs[key].id} value="" id="checkbox_1" onChange={this.onProgramChange.bind(this)} checked={programValues[programs[key].id] !== undefined} />
               {programs[key]['description_'+LOCALE]}
           </label>
         );
@@ -432,7 +432,7 @@ class ModalForm extends Component {
                         }
 
 
-                        <input type="submit" value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                       </form>
 

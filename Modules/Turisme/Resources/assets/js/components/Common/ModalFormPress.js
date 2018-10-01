@@ -521,7 +521,7 @@ export default class ModalFormPress extends Component {
                           </p>
                         }
 
-                        <input type="submit" value={ window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                       </form>
 
