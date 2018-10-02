@@ -333,7 +333,7 @@ class ModalEditItem extends Component {
     switch (field.type) {
 
       case FIELDS.LINK.type:
-        if(field.value == null){
+        if(field.value == null || field.value == ""){
           field.value = {};
         }
         else if(field.value.url !== undefined){
@@ -344,7 +344,7 @@ class ModalEditItem extends Component {
         return field;
 
       case FIELDS.URL.type:
-        if(field.value == null){
+        if(field.value == null || field.value == ""){
           field.value = {};
         }
         else if(field.value.url !== undefined){

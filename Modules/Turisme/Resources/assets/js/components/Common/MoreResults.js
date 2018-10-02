@@ -21,9 +21,9 @@ class MoreResults extends Component {
 
         return ( <div>
                     {display_button &&
-                      <ul className="navigation">
-                        <li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> {window.localization['GENERAL_READ_MORE']}</a></li>
-                      </ul>
+                      <div className="navigation">
+                        <p className="btn"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> {window.localization['GENERAL_READ_MORE']}</a></p>
+                      </div>
                     }
                 </div>
         );
