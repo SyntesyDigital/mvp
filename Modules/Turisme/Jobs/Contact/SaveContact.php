@@ -7,6 +7,8 @@ use Modules\Turisme\Http\Requests\SaveContactRequest;
 use  Modules\Turisme\Entities\ContactForm;
 use Modules\ExternalApi\Entities\Program;
 
+use Mail;
+
 class SaveContact
 {
     public function __construct($attributes)
@@ -38,11 +40,13 @@ class SaveContact
         $programValues = $this->attributes['programCheckboxes'];
         $programsResult = '';
 
-        $programs = Program::pluck('description_es','code');
+        $programs = Program::pluck('description_es','id');
+
+        //dd($programs);
 
         if(sizeof($programValues) > 0){
-            foreach($programValues as $programValue){
-              $programsResult .= $programs[$programValue].";";
+            foreach($programValues as $index => $programValue){
+              $programsResult .= $programs[$index].";";
             }
         }
 
@@ -57,7 +61,7 @@ class SaveContact
         //dd($programValues,$programsResult);
         //dd($this->attributes['initProgram']);
 
-        return ContactForm::create([
+        $contactResult = ContactForm::create([
           'firstname' => $this->attributes['firstname'],
           'lastname' => $this->attributes['lastname'],
           'email'=> $this->attributes['email'],
@@ -73,6 +77,34 @@ class SaveContact
           'init_program_value'=> $this->attributes['initProgram'],
           'type' => 'contact'
         ]);
+
+        if($contactResult){
+
+          $data = $this->attributes;
+          $data["programs"] = $programsResult;
+          $data["init_program"] = $initProgram;
+
+          //TODO poner los emails definitivos
+          if($initProgram != ''){
+            //send to program email
+          }
+          else {
+            //send to promotion department
+          }
+
+          Mail::send('turisme::emails.contact', $data, function ($message) use ($data) {
+
+            $message->from($data['email'], $data['firstname']);
+
+            $message->to(env('MAIL_COMPANY_EMAIL'))
+              ->cc($data['email'])
+              ->subject("Contacto");
+
+          });
+        }
+
+        return true;
+
     }
 
 }

@@ -5,6 +5,8 @@ namespace Modules\Turisme\Jobs\Contact;
 use Modules\Turisme\Http\Requests\SavePressRequest;
 use  Modules\Turisme\Entities\ContactPress;
 
+use Mail;
+
 class SavePress
 {
     public function __construct($attributes)
@@ -44,7 +46,24 @@ class SavePress
     public function handle()
     {
 
-        return ContactPress::create($this->attributes);
+        $contactResult = ContactPress::create($this->attributes);
+
+        if($contactResult){
+
+          $data = $this->attributes;
+
+          Mail::send('turisme::emails.press', $data, function ($message) use ($data) {
+
+            $message->from($data['email'], $data['firstname']);
+
+            $message->to(env('MAIL_COMPANY_EMAIL'))
+              ->cc($data['email'])
+              ->subject("Contacto Prensa");
+
+          });
+        }
+
+        return true;
     }
 
 }
