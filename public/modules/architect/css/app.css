@@ -46,7 +46,8 @@
 .leaflet-container .leaflet-marker-pane img,
 .leaflet-container .leaflet-shadow-pane img,
 .leaflet-container .leaflet-tile-pane img,
-.leaflet-container img.leaflet-image-layer {
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
 	max-width: none !important;
 	max-height: none !important;
 	}
@@ -205,7 +206,7 @@
 	}
 .leaflet-grab {
 	cursor: -webkit-grab;
-	cursor:    -moz-grab;
+	cursor:         grab;
 	}
 .leaflet-crosshair,
 .leaflet-crosshair .leaflet-interactive {
@@ -220,7 +221,7 @@
 .leaflet-dragging .leaflet-marker-draggable {
 	cursor: move;
 	cursor: -webkit-grabbing;
-	cursor:    -moz-grabbing;
+	cursor:         grabbing;
 	}
 
 /* marker & overlays interactivity */
@@ -2033,7 +2034,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -4033,9 +4034,9 @@ output {
 }
 
 .form-control[disabled],
-[disabled].cke_textarea_inline,
+.cke_textarea_inline[disabled],
 .form-control[readonly],
-[readonly].cke_textarea_inline,
+.cke_textarea_inline[readonly],
 fieldset[disabled] .form-control,
 fieldset[disabled] .cke_textarea_inline {
   background-color: #eeeeee;
@@ -4043,7 +4044,7 @@ fieldset[disabled] .cke_textarea_inline {
 }
 
 .form-control[disabled],
-[disabled].cke_textarea_inline,
+.cke_textarea_inline[disabled],
 fieldset[disabled] .form-control,
 fieldset[disabled] .cke_textarea_inline {
   cursor: not-allowed;
@@ -4060,71 +4061,71 @@ input[type="search"] {
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,
-  input[type="date"].cke_textarea_inline,
+  input.cke_textarea_inline[type="date"],
   input[type="time"].form-control,
-  input[type="time"].cke_textarea_inline,
+  input.cke_textarea_inline[type="time"],
   input[type="datetime-local"].form-control,
-  input[type="datetime-local"].cke_textarea_inline,
+  input.cke_textarea_inline[type="datetime-local"],
   input[type="month"].form-control,
-  input[type="month"].cke_textarea_inline {
+  input.cke_textarea_inline[type="month"] {
     line-height: 36px;
   }
 
   input[type="date"].input-sm,
-  .input-group-sm > input[type="date"].form-control,
-  .input-group-sm > input[type="date"].cke_textarea_inline,
-  .input-group-sm > input[type="date"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="date"].btn,
+  .input-group-sm > input.form-control[type="date"],
+  .input-group-sm > input.cke_textarea_inline[type="date"],
+  .input-group-sm > input.input-group-addon[type="date"],
+  .input-group-sm > .input-group-btn > input.btn[type="date"],
   .input-group-sm input[type="date"],
   input[type="time"].input-sm,
-  .input-group-sm > input[type="time"].form-control,
-  .input-group-sm > input[type="time"].cke_textarea_inline,
-  .input-group-sm > input[type="time"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="time"].btn,
+  .input-group-sm > input.form-control[type="time"],
+  .input-group-sm > input.cke_textarea_inline[type="time"],
+  .input-group-sm > input.input-group-addon[type="time"],
+  .input-group-sm > .input-group-btn > input.btn[type="time"],
   .input-group-sm
   input[type="time"],
   input[type="datetime-local"].input-sm,
-  .input-group-sm > input[type="datetime-local"].form-control,
-  .input-group-sm > input[type="datetime-local"].cke_textarea_inline,
-  .input-group-sm > input[type="datetime-local"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
+  .input-group-sm > input.form-control[type="datetime-local"],
+  .input-group-sm > input.cke_textarea_inline[type="datetime-local"],
+  .input-group-sm > input.input-group-addon[type="datetime-local"],
+  .input-group-sm > .input-group-btn > input.btn[type="datetime-local"],
   .input-group-sm
   input[type="datetime-local"],
   input[type="month"].input-sm,
-  .input-group-sm > input[type="month"].form-control,
-  .input-group-sm > input[type="month"].cke_textarea_inline,
-  .input-group-sm > input[type="month"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="month"].btn,
+  .input-group-sm > input.form-control[type="month"],
+  .input-group-sm > input.cke_textarea_inline[type="month"],
+  .input-group-sm > input.input-group-addon[type="month"],
+  .input-group-sm > .input-group-btn > input.btn[type="month"],
   .input-group-sm
   input[type="month"] {
     line-height: 30px;
   }
 
   input[type="date"].input-lg,
-  .input-group-lg > input[type="date"].form-control,
-  .input-group-lg > input[type="date"].cke_textarea_inline,
-  .input-group-lg > input[type="date"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="date"].btn,
+  .input-group-lg > input.form-control[type="date"],
+  .input-group-lg > input.cke_textarea_inline[type="date"],
+  .input-group-lg > input.input-group-addon[type="date"],
+  .input-group-lg > .input-group-btn > input.btn[type="date"],
   .input-group-lg input[type="date"],
   input[type="time"].input-lg,
-  .input-group-lg > input[type="time"].form-control,
-  .input-group-lg > input[type="time"].cke_textarea_inline,
-  .input-group-lg > input[type="time"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="time"].btn,
+  .input-group-lg > input.form-control[type="time"],
+  .input-group-lg > input.cke_textarea_inline[type="time"],
+  .input-group-lg > input.input-group-addon[type="time"],
+  .input-group-lg > .input-group-btn > input.btn[type="time"],
   .input-group-lg
   input[type="time"],
   input[type="datetime-local"].input-lg,
-  .input-group-lg > input[type="datetime-local"].form-control,
-  .input-group-lg > input[type="datetime-local"].cke_textarea_inline,
-  .input-group-lg > input[type="datetime-local"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="datetime-local"].btn,
+  .input-group-lg > input.form-control[type="datetime-local"],
+  .input-group-lg > input.cke_textarea_inline[type="datetime-local"],
+  .input-group-lg > input.input-group-addon[type="datetime-local"],
+  .input-group-lg > .input-group-btn > input.btn[type="datetime-local"],
   .input-group-lg
   input[type="datetime-local"],
   input[type="month"].input-lg,
-  .input-group-lg > input[type="month"].form-control,
-  .input-group-lg > input[type="month"].cke_textarea_inline,
-  .input-group-lg > input[type="month"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="month"].btn,
+  .input-group-lg > input.form-control[type="month"],
+  .input-group-lg > input.cke_textarea_inline[type="month"],
+  .input-group-lg > input.input-group-addon[type="month"],
+  .input-group-lg > .input-group-btn > input.btn[type="month"],
   .input-group-lg
   input[type="month"] {
     line-height: 46px;
@@ -4257,10 +4258,10 @@ textarea.input-sm,
 .input-group-sm > textarea.input-group-addon,
 .input-group-sm > .input-group-btn > textarea.btn,
 select[multiple].input-sm,
-.input-group-sm > select[multiple].form-control,
-.input-group-sm > select[multiple].cke_textarea_inline,
-.input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .input-group-btn > select[multiple].btn {
+.input-group-sm > select.form-control[multiple],
+.input-group-sm > select.cke_textarea_inline[multiple],
+.input-group-sm > select.input-group-addon[multiple],
+.input-group-sm > .input-group-btn > select.btn[multiple] {
   height: auto;
 }
 
@@ -4282,7 +4283,7 @@ select[multiple].input-sm,
 .form-group-sm textarea.form-control,
 .form-group-sm textarea.cke_textarea_inline,
 .form-group-sm select[multiple].form-control,
-.form-group-sm select[multiple].cke_textarea_inline {
+.form-group-sm select.cke_textarea_inline[multiple] {
   height: auto;
 }
 
@@ -4321,10 +4322,10 @@ textarea.input-lg,
 .input-group-lg > textarea.input-group-addon,
 .input-group-lg > .input-group-btn > textarea.btn,
 select[multiple].input-lg,
-.input-group-lg > select[multiple].form-control,
-.input-group-lg > select[multiple].cke_textarea_inline,
-.input-group-lg > select[multiple].input-group-addon,
-.input-group-lg > .input-group-btn > select[multiple].btn {
+.input-group-lg > select.form-control[multiple],
+.input-group-lg > select.cke_textarea_inline[multiple],
+.input-group-lg > select.input-group-addon[multiple],
+.input-group-lg > .input-group-btn > select.btn[multiple] {
   height: auto;
 }
 
@@ -4346,7 +4347,7 @@ select[multiple].input-lg,
 .form-group-lg textarea.form-control,
 .form-group-lg textarea.cke_textarea_inline,
 .form-group-lg select[multiple].form-control,
-.form-group-lg select[multiple].cke_textarea_inline {
+.form-group-lg select.cke_textarea_inline[multiple] {
   height: auto;
 }
 
@@ -8585,7 +8586,7 @@ button.close {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .carousel-control.left {
@@ -8674,7 +8675,7 @@ button.close {
   border-radius: 10px;
   cursor: pointer;
   background-color: #000 \9;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .carousel-indicators .active {
@@ -10684,71 +10685,71 @@ output {
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,
-  input[type="date"].cke_textarea_inline,
+  input.cke_textarea_inline[type="date"],
   input[type="time"].form-control,
-  input[type="time"].cke_textarea_inline,
+  input.cke_textarea_inline[type="time"],
   input[type="datetime-local"].form-control,
-  input[type="datetime-local"].cke_textarea_inline,
+  input.cke_textarea_inline[type="datetime-local"],
   input[type="month"].form-control,
-  input[type="month"].cke_textarea_inline {
+  input.cke_textarea_inline[type="month"] {
     line-height: 38px;
   }
 
   input[type="date"].input-sm,
-  .input-group-sm > input[type="date"].form-control,
-  .input-group-sm > input[type="date"].cke_textarea_inline,
-  .input-group-sm > input[type="date"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="date"].btn,
+  .input-group-sm > input.form-control[type="date"],
+  .input-group-sm > input.cke_textarea_inline[type="date"],
+  .input-group-sm > input.input-group-addon[type="date"],
+  .input-group-sm > .input-group-btn > input.btn[type="date"],
   .input-group-sm input[type="date"],
   input[type="time"].input-sm,
-  .input-group-sm > input[type="time"].form-control,
-  .input-group-sm > input[type="time"].cke_textarea_inline,
-  .input-group-sm > input[type="time"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="time"].btn,
+  .input-group-sm > input.form-control[type="time"],
+  .input-group-sm > input.cke_textarea_inline[type="time"],
+  .input-group-sm > input.input-group-addon[type="time"],
+  .input-group-sm > .input-group-btn > input.btn[type="time"],
   .input-group-sm
   input[type="time"],
   input[type="datetime-local"].input-sm,
-  .input-group-sm > input[type="datetime-local"].form-control,
-  .input-group-sm > input[type="datetime-local"].cke_textarea_inline,
-  .input-group-sm > input[type="datetime-local"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="datetime-local"].btn,
+  .input-group-sm > input.form-control[type="datetime-local"],
+  .input-group-sm > input.cke_textarea_inline[type="datetime-local"],
+  .input-group-sm > input.input-group-addon[type="datetime-local"],
+  .input-group-sm > .input-group-btn > input.btn[type="datetime-local"],
   .input-group-sm
   input[type="datetime-local"],
   input[type="month"].input-sm,
-  .input-group-sm > input[type="month"].form-control,
-  .input-group-sm > input[type="month"].cke_textarea_inline,
-  .input-group-sm > input[type="month"].input-group-addon,
-  .input-group-sm > .input-group-btn > input[type="month"].btn,
+  .input-group-sm > input.form-control[type="month"],
+  .input-group-sm > input.cke_textarea_inline[type="month"],
+  .input-group-sm > input.input-group-addon[type="month"],
+  .input-group-sm > .input-group-btn > input.btn[type="month"],
   .input-group-sm
   input[type="month"] {
     line-height: 24px;
   }
 
   input[type="date"].input-lg,
-  .input-group-lg > input[type="date"].form-control,
-  .input-group-lg > input[type="date"].cke_textarea_inline,
-  .input-group-lg > input[type="date"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="date"].btn,
+  .input-group-lg > input.form-control[type="date"],
+  .input-group-lg > input.cke_textarea_inline[type="date"],
+  .input-group-lg > input.input-group-addon[type="date"],
+  .input-group-lg > .input-group-btn > input.btn[type="date"],
   .input-group-lg input[type="date"],
   input[type="time"].input-lg,
-  .input-group-lg > input[type="time"].form-control,
-  .input-group-lg > input[type="time"].cke_textarea_inline,
-  .input-group-lg > input[type="time"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="time"].btn,
+  .input-group-lg > input.form-control[type="time"],
+  .input-group-lg > input.cke_textarea_inline[type="time"],
+  .input-group-lg > input.input-group-addon[type="time"],
+  .input-group-lg > .input-group-btn > input.btn[type="time"],
   .input-group-lg
   input[type="time"],
   input[type="datetime-local"].input-lg,
-  .input-group-lg > input[type="datetime-local"].form-control,
-  .input-group-lg > input[type="datetime-local"].cke_textarea_inline,
-  .input-group-lg > input[type="datetime-local"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="datetime-local"].btn,
+  .input-group-lg > input.form-control[type="datetime-local"],
+  .input-group-lg > input.cke_textarea_inline[type="datetime-local"],
+  .input-group-lg > input.input-group-addon[type="datetime-local"],
+  .input-group-lg > .input-group-btn > input.btn[type="datetime-local"],
   .input-group-lg
   input[type="datetime-local"],
   input[type="month"].input-lg,
-  .input-group-lg > input[type="month"].form-control,
-  .input-group-lg > input[type="month"].cke_textarea_inline,
-  .input-group-lg > input[type="month"].input-group-addon,
-  .input-group-lg > .input-group-btn > input[type="month"].btn,
+  .input-group-lg > input.form-control[type="month"],
+  .input-group-lg > input.cke_textarea_inline[type="month"],
+  .input-group-lg > input.input-group-addon[type="month"],
+  .input-group-lg > .input-group-btn > input.btn[type="month"],
   .input-group-lg
   input[type="month"] {
     line-height: 44px;
@@ -10781,26 +10782,16 @@ output {
 .input-group-sm > .cke_textarea_inline .input-group-sm > .cke_textarea_inline,
 .input-group-sm > .input-group-addon .input-group-sm > .cke_textarea_inline,
 .input-group-sm > .input-group-btn > .btn .input-group-sm > .cke_textarea_inline,
-.input-sm
-.input-group-sm > .input-group-addon,
-.input-group-sm > .form-control
-.input-group-sm > .input-group-addon,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > .input-group-addon,
-.input-group-sm > .input-group-addon
-.input-group-sm > .input-group-addon,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > .input-group-addon,
-.input-sm
-.input-group-sm > .input-group-btn > .btn,
-.input-group-sm > .form-control
-.input-group-sm > .input-group-btn > .btn,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > .input-group-btn > .btn,
-.input-group-sm > .input-group-addon
-.input-group-sm > .input-group-btn > .btn,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > .input-group-btn > .btn {
+.input-sm .input-group-sm > .input-group-addon,
+.input-group-sm > .form-control .input-group-sm > .input-group-addon,
+.input-group-sm > .cke_textarea_inline .input-group-sm > .input-group-addon,
+.input-group-sm > .input-group-addon .input-group-sm > .input-group-addon,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > .input-group-addon,
+.input-sm .input-group-sm > .input-group-btn > .btn,
+.input-group-sm > .form-control .input-group-sm > .input-group-btn > .btn,
+.input-group-sm > .cke_textarea_inline .input-group-sm > .input-group-btn > .btn,
+.input-group-sm > .input-group-addon .input-group-sm > .input-group-btn > .btn,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > .input-group-btn > .btn {
   height: 24px;
   padding: 3px 0;
   font-size: 11px;
@@ -10823,26 +10814,16 @@ output {
 .input-group-sm > .cke_textarea_inline .input-group-sm > select.cke_textarea_inline,
 .input-group-sm > .input-group-addon .input-group-sm > select.cke_textarea_inline,
 .input-group-sm > .input-group-btn > .btn .input-group-sm > select.cke_textarea_inline,
-.input-sm
-.input-group-sm > select.input-group-addon,
-.input-group-sm > .form-control
-.input-group-sm > select.input-group-addon,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > select.input-group-addon,
-.input-group-sm > .input-group-addon
-.input-group-sm > select.input-group-addon,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > select.input-group-addon,
-.input-sm
-.input-group-sm > .input-group-btn > select.btn,
-.input-group-sm > .form-control
-.input-group-sm > .input-group-btn > select.btn,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > .input-group-btn > select.btn,
-.input-group-sm > .input-group-addon
-.input-group-sm > .input-group-btn > select.btn,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > .input-group-btn > select.btn {
+.input-sm .input-group-sm > select.input-group-addon,
+.input-group-sm > .form-control .input-group-sm > select.input-group-addon,
+.input-group-sm > .cke_textarea_inline .input-group-sm > select.input-group-addon,
+.input-group-sm > .input-group-addon .input-group-sm > select.input-group-addon,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > select.input-group-addon,
+.input-sm .input-group-sm > .input-group-btn > select.btn,
+.input-group-sm > .form-control .input-group-sm > .input-group-btn > select.btn,
+.input-group-sm > .cke_textarea_inline .input-group-sm > .input-group-btn > select.btn,
+.input-group-sm > .input-group-addon .input-group-sm > .input-group-btn > select.btn,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > .input-group-btn > select.btn {
   height: 24px;
   line-height: 24px;
 }
@@ -10862,61 +10843,41 @@ output {
 .input-group-sm > .cke_textarea_inline .input-group-sm > textarea.cke_textarea_inline,
 .input-group-sm > .input-group-addon .input-group-sm > textarea.cke_textarea_inline,
 .input-group-sm > .input-group-btn > .btn .input-group-sm > textarea.cke_textarea_inline,
-.input-sm
-.input-group-sm > textarea.input-group-addon,
-.input-group-sm > .form-control
-.input-group-sm > textarea.input-group-addon,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > textarea.input-group-addon,
-.input-group-sm > .input-group-addon
-.input-group-sm > textarea.input-group-addon,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > textarea.input-group-addon,
-.input-sm
-.input-group-sm > .input-group-btn > textarea.btn,
-.input-group-sm > .form-control
-.input-group-sm > .input-group-btn > textarea.btn,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > .input-group-btn > textarea.btn,
-.input-group-sm > .input-group-addon
-.input-group-sm > .input-group-btn > textarea.btn,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > .input-group-btn > textarea.btn,
+.input-sm .input-group-sm > textarea.input-group-addon,
+.input-group-sm > .form-control .input-group-sm > textarea.input-group-addon,
+.input-group-sm > .cke_textarea_inline .input-group-sm > textarea.input-group-addon,
+.input-group-sm > .input-group-addon .input-group-sm > textarea.input-group-addon,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > textarea.input-group-addon,
+.input-sm .input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .form-control .input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .cke_textarea_inline .input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .input-group-addon .input-group-sm > .input-group-btn > textarea.btn,
+.input-group-sm > .input-group-btn > .btn .input-group-sm > .input-group-btn > textarea.btn,
 .input-sm select[multiple].input-sm,
 .input-group-sm > .form-control select[multiple].input-sm,
 .input-group-sm > .cke_textarea_inline select[multiple].input-sm,
 .input-group-sm > .input-group-addon select[multiple].input-sm,
 .input-group-sm > .input-group-btn > .btn select[multiple].input-sm,
-.input-sm .input-group-sm > select[multiple].form-control,
-.input-group-sm > .form-control .input-group-sm > select[multiple].form-control,
-.input-group-sm > .cke_textarea_inline .input-group-sm > select[multiple].form-control,
-.input-group-sm > .input-group-addon .input-group-sm > select[multiple].form-control,
-.input-group-sm > .input-group-btn > .btn .input-group-sm > select[multiple].form-control,
-.input-sm .input-group-sm > select[multiple].cke_textarea_inline,
-.input-group-sm > .form-control .input-group-sm > select[multiple].cke_textarea_inline,
-.input-group-sm > .cke_textarea_inline .input-group-sm > select[multiple].cke_textarea_inline,
-.input-group-sm > .input-group-addon .input-group-sm > select[multiple].cke_textarea_inline,
-.input-group-sm > .input-group-btn > .btn .input-group-sm > select[multiple].cke_textarea_inline,
-.input-sm
-.input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .form-control
-.input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .input-group-addon
-.input-group-sm > select[multiple].input-group-addon,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > select[multiple].input-group-addon,
-.input-sm
-.input-group-sm > .input-group-btn > select[multiple].btn,
-.input-group-sm > .form-control
-.input-group-sm > .input-group-btn > select[multiple].btn,
-.input-group-sm > .cke_textarea_inline
-.input-group-sm > .input-group-btn > select[multiple].btn,
-.input-group-sm > .input-group-addon
-.input-group-sm > .input-group-btn > select[multiple].btn,
-.input-group-sm > .input-group-btn > .btn
-.input-group-sm > .input-group-btn > select[multiple].btn {
+.input-sm .input-group-sm > select.form-control[multiple],
+.input-group-sm > .form-control .input-group-sm > select.form-control[multiple],
+.input-group-sm > .cke_textarea_inline .input-group-sm > select.form-control[multiple],
+.input-group-sm > .input-group-addon .input-group-sm > select.form-control[multiple],
+.input-group-sm > .input-group-btn > .btn .input-group-sm > select.form-control[multiple],
+.input-sm .input-group-sm > select.cke_textarea_inline[multiple],
+.input-group-sm > .form-control .input-group-sm > select.cke_textarea_inline[multiple],
+.input-group-sm > .cke_textarea_inline .input-group-sm > select.cke_textarea_inline[multiple],
+.input-group-sm > .input-group-addon .input-group-sm > select.cke_textarea_inline[multiple],
+.input-group-sm > .input-group-btn > .btn .input-group-sm > select.cke_textarea_inline[multiple],
+.input-sm .input-group-sm > select.input-group-addon[multiple],
+.input-group-sm > .form-control .input-group-sm > select.input-group-addon[multiple],
+.input-group-sm > .cke_textarea_inline .input-group-sm > select.input-group-addon[multiple],
+.input-group-sm > .input-group-addon .input-group-sm > select.input-group-addon[multiple],
+.input-group-sm > .input-group-btn > .btn .input-group-sm > select.input-group-addon[multiple],
+.input-sm .input-group-sm > .input-group-btn > select.btn[multiple],
+.input-group-sm > .form-control .input-group-sm > .input-group-btn > select.btn[multiple],
+.input-group-sm > .cke_textarea_inline .input-group-sm > .input-group-btn > select.btn[multiple],
+.input-group-sm > .input-group-addon .input-group-sm > .input-group-btn > select.btn[multiple],
+.input-group-sm > .input-group-btn > .btn .input-group-sm > .input-group-btn > select.btn[multiple] {
   height: auto;
 }
 
@@ -10937,7 +10898,7 @@ output {
 .form-group-sm textarea.form-control,
 .form-group-sm textarea.cke_textarea_inline,
 .form-group-sm select[multiple].form-control,
-.form-group-sm select[multiple].cke_textarea_inline {
+.form-group-sm select.cke_textarea_inline[multiple] {
   height: auto;
 }
 
@@ -10964,26 +10925,16 @@ output {
 .input-group-lg > .cke_textarea_inline .input-group-lg > .cke_textarea_inline,
 .input-group-lg > .input-group-addon .input-group-lg > .cke_textarea_inline,
 .input-group-lg > .input-group-btn > .btn .input-group-lg > .cke_textarea_inline,
-.input-lg
-.input-group-lg > .input-group-addon,
-.input-group-lg > .form-control
-.input-group-lg > .input-group-addon,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-addon
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > .input-group-addon,
-.input-lg
-.input-group-lg > .input-group-btn > .btn,
-.input-group-lg > .form-control
-.input-group-lg > .input-group-btn > .btn,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > .input-group-btn > .btn,
-.input-group-lg > .input-group-addon
-.input-group-lg > .input-group-btn > .btn,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > .input-group-btn > .btn {
+.input-lg .input-group-lg > .input-group-addon,
+.input-group-lg > .form-control .input-group-lg > .input-group-addon,
+.input-group-lg > .cke_textarea_inline .input-group-lg > .input-group-addon,
+.input-group-lg > .input-group-addon .input-group-lg > .input-group-addon,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > .input-group-addon,
+.input-lg .input-group-lg > .input-group-btn > .btn,
+.input-group-lg > .form-control .input-group-lg > .input-group-btn > .btn,
+.input-group-lg > .cke_textarea_inline .input-group-lg > .input-group-btn > .btn,
+.input-group-lg > .input-group-addon .input-group-lg > .input-group-btn > .btn,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > .input-group-btn > .btn {
   height: 44px;
   padding: 9px 0;
   font-size: 18px;
@@ -11006,26 +10957,16 @@ output {
 .input-group-lg > .cke_textarea_inline .input-group-lg > select.cke_textarea_inline,
 .input-group-lg > .input-group-addon .input-group-lg > select.cke_textarea_inline,
 .input-group-lg > .input-group-btn > .btn .input-group-lg > select.cke_textarea_inline,
-.input-lg
-.input-group-lg > select.input-group-addon,
-.input-group-lg > .form-control
-.input-group-lg > select.input-group-addon,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > select.input-group-addon,
-.input-group-lg > .input-group-addon
-.input-group-lg > select.input-group-addon,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > select.input-group-addon,
-.input-lg
-.input-group-lg > .input-group-btn > select.btn,
-.input-group-lg > .form-control
-.input-group-lg > .input-group-btn > select.btn,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > .input-group-btn > select.btn,
-.input-group-lg > .input-group-addon
-.input-group-lg > .input-group-btn > select.btn,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > .input-group-btn > select.btn {
+.input-lg .input-group-lg > select.input-group-addon,
+.input-group-lg > .form-control .input-group-lg > select.input-group-addon,
+.input-group-lg > .cke_textarea_inline .input-group-lg > select.input-group-addon,
+.input-group-lg > .input-group-addon .input-group-lg > select.input-group-addon,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > select.input-group-addon,
+.input-lg .input-group-lg > .input-group-btn > select.btn,
+.input-group-lg > .form-control .input-group-lg > .input-group-btn > select.btn,
+.input-group-lg > .cke_textarea_inline .input-group-lg > .input-group-btn > select.btn,
+.input-group-lg > .input-group-addon .input-group-lg > .input-group-btn > select.btn,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > .input-group-btn > select.btn {
   height: 44px;
   line-height: 44px;
 }
@@ -11045,61 +10986,41 @@ output {
 .input-group-lg > .cke_textarea_inline .input-group-lg > textarea.cke_textarea_inline,
 .input-group-lg > .input-group-addon .input-group-lg > textarea.cke_textarea_inline,
 .input-group-lg > .input-group-btn > .btn .input-group-lg > textarea.cke_textarea_inline,
-.input-lg
-.input-group-lg > textarea.input-group-addon,
-.input-group-lg > .form-control
-.input-group-lg > textarea.input-group-addon,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > textarea.input-group-addon,
-.input-group-lg > .input-group-addon
-.input-group-lg > textarea.input-group-addon,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > textarea.input-group-addon,
-.input-lg
-.input-group-lg > .input-group-btn > textarea.btn,
-.input-group-lg > .form-control
-.input-group-lg > .input-group-btn > textarea.btn,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > .input-group-btn > textarea.btn,
-.input-group-lg > .input-group-addon
-.input-group-lg > .input-group-btn > textarea.btn,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > .input-group-btn > textarea.btn,
+.input-lg .input-group-lg > textarea.input-group-addon,
+.input-group-lg > .form-control .input-group-lg > textarea.input-group-addon,
+.input-group-lg > .cke_textarea_inline .input-group-lg > textarea.input-group-addon,
+.input-group-lg > .input-group-addon .input-group-lg > textarea.input-group-addon,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > textarea.input-group-addon,
+.input-lg .input-group-lg > .input-group-btn > textarea.btn,
+.input-group-lg > .form-control .input-group-lg > .input-group-btn > textarea.btn,
+.input-group-lg > .cke_textarea_inline .input-group-lg > .input-group-btn > textarea.btn,
+.input-group-lg > .input-group-addon .input-group-lg > .input-group-btn > textarea.btn,
+.input-group-lg > .input-group-btn > .btn .input-group-lg > .input-group-btn > textarea.btn,
 .input-lg select[multiple].input-lg,
 .input-group-lg > .form-control select[multiple].input-lg,
 .input-group-lg > .cke_textarea_inline select[multiple].input-lg,
 .input-group-lg > .input-group-addon select[multiple].input-lg,
 .input-group-lg > .input-group-btn > .btn select[multiple].input-lg,
-.input-lg .input-group-lg > select[multiple].form-control,
-.input-group-lg > .form-control .input-group-lg > select[multiple].form-control,
-.input-group-lg > .cke_textarea_inline .input-group-lg > select[multiple].form-control,
-.input-group-lg > .input-group-addon .input-group-lg > select[multiple].form-control,
-.input-group-lg > .input-group-btn > .btn .input-group-lg > select[multiple].form-control,
-.input-lg .input-group-lg > select[multiple].cke_textarea_inline,
-.input-group-lg > .form-control .input-group-lg > select[multiple].cke_textarea_inline,
-.input-group-lg > .cke_textarea_inline .input-group-lg > select[multiple].cke_textarea_inline,
-.input-group-lg > .input-group-addon .input-group-lg > select[multiple].cke_textarea_inline,
-.input-group-lg > .input-group-btn > .btn .input-group-lg > select[multiple].cke_textarea_inline,
-.input-lg
-.input-group-lg > select[multiple].input-group-addon,
-.input-group-lg > .form-control
-.input-group-lg > select[multiple].input-group-addon,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > select[multiple].input-group-addon,
-.input-group-lg > .input-group-addon
-.input-group-lg > select[multiple].input-group-addon,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > select[multiple].input-group-addon,
-.input-lg
-.input-group-lg > .input-group-btn > select[multiple].btn,
-.input-group-lg > .form-control
-.input-group-lg > .input-group-btn > select[multiple].btn,
-.input-group-lg > .cke_textarea_inline
-.input-group-lg > .input-group-btn > select[multiple].btn,
-.input-group-lg > .input-group-addon
-.input-group-lg > .input-group-btn > select[multiple].btn,
-.input-group-lg > .input-group-btn > .btn
-.input-group-lg > .input-group-btn > select[multiple].btn {
+.input-lg .input-group-lg > select.form-control[multiple],
+.input-group-lg > .form-control .input-group-lg > select.form-control[multiple],
+.input-group-lg > .cke_textarea_inline .input-group-lg > select.form-control[multiple],
+.input-group-lg > .input-group-addon .input-group-lg > select.form-control[multiple],
+.input-group-lg > .input-group-btn > .btn .input-group-lg > select.form-control[multiple],
+.input-lg .input-group-lg > select.cke_textarea_inline[multiple],
+.input-group-lg > .form-control .input-group-lg > select.cke_textarea_inline[multiple],
+.input-group-lg > .cke_textarea_inline .input-group-lg > select.cke_textarea_inline[multiple],
+.input-group-lg > .input-group-addon .input-group-lg > select.cke_textarea_inline[multiple],
+.input-group-lg > .input-group-btn > .btn .input-group-lg > select.cke_textarea_inline[multiple],
+.input-lg .input-group-lg > select.input-group-addon[multiple],
+.input-group-lg > .form-control .input-group-lg > select.input-group-addon[multiple],
+.input-group-lg > .cke_textarea_inline .input-group-lg > select.input-group-addon[multiple],
+.input-group-lg > .input-group-addon .input-group-lg > select.input-group-addon[multiple],
+.input-group-lg > .input-group-btn > .btn .input-group-lg > select.input-group-addon[multiple],
+.input-lg .input-group-lg > .input-group-btn > select.btn[multiple],
+.input-group-lg > .form-control .input-group-lg > .input-group-btn > select.btn[multiple],
+.input-group-lg > .cke_textarea_inline .input-group-lg > .input-group-btn > select.btn[multiple],
+.input-group-lg > .input-group-addon .input-group-lg > .input-group-btn > select.btn[multiple],
+.input-group-lg > .input-group-btn > .btn .input-group-lg > .input-group-btn > select.btn[multiple] {
   height: auto;
 }
 
@@ -11120,7 +11041,7 @@ output {
 .form-group-lg textarea.form-control,
 .form-group-lg textarea.cke_textarea_inline,
 .form-group-lg select[multiple].form-control,
-.form-group-lg select[multiple].cke_textarea_inline {
+.form-group-lg select.cke_textarea_inline[multiple] {
   height: auto;
 }
 
@@ -11207,7 +11128,7 @@ output {
   background-size: 0 2px, 100% 1px;
   background-repeat: no-repeat;
   background-position: center bottom, center calc(100% - 1px);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
   -webkit-transition: background 0s ease-out;
   transition: background 0s ease-out;
   float: none;
@@ -11242,32 +11163,28 @@ output {
 }
 
 .form-control[readonly],
-[readonly].cke_textarea_inline,
+.cke_textarea_inline[readonly],
 .form-control[disabled],
-[disabled].cke_textarea_inline,
+.cke_textarea_inline[disabled],
 fieldset[disabled] .form-control,
 fieldset[disabled] .cke_textarea_inline,
 .form-group .form-control[readonly],
-.form-group [readonly].cke_textarea_inline,
+.form-group .cke_textarea_inline[readonly],
 .form-group .form-control[disabled],
-.form-group [disabled].cke_textarea_inline,
-fieldset[disabled]
-.form-group .form-control,
-fieldset[disabled]
-.form-group .cke_textarea_inline {
-  background-color: transparent;
+.form-group .cke_textarea_inline[disabled],
+fieldset[disabled] .form-group .form-control,
+fieldset[disabled] .form-group .cke_textarea_inline {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .form-control[disabled],
-[disabled].cke_textarea_inline,
+.cke_textarea_inline[disabled],
 fieldset[disabled] .form-control,
 fieldset[disabled] .cke_textarea_inline,
 .form-group .form-control[disabled],
-.form-group [disabled].cke_textarea_inline,
-fieldset[disabled]
-.form-group .form-control,
-fieldset[disabled]
-.form-group .cke_textarea_inline {
+.form-group .cke_textarea_inline[disabled],
+fieldset[disabled] .form-group .form-control,
+fieldset[disabled] .form-group .cke_textarea_inline {
   background-image: none;
   border-bottom: 1px dotted #D2D2D2;
 }
@@ -11722,9 +11639,9 @@ select.cke_textarea_inline {
 }
 
 select.form-control[multiple],
-select[multiple].cke_textarea_inline,
+select.cke_textarea_inline[multiple],
 .form-group.is-focused select.form-control[multiple],
-.form-group.is-focused select[multiple].cke_textarea_inline {
+.form-group.is-focused select.cke_textarea_inline[multiple] {
   height: 85px;
 }
 
@@ -16713,7 +16630,7 @@ line.links {
 }
 
 .page-builder .page-row .col-types-container .col-icon .col .col-bars {
-  background-image: url(/images/col-back.png?f982bce1dafb2ac65b096249e899c335);
+  background-image: url(/images/col-back.png?48274adeea85dbe76ac40fbd3c3a0c2c);
   height: 18px;
   width: 70%;
   position: absolute;
