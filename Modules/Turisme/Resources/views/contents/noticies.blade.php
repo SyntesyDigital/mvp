@@ -6,7 +6,7 @@
 
 @extends('turisme::layouts.app',[
   'title' => isset($content) ? $content->getFieldValue('title') : '',
-  'mainClass' => $pageType.' '.$htmlClass.' '.$idClass
+  'mainClass' => $pageType.' blog '.$htmlClass.' '.$idClass
 ])
 
 @section('content')

@@ -116,24 +116,14 @@ class ModalSelectItem extends Component {
     });
   }
 
-  addSeparator(field,e) {
+  addSeparator(e) {
 
     e.preventDefault();
 
-    var newField = {
-        "class": "",
-        "rules": {},
-        "label": "SEPARATOR",
-        "name": "Separador",
-        "type": "widget",
-        "icon": "fa-arrows-v",
-        "settings": {"height" : null},
-        "fields": [],
-        "component": "CommonWidget",
-        "widget": null,
-        "hidden": false,
-        "defaultSettings": null
-    };
+    var newField = JSON.parse(JSON.stringify(WIDGETS['SEPARATOR']));
+
+    newField.rules = this.exploteToObject(newField.rules);
+    newField.settings = this.exploteToObject(newField.settings);
 
     this.props.onItemSelected({
       type : 'item',
@@ -253,7 +243,7 @@ class ModalSelectItem extends Component {
                         <div className="col-xs-3">
                           <a href="" onClick={this.addSeparator.bind(this)}>
                             <div className="grid-item">
-                              <i className="fa fa-arrows-v"></i>
+                              <i className={"fa "+WIDGETS['SEPARATOR'].icon}></i>
                               <p className="grid-item-name">
                                 Separador
                               </p>
