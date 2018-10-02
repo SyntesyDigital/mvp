@@ -108,7 +108,7 @@ class FilterBarStatistics extends Component {
     render() {
 
         return (
-            <div className="filter-bar">
+            <div className="filter-bar filter-statistics">
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
 
                 <div className="col-xs-3">

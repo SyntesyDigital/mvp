@@ -119,7 +119,7 @@ class FilterBarCompanies extends Component {
     render() {
 
         return (
-            <div className="filter-bar">
+            <div className="filter-bar filter-companies">
               <form onSubmit={this.handleSubmit.bind(this)} className="nova-cerca">
 
                 <select name="category" className="col-xs-3" onChange={this.handleChange} value={this.state.language}>

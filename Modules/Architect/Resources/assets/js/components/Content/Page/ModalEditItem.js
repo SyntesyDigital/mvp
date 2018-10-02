@@ -1000,6 +1000,15 @@ class ModalEditItem extends Component {
           ]}
         />
 
+        <InputSettingsField
+          field={this.state.field}
+          name="height"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Alçada"
+          inputLabel="Indica l'alçada del camp"
+        />
+
       </div>
 
 
