@@ -17,30 +17,36 @@ class UpdateUrlsTypology
 
     public function run()
     {
-        $typology = $this->typology;
-
-        if(!$typology->has_slug) {
+        // If typology no has slug then we don't need to build URLs
+        if(!$this->typology->has_slug) {
             return false;
         }
 
-        $typology->urls()->delete();
+        // Delete URLs of the typology
+        $this->typology->urls()->delete();
 
-        // Create Typology URL
-        Language::getAllCached()->map(function($language) use ($typology) {
-            $attr = $typology->attrs->where('name', 'slug')
+        // Build URLs of the typology
+        Language::getAllCached()->map(function($language) {
+
+            $attr = $this->typology->attrs->where('name', 'slug')
                 ->where('language_id', $language->id)
                 ->first();
 
-            $url = isset($attr->value) ? '/' . $attr->value : null;
-
-            if($url) {
-                $typology->urls()->create([
+            if(isset($attr->value)) {
+                $this->typology->urls()->create([
                     'language_id' => $language->id,
-                    'url' => '/' . $language->iso . $url
+                    'url' => sprintf('/%s/%s',
+                        $language->iso,
+                        $attr->value
+                    )
                 ]);
             }
         });
 
+        // Refresh typology attributes
+        $this->typology->load('attrs', 'fields');
+
+        // Update all contents urls
         $this->typology->contents->map(function($content) {
             (new UpdateUrlsContent($content))->run();
         });

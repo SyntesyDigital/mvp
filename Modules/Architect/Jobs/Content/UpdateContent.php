@@ -67,6 +67,9 @@ class UpdateContent
             Cache::forget(sprintf("menu_%s", $menu->name));
         }
 
+        // Refresh relations
+        $this->content->load('fields', 'categories', 'tags', 'languages');
+
         // Update url
         (new UpdateUrlsContent($this->content))->run();
 
@@ -99,9 +102,19 @@ class UpdateContent
             $type = isset($field["type"]) ? $field["type"] : null;
 
             if($values && $type && $identifier) {
-                $this
-                    ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
-                    ->save($this->content, $identifier, $values, $this->languages);
+
+                $_field = $this
+                    ->getFieldObject($type, $fieldObjects); // <= Better into FieldObject like FieldHandler ?
+
+                if(!$_field) {
+                    throw new \Exception('Field ' . $identifier . ' (type: '.$type.') not exist');
+                }
+
+                $_field->save($this->content, $identifier, $values, $this->languages);
+
+                // $this
+                //     ->getFieldObject($type, $fieldObjects) // <= Better into FieldObject like FieldHandler ?
+                //     ->save($this->content, $identifier, $values, $this->languages);
             }
         }
     }

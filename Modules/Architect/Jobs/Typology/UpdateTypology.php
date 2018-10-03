@@ -71,8 +71,10 @@ class UpdateTypology
             }
         }
 
+        $this->typology->load('fields', 'attrs');
+
         (new UpdateUrlsTypology($this->typology))->run();
 
-        return $this->typology->load('fields', 'attrs');
+        return $this->typology;
     }
 }
