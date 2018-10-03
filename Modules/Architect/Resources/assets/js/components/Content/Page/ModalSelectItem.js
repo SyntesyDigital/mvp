@@ -116,6 +116,21 @@ class ModalSelectItem extends Component {
     });
   }
 
+  addSeparator(e) {
+
+    e.preventDefault();
+
+    var newField = JSON.parse(JSON.stringify(WIDGETS['SEPARATOR']));
+
+    newField.rules = this.exploteToObject(newField.rules);
+    newField.settings = this.exploteToObject(newField.settings);
+
+    this.props.onItemSelected({
+      type : 'item',
+      field : newField
+    });
+  }
+
   renderFields() {
 
     var fields = [];
@@ -220,6 +235,17 @@ class ModalSelectItem extends Component {
                               <i className="fa fa-columns"></i>
                               <p className="grid-item-name">
                                 Fila
+                              </p>
+                            </div>
+                          </a>
+                        </div>
+
+                        <div className="col-xs-3">
+                          <a href="" onClick={this.addSeparator.bind(this)}>
+                            <div className="grid-item">
+                              <i className={"fa "+WIDGETS['SEPARATOR'].icon}></i>
+                              <p className="grid-item-name">
+                                Separador
                               </p>
                             </div>
                           </a>

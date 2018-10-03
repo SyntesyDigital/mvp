@@ -10,14 +10,19 @@
 @endphp
 
 
-<div class="col-md-9 col-sm-10 col-xs-12 centered">
+<div class="carousel-single-container centered">
   <div id="carousel-single" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
       @foreach($slides as $item)
+
+        @php
+          $title = isset($item['metadata']['fields']['title'][App::getLocale()]) ? $item['metadata']['fields']['title'][App::getLocale()]['value'] : '';
+        @endphp
+
         <div class="item {{$first?'active':''}}"><img src="{{asset($item['urls'][$crop])}}" alt="{{$item['uploaded_filename']}}" class="center-block">
-          <!--div class="carousel-caption">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut dapibus est.tetur adipiscing elit. Donec ut dapibus est. </p>
-          </div-->
+          <div class="carousel-caption">
+            <p>{{$title}}</p>
+          </div>
         </div>
         @php
           $first = false;

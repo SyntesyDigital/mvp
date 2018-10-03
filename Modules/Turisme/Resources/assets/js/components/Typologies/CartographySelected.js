@@ -12,9 +12,9 @@ class CartographySelected extends Component {
         super(props);
 
         var inputs = {
-          size : 'a3',
-          format : 'jpg',
-          resolution : '72'
+          size : '',
+          format : '',
+          resolution : ''
         };
 
         if(this.props.field.inputs !== undefined){
@@ -78,6 +78,7 @@ class CartographySelected extends Component {
               <li className="list-forms">
                 <label htmlFor="Autor">Mides</label>
                 <select name="size" id="select" onChange={this.onChange} value={inputs.size}>
+                  <option value=""> --- </option>
                   <option value="a3">A3 (42 x 29,7 cm)</option>
                   <option value="a2">A2 (29,7 x 21 cm)</option>
                 </select>
@@ -86,6 +87,7 @@ class CartographySelected extends Component {
               <li className="list-forms">
                 <label htmlFor="Format">Format</label>
                 <select name="format" id="select2" onChange={this.onChange} value={inputs.format}>
+                  <option value=""> --- </option>
                   <option value="jpg">JPG</option>
                   <option value="png">PNG</option>
                   <option value="pdf">PDF</option>
@@ -95,6 +97,7 @@ class CartographySelected extends Component {
               <li className="list-forms">
                 <label htmlFor="Ressolucio">Ressolució</label>
                 <select name="resolution" id="select3" onChange={this.onChange} value={inputs.resolution}>
+                  <option value=""> --- </option>
                   <option value="72">72 dpi</option>
                   <option value="150">150 dpi</option>
                   <option value="300">300 dpi</option>

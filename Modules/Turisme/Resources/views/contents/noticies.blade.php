@@ -6,7 +6,7 @@
 
 @extends('turisme::layouts.app',[
   'title' => isset($content) ? $content->getFieldValue('title') : '',
-  'mainClass' => $pageType.' '.$htmlClass.' '.$idClass
+  'mainClass' => $pageType.' blog '.$htmlClass.' '.$idClass
 ])
 
 @section('content')
@@ -54,18 +54,20 @@
         <div class="row">
             <div class="col-md-9 col-sm-10 col-xs-12 centered">
             @php $any_media = false;   @endphp
-            @if (isset($fields['video']['value']['url'][App::getLocale()]))
-              @include('turisme::partials.fields.video',  [
-                 "field" => $fields['video'],
-                ])
-                @php $any_media = true; @endphp
-            @endif
             @if ($fields['rotatorio']['value'] && count($fields['rotatorio']['value']) > 0)
               @include('turisme::partials.fields.carousel_single',  [
                "field" => $fields['rotatorio'],
               ])
               @php $any_media = true; @endphp
             @endif
+
+            @if (isset($fields['video']['value']['url'][App::getLocale()]))
+              @include('turisme::partials.fields.video',  [
+                 "field" => $fields['video'],
+                ])
+                @php $any_media = true; @endphp
+            @endif
+
             @if(!$any_media && $fields['imatge']['value'])
               <img
                 src="{{ isset($fields['imatge']['value']['urls']['large']) ? asset($fields['imatge']['value']['urls']['large']) : null }}"

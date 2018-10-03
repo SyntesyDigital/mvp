@@ -106,8 +106,8 @@ class VideoField extends Component
     const language = $(event.target).closest('.form-control').attr('language');
     const value = this.props.field.value ? this.props.field.value : {};
 
-    var linkValues = this.props.field.value !== undefined && this.props.field.value.url !== undefined
-      && this.props.field.value.url != null ?
+    var linkValues = this.props.field.value !== undefined && this.props.field.value != null &&
+      this.props.field.value.url !== undefined && this.props.field.value.url != null ?
       this.props.field.value.url : {};
 
     linkValues[language] = event.target.value;
