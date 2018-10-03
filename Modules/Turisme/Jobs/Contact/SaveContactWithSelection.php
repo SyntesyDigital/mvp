@@ -6,6 +6,8 @@ use Modules\Turisme\Http\Requests\SaveContactWithSelectionRequest;
 
 use  Modules\Turisme\Entities\ContactWithSelection;
 
+use Mail;
+
 class SaveContactWithSelection
 {
     public function __construct($attributes)
@@ -30,9 +32,11 @@ class SaveContactWithSelection
     }
 
 
+
+
     public function handle()
     {
-        return ContactWithSelection::create([
+        $contactResult = ContactWithSelection::create([
           'firstname' => $this->attributes['firstname'],
           'lastname' => $this->attributes['lastname'],
           'email'=> $this->attributes['email'],
@@ -44,6 +48,28 @@ class SaveContactWithSelection
           'conditions'=> $this->attributes['conditions'],
           'items' => json_encode($this->attributes['items']),
         ]);
+
+        //dd($this->attributes['items']);
+
+        if($contactResult){
+
+          $data = $this->attributes;
+
+          Mail::send('turisme::emails.selection', $data, function ($message) use ($data) {
+
+            $message->from($data['email'], $data['firstname']);
+
+            $message->to(env('MAIL_COMPANY_EMAIL'))
+              ->cc($data['email'])
+              ->subject("Mi Selección");
+
+          });
+
+          return true;
+        }
+        else {
+          return false;
+        }
     }
 
 }

@@ -383,6 +383,7 @@ export default class TypologySelectionFilters extends Component {
               />
 
               <ModalThanks
+                id="modal-thanks-selection"
                 display={this.state.displayThanks}
                 onModalClose={this.handleThanksClose.bind(this)}
               />

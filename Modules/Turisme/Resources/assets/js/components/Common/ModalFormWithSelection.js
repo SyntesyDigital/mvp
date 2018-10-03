@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import ListSelectedSummary from './ListSelectedSummary';
 import CountriesSelect from './CountriesSelect';
+import jsxToString from 'jsx-to-string';
 
 export default class ModalFormWithSelection extends Component {
 
@@ -232,7 +233,11 @@ export default class ModalFormWithSelection extends Component {
           />
         </li>
       );
+
+
     }
+
+
 
     return result;
   }
@@ -328,7 +333,6 @@ export default class ModalFormWithSelection extends Component {
                         <div className="col-xs-12">
                           <p>
                           { window.localization['SELECTED_LIST_FORM_SUBTITLE4'] }
-
                           </p>
 
                           <textarea className="col-xs-12" name="comment" value={fields.comment} onChange={this.onFieldChange} />

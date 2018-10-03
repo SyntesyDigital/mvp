@@ -101,10 +101,12 @@ class SaveContact
               ->subject("Contacto");
 
           });
+
+          return true;
         }
-
-        return true;
-
+        else {
+          return false;
+        }
     }
 
 }

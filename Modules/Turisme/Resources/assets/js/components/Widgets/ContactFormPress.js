@@ -71,6 +71,7 @@ export default class ContactFormPress extends Component {
                 />
 
                 <ModalThanks
+                  id="modal-thanks-press"
                   display={this.state.displayThanks}
                   onModalClose={this.handleThanksClose.bind(this)}
                 />
