@@ -22,8 +22,10 @@ class ContentSearchCollection extends ResourceCollection
         $language = $request->get('accept_lang') ? Language::byIso($request->get('accept_lang'))->first() : Language::getDefault();
         $self = $this;
 
+
         return [
             'data' => $this->collection->map(function ($content) use ($request, $language, $hits, $self) {
+
                 $hit = null;
                 foreach ($hits as $h) {
                     if ($h['_id'] == $content->id) {
@@ -35,7 +37,16 @@ class ContentSearchCollection extends ResourceCollection
                     ->toArray($request, $language, [
                         'description' => $self->buildDescription($hit, $content, $language)
                     ]);
-            })
+
+            }),
+            "total" => $this->total(),
+            "per_page" => $this->perPage(),
+            "current_page" => $this->currentPage(),
+            "last_page" => $this->lastPage(),
+            "next_page_url" => $this->nextPageUrl(),
+            "prev_page_url" => $this->previousPageUrl(),
+            // "from" => $this->currentPage(),
+            // "to" => $this->total(),
         ];
     }
 

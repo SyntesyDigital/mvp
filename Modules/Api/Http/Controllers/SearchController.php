@@ -66,7 +66,7 @@ class SearchController extends Controller
         } else {
             $collection->orderByHits($hits);
         }
-
+        
         return (new ContentSearchCollection($collection->paginate($size)))->toArray($request, $hits);
     }
 
