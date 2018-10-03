@@ -7,6 +7,8 @@ use Modules\Architect\Entities\Content;
 
 use Illuminate\Support\Facades\Schema;
 
+use Modules\Architect\Tasks\Urls\UpdateUrlsContent;
+
 class DeleteContent
 {
     public function __construct(Content $content)
@@ -21,11 +23,32 @@ class DeleteContent
 
     public function handle()
     {
+        // Disable FK constraints for this operation
         Schema::disableForeignKeyConstraints();
+
+        // Unindex content (Elasticsearch)
         $this->content->unindex();
-        $result = $this->content->delete();
+
+        // Update parent ID of childrens
+        $contents = Content::where('parent_id', $this->content->id)->get();
+
+        // Update URLS of the contents
+        if($contents->isNotEmpty()) {
+            foreach($contents as $content) {
+                $content->update([
+                    'parent_id' => null
+                ]);
+
+                (new UpdateUrlsContent($content))->run();
+            }
+        }
+
+        // Delete content
+        $raws = Content::where('id', $this->content->id)->delete();
+
+        // Enable FK constraints
         Schema::enableForeignKeyConstraints();
 
-        return $result;
+        return $raws;
     }
 }

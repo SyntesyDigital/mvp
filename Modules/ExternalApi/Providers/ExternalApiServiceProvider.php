@@ -48,8 +48,14 @@ class ExternalApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Config/config.php' => config_path('externalapi.php'),
         ], 'config');
+
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'externalapi'
+        );
+
+        // Add database config
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/database.php', 'database.connections'
         );
     }
 
@@ -91,7 +97,7 @@ class ExternalApiServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

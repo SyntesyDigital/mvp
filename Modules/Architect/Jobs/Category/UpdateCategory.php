@@ -63,8 +63,8 @@ class UpdateCategory
             }
         }
 
-        (new UpdateUrlsCategory($this->category))->run();
+        (new UpdateUrlsCategory($this->category->load('fields')))->run();
 
-        return $this->category;
+        return $this->category->load('urls', 'fields');
     }
 }

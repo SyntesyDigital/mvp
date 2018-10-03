@@ -80,20 +80,23 @@ class UpdateUrlsContent
              return false;
          }
 
-         // Prepare array of urls indexed with language ID and Typology Slug
-         $urls = Language::getAllCached()->mapWithKeys(function($language) use ($content) {
+         foreach(Language::getAllCached() as $language) {
              $attr = $this->content->typology->attrs
                  ->where('name', 'slug')
                  ->where('language_id', $language->id)
                  ->first();
 
-             $slug = isset($attr->value) ? $attr->value : null;
-
-             return [
-                 $language->id => '/' . $language->iso . '/' . $slug
-             ];
-         })->toArray();
-
+            if($attr) {
+                $content->urls()->create([
+                    'language_id' => $language->id,
+                    'url' => sprintf('/%s/%s/%s',
+                       $language->iso,
+                       $attr->value, // Typology slug
+                       $content->getFieldValue('slug', $language->id) // Article slug
+                    )
+                ]);
+            }
+         }
 
          // Save category slug by languages
          // if($this->content->typology->has_categories) {
@@ -104,14 +107,6 @@ class UpdateUrlsContent
          //         }
          //     }
          // }
-
-         // Save URLs
-         foreach($urls as $languageId => $url) {
-             $content->urls()->create([
-                 'language_id' => $languageId,
-                 'url' => $url . '/' . $content->getFieldValue('slug', $languageId),
-             ]);
-         }
 
          return true;
      }
