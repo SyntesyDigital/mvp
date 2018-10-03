@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import MoreResults from './../Common/MoreResults';
-import NewsBlog from './../Typologies/SearchResults';
 
 
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
@@ -25,6 +24,9 @@ export default class Search extends Component {
             field : field,
             filters : filters,
             size:field.settings.itemsPerPage !== null ?  field.settings.itemsPerPage : 5,
+            items : null,
+            currPage : null,
+            total : null,
         };
     }
 
@@ -49,6 +51,9 @@ export default class Search extends Component {
         if(filters != null && filters.text != null){
           query += '&q='+filters.text;
         }
+        if(page >1){
+          query += '&page='+page;
+        }
         console.log('QUERY--',query);
 
         axios.get(ASSETS+'api/search?'+query)
@@ -57,19 +62,22 @@ export default class Search extends Component {
               if(response.status == 200
                   && response.data.data !== undefined)
               {
-                console.log('RESPONSE--',response);
+                console.log('RESPONSE.DATA--',response.data);
 
                 var old_items = self.state.items;
-                if(response.data.meta.current_page != 1){
+                if(response.data.current_page != 1){
                   old_items.push.apply(old_items, response.data.data);
                 }else{
                   old_items =response.data.data;
                 }
+                console.log('OLD ITEMS--',old_items);
+
                   self.setState({
                       items : old_items,
-                      lastPage : response.data.meta.last_page,
-                      currPage : response.data.meta.current_page,
-                      filters : filters
+                      lastPage : response.data.last_page,
+                      currPage : response.data.current_page,
+                      filters : filters,
+                      total : response.data.total
                   });
               }
 
@@ -82,18 +90,21 @@ export default class Search extends Component {
 
       var result = [];
       const {items} = this.state;
-      for(var key in items){
+      for(var i = 0; i< items.length; i++){
+
         result.push(
-          <li>
-            <SearchResults
-              field={items[key]}
-            />
+          <li key={i}>
+            <div>
+              <h3><a href={items[i].url}>{items[i].title}</a><span>90%</span></h3>
+              <p className="breadcrumb"> <a href="">pagina padre</a> / <a href="">pagina padre</a> / <a href={items[i].url}>{items[i].title}</a></p>
+              <p className="text">{items[i].description}</p>
+            </div>
           </li>
         );
       }
 
       return (
-                {result}
+                result
             );
     }
 
@@ -113,7 +124,7 @@ export default class Search extends Component {
                   <div className="claim trade">
                     <h1>Buscar</h1>
                     <p>
-                      Se han encontrado <strong>XX</strong> resultados coincidentes con lel término de búsqueda <strong>"{this.state.filters.text}"</strong>
+                      Se han encontrado <strong>{this.state.total}</strong> resultados coincidentes con lel término de búsqueda <strong>"{this.state.filters.text}"</strong>
                     </p>
                   </div>
                 </div>
@@ -127,13 +138,14 @@ export default class Search extends Component {
                   }
 
                   {this.state.items != null && this.state.items.length > 0 &&
-                    <div class="col-md-12 col-sm-12 col-xs-12 busqueda">
+                    <div className="col-md-12 col-sm-12 col-xs-12 busqueda">
                       <ul>
                         {this.renderItems()}
                       </ul>
                     </div>
                   }
-
+                </div>
+                <div className="row">
                   {this.state.lastPage &&
                       <MoreResults
                         currPage={this.state.currPage}
