@@ -182,17 +182,18 @@ class UpdateContent
 
                             case "widget-list":
                                 $widgets = isset($field['value']) ? $field['value'] : null;
+                                if($widgets){
+                                    foreach($widgets as $k => $widget) {
+                                        $fieldName = uniqid('pagewidget_');
+                                        $fields = isset($widget['fields']) ? $widget['fields'] : null;
+                                        $nodes[$key]['field']['value'][$k]['fieldname'] = $fieldName;
 
-                                foreach($widgets as $k => $widget) {
-                                    $fieldName = uniqid('pagewidget_');
-                                    $fields = isset($widget['fields']) ? $widget['fields'] : null;
-                                    $nodes[$key]['field']['value'][$k]['fieldname'] = $fieldName;
+                                        (new $widget['class'])->save($this->content, $fieldName, $fields);
 
-                                    (new $widget['class'])->save($this->content, $fieldName, $fields);
-
-                                    foreach($widget["fields"] as $k2 => $v) {
-                                        if(isset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"])) {
-                                            unset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"]);
+                                        foreach($widget["fields"] as $k2 => $v) {
+                                            if(isset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"])) {
+                                                unset($nodes[$key]['field']['value'][$k]["fields"][$k2]["value"]);
+                                            }
                                         }
                                     }
                                 }
