@@ -1,5 +1,5 @@
 @php
-  $crop = "original";
+  $crop = "large";
 
   $settings = isset($settings) ? $settings : $field['settings'];
   $settings = json_decode(json_encode($settings), true);

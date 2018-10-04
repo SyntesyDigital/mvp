@@ -7,6 +7,8 @@ use Modules\Turisme\Http\Requests\SaveContactWithSelectionRequest;
 use  Modules\Turisme\Entities\ContactWithSelection;
 
 use Mail;
+use Cache;
+use App;
 
 class SaveContactWithSelection
 {
@@ -22,7 +24,9 @@ class SaveContactWithSelection
             'privacity',
             'newsletter',
             'conditions',
-            'items'
+            'items',
+            'items_value',
+            'typology'
         ]);
     }
 
@@ -30,9 +34,6 @@ class SaveContactWithSelection
     {
         return new self($request->all());
     }
-
-
-
 
     public function handle()
     {
@@ -47,6 +48,8 @@ class SaveContactWithSelection
           'newsletter'=> $this->attributes['newsletter'],
           'conditions'=> $this->attributes['conditions'],
           'items' => json_encode($this->attributes['items']),
+          'items_value' => json_encode($this->attributes['items_value']),
+          'typology'=> $this->attributes['typology']
         ]);
 
         //dd($this->attributes['items']);
@@ -59,11 +62,38 @@ class SaveContactWithSelection
 
             $message->from($data['email'], $data['firstname']);
 
-            $message->to(env('MAIL_COMPANY_EMAIL'))
+            $message->to(env('MAIL_MEDIA_CENTER_EMAIL'))
               ->cc($data['email'])
               ->subject("Mi Selección");
 
           });
+
+
+          //send email with files
+          $template = "";
+
+          if($this->attributes['typology'] == 7){ //cartografia
+            $template = "cartography";
+          }
+          else if($this->attributes['typology'] == 14){ //logos
+            $template = "logos";
+          }
+
+          $localization = Cache::get('localization.'.App::getLocale());
+
+          if($template != ""){
+            Mail::send('turisme::emails.'.$template, $data, function ($message) use ($data,$localization) {
+
+              $fromEmail = env('MAIL_MEDIA_CENTER_EMAIL');
+
+              $message->from($fromEmail, env('MAIL_COMPANY_NAME'));
+
+              $message->to($data['email'])
+                ->cc($fromEmail)
+                ->subject($localization["EMAIL_SELECTION_SUBJECT"]);
+
+            });
+          }
 
           return true;
         }

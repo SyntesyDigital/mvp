@@ -26,7 +26,7 @@ class ImageField extends Component {
 
       console.log("ImageField :: props => ",props);
 
-      var crop = "original";
+      var crop = "medium";
       if(props.field.settings != null && props.field.settings.cropsAllowed !== undefined
         && props.field.settings.cropsAllowed != null ){
 

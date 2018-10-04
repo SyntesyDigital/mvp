@@ -12,9 +12,9 @@ class CartographySelected extends Component {
         super(props);
 
         var inputs = {
-          size : '',
-          format : '',
-          resolution : ''
+          size : 'a3',
+          format : 'jpg',
+          resolution : '72'
         };
 
         if(this.props.field.inputs !== undefined){
@@ -28,6 +28,7 @@ class CartographySelected extends Component {
         };
 
         this.onChange = this.onChange.bind(this);
+        this.props.onItemChange(inputs,this.props.field.id);
     }
 
     componentDidMount() {
@@ -76,18 +77,16 @@ class CartographySelected extends Component {
             <ul className="detalls">
 
               <li className="list-forms">
-                <label htmlFor="Autor">Mides</label>
+                <label htmlFor="Autor">{window.localization['GENERAL_FORM_SIZE']}</label>
                 <select name="size" id="select" onChange={this.onChange} value={inputs.size}>
-                  <option value=""> --- </option>
                   <option value="a3">A3 (42 x 29,7 cm)</option>
                   <option value="a2">A2 (29,7 x 21 cm)</option>
                 </select>
               </li>
 
               <li className="list-forms">
-                <label htmlFor="Format">Format</label>
+                <label htmlFor="Format">{window.localization['PUBLICATION_WIDGET_FORMAT']}</label>
                 <select name="format" id="select2" onChange={this.onChange} value={inputs.format}>
-                  <option value=""> --- </option>
                   <option value="jpg">JPG</option>
                   <option value="png">PNG</option>
                   <option value="pdf">PDF</option>
@@ -95,9 +94,8 @@ class CartographySelected extends Component {
               </li>
 
               <li className="list-forms">
-                <label htmlFor="Ressolucio">Ressolució</label>
+                <label htmlFor="Ressolucio">{window.localization['GENERAL_FORM_RESOLUTION']}</label>
                 <select name="resolution" id="select3" onChange={this.onChange} value={inputs.resolution}>
-                  <option value=""> --- </option>
                   <option value="72">72 dpi</option>
                   <option value="150">150 dpi</option>
                   <option value="300">300 dpi</option>

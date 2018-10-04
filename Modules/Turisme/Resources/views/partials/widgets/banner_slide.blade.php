@@ -1,5 +1,21 @@
 <div class="item {{$class}} {{$settings['htmlClass'] or ''}}">
 
+  @php
+    $urlField = $field['fields'][3];
+    $link = "";
+    $target = "";
+    if(isset($urlField['value']['content'])){
+      //is internal
+      $content = $urlField['value']['content'];
+      $link = route('content.show',[$content->url]);
+    }
+    else {
+      //is external
+      $target = "_blank";
+      $link = isset($urlField['value']['url'][App::getLocale()]) ? $urlField['value']['url'][App::getLocale()] : '';
+    }
+  @endphp
+
   @include('turisme::partials.fields.'.$field['fields'][0]['type'],
     [
       "field" => $field['fields'][0],
@@ -9,16 +25,24 @@
     ]
   )
 
+
+
   <div class="carousel-caption">
-    <h3>
-      @include('turisme::partials.fields.'.$field['fields'][1]['type'],
-        [
-          "field" => $field['fields'][1],
-          "settings" => $settings,
-          "div" => false
-        ]
-      )
-    </h3>
+    @if($link != "")
+      <a href="{{$link}}" target="{{$target or ''}}">
+    @endif
+      <h3>
+        @include('turisme::partials.fields.'.$field['fields'][1]['type'],
+          [
+            "field" => $field['fields'][1],
+            "settings" => $settings,
+            "div" => false
+          ]
+        )
+      </h3>
+    @if($link != "")
+      </a>
+    @endif
     <p>
       @include('turisme::partials.fields.'.$field['fields'][2]['type'],
         [

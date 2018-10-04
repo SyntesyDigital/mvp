@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import ListSelectedSummary from './ListSelectedSummary';
 import CountriesSelect from './CountriesSelect';
-import jsxToString from 'jsx-to-string';
+import moment from 'moment';
 
 export default class ModalFormWithSelection extends Component {
 
@@ -61,13 +61,97 @@ export default class ModalFormWithSelection extends Component {
     }
   }
 
+  processText(fields,fieldName){
+    return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ?
+      fields[fieldName].values[LOCALE] : '' ;
+  }
+
+  processLanguages(inputs) {
+    var result="";
+    for(var key in inputs){
+      result += key+" ("+inputs[key]+") ";
+    }
+    return result;
+  }
+
+  processPublication(field){
+    const fields = field.fields;
+    const inputs = field.inputs !== undefined ? field.inputs : null;
+    const title = this.processText(fields,'title');
+    const languages = inputs != null ? this.processLanguages(inputs) : '';
+
+    return title+" - "+languages;
+
+  }
+
+  processCartografia(field){
+    const fields = field.fields;
+    const inputs = field.inputs !== undefined ? field.inputs : null;
+    const title = this.processText(fields,'title');
+
+    const size = inputs != null ? ' - '+inputs.size : '';
+    const format = inputs != null ? ' - '+inputs.format : '';
+    const resolution = inputs != null ? ' - '+inputs.resolution : '';
+
+    return title+size+format+resolution;
+
+  }
+
+  processEstadistica(field){
+    const fields = field.fields;
+    var data = fields.data.values != null ? fields.data.values : null;
+    if(data != null){
+      data = moment(data).format('L');
+    }
+
+    const title = this.processText(fields,'title');
+    return title+" - "+data;
+  }
+
+  processLogo(field){
+    const fields = field.fields;
+    const title = this.processText(fields,'title');
+    return title;
+  }
+
+  processItems(items){
+
+    var itemsProcessed = [];
+
+    for(var key in items){
+
+      //console.log("ModalFormWithSelection :: processItem => ",items[key]);
+
+      switch(items[key].typology.identifier){
+        case 'publication' :
+          itemsProcessed.push(this.processPublication(items[key]));
+          break;
+        case 'cartografia' :
+          itemsProcessed.push(this.processCartografia(items[key]));
+          break;
+        case 'estadistica' :
+          itemsProcessed.push(this.processEstadistica(items[key]));
+          break;
+       case 'logo' :
+         itemsProcessed.push(this.processLogo(items[key]));
+         break;
+       }
+    }
+
+    //console.log("ModalFormWithSelection :: itemsProcessed => ",itemsProcessed);
+
+    return itemsProcessed;
+
+  }
+
   getFormData()
   {
-
       const {fields} = this.state;
 
       fields['_token'] = this.props.csrf_token;
       fields['items'] = this.props.items;
+      fields['items_value'] = this.processItems(this.props.items);
+      fields['typology'] = parseInt(this.props.typology);
 
       return fields;
   }
@@ -307,7 +391,7 @@ export default class ModalFormWithSelection extends Component {
 
                         <div className="col-xs-12 col-md-6">
                           <div className="form-group ">
-                            <input type="text" className={this.hasErrors('company')} name="company" placeholder={ window.localization['GENERAL_FORM_MAIL'] } value={fields.company} onChange={this.onFieldChange} />
+                            <input type="text" className={this.hasErrors('company')} name="company" placeholder={ window.localization['GENERAL_FORM_ENTERPRISE'] } value={fields.company} onChange={this.onFieldChange} />
                           </div>
                         </div>
 
@@ -374,7 +458,7 @@ export default class ModalFormWithSelection extends Component {
                       }
 
 
-                      <input type="submit" value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                      <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
 
                     </form>
 

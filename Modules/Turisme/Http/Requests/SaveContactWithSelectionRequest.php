@@ -20,6 +20,8 @@ class SaveContactWithSelectionRequest extends FormRequest
             'country' => 'required',
             'company' => 'required',
             'items' => 'required',
+            'items_value' => 'required',
+            'typology' => 'required',
             'privacity' => 'required|accepted',
             'conditions' => 'required|accepted',
             //'newsletter' => 'required|accepted',

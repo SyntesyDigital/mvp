@@ -1,6 +1,9 @@
 <div id="{{$field['settings']['htmlId'] or ''}}" class="widget image_text_link image {{$field['settings']['htmlClass'] or ''}}">
 
-
+@php
+  //TODO move this to a widget config
+  $field['settings']['cropsAllowed'] = 'medium';
+@endphp
     <p class="image">
       @include('turisme::partials.fields.'.$field['fields'][0]['type'],
         [

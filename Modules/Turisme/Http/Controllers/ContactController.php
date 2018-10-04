@@ -75,5 +75,42 @@ class ContactController extends Controller
 
     }
 
+    public function downloadFile(Request $request, $id){
+
+      //id : 140-4-1234123434
+      //{content_id}-{typology}-{config}-{timestamp}
+      $idArray = explode('-',$id);
+      $contentId = $idArray[0];
+      $typology = $idArray[1];
+      $timestamp = $idArray[sizeof($idArray)-1];
+
+      $now = time();
+      $diff = $now - $timestamp;
+
+      if($diff > 86400 * 2){ //two days
+          abort(404);
+      }
+
+      $pathToFile = "";
+      $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+
+      if($typology == 7){ //cartografia
+
+        $format = $idArray[2];
+        $resolution = $idArray[3];
+        $size = $idArray[4];
+        $pathToFile = $root."/downloads/7/".$contentId."-".$format."-".$resolution."-".$size.".zip";
+      }
+      else if($typology == 14){ //logos
+        $pathToFile = $root."/downloads/14/".$contentId.".zip";
+      }
+
+      if($pathToFile == "")
+        abort(404);
+
+      return response()->download($pathToFile);
+
+    }
+
 
 }
