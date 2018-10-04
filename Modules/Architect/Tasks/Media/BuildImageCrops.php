@@ -26,8 +26,10 @@ class BuildImageCrops
             $ratio = $ratio[0] / $ratio[1];
 
             $imageData = $image
-                ->fit($width, $height, null, "center")
-                ->crop($width, round($width / $ratio))
+                ->fit($width, $height, function ($constraint) { // http://image.intervention.io/api/fit
+                    $constraint->upsize();
+                })
+                ->crop($width, $height)
                 ->encode();
 
             $path = sprintf('%s/%s/%s',
