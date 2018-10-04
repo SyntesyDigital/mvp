@@ -4,6 +4,7 @@ namespace Modules\Architect\Jobs\Media;
 
 use Modules\Architect\Http\Requests\Media\CreateMediaRequest;
 use Modules\Architect\Entities\Media;
+use Modules\Architect\Tasks\Media\BuildImageCrops;
 
 use Intervention\Image\ImageManagerStatic as Image;
 use Storage;
@@ -40,28 +41,8 @@ class CreateMedia
         $this->filePath = $this->file->store(config('images.storage_directory') . '/original');
 
         if ($this->filePath) {
-
-            // Build others image formats
-            foreach(config('images.formats') as $format) {
-
-                $image = Image::make(storage_path() . '/app/' . $this->filePath);
-
-                $width = $image->width() > $format["width"] ? $format["width"] : $image->width();
-                $height = $image->height() > $format["height"] ? $format["height"] : $image->height();
-
-                $imageData = $image
-                    ->fit($width, $height, null, "center")
-                    ->crop($width, $height)
-                    ->encode();
-
-                $path = sprintf('%s/%s/%s',
-                    config('images.storage_directory'),
-                    $format['directory'],
-                    basename($this->filePath)
-                );
-
-                Storage::put($path, (string) $imageData);
-            }
+            // Build cropped images
+            (new BuildImageCrops(storage_path() . '/app/' . $this->filePath))->run();
 
             // Build medatadata
             $image = Image::make(storage_path() . '/app/' . $this->filePath);
