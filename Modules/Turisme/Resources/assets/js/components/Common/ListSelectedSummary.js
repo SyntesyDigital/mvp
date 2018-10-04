@@ -6,13 +6,16 @@ import StatisticsSummary from './../Typologies/StatisticsSummary';
 import CartographySummary from './../Typologies/CartographySummary';
 import LogosSummary from './../Typologies/LogosSummary';
 
-
 class ListSelectedSummary extends Component {
 
     constructor(props)
     {
         super(props);
 
+    }
+
+    renderToString() {
+      return "hello!";
     }
 
     renderItem() {
@@ -49,6 +52,7 @@ class ListSelectedSummary extends Component {
     }
 
     render() {
+
         return (
             this.renderItem()
         );

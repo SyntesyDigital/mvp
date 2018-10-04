@@ -73,6 +73,7 @@ export default class Subscribe extends Component {
                 />
 
                 <ModalThanks
+                  id="modal-thanks-suscribe"
                   display={this.state.displayThanks}
                   onModalClose={this.handleThanksClose.bind(this)}
                 />

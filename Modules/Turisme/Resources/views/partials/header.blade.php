@@ -40,7 +40,16 @@
 
 		<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
 
-		<li class="link-twitter"><a href="">@BarcelonaTurism</a></li>
+		<li class="link-twitter">
+				@php
+					$twitter = [
+						"es" => "https://twitter.com/BarcelonaInfoES",
+						"ca" => "https://twitter.com/barcelonaturism",
+						"en" => "https://twitter.com/BarcelonaInfoEN"
+					];
+				@endphp
+				<a href="{{$twitter[App::getLocale()]}}" target="_blank">@BarcelonaTurism</a>
+			</li>
 			<li class="boto-search">Buscar </li>
 		</ul>
 	</div><!-- /.nav-collapse -->

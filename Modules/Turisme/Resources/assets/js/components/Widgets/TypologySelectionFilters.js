@@ -282,9 +282,9 @@ export default class TypologySelectionFilters extends Component {
                     <p>{/*Carregant dades...*/}</p>
                 }
 
-            {this.state.items != null && this.state.items.length == 0 &&
-                <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
-            }
+                {this.state.items != null && this.state.items.length == 0 &&
+                    <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
+                }
 
                 {this.state.items != null && this.state.items.length > 0 &&
                     <ul>{this.renderItems()}</ul>
@@ -379,10 +379,12 @@ export default class TypologySelectionFilters extends Component {
                 display={this.state.displayModal}
                 onModalClose={this.handleModalClose.bind(this)}
                 items={this.state.selectedItems}
+                typology={this.state.typology}
                 onSubmitSuccess={this.handleFormSubmited.bind(this)}
               />
 
               <ModalThanks
+                id="modal-thanks-selection"
                 display={this.state.displayThanks}
                 onModalClose={this.handleThanksClose.bind(this)}
               />

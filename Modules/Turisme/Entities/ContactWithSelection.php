@@ -30,7 +30,9 @@ class ContactWithSelection extends Model
         'privacity',
         'newsletter',
         'conditions',
-        'items'
+        'items',
+        'items_value',
+        'typology'
     ];
 
 }

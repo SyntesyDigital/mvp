@@ -61,9 +61,13 @@ class SavePress
               ->subject("Contacto Prensa");
 
           });
+
+          return true;
+        }
+        else {
+          return false;
         }
 
-        return true;
     }
 
 }

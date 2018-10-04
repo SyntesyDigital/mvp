@@ -7,6 +7,8 @@ use Modules\Turisme\Http\Requests\SaveNewsletterRequest;
 use  Modules\Turisme\Entities\ContactForm;
 use Modules\ExternalApi\Entities\Program;
 
+use Mail;
+
 class SaveNewsletter
 {
     public function __construct($attributes)
@@ -37,11 +39,11 @@ class SaveNewsletter
         $programValues = $this->attributes['programCheckboxes'];
         $programsResult = '';
 
-        $programs = Program::pluck('description_es','code');
+        $programs = Program::pluck('description_es','id');
 
         if(sizeof($programValues) > 0){
-            foreach($programValues as $programValue){
-              $programsResult .= $programs[$programValue].";";
+            foreach($programValues as $index => $programValue){
+              $programsResult .= $programs[$index].";";
             }
         }
 
@@ -49,7 +51,7 @@ class SaveNewsletter
         //dd($programValues,$programsResult);
         //dd($this->attributes['initProgram']);
 
-        return ContactForm::create([
+        $contactResult = ContactForm::create([
           'firstname' => $this->attributes['firstname'],
           'lastname' => $this->attributes['lastname'],
           'email'=> $this->attributes['email'],
@@ -59,11 +61,34 @@ class SaveNewsletter
           'occupation'=> $this->attributes['occupation'],
           'comment'=> $this->attributes['comment'],
           'privacity'=> $this->attributes['privacity'],
-          'newsletter'=> $this->attributes['newsletter'],
+          'newsletter'=> 1,
           'programs'=> $programsResult,
           'program_values' => json_encode($programValues),
           'type' => 'newsletter'
         ]);
+
+        if($contactResult){
+
+          $data = $this->attributes;
+          $data["programs"] = $programsResult;
+
+          //TODO add email to subscription
+
+          Mail::send('turisme::emails.newsletter', $data, function ($message) use ($data) {
+
+            $message->from($data['email'], $data['firstname']);
+
+            $message->to(env('MAIL_COMPANY_EMAIL'))
+              ->cc($data['email'])
+              ->subject("Suscripción Newsletter");
+          });
+
+          return true;
+        }
+        else {
+          return false;
+        }
+
     }
 
 }

@@ -37,5 +37,6 @@ return [
     'AGENCIES' => 'Agencias de Viajes',
     'CONTACT_FORM_PRESS' => 'Formulario Prensa',
     'BLOG' => 'Blog',
-    'SEPARATOR' => 'Separador'
+    'SEPARATOR' => 'Separador',
+    'SEARCH' => 'Search'
 ];

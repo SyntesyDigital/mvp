@@ -31,4 +31,5 @@ require('./components/Widgets/Subscribe');
 require('./components/Widgets/ContactFormPress');
 require('./components/Widgets/MenuBanner');
 require('./components/Widgets/Blog');
+require('./components/Widgets/Search');
 require('./components/Widgets/RelatedNews');

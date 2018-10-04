@@ -13,6 +13,8 @@ Route::group([
     Route::put('/contact/save-with-selection', 'ContactController@saveWithSelection')->name('contact.save.selection');
     Route::put('/contact/save-press', 'ContactController@savePress')->name('contact.save.press');
 
+    Route::get('/download/{id}', 'ContactController@downloadFile')->name('contact.download');
+
     Route::get(LaravelLocalization::transRoute('routes.category.index'), 'CategoryController@index')->name('blog.category.index');
     Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('blog.tag.index');
 

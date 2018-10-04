@@ -10029,11 +10029,11 @@ article.page-builder{
   padding-bottom: 20px;
 }
 
-#modal-thanks.custom-modal .modal-container {
+.modal-thanks.custom-modal .modal-container {
   padding: 40px 20vw;
 }
 
-#modal-thanks h2 {
+.modal-thanks h2 {
   font-size: 50px;
   margin-bottom: 40px;
   margin-top: 40px;
@@ -10041,14 +10041,14 @@ article.page-builder{
   padding-bottom: 0px;
 }
 
-#modal-thanks p.links {
+.modal-thanks p.links {
   border-top: 1px solid #e5e5e5;
   margin-top: 50px;
   padding-top: 20px;
   margin-bottom: 40px !important;
 }
 
-#modal-thanks p.links a {
+.modal-thanks p.links a {
   color: #9a9a9a;
 }
 

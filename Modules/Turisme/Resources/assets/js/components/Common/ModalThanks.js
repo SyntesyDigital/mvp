@@ -29,14 +29,14 @@ export default class ModalThanks extends Component {
       if(!this.isIn){
         this.isIn = true;
 
-        $("#modal-thanks").css({
+        $("#"+this.props.id).css({
             display:"block",
             zIndex:1000
         });
 
         $('body').css({overflow:'hidden'});
 
-        TweenMax.to($("#modal-thanks"),1,{
+        TweenMax.to($("#"+this.props.id),1,{
             delay : 0.25,
             opacity:1,
             ease: Power2.easeInOut
@@ -55,9 +55,10 @@ export default class ModalThanks extends Component {
       if(this.isIn){
 
         this.isIn = false;
+        var self = this;
 
-        TweenMax.to($("#modal-thanks"),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
-              $("#modal-thanks").css({
+        TweenMax.to($("#"+this.props.id),0.75,{opacity:0,ease: Power2.easeInOut,onComplete :function(){
+              $("#"+self.props.id).css({
                   opacity:0,
                   display:'none',
                   zIndex:0
@@ -71,7 +72,7 @@ export default class ModalThanks extends Component {
     render() {
 
         return (
-            <div className="custom-modal" id="modal-thanks">
+            <div className="custom-modal modal-thanks" id={this.props.id}>
               <div className="modal-background"></div>
               <div className="modal-container">
                 <div className="modal-content">

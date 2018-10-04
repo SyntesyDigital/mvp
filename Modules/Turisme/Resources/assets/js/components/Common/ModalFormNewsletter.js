@@ -22,7 +22,7 @@ export default class ModalFormNewsletter extends Component {
             occupation : '',
             comment : '',
             privacity : false,
-            newsletter : false,
+            //newsletter : false,
             programCheckboxes : {}
           },
           programs : [],
@@ -264,7 +264,7 @@ export default class ModalFormNewsletter extends Component {
       for(var key in programs){
         result.push(
           <label className="col-xs-12 col-md-6" key={key}>
-            <input type="checkbox" name={key} value="" id="checkbox_1" onChange={this.onProgramChange.bind(this)} checked={programValues[key] !== undefined} />
+            <input type="checkbox" name={programs[key].id} value="" id="checkbox_1" onChange={this.onProgramChange.bind(this)} checked={programValues[programs[key].id] !== undefined} />
               {programs[key]['description_'+LOCALE]}
           </label>
         );
@@ -409,10 +409,12 @@ export default class ModalFormNewsletter extends Component {
                               {window.localization['GENERAL_FORM_CHECKBOX_RGPD']}
                             </label>
 
+                            {/*
                             <label className={"col-xs-12 "+this.hasErrors('newsletter')}>
                               <input type="checkbox" className={this.hasErrors('newsletter')} name="newsletter" value={fields.newsletter} onChange={this.onCheckboxChange}  />
                               {window.localization['GENERAL_FORM_CHECKBOX_NEWS']}
                             </label>
+                            */}
 
                           </div>
 
