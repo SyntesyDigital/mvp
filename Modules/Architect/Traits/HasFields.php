@@ -54,7 +54,6 @@ trait HasFields
 
     public function getFieldValue($identifier, $languageId = null)
     {
-
         if(!isset($languageId)) {
             $field = $this->fields->where('name', $identifier)->first();
             return isset($field) ? $field->value : null;
