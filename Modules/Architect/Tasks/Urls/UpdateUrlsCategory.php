@@ -20,6 +20,7 @@ class UpdateUrlsCategory
     {
         // Update Category url
         $this->category->urls()->delete();
+
         (new CreateUrlsCategory($this->category))->run();
 
         // Update Category childrens urls & childrens contents Urls

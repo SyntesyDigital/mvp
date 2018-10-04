@@ -29,7 +29,7 @@ class CreateUrlsContent
             if($url) {
                 $content->urls()->create([
                     'language_id' => $language->id,
-                    'url' => $language->iso . "/" . $url
+                    'url' => '/' . $language->iso . "/" . $url
                 ]);
             }
         });
@@ -46,19 +46,21 @@ class CreateUrlsContent
      */
     private function createContentUrl()
     {
-        $content = $this->content;
-
-        if(!$content->typology->has_slug) {
+        if(!$this->content->typology->has_slug) {
             return false;
         }
 
-        // Prepare array of urls indexed with language ID and Typology Slug
-        $urls = Language::getAllCached()->mapWithKeys(function($language) use ($content) {
-            return [
-                $language->id => '/' . $language->iso . '/' . $this->content->typology->getSlug($language->id)
-            ];
-        })->toArray();
-
+        foreach(Language::getAllCached() as $language) {
+            $this->content->urls()->create([
+                'language_id' => $language->id,
+                'url' => sprintf(
+                    '/%s/%s/%s',
+                    $language->iso,
+                    $this->content->typology->getSlug($language->id),
+                    $this->content->getFieldValue('slug', $language->id)
+                ),
+            ]);
+        }
 
         // Save category slug by languages
         // if($this->content->typology->has_categories) {
@@ -69,14 +71,6 @@ class CreateUrlsContent
         //         }
         //     }
         // }
-
-        // Save URLs
-        foreach($urls as $languageId => $url) {
-            $content->urls()->create([
-                'language_id' => $languageId,
-                'url' => $url,
-            ]);
-        }
 
         return true;
     }

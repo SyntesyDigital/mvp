@@ -17,6 +17,7 @@ class CreateCategory
             ->keyBy('identifier')
             ->keys()
             ->toArray();
+
         $this->attributes = array_only($attributes['fields'], $fields);
         $this->parent_id = isset($attributes['parent_id']) && $attributes['parent_id'] > 0 ? $attributes['parent_id'] : null;
     }
@@ -33,9 +34,8 @@ class CreateCategory
 
         if($this->parent_id != null){
           $order = Category::where("parent_id",$this->parent_id)->max('order');
-				  $order = $order + 1;
-        }
-        else {
+          $order = $order + 1;
+        } else {
           $order = Category::where("parent_id",null)->max('order');
           $order = $order + 1;
         }
