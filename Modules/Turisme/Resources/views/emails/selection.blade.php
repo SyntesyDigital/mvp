@@ -22,7 +22,7 @@
             <p style="Margin-bottom: 15px;">Privacidad aceptada : {{isset($privacity) && $privacity == 1 ? 'Si' : 'No'}}</p>
             <p style="Margin-bottom: 15px;">Newsletter : {{isset($newsletter) && $newsletter == 1 ? 'Si' : 'No'}}</p>
             <p style="Margin-bottom: 15px;">Condiciones aceptadas : {{isset($conditions) && $conditions == 1 ? 'Si' : 'No'}}</p>
-            
+
           </td>
         </tr>
       </table>

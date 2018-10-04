@@ -36,5 +36,6 @@ return [
     'COMPANIES' => 'Recursos y Sostenibilidad',
     'AGENCIES' => 'Agencias de Viajes',
     'CONTACT_FORM_PRESS' => 'Formulario Prensa',
-    'SEPARATOR' => 'Separador'
+    'SEPARATOR' => 'Separador',
+    'SEARCH' => 'Buscador'
 ];
