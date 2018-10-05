@@ -106,8 +106,6 @@ class PublicationSelected extends Component {
               />
               }
             </p>
-            <p className="media"><img src="images/img-medium.png" alt=""/></p>
-            <p className="expand"><a href=""><img src="images/expand.png" alt=""/></a></p>
             <p className="titol">{title}</p>
             <ul className="detalls">
               {this.renderLanguages()}

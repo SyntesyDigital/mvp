@@ -312,10 +312,11 @@ export default class TypologySelectionFilters extends Component {
           <div className="container">
             <div className="col-xs-12 col-sm-offset-1 col-sm-10 columna central">
 
-            {size == 0 &&
-                <p>{window.localization['GENERAL_WIDGET_SELECTED_VOID']}</p>
-            }
+              <h2>{window.localization['GENERAL_WIDGET_SELECTED_TITLE']}</h2>
 
+              {size == 0 &&
+                  <p className="empty-selection-title">{window.localization['GENERAL_WIDGET_SELECTED_VOID']}</p>
+              }
 
               {size > 0 &&
                   <div className="selected-list-wrapper">

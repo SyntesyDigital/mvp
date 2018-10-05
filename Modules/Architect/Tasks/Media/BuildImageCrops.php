@@ -19,17 +19,33 @@ class BuildImageCrops
 
             $image = Image::make($this->filePath);
 
-            $width = $image->width() > $format["width"] ? $format["width"] : $image->width();
-            $height = $image->height() > $format["height"] ? $format["height"] : $image->height();
+            $cropRatio = $format["width"]/$format["height"];
+            $imageRatio = $image->width()/$image->height();
 
-            $ratio = explode(':', $format["ratio"]);
-            $ratio = $ratio[0] / $ratio[1];
+            //image is bigger than the crop, is crop
+            $width = $format["width"];
+            $height = $format["height"];
+
+            if($cropRatio > $imageRatio){
+              //width is the limit
+              if($format["width"] > $image->width()){
+                //image is small than crop
+                $width = $image->width();
+                $height = round($image->width()/$cropRatio);
+              }
+            }
+            else {
+              //height is the limit
+              if($format["height"] > $image->height()){
+                //image is small than crop
+                $height = $image->height();
+                $width = round($image->height()*$cropRatio);
+              }
+            }
 
             $imageData = $image
-                ->fit($width, $height, function ($constraint) { // http://image.intervention.io/api/fit
-                    $constraint->upsize();
-                })
-                ->crop($width, $height)
+                ->fit($width, $height)
+                //->crop($width, $height)
                 ->encode();
 
             $path = sprintf('%s/%s/%s',
