@@ -10,7 +10,7 @@ if (!function_exists('breadcrumb')) {
         // Build breadcrumb path
         foreach($nodes as $node) {
             $prefix = $prefix . '/' . $node->getFieldValue('slug');
-            array_unshift($breadcrumb,[
+            array_push($breadcrumb,[
                 'label' => $node->title,
                 'url' => $prefix
             ]);
