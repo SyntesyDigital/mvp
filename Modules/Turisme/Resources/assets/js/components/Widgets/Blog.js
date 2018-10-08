@@ -69,7 +69,7 @@ export default class Blog extends Component {
             filters : filters,
             tags : null,
             showFilter:showFilter,
-            size:field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : null,
+            size:field.settings !== undefined && field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : 6,
         };
     }
 

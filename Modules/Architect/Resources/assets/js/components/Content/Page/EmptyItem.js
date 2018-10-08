@@ -20,9 +20,11 @@ class EmptyItem extends Component {
 
     return (
       <div className="row empty-item">
-          <a href="" className="btn btn-link" onClick={this.onSelectItem.bind(this)}>
-            <i className="fa fa-plus"></i>
-          </a>
+          {!architect.currentUserHasRole('author') &&
+            <a href="" className="btn btn-link" onClick={this.onSelectItem.bind(this)}>
+              <i className="fa fa-plus"></i>
+            </a>
+          }
       </div>
     );
   }

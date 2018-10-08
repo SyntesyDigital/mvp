@@ -196,26 +196,31 @@ class PageItem extends Component {
       <div className="row page-row item-filled">
 
         <div className="item-header">
-          <div className="left-buttons">
-            { childrenIndex > 0 &&
-              <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
-                <i className="fa fa-arrow-up"></i>
+
+          {!architect.currentUserHasRole('author') &&
+            <div className="left-buttons">
+              { childrenIndex > 0 &&
+                <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
+                  <i className="fa fa-arrow-up"></i>
+                </a>
+              }
+              {childrenIndex < childrenLength - 1 &&
+                <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
+                  <i className="fa fa-arrow-down"></i>
+                </a>
+              }
+            </div>
+          }
+          {!architect.currentUserHasRole('author') &&
+            <div className="right-buttons">
+              <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
+                <i className="fa fa-files-o"></i>
               </a>
-            }
-            {childrenIndex < childrenLength - 1 &&
-              <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
-                <i className="fa fa-arrow-down"></i>
+              <a href="" className="btn btn-link text-danger" onClick={this.onDeleteItem.bind(this)}>
+                <i className="fa fa-trash"></i>
               </a>
-            }
-          </div>
-          <div className="right-buttons">
-            <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-              <i className="fa fa-files-o"></i>
-            </a>
-            <a href="" className="btn btn-link text-danger" onClick={this.onDeleteItem.bind(this)}>
-              <i className="fa fa-trash"></i>
-            </a>
-          </div>
+            </div>
+          }
         </div>
 
         <div className="item-content" onClick={this.onEditItem.bind(this)}>

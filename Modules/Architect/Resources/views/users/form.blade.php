@@ -121,26 +121,35 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-md-12">
+            @if(Auth::user()->hasRole(["admin"]))
 
-                    @php
-                      $userRole = isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role');
-                    @endphp
-                    <label>Role</label>
-                    {!!
-                        Form::select(
-                            'role_id',
-                            App\Models\Role::pluck('display_name', 'id'),
-                            $userRole,
-                            [
-                                'class' => 'form-control',
-                                'placeholder'=> '---'
-                            ]
-                        )
-                    !!}
-                </div>
-            </div>
+              <div class="row">
+                  <div class="col-md-12">
+
+                      @php
+                        $userRole = isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role');
+                      @endphp
+
+                      <label>Role</label>
+                      {!!
+                          Form::select(
+                              'role_id',
+                              App\Models\Role::pluck('display_name', 'id'),
+                              $userRole,
+                              [
+                                  'class' => 'form-control',
+                                  'placeholder'=> '---'
+                              ]
+                          )
+                      !!}
+                  </div>
+              </div>
+
+            @else
+
+              <input type="hidden" name="role_id" value="{{isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role')}}" />
+
+            @endif
 
 
             <div class="row">

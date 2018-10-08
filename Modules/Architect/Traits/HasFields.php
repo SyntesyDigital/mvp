@@ -54,12 +54,14 @@ trait HasFields
 
     public function getFieldValue($identifier, $languageId = null)
     {
+        /*
         if(!isset($languageId)) {
             $field = $this->fields->where('name', $identifier)->first();
             return isset($field) ? $field->value : null;
         }
+        */
 
-        $languageId = $languageId ?: Language::getCurrentLanguage()->id;
+        $languageId = isset($languageId) ? $languageId : Language::getCurrentLanguage()->id;
 
         $field = $this->field($identifier, $languageId);
 

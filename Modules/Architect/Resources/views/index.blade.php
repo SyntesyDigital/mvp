@@ -13,33 +13,37 @@
       <div class="dashboard-items">
         <div class="row">
 
-            @include('architect::partials.dashboard-counter',[
-              "name" => "Continguts",
-              "value" => Modules\Architect\Entities\Content::all()->count(),
-              "icon" => "fa-file-o",
-              "route" => route('contents')
-            ])
+            @if(Auth::user()->hasRole(["admin"]))
 
-            @include('architect::partials.dashboard-counter',[
-              "name" => "Mitjans",
-              "value" => Modules\Architect\Entities\Media::all()->count(),
-              "icon" => "fa-picture-o",
-              "route" => route('medias.index')
-            ])
+              @include('architect::partials.dashboard-counter',[
+                "name" => "Continguts",
+                "value" => Modules\Architect\Entities\Content::all()->count(),
+                "icon" => "fa-file-o",
+                "route" => route('contents')
+              ])
 
-            @include('architect::partials.dashboard-counter',[
-              "name" => "Usuaris",
-              "value" => App\Models\User::all()->count(),
-              "icon" => "fa-users",
-              "route" => route('users')
-            ])
+              @include('architect::partials.dashboard-counter',[
+                "name" => "Mitjans",
+                "value" => Modules\Architect\Entities\Media::all()->count(),
+                "icon" => "fa-picture-o",
+                "route" => route('medias.index')
+              ])
 
-            @include('architect::partials.dashboard-counter',[
-              "name" => "Llenguatges",
-              "value" => Modules\Architect\Entities\Language::all()->count(),
-              "icon" => "fa-flag",
-              "route" => route('languages')
-            ])
+              @include('architect::partials.dashboard-counter',[
+                "name" => "Usuaris",
+                "value" => App\Models\User::all()->count(),
+                "icon" => "fa-users",
+                "route" => route('users')
+              ])
+
+              @include('architect::partials.dashboard-counter',[
+                "name" => "Llenguatges",
+                "value" => Modules\Architect\Entities\Language::all()->count(),
+                "icon" => "fa-flag",
+                "route" => route('languages')
+              ])
+
+            @endif
 
             <div class="col-xs-6">
               <!-- React Table.js -->

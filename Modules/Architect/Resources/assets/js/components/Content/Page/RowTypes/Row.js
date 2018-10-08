@@ -269,36 +269,42 @@ class Row extends Component {
       <div className="page-row filled">
         <div className="row-container">
           <div className="row-container-header">
-            <div className="left-buttons">
-              { childrenIndex > 0 &&
-                <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
-                  <i className="fa fa-arrow-up"></i>
+
+            {!architect.currentUserHasRole('author') &&
+              <div className="left-buttons">
+                { childrenIndex > 0 &&
+                  <a href="" className="btn btn-link" onClick={this.onPullUpItem.bind(this)}>
+                    <i className="fa fa-arrow-up"></i>
+                  </a>
+                }
+                {childrenIndex < childrenLength - 1 &&
+                  <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
+                    <i className="fa fa-arrow-down"></i>
+                  </a>
+                }
+                <a href="" className="btn btn-link" onClick={this.toggleColumns}>
+                  <i className="fa fa-columns"></i>
                 </a>
-              }
-              {childrenIndex < childrenLength - 1 &&
-                <a href="" className="btn btn-link" onClick={this.onPullDownItem.bind(this)}>
-                  <i className="fa fa-arrow-down"></i>
+              </div>
+            }
+
+            {!architect.currentUserHasRole('author') &&
+              <div className="right-buttons">
+                <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
+                  <i className="fa fa-pencil"></i>
                 </a>
-              }
-              <a href="" className="btn btn-link" onClick={this.toggleColumns}>
-                <i className="fa fa-columns"></i>
-              </a>
-            </div>
-            <div className="right-buttons">
-              <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
-                <i className="fa fa-pencil"></i>
-              </a>
-              {!isWrapper &&
-                <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-                  <i className="fa fa-files-o"></i>
-                </a>
-              }
-              {!isWrapper &&
-                <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>
-                  <i className="fa fa-trash"></i>
-                </a>
-              }
-            </div>
+                {!isWrapper &&
+                  <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
+                    <i className="fa fa-files-o"></i>
+                  </a>
+                }
+                {!isWrapper &&
+                  <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>
+                    <i className="fa fa-trash"></i>
+                  </a>
+                }
+              </div>
+            }
           </div>
 
           {this.renderColTypes()}

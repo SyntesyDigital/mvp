@@ -161,7 +161,9 @@ class ContentSidebar extends Component {
             { this.props.status == 1 &&
               <div className="publish-form sidebar-item">
                   <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
-                  <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
+                  {!architect.currentUserHasRole('author') &&
+                    <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
+                  }
                   <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
               </div>
             }
@@ -169,7 +171,9 @@ class ContentSidebar extends Component {
             {this.props.status == 0 &&
               <div className="publish-form sidebar-item">
                   <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
-                  <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
+                  {!architect.currentUserHasRole('author') &&
+                    <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
+                  }
                   <p className="field-help"></p>
               </div>
             }
@@ -183,14 +187,18 @@ class ContentSidebar extends Component {
           <div>
             <div className="form-group bmd-form-group sidebar-item">
                <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
-               <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
-                    <option value="">---</option>
-                   {
-                     this.props.pages && Object.keys(this.props.pages).map(function(id) {
-                         return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
-                     })
-                   }
-               </select>
+
+               {!architect.currentUserHasRole('author') &&
+                 <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
+                      <option value="">---</option>
+                     {
+                       this.props.pages && Object.keys(this.props.pages).map(function(id) {
+                           return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
+                       })
+                     }
+                 </select>
+               }
+               
 
             </div>
             <hr/>

@@ -17014,6 +17014,11 @@ line.links {
   overflow-y: scroll;
 }
 
+#modal-edit-item .settings-col.disabled {
+  opacity: 0.4;
+  pointer-events: none !important;
+}
+
 .translated-file {
   display: inline-block;
   padding: 10px;
