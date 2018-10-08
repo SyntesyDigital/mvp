@@ -76,7 +76,8 @@ class ContentSelectModal extends Component {
           return route+'?is_page=1&has_slug=1';
         }
         else if(field.type == "widget" || field.type == "contents"){
-          if(field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
+          if(field.settings !== undefined && field.settings != null
+            && field.settings.typologyAllowed !== undefined && field.settings.typologyAllowed != null){
             return route+'?typology_id='+field.settings.typologyAllowed;
           }
         }

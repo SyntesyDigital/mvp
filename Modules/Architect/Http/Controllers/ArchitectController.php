@@ -21,9 +21,4 @@ class ArchitectController extends Controller
     {
         return view('architect::settings');
     }
-
-    public function save(SaveContent $request)
-    {
-
-    }
 }

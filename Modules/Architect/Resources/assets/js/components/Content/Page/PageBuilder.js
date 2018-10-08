@@ -828,6 +828,9 @@ class PageBuilder extends Component {
 
   /******** Contents  ********/
 
+  /**
+  *   The last field is used to pass information from widgets.
+  */
   handleContentSelect(identifier,callback,field) {
 
     var listItemIndex = -1;
@@ -993,9 +996,11 @@ class PageBuilder extends Component {
             this.renderRows()
           }
 
-          <FirstEmptyRow
-            onAddRow={this.handleAddRow}
-          />
+          {!architect.currentUserHasRole('author') &&
+            <FirstEmptyRow
+              onAddRow={this.handleAddRow}
+            />
+          }
 
         </div>
       </div>

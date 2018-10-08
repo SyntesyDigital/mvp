@@ -23,8 +23,9 @@ class NewsBlog extends Component {
 
     render() {
 
+      //console.log("NewsBlog => ",this.props.field);
+
       const fields = this.props.field.fields;
-   //  console.log("News => ",this.props.field);
 
       const category = this.props.field.category != null ? this.props.field.category.name : null;
       const category_slug = this.props.field.category != null ? this.props.field.category.slug : null;
@@ -40,9 +41,6 @@ class NewsBlog extends Component {
         data = moment(data).format('L');
       }
 
-
-
-
       return (
         <div className="post">
           <p className="details">
@@ -50,7 +48,7 @@ class NewsBlog extends Component {
             {category != null && data != null ? '|' : ''}
             {category != null &&
               <a href={routes["categoryNews"].replace(":slug",category_slug)}>{category} </a>
-            }  
+            }
           </p>
           <p className="image">
             {fields.imatge &&
@@ -59,13 +57,13 @@ class NewsBlog extends Component {
             />
             }
           </p>
-          <h3><a href={'/'+slug }>{ title}</a></h3>
+          <h3><a href={this.props.field.url}>{ title}</a></h3>
           <p>{nom}</p>
-          <p>{carrec}</p>   
+          <p>{carrec}</p>
           <p>
             <span dangerouslySetInnerHTML={{__html: descripcio }} / >
           </p>
-          
+
         </div>
       );
 

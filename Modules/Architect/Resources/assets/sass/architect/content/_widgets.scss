@@ -96,5 +96,11 @@
   .settings-col{
     height: calc(100vh - 250px);
     overflow-y: scroll;
+
+    &.disabled {
+      opacity:0.4;
+      pointer-events: none !important;
+    }
+
   }
 }

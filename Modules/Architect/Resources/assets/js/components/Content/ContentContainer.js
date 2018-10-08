@@ -384,6 +384,11 @@ class ContentContainer extends Component {
                  if(response.data.success) {
                      toastr.success('ok');
                  }
+
+                 _this.setState({
+                     status : newStatus
+                 });
+
              })
              .catch((error) => {
                  toastr.error('Error !');
@@ -396,10 +401,6 @@ class ContentContainer extends Component {
 
         const newStatus = 1;
 
-        this.setState({
-            status : newStatus
-        });
-
         this.publishToogle(newStatus);
     }
 
@@ -408,10 +409,6 @@ class ContentContainer extends Component {
         e.preventDefault();
 
         const newStatus = 0;
-
-        this.setState({
-            status : newStatus
-        });
 
         this.publishToogle(newStatus);
     }

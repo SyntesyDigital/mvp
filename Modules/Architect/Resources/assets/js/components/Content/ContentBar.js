@@ -140,27 +140,30 @@ class ContentBar extends Component {
               <div className="float-buttons pull-right">
 
 
-                <div className="actions-dropdown">
-                  <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                    Accions
-                    <b className="caret"></b>
-                    <div className="ripple-container"></div>
-                  </a>
-                    { this.props.saved && this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
-                      this.renderFullMenu()
-                    }
+                {!architect.currentUserHasRole('author') &&
 
-                    { !this.props.saved && !architect.currentUserHasRole('author') &&
-                      this.renderUnsavedMenu()
-                    }
+                  <div className="actions-dropdown">
+                    <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
+                      Accions
+                      <b className="caret"></b>
+                      <div className="ripple-container"></div>
+                    </a>
+                      { this.props.saved && this.props.content !== undefined && this.props.content != null && !architect.currentUserHasRole('author') &&
+                        this.renderFullMenu()
+                      }
+
+                      { !this.props.saved  &&
+                        this.renderUnsavedMenu()
+                      }
                   </div>
-
-                {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
-                  this.props.hasPreview &&
-                  <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
                 }
-                <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
-              </div>
+
+              {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
+                this.props.hasPreview &&
+                <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
+              }
+              <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+            </div>
 
             </div>
           </div>

@@ -62,6 +62,33 @@ class CommonWidget extends Component
     this.props.onWidgetChange(stateField);
   }
 
+  handleContentSelect(identifier) {
+
+    const stateFields = this.state.field.fields;
+
+    console.log("CommonWidget :: handleContentSelect ::",identifier,stateFields[identifier]);
+
+    var field = null;
+    for(var key in stateFields){
+      if(stateFields[key].identifier == identifier){
+        field = stateFields[key];
+        break;
+      }
+    }
+
+    if(field == null){
+      console.error("CommonWidget :: handleContentSelect : field = null");
+      return;
+    }
+
+    field.settings = this.state.field.settings;
+
+    console.log("CommonWidget :: handleContentSelect :: field => ",field);
+
+    this.props.onContentSelect(identifier,null,field);
+
+  }
+
   renderFields() {
     var fields = [];
     var _this = this;
@@ -174,7 +201,7 @@ class CommonWidget extends Component
                     translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onContentSelect={_this.props.onContentSelect}
+                    onContentSelect={_this.handleContentSelect.bind(_this)}
                 />
                 );
             break;

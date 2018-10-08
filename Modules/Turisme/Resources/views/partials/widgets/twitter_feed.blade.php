@@ -2,7 +2,9 @@
 
   <a class="twitter-timeline"
     href="https://twitter.com/BarcelonaTurism"
-    data-tweet-limit="1">
+    data-tweet-limit="1"
+    data-chrome="nofooter"
+    >
     Tweets by @BarcelonaTurism
   </a>
 

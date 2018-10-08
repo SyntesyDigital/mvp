@@ -20,7 +20,7 @@
                         </a>
                       </li>
 
-                        @if(Auth::user()->hasRole(["admin", "editor"]))
+                        @if(Auth::user()->hasRole(["admin"]))
                       <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">
                           Tipologies

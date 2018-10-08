@@ -119,30 +119,37 @@ class Col extends Component {
       <div className={this.props.colClass}>
         <div className="row-container-body-content">
 
-          <div className="row-container-body-top">
+          {!architect.currentUserHasRole('author') &&
+            <div className="row-container-body-top">
 
-            {childrenLength > 0 &&
-              <a href="" className="btn btn-link" onClick={this.onSelectItemBefore.bind(this)}>
-                <i className="fa fa-plus"></i>
+              {childrenLength > 0 &&
+                <a href="" className="btn btn-link" onClick={this.onSelectItemBefore.bind(this)}>
+                  <i className="fa fa-plus"></i>
+                </a>
+              }
+              &nbsp;&nbsp;
+              <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
+                <i className="fa fa-pencil"></i>
               </a>
-            }
-            &nbsp;&nbsp;
-            <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
-              <i className="fa fa-pencil"></i>
-            </a>
-          </div>
+            </div>
+          }
+          {architect.currentUserHasRole('author') &&
+            <div className="row-container-body-top"></div>
+          }
 
 
             {this.renderChildren()}
 
 
-          <div className="row-container-body-bottom">
-            {childrenLength > 0 &&
-              <a href="" className="btn btn-link" onClick={this.onSelectItemAfter.bind(this)}>
-                <i className="fa fa-plus"></i>
-              </a>
-            }
-          </div>
+          {!architect.currentUserHasRole('author') &&
+            <div className="row-container-body-bottom">
+              {childrenLength > 0 &&
+                <a href="" className="btn btn-link" onClick={this.onSelectItemAfter.bind(this)}>
+                  <i className="fa fa-plus"></i>
+                </a>
+              }
+            </div>
+          }
 
         </div>
       </div>

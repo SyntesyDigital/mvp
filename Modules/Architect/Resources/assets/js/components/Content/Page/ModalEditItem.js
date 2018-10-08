@@ -1069,7 +1069,7 @@ class ModalEditItem extends Component {
                         this.renderField()}
 
                     </div>
-                    <div className="col-xs-4 settings-col">
+                    <div className={"col-xs-4 settings-col "+(architect.currentUserHasRole('author') ? "disabled":"")}>
                       {this.renderSettings()}
                     </div>
                   </div>
