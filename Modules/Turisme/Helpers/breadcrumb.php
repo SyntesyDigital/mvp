@@ -3,7 +3,7 @@
 if (!function_exists('breadcrumb')) {
     function breadcrumb($content)
     {
-        $nodes = Modules\Architect\Entities\Content::with('fields')->ancestorsOf($content->id);
+        $nodes = Modules\Architect\Entities\Content::with('fields')->defaultOrder()->ancestorsAndSelf($content->id);
         $breadcrumb = [];
         $prefix = '';
 
@@ -15,13 +15,6 @@ if (!function_exists('breadcrumb')) {
                 'url' => $prefix
             ]);
         }
-
-        // Add current content
-        $prefix = $prefix . '/' . $content->getFieldValue('slug');
-        $breadcrumb[] = [
-            'label' => $content->title,
-            'url' => $prefix
-        ];
 
         // Build HTML
         $html = '';
