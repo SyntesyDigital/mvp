@@ -55,6 +55,10 @@ class SlugField extends Component
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
 
+          if(!error && this.props.errors && this.props.errors.length > 0) {
+              error = true;
+          }
+
           //console.log("source field )=> ",this.state.sourceField);
 
           var sourceValue = this.state.sourceField != null && this.state.sourceField.value !== undefined &&

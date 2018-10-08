@@ -341,6 +341,8 @@ class PageContainer extends Component {
      var _this = this;
      var stateErrors = this.state.errors;
 
+
+
      if(errors) {
 
          var fields = errors.fields ? errors.fields : null;
@@ -358,6 +360,8 @@ class PageContainer extends Component {
          }
 
      }
+
+      console.log('ERROR ====>', stateErrors);
 
      this.setState({
        saving : false,
@@ -560,6 +564,7 @@ class PageContainer extends Component {
                 title={this.state.title}
                 slug={this.state.slug}
                 saved={this.props.saved}
+                errors={this.state.errors}
               />
             {/*  } */}
             </DragDropContextProvider>

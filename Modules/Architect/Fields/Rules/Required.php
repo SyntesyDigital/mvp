@@ -12,6 +12,10 @@ class Required
         $errors = [];
 
         if($param) {
+            if(empty($values)) {
+                $errors[] = $this->message();
+            }
+
             foreach($values as $k => $value) {
                 //FIXME if(!trim(strip_tags($value))) {
                 if(!trim($value)) {

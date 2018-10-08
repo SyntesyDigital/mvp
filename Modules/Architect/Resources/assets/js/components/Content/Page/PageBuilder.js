@@ -982,6 +982,7 @@ class PageBuilder extends Component {
             field={this.props.title}
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
+            errors={this.state.errors.title}
           />
 
           <SlugField
@@ -990,6 +991,7 @@ class PageBuilder extends Component {
             blocked={this.props.saved}
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
+            errors={this.state.errors.slug}
           />
 
           {this.props.layout != null &&
