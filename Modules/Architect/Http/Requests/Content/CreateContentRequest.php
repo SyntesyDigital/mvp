@@ -5,6 +5,7 @@ namespace Modules\Architect\Http\Requests\Content;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Modules\Architect\Rules\ContentField;
+use Modules\Architect\Rules\PageField;
 
 class CreateContentRequest extends FormRequest
 {
@@ -19,6 +20,7 @@ class CreateContentRequest extends FormRequest
             return [
                 'status' => 'required',
                 'author_id' => 'required',
+                'fields' => ['required', new PageField]
             ];
         }
 

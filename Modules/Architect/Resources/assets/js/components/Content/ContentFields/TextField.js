@@ -25,11 +25,17 @@ class TextField extends Component
   renderInputs()
   {
 
+      console.log("ERRROR :::: ", this.props.errors);
+
     var inputs = [];
     for(var key in this.props.translations){
         //if(this.props.translations[key]){
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
           var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
+
+          if(!error && this.props.errors && this.props.errors.length > 0) {
+              error = true;
+          }
 
           inputs.push(
               <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
