@@ -39,7 +39,7 @@ trait HasUrl
     {
         // FIXME : cache-it with a key that use updated_at, like md5([entity]_[id]_fullslug_[updated_at])
         // WARNING : If we use cache we need to think what happen when slug's children change.
-        $nodes = self::with('fields')->ancestorsOf($this->id);
+        $nodes = self::with('fields')->defaultOrder()->ancestorsAndSelf($this->id);
         $arr = [];
 
         foreach ($nodes as $node) {
@@ -50,7 +50,7 @@ trait HasUrl
             }
         }
 
-        $arr[] = $this->getFieldValue('slug', $languageId);
+        //$arr[] = $this->getFieldValue('slug', $languageId);
 
         return sizeof($arr) ? implode('/', $arr) : false;
     }
