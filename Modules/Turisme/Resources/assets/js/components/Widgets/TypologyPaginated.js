@@ -44,8 +44,7 @@ export default class TypologyPaginated extends Component {
           .then(function (response) {
 
               if(response.status == 200
-                  && response.data.data !== undefined
-                  && response.data.data.length > 0)
+                  && response.data.data !== undefined)
               {
                   var old_items = self.state.items;
                   if(response.data.meta.current_page != 1){

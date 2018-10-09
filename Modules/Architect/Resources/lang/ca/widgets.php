@@ -37,5 +37,6 @@ return [
     'AGENCIES' => 'Agencias de Viajes',
     'CONTACT_FORM_PRESS' => 'Formulari Prensa',
     'SEPARATOR' => 'Separador',
-    'SEARCH' => 'Buscador'
+    'SEARCH' => 'Buscador',
+    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Rotatori tipologia horizontal'
 ];

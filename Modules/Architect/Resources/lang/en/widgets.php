@@ -38,5 +38,6 @@ return [
     'CONTACT_FORM_PRESS' => 'Formulario Prensa',
     'BLOG' => 'Blog',
     'SEPARATOR' => 'Separador',
-    'SEARCH' => 'Search'
+    'SEARCH' => 'Search',
+    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Rotatori tipologia horizontal'
 ];

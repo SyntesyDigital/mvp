@@ -2,6 +2,8 @@
 
 namespace Modules\Architect\Fields\Rules;
 
+use Modules\Architect\Entities\Language;
+
 class Required
 {
     public $name = "required";
@@ -16,12 +18,30 @@ class Required
                 $errors[] = $this->message();
             }
 
+            $language = Language::getDefault();
+            $translations = request('translations');
+
+            if((!isset($values[$language->iso])) || trim($values[$language->iso]) == ""){
+              $errors[$language->iso] = $this->message();
+            }
+
+            if($translations) {
+              foreach($translations as $iso => $bool){
+                if($bool){
+                  if((!isset($values[$iso])) || trim($values[$iso]) == ""){
+                    $errors[$iso] = $this->message();
+                  }
+                }
+              }
+            }
+
+            /*
             foreach($values as $k => $value) {
-                //FIXME if(!trim(strip_tags($value))) {
                 if(!trim($value)) {
                     $errors[$k] = $this->message();
                 }
             }
+            */
         }
 
         return !empty($errors) ? $errors : null;

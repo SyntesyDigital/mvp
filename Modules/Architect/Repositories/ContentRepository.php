@@ -135,7 +135,7 @@ class ContentRepository extends BaseRepository
                 $buttons = '';
 
                 if($item->page) {
-                  $buttons = '<a title="Previsualitzar" href="/'.App::getLocale().'/preview/'.$item->id.'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
+                  $buttons = '<a title="Previsualitzar" href="/es/preview/'.$item->id.'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
                 }
 
                 return $buttons.'

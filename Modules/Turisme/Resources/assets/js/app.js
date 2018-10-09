@@ -33,3 +33,4 @@ require('./components/Widgets/MenuBanner');
 require('./components/Widgets/Blog');
 require('./components/Widgets/Search');
 require('./components/Widgets/RelatedNews');
+require('./components/Widgets/TypologyHorizontalCarousel');
