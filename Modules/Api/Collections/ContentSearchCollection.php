@@ -27,15 +27,18 @@ class ContentSearchCollection extends ResourceCollection
             'data' => $this->collection->map(function ($content) use ($request, $language, $hits, $self) {
 
                 $hit = null;
+                $score = null;
                 foreach ($hits as $h) {
                     if ($h['_id'] == $content->id) {
+                        $score = round($h['_score']);
                         $hit = $h;
                     }
                 }
 
                 return (new ContentSearchTransformer($content))
                     ->toArray($request, $language, [
-                        'description' => $self->buildDescription($hit, $content, $language)
+                        'description' => $self->buildDescription($hit, $content, $language),
+                        'score' => $score
                     ]);
 
             }),
