@@ -17095,24 +17095,40 @@ ol.sortable-list li {
   display: block;
   margin: 5px;
   padding: 0px 10px 0 10px;
-  min-height: 50px;
-}
+  min-height: 30px;
+  /*
+    .item-bar {
+      color: $text-color;
+      border:1px solid #ccc;
+      background-color: #fafafa;
+      @include round(6px);
+      min-height: 50px;
+      width:50vw;
+      padding-left: 40px;
+      /*
+      &:before{
+        content: "\25BE";
+        margin-right: 0px;
+        position: absolute;
+        top: -2px;
+        left: 16px;
+        font-size: 18px;
+        color: #a0a0a0;
+      }
 
-ol.sortable-list li .item-bar {
-  color: #455660;
-  border: 1px solid #ccc;
-  background-color: #fafafa;
-  border-radius: 6px;
-  min-height: 50px;
-  width: 50vw;
-  padding-left: 20px;
+      &.collapsed {
+        &:before{
+          content: "\25B8";
+        }
+      }
+
+    }
+    */
 }
 
 ol.sortable-list li.placeholder {
   border: 1px dashed #4a9fea;
   background-color: transparent;
-  width: 50vw;
-  margin-left: 15px;
 }
 
 ol.sortable-list li.drag {

@@ -48,7 +48,7 @@ class PageContainer extends Component {
            });
            translations[language.iso] = exist;
         } else {
-            translations[language.iso] = true;
+            translations[language.iso] = false;
         }
     });
     translations[DEFAULT_LOCALE] = true;

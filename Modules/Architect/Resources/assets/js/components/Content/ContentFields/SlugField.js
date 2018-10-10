@@ -61,9 +61,18 @@ class SlugField extends Component
 
           //console.log("source field )=> ",this.state.sourceField);
 
-          var sourceValue = this.state.sourceField != null && this.state.sourceField.value !== undefined &&
-            this.state.sourceField.value != null && this.state.sourceField.value[key] !== undefined ?
-            this.state.sourceField.value[key] : '';
+          var sourceValue = '';
+
+          if(this.state.sourceField != null && this.state.sourceField.value !== undefined &&
+            this.state.sourceField.value != null ){
+
+            if(this.state.sourceField.value[key] !== undefined && this.state.sourceField.value[key] != ''){
+              sourceValue = this.state.sourceField.value[key];
+            }
+            else if(this.state.sourceField.value[DEFAULT_LOCALE] !== undefined){
+              sourceValue = this.state.sourceField.value[DEFAULT_LOCALE]
+            }
+          }
 
           //console.log("source value )=> ",sourceValue);
 
