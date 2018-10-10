@@ -16,9 +16,9 @@ class Unique
 
         if($param) {
             foreach($values as $k => $value) {
-                $isUpdate = request()->get('content_id') ? true : false;
+                $isUpdate = request('content_id') ? true : false;
                 if($isUpdate) {
-                    if(Content::whereField($identifier, $value)->where('id', '<>', request()->get('content_id'))->count() > 0) {
+                    if(Content::whereField($identifier, $value)->where('id', '<>', request('content_id'))->count() > 0) {
                         $errors[$k] = $this->message();
                     }
                 } else {

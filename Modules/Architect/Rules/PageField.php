@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 use Modules\Architect\Fields\FieldValidator;
 
 use Modules\Architect\Fields\Rules\Required;
+use Modules\Architect\Fields\Rules\Unique;
 
 class PageField implements Rule
 {
@@ -38,6 +39,17 @@ class PageField implements Rule
 
             if($error) {
                 $this->errors[$identifier] = $error;
+            }
+
+            switch($identifier) {
+                case "slug":
+                    $rule = new Unique();
+                    $error = $rule->validate($value, true, $identifier);
+
+                    if($error) {
+                        $this->errors[$identifier] = $error;
+                    }
+                break;
             }
         }
 
