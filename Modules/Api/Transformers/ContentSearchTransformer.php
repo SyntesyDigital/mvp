@@ -29,6 +29,7 @@ class ContentSearchTransformer extends Resource
         return array_merge([
             'id' => $this->resource->id,
             'title' => $this->resource->getTitleAttribute($language),
+            'score' => null,
             'description' => '',
             'url' => $this->resource->getUrlAttribute($language),
         ], $data);
