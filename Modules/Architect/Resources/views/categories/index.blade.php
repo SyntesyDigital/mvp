@@ -30,7 +30,6 @@
 @push('plugins')
     {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
     {{ Html::script('/modules/architect/js/architect.js') }}
-    {{ Html::script('/modules/architect/js/libs/jquery.sortable.min.js') }}
 @endpush
 
 @push('javascripts')
@@ -63,8 +62,6 @@
 
   		$(classSelector).append(''+
   			'<li class="item drag" data-id="'+category.id+'" data-class="category">'+
-            category.name+
-            /*
             '<div class="item-bar">'+
     	  			//'<i class="fa fa-bars"></i> &nbsp; '+category.name+
               category.name+
@@ -73,7 +70,6 @@
     		  			'<a href="#" data-ajax="'+routes.deleteItem.replace(':id',category.id)+'" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
     		  		'</div>'+
             '</div>'+
-            */
   	  			'<ol class="category-container-'+category.id+'">'+
   			  	'</ol>'+
   	  		'</li>'
@@ -94,7 +90,6 @@
   			appendCategory(item);
   		}
 
-      /*
       var group = $("ol.sortable-list").sortable({
         onDrop: function ($item, container, _super) {
 
@@ -105,9 +100,6 @@
             updateOrder();
   			}
   		});
-      */
-
-      var group = $("ol.sortable-list").sortable({});
 
       var updateOrder = function() {
 
@@ -144,7 +136,6 @@
 
     });
 
-    /*
     $(document).on('click','.item-bar',function(e){
 
       var item = $(e.target).closest('.item-bar');
@@ -162,7 +153,6 @@
         item.addClass('collapsed');
       }
     });
-    */
 
     $(document).on('click','.btn-delete',function(e){
 

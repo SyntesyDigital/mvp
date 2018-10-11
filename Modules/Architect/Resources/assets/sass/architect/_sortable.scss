@@ -15,9 +15,8 @@ ol.sortable-list {
     margin: 5px;
     padding: 0px 10px 0 10px;
 
-    min-height: 30px;
+    min-height: 50px;
 
-    /*
     .item-bar {
       color: $text-color;
       border:1px solid #ccc;
@@ -26,7 +25,7 @@ ol.sortable-list {
       min-height: 50px;
       width:50vw;
       padding-left: 40px;
-      /*
+
       &:before{
         content: "\25BE";
         margin-right: 0px;
@@ -44,13 +43,12 @@ ol.sortable-list {
       }
 
     }
-    */
 
     &.placeholder {
       border:1px dashed $brand-primary;
       background-color:transparent;
-      //width:50vw;
-      //margin-left:15px;
+      width:50vw;
+      margin-left:15px;
     }
 
     &.drag{

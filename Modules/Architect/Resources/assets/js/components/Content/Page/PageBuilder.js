@@ -21,7 +21,7 @@ class PageBuilder extends Component {
 
     this.state = {
         fields : [],
-        errors : this.props.errors,
+        errors : props.errors,
 
         /*
         layout : this.props.layout ? this.props.layout : [
@@ -52,6 +52,7 @@ class PageBuilder extends Component {
         contentField : null,
         imageCallback : null,
         contentCallback : null,
+
     };
 
     this.handleAddRow = this.handleAddRow.bind(this);
@@ -84,7 +85,6 @@ class PageBuilder extends Component {
     if(nextProps.layout != null){
 
       //a change has been done to layout
-
       if(!this.state.displayEditItemModal){
         //if the modal is not displaying, don't close the modal yet
 
@@ -99,14 +99,17 @@ class PageBuilder extends Component {
           editItemData : null,
           addPosition : null,
           contentCallback : null,
+          errors : nextProps.errors
         });
+
+        return;
       }
     }
+
+    this.setState({
+      errors : nextProps.errors
+    });
   }
-
-
-
-
 
   /******** Modal Items  ********/
 
@@ -982,7 +985,7 @@ class PageBuilder extends Component {
             field={this.props.title}
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
-            errors={this.state.errors.title}
+            errors={this.props.errors.title}
           />
 
           <SlugField
@@ -991,7 +994,7 @@ class PageBuilder extends Component {
             blocked={this.props.saved}
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
-            errors={this.state.errors.slug}
+            errors={this.props.errors.slug}
           />
 
           {this.props.layout != null &&

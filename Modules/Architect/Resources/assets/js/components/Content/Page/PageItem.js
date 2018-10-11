@@ -160,6 +160,31 @@ class PageItem extends Component {
 
   }
 
+  renderImageTextLinkPreview() {
+    var value = null;
+
+    console.log("PageItem :: renderImageTextLinkPreview => ",this.props.data.field);
+
+    if(this.props.data.field.fields[1] !== undefined &&
+      this.props.data.field.fields[1].value !== undefined &&
+      this.props.data.field.fields[1].value != null &&
+      this.props.data.field.fields[1].value.title[DEFAULT_LOCALE] !== undefined ){
+
+      value = this.props.data.field.fields[1].value.title[DEFAULT_LOCALE];
+    }
+
+    if(value != null) {
+      return (
+        <a href="" className="text-preview">
+          <p>{value}</p>
+        </a>
+      );
+    }
+    else {
+      return this.renderDefaultPreview();
+    }
+  }
+
   renderDefaultPreview() {
     return (
       <a href="" className="btn btn-link">
@@ -180,6 +205,11 @@ class PageItem extends Component {
         return this.renderImagePreview();
       case FIELDS.LINK.type:
         return this.renderLinkPreview();
+
+      /*
+      case WIDGETS.IMAGE_TEXT_LINK.type:
+        return this.renderImageTextLinkPreview();
+      */
 
       default :
         return this.renderDefaultPreview();

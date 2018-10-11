@@ -6,6 +6,23 @@
 
 @section('content')
 
+@if(isset($category))
+<div class="single">
+  <div class="grey no-margin">
+       <div class="container">
+        <div class="row">
+          <div class="detalls-single">
+      		  <div class="col-md-10  col-sm-9 col-xs-12">
+      		  	<div class="ariadna">
+                {!! breadcrumb_category($category) !!}
+                </div>
+      		  </div>
+    	   </div>
+  		 </div>
+  	</div>
+  </div>
+</div>
+@endif
 
 <!-- ARTICLE -->
 <article class="content">

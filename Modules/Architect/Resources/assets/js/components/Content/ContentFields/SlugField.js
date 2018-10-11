@@ -10,7 +10,8 @@ class SlugField extends Component
     super(props);
 
     this.state = {
-      sourceField : props.sourceField
+      sourceField : props.sourceField,
+      errors : props.errors
     };
 
     //console.log("SlugField :: this.props.sourceField => ",this.props.sourceField);
@@ -25,7 +26,8 @@ class SlugField extends Component
     //this.props.sourceField = nextProps.sourceField;
 
     this.setState({
-      sourceField : nextProps.sourceField
+      sourceField : nextProps.sourceField,
+      errors : nextProps.errors
     });
 
   }
@@ -53,13 +55,13 @@ class SlugField extends Component
     for(var key in this.props.translations){
         //if(this.props.translations[key]){
           var value = this.props.field.value && this.props.field.value[key] ? this.props.field.value[key] : '';
-          var error = this.props.errors && this.props.errors[key] ? this.props.errors[key] : null;
+          var error = this.state.errors && this.state.errors[key] ? this.state.errors[key] : null;
 
-          if(!error && this.props.errors && this.props.errors.length > 0) {
+          if(!error && this.state.errors && this.state.errors.length > 0) {
               error = true;
           }
 
-          //console.log("source field )=> ",this.state.sourceField);
+          console.log("SlugField :: error ", error);
 
           var sourceValue = '';
 
@@ -77,7 +79,7 @@ class SlugField extends Component
           //console.log("source value )=> ",sourceValue);
 
           inputs.push(
-              <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>
+              <div className={'form-group bmd-form-group ' + (error != null ? 'has-error' : '')} key={key}>
                   <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{this.props.field.name} - {key}</label>
                   {/*
                   <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />

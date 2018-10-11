@@ -9,6 +9,9 @@ use Illuminate\Routing\Controller;
 use Modules\Turisme\Adapters\PageBuilderAdapter;
 use Modules\Turisme\Adapters\FieldsAdapter;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\Url;
+
+use App;
 
 class ContentController extends Controller
 {
@@ -64,9 +67,15 @@ class ContentController extends Controller
 
     public function show(Request $request, $slug)
     {
-      $slug = $request->segment(count($request->segments()));
+      //$slug = $request->segment(count($request->segments()));
+      $slug = '/'.App::getLocale().'/'.$slug;
 
-      $content = Content::whereField('slug', $slug)->first();
+      $url = Url::where('url', $slug)->first();
+      if($url == null){
+        abort(404);
+      }
+
+      $content = Content::find($url->entity_id);
 
       if($content == null){
         abort(404);

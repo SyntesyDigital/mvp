@@ -12,7 +12,7 @@ class AgencyCategory extends Model
     protected $connection= 'turisme_external';
 
     protected $fillable = [
-        'name',
+        'category',
         'description_ca',
         'description_es',
         'description_en',

@@ -63,15 +63,13 @@ class ModalEditItem extends Component {
         displayListItemModal : false,
         listItemInfo : null,
         programs : [],
-        axes : []
+        axes : [],
+        categories : [{
+          value:'',
+          name:'----'
+        }],
+        originalCategories : []
     };
-
-    this.categories = [
-      {
-        value:'',
-        name:'----'
-      }
-    ];
 
     this.TYPOLOGIES = [{
           id:'',
@@ -174,10 +172,22 @@ class ModalEditItem extends Component {
               && response.data.data !== undefined
               && response.data.data[0].descendants.length > 0)
           {
-            var categories = response.data.data[0].descendants
-            self.push_categories(response.data.data, 0,self.categories);
-          }
 
+            console.log("original categories => ",response.data.data);
+
+            var categories = [{
+              value:'',
+              name:'----'
+            }];
+
+            self.push_categories(response.data.data, 0,categories);
+
+            self.setState({
+              originalCategories : response.data.data,
+              categories : categories
+            });
+
+          }
 
       }).catch(function (error) {
          console.log(error);
@@ -243,17 +253,40 @@ class ModalEditItem extends Component {
   componentWillReceiveProps(nextProps)
   {
     var field = null;
+    var categories = null;
 
     if(nextProps.display){
         this.modalOpen();
         field = this.processProps(nextProps);
+
+        //update categories
+        console.log("componentWillReceiveProps :: field => ",field);
+
+        if(field.settings !== undefined && field.settings.typology !== undefined
+          && field.settings.typology != null){
+
+          console.log("Typology vale => ",field.settings.typology);
+          categories = this.updateCategoriesFromTypology(field.settings.typology);
+        }
+        else {
+          categories = this.updateCategoriesFromTypology(null);
+        }
+
     } else {
         this.modalClose();
     }
 
-    this.setState({
-      field : field
-    });
+    if(categories != null){
+      this.setState({
+        field : field,
+        categories : categories
+      });
+    }
+    else {
+      this.setState({
+        field : field
+      });
+    }
   }
 
   onModalClose(e){
@@ -769,17 +802,65 @@ class ModalEditItem extends Component {
 
   /*************** SETTINGS **********************/
 
+  updateCategoriesFromTypology(typologyId) {
+
+    const {originalCategories,categories} = this.state;
+
+    var resultCategories = [{
+      value:'',
+      name:'----'
+    }];
+
+    if(typologyId === undefined || typologyId == null){
+      this.push_categories(originalCategories, 0,resultCategories);
+      //console.log("updateCategoriesFromTypology :: resultCategories : ",resultCategories);
+      return resultCategories;
+    }
+
+    //console.log("updateCategoriesFromTypology :: original : ",originalCategories);
+
+    //FIXME this relation should come from the BBDD
+    var correspondance = {
+      "2" : 0,
+      "3" : 1,
+      "8" : 2,
+      "4" : 3,
+      //"11" : 4
+    };
+
+    var index = correspondance[typologyId] !== undefined ? correspondance[typologyId] : null ;
+
+    if(index != null){
+      this.push_categories(originalCategories[index].descendants, 0,resultCategories);
+      //console.log("updateCategoriesFromTypology :: resultCategories : ",resultCategories);
+    }
+
+    return resultCategories;
+
+  }
+
   handleFieldSettingsChange(field) {
 
-      //console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+      console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
 
       const stateField = this.state.field;
 
       stateField[field.source][field.name] = field.value;
 
-      this.setState({
-          field : stateField
-      });
+      if(field.name == "typology"){
+        this.setState({
+            field : stateField,
+            categories : this.updateCategoriesFromTypology(field.value)
+        });
+
+      }
+      else {
+        this.setState({
+            field : stateField
+        });
+      }
+
+
   }
 
   getCropsformats() {
@@ -923,7 +1004,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Categoria"
-          options={this.categories}
+          options={this.state.categories}
         />
 
         <InputSettingsField

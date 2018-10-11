@@ -330,7 +330,8 @@ class PageContainer extends Component {
 
       //si no esta gurdada todavia ponemos que sigue guardandose hasta la recarga
       this.setState({
-        saving : !this.props.saved ? true : false
+        saving : !this.props.saved ? true : false,
+        errors : {}
       });
   }
 
@@ -339,9 +340,7 @@ class PageContainer extends Component {
  {
      var errors = response.errors ? response.errors : null;
      var _this = this;
-     var stateErrors = this.state.errors;
-
-
+     var stateErrors = {};
 
      if(errors) {
 

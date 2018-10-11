@@ -195,14 +195,26 @@ class ContentSidebar extends Component {
             <div className="form-group bmd-form-group sidebar-item">
                <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
 
-               <select disabled={architect.currentUserHasRole('author') ? "true" : "false"} className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
-                    <option value="">---</option>
-                   {
-                     this.props.pages && Object.keys(this.props.pages).map(function(id) {
-                         return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
-                     })
-                   }
-               </select>
+               {!architect.currentUserHasRole('author') &&
+                 <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
+                      <option value="">---</option>
+                     {
+                       this.props.pages && Object.keys(this.props.pages).map(function(id) {
+                           return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
+                       })
+                     }
+                 </select>
+               }
+               {architect.currentUserHasRole('author') &&
+                 <select disabled="true" className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
+                      <option value="">---</option>
+                     {
+                       this.props.pages && Object.keys(this.props.pages).map(function(id) {
+                           return <option value={self.props.pages[id].id} key={self.props.pages[id].id} selected={self.props.content && self.props.content.parent_id == self.props.pages[id].id ? "selected" : ""}>{self.props.pages[id].title}</option>
+                       })
+                     }
+                 </select>
+               }
 
             </div>
             <hr/>
@@ -246,7 +258,7 @@ class ContentSidebar extends Component {
 
         <div className={'form-group bmd-form-group sidebar-item ' + ( this.props.errors['author_id'] ? 'has-error' : '')}>
            <label htmlFor="author" className="bmd-label-floating">Autor</label>
-           <select className="form-control" disabled={architect.currentUserHasRole('author') ? 'true' : 'false'} id="author" name="author" value={this.props.author} onChange={this.handleChange} placeholder="---">
+           <select className="form-control" disabled={(architect.currentUserHasRole('author') ? 'true' : 'false')} id="author" name="author" value={this.props.author} onChange={this.handleChange} placeholder="---">
            <option value=""></option>
            {
              this.props.authors.map(function(author, i) {
