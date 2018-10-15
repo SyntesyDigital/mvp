@@ -26,7 +26,7 @@ export default class Search extends Component {
             size:field.settings.itemsPerPage !== null ?  field.settings.itemsPerPage : 5,
             items : null,
             currPage : null,
-            total : null,
+            total : 0,
         };
     }
 
@@ -94,15 +94,14 @@ export default class Search extends Component {
 
       for(var i = 0; i< items.length; i++){
 
-        var reg = items[i].title;
-        var title = items[i].description;
-        var description = '';
+        var reg = '';
+        var title = items[i].title;
+        var description = items[i].description;
         for(var j=0;j<text_array.length; j ++){
           reg = new RegExp(text_array[j], 'gi');
           title = title.replace(reg, function(str) {return '<b>'+str+'</b>'});
           description = description.replace(reg, function(str) {return '<b>'+str+'</b>'});
         }
-
 
         result.push(
           <li key={i}>
