@@ -256,7 +256,7 @@ export default class SiteMapGraph extends Component {
           .attr("dx", 0)
           .attr("dy", 20)
           .attr("text-anchor","middle")
-          .text(function(d) { return d.url })
+          .text(function(d) { return d.title })
           .style("fill", "#000");
 
       this.node
