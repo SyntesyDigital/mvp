@@ -137,18 +137,19 @@ class ExternalApiDatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         //Create AAVV
-        for($i = 0; $i < 5; $i++) {
+        $count = 1;
+        for($i = 1; $i < 5; $i++) {
           $agencyCategory = AgencyCategory::create([
-            'name' => 'Category '.$i,
             'description_ca' => 'Description description_ca '.$i,
             'description_es' => 'Description description_es '.$i,
             'description_en'=> 'Description description_en '.$i,
           ]);
+          $agencyCategory->id = intval($i);
+          $agencyCategory->save();
 
-          for($j = 0; $j < 3; $j++) {
+          for($j = 1; $j < 4; $j++) {
             $agency = Agency::create([
-              'code' => $i.$j,
-              'name' => 'Agency '.$i.'-'.$j,
+              'name' => 'Agency '.$count,
               'address' => "sdfsdf",
               'postcode' => "sdfsdf",
               'city' => 'safd',
@@ -156,6 +157,9 @@ class ExternalApiDatabaseSeeder extends Seeder
               'phone_number' => '234234',
               'email' => "sdfsd@sdf.com"
             ]);
+            $agency->id = intval($count);
+            $agency->save();
+            $count++;
 
             DB::table('turismobcn_external.agencies_categories_pivot')->insert([
                'agency_id' => $agency->id,
