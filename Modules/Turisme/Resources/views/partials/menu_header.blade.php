@@ -15,7 +15,7 @@
 			$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
 		@endphp
 
-		<li class="dropdown mega-dropdown {{ Request::is('*'.$link['url'].'*') ? 'active' : '' }}">
+		<li class="dropdown mega-dropdown {{ Request::is($link['request_url'].'*') ? 'active' : '' }}">
 
 			@if(isset($link))
 					<a href="{{$link["url"]}}" id="{{$link["id"]}}" class="{{$hasChildren ? 'dropdown-toggle' : ''}} {{$link["class"]}}" @if($hasChildren)data-toggle="dropdown"@endif>{{$link["name"]}}</a>
