@@ -54,6 +54,7 @@ if (!function_exists('format_link')) {
 
       $result = [
         "url" => $url,
+        "request_url" => substr($url,1),
         "name" => $menuElement["name"][App::getLocale()],
         "class" => isset($menuElement["settings"]["htmlClass"]) ?
           $menuElement["settings"]["htmlClass"] : '',
