@@ -4,6 +4,7 @@ namespace Modules\Architect\Jobs\Content;
 
 use Modules\Architect\Http\Requests\Content\DeleteContentRequest;
 use Modules\Architect\Entities\Content;
+use Modules\Architect\Entities\ContentField;
 
 use Illuminate\Support\Facades\Schema;
 
@@ -42,6 +43,11 @@ class DeleteContent
                 (new UpdateUrlsContent($content))->run();
             }
         }
+
+        // Remove contents fields relation
+        ContentField::where('relation', 'contents')
+            ->where('value', $this->content->id)
+            ->delete();
 
         // Delete content
         $raws = Content::where('id', $this->content->id)->delete();
