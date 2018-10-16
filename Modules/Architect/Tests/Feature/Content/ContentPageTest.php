@@ -149,6 +149,38 @@ class ContentPageTest extends TestCase
     }
 
 
+    /*
+     *  [TEST] Field contents really remove
+     */
+    public function testIsRemoveContentRelationed()
+    {
+        // 1. Create Page 1
+        $page1 = $this->createPage();
+
+        $pageId = $page1->id;
+
+        // 2. Create Page 2 with content relation
+        $attributes = $this->attributes['page'];
+        $attributes['fields'][] = [
+            'identifier' => 'content',
+            'type' => 'contents',
+            'value' => [
+                ['id' => $pageId]
+            ]
+        ];
+        $page2 = $this->createPage($attributes);
+
+        // 3. Remove page 1
+        (new DeleteContent($page1))->handle();
+
+        // 4. Test page 2 fields
+        $page2 = Content::find(2);
+
+        $contentId = $page2->field('content') ? $page2->field('content')->value : null;
+
+        $this->assertNotEquals($pageId, $contentId);
+    }
+
 
 
 
