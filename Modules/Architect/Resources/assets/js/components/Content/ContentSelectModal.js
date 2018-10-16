@@ -38,11 +38,31 @@ class ContentSelectModal extends Component {
       //this.modalOpen();
     }
 
+    processContent(content) {
+
+      var data = {
+        id : content.id,
+        title : content.title
+      };
+
+      if(!content.is_page){
+        data["typology"] = {
+          id : content.typology.id,
+          name : content.typology.name,
+          icon : content.typology.icon
+        };
+      }
+
+      return data;
+    }
+
     handleSelectItem(item){
 
       console.log("ContentSelectModal :: handleSelectItem => ",item);
 
-      this.props.onContentSelected(item);
+      if(item != null){
+        this.props.onContentSelected(this.processContent(item));
+      }
     }
 
     modalOpen()
