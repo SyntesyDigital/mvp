@@ -102,7 +102,8 @@ class ContentController extends Controller
             'categories' => $this->categories->getTree()
         ];
 
-        //dd($content);
+        //print_r($data["page"]);
+        //exit();
 
         return view('architect::contents.show', $data);
     }

@@ -71,6 +71,26 @@ class FieldsReactPageBuilderAdapter
         return $nodes;
     }
 
+    private function processContent($contentId) {
+      $content = Content::find($contentId);
+
+      $data = [
+        "id" => $content->id,
+        "title" => $content->title
+      ];
+
+      if(!$content->is_page){
+        $data["typology"] = [
+          "id" => $content->typology->id,
+          "name" => $content->typology->name,
+          "icon" => $content->typology->icon
+        ];
+      }
+
+      return $data;
+
+    }
+
     private function buildPageField($field, $name = null)
     {
         $fieldName = isset($field['fieldname']) ? $field['fieldname'] : null;
@@ -122,7 +142,7 @@ class FieldsReactPageBuilderAdapter
 
             case 'contents':
                 return ContentField::where('name', $fieldName)->get()->map(function($field){
-                    return Content::find($field->value);
+                    return $this->processContent($field->value);
                 })->toArray();
             break;
 
@@ -159,7 +179,7 @@ class FieldsReactPageBuilderAdapter
                               $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
                           } else {
                               if(explode('.', $v->name)[1] == 'content') {
-                                  $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                                  $values[ explode('.', $v->name)[1] ] = $this->processContent($v->value);
                               }
                           }
                       }
