@@ -36,7 +36,7 @@ class DeleteContent
         if($contents->isNotEmpty()) {
             foreach($contents as $content) {
                 $content->update([
-                    'parent_id' => null
+                    'parent_id' => $this->content->parent_id
                 ]);
 
                 (new UpdateUrlsContent($content))->run();

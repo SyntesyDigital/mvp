@@ -109,35 +109,47 @@ class ContentPageTest extends TestCase
         $page1 = $this->createPage();
 
         // 2. Create Page 2
-        $attributes = $this->attributes['page'];
-        $attributes['parent_id'] = $page1->id;
-        $this->createPage($attributes);
+        $attributes2 = $this->attributes['page'];
+        $attributes2['parent_id'] = $page1->id;
+        $page2 = $this->createPage($attributes2);
 
-        // 3. Remove page 1
-        (new DeleteContent($page1))->handle();
+        // 3. Create Page 3
+        $attributes3 = $this->attributes['page'];
+        $attributes3['parent_id'] = $page2->id;
+        $page3 = $this->createPage($attributes3);
 
+        // 4. Remove page 1
+        (new DeleteContent($page2))->handle();
+
+        // 5. Reload page
+        $page1 = Content::find(1);
         $page2 = Content::find(2);
+        $page3 = Content::find(3);
 
-        // 4. Test if content is created
-        $this->assertTrue($page2->parent_id == $page1->id ? false : true);
+        // 6. Test page parent_id
+        $this->assertTrue($page3->parent_id == $page1->id ? true : false);
+
 
         // 5. Test URLS
-        foreach($page2->urls as $url) {
-            $language = Language::find($url->language_id);
-
-            $actual = $url->url;
-
-            $excepted = sprintf('/%s/%s',
-                $language->iso,
-                $attributes['fields'][1]['value'][$language->iso]
-            );
-
-            $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
-
-            $this->assertSame($excepted, $actual, $message);
-        }
+        // foreach($page2->urls as $url) {
+        //     $language = Language::find($url->language_id);
+        //
+        //     $actual = $url->url;
+        //
+        //     $excepted = sprintf('/%s/%s',
+        //         $language->iso,
+        //         $attributes2['fields'][1]['value'][$language->iso]
+        //     );
+        //
+        //     $message = '--> BAD URL  : ' . $actual . ' must be ' . $excepted;
+        //
+        //     $this->assertSame($excepted, $actual, $message);
+        // }
 
     }
+
+
+
 
 
 }
