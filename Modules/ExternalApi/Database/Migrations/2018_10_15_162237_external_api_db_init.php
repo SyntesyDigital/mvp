@@ -147,7 +147,7 @@ class ExternalApiDbInit extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
+        Schema::connection('turisme_external')->disableForeignKeyConstraints();
 
         Schema::connection('turisme_external')->dropIfExists('members');
         Schema::connection('turisme_external')->dropIfExists('programs');
@@ -162,6 +162,6 @@ class ExternalApiDbInit extends Migration
         Schema::connection('turisme_external')->dropIfExists('indicators');
         Schema::connection('turisme_external')->dropIfExists('companies');
 
-        Schema::enableForeignKeyConstraints();
+        Schema::connection('turisme_external')->enableForeignKeyConstraints();
     }
 }
