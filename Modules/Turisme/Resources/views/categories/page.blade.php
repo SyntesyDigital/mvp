@@ -1,7 +1,8 @@
 
 @extends('turisme::layouts.app',[
   'name' => isset($category) ? $category->getFieldValue('name') : '',
-  'mainClass' => 'blog category'
+  'mainClass' => 'blog category',
+  'routeAttributes' => ["slug" => $category->getFieldValue('slug')],
 ])
 
 @section('content')

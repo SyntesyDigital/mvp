@@ -19,6 +19,8 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('blog.tag.index');
 
     Route::get('/', 'ContentController@index')->name('home');
+    Route::get('/not-found', 'ContentController@languageNotFound')->name('language-not-found');
+
 
     Route::get('/{slug}','ContentController@show')
       ->where('slug', '([A-Za-z0-9\-\/]+)')

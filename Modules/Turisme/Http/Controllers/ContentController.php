@@ -117,6 +117,9 @@ class ContentController extends Controller
 
     }
 
-
+    public function languageNotFound(Request $request)
+    {
+      abort(404);
+    }
 
 }
