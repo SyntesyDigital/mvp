@@ -9,9 +9,9 @@ return [
         [
             'name' => 'large',
             'directory' => 'large',
-            'ratio' => '16:9',
+            'ratio' => '',
             'width' => 1366,
-            'height' => 768
+            'height' => 550
         ],
         [
             'name' => 'medium',
