@@ -11,7 +11,7 @@ return [
             'directory' => 'large',
             'ratio' => '',
             'width' => 1366,
-            'height' => 550
+            'height' => 650
         ],
         [
             'name' => 'medium',
