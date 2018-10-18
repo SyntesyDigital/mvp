@@ -107,9 +107,8 @@ class ExternalApiDbInit extends Migration
         // COMPANIES
         Schema::connection('turisme_external')
             ->create('companies', function($table) {
-                $table->integer('id')->unique();
+                $table->integer('id')->unsigned();
                 $table->primary('id');
-                $table->integer('indicator_id')->nullable();
                 $table->string('name');
                 $table->longText('description_ca')->nullable();
                 $table->longText('description_es')->nullable();
@@ -122,12 +121,21 @@ class ExternalApiDbInit extends Migration
 
         Schema::connection('turisme_external')
             ->create('indicators', function($table) {
-                $table->integer('id')->unique();
+                $table->integer('id')->unsigned();
                 $table->primary('id');
                 $table->integer('axe_id');
                 $table->longText('description_ca')->nullable();
                 $table->longText('description_es')->nullable();
                 $table->longText('description_en')->nullable();
+            });
+
+        Schema::connection('turisme_external')
+            ->create('companies_indicators_pivot', function($table) {
+                $table->integer('company_id')->nullable()->unsigned();
+                $table->foreign('company_id')->references('id')->on('companies');
+
+                $table->integer('indicator_id')->nullable()->unsigned();
+                $table->foreign('indicator_id')->references('id')->on('indicators');
             });
 
         Schema::connection('turisme_external')

@@ -105,16 +105,15 @@ class ExternalApiDatabaseSeeder extends Seeder
             $companyId = Company::count() + 1;
 
             $indicator = Indicator::create([
-                'id' => $indicadorId,
                 'axe_id' => $axeId,
                 'description_ca' => 'Indicator description_ca '.$i.'-'.$j,
                 'description_es' => 'Indicator description_es '.$i.'-'.$j,
                 'description_en'=> 'Indicator description_en '.$i.'-'.$j
             ]);
+            $indicator->id = intval($indicadorId);
+            $indicator->save();
 
             $company = Company::create([
-                'id' => $companyId,
-                'indicator_id' => $indicadorId,
                 'name' => 'Company '.$i.'-'.$j,
                 'description_ca' => 'Description description_ca '.$i.'-'.$j,
                 'description_es' => 'Description description_es '.$i.'-'.$j,
@@ -123,6 +122,13 @@ class ExternalApiDatabaseSeeder extends Seeder
                 'postcode' => 'Postcode',
                 'web' => 'web'
             ]);
+            $company->id = intval($companyId);
+            $company->save();
+
+            DB::table('turismobcn_external.companies_indicators_pivot')->insert([
+               'company_id' => $company->id,
+               'indicator_id' => $indicator->id
+           ]);
 
           }
 

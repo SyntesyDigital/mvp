@@ -59,8 +59,8 @@ class FilterBarCompanies extends Component {
 
       if(this.state.category != ''){
           query.push({
-            search : 'indicator_id:'+this.state.category,
-            searchFields : 'indicator_id:='
+            search : 'indicator.id:'+this.state.category,
+            searchFields : 'indicator.id:='
           });
       }
 

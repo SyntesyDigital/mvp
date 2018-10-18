@@ -24,10 +24,16 @@ class Company extends Model
 
     public $timestamps = false;
 
-
+    /*
     public function indicator()
     {
         return $this->hasOne('\Modules\ExternalApi\Entities\Indicator', 'id', 'indicator_id');
+    }
+    */
+
+    public function indicator()
+    {
+        return $this->belongsToMany('Modules\ExternalApi\Entities\Indicator', 'companies_indicators_pivot', 'company_id', 'indicator_id');
     }
 
     public function axes()
