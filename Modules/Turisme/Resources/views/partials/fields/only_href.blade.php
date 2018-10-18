@@ -11,6 +11,7 @@
     $target = "_blank";
     $link = isset($field['value']['url'][App::getLocale()]) ? $field['value']['url'][App::getLocale()] : '';
   }
+
 @endphp
 
 <a href="{{$link}}" id="{{$field['settings']['htmlId'] or ''}}">

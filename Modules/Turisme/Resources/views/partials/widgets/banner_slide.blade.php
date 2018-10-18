@@ -7,7 +7,7 @@
     if(isset($urlField['value']['content'])){
       //is internal
       $content = $urlField['value']['content'];
-      $link = route('content.show',[$content->url]);
+      $link = $content->url;
     }
     else {
       //is external

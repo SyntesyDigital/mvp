@@ -13,7 +13,7 @@ export default class Search extends Component {
         super(props);
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
-        const text = props.text ? props.text : null;
+        const text = props.text ? JSON.parse(atob(props.text)) : null;
 
         var filters = {};
         if(text != null){
@@ -26,7 +26,7 @@ export default class Search extends Component {
             size:field.settings.itemsPerPage !== null ?  field.settings.itemsPerPage : 5,
             items : null,
             currPage : null,
-            total : null,
+            total : 0,
         };
     }
 
@@ -90,14 +90,25 @@ export default class Search extends Component {
 
       var result = [];
       const {items} = this.state;
+      var text_array = this.state.filters.text.split(' ');
+
       for(var i = 0; i< items.length; i++){
+
+        var reg = '';
+        var title = items[i].title;
+        var description = items[i].description;
+        for(var j=0;j<text_array.length; j ++){
+          reg = new RegExp(text_array[j], 'gi');
+          title = title.replace(reg, function(str) {return '<b>'+str+'</b>'});
+          description = description.replace(reg, function(str) {return '<b>'+str+'</b>'});
+        }
 
         result.push(
           <li key={i}>
             <div>
-              <h3><a href={items[i].url}>{items[i].title}</a><span>90%</span></h3>
-              <p className="breadcrumb"> <a href="">pagina padre</a> / <a href="">pagina padre</a> / <a href={items[i].url}>{items[i].title}</a></p>
-              <p className="text">{items[i].description}</p>
+              <h3><a href={items[i].url} dangerouslySetInnerHTML={{__html: title}}></a><span>{items[i].score}%</span></h3>
+              <p className="breadcrumb">  <a href={items[i].url} dangerouslySetInnerHTML={{__html: title}}></a></p>
+              <p className="text" dangerouslySetInnerHTML={{__html: description}}></p>
             </div>
           </li>
         );
