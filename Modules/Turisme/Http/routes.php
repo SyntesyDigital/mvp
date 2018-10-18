@@ -17,6 +17,7 @@ Route::group([
 
     Route::get(LaravelLocalization::transRoute('routes.category.index'), 'CategoryController@index')->name('blog.category.index');
     Route::get(LaravelLocalization::transRoute('routes.tag.index'), 'TagController@index')->name('blog.tag.index');
+    Route::get(LaravelLocalization::transRoute('search'), 'ContentController@search')->name('front.search');
 
     Route::get('/', 'ContentController@index')->name('home');
     Route::get('/not-found', 'ContentController@languageNotFound')->name('language-not-found');

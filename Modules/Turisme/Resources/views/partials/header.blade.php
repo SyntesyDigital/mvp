@@ -26,11 +26,11 @@
 		</button>
 	</div>
 
-	<div class="collapse navbar-collapse js-navbar-collapse">
+	<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
 
 		 		<!-- buscador -->
-				<form class="col-md-12 buscar">
-					<input type="text" placeholder="Introdueix el mot que cerques (TEXT)">
+				<form class="col-md-12 buscar" method="GET" action="{{route('front.search')}}">
+					<input type="text" name="q" placeholder="Introdueix el mot que cerques (TEXT)">
 				</form>
 				<!-- end buscador -->
 
@@ -56,3 +56,34 @@
 	</nav>
 </div>
 </header><!-- end HEADER -->
+
+@push('javascripts')
+<script>
+	$(function(){
+		$(".boto-search").click(function(e){
+			e.preventDefault();
+			$("form.buscar input").removeClass('has-error');
+
+			if($("form.buscar").css('display') != "block"){
+				$("form.buscar").css({display:'block'});
+			}
+			else {
+				if($("form.buscar input").val() != ""){
+					$("form.buscar").submit();
+				}
+				else {
+					$("form.buscar input").addClass('has-error');
+				}
+			}
+		});
+
+		$(document).mouseup(function(e){
+		    var container = $("#main-menu");
+
+		    if (!container.is(e.target) && container.has(e.target).length === 0){
+		        $("form.buscar").css({display:'none'});
+		    }
+		});
+	});
+</script>
+@endpush

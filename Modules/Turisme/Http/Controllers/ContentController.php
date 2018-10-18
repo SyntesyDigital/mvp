@@ -21,8 +21,34 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
-
       $content = Content::whereField('slug','home')->first();
+
+      if($content == null){
+        abort(404);
+      }
+
+      $content->load('fields', 'page');
+
+      $pageBuilderAdapter = new PageBuilderAdapter($content);
+
+      if($request->has('debug'))
+        dd($pageBuilderAdapter->get());
+
+      return view('turisme::contents.page',[
+        'content' => $content,
+        'page' => $pageBuilderAdapter->get(),
+        'contentSettings' => $content->getSettings()
+      ]);
+    }
+
+    public function search(Request $request)
+    {
+      $content = Content::whereField('slug','search')->first();
+
+      if($content == null){
+        abort(404);
+      }
+
       $content->load('fields', 'page');
 
       $pageBuilderAdapter = new PageBuilderAdapter($content);
@@ -70,7 +96,10 @@ class ContentController extends Controller
       //$slug = $request->segment(count($request->segments()));
       $slug = '/'.App::getLocale().'/'.$slug;
 
-      $url = Url::where('url', $slug)->first();
+      $url = Url::where('url', $slug)
+        ->where('entity_type','Modules\Architect\Entities\Content')
+        ->first();
+
       if($url == null){
         abort(404);
       }
