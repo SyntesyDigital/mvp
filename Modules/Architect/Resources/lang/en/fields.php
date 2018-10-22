@@ -18,7 +18,7 @@ return [
     'translated_file' => 'Arxiu traduit',
     'key_values' => 'Clau/Valor',
 
-    'title' => 'Title',
+    'title' => 'Títol',
     'description' => 'Descripció',
     'subtitle' => 'Subtítol',
     'message' => 'Missatge',

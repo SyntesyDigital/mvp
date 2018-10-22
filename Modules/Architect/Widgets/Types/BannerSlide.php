@@ -18,7 +18,7 @@ class BannerSlide extends Widget implements WidgetInterface
 
     public $fields = [
         'image' => 'Modules\Architect\Fields\Types\Image',
-        'text' => 'Modules\Architect\Fields\Types\Text',
+        'title' => 'Modules\Architect\Fields\Types\Text',
         'subtitle' => 'Modules\Architect\Fields\Types\Text',
         'url' => 'Modules\Architect\Fields\Types\Url'
     ];
