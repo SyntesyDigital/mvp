@@ -289,8 +289,7 @@ class ModalForm extends Component {
                         <h2>{window.localization['CONTACT_FORM_TITLE']}</h2>
 
                         {initProgram != null && programs[initProgram] !== undefined &&
-                          <p>{window.localization['CONTACT_FORM_THANKS'].replace("%s", "<b>"+programs[initProgram]['description_'+LOCALE]+"</b>")}
-                             <br/>
+                          <p dangerouslySetInnerHTML={{__html: window.localization['CONTACT_FORM_THANKS'].replace("%s", "<strong>"+programs[initProgram]['description_'+LOCALE]+"</strong>")}}>
                           </p>
                         }
 
@@ -431,8 +430,9 @@ class ModalForm extends Component {
                           </p>
                         }
 
-
-                        <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        <div className="centered form-button-wrapper">
+                          <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        </div>
 
                       </form>
 

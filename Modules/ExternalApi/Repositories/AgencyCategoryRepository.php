@@ -15,7 +15,6 @@ class AgencyCategoryRepository extends BaseRepository
 {
     protected $fieldSearchable = [
         'id',
-        'name',
         'description_ca',
         'description_es',
         'description_en',

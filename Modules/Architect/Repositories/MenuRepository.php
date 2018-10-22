@@ -78,14 +78,15 @@ class MenuRepository extends BaseRepository
     {
         $menuElementsTree = array();
         $languages = Language::getAllCached();
+        $defaultLanguage = Language::getDefault();
         $level = 1;
 
-        $traverse = function (&$menuElementsTree, $menuElements, $level) use (&$traverse, $languages) {
+        $traverse = function (&$menuElementsTree, $menuElements, $level) use (&$traverse, $languages, $defaultLanguage) {
             $level++;
 
             foreach ($menuElements as $menuElement) {
                 array_push($menuElementsTree, array(
-                    "name" => $menuElement->getFieldValue('link.title'),
+                    "name" => $menuElement->getFieldValue('link.title',$defaultLanguage->id),
                     "id" => $menuElement->id,
                     "parent_id" => $menuElement->parent_id,
                     "order" => $menuElement->order,
@@ -110,7 +111,7 @@ class MenuRepository extends BaseRepository
             if (!$menuElement->parent_id) {
                 array_push($menuElementsTree, array(
                     //"name" => $menuElement->getFieldValue('title'),
-                    "name" => $menuElement->getFieldValue('link.title'),
+                    "name" => $menuElement->getFieldValue('link.title',$defaultLanguage->id),
                     "id" => $menuElement->id,
                     "parent_id" => $menuElement->parent_id,
                     "order" => $menuElement->order,

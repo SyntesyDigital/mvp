@@ -67,7 +67,7 @@ export default class SiteMapGraph extends Component {
       //.strength(0.5)
     )
     .force("charge", d3.forceManyBody()
-      .strength(-200)
+      .strength(-400)
       .distanceMax(r*45)
     )
     //.force("collide", d3.forceCollide(r*1.25))

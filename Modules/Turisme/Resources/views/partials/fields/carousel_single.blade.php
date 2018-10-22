@@ -20,9 +20,11 @@
         @endphp
 
         <div class="item {{$first?'active':''}}"><img src="{{asset($item['urls'][$crop])}}" alt="{{$item['uploaded_filename']}}" class="center-block">
-          <div class="carousel-caption">
-            <p>{{$title}}</p>
-          </div>
+          @if($title != null && $title != '')
+            <div class="carousel-caption">
+              <p>{{$title}}</p>
+            </div>
+          @endif
         </div>
         @php
           $first = false;
@@ -30,5 +32,8 @@
       @endforeach
 
   </div>
-  <a class="left carousel-control" href="#carousel-single" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#carousel-single" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>
+  @if(count($slides)>1)
+    <a class="left carousel-control" href="#carousel-single" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#carousel-single" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>
+  @endif
+
 </div>

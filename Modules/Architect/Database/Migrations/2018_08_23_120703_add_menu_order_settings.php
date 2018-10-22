@@ -14,12 +14,12 @@ class AddMenuOrderSettings extends Migration
     public function up()
     {
         Schema::table('menus', function (Blueprint $table) {
-          $table->longText('settings')->nullable()->default('NULL');
+          $table->longText('settings')->nullable();
         });
 
         Schema::table('menus_elements', function (Blueprint $table) {
-          $table->longText('settings')->nullable()->default('NULL');
-          $table->integer('order')->nullable()->default('NULL');
+          $table->longText('settings')->nullable();
+          $table->integer('order')->nullable();
         });
 
     }

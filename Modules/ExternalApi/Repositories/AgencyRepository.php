@@ -14,7 +14,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 class AgencyRepository extends BaseRepository
 {
     protected $fieldSearchable = [
-        'code',
+        'id',
         'name',
         'address',
         'postcode',

@@ -8,10 +8,12 @@ class Agency extends Model
 {
     protected $table = 'agencies';
 
+    protected $primaryKey = 'id';
+
     protected $connection= 'turisme_external';
 
     protected $fillable = [
-        'code',
+        'id',
         'name',
         'address',
         'postcode',
@@ -25,7 +27,7 @@ class Agency extends Model
         'receptive',
         'incentive',
         'congresses',
-        'validated',
+        'validated'
     ];
 
     public $timestamps = false;

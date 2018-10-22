@@ -71,6 +71,26 @@ class FieldsReactPageBuilderAdapter
         return $nodes;
     }
 
+    private function processContent($contentId) {
+      $content = Content::find($contentId);
+
+      $data = [
+        "id" => $content->id,
+        "title" => $content->title
+      ];
+
+      if(!$content->is_page){
+        $data["typology"] = [
+          "id" => $content->typology->id,
+          "name" => $content->typology->name,
+          "icon" => $content->typology->icon
+        ];
+      }
+
+      return $data;
+
+    }
+
     private function buildPageField($field, $name = null)
     {
         $fieldName = isset($field['fieldname']) ? $field['fieldname'] : null;
@@ -83,51 +103,79 @@ class FieldsReactPageBuilderAdapter
             case 'richtext':
             case 'slug':
             case 'text':
-                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
-                    return [$field->language->iso => $field->value];
-                })->toArray();
+                return ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->get()
+                    ->mapWithKeys(function($field) {
+                        return [$field->language->iso => $field->value];
+                    })
+                    ->toArray();
             break;
 
             case 'file':
             case 'image':
-                $contentField = ContentField::where('name', $fieldName)->first();
+                $contentField = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 if($contentField != null){
-                  return Media::find($contentField->value);
+                    return Media::find($contentField->value);
                 }
             break;
 
             case 'translated_file':
-                return ContentField::where('name', $fieldName)->get()->mapWithKeys(function($field) {
-                    return [$field->language->iso => Media::find($field->value)];
-                })->toArray();
+                return ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->get()
+                    ->mapWithKeys(function($field) {
+                        return [$field->language->iso => Media::find($field->value)];
+                    })
+                    ->toArray();
             break;
 
             case 'date':
-                $contentField = ContentField::where('name', $fieldName)->first();
+                $contentField = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 return date('Y-m-d H:i:s', $contentField->value);
             break;
 
             case 'localization':
-                $contentField = ContentField::where('name', $fieldName)->first();
+                $contentField = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 if($contentField != null){
                   return json_decode($contentField->value, true);
                 }
             break;
 
             case 'images':
-                return ContentField::where('name', $fieldName)->get()->map(function($field){
-                    return Media::find($field->value);
-                })->toArray();
+                return ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->get()
+                    ->map(function($field){
+                        return Media::find($field->value);
+                    })
+                    ->toArray();
             break;
 
             case 'contents':
-                return ContentField::where('name', $fieldName)->get()->map(function($field){
-                    return Content::find($field->value);
-                })->toArray();
+                return ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->get()
+                    ->map(function($field){
+                        return $this->processContent($field->value);
+                    })
+                    ->toArray();
             break;
 
             case 'video':
-                $field = ContentField::where('name', $fieldName)->first();
+                $field = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 $values = null;
 
                 if($field) {
@@ -146,7 +194,10 @@ class FieldsReactPageBuilderAdapter
             break;
 
             case 'link':
-                $field = ContentField::where('name', $fieldName)->first();
+                $field = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 $values = null;
 
                 if($field) {
@@ -159,7 +210,7 @@ class FieldsReactPageBuilderAdapter
                               $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
                           } else {
                               if(explode('.', $v->name)[1] == 'content') {
-                                  $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                                  $values[ explode('.', $v->name)[1] ] = $this->processContent($v->value);
                               }
                           }
                       }
@@ -208,12 +259,14 @@ class FieldsReactPageBuilderAdapter
                     }
                 }
 
-
                 return $field["value"];
             break;
 
             default:
-                $fields = ContentField::where('name', $fieldName)->first();
+                $fields = ContentField::where('name', $fieldName)
+                    ->where('content_id', $this->content->id)
+                    ->first();
+
                 return $fields ? $fields->value : null;
             break;
         }

@@ -20,10 +20,16 @@ class Indicator extends Model
 
     public $timestamps = false;
 
-
+    /*
     public function companies()
     {
         return $this->hasMany('\Modules\ExternalApi\Entities\Company');
+    }
+    */
+
+    public function companies()
+    {
+        return $this->belongsToMany('Modules\ExternalApi\Entities\Company', 'companies_indicators_pivot', 'indicator_id', 'company_id');
     }
 
     public function axe()

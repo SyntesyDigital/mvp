@@ -11,7 +11,7 @@
 
 @section('content')
 
-@if(isset($content) && $content->parent_id != null)
+@if(isset($content))
 <div class="single">
   <div class="grey no-margin">
        <div class="container">

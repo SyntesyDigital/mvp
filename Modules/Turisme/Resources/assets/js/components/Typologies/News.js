@@ -59,7 +59,7 @@ class News extends Component {
 
           </p>
 
-          <a href="">{fields.title.values[LOCALE] !== undefined ?
+          <a href={this.props.field.url}>{fields.title.values[LOCALE] !== undefined ?
             fields.title.values[LOCALE] : '' }
           </a>
 

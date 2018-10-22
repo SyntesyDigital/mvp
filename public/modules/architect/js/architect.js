@@ -587,6 +587,26 @@ architect.menu.form = {
 
         this.currentId = 1000; // FIXME que sea otro valor
 
+
+        $(document).on('click','.item-bar',function(e){
+
+          var item = $(e.target).closest('.item-bar');
+
+          console.log("item-bar :: clicked!",item);
+
+          if(item.hasClass('collapsed')){
+              //item.parent().find('ol').css({display:'block'});
+              item.parent().find('ol').slideDown();
+              item.removeClass('collapsed');
+          }
+          else {
+            //item.parent().find('ol').css({display:'none'});
+            item.parent().find('ol').slideUp();
+            item.addClass('collapsed');
+          }
+        });
+
+
     },
 
     initEvents : function()
@@ -651,7 +671,7 @@ architect.menu.form = {
     		var divItem = $(classSelector).append(''+
     			'<li id="menu-'+item.id+'" class="item menu-item drag" data-id="'+item.id+'" data-class="category" >'+
               '<div class="item-bar">'+
-      	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+item.name+'</span>'+
+      	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+(item.name != null ? item.name : '')+'</span>'+
       	  			'<div class="actions">'+
       		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
       		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+

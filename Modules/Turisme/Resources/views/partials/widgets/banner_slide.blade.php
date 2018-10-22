@@ -7,7 +7,7 @@
     if(isset($urlField['value']['content'])){
       //is internal
       $content = $urlField['value']['content'];
-      $link = route('content.show',[$content->url]);
+      $link = $content->url;
     }
     else {
       //is external
@@ -26,7 +26,7 @@
   )
 
 
-
+@if(isset($field['fields'][1]['value'][App::getLocale()]) && $field['fields'][1]['value'][App::getLocale()] != '')
   <div class="carousel-caption">
     @if($link != "")
       <a href="{{$link}}" target="{{$target or ''}}">
@@ -53,4 +53,5 @@
       )
     </p>
   </div>
+@endif
 </div>

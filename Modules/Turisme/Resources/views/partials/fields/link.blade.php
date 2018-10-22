@@ -4,7 +4,7 @@
   if(isset($field['value']['content'])){
     //is internal
     $content = $field['value']['content'];
-    $link = route('content.show',[$content->getField('slug')]);
+    $link = $content->url;
   }
   else {
     //is external

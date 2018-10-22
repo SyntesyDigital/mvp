@@ -105,16 +105,15 @@ class ExternalApiDatabaseSeeder extends Seeder
             $companyId = Company::count() + 1;
 
             $indicator = Indicator::create([
-                'id' => $indicadorId,
                 'axe_id' => $axeId,
                 'description_ca' => 'Indicator description_ca '.$i.'-'.$j,
                 'description_es' => 'Indicator description_es '.$i.'-'.$j,
                 'description_en'=> 'Indicator description_en '.$i.'-'.$j
             ]);
+            $indicator->id = intval($indicadorId);
+            $indicator->save();
 
             $company = Company::create([
-                'id' => $companyId,
-                'indicator_id' => $indicadorId,
                 'name' => 'Company '.$i.'-'.$j,
                 'description_ca' => 'Description description_ca '.$i.'-'.$j,
                 'description_es' => 'Description description_es '.$i.'-'.$j,
@@ -123,6 +122,13 @@ class ExternalApiDatabaseSeeder extends Seeder
                 'postcode' => 'Postcode',
                 'web' => 'web'
             ]);
+            $company->id = intval($companyId);
+            $company->save();
+
+            DB::table('turismobcn_external.companies_indicators_pivot')->insert([
+               'company_id' => $company->id,
+               'indicator_id' => $indicator->id
+           ]);
 
           }
 
@@ -137,18 +143,19 @@ class ExternalApiDatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         //Create AAVV
-        for($i = 0; $i < 5; $i++) {
+        $count = 1;
+        for($i = 1; $i < 5; $i++) {
           $agencyCategory = AgencyCategory::create([
-            'name' => 'Category '.$i,
             'description_ca' => 'Description description_ca '.$i,
             'description_es' => 'Description description_es '.$i,
             'description_en'=> 'Description description_en '.$i,
           ]);
+          $agencyCategory->id = intval($i);
+          $agencyCategory->save();
 
-          for($j = 0; $j < 3; $j++) {
+          for($j = 1; $j < 4; $j++) {
             $agency = Agency::create([
-              'code' => $i.$j,
-              'name' => 'Agency '.$i.'-'.$j,
+              'name' => 'Agency '.$count,
               'address' => "sdfsdf",
               'postcode' => "sdfsdf",
               'city' => 'safd',
@@ -156,6 +163,9 @@ class ExternalApiDatabaseSeeder extends Seeder
               'phone_number' => '234234',
               'email' => "sdfsd@sdf.com"
             ]);
+            $agency->id = intval($count);
+            $agency->save();
+            $count++;
 
             DB::table('turismobcn_external.agencies_categories_pivot')->insert([
                'agency_id' => $agency->id,

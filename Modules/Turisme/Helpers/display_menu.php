@@ -46,7 +46,7 @@ if (!function_exists('format_link')) {
         $target = "_blank";
       }
       else if(isset($menuElement["link"]["content"])){
-        $url = $menuElement["link"]["content"]->getFullSlug();
+        $url = $menuElement["link"]["content"]->url;
       }
       else {
         return null;
@@ -54,6 +54,7 @@ if (!function_exists('format_link')) {
 
       $result = [
         "url" => $url,
+        "request_url" => substr($url,1),
         "name" => $menuElement["name"][App::getLocale()],
         "class" => isset($menuElement["settings"]["htmlClass"]) ?
           $menuElement["settings"]["htmlClass"] : '',
@@ -61,6 +62,8 @@ if (!function_exists('format_link')) {
           $menuElement["settings"]["htmlId"] : '',
         "target" => $target
       ];
+
+      //print_r($result);
 
       return $result;
     }

@@ -9,10 +9,12 @@ class AgencyCategory extends Model
 
     protected $table = 'agencies_categories';
 
+    protected $primaryKey = 'id';
+
     protected $connection= 'turisme_external';
 
     protected $fillable = [
-        'name',
+        'id',
         'description_ca',
         'description_es',
         'description_en',

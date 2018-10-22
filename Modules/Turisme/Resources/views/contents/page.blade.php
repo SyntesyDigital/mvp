@@ -24,14 +24,6 @@
               </div>
       		  </div>
 
-            <!--
-      		  <div class="col-md-2  col-sm-3 col-xs-6">
-      		  	<div class="navegacio">
-      				<span class="back glyphicon glyphicon-menu-left"></span><a href="#" >Anterior</a>
-      				<a href="#" >Següent</a><span class="next glyphicon glyphicon-menu-right"></span>
-      		  	  </div>
-      		  </div>
-            -->
       		  <div class="col-md-2 col-sm-3 col-xs-6">
       		  	<div id="selected-items" class="seleccio" style="display:none;">
                 <span id="number">0</span>

@@ -24,7 +24,24 @@ ol.sortable-list {
       @include round(6px);
       min-height: 50px;
       width:50vw;
-      padding-left: 20px;
+      padding-left: 40px;
+
+      &:before{
+        content: "\25BE";
+        margin-right: 0px;
+        position: absolute;
+        top: -2px;
+        left: 16px;
+        font-size: 18px;
+        color: #a0a0a0;
+      }
+
+      &.collapsed {
+        &:before{
+          content: "\25B8";
+        }
+      }
+
     }
 
     &.placeholder {

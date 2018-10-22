@@ -319,10 +319,7 @@ export default class ModalFormPress extends Component {
 
                           <div className="col-xs-12 col-md-6">
                             <div className="form-group ">
-                              <select className={this.hasErrors('media_distribution')} name="media_distribution" value={fields.media_distribution} onChange={this.onFieldChange}>
-                                <option value="">{ window.localization['PRESS_FORM_DISTRIBUTION']}</option>
-                                <option value="ES">{ window.localization['GENERAL_FORM_SPAIN']}</option>
-                              </select>
+                              <input type="text" className={this.hasErrors('media_distribution')} name="media_distribution" value={fields.media_distribution} placeholder={ window.localization['PRESS_FORM_DISTRIBUTION']} onChange={this.onFieldChange} />
                             </div>
                           </div>
 
@@ -521,7 +518,9 @@ export default class ModalFormPress extends Component {
                           </p>
                         }
 
-                        <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        <div className="centered form-button-wrapper">
+                          <input type="submit" disabled={this.state.saving} value={window.localization['GENERAL_FORM_SEND']} className="btn" />
+                        </div>
 
                       </form>
 

@@ -90,7 +90,7 @@ class ContentController extends Controller
             $content->typology->load('fields');
         }
 
-        return view('architect::contents.show', [
+        $data = [
             'content' => $content->load('tags', 'categories', 'languages'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
@@ -100,7 +100,12 @@ class ContentController extends Controller
             'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
-        ]);
+        ];
+
+        //print_r($data["page"]);
+        //exit();
+
+        return view('architect::contents.show', $data);
     }
 
     public function create(Typology $typology=null, Request $request)

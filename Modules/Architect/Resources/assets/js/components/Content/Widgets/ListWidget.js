@@ -39,7 +39,19 @@ class ListWidget extends Component
       fields : []
     };
 
-    this.currentIndex = props.field.value !== undefined && props.field.value != null ? props.field.value.length : 0;
+    this.currentId = 0;
+
+    if(props.field.value !== undefined && props.field.value != null &&
+      props.field.value.length > 0){
+
+        for(var key in props.field.value){
+          this.currentId = Math.max(props.field.value[key].id,this.currentId);
+        }
+
+        this.currentId ++;
+    }
+    console.log("ListWidget :: currentId = "+this.currentId);
+
   }
 
   moveField(dragIndex, hoverIndex) {
@@ -144,11 +156,14 @@ class ListWidget extends Component
     const widgetIdentifier = this.props.field.widget;
     //console.log("FIELDS ======>", this.props.field);
 
-    var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
-    field["index"] = this.currentIndex;
-    field["id"] = this.currentIndex;
+    var currentIndex = this.props.field.value != undefined && this.props.field.value != null ?
+      this.props.field.value.length : 0;
 
-    this.currentIndex++;
+    var field = JSON.parse(JSON.stringify(WIDGETS[widgetIdentifier]));
+    field["index"] = currentIndex;
+    field["id"] = this.currentId;
+
+    this.currentId++;
 
     //console.log("ListWidget :: onAddField with value => ",field);
 
@@ -195,15 +210,15 @@ class ListWidget extends Component
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){
 
-              console.log("ListWidget :: renderInputs =>",widget.fields);
+              console.log("ListWidget :: renderInputs =>",widget);
               const name = _this.findName(widget.fields);
               const image = _this.findImage(widget.fields);
 
              fields.push(
                  <ItemListDragField
-                    key = {widget.index}
+                    key = {widget.id}
                     index = {i}
-                    id = {widget.index}
+                    id = {widget.id}
                     type = {widget.type}
                     label = {widget.name}
                     icon = {widget.icon}
