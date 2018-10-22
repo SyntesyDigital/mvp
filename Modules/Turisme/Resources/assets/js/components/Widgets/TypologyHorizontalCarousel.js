@@ -146,9 +146,12 @@ export default class TypologyHorizontalCarousel extends Component {
             <div className="carousel-inner" role="listbox">
               {this.renderPages()}
 				    </div>
-
-            <a className="left carousel-control" href="#carousel-multiple" role="button" data-slide="prev"><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span className="sr-only">Previous</span></a>
-         		<a className="right carousel-control" href="#carousel-multiple" role="button" data-slide="next"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span className="sr-only">Next</span></a>
+            {this.state.items != null && this.state.items.length > 1 &&
+              <span>
+                <a className="left carousel-control" href="#carousel-multiple" role="button" data-slide="prev"><span className="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span className="sr-only">Previous</span></a>
+             		<a className="right carousel-control" href="#carousel-multiple" role="button" data-slide="next"><span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span className="sr-only">Next</span></a>
+                </span>
+              }
           </div>
         )
     }
