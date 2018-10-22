@@ -68,8 +68,13 @@ Route::group([
     Route::get('/account', 'AccountController@index')->name('account');
 
     // Users
-    Route::put('/users/{user}/update', 'UserController@update')->name('users.update');
-    Route::get('/users/{user}', 'UserController@show')->name('users.show');
+    Route::get('/users', 'UserController@index')->name('users');
+    Route::get('/users/data', 'UserController@data')->name('users.data');
+    Route::post('/users', 'UserController@store')->name('users.store');
+    Route::get('/users/create', 'UserController@create')->name('users.create');
+    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
+    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
+    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +82,6 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
-
 });
 
 /*
@@ -135,12 +139,7 @@ Route::group([
   Route::delete('/translations/{translation?}/delete', 'TranslationController@delete')->name('translations.delete');
   Route::get('/translations/{translation?}', 'TranslationController@show')->name('translations.show');
 
-  // Users
-  Route::get('/users', 'UserController@index')->name('users');
-  Route::get('/users/data', 'UserController@data')->name('users.data');
-  Route::post('/users', 'UserController@store')->name('users.store');
-  Route::get('/users/create', 'UserController@create')->name('users.create');
-  Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
+
 
   //added to all users FIXME separete account and users ?
   //Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
