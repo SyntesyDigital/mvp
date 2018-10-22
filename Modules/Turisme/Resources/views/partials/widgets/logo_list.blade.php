@@ -35,7 +35,9 @@
 
     </div>
     <br>
-    <a class="left carousel-control" href="#carousel-multiple2" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a>
-    <a class="right carousel-control" href="#carousel-multiple2" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+    @if(count($field['value']) > 1)
+      <a class="left carousel-control" href="#carousel-multiple2" role="button" data-slide="prev"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a>
+      <a class="right carousel-control" href="#carousel-multiple2" role="button" data-slide="next"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+    @endif
   </div>
 </div>

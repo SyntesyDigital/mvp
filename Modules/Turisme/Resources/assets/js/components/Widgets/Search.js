@@ -27,6 +27,7 @@ export default class Search extends Component {
             items : null,
             currPage : null,
             total : 0,
+            result_text : '',
         };
     }
 
@@ -56,7 +57,7 @@ export default class Search extends Component {
         }
         console.log('QUERY--',query);
 
-        axios.get(ASSETS+'api/search?'+query)
+        axios.get(ASSETS+'api/search?'+query+'&accept_lang='+LOCALE)
           .then(function (response) {
 
               if(response.status == 200
@@ -71,13 +72,16 @@ export default class Search extends Component {
                   old_items =response.data.data;
                 }
                 console.log('OLD ITEMS--',old_items);
+                  var result_text = window.localization['SEARCH_WIDGET_RESULT_TEXT'].replace('XX',response.data.total) + '<strong>"'+self.state.filters.text+'"</strong>';
 
                   self.setState({
                       items : old_items,
                       lastPage : response.data.last_page,
                       currPage : response.data.current_page,
                       filters : filters,
-                      total : response.data.total
+                      total : response.data.total,
+                      result_text : result_text
+
                   });
               }
 
@@ -107,7 +111,7 @@ export default class Search extends Component {
           <li key={i}>
             <div>
               <h3><a href={items[i].url} dangerouslySetInnerHTML={{__html: title}}></a><span>{items[i].score}%</span></h3>
-              <p className="breadcrumb">  <a href={items[i].url} dangerouslySetInnerHTML={{__html: title}}></a></p>
+              <p className="breadcrumb">  <a href={items[i].url}>{window.location.host+items[i].url}</a></p>
               <p className="text" dangerouslySetInnerHTML={{__html: description}}></p>
             </div>
           </li>
@@ -133,9 +137,8 @@ export default class Search extends Component {
               <div className="container">
                 <div className="row">
                   <div className="claim trade">
-                    <h1>Buscar</h1>
-                    <p>
-                      Se han encontrado <strong>{this.state.total}</strong> resultados coincidentes con lel término de búsqueda <strong>"{this.state.filters.text}"</strong>
+                    <h1>{window.localization['GENERAL_BUTTON_SEARCH']}</h1>
+                    <p dangerouslySetInnerHTML={{__html: this.state.result_text}}>
                     </p>
                   </div>
                 </div>
