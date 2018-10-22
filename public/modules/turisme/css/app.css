@@ -10119,6 +10119,10 @@ form.contact-form .checkbox {
   margin-top: 10px;
 }
 
+.date-delivery {
+  margin-top: 30px !important;
+}
+
 /** DATE  **/
 
 .react-datepicker-popper {

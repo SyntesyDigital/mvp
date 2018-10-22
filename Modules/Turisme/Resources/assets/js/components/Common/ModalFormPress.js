@@ -35,6 +35,7 @@ export default class ModalFormPress extends Component {
             dateStart : null,
             dateEnd : null,
             comment : '',
+            delivery : null,
 
             privacity : false,
             newsletter : false,
@@ -346,17 +347,14 @@ export default class ModalFormPress extends Component {
                             </div>
                           </div>
 
-                          <div className="row">
-                            <div className="col-xs-12">
-                              <p>
-                              { window.localization['PRESS_FORM_SUBTITLE4']}
+                          <div className="col-xs-12">
+                            <p>
+                            { window.localization['PRESS_FORM_SUBTITLE4']}
 
-                              </p>
-                              <textarea className={"col-xs-12 "+this.hasErrors('media_comment')} name="media_comment" value={fields.media_comment} onChange={this.onFieldChange} />
+                            </p>
+                            <textarea className={"col-xs-12 "+this.hasErrors('media_comment')} name="media_comment" value={fields.media_comment} onChange={this.onFieldChange} />
 
-                            </div>
                           </div>
-
 
                         </div>
 
@@ -446,12 +444,14 @@ export default class ModalFormPress extends Component {
                           <div className="form-group ">
                             <DatePicker
                                 className={"input-date "+this.hasErrors('dateStart')}
-                                selected={fields.dateStart ? fields.dateStart : moment()}
+                                selected={fields.dateStart}
                                 selectsStart
                                 startDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateStart')}
                                 locale="{LOCALE}"
+                                dateFormat="DD/MM/YYYY"
+                                placeholderText={window.localization['GENERAL_WIDGET_FROM']}
 
                             />
                           </div>
@@ -461,14 +461,15 @@ export default class ModalFormPress extends Component {
                           <div className="form-group ">
                             <DatePicker
                                 className={"input-date "+this.hasErrors('dateEnd')}
-                                selected={fields.dateEnd ? fields.dateEnd : moment()}
+                                selected={fields.dateEnd}
                                 selectsEnd
                                 startDate={fields.dateStart}
                                 minDate={fields.dateStart}
                                 endDate={fields.dateEnd}
                                 onChange={this.handleDateChange.bind(this,'dateEnd')}
                                 locale="{LOCALE}"
-
+                                dateFormat="DD/MM/YYYY"
+                                placeholderText={window.localization['GENERAL_WIDGET_TO']}
                             />
                           </div>
                         </div>
@@ -486,6 +487,27 @@ export default class ModalFormPress extends Component {
                             <textarea className={"col-xs-12 "+this.hasErrors('comment')} name="comment" value={fields.comment} onChange={this.onFieldChange} />
 
                           </div>
+
+                        </div>
+
+                        <div className="row date-delivery">
+                          <div className="col-xs-12 col-md-6">
+                            <div className="form-group ">
+                              <DatePicker
+                                  className={"input-date "+this.hasErrors('delivery')}
+                                  selected={fields.delivery}
+                                  selectsEnd
+                                  onChange={this.handleDateChange.bind(this,'delivery')}
+                                  locale="{LOCALE}"
+                                  showTimeSelect
+                                  timeFormat="HH:mm"
+                                  timeIntervals={15}
+                                  dateFormat="DD/MM/YYYY HH:mm"
+                                  timeCaption="Hora"
+                                  placeholderText={window.localization['PRESS_FORM_DELIVERY']}
+                              />
+                            </div>
+                          </div>
                         </div>
 
                         <div className="separator" style={{height:30}}></div>
@@ -500,12 +522,11 @@ export default class ModalFormPress extends Component {
 
                             </label>
 
-                            {/*
                             <label className={"col-xs-12 "+this.hasErrors('newsletter')}>
                               <input type="checkbox" className={this.hasErrors('newsletter')} name="newsletter" value={fields.newsletter} onChange={this.onCheckboxChange}  />
                               Quiero recibir más información de Turisme de Barcelona (NewsleJer Profesional)
                             </label>
-                            */}
+                            
                           </div>
 
                         </div>

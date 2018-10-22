@@ -33,6 +33,7 @@ class SavePressRequest extends FormRequest
             'dateStart' => 'required',
             'dateEnd' => 'required',
             'comment' => 'required',
+            'delivery' => 'required',
 
             'privacity' => 'required|accepted',
             //'newsletter' => 'required|accepted',

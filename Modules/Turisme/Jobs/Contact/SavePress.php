@@ -31,6 +31,7 @@ class SavePress
             'dateStart',
             'dateEnd',
             'comment',
+            'delivery',
 
             'privacity',
             'newsletter',

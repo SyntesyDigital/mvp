@@ -27,6 +27,7 @@
             <p style="Margin-bottom: 15px;">Inicio : {{$dateStart}}</p>
             <p style="Margin-bottom: 15px;">Final : {{$dateEnd}}</p>
             <p style="Margin-bottom: 15px;">Comentario : {{$comment}}</p>
+            <p style="Margin-bottom: 15px;">Fecha recogida : {{$delivery}}</p>
             <p style="Margin-bottom: 15px;"></p>
 
             <p style="Margin-bottom: 15px;">Privacidad aceptada : {{isset($privacity) && $privacity == 1 ? 'Si' : 'No'}}</p>

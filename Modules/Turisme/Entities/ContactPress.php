@@ -41,6 +41,7 @@ class ContactPress extends Model
         'dateStart',
         'dateEnd',
         'comment',
+        'delivery',
 
         'privacity',
         'newsletter',
