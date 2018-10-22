@@ -1,10 +1,11 @@
 <div id="carousel-full" class="carousel slide {{$field['settings']['htmlClass'] or ''}}" data-ride="carousel">
+    @if(count($field['value']) > 1)
     <ol class="carousel-indicators">
       @foreach($field['value'] as $index => $widget)
       <li data-target="#carousel-full" data-slide-to="{{$index}}" class="{{$index == 0 ? 'active' : ''}}"></li>
       @endforeach
-
     </ol>
+    @endif
 
     <div class="carousel-inner" role="listbox">
 
