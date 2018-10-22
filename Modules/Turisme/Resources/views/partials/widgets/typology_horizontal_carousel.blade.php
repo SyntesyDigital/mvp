@@ -6,7 +6,8 @@
       [
         "field" => $field['fields'][0],
         "settings" => $field['settings'],
-        "div" => false
+        "div" => false,
+        "p" => false
       ]
     )
   </h3>
@@ -16,6 +17,3 @@
   >
   </div>
 </div>
-
-
-          

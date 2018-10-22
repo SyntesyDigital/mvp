@@ -23,9 +23,17 @@
     {{$field['value']['title'][App::getLocale()] or ''}}
   </a>
   @else
-  <p class="titol">
-    {{$field['value']['title'][App::getLocale()] or ''}}
-  </p>
+
+    @if(!isset($p))
+    <p class="titol">
+    @endif
+
+      {{$field['value']['title'][App::getLocale()] or ''}}
+
+    @if(!isset($p))
+    </p>
+    @endif
+
   @endif
 
 @if(!isset($div))
