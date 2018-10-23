@@ -9,7 +9,7 @@
   }
 @endphp
 
-@if($slides)
+@if($slides != null)
   <div class="carousel-single-container centered">
   <div id="carousel-single" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
