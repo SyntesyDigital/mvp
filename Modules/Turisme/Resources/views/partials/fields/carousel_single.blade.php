@@ -9,8 +9,8 @@
   }
 @endphp
 
-
-<div class="carousel-single-container centered">
+@if($slides)
+  <div class="carousel-single-container centered">
   <div id="carousel-single" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
       @foreach($slides as $item)
@@ -37,3 +37,4 @@
   @endif
 
 </div>
+@endif
