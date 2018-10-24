@@ -120,6 +120,34 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+
+                    @php
+                      $userRole = isset($user) && $user->language ? $user->roles->first()->id : old('role');
+                      $languages = [
+                                    'ca' => 'Catalan',
+                                    'es' => 'Español',
+                                    'en' => 'English',
+                                    'fr' => 'Francés'
+                                   ]
+                    @endphp
+
+                    <label>Language</label>
+                    {!!
+                        Form::select(
+                            'language',
+                            $languages,
+                            $user->language,
+                            [
+                                'class' => 'form-control',
+                                'placeholder'=> '---'
+                            ]
+                        )
+                    !!}
+                </div>
+            </div>
+
 
             @if(Auth::user()->hasRole(["admin"]))
 

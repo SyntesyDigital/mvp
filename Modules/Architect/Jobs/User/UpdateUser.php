@@ -19,6 +19,7 @@ class UpdateUser
             'email',
             'password',
             'role_id',
+            'language',
         ]);
     }
 

@@ -17,6 +17,7 @@ class CreateUser
             'email',
             'password',
             'role_id',
+            'language',
         ]);
     }
 
