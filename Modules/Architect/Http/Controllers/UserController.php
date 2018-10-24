@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\UserRepository;
+use Session;
 
 // Models
 use App\Models\User;

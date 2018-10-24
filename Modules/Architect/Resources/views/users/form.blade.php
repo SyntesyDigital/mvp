@@ -45,14 +45,14 @@
                     @if(isset($user))
                     <h1>{{ $user->full_name }}</h1>
                     @else
-                    <h1>Crear usuari</h1>
+                    <h1>{{Lang::get('architect::user.create')}}</h1>
                     @endif
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <label>Email</label>
+                    <label>{{Lang::get('architect::fields.email')}}</label>
                     {!!
                         Form::text(
                             'email',
@@ -69,7 +69,7 @@
 
 
                 <div class="col-md-6">
-                    <label>Firstname</label>
+                    <label>{{Lang::get('architect::fields.firstname')}}</label>
                     {!!
                         Form::text(
                             'firstname',
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label>Lastname</label>
+                    <label>{{Lang::get('architect::fields.lastname')}}</label>
                     {!!
                         Form::text(
                             'lastname',
@@ -97,7 +97,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <label>Password</label>
+                    <label>{{Lang::get('architect::fields.password')}}</label>
                     {!!
                         Form::password(
                             'password',
@@ -108,7 +108,7 @@
                     !!}
                 </div>
                 <div class="col-md-6">
-                    <label>Confirm password</label>
+                    <label>{{Lang::get('architect::fields.co_password')}}</label>
                     {!!
                         Form::password(
                             'password_confirmation',
@@ -124,21 +124,22 @@
                 <div class="col-md-12">
 
                     @php
-                      $userRole = isset($user) && $user->language ? $user->roles->first()->id : old('role');
                       $languages = [
-                                    'ca' => 'Catalan',
-                                    'es' => 'Español',
-                                    'en' => 'English',
-                                    'fr' => 'Francés'
-                                   ]
+                                    'ca' => Lang::get('architect::user.catalan'),
+                                    'es' => Lang::get('architect::user.spanish'),
+                                    'en' => Lang::get('architect::user.english'),
+                                    'fr' => Lang::get('architect::user.french')
+                                   ];
+                     $userLang = isset($user) && $user->language != '' ? $user->language : old('language');
+
                     @endphp
 
-                    <label>Language</label>
+                    <label>{{Lang::get('architect::fields.language')}}</label>
                     {!!
                         Form::select(
                             'language',
                             $languages,
-                            $user->language,
+                            $userLang,
                             [
                                 'class' => 'form-control',
                                 'placeholder'=> '---'
@@ -158,7 +159,7 @@
                         $userRole = isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role');
                       @endphp
 
-                      <label>Role</label>
+                      <label>{{Lang::get('architect::fields.role')}}</label>
                       {!!
                           Form::select(
                               'role_id',
@@ -183,7 +184,7 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     {!!
-                        Form::submit('Guardar', [
+                        Form::submit(Lang::get('architect::fields.save'), [
                             'class' => 'btn btn-primary'
                         ])
                     !!}

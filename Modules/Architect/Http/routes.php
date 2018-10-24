@@ -4,7 +4,7 @@
 Auth::routes();
 
 Route::group([
-  'middleware' => ['web', 'auth'],
+  'middleware' => ['web', 'auth', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()

@@ -16,33 +16,33 @@
 
                       <li class="{{ Request::is('architect') ? 'active' : '' }}">
                         <a href="{{route('dashboard')}}">
-                        Inici
+                        {{Lang::get('architect::header.home')}}
                         </a>
                       </li>
 
                         @if(Auth::user()->hasRole(["admin"]))
                       <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">
-                          Tipologies
+                          {{Lang::get('architect::header.typology')}}
                         </a>
                       </li>
                         @endif
                       <li class="{{ Request::is('architect/contents*') ? 'active' : '' }}">
                         <a href="{{route('contents')}}">
-                        Continguts
+                        {{Lang::get('architect::header.contents')}}
                         </a>
                       </li>
 
                       <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
                         <a href="{{route('medias.index')}}">
-                          Mitjans
+                          {{Lang::get('architect::header.media')}}
                         </a>
                       </li>
 
                        @if(Auth::user()->hasRole(["admin"]))
                       <li class="{{ Request::is('architect/settings*') ? 'active' : '' }}">
                         <a href="{{route('settings')}}">
-                          Configuració
+                          {{Lang::get('architect::header.configuration')}}
                         </a>
                       </li>
                       @endif
@@ -58,7 +58,7 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              Hola {{Auth::user()->firstname}},
+                              {{Lang::get('architect::header.hello')}} {{Auth::user()->firstname}},
                               <b class="caret"></b>
                               <div class="ripple-container"></div>
                             </a>
@@ -67,12 +67,12 @@
                                   <li>
                                       <a href="{{route('users.show',Auth::user()->id)}}">
                                           <i class="fa fa-user"></i>
-                                          &nbsp;El meu compte
+                                          &nbsp;{{Lang::get('architect::header.my_profile')}}
                                       </a>
                                   </li>
                                   <li>
                                       <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                          <i class="fa fa-sign-out"></i> &nbsp; Desconectar
+                                          <i class="fa fa-sign-out"></i> &nbsp; {{Lang::get('architect::header.disconnect')}}
                                       </a>
                                       <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                                       {{csrf_field()}}

@@ -1,0 +1,35 @@
+<?php
+
+return [
+    'text' => 'Texte',
+    'richtext' => 'Texteriche',
+    'image' => 'Image',
+    'images' => 'Images',
+    'contents' => 'Contenus',
+    'date' => 'Date',
+    'contentlist' => 'Liste',
+    'boolean' => 'Booléen',
+    'link' => 'Lien',
+    'video' => 'Vidéo',
+    'localization' => 'Emplacement',
+    'slug' => 'Slug',
+    'url' => 'URL',
+    'file' => 'Fichier',
+    'translated_file' => 'Fichier traduit',
+    'key_values' => 'Clé/Value',
+
+    'title' => 'Titre',
+    'description' => 'Description',
+    'subtitle' => 'Sous-titre',
+    'message' => 'Message',
+    'author' => 'Auteur',
+    'company' => 'Entreprise',
+    'email'   => 'Email',
+    'firstname' => 'Prénom',
+    'lastname'  => 'Nom',
+    'password'  => 'Mot de passe',
+    'co_password' => 'Confirmex le mot de passe',
+    'language'  => 'Langue',
+    'role'      => 'Rôle',
+    'save'      => 'Sauvegarder'
+];

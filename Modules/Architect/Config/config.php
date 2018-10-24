@@ -18,5 +18,6 @@ return [
         ],
 
         'index' => env('ELASTICSEARCH_INDEX', 'architect')
-    ]
+    ],
+    'fallback_language' => 'ca'
 ];

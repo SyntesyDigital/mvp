@@ -23,5 +23,13 @@ return [
     'subtitle' => 'Subtítol',
     'message' => 'Missatge',
     'author' => 'Autor',
-    'company' => 'Empresa'
+    'company' => 'Empresa',
+    'email'   => 'Email',
+    'firstname' => 'Nom',
+    'lastname'  => 'Cognom',
+    'password'  => 'Contrasenya',
+    'co_password' => 'Confirma contrasenya',
+    'language'  => 'Idioma',
+    'role'      => 'Rol',
+    'save'      => 'Guardar'
 ];

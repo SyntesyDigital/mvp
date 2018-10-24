@@ -2,5 +2,5 @@
 
 return [
     'published' => 'Publicado',
-    'draft' => 'Esborrany'
+    'draft' => 'Borrador'
 ];

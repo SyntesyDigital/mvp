@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'published' => 'Publicat',
-    'draft' => 'Esborrany'
+    'published' => 'Published',
+    'draft' => 'Draft'
 ];

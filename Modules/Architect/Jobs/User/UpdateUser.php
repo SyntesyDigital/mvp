@@ -40,5 +40,6 @@ class UpdateUser
         $this->user->roles()->sync($this->attributes['role_id']);
 
         return $this->user->update($this->attributes);
+        
     }
 }
