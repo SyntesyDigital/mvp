@@ -6,8 +6,8 @@
     <div class="col-md-offset-2 col-md-8">
 
       <div class="page-title">
-        <h1>Benvingut {{Auth::user()->firstname}},</h1>
-        <h3>Visualitza l'estat actual de les diferents seccions del portal</h3>
+        <h1>{{Lang::get('architect::home.wellcome')}} {{Auth::user()->firstname}},</h1>
+        <h3>{{Lang::get('architect::home.current_state')}}</h3>
       </div>
 
       <div class="dashboard-items">
@@ -16,28 +16,28 @@
             @if(Auth::user()->hasRole(["admin"]))
 
               @include('architect::partials.dashboard-counter',[
-                "name" => "Continguts",
+                "name" => Lang::get('architect::home.contents'),
                 "value" => Modules\Architect\Entities\Content::all()->count(),
                 "icon" => "fa-file-o",
                 "route" => route('contents')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => "Mitjans",
+                "name" => Lang::get('architect::home.media'),
                 "value" => Modules\Architect\Entities\Media::all()->count(),
                 "icon" => "fa-picture-o",
                 "route" => route('medias.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => "Usuaris",
+                "name" => Lang::get('architect::home.users'),
                 "value" => App\Models\User::all()->count(),
                 "icon" => "fa-users",
                 "route" => route('users')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => "Llenguatges",
+                "name" => Lang::get('architect::home.languages'),
                 "value" => Modules\Architect\Entities\Language::all()->count(),
                 "icon" => "fa-flag",
                 "route" => route('languages')
@@ -48,7 +48,7 @@
             <div class="col-xs-6">
               <!-- React Table.js -->
               <div id="dashboard-table"
-                title="Últimes 25 pàgines"
+                title={{Lang::get('architect::home.pages')}}
                 route={{route('contents.modal.data')."?is_page=1"}}
               ></div>
             </div>
@@ -56,7 +56,7 @@
             <div class="col-xs-6">
               <!-- React Table.js -->
               <div id="dashboard-table"
-                title="Últimes 25 notícies"
+                title={{Lang::get('architect::home.news')}}
                 route={{route('contents.modal.data')."?typology_id=2"}}
               ></div>
             </div>

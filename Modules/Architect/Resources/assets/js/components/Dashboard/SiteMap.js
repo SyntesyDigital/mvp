@@ -123,6 +123,7 @@ export default class SiteMap extends Component {
       var result = [];
       var legend = this.legend[this.state.metric];
 
+
       for(var key in legend){
         result.push(
           <li key={key}>
@@ -137,11 +138,11 @@ export default class SiteMap extends Component {
     }
 
     render() {
-
         return (
+
             <div className="dashboard-graph">
               <div className="dashboard-header">
-                Mapa del portal
+                {Lang.get('home.map')}
                 <div className="actions">
                   {/*
                   <a href="" className="btn btn-link">
@@ -153,10 +154,10 @@ export default class SiteMap extends Component {
               <div className="dashboard-body">
                 <div className="col-xs-3 sidebar">
                   <div className="form-group bmd-form-group">
-                    <label htmlFor="parent_id" className="bmd-label-floating">Agrupat per</label>
+                    <label htmlFor="parent_id" className="bmd-label-floating">{Lang.get('home.grouped')}</label>
                     <select className="form-control" value={this.state.metric} onChange={this.onMetricChange.bind(this)}>
-                      <option value="status">Estat</option>
-                      <option value="author">Autor</option>
+                      <option value="status">{Lang.get('home.status')}</option>
+                      <option value="author">{Lang.get('home.author')}</option>
                     </select>
                   </div>
 
@@ -172,13 +173,13 @@ export default class SiteMap extends Component {
                   {this.state.selectedInfo != null &&
                   <div className="item-info">
                     <ul>
-                      <li><b>Nom</b> : {this.state.selectedInfo.title}</li>
-                      <li><b>Estat</b> : {this.legend.status[this.state.selectedInfo.status].name}</li>
-                      <li><b>Autor</b> : {this.state.selectedInfo.author}</li>
-                      <li><b>Url</b> : {this.state.selectedInfo.url}</li>
+                      <li><b>{Lang.get('home.name')}</b> : {this.state.selectedInfo.title}</li>
+                      <li><b>{Lang.get('home.status')}</b> : {this.legend.status[this.state.selectedInfo.status].name}</li>
+                      <li><b>{Lang.get('home.author')}</b> : {this.state.selectedInfo.author}</li>
+                      <li><b>{Lang.get('home.url')}</b> : {this.state.selectedInfo.url}</li>
                       <li>
-                        <a href={this.state.selectedInfo.url} target="_blank"><i className="fa fa-eye"></i> Veure</a> |
-                        &nbsp;<a href={"/architect/contents/"+this.state.selectedInfo.id} target="_blank"><i className="fa fa-pencil"></i> Editar</a>
+                        <a href={this.state.selectedInfo.url} target="_blank"><i className="fa fa-eye"></i> {Lang.get('home.view')}</a> |
+                        &nbsp;<a href={"/architect/contents/"+this.state.selectedInfo.id} target="_blank"><i className="fa fa-pencil"></i> {Lang.get('home.edit')}</a>
                       </li>
                     </ul>
                   </div>

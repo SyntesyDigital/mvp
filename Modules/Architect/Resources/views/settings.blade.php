@@ -6,8 +6,8 @@
     <div class="col-md-offset-2 col-md-8">
 
       <div class="page-title">
-        <h1>Configuració</h1>
-        <h3>Configura les diferents opcions del portal web</h3>
+        <h1>{{Lang::get('architect::settings.title')}}</h1>
+        <h3>{{Lang::get('architect::settings.subtitle')}}</h3>
       </div>
 
       <div class="grid-items">
@@ -18,7 +18,7 @@
                   <div class="grid-item">
                       <i class="fa fa-users"></i>
                       <p class="grid-item-name">
-                          Usuaris
+                          {{Lang::get('architect::settings.users')}}
                       </p>
                   </div>
                 </a>
@@ -29,7 +29,7 @@
                   <div class="grid-item">
                       <i class="fa fa-flag"></i>
                       <p class="grid-item-name">
-                          Llenguatges
+                          {{Lang::get('architect::settings.languages')}}
                       </p>
                   </div>
                 </a>
@@ -40,7 +40,7 @@
                   <div class="grid-item">
                       <i class="fa fa-list-alt"></i>
                       <p class="grid-item-name">
-                          Traduccions
+                          {{Lang::get('architect::settings.translations')}}
                       </p>
                   </div>
                 </a>
@@ -51,7 +51,7 @@
                   <div class="grid-item">
                       <i class="fa fa-list"></i>
                       <p class="grid-item-name">
-                          Menú
+                          {{Lang::get('architect::settings.menu')}}
                       </p>
                   </div>
                 </a>
@@ -62,7 +62,7 @@
                   <div class="grid-item">
                       <i class="fa fa-columns"></i>
                       <p class="grid-item-name">
-                          Plantilles
+                          {{Lang::get('architect::settings.templates')}}
                       </p>
                   </div>
                 </a>

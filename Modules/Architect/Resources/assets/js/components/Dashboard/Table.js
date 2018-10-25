@@ -94,19 +94,19 @@ export default class Table extends Component {
         return (
           <div className="dashboard-table">
               <div className="dashboard-table-header">
-                <h3> {this.props.title}</h3>
+                <h3> {Lang.get('home.lasts')} {this.props.title}</h3>
 
                 <table>
                   <thead>
                     <tr>
                       <th>
-                        Nom
+                        {Lang.get('home.name')}
                       </th>
                       <th>
-                        Estat
+                        {Lang.get('home.status')}
                       </th>
                       <th>
-                        Data
+                        {Lang.get('home.date')}
                       </th>
                     </tr>
                   </thead>
