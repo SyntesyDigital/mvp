@@ -102,7 +102,7 @@ architect.medias = {
           ordering: true,
     	    pageLength: 20,
           language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
           },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [

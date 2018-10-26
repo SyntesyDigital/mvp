@@ -47,7 +47,7 @@ class ContentDataTable extends Component {
         var _this = this;
         var table = $(this.refs.main).DataTable({
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
             },
             processing: true,
             serverSide: true,

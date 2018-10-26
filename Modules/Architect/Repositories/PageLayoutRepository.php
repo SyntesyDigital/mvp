@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 use DataTables;
 use Modules\Architect\Entities\PageLayout;
+use Lang;
 
 class PageLayoutRepository extends BaseRepository
 {
@@ -19,7 +20,7 @@ class PageLayoutRepository extends BaseRepository
         return Datatables::of(PageLayout::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('pagelayouts.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('pagelayouts.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);

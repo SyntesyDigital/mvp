@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 use Modules\Architect\Entities\Translation;
 use Datatables;
+use Lang;
 
 class TranslationRepository extends BaseRepository
 {
@@ -33,8 +34,8 @@ class TranslationRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '
-                <a href="' . route('translations.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a>&nbsp;
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('translations.delete', $item) . '" data-confirm-message="Vols continuar ? "><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                <a href="' . route('translations.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a>&nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('translations.delete', $item) . '" data-confirm-message="Vols continuar ? "><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);

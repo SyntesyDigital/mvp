@@ -5,5 +5,6 @@ return [
     'catalan'        => 'Català',
     'english'        => 'Anglès',
     'spanish'        => 'Espanyol',
-    'french'         => 'Francès'
+    'french'         => 'Francès',
+    'add'            => 'Afegir usuari'
 ];

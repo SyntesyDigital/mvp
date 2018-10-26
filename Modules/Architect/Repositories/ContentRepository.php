@@ -11,6 +11,7 @@ use Modules\Architect\Entities\Field;
 
 use App;
 use Auth;
+use Lang;
 
 use Modules\Architect\Repositories\Criterias\ContentModalDatatableCriteria;
 
@@ -139,11 +140,11 @@ class ContentRepository extends BaseRepository
                   $buttons .= '<a title="Previsualitzar" href="/es/preview/'.$item->id.'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
                 }
 
-                $buttons .= '<a title="Editar" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp';
+                $buttons .= '<a title="'.Lang::get("architect::datatables.edit").'" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp';
 
                 //si no es ( pagina y author a la vez add remove)
                 if(!($item->page && Auth::user()->hasRole(["author"]))){
-                  $buttons .= '<a title="Esborrar" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> </a> &nbsp';
+                  $buttons .= '<a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> </a> &nbsp';
                 }
 
                 return $buttons;

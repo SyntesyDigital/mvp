@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 use DataTables;
 use Storage;
+use Lang;
 
 use Modules\Architect\Entities\Menu;
 use Modules\Architect\Entities\MenuElement;
@@ -24,8 +25,8 @@ class MenuRepository extends BaseRepository
         return Datatables::of(Menu::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="'.route('menu.show', $item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a> &nbsp;
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('menu.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                <a href="'.route('menu.show', $item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('menu.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);

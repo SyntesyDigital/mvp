@@ -153,7 +153,7 @@ architect.medias = {
           ordering: true,
     	    pageLength: 20,
           language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
           },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -230,7 +230,7 @@ architect.contents = {
             order: [],
              pageLength: 10,
               language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
               },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -304,7 +304,7 @@ architect.tags = {
             serverSide: true,
     	    pageLength: 20,
               language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
               },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -368,13 +368,12 @@ architect.users = {
     setDatatable: function()
     {
         var _this = this;
-
         var table = _this._settings.table.DataTable({
     		processing: true,
             serverSide: true,
     	    pageLength: 20,
               language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
               },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -444,7 +443,7 @@ architect.pageLayouts = {
             serverSide: true,
     	    pageLength: 20,
               language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
               },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -514,7 +513,7 @@ architect.menu = {
             //serverSide: true,
     	      pageLength: 20,
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
             },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -907,7 +906,7 @@ architect.languages = {
             serverSide: true,
     	      pageLength: 20,
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
             },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -1051,7 +1050,7 @@ architect.translations = {
             serverSide: true,
     	      pageLength: 20,
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
             },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [

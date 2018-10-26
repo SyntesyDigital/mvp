@@ -4,15 +4,15 @@
 <div class="container leftbar-page">
   <div class="col-xs-offset-2 col-xs-8 page-content">
 
-    <h3 class="card-title">Llenguatges</h3>
+    <h3 class="card-title">{{Lang::get('architect::settings.languages')}}</h3>
     <a href="{{route('languages.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir llenguatge</a>
 
     <table class="table" id="table" data-url="{{route('languages.data')}}">
         <thead>
            <tr>
-               <th></th>  
-               <th>Nom</th>
-               <th>Codi ISO</th>
+               <th></th>
+               <th>{{Lang::get('architect::datatables.name')}}</th>
+               <th>{{Lang::get('architect::datatables.iso')}}</th>
                <th></th>
            </tr>
         </thead>

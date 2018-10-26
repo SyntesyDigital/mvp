@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 use Modules\Architect\Entities\Tag;
 use Datatables;
+use Lang;
 
 class TagRepository extends BaseRepository
 {
@@ -31,8 +32,8 @@ class TagRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '
-                <a href="' . route('tags.show', $item) . '" class="" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> Editar</a>
-                <a href="#" class="text-danger" data-toogle="delete" data-ajax="' . route('tags.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> Esborrar</a> &nbsp;
+                <a href="' . route('tags.show', $item) . '" class="" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a>
+                <a href="#" class="text-danger" data-toogle="delete" data-ajax="' . route('tags.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);
