@@ -5,7 +5,7 @@
   <div class="col-xs-offset-2 col-xs-8 page-content">
 
     <h3 class="card-title">{{Lang::get('architect::settings.languages')}}</h3>
-    <a href="{{route('languages.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir llenguatge</a>
+    <a href="{{route('languages.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('architect::settings.add_language')}}</a>
 
     <table class="table" id="table" data-url="{{route('languages.data')}}">
         <thead>

@@ -278,7 +278,7 @@
       var isoCode = $(e.target).data('lang');
       var slug = slugifyTitle(e.target.value);
       $(".input-target[data-lang='"+isoCode+"']").val(slug);
-      
+
     });
 
   });
