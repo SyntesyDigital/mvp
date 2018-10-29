@@ -99,11 +99,11 @@ class ContentDataTable extends Component {
             <table ref="main" className="table" id="table-contents" style={{width:"100%"}}>
                 <thead>
                    <tr>
-                       <th>Nom</th>
-                       <th>Tipus</th>
-                       <th>Actualiztat</th>
-                       <th>Autor</th>
-                       <th>Estat</th>
+                       <th>{Lang.get('fields.name')}</th>
+                       <th>{Lang.get('fields.tipus')}</th>
+                       <th>{Lang.get('fields.updated')}</th>
+                       <th>{Lang.get('fields.author')}</th>
+                       <th>{Lang.get('fields.status')}</th>
                        <th></th>
                    </tr>
                 </thead>

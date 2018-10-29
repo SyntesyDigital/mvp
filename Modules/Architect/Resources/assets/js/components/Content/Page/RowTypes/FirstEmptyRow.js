@@ -14,7 +14,7 @@ class FirstEmptyRow extends Component {
     return (
       <div className="page-row add-row-block">
         <a href="" className="btn btn-default" onClick={this.props.onAddRow}>
-          <i className="fa fa-plus-circle"></i> Afegir fila
+          <i className="fa fa-plus-circle"></i> {Lang.get('fields.add_row')}
         </a>
       </div>
     );

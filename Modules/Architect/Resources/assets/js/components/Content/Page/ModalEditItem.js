@@ -147,7 +147,7 @@ class ModalEditItem extends Component {
 
               response.data.data.unshift({
                 "id": '',
-          			"description_es": "Sin programa",
+          			"description_es": Lang.get('modals.without_program'),
               });
 
               self.setState({
@@ -887,15 +887,15 @@ class ModalEditItem extends Component {
     return (
       <div>
 
-        <h6>Configuració</h6>
+        <h6>{Lang.get('modals.configuration')}</h6>
 
         <InputTranslatedSettingsField
           field={this.state.field}
           name="title"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Títol"
-          inputLabel="Indica el títol"
+          label={Lang.get('modals.title')}
+          inputLabel={Lang.get('modals.indica_title')}
           translations={this.props.translations}
         />
 
@@ -907,7 +907,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Html ID"
-          inputLabel="Indica el Id html del camp"
+          inputLabel={Lang.get('modals.indica_html')}
         />
 
         <InputSettingsField
@@ -916,7 +916,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Html Class"
-          inputLabel="Indica la clase CSS personalitzada"
+          inputLabel={Lang.get('modals.indica_css')}
         />
 
         <RadioSettingsField
@@ -924,7 +924,7 @@ class ModalEditItem extends Component {
           name="cropsAllowed"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Mides permeses"
+          label={Lang.get('modals.sizes_allowed')}
           options={this.getCropsformats()}
         />
 
@@ -933,7 +933,7 @@ class ModalEditItem extends Component {
           name="typologyAllowed"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologia permesa"
+          label={Lang.get('modals.tipology_allowed')}
           options={this.TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
@@ -947,7 +947,7 @@ class ModalEditItem extends Component {
           name="typology"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologia"
+          label={Lang.get('modals.typology_allowed')}
           options={this.LISTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
@@ -961,7 +961,7 @@ class ModalEditItem extends Component {
           name="selectableTypology"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Tipologia"
+          label={Lang.get('modals.tipology')}
           options={this.SELECTABLE_TYPOLOGIES.map(function(obj){
               return {
                   value: obj.id,
@@ -975,7 +975,7 @@ class ModalEditItem extends Component {
           name="program"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Programa"
+          label={Lang.get('modals.program')}
           options={this.state.programs.map(function(obj){
               return {
                   value: obj.id,
@@ -989,7 +989,7 @@ class ModalEditItem extends Component {
           name="axe"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Eix"
+          label={Lang.get('modals.axe')}
           options={this.state.axes.map(function(item){
               return {
                   value: item.id,
@@ -1003,7 +1003,7 @@ class ModalEditItem extends Component {
           name="category"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Categoria"
+          label={Lang.get('modals.category')}
           options={this.state.categories}
         />
 
@@ -1012,8 +1012,8 @@ class ModalEditItem extends Component {
           name="maxItems"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Número màxim d'elements"
-          inputLabel="Indica el número màxim"
+          label={Lang.get('modals.max_elements')}
+          inputLabel={Lang.get('modals.indica_max_elements')}
         />
 
         <InputSettingsField
@@ -1021,8 +1021,8 @@ class ModalEditItem extends Component {
           name="itemsPerPage"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Número d'elements per pagina"
-          inputLabel="Indica el número d'elements per pagina"
+          label={Lang.get('modals.max_elements_page')}
+          inputLabel={Lang.get('modals.indica_max_elements_page')}
         />
 
         <InputSettingsField
@@ -1030,8 +1030,8 @@ class ModalEditItem extends Component {
           name="textIdentifier"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Camp de cerca"
-          inputLabel="Indica el identificador del text de la tipologia"
+          label={Lang.get('modals.search_field')}
+          inputLabel={Lang.get('modals.indica_tipology_text_identifier')}
         />
 
         <InputSettingsField
@@ -1039,8 +1039,8 @@ class ModalEditItem extends Component {
           name="dateIdentifier"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Camp de data"
-          inputLabel="Indica el identificador de la data de la tipologia"
+          label={Lang.get('modals.date_field')}
+          inputLabel={Lang.get('modals.indica_tipology_date_identifier')}
         />
 
         <BooleanSettingsField
@@ -1048,7 +1048,7 @@ class ModalEditItem extends Component {
           name="extended"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Versió extesa"
+          label={Lang.get('modals.extended_version')}
         />
 
         <SelectorSettingsField
@@ -1056,7 +1056,7 @@ class ModalEditItem extends Component {
           name="columns"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Columnes del llistat"
+          label={Lang.get('modals.list_columns')}
           options={[
               {
                   value: "",
@@ -1064,19 +1064,19 @@ class ModalEditItem extends Component {
               },
               {
                   value: "col-1",
-                  name: "1 columna",
+                  name: "1 "+Lang.get('modals.column'),
               },
               {
                   value: "col-2",
-                  name: "2 columnes",
+                  name: "2 "+Lang.get('modals.columns'),
               },
               {
                   value: "col-3",
-                  name: "3 columnes",
+                  name: "3 "+Lang.get('modals.columns'),
               },
               {
                   value: "col-4",
-                  name: "4 columnes",
+                  name: "4 "+Lang.get('modals.columns'),
               }
           ]}
         />
@@ -1086,8 +1086,8 @@ class ModalEditItem extends Component {
           name="height"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Alçada"
-          inputLabel="Indica l'alçada del camp"
+          label={Lang.get('modals.height')}
+          inputLabel={Lang.get('modals.indica_height')}
         />
 
       </div>
@@ -1131,7 +1131,7 @@ class ModalEditItem extends Component {
                 <div className="modal-header">
 
                     <i className={"fa "+this.state.field.icon}></i>
-                    <h2>{this.state.field.name} | Edició</h2>
+                    <h2>{this.state.field.name} | {Lang.get('modals.edition')}</h2>
 
                   <div className="modal-buttons">
                     <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -1157,8 +1157,8 @@ class ModalEditItem extends Component {
                 </div>
 
                 <div className="modal-footer">
-                  <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                  <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> Acceptar </a> &nbsp;
+                  <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('modals.cancel')} </a> &nbsp;
+                  <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> {Lang.get('modals.accept')} </a> &nbsp;
                 </div>
 
               </div>

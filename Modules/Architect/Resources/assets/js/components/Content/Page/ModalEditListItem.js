@@ -142,7 +142,7 @@ class ModalEditListItem extends Component {
               <div className="modal-header">
 
                   <i className={"fa "+this.state.field.icon}></i>
-                  <h2>{this.state.field.name} | Edició</h2>
+                  <h2>{this.state.field.name} | {Lang.get('modals.edition')}</h2>
 
                 <div className="modal-buttons">
                   <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -166,8 +166,8 @@ class ModalEditListItem extends Component {
               </div>
 
               <div className="modal-footer">
-                <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> Acceptar </a> &nbsp;
+                <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('fields.cancel')} </a> &nbsp;
+                <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> {Lang.get('fields.accept')} </a> &nbsp;
               </div>
 
             </div>

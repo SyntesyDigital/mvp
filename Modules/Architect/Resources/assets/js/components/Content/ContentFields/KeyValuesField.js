@@ -122,7 +122,7 @@ class KeyValuesField extends Component {
             </div>
 
             <div className="add-content-button">
-               <a href="#" className="btn btn-default" onClick={this.onAddItem.bind(this)}><i className="fa fa-plus-circle"></i>  Afegir </a>
+               <a href="#" className="btn btn-default" onClick={this.onAddItem.bind(this)}><i className="fa fa-plus-circle"></i>  {Lang.get('fields.add')} </a>
             </div>
 
         </div>

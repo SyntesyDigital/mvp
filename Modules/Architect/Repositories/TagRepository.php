@@ -33,7 +33,7 @@ class TagRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 return '
                 <a href="' . route('tags.show', $item) . '" class="" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a>
-                <a href="#" class="text-danger" data-toogle="delete" data-ajax="' . route('tags.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
+                <a href="#" class="text-danger" data-toogle="delete" data-ajax="' . route('tags.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);

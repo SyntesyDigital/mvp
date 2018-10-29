@@ -280,7 +280,7 @@ architect.menu.form = {
     {
         var ajax = item.data('ajax');
 
-        architect.dialog.confirm("Estas segur ? ", function(result){
+        architect.dialog.confirm("Estas segu ? ", function(result){
             if(result) {
 
                 var itemId = item.attr('id').split('-')[1];

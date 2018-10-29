@@ -53,7 +53,7 @@ class LayoutSelectModal extends Component {
                 <div className="modal-container">
                     <div className="modal-header">
 
-                      <h2>Seleccionar plantilla</h2>
+                      <h2>{Lang.get('fields.select_template')}</h2>
 
                       <div className="modal-buttons">
                         <a className="btn btn-default close-button-modal" onClick={this.onModalClose.bind(this)}>
@@ -76,7 +76,7 @@ class LayoutSelectModal extends Component {
                     </div>
 
                     <div className="modal-footer">
-                      <a href="" className="btn btn-default" onClick={this.onModalClose.bind(this)}> Cancel·lar </a> &nbsp;
+                      <a href="" className="btn btn-default" onClick={this.onModalClose.bind(this)}> {Lang.get('fields.cancel')} </a> &nbsp;
                     </div>
 
                   </div>

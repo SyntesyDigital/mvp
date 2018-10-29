@@ -125,7 +125,7 @@ class ContentSelectModal extends Component {
                 <div className="modal-container">
                     <div className="modal-header">
 
-                        <h2>Seleccionar contingut</h2>
+                        <h2>{Lang.get('fields.select_content')}</h2>
 
                       <div className="modal-buttons">
                         <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -149,7 +149,7 @@ class ContentSelectModal extends Component {
                     </div>
 
                     <div className="modal-footer">
-                      <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
+                      <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('modals.cancel')}</a> &nbsp;
                     </div>
 
                   </div>

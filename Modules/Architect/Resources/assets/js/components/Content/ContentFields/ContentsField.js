@@ -147,7 +147,7 @@ class ContentsField extends Component {
 
 
           <div className="add-content-button">
-            <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> Afegir </a>
+            <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> {Lang.get('fields.add')}  </a>
           </div>
 
         </div>

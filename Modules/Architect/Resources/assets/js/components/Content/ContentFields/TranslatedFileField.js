@@ -92,15 +92,15 @@ class TranslatedFileField extends Component {
 
               {(!defined ) &&
                 <div className="add-button">
-                  <a href="#" className="btn btn-default" onClick={this.onFileSelect.bind(this,key)}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
+                  <a href="#" className="btn btn-default" onClick={this.onFileSelect.bind(this,key)}><i className="fa fa-plus-circle"></i>  {Lang.get('fields.select')}</a>
                 </div>
               }
            </div>
 
             {defined &&
               <div className="image-buttons">
-                <a href={ASSETS+url} className="btn btn-link" target="_blank"><i className="fa fa-eye"></i> Veure</a> &nbsp;&nbsp;
-                <a href="" className="btn btn-link text-danger" onClick={this.cancelFile.bind(this,key)}><i className="fa fa-times"></i> Cancel·lar</a>
+                <a href={ASSETS+url} className="btn btn-link" target="_blank"><i className="fa fa-eye"></i> {Lang.get('fields.view')}</a> &nbsp;&nbsp;
+                <a href="" className="btn btn-link text-danger" onClick={this.cancelFile.bind(this,key)}><i className="fa fa-times"></i> {Lang.get('fields.cancel')}</a>
               </div>
              }
 

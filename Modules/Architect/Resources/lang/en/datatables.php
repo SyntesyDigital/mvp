@@ -8,6 +8,7 @@ return [
     'iso'           => 'ISO Code',
     'si'            => 'Yes',
     'no'            => 'No',
-    'del_lang_msg'  => 'Deleting a language you will delete all contents in that language. Do you want to continue?'
+    'continue'      => 'Do you want to continue ?',
+    'sure'          => 'Are you sure ?'
 
 ];

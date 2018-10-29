@@ -121,7 +121,7 @@ class ContentsDragField extends Component {
         </div>
 
         <div className="field-actions">
-          <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+          <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
 					&nbsp;&nbsp;
         </div>
       </div>),

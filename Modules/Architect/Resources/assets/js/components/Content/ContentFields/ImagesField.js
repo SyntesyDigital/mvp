@@ -152,7 +152,7 @@ class ImagesField extends Component {
             </div>
 
             <div className="add-content-button">
-               <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
+               <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  {Lang.get('fields.select')}</a>
             </div>
 
         </div>

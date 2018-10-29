@@ -7,6 +7,5 @@ return [
     'languages'   => 'Langues',
     'translations'  => 'Traductions',
     'menu'        => 'Menu',
-    'templates'   => 'Modèle',
-    'add_language' => 'Ajouter langue'
+    'templates'   => 'Modèle'
 ];

@@ -8,6 +8,6 @@ return [
     'iso'           => 'Código ISO',
     'si'            => 'Sí',
     'no'            => 'No',
-    'del_lang_msg'  => 'Borrar un lenguaje causa la pérdida de todos los contenidos en aquel idioma. Quieres continuar?'
-
+    'continue'      => 'Quieres continuar ?',
+    'sure'          => 'Estas seguro ?'
 ];

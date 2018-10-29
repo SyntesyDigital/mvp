@@ -20,14 +20,14 @@
             <a href="{{route('languages')}}" class="btn btn-default btn-close"> <i class="fa fa-angle-left"></i> </a>
             <h1>
               <i class="fa fa-flag"></i>
-              Nou llenguatge
+              {{Lang::get('architect::language.new')}}
             </h1>
 
             <div class="float-buttons pull-right">
 
             <div class="actions-dropdown">
               <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                Accions
+                {{Lang::get('architect::fields.actions')}}
                 <b class="caret"></b>
                 <div class="ripple-container"></div>
               </a>
@@ -36,7 +36,7 @@
                     <li>
                         <a href="{{route('languages.create')}}">
                             <i class="fa fa-plus-circle"></i>
-                            &nbsp;Nou
+                            &nbsp;{{Lang::get('architect::fields.new')}}
                         </a>
                     </li>
                     @if(isset($language))
@@ -45,11 +45,11 @@
                             class="text-danger"
                             data-toogle="delete"
                             data-ajax="{{route('languages.delete', $language)}}"
-                            data-confirm-message="Esborrar un llenguatge causa la perdua de tots els contingus en aquell idioma. Vols continuar ? "
+                            data-confirm-message="{{Lang::get('architect::language.del_lang_msg')}}"
                         >
                             <i class="fa fa-trash text-danger"></i>
                             &nbsp;
-                            <span class="text-danger">Esborrar</span>
+                            <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                         </a>
                     </li>
                     @endif
@@ -58,7 +58,7 @@
 
 
               {!!
-                  Form::submit('Guardar', [
+                  Form::submit(Lang::get('architect::fields.save'), [
                       'class' => 'btn btn-primary'
                   ])
               !!}
@@ -108,17 +108,17 @@
               <div class="field-item">
                   <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
                       <span class="field-type">
-                          <i class="fa fa-font"></i> Text
+                          <i class="fa fa-font"></i> {{Lang::get('architect::fields.text')}}
                       </span>
                       <span class="field-name">
-                          Nom
+                          {{Lang::get('architect::fields.name')}}
                       </span>
                   </div>
 
                   <div id="collapse1" class="collapse in" aria-labelledby="heading1" aria-expanded="true" aria-controls="collapse1">
                       <div class="field-form">
                           <div class='form-group bmd-form-group'>
-                              <label class="bmd-label-floating">Nom</label>
+                              <label class="bmd-label-floating">{{Lang::get('architect::fields.name')}}</label>
 
                               {!!
                                   Form::text(
@@ -138,17 +138,17 @@
               <div class="field-item">
                   <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
                       <span class="field-type">
-                          <i class="fa fa-font"></i> Text
+                          <i class="fa fa-font"></i> {{Lang::get('architect::fields.text')}}
                       </span>
                       <span class="field-name">
-                          Codi ISO
+                           {{Lang::get('architect::datatables.iso')}}
                       </span>
                   </div>
 
                   <div id="collapse2" class="collapse in" aria-labelledby="heading1" aria-expanded="true" aria-controls="collapse2">
                       <div class="field-form">
                           <div class='form-group bmd-form-group'>
-                              <label class="bmd-label-floating">Codi ISO</label>
+                              <label class="bmd-label-floating">{{Lang::get('architect::datatables.iso')}}</label>
 
                               {!!
                                   Form::text(
@@ -168,10 +168,11 @@
               <div class="field-item">
                   <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
                       <span class="field-type">
-                          <i class="fa fa-check-square-o"></i> Booleà
+                          <i class="fa fa-check-square-o"></i> {{Lang::get('architect::fields.boolean')}}
                       </span>
                       <span class="field-name">
-                          És idioma per defecte ?
+                          {{Lang::get('architect::language.default_question')}}
+
                       </span>
                   </div>
 
@@ -180,7 +181,7 @@
                           <div class='form-group bmd-form-group'>
                             <div class='togglebutton'>
                               <label>
-                                  És idioma per defecte ?
+                                  {{Lang::get('architect::language.default_question')}}
                                   <input
                                     type="checkbox"
                                     name="default"

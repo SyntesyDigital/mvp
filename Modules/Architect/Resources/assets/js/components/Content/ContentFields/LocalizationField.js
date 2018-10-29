@@ -68,7 +68,7 @@ class LocalizationField extends Component
       <div className="row">
         <div className="col-xs-6">
           <div className="form-group bmd-form-group">
-             <label htmlFor={this.props.field.identifier+"_lat"} className="bmd-label-floating">Latitud</label>
+             <label htmlFor={this.props.field.identifier+"_lat"} className="bmd-label-floating">{Lang.get('fields.latitude')}</label>
              <div>{lat}</div>
              {/*
              <input type="text" className="form-control" name="lat" value={lat} onChange={this.handleOnChange} />
@@ -77,7 +77,7 @@ class LocalizationField extends Component
         </div>
         <div className="col-xs-6">
           <div className="form-group bmd-form-group">
-             <label htmlFor={this.props.field.identifier+"_lng"} className="bmd-label-floating">Longitud</label>
+             <label htmlFor={this.props.field.identifier+"_lng"} className="bmd-label-floating">{Lang.get('fields.longitude')}</label>
              <div>{lng}</div>
              {/*
              <input type="text" className="form-control" name="lng" value={lng} onChange={this.handleOnChange} />

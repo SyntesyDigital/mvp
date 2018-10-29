@@ -89,14 +89,14 @@ class Row extends Component {
     var self = this;
 
     bootbox.confirm({
-				message: "Estas segur d'esborrar permanentment aquesta fila i els seus continguts ?",
+				message: Lang.get('fields.delete_row_alert'),
 				buttons: {
 						confirm: {
-								label: 'Sí',
+								label: Lang.get('fields.si'),
 								className: 'btn-primary'
 						},
 						cancel: {
-								label: 'No',
+								label: Lang.get('fields.no'),
 								className: 'btn-default'
 						}
 				},
@@ -150,14 +150,14 @@ class Row extends Component {
     if(cols.length < children.length ){
 
       bootbox.confirm({
-  				message: "La selecció d'un nombre inferior de columnes, pot causar la perdua de contingut. Estas segur de continuar?",
+  				message: Lang.get('fields.less_row_alert'),
   				buttons: {
   						confirm: {
-  								label: 'Sí',
+  								label: Lang.get('fields.si'),
   								className: 'btn-primary'
   						},
   						cancel: {
-  								label: 'No',
+  								label: Lang.get('fields.no'),
   								className: 'btn-default'
   						}
   				},

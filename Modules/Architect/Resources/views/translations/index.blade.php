@@ -4,15 +4,15 @@
 <div class="container leftbar-page">
   <div class="col-xs-offset-2 col-xs-8 page-content">
 
-    <h3 class="card-title">Traduccions</h3>
-    <a href="{{route('translations.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir traducció</a>
+    <h3 class="card-title">{{Lang::get('architect::settings.translations')}}</h3>
+    <a href="{{route('translations.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('architect::translates.add')}}</a>
 
     <table class="table" id="table" data-url="{{route('translations.data')}}">
         <thead>
            <tr>
-               <th>Order</th>
-               <th>Identificador</th>
-               <th>Valor per defecte</th>
+               <th>{{Lang::get('architect::translates.order')}}</th>
+               <th>{{Lang::get('architect::translates.identifier')}}</th>
+               <th>{{Lang::get('architect::translates.default_value')}}</th>
                <th></th>
            </tr>
         </thead>

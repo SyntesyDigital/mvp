@@ -105,7 +105,7 @@ class ModalEditClass extends Component {
     return (
       <div>
 
-        <h6>Configuració</h6>
+        <h6>{Lang.get('modals.configuration')}</h6>
 
         <InputSettingsField
           field={data}
@@ -113,7 +113,7 @@ class ModalEditClass extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Html ID"
-          inputLabel="Indica el Id html del camp"
+          inputLabel={Lang.get('modals.indica_html')}
         />
 
         <InputSettingsField
@@ -122,7 +122,7 @@ class ModalEditClass extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label="Html Class"
-          inputLabel="Indica la clase CSS personalitzada"
+          inputLabel={Lang.get('modals.indica_css')}
         />
 
         <BooleanSettingsField
@@ -130,7 +130,7 @@ class ModalEditClass extends Component {
           name="hasContainer"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label="Té contenidor ?"
+          label={Lang.get('modals.has_container')}
         />
 
       </div>
@@ -153,7 +153,7 @@ class ModalEditClass extends Component {
 
               {this.state.field != null &&
                 <div className="modal-header">
-                    <h2>{this.state.field.data.type == 'row' ? 'Fila' : 'Columna'} | Edició</h2>
+                    <h2>{this.state.field.data.type == 'row' ? 'Fila' : 'Columna'} | {Lang.get('modals.edition')}</h2>
                   <div className="modal-buttons">
                     <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
                       <i className="fa fa-times"></i>
@@ -172,8 +172,8 @@ class ModalEditClass extends Component {
                 </div>
 
                 <div className="modal-footer">
-                  <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                  <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> Acceptar </a> &nbsp;
+                  <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('modals.cancel')} </a> &nbsp;
+                  <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}> {Lang.get('modals.accept')} </a> &nbsp;
                 </div>
 
               </div>

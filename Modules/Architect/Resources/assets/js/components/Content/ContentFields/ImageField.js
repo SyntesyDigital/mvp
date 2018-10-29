@@ -76,7 +76,7 @@ class ImageField extends Component {
 
             {(!defined || value.url == "" ) &&
               <div className="add-button">
-                <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  Seleccionar</a>
+                <a href="#" className="btn btn-default" onClick={this.onImageSelect}><i className="fa fa-plus-circle"></i>  {Lang.get('fields.select')}</a>
               </div>
             }
          </div>
@@ -84,12 +84,12 @@ class ImageField extends Component {
           {defined && value.url != "" &&
             <div className="image-buttons">
               {/*<a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a>*/}
-               <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> Cancel·lar</a>
+               <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> {Lang.get('modals.cancel')}</a>
             </div>
            }
 
            {format &&
-               <p className="field-help"> <b>{format.name}</b> : Mides {format.width}x{format.height} ( Ratio {format.ratio} )</p>
+               <p className="field-help"> <b>{format.name}</b> : {Lang.get('modals.sizes')} {format.width}x{format.height} (  {Lang.get('modals.ratio')} {format.ratio} )</p>
             }
       </div>
     );

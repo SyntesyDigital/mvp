@@ -22,9 +22,9 @@
             <h1>
               <i class="fa fa-list "></i>
               @if(isset($menu))
-                Edita menu "{{$menu->name or ''}}"
+                {{Lang::get('architect::menus.edit')}} "{{$menu->name or ''}}"
               @else
-                Nova menu
+                {{Lang::get('architect::menus.new')}}
               @endif
             </h1>
 
@@ -32,7 +32,7 @@
 
             <div class="actions-dropdown">
               <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                Accions
+                {{Lang::get('architect::fields.actions')}}
                 <b class="caret"></b>
                 <div class="ripple-container"></div>
               </a>
@@ -41,14 +41,14 @@
                     <li>
                         <a href="{{route('menu.create')}}">
                             <i class="fa fa-plus-circle"></i>
-                            &nbsp;Nou
+                            &nbsp;{{Lang::get('architect::fields.new')}}
                         </a>
                     </li>
                     <li>
                         <a href="#" class="text-danger">
                             <i class="fa fa-trash text-danger"></i>
                             &nbsp;
-                            <span class="text-danger">Esborrar</span>
+                            <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                         </a>
                     </li>
                 </ul>
@@ -56,7 +56,7 @@
 
 
               {!!
-                  Form::submit('Guardar', [
+                  Form::submit(Lang::get('architect::fields.save'), [
                       'class' => 'btn btn-primary'
                   ])
               !!}
@@ -74,7 +74,7 @@
 
           <div>
             <div class="form-group bmd-form-group sidebar-item">
-               <label htmlFor="name" class="bmd-label-floating">Nom</label>
+               <label htmlFor="name" class="bmd-label-floating">{{Lang::get('architect::fields.name')}}</label>
                <input type="text" class="form-control"  id="name" name="name" value="{{$menu->name or ''}}" />
 
             </div>
@@ -103,7 +103,7 @@
             <div class="row">
               <ol class='sortable-list'>
                 <p class="loading-message">
-                  Carregant menú...
+                  {{Lang::get('architect::menus.loading')}}
                 </p>
               </ol>
             </div>
@@ -112,7 +112,7 @@
 
           <div class="page-row add-row-block">
             <a href="" class="btn btn-default add-new-item">
-              <i class="fa fa-plus-circle"></i> Afegir pàgina
+              <i class="fa fa-plus-circle"></i> {{Lang::get('architect::menus.add_page')}}
             </a>
           </div>
 

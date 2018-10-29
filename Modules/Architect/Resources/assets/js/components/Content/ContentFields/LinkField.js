@@ -213,7 +213,7 @@ class LinkField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Títol - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.title')} - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
           </div>
         );
@@ -240,7 +240,7 @@ class LinkField extends Component
               value={TYPE_INTERNAL}
               onChange={this.handleLinkTypeChange}
             /> &nbsp;
-            Enllaç intern
+            {Lang.get('fields.internal_link')}
             &nbsp;&nbsp;
         </label>
 
@@ -253,7 +253,7 @@ class LinkField extends Component
               value={TYPE_EXTERNAL}
               onChange={this.handleLinkTypeChange}
             /> &nbsp;
-            Enllaç extern
+            {Lang.get('fields.external_link')}
             &nbsp;&nbsp;
         </label>
 
@@ -281,7 +281,7 @@ class LinkField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Enllaç - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.link')} - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
@@ -313,7 +313,7 @@ class LinkField extends Component
             {(pageValues.typology === undefined || pageValues.typology == null) &&
               <div className="field-type">
                 <i className="fa fa-file-o"></i>
-                &nbsp; Pàgina
+                &nbsp; {Lang.get('fields.page')}
               </div>
             }
 
@@ -327,7 +327,7 @@ class LinkField extends Component
             </div>
 
             <div className="field-actions">
-              <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+              <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
               &nbsp;&nbsp;
             </div>
           </div>
@@ -338,7 +338,7 @@ class LinkField extends Component
     else {
       return (
         <div className="add-content-button">
-          <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> Seleccionar </a>
+          <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> {Lang.get('fields.select')} </a>
         </div>
       );
     }

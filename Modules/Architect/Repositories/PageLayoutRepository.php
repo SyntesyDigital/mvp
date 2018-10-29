@@ -20,7 +20,7 @@ class PageLayoutRepository extends BaseRepository
         return Datatables::of(PageLayout::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('pagelayouts.delete', $item) . '" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
+                <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('pagelayouts.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })
             ->make(true);

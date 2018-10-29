@@ -19,14 +19,14 @@
             <a href="{{route('translations')}}" class="btn btn-default btn-close"> <i class="fa fa-angle-left"></i> </a>
             <h1>
               <i class="fa fa-list-alt"></i>
-              Nova traducció
+              {{Lang::get('architect::translates.new')}}
             </h1>
 
             <div class="float-buttons pull-right">
 
             <div class="actions-dropdown">
               <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                Accions
+                {{Lang::get('architect::fields.actions')}}
                 <b class="caret"></b>
                 <div class="ripple-container"></div>
               </a>
@@ -35,7 +35,7 @@
                     <li>
                         <a href="{{route('translations.create')}}">
                             <i class="fa fa-plus-circle"></i>
-                            &nbsp;Nou
+                            &nbsp;{{Lang::get('architect::fields.new')}}
                         </a>
                     </li>
                     @if(isset($translation))
@@ -44,11 +44,11 @@
                             class="text-danger"
                             data-toogle="delete"
                             data-ajax="{{route('translations.delete', $translation)}}"
-                            data-confirm-message="Esborrar un llenguatge causa la perdua de tots els contingus en aquell idioma. Vols continuar ? "
+                            data-confirm-message="{{Lang::get('architect::datatable.continue')}}"
                         >
                             <i class="fa fa-trash text-danger"></i>
                             &nbsp;
-                            <span class="text-danger">Esborrar</span>
+                            <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                         </a>
                     </li>
                     @endif
@@ -57,7 +57,7 @@
 
 
               {!!
-                  Form::submit('Guardar', [
+                  Form::submit(Lang::get('architect::fields.save'), [
                       'class' => 'btn btn-primary'
                   ])
               !!}
@@ -107,17 +107,17 @@
               <div class="field-item">
                   <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
                       <span class="field-type">
-                          <i class="fa fa-font"></i> Text
+                          <i class="fa fa-font"></i> {{Lang::get('architect::fields.text')}}
                       </span>
                       <span class="field-name">
-                          Identificador
+                          {{Lang::get('architect::translates.identifier')}}
                       </span>
                   </div>
 
                   <div id="collapse1" class="collapse in" aria-labelledby="heading1" aria-expanded="true" aria-controls="collapse1">
                       <div class="field-form">
                           <div class='form-group bmd-form-group'>
-                              <label class="bmd-label-floating">Identificador</label>
+                              <label class="bmd-label-floating">{{Lang::get('architect::translates.identifier')}}</label>
 
                               {!!
                                   Form::text(
@@ -141,7 +141,7 @@
                           <div class="field-item">
                               <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $field['identifier'] }}" aria-expanded="true" aria-controls="collapse{{ $field['identifier'] }}">
                                   <span class="field-type">
-                                      <i class="fa fa-font"></i> {{ ucfirst($field['type']) }}
+                                      <i class="fa fa-font"></i> {{Lang::get('architect::fields.text')}}
                                   </span>
                                   <span class="field-name">
                                       {{ $field['name'] }}

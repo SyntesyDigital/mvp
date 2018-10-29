@@ -58,7 +58,7 @@ class MediaRepository extends BaseRepository
                     $html .= '<a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;';
                 }
 
-                $html .= '<a href="#" class="btn btn-link text-danger toogle-delete" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="Estàs segur ?"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;';
+                $html .= '<a href="#" class="btn btn-link text-danger toogle-delete" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;';
 
                 return $html;
             })

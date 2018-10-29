@@ -134,7 +134,7 @@ class VideoField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Títol - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.title')} - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
           </div>
         );
@@ -159,7 +159,7 @@ class VideoField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Enllaç - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.link')} - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
@@ -194,7 +194,7 @@ class VideoField extends Component
 
             <hr/>
             <br/>
-            <label className="bmd-label-floating">Enllaç de YouTube o Vimeo :</label>
+            <label className="bmd-label-floating">{Lang.get('fields.link_youtube_vimeo')} :</label>
             <br/>
             <br/>
 
