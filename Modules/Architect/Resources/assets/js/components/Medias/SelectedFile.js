@@ -14,10 +14,10 @@ class SelectedFile extends Component {
             <div className="pdf-preview"><i className="fa fa-file-pdf-o"></i></div>
             <ul>
               <li>
-                <b>Nom arxiu</b> : {this.props.name}
+                <b>{Lang.get('fields.filename')}</b> : {this.props.name}
               </li>
               <li>
-                <b>Autor</b> : {this.props.author}
+                <b>{Lang.get('fields.author')}</b> : {this.props.author}
               </li>
             </ul>
           </div>

@@ -32,5 +32,24 @@ return [
     'height'          => 'Altura',
     'indica_height'   => 'Indica la altura del campo',
     'sizes'           => 'Medidas',
-    'ratio'           => 'Ratio'
+    'ratio'           => 'Ratio',
+    'new_element' => 'Nuevo Elemento',
+    'select_list_to_add' => 'Selecciona de la lista el elemento a añadir',
+    'load_template_alert' => 'Cargar una plantilla borrará el contenido introducido, quieres continuar ?',
+    'loaded_template' => 'Plantilla Cargada!',
+    'name_template'   => 'Introduce el nombre de la plantilla :',
+    'template_saved'  => 'Plantilla guardada !',
+    'content_saved'   => 'Contenido guardado correctamente!',
+      'delete_permanently_alert' => 'Estas seguro de borrar permanentmente este campo ?',
+      'insert_tags' => 'Introduce etiquetas',
+      'load_template' => 'Cargar Plantilla',
+        'save_template' => 'Guardar Plantilla',
+        'new_content'   => 'Nuevo contenido',
+        'content_saved' => 'Contenido guardado',
+        'edit_slug_alert' => 'Editar el identificador, puede causar cambios importantes en la maquetación final.\nQuieres editar el campo ?',
+        'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
+        'max_size' => 'Medida máxima',
+        'cut media' => 'Recorta media',
+        'select_right_list' => 'Selecciona una opción de la lista de la derecha' 
+
 ];

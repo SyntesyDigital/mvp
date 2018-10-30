@@ -277,9 +277,9 @@ class MediaSelectModal extends Component {
               <thead>
                  <tr>
                      <th></th>
-                     <th>Nom darxiu</th>
-                     <th data-filter="select">Tipus</th>
-                     <th data-filter="select">Autor</th>
+                     <th>{Lang.get('fields.filename')}</th>
+                     <th data-filter="select">{Lang.get('fields.tipus')}</th>
+                     <th data-filter="select">{Lang.get('fields.author')}</th>
                      <th></th>
                  </tr>
               </thead>
@@ -318,7 +318,7 @@ class MediaSelectModal extends Component {
                 <div className="modal-container">
                     <div className="modal-header">
 
-                        <h2>Seleccionar media</h2>
+                        <h2>{Lang.get('fields.select_media')}</h2>
 
                       <div className="modal-buttons">
                         <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -342,8 +342,8 @@ class MediaSelectModal extends Component {
                         <div className="col-xs-4 image-col" style={{display: this.state.imageSelected == null ? "block" : "none"}}>
                           <div className="image no-selected medias-dropfiles">
                             <p align="center">
-                              <strong>Arrossega un arxiu o</strong> <br />
-                              <a href="#" className="btn btn-default"><i className="fa fa-upload"></i> Pujar arxiu </a>
+                              <strong>{Lang.get('fields.drag_file')}</strong> <br />
+                              <a href="#" className="btn btn-default"><i className="fa fa-upload"></i> {Lang.get('fields.upload_file')} </a>
                             </p>
                           </div>
 

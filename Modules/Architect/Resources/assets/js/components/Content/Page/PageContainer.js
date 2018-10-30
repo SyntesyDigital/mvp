@@ -135,14 +135,14 @@ class PageContainer extends Component {
        var _this = this;
 
        bootbox.confirm({
-          message: "Carregar una plantilla borrarà el contingut introduit, vols continuar ?",
+          message: Lang.get('modals.load_template_alert'),
           buttons: {
             confirm: {
-                label: 'Sí',
+                label: Lang.get('fields.si'),
                 className: 'btn-primary'
             },
             cancel: {
-                label: 'No',
+                label: Lang.get('fields.no'),
                 className: 'btn-default'
             }
           },
@@ -154,10 +154,10 @@ class PageContainer extends Component {
                            layout : JSON.parse(response.data.definition),
                            settings : JSON.parse(response.data.settings),
                        });
-                       toastr.success('Plantilla carregada !');
+                       toastr.success(Lang.get('modals.loaded_template'));
                    })
                    .catch((error) => {
-                       toastr.error('Error !');
+                       toastr.error(Lang.get('fields.error')+' !');
                    });
              }
           }
@@ -195,7 +195,7 @@ class PageContainer extends Component {
 
         var self = this;
 
-        bootbox.prompt("Introdueix el nom de la plantilla :", function(result){
+        bootbox.prompt(Lang.get('modals.name_template'), function(result){
           if(result != null){
             axios.post('/architect/page-layouts', {
                 name : result,
@@ -203,10 +203,10 @@ class PageContainer extends Component {
                 settings : self.state.settings
             })
             .then((response) => {
-                toastr.success('Plantilla guardad !');
+                toastr.success(Lang.get('modals.template_saved'));
             })
             .catch((error) => {
-                toastr.error('Error !');
+                toastr.error(Lang.get('fields.error')+'!');
             });
           }
         });
@@ -305,7 +305,7 @@ class PageContainer extends Component {
           .then((response) => {
               if(response.data.success) {
 
-                  toastr.success('Esborrat! Redirigint ...');
+                  toastr.success(Lang.get('fields.error')+'! '+Lang.get('fields.redirect')+' ...');
                   setTimeout(function(){
                     window.location.href= "/architect/contents/";
                   },1000);
@@ -326,7 +326,7 @@ class PageContainer extends Component {
 
   onSaveSuccess(response)
   {
-      toastr.success('Contingut guardat correctament!');
+      toastr.success(Lang.get('modals.content_saved'));
 
       //si no esta gurdada todavia ponemos que sigue guardandose hasta la recarga
       this.setState({
@@ -385,7 +385,7 @@ class PageContainer extends Component {
                  }
              })
              .catch((error) => {
-                 toastr.error('Error !');
+                 toastr.error(Lang.get('fields.error')+' !');
              });
      }
 
@@ -514,7 +514,7 @@ class PageContainer extends Component {
         <ContentBar
           content={this.state.content}
           icon={'fa-file-o'}
-          name={'Pàgina'}
+          name={Lang.get('fields.page')}
           typologyId={null}
           onSubmitForm={this.handleSubmitForm}
           onDelete={this.handleDeleteContent.bind(this)}

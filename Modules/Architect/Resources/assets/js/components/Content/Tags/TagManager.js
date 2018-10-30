@@ -130,7 +130,7 @@ class TagManager extends Component {
     const { value, suggestions } = this.state;
 
     const inputProps = {
-        placeholder: 'Introduex etiquetes...',
+        placeholder: Lang.get('modals.insert_tags'),
         className: 'form-control',
         value,
         onChange: this.onChange.bind(this)
@@ -138,7 +138,7 @@ class TagManager extends Component {
 
     return (
       <div className="tag-manager" onKeyPress={this.handleKeyPress}>
-        <label htmlFor="template" className="bmd-label-floating">Etiquetes</label>
+        <label htmlFor="template" className="bmd-label-floating">{Lang.get('fields.tags')}</label>
 
         <Autosuggest
             suggestions={suggestions}

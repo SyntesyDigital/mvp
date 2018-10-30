@@ -80,7 +80,7 @@ class LayoutDataTable extends Component {
             <table className="table" id="table-layouts" style={{width:"100%"}}>
                 <thead>
                    <tr>
-                       <th>Nom</th>
+                       <th>{Lang.get('fields.name')}</th>
                        <th></th>
                    </tr>
                 </thead>

@@ -19,7 +19,7 @@ class SelectedImage extends Component {
 
             <ul>
               <li>
-                <b>Nom arxiu</b> : {this.props.name}
+                <b>{Lang.get('fields.filename')}</b> : {this.props.name}
               </li>
               {/*
               <li>
@@ -27,16 +27,16 @@ class SelectedImage extends Component {
               </li>
               */}
               <li>
-                <b>Mida original</b> : {this.props.dimension}
+                <b>{Lang.get('fields.original_size')}</b> : {this.props.dimension}
               </li>
               <li>
-                <b>Pes original</b> : {this.props.filesize}
+                <b>{Lang.get('fields.original weight')}</b> : {this.props.filesize}
               </li>
               <li>
-                <b>Autor</b> : {this.props.author}
+                <b>{Lang.get('fields.author')}</b> : {this.props.author}
               </li>
               <li>
-                <a href="" className="btn btn-link" onClick={this.props.onEdit}><i className="fa fa-pencil"></i> Editar</a>
+                <a href="" className="btn btn-link" onClick={this.props.onEdit}><i className="fa fa-pencil"></i> {Lang.get('fields.edit')}</a>
                 {/*
                 <a href="" className="btn btn-link text-danger"><i className="fa fa-trash"></i> Esborrar</a>
                 */}

@@ -87,12 +87,12 @@ export default class SiteMap extends Component {
       this.legend = {
         "status" : {
           "0" : {
-            "name" : "Esborrany",
+            "name" : Lang.get('fields.draft'),
             "color" : "#ffb102",
             "values" : 0
           },
           "1" : {
-            "name" : "Publicat",
+            "name" : Lang.get('fields.published'),
             "color" : "#47daa4",
             "values" : 0
           }

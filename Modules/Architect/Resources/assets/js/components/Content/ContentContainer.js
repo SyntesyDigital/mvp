@@ -308,7 +308,7 @@ class ContentContainer extends Component {
           .then((response) => {
               if(response.data.success) {
 
-                  toastr.success('Esborrat! Redirigint ...');
+                  toastr.success(Lang.get('fields.delete')+'! '+Lang.get('fields.redirect')+' ...');
                   setTimeout(function(){
                     window.location.href= "/architect/contents/";
                   },1000);
@@ -334,7 +334,7 @@ class ContentContainer extends Component {
               content : response.content,
               saving : !this.props.saved ? true : false
           });
-          toastr.success('Contingut guardar correctament');
+          toastr.success(Lang.get('models.content_saved'));
       }
   }
 
@@ -391,7 +391,7 @@ class ContentContainer extends Component {
 
              })
              .catch((error) => {
-                 toastr.error('Error !');
+                 toastr.error(Lang.get('fields.error'));
              });
      }
 

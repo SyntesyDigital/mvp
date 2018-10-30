@@ -100,8 +100,8 @@ class MediaSelectedItem extends Component {
             }
             {this.state.media != null &&
               <div className="col-footer">
-                <a href="" className="btn btn-default" onClick={this.props.onCancelImage}> Cancel·lar </a> &nbsp;
-                <a href="" className="btn btn-primary" onClick={this.onSubmit}> Afegir </a>
+                <a href="" className="btn btn-default" onClick={this.props.onCancelImage}> {Lang.get('fields.cancel')} </a> &nbsp;
+                <a href="" className="btn btn-primary" onClick={this.onSubmit}> {Lang.get('fields.add')} </a>
               </div>
             }
           </div>

@@ -57,14 +57,14 @@ class ContentBar extends Component {
           <li>
               <a href={this.createRoute}>
                   <i className="fa fa-plus-circle"></i>
-                  &nbsp;Nou
+                  &nbsp;{Lang.get('fields.new')}
               </a>
           </li>
           {this.props.onLoadLayout &&
           <li>
               <a href="#" onClick={this.loadLayout.bind(this)}>
                   <i className="fa fa-download"></i>
-                  &nbsp;Carregar plantilla
+                  &nbsp;{Lang.get('modals.load_template')}
               </a>
           </li>
           }
@@ -80,13 +80,13 @@ class ContentBar extends Component {
           <li>
               <a href={this.createRoute}>
                   <i className="fa fa-plus-circle"></i>
-                  &nbsp;Nou
+                  &nbsp;{Lang.get('fields.new')}
               </a>
           </li>
           <li>
               <a href="#" onClick={this.duplicate.bind(this)}>
                   <i className="fa fa-files-o"></i>
-                  &nbsp;Duplicar
+                  &nbsp;{Lang.get('fields.duplicate')}
               </a>
           </li>
 
@@ -94,7 +94,7 @@ class ContentBar extends Component {
           <li>
               <a href="#" onClick={this.loadLayout.bind(this)}>
                   <i className="fa fa-download"></i>
-                  &nbsp;Carregar plantilla
+                  &nbsp;{Lang.get('modals.load_template')}
               </a>
           </li>
           }
@@ -103,7 +103,7 @@ class ContentBar extends Component {
           <li>
               <a href="#" onClick={this.saveLayout.bind(this)}>
                   <i className="fa fa-upload"></i>
-                  &nbsp;Guardar plantilla
+                  &nbsp;{Lang.get('modals.save_template')}
               </a>
           </li>
           }
@@ -112,7 +112,7 @@ class ContentBar extends Component {
               <a href="#" className="text-danger" onClick={this.props.onDelete}>
                   <i className="fa fa-trash text-danger"></i>
                   &nbsp;
-                  <span className="text-danger">Esborrar</span>
+                  <span className="text-danger">{Lang.get('fields.delete')}</span>
               </a>
           </li>
       </ul>
@@ -134,7 +134,7 @@ class ContentBar extends Component {
                 }
                 {'\u00A0'}
 
-                { this.props.name != "" ? this.props.name : "Nou contingut" }
+                { this.props.name != "" ? this.props.name : Lang.get('modals.new_content') }
               </h1>
 
               <div className="float-buttons pull-right">
@@ -160,9 +160,9 @@ class ContentBar extends Component {
 
               {  this.props.saved && this.props.content !== undefined && this.props.content != null &&
                 this.props.hasPreview &&
-                <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; Previsualitzar </a>
+                <a href={routes['previewContent'].replace(':id',this.props.content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; {Lang.get('fields.preview') } </a>
               }
-              <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+              <a href="" className="btn btn-primary" onClick={this.onSubmitForm.bind(this)} disabled={this.props.saving} > <i className="fa fa-cloud-upload"></i> &nbsp; {Lang.get('fields.save') } </a>
             </div>
 
             </div>

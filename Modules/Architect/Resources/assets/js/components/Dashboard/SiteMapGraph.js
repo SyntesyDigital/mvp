@@ -396,8 +396,8 @@ export default class SiteMapGraph extends Component {
 
         <div className="leaflet-top leaflet-right">
           <div className="leaflet-control-zoom leaflet-bar leaflet-control">
-            <a className="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in" onClick={this.onZoomIn}>+</a>
-            <a className="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out" onClick={this.onZoomOut}>−</a>
+            <a className="leaflet-control-zoom-in" href="#" title={Lang.get('fields.zoom_in')} role="button" aria-label="Zoom in" onClick={this.onZoomIn}>+</a>
+            <a className="leaflet-control-zoom-out" href="#" title={Lang.get('fields.zoom_out')} role="button" aria-label="Zoom out" onClick={this.onZoomOut}>−</a>
           </div>
         </div>
 

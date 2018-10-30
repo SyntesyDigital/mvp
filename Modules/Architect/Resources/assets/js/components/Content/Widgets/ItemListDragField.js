@@ -134,8 +134,8 @@ class ItemListDragField extends Component {
         </div>
 
         <div className="field-actions">
-			<a href="" className="" onClick={this.onEditField}> <i className="fa fa-pencil"></i> Editar </a> &nbsp;
-			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+			<a href="" className="" onClick={this.onEditField}> <i className="fa fa-pencil"></i> {Lang.get('fields.edit')} </a> &nbsp;
+			<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
 			&nbsp;&nbsp;
         </div>
       </div>),

@@ -114,8 +114,8 @@ class MediaCropModal extends Component {
                   {format.name}
                 </p>
                 <p className="crop-dimensions">
-                  <b>Mida máxima</b>: {format.width}x{format.height} <br/>
-                  <b>Ratio</b>: {format.ratio}
+                  <b>{Lang.get('modals.max_size')}</b>: {format.width}x{format.height} <br/>
+                  <b>{Lang.get('modals.ratio')}</b>: {format.ratio}
                 </p>
                 {format.error != "" &&
                   <p className="error-message">
@@ -140,7 +140,7 @@ class MediaCropModal extends Component {
               <div className="modal-container">
                   <div className="modal-header">
 
-                      <h2>Retalla media</h2>
+                      <h2>{Lang.get('modals.cut_media')}</h2>
 
                     <div className="modal-buttons">
                       <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -178,14 +178,14 @@ class MediaCropModal extends Component {
 
                           {this.state.currentFormat == null &&
                             <p>
-                              Selecciona una opció de la llista de la dreta
+                            {Lang.get('modals.select_right_list')}
                             </p>
                           }
 
                           {this.state.currentFormat != null &&
                             <div>
-                              <a href="" className="btn btn-default" onClick={this.onCropClose}> Cancel·lar </a>
-                              <a href="" className="btn btn-primary" onClick={this.onCropSubmit}> Aplicar </a>
+                              <a href="" className="btn btn-default" onClick={this.onCropClose}> {Lang.get('fields.cancel')}  </a>
+                              <a href="" className="btn btn-primary" onClick={this.onCropSubmit}> {Lang.get('fields.apply')}  </a>
                             </div>
                           }
                         </div>
@@ -204,8 +204,8 @@ class MediaCropModal extends Component {
                                   {format.name}
                                 </p>
                                 <p className="crop-dimensions">
-                                  <b>Mida máxima</b>: {format.width}x{format.height} <br/>
-                                  <b>Ratio</b>: {format.ratio}
+                                  <b>{Lang.get('modals.max_size')}</b>: {format.width}x{format.height} <br/>
+                                  <b>{Lang.get('modals.ratio')}</b>: {format.ratio}
                                 </p>
                                 {format.error != "" &&
                                   <p className="error-message">
@@ -223,7 +223,7 @@ class MediaCropModal extends Component {
                   </div>
 
                   <div className="modal-footer">
-                    <a href="" className="btn btn-default" onClick={this.onModalClose}> Tornar </a> &nbsp;
+                    <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('fields.back')} </a> &nbsp;
                   </div>
 
                 </div>

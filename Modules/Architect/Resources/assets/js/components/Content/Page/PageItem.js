@@ -21,14 +21,14 @@ class PageItem extends Component {
     var self = this;
 
     bootbox.confirm({
-				message: "Estas segur d'esborrar permanentment aquest camp ?",
+				message: Lang.get('models.delete_permanently_alert'),
 				buttons: {
 						confirm: {
-								label: 'Sí',
+								label: Lang.get('fields.si'),
 								className: 'btn-primary'
 						},
 						cancel: {
-								label: 'No',
+								label: Lang.get('fields.no'),
 								className: 'btn-default'
 						}
 				},

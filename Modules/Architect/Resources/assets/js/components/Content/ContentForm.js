@@ -22,7 +22,6 @@ export default class ContentForm extends Component {
             categories : props.categories ? JSON.parse(atob(props.categories)) : '',
             saved : props.content || props.page ? true : false
         };
-        console.log('AQUIIIIIII:',this.state.pages);
     }
 
     componentDidMount()

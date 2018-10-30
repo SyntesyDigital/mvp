@@ -84,14 +84,14 @@ class SlugInput extends Component
     var self = this;
 
     bootbox.confirm({
-				message: "Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?",
+				message: Lang.get('modals.edit_slug_alert'),
 				buttons: {
 						confirm: {
-								label: 'Sí',
+								label: {Lang.get('fields.si')},
 								className: 'btn-primary'
 						},
 						cancel: {
-								label: 'No',
+								label: {Lang.get('fields.no')},
 								className: 'btn-default'
 						}
 				},

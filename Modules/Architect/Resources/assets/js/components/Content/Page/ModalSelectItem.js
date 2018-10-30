@@ -222,8 +222,8 @@ class ModalSelectItem extends Component {
                 <div className="row">
                   <div className="col-xs-12 col-md-10 col-md-offset-1">
 
-                    <h3 className="card-title">Nou element</h3>
-                    <h6>Selecciona de la llista el element que vols afegir: </h6>
+                    <h3 className="card-title">{Lang.get('fields.new_element')}</h3>
+                    <h6>{Lang.get('modals.select_list_to_add')} </h6>
 
 
                     <div className="grid-items">
@@ -234,7 +234,7 @@ class ModalSelectItem extends Component {
                             <div className="grid-item">
                               <i className="fa fa-columns"></i>
                               <p className="grid-item-name">
-                                Fila
+                                {Lang.get('fields.row')}
                               </p>
                             </div>
                           </a>
@@ -245,7 +245,7 @@ class ModalSelectItem extends Component {
                             <div className="grid-item">
                               <i className={"fa "+WIDGETS['SEPARATOR'].icon}></i>
                               <p className="grid-item-name">
-                                Separador
+                                {Lang.get('fields.separator')}
                               </p>
                             </div>
                           </a>
@@ -271,7 +271,7 @@ class ModalSelectItem extends Component {
               </div>
 
               <div className="modal-footer">
-                <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
+                <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('fields.cancel')} </a> &nbsp;
               </div>
 
             </div>

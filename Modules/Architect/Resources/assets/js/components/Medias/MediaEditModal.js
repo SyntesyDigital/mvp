@@ -202,7 +202,7 @@ export default class MediaEditModal extends Component {
                 <div className="modal-container">
                     <div className="modal-header">
 
-                        <h2>Edita media</h2>
+                        <h2>{Lang.get('fields.edit_media')}  </h2>
 
                       <div className="modal-buttons">
                         <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
@@ -219,7 +219,7 @@ export default class MediaEditModal extends Component {
                           <div className="original-image" style={{backgroundImage:'url(/storage/medias/original/' + this.state.media.stored_filename + ')'}}></div>
                           }
                           <div className="image-actions">
-                            <a href="" className="btn btn-default" onClick={this.toggleCrops}> <i className="fa fa-scissors"></i> Retalla </a>
+                            <a href="" className="btn btn-default" onClick={this.toggleCrops}> <i className="fa fa-scissors"></i> {Lang.get('fields.cut')}  </a>
                           </div>
 
                         </div>
@@ -235,8 +235,8 @@ export default class MediaEditModal extends Component {
                     </div>
 
                     <div className="modal-footer">
-                      <a href="" className="btn btn-default" onClick={this.onModalClose}> Cancel·lar </a> &nbsp;
-                      <a href="" className="btn btn-primary" onClick={this.onSubmit}> Guardar </a>
+                      <a href="" className="btn btn-default" onClick={this.onModalClose}> {Lang.get('fields.cancel')}  </a> &nbsp;
+                      <a href="" className="btn btn-primary" onClick={this.onSubmit}> {Lang.get('fields.save')}  </a>
                     </div>
 
                   </div>

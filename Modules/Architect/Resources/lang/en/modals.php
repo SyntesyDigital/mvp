@@ -32,5 +32,24 @@ return [
     'height'          => 'Height',
     'indica_height'   => 'Indicate field height',
     'sizes'           => 'Sizes',
-    'ratio'           => 'Ratio'
+    'ratio'           => 'Ratio',
+    'new_element' => 'New Element',
+    'select_list_to_add' => 'Select from the list the element to add',
+    'load_template_alert' => 'Load a template will delete all inserted content, do you want to continue?',
+    'loaded_template' => 'Template Loaded!',
+    'name_template'   => 'Enter template name :',
+    'template_saved'  => 'Template saved !',
+    'content_saved'   => 'Content saved correctly!',
+      'delete_permanently_alert' => 'Are you sure do you want to delete this content permanently?',
+      'insert_tags' => 'Insert tags...',
+      'load_template' => 'Load template',
+        'save_template' => 'Save template',
+        'new_content'   => 'New content',
+        'content_saved' => 'Content saved',
+        'edit_slug_alert' => 'Edit the identifier can cause important changes, Do you want to edit it ?' ,
+        'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
+        'max_size' => 'Max. Size',
+        'cut media' => 'Cut media',
+        'select_right_list' => 'Select an optiom from right list'
+
 ];

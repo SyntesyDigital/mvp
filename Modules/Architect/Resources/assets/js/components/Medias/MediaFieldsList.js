@@ -77,26 +77,26 @@ class MediaFieldsList extends Component {
 
                 <ul>
                   <li>
-                    <b>Nom arxiu</b> : {this.state.media && this.state.media.uploaded_filename}
+                    <b>{Lang.get('fields.filename')}</b> : {this.state.media && this.state.media.uploaded_filename}
                   </li>
                   <li>
-                    <b>Data</b> : {this.state.media && this.state.media.created_at}
+                    <b>{Lang.get('fields.date')}</b> : {this.state.media && this.state.media.created_at}
                   </li>
                   <li>
-                    <b>Autor</b> : {this.state.media && this.state.media.author.firstname + ' ' + this.state.media.author.lastname}
+                    <b>{Lang.get('fields.author')}</b> : {this.state.media && this.state.media.author.firstname + ' ' + this.state.media.author.lastname}
                   </li>
                 </ul>
               </div>
               <div className="col-xs-6">
               <ul>
                 <li>
-                  <b>Tipus</b> : image/jpeg
+                  <b>{Lang.get('fields.tipus')}</b> : image/jpeg
                 </li>
                 <li>
-                  <b>Pes original</b> :  {this.state.media && this.state.media.metadata.filesize + 'Kb'}
+                  <b>{Lang.get('fields.original_weight')}</b> :  {this.state.media && this.state.media.metadata.filesize + 'Kb'}
                 </li>
                 <li>
-                  <b>Mida original</b> :{this.state.media && this.state.media.metadata.dimension}
+                  <b>{Lang.get('fields.original_size')}</b> :{this.state.media && this.state.media.metadata.dimension}
                 </li>
 
               </ul>
@@ -108,18 +108,18 @@ class MediaFieldsList extends Component {
             <div className="media-form">
 
               <div className="fields-group">
-                <label>Llegenda</label>
-                {this.renderField('title', 'text', 'Llegenda')}
+                <label>{Lang.get('fields.legend')}</label>
+                {this.renderField('title', 'text', Lang.get('fields.lengend'))}
               </div>
 
               <div className="fields-group">
-                <label>Text alternatiu</label>
-                {this.renderField('alt', 'text', 'Text alternatiu')}
+                <label>{Lang.get('fields.alternative_text')}</label>
+                {this.renderField('alt', 'text', Lang.get('fields.alternative_text'))}
               </div>
 
               <div className="fields-group">
-                <label>Descripció</label>
-                {this.renderField('description', 'textarea', 'Descripció')}
+                <label>{Lang.get('fields.description')}</label>
+                {this.renderField('description', 'textarea', Lang.get('fields.description'))}
               </div>
 
             </div>

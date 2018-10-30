@@ -32,5 +32,24 @@ return [
     'height'          => 'hauteur',
     'indica_height'   => 'Indiquer l\'hauteur du champ',
     'sizes'           => 'Tailles',
-    'ratio'           => 'Ratio'
+    'ratio'           => 'Ratio',
+    'new_element' => 'Noveau Element',
+    'select_list_to_add' => 'Sélectionnez dans la liste l\'élément à ajouter',
+    'load_template_alert' => 'Le chargement d\'un modèle supprimera le contenu que vous avez entré. Voulez-vous continuer?',
+    'loaded_template' => 'Modèle chargé!',
+    'name_template'   => 'Entrez le nom du modèle :',
+    'template_saved'  => 'Modèle enregistré !',
+    'content_saved'   => 'Contenu enregistré!',
+    'delete_permanently_alert' => 'Vous êtes sûr de supprimer définitivement ce champ',
+    'insert_tags' => 'Entez les mots clés...',
+    'load_template' => 'Charge modèle',
+    'save_template' => 'Suvegarder modèle',
+    'new_content'   => 'Nouvelle modèlle',
+    'content_saved' => 'Contenu enregistré',
+    'edit_slug_alert' => 'La modification de l\'identifiant peut entraîner des modifications importantes dans la mise en page finale. \ Voudriez-vous modifier le champ?',
+    'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
+    'max_size' => 'Taille max',
+    'cut media' => 'Coup media',
+    'select_right_list' => 'Sélectionnez une option dans la liste à droite' 
+
 ];

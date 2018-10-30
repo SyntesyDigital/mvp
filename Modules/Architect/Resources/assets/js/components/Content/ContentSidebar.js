@@ -112,7 +112,7 @@ class ContentSidebar extends Component {
             name="pageType"
             source="settings"
             onFieldChange={this.handleFieldSettingsChange.bind(this)}
-            label="Tipus de pàgina"
+            label={Lang.get('fields.page_type')}
             options={[
               {
                 value : '',
@@ -120,7 +120,7 @@ class ContentSidebar extends Component {
               },
               {
                 value : 'single',
-                name : 'Simple'
+                name : 'Single'
               },
               {
                 value : 'landing',
@@ -139,8 +139,8 @@ class ContentSidebar extends Component {
             name="htmlClass"
             source="settings"
             onFieldChange={this.handleFieldSettingsChange.bind(this)}
-            label="Clase HTML"
-            inputLabel="Indica la clase CSS"
+            label={Lang.get('modals.html_class')}
+            inputLabel={Lang.get('modals.indica_html')}
           />
         </div>
 
@@ -160,9 +160,9 @@ class ContentSidebar extends Component {
           <div className="publish-group">
             { this.props.status == 1 &&
               <div className="publish-form sidebar-item">
-                  <b>Estat</b> : <i className="fa fa-circle text-success"></i> Publicat <br/>
+                  <b>Estat</b> : <i className="fa fa-circle text-success"></i> {Lang.get('fields.published')} <br/>
                   {!architect.currentUserHasRole('author') &&
-                    <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> Despublicar </a>
+                    <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> {Lang.get('fields.unpublish')} </a>
                   }
                   <p className="field-help">{moment(this.props.content.published_at).format('LLLL')}</p>
               </div>
@@ -170,9 +170,9 @@ class ContentSidebar extends Component {
 
             {this.props.status == 0 &&
               <div className="publish-form sidebar-item">
-                  <b>Estat</b> : <i className="fa fa-circle text-warning"></i> Esborrany <br/>
+                  <b>Estat</b> : <i className="fa fa-circle text-warning"></i> {Lang.get('fields.draft')} <br/>
                   {!architect.currentUserHasRole('author') &&
-                    <a className="btn btn-success" href=""  onClick={this.props.onPublish}> Publicar </a>
+                    <a className="btn btn-success" href=""  onClick={this.props.onPublish}> {Lang.get('fields.publish')} </a>
                   }
                   <p className="field-help"></p>
               </div>
@@ -184,7 +184,7 @@ class ContentSidebar extends Component {
         }
 
         <div className="form-group bmd-form-group sidebar-item">
-           <label className="bmd-label-floating">Idiomes actius</label>
+           <label className="bmd-label-floating">{Lang.get('fields.active_languages')}</label>
            {this.renderLanguagesCheckbox()}
         </div>
 
@@ -193,7 +193,7 @@ class ContentSidebar extends Component {
         {this.props.pages !== undefined && this.props.pages != null &&
           <div>
             <div className="form-group bmd-form-group sidebar-item">
-               <label htmlFor="parent_id" className="bmd-label-floating">Pàgina pare</label>
+               <label htmlFor="parent_id" className="bmd-label-floating">{Lang.get('fields.parent_page')}</label>
 
                {!architect.currentUserHasRole('author') &&
                  <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
@@ -224,7 +224,7 @@ class ContentSidebar extends Component {
         {this.props.enableCategories == 1 &&
           <div>
             <div className="form-group bmd-form-group has-danger">
-               <label htmlFor="template" className="bmd-label-floating">Categoria</label>
+               <label htmlFor="template" className="bmd-label-floating">{Lang.get('fields.category')}</label>
                <select className="form-control" id="template" name="category" value="" value={this.props.category} onChange={this.handleChange}>
                     <option value="">---</option>
                    {
@@ -257,7 +257,7 @@ class ContentSidebar extends Component {
 
 
         <div className={'form-group bmd-form-group sidebar-item ' + ( this.props.errors['author_id'] ? 'has-error' : '')}>
-           <label htmlFor="author" className="bmd-label-floating">Autor</label>
+           <label htmlFor="author" className="bmd-label-floating">{Lang.get('fields.author')}</label>
            <select className="form-control" disabled={(architect.currentUserHasRole('author') ? 'true' : 'false')} id="author" name="author" value={this.props.author} onChange={this.handleChange} placeholder="---">
            <option value=""></option>
            {
@@ -277,7 +277,7 @@ class ContentSidebar extends Component {
             <hr/>
 
             <div className="sidebar-item">
-               <label className="bmd-label-floating">CONFIGURACIÓ</label>
+               <label className="bmd-label-floating">{Lang.get('header.configuration')}</label>
                {this.renderSettings()}
             </div>
 

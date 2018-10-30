@@ -32,7 +32,25 @@ return [
   'height'          => 'Alçada',
   'indica_height'   => 'Indica l\'alçada del camp',
   'sizes'           => 'Mides',
-  'ratio'           => 'Ratio'
+  'ratio'           => 'Ratio',
+  'new_element' => 'Nou Element',
+  'select_list_to_add' => 'Selecciona de la llista el element que vols afegir:',
+  'load_template_alert' => 'Carregar una plantilla borrarà el contingut introduit, vols continuar ?',
+  'loaded_template' => 'Plantilla Carregada!',
+  'name_template'   => 'Introdueix el nom de la plantilla :',
+  'template_saved'  => 'Plantilla guardada !',
+  'content_saved'   => 'Contingut guardat correctament!',
+  'delete_permanently_alert' => 'Estas segur d\'esborrar permanentment aquest camp ?',
+  'insert_tags' => 'Introdueix etiquetes...',
+  'load_template' => 'Carregar Plantilla',
+    'save_template' => 'Guardar Plantilla',
+    'new_content'   => 'Nou contingut',
+    'content_saved' => 'Contigut guardat',
+    'html_class' => 'Clase HTML',
+    'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
+    'max_size' => 'Mida màxima',
+    'cut media' => 'Retalla media',
+    'select_right_list' => 'Selecciona una opció de la llista de la dreta'
 
 
 ];
