@@ -9,13 +9,13 @@
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 
-    <h3 class="card-title">Categories</h3>
-    <a href="{{route('categories.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir categoria</a>
+    <h3 class="card-title">{{Lang::get('architect::category.categories')}}</h3>
+    <a href="{{route('categories.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('architect::category.add')}}</a>
 
     <div class="grid-items">
       <div class="row">
         <ol class='sortable-list'>
-          Carregant categories...
+          {{Lang::get('architect::category.loading')}}
         </ol>
       </div>
     </div>
@@ -66,8 +66,8 @@
     	  			//'<i class="fa fa-bars"></i> &nbsp; '+category.name+
               category.name+
     	  			'<div class="actions">'+
-    		  			'<a href="'+routes.showItem.replace(':id',category.id)+'" class="btn btn-link"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
-    		  			'<a href="#" data-ajax="'+routes.deleteItem.replace(':id',category.id)+'" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
+    		  			'<a href="'+routes.showItem.replace(':id',category.id)+'" class="btn btn-link"><i class="fa fa-pencil"></i> &nbsp; '+Lang.get('fields.edit')+'</a>&nbsp;'+
+    		  			'<a href="#" data-ajax="'+routes.deleteItem.replace(':id',category.id)+'" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; '+Lang.get('fields.delete')+'</a>'+
     		  		'</div>'+
             '</div>'+
   	  			'<ol class="category-container-'+category.id+'">'+
@@ -121,12 +121,12 @@
 
 	                if(rep.success){
 	                    //change
-	                    toastr.success('Ordre guardat amb éxit', '', {timeOut: 3000});
+	                    toastr.success('Ok', '', {timeOut: 3000});
 	                    //location.reload();
 	                }
 	                else {
 	                	//error
-	                	toastr.error('Error al guardar el nou ordre', '', {timeOut: 3000});
+	                	toastr.error('Error', '', {timeOut: 3000});
 	                }
 	            }
   			});
@@ -173,14 +173,14 @@
                     })
                     .done(function(response) {
                         if(response.success) {
-                            toastr.success("Esborrat correctament", '', {timeOut: 3000});
+                            toastr.success(Lang.get('fields.edit'), '', {timeOut: 3000});
                             window.location.href = "";
 
                         } else {
-                            toastr.error("Error al esborrar", '', {timeOut: 3000});
+                            toastr.error(Lang.get('fields.deleted_correctly'), '', {timeOut: 3000});
                         }
                     }).fail(function(response){
-                        toastr.error("Error al esborrar", '', {timeOut: 3000});
+                        toastr.error(Lang.get('fields.error'), '', {timeOut: 3000});
                     });
                     return;
                 }

@@ -21,9 +21,9 @@
               <h1>
                 <i class="fa fa-list "></i>
                 @if(isset($category))
-                  Edita categoria {{$category->name or ''}}
+                  {{Lang::get('architect::category.edit')}} {{$category->name or ''}}
                 @else
-                  Nova categoria
+                  {{Lang::get('architect::category.new')}}
                 @endif
               </h1>
 
@@ -31,7 +31,7 @@
 
               <div class="actions-dropdown">
                 <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                  Accions
+                  {{Lang::get('architect::fields.actions')}}
                   <b class="caret"></b>
                   <div class="ripple-container"></div>
                 </a>
@@ -40,14 +40,14 @@
                       <li>
                           <a href="{{route('categories.create')}}">
                               <i class="fa fa-plus-circle"></i>
-                              &nbsp;Nou
+                              &nbsp;{{Lang::get('architect::fields.new')}}
                           </a>
                       </li>
                       <li>
                           <a href="{{route('account')}}" class="text-danger">
                               <i class="fa fa-trash text-danger"></i>
                               &nbsp;
-                              <span class="text-danger">Esborrar</span>
+                              <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                           </a>
                       </li>
                   </ul>
@@ -55,7 +55,7 @@
 
 
                 {!!
-                    Form::submit('Guardar', [
+                    Form::submit({{Lang::get('architect::fields.save')}}, [
                         'class' => 'btn btn-primary'
                     ])
                 !!}
@@ -208,10 +208,10 @@
                   <div class="field-item">
                       <div id="heading" class="btn btn-link" data-toggle="collapse" data-target="#collapse_parent_id" aria-expanded="true" aria-controls="collapse_parent_id">
                           <span class="field-type">
-                              <i class="fa fa-font"></i> Categoria
+                              <i class="fa fa-font"></i> {{Lang::get('architect::fields.category')}}
                           </span>
                           <span class="field-name">
-                              Categoria pare
+                             {{Lang::get('architect::category.parent')}}
                           </span>
                       </div>
 

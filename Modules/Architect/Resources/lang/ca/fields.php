@@ -85,6 +85,8 @@ return [
     'alternative_text' => 'Text alternatiu',
     'select_media'  => 'Seleciona media',
     'drag_file' => 'Arrosega un arxiu o',
-    'upload_file' => 'Pujar arxiu'
+    'upload_file' => 'Pujar arxiu',
+    'deleted_correctly' => 'Esborrat correctament!'
+
 
 ];

@@ -181,8 +181,8 @@ architect.menu.form = {
               '<div class="item-bar">'+
       	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+(item.name != null ? item.name : '')+'</span>'+
       	  			'<div class="actions">'+
-      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
-      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
+      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; '+ Lang.get('fields.edit')+'</a>&nbsp;'+
+      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; '+ Lang.get('fields.delete')+'</a>'+
       		  		'</div>'+
               '</div>'+
     	  			'<ol class="category-container-'+item.id+'">'+
@@ -280,7 +280,7 @@ architect.menu.form = {
     {
         var ajax = item.data('ajax');
 
-        architect.dialog.confirm("Estas segu ? ", function(result){
+        architect.dialog.confirm( Lang.get('datatables.sure'), function(result){
             if(result) {
 
                 var itemId = item.attr('id').split('-')[1];

@@ -85,5 +85,7 @@ return [
     'alternative_text' => 'Texto alternativo',
     'select_media'  => 'Seleciona media',
     'drag_file' => 'Arrastra un archivo o',
-    'upload_file' => 'Sube archivo'
+    'upload_file' => 'Sube archivo',
+    'deleted_correctly' => 'Borrado Correctamente!'
+
 ];

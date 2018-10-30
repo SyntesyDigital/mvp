@@ -9,11 +9,11 @@ architect.dialog = {
             message: msg,
             buttons: {
                 confirm: {
-                    label: 'Sí',
+                    label: Lang.get('fields.si') ,
                     className: 'btn-primary'
                 },
                 cancel: {
-                    label: 'No',
+                    label:  Lang.get('fields.no'),
                     className: 'btn-default'
                 }
             },

@@ -85,5 +85,6 @@ return [
         'alternative_text' => 'Alternative text',
         'select_media'  => 'Select media',
         'drag_file' => 'Drag a file or',
-        'upload_file' => 'Upload file'
+        'upload_file' => 'Upload file',
+        'deleted_correctly' => 'Deleted correctly!'
 ];
