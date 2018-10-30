@@ -11,7 +11,7 @@ return [
     'pages'         => 'pages',
     'news'          => 'news',
     'map'           => 'Website map',
-    'gouped'        => 'Gruped by',
+    'grouped'        => 'Gruped by',
     'status'        => 'Status',
     'author'        => 'Author',
     'name'          => 'Name',

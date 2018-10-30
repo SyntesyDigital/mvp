@@ -97,5 +97,8 @@ return [
     'invalid_format_file' => 'Formato de fichero no vàlido',
     'file_required' => 'Fichero requerido',
     'email_taken' => 'Este email ya está utilizado',
-
+    'add_fields' => 'Agrega campos',
+    'default_template' => 'Plantilla por defecto',
+    'template' => 'Plantilla',
+    'icon' => 'Icono'
 ];

@@ -11,7 +11,7 @@ return [
     'pages'         => 'pages',
     'news'          => 'actualités',
     'map'           => 'plan du site',
-    'gouped'        => 'Groupé par',
+    'grouped'        => 'Groupé par',
     'status'        => 'Statu',
     'author'        => 'Auteur',
     'name'          => 'Nom',

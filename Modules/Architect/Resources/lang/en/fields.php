@@ -97,5 +97,9 @@ return [
         'invalid_format_file' => 'Invalid file format',
         'file_required' => 'File is missing',
         'email_taken' => 'This email has been taken',
+        'add_fields' => 'Add fields',
+        'default_template' => 'Default template',
+        'template' => 'Template',
+        'icon' => 'Icon'
 
 ];

@@ -97,7 +97,9 @@ return [
     'invalid_format_file' => 'Format de fichier invalide',
     'file_required' => 'Fichier manquant',
     'email_taken' => 'Cette email est dejà utilisé',
-
-
+    'add_fields' => 'Ajouter champs',
+    'default_template' => 'Modele pour defet',
+    'template' => 'Modèle',
+    'icon' => 'Icon'
 
 ];

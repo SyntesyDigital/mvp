@@ -96,7 +96,11 @@ return [
     'sure' => 'Estas segur?',
     'invalid_format_file' => 'Format de fitxer invàlid',
     'file_required' => 'Fitxer requerit',
-    'email_taken' => 'Aquest email ja està utilitzat'
+    'email_taken' => 'Aquest email ja està utilitzat',
+    'add_fields' => 'Afegeix camps',
+    'default_template' => 'Plantilla per defecte',
+    'template' => 'Plantilla',
+    'icon' => 'Icona'
 
 
 ];

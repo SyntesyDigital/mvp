@@ -11,7 +11,7 @@ return [
     'pages'         => 'pàgines',
     'news'          => 'noticies',
     'map'           => 'mapa del portal',
-    'gouped'        => 'Agrupat per',
+    'grouped'        => 'Agrupat per',
     'status'        => 'Estat',
     'author'        => 'Autor',
     'name'          => 'Nom',

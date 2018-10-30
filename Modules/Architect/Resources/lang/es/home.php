@@ -11,7 +11,7 @@ return [
     'pages'         => 'páginas',
     'news'          => 'noticias',
     'map'           => 'mapa del portal',
-    'gouped'        => 'Agrupado por',
+    'grouped'        => 'Agrupado por',
     'status'        => 'Estado',
     'author'        => 'Autor',
     'name'          => 'Nombre',

@@ -41,14 +41,14 @@ class TypologySidebar extends Component {
     var self = this;
 
     bootbox.confirm({
-        message: "Estas segur d'esborrar permanentment aquesta tipologia ?",
+        message: { Lang.get('fields.sure')},
         buttons: {
             confirm: {
-                label: 'Sí',
+                label: { Lang.get('fields.si')},
                 className: 'btn-primary'
             },
             cancel: {
-                label: 'No',
+                label: { Lang.get('fields.no')},
                 className: 'btn-default'
             }
         },
@@ -108,17 +108,17 @@ class TypologySidebar extends Component {
     return (
       <div className="sidebar">
         <div className={"form-group bmd-form-group " + (this.props.errors.name ? 'has-error' : '')}>
-           <label htmlFor="name" className="bmd-label-floating">Nom</label>
+           <label htmlFor="name" className="bmd-label-floating">{ Lang.get('fields.name')}</label>
            <input type="text" className="form-control" id="name" name="name" value={this.props.fields.name} onChange={this.handleChange} />
         </div>
 
         <div className={"form-group bmd-form-group " + (this.props.errors.identifier ? 'has-error' : '')}>
-           <label htmlFor="identifier" className="bmd-label-floating">Identifier</label>
+           <label htmlFor="identifier" className="bmd-label-floating">{ Lang.get('fields.identifier')}</label>
            <input type="text" className="form-control" id="identifier" name="identifier" value={this.props.fields.identifier} onChange={this.handleChange} />
         </div>
 
         <div className="form-group bmd-form-group">
-           <label htmlFor="icon" className="bmd-label-floating">Icona</label>
+           <label htmlFor="icon" className="bmd-label-floating">{ Lang.get('fields.icon')}</label>
            <Select
                 id="icon"
                 name="icon"
@@ -129,11 +129,11 @@ class TypologySidebar extends Component {
         </div>
 
         <div className="form-group bmd-form-group">
-           <label htmlFor="template" className="bmd-label-floating">Plantilla per defecte</label>
+           <label htmlFor="template" className="bmd-label-floating">{ Lang.get('fields.default_template')}</label>
            <select className="form-control" id="template" name="template" value={this.props.fields.template}  onChange={this.handleChange}>
-              <option name="" value="1"> Plantilla 1 </option>
-              <option name="" value="2"> Plantilla 2 </option>
-              <option name="" value="3"> Plantilla 3 </option>
+              <option name="" value="1"> { Lang.get('fields.template')} 1 </option>
+              <option name="" value="2"> { Lang.get('fields.template')} 2 </option>
+              <option name="" value="3"> { Lang.get('fields.template')} 3 </option>
            </select>
         </div>
 
@@ -150,21 +150,21 @@ class TypologySidebar extends Component {
 
         <div className="togglebutton">
           <label>
-              Categories
+              { Lang.get('category.categories')}
               <input type="checkbox" name="categories" checked={this.props.fields.categories} onChange={this.handleChange} />
           </label>
         </div>
 
         <div className="togglebutton" >
           <label>
-              Etiquetes
+              { Lang.get('fields.tags')}
               <input type="checkbox" name="tags" checked={this.props.fields.tags} onChange={this.handleChange} />
           </label>
         </div>
 
         <hr/>
 
-        <h3>Afegeix camps</h3>
+        <h3>{ Lang.get('fields.add_fields')}</h3>
 
         <div className="field-list">
           {this.props.children}
