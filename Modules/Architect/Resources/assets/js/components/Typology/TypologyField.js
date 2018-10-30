@@ -107,14 +107,14 @@ class TypologyField extends Component {
 		var self = this;
 
 		bootbox.confirm({
-				message: "Estas segur d'esborrar permanentment aquest camp ?",
+				message: Lang.get('fields.sure'),
 				buttons: {
 						confirm: {
-								label: 'Sí',
+								label: Lang.get('fields.si'),
 								className: 'btn-primary'
 						},
 						cancel: {
-								label: 'No',
+								label: Lang.get('fields.no'),
 								className: 'btn-default'
 						}
 				},
@@ -236,8 +236,8 @@ class TypologyField extends Component {
 
         <div className="field-actions">
 
-					<a href="" onClick={this.onOpenSettings}> Configuració</a> &nbsp;&nbsp;
-					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
+					<a href="" onClick={this.onOpenSettings}> {Lang.get('header.configuration')}</a> &nbsp;&nbsp;
+					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.deletes')} </a>
 					&nbsp;&nbsp;
 
         </div>

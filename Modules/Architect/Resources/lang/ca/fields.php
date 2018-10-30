@@ -58,7 +58,7 @@ return [
     'separator' => 'Separador',
     'si'    => 'Sí',
     'no'    => 'No',
-    'error' => 'Error',
+    'error' => 'S\'ha produit un error',
     'redirect' => 'Redirigint',
     'tags'  => 'Etiquetes',
     'duplicate' => 'Duplicar',
@@ -86,7 +86,17 @@ return [
     'select_media'  => 'Seleciona media',
     'drag_file' => 'Arrosega un arxiu o',
     'upload_file' => 'Pujar arxiu',
-    'deleted_correctly' => 'Esborrat correctament!'
+    'deleted_correctly' => 'Esborrat correctament!',
+    'size' => 'Mida',
+    'layouts' => 'Disenys',
+    'pages' => 'Pàgines',
+    'send' => 'Enviar',
+    'success' => 'Acció realitzada amb exit !',
+    'drag_fields' => 'Arrosega camps en aquesta zona',
+    'sure' => 'Estas segur?',
+    'invalid_format_file' => 'Format de fitxer invàlid',
+    'file_required' => 'Fitxer requerit',
+    'email_taken' => 'Aquest email ja està utilitzat'
 
 
 ];

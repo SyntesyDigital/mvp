@@ -22,7 +22,7 @@
 						'name' => 'image',
 						'resizeWidth' => 500
 					])
-                    
+
 					<h4 class="info-title text-center">{{$user->full_name or ''}}</h4>
 				</div>
 			</div>
@@ -31,41 +31,41 @@
         <div class="col-md-7">
 			<div class="card">
 				<div class="card-body">
-					<h3 class="card-title">Mi cuenta</h3>
-    				{{-- <h6 class="card-subtitle mb-2 text-muted">Editar mi cuenta</h6> --}}
+					<h3 class="card-title">{{Lang::get('architect::user.my_account')}}</h3>
+    				{{-- <h6 class="card-subtitle mb-2 text-muted">{{Lang::get('architect::user.edit_account')}}</h6> --}}
 		            <div class="row">
 		                <div class="col-md-6">
 		                    <div class="form-group label-floating">
-		                        <label class="control-label">Nombre</label>
+		                        <label class="control-label">{{Lang::get('architect::fields.firstname')}}</label>
 		                        <input type="text" name="firstname" value="{{ $user->firstname or '' }}" class="form-control">
 		                    </div>
 		                </div>
 
 		                <div class="col-md-6">
 		                    <div class="form-group label-floating">
-		                        <label class="control-label">Appellido</label>
+		                        <label class="control-label">{{Lang::get('architect::fields.lastname')}}</label>
 		                        <input type="text" name="lastname" value="{{ $user->lastname or '' }}" class="form-control"/>
 		                    </div>
 		                </div>
 		            </div>
 
 					<div class="form-group label-floating">
-		                <label class="control-label">E-mail</label>
+		                <label class="control-label">{{Lang::get('architect::fields.email')}}</label>
 		                <input type="text" name="email" value="{{ $user->email or '' }}" class="form-control"/>
 		            </div>
 
 		            <div class="form-group label-floating">
-		                <label class="control-label">Contraseña</label>
+		                <label class="control-label">{{Lang::get('architect::fields.password')}}</label>
 		                <input type="password" name="password" value="" class="form-control"/>
 		            </div>
 
 		            <div class="form-group label-floating">
-		                <label class="control-label">Confirmar la contraseña</label>
+		                <label class="control-label">{{Lang::get('architect::fields.co_password')}}</label>
 		                <input type="password" name="confirm_password" value="" class="form-control"/>
 		            </div>
 
 		            <div class="form-group label-floating text-left">
-						<input type="submit" value="Enviar" class="btn btn-success submit-form"/>
+						<input type="submit" value={{Lang::get('architect::fields.send')}} class="btn btn-success submit-form"/>
 		            </div>
 				</div>
 			</div>

@@ -22,6 +22,7 @@ use Modules\Architect\Jobs\Language\DeleteLanguage;
 
 // Models
 use Modules\Architect\Entities\Language;
+use Lang;
 
 class LanguageController extends Controller
 {
@@ -60,10 +61,10 @@ class LanguageController extends Controller
             $language = dispatch_now(CreateLanguage::fromRequest($request));
 
             if(!$language) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('languages.show', $language))->with('success', 'Llenguatge guardat correctament');
+            return redirect(route('languages.show', $language))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
@@ -77,10 +78,10 @@ class LanguageController extends Controller
             $language = dispatch_now(UpdateLanguage::fromRequest($language, $request));
 
             if(!$language) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('languages.show', $language))->with('success', 'Llenguatge guardat correctament');
+            return redirect(route('languages.show', $language))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }

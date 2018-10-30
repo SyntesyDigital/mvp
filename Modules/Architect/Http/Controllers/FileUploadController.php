@@ -7,6 +7,7 @@ use Modules\Architect\Repositories\ImageUploadRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Lang;
 
 class FileUploadController extends Controller
 {
@@ -35,7 +36,7 @@ class FileUploadController extends Controller
 
         return response()->json([
             'error' => $httpCode == 500 ? true : false,
-            'message' => $httpCode == 500 ? 'Server error while uploading' : null,
+            'message' => $httpCode == 500 ? Lang::get("architect::fields.error") : null,
             'code' => $httpCode,
         ], $httpCode);
     }

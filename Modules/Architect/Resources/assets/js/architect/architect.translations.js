@@ -37,7 +37,7 @@ architect.translations = {
           initComplete: function(settings, json) {
             DataTableTools.init(this, {
                 onDelete: function(response) {
-                    toastr.success(response.message, 'Success !', {timeOut: 3000});
+                    toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                     _this.refresh();
                 }
             });
@@ -73,11 +73,11 @@ architect.translations = {
                   var rep = JSON.parse(data);
                   if(rep.code == 200){
                       //change
-                      toastr.success('Enregistrement effectué avec succès.', 'Sauvegardé !', {timeOut: 3000});
+                      toastr.success('success', Lang.get('fields.save'), {timeOut: 3000});
                   }
                   else if(rep.code == 400){
                     //error
-                    toastr.error('Une erreur s\'est produite lors de l\'enregistrement', 'Erreur !', {timeOut: 3000});
+                    toastr.error(Lang.get('fields.error'), Lang.get('fields.error'), {timeOut: 3000});
                   }
                   else {
                     //nothing to change
@@ -166,16 +166,16 @@ architect.translations.form = {
                             if(_this._settings.onDelete !== undefined) {
                                 _this._settings.onDelete(response);
                             } else {
-                                toastr.success(response.message, 'Correcte !', {timeOut: 3000});
+                                toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                             }
 
                             window.location.href = _this._settings.reloadRoute;
 
                         } else {
-                            toastr.error(response.message, 'Error !', {timeOut: 3000});
+                            toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                         }
                     }).fail(function(response){
-                        toastr.error(response.message, 'Error !', {timeOut: 3000});
+                        toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                     });
                     return;
                 }

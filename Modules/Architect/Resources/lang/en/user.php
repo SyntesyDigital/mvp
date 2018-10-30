@@ -6,6 +6,8 @@ return [
   'english'        => 'English',
   'spanish'        => 'Spanish',
   'french'         => 'French',
-  'add'            => 'Add User'
+  'add'            => 'Add User',
+  'my_account'     => 'My account',
+  'edit_account'   => 'Edit my account'
 
 ];

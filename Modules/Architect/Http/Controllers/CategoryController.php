@@ -26,6 +26,7 @@ use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
+use Lang;
 
 class CategoryController extends Controller
 {
@@ -70,10 +71,10 @@ class CategoryController extends Controller
             $category = dispatch_now(CreateCategory::fromRequest($request));
 
             if(!$category) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('categories.show', $category))->with('success', 'Category successfully saved');
+            return redirect(route('categories.show', $category))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
@@ -89,10 +90,10 @@ class CategoryController extends Controller
             $category = dispatch_now(UpdateCategory::fromRequest($category, $request));
 
             if(!$category) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('categories.show', $category))->with('success', 'Category successfully saved');
+            return redirect(route('categories.show', $category))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }

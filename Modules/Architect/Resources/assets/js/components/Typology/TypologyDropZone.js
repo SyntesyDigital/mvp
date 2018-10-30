@@ -143,7 +143,7 @@ class TypologyDropZone extends Component {
 
 				<div className="list-container-content-wrapper">
 					<div className="list-container-content">
-	          Arrosega camps en aquesta zona
+	          {Lang.get('fields.drag_fields')}
 	        </div>
 				</div>
       </div>

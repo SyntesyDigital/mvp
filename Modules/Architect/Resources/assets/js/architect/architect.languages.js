@@ -34,7 +34,7 @@ architect.languages = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -122,16 +122,16 @@ architect.languages.form = {
                             if(_this._settings.onDelete !== undefined) {
                                 _this._settings.onDelete(response);
                             } else {
-                                toastr.success(response.message, 'Correcte !', {timeOut: 3000});
+                                toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                             }
 
                             window.location.href = _this._settings.reloadRoute;
 
                         } else {
-                            toastr.error(response.message, 'Error !', {timeOut: 3000});
+                            toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                         }
                     }).fail(function(response){
-                        toastr.error(response.message, 'Error !', {timeOut: 3000});
+                        toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                     });
                     return;
                 }

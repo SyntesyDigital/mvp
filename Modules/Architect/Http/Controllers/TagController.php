@@ -23,6 +23,7 @@ use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\Typology;
 use App\Models\User;
 use App\Models\Role;
+use Lang;
 
 class TagController extends Controller
 {
@@ -62,10 +63,10 @@ class TagController extends Controller
             $tag = dispatch_now(CreateTag::fromRequest($request));
 
             if(!$tag) {
-                throw new \Exception('Error al guardar la etiqueta...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('tags.show', $tag))->with('success', 'Etiqueta guardada correctament');
+            return redirect(route('tags.show', $tag))->with('success',Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
@@ -79,10 +80,10 @@ class TagController extends Controller
             $tag = dispatch_now(UpdateTag::fromRequest($tag, $request));
 
             if(!$tag) {
-                throw new \Exception('Error al guardar la etiqueta...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('tags.show', $tag))->with('success', 'Etiqueta guardada correctament');
+            return redirect(route('tags.show', $tag))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }

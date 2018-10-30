@@ -6,5 +6,7 @@ return [
     'english'        => 'Anglès',
     'spanish'        => 'Espanyol',
     'french'         => 'Francès',
-    'add'            => 'Afegir usuari'
+    'add'            => 'Afegir usuari',
+    'my_account'     => 'El meu compte',
+    'edit_account'   => 'Editar compte'
 ];

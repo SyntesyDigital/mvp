@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul>
     <li class="{{ isset($display_pages) ? 'active' : '' }}">
-      <a href="{{route('contents')}}?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">Pàgines</span> </a>
+      <a href="{{route('contents')}}?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">{{Lang::get('architect::fields.pages')}}</span> </a>
     </li>
   </ul>
   <hr />
@@ -20,10 +20,10 @@
   <hr/>
   <ul>
     <li class="{{ Request::is('architect/categories*') ? 'active' : '' }}">
-      <a href="{{route('categories')}}"> <i class="fa fa-list"></i> <span class="text">Categories</span> </a>
+      <a href="{{route('categories')}}"> <i class="fa fa-list"></i> <span class="text">{{Lang::get('architect::category.categories')}}</span> </a>
     </li>
     <li class="{{ Request::is('architect/tags*') ? 'active' : '' }}">
-      <a href="{{route('tags')}}"> <i class="fa fa-tag"></i> <span class="text">Etiquetes</span> </a>
+      <a href="{{route('tags')}}"> <i class="fa fa-tag"></i> <span class="text">{{Lang::get('architect::fields.tags')}}</span> </a>
     </li>
   </ul>
 </div>

@@ -86,5 +86,16 @@ return [
         'select_media'  => 'Select media',
         'drag_file' => 'Drag a file or',
         'upload_file' => 'Upload file',
-        'deleted_correctly' => 'Deleted correctly!'
+        'deleted_correctly' => 'Deleted correctly!',
+        'size' => 'Size',
+        'layouts' => 'Layouts',
+        'pages' => 'Pages',
+        'send' => 'Send',
+        'success' => 'Success !',
+        'drag_fields' => 'Drag fields to this zone',
+        'sure' => 'Are you sure?',
+        'invalid_format_file' => 'Invalid file format',
+        'file_required' => 'File is missing',
+        'email_taken' => 'This email has been taken',
+
 ];

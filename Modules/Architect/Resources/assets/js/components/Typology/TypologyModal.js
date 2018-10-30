@@ -45,7 +45,7 @@ class TypologyModal extends Component {
               <div className="modal-header">
 
                   <i className={"fa "+this.props.field.icon}></i>
-                  <h2>{this.props.field.name} | Cofiguració</h2>
+                  <h2>{this.props.field.name} | {Lang.get('header.configuration')}</h2>
 
                 <div className="modal-buttons">
                   <a className="btn btn-default close-button-modal" onClick={this.props.onModalClose}>

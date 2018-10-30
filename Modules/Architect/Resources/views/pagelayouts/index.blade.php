@@ -4,12 +4,12 @@
 <div class="container leftbar-page">
   <div class="col-xs-offset-2 col-xs-8 page-content">
 
-    <h3 class="card-title">Layouts</h3>
+    <h3 class="card-title">{{Lang::get('architect::fields.layouts')}}</h3>
 
     <table class="table" id="table" data-url="{{route('pagelayouts.data')}}">
         <thead>
            <tr>
-               <th>Nom</th>
+               <th>{{Lang::get('architect::fields.name')}}</th>
                <th></th>
            </tr>
         </thead>

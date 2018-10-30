@@ -22,6 +22,7 @@ use Modules\Architect\Jobs\Translation\DeleteTranslation;
 
 // Models
 use Modules\Architect\Entities\Translation;
+use Lang;
 
 class TranslationController extends Controller
 {
@@ -63,7 +64,7 @@ class TranslationController extends Controller
                 throw new \Exception('Error occured while saving...');
             }
 
-            return redirect(route('translations.show', $translation))->with('success', 'Traducció guardada correctament');
+            return redirect(route('translations.show', $translation))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }
@@ -77,10 +78,10 @@ class TranslationController extends Controller
             $translation = dispatch_now(UpdateTranslation::fromRequest($translation, $request));
 
             if(!$translation) {
-                throw new \Exception('Error occured while saving...');
+                throw new \Exception(Lang::get("architect::fields.error"));
             }
 
-            return redirect(route('translations.show', $translation))->with('success', 'Traducció guardada correctament');
+            return redirect(route('translations.show', $translation))->with('success', Lang::get("architect::fields.success"));
         } catch (\Exception $ex) {
             $error = $ex->getMessage();
         }

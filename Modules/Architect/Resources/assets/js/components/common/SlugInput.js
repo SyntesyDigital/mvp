@@ -87,11 +87,11 @@ class SlugInput extends Component
 				message: Lang.get('modals.edit_slug_alert'),
 				buttons: {
 						confirm: {
-								label: {Lang.get('fields.si')},
+								label: Lang.get('fields.si'),
 								className: 'btn-primary'
 						},
 						cancel: {
-								label: {Lang.get('fields.no')},
+								label: Lang.get('fields.no'),
 								className: 'btn-default'
 						}
 				},

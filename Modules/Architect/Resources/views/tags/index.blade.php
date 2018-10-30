@@ -9,13 +9,13 @@
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 
-    <h3 class="card-title">Etiquetes</h3>
-    <a href="{{route('tags.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; Afegir tag</a>
+    <h3 class="card-title">{{Lang::get('architect::fields.tags')}}</h3>
+    <a href="{{route('tags.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('architect::tag.add')}}</a>
 
     <table class="table" id="table-tags" data-url="{{route('tags.data')}}">
         <thead>
            <tr>
-               <th>Nom</th>
+               <th>{{Lang::get('architect::fields.name')}}</th>
                <th></th>
            </tr>
         </thead>

@@ -33,11 +33,11 @@ architect.dialog = {
             message: msg,
             buttons: {
                 confirm: {
-                    label: 'Sí',
+                    label: Lang.get('fields.si') ,
                     className: 'btn-primary'
                 },
                 cancel: {
-                    label: 'No',
+                    label:  Lang.get('fields.no'),
                     className: 'btn-default'
                 }
             },
@@ -136,7 +136,7 @@ architect.medias = {
 
     onSuccessUpload: function(_this)
     {
-        toastr.success('File save correctly');
+        toastr.success(Lang.get('fields.success'));
         _this.refresh();
     },
 
@@ -168,7 +168,7 @@ architect.medias = {
 
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Esborrat correctament!', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     },
 
@@ -383,7 +383,7 @@ architect.users = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -453,7 +453,7 @@ architect.pageLayouts = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -523,7 +523,7 @@ architect.menu = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -672,8 +672,8 @@ architect.menu.form = {
               '<div class="item-bar">'+
       	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+(item.name != null ? item.name : '')+'</span>'+
       	  			'<div class="actions">'+
-      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
-      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
+      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; '+ Lang.get('fields.edit')+'</a>&nbsp;'+
+      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; '+ Lang.get('fields.delete')+'</a>'+
       		  		'</div>'+
               '</div>'+
     	  			'<ol class="category-container-'+item.id+'">'+
@@ -771,7 +771,7 @@ architect.menu.form = {
     {
         var ajax = item.data('ajax');
 
-        architect.dialog.confirm("Estas segu ? ", function(result){
+        architect.dialog.confirm( Lang.get('datatables.sure'), function(result){
             if(result) {
 
                 var itemId = item.attr('id').split('-')[1];
@@ -860,7 +860,7 @@ architect.menu.form = {
     {
 
 
-        toastr.success('Menu guardat correctament!');
+        toastr.success(Lang.get('fields.success'));
     },
 
 
@@ -876,7 +876,7 @@ architect.menu.form = {
          $(".add-row-block").addClass('has-error');
        }
 
-       toastr.error('Algun error al guardar');
+       toastr.error(Lang.get('fields.error'));
 
      }
 
@@ -918,7 +918,7 @@ architect.languages = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -1006,16 +1006,16 @@ architect.languages.form = {
                             if(_this._settings.onDelete !== undefined) {
                                 _this._settings.onDelete(response);
                             } else {
-                                toastr.success(response.message, 'Correcte !', {timeOut: 3000});
+                                toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                             }
 
                             window.location.href = _this._settings.reloadRoute;
 
                         } else {
-                            toastr.error(response.message, 'Error !', {timeOut: 3000});
+                            toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                         }
                     }).fail(function(response){
-                        toastr.error(response.message, 'Error !', {timeOut: 3000});
+                        toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                     });
                     return;
                 }
@@ -1065,7 +1065,7 @@ architect.translations = {
           initComplete: function(settings, json) {
             DataTableTools.init(this, {
                 onDelete: function(response) {
-                    toastr.success(response.message, 'Success !', {timeOut: 3000});
+                    toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                     _this.refresh();
                 }
             });
@@ -1101,11 +1101,11 @@ architect.translations = {
                   var rep = JSON.parse(data);
                   if(rep.code == 200){
                       //change
-                      toastr.success('Enregistrement effectué avec succès.', 'Sauvegardé !', {timeOut: 3000});
+                      toastr.success('success', Lang.get('fields.save'), {timeOut: 3000});
                   }
                   else if(rep.code == 400){
                     //error
-                    toastr.error('Une erreur s\'est produite lors de l\'enregistrement', 'Erreur !', {timeOut: 3000});
+                    toastr.error(Lang.get('fields.error'), Lang.get('fields.error'), {timeOut: 3000});
                   }
                   else {
                     //nothing to change
@@ -1194,16 +1194,16 @@ architect.translations.form = {
                             if(_this._settings.onDelete !== undefined) {
                                 _this._settings.onDelete(response);
                             } else {
-                                toastr.success(response.message, 'Correcte !', {timeOut: 3000});
+                                toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                             }
 
                             window.location.href = _this._settings.reloadRoute;
 
                         } else {
-                            toastr.error(response.message, 'Error !', {timeOut: 3000});
+                            toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                         }
                     }).fail(function(response){
-                        toastr.error(response.message, 'Error !', {timeOut: 3000});
+                        toastr.error(response.message, Lang.get('fields.error'), {timeOut: 3000});
                     });
                     return;
                 }

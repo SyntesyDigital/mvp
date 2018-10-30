@@ -20,8 +20,8 @@
           <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
-              <h3 class="card-title">Nou contingut</h3>
-              <h6>Selecciona de la llista el tipus de contingut que vols crear : </h6>
+              <h3 class="card-title">{{Lang::get('architect::contents.new')}}</h3>
+              <h6>{{Lang::get('architect::contents.select_list')}}</h6>
 
 
               <div class="grid-items">
@@ -33,7 +33,7 @@
                       <div class="grid-item">
                         <i class="fa fa-file-o"></i>
                         <p class="grid-item-name">
-                          Pàgina
+                          {{Lang::get('architect::fields.page')}}
                         </p>
                       </div>
                     </a>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="modal-footer">
-          <a href="" class="btn btn-default close-btn" > Cancel·lar </a>
+          <a href="" class="btn btn-default close-btn" > {{Lang::get('architect::fields.cancel')}} </a>
         </div>
 
       </div>

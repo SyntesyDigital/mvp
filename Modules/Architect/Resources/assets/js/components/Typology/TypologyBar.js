@@ -33,7 +33,7 @@ class TypologyBar extends Component {
               </h1>
 
               <div className="float-buttons pull-right">
-                <a href="" className="btn btn-primary" onClick={this.props.onSubmitForm}> <i className="fa fa-cloud-upload"></i> &nbsp; Guardar </a>
+                <a href="" className="btn btn-primary" onClick={this.props.onSubmitForm}> <i className="fa fa-cloud-upload"></i> &nbsp; {Lang.get('fields.save')} </a>
               </div>
 
             </div>

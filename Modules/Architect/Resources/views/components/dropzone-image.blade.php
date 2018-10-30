@@ -14,9 +14,9 @@
             </div>
 
             <div class="message">
-    			<p>Drop una imagen o<br><span class="link"><i class="fa fa-upload"></i> &nbsp; pincha aqui</span></p>
+    			<p>{{Lang::get('architect::fields.drag_file')}}<br><span class="link"><i class="fa fa-upload"></i> &nbsp; {{Lang::get('architect::fields.upload_file')}}</span></p>
 					@if(isset($sizeText))
-						<p>( Taille {{$sizeText}} )</p>
+						<p>( {{Lang::get('architect::fields.size')}} {{$sizeText}} )</p>
 					@endif
     		</div>
     	</div>
@@ -26,7 +26,7 @@
 		<div class="background-image" @if($image != null) style="background-image:url('{{ Storage::url($image)}}')" @endif>
 		</div>
 		<div class="actions">
-			<a href="" class="btn btn-table" id="remove-picture"><i class="fa fa-trash"></i> &nbsp; Borrar </a>
+			<a href="" class="btn btn-table" id="remove-picture"><i class="fa fa-trash"></i> &nbsp; {{Lang::get('architect::fields.delete')}} </a>
 		</div>
 	</div>
 

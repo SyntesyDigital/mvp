@@ -12,13 +12,13 @@
             <div class="card">
 				<div class="card-body">
 
-                    <h3 class="card-title">{{ __('Llista de Mitjans') }}</h3>
-    				        <h6 class="card-subtitle mb-2 text-muted">{{ __('Tots els mitjans poden ser trobats aquí.') }}</h6>
+                    <h3 class="card-title">{{Lang::get('architect::media.list')}}</h3>
+    				        <h6 class="card-subtitle mb-2 text-muted">{{Lang::get('architect::media.all_media')}}</h6>
 
                     <div class="medias-dropfiles" style="cursor:pointer;">
                         <p align="center" style="pointer-events:none;">
-                            <strong>{{ __('Arrossega un arxiu o') }}</strong> <br />
-                            <a href="#" class="btn btn-default"><i class="fa fa-upload"></i> &nbsp; {{ __('Pujar arxiu') }}</a>
+                            <strong>{{Lang::get('architect::fields.drag_file')}}</strong> <br />
+                            <a href="#" class="btn btn-default"><i class="fa fa-upload"></i> &nbsp; {{Lang::get('architect::fields.upload_file')}}</a>
                         </p>
                     </div>
 
@@ -42,9 +42,9 @@
                         <thead>
                            <tr>
                                <th></th>
-                               <th>Nom d'arxiu</th>
-                               <th data-filter="select">Tipus</th>
-                               <th data-filter="select">Autor</th>
+                               <th>{{Lang::get('architect::fields.filename')}}</th>
+                               <th data-filter="select">{{Lang::get('architect::fields.tipus')}}</th>
+                               <th data-filter="select">{{Lang::get('architect::fields.author')}}</th>
                                <th></th>
                            </tr>
                         </thead>

@@ -291,7 +291,7 @@ class TypologyContainer extends Component {
                 } else if (error.message) {
                     toastr.error(error.message);
                 } else {
-                    console.log('Error', error.message);
+                    console.log(Lang.get('fields.error'), error.message);
                 }
                 //console.log(error.config);
             });
@@ -359,7 +359,7 @@ class TypologyContainer extends Component {
              fields : fields
          })
 
-         toastr.success('Ok');
+         toastr.success(Lang.get('fields.success'));
 
      }
 

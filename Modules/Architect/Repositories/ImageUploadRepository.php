@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManager;
 
 use Storage;
-
+use Lang;
 /**
  * Interface UsersRepository.
  */
@@ -20,8 +20,8 @@ class ImageUploadRepository
     ];
 
     public static $messages = [
-        'file.mimes' => 'Format de fichier invalide',
-        'file.required' => 'Fichier manquant',
+        'file.mimes' => Lang::get("architect::fields.invalid_format_file"),
+        'file.required' => Lang::get("architect::fields.file_required"),
     ];
 
     public function upload($form_data, $resizeWidth = null)
@@ -53,7 +53,7 @@ class ImageUploadRepository
         if (! $result) {
             return [
                 'error' => true,
-                'message' => 'Une erreur est survenue',
+                'message' => Lang::get("architect::fields.error"),
             ];
         }
 

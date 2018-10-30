@@ -20,14 +20,14 @@
             <a href="{{route('tags')}}" class="btn btn-default btn-close"> <i class="fa fa-angle-left"></i> </a>
             <h1>
               <i class="fa fa-tag "></i>
-              Nova etiqueta
+              {{Lang::get('architect::tag.new')}}
             </h1>
 
             <div class="float-buttons pull-right">
 
             <div class="actions-dropdown">
               <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                Accions
+                {{Lang::get('architect::fields.actions')}}
                 <b class="caret"></b>
                 <div class="ripple-container"></div>
               </a>
@@ -36,14 +36,13 @@
                     <li>
                         <a href="{{route('account')}}">
                             <i class="fa fa-plus-circle"></i>
-                            &nbsp;Nou
-                        </a>
+                            &nbsp;{{Lang::get('architect::fields.new
                     </li>
                     <li>
                         <a href="{{route('account')}}" class="text-danger">
                             <i class="fa fa-trash text-danger"></i>
                             &nbsp;
-                            <span class="text-danger">Esborrar</span>
+                            <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                         </a>
                     </li>
                 </ul>
@@ -51,7 +50,7 @@
 
 
               {!!
-                  Form::submit('Guardar', [
+                  Form::submit(Lang::get('architect::fields.save'), [
                       'class' => 'btn btn-primary'
                   ])
               !!}

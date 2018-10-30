@@ -25,7 +25,7 @@ use Modules\Architect\Jobs\User\UpdateUser;
 // Delete
 use Modules\Architect\Http\Requests\User\DeleteUserRequest;
 use Modules\Architect\Jobs\User\DeleteUser;
-
+use Lang;
 
 class UserController extends Controller
 {
@@ -63,14 +63,14 @@ class UserController extends Controller
         dispatch_now(UpdateUser::fromRequest($user, $request));
 
         return redirect(route('users.show', $user))
-            ->with('success', 'Usuari guardat satisfactoriament');
+            ->with('success', Lang::get("architect::fields.success"));
     }
 
     public function store(CreateUserRequest $request)
     {
         $user = dispatch_now(CreateUser::fromRequest($request));
 
-        return redirect(route('users.show', $user))->with('success', 'Usuari guardat satisfactoriament');
+        return redirect(route('users.show', $user))->with('success', Lang::get("architect::fields.success"));
     }
 
     public function delete(User $user, DeleteUserRequest $request)

@@ -28,7 +28,7 @@ return [
     'firstname' => 'Prénom',
     'lastname'  => 'Nom',
     'password'  => 'Mot de passe',
-    'co_password' => 'Confirmex le mot de passe',
+    'co_password' => 'Confirmez le mot de passe',
     'language'  => 'Langue',
     'role'      => 'Rôle',
     'save'      => 'Sauvegarder',
@@ -58,7 +58,7 @@ return [
     'separator' => 'Séparateur',
     'si'    => 'Oui',
     'no'    => 'Non',
-    'error' => 'Erreur',
+    'error' => 'Il y avé un erreur',
     'redirect' => 'Rediriger',
     'tags'  => 'Mots clés',
     'duplicate' => 'Dupliquer',
@@ -86,6 +86,18 @@ return [
     'select_media'  => 'Sélectionner media',
     'drag_file' => 'Glisser un fichier ou',
     'upload_file' => 'télécharger le fichier',
-    'deleted_correctly' => 'Supprimé!'
+    'deleted_correctly' => 'Supprimé!',
+    'size' => 'Taille',
+    'layouts' => 'Agencements',
+    'pages' => 'Pages',
+    'send' => 'Envoyer',
+    'success' => 'Action realisé avec succès !',
+    'drag_fields' => 'Faites glisser les champs dans cette zone',
+    'sure' => 'Êtes-vous sûr?',
+    'invalid_format_file' => 'Format de fichier invalide',
+    'file_required' => 'Fichier manquant',
+    'email_taken' => 'Cette email est dejà utilisé',
+
+
 
 ];

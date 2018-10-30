@@ -85,7 +85,7 @@ architect.medias = {
 
     onSuccessUpload: function(_this)
     {
-        toastr.success('File save correctly');
+        toastr.success(Lang.get('fields.success'));
         _this.refresh();
     },
 
@@ -117,7 +117,7 @@ architect.medias = {
 
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Esborrat correctament!', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     },
 

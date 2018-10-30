@@ -20,6 +20,7 @@ use Modules\Architect\Jobs\Media\UpdateMedia;
 use Illuminate\Support\Facades\Bus;
 
 use Modules\Architect\Entities\Media;
+use Lang;
 
 use Session;
 
@@ -67,7 +68,7 @@ class MediaController extends Controller
         if(dispatch_now(UpdateMedia::fromRequest($media, $request))) {
             return response()->json([
                 'success' => true,
-                'message' => 'Media updated with success'
+                'message' => Lang::get("architect::fields.success")
             ]);
         }
 
@@ -82,14 +83,14 @@ class MediaController extends Controller
             return $request->ajax()
                 ? response()->json([
                     'success' => true,
-                    'message' => 'Media deleted with success'
+                    'message' => Lang::get("architect::fields.success")
                 ]) : redirect()->route('admin.content.medias.index');
         }
 
         return $request->ajax()
             ? response()->json([
                 'error' => true,
-                'message' => 'An error occured when deleting media'
+                'message' => Lang::get("architect::fields.error")
             ], 500)
             : redirect()->route('admin.content.medias.index');
     }

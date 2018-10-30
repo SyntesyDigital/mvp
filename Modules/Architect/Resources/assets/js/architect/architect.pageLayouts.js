@@ -32,7 +32,7 @@ architect.pageLayouts = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, 'Success !', {timeOut: 3000});
+                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
                         _this.refresh();
                     }
                 });

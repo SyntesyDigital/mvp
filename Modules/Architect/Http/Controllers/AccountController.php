@@ -9,6 +9,7 @@ use Modules\Architect\Http\Requests\SaveAccountRequest;
 
 use Auth;
 use Session;
+use Lang;
 
 class AccountController extends Controller
 {
@@ -36,7 +37,7 @@ class AccountController extends Controller
                 ->count();
 
             if ($count > 0) {
-                Session::flash('notify_error', 'This email has been taken');
+                Session::flash('notify_error', Lang::get("architect::fields.email_taken"));
                 return redirect(route('account'));
             }
         }
@@ -50,9 +51,9 @@ class AccountController extends Controller
         ];
 
         if ($user->update($data)) {
-            Session::flash('notify_success', 'Usuario registrado con sucess');
+            Session::flash('notify_success', Lang::get("architect::fields.success"));
         } else {
-            Session::flash('notify_error', "Occurio un error");
+            Session::flash('notify_error', Lang::get("architect::fields.error"));
         }
 
         return redirect(route('account'));

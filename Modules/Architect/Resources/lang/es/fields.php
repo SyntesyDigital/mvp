@@ -58,7 +58,7 @@ return [
     'separator' => 'Separador',
     'si'    => 'Sí',
     'no'    => 'No',
-    'error' => 'Error',
+    'error' => 'Se ha producido un error',
     'redirect' => 'Redirigiendo',
     'tags'  => 'Etiquetas',
     'duplicate' => 'Duplicar',
@@ -86,6 +86,16 @@ return [
     'select_media'  => 'Seleciona media',
     'drag_file' => 'Arrastra un archivo o',
     'upload_file' => 'Sube archivo',
-    'deleted_correctly' => 'Borrado Correctamente!'
+    'deleted_correctly' => 'Borrado Correctamente!',
+    'size' => 'Medida',
+    'layouts' => 'Diseños',
+    'pages' => 'Páginas',
+    'send' => 'Enviar',
+    'success' => 'Accion realizada con éxito !',
+    'drag_fields' => 'Arrastra campos en esta zona',
+    'sure' => 'Estas seguro?',
+    'invalid_format_file' => 'Formato de fichero no vàlido',
+    'file_required' => 'Fichero requerido',
+    'email_taken' => 'Este email ya está utilizado',
 
 ];
