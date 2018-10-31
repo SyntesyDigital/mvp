@@ -91,7 +91,7 @@ Route::group([
 */
 
 Route::group([
-  'middleware' => ['web', 'auth','role:admin'],
+  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()

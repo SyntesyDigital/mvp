@@ -23,7 +23,6 @@ class DetectUserLocale {
     public function handle($request, Closure $next)
     {
         $this->app->setLocale(Auth::user()->language ?: config('architect.fallback_language'));
-
         return $next($request);
     }
 

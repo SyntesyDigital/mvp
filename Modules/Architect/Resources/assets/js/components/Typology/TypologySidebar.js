@@ -41,14 +41,14 @@ class TypologySidebar extends Component {
     var self = this;
 
     bootbox.confirm({
-        message: { Lang.get('fields.sure')},
+        message:  Lang.get('fields.sure'),
         buttons: {
             confirm: {
-                label: { Lang.get('fields.si')},
+                label: Lang.get('fields.si'),
                 className: 'btn-primary'
             },
             cancel: {
-                label: { Lang.get('fields.no')},
+                label:  Lang.get('fields.no'),
                 className: 'btn-default'
             }
         },
