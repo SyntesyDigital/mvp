@@ -49,7 +49,7 @@
 				?>
 				<a href="<?php echo e($twitter[App::getLocale()]); ?>" target="_blank">@twitter</a>
 			</li>
-			<li class="boto-search">Buscar </li>
+			<!--li class="boto-search">Buscar </li-->
 		</ul>
 	</div><!-- /.nav-collapse -->
 	</nav>
