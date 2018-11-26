@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\TagRepository;
 
 use Modules\Architect\Http\Requests\Tag\CreateTagRequest;
-use Modules\Architect\Jobs\tag\CreateTag;
+use Modules\Architect\Jobs\Tag\CreateTag;
 
 use Modules\Architect\Http\Requests\Tag\UpdateTagRequest;
-use Modules\Architect\Jobs\tag\UpdateTag;
+use Modules\Architect\Jobs\Tag\UpdateTag;
 
 use Modules\Architect\Http\Requests\Tag\DeleteTagRequest;
 use Modules\Architect\Jobs\Tag\DeleteTag;

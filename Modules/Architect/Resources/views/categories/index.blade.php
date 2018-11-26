@@ -160,7 +160,7 @@
 
         var ajax = $(this).data('ajax');
 
-        architect.dialog.confirm({{Lang::get('architect::datatables.sure')}}, function(result){
+        architect.dialog.confirm(Lang.get('datatables.sure'), function(result){
             if(result) {
 
                 if(ajax) {

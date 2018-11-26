@@ -14,7 +14,7 @@ class AlterTableMediasAddUploadedByField extends Migration
     public function up()
     {
         Schema::table('medias', function($table){
-            $table->integer('author_id')->unsigned()->after('metadata')->default('NULL');
+            $table->integer('author_id')->unsigned()->after('metadata');
             $table->foreign('author_id')->references('id')->on('users');
         });
     }

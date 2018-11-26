@@ -120,7 +120,7 @@ export default class Blog extends Component {
 
         var params = {
             size : this.state.size,
-            typology_id : 2,
+            typology_id : 1,
             category_id : filters!= null && filters.category != null?filters.category:null,
             tags : filters!= null && filters.tag != null?filters.tag:null,
             fields : fieldsQuery,

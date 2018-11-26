@@ -43,12 +43,11 @@
 		<li class="link-twitter">
 				@php
 					$twitter = [
-						"es" => "https://twitter.com/BarcelonaInfoES",
-						"ca" => "https://twitter.com/barcelonaturism",
-						"en" => "https://twitter.com/BarcelonaInfoEN"
+						"es" => "",
+						"fr" => ""
 					];
 				@endphp
-				<a href="{{$twitter[App::getLocale()]}}" target="_blank">@BarcelonaTurism</a>
+				<a href="{{$twitter[App::getLocale()]}}" target="_blank">@twitter</a>
 			</li>
 			<li class="boto-search">Buscar </li>
 		</ul>

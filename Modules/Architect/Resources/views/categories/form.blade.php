@@ -55,7 +55,7 @@
 
 
                 {!!
-                    Form::submit({{Lang::get('architect::fields.save')}}, [
+                    Form::submit(Lang::get('architect::fields.save'), [
                         'class' => 'btn btn-primary'
                     ])
                 !!}

@@ -36,7 +36,7 @@
                     <li>
                         <a href="{{route('account')}}">
                             <i class="fa fa-plus-circle"></i>
-                            &nbsp;{{Lang::get('architect::fields.new
+                            &nbsp;{{Lang::get('architect::fields.new')}}
                     </li>
                     <li>
                         <a href="{{route('account')}}" class="text-danger">
