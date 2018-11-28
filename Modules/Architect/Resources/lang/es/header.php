@@ -8,5 +8,6 @@ return [
     'media'         => 'Medios',
     'configuration' => 'Configuración',
     'my_profile'    => 'Mi cuenta',
-    'disconnect'    => 'Desconectar'
+    'disconnect'    => 'Desconectar',
+    'offers'        => 'Ofertas'
 ];

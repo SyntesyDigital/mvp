@@ -1,0 +1,54 @@
+.btn {
+  background-color:$brand-color-2;
+  text-transform:uppercase;
+  padding:5px 12px;
+  @include font(15,18,300);
+  color:#fff;
+  border:none;
+  border-radius: 0px;
+  font-family:$brand-font-1;
+
+  @extend .animate;
+
+  &:hover, &:focus, &:active, &:active:focus{
+    background-color:$brand-color-1;
+    color:#fff;
+    outline: none;
+  }
+
+ /* &:visited{
+    background-color:$brand-color-1;
+  }*/
+
+  &.btn-secondary{
+    background-color:$brand-light-color-2;
+
+    &:hover, &:focus, &:active, &:active:focus {
+      background-color:$brand-color-1;
+    }
+
+  /*  &:visited{
+      background-color:$brand-color-1;
+    } */
+  }
+  &.btn-secondary-clear{
+    background-color:$brand-light-color-1;
+    color:$brand-light-color-2;
+    text-transform: none;
+    @include font(16,18,400);
+    &:hover, &:focus, &:active, &:active:focus {
+      background-color:$brand-color-1;
+      color:white;
+    }
+    /*&:visited{
+      background-color:$brand-color-1;
+      color:white;
+    }*/
+  }
+  &.btn-more{
+    width: 100%;
+    @include font(18,30,400);
+    text-transform: none;
+    margin-bottom: 38px;
+  }
+}

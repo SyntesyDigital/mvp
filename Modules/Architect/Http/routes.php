@@ -140,7 +140,6 @@ Route::group([
   Route::get('/translations/{translation?}', 'TranslationController@show')->name('translations.show');
 
 
-
   //added to all users FIXME separete account and users ?
   //Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
   //Route::get('/users/{user?}', 'UserController@show')->name('users.show');

@@ -1,0 +1,59 @@
+.home {
+    .home-block {
+        padding: 40px 0;
+        p{
+            /*text-align:center;*/
+            @include font(18, 20, 300);
+            color: #000;
+        }
+
+    }
+}
+.offers{
+    padding: 20px 0 10px;
+    clear:both;
+    overflow:hidden;
+    max-width: 930px;
+    margin: 0 auto;
+    .offer-container{
+       .offer-box{
+            min-height:315px;
+            max-height:315px;
+            background-color: $brand-light-color-3;
+            padding:10px;
+            background-repeat:no-repeat;
+            background-position:bottom right;
+            margin:20px auto;
+            h4{
+                @include font(23,26,400);
+                color:$brand-color-2;
+                text-align:center;
+                padding: 0 30px;
+                margin-bottom: 20px;
+                min-height:52px;
+            }
+            p{
+                text-align: center;
+                color:$brand-light-color-2;
+                margin-bottom:16px;
+                @include font(15, 18, 600);
+                i{
+                    @include font(20, 18, 600);
+                    margin-right: 10px;
+                }
+            }
+            .btn{
+                width:105px;
+                text-align:center;
+                padding: 3px 2px;
+                display:block;
+                margin: 5px auto;
+                &.unactivated{
+                  width:120px;
+                  background-color:$brand-light-color-1;
+                  cursor:default;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,183 @@
+<?php
+
+namespace Modules\RRHH\Entities\Offers;
+
+use Modules\RRHH\Entities\User;
+use App\Presenters\DatePresenter;
+use Auth;
+use Cache;
+use Geocoder\Geocoder;
+use Illuminate\Database\Eloquent\Model;
+
+class Offer extends Model
+{
+    use DatePresenter;
+
+    const STATUS_ACTIVE = 'ACTIVE';
+    const STATUS_UNACTIVE = 'UNACTIVE';
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'offers';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status',
+        'recipient_id',
+        'customer_id',
+        'customer_contact_id',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function recipient()
+    {
+        return $this->hasOne('Modules\RRHH\Entities\User', 'id', 'recipient_id');
+    }
+
+    public function agence()
+    {
+        return $this->hasOne('Modules\RRHH\Entities\Agence', 'id', 'agence_id');
+    }
+
+    public function fields()
+    {
+        return $this->hasMany('Modules\RRHH\Entities\Offers\OfferField');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('Modules\RRHH\Entities\TagOffer', 'offers_tag_offers');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany('Modules\RRHH\Entities\Offers\Application');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany('Modules\RRHH\Entities\Offers\AlertCandidate');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('Modules\RRHH\Entities\Customer');
+    }
+
+    public function customer_contact()
+    {
+        return $this->belongsTo('Modules\RRHH\Entities\CustomerContact', 'customer_contact_id');
+    }
+
+    public function getField($key)
+    {
+        $attr = $this->fields->where('name', $key);
+
+        if ($attr->count() > 1) {
+            return $attr->map(function ($field, $key) {
+                return $field->value;
+            })->toArray();
+        }
+
+        return isset($attr->first()->value) ? $attr->first()->value : null;
+    }
+
+    public static function whereField($name, $value)
+    {
+        return self::whereHas('fields', function ($q) use ($name, $value) {
+            $q->where('name', $name);
+            $q->where('value', 'like', $value);
+        });
+    }
+
+    public function __get($key)
+    {
+        $value = parent::__get($key);
+
+        return null === $value ? $this->getField($key) : $value;
+    }
+
+    public static function getStatus()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_UNACTIVE => 'Inactive',
+        ];
+    }
+
+    public function getStringStatus()
+    {
+        return isset($this->getStatus()[$this->status]) ? $this->getStatus()[$this->status] : null;
+    }
+
+    public function getCandidatesToAlerts()
+    {
+        $offer = $this;
+
+        return Candidate::whereHas('user', function ($query) {
+            $query->where('status', User::STATUS_ACTIVE);
+        })
+        ->whereHas('tags', function ($query) use ($offer) {
+            $query->whereIn('tag_id', $offer->tags->toArray());
+        })
+        ->whereDoesntHave('alerts', function ($query) use ($offer) {
+            $query
+                ->where('offer_id', $offer->id)
+                ->where('status', AlertCandidate::STATUS_ERROR);
+        })->get();
+    }
+
+    public function hasAlreadyCandidate()
+    {
+        if (Auth::user()->candidate) {
+            if ($this->applications()->where('candidate_id', Auth::user()->candidate->id)->first()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function setGeo()
+    {
+        if (null != $this->latitude && null != $this->longitude) {
+            return [
+                'lat' => $this->latitude,
+                'lng' => $this->longitude,
+            ];
+        } else {
+            $address = $this->address.', '.$this->place;
+            $data = Cache::has(md5($address)) ? Cache::get(md5($address)) : false;
+
+            if (! $data) {
+                $data = app('geocoder')->geocode($address)->get();
+                Cache::add(md5($address), $data, 60 * 24);
+            }
+
+            if (isset($data[0]) && null !== $data[0]) {
+                return [
+                    'lat' => $data[0]->getCoordinates()->getLatitude(),
+                    'lng' => $data[0]->getCoordinates()->getLongitude(),
+                ];
+            }
+
+            return null;
+        }
+    }
+}

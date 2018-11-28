@@ -1,0 +1,90 @@
+.candidate {
+    .bk-candidate-menu {
+        padding-top: 60px;
+        .horizontal-inner-container {
+            min-height: 320px;
+            .candidate-menu {
+                float: left;
+                width: 290px;
+                min-height: 50px;
+                margin-bottom:20px;
+                background: linear-gradient(
+                    to right, 
+                    $brand-light-color-3 0, 
+                    $brand-light-color-3 98%, 
+                    #ffffff 98%, 
+                    #ffffff 100%
+                );
+
+                a {
+                    text-decoration:none;
+                    .menu-title {
+                        padding: 0px 16px;
+                        @include font(25,60,300);
+                        color: $brand-light-color-2;
+
+                        &.active {
+                            color: #fff;
+                        }
+                        &:hover {
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .active {
+                    .hex-container {
+                        .hexagon-sm-menu {
+                            .hex-content {
+                                .candidate-icon {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                    background-color:$brand-color-2;
+                    .menu-title {
+                        color: #fff;
+                    }
+                }
+            }
+
+            .candidate-page-content {
+                overflow: hidden;
+                min-height: 50px;
+                padding: 0px 10px 20px;
+                h2{
+                    margin-top:0px;
+                }
+                form {
+                    label {
+                        @include font (13,15,100);
+                        font-family: $brand-font-1;
+                        color: $brand-color-1;
+                    }
+
+                    .form-group {
+                        margin-bottom: 10px;
+                    }
+
+                    input {
+                        &.btn {
+                            float: left;
+                        }
+                    }
+                }
+            }
+
+            &.horizontal-inner-container-candidate-profile {
+                .candidate-page-content {
+                    h2 {
+                        font-family: $brand-font-1;
+                        @include font(38,40,100);
+                        color: $brand-color-1;
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

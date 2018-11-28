@@ -1,0 +1,12 @@
+.has-error {
+    color: #F00;
+
+    input {
+        border: 1px solid #F00  !important;
+        color: #F00;
+    }
+
+    label {
+        color: #F00 !important;
+    }
+}

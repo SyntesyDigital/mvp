@@ -8,5 +8,7 @@ return [
     'media'         => 'Media',
     'configuration' => 'Configuration',
     'my_profile'    => 'My profile',
-    'disconnect'    => 'Disconnect'
+    'disconnect'    => 'Disconnect',
+    'offers'        => 'Offers'
+
 ];

@@ -20,6 +20,12 @@
                         </a>
                       </li>
 
+                      <li class="{{ Request::is('architect') ? 'active' : '' }}">
+                        <a href="{{route('rrhh.offers')}}">
+                        {{Lang::get('architect::header.offers')}}
+                        </a>
+                      </li>
+
                         @if(Auth::user()->hasRole(["admin"]))
                       <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
                         <a href="{{route('typologies')}}">

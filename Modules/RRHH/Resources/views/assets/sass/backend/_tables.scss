@@ -1,0 +1,271 @@
+#content .body.table-content {
+    padding-top: 10px;
+}
+
+.table-content {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    table {
+        width: 100%;
+
+        thead {
+            background-color: $cms-light-color-3;
+            height: 50px;
+            line-height: 50px;
+
+            td {
+                line-height: 50px;
+                margin: 0;
+                color: $cms-dark-color-2;
+                font-weight: 400;
+                font-size: 13px;
+                text-transform: uppercase;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        tbody {
+            tr {
+                height: 80px;
+                background-color: #fff;
+                border-bottom: 1px solid $cms-light-color-3;
+
+                td {
+                    line-height: 50px;
+                    padding-left: 30px;
+                    padding-right: 25px;
+                    color: $cms-dark-color-2;
+                    font-size: 13px;
+                    font-weight: 400;
+                }
+
+                td.title {
+                    color: $cms-dark-color-1;
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        a.btn.btn-table {
+            @extend .rounded;
+            background-color: $cms-light-color-3;
+            display: inline-block;
+            padding: 6px 7px;
+            color: $cms-dark-color-2;
+            padding: 6px 9px;
+            margin-right: 5px;
+
+            i.fa {
+                font-size: 14px;
+            }
+
+            &:hover {
+                color: $cms-color-1;
+
+                i.fa {
+                    color: $cms-color-1;
+                }
+            }
+        }
+
+        &.table-image {
+            tr td {
+                line-height: 20px;
+            }
+
+            .image {
+                width: 60px;
+                height: 60px;
+                background-size: cover;
+                background-position: center;
+                @extend .rounded;
+            }
+
+            a.title-link {
+                display: block;
+            }
+
+            td:nth-child(1) {
+                width: 100px;
+                padding-right: 10px;
+            }
+
+            h4 {
+                margin: 0;
+                padding: 0 0 5px;
+                @include font(16,20,400);
+            }
+
+            p {
+                padding: 0;
+                margin: 0;
+                font-weight: 100;
+                line-height: 35px;
+                padding-bottom: 8px;
+
+                .label {
+                    margin-right: 5px;
+                }
+
+                a.author {
+                    color: $cms-dark-color-1;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+/* Data Table Customization */
+#table_wrapper {
+    .form-group {
+        margin: 0;
+    }
+
+    .dataTable.no-footer {
+        border-bottom: 1px solid $cms-light-color-4;
+    }
+
+    thead {
+        background-color: $cms-light-color-3;
+        height: 50px;
+        line-height: 50px;
+
+        th {
+            line-height: 20px;
+            vertical-align: middle;
+            margin: 0;
+            color: $cms-dark-color-2;
+            font-weight: 400;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-bottom: none;
+        }
+    }
+
+    tbody {
+        tr {
+            height: 40px;
+            background-color: #fff;
+            border-bottom: 1px solid $cms-light-color-3;
+
+            td {
+                position: relative;
+                line-height: 20px;
+                padding-left: 15px;
+                padding-right: 15px;
+                color: $cms-dark-color-3;
+                font-size: 13px;
+                font-weight: 400;
+                vertical-align: middle;
+            }
+
+            td.title {
+                color: $cms-dark-color-1;
+                font-size: 16px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    a.btn.btn-table {
+        @extend .rounded;
+        background-color: $cms-light-color-3;
+        display: inline-block;
+        padding: 6px 7px;
+        color: $cms-dark-color-2;
+        padding: 6px 9px;
+        margin-right: 5px;
+        margin-top: 6px;
+
+        i.fa {
+            font-size: 14px;
+        }
+
+        &:hover {
+            color: $cms-color-1;
+
+            i.fa {
+                color: $cms-color-1;
+            }
+        }
+    }
+
+    #table_filter {
+        label {
+            &:before {
+                font-family: FontAwesome;
+                content: "\f002";
+                padding-right: 5px;
+                color: $cms-dark-color-2;
+            }
+        }
+
+        input {
+            @include font(14,16,300);
+        }
+    }
+
+    .dropdown-menu {
+        top: 55px;
+
+        li a {
+            background-color: transparent;
+            color: $cms-dark-color-2;
+            padding-left: 29px;
+
+            &:hover {
+                background-color: transparent;
+                border: none;
+                color: $cms-color-1;
+                box-shadow: none;
+            }
+
+            .fa {
+                position: absolute;
+                top: 14px;
+                left: 12px;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .btn-status {
+        background-color: transparent;
+        color: $cms-dark-color-1;
+        border: 1px solid $cms-light-color-4;
+        text-transform: initial;
+        padding: 8px 17px 8px 40px;
+        margin: 7px 1px;
+
+        .caret {
+            margin-left: 5px;
+        }
+
+        .fa {
+            position: absolute;
+            top: 11px;
+            left: 11px;
+        }
+    }
+
+    a.btn.btn-table.open-modal {
+        background-color: transparent;
+        color: $cms-dark-color-1;
+        border: 1px solid $cms-light-color-4;
+        padding: 8px 17px;
+        margin: 7px 1px;
+
+        &:hover {
+            color: $cms-color-1;
+        }
+    }
+}

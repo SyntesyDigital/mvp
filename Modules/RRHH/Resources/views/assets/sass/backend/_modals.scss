@@ -1,0 +1,23 @@
+.modal.cms-modal {
+    .btn-secondary {
+        background-color: transparent;
+        color: $cms-dark-color-1;
+        border: 1px solid $cms-light-color-4;
+    }
+
+    .modal-footer {
+        padding: 0 30px 20px;
+    }
+
+    .modal-body {
+        padding-top: 0;
+    }
+
+    button.close {
+        top: 20px;
+        position: absolute;
+        right: 30px;
+        font-size: 20px;
+        color: $cms-dark-color-2;
+    }
+}
