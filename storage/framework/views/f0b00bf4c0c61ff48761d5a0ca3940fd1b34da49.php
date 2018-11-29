@@ -22,7 +22,7 @@
                       </li>
 
                       <li class="<?php echo e(Request::is('architect') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('rrhh.offers')); ?>">
+                        <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>">
                         <?php echo e(Lang::get('architect::header.offers')); ?>
 
                         </a>

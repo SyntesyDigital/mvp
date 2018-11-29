@@ -10,7 +10,7 @@ class CustomerRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\Customer";
+        return "Modules\\RRHH\\Entities\Customer";
     }
 
     public function getDatatableData()

@@ -10,7 +10,7 @@ class ContentRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Content\Content";
+        return "Modules\\RRHH\\Entities\\Content\Content";
     }
 
     public function getBlogPosts($category = false, $limit = false, $offset = false)

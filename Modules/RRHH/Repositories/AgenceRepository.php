@@ -10,7 +10,7 @@ class AgenceRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\Agence";
+        return "Modules\\RRHH\\Entities\Agence";
     }
 
     public function getDatatableData()

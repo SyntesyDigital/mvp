@@ -13,7 +13,8 @@ class OfferRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Offers\Offer";
+        return "Modules\\RRHH\\Entities\\Offers\Offer";
+
     }
 
     public function getDataTableData()

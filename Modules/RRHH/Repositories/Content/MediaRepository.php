@@ -8,6 +8,6 @@ class MediaRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Content\Media";
+        return "Modules\\RRHH\\Entities\\Content\Media";
     }
 }

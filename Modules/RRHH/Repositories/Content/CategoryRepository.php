@@ -8,6 +8,6 @@ class CategoryRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Content\Category";
+        return "Modules\\RRHH\\Entities\\Content\Category";
     }
 }

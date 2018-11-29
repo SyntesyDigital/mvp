@@ -11,7 +11,7 @@ class CandidateRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Offers\Candidate";
+        return "Modules\\RRHH\\Entities\\Offers\Candidate";
     }
 
     public function getDatatableData($roles, $tags = null)

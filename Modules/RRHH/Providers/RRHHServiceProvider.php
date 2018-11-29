@@ -51,6 +51,12 @@ class RRHHServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'rrhh'
         );
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/offers.php', 'offers'
+        );
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/emails_templates.php', 'emails_templates'
+        );
     }
 
     /**
@@ -91,7 +97,7 @@ class RRHHServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

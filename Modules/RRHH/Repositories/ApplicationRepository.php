@@ -12,7 +12,7 @@ class ApplicationRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\\Offers\Application";
+        return "Modules\\RRHH\\Entities\\Offers\Application";
     }
 
     public function getSpontaneousDatatable()

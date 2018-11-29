@@ -2,8 +2,8 @@
 
 namespace Modules\RRHH\Repositories;
 
-use Modules\RRHH\Entities\Role;
-use Modules\RRHH\Entities\User;
+use App\Models\Role;
+use App\Models\User;
 use DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -19,7 +19,7 @@ class UserRepository extends BaseRepository
      */
     public function model()
     {
-        return 'App\\Models\\User';
+        return 'App\\Models\User';
     }
 
     public function getDatatableData()

@@ -13,6 +13,6 @@ class TypologyRepository extends BaseRepository
      */
     public function model()
     {
-        return 'App\\Models\\Content\\Typology';
+        return 'Modules\\RRHH\\Entities\\Content\\Typology';
     }
 }

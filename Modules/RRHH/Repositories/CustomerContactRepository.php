@@ -12,7 +12,7 @@ class CustomerContactRepository extends BaseRepository
 {
     public function model()
     {
-        return "App\\Models\CustomerContact";
+        return "Modules\\RRHH\\Entities\CustomerContact";
     }
 
     public function getDatatableData(Customer $customer)

@@ -28,8 +28,7 @@ class OfferController extends Controller
 
     public function index(Request $request)
     {
-        dd('hola');
-        return view('admin.offers.index');
+        return view('rrhh::admin.offers.index');
     }
 
     public function data(Request $request)
@@ -39,7 +38,7 @@ class OfferController extends Controller
 
     public function show(Offer $offer, Request $request)
     {
-        return view('admin.offers.form', [
+        return view('rrhh::admin.offers.form', [
             'form' => Config::get('offers.form'),
             'offer' => $offer,
         ]);
@@ -59,7 +58,7 @@ class OfferController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.offers.form', [
+        return view('rrhh::admin.offers.form', [
             'form' => Config::get('offers.form'),
         ]);
     }

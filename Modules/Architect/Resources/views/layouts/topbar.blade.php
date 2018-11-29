@@ -21,7 +21,7 @@
                       </li>
 
                       <li class="{{ Request::is('architect') ? 'active' : '' }}">
-                        <a href="{{route('rrhh.offers')}}">
+                        <a href="{{route('rrhh.admin.offers.index')}}">
                         {{Lang::get('architect::header.offers')}}
                         </a>
                       </li>

@@ -13,6 +13,6 @@ class LanguageRepository extends BaseRepository
      */
     public function model()
     {
-        return 'App\\Models\\Language';
+        return 'Modules\\RRHH\\Entities\Language';
     }
 }

@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Entities\Offers;
 
 use Modules\RRHH\Entities\User;
-use App\Presenters\DatePresenter;
+use Modules\RRHH\Presenters\DatePresenter;
 use Auth;
 use Cache;
 use Geocoder\Geocoder;
