@@ -190,7 +190,7 @@
      @if(isset($customer))
         <script>
             var routes = {
-                data : '{{ route("admin.customer_contacts.data", $customer->id) }}',
+                data : '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}',
             };
         </script>
         {{ Html::script('/js/admin/customer_contacts/customer_contactslist.js') }}

@@ -105,7 +105,7 @@
             {!!
                 Form::select(
                     $node["name"],
-                    \App\Models\Tag::pluck('name', 'id'),
+                    \Modules\RRHH\Entities\TagOffer::pluck('name', 'id'),
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control toggle-select2',
@@ -163,13 +163,13 @@
                         'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : null,
                     ]
                 )
-            !!}           
+            !!}
         </div>
     @endif
 
 
     @if($node["input"] == 'customers_contacts')
-            
+
          <div class="form-group">
             {!!
                 Form::select(
@@ -194,7 +194,7 @@
 {{-- RECURSIVE CALL --}}
 @if(isset($node['childs']))
     @foreach($node['childs'] as $n)
-        @include('admin.offers.partials.node', [
+        @include('rrhh::admin.offers.partials.node', [
             'node' => $n,
             'item' => isset($item) ? $item : null
         ])

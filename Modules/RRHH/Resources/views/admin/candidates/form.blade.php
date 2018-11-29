@@ -320,7 +320,7 @@
     @if(isset($user))
         <script>
             var routes = {
-                data : '{{ route("admin.candidates.applications.data",  $user) }}',
+                data : '{{ route("rrhh.admin.candidates.applications.data",  $user) }}',
             };
              @foreach ($userTags as $ut)
                 utags.push('{{$ut}}');

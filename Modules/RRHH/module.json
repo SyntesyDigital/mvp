@@ -6,7 +6,8 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\RRHH\\Providers\\RRHHServiceProvider"
+        "Modules\\RRHH\\Providers\\RRHHServiceProvider",
+        "Modules\\RRHH\\Providers\\MacroServiceProvider"
     ],
     "aliases": {},
     "files": [

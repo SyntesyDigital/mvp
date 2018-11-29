@@ -105,7 +105,7 @@
         <div class="form-group">
             <?php echo Form::select(
                     $node["name"],
-                    \App\Models\Tag::pluck('name', 'id'),
+                    \Modules\RRHH\Entities\TagOffer::pluck('name', 'id'),
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control toggle-select2',
@@ -159,13 +159,14 @@
                         'class' => 'form-control customers',
                         'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : null,
                     ]
-                ); ?>           
+                ); ?>
+
         </div>
     <?php endif; ?>
 
 
     <?php if($node["input"] == 'customers_contacts'): ?>
-            
+
          <div class="form-group">
             <?php echo Form::select(
                     $node["name"],
@@ -189,7 +190,7 @@
 
 <?php if(isset($node['childs'])): ?>
     <?php $__currentLoopData = $node['childs']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $n): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <?php echo $__env->make('admin.offers.partials.node', [
+        <?php echo $__env->make('rrhh::admin.offers.partials.node', [
             'node' => $n,
             'item' => isset($item) ? $item : null
         ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

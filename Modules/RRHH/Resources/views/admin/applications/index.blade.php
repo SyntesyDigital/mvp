@@ -10,7 +10,7 @@
                     <h3 class="card-title">Liste des candidatures</h3>
     				<h6 class="card-subtitle mb-2 text-muted">Retrouvez-ici l'ensemble des candidatures</h6>
 
-                    <table class="table" id="table" data-url="{{ route("admin.applications.data") }}" style="width:100%">
+                    <table class="table" id="table" data-url="{{ route("rrhh.admin.applications.data") }}" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>

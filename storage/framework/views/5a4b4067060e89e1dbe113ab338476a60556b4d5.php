@@ -122,7 +122,7 @@ $('.datepicker-offer').datepicker({
 
         var csrf_token = "<?php echo e(csrf_token()); ?>";
         var routes = {
-            data : '<?php echo e(route("admin.customers.data")); ?>',
+            data : '<?php echo e(route("rrhh.admin.customers.data")); ?>',
         };
 
         $.ajaxSetup({

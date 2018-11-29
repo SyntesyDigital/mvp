@@ -51,7 +51,7 @@
     <script>
     var csrf_token = "{{csrf_token()}}";
     var routes = {
-        data : '{{ route("admin.users.data") }}',
+        data : '{{ route("rrhh.admin.users.data") }}',
     };
     </script>
 

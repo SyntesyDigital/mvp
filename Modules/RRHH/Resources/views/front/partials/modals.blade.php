@@ -163,7 +163,7 @@
                                     <div class="fileinputs">
                                         <select name="alerts" id="alerts" class="form-control" multiple="multiple">
                                         @php
-                                            $allTags = App\Models\Tag::orderBy('name')->get()
+                                            $allTags = Modules\RRHH\Entities\TagOffer::orderBy('name')->get()
                                         @endphp
                                             @foreach ($allTags as $tag)
                                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>

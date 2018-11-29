@@ -11,7 +11,7 @@
                     <h3 class="card-title">Liste des candidatures spontanées</h3>
     				<h6 class="card-subtitle mb-2 text-muted">Retrouvez-ici l'ensemble des candidatures spontanées</h6>
 
-                    <table class="table" id="table" data-url="{{ route("admin.applications.spontaneous.data") }}">
+                    <table class="table" id="table" data-url="{{ route("rrhh.admin.applications.spontaneous.data") }}">
                         <thead>
                             <tr>
                                 <th>#</th>

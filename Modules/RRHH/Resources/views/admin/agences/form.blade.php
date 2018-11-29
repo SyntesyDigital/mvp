@@ -217,7 +217,7 @@
     @if(isset($agence))
         <script>
             var routes = {
-                data : '{{ route("admin.agences.data",  $agence) }}',
+                data : '{{ route("rrhh.admin.agences.data",  $agence) }}',
             };
         </script>
     @endif

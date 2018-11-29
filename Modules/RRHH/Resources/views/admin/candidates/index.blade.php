@@ -1,6 +1,6 @@
 @extends('architect::layouts.master')
 @php
-  $allTags = App\Models\Tag::orderBy('name')->get()->pluck('name');
+  $allTags = Modules\RRHH\Entities\TagOffer::orderBy('name')->get()->pluck('name');
 @endphp
 @section('content')
 <div class="body">
@@ -65,7 +65,7 @@
     <script>
     var csrf_token = "{{csrf_token()}}";
     var routes = {
-        data : '{{ route("admin.candidates.data") }}',
+        data : '{{ route("rrhh.admin.candidates.data") }}',
     };
     var table_candidats = '';
     </script>
