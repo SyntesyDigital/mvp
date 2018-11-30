@@ -4,7 +4,7 @@ namespace Modules\RRHH\Jobs;
 
 use Modules\RRHH\Jobs\Candidate\SendMessageMail;
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 
 class SendMassmail
 {

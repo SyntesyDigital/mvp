@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Candidate;
 
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 
 class DeleteCandidate
 {

@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Entities\Offers;
 
-use App\Presenters\DatePresenter;
+use Modules\RRHH\Presenters\DatePresenter;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model

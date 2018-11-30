@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Modules\RRHH\Http\Requests\Admin\SendMassmailRequest;
 use Modules\RRHH\Jobs\SendMassmail;
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Session;
 
 class MassmailController extends Controller

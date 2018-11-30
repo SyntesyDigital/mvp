@@ -5,7 +5,7 @@ namespace Modules\RRHH\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Modules\RRHH\Jobs\Offers\CreateOfferApplication;
 use Modules\RRHH\Entities\Offers\Offer;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Auth;
 use Exception;
 

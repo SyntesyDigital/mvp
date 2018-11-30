@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\User;
 
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 
 class DeleteUser
 {

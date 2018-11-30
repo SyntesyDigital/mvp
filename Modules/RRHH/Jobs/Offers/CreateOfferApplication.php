@@ -5,7 +5,7 @@ namespace Modules\RRHH\Jobs\Offers;
 use Modules\RRHH\Jobs\SendEmailTemplate;
 use Modules\RRHH\Entities\Offers\Application;
 use Modules\RRHH\Entities\Offers\Offer;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Exception;
 
 class CreateOfferApplication

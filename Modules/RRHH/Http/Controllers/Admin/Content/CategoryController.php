@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
         return $request->ajax()
             ? response()->json($data)
-            : view('admin.content.categories.index', $data);
+            : view('rrhh::admin.content.categories.index', $data);
     }
 
     public function show(Request $request, $id)
@@ -49,12 +49,12 @@ class CategoryController extends Controller
             return response()->json($data);
         }
 
-        return view('admin.content.categories.form', $data);
+        return view('rrhh::admin.content.categories.form', $data);
     }
 
     public function create(Request $request)
     {
-        return view('admin.content.categories.form', [
+        return view('rrhh::admin.content.categories.form', [
             'languages' => Language::all(),
             'categories' => Category::all(),
         ]);

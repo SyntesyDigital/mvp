@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Jobs\User;
 
 use Modules\RRHH\Http\Requests\User\UserRequest;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\Mail;
 

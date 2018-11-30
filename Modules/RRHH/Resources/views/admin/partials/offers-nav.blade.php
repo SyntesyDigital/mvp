@@ -9,22 +9,22 @@
         </li>
 
         <li>
-          <a href="{{route('rrhh.admin.offers.index')}}"><i class="fa fa-pages"></i><span class="text">Candidatures</span> </a>
+          <a href="{{route('rrhh.admin.applications.index')}}"><i class="fa fa-pages"></i><span class="text">Candidatures</span> </a>
         </li>
 
         <li>
-          <a href="{{route('rrhh.admin.offers.index')}}"><i class="fa fa-pages"></i><span class="text">C.Spontanees</span> </a>
+          <a href="{{route('rrhh.admin.applications.spontaneous')}}"><i class="fa fa-pages"></i><span class="text">C.Spontanees</span> </a>
         </li>
    </ul>
    <hr />
    <ul>
 
         <li>
-          <a href="{{route('rrhh.admin.offers.index')}}"><i class="fa fa-pages"></i><span class="text">Candidats</span> </a>
+          <a href="{{route('rrhh.admin.candidates.index')}}"><i class="fa fa-pages"></i><span class="text">Candidats</span> </a>
         </li>
 
         <li>
-          <a href="{{route('rrhh.admin.offers.index')}}"><i class="fa fa-pages"></i><span class="text">Clients</span> </a>
+          <a href="{{route('rrhh.admin.customers.index')}}"><i class="fa fa-pages"></i><span class="text">Clients</span> </a>
         </li>
     </ul>
     <hr/>

@@ -4,7 +4,7 @@ namespace Modules\RRHH\Jobs\Tags;
 
 use Modules\RRHH\Entities\Offers\CandidateTag;
 use Modules\RRHH\Entities\Tag;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 
 class SaveCandidateTags
 {

@@ -37,7 +37,7 @@ class ArchitectTestDatabaseSeeder extends Seeder
 
 
         Model::unguard();
-
+/*
         // Admin
         $adminRole = new Role();
         $adminRole->name         = 'admin';
@@ -83,6 +83,6 @@ class ArchitectTestDatabaseSeeder extends Seeder
             'lastname' => 'Editor',
         ]);
         $editor->attachRole($editorRole);
-
+*/
     }
 }

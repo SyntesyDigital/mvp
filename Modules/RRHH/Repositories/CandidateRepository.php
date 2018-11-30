@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Repositories;
 
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Datatables;
 use Prettus\Repository\Eloquent\BaseRepository;
 

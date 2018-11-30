@@ -24,7 +24,7 @@ class OfferApplicationController extends Controller
 
     public function show(Offer $offer, Request $request)
     {
-        return view('admin.offers.applications.form', [
+        return view('rrhh::admin.offers.applications.form', [
             'offer' => $offer,
             'other_offers' => Offer::where('id', '!=', $offer->id)->where('status', Offer::STATUS_ACTIVE)->get(),
         ]);

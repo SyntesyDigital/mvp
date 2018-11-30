@@ -13,8 +13,8 @@
             <div class="card">
                 <div class="card-body div-dz-content">
                     <h4 class="card-title">Nouvelle</h3>
-                    <div class="dz dz-pending" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ App\Models\Offers\Application::STATUS_PENDING }}')" ondragover="app.offerapplications.dragover(event)" @endif >
-                        @foreach ($offer->applications()->where('type', App\Models\Offers\Application::TYPE_OFFER )->where('status', App\Models\Offers\Application::STATUS_PENDING )->get() as $oa)
+                    <div class="dz dz-pending" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_PENDING }}')" ondragover="app.offerapplications.dragover(event)" @endif >
+                        @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_PENDING )->get() as $oa)
                              <div class ="candidate-drop-item draggable" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
@@ -33,8 +33,8 @@
             <div class="card">
                 <div class="card-body div-dz-content">
                     <h4 class="card-title">A recontacter</h3>
-                    <div class="dz dz-to-contact"   @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ App\Models\Offers\Application::STATUS_TO_CONTACT }}')" ondragover="app.offerapplications.dragover(event)"  @endif  >
-                        @foreach ($offer->applications()->where('type', App\Models\Offers\Application::TYPE_OFFER )->where('status', App\Models\Offers\Application::STATUS_TO_CONTACT )->get() as $oa)
+                    <div class="dz dz-to-contact"   @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_TO_CONTACT }}')" ondragover="app.offerapplications.dragover(event)"  @endif  >
+                        @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_TO_CONTACT )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
@@ -53,8 +53,8 @@
             <div class="card">
                 <div class="card-body div-dz-content">
                     <h4 class="card-title">Refusé</h3>
-                    <div class="dz dz-refused" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ App\Models\Offers\Application::STATUS_REFUSED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
-                        @foreach ($offer->applications()->where('type', App\Models\Offers\Application::TYPE_OFFER )->where('status', App\Models\Offers\Application::STATUS_REFUSED )->get() as $oa)
+                    <div class="dz dz-refused" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
+                        @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
@@ -73,8 +73,8 @@
             <div class="card">
                 <div class="card-body div-dz-content">
                     <h4 class="card-title">Entretien</h3>
-                    <div class="dz dz-interview" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ App\Models\Offers\Application::STATUS_INTERVIEW }}')" ondragover="app.offerapplications.dragover(event)" @endif >
-                        @foreach ($offer->applications()->where('type', App\Models\Offers\Application::TYPE_OFFER )->where('status', App\Models\Offers\Application::STATUS_INTERVIEW )->get() as $oa)
+                    <div class="dz dz-interview" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW }}')" ondragover="app.offerapplications.dragover(event)" @endif >
+                        @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true' ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
@@ -93,8 +93,8 @@
             <div class="card">
                 <div class="card-body div-dz-content">
                     <h4 class="card-title">Accepter</h3>
-                    <div class="dz dz-accepted" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ App\Models\Offers\Application::STATUS_ACCEPTED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
-                        @foreach ($offer->applications()->where('type', App\Models\Offers\Application::TYPE_OFFER )->where('status', App\Models\Offers\Application::STATUS_ACCEPTED )->get() as $oa)
+                    <div class="dz dz-accepted" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
+                        @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true' ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
@@ -122,9 +122,9 @@
 
     <script>
         var csrf_token = "{{csrf_token()}}",
-        status_refused =  "{{App\Models\Offers\Application::STATUS_REFUSED}}",
-        status_accepted =  "{{App\Models\Offers\Application::STATUS_ACCEPTED}}";
-        status_interview =  "{{App\Models\Offers\Application::STATUS_INTERVIEW}}";
+        status_refused =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED}}",
+        status_accepted =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED}}";
+        status_interview =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW}}";
 
         var other_offer_options  ='';
         @foreach ($other_offers as $oo)

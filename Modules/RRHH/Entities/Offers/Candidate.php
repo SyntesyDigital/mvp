@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Entities\Offers;
 
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
@@ -60,7 +60,7 @@ class Candidate extends Model
 
     public function user()
     {
-        return $this->belongsTo('Modules\RRHH\Entities\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function applications()

@@ -10,8 +10,8 @@
 
 {{-- BOX --}}
 @if($node['type'] == "box")
-    <div class="card">
-        <div class="card-body">
+    <!--div class="card">
+        <div class="card-body"-->
             <h3 class="card-title">{{$node['title'] or ''}}</h3>
             @if(isset($node['subtitle']))
             <h6 class="card-subtitle mb-2 text-muted">{{$node['subtitle'] or ''}}</h6>
@@ -32,7 +32,7 @@
      <div class="form-group">
         <div class="location-box">
             <label>{{$node["label"]}}</label>
-            <div id="{{$node["id"] or ''}}">
+            <div id="{{$node["id"] or ''}}" class="map-container">
             </div>
         </div>
      </div>
@@ -41,8 +41,8 @@
 {{-- FIELDS --}}
 @if($node['type'] == "field")
     @if($node["input"] == 'text')
-        <div class="form-group">
-            <label>{{$node["label"]}}</label>
+        <div class="form-group bmd-form-group">
+            <label class="bmd-label-floating">{{$node["label"]}}</label>
             <input type="text" class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
         </div>
     @endif
@@ -55,7 +55,7 @@
     @if($node["input"] == 'date')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
-            <input type="text" class="form-control datepicker-offer" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
         </div>
     @endif
 
@@ -203,8 +203,8 @@
 
 {{-- CLOSE BOX --}}
 @if($node['type'] == "box")
-        </div>
-    </div>
+        <!--/div>
+    </div-->
 @endif
 
 {{-- CLOSE ROW AND COL --}}

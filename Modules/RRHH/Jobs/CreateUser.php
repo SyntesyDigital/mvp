@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Jobs;
 
 use Modules\RRHH\Http\Requests\CreateUserRequest;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Hash;
 
 class CreateUser

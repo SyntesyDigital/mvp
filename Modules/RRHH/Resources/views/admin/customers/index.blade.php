@@ -1,20 +1,22 @@
 @extends('architect::layouts.master')
 
+
 @section('content')
-<div class="body">
-    <div class="row">
-        <div class="col-md-offset-1 col-md-10">
-            <div class="card">
-				<div class="card-body">
+<div class="container leftbar-page">
 
-                    <h3 class="card-title">Liste des clients
-                        <a href="{{route('admin.customers.create')}}" class="pull-right btn btn-primary">
-                            Ajouter un client
-                        </a>
-                    </h3>
-                    <h6 class="card-subtitle mb-2 text-muted">Tous les clients</h6>
+  @include('rrhh::admin.partials.offers-nav')
 
-                    <table class="table" id="table-customers" style="width:100%">
+  <div class="col-xs-offset-2 col-xs-10 page-content">
+
+
+        <h3 class="card-title">Liste des clients        </h3>
+
+            <a href="{{route('rrhh.admin.customers.create')}}" class="pull-right btn btn-primary">
+                Ajouter un client
+            </a>
+        <h6 class="card-subtitle mb-2 text-muted">Tous les clients</h6>
+
+        <table class="table" id="table-customers" style="width:100%">
                         <thead>
                            <tr>
                                <th>#</th>
@@ -32,9 +34,7 @@
                            </tr>
                         </tfoot>
                     </table>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 @endsection

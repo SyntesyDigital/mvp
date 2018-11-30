@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admin.tags', [
+        return view('rrhh::admin.tags', [
             'tags' => Tag::all(),
         ]);
     }

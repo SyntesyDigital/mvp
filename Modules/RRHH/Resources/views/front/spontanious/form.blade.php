@@ -45,11 +45,11 @@
 					<div class="col-md-offset-3 col-md-6 radio-div {{ (isset($errors)) && $errors->has('civility') ? 'has-error' : null }}">
 					 	{!! Form::label('civility', 'Madame') !!}
 					 	{!!
-					 		Form::radio('civility', App\Models\Offers\Candidate::CIVILITY_FEMALE , null !== Auth::user() && Auth::user()->candidate->civility == App\Models\Offers\Candidate::CIVILITY_FEMALE  ?true:false )
+					 		Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE , null !== Auth::user() && Auth::user()->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE  ?true:false )
 					 	!!}
 					 	{!! Form::label('civility', 'Monsieur') !!}
 					 	{!!
-					 		Form::radio('civility', App\Models\Offers\Candidate::CIVILITY_MALE, null !== Auth::user() && Auth::user()->candidate->civility == App\Models\Offers\Candidate::CIVILITY_MALE  ?true:false )
+					 		Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE, null !== Auth::user() && Auth::user()->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE  ?true:false )
 					 	!!}
 					</div>
 

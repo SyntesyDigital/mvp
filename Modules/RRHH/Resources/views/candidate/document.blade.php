@@ -19,7 +19,7 @@
 
 			<div class="candidate-page-content">
 
-				@if(Auth::user()->candidate->type != \App\Models\Offers\Candidate::TYPE_INTERIM)
+				@if(Auth::user()->candidate->type != \Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM)
 					<h2>Document</h2>
 					<br />
 					<p>Seuls nos intérimaires ont accès aux documents</p>

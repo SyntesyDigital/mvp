@@ -33,7 +33,7 @@ class ContentController extends Controller
     {
         $typology = $this->typologies->findByField('identifier', $identifier)->first();
 
-        return view('admin.content.contents.index', [
+        return view('rrhh::admin.content.contents.index', [
             'contents' => $typology->contents,
             'typology' => $typology,
         ]);
@@ -48,7 +48,7 @@ class ContentController extends Controller
             return [$category->id => $category->name];
         });
 
-        return view('admin.content.contents.form', [
+        return view('rrhh::admin.content.contents.form', [
             'typology' => $content->typology,
             'languages' => $this->languages->all(),
             'content' => $content,
@@ -67,7 +67,7 @@ class ContentController extends Controller
             return [$category->id => $category->name];
         });
 
-        return view('admin.content.contents.form', [
+        return view('rrhh::admin.content.contents.form', [
             'typology' => $typology,
             'languages' => $this->languages->all(),
             'categories' => $categories,

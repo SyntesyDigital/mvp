@@ -16,14 +16,14 @@ class SiteListController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.tools.sitelists.index', [
+        return view('rrhh::admin.tools.sitelists.index', [
             'sitelists' => SiteList::where('type', '!=', 'documents')->paginate(20),
         ]);
     }
 
     public function create(Request $request)
     {
-        return view('admin.tools.sitelists.form');
+        return view('rrhh::admin.tools.sitelists.form');
     }
 
     public function store(CreateSiteListRequest $request)
@@ -42,7 +42,7 @@ class SiteListController extends Controller
 
     public function show($id, Request $request)
     {
-        return view('admin.tools.sitelists.form', [
+        return view('rrhh::admin.tools.sitelists.form', [
             'sitelist' => SiteList::find($id),
         ]);
     }

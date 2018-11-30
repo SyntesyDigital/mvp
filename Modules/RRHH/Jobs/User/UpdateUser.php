@@ -3,13 +3,13 @@
 namespace Modules\RRHH\Jobs\User;
 
 use Modules\RRHH\Http\Requests\User\UserRequest;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Hash;
 
 class UpdateUser
 {
     /**
-     * @var \Modules\RRHH\Entities\User
+     * @var \App\Models\User
      */
     private $user;
 

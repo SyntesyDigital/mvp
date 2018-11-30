@@ -30,7 +30,7 @@ class CustomerContactController extends Controller
 
     public function create(Customer $customer)
     {
-        return view('admin.customer_contacts.form', [
+        return view('rrhh::admin.customer_contacts.form', [
             'customer' => $customer,
             ]);
     }
@@ -51,7 +51,7 @@ class CustomerContactController extends Controller
 
     public function show(CustomerContact $customer_contact)
     {
-        return view('admin.customer_contacts.form', [
+        return view('rrhh::admin.customer_contacts.form', [
             'customer_contact' => $customer_contact,
             'customer' => $customer_contact->customer,
         ]);

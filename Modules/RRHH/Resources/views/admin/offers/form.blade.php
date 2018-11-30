@@ -1,39 +1,74 @@
 @extends('architect::layouts.master')
 
 @section('content')
-<div class="body">
 
-    {!!
-        Form::open([
-            'url' => isset($offer)
-                ? route('rrhh.admin.offers.update', $offer)
-                : route('rrhh.admin.offers.store'),
-            'method' => isset($offer) ? 'PUT' : 'POST',
-            'id' => 'form-offer'
-        ])
-    !!}
+{!!
+    Form::open([
+        'url' => isset($offer)
+            ? route('rrhh.admin.offers.update', $offer)
+            : route('rrhh.admin.offers.store'),
+        'method' => isset($offer) ? 'PUT' : 'POST',
+        'id' => 'form-offer'
+    ])
+!!}
+@if(isset($offer))
+    <input type="hidden" name="_method" value="PUT" />
+@endif
 
-    @if(isset($offer))
-        <input type="hidden" name="_method" value="PUT" />
-    @endif
+<div class="page-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+        <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
+        <div class="float-buttons pull-right">
 
-    @foreach($form as $node)
-        @include('rrhh::admin.offers.partials.node', [
-            'node' => $node,
-            'item' => isset($offer) ? $offer : null
-        ])
-    @endforeach
-
-    {!! Form::close() !!}
+          <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+  <div class="container rightbar-page">
+
+    <div class="col-md-9 page-content">
+      @foreach(config('offers.form.left') as $node)
+          @include('rrhh::admin.offers.partials.node', [
+              'node' => $node,
+              'item' => isset($offer) ? $offer : null
+          ])
+      @endforeach
+    </div>
+    <div class="sidebar">
+      @foreach(config('offers.form.right') as $node)
+          @include('rrhh::admin.offers.partials.node', [
+              'node' => $node,
+              'item' => isset($offer) ? $offer : null
+          ])
+      @endforeach
+    </div>
+
+  </div>
+
+{!! Form::close() !!}
+
+
 @endsection
 
 
 @push('javascripts-libs')
-<script>
-	var WEBROOT = "";
-</script>
 
+<!-- Datepicker -->
+<link rel="stylesheet" type="text/css" href="{{ asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css') }}">
+<script src="{{ asset('/modules/turisme/plugins/datepicker/moment-with-locales.min.js') }}"></script>
+
+<script src="{{ asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
+
+<!-- Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- Vendors -->
 {{ Html::script('/js/admin/content/contents/vendors/ckeditor/ckeditor.js') }}
 
@@ -45,13 +80,22 @@
 
 @push('javascripts')
 {{ Html::script('/js/admin/offers/form.js')}}
-{{ Html::script('/plugins/moment/moment-with-locales.js')}}
 
 <script>
-$('.datepicker-offer').datepicker({
-     weekStart: 1,
-     format: 'dd/mm/yyyy'
-});
+  $(document).ready(function() {
+
+      $(document).on('click', ".btn-submit-primary", function(e){
+          e.preventDefault();
+          this.closest('form').submit()
+      });
+
+
+    $('#form-offer .datepicker-offer').datepicker({
+         weekStart: 1,
+         format: 'dd/mm/yyyy'
+    });
+
+  });
 </script>
 
 <script>

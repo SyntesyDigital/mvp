@@ -1,37 +1,72 @@
 <?php $__env->startSection('content'); ?>
-<div class="body">
 
-    <?php echo Form::open([
-            'url' => isset($offer)
-                ? route('rrhh.admin.offers.update', $offer)
-                : route('rrhh.admin.offers.store'),
-            'method' => isset($offer) ? 'PUT' : 'POST',
-            'id' => 'form-offer'
-        ]); ?>
+<?php echo Form::open([
+        'url' => isset($offer)
+            ? route('rrhh.admin.offers.update', $offer)
+            : route('rrhh.admin.offers.store'),
+        'method' => isset($offer) ? 'PUT' : 'POST',
+        'id' => 'form-offer'
+    ]); ?>
 
+<?php if(isset($offer)): ?>
+    <input type="hidden" name="_method" value="PUT" />
+<?php endif; ?>
 
-    <?php if(isset($offer)): ?>
-        <input type="hidden" name="_method" value="PUT" />
-    <?php endif; ?>
+<div class="page-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+        <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
+        <div class="float-buttons pull-right">
 
-    <?php $__currentLoopData = $form; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <?php echo $__env->make('rrhh::admin.offers.partials.node', [
-            'node' => $node,
-            'item' => isset($offer) ? $offer : null
-        ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-    <?php echo Form::close(); ?>
-
+          <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+  <div class="container rightbar-page">
+
+    <div class="col-md-9 page-content">
+      <?php $__currentLoopData = config('offers.form.left'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php echo $__env->make('rrhh::admin.offers.partials.node', [
+              'node' => $node,
+              'item' => isset($offer) ? $offer : null
+          ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+    <div class="sidebar">
+      <?php $__currentLoopData = config('offers.form.right'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php echo $__env->make('rrhh::admin.offers.partials.node', [
+              'node' => $node,
+              'item' => isset($offer) ? $offer : null
+          ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
+
+  </div>
+
+<?php echo Form::close(); ?>
+
+
+
 <?php $__env->stopSection(); ?>
 
 
 <?php $__env->startPush('javascripts-libs'); ?>
-<script>
-	var WEBROOT = "";
-</script>
 
+<!-- Datepicker -->
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css')); ?>">
+<script src="<?php echo e(asset('/modules/turisme/plugins/datepicker/moment-with-locales.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js')); ?>"></script>
+
+<!-- Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- Vendors -->
 <?php echo e(Html::script('/js/admin/content/contents/vendors/ckeditor/ckeditor.js')); ?>
 
@@ -48,14 +83,22 @@
 <?php $__env->startPush('javascripts'); ?>
 <?php echo e(Html::script('/js/admin/offers/form.js')); ?>
 
-<?php echo e(Html::script('/plugins/moment/moment-with-locales.js')); ?>
-
 
 <script>
-$('.datepicker-offer').datepicker({
-     weekStart: 1,
-     format: 'dd/mm/yyyy'
-});
+  $(document).ready(function() {
+
+      $(document).on('click', ".btn-submit-primary", function(e){
+          e.preventDefault();
+          this.closest('form').submit()
+      });
+
+
+    $('#form-offer .datepicker-offer').datepicker({
+         weekStart: 1,
+         format: 'dd/mm/yyyy'
+    });
+
+  });
 </script>
 
 <script>

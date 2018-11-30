@@ -16,14 +16,14 @@ class TypologyController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.content.typologies.index', [
+        return view('rrhh::admin.content.typologies.index', [
             'typologies' => Typology::paginate(20),
         ]);
     }
 
     public function create(Request $request)
     {
-        return view('admin.content.typologies.form');
+        return view('rrhh::admin.content.typologies.form');
     }
 
     public function store(CreateTypologyRequest $request)
@@ -42,7 +42,7 @@ class TypologyController extends Controller
 
     public function show($id, Request $request)
     {
-        return view('admin.content.typologies.form', [
+        return view('rrhh::admin.content.typologies.form', [
             'typology' => Typology::find($id),
         ]);
     }

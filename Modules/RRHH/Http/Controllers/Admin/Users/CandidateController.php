@@ -12,7 +12,7 @@ use Modules\RRHH\Jobs\Candidate\UpdateCandidate;
 use Modules\RRHH\Jobs\Tags\UpdateCandidateTags;
 use Modules\RRHH\Entities\Offers\Candidate;
 use Modules\RRHH\Entities\Tag;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Modules\RRHH\Repositories\CandidateRepository;
 use Modules\RRHH\Repositories\UserRepository;
 use Datatables;
@@ -29,7 +29,7 @@ class CandidateController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.candidates.index');
+        return view('rrhh::admin.candidates.index');
     }
 
     public function data(Request $request)
@@ -93,7 +93,7 @@ class CandidateController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.candidates.index');
+        return redirect()->route('rrhh::admin.candidates.index');
     }
 
     public function applications(User $user)

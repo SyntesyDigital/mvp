@@ -16,7 +16,7 @@ class FileListController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.tools.filelist.form', [
+        return view('rrhh::admin.tools.filelist.form', [
             'filelist' => $this->dispatchNow(new GetFileList()),
         ]);
     }

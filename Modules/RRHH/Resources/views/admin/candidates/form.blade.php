@@ -25,10 +25,10 @@
 
                         <div class="radio" style="display: inline; margin-left:20px;">
                             <label style="font-size: .8em">
-                                 <input type="radio"  name="civility"  value="{{ App\Models\Offers\Candidate::CIVILITY_MALE }}" {{isset($user) && $user->candidate->civility == App\Models\Offers\Candidate::CIVILITY_MALE  ?'checked':'' }}>Monsieur
+                                 <input type="radio"  name="civility"  value="{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}" {{isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE  ?'checked':'' }}>Monsieur
                             </label>
                             <label style="font-size: .8em">
-                                <input type="radio" name="civility" value="{{ App\Models\Offers\Candidate::CIVILITY_FEMALE }}" {{isset($user) && $user->candidate->civility == App\Models\Offers\Candidate::CIVILITY_FEMALE  ?'checked':'' }}>Madame
+                                <input type="radio" name="civility" value="{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE }}" {{isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE  ?'checked':'' }}>Madame
                             </label>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                      @if(isset($user))
                         <div class="form-group">
                             <label for="registration_number" style="display: block;">Matricule</label>
-                            @if($user->candidate->type == App\Models\Offers\Candidate::TYPE_INTERIM)
+                            @if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM)
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" id="registration_number" name="registration_number" value="{{  $user->candidate->registration_number }}" >
@@ -161,7 +161,7 @@
                     @else
                         <input type="hidden" name="registration_number" value="" >
                     @endif
-                    <input type="hidden" name="type" id="type" value="{{ isset($user->candidate->type) && $user->candidate->type!=''?$user->candidate->type:App\Models\Offers\Candidate::TYPE_NORMAL}}" >
+                    <input type="hidden" name="type" id="type" value="{{ isset($user->candidate->type) && $user->candidate->type!=''?$user->candidate->type:Modules\RRHH\Entities\Offers\Candidate::TYPE_NORMAL}}" >
 
                     <div class="form-group">
                         <label for="name">C.V.</label>
@@ -310,7 +310,7 @@
 
     <script>
         var inactive_value = '{{App\Models\User::STATUS_INACTIVE}}';
-        var type_interim_value = '{{App\Models\Offers\Candidate::TYPE_INTERIM}}';
+        var type_interim_value = '{{Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM}}';
         var csrf_token = "{{csrf_token()}}";
         var routes = '';
         var utags = [];

@@ -24,12 +24,12 @@ class ApplicationController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.applications.index');
+        return view('rrhh::admin.applications.index');
     }
 
     public function spontaneous(Request $request)
     {
-        return view('admin.applications.spontaneous');
+        return view('rrhh::admin.applications.spontaneous');
     }
 
     public function spontaneousData(Request $request)

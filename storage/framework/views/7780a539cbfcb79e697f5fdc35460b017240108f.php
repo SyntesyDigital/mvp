@@ -10,8 +10,8 @@
 
 
 <?php if($node['type'] == "box"): ?>
-    <div class="card">
-        <div class="card-body">
+    <!--div class="card">
+        <div class="card-body"-->
             <h3 class="card-title"><?php echo e(isset($node['title']) ? $node['title'] : ''); ?></h3>
             <?php if(isset($node['subtitle'])): ?>
             <h6 class="card-subtitle mb-2 text-muted"><?php echo e(isset($node['subtitle']) ? $node['subtitle'] : ''); ?></h6>
@@ -32,7 +32,7 @@
      <div class="form-group">
         <div class="location-box">
             <label><?php echo e($node["label"]); ?></label>
-            <div id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>">
+            <div id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" class="map-container">
             </div>
         </div>
      </div>
@@ -41,8 +41,8 @@
 
 <?php if($node['type'] == "field"): ?>
     <?php if($node["input"] == 'text'): ?>
-        <div class="form-group">
-            <label><?php echo e($node["label"]); ?></label>
+        <div class="form-group bmd-form-group">
+            <label class="bmd-label-floating"><?php echo e($node["label"]); ?></label>
             <input type="text" class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
         </div>
     <?php endif; ?>
@@ -55,7 +55,7 @@
     <?php if($node["input"] == 'date'): ?>
         <div class="form-group">
             <label><?php echo e($node["label"]); ?></label>
-            <input type="text" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
+            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
         </div>
     <?php endif; ?>
 
@@ -199,8 +199,8 @@
 
 
 <?php if($node['type'] == "box"): ?>
-        </div>
-    </div>
+        <!--/div>
+    </div-->
 <?php endif; ?>
 
 

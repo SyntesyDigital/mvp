@@ -7,7 +7,7 @@ use Modules\RRHH\Http\Requests\User\UserRequest;
 use Modules\RRHH\Jobs\User\CreateUser;
 use Modules\RRHH\Jobs\User\DeleteUser;
 use Modules\RRHH\Jobs\User\UpdateUser;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Modules\RRHH\Repositories\UserRepository;
 use Datatables;
 use Illuminate\Http\Request;

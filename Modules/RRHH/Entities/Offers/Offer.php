@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Entities\Offers;
 
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Modules\RRHH\Presenters\DatePresenter;
 use Auth;
 use Cache;
@@ -47,7 +47,7 @@ class Offer extends Model
 
     public function recipient()
     {
-        return $this->hasOne('Modules\RRHH\Entities\User', 'id', 'recipient_id');
+        return $this->hasOne('App\Models\User', 'id', 'recipient_id');
     }
 
     public function agence()

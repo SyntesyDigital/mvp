@@ -4,7 +4,7 @@ namespace Modules\RRHH\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Modules\RRHH\Http\Requests\Admin\SaveAccountRequest;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Modules\RRHH\Repositories\UserRepository;
 use Auth;
 use Hash;

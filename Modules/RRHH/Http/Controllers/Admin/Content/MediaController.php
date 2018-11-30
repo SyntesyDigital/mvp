@@ -24,7 +24,7 @@ class MediaController extends Controller
 
         return $request->ajax()
             ? response()->json($medias)
-            : view('admin.content.medias.index', [
+            : view('rrhh::admin.content.medias.index', [
                 'medias' => $medias,
             ]);
     }
@@ -42,7 +42,7 @@ class MediaController extends Controller
     {
         return $request->ajax()
             ? $this->medias->find($id)
-            : view('admin.content.medias.show', [
+            : view('rrhh::admin.content.medias.show', [
                 'media' => $this->medias->find($id),
             ]);
     }

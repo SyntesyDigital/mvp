@@ -27,7 +27,7 @@ class AgenceController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.agences.index');
+        return view('rrhh::admin.agences.index');
     }
 
     public function data(Request $request)
@@ -37,7 +37,7 @@ class AgenceController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.agences.form');
+        return view('rrhh::admin.agences.form');
     }
 
     public function store(AgenceRequest $request)
@@ -56,7 +56,7 @@ class AgenceController extends Controller
 
     public function show(Agence $agence)
     {
-        return view('admin.agences.form', [
+        return view('rrhh::admin.agences.form', [
             'agence' => $agence,
         ]);
     }

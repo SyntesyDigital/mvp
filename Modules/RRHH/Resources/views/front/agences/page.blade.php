@@ -134,7 +134,7 @@
 
 		<script>
         var csrf_token = "{{csrf_token()}}";
-        var civility_default = "{{ App\Models\Offers\Candidate::CIVILITY_MALE }}"
+        var civility_default = "{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}"
 
 
 		$(document).ready(function() {

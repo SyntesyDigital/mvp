@@ -5,7 +5,7 @@ namespace Modules\RRHH\Jobs\Candidate;
 use Modules\RRHH\Http\Requests\Candidate\CandidateFrontRequest;
 use Modules\RRHH\Jobs\User\CreateUser;
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Support\Str;
 

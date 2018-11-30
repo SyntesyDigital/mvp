@@ -36,7 +36,7 @@ class Agence extends Model
 
     public function users()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\User', 'agence_user', 'agence_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'agence_user', 'agence_id', 'user_id');
     }
 
     /**

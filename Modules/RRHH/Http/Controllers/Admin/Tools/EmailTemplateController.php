@@ -16,14 +16,14 @@ class EmailTemplateController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.tools.emails-templates.index', [
+        return view('rrhh::admin.tools.emails-templates.index', [
             'templates' => EmailTemplate::all(),
         ]);
     }
 
     public function create()
     {
-        return view('admin.tools.emails-templates.form');
+        return view('rrhh::admin.tools.emails-templates.form');
     }
 
     public function store(CreateEmailTemplateRequest $request)
@@ -42,7 +42,7 @@ class EmailTemplateController extends Controller
 
     public function show(EmailTemplate $template, Request $request)
     {
-        return view('admin.tools.emails-templates.form', [
+        return view('rrhh::admin.tools.emails-templates.form', [
             'template' => $template,
         ]);
     }

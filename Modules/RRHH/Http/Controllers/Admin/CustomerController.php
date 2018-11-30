@@ -25,7 +25,7 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.customers.index');
+        return view('rrhh::admin.customers.index');
     }
 
     public function data(Request $request)
@@ -35,7 +35,7 @@ class CustomerController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.customers.form');
+        return view('rrhh::admin.customers.form');
     }
 
     public function store(CustomerRequest $request)
@@ -54,7 +54,7 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
-        return view('admin.customers.form', [
+        return view('rrhh::admin.customers.form', [
             'customer' => $customer,
         ]);
     }

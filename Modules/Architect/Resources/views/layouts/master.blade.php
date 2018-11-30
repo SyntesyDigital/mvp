@@ -13,6 +13,7 @@
 
         <!-- Global style -->
         <link rel="stylesheet" media="all" href="{{ asset('modules/architect/css/app.css')}}" />
+        <link rel="stylesheet" media="all" href="{{ asset('modules/rrhh/css/app.css')}}" />
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -26,6 +27,8 @@
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
         {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+
+
 
         <!-- Language -->
         {{ Html::script('/modules/architect/js/lang.dist.js') }}
