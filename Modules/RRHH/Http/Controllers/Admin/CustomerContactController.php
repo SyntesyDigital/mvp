@@ -41,12 +41,12 @@ class CustomerContactController extends Controller
             $customer_contact = $this->dispatchNow(CreateCustomerContact::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('admin.customer_contacts.show', $customer_contact);
+            return redirect()->route('rrhh.admin.customer_contacts.show', $customer_contact);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customer_contacts.create', ['customer' => $request->get('customer_id')])->withInput($request->toArray());
+        return redirect()->route('rrhh.admin.customer_contacts.create', ['customer' => $request->get('customer_id')])->withInput($request->toArray());
     }
 
     public function show(CustomerContact $customer_contact)
@@ -66,7 +66,7 @@ class CustomerContactController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customer_contacts.show', $customer_contact);
+        return redirect()->route('rrhh.admin.customer_contacts.show', $customer_contact);
     }
 
     public function delete(CustomerContact $customer_contact)
@@ -79,7 +79,7 @@ class CustomerContactController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customers.show', $customer);
+        return redirect()->route('rrhh.admin.customers.show', $customer);
     }
 
     public function list(Customer $customer)

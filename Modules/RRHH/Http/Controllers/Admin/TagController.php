@@ -7,7 +7,7 @@ use Modules\RRHH\Jobs\Tags\CreateTag;
 //use Modules\RRHH\Http\Requests\Admin\SendTagRequest;
 
 use Modules\RRHH\Jobs\Tags\DeleteTag;
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 use Illuminate\Http\Request;
 
 //use Modules\RRHH\Jobs\SendTag;
@@ -30,14 +30,14 @@ class TagController extends Controller
     public function index()
     {
         return view('rrhh::admin.tags', [
-            'tags' => Tag::all(),
+            'tags' => TagOffer::all(),
         ]);
     }
 
     public function store(Request $request)
     {
         $name = $request->get('name');
-        if ($this->dispatchNow(CreateTag::fromRequest($name))) {
+        if ($this->dispatchNow(CreateTagOffer::fromRequest($name))) {
             return 'saved';
         } else {
             return 'error';
@@ -47,7 +47,7 @@ class TagController extends Controller
     public function delete(Request $request)
     {
         $name = $request->get('name');
-        $tag = Tag::where('name', $name)->first();
+        $tag = TagOffer::where('name', $name)->first();
         if ($this->dispatchNow(new DeleteTag($tag))) {
             return 'deleted';
         } else {

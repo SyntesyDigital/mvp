@@ -76,7 +76,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function roles()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\Role', 'roles_users', 'user_id', 'role_id');
+        return $this->belongsToMany('Modules\RRHH\Entities\Role', 'role_user', 'user_id', 'role_id');
     }
 
     public function agences()

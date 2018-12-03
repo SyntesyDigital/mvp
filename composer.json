@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.1.3",
         "doctrine/dbal": "^2.7",
+        "acoustep/entrust-gui": "5.2.x-dev",
         "elasticsearch/elasticsearch": "^6.0",
         "fideloper/proxy": "~4.0",
         "fzaninotto/faker": "^1.8",

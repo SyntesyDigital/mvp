@@ -63,7 +63,7 @@ class ApplicationRepository extends BaseRepository
 
             ->addColumn('status', function ($item) {
                 return Form::select('status', $item->getStatus(), $item->status, [
-                    'data-url' => route('admin.applications.spontaneous.update.status'),
+                    'data-url' => route('rrhh.admin.applications.spontaneous.update.status'),
                     'data-id' => $item->id,
                     'data-toogle' => 'save-onchange',
                 ]);
@@ -71,8 +71,8 @@ class ApplicationRepository extends BaseRepository
 
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('admin.applications.delete', $item).'" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
-                    <a href="'.route('admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
+                    <a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
+                    <a href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
                 ';
             })
 
@@ -174,9 +174,9 @@ class ApplicationRepository extends BaseRepository
 
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="#" class="btn btn-sm btn-danger" data-ajax="'.route('admin.applications.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
-                    <a href="'.route('admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
-                    <a href="'.route('admin.offer.applications.show', $item->offer_id).'" class="btn btn-sm btn-primary">Traiter</a>
+                    <a href="#" class="btn btn-sm btn-danger" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
+                    <a href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
+                    <a href="'.route('rrhh.admin.offer.applications.show', $item->offer_id).'" class="btn btn-sm btn-primary">Traiter</a>
                 ';
             })
 

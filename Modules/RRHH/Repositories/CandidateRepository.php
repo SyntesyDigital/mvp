@@ -28,8 +28,8 @@ class CandidateRepository extends BaseRepository
         }
 
         $candidates = Candidate::leftJoin('users', 'users.id', '=', 'candidates.user_id')
-            ->leftJoin('roles_users', 'users.id', '=', 'roles_users.user_id')
-            ->leftJoin('roles', 'roles_users.role_id', '=', 'roles.id')
+            ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
             ->select(
                 'users.id',
                 'users.firstname',
@@ -91,7 +91,7 @@ class CandidateRepository extends BaseRepository
                 return isset($status[$item->status]) ? $status[$item->status] : null;
             })
             ->addColumn('action', function ($item) {
-                return '<a href="'.route('admin.candidates.show', $item).'" class="btn btn-sm btn-success pull-right">Modifier</a>';
+                return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-sm btn-success pull-right">Modifier</a>';
             })
 
             ->order(function ($query) {

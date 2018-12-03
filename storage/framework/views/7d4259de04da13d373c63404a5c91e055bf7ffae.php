@@ -24,7 +24,6 @@
 
           </div>
           <br clear="all">
-
           <table class="table" id="table-candidates" style="width:100%">
                         <thead>
                            <tr>
@@ -74,8 +73,6 @@
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </script>
 
-    <?php echo e(Html::script('js/libs/datatabletools.js')); ?>
-
     <?php echo e(Html::script('/js/admin/users/candidateslist.js')); ?>
 
     <?php echo e(Html::script('/js/textext.core.js')); ?>
@@ -83,6 +80,13 @@
     <?php echo e(Html::script('/js/textext.plugin.autocomplete.js')); ?>
 
     <?php echo e(Html::script('/js/textext.plugin.tags.js')); ?>
+
+    <?php echo e(Html::script('/modules/architect/plugins/datatables/datatables.min.js')); ?>
+
+    <?php echo e(HTML::style('/modules/architect/plugins/datatables/datatables.min.css')); ?>
+
+    <?php echo e(Html::script('/modules/architect/js/libs/datatabletools.js')); ?>
+
 
 <?php $__env->stopPush(); ?>
 

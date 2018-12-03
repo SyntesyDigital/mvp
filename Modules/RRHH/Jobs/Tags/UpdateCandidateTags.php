@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Tags;
 
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 use App\Models\User;
 
 class UpdateCandidateTags
@@ -18,9 +18,9 @@ class UpdateCandidateTags
         $tags_array = [];
         $this->user->candidate->tags()->detach();
         foreach ($this->tags as $tag) {
-            $tag_exists = Tag::where('name', $tag)->first();
+            $tag_exists = TagOffer::where('name', $tag)->first();
             if (null === $tag_exists) {
-                $tag_exists = Tag::create(['name' => $tag]);
+                $tag_exists = TagOffer::create(['name' => $tag]);
             }
             $tags_array[] = $tag_exists->id;
         }

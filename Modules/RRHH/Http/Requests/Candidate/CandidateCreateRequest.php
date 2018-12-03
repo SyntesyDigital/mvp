@@ -5,7 +5,7 @@ namespace Modules\RRHH\Http\Requests\Candidate;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CandidateEditRequest extends FormRequest
+class CandidateCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

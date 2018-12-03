@@ -9,7 +9,7 @@ use Modules\RRHH\Http\Requests\Candidate\CandidateLoginRequest;
 use Modules\RRHH\Jobs\Candidate\RegisterCandidate;
 use Modules\RRHH\Jobs\Candidate\UploadCVCandidate;
 use Modules\RRHH\Jobs\Tags\SaveCandidateTags;
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 use App\Models\User;
 use Modules\RRHH\Repositories\UserRepository;
 use Auth;

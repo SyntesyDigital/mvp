@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Tags;
 
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 
 class DeleteTag
 {

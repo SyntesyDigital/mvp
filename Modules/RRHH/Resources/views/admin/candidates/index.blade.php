@@ -26,7 +26,6 @@
 
           </div>
           <br clear="all">
-
           <table class="table" id="table-candidates" style="width:100%">
                         <thead>
                            <tr>
@@ -76,9 +75,12 @@
       @endforeach
     </script>
 
-    {{ Html::script('js/libs/datatabletools.js')}}
     {{ Html::script('/js/admin/users/candidateslist.js') }}
     {{ Html::script('/js/textext.core.js') }}
     {{ Html::script('/js/textext.plugin.autocomplete.js') }}
     {{ Html::script('/js/textext.plugin.tags.js') }}
+    {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
+    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+
 @endpush

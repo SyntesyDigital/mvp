@@ -16,12 +16,9 @@ use Esensi\Model\Contracts\ValidatingModelInterface;
 use Esensi\Model\Traits\ValidatingModelTrait;
 use Hash;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract,
-    HashMethodInterface
+class User extends Authenticatable
 {
     use SoftDeletes, EntrustUserTrait {
         SoftDeletes::restore insteadof EntrustUserTrait;
@@ -89,7 +86,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function roles()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\Role', 'roles_users', 'user_id', 'role_id');
+        return $this->belongsToMany('Modules\RRHH\Entities\Role', 'role_user', 'user_id', 'role_id');
     }
 
     public function agences()

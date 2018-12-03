@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Jobs\Tags;
 
 use Modules\RRHH\Entities\Offers\CandidateTag;
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 use App\Models\User;
 
 class SaveCandidateTags
@@ -18,7 +18,7 @@ class SaveCandidateTags
 
     public function handle()
     {
-        $tag_exists = CandidateTag::where('tag_id', $this->tag)->where('candidate_id', $this->user->candidate->id)->first();
+        $tag_exists = CandidateTagOffer::where('tag_id', $this->tag)->where('candidate_id', $this->user->candidate->id)->first();
         if ($tag_exists) {
             throw new \Exception('Tag-Candidate already exists', self::EXCEPTION_ALREADY_APPLIED);
         } else {

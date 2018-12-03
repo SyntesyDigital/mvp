@@ -11,7 +11,7 @@ use Modules\RRHH\Jobs\Candidate\DeleteCandidate;
 use Modules\RRHH\Jobs\Candidate\UpdateCandidate;
 use Modules\RRHH\Jobs\Tags\UpdateCandidateTags;
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 use App\Models\User;
 use Modules\RRHH\Repositories\CandidateRepository;
 use Modules\RRHH\Repositories\UserRepository;
@@ -39,7 +39,7 @@ class CandidateController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.candidates.form');
+        return view('rrhh::admin.candidates.form');
     }
 
     public function store(CandidateRequest $request)
@@ -48,12 +48,12 @@ class CandidateController extends Controller
             $candidate = $this->dispatchNow(CreateCandidate::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('admin.candidates.show', $candidate->user_id);
+            return redirect()->route('rrhh.admin.candidates.show', $candidate->user_id);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.candidates.create')->withInput($request->toArray());
+        return redirect()->route('rrhh.admin.candidates.create')->withInput($request->toArray());
     }
 
     public function show(User $user)
@@ -65,10 +65,10 @@ class CandidateController extends Controller
                 ->pluck('name')
             : null;
 
-        return view('admin.candidates.form', [
+        return view('rrhh::admin.candidates.form', [
             'user' => $user,
             'userTags' => $userTags,
-            'allTAgs' => Tag::orderBy('name')->get()->pluck('name'),
+            'allTAgs' => TagOffer::orderBy('name')->get()->pluck('name'),
         ]);
     }
 
@@ -81,7 +81,7 @@ class CandidateController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.candidates.show', $user);
+        return redirect()->route('rrhh.admin.candidates.show', $user);
     }
 
     public function delete(User $user)
@@ -120,7 +120,7 @@ class CandidateController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.candidates.show', $user);
+        return redirect()->route('rrhh.admin.candidates.show', $user);
     }
 
     public function filestore(CreateFileRequest $request)

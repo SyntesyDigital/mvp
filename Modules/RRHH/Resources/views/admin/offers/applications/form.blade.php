@@ -19,11 +19,11 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
-                                <a href="{{route('admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD">Déplacer sur une<br/>autre annonce</a>
                             </div>
-                        @endforeach
+                        @endforeachs
                     </div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
-                                <a href="{{route('admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})" class="btn btn-sm btn-danger  showHideDnD">Déplacer sur une<br/>autre annonce</a>
                             </div>
                         @endforeach
@@ -59,8 +59,8 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
                             </div>
                         @endforeach
@@ -79,8 +79,8 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
                             </div>
                         @endforeach
@@ -99,8 +99,8 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
                             </div>
                         @endforeach

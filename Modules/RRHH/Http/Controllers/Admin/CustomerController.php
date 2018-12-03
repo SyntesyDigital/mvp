@@ -44,12 +44,12 @@ class CustomerController extends Controller
             $customer = $this->dispatchNow(CreateCustomer::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('admin.customers.show', $customer);
+            return redirect()->route('rrhh.admin.customers.show', $customer);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customers.create')->withInput($request->toArray());
+        return redirect()->route('rr.hh.admin.customers.create')->withInput($request->toArray());
     }
 
     public function show(Customer $customer)
@@ -68,7 +68,7 @@ class CustomerController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customers.show', $customer);
+        return redirect()->route('rrhh.admin.customers.show', $customer);
     }
 
     public function delete(Customer $customer)
@@ -80,6 +80,6 @@ class CustomerController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.customers.index');
+        return redirect()->route('rrhh.admin.customers.index');
     }
 }

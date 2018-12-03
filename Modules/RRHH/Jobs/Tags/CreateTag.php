@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Tags;
 
-use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Entities\TagOffer;
 
 class CreateTag
 {
@@ -22,6 +22,6 @@ class CreateTag
 
     public function handle()
     {
-        return Tag::create($this->attributes);
+        return TagOffer::create($this->attributes);
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Architect\Traits\ImageUpload;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class User extends Authenticatable
+class UserOLD extends Authenticatable
 {
     use SoftDeletes, EntrustUserTrait {
         SoftDeletes::restore insteadof EntrustUserTrait;
