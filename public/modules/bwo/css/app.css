@@ -10005,6 +10005,32 @@ body {
   min-height: 100%;
 }
 
+footer {
+  padding: 25px 0;
+  background-color: #666666;
+  text-align: center;
+}
+
+footer .footer-logo {
+  width: 125px;
+  height: 69px;
+  margin: 0 auto;
+}
+
+@media (min-width: 62em) {
+  footer {
+    text-align: left;
+  }
+
+  footer .footer-logo {
+    float: left;
+  }
+
+  footer .footer-info {
+    overflow: hidden;
+  }
+}
+
 form .input-round {
   border-radius: 15px;
 }
@@ -10180,12 +10206,18 @@ body .gray-information-container .img-bwo {
     background: linear-gradient(90deg, #b6b6b6 50%, #fff 50%);
   }
 
-  body .doble-bk-information-container .home-square-gray {
-    float: left;
+  body .doble-bk-information-container .home-square {
+    padding: 0 30px 50px;
   }
 
-  body .doble-bk-information-container .home-square-white {
+  body .doble-bk-information-container .home-square.home-square-gray {
+    float: left;
+    padding: 0 30px 50px 0;
+  }
+
+  body .doble-bk-information-container .home-square.home-square-white {
     float: right;
+    padding: 0 0 25px 30px;
   }
 }
 
@@ -10193,12 +10225,67 @@ body .doble-bk-information-container .home-square-gray {
   background: #b6b6b6;
 }
 
-body .doble-bk-information-container .home-square-white {
-  background: #fff;
+body .doble-bk-information-container .home-square-gray h2 {
+  max-width: 380px;
+}
+
+body .doble-bk-information-container .home-square-gray .centered {
+  margin-top: 20px;
+}
+
+body .doble-bk-information-container .home-square-gray .centered i {
+  margin-right: 10px;
+}
+
+body .doble-bk-information-container .home-square-white h2 {
+  max-width: 460px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 62em) {
+  body .doble-bk-information-container .home-square-white h2 {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+body .doble-bk-information-container .home-square-white .post-box {
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+}
+
+@media (min-width: 62em) {
+  body .doble-bk-information-container .home-square-white .post-box {
+    max-width: 100%;
+  }
+}
+
+body .doble-bk-information-container .home-square-white .post-box .title {
+  color: #666666;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+body .doble-bk-information-container .home-square-white .post-box .date {
+  color: #d3d1ae;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  height: 14px;
+}
+
+body .doble-bk-information-container .home-square-white .post-box .read-more {
+  text-decoration: none;
+  color: #ff0000;
 }
 
 .home-square {
-  padding: 0 30px 50px;
+  padding: 15px 30px 50px;
 }
 
 .home-square p {

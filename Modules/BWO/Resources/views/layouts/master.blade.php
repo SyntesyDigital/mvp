@@ -43,12 +43,12 @@
 
         @stack('modal')
 
-        @include ('bwo::partials.header') 
+        @include ('bwo::partials.header')
 
         @yield('content')
 
         <!-- Footer blade important to add JavasCript variables from Controller -->
-      <?php /*  @include ('bwo::partials.footer') */ ?>
+        @include ('bwo::partials.footer')
         <script>
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';

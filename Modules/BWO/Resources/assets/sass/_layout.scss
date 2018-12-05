@@ -79,3 +79,26 @@ body {
   min-height: 100%;
 
 }
+
+footer{
+    padding:25px 0;
+    background-color: $brand-dark-gray-color;
+    text-align: center;
+    .footer-logo{
+      width:125px;
+      height:69px;
+      margin:0 auto;
+    }
+    .footer-info{
+
+    }
+    @include mq(md){
+      text-align: left;
+      .footer-logo{
+        float:left;
+      }
+      .footer-info{
+        overflow: hidden;
+      }
+    }
+}

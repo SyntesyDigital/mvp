@@ -43,12 +43,12 @@
 
         <?php echo $__env->yieldPushContent('modal'); ?>
 
-        <?php echo $__env->make('bwo::partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
+        <?php echo $__env->make('bwo::partials.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
         <?php echo $__env->yieldContent('content'); ?>
 
         <!-- Footer blade important to add JavasCript variables from Controller -->
-      <?php /*  @include ('bwo::partials.footer') */ ?>
+        <?php echo $__env->make('bwo::partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         <script>
           const WEBROOT = '<?php echo e(route("home")); ?>';
           const ASSETS = '<?php echo e(asset('')); ?>';
