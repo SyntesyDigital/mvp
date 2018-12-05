@@ -1,0 +1,51 @@
+.btn{
+
+  background-color:$brand-black-color;
+  @extend .rounded;
+  text-transform:uppercase;
+  padding:9px 28px;
+  @include font(12,14,400);
+  color:#000;
+  border:none;
+
+  @extend .animate;
+  outline: none;
+  &.btn-red{
+    color: $brand-white-color;
+    background-color:$brand-red-color;
+    &:hover {
+      background-color:$brand-dark-gray-color;
+    }
+    &:focus, &:active, &:active:focus {
+      background-color:$brand-dark-gray-color;
+    }
+  }
+  &.btn-dark-gray{
+    color: $brand-white-color;
+    background-color:$brand-dark-gray-color;
+    &:hover {
+      background-color:$brand-red-color;
+    }
+
+    &:focus, &:active, &:active:focus {
+      background-color:$brand-red-color;
+    }
+  }
+  &.btn-soft-gray{
+    color:$brand-black-color;
+    background-color:$brand-light-gray-color;
+    &:hover {
+      background-color:$brand-dark-gray-color;
+      color:$brand-white-color;
+    }
+
+    &:focus, &:active, &:active:focus {
+      background-color:$brand-dark-gray-color;
+      color:$brand-white-color;
+    }
+  }
+
+
+
+
+}

@@ -21,6 +21,10 @@ mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js'
 
 mix.sass('Modules/RRHH/Resources/assets/sass/app.scss', 'modules/rrhh/css');
 
+mix.js('Modules/BWO/Resources/assets/js/app.js', 'modules/bwo/js')
+   .sass('Modules/BWO/Resources/assets/sass/app.scss', 'modules/bwo/css');
+
+
 // Compile Architect lib
 mix.scripts([
   'Modules/Architect/Resources/assets/js/architect/architect.js',

@@ -36,8 +36,8 @@
 
                               </a>
                           </li-->
-                            <li>
-                              <a href="#" data-confirm-message="Tu es sûr ?" data-toogle="delete" data-ajax="<?php echo e(route('rrhh.admin.candidates.delete', $user->id)); ?>" class="text-danger">
+                          <li>
+                              <a href="<?php echo e(route('rrhh.admin.candidates.delete', $user->id)); ?>" class="text-danger">
                                   <i class="fa fa-trash text-danger"></i>
                                   &nbsp;
                                   <span class="text-danger"><?php echo e(Lang::get('architect::fields.delete')); ?></span>

@@ -1,0 +1,16 @@
+{
+    "name": "BWO",
+    "alias": "bwo",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\BWO\\Providers\\BWOServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
