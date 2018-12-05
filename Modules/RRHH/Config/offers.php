@@ -460,7 +460,8 @@ return [
                                 'input' => 'list',
                                 'identifier' => 'offer_status',
                                 'name' => 'status',
-                                'label' => 'Statut',
+                                'label' => 'Status',
+                                'default' => Modules\RRHH\Entities\Offers\Offer::STATUS_UNACTIVE
                             ],
                             [
                                 'type' => 'field',
@@ -838,7 +839,7 @@ return [
                       'type' => 'br',
                   ],
 
-                
+
               ],
           ],
 

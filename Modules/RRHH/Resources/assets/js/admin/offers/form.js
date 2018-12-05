@@ -71,7 +71,6 @@ var isEqual = function (value, other) {
 var tags = $('select[name="tags[]"]').val();
 
 
-
 $('#form-offer').on('submit', function(e){
 
     var _this = $(this);

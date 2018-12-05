@@ -124,11 +124,20 @@
     @if($node["input"] == 'list')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
+            @php
+                $default = isset($node["default"]) ? $node["default"] : null;
+            @endphp
+
             {!!
-                Form::siteList($node["identifier"], $node["name"], isset($item) ? $item->{$node["name"]} : null, [
-                    'class' => 'form-control',
-                    'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : '---'
-                ])
+                Form::siteList(
+                    $node["identifier"],
+                    $node["name"],
+                    isset($item) ? $item->{$node["name"]} : $default,
+                    [
+                        'class' => 'form-control',
+                        'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : '-'
+                    ]
+                )
             !!}
         </div>
     @endif

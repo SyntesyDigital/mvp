@@ -1,12 +1,12 @@
 $(function() {
 	$('#table').DataTable({
 	    language: {
-	        "url": "/plugins/datatables/locales/french.json"
+	        "url": "/modules/rrhh/plugins/datatables/locales/french.json"
 	    },
 		processing: true,
-      serverSide: true,
+      	serverSide: true,
 	    pageLength: 10,
-			order: [ 1, "desc" ],
+		order: [ 1, "desc" ],
 	    ajax: $('#table').data('url'),
 	    columns: [
 	        {data: 'id', name: 'id', width: "40"},
