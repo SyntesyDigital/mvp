@@ -2,14 +2,13 @@
 
 namespace Modules\RRHH\Jobs\Candidate;
 
-use Modules\RRHH\Http\Requests\Candidate\CandidateRequest;
+use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
 use Modules\RRHH\Jobs\User\CreateUser;
 use Modules\RRHH\Entities\Offers\Candidate;
 
 class CreateCandidate
 {
-    public function __construct(
-        array $attributes = [])
+    public function __construct(array $attributes = [])
     {
         $this->attributes = array_only($attributes, [
             'civility',
@@ -45,41 +44,22 @@ class CreateCandidate
 
     public function handle()
     {
-        $user = dispatch(new CreateUser(
-            $this->attributes['firstname'],
-            $this->attributes['lastname'],
-            $this->attributes['email'],
-            $this->attributes['role_id'],
-            $this->attributes['password'],
-            $this->attributes['status'],
-            null,
-            $this->attributes['telephone']
-        ));
+        $user = (new CreateUser($this->attributes))->handle();
 
-        $date_formated = null;
+        // Prepare data
+        $attributes = $this->attributes;
+        $attributes['registered_at'] = date('Y-m-d');
+        $attributes['type'] = Candidate::TYPE_NORMAL;
+        $attributes['registration_number'] = '';
+        $attributes['user_id'] = $user->id;
+
         if (isset($this->attributes['birthday'])) {
             $date = explode('/', $this->attributes['birthday']);
-            $date_formated = $date[2].'-'.$date[1].'-'.$date[0];
+            $attributes['birthday'] = $date[2].'-'.$date[1].'-'.$date[0];
         }
 
-        $candidate = new Candidate([
-            'civility' => $this->attributes['civility'],
-            'resume_file' => $this->attributes['resume_file'] ? $this->attributes['resume_file'] : '',
-            'recommendation_letter' => $this->attributes['recommendation_letter'] ? $this->attributes['recommendation_letter'] : '',
-            'type' => Candidate::TYPE_NORMAL,
-            'registration_number' => '',
-            'registered_at' => date('Y-m-d'),
-            'address' => isset($this->attributes['address']) ? $this->attributes['address'] : '',
-            'location' => isset($this->attributes['location']) ? $this->attributes['location'] : '',
-            'postal_code' => isset($this->attributes['postal_code']) ? $this->attributes['postal_code'] : '',
-            'country' => isset($this->attributes['country']) ? $this->attributes['country'] : '',
-            'birthday' => $date_formated,
-            'birthplace' => isset($this->attributes['birthplace']) ? $this->attributes['birthplace'] : '',
-            'comment' => isset($this->attributes['comment']) ? $this->attributes['comment'] : '',
-        ]);
-
-        $candidate->user()->associate($user);
-        $candidate->Save();
+        // Create candidate
+        $candidate = Candidate::create($attributes);
 
         return $candidate;
     }

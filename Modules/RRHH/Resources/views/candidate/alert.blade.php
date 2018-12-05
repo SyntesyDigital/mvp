@@ -43,7 +43,7 @@
 			        ])
 			    !!}
 
-					@foreach(\Modules\RRHH\Entities\TagOffer::get()->all() as $tag)
+					@foreach(\Modules\RRHH\Entities\Tag::get()->all() as $tag)
 						<div class="col-md-3 col-sm-6 tag">
 							{{ Form::checkbox('tags[]', $tag->name, in_array($tag->id, $user_tags), array('id' => $tag->id)) }}
 							<label class="text" for="{{$tag->id}}">{{$tag->name}} ({{$tag->offers()->count()}})

@@ -9,5 +9,5 @@ return [
     'si'            => 'Oui',
     'no'            => 'Non',
     'continue'      => 'Voulez-vous continuer ?',
-    'sure'          => 'Tu es sûr ?'
+    'sure'          => 'Etes-vous sûre de vouloir continuer ?'
 ];

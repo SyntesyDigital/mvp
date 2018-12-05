@@ -105,7 +105,7 @@
             {!!
                 Form::select(
                     $node["name"],
-                    \Modules\RRHH\Entities\TagOffer::pluck('name', 'id'),
+                    \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control toggle-select2',
@@ -174,7 +174,7 @@
             {!!
                 Form::select(
                     $node["name"],
-                    isset($item) ? \App\Models\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
+                    isset($item) ? \Modules\RRHH\Entities\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control'

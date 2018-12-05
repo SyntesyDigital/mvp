@@ -2,8 +2,6 @@
 
 namespace Modules\RRHH\Jobs\Tags;
 
-use Modules\RRHH\Entities\TagOffer;
-
 class DeleteTag
 {
     public function __construct(Tag $tag)

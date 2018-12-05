@@ -105,7 +105,7 @@
         <div class="form-group">
             <?php echo Form::select(
                     $node["name"],
-                    \Modules\RRHH\Entities\TagOffer::pluck('name', 'id'),
+                    \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control toggle-select2',

@@ -13,11 +13,10 @@ class RrhhMigrationModule extends Migration
      */
     public function up()
     {
-
-      Schema::create('tag_offers', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('name');
-      });
+        Schema::create('tags_offers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+        });
 
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -77,13 +76,13 @@ class RrhhMigrationModule extends Migration
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
         });
 
-        Schema::create('candidates_tag_offers', function (Blueprint $table) {
+        Schema::create('candidates_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('candidate_id')->unsigned();
-            $table->integer('tag_offer_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
 
             $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
-            $table->foreign('tag_offer_id')->references('id')->on('tag_offers')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags_offers')->onDelete('cascade');
         });
         Schema::table('candidates', function (Blueprint $table) {
             $table->string('recommendation_letter')->after('resume_file')->nullable();
@@ -96,12 +95,12 @@ class RrhhMigrationModule extends Migration
             $table->string('telephone')->after('email')->nullable();
         });
 
-        Schema::create('offers_tag_offers', function (Blueprint $table) {
+        Schema::create('offers_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('offer_id')->unsigned();
-            $table->integer('tag_offer_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers')->onDelete('cascade');
-            $table->foreign('tag_offer_id')->references('id')->on('tag_offers')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags_offers')->onDelete('cascade');
         });
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -236,17 +235,17 @@ class RrhhMigrationModule extends Migration
      */
     public function down()
     {
-      Schema::disableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('tag_offers');
+        Schema::dropIfExists('tags_offers');
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('site_lists');
-        Schema::dropIfExists('candidates_tag_offers');
+        Schema::dropIfExists('candidates_tags');
         Schema::dropIfExists('applications');
         Schema::dropIfExists('candidates');
         Schema::dropIfExists('offers_fields');
         Schema::dropIfExists('offers');
-        Schema::dropIfExists('offers_tag_offers');
+        Schema::dropIfExists('offers_tags');
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('emails_templates');
         Schema::dropIfExists('alerts_candidates');
@@ -255,6 +254,5 @@ class RrhhMigrationModule extends Migration
         Schema::dropIfExists('customers');
         Schema::dropIfExists('customers_contacts');
         Schema::enableForeignKeyConstraints();
-
     }
 }

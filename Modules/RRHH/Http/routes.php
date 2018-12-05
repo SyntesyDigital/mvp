@@ -25,7 +25,9 @@ Route::group([
     Route::put('/candidates/{user?}/update', 'Admin\Users\CandidateController@update')->name('rrhh.admin.candidates.update');
     Route::delete('/candidates/{user?}/delete','Admin\Users\CandidateController@delete')->name('rrhh.admin.candidates.delete');
     Route::post('/candidates/{user?}/updatetags', 'Admin\Users\CandidateController@updatetags')->name('rrhh.admin.candidates.updatetags');
+
     Route::post('/candidates/filestore', 'Admin\Users\CandidateController@filestore')->name('rrhh.admin.candidates.filestore');
+
     Route::get('/candidates/{candidate?}/downloadcv', 'Admin\Users\CandidateController@downloadCV')->name('rrhh.admin.candidates.downloadcv');
 
 

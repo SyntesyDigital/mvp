@@ -53,7 +53,7 @@ class OfferController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.offers.show', $offer);
+        return redirect()->route('rrhh.admin.offers.show', $offer);
     }
 
     public function create(Request $request)
@@ -69,12 +69,12 @@ class OfferController extends Controller
             $offer = $this->dispatchNow(CreateOffer::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('admin.offers.show', $offer);
+            return redirect()->route('rrhh.admin.offers.show', $offer);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.offers.create');
+        return redirect()->route('rrhh.admin.offers.create');
     }
 
     public function delete(Offer $offer, DeleteOfferRequest $request)
@@ -100,7 +100,7 @@ class OfferController extends Controller
 
         Session::flash($success ? 'notify_success' : 'notify_error', $message);
 
-        return redirect()->route('admin.offers.index');
+        return redirect()->route('rrhh.admin.offers.index');
     }
 
     public function recipients(Request $request)

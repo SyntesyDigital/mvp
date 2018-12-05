@@ -1,7 +1,7 @@
 @extends('architect::layouts.master')
 
 @php
-  $allTags = Modules\RRHH\Entities\TagOffer::orderBy('name')->get()->pluck('name');
+  $allTags = Modules\RRHH\Entities\Tag::orderBy('name')->get()->pluck('name');
 @endphp
 @section('content')
 <div class="container leftbar-page">
