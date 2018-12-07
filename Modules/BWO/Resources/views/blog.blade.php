@@ -1,60 +1,15 @@
 @extends('bwo::layouts.master')
 
 @section('content')
-    <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
+    <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/blog-banner.jpg')}}')">
       <div class="horizontal-inner-container">
-          <h1>VOTRE RECHERCHE</h1>
+          <h1>ACTUALITÉS</h1>
         </div>
       </div>
     </div>
     <div class="offers-container">
       <div class="horizontal-inner-container">
-        <form method="get" action="{{route('offers')}}">
-          <div class="lightest-gray-search-container">
-            <ul class="breadcrumb">
-              <li><a href="{{route('home')}}">ACCUEIL</a></li>
-              <li>OFFRES</li>
-            </ul>
 
-            <div class="btn btn-red btn-search" id="btn-search">
-              <i class="fa fa-search"></i>RECHERCHER
-            </div>
-            <div class="input-search-container">
-              <input class="form-control input-round search-input" type="text" placeholder="Métier, ville, contrat..." name="search" value="">
-            </div>
-            <div class="checkboxes">
-              <label>
-                 {{Form::checkbox('job', '1')}}[Métier]
-              </label>
-              <label>
-                  {{Form::checkbox('city', '1')}}[Ville]
-              </label>
-              <label>
-                {{Form::checkbox('contract', '1')}}[Contrat]
-              </label>
-            </div>
-            <div class="filter-btn">
-              <div class="btn btn-dark-gray" id="btn-more">VOIR PLUS DE FILTRES</div>
-              <div class="btn btn-dark-gray" id="btn-less">VOIR MOINS DE FILTRES</div>
-            </div>
-          </div>
-          <div class="light-gray-search-container">
-            <div class="col-sm-4 select-container">
-              {!! Form::Label('job', 'Choisissez votre métier:') !!}
-              {!! Form::select('job', [0 => '', 1 =>'Metier 1', 2 => 'Metier 2'], null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="col-sm-4 select-container">
-              {!! Form::Label('contract', 'Choisissez votre type de contrat:') !!}
-              {!! Form::select('contract', [0 => '', 1 =>'Contrat 1', 2 => 'Contrat 2'], null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="col-sm-4 select-container">
-              {!! Form::Label('filter', 'Filtre par:') !!}
-              {!! Form::select('filter', [0 => '', 1 =>'Filtre 1', 2 => 'Filtre 2'], null, ['class' => 'form-control']) !!}
-            </div>
-            <div class="btn btn-dark-gray" id="btn-filtres">APPLIQUER LES FILTRES</div>
-          </div>
-
-        </form>
         <div class="offers-list">
           <div class="col-md-4">
             <div class="offer-box">

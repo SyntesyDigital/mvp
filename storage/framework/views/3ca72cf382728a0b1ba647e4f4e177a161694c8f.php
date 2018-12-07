@@ -8,16 +8,17 @@
               <div class="extra-red-text">VOUS !</div>
           </div>
 
-          <form>
+          <form method="get" action="<?php echo e(route('offers')); ?>">
             <input class="form-control input-round search-input" type="text" placeholder="Métier, ville, contrat..." name="search" value="">
 
             <div class="btn btn-red btn-search">
               <i class="fa fa-search"></i>RECHERCHER
             </div>
-            <div class="btn btn-red">
-              <i class="fa fa-list"></i>TOUTES NOS OFFRES
-            </div>
-
+            <a href="<?php echo e(route('offers')); ?>">
+              <div class="btn btn-red">
+                <i class="fa fa-list"></i>TOUTES NOS OFFRES
+              </div>
+            </a>
           </form>
         </div>
       </div>
@@ -36,7 +37,7 @@
                   <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
                   <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
                 </div>
-                <a class="detail" >DÉTAIL DE L'OFFRE</a>
+                <a href="<?php echo e(route('offer')); ?>" class="detail" >DÉTAIL DE L'OFFRE</a>
             </div>
           </div>
           <div class="col-md-4 offer-box-center">
@@ -49,7 +50,7 @@
                   <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
                   <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
                 </div>
-                <a class="detail" >DÉTAIL DE L'OFFRE</a>
+                <a href="<?php echo e(route('offer')); ?>" class="detail" >DÉTAIL DE L'OFFRE</a>
             </div>
           </div>
           <div class="col-md-4 offer-box-right">
@@ -62,12 +63,13 @@
                   <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
                   <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
                 </div>
-                <a class="detail" >DÉTAIL DE L'OFFRE</a>
+                <a href="<?php echo e(route('offer')); ?>" class="detail" >DÉTAIL DE L'OFFRE</a>
             </div>
           </div>
           <br clear="all">
       </div>
     </div>
+
 
     <div class="gray-information-container">
       <div class="horizontal-inner-container">
@@ -91,12 +93,12 @@
             <div class="post-box">
                 <div class="title">TITLE ACTUALITÉ</div>
                 <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="<?php echo e(route('post')); ?>" class="read-more">Lire la suite</a></p>
             </div>
             <div class="post-box">
                 <div class="title">TITLE ACTUALITÉ</div>
                 <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="<?php echo e(route('post')); ?>" class="read-more">Lire la suite</a></p>
             </div>
           </div>
           <div class="col-md-6 home-square home-square-gray">
@@ -110,16 +112,20 @@
         </div>
     </div>
 
+    <?php $__env->stopSection(); ?>
 
+    <?php $__env->startPush('javascripts'); ?>
+    	<script>
 
+        $(document).ready(function() {
+            $(document).on("click",".btn-search",function() {
+              $(this).closest('form').submit();
+            });
 
+        });
 
+      </script>
 
-
-
-
-
-
-<?php $__env->stopSection(); ?>
+    <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('bwo::layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

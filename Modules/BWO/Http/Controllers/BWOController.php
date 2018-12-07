@@ -21,4 +21,19 @@ class BWOController extends Controller
     {
         return view('bwo::offers');
     }
+
+    public function offer()
+    {
+        return view('bwo::offer');
+    }
+
+    public function blog()
+    {
+        return view('bwo::blog');
+    }
+
+    public function post()
+    {
+        return view('bwo::post');
+    }
 }

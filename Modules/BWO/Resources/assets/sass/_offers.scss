@@ -10,6 +10,126 @@ body{
     }
   }
   .offers-container{
-    
+    padding:10px;
+    margin-top: -80px;
+    .horizontal-inner-container{
+      -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      padding: 0;
+      form{
+        .lightest-gray-search-container{
+          padding:20px 30px;
+          background-color: $brand-lightest-gray-color;
+          .input-search-container {
+            overflow: hidden;
+            .search-input{
+            }
+          }
+
+          .btn-search{
+            float:right;
+            margin-left: 10px;
+          }
+          .checkboxes{
+            padding:10px 0;
+            label{
+              margin:10px 15px 10px 0;
+              @include font(14, 19, 300);
+              color: $brand-dark-gray-color;
+              input[type='checkbox'] {
+                  -webkit-appearance:none;
+                  width:19px;
+                  height:19px;
+                  background:white;
+                  border-radius:5px;
+                  border:1px solid $brand-dark-gray-color;
+                  float: left;
+                  margin:0 5px 0 0px;
+              }
+              input[type='checkbox']:checked {
+                  background: url('/modules/bwo/images/offers-check.jpg');
+                  background-position: center;
+              }
+            }
+
+          }
+          #btn-less{
+            display:none;
+            width:200px;
+          }
+        }
+        .light-gray-search-container{
+          padding:20px 30px;
+          background-color: $brand-light-gray-color;
+          display:none;
+          .select-container{
+            padding-left:10px;
+            padding-right:10px;
+            label{
+              @include font(14, 19, 300);
+              color: $brand-dark-gray-color;
+            }
+            select{
+              margin-bottom:10px;
+            }
+          }
+        }
+      }
+      .offers-list{
+        padding: 20px 15px;
+        .offer-box{
+          padding: 18px 0 0;
+          text-align:center;
+          -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+          box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+          margin-bottom:20px;
+          .title{
+            padding:0 42px;
+            color:$brand-dark-gray-color;
+            @include font(20,22,600);
+            height:42px;
+            margin-bottom:10px;
+          }
+          p{
+            color:$brand-light-gray-color;
+            @include font(12,14,300);
+            margin-bottom:15px;
+            height: 14px;
+            &.description{
+              color:$brand-dark-gray-color;
+              @include font(14,18,300);
+              margin-bottom:15px;
+              height: 100px;
+              padding-left:25px;
+              padding-right:25px;
+            }
+          }
+          .buttons{
+            margin-bottom:20px;
+            a{
+              &.btn{
+                padding: 6px 28px;
+              }
+            }
+          }
+          .detail{
+            width:100%;
+            padding: 15px;
+            color:$brand-white-color;
+            @include font(18,20,600);
+            background-color: $brand-dark-gray-color;
+            cursor:pointer;
+            text-decoration: none;
+            &:hover{
+              background-color: $brand-red-color;
+              cursor:pointer;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
   }
 }

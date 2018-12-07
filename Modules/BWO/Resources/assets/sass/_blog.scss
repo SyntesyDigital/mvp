@@ -1,0 +1,22 @@
+body{
+  .banner{
+    h1{
+      background-color: $brand-dark-gray-color;
+      color:$brand-white-color;
+      float:left;
+      @include font(40,70, 600);
+      padding: 0 15px;
+      margin:45px 0 20px 0;
+    }
+  }
+  .blog-container{
+    padding:10px;
+    margin-top: -80px;
+    .horizontal-inner-container{
+      -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      padding: 0;
+    }
+  }
+}

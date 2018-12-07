@@ -1,9 +1,9 @@
 <ul class="navbar-nav mr-auto">
   <li class="nav-item active">
-    <a class="nav-link" href="#">OFFRES <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="{{route('offers')}}">OFFRES</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">ACTUALITÉS</a>
+    <a class="nav-link" href="{{route('blog')}}">ACTUALITÉS</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">ENTERPRISES</a>

@@ -1,0 +1,63 @@
+body{
+  .offers-container{
+    .offer-container{
+      background-color: white;
+      padding:10px;
+      margin-top: -80px;
+      h1{
+        @include font(32,40,600);
+        text-align: center;
+        color:$brand-dark-gray-color;
+      }
+      .separator{
+        width:390px;
+        margin:0px auto 5px;
+        background: $brand-light-gray-color;
+      }
+      .first-info{
+        @include font(12,14,100);
+        text-align: center;
+        color:$brand-dark-gray-color;
+        margin-bottom:35px;
+      }
+      .information{
+        padding:25px 0px 0px;
+        background-color:$brand-light-gray-color;
+        .gray-square-text{
+          width:105px;
+          @include font(20,20,600);
+          margin:0 15px 20px;
+        }
+        .block-info{
+          margin:0 15px 10px;
+
+          p{
+            @include font(14,18,200);
+            margin:0;
+          }
+        }
+        .reference{
+          background-color:$brand-dark-gray-color;
+          color:white;
+          margin-top:20px;
+          padding:10px;
+          text-align: center;
+          @include font(12,18,600);
+        }
+      }
+      .description{
+        padding: 5px 30px;
+        color:$brand-dark-gray-color;
+        .title{
+          @include font(14,18,600);
+          margin: 20px 0 10px;
+        }
+      }
+      .btn-red-container{
+        text-align: center;
+        margin:20px 0;
+      }
+
+    }
+  }
+}

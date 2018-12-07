@@ -10104,6 +10104,7 @@ body {
           box-sizing: border-box;
   margin: 0;
   min-height: 100%;
+  /* Display list items side by side */
 }
 
 body .banner {
@@ -10114,6 +10115,89 @@ body .banner {
 
 body .banner.banner-small {
   height: 228px;
+}
+
+body ul.breadcrumb {
+  list-style: none;
+  background-color: transparent;
+  padding: 0px 5px;
+}
+
+body ul.breadcrumb li {
+  display: inline;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+body ul.breadcrumb li a {
+  color: #000;
+  text-decoration: none;
+}
+
+body ul.breadcrumb li a:hover {
+  color: #ff0000;
+  text-decoration: none;
+}
+
+body ul.breadcrumb li + li:before {
+  padding: 2px;
+  color: black;
+  content: "/\A0";
+}
+
+body .pagination-container {
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+body .pagination-container a {
+  text-decoration: none;
+  color: #666666;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+  margin: 0 5px;
+}
+
+body .pagination-container a:hover,
+body .pagination-container a.active {
+  color: #ff0000;
+}
+
+body .pagination-container a .round {
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  height: 18px;
+  width: 18px;
+}
+
+body .pagination-container a .round i {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+body .offers-3-container {
+  background-color: white;
+  padding: 10px;
+}
+
+body .offers-3-container .horizontal-inner-container {
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+}
+
+body .offers-3-container h2 {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 footer {
@@ -10516,5 +10600,278 @@ body .banner h1 {
   font-weight: 600;
   padding: 0 15px;
   margin: 45px 0 20px 0;
+}
+
+body .offers-container {
+  padding: 10px;
+  margin-top: -80px;
+}
+
+body .offers-container .horizontal-inner-container {
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  padding: 0;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container {
+  padding: 20px 30px;
+  background-color: #e0dfc7;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .input-search-container {
+  overflow: hidden;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .btn-search {
+  float: right;
+  margin-left: 10px;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .checkboxes {
+  padding: 10px 0;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .checkboxes label {
+  margin: 10px 15px 10px 0;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 300;
+  color: #666666;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .checkboxes label input[type='checkbox'] {
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  background: white;
+  border-radius: 5px;
+  border: 1px solid #666666;
+  float: left;
+  margin: 0 5px 0 0px;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container .checkboxes label input[type='checkbox']:checked {
+  background: url("/modules/bwo/images/offers-check.jpg");
+  background-position: center;
+}
+
+body .offers-container .horizontal-inner-container form .lightest-gray-search-container #btn-less {
+  display: none;
+  width: 200px;
+}
+
+body .offers-container .horizontal-inner-container form .light-gray-search-container {
+  padding: 20px 30px;
+  background-color: #d3d1ae;
+  display: none;
+}
+
+body .offers-container .horizontal-inner-container form .light-gray-search-container .select-container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body .offers-container .horizontal-inner-container form .light-gray-search-container .select-container label {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 300;
+  color: #666666;
+}
+
+body .offers-container .horizontal-inner-container form .light-gray-search-container .select-container select {
+  margin-bottom: 10px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list {
+  padding: 20px 15px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box {
+  padding: 18px 0 0;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box .title {
+  padding: 0 42px;
+  color: #666666;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  height: 42px;
+  margin-bottom: 10px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box p {
+  color: #d3d1ae;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  height: 14px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box p.description {
+  color: #666666;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  height: 100px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box .buttons {
+  margin-bottom: 20px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box .buttons a.btn {
+  padding: 6px 28px;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box .detail {
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+  background-color: #666666;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body .offers-container .horizontal-inner-container .offers-list .offer-box .detail:hover {
+  background-color: #ff0000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body .offers-container .offer-container {
+  background-color: white;
+  padding: 10px;
+  margin-top: -80px;
+}
+
+body .offers-container .offer-container h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  text-align: center;
+  color: #666666;
+}
+
+body .offers-container .offer-container .separator {
+  width: 390px;
+  margin: 0px auto 5px;
+  background: #d3d1ae;
+}
+
+body .offers-container .offer-container .first-info {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 100;
+  text-align: center;
+  color: #666666;
+  margin-bottom: 35px;
+}
+
+body .offers-container .offer-container .information {
+  padding: 25px 0px 0px;
+  background-color: #d3d1ae;
+}
+
+body .offers-container .offer-container .information .gray-square-text {
+  width: 105px;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 600;
+  margin: 0 15px 20px;
+}
+
+body .offers-container .offer-container .information .block-info {
+  margin: 0 15px 10px;
+}
+
+body .offers-container .offer-container .information .block-info p {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 200;
+  margin: 0;
+}
+
+body .offers-container .offer-container .information .reference {
+  background-color: #666666;
+  color: white;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+body .offers-container .offer-container .description {
+  padding: 5px 30px;
+  color: #666666;
+}
+
+body .offers-container .offer-container .description .title {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+}
+
+body .offers-container .offer-container .btn-red-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+body .banner h1 {
+  background-color: #666666;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 70px;
+  font-weight: 600;
+  padding: 0 15px;
+  margin: 45px 0 20px 0;
+}
+
+body .blog-container {
+  padding: 10px;
+  margin-top: -80px;
+}
+
+body .blog-container .horizontal-inner-container {
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  padding: 0;
+}
+
+body .banner h1 {
+  background-color: #666666;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 70px;
+  font-weight: 600;
+  padding: 0 15px;
+  margin: 45px 0 20px 0;
+}
+
+body .post-container {
+  padding: 10px;
+  margin-top: -80px;
+}
+
+body .post-container .horizontal-inner-container {
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  padding: 0;
 }
 
