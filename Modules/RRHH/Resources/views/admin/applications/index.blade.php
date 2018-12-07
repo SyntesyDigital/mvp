@@ -40,7 +40,15 @@
 </div>
 @endsection
 
+
+@push('javascripts-libs')
+    <!-- Datatables -->
+    {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
+    {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
+@endpush
+
+
 @push('javascripts')
-{{ Html::script('js/libs/datatabletools.js')}}
-{{ Html::script('js/admin/applications/index.js')}}
+{{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
+{{ Html::script('/modules/rrhh/js/admin/applications/index.js')}}
 @endpush

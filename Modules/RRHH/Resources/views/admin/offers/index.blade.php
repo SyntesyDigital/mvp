@@ -55,9 +55,6 @@
     <!-- Toastr -->
     {{ Html::style('/modules/rrhh/plugins/toastr/toastr.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/toastr/toastr.min.js') }}
-
-    <!-- Dropzone -->
-    {{ Html::script('/modules/rrhh/plugins/dropzone/dropzone.js') }}
 @endpush
 
 @push('javascripts')
