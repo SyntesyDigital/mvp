@@ -10106,6 +10106,16 @@ body {
   min-height: 100%;
 }
 
+body .banner {
+  height: 537px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body .banner.banner-small {
+  height: 228px;
+}
+
 footer {
   padding: 25px 15px;
   background-color: #666666;
@@ -10223,24 +10233,18 @@ form .input-round {
   border-radius: 15px;
 }
 
-body .banner {
-  height: 537px;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-body .banner .banner-info-container {
+body .banner.home-banner .banner-info-container {
   width: 475px;
   float: right;
   padding: 70px 15px 0 15px;
 }
 
-body .banner .banner-info-container .banner-title {
+body .banner.home-banner .banner-info-container .banner-title {
   width: 320px;
   margin: 0 auto;
 }
 
-body .banner .banner-info-container .banner-title .extra-red-text {
+body .banner.home-banner .banner-info-container .banner-title .extra-red-text {
   color: #ff0000;
   font-size: 85px;
   line-height: 90px;
@@ -10248,7 +10252,7 @@ body .banner .banner-info-container .banner-title .extra-red-text {
   padding: 5px 10px;
 }
 
-body .banner .banner-info-container .search-input {
+body .banner.home-banner .banner-info-container .search-input {
   font-size: 16px;
   line-height: 50px;
   font-weight: 100;
@@ -10257,7 +10261,7 @@ body .banner .banner-info-container .search-input {
   margin-top: 65px;
 }
 
-body .banner .banner-info-container .btn.btn-red {
+body .banner.home-banner .banner-info-container .btn.btn-red {
   padding: 15px 30px;
   margin-top: 25px;
   font-size: 14px;
@@ -10265,11 +10269,11 @@ body .banner .banner-info-container .btn.btn-red {
   font-weight: 400;
 }
 
-body .banner .banner-info-container .btn.btn-red i {
+body .banner.home-banner .banner-info-container .btn.btn-red i {
   margin-right: 10px;
 }
 
-body .banner .banner-info-container .btn.btn-red.btn-search {
+body .banner.home-banner .banner-info-container .btn.btn-red.btn-search {
   margin-right: 20px;
 }
 
@@ -10501,5 +10505,16 @@ body .doble-bk-information-container .home-square-white .post-box .read-more {
 
 .centered {
   text-align: center;
+}
+
+body .banner h1 {
+  background-color: #666666;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 70px;
+  font-weight: 600;
+  padding: 0 15px;
+  margin: 45px 0 20px 0;
 }
 

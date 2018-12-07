@@ -1,42 +1,40 @@
 body{
   .banner{
-     height: 537px;
-     background-repeat: no-repeat;
-     background-size: cover;
-     .banner-info-container{
-       width: 475px;
-       float: right;
-       padding:70px 15px 0 15px;
-       .banner-title{
-         width:320px;
-         margin:0 auto;
-         .extra-red-text{
-           color:$brand-red-color;
-           @include font(85,90,600);
-           padding:5px 10px;
-         }
-       }
-       .search-input{
-         @include font(16,50,100);
-         height: 50px;
-         padding-left:30px;
-         margin-top:65px;
-       }
-       .btn{
-         &.btn-red{
-           padding: 15px 30px;
-           margin-top:25px;
-           @include font(14,16,400);
-           i{
-             margin-right:10px;
-           }
-           &.btn-search{
-             margin-right:20px;
-           }
-         }
-       }
-     }
-
+      &.home-banner{
+        .banner-info-container{
+          width: 475px;
+          float: right;
+          padding:70px 15px 0 15px;
+          .banner-title{
+            width:320px;
+            margin:0 auto;
+            .extra-red-text{
+              color:$brand-red-color;
+              @include font(85,90,600);
+              padding:5px 10px;
+            }
+          }
+          .search-input{
+            @include font(16,50,100);
+            height: 50px;
+            padding-left:30px;
+            margin-top:65px;
+          }
+          .btn{
+            &.btn-red{
+              padding: 15px 30px;
+              margin-top:25px;
+              @include font(14,16,400);
+              i{
+                margin-right:10px;
+              }
+              &.btn-search{
+                margin-right:20px;
+              }
+            }
+          }
+        }
+      }
   }
   h2{
     &.gray-square-text{

@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-    <div class="banner" style="background-image:url('<?php echo e(asset('modules/bwo/images/home-banner.jpg')); ?>')">
+    <div class="banner home-banner" style="background-image:url('<?php echo e(asset('modules/bwo/images/home-banner.jpg')); ?>')">
       <div class="horizontal-inner-container">
 
         <div class="banner-info-container">

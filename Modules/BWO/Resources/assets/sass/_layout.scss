@@ -154,6 +154,16 @@ body {
   margin: 0;
   min-height: 100%;
 
+
+  .banner{
+     height: 537px;
+     background-repeat: no-repeat;
+     background-size: cover;
+     &.banner-small{
+       height:228px;
+     }
+  }
+
 }
 
 footer{

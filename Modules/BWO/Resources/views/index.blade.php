@@ -1,7 +1,7 @@
 @extends('bwo::layouts.master')
 
 @section('content')
-    <div class="banner" style="background-image:url('{{asset('modules/bwo/images/home-banner.jpg')}}')">
+    <div class="banner home-banner" style="background-image:url('{{asset('modules/bwo/images/home-banner.jpg')}}')">
       <div class="horizontal-inner-container">
 
         <div class="banner-info-container">

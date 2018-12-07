@@ -1,13 +1,11 @@
-@extends('bwo::layouts.master')
-
-@section('content')
-    <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
+<?php $__env->startSection('content'); ?>
+    <div class="banner banner-small offer-banner" style="background-image:url('<?php echo e(asset('modules/bwo/images/offer-banner.jpg')); ?>')">
       <div class="horizontal-inner-container">
           <h1>VOTRE RECHERCHE</h1>
         </div>
       </div>
     </div>
-    <div class="offers-container">
+    <div class="three-offers-container">
       <div class="horizontal-inner-container">
           <div class="col-md-4 offer-box-left">
             <div class="offer-box">
@@ -55,7 +53,7 @@
     <div class="gray-information-container">
       <div class="horizontal-inner-container">
         <div class="col-md-6 home-square home-square-logo">
-          <div class="img-bwo" style="background-image:url('{{asset('modules/bwo/images/home-bwo.jpg')}}')"></div>
+          <div class="img-bwo" style="background-image:url('<?php echo e(asset('modules/bwo/images/home-bwo.jpg')); ?>')"></div>
 
         </div>
         <div class="col-md-6 home-square">
@@ -103,4 +101,6 @@
 
 
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('bwo::layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

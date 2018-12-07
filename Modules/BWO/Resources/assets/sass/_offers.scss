@@ -1,0 +1,15 @@
+body{
+  .banner{
+    h1{
+      background-color: $brand-dark-gray-color;
+      color:$brand-white-color;
+      float:left;
+      @include font(40,70, 600);
+      padding: 0 15px;
+      margin:45px 0 20px 0;
+    }
+  }
+  .offers-container{
+    
+  }
+}
