@@ -8,133 +8,60 @@
       </div>
     </div>
     <div class="offers-container">
-      <div class="horizontal-inner-container">
+      <div class="horizontal-inner-container blog-container">
+        <ul class="breadcrumb">
+          <li><a href="{{route('home')}}">ACCUEIL</a></li>
+          <li>ACTUALITÉS</li>
+        </ul>
+        <div class="categories-container">
+          <h3>CATÉGORIES</h3>
+          <a class="btn btn-soft-gray">CATÉGORIE</a>
+          <a class="btn btn-soft-gray">CATÉGORIE</a>
+          <a class="btn btn-soft-gray">CATÉGORIE</a>
+          <a class="btn btn-soft-gray">CATÉGORIE</a>
+        </div>
 
-        <div class="offers-list">
-          <div class="col-md-4">
-            <div class="offer-box">
+
+
+        <div class="posts-list">
+          <div class="col-md-6">
+            <div class="post-box">
+                <div class="image" style="background-image:url('{{asset('modules/bwo/images/post.jpg')}}')"></div>
                 <div class="title">
-                  Assistant comptable H/F
+                  TITRE ACTUALITÉ
                 </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+                <p>Le 16/11/2018 - CATÉGORIE</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="offer-box">
+          <div class="col-md-6">
+            <div class="post-box">
+                <div class="image" style="background-image:url('{{asset('modules/bwo/images/post.jpg')}}')"></div>
                 <div class="title">
-                  Assistant comptable H/F
+                  TITRE ACTUALITÉ
                 </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+                <p>Le 16/11/2018 - CATÉGORIE</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="offer-box">
+          <div class="col-md-6">
+            <div class="post-box">
+                <div class="image" style="background-image:url('{{asset('modules/bwo/images/post.jpg')}}')"></div>
                 <div class="title">
-                  Assistant comptable H/F
+                  TITRE ACTUALITÉ
                 </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+                <p>Le 16/11/2018 - CATÉGORIE</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="offer-box">
+          <div class="col-md-6">
+            <div class="post-box">
+                <div class="image" style="background-image:url('{{asset('modules/bwo/images/post.jpg')}}')"></div>
                 <div class="title">
-                  Assistant comptable H/F
+                  TITRE ACTUALITÉ
                 </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="offer-box">
-                <div class="title">
-                  Assistant comptable H/F
-                </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="offer-box">
-                <div class="title">
-                  Assistant comptable H/F
-                </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="offer-box">
-                <div class="title">
-                  Assistant comptable H/F
-                </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="offer-box">
-                <div class="title">
-                  Assistant comptable H/F
-                </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="offer-box">
-                <div class="title">
-                  Assistant comptable H/F
-                </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
-                </div>
-                <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+                <p>Le 16/11/2018 - CATÉGORIE</p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
             </div>
           </div>
           <br clear="all">
