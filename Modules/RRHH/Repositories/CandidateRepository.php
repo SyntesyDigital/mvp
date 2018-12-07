@@ -16,15 +16,9 @@ class CandidateRepository extends BaseRepository
 
     public function getDatatableData($roles, $tags = null)
     {
-        if (null !== $tags) {
+        if ($tags !== null) {
             $tags = str_replace(['[', ']', '"'], '', $tags);
-            if ('' != $tags) {
-                $tags = explode(',', $tags);
-            } else {
-                $tags = null;
-            }
-        } else {
-            $tags = null;
+            $tags = $tags != '' ? explode(',', $tags) : null;
         }
 
         $candidates = Candidate::leftJoin('users', 'users.id', '=', 'candidates.user_id')
@@ -40,28 +34,16 @@ class CandidateRepository extends BaseRepository
                 'candidates.location',
                 'roles.name',
                 'roles.display_name'
-            );
-
-        if (is_array($roles)) {
-            $candidates->whereIn('roles.name', $roles);
-        } else {
-            $candidates->where('roles.name', $roles);
-        }
-
-        if (null != $tags) {
-            $candidates->whereHas('tags', function ($query) use ($tags) {
-                $query->whereIn('tags.name', $tags);
-            });
-        }
+            )
+            ->byTags($tags)
+            ->whereIn('roles.name', !is_array($roles) ? [$roles] : $roles);
 
         return Datatables::eloquent($candidates)
-
             ->filterColumn('lastname', function ($query, $keyword) {
                 if ($keyword) {
                     $query->whereRaw("CONCAT(users.lastname,' ',users.firstname) like ?", ["%$keyword%"]);
                 }
             })
-
             ->addColumn('lastname', function ($item) {
                 return $item->lastname.' '.$item->firstname;
             })
@@ -76,7 +58,6 @@ class CandidateRepository extends BaseRepository
             ->filterColumn('location', function ($query, $keyword) {
                 $query->whereRaw('candidates.location LIKE ?', ["%$keyword%"]);
             })
-
             ->addColumn('type', function ($item) {
                 return $item->getTypeString();
             })
@@ -93,7 +74,6 @@ class CandidateRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-sm btn-success pull-right">Modifier</a>';
             })
-
             ->order(function ($query) {
                 $orders = request()->get('order');
                 $columns = request()->get('columns');

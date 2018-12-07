@@ -92,4 +92,21 @@ class Candidate extends Model
             ? self::getTypes()[$this->type]
             : null;
     }
+
+    public function scopeCountByType($query, $type)
+    {
+        return Candidate::whereHas('user', function ($query) {
+            $query->where('status', User::STATUS_ACTIVE);
+        })
+            ->where('type', $type)
+            ->count();
+    }
+
+
+    public function scopeByTags($query, $tags = null)
+    {
+        return $tags ? $query->whereHas('tags', function ($query) use ($tags) {
+            $query->whereIn('tags.name', $tags);
+        }) : $query;
+    }
 }

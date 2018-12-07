@@ -100,8 +100,8 @@ Route::group([
     // Route::post('/tools/filelist/sort', ['as' => '.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@sort']);
 
     // Mass Mail Sending
-    // Route::get('/massmail', ['as' => '.massmail', 'uses' => 'Admin\MassmailController@index']);
-    // Route::post('/sendmassmail', ['as' => '.sendmassmail', 'uses' => 'Admin\MassmailController@send']);
+    Route::get('/massmail', 'Admin\MassmailController@index')->name('rrhh.admin.massmail');
+    Route::post('/massmail/send', 'Admin\MassmailController@send')->name('rrhh.admin.massmail.send');
 
     // Templates Emails
     Route::get('/emails-templates', 'Admin\EmailTemplateController@index')->name('rrhh.admin.emailstemplates.index');

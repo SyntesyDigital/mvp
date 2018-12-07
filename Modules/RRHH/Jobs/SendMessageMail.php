@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\RRHH\Jobs\Candidate;
+namespace Modules\RRHH\Jobs;
 
-use App\Mail\CandidateMessageMail;
+use Modules\RRHH\Mail\CandidateMessageMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

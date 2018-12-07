@@ -4,6 +4,7 @@ namespace Modules\RRHH\Jobs\Candidate;
 
 use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
 use Modules\RRHH\Jobs\User\CreateUser;
+use App\Models\Role;
 use Modules\RRHH\Entities\Offers\Candidate;
 
 class CreateCandidate
@@ -45,6 +46,13 @@ class CreateCandidate
     public function handle()
     {
         $user = (new CreateUser($this->attributes))->handle();
+        $role = Role::where("name", "recruiter")->first();
+
+        if(!$role) {
+            return false;
+        }
+
+        $user->roles()->sync($role->id);
 
         // Prepare data
         $attributes = $this->attributes;
@@ -60,6 +68,7 @@ class CreateCandidate
 
         // Create candidate
         $candidate = Candidate::create($attributes);
+
 
         return $candidate;
     }

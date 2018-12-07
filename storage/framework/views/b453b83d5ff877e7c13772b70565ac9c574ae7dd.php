@@ -1,24 +1,22 @@
-@extends('architect::layouts.master')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-{!!
-    Form::open([
+<?php echo Form::open([
         'url' => isset($offer)
             ? route('rrhh.admin.offers.update', $offer)
             : route('rrhh.admin.offers.store'),
         'method' => isset($offer) ? 'PUT' : 'POST',
         'id' => 'form-offer'
-    ])
-!!}
+    ]); ?>
 
-{{ Form::hidden('_method', isset($offer) ? 'PUT' : 'POST') }}
+
+<?php echo e(Form::hidden('_method', isset($offer) ? 'PUT' : 'POST')); ?>
+
 
 <div class="page-bar">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+        <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
         <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
         <div class="float-buttons pull-right">
 
@@ -33,52 +31,58 @@
   <div class="container rightbar-page">
 
     <div class="col-md-9 page-content">
-      @foreach(config('offers.form.left') as $node)
-          @include('rrhh::admin.offers.partials.node', [
+      <?php $__currentLoopData = config('offers.form.left'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php echo $__env->make('rrhh::admin.offers.partials.node', [
               'node' => $node,
               'item' => isset($offer) ? $offer : null
-          ])
-      @endforeach
+          ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
     <div class="sidebar">
-      @foreach(config('offers.form.right') as $node)
-          @include('rrhh::admin.offers.partials.node', [
+      <?php $__currentLoopData = config('offers.form.right'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $node): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php echo $__env->make('rrhh::admin.offers.partials.node', [
               'node' => $node,
               'item' => isset($offer) ? $offer : null
-          ])
-      @endforeach
+          ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 
   </div>
 
-{!! Form::close() !!}
+<?php echo Form::close(); ?>
 
 
-@endsection
+
+<?php $__env->stopSection(); ?>
 
 
-@push('javascripts-libs')
+<?php $__env->startPush('javascripts-libs'); ?>
 
 <!-- Datepicker -->
-<link rel="stylesheet" type="text/css" href="{{ asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css') }}">
-<script src="{{ asset('/modules/turisme/plugins/datepicker/moment-with-locales.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css')); ?>">
+<script src="<?php echo e(asset('/modules/turisme/plugins/datepicker/moment-with-locales.min.js')); ?>"></script>
 
-<script src="{{ asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="<?php echo e(asset('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js')); ?>"></script>
 
 <!-- Select2 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <!-- Vendors -->
-{{ Html::script('/js/admin/content/contents/vendors/ckeditor/ckeditor.js') }}
+<?php echo e(Html::script('/js/admin/content/contents/vendors/ckeditor/ckeditor.js')); ?>
+
 
 <!-- CMS libs -->
-{{ Html::script('/js/admin/content/contents/app.js') }}
-{{ Html::script('/js/admin/content/contents/app.modal.js') }}
-{{ Html::script('/js/admin/content/contents/app.editor.js') }}
-@endpush
+<?php echo e(Html::script('/js/admin/content/contents/app.js')); ?>
 
-@push('javascripts')
-{{ Html::script('/js/admin/offers/form.js')}}
+<?php echo e(Html::script('/js/admin/content/contents/app.modal.js')); ?>
+
+<?php echo e(Html::script('/js/admin/content/contents/app.editor.js')); ?>
+
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startPush('javascripts'); ?>
+<?php echo e(Html::script('/js/admin/offers/form.js')); ?>
+
 
 <script>
   $(document).ready(function() {
@@ -109,7 +113,7 @@
 
     $(document).ready(function() {
         geocoder = new google.maps.Geocoder();
-        var input = /** @type {HTMLInputElement} */(
+        var input = /** @type  {HTMLInputElement} */(
             document.getElementById('address'));
         var autocomplete = new google.maps.places.Autocomplete(input);
 
@@ -121,8 +125,8 @@
 
     function initMap() {
 
-        var lat_init = {{ isset($offer) && $offer->latitude != null ? $offer->latitude: 48.858344}};
-        var lat_lng = {{ isset($offer) && $offer->longitude != null ? $offer->longitude: 2.294331}};
+        var lat_init = <?php echo e(isset($offer) && $offer->latitude != null ? $offer->latitude: 48.858344); ?>;
+        var lat_lng = <?php echo e(isset($offer) && $offer->longitude != null ? $offer->longitude: 2.294331); ?>;
 
         var uluru = {lat: lat_init , lng: lat_lng };
         map = new google.maps.Map(document.getElementById('map-container'), {
@@ -159,9 +163,9 @@
 
 
 
-        var csrf_token = "{{csrf_token()}}";
+        var csrf_token = "<?php echo e(csrf_token()); ?>";
         var routes = {
-            data : '{{ route("rrhh.admin.customers.data") }}',
+            data : '<?php echo e(route("rrhh.admin.customers.data")); ?>',
         };
 
         $.ajaxSetup({
@@ -194,6 +198,8 @@
 
 
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap&language=fr&libraries=places">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo e(env('GOOGLE_API_KEY')); ?>&callback=initMap&language=fr&libraries=places">
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('architect::layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
