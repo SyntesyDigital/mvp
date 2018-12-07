@@ -56,11 +56,11 @@ class CreateSpontaniousCandidature
         if (0 == $this->request->agence) {
             $agences = Agence::get();
             foreach ($agences as $agence) {
-                dispatch((new SendEmailTemplate(config('emails_templates.application.new_spontanee_interne'), $agence->email, $data, $file)));
+                dispatch((new SendEmailTemplate('APPLICATION_SPONTATINIOUS_RECEIVED_RECRUITER', $agence->email, $data, $file)));
             }
         } else {
             $agence = Agence::where('id', $this->request->agence)->first();
-            dispatch((new SendEmailTemplate(config('emails_templates.application.new_spontanee_interne'), $agence->email, $data, $file)));
+            dispatch((new SendEmailTemplate('APPLICATION_SPONTATINIOUS_RECEIVED_RECRUITER', $agence->email, $data, $file)));
         }
 
         if ($application) {

@@ -23,11 +23,10 @@
         <!-- Jquery -->
         <script src="{{ asset('modules/architect/plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 
-        <!-- Toaster -->
+        <!-- Toastr -->
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
         {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
-
 
         <!-- Language -->
         {{ Html::script('/modules/architect/js/lang.dist.js') }}

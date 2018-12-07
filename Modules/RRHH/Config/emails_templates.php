@@ -1,12 +1,11 @@
 <?php
 
 return [
-    'application' => [
-        'refused' => 'application_refused',
-        'accepted' => 'application_accepted',
-        'interview' => 'application_interview',
-        'new' => 'application_new',
-        'new_interne' => 'application_new_interne',
-        'new_spontanee_interne' => 'application_new_spontanee_interne',
-    ],
+    'APPLICATION_REFUSED' => Lang::get('rrhh::emails_templates.APPLICATION_REFUSED'),
+    'APPLICATION_ACCEPTED' => Lang::get('rrhh::emails_templates.APPLICATION_ACCEPTED'),
+    'APPLICATION_INTERVIEW' => Lang::get('rrhh::emails_templates.APPLICATION_INTERVIEW'),
+    'APPLICATION_RECEIVED_CANDIDATE' => Lang::get('rrhh::emails_templates.APPLICATION_RECEIVED_CANDIDATE'),
+    'APPLICATION_RECEIVED_RECRUITER' => Lang::get('rrhh::emails_templates.APPLICATION_RECEIVED_RECRUITER'),
+    'APPLICATION_SPONTATINIOUS_RECEIVED_CANDIDATE' => Lang::get('rrhh::emails_templates.APPLICATION_SPONTATINIOUS_RECEIVED_CANDIDATE'),
+    'APPLICATION_SPONTATINIOUS_RECEIVED_RECRUITER' => Lang::get('rrhh::emails_templates.APPLICATION_SPONTATINIOUS_RECEIVED_RECRUITER'),
 ];

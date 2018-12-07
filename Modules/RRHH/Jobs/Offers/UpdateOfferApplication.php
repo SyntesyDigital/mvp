@@ -32,7 +32,7 @@ class UpdateOfferApplication
             break;
 
             case Application::STATUS_REFUSED:
-                dispatch((new SendEmailTemplate(config('emails_templates.application.refused'), $this->application->candidate->user->email, [
+                dispatch((new SendEmailTemplate('APPLICATION_REFUSED', $this->application->candidate->user->email, [
                     'user' => $this->application->candidate->user,
                 ])));
             break;
@@ -40,7 +40,7 @@ class UpdateOfferApplication
             case Application::STATUS_INTERVIEW:
 
                 // Send e-mail to the candidate
-                dispatch((new SendEmailTemplate(config('emails_templates.application.interview'), $this->application->candidate->user->email, [
+                dispatch((new SendEmailTemplate('APPLICATION_INTERVIEW', $this->application->candidate->user->email, [
                     'user' => $this->application->candidate->user,
                 ])));
 
@@ -56,13 +56,13 @@ class UpdateOfferApplication
                     ->get();
 
                 foreach ($other_applications as $application) {
-                    dispatch((new SendEmailTemplate(config('emails_templates.application.refused'), $application->candidate->user->email, [
+                    dispatch((new SendEmailTemplate('APPLICATION_REFUSED', $application->candidate->user->email, [
                         'user' => $application->candidate->user,
                     ])));
                 }
 
                 // Send e-mail to the candidate
-                dispatch((new SendEmailTemplate(config('emails_templates.application.accepted'), $this->application->candidate->user->email, [
+                dispatch((new SendEmailTemplate('APPLICATION_ACCEPTED', $this->application->candidate->user->email, [
                     'user' => $this->application->candidate->user,
                 ])));
 

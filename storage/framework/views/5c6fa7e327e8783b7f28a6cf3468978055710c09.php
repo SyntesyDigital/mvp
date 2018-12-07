@@ -23,11 +23,10 @@
         <!-- Jquery -->
         <script src="<?php echo e(asset('modules/architect/plugins/jquery/jquery-3.2.1.min.js')); ?>"></script>
 
-        <!-- Toaster -->
+        <!-- Toastr -->
         <script src="<?php echo e(asset('modules/architect/plugins/toastr/toastr.min.js')); ?>"></script>
         <link href="<?php echo e(asset('modules/architect/plugins/toastr/toastr.min.css')); ?>" rel="stylesheet" media="all"  />
         <?php echo e(Html::script('/modules/architect/plugins/bootbox/bootbox.min.js')); ?>
-
 
 
         <!-- Language -->

@@ -74,7 +74,7 @@ Route::group([
     Route::put('/customers/{customer?}/update', 'Admin\CustomerController@update')->name('rrhh.admin.customers.update');
     Route::delete('/customers/{customer?}/delete', 'Admin\CustomerController@delete')->name('rrhh.admin.customers.delete');
 
-    //contacts
+    // Contacts client
     Route::get('/customer_contacts/create/{customer}', 'Admin\CustomerContactController@create')->name('rrhh.admin.customer_contacts.create');
     Route::post('/customer_contacts/store', 'Admin\CustomerContactController@store')->name('rrhh.admin.customer_contacts.store');
     Route::get('/customer_contacts/data/{customer}', 'Admin\CustomerContactController@data')->name('rrhh.admin.customer_contacts.data');
@@ -83,6 +83,33 @@ Route::group([
     Route::delete('/customer_contacts/{customer_contact}/delete', 'Admin\CustomerContactController@delete')->name('rrhh.admin.customer_contacts.delete');
     Route::post('/customer_contacts/list/{customer}', 'Admin\CustomerContactController@list')->name('rrhh.admin.customer_contacts.list');
 
+    // Lists
+    Route::get('/sitelists', 'Admin\SiteListController@index')->name('rrhh.admin.sitelists.index');
+    Route::get('/sitelists/create', 'Admin\SiteListController@create')->name('rrhh.admin.sitelists.create');
+    Route::post('/sitelists/store', 'Admin\SiteListController@store')->name('rrhh.admin.sitelists.store');
+    Route::get('/sitelists/{sitelist?}', 'Admin\SiteListController@show')->name('rrhh.admin.sitelists.show');
+    Route::put('/sitelists/{sitelist?}/update', 'Admin\SiteListController@update')->name('rrhh.admin.sitelists.update');
+    Route::delete('/sitelists/{sitelist?}/delete', 'Admin\SiteListController@delete')->name('rrhh.admin.sitelists.delete');
+
+
+    // File List
+    // Route::get('/filelist', ['as' => '.tools.filelist.index', 'uses' => 'Admin\Tools\FileListController@index']);
+    // Route::put('/tools/filelist/{sitelist?}/update', ['as' => '.tools.filelist.update', 'uses' => 'Admin\Tools\FileListController@update']);
+    // Route::post('/tools/filelist/store', ['as' => '.tools.filelist.store', 'uses' => 'Admin\Tools\FileListController@store']);
+    // Route::post('/tools/filelist/delete', ['as' => '.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@delete']);
+    // Route::post('/tools/filelist/sort', ['as' => '.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@sort']);
+
+    // Mass Mail Sending
+    // Route::get('/massmail', ['as' => '.massmail', 'uses' => 'Admin\MassmailController@index']);
+    // Route::post('/sendmassmail', ['as' => '.sendmassmail', 'uses' => 'Admin\MassmailController@send']);
+
+    // Templates Emails
+    Route::get('/emails-templates', 'Admin\EmailTemplateController@index')->name('rrhh.admin.emailstemplates.index');
+    Route::get('/emails-templates/create', 'Admin\EmailTemplateController@create')->name('rrhh.admin.emailstemplates.create');
+    Route::post('/emails-templates/store', 'Admin\EmailTemplateController@store')->name('rrhh.admin.emailstemplates.store');
+    Route::get('/emails-templates/{template?}', 'Admin\EmailTemplateController@show')->name('rrhh.admin.emailstemplates.show');
+    Route::put('/emails-templates/{template?}/update', 'Admin\EmailTemplateController@update')->name('rrhh.admin.emailstemplates.update');
+    Route::delete('/emails-templates/{template?}/delete', 'Admin\EmailTemplateController@delete')->name('rrhh.admin.emailstemplates.delete');
 
 
 });

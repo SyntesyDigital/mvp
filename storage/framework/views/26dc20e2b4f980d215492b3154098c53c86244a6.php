@@ -10,67 +10,19 @@
 
       <div class="grid-items">
         <div class="row">
+            <?php $__currentLoopData = config('settings'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-xs-3">
+                    <a href="<?php echo e(route($setting["route"])); ?>">
+                      <div class="grid-item">
+                          <i class="fa <?php echo e($setting["icon"]); ?>"></i>
+                          <p class="grid-item-name">
+                              <?php echo e($setting["label"]); ?>
 
-            <div class="col-xs-3">
-                <a href="<?php echo e(route('users')); ?>">
-                  <div class="grid-item">
-                      <i class="fa fa-users"></i>
-                      <p class="grid-item-name">
-                          <?php echo e(Lang::get('architect::settings.users')); ?>
-
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="<?php echo e(route('languages')); ?>">
-                  <div class="grid-item">
-                      <i class="fa fa-flag"></i>
-                      <p class="grid-item-name">
-                          <?php echo e(Lang::get('architect::settings.languages')); ?>
-
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="<?php echo e(route('translations')); ?>">
-                  <div class="grid-item">
-                      <i class="fa fa-list-alt"></i>
-                      <p class="grid-item-name">
-                          <?php echo e(Lang::get('architect::settings.translations')); ?>
-
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="<?php echo e(route('menu.index')); ?>">
-                  <div class="grid-item">
-                      <i class="fa fa-list"></i>
-                      <p class="grid-item-name">
-                          <?php echo e(Lang::get('architect::settings.menu')); ?>
-
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="<?php echo e(route('pagelayouts')); ?>">
-                  <div class="grid-item">
-                      <i class="fa fa-columns"></i>
-                      <p class="grid-item-name">
-                          <?php echo e(Lang::get('architect::settings.templates')); ?>
-
-                      </p>
-                  </div>
-                </a>
-            </div>
-
+                          </p>
+                      </div>
+                    </a>
+                </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
       </div>
 

@@ -13,51 +13,9 @@
                 <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
-
-                      <li class="<?php echo e(Request::is('architect') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('dashboard')); ?>">
-                        <?php echo e(Lang::get('architect::header.home')); ?>
-
-                        </a>
-                      </li>
-
-                      <li class="<?php echo e(Request::is('architect/offers*') ||  Request::is('architect/candidates*')  ||  Request::is('architect/customers*') || Request::is('architect/tags*') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>">
-                        <?php echo e(Lang::get('architect::header.offers')); ?>
-
-                        </a>
-                      </li>
-
-                        <?php if(Auth::user()->hasRole(["admin"])): ?>
-                      <li class="<?php echo e(Request::is('architect/typologies*') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('typologies')); ?>">
-                          <?php echo e(Lang::get('architect::header.typology')); ?>
-
-                        </a>
-                      </li>
-                        <?php endif; ?>
-                      <li class="<?php echo e(Request::is('architect/contents*') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('contents')); ?>">
-                        <?php echo e(Lang::get('architect::header.contents')); ?>
-
-                        </a>
-                      </li>
-
-                      <li class="<?php echo e(Request::is('architect/medias*') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('medias.index')); ?>">
-                          <?php echo e(Lang::get('architect::header.media')); ?>
-
-                        </a>
-                      </li>
-
-                       <?php if(Auth::user()->hasRole(["admin"])): ?>
-                      <li class="<?php echo e(Request::is('architect/settings*') ? 'active' : ''); ?>">
-                        <a href="<?php echo e(route('settings')); ?>">
-                          <?php echo e(Lang::get('architect::header.configuration')); ?>
-
-                        </a>
-                      </li>
-                      <?php endif; ?>
+                        <?php echo $__env->make('architect::partials.topbar-menu', [
+                            'items' => config('architect::menu')
+                        ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </ul>
                   </nav>
                 </div>
