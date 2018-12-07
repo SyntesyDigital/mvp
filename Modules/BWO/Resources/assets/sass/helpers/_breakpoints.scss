@@ -41,8 +41,9 @@ $mq-breakpoints: (
     desktopAd: 810px,
     mobileLandscape: 480px,
 
-    md:868px
-    
+    md:868px,
+    xs:672px
+
 ) !default;
 
 /// Static breakpoint (for fixed-width layouts)

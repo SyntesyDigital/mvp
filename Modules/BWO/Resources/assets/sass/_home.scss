@@ -47,7 +47,7 @@ body{
     }
   }
   .three-offers-container{
-    padding:50px 0 30px;
+    padding:50px 15px 30px;
     .offer-box{
       padding: 18px 0 0;
       text-align:center;
@@ -143,14 +143,25 @@ body{
         padding:0 30px 50px;
         &.home-square-gray{
           float:left;
-          padding:0 30px 50px 0;
+
         }
         &.home-square-white{
           float:right;
-          padding:0 0 25px 30px;
+        }
+      }
+      @include mq(940){
+        .home-square{
+          &.home-square-gray{
+            padding:0 15px 50px 0;
+          }
+          &.home-square-white{
+            padding:0 0 25px 30px;
+
+          }
         }
       }
     }
+
     .home-square-gray{
       background: #b6b6b6;
       h2{
