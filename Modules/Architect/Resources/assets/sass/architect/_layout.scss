@@ -7,8 +7,14 @@ body {
     height: 100%;
 }
 
-.container{
+.container {
   width:100% !important;
+
+  &-error {
+      clear:both;
+      margin-top: 90px;
+      border-radius: 5px;
+  }
 }
 
 #main {

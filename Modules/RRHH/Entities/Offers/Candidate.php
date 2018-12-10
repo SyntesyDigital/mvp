@@ -75,7 +75,7 @@ class Candidate extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\TagOffer', 'candidates_tag_offers');
+        return $this->belongsToMany('Modules\RRHH\Entities\Tag', 'candidates_tags');
     }
 
     public static function getTypes()

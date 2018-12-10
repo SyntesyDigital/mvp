@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Candidate;
 
-use Modules\RRHH\Http\Requests\Candidate\CandidateRequest;
+use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
 use Modules\RRHH\Jobs\User\UpdateUser;
 use Modules\RRHH\Entities\Offers\Candidate;
 use App\Models\User;

@@ -14072,6 +14072,12 @@ body {
   width: 100% !important;
 }
 
+.container-error {
+  clear: both;
+  margin-top: 90px;
+  border-radius: 5px;
+}
+
 #main .navbar-collapse {
   position: fixed;
   width: 100%;

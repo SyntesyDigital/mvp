@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'new'         => 'Noveau Langue',
-    'del_lang_msg'  => 'L\'effacement d\'une langue entraîne la perte de tout contenu dans cette langue. Voulez-vous continuer?',
-    'add_language' => 'Ajouter langue',
-    'default_question'  => 'C\'est la langue par défaut ?'
+    'new' => 'Nouvelle langue',
+    'del_lang_msg'  => 'Attention, la suppression d\'une langue entraîne la perte totale de son contenu. Êtes-vous sûr de vouloir continuer ?',
+    'add_language' => 'Ajouter une langue',
+    'default_question'  => 'Êst-ce la langue par défaut ?'
 ];

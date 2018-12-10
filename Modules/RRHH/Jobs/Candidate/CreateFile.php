@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs\Candidate;
 
-use Modules\RRHH\Http\Requests\Candidate\CreateFileRequest;
+use Modules\RRHH\Http\Requests\Admin\Candidate\CreateFileRequest;
 
 class CreateFile
 {

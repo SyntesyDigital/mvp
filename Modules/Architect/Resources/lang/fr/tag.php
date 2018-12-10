@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'add' => 'Ajouter étiquette',
-    'new' => 'Nouvelle étiquette'
+    'add' => 'Ajouter un tag',
+    'new' => 'Nouveau tag'
 
 ];

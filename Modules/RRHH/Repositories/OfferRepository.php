@@ -91,13 +91,13 @@ class OfferRepository extends BaseRepository
                 $html = '';
 
                 if (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('recruiter') && $item->recipient_id == Auth::user()->id)) {
-                    $html .= '<a href="'.route('admin.offers.delete', $item).'" data-ajax="'.route('admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-sm btn-danger" >Supprimer</a>';
+                    $html .= '<a href="'.route('rrhh.admin.offers.delete', $item).'" data-ajax="'.route('rrhh.admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-sm btn-danger" >Supprimer</a>';
                 }
 
-                $html .= '<a href="'.route('admin.offers.show', $item).'" class="btn btn-sm btn-success">Voir</a>';
+                $html .= '<a href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-sm btn-success">Voir</a>';
 
                 if ($item->applications()->count()) {
-                    $html .= '<a href="'.route('admin.offer.applications.show', $item).'" class="btn btn-sm btn-primary">Candidatures</a>';
+                    $html .= '<a href="'.route('rrhh.admin.offer.applications.show', $item).'" class="btn btn-sm btn-primary">Candidatures</a>';
                 }
 
                 return $html;
@@ -107,38 +107,38 @@ class OfferRepository extends BaseRepository
                 $orders = request()->get('order');
                 $columns = request()->get('columns');
 
-                foreach ($orders as $order) {
-                    $column = $order['column'];
-                    $dir = $order['dir'];
-
-                    switch ($columns[$column]['name']) {
-                        case 'id':
-                            $query->groupBy('offers.id')->orderBy('offers.id', $dir);
-                        break;
-
-                        case 'title':
-                            $query->groupBy('offers_fields.id')->whereRaw('offers_fields.name = ?', [
-                                'title',
-                            ])->orderBy('offers_fields.value', $dir);
-                        break;
-
-                        case 'created_at':
-                            $query->groupBy('offers.id')->orderBy('offers.created_at', $dir);
-                        break;
-
-                        case 'status':
-                            $query->groupBy('offers.id')->orderBy('offers.status', $dir);
-                        break;
-
-                        case 'recipient':
-                            $query->groupBy('offers.id')->orderBy('recipient_fullname', $dir);
-                        break;
-
-                        case 'applied':
-                            $query->groupBy('offers.id')->orderBy('applied', $dir);
-                        break;
-                    }
-                }
+                // foreach ($orders as $order) {
+                //     $column = $order['column'];
+                //     $dir = $order['dir'];
+                //
+                //     switch ($columns[$column]['name']) {
+                //         case 'id':
+                //             $query->groupBy('offers.id')->orderBy('offers.id', $dir);
+                //         break;
+                //
+                //         case 'title':
+                //             $query->groupBy('offers_fields.id')->whereRaw('offers_fields.name = ?', [
+                //                 'title',
+                //             ])->orderBy('offers_fields.value', $dir);
+                //         break;
+                //
+                //         case 'created_at':
+                //             $query->groupBy('offers.id')->orderBy('offers.created_at', $dir);
+                //         break;
+                //
+                //         case 'status':
+                //             $query->groupBy('offers.id')->orderBy('offers.status', $dir);
+                //         break;
+                //
+                //         case 'recipient':
+                //             $query->groupBy('offers.id')->orderBy('recipient_fullname', $dir);
+                //         break;
+                //
+                //         case 'applied':
+                //             $query->groupBy('offers.id')->orderBy('applied', $dir);
+                //         break;
+                //     }
+                // }
             })
         ->make(true);
     }

@@ -48,6 +48,7 @@ class RRHHServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Config/config.php' => config_path('rrhh.php'),
         ], 'config');
+
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'rrhh'
         );
@@ -56,6 +57,15 @@ class RRHHServiceProvider extends ServiceProvider
         );
         $this->mergeConfigFrom(
             __DIR__.'/../Config/emails_templates.php', 'emails_templates'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/settings.php', 'settings'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/topbar_menu.php',
+            'architect::plugins.topbar.menu'
         );
     }
 

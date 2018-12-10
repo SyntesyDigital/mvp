@@ -1,0 +1,50 @@
+.sitelist {
+
+    .dashed-border{
+    	border: 1px dashed #acacac;
+    	padding : 10px;
+    }
+
+    .content-field-dropper {
+        border: 1px dashed #acacac;
+        padding: 20px;
+    }
+
+    #ajouter{
+    	cursor:pointer;
+    	padding: 5px;
+    }
+
+    #ajouter h2{
+    	margin-top:10px;
+    }
+    .input-name-option{
+    	font-weight: bold;
+        font-size: 18px;
+        width: 90%;
+        float:left;
+        margin-bottom:0px;
+    }
+    .input-value-option{
+    	width: 90%;
+        margin-bottom:5px;
+    }
+    .remove-action{
+    	cursor:pointer
+    }
+
+    /*DRAG AND DROP */
+    [draggable] {
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      /* Required to make elements draggable in old WebKit */
+      -khtml-user-drag: element;
+      -webkit-user-drag: element;
+    }
+    .dragable-option{
+    	cursor:move;
+    }
+    /* END DRAG AND DROP */
+}

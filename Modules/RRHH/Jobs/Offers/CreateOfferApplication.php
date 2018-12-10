@@ -45,8 +45,8 @@ class CreateOfferApplication
                 'user' => $this->user,
             ];
 
-            dispatch((new SendEmailTemplate(config('emails_templates.application.new'), $this->user->email, $data)));
-            dispatch((new SendEmailTemplate(config('emails_templates.application.new_interne'), $this->offer->recipient->email, $data, $file)));
+            dispatch((new SendEmailTemplate('APPLICATION_RECEIVED_CANDIDATE', $this->user->email, $data)));
+            dispatch((new SendEmailTemplate('APPLICATION_RECEIVED_RECRUITER', $this->offer->recipient->email, $data, $file)));
         }
 
         return $application ? $application : false;

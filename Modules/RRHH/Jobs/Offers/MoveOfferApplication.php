@@ -21,7 +21,7 @@ class MoveOfferApplication
 
         switch ($this->application->status) {
             case Application::STATUS_REFUSED:
-                dispatch((new SendEmailTemplate(config('emails_templates.application.refused'), $this->application->candidate->user->email, [
+                dispatch((new SendEmailTemplate('APPLICATION_REFUSED', $this->application->candidate->user->email, [
                     'user' => $this->application->candidate->user,
                 ])));
             break;

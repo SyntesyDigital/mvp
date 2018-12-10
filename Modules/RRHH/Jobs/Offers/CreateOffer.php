@@ -9,7 +9,7 @@ use Config;
 
 class CreateOffer
 {
-    public function __construct(array $attributes = [])
+    public function __construct($attributes)
     {
         $this->fields = $this->getFields();
         $this->attributes = array_only($attributes, $this->fields);
@@ -17,11 +17,13 @@ class CreateOffer
 
     public static function fromRequest(CreateOfferRequest $request)
     {
+
         return new self($request->all());
     }
 
     public function handle()
     {
+
         $offer = Offer::create([
             'status' => $this->attributes['status'],
             'recipient_id' => $this->attributes['recipient_id'],
@@ -64,7 +66,7 @@ class CreateOffer
 
     public function getFields()
     {
-        return collect($this->parseNode(Config::get('offers.form')))
+        return collect($this->parseNode(array_collapse(config('offers.form'))))
             ->map(function ($field) {
                 return isset($field['name']) ? str_replace('[]', '', $field['name']) : false;
             })
@@ -83,7 +85,7 @@ class CreateOffer
                 $fields = $this->parseNode($childs, $fields);
             }
 
-            if ('field' == $node['type']) {
+            if ((isset($node['type'])) && 'field' == $node['type']) {
                 $fields[] = $node;
             }
         }

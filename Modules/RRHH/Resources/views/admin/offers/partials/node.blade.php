@@ -105,7 +105,7 @@
             {!!
                 Form::select(
                     $node["name"],
-                    \Modules\RRHH\Entities\TagOffer::pluck('name', 'id'),
+                    \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control toggle-select2',
@@ -124,11 +124,20 @@
     @if($node["input"] == 'list')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
+            @php
+                $default = isset($node["default"]) ? $node["default"] : null;
+            @endphp
+
             {!!
-                Form::siteList($node["identifier"], $node["name"], isset($item) ? $item->{$node["name"]} : null, [
-                    'class' => 'form-control',
-                    'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : '---'
-                ])
+                Form::siteList(
+                    $node["identifier"],
+                    $node["name"],
+                    isset($item) ? $item->{$node["name"]} : $default,
+                    [
+                        'class' => 'form-control',
+                        'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : '-'
+                    ]
+                )
             !!}
         </div>
     @endif
@@ -174,7 +183,7 @@
             {!!
                 Form::select(
                     $node["name"],
-                    isset($item) ? \App\Models\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
+                    isset($item) ? \Modules\RRHH\Entities\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
                     isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
                     [
                         'class' => 'form-control'

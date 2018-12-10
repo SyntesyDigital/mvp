@@ -62,7 +62,7 @@ class Offer extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\TagOffer', 'offers_tag_offers');
+        return $this->belongsToMany('Modules\RRHH\Entities\Tag', 'offers_tags');
     }
 
     public function applications()

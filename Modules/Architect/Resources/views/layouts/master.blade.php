@@ -23,12 +23,10 @@
         <!-- Jquery -->
         <script src="{{ asset('modules/architect/plugins/jquery/jquery-3.2.1.min.js') }}"></script>
 
-        <!-- Toaster -->
+        <!-- Toastr -->
         <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
         {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
-
-
 
         <!-- Language -->
         {{ Html::script('/modules/architect/js/lang.dist.js') }}
@@ -61,65 +59,67 @@
 
     <body>
         <div id="app">
-    	       @yield('modal')
-		      <section id="wrapper">
 
-	        <section id="main">
+            @yield('modal')
 
-                @if(Auth::user())
-                    @if(!isset($hideTopbar) || (isset($hideTopbar) && $hideTopbar === false))
-    	        	      @include('architect::layouts.topbar')
+            <section id="wrapper">
+                <section id="main">
+
+                    @if(Auth::user())
+                        @if(!isset($hideTopbar) || (isset($hideTopbar) && $hideTopbar === false))
+        	        	      @include('architect::layouts.topbar')
+                        @endif
                     @endif
-                @endif
 
-	        	<section id="content">
+    	        	<section id="content">
 
-                    @if(isset($errors))
-                        @if (count($errors) > 0)
-                            <div class="container">
+                        @if(isset($errors))
+                            @if (count($errors) > 0)
+                                <div class="clearfix"></div>
+                                <div class="container container-error">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-danger">
+                                		        <ul>
+                                		            @foreach ($errors->all() as $error)
+                                		                <li>{{ $error }}</li>
+                                		            @endforeach
+                                		        </ul>
+                                		    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    		@endif
+                        @endif
+
+                        @if(Session::has('notify_error'))
+                            <div class="container  container-error">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="alert alert-danger">
-                            		        <ul>
-                            		            @foreach ($errors->all() as $error)
-                            		                <li>{{ $error }}</li>
-                            		            @endforeach
-                            		        </ul>
-                            		    </div>
+                                            {{ Session::get('notify_error') }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                		@endif
-                    @endif
+                        @endif
 
-                    @if(Session::has('notify_error'))
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger">
-                                        {{ Session::get('notify_error') }}
+                        @if(Session::has('notify_success'))
+                            <div class="container  container-error">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-success">
+                                            {{ Session::get('notify_success') }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    @if(Session::has('notify_success'))
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-success">
-                                        {{ Session::get('notify_success') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-	        		@yield('content')
-	        	</section>
-	        </section>
-        </section>
+    	        		@yield('content')
+    	        	</section>
+    	        </section>
+            </section>
         </div>
 
         @stack('javascripts-libs')

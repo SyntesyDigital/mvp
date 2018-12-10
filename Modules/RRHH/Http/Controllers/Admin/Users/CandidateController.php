@@ -3,20 +3,25 @@
 namespace Modules\RRHH\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
-use Modules\RRHH\Http\Requests\Candidate\CandidateRequest;
-use Modules\RRHH\Http\Requests\Candidate\CreateFileRequest;
+use Illuminate\Http\Request;
+
 use Modules\RRHH\Jobs\Candidate\CreateCandidate;
 use Modules\RRHH\Jobs\Candidate\CreateFile;
 use Modules\RRHH\Jobs\Candidate\DeleteCandidate;
 use Modules\RRHH\Jobs\Candidate\UpdateCandidate;
 use Modules\RRHH\Jobs\Tags\UpdateCandidateTags;
+
+use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
+use Modules\RRHH\Http\Requests\Admin\Candidate\CreateFileRequest;
+
 use Modules\RRHH\Entities\Offers\Candidate;
-use Modules\RRHH\Entities\TagOffer;
+use Modules\RRHH\Entities\Tag;
 use App\Models\User;
+
 use Modules\RRHH\Repositories\CandidateRepository;
 use Modules\RRHH\Repositories\UserRepository;
+
 use Datatables;
-use Illuminate\Http\Request;
 use Session;
 
 class CandidateController extends Controller
@@ -68,7 +73,7 @@ class CandidateController extends Controller
         return view('rrhh::admin.candidates.form', [
             'user' => $user,
             'userTags' => $userTags,
-            'allTAgs' => TagOffer::orderBy('name')->get()->pluck('name'),
+            'allTAgs' => Tag::orderBy('name')->get()->pluck('name'),
         ]);
     }
 
