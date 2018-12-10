@@ -44,6 +44,11 @@ body{
           text-align: center;
           @include font(12,18,600);
         }
+        .share-container{
+          background-color: white;
+          padding: 25px 5px;
+          text-align: center;
+        }
       }
       .description{
         padding: 5px 30px;

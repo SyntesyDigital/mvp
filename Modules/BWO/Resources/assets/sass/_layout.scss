@@ -50,7 +50,32 @@ header{
         padding-right:0px;
       }
       #user-menu{
+        position: absolute;
+        right: -21px;
+        top: 95px;
+        z-index: 100;
+        width: 100vw;
+        background-color: white;
+        text-align: center;
+        padding-right: 25px;
+        overflow: hidden;
+        @include mq(xs){
+          position:relative;
+          right: 0;
+          top:0;
+          z-index:0;
+          width: 390px;
+          padding-right:0;
+          float: right;
+          text-align: right;
+        }
+
         li{
+          padding: 10px;
+          @include mq(xs){
+            padding:0;
+          }
+
           a{
             &.btn{
               padding: 5px 13px;
@@ -60,6 +85,7 @@ header{
       }
       .navbar-header-main, #main-menu{
         float:left;
+
         @include mq(xs){
           float:right;
         }
@@ -73,9 +99,27 @@ header{
 
       }
       #main-menu{
-        padding-left:0px;
+        position: absolute;
+        left: -38px;
+        top: 95px;
+        z-index: 100;
+        width: 100vw;
+        background-color: white;
+        text-align: center;
+        padding-left:28px;
+        overflow: hidden;
+        @include mq(xs){
+          position:relative;
+          left:0;
+          top:0;
+          z-index:0;
+          width: 100%;
+          padding-left:0;
+          text-align:left;
+        }
         ul{
           padding-left:0px;
+          max-width: 100%;
           li{
           a{
             color:$brand-black-color;

@@ -4,20 +4,98 @@ body{
       background-color: $brand-dark-gray-color;
       color:$brand-white-color;
       float:left;
-      @include font(40,70, 600);
-      padding: 0 15px;
-      margin:45px 0 20px 0;
+      @include font(40,50, 600);
+      padding: 0 7px;
+      margin:20px 0 20px 0;
     }
   }
-  .post-container{
-    padding:10px;
-    margin-top: -80px;
-    .horizontal-inner-container{
+  .posts-container{
+    .post-container{
+      background-color: white;
+      padding:10px;
+      margin-top: -130px;
       -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
       -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
       box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-      padding: 0;
-
+      margin-bottom:20px;
+      h1{
+        @include font(32,40,600);
+        text-align: center;
+        color:$brand-dark-gray-color;
+      }
+      .description{
+        padding: 5px 30px;
+        color:$brand-dark-gray-color;
+        img{
+          max-width: 100%;
+        }
+        .first-line{
+          padding:0px;
+          .share-container{
+            float:right;
+          }
+          .first-info{
+          @include font(12,14,100);
+          text-align: left;
+          color:$brand-dark-gray-color;
+          margin-bottom:35px;
+          float:left;
+        }
+        }
+        .subtitle{
+          @include font(25,30,400);
+          margin: 20px 0 10px;
+          color:$brand-light-gray-color;
+        }
+      }
     }
   }
+.other-posts{
+  h3{
+    padding: 0 34px;
+    @include font(16,18,600);
+    color:$brand-dark-gray-color;
+  }
+  .post-box{
+    @include mq(md){
+      max-width: 100%;
+    }
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+    margin-bottom:20px;
+
+    .title{
+      color: $brand-dark-gray-color;
+      @include font(20, 22, 600);
+      margin-bottom: 5px;
+    }
+    .date{
+      color:$brand-light-gray-color;
+      @include font(12,14,300);
+      margin-bottom:10px;
+      height: 14px;
+    }
+    .read-more{
+      text-decoration:none;
+      color:$brand-red-color;
+    }
+  }
+  .left-post-container, .right-post-container{
+    padding:10px 15px;
+  }
+  @include mq(md){
+    h3{
+      padding: 0 25px;
+    }
+    .left-post-container{
+      padding-left: 5px;
+    }
+    .right-post-container{
+      padding-right: 5px;
+    }
+  }
+}
+
 }

@@ -35,6 +35,35 @@
               <p>30/34 K€ selon profil</p>
             </div>
             <div class="reference">REF : LEG1 | 20/11/2018</div>
+            <div class="share-container">
+              <?php
+                $shareUrl = '';
+                $title = '';
+                $description =  '';
+              ?>
+               Partager:
+               <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo e($shareUrl); ?>&t=<?php echo e($title); ?>"
+        					class="share-button"
+        					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+        					 target="_blank" title="Share on Facebook">
+        					<img src="<?php echo e(asset('modules/bwo/images/fb_icon.jpg')); ?>" class="social-icon">
+        				</a>
+
+        				<a href="#"	class="share-button" title="Share on Instagram">
+        					<img src="<?php echo e(asset('modules/bwo/images/instagram_icon.jpg')); ?>" class="social-icon">
+        				</a>
+                <a href="https://twitter.com/share?url=<?php echo e($shareUrl); ?>&text=<?php echo e($title); ?>"
+        					class="share-button"
+        					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+        					 target="_blank" title="Share on Twitter">
+        					<img src="<?php echo e(asset('modules/bwo/images/tw_icon.jpg')); ?>" class="social-icon">
+        				</a>
+                <a href="mailto:?subject=<?php echo e($title); ?>&body=<?php echo e($shareUrl); ?>"
+        					class="mail-button">
+        					<img src="<?php echo e(asset('modules/bwo/images/mail_icon.jpg')); ?>" class="social-icon">
+        				</a>
+
+            </div>
           </div>
           <div class="col-sm-8 col-md-9 description">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus. Aenean vitae justo sed nibh rhoncus semper id ut urna. Proin sodales risus in lacinia ultricies. Quisque consequat purus egesta</p>

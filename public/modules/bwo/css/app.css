@@ -9993,6 +9993,41 @@ header .menus .navbar .navbar-collapse {
   padding-right: 0px;
 }
 
+header .menus .navbar #user-menu {
+  position: absolute;
+  right: -21px;
+  top: 95px;
+  z-index: 100;
+  width: 100vw;
+  background-color: white;
+  text-align: center;
+  padding-right: 25px;
+  overflow: hidden;
+}
+
+@media (min-width: 48em) {
+  header .menus .navbar #user-menu {
+    position: relative;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    width: 390px;
+    padding-right: 0;
+    float: right;
+    text-align: right;
+  }
+}
+
+header .menus .navbar #user-menu li {
+  padding: 10px;
+}
+
+@media (min-width: 48em) {
+  header .menus .navbar #user-menu li {
+    padding: 0;
+  }
+}
+
 header .menus .navbar #user-menu li a.btn {
   padding: 5px 13px;
 }
@@ -10019,11 +10054,32 @@ header .menus .navbar li a {
 }
 
 header .menus .navbar #main-menu {
-  padding-left: 0px;
+  position: absolute;
+  left: -38px;
+  top: 95px;
+  z-index: 100;
+  width: 100vw;
+  background-color: white;
+  text-align: center;
+  padding-left: 28px;
+  overflow: hidden;
+}
+
+@media (min-width: 48em) {
+  header .menus .navbar #main-menu {
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    padding-left: 0;
+    text-align: left;
+  }
 }
 
 header .menus .navbar #main-menu ul {
   padding-left: 0px;
+  max-width: 100%;
 }
 
 header .menus .navbar #main-menu ul li a {
@@ -10814,6 +10870,12 @@ body .offers-container .offer-container .information .reference {
   font-weight: 600;
 }
 
+body .offers-container .offer-container .information .share-container {
+  background-color: white;
+  padding: 25px 5px;
+  text-align: center;
+}
+
 body .offers-container .offer-container .description {
   padding: 5px 30px;
   color: #666666;
@@ -10923,20 +10985,123 @@ body .banner h1 {
   color: #fff;
   float: left;
   font-size: 40px;
-  line-height: 70px;
+  line-height: 50px;
   font-weight: 600;
-  padding: 0 15px;
-  margin: 45px 0 20px 0;
+  padding: 0 7px;
+  margin: 20px 0 20px 0;
 }
 
-body .post-container {
+body .posts-container .post-container {
+  background-color: white;
   padding: 10px;
-  margin-top: -80px;
-}
-
-body .post-container .horizontal-inner-container {
+  margin-top: -130px;
   -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
-  padding: 0;
+  margin-bottom: 20px;
+}
+
+body .posts-container .post-container h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  text-align: center;
+  color: #666666;
+}
+
+body .posts-container .post-container .description {
+  padding: 5px 30px;
+  color: #666666;
+}
+
+body .posts-container .post-container .description img {
+  max-width: 100%;
+}
+
+body .posts-container .post-container .description .first-line {
+  padding: 0px;
+}
+
+body .posts-container .post-container .description .first-line .share-container {
+  float: right;
+}
+
+body .posts-container .post-container .description .first-line .first-info {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 100;
+  text-align: left;
+  color: #666666;
+  margin-bottom: 35px;
+  float: left;
+}
+
+body .posts-container .post-container .description .subtitle {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: 400;
+  margin: 20px 0 10px;
+  color: #d3d1ae;
+}
+
+body .other-posts h3 {
+  padding: 0 34px;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+  color: #666666;
+}
+
+body .other-posts .post-box {
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 41px -8px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+}
+
+@media (min-width: 62em) {
+  body .other-posts .post-box {
+    max-width: 100%;
+  }
+}
+
+body .other-posts .post-box .title {
+  color: #666666;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+body .other-posts .post-box .date {
+  color: #d3d1ae;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  height: 14px;
+}
+
+body .other-posts .post-box .read-more {
+  text-decoration: none;
+  color: #ff0000;
+}
+
+body .other-posts .left-post-container,
+body .other-posts .right-post-container {
+  padding: 10px 15px;
+}
+
+@media (min-width: 62em) {
+  body .other-posts h3 {
+    padding: 0 25px;
+  }
+
+  body .other-posts .left-post-container {
+    padding-left: 5px;
+  }
+
+  body .other-posts .right-post-container {
+    padding-right: 5px;
+  }
 }
 

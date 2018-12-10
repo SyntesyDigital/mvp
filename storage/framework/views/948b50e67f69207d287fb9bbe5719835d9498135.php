@@ -59,6 +59,22 @@
         <script type="text/javascript" src="<?php echo e(asset('modules/bwo/js/app.js')); ?>" ></script>
         <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+        <script>
+
+          $(document).ready(function() {
+              $(document).on("click","#btn-user-menu",function() {
+                $('#main-menu').removeClass('in');
+              });
+
+              $(document).on("click","#btn-main-menu",function() {
+                $('#user-menu').removeClass('in');
+              });
+
+          });
+
+        </script>
+
+
         <?php echo $__env->yieldPushContent('javascripts'); ?>
     </body>
 </html>
