@@ -11,7 +11,7 @@ Route::group([
 ], function()
 {
     // Tags
-    Route::get('/tags', 'Admin\TagController@index')->name('rrhh.admin.tags');
+    Route::get('/offer-tags', 'Admin\TagController@index')->name('rrhh.admin.tags');
     Route::post('/addtags', 'Admin\TagController@store')->name('rrhh.admin.storetag');
     Route::post('/deltag', 'Admin\TagController@delete')->name('rrhh.admin.deltag');
 
