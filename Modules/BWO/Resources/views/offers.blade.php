@@ -11,10 +11,10 @@
       <div class="horizontal-inner-container">
         <form method="get" action="{{route('offers')}}">
           <div class="lightest-gray-search-container">
-            <ul class="breadcrumb">
+            <ol class="breadcrumb">
               <li><a href="{{route('home')}}">ACCUEIL</a></li>
               <li>OFFRES</li>
-            </ul>
+            </ol>
 
             <div class="btn btn-red btn-search" id="btn-search">
               <i class="fa fa-search"></i>RECHERCHER

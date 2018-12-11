@@ -9,12 +9,12 @@
   </div>
   <div class="posts-container">
     <div class="horizontal-inner-container post-container">
-        <ul class="breadcrumb">
+        <ol class="breadcrumb">
           <li><a href="{{route('home')}}">ACCUEIL</a></li>
           <li><a href="{{route('blog')}}">ACTUALITÉS</a></li>
           <li><a href="{{route('blog')}}">CATÉGORUE</a></li>
           <li>TITRE ACTUALITÉ</li>
-        </ul>
+        </ol>
         <h1>TITRE ACTUALITÉ</h1>
 
         <div class="description">

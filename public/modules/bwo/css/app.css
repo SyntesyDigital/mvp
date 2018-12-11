@@ -10173,30 +10173,30 @@ body .banner.banner-small {
   height: 228px;
 }
 
-body ul.breadcrumb {
+body ol.breadcrumb {
   list-style: none;
   background-color: transparent;
   padding: 0px 5px;
 }
 
-body ul.breadcrumb li {
+body ol.breadcrumb li {
   display: inline;
   font-size: 12px;
   line-height: 20px;
   font-weight: 400;
 }
 
-body ul.breadcrumb li a {
+body ol.breadcrumb li a {
   color: #000;
   text-decoration: none;
 }
 
-body ul.breadcrumb li a:hover {
+body ol.breadcrumb li a:hover {
   color: #ff0000;
   text-decoration: none;
 }
 
-body ul.breadcrumb li + li:before {
+body ol.breadcrumb li + li:before {
   padding: 2px;
   color: black;
   content: "/\A0";

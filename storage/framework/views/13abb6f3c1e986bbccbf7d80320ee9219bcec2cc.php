@@ -3,12 +3,12 @@
     </div>
     <div class="offers-container">
       <div class="horizontal-inner-container offer-container">
-          <ul class="breadcrumb">
+          <ol class="breadcrumb">
             <li><a href="<?php echo e(route('home')); ?>">ACCUEIL</a></li>
             <li><a href="<?php echo e(route('offers')); ?>">OFFERS</a></li>
             <li><a href="<?php echo e(route('offers')); ?>">MÉTIER 1</a></li>
             <li>ASSISTANT COMPTABLE H/F</li>
-          </ul>
+          </ol>
           <h1>ASSISTANT COMPTABLE H/F</h1>
           <div class="separator"></div>
           <p class="first-info">Mérignac, Gironde, 33, Bâtiment, Contrat intérimaire - Publié le 14 mai 2018</p>
