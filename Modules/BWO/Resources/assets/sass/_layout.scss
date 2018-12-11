@@ -7,6 +7,7 @@ header{
   padding: 10px 20px 0px;
   .menus{
     width:100%;
+    @include font(14,20,400)
     .navbar-menu-user{
       float:right;
     }
@@ -185,10 +186,7 @@ body {
   background-color: $body-bg;
   color:$brand-black-color;
   position:relative;
-  /* 16px / 24px */
-  font-size: 14px;
-  line-height: 16px;
-
+  @include font(14,20,100);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   letter-spacing:0px;
@@ -207,19 +205,29 @@ body {
        height:228px;
      }
   }
-
+  .share-container{
+    @include font(12,20,100);
+    color:$brand-dark-gray-color;
+    a{
+      margin-left: 0px;
+      &.first-share-btn{
+        margin-left:10px;
+      }
+    }
+  }
 
   /* Display list items side by side */
   ol{
     &.breadcrumb{
       list-style: none;
       background-color: transparent;
-      padding: 0px 5px;
+      padding: 8px 12px;
       li{
         display: inline;
         @include font(12,20,400);
+        color: $brand-dark-gray-color;
         a {
-          color: $brand-black-color;
+          color: $brand-dark-gray-color;
           text-decoration: none;
           &:hover {
             color: $brand-red-color;
@@ -249,9 +257,9 @@ body {
       }
       .round{
         border-radius: 50%;
-        -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
         height: 18px;
         width:18px;
         i{
@@ -264,9 +272,9 @@ body {
     background-color: white;
     padding:10px;
     .horizontal-inner-container{
-      -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-      box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
       padding:20px;
 
     }
@@ -303,7 +311,7 @@ footer{
           }
           a{
             font-size:18px;
-            color:#fff;
+            color:$brand-white-color;
             .fa-facebook{
               background-color:#3b5998;
               padding: 3px 6px 1px;
@@ -320,17 +328,12 @@ footer{
         }
         .footer-copyright{
           font-size:12px;
-          color:$brand-white-color;
-          //position: relative;
-          //right: -75px;
-          //@include mq(xs){
-        //    right: 0;
-        //a  }
+          color:$brand-footer-light-gray-color;
           a{
             text-decoration:none;
-            color:$brand-white-color;
+            color:$brand-footer-light-gray-color;
             &:hover{
-              color:$brand-red-color;
+              color:$brand-white-color;
             }
           }
         }
@@ -344,9 +347,9 @@ footer{
             margin:0 auto;
             a{
               text-decoration:none;
-              color:$brand-white-color;
+              color:$brand-footer-light-gray-color;
               &:hover{
-                color:$brand-red-color;
+                color:$brand-white-color;
               }
             }
           }

@@ -19,6 +19,7 @@ body{
             height: 50px;
             padding-left:30px;
             margin-top:65px;
+            border-radius: 200px;
           }
           .btn{
             &.btn-red{
@@ -49,9 +50,9 @@ body{
     .offer-box{
       padding: 18px 0 0;
       text-align:center;
-      -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-      box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
       margin-bottom:20px;
       .title{
         padding:0 42px;
@@ -128,15 +129,16 @@ body{
       background-size: cover;
       @include mq(md){
         float:right;
-        margin:0 50px 0 0;
+        margin:0 55px 0 0;
       }
     }
   }
 
   .doble-bk-information-container{
+    margin-bottom: -15px;
     @include mq(md){
       background: linear-gradient(90deg, #b6b6b6 50%, #fff 50%);
-
+      margin-bottom:-2px;
       .home-square{
         padding:0 30px 50px;
         &.home-square-gray{
@@ -167,9 +169,13 @@ body{
       }
       .centered{
         margin-top:20px;
-        i{
-          margin-right:10px;
+        .btn{
+          padding:20px 35px;
+          i{
+            margin-right:10px;
+          }
         }
+
       }
     }
     .home-square-white{
@@ -187,9 +193,9 @@ body{
           max-width: 100%;
         }
         padding: 20px;
-        -webkit-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 41px -8px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
         margin-bottom:20px;
 
         .title{
@@ -213,10 +219,15 @@ body{
   }
 }
 .home-square{
-  padding:15px 30px 50px;
+  padding:15px 25px 50px;
+  &.p-l-10{
+    p{
+      padding-left:10px;
+    }
+  }
   p{
     color:$brand-dark-gray-color;
-    @include font(14,16,300);
+    @include font(14,16,300);    
     &.subtitle{
       @include font(16,18,600);
       margin-bottom:20px;

@@ -30,7 +30,7 @@
               @endphp
                Partager:
                <a href="https://www.facebook.com/sharer/sharer.php?u={{$shareUrl}}&t={{$title}}"
-        					class="share-button"
+        					class="share-button first-share-btn"
         					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
         					 target="_blank" title="Share on Facebook">
         					<img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon">
@@ -64,14 +64,14 @@
       </div>
       <div class="other-posts">
         <h3>SUR LE MÊME SUJET</h3>
-        <div class="col-md-6 left-post-container">
+        <div class="col-md-6">
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="{{route('post')}}" class="read-more">Lire la suite</a></p>
           </div>
         </div>
-        <div class="col-md-6 right-post-container">
+        <div class="col-md-6">
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>

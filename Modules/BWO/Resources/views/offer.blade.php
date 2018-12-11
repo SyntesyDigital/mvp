@@ -45,7 +45,7 @@
               @endphp
                Partager:
                <a href="https://www.facebook.com/sharer/sharer.php?u={{$shareUrl}}&t={{$title}}"
-        					class="share-button"
+        					class="share-button first-share-btn"
         					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
         					 target="_blank" title="Share on Facebook">
         					<img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon">

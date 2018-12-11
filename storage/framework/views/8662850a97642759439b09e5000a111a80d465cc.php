@@ -7,10 +7,10 @@
     </div>
     <div class="offers-container">
       <div class="horizontal-inner-container blog-container">
-        <ul class="breadcrumb">
+        <ol class="breadcrumb">
           <li><a href="<?php echo e(route('home')); ?>">ACCUEIL</a></li>
           <li>ACTUALITÉS</li>
-        </ul>
+        </ol>
         <div class="categories-container">
           <h3>CATÉGORIES</h3>
           <a class="btn btn-soft-gray">CATÉGORIE</a>

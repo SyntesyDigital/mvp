@@ -7,12 +7,12 @@
   </div>
   <div class="posts-container">
     <div class="horizontal-inner-container post-container">
-        <ul class="breadcrumb">
+        <ol class="breadcrumb">
           <li><a href="<?php echo e(route('home')); ?>">ACCUEIL</a></li>
           <li><a href="<?php echo e(route('blog')); ?>">ACTUALITÉS</a></li>
           <li><a href="<?php echo e(route('blog')); ?>">CATÉGORUE</a></li>
           <li>TITRE ACTUALITÉ</li>
-        </ul>
+        </ol>
         <h1>TITRE ACTUALITÉ</h1>
 
         <div class="description">
@@ -28,7 +28,7 @@
               ?>
                Partager:
                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo e($shareUrl); ?>&t=<?php echo e($title); ?>"
-        					class="share-button"
+        					class="share-button first-share-btn"
         					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
         					 target="_blank" title="Share on Facebook">
         					<img src="<?php echo e(asset('modules/bwo/images/fb_icon.jpg')); ?>" class="social-icon">
@@ -43,8 +43,8 @@
         					 target="_blank" title="Share on Twitter">
         					<img src="<?php echo e(asset('modules/bwo/images/tw_icon.jpg')); ?>" class="social-icon">
         				</a>
-                <a href=""
-        					class="share-button">
+                <a href="mailto:?subject=<?php echo e($title); ?>&body=<?php echo e($shareUrl); ?>"
+        					class="mail-button">
         					<img src="<?php echo e(asset('modules/bwo/images/mail_icon.jpg')); ?>" class="social-icon">
         				</a>
 
@@ -62,14 +62,14 @@
       </div>
       <div class="other-posts">
         <h3>SUR LE MÊME SUJET</h3>
-        <div class="col-md-6 left-post-container">
+        <div class="col-md-6">
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="<?php echo e(route('post')); ?>" class="read-more">Lire la suite</a></p>
           </div>
         </div>
-        <div class="col-md-6 right-post-container">
+        <div class="col-md-6">
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>

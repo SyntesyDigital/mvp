@@ -1,7 +1,7 @@
 <div class="three-offers-container">
   <div class="horizontal-inner-container">
     <h2>CES OFFRES POURRAIENT VOUS INTÉRESSER</h2>
-      <div class="col-md-4 offer-box-left">
+      <div class="col-md-4 ">
         <div class="offer-box">
             <div class="title">
               Assistant comptable H/F
@@ -14,7 +14,7 @@
             <a href="<?php echo e(route('offer')); ?>" class="detail" >DÉTAIL DE L'OFFRE</a>
         </div>
       </div>
-      <div class="col-md-4 offer-box-center">
+      <div class="col-md-4 ">
         <div class="offer-box">
             <div class="title">
               Assistant comptable H/F
@@ -27,7 +27,7 @@
             <a href="<?php echo e(route('offer')); ?>" class="detail" >DÉTAIL DE L'OFFRE</a>
         </div>
       </div>
-      <div class="col-md-4 offer-box-right">
+      <div class="col-md-4 ">
         <div class="offer-box">
             <div class="title">
               Assistant comptable H/F

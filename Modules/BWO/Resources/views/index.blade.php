@@ -79,7 +79,7 @@
           <div class="img-bwo" style="background-image:url('{{asset('modules/bwo/images/home-bwo.jpg')}}')"></div>
 
         </div>
-        <div class="col-md-6 home-square">
+        <div class="col-md-6 home-square p-l-10">
           <h2 class="gray-square-text">VOTRE AGENCE D'EMPLOI TERTIAIRE À PARIS</h2>
           <p class=subtitle>Conseil en recrutement intérim, CDD, CDI depuis 1968</p>
           <p>Bienvenue sur le site BWO. Installée à Paris 12e, notre agence pour l'emploi est spécialisée dans les offres du secteur tertiare. Assistanat, secrétariat, comptabilité, contrôle de gestion... nos offres d'emploi concernent aussi bien des missions d'intérim que des recrutements en CDD et CDI sur Paris (75) et la petite couronne (92, 93 et 94).</p>
@@ -103,7 +103,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="{{route('post')}}" class="read-more">Lire la suite</a></p>
             </div>
           </div>
-          <div class="col-md-6 home-square home-square-gray">
+          <div class="col-md-6 home-square home-square-gray p-l-10">
             <h2 class="gray-square-text">CANDIDATURE SPONTANÉE</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor. Pellentesque bibendum eget lorem quis placerat. Suspendisse vestibulum sapien nibh, et lobortis libero laoreet nec. Ut eget ex ante. Mauris cursus nibh ac augue tincidunt, nec ultrices elit ullamcorper. Aenean in metus nunc. Vestibulum ac auctor dolor, sit amet lacinia orci. Proin at est velit.</p>
             <div class="centered">

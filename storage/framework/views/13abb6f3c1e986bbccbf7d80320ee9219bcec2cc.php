@@ -43,7 +43,7 @@
               ?>
                Partager:
                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo e($shareUrl); ?>&t=<?php echo e($title); ?>"
-        					class="share-button"
+        					class="share-button first-share-btn"
         					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
         					 target="_blank" title="Share on Facebook">
         					<img src="<?php echo e(asset('modules/bwo/images/fb_icon.jpg')); ?>" class="social-icon">
