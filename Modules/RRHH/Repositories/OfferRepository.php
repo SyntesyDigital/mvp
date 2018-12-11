@@ -90,14 +90,14 @@ class OfferRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 $html = '';
 
-                if (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('recruiter') && $item->recipient_id == Auth::user()->id)) {
-                    $html .= '<a href="'.route('rrhh.admin.offers.delete', $item).'" data-ajax="'.route('rrhh.admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-sm btn-danger" >Supprimer</a>';
+                if ($item->applications()->count()) {
+                    $html .= '<a href="'.route('rrhh.admin.offer.applications.show', $item).'" class="btn btn-sm btn-primary"><i class="fa fa-address-card"></i> Candidatures</a>';
                 }
 
-                $html .= '<a href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-sm btn-success">Voir</a>';
+                $html .= '&nbsp; <a href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> Voir</a>';
 
-                if ($item->applications()->count()) {
-                    $html .= '<a href="'.route('rrhh.admin.offer.applications.show', $item).'" class="btn btn-sm btn-primary">Candidatures</a>';
+                if (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('recruiter') && $item->recipient_id == Auth::user()->id)) {
+                    $html .= '&nbsp; <a href="'.route('rrhh.admin.offers.delete', $item).'" data-ajax="'.route('rrhh.admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-link text-danger" ><i class="fa fa-trash"></i> Supprimer</a>';
                 }
 
                 return $html;

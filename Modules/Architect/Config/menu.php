@@ -15,6 +15,7 @@ return [
         'name' => 'architect::plugins.topbar.menu'
     ],
 
+    /*
     [
         "route" => 'typologies',
         "label" => Lang::get('architect::header.typology'),
@@ -25,6 +26,7 @@ return [
             'admin'
         ]
     ],
+    */
 
     [
         "route" => 'contents',
