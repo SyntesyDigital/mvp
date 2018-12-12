@@ -36,4 +36,13 @@ class BWOController extends Controller
     {
         return view('bwo::post');
     }
+
+    public function candidate()
+    {
+        return view('bwo::candidate');
+    }
+    public function candidateForm()
+    {
+        return view('bwo::candidateform');
+    }
 }

@@ -7,4 +7,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\BWO\Http\Controller
     Route::get('/offer', 'BWOController@offer')->name('offer');
     Route::get('/blog', 'BWOController@blog')->name('blog');
     Route::get('/post', 'BWOController@post')->name('post');
+    Route::get('/candidate', 'BWOController@candidate')->name('candidate');
+    Route::get('/candidate/information', 'BWOController@candidateForm')->name('candidate.form');
+
 });

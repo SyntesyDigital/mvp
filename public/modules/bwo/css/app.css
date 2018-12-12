@@ -10275,6 +10275,114 @@ body .offers-3-container h2 {
   margin-bottom: 25px;
 }
 
+body .three-colors-separator {
+  width: 291px;
+  margin: 0 auto;
+}
+
+body .three-colors-separator .separator-piece {
+  height: 6px;
+  display: inline-block;
+  margin-right: -3px;
+}
+
+body .three-colors-separator .separator-piece.dark-gray {
+  background-color: #666666;
+  width: 153px;
+}
+
+body .three-colors-separator .separator-piece.soft-gray {
+  background-color: #d3d1ae;
+  width: 109px;
+}
+
+body .three-colors-separator .separator-piece.red {
+  background-color: #ff0000;
+  width: 30px;
+}
+
+body .three-offers-container {
+  padding: 50px 15px 30px;
+}
+
+body .three-offers-container .offer-box {
+  padding: 18px 0 0;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+body .three-offers-container .offer-box .title {
+  padding: 0 42px;
+  color: #666666;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  height: 42px;
+  margin-bottom: 10px;
+}
+
+body .three-offers-container .offer-box p {
+  color: #d3d1ae;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  margin-bottom: 15px;
+  height: 14px;
+}
+
+body .three-offers-container .offer-box .buttons {
+  margin-bottom: 20px;
+}
+
+body .three-offers-container .offer-box .buttons a.btn {
+  padding: 6px 28px;
+}
+
+body .three-offers-container .offer-box .detail {
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+  background-color: #666666;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body .three-offers-container .offer-box .detail:hover {
+  background-color: #ff0000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+body .three-offers-container .offer-box-right,
+body .three-offers-container .offer-box-center,
+body .three-offers-container .offer-box-left {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+@media (min-width: 62em) {
+  body .three-offers-container .offer-box-right {
+    padding: 5px 0 5px 33px;
+  }
+
+  body .three-offers-container .offer-box-center {
+    padding: 5px 17px 5px 17px;
+  }
+
+  body .three-offers-container .offer-box-left {
+    padding: 5px 33px 5px 0;
+  }
+
+  body .three-offers-container .offer-box {
+    height: 195px;
+  }
+}
+
 footer {
   padding: 25px 15px;
   background-color: #666666;
@@ -10444,88 +10552,6 @@ body h2.gray-square-text {
   line-height: 30px;
   font-weight: 500;
   padding: 5px 10px;
-}
-
-body .three-offers-container {
-  padding: 50px 15px 30px;
-}
-
-body .three-offers-container .offer-box {
-  padding: 18px 0 0;
-  text-align: center;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-}
-
-body .three-offers-container .offer-box .title {
-  padding: 0 42px;
-  color: #666666;
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: 600;
-  height: 42px;
-  margin-bottom: 10px;
-}
-
-body .three-offers-container .offer-box p {
-  color: #d3d1ae;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 300;
-  margin-bottom: 15px;
-  height: 14px;
-}
-
-body .three-offers-container .offer-box .buttons {
-  margin-bottom: 20px;
-}
-
-body .three-offers-container .offer-box .buttons a.btn {
-  padding: 6px 28px;
-}
-
-body .three-offers-container .offer-box .detail {
-  width: 100%;
-  padding: 15px;
-  color: #fff;
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: 600;
-  background-color: #666666;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-body .three-offers-container .offer-box .detail:hover {
-  background-color: #ff0000;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-body .three-offers-container .offer-box-right,
-body .three-offers-container .offer-box-center,
-body .three-offers-container .offer-box-left {
-  max-width: 350px;
-  margin: 0 auto;
-}
-
-@media (min-width: 62em) {
-  body .three-offers-container .offer-box-right {
-    padding: 5px 0 5px 33px;
-  }
-
-  body .three-offers-container .offer-box-center {
-    padding: 5px 17px 5px 17px;
-  }
-
-  body .three-offers-container .offer-box-left {
-    padding: 5px 33px 5px 0;
-  }
-
-  body .three-offers-container .offer-box {
-    height: 195px;
-  }
 }
 
 body .gray-information-container {
@@ -11177,5 +11203,124 @@ body .other-posts .right-post-container {
   body .other-posts .right-post-container {
     padding-right: 5px;
   }
+}
+
+body .banner h1 {
+  background-color: #666666;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 70px;
+  font-weight: 600;
+  padding: 0 15px;
+  margin: 45px 0 20px 0;
+}
+
+body .candidate-container {
+  padding: 10px;
+  margin-top: -100px;
+  margin-bottom: 35px;
+}
+
+body .candidate-container .horizontal-inner-container {
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  background-color: #fff;
+}
+
+body .candidate-container .horizontal-inner-container .information-container {
+  min-height: 190px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+body .candidate-container .horizontal-inner-container .information-container .image {
+  height: 141px;
+  width: 140px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+body .candidate-container .horizontal-inner-container .information-container .information {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #666666;
+  text-align: center;
+}
+
+@media (min-width: 62em) {
+  body .candidate-container .horizontal-inner-container .information-container .information {
+    text-align: left;
+  }
+}
+
+body .candidate-container .horizontal-inner-container .information-container .information p {
+  margin-bottom: 0;
+}
+
+body .candidate-container .horizontal-inner-container .information-container .information .name {
+  margin-top: 15px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+body .candidate-container .horizontal-inner-container .information-container .information .btn-soft-gray {
+  margin-top: 5px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list {
+  padding: 20px 15px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list .candidate-box {
+  padding: 30px 0 0;
+  height: 190px;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list .candidate-box i {
+  color: #d2d1ad;
+  font-size: 50px;
+  line-height: 55px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list .candidate-box .btn {
+  padding: 18px 28px;
+}
+
+body .candidate-container .horizontal-inner-container form label {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #666666;
+}
+
+body .candidate-container .horizontal-inner-container form input {
+  border-radius: 200px;
+}
+
+body .candidate-container .horizontal-inner-container .btn-red-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+body .candidate-container .horizontal-inner-container .btn-red-container .btn-red {
+  padding: 15px 28px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+body .offers-3-container.candidate-page .three-offers-container {
+  padding: 30px 15px 30px;
 }
 
