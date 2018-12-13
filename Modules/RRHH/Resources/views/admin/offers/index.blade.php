@@ -51,10 +51,7 @@
     <!-- Datatables -->
     {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
-
-    <!-- Toastr -->
-    {{ Html::style('/modules/rrhh/plugins/toastr/toastr.min.css') }}
-    {{ Html::script('/modules/rrhh/plugins/toastr/toastr.min.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
 @endpush
 
 @push('javascripts')
@@ -66,6 +63,5 @@ var routes = {
 };
 </script>
 
-{{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
 {{ Html::script('/modules/rrhh/js/admin/offers/index.js')}}
 @endpush

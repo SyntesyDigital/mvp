@@ -2,39 +2,39 @@
 
 namespace Modules\RRHH\Jobs\Customer;
 
-use Modules\RRHH\Http\Requests\Customer\CustomerRequest;
+use Modules\RRHH\Http\Requests\Admin\Customers\CreateCustomerRequest;
+
 use Modules\RRHH\Entities\Customer;
+use Modules\RRHH\Entities\CustomerField;
+
+use Modules\RRHH\Traits\FormFields;
 
 class CreateCustomer
 {
-    public function __construct(
-        array $attributes = [])
+    use FormFields;
+
+    public function __construct(array $attributes = [])
     {
-        $this->attributes = array_only($attributes, [
-            'name',
-            'contact_firstname',
-            'contact_lastname',
-            'phone',
-            'email',
-            'address',
-            'postal_code',
-            'location',
-        ]);
+        $this->fields = $this->getFields(config('customers.form'));
+        $this->attributes = array_only($attributes, $this->fields);
     }
 
-    public static function fromRequest(CustomerRequest $request)
+    public static function fromRequest(CreateCustomerRequest $request)
     {
         return new self($request->all());
     }
 
+
     public function handle()
     {
-        $customer = new Customer($this->attributes);
+        $customer = Customer::create([
+            'status' => isset($this->attributes['status']) ? $this->attributes['status'] : Customer::STATUS_ACTIVE,
+        ]);
 
-        if ($customer->save()) {
-            return $customer;
+        if($customer) {
+            $this->saveFields($customer);
         }
 
-        return false;
+        return $customer;
     }
 }

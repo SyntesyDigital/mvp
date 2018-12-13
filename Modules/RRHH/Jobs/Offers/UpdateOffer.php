@@ -7,12 +7,11 @@ use Modules\RRHH\Entities\Offers\Offer;
 use Modules\RRHH\Entities\Offers\OfferField;
 use Carbon\Carbon;
 use Config;
-use Modules\RRHH\Traits\OfferFields;
+use Modules\RRHH\Traits\FormFields;
 
 class UpdateOffer
 {
-
-    use OfferFields;
+    use FormFields;
 
     public function __construct(Offer $offer, array $attributes = [])
     {

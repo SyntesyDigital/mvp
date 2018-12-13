@@ -9,12 +9,18 @@ use Cache;
 use Geocoder\Geocoder;
 use Illuminate\Database\Eloquent\Model;
 
+use Modules\RRHH\Traits\FormFieldsEntity;
+
 class Offer extends Model
 {
     use DatePresenter;
+    use FormFieldsEntity;
 
     const STATUS_ACTIVE = 'ACTIVE';
     const STATUS_UNACTIVE = 'UNACTIVE';
+
+    public $fieldModel = 'Modules\RRHH\Entities\Offers\OfferField';
+    public $fieldKey = 'offer_id';
 
     /**
      * The database table used by the model.
@@ -55,10 +61,6 @@ class Offer extends Model
         return $this->hasOne('Modules\RRHH\Entities\Agence', 'id', 'agence_id');
     }
 
-    public function fields()
-    {
-        return $this->hasMany('Modules\RRHH\Entities\Offers\OfferField');
-    }
 
     public function tags()
     {
@@ -83,34 +85,6 @@ class Offer extends Model
     public function customer_contact()
     {
         return $this->belongsTo('Modules\RRHH\Entities\CustomerContact', 'customer_contact_id');
-    }
-
-    public function getField($key)
-    {
-        $attr = $this->fields->where('name', $key);
-
-        if ($attr->count() > 1) {
-            return $attr->map(function ($field, $key) {
-                return $field->value;
-            })->toArray();
-        }
-
-        return isset($attr->first()->value) ? $attr->first()->value : null;
-    }
-
-    public static function whereField($name, $value)
-    {
-        return self::whereHas('fields', function ($q) use ($name, $value) {
-            $q->where('name', $name);
-            $q->where('value', 'like', $value);
-        });
-    }
-
-    public function __get($key)
-    {
-        $value = parent::__get($key);
-
-        return null === $value ? $this->getField($key) : $value;
     }
 
     public static function getStatus()

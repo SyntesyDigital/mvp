@@ -6,11 +6,11 @@ use Modules\RRHH\Http\Requests\Admin\Offers\CreateOfferRequest;
 use Modules\RRHH\Entities\Offers\Offer;
 use Modules\RRHH\Entities\Offers\OfferField;
 use Config;
-use Modules\RRHH\Traits\OfferFields;
+use Modules\RRHH\Traits\FormFields;
 
 class CreateOffer
 {
-    use OfferFields;
+    use FormFields;
 
     public function __construct($attributes)
     {
