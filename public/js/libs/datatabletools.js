@@ -13,11 +13,10 @@ var DataTableTools = {
             self._delete(instance, $(this));
         });*/
 
-        $(document).on('click',instanceId+' [data-toogle="delete"]',function(e){
-         e.preventDefault();
-         var button = $(e.target).closest('[data-toogle="delete"]');
-         self._delete(instance, button);
-       });
+        $(document).on('click', instanceId + ' [data-toogle="delete"]',function(e){
+            e.preventDefault();
+            self._delete(instance, $(e.target).closest('[data-toogle="delete"]'));
+        });
 
 
         $(instance).find('[data-toogle="save-onchange"]').each(function(k,v){
@@ -121,42 +120,41 @@ var DataTableTools = {
      */
     _delete: function(instance, el)
     {
+        var ajax = el.data('ajax');
+        var redirect = el.data('redirect');
+        var confirmMessage = el.data('confirm-message');
 
-                var ajax = el.data('ajax');
-                var redirect = el.data('redirect');
-                var confirmMessage = el.data('confirm-message');
+        dialog.confirm(confirmMessage, function(result){
+            if(result) {
 
-                dialog.confirm(confirmMessage, function(result){
-                    if(result) {
+                if(redirect) {
+                    window.location = redirect;
+                    return;
+                }
 
-                        if(redirect) {
-                            window.location = redirect;
-                            return;
+                if(ajax) {
+                    $.ajax({
+                        method: 'DELETE',
+                        url: ajax,
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
                         }
-
-                        if(ajax) {
-                            $.ajax({
-                                method: 'DELETE',
-                                url: ajax,
-                                data: {
-                                    _token: $('meta[name="csrf-token"]').attr('content'),
-                                }
-                            })
-                            .done(function(response) {
-                                if(response.success) {
-                                    $(instance).DataTable().ajax.reload();
-                                    toastr.success(response.message, 'Succès !', {timeOut: 3000});
-                                } else {
-                                    toastr.error(response.message, 'Erreur !', {timeOut: 3000});
-                                }
-                            }).fail(function(response){
-                                toastr.error(response.message, 'Erreur !', {timeOut: 3000});
-                            });
-                            return;
+                    })
+                    .done(function(response) {
+                        if(response.success) {
+                            $(instance).DataTable().ajax.reload();
+                            toastr.success(response.message, 'Succès !', {timeOut: 3000});
+                        } else {
+                            toastr.error(response.message, 'Erreur !', {timeOut: 3000});
                         }
+                    }).fail(function(response){
+                        toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                    });
+                    return;
+                }
 
-                    }
-                });
+            }
+        });
     }
 
 }

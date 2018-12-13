@@ -52,6 +52,9 @@
 
     <?php echo e(Html::script('/modules/rrhh/plugins/toastr/toastr.min.js')); ?>
 
+
+    <!-- Dialog -->
+    <script src="<?php echo e(asset('/modules/rrhh/js/libs/dialog.js')); ?>"></script>
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('javascripts'); ?>
