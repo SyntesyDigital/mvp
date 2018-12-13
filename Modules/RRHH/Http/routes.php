@@ -11,13 +11,13 @@ Route::group([
 ], function()
 {
     // Tags
-    Route::get('/tags', 'Admin\TagController@index')->name('rrhh.admin.tags.index');
-    Route::get('/tags/data', 'Admin\TagController@data')->name('rrhh.admin.tags.data');
-    Route::get('/tags/create', 'Admin\TagController@create')->name('rrhh.admin.tags.create');
-    Route::post('/tags/store', 'Admin\TagController@store')->name('rrhh.admin.tags.store');
-    Route::get('/tags/{tag?}', 'Admin\TagController@show')->name('rrhh.admin.tags.show');
-    Route::put('/tags/{tag?}/update', 'Admin\TagController@update')->name('rrhh.admin.tags.update');
-    Route::delete('/tags/{tag?}/delete', 'Admin\TagController@delete')->name('rrhh.admin.tags.delete');
+    Route::get('/offer-tags', 'Admin\TagController@index')->name('rrhh.admin.tags.index');
+    Route::get('/offer-tags/data', 'Admin\TagController@data')->name('rrhh.admin.tags.data');
+    Route::get('/offer-tags/create', 'Admin\TagController@create')->name('rrhh.admin.tags.create');
+    Route::post('/offer-tags/store', 'Admin\TagController@store')->name('rrhh.admin.tags.store');
+    Route::get('/offer-tags/{tag?}', 'Admin\TagController@show')->name('rrhh.admin.tags.show');
+    Route::put('/offer-tags/{tag?}/update', 'Admin\TagController@update')->name('rrhh.admin.tags.update');
+    Route::delete('/offer-tags/{tag?}/delete', 'Admin\TagController@delete')->name('rrhh.admin.tags.delete');
     // Route::post('/addtags', 'Admin\TagController@store')->name('rrhh.admin.storetag');
     // Route::post('/deltag', 'Admin\TagController@delete')->name('rrhh.admin.deltag');
 

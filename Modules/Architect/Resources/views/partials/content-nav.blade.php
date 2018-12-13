@@ -22,6 +22,7 @@
     <li class="{{ Request::is('architect/categories*') ? 'active' : '' }}">
       <a href="{{route('categories')}}"> <i class="fa fa-list"></i> <span class="text">{{Lang::get('architect::category.categories')}}</span> </a>
     </li>
+
     <li class="{{ Request::is('architect/tags*') ? 'active' : '' }}">
       <a href="{{route('tags')}}"> <i class="fa fa-tag"></i> <span class="text">{{Lang::get('architect::fields.tags')}}</span> </a>
     </li>
