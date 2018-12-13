@@ -1,4 +1,19 @@
-@extends('bwo::layouts.master')
+@php
+	$metaDescription = strip_tags(str_replace('&#39;', '\'', $offer->description));
+	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
+	$metaDescription = trim(substr(strip_tags($metaDescription), 0, 180));
+	$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
+@endphp
+
+@extends('bwo::layouts.master', [
+	'socialTitle' => $offer->title,
+	'htmlTitle' => $offer->title,
+	'pageTitle' => $offer->title,
+	'headerDescription' => $offer->address,
+	'metaDescription' => $metaDescription,
+	'socialDescription' => $metaDescription,
+	'headerDate' => $offer->start_at
+])
 
 @section('content')
     <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
@@ -7,8 +22,8 @@
       <div class="horizontal-inner-container offer-container">
           <ol class="breadcrumb">
             <li><a href="{{route('home')}}">ACCUEIL</a></li>
-            <li><a href="{{route('offers')}}">OFFERS</a></li>
-            <li><a href="{{route('offers')}}">MÉTIER 1</a></li>
+            <li><a href="{{route('search')}}">OFFERS</a></li>
+            <li><a href="{{route('search')}}">MÉTIER 1</a></li>
             <li>ASSISTANT COMPTABLE H/F</li>
           </ol>
           <h1>ASSISTANT COMPTABLE H/F</h1>
@@ -39,10 +54,11 @@
             <div class="reference">REF : LEG1 | 20/11/2018</div>
             <div class="share-container">
               @php
-                $shareUrl = '';
-                $title = '';
-                $description =  '';
-              @endphp
+      					$shareUrl = urlencode(Request::url());
+      					$title = isset( $offer->title ) ?  $offer->title : '';
+      					$description = isset( $offer->description ) ?  $offer->description : '';
+      				@endphp
+
                Partager:
                <a href="https://www.facebook.com/sharer/sharer.php?u={{$shareUrl}}&t={{$title}}"
         					class="share-button first-share-btn"
@@ -88,7 +104,22 @@
           </div>
           <br clear="all">
           <div class="btn-red-container">
-            <div class="btn btn-red"><i class="fa fa-file-text-o"></i> POSTULER</div>
+
+            @if(Auth::check() && !Auth::user()->hasRole(['admin', 'recruiter']))
+                @if($offer->hasAlreadyCandidate())
+                  <a id="{{$offer->id}}"  class="btn btn-red unactivated">
+                    <i class="fa fa-check"></i> Déjà postulé
+                  </a>
+                @else
+                  <a id="{{$offer->id}}"  class="btn btn-red application-btn">
+                    <i class="fa fa-file-text-o"></i> POSTULER
+                  </a>
+                @endif
+            @else
+                <a id="{{$offer->id}}"  class="btn btn-red application-btn">
+                  <i class="fa fa-file-text-o"></i> POSTULER
+                </a>
+            @endif
           </div>
       </div>
     </div>
@@ -102,28 +133,6 @@
 	<script>
 
     $(document).ready(function() {
-        $(document).on("click","#btn-more",function() {
-          $(this).hide();
-          $('#btn-less').show();
-          $('.light-gray-search-container').show();
-        });
-
-        $(document).on("click","#btn-less",function() {
-          $(this).hide();
-          $('#btn-more').show();
-          $('.light-gray-search-container').hide();
-        });
-        $(document).ready(function() {
-            $(document).on("click",".btn-search",function() {
-              $(this).closest('form').submit();
-            });
-        });
-        $(document).ready(function() {
-            $(document).on("click","#btn-filtres",function() {
-              $(this).closest('form').submit();
-            });
-        });
-
 
     });
 

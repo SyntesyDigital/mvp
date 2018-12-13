@@ -3,5 +3,5 @@
 return [
     'list' => 'Listes',
     'emailstemplates' => 'Modèles d\'e-mails',
-    'massmail' => 'Envoyer un email de masse'
+    'massmail' => 'Envoyer un email de masse',
 ];

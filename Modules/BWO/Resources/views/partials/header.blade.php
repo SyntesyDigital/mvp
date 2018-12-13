@@ -15,10 +15,12 @@
 						<div id="user-menu" class="collapse navbar-collapse js-navbar-collapse">
 									<ul class="navbar-nav mr-auto">
 										<li class="nav-item">
-											<a class="nav-link btn btn-soft-gray" href="#">Espace Candidat <span class="sr-only">(current)</span></a>
+											<a class="nav-link btn btn-soft-gray application-btn" href="#">Espace Candidat
+												<span class="sr-only">(current)</span>
+											</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link btn btn-dark-gray" href="#">Espace Enterprise</a>
+											<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Enterprise</a>
 										</li>
 									</ul>
 						</div><!-- /.nav-collapse -->
