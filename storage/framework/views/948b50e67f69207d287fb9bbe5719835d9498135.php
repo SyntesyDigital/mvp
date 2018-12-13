@@ -8,11 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
 
-        <title>HOME</title>
-        <meta name="keywords" lang="rn" content="" />
-        <meta name="description" lang="en" content="" />
-        <meta name="abstract" content="" />
-  	    <meta name="author" content="" />
+        <title><?php echo isset($htmlTitle) ? $htmlTitle : 'BWO Interim'; ?></title>
+        <meta name="description" content="<?php echo isset($metaDescription) ? $metaDescription : ''; ?>">
+        <meta property="og:url" content="<?php echo e(Request::url()); ?>" />
+        <meta property="og:title" content="<?php echo isset($htmlTitle) ? $htmlTitle : 'Menco RH'; ?>"/>
+        <meta property="og:description" content="<?php echo isset($socialDescription) ? $socialDescription : ''; ?>"/>
+        <meta property="og:image" content="<?php echo isset($socialImage) ? $socialImage : asset('images/header-logo.jpg'); ?>"/>
+        <meta property="og:type" content="website"/>
         <meta name="robots" content="noindex,nofollow">
 
         <!-- twitter -->
@@ -22,15 +24,10 @@
     		<meta name="twitter:title" content=""/>
     		<meta name="twitter:description" content=""/>
 
-        <!-- facebook -->
-    		<meta property="og:url" content="" />
-    		<meta property="og:image" content="" />
-    		<meta property="og:title" content=""/>
-    		<meta property="og:description" content=""/>
-    		<meta property="og:type" content="website"/>
 
         <link href="<?php echo e(asset('modules/bwo/css/app.css')); ?>" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" media="all" href="<?php echo e(asset('modules/bwo/css/font-awesome/css/font-awesome.min.css')); ?>" />
+        <link rel="stylesheet" media="all" href="<?php echo e(asset('modules/bwo/fonts/iconmoon/iconmoon.css')); ?>" />
 
 
         <?php echo $__env->yieldPushContent('styles'); ?>
@@ -38,6 +35,9 @@
     </head>
 
     <body class="<?php echo e(isset($mainClass) ? $mainClass : ''); ?>">
+
+
+        <?php echo $__env->make('bwo::partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
         <?php echo $__env->yieldPushContent('modal'); ?>
 
@@ -51,13 +51,19 @@
           const WEBROOT = '<?php echo e(route("home")); ?>';
           const ASSETS = '<?php echo e(asset('')); ?>';
           const LOCALE = '<?php echo e(App::getLocale()); ?>';
+          const app = {};
+          var csrf_token = "<?php echo e(csrf_token()); ?>";
+          var civility_default = "<?php echo e(Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE); ?>"
         </script>
+
+
+        <!-- Select2 -->
 
         <?php echo $__env->yieldPushContent('javascripts-libs'); ?>
 
-
         <script type="text/javascript" src="<?php echo e(asset('modules/bwo/js/app.js')); ?>" ></script>
-        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
         <script>
 
@@ -68,6 +74,16 @@
 
               $(document).on("click","#btn-main-menu",function() {
                 $('#user-menu').removeClass('in');
+              });
+
+              $(".application-btn").on('click',function(e){
+                  app.offerapplications.init(
+                    "<?php echo e(Auth::check() ? Auth::user()->id : 0); ?>",
+                    this.id,
+                    "<?php echo e(Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : ''); ?>"
+                  );
+                  app.offerapplications.open();
+
               });
 
           });
