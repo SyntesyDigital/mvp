@@ -21,7 +21,9 @@ class UserRepository extends BaseRepository
         $users = User::select([
             'users.*',
             DB::raw("CONCAT(users.firstname,' ',users.lastname) as full_name"),
-        ]);
+        ])->whereHas('roles', function ($q) {
+            $q->whereIn('name', config('architect::settings.users.only_display'));
+        });
 
         return Datatables::of($users)
             ->addColumn('name', function ($item) {
