@@ -3,7 +3,8 @@
 namespace Modules\RRHH\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Modules\RRHH\Http\Requests\Customer\CustomerRequest;
+use Modules\RRHH\Http\Requests\Admin\Customers\CreateCustomerRequest;
+use Modules\RRHH\Http\Requests\Admin\Customers\UpdateCustomerRequest;
 use Modules\RRHH\Jobs\Customer\CreateCustomer;
 use Modules\RRHH\Jobs\Customer\DeleteCustomer;
 use Modules\RRHH\Jobs\Customer\UpdateCustomer;
@@ -45,12 +46,11 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function store(CustomerRequest $request)
+    public function store(CreateCustomerRequest $request)
     {
         try {
             $customer = $this->dispatchNow(CreateCustomer::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectuée avec succès');
-
             return redirect()->route('rrhh.admin.customers.show', $customer);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());

@@ -2,23 +2,15 @@
 
 namespace Modules\RRHH\Jobs\Customer;
 
-use Modules\RRHH\Http\Requests\Customer\CustomerRequest;
+use Modules\RRHH\Http\Requests\Admin\Customers\UpdateCustomerRequest;
 use Modules\RRHH\Entities\Customer;
 
 class UpdateCustomer
 {
     public function __construct(Customer $customer, array $attributes = [])
     {
-        $this->attributes = array_only($attributes, [
-            'name',
-            'contact_firstname',
-            'contact_lastname',
-            'phone',
-            'email',
-            'address',
-            'postal_code',
-            'location',
-        ]);
+        $this->fields = $this->getFields(config('customers.form'));
+        $this->attributes = array_only($attributes, $this->fields);
         $this->customer = $customer;
     }
 
@@ -29,6 +21,9 @@ class UpdateCustomer
 
     public function handle()
     {
-        return $this->customer->update($this->attributes) ? $this->customer : false;
+        $this->customer->update($this->attributes);
+        $this->saveFields($this->customer);
+
+        return true;
     }
 }

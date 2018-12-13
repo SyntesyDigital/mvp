@@ -8,7 +8,6 @@ return [
         "patterns" => [
             'architect/offers*',
             'architect/candidates*',
-            'architect/customers*',
             'architect/tags*'
         ],
         "roles" => []
