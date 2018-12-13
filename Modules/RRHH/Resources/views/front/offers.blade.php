@@ -60,7 +60,7 @@
 					@if($offer->salary)
 					<div class="detail-description">
 						<p>Salaire:</p>
-						<p>{{ App\Models\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
+						<p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
 					</div>
 					@endif
 
@@ -68,7 +68,7 @@
 					<div class="detail-description" >
 						<p>Horaires:</p>
 						@php
-							$values = App\Models\Tools\SiteList::getListValue($offer->schedule, 'schedule');
+							$values = Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->schedule, 'schedule');
 						@endphp
 
 						@if(is_array($values))
@@ -121,8 +121,8 @@
 						<div class="offer-box" style="background-image:url('{{asset('images/offer-bk.jpg')}}')">
 							<h4>{{ $o->title }}</h4>
 							<p><i class="fa fa-map-marker"></i>{{ $o->address }}</p>
-							<p><i class="fa fa-star"></i> {{ App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</p>
-							<p><i class="fa fa-file-o"></i> {{ App\Models\Tools\SiteList::getListValue($o->contract, 'contracts') }}</p>
+							<p><i class="fa fa-star"></i> {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</p>
+							<p><i class="fa fa-file-o"></i> {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->contract, 'contracts') }}</p>
 							@if(Auth::check())
 				                @if(!Auth::user()->hasRole(['admin', 'recruiter']))
 				                  @if($offer->hasAlreadyCandidate())
@@ -135,7 +135,7 @@
 				                <button id="{{$o->id}}"  class="btn application-btn">POSTULER</button>
 				            @endif
 							<a href="{{ route('offer.show', [
-									'job_1' => str_slug(App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
+									'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
 									'id' => $o->id
 								]) }}"  class="btn btn-secondary">PLUS D'INFOS</a>
 						</div>
@@ -160,8 +160,8 @@
 						<div class="offer-box" style="background-image:url('{{asset('images/offer-bk.jpg')}}')">
 							<h4>{{ $o->title }}</h4>
 							<p><i class="fa fa-map-marker"></i>{{ $o->address }}</p>
-							<p><i class="fa fa-star"></i> {{ App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</p>
-							<p><i class="fa fa-file-o"></i> {{ App\Models\Tools\SiteList::getListValue($o->contract, 'contracts') }}</p>
+							<p><i class="fa fa-star"></i> {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</p>
+							<p><i class="fa fa-file-o"></i> {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->contract, 'contracts') }}</p>
 			                @if(Auth::check())
 				                @if(!Auth::user()->hasRole(['admin', 'recruiter']))
 				                  @if($offer->hasAlreadyCandidate())
@@ -174,7 +174,7 @@
 				                <button id="{{$o->id}}"  class="btn application-btn">POSTULER</button>
 				            @endif
 							<a href="{{ route('offer.show', [
-									'job_1' => str_slug(App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
+									'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
 									'id' => $o->id
 								]) }}"  class="btn btn-secondary">PLUS D'INFOS</a>
 						</div>

@@ -2,6 +2,11 @@
 
 return [
     [
+        "route" => 'typologies',
+        "icon" => "fa-th",
+        "label" => Lang::get('architect::settings.typologies'),
+    ],
+    [
         "route" => 'users',
         "icon" => "fa-users",
         "label" => Lang::get('architect::settings.users'),

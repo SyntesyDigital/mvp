@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\RRHH\Http\Controllers\Front;
+namespace Modules\BWO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\RRHH\Http\Requests\Front\ContactRequest;
@@ -24,7 +24,7 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        return view('front.contact');
+        return view('bwo::contact');
     }
 
     public function send(ContactRequest $request)
@@ -32,11 +32,11 @@ class ContactController extends Controller
         if ($sent = $this->dispatch(new SendContact($request->all()))) {
             Session::flash('notify_success', 'Votre message vient d\'être envoyé.');
 
-            return redirect()->action('Front\ContactController@index');
+            return redirect()->action('ContactController@index');
         }
 
         Session::flash('notify_error', "Une erreur s'est produite lors de l'envoi de le message.");
 
-        return redirect()->action('Front\ContactController@index')->withInput();
+        return redirect()->action('ContactController@index')->withInput();
     }
 }

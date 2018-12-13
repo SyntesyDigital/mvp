@@ -1,0 +1,100 @@
+body{
+  .banner{
+    h1{
+      background-color: $brand-dark-gray-color;
+      color:$brand-white-color;
+      float:left;
+      @include font(40,70, 600);
+      padding: 0 15px;
+      margin:45px 0 20px 0;
+    }
+  }
+  .candidate-container{
+    padding:10px;
+    margin-top: -100px;
+    margin-bottom: 35px;
+    .horizontal-inner-container{
+      -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+      padding: 0;
+      background-color: #fff;
+      .information-container{
+        min-height: 190px;
+        padding-top:20px;
+        padding-bottom: 30px;
+        .image{
+          height: 141px;
+          width: 140px;
+          border-radius: 50%;
+          margin: 0 auto;
+        }
+        .information{
+          @include font(18,24,400);
+          color: $brand-dark-gray-color;
+          text-align: center;
+          @include mq(md){
+            text-align: left;
+          }
+          p{
+            margin-bottom: 0;
+          }
+          .name{
+            margin-top: 15px;
+            @include font(18,24,600);
+          }
+          .btn-soft-gray{
+            margin-top: 5px;
+          }
+
+        }
+      }
+      .candidate-list{
+        padding: 20px 15px;
+        .candidate-box{
+          i{
+            color:$brand-footer-light-gray-color;
+            @include font(50,55,600);
+            margin-bottom:30px;
+          }
+          padding: 30px 0 0;
+          height: 190px;
+          text-align:center;
+          -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          margin-bottom:30px;
+          .btn{
+            padding: 18px 28px;
+          }
+        }
+      }
+      form{
+        label{
+          margin-top:10px;
+          @include font(12,16,400);
+          color:$brand-dark-gray-color
+        }
+        input{
+          border-radius:200px;
+        }
+      }
+      .btn-red-container{
+        text-align: center;
+        margin-top:30px;
+        .btn-red{
+          padding: 15px 28px;
+          @include font(14,20,400);
+        }
+      }
+    }
+  }
+
+  .offers-3-container{
+    &.candidate-page{
+      .three-offers-container{
+        padding:30px 15px 30px;
+      }
+    }
+  }
+}
