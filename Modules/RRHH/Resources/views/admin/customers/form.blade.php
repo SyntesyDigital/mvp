@@ -23,6 +23,23 @@
                 <h1><i class="fa fa-newspaper-o"></i>&nbsp;Clients</h1>
                 <div class="float-buttons pull-right">
 
+                    @if(isset($customer))
+                        {{-- <div class="row">
+                            <div class="col-md-offset-2 col-md-8">
+                                {!!
+                                    Form::open([
+                                        'url' => route('rrhh.admin.customers.delete', $customer->id),
+                                        'method' => 'POST',
+                                        'class' => 'delete-customer-form'
+                                    ])
+                                !!}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="submit" value="Supprimer ce client" class="btn btn-danger" />
+                                {{ Form::close() }}
+                            </div>
+                        </div> --}}
+                    @endif
+
                   <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
                 </div>
               </div>
@@ -122,22 +139,6 @@
             </div>
             <div class="sidebar">
               @if(isset($customer))
-                  <div class="row">
-                      <div class="col-md-offset-2 col-md-8">
-                          {!!
-                              Form::open([
-                                  'url' => route('rrhh.admin.customers.delete', $customer->id),
-                                  'method' => 'POST',
-                                  'class' => 'delete-customer-form'
-                              ])
-                          !!}
-                          <input type="hidden" name="_method" value="DELETE">
-                          <input type="submit" value="Supprimer ce client" class="btn btn-danger" />
-                          {{ Form::close() }}
-                      </div>
-                  </div>
-
-
               <div class="row">
 
                  <h3 class="card-title">Liste des contacts

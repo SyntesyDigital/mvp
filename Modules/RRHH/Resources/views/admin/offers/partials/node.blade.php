@@ -62,19 +62,19 @@
     @if($node["input"] == 'textarea')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
-            <textarea class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
+            <textarea class="form-control" id="{{$node["id"] or ''}}" rows="6" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
         </div>
     @endif
 
     @if($node["input"] == 'richtext')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
-            <textarea class="form-control" id="{{ $node["name"] }}_editor" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
+            <textarea class="form-control" id="{{ $node["name"] }}_editor" name="{{$node["name"]}}" rows="6" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
         </div>
 
         <script type="text/javascript">
             $(document).ready(function() {
-                app.editor.init('{{$node["name"]}}_editor', {
+                CKEDITOR.replace('{{$node["name"]}}_editor', {
                     height: '300px',
                     toolbarGroups :  [
                         {"name":"basicstyles","groups":["basicstyles"]},

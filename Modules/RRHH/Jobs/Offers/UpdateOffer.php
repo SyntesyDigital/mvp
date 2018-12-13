@@ -7,9 +7,13 @@ use Modules\RRHH\Entities\Offers\Offer;
 use Modules\RRHH\Entities\Offers\OfferField;
 use Carbon\Carbon;
 use Config;
+use Modules\RRHH\Traits\OfferFields;
 
 class UpdateOffer
 {
+
+    use OfferFields;
+
     public function __construct(Offer $offer, array $attributes = [])
     {
         $this->offer = $offer;
@@ -93,34 +97,5 @@ class UpdateOffer
         $this->sendCustomerAlerts();
 
         return $this->offer;
-    }
-
-    public function getFields()
-    {
-        return collect($this->parseNode(Config::get('offers.form')))
-            ->map(function ($field) {
-                return isset($field['name']) ? str_replace('[]', '', $field['name']) : false;
-            })
-            ->reject(function ($field) {
-                return empty($field);
-            })
-            ->toArray();
-    }
-
-    public function parseNode($nodes, $fields = [])
-    {
-        foreach ($nodes as $node) {
-            $childs = isset($node['childs']) ? $node['childs'] : null;
-
-            if ($childs) {
-                $fields = $this->parseNode($childs, $fields);
-            }
-
-            if ('field' == $node['type']) {
-                $fields[] = $node;
-            }
-        }
-
-        return $fields;
     }
 }

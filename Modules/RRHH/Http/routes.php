@@ -8,8 +8,8 @@ Route::group([
   'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\RRHH\Http\Controllers'
-], function()
-{
+], function() {
+
     // Tags
     Route::get('/tags', 'Admin\TagController@index')->name('rrhh.admin.tags.index');
     Route::get('/tags/data', 'Admin\TagController@data')->name('rrhh.admin.tags.data');
@@ -18,8 +18,6 @@ Route::group([
     Route::get('/tags/{tag?}', 'Admin\TagController@show')->name('rrhh.admin.tags.show');
     Route::put('/tags/{tag?}/update', 'Admin\TagController@update')->name('rrhh.admin.tags.update');
     Route::delete('/tags/{tag?}/delete', 'Admin\TagController@delete')->name('rrhh.admin.tags.delete');
-    // Route::post('/addtags', 'Admin\TagController@store')->name('rrhh.admin.storetag');
-    // Route::post('/deltag', 'Admin\TagController@delete')->name('rrhh.admin.deltag');
 
     // Candidates
     Route::get('/candidates', 'Admin\Users\CandidateController@index')->name('rrhh.admin.candidates.index');
@@ -31,11 +29,8 @@ Route::group([
     Route::put('/candidates/{user?}/update', 'Admin\Users\CandidateController@update')->name('rrhh.admin.candidates.update');
     Route::delete('/candidates/{user?}/delete','Admin\Users\CandidateController@delete')->name('rrhh.admin.candidates.delete');
     Route::post('/candidates/{user?}/updatetags', 'Admin\Users\CandidateController@updatetags')->name('rrhh.admin.candidates.updatetags');
-
     Route::post('/candidates/filestore', 'Admin\Users\CandidateController@filestore')->name('rrhh.admin.candidates.filestore');
-
     Route::get('/candidates/{candidate?}/downloadcv', 'Admin\Users\CandidateController@downloadCV')->name('rrhh.admin.candidates.downloadcv');
-
 
     // Offers
     Route::get('/offers', 'Admin\Offers\OfferController@index')->name('rrhh.admin.offers.index');
@@ -71,7 +66,7 @@ Route::group([
     Route::post('/agences/filestore', 'Admin\AgenceController@filestore')->name('rrhh.admin.agences.filestore');
     Route::get('/agences/{agence?}/downloadcv', 'Admin\AgenceController@downloadCV')->name('rrhh.admin.agences.downloadcv');
 
-    // Customer
+    // Customers
     Route::get('/customers', 'Admin\CustomerController@index')->name('rrhh.admin.customers.index');
     Route::get('/customers/create', 'Admin\CustomerController@create')->name('rrhh.admin.customers.create');
     Route::post('/customers/store', 'Admin\CustomerController@store')->name('rrhh.admin.customers.store');
@@ -80,14 +75,14 @@ Route::group([
     Route::put('/customers/{customer?}/update', 'Admin\CustomerController@update')->name('rrhh.admin.customers.update');
     Route::delete('/customers/{customer?}/delete', 'Admin\CustomerController@delete')->name('rrhh.admin.customers.delete');
 
-    // Contacts client
-    Route::get('/customer_contacts/create/{customer}', 'Admin\CustomerContactController@create')->name('rrhh.admin.customer_contacts.create');
-    Route::post('/customer_contacts/store', 'Admin\CustomerContactController@store')->name('rrhh.admin.customer_contacts.store');
-    Route::get('/customer_contacts/data/{customer}', 'Admin\CustomerContactController@data')->name('rrhh.admin.customer_contacts.data');
-    Route::get('/customer_contacts/{customer_contact}', 'Admin\CustomerContactController@show')->name('rrhh.admin.customer_contacts.show');
-    Route::put('/customer_contacts/{customer_contact}/update', 'Admin\CustomerContactController@update')->name('rrhh.admin.customer_contacts.update');
-    Route::delete('/customer_contacts/{customer_contact}/delete', 'Admin\CustomerContactController@delete')->name('rrhh.admin.customer_contacts.delete');
-    Route::post('/customer_contacts/list/{customer}', 'Admin\CustomerContactController@list')->name('rrhh.admin.customer_contacts.list');
+    // Customers contacts
+    Route::get('/customers/contacts/create/{customer}', 'Admin\CustomerContactController@create')->name('rrhh.admin.customer_contacts.create');
+    Route::post('/customers/contacts/store', 'Admin\CustomerContactController@store')->name('rrhh.admin.customer_contacts.store');
+    Route::get('/customers/contacts/data/{customer}', 'Admin\CustomerContactController@data')->name('rrhh.admin.customer_contacts.data');
+    Route::get('/customers/contacts/{customer_contact}', 'Admin\CustomerContactController@show')->name('rrhh.admin.customer_contacts.show');
+    Route::put('/customers/contacts/{customer_contact}/update', 'Admin\CustomerContactController@update')->name('rrhh.admin.customer_contacts.update');
+    Route::delete('/customers/contacts/{customer_contact}/delete', 'Admin\CustomerContactController@delete')->name('rrhh.admin.customer_contacts.delete');
+    Route::post('/customers/contacts/list/{customer}', 'Admin\CustomerContactController@list')->name('rrhh.admin.customer_contacts.list');
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('rrhh.admin.sitelists.index');
@@ -116,6 +111,5 @@ Route::group([
     Route::get('/emails-templates/{template?}', 'Admin\EmailTemplateController@show')->name('rrhh.admin.emailstemplates.show');
     Route::put('/emails-templates/{template?}/update', 'Admin\EmailTemplateController@update')->name('rrhh.admin.emailstemplates.update');
     Route::delete('/emails-templates/{template?}/delete', 'Admin\EmailTemplateController@delete')->name('rrhh.admin.emailstemplates.delete');
-
 
 });

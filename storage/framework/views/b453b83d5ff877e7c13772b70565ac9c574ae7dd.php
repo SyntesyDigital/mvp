@@ -19,7 +19,6 @@
         <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
         <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
         <div class="float-buttons pull-right">
-
           <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
         </div>
       </div>
@@ -52,7 +51,6 @@
 <?php echo Form::close(); ?>
 
 
-
 <?php $__env->stopSection(); ?>
 
 
@@ -67,21 +65,14 @@
 <!-- Select2 -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <!-- Vendors -->
-<?php echo e(Html::script('/js/admin/content/contents/vendors/ckeditor/ckeditor.js')); ?>
-
-
-<!-- CMS libs -->
-<?php echo e(Html::script('/js/admin/content/contents/app.js')); ?>
-
-<?php echo e(Html::script('/js/admin/content/contents/app.modal.js')); ?>
-
-<?php echo e(Html::script('/js/admin/content/contents/app.editor.js')); ?>
+<?php echo e(Html::script('/modules/architect/plugins/ckeditor/ckeditor.js')); ?>
 
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('javascripts'); ?>
-<?php echo e(Html::script('/js/admin/offers/form.js')); ?>
+<?php echo e(Html::script('/modules/rrhh/js/admin/offers/form.js')); ?>
 
 
 <script>
@@ -123,24 +114,29 @@
 
     });
 
-    function initMap() {
+    function initMap()
+    {
+        var location = {
+            lat: <?php echo e(isset($offer) && $offer->latitude != null ? $offer->latitude: 48.858344); ?>,
+            lng: <?php echo e(isset($offer) && $offer->longitude != null ? $offer->longitude: 2.294331); ?>
 
-        var lat_init = <?php echo e(isset($offer) && $offer->latitude != null ? $offer->latitude: 48.858344); ?>;
-        var lat_lng = <?php echo e(isset($offer) && $offer->longitude != null ? $offer->longitude: 2.294331); ?>;
+        };
 
-        var uluru = {lat: lat_init , lng: lat_lng };
         map = new google.maps.Map(document.getElementById('map-container'), {
           zoom: 9,
-          center: uluru
+          center: location
         });
+
         marker = new google.maps.Marker({
-          position: uluru,
+          position: location,
           map: map,
           draggable: true
         });
+
         google.maps.event.addListener(marker, 'dragend', function(event) {
             ModifyUbicacion();
         });
+
         ModifyUbicacion();
     }
 
@@ -158,10 +154,7 @@
         });
     }
 
-
     $(document).ready(function() {
-
-
 
         var csrf_token = "<?php echo e(csrf_token()); ?>";
         var routes = {

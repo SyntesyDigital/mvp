@@ -6,9 +6,12 @@ use Modules\RRHH\Http\Requests\Admin\Offers\CreateOfferRequest;
 use Modules\RRHH\Entities\Offers\Offer;
 use Modules\RRHH\Entities\Offers\OfferField;
 use Config;
+use Modules\RRHH\Traits\OfferFields;
 
 class CreateOffer
 {
+    use OfferFields;
+
     public function __construct($attributes)
     {
         $this->fields = $this->getFields();
@@ -64,32 +67,5 @@ class CreateOffer
         return $offer;
     }
 
-    public function getFields()
-    {
-        return collect($this->parseNode(array_collapse(config('offers.form'))))
-            ->map(function ($field) {
-                return isset($field['name']) ? str_replace('[]', '', $field['name']) : false;
-            })
-            ->reject(function ($field) {
-                return empty($field);
-            })
-            ->toArray();
-    }
 
-    public function parseNode($nodes, $fields = [])
-    {
-        foreach ($nodes as $node) {
-            $childs = isset($node['childs']) ? $node['childs'] : null;
-
-            if ($childs) {
-                $fields = $this->parseNode($childs, $fields);
-            }
-
-            if ((isset($node['type'])) && 'field' == $node['type']) {
-                $fields[] = $node;
-            }
-        }
-
-        return $fields;
-    }
 }
