@@ -11,9 +11,15 @@ Route::group([
 ], function()
 {
     // Tags
-    Route::get('/offer-tags', 'Admin\TagController@index')->name('rrhh.admin.tags');
-    Route::post('/addtags', 'Admin\TagController@store')->name('rrhh.admin.storetag');
-    Route::post('/deltag', 'Admin\TagController@delete')->name('rrhh.admin.deltag');
+    Route::get('/tags', 'Admin\TagController@index')->name('rrhh.admin.tags.index');
+    Route::get('/tags/data', 'Admin\TagController@data')->name('rrhh.admin.tags.data');
+    Route::get('/tags/create', 'Admin\TagController@create')->name('rrhh.admin.tags.create');
+    Route::post('/tags/store', 'Admin\TagController@store')->name('rrhh.admin.tags.store');
+    Route::get('/tags/{tag?}', 'Admin\TagController@show')->name('rrhh.admin.tags.show');
+    Route::put('/tags/{tag?}/update', 'Admin\TagController@update')->name('rrhh.admin.tags.update');
+    Route::delete('/tags/{tag?}/delete', 'Admin\TagController@delete')->name('rrhh.admin.tags.delete');
+    // Route::post('/addtags', 'Admin\TagController@store')->name('rrhh.admin.storetag');
+    // Route::post('/deltag', 'Admin\TagController@delete')->name('rrhh.admin.deltag');
 
     // Candidates
     Route::get('/candidates', 'Admin\Users\CandidateController@index')->name('rrhh.admin.candidates.index');

@@ -3,6 +3,7 @@
 namespace Modules\RRHH\Jobs\Tags;
 
 use Modules\RRHH\Entities\Tag;
+use Modules\RRHH\Http\Requests\Admin\Tags\CreateTagRequest;
 
 class CreateTag
 {
@@ -13,11 +14,9 @@ class CreateTag
         ]);
     }
 
-    public static function fromRequest($name)
+    public static function fromRequest(CreateTagRequest $request)
     {
-        $attr = ['name' => $name];
-
-        return new self($attr);
+        return new self($request->all());
     }
 
     public function handle()
