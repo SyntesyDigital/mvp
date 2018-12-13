@@ -2,7 +2,7 @@
 
 namespace Modules\RRHH\Jobs;
 
-use Modules\RRHH\Jobs\Candidate\SendMessageMail;
+use Modules\RRHH\Jobs\SendMessageMail;
 use Modules\RRHH\Entities\Offers\Candidate;
 use App\Models\User;
 
@@ -13,9 +13,8 @@ class SendMassmail
 
     public function __construct(array $attributes = [])
     {
-        $this->inputs = array_only($attributes, [
-            'candidate',
-            'interim',
+        $this->attributes = array_only($attributes, [
+            'recipients',
             'subject',
             'reply_to',
             'message',
@@ -24,23 +23,18 @@ class SendMassmail
 
     public function handle()
     {
-        $types = [];
-        if (isset($this->inputs['candidate'])) {
-            $types[] = Candidate::TYPE_NORMAL;
-        }
-
-        if (isset($this->inputs['interim'])) {
-            $types[] = Candidate::TYPE_INTERIM;
-        }
-
         $candidates = Candidate::whereHas('user', function ($query) {
             $query->where('status', User::STATUS_ACTIVE);
         })
-            ->whereIn('type', $types)
+            ->whereIn('type', $this->attributes['recipients'])
             ->get();
 
         foreach ($candidates as $candidate) {
-            $job = new SendMessageMail($this->inputs['subject'], $this->inputs['message'], $candidate);
+            $job = new SendMessageMail(
+                $this->attributes['subject'],
+                $this->attributes['message'],
+                $candidate
+            );
             dispatch($job->onQueue('emails'));
         }
 

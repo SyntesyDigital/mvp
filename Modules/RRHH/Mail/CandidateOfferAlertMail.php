@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace Modules\RRHH\Mail;
 
 use Modules\RRHH\Entities\Offers\AlertCandidate;
 use Illuminate\Bus\Queueable;
@@ -37,7 +37,7 @@ class CandidateOfferAlertMail extends Mailable implements ShouldQueue
             ]);
         });
 
-        return $this->view('emails.offer_alert', [
+        return $this->view('rrhh::emails.offer_alert', [
             'candidate' => $this->alert->candidate,
             'offer' => $this->alert->offer,
         ])->subject('Offre '.$this->alert->offer->title);

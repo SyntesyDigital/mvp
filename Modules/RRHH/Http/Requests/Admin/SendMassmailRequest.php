@@ -27,6 +27,14 @@ class SendMassmailRequest extends FormRequest
             'subject' => 'required',
             'reply_to' => 'required|email',
             'message' => 'required',
+            'recipients' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'recipients.required' => 'Vous devez choisir au moins un groupe de destinataires'
         ];
     }
 }

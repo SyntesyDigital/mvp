@@ -11,9 +11,8 @@
         'id' => 'form-offer'
     ])
 !!}
-@if(isset($offer))
-    <input type="hidden" name="_method" value="PUT" />
-@endif
+
+{{ Form::hidden('_method', isset($offer) ? 'PUT' : 'POST') }}
 
 <div class="page-bar">
   <div class="container">

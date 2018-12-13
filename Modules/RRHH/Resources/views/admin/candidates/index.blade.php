@@ -53,34 +53,31 @@
 </div>
 @endsection
 
-@push('javascripts-libs')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
 
+@push('javascripts-libs')
+    <!-- Datatables -->
+    {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
+    {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
+    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js') }}
 @endpush
 
 @push('javascripts')
     <script>
-    var csrf_token = "{{csrf_token()}}";
-    var routes = {
-        data : '{{ route("rrhh.admin.candidates.data") }}',
-    };
-    var table_candidats = '';
+        var csrf_token = "{{csrf_token()}}";
+        var routes = {
+            data : '{{ route("rrhh.admin.candidates.data") }}',
+        };
+        var atags = [];
+
+        @foreach ($allTags as $at)
+            atags.push('{{$at}}');
+        @endforeach
     </script>
 
-
-    <script>
-      var atags = [];
-      @foreach ($allTags as $at)
-          atags.push('{{$at}}');
-      @endforeach
-    </script>
-
-    {{ Html::script('/js/admin/users/candidateslist.js') }}
-    {{ Html::script('/js/textext.core.js') }}
-    {{ Html::script('/js/textext.plugin.autocomplete.js') }}
-    {{ Html::script('/js/textext.plugin.tags.js') }}
-    {{ Html::script('/modules/architect/plugins/datatables/datatables.min.js') }}
-    {{ HTML::style('/modules/architect/plugins/datatables/datatables.min.css') }}
-    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/users/candidateslist.js') }}
+    {{ Html::script('/modules/rrhh/js/textext.core.js') }}
+    {{ Html::script('/modules/rrhh/js/textext.plugin.autocomplete.js') }}
+    {{ Html::script('/modules/rrhh/js/textext.plugin.tags.js') }}
 
 @endpush

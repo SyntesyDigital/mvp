@@ -3,51 +3,83 @@
 namespace Modules\RRHH\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Modules\RRHH\Jobs\Tags\CreateTag;
-//use Modules\RRHH\Http\Requests\Admin\SendTagRequest;
-
-use Modules\RRHH\Jobs\Tags\DeleteTag;
-use Modules\RRHH\Entities\Tag;
 use Illuminate\Http\Request;
 
+//use Modules\RRHH\Http\Requests\Admin\SendTagRequest;
 //use Modules\RRHH\Jobs\SendTag;
+
+use Modules\RRHH\Http\Requests\Admin\Tags\UpdateTagRequest;
+use Modules\RRHH\Http\Requests\Admin\Tags\CreateTagRequest;
+
+use Modules\RRHH\Jobs\Tags\CreateTag;
+use Modules\RRHH\Jobs\Tags\UpdateTag;
+use Modules\RRHH\Jobs\Tags\DeleteTag;
+use Modules\RRHH\Entities\Tag;
+
+use Modules\RRHH\Repositories\TagRepository;
+
+use Session;
 
 class TagController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
+    public function __construct(TagRepository $tags)
     {
         $this->middleware('auth');
+        $this->tags = $tags;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('rrhh::admin.tags', [
-            'tags' => Tag::all(),
+        return view('rrhh::admin.tags.index');
+    }
+
+    public function data()
+    {
+        return $this->tags->getDataTableData();
+    }
+
+    public function create()
+    {
+        return view('rrhh::admin.tags.form');
+    }
+
+    public function show(Tag $tag, Request $request)
+    {
+        return view('rrhh::admin.tags.form', [
+            'tag' => $tag
         ]);
     }
 
-    public function store(Request $request)
+    public function update(Tag $tag, UpdateTagRequest $request)
     {
-        $name = $request->get('name');
-        if ($this->dispatchNow(CreateTagOffer::fromRequest($name))) {
-            return 'saved';
-        } else {
-            return 'error';
+        try {
+            $tag = $this->dispatchNow(UpdateTag::fromRequest($tag, $request));
+            Session::flash('notify_success', 'Enregistrement effectué avec succès');
+        } catch (\Exception $e) {
+            Session::flash('notify_error', $e->getMessage());
         }
+
+        return redirect()->route('rrhh.admin.tags.show', $tag);
+    }
+
+    public function store(CreateTagRequest $request)
+    {
+        try {
+            $tag = $this->dispatchNow(CreateTag::fromRequest($request));
+            Session::flash('notify_success', 'Enregistrement effectué avec succès');
+
+            return redirect()->route('rrhh.admin.tags.show', $tag);
+        } catch (\Exception $e) {
+            Session::flash('notify_error', $e->getMessage());
+        }
+
+        return redirect()->route('rrhh.admin.tags.create')->withInput();
     }
 
     public function delete(Request $request)
     {
-        $name = $request->get('name');
-        $tag = Tag::where('name', $name)->first();
+        $tag = Tag::where('name', $request->get('name'))->first();
+
         if ($this->dispatchNow(new DeleteTag($tag))) {
             return 'deleted';
         } else {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace Modules\RRHH\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -30,7 +30,7 @@ class CandidateMessageMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.candidate_message', [
+        return $this->view('rrhh::emails.candidate_message', [
             'candidate' => $this->candidate,
             'body' => $this->body,
         ])->subject($this->subject);
