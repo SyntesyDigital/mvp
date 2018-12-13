@@ -22,10 +22,10 @@
 						@if($offer->visibility == 1)
 						<p><i class="fa fa-map-marker"></i>{{ $offer->address }}</p>
 						@endif
-						@if($offer->job_1 && App\Models\Tools\SiteList::getListValue($offer->job_1, 'jobs1') )
-							<p><i class="fa fa-star"></i>{{ App\Models\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }}</p>
+						@if($offer->job_1 && Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') )
+							<p><i class="fa fa-star"></i>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }}</p>
 						@endif
-						<p><i class="fa fa-file-o"></i>{{ App\Models\Tools\SiteList::getListValue($offer->contract, 'contracts') }}</p>
+						<p><i class="fa fa-file-o"></i>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }}</p>
 
 						@if(Auth::check())
 			                @if(!Auth::user()->hasRole(['admin', 'recruiter']))
@@ -39,8 +39,8 @@
 			                <button id="{{$offer->id}}"  class="btn application-btn">POSTULER</button>
 			            @endif
 			            <a  href="{{ route('offer.show', [
-			                                    'job_1' => str_slug(App\Models\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
-			                                    // 'job_2' => str_slug(App\Models\Tools\SiteList::getListValue($offer->job_2, 'jobs2'), '-'),
+			                                    'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
+			                                    // 'job_2' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2'), '-'),
 			                                    'id' => $offer->id
 			                                ]) }}" class="btn btn-secondary">PLUS D'INFOS</a>
 					</div>

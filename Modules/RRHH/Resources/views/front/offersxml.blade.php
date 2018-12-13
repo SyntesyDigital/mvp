@@ -18,8 +18,8 @@
             @endif
 			<referencenumber>{{ $o->id }}</referencenumber>
 			<url>{{ route('offer.show', [
-                                    'job_1' => str_slug(App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
-                                    // 'job_2' => str_slug(App\Models\Tools\SiteList::getListValue($o->job_2, 'jobs2'), '-'),
+                                    'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1'), '-'),
+                                    // 'job_2' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_2, 'jobs2'), '-'),
                                     'id' => $o->id
                                 ]) }}</url>
             @if($o->customer)
@@ -30,13 +30,13 @@
 			@endif
 				<description>{{ strip_tags($o->description) }}</description>
 			@if($o->salary)
-				<salary>{{ App\Models\Tools\SiteList::getListValue($o->salary, 'salaries') }}</salary>
+				<salary>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->salary, 'salaries') }}</salary>
 			@endif
 			@if($o->contract)
-				<jobtype>{{ App\Models\Tools\SiteList::getListValue($o->contract, 'contracts') }}</jobtype>
+				<jobtype>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->contract, 'contracts') }}</jobtype>
 			@endif
 			@if($o->job_1)
-				<category>{{ App\Models\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</category>
+				<category>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($o->job_1, 'jobs1') }}</category>
 			@endif
 		</job>
 	@endforeach

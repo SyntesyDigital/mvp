@@ -3,7 +3,7 @@
 namespace Modules\RRHH\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use Modules\RRHH\Repositories\Content\ContentRepository;
+use Modules\Architecht\Repositories\Content\ContentRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

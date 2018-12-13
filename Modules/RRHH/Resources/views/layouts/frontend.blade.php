@@ -443,7 +443,7 @@
                                                 </div>
                                                 <div class="checkboxes" id="checkboxes_2">
                                                   @php
-                                                    $list = App\Models\Tools\SiteList::where('identifier', 'jobs1')->first();
+                                                    $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'jobs1')->first();
                                                     $jobs = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
                                                         return [$item['value'] => $item['name']];
                                                     });
@@ -466,7 +466,7 @@
                                                 </div>
                                                 <div class="checkboxes" id="checkboxes_3">
                                                   @php
-                                                    $list = App\Models\Tools\SiteList::where('identifier', 'contracts')->first();
+                                                    $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
                                                     $contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
                                                         return [$item['value'] => $item['name']];
                                                     });

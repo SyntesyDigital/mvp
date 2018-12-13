@@ -1,0 +1,75 @@
+body{
+  .banner{
+    h1{
+      background-color: $brand-dark-gray-color;
+      color:$brand-white-color;
+      float:left;
+      @include font(40,70, 600);
+      padding: 0 15px;
+      margin:45px 0 20px 0;
+    }
+  }
+  .offers-container{
+    .blog-container{
+      background-color: white;
+      padding:20px;
+      color:$brand-dark-gray-color;
+      .categories-container{
+        margin-top:20px;
+        h3{
+          @include font(14,18, 600)
+        }
+      }
+      .posts-list{
+        padding: 20px 0;
+        .post-box{
+          padding: 18px 0 0;
+          text-align:left;
+          -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+          margin-bottom:20px;
+          .image{
+            height: 192px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .title{
+            margin:10px 0 0;
+            color:$brand-dark-gray-color;
+            @include font(20,22,600);
+            height:42px;
+            padding:15px;
+          }
+          p{
+            color:$brand-light-gray-color;
+            @include font(12,14,300);
+            margin-bottom:15px;
+            height: 14px;
+            padding:0 15px;
+            &.description{
+              color:$brand-dark-gray-color;
+              @include font(14,18,300);
+              margin-bottom:15px;
+              height: 100px;
+            }
+          }
+          .detail{
+            color:$brand-red-color ;
+            cursor:pointer;
+            text-decoration: none;
+            &:hover{
+              color: $brand-dark-gray-color;
+              cursor:pointer;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+
+    }
+  }
+}

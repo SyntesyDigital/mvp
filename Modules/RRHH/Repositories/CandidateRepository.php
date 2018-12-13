@@ -72,7 +72,8 @@ class CandidateRepository extends BaseRepository
                 return isset($status[$item->status]) ? $status[$item->status] : null;
             })
             ->addColumn('action', function ($item) {
-                return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-sm btn-success pull-right">Modifier</a>';
+                return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> Voir</a>'.
+                '&nbsp; <a href="'.route('rrhh.admin.candidates.delete', $item).'" class="btn btn-link text-danger"><i class="fa fa-trash"></i> Suprimer</a>';
             })
             ->order(function ($query) {
                 $orders = request()->get('order');

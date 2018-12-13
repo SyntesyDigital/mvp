@@ -10,8 +10,9 @@ return [
     [
         "route" => 'rrhh.admin.emailstemplates.index',
         "icon" => "fa-reorder",
-        "label" => Lang::get('rrhh::settings.emailstemplates'),
+        "label" => Lang::get('rrhh::settings.emails_templates'),
     ],
+
 
     [
         "route" => 'rrhh.admin.massmail',
