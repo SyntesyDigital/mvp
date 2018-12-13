@@ -11,7 +11,7 @@
               <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
               <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
             </div>
-            <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+            <a href="{{route('search')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
         </div>
       </div>
       <div class="col-md-4 ">
@@ -24,7 +24,7 @@
               <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
               <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
             </div>
-            <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+            <a href="{{route('search')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
         </div>
       </div>
       <div class="col-md-4 ">
@@ -37,7 +37,7 @@
               <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
               <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
             </div>
-            <a href="{{route('offer')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+            <a href="{{route('search')}}" class="detail" >DÉTAIL DE L'OFFRE</a>
         </div>
       </div>
       <br clear="all">

@@ -8,11 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>HOME</title>
-        <meta name="keywords" lang="rn" content="" />
-        <meta name="description" lang="en" content="" />
-        <meta name="abstract" content="" />
-  	    <meta name="author" content="" />
+        <title>{!! $htmlTitle or 'BWO Interim' !!}</title>
+        <meta name="description" content="{!! $metaDescription or '' !!}">
+        <meta property="og:url" content="{{ Request::url() }}" />
+        <meta property="og:title" content="{!! $htmlTitle or 'Menco RH' !!}"/>
+        <meta property="og:description" content="{!! $socialDescription or '' !!}"/>
+        <meta property="og:image" content="{!! $socialImage or asset('images/header-logo.jpg') !!}"/>
+        <meta property="og:type" content="website"/>
         <meta name="robots" content="noindex,nofollow">
 
         <!-- twitter -->
@@ -22,15 +24,10 @@
     		<meta name="twitter:title" content=""/>
     		<meta name="twitter:description" content=""/>
 
-        <!-- facebook -->
-    		<meta property="og:url" content="" />
-    		<meta property="og:image" content="" />
-    		<meta property="og:title" content=""/>
-    		<meta property="og:description" content=""/>
-    		<meta property="og:type" content="website"/>
 
         <link href="{{asset('modules/bwo/css/app.css')}}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/css/font-awesome/css/font-awesome.min.css')}}" />
+        <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/fonts/iconmoon/iconmoon.css')}}" />
 
 
         @stack('styles')
@@ -38,6 +35,9 @@
     </head>
 
     <body class="{{$mainClass or ''}}">
+
+
+        @include('bwo::partials.modals')
 
         @stack('modal')
 
@@ -51,13 +51,19 @@
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';
           const LOCALE = '{{App::getLocale()}}';
+          const app = {};
+          var csrf_token = "{{csrf_token()}}";
+          var civility_default = "{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}"
         </script>
+
+
+        <!-- Select2 -->
 
         @stack('javascripts-libs')
 
-
         <script type="text/javascript" src="{{asset('modules/bwo/js/app.js')}}" ></script>
-        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
         <script>
 
@@ -68,6 +74,16 @@
 
               $(document).on("click","#btn-main-menu",function() {
                 $('#user-menu').removeClass('in');
+              });
+
+              $(".application-btn").on('click',function(e){
+                  app.offerapplications.init(
+                    "{{ Auth::check() ? Auth::user()->id : 0 }}",
+                    this.id,
+                    "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
+                  );
+                  app.offerapplications.open();
+
               });
 
           });

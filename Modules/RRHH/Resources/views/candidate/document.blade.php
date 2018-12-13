@@ -26,7 +26,7 @@
 				@else
 
 					@php
-						$list = App\Models\Tools\SiteList::where('identifier', 'doclist')->first();
+						$list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'doclist')->first();
 						$documents = json_decode($list->value);
 					@endphp
 

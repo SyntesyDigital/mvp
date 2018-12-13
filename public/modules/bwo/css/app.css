@@ -10391,6 +10391,129 @@ form .input-round {
   border-radius: 15px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.modal-content {
+  padding: 0px;
+  overflow: hidden;
+  text-align: center;
+  font-family: Roboto;
+}
+
+.modal-content h3 {
+  font-size: 25px;
+  line-height: 27px;
+  font-weight: 400;
+}
+
+.modal-content p {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 100;
+}
+
+.modal-content .login-left {
+  width: 49%;
+  display: inline-block;
+  padding: 25px 15px;
+}
+
+.modal-content .register-right {
+  width: 50%;
+  display: inline-block;
+  background-color: #7d7c7c;
+  padding: 25px 15px 30px;
+  float: right;
+}
+
+.modal-content .modal-error {
+  background-color: #c41a1b;
+  color: #fff;
+  padding: 15px 10px 5px;
+  display: inline-block;
+  display: none;
+  width: 100%;
+}
+
+.modal-content .modal-error p {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 100;
+}
+
+.modal-content .modal-message {
+  padding: 20px 80px 30px;
+  color: #7d7c7c;
+}
+
+.modal-content .modal-cv {
+  background-color: #7d7c7c;
+  color: #fff;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.button-upload-fake {
+  background-color: #7d7c7c;
+  color: #fff;
+  height: 30px;
+  width: 165px;
+  float: left;
+  position: relative;
+  top: -22px;
+  height: 20px;
+  padding: 0 5px;
+  right: -183px;
+}
+
+.button-upload-fake i {
+  margin-right: 5px;
+}
+
+div.fileinputs {
+  position: relative;
+}
+
+div.fileinputs .select2 {
+  width: 100% !important;
+}
+
+div.fakefile {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  margin: 0 auto;
+  width: 350px;
+  height: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+div.fakefile input {
+  width: 100%;
+  color: #3f3f3f;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 100;
+}
+
+input.file {
+  position: relative;
+  text-align: right;
+  -moz-opacity: 0;
+  opacity: 0;
+  z-index: 2;
+  margin: 0 auto;
+  width: 350px;
+  height: 24px;
+}
+
 body .banner.home-banner .banner-info-container {
   width: 475px;
   float: right;
@@ -11176,5 +11299,140 @@ body .other-posts .right-post-container {
   body .other-posts .right-post-container {
     padding-right: 5px;
   }
+}
+
+.map-container .leaflet-container {
+  height: 300px;
+  width: 100%;
+}
+
+.map-container .leaflet-control-container {
+  z-index: 400;
+}
+
+/** DATE  **/
+
+.react-datepicker-popper {
+  z-index: 10000 !important;
+}
+
+.react-datepicker-wrapper {
+  display: block;
+  font-family: Roboto;
+}
+
+.react-datepicker-wrapper .react-datepicker__input-container {
+  display: block;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 300;
+  font-family: Roboto;
+  width: 30px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: Roboto;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+  padding: 0px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 300;
+  font-family: Roboto;
+}
+
+.react-datepicker__time-container {
+  width: 90px;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 90px;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background-color: #337ab7;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover {
+  background-color: #337ab7;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #337ab7;
+}
+
+.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+  right: 100px;
+}
+
+.paginator ul li {
+  display: inline-block;
+  padding: 0 8px;
+}
+
+.paginator ul li.active a {
+  color: #c54345;
+}
+
+.paginator ul li a {
+  margin-left: 0px !important;
+}
+
+.press a:after {
+  content: '|';
+  padding-left: 6px;
+}
+
+.press a:last-child:after {
+  content: none;
+}
+
+.filter-bar form.nova-cerca input {
+  display: inline-block;
+  width: 20%;
+  float: left;
+  margin-right: 2%;
+}
+
+.filter-bar form.nova-cerca select {
+  display: inline-block;
+  width: 15%;
+  float: left;
+  margin-right: 2%;
+}
+
+.filter-bar form.nova-cerca .input-date {
+  display: inline-block;
+  width: auto;
+  float: left;
+  margin-right: 2%;
+}
+
+.filter-bar form.nova-cerca .input-date + div {
+  display: inline-block;
+  width: auto;
+}
+
+.filter-bar form.nova-cerca .input-date input.input-date {
+  width: auto;
+}
+
+.blog-home .grey {
+  overflow: inherit !important;
+  padding-bottom: 1px;
 }
 
