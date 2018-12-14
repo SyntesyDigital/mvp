@@ -96,6 +96,7 @@ architect.menu.form = {
         this.currentId = 1000; // FIXME que sea otro valor
 
 
+        /*
         $(document).on('click','.item-bar',function(e){
 
           var item = $(e.target).closest('.item-bar');
@@ -113,6 +114,7 @@ architect.menu.form = {
             item.addClass('collapsed');
           }
         });
+        */
 
 
     },

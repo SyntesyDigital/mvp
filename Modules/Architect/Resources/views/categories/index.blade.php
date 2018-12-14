@@ -136,6 +136,7 @@
 
     });
 
+    /*
     $(document).on('click','.item-bar',function(e){
 
       var item = $(e.target).closest('.item-bar');
@@ -153,6 +154,7 @@
         item.addClass('collapsed');
       }
     });
+    */
 
     $(document).on('click','.btn-delete',function(e){
 

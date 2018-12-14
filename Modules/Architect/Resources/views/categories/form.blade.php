@@ -225,10 +225,12 @@
 
                               @endphp
 
+
+
                               {!!
                                   Form::select(
                                       'parent_id',
-                                      $categories,
+                                      array_merge([""=>"---"],$categories),
                                       isset($category) ? $category->parent_id : null,
                                       [
                                           'class' => 'form-control'
