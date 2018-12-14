@@ -19380,7 +19380,8 @@ line.links {
 }
 
 .content .field-group .field-item .ql-editor {
-  height: 100px;
+  min-height: 100px;
+  max-height: 100vh;
 }
 
 .content .field-group .field-item .field-form {
@@ -20082,20 +20083,23 @@ ol.sortable-list li .item-bar {
   min-height: 50px;
   width: 50vw;
   padding-left: 40px;
-}
+  /*
+      &:before{
+        content: "\25BE";
+        margin-right: 0px;
+        position: absolute;
+        top: -2px;
+        left: 16px;
+        font-size: 18px;
+        color: #a0a0a0;
+      }
 
-ol.sortable-list li .item-bar:before {
-  content: "\25BE";
-  margin-right: 0px;
-  position: absolute;
-  top: -2px;
-  left: 16px;
-  font-size: 18px;
-  color: #a0a0a0;
-}
-
-ol.sortable-list li .item-bar.collapsed:before {
-  content: "\25B8";
+      &.collapsed {
+        &:before{
+          content: "\25B8";
+        }
+      }
+      */
 }
 
 ol.sortable-list li.placeholder {
