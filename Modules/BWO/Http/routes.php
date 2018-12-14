@@ -50,10 +50,10 @@ Route::group([
     //Route::get('/offer/{offer}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
     Route::get('/emplois/{job_1}/{offer?}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
     //Route::post('/offers/application/{offer?}/create', ['as' => 'offer.applications.create', 'uses' => 'Front\OfferApplicationController@create']);
-    Route::post('/candidate/store', ['as' => 'candidate.store', 'uses' => 'Front\CandidateController@store']);
+    Route::post('/candidate/store', ['as' => 'candidate.store', 'uses' => 'CandidateController@store']);
     Route::post('/candidate/login', ['as' => 'candidate.login', 'uses' => 'CandidateController@login']);
     Route::post('/candidate/addcv', ['as' => 'candidate.addcv', 'uses' => 'CandidateController@addcv']);
-    //Route::post('/candidate/addtag', ['as' => 'candidate.addtag', 'uses' => 'Front\CandidateController@addtag']);
+    Route::post('/candidate/addtag', ['as' => 'candidate.addtag', 'uses' => 'CandidateController@addtag']);
 
 
     /*

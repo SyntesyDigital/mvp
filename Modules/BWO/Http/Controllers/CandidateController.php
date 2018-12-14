@@ -50,7 +50,6 @@ class CandidateController extends Controller
             $httpCode = 200;
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            dd($message);
         }
 
         return response()->json([
