@@ -13,15 +13,48 @@
 						</div>
 
 						<div id="user-menu" class="collapse navbar-collapse js-navbar-collapse">
-									<ul class="navbar-nav mr-auto">
-										<li class="nav-item">
-											<a class="nav-link btn btn-soft-gray application-btn" href="#">Espace Candidat
-												<span class="sr-only">(current)</span>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Enterprise</a>
-										</li>
+									<ul class="navbar-nav mr-auto buttons-nabvar">
+
+										@if(Auth::check())
+											@if(Auth::user()->hasRole('candidate'))
+												<li class="nav-item">
+													<a class="nav-link btn btn-soft-gray" href="{{route('candidate')}}">Mon Espace
+														<span class="sr-only">(current)</span>
+													</a>
+												</li>
+											@endif
+											@if(Auth::user()->hasRole('enterprise'))
+												<li class="nav-item">
+													<a class="nav-link btn btn-soft-gray" href="#">Mon Espace
+														<span class="sr-only">(current)</span>
+													</a>
+												</li>
+											@endif
+											@if(Auth::user()->hasRole('admin'))
+												<li class="nav-item">
+													<a class="nav-link btn btn-soft-gray" href="{{route('dashboard')}}">Espace Admin
+														<span class="sr-only">(current)</span>
+													</a>
+												</li>
+											@endif
+											<li class="nav-item">
+												<form id="logout-form" action="{{ route('logout') }}" method="POST">
+														{{csrf_field()}}
+													<button class="nav-link btn btn-dark-gray btn-logout" type="submit" >Deconnexion</button>
+												</form>
+											</li>
+										@else
+
+											<li class="nav-item">
+												<a class="nav-link btn btn-soft-gray application-btn" href="#">Espace Candidat
+													<span class="sr-only">(current)</span>
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Enterprise</a>
+											</li>
+										@endif
+
 									</ul>
 						</div><!-- /.nav-collapse -->
 					</nav>

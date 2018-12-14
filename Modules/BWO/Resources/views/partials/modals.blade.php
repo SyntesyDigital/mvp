@@ -3,28 +3,24 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="login-left">
-                        <div class="modal-body">
+                        <div class="modal-body sub-left-square">
                             <form role="form" method="POST" action="{{ route('login') }}">
                               {{ csrf_field() }}
-                                <div class="row">
-                                        <input type="text" id="log-email" name="email" value="" placeholder="Identifiant" class="form-control" />
+                                <h3>VOUS AVEZ UN COMPTE</h3>
+                                    <input type="text" id="log-email" name="email" value="" placeholder="Identifiant" class="form-control" />
                                     @if ($errors->has('email'))
                                       <p class="control-label error-login-p">{{ $errors->first('email') }}</p>
                                     @endif
-                                </div>
-                                <div class="row">
+
                                     <input type="password" id="log-password" name="password" value="" placeholder="Mot de passe" class="form-control" />
                                     @if ($errors->has('password'))
                                       <p class="control-label error-login-p">{{ $errors->first('password') }}</p>
                                     @endif
-                                </div>
-                                 <div class="row">
                                     <a href="/password/reset">Mot de passe oublié ?</a>
                                     <br clear="all">
 
-                                    <button type="button" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-primary full-width mt-10">Se Connecter</button>
+                                    <button type="button" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
                                     <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -32,53 +28,40 @@
                         <div class="modal-body">
                             <form role="form" method="POST" action="">
                               {{ csrf_field() }}
-                                <div class="row">
+                                <h3>VOUS N'AVEZ DE COMPTE</h3>
                                     <input type="text" id="reg-email" name="email" value="" placeholder="E-mail" class="form-control" />
                                     @if ($errors->has('email'))
                                       <p class="control-label error-login-p">{{ $errors->first('email') }}</p>
                                     @endif
-                                </div>
 
-                                <div class="row">
                                     <input type="text" id="reg-lastname" name="lastname" value="" placeholder="Nom" class="form-control" />
                                     @if ($errors->has('lastname'))
                                       <p class="control-label error-login-p">{{ $errors->first('lastname') }}</p>
                                     @endif
-                                </div>
 
-                                <div class="row">
                                     <input type="text" id="reg-firstname" name="firstname" value="" placeholder="Prénom" class="form-control" />
                                     @if ($errors->has('firstname'))
                                       <p class="control-label error-login-p">{{ $errors->first('firstname') }}</p>
                                     @endif
-                                </div>
 
-                                 <div class="row">
                                     <input type="text" id="reg-telephone" name="telephone" value="" placeholder="Téléphone" class="form-control" />
                                     @if ($errors->has('telephone'))
                                       <p class="control-label error-login-p">{{ $errors->first('telephone') }}</p>
                                     @endif
-                                </div>
 
-                               <div class="row">
                                   <input type="text" id="reg-postal_code" name="postal_code" value="" placeholder="Code postal" class="form-control" />
                                   @if ($errors->has('postal_code'))
                                     <p class="control-label error-login-p">{{ $errors->first('postal_code') }}</p>
                                   @endif
-                              </div>
 
-                              <div class="row">
                                  <input type="text" id="reg-location" name="location" value="" placeholder="Ville" class="form-control" />
                                  @if ($errors->has('location'))
                                    <p class="control-label error-login-p">{{ $errors->first('location') }}</p>
                                  @endif
-                             </div>
 
 
-                                <div class="row">
-                                    <button type="button" onclick="app.offerapplications.register()" id="regButton" class="btn btn-primary full-width">Créer un compte</button>
-                                    <img class="loader" id="regLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
-                                </div>
+                                  <button type="button" onclick="app.offerapplications.register()" id="regButton" class="btn btn-dark-gray full-width"><i class="fa fa-user"></i>Créer un compte</button>
+                                  <img class="loader" id="regLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>
                     </div>
@@ -161,7 +144,7 @@
 
                                 <div class="row">
                                     <div class="fileinputs">
-                                        
+
                                     </div>
                                 </div>
 

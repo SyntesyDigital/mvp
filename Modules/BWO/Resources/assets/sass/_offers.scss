@@ -7,6 +7,9 @@ body{
       @include font(40,70, 600);
       padding: 0 15px;
       margin:45px 0 20px 0;
+      &.title-up{
+        margin-top:15px;
+      }
     }
   }
   .offers-container{

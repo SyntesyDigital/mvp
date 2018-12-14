@@ -9926,6 +9926,10 @@ a {
   color: #fff;
 }
 
+.btn.btn-logout {
+  padding: 8px 28px;
+}
+
 html {
   height: 100%;
   -webkit-box-sizing: border-box;
@@ -9969,6 +9973,14 @@ header .menus .navbar-menu-main {
 header .menus .navbar {
   margin-bottom: 0px;
   min-height: 38px;
+}
+
+@media (min-width: 768px) {
+  header .menus .navbar .navbar-nav.buttons-nabvar {
+    float: right;
+    margin-right: 46px;
+    padding: 0;
+  }
 }
 
 header .menus .navbar .navbar-header-user,
@@ -10383,6 +10395,10 @@ body .three-offers-container .offer-box-left {
   }
 }
 
+body form input.form-control {
+  border-radius: 200px;
+}
+
 footer {
   padding: 25px 15px;
   background-color: #666666;
@@ -10504,69 +10520,120 @@ form .input-round {
   width: 100%;
 }
 
-.modal-content {
-  padding: 0px;
+body .modal {
+  z-index: 2000;
+}
+
+body .modal .modal-content {
   overflow: hidden;
   text-align: center;
   font-family: Roboto;
+  padding: 25px 0px;
 }
 
-.modal-content h3 {
-  font-size: 25px;
-  line-height: 27px;
-  font-weight: 400;
+body .modal .modal-content .modal-body {
+  padding: 0 15px;
 }
 
-.modal-content p {
+body .modal .modal-content .modal-body .loader {
+  height: 30px;
+  width: 30px;
+  display: none;
+}
+
+body .modal .modal-content .login-left {
+  width: 49%;
+  display: inline-block;
+  padding: 0;
+}
+
+body .modal .modal-content .login-left .sub-left-square {
+  margin-top: 70px;
+  padding: 15px;
+  border-right: 1px solid #e9e8d7;
+}
+
+body .modal .modal-content .register-right {
+  width: 50%;
+  display: inline-block;
+  padding: 0;
+  float: right;
+}
+
+body .modal .modal-content h3 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+body .modal .modal-content input.form-control {
+  border-radius: 200px;
+  margin: 10px 0;
+  height: 39px;
+}
+
+body .modal .modal-content p {
   font-size: 16px;
   line-height: 18px;
   font-weight: 100;
 }
 
-.modal-content .login-left {
-  width: 49%;
-  display: inline-block;
-  padding: 25px 15px;
+body .modal .modal-content a {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 100;
+  color: #666666;
+  margin: 5px 0 10px;
 }
 
-.modal-content .register-right {
-  width: 50%;
-  display: inline-block;
-  background-color: #7d7c7c;
-  padding: 25px 15px 30px;
-  float: right;
+body .modal .modal-content button {
+  padding: 11px 28px;
+  font-size: 14px;
+  line-height: 23px;
+  font-weight: 400;
+  margin-top: 15px;
 }
 
-.modal-content .modal-error {
+body .modal .modal-content button i {
+  margin-right: 10px;
+  font-size: 26px;
+  line-height: 23px;
+  font-weight: 400;
+}
+
+body .modal .modal-content .modal-error {
   background-color: #c41a1b;
   color: #fff;
   padding: 15px 10px 5px;
   display: inline-block;
   display: none;
   width: 100%;
+  margin-top: 10px;
 }
 
-.modal-content .modal-error p {
+body .modal .modal-content .modal-error p {
   font-size: 14px;
   line-height: 18px;
   font-weight: 100;
 }
 
-.modal-content .modal-message {
+body .modal .modal-content .modal-message {
   padding: 20px 80px 30px;
   color: #7d7c7c;
 }
 
-.modal-content .modal-cv {
+body .modal .modal-content .modal-cv {
   background-color: #7d7c7c;
   color: #fff;
 }
 
-.mt-10 {
+body .modal .mt-10 {
   margin-top: 10px;
 }
 
-.button-upload-fake {
+body .modal .button-upload-fake {
   background-color: #7d7c7c;
   color: #fff;
   height: 30px;
@@ -10579,19 +10646,19 @@ form .input-round {
   right: -183px;
 }
 
-.button-upload-fake i {
+body .modal .button-upload-fake i {
   margin-right: 5px;
 }
 
-div.fileinputs {
+body .modal div.fileinputs {
   position: relative;
 }
 
-div.fileinputs .select2 {
+body .modal div.fileinputs .select2 {
   width: 100% !important;
 }
 
-div.fakefile {
+body .modal div.fakefile {
   position: absolute;
   top: 0px;
   z-index: 1;
@@ -10604,7 +10671,7 @@ div.fakefile {
   right: 0;
 }
 
-div.fakefile input {
+body .modal div.fakefile input {
   width: 100%;
   color: #3f3f3f;
   font-size: 13px;
@@ -10612,7 +10679,7 @@ div.fakefile input {
   font-weight: 100;
 }
 
-input.file {
+body .modal input.file {
   position: relative;
   text-align: right;
   -moz-opacity: 0;
@@ -10838,6 +10905,10 @@ body .banner h1 {
   font-weight: 600;
   padding: 0 15px;
   margin: 45px 0 20px 0;
+}
+
+body .banner h1.title-up {
+  margin-top: 15px;
 }
 
 body .offers-container {

@@ -15,7 +15,7 @@
           <li><a href="{{route('blog')}}">CATÉGORUE</a></li>
           <li>TITRE ACTUALITÉ</li>
         </ol>
-        <h1>TITRE ACTUALITÉ</h1>
+        <h1 class="title-up">TITRE ACTUALITÉ</h1>
 
         <div class="description">
           <div class="col-sm-6 first-line">

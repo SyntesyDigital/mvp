@@ -54,6 +54,7 @@
           const app = {};
           var csrf_token = "{{csrf_token()}}";
           var civility_default = "{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}"
+          var routes = {'login':"{{route('candidate.login')}}"}
         </script>
 
 

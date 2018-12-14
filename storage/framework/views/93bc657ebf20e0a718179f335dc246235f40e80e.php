@@ -16,7 +16,7 @@
           </ol>
 
           <div>
-            <h2>MODIFIE VOS INFORMATIONS</h2>
+            <h2>MODIFIER VOS INFORMATIONS</h2>
             <form>
               <div class="col-md-6">
                 <?php echo Form::Label('surname', 'Prénom'); ?>
@@ -25,39 +25,39 @@
 
               </div>
               <div class="col-md-6">
-                <?php echo Form::Label('surname', 'Nom'); ?>
+                <?php echo Form::Label('nom', 'Nom'); ?>
 
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
+                <?php echo Form::text('nom', '', ['class' => 'form-control']); ?>
 
               </div>
               <div class="col-md-12">
-                <?php echo Form::Label('surname', 'Adresse'); ?>
+                <?php echo Form::Label('address', 'Adresse'); ?>
 
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
-
-              </div>
-              <div class="col-md-6">
-                <?php echo Form::Label('surname', 'Code Postal'); ?>
-
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
+                <?php echo Form::text('address', '', ['class' => 'form-control']); ?>
 
               </div>
               <div class="col-md-6">
-                <?php echo Form::Label('surname', 'Ville'); ?>
+                <?php echo Form::Label('postal_code', 'Code Postal'); ?>
 
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
-
-              </div>
-              <div class="col-md-6">
-                <?php echo Form::Label('surname', 'Teléphone'); ?>
-
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
+                <?php echo Form::text('postal_code', '', ['class' => 'form-control']); ?>
 
               </div>
               <div class="col-md-6">
-                <?php echo Form::Label('surname', 'E-mail'); ?>
+                <?php echo Form::Label('city', 'Ville'); ?>
 
-                <?php echo Form::text('surname', '', ['class' => 'form-control']); ?>
+                <?php echo Form::text('city', '', ['class' => 'form-control']); ?>
+
+              </div>
+              <div class="col-md-6">
+                <?php echo Form::Label('phone', 'Teléphone'); ?>
+
+                <?php echo Form::text('phone', '', ['class' => 'form-control']); ?>
+
+              </div>
+              <div class="col-md-6">
+                <?php echo Form::Label('email', 'E-mail'); ?>
+
+                <?php echo Form::text('email', '', ['class' => 'form-control']); ?>
 
               </div>
               <br clear="all">

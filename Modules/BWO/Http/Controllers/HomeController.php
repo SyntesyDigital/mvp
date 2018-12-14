@@ -5,6 +5,7 @@ namespace Modules\BWO\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\RRHH\Entities\Offers\Offer;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
         return view('bwo::home', [
           'offers' => Offer::where('status', Offer::STATUS_ACTIVE)->orderBy('created_at', 'desc')->limit(6)->get()
         ]);
