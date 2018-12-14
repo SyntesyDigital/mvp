@@ -10991,6 +10991,47 @@ body .offers-container .horizontal-inner-container form .light-gray-search-conta
   margin-bottom: 10px;
 }
 
+body .offers-container .horizontal-inner-container form .select-container .selectBox {
+  position: relative;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+  background-color: white;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  max-height: 75px;
+  overflow-y: scroll;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .checkboxes label {
+  display: block;
+  padding: 7px 10px;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .checkboxes label:hover {
+  background-color: #c41a1b;
+}
+
+body .offers-container .horizontal-inner-container form .select-container .checkboxes label input {
+  margin: 3px 5px 0 0;
+  float: left;
+}
+
 body .offers-container .horizontal-inner-container .offers-list {
   padding: 20px 15px;
 }

@@ -26,6 +26,11 @@ class SearchController extends Controller
             $this->itemsPerPage,
             $request->get('page') ? $request->get('page') : 0
         );
+        //delete page parameter for url contruction for pagination
+        $params_array = $request->all();
+        if(isset($params_array['page'])){
+          unset($params_array['page']);
+        }
 
         return view('bwo::results', [
             'offers' => $offers->sortByDesc(function ($offer, $key) {
@@ -43,6 +48,7 @@ class SearchController extends Controller
             'search' => $request->get('search'),
             'items_per_page' => $this->itemsPerPage,
             'page' => $request->get('page') ? $request->get('page') : 0,
+            'pagination_url' => route('search',$params_array).'&page='
         ]);
     }
 }
