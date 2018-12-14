@@ -4,21 +4,22 @@ namespace Modules\RRHH\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Modules\RRHH\Traits\FormFieldsEntity;
+
 class Customer extends Model
 {
-    protected $imagesUpload = ['image'];
+    use FormFieldsEntity;
+
+    const STATUS_ACTIVE = 'ACTIVE';
+    const STATUS_UNACTIVE = 'UNACTIVE';
 
     protected $table = 'customers';
 
+    public $fieldModel = 'Modules\RRHH\Entities\CustomerField';
+    public $fieldKey = 'customer_id';
+
     protected $fillable = [
-        'name',
-        'contact_firstname',
-        'contact_lastname',
-        'phone',
-        'email',
-        'address',
-        'postal_code',
-        'location',
+        'status'
     ];
 
     protected $dates = [
@@ -27,13 +28,17 @@ class Customer extends Model
         'deleted_at',
     ];
 
-    public function offers()
+    public static function getStatus()
     {
-        return $this->hasMany('Modules\RRHH\Entities\Offers\Offer');
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_UNACTIVE => 'Inactive',
+        ];
     }
 
-    public function customers_contacts()
+    public function getStringStatus()
     {
-        return $this->hasMany('Modules\RRHH\Entities\CustomerContact');
+        return isset($this->getStatus()[$this->status]) ? $this->getStatus()[$this->status] : null;
     }
+
 }

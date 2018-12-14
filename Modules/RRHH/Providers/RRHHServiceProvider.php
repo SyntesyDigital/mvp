@@ -50,17 +50,33 @@ class RRHHServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'rrhh'
-        );
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/offers.php', 'offers'
-        );
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/emails_templates.php', 'emails_templates'
+            __DIR__.'/../Config/config.php',
+            'rrhh'
         );
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/settings.php', 'settings'
+            __DIR__.'/../Config/offers.php',
+            'offers'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/customers.php',
+            'customers'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/emails_templates.php',
+            'emails_templates'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/settings.php',
+            'settings'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/users.php',
+            'architect::settings.users'
         );
 
         $this->mergeConfigFrom(

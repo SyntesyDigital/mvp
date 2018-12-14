@@ -76,14 +76,16 @@ class TagController extends Controller
         return redirect()->route('rrhh.admin.tags.create')->withInput();
     }
 
-    public function delete(Request $request)
+    public function delete(Tag $tag, Request $request)
     {
-        $tag = Tag::where('name', $request->get('name'))->first();
-
         if ($this->dispatchNow(new DeleteTag($tag))) {
-            return 'deleted';
-        } else {
-            return 'error';
+            return response()->json([
+                'success' => true
+            ], 200);
         }
+
+        return response()->json([
+            'success' => true
+        ], 500);
     }
 }

@@ -203,7 +203,7 @@
 {{-- RECURSIVE CALL --}}
 @if(isset($node['childs']))
     @foreach($node['childs'] as $n)
-        @include('rrhh::admin.offers.partials.node', [
+        @include('rrhh::admin.partials.form.node', [
             'node' => $n,
             'item' => isset($item) ? $item : null
         ])

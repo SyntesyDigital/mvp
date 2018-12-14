@@ -3,6 +3,7 @@
 namespace Modules\RRHH\Jobs\Tags;
 
 use Modules\RRHH\Http\Requests\Admin\Tags\DeleteTagRequest;
+use Modules\RRHH\Entities\Tag;
 
 class DeleteTag
 {

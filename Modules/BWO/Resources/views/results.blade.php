@@ -173,11 +173,9 @@
         });
       }
 
-      $(document).ready(function() {
       $(".btn-more-posts").on('click',function(e){
         getMoreResults(this);
       });
-    });
     });
   </script>
 @endpush

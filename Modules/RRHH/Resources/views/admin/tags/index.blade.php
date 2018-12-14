@@ -1,6 +1,5 @@
 @extends('architect::layouts.master')
 
-
 @section('content')
 <div class="container leftbar-page">
 
@@ -50,6 +49,9 @@
     <!-- Toastr -->
     {{ Html::style('/modules/rrhh/plugins/toastr/toastr.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/toastr/toastr.min.js') }}
+
+    <!-- Dialog -->
+    <script src="{{ asset('/modules/rrhh/js/libs/dialog.js')}}"></script>
 @endpush
 
 @push('javascripts')
