@@ -12,33 +12,19 @@
 
 @section('content')
 
-@if(isset($content) && $content->parent_id != null)
-<div class="single">
-  <div class="breadcrumb">
-       <div class="container">
-        <div class="row">
-          <div class="detalls-single">
-      		  <div class="col-md-10  col-sm-9 col-xs-12">
-      		  	<div class="ariadna">
-                {!! breadcrumb($content) !!}
-              </div>
-      		  </div>
+@if(isset($content))
 
-      		  <div class="col-md-2 col-sm-3 col-xs-6">
-      		  	<div id="selected-items" class="seleccio" style="display:none;">
-                <span id="number">0</span>
-                <a href="#" id="selected-area">La meva sel.lecció</a>
-              </div>
-      		  </div>
-    	   </div>
-  		 </div>
-  	</div>
+<div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/blog-banner.jpg')}}')">
+  <div class="horizontal-inner-container">
+      <h1>{{$content->getFieldValue('title')}}</h1>
+    </div>
   </div>
 </div>
+
+<div class="posts-container">
+  <div class="horizontal-inner-container post-container">
+    {!! breadcrumb($content) !!}
 @endif
-
-
-
 <!-- ARTICLE -->
 <article class="page-builder">
 
@@ -50,6 +36,12 @@
       @endforeach
     @endif
 </article>
+
+@if(isset($content))
+  </div>
+</div>
+@endif
+
 <!-- END ARTICLE -->
 @endsection
 

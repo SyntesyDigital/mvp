@@ -19,19 +19,15 @@ if (!function_exists('breadcrumb')) {
         }
 
         // Build HTML
-        $html = '';
-        foreach($breadcrumb as $k => $v) {
-            $arrow = "";
-            if($k != sizeof($breadcrumb)-1){
-              $arrow = " > ";
-            }
+        $html = '<ol class="breadcrumb">';
 
-            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
+        foreach($breadcrumb as $k => $v) {
+            $html .= sprintf('<li><a href="%s">%s</a></li>',
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '';
+        $html .= '</ol>';
 
         return $html;
     }
@@ -63,19 +59,15 @@ if (!function_exists('breadcrumb')) {
         ]);
 
         // Build HTML
-        $html = '';
+        $html = '<ol class="breadcrumb">';
         foreach($breadcrumb as $k => $v) {
-            $arrow = "";
-            if($k != sizeof($breadcrumb)-1){
-              $arrow = " > ";
-            }
 
-            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
+            $html .= sprintf('<li><a href="%s">%s</a></li>',
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '';
+        $html .= '</ol>';
 
         return $html;
     }
@@ -98,19 +90,19 @@ if (!function_exists('breadcrumb')) {
         ]);
 
         // Build HTML
-        $html = '';
+        $html = '<ol class="breadcrumb">';
         foreach($breadcrumb as $k => $v) {
             $arrow = "";
             if($k != sizeof($breadcrumb)-1){
               $arrow = " > ";
             }
 
-            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
+            $html .= sprintf('<li><a href="%s">%s</a></li>',
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '';
+        $html .= '</ol>';
 
         return $html;
     }

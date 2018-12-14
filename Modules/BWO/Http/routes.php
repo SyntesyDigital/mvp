@@ -84,8 +84,8 @@ Route::group([
     //Route::get('/', 'BWOController@index')->name('home');
     //Route::get('/offers', 'BWOController@offers')->name('offers');
     //Route::get('/offer', 'BWOController@offer')->name('offer');
-    Route::get('/blog', 'BWOController@blog')->name('blog');
-    Route::get('/post', 'BWOController@post')->name('post');
+    Route::get('/blog-old', 'BWOController@blog')->name('blog');
+    //Route::get('/post', 'BWOController@post')->name('post');
     Route::get('/candidate', 'BWOController@candidate')->name('candidate');
     Route::get('/candidate/information', 'BWOController@candidateForm')->name('candidate.form');
 

@@ -35,7 +35,9 @@ class BWOServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename){
+            require_once($filename);
+        }
     }
 
     /**
@@ -91,7 +93,7 @@ class BWOServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

@@ -3,7 +3,7 @@
     <a class="nav-link" href="{{route('search')}}">OFFRES</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{route('blog')}}">ACTUALITÉS</a>
+    <a class="nav-link" href="/blog">ACTUALITÉS</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">ENTERPRISES</a>

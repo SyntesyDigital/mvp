@@ -7,6 +7,7 @@
         </div>
       </div>
     </div>
+
     <div class="offers-container">
       <div class="horizontal-inner-container blog-container">
         <ol class="breadcrumb">
@@ -31,7 +32,7 @@
                   TITRE ACTUALITÉ
                 </div>
                 <p>Le 16/11/2018 - CATÉGORIE</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="#" class="detail" >Lire la suite</a></p>
             </div>
           </div>
           <div class="col-md-6">
@@ -41,7 +42,7 @@
                   TITRE ACTUALITÉ
                 </div>
                 <p>Le 16/11/2018 - CATÉGORIE</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="#" class="detail" >Lire la suite</a></p>
             </div>
           </div>
           <div class="col-md-6">
@@ -51,7 +52,7 @@
                   TITRE ACTUALITÉ
                 </div>
                 <p>Le 16/11/2018 - CATÉGORIE</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="#" class="detail" >Lire la suite</a></p>
             </div>
           </div>
           <div class="col-md-6">
@@ -61,7 +62,7 @@
                   TITRE ACTUALITÉ
                 </div>
                 <p>Le 16/11/2018 - CATÉGORIE</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="{{route('post')}}" class="detail" >Lire la suite</a></p>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...<a href="#" class="detail" >Lire la suite</a></p>
             </div>
           </div>
           <br clear="all">
