@@ -54,6 +54,7 @@
           const app = {};
           var csrf_token = "<?php echo e(csrf_token()); ?>";
           var civility_default = "<?php echo e(Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE); ?>"
+          var routes = {'login':"<?php echo e(route('candidate.login')); ?>"}
         </script>
 
 

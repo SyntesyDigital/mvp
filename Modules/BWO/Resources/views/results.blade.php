@@ -47,11 +47,49 @@
       <div class="light-gray-search-container">
         <div class="col-sm-4 select-container">
           {!! Form::Label('job', 'Choisissez votre métier:') !!}
-          {!! Form::select('job', [0 => '', 1 =>'Metier 1', 2 => 'Metier 2'], null, ['class' => 'form-control']) !!}
+          <div class="multiselect">
+            <div class="selectBox" checkbox="2" >
+              <select class="form-control">
+                <option>----</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div class="checkboxes" id="checkboxes_2">
+              @php
+                $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'jobs1')->first();
+                $jobs = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+                    return [$item['value'] => $item['name']];
+                });
+                $jobs = $jobs->toArray();
+              @endphp
+              @foreach($jobs as $key => $value)
+                <label for="job_{{$key}}"><input type="checkbox" value="{{$key}}" name="job[]" id="job_{{$key}}" {{in_array($key,$selected_job)?'checked="checked"':''}} />{{$value}}</label>
+              @endforeach
+            </div>
+          </div>
         </div>
         <div class="col-sm-4 select-container">
           {!! Form::Label('contract', 'Choisissez votre type de contrat:') !!}
-          {!! Form::select('contract', [0 => '', 1 =>'Contrat 1', 2 => 'Contrat 2'], null, ['class' => 'form-control']) !!}
+          <div class="multiselect">
+            <div class="selectBox" checkbox="3">
+              <select class="form-control">
+                <option>----</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div class="checkboxes" id="checkboxes_3">
+              @php
+                $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
+                $contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+                    return [$item['value'] => $item['name']];
+                });
+                $contracts = $contracts->toArray();
+              @endphp
+              @foreach($contracts as $key => $value)
+                <label for="contract_{{$key}}"><input type="checkbox" value="{{$key}}" name="contract[]" id="contract_{{$key}}" {{in_array($key,$selected_contract)?'checked="checked"':''}}  />{{$value}}</label>
+              @endforeach
+            </div>
+          </div>
         </div>
         <div class="col-sm-4 select-container">
           {!! Form::Label('filter', 'Filtre par:') !!}
@@ -71,10 +109,20 @@
                   {{ $offer->title }}
                 </div>
                 <p>Réf: BOU - Posté le 16/11/2018</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus.Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                @php
+                  $string = substr(strip_tags($offer->description), 0, 250);
+                  if(strlen($string) < strlen(strip_tags($offer->description))){
+                    $string = substr($string, 0, strrpos($string, ' ')) . " ...";
+                  }
+                @endphp
+                <p class="description">{!! $string !!}</p>
+                @php
+                 $otags = $offer->tags()->limit(2)->get();
+                @endphp
                 <div class="buttons">
-                  <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                  <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
+                  @foreach($otags as $otag)
+                    <a href="#" class="btn btn-soft-gray tag">{{$otag->name}}</a>
+                  @endforeach
                 </div>
                 <a href="{{ route('offer.show', [
                                       'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
@@ -83,15 +131,33 @@
             </div>
           </div>
         @endforeach
-
       <br clear="all">
       <div class="pagination-container">
-        <!--a href="#" class="round"><div class="round"><i class="fa fa-angle-left" aria-hidden="true"></i></div></a-->
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">...</a>
-        <a href="#" class="round"><div class="round"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a>
+        @if($page > 0)
+          <a href="{{$pagination_url.($page - 1)}}" class="round"><div class="round"><i class="fa fa-angle-left" aria-hidden="true"></i></div></a>
+        @endif
+        @if($page > 2)
+          <a href="{{$pagination_url.($page-3)}}">...</a>
+        @endif
+        @if($page > 1)
+          <a href="{{$pagination_url.($page-2)}}">{{$page - 1}}</a>
+        @endif
+        @if($page > 0)
+          <a href="{{$pagination_url.($page-1)}}">{{$page}}</a>
+        @endif
+        <a href="javascript:void(0)" class="active">{{$page + 1}}</a>
+        @if(($page+1)*$items_per_page < $num_offers)
+          <a href="{{$pagination_url.($page +1)}}">{{$page +2}}</a>
+        @endif
+        @if(($page+2)*$items_per_page < $num_offers)
+          <a href="{{$pagination_url.($page + 2)}}">{{$page +3}}</a>
+        @endif
+        @if(($page+3)*$items_per_page < $num_offers)
+          <a href="{{$pagination_url.($page + 3)}}">...</a>
+        @endif
+        @if(($page+1)*$items_per_page < $num_offers)
+          <a href="{{$pagination_url.($page + 1)}}" class="round"><div class="round"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a>
+        @endif
       </div>
 
     </div>
@@ -107,9 +173,27 @@
 
     $(document).ready(function() {
 
-      $('body').on('click', '.btn-more', function() {
-          getMoreResults(this);
-      });
+       $(document).on("click","#btn-more",function() {
+         $(this).hide();
+         $('#btn-less').show();
+         $('.light-gray-search-container').show();
+       });
+
+       $(document).on("click","#btn-less",function() {
+         $(this).hide();
+         $('#btn-more').show();
+         $('.light-gray-search-container').hide();
+       });
+       $(document).ready(function() {
+           $(document).on("click",".btn-search",function() {
+             $(this).closest('form').submit();
+           });
+       });
+       $(document).ready(function() {
+           $(document).on("click","#btn-filtres",function() {
+             $(this).closest('form').submit();
+           });
+       });
 
       $.ajaxSetup({
           headers: {
@@ -173,11 +257,24 @@
         });
       }
 
-      $(document).ready(function() {
       $(".btn-more-posts").on('click',function(e){
         getMoreResults(this);
       });
+
+      $(".selectBox").on('click',function(e){
+        showCheckboxes(this.getAttribute('checkbox'));
+      });
     });
-    });
+    var expanded = false;
+    function showCheckboxes(num_select) {
+      var checkboxes = document.getElementById("checkboxes_"+num_select);
+      if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+      } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+      }
+    }
   </script>
 @endpush

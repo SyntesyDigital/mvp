@@ -11,7 +11,7 @@
         <div class="candidate-list">
           <ol class="breadcrumb">
             <li><a href="<?php echo e(route('home')); ?>">ACCUEIL</a></li>
-            <li>OFFRES</li>
+            <li>ESPACE CANDIDAT</li>
           </ol>
           <div class="col-md-8 information-container">
             <div class="col-md-4">

@@ -81,30 +81,30 @@ app.offerapplications = {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 var error_data = false;
-                if (typeof(jqXHR.responseJSON["email"]) !== 'undefined') {
-                    $('#loginModalError p').html(jqXHR.responseJSON["email"][0]);
+                if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
                     error_data = true;
                 }
-                if (typeof(jqXHR.responseJSON["lastname"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["lastname"][0]);
+                if (typeof(jqXHR.responseJSON.errors["lastname"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["lastname"][0]);
                     error_data = true;
                 }
-                if (typeof(jqXHR.responseJSON["firstname"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["firstname"][0]);
+                if (typeof(jqXHR.responseJSON.errors["firstname"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["firstname"][0]);
                     error_data = true;
                 }
-                if (typeof(jqXHR.responseJSON["telephone"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["telephone"][0]);
-                    error_data = true;
-                }
-
-                if (typeof(jqXHR.responseJSON["postal_code"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["postal_code"][0]);
+                if (typeof(jqXHR.responseJSON.errors["telephone"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["telephone"][0]);
                     error_data = true;
                 }
 
-                if (typeof(jqXHR.responseJSON["location"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["location"][0]);
+                if (typeof(jqXHR.responseJSON.errors["postal_code"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["postal_code"][0]);
+                    error_data = true;
+                }
+
+                if (typeof(jqXHR.responseJSON.errors["location"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["location"][0]);
                     error_data = true;
                 }
 
@@ -128,7 +128,7 @@ app.offerapplications = {
 
         $.ajax({
             type: "POST",
-            url: "/candidate/login",
+            url: routes.login,
             data: {
                 email: $('#log-email').val(),
                 password: $('#log-password').val(),
@@ -151,12 +151,12 @@ app.offerapplications = {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 var error_data = false;
-                if (typeof(jqXHR.responseJSON["email"]) !== 'undefined') {
-                    $('#loginModalError p').html(jqXHR.responseJSON["email"][0]);
+                if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
                     error_data = true;
                 }
-                if (typeof(jqXHR.responseJSON["password"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON["password"][0]);
+                if (typeof(jqXHR.responseJSON.errors["password"]) !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["password"][0]);
                     error_data = true;
                 }
                 if (error_data) {
@@ -206,8 +206,8 @@ app.offerapplications = {
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     var error_data = false;
-                    if (typeof(jqXHR.responseJSON["resume_file"]) !== 'undefined') {
-                        $('#cvModalError p').html(jqXHR.responseJSON["resume_file"][0]);
+                    if (typeof(jqXHR.responseJSON.errors["resume_file"]) !== 'undefined') {
+                        $('#cvModalError p').html(jqXHR.responseJSON.errors["resume_file"][0]);
                         error_data = true;
                     }
                     if (error_data) {

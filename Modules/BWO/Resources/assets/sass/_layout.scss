@@ -26,6 +26,15 @@ header{
     }
 
     .navbar{
+      @media (min-width: 768px) {
+        .navbar-nav {
+          &.buttons-nabvar{
+            float: right;
+            margin-right: 46px;
+            padding:0;
+          }
+        }
+      }
       margin-bottom:0px;
       min-height: 38px;
       .navbar-header-user, #user-menu{
@@ -375,6 +384,13 @@ body {
       }
     }
   }
+  form{
+    input{
+      &.form-control{
+        border-radius:200px;
+      }
+    }
+  }
 
 }
 
@@ -476,4 +492,5 @@ footer{
       }
 
     }
+
 }

@@ -1,109 +1,154 @@
 .full-width{
   width: 100%
 }
-.modal-content{
-  padding:0px;
-  overflow:hidden;
-  text-align:center;
-  font-family: $brand-font-1;
-   h3{
-      @include font(25,27,400);
+body{
+  .modal{
+    z-index: 2000;
+    .modal-content{
+        overflow:hidden;
+        text-align:center;
+        font-family: $brand-font-1;
+        padding: 25px 0px;
+        .modal-body{
+          padding: 0 15px;
+          .loader{
+            height: 30px;
+            width: 30px;
+            display: none;
+          }
+        }
+        .login-left{
+          width:49%;
+          display: inline-block;
+          padding: 0 ;
+          .sub-left-square{
+            margin-top: 70px;
+            padding:15px;
+            border-right: 1px solid $brand-light-gray-input;
+          }
+        }
+        .register-right{
+          width:50%;
+          display: inline-block;
+          padding: 0;
+          float:right;
+        }
+        h3{
+          @include font(14,20,600);
+          color: $brand-dark-gray-color;
+          margin-bottom:20px;
+        }
+        input{
+          &.form-control{
+           border-radius:200px;
+           margin:10px 0;
+           height: 39px;
+          }
+        }
+        p{
+          @include font(16,18,100);
+        }
+        a{
+          @include font(12,14,100);
+          color: $brand-dark-gray-color;
+          margin:5px 0 10px;
+        }
+        button{
+          padding: 11px 28px;
+          @include font(14,23,400);
+          margin-top: 15px;
+          i{
+            margin-right: 10px;
+            @include font(26,23,400);
+          }
+        }
+
+
+
+
+        .modal-error{
+          background-color: $brand-color-2;
+          color:#fff;
+          padding: 15px 10px 5px;
+          display: inline-block;
+          display:none;
+          width: 100%;
+          margin-top:10px;
+          p{
+            @include font(14,18,100);
+          }
+        }
+        .modal-message{
+          padding: 20px 80px 30px;
+          color: $brand-color-1;
+        }
+        .modal-cv{
+          background-color: $brand-color-1;
+          color:#fff;
+
+        }
+        .modal-alerts{
+
+        }
+        .modal-registered{
+
+        }
+      }
+      .mt-10{
+        margin-top: 10px;
+      }
+
+      .button-upload-fake{
+        background-color: $brand-color-1;
+        color:#fff;
+        height: 30px;
+        width: 165px;
+        float:left;
+        position: relative;
+        top: -22px;
+        height: 20px;
+        padding: 0 5px;
+        right: -183px;
+        i{
+          margin-right: 5px;
+        }
+      }
+
+      div.fileinputs {
+        position: relative;
+
+        .select2 {
+            width: 100% !important;
+        }
+      }
+
+      div.fakefile {
+        position: absolute;
+        top: 0px;
+        z-index: 1;
+        margin: 0 auto;
+        width: 350px;
+        height:24px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        input{
+          width: 100%;
+          color: #3f3f3f;
+          @include font(13,18,100);
+        }
+      }
+
+      input.file {
+        position: relative;
+        text-align: right;
+        -moz-opacity:0 ;
+        opacity: 0;
+        z-index: 2;
+        margin: 0 auto;
+        width: 350px;
+        height: 24px;
+      }
     }
-    p{
-      @include font(16,18,100);
-    }
-  .login-left{
-    width:49%;
-    display: inline-block;
-    padding: 25px 15px;
-  }
-  .register-right{
-    width:50%;
-    display: inline-block;
-    background-color: $brand-color-1;
-    padding: 25px 15px 30px;
-    float:right;
-  }
-  .modal-error{
-    background-color: $brand-color-2;
-    color:#fff;
-    padding: 15px 10px 5px;
-    display: inline-block;
-    display:none;
-    width: 100%;
-    p{
-      @include font(14,18,100);
-    }
-  }
-  .modal-message{
-    padding: 20px 80px 30px;
-    color: $brand-color-1;
-  }
-  .modal-cv{
-    background-color: $brand-color-1;
-    color:#fff;
-
-  }
-  .modal-alerts{
-
-  }
-  .modal-registered{
-
-  }
-}
-.mt-10{
-  margin-top: 10px;
-}
-
-.button-upload-fake{
-  background-color: $brand-color-1;
-  color:#fff;
-  height: 30px;
-  width: 165px;
-  float:left;
-  position: relative;
-  top: -22px;
-  height: 20px;
-  padding: 0 5px;
-  right: -183px;
-  i{
-    margin-right: 5px;
-  }
-}
-
-div.fileinputs {
-  position: relative;
-
-  .select2 {
-      width: 100% !important;
-  }
-}
-
-div.fakefile {
-  position: absolute;
-  top: 0px;
-  z-index: 1;
-  margin: 0 auto;
-  width: 350px;
-  height:24px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  input{
-    width: 100%;
-    color: #3f3f3f;
-    @include font(13,18,100);
-  }
-}
-
-input.file {
-  position: relative;
-  text-align: right;
-  -moz-opacity:0 ;
-  opacity: 0;
-  z-index: 2;
-  margin: 0 auto;
-  width: 350px;
-  height: 24px;
 }

@@ -50,11 +50,7 @@
 
     <?php echo e(Html::script('/modules/rrhh/plugins/datatables/datatables.min.js')); ?>
 
-
-    <!-- Toastr -->
-    <?php echo e(Html::style('/modules/rrhh/plugins/toastr/toastr.min.css')); ?>
-
-    <?php echo e(Html::script('/modules/rrhh/plugins/toastr/toastr.min.js')); ?>
+    <?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
 
 <?php $__env->stopPush(); ?>
 
@@ -66,8 +62,6 @@ var routes = {
     recipients: '<?php echo e(route("rrhh.admin.offers.index.data.recipients")); ?>'
 };
 </script>
-
-<?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
 
 <?php echo e(Html::script('/modules/rrhh/js/admin/offers/index.js')); ?>
 

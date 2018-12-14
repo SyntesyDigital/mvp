@@ -62,19 +62,19 @@
     <?php if($node["input"] == 'textarea'): ?>
         <div class="form-group">
             <label><?php echo e($node["label"]); ?></label>
-            <textarea class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
+            <textarea class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" rows="6" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
         </div>
     <?php endif; ?>
 
     <?php if($node["input"] == 'richtext'): ?>
         <div class="form-group">
             <label><?php echo e($node["label"]); ?></label>
-            <textarea class="form-control" id="<?php echo e($node["name"]); ?>_editor" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
+            <textarea class="form-control" id="<?php echo e($node["name"]); ?>_editor" name="<?php echo e($node["name"]); ?>" rows="6" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
         </div>
 
         <script type="text/javascript">
             $(document).ready(function() {
-                app.editor.init('<?php echo e($node["name"]); ?>_editor', {
+                CKEDITOR.replace('<?php echo e($node["name"]); ?>_editor', {
                     height: '300px',
                     toolbarGroups :  [
                         {"name":"basicstyles","groups":["basicstyles"]},
