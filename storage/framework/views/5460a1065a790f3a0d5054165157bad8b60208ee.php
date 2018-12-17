@@ -25,28 +25,28 @@
           </div>
           <br clear="all">
           <table class="table" id="table-candidates" style="width:100%">
-                        <thead>
-                           <tr>
-                               <th>#</th>
-                               <th>Nom</th>
-                               <th data-filter="select" data-values="<?php echo base64_encode(json_encode(\App\Models\User::getStatus())); ?>">Etat</th>
-                               <th>Code postal</th>
-                               <th>Localisation</th>
-                               <th data-filter="select" data-values="<?php echo base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Candidate::getTypes())); ?>">Type</th>
-                               
-                               <th></th>
-                           </tr>
-                        </thead>
-                        <tfoot>
-                           <tr>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                           </tr>
-                        </tfoot>
-                    </table>
+            <thead>
+               <tr>
+                   <th>#</th>
+                   <th>Nom</th>
+                   <th data-filter="select" data-values="<?php echo base64_encode(json_encode(\App\Models\User::getStatus())); ?>">Etat</th>
+                   <th>Code postal</th>
+                   <th>Localisation</th>
+                   <th data-filter="select" data-values="<?php echo base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Candidate::getTypes())); ?>">Type</th>
+                   
+                   <th></th>
+               </tr>
+            </thead>
+            <tfoot>
+               <tr>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+               </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
@@ -58,7 +58,9 @@
 
     <?php echo e(Html::script('/modules/rrhh/plugins/datatables/datatables.min.js')); ?>
 
-    <?php echo e(Html::script('/modules/architect/js/libs/datatabletools.js')); ?>
+    <?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
 
     <?php echo e(Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js')); ?>
 
@@ -84,7 +86,6 @@
     <?php echo e(Html::script('/modules/rrhh/js/textext.plugin.autocomplete.js')); ?>
 
     <?php echo e(Html::script('/modules/rrhh/js/textext.plugin.tags.js')); ?>
-
 
 <?php $__env->stopPush(); ?>
 
