@@ -83,14 +83,20 @@ body{
       @include font(12,14,400);
       margin-bottom:5px;
       height: 14px;
+
+      a {
+        color:$brand-light-gray-color;
+      }
+
     }
     p{
       color:$brand-dark-gray-color;
       @include font(12,18,400);
-      .read-more{
-        text-decoration:none;
-        color:$brand-red-color;
-      }
+
+    }
+    a.read-more{
+      text-decoration:none;
+      color:$brand-red-color;
     }
 
   }

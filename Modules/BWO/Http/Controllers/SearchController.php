@@ -48,7 +48,7 @@ class SearchController extends Controller
             'search' => $request->get('search'),
             'items_per_page' => $this->itemsPerPage,
             'page' => $request->get('page') ? $request->get('page') : 0,
-            'pagination_url' => route('search',$params_array).'&page='
+            'pagination_url' => route('search',$params_array).'?page='
         ]);
     }
 }

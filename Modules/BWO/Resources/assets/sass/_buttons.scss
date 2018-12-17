@@ -49,6 +49,18 @@
       color:$brand-white-color;
     }
 
+    &.tag {
+      color:$brand-dark-gray-color;
+      border:1px solid $brand-dark-gray-color;
+      background-color:transparent;
+      cursor:default;
+      &:hover{
+        color:$brand-dark-gray-color;
+        border:1px solid $brand-dark-gray-color;
+        background-color:transparent;
+      }
+    }
+
   }
   &.btn-logout{
     padding: 8px 28px;

@@ -28,7 +28,7 @@ class SendContact
             'comment' => $this->inputs['message'],
         ];
         //at the momoent for testing
-        Mail::send(['html' => 'emails.contact'],
+        Mail::send(['html' => 'bwo::emails.contact'],
             $params,
             function ($message) use ($params) {
                 $message->to(env('MAIL_COMPANY_EMAIL'), null)

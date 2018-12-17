@@ -84,7 +84,7 @@
     </div><!-- end description -->
 
 
-    <div id="related-news" content="{{$content->id}}" tags="{{isset($content->tags)?$content->tags->pluck('id'):null}}" category="{{null !== $content->categories->first()?$content->categories()->first()->id:null }}" ></div>
+    <div id="related-news" content="{{$content->id}}" category="{{null !== $content->categories->first()?$content->categories()->first()->id:null }}" ></div>
 
     <!--
     <div class="other-posts">

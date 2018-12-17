@@ -19,7 +19,7 @@
                                     <a href="/password/reset">Mot de passe oublié ?</a>
                                     <br clear="all">
 
-                                    <button type="button" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
+                                    <button type="submit" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
                                     <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>
@@ -60,7 +60,7 @@
                                  @endif
 
 
-                                  <button type="button" onclick="app.offerapplications.register()" id="regButton" class="btn btn-dark-gray full-width"><i class="fa fa-user"></i>Créer un compte</button>
+                                  <button type="submit" onclick="app.offerapplications.register()" id="regButton" class="btn btn-dark-gray full-width"><i class="fa fa-user"></i>Créer un compte</button>
                                   <img class="loader" id="regLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>

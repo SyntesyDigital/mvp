@@ -74,16 +74,9 @@
       <div class="horizontal-inner-container">
         <div class="col-md-6 home-square home-square-white">
           <h2 class="gray-square-text">INFORMATION SUR L'INTÉRIM</h2>
-          <div class="post-box">
-              <div class="title">TITLE ACTUALITÉ</div>
-              <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
-          </div>
-          <div class="post-box">
-              <div class="title">TITLE ACTUALITÉ</div>
-              <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
-          </div>
+
+          <div id="last-news"></div>
+
         </div>
         <div class="col-md-6 home-square home-square-gray p-l-10">
           <h2 class="gray-square-text">CANDIDATURE SPONTANÉE</h2>
@@ -100,7 +93,8 @@
 
   @push('javascripts')
     <script>
-
+      routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
       $(document).ready(function() {
           $(document).on("click",".btn-search",function() {
             $(this).closest('form').submit();

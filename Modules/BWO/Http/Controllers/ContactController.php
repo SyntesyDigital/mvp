@@ -32,11 +32,11 @@ class ContactController extends Controller
         if ($sent = $this->dispatch(new SendContact($request->all()))) {
             Session::flash('notify_success', 'Votre message vient d\'être envoyé.');
 
-            return redirect()->action('ContactController@index');
+            return redirect()->route('contact.index');
         }
 
         Session::flash('notify_error', "Une erreur s'est produite lors de l'envoi de le message.");
 
-        return redirect()->action('ContactController@index')->withInput();
+        return redirect()->route('contact.index')->withInput();
     }
 }

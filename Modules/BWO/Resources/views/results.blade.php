@@ -28,6 +28,7 @@
         <div class="input-search-container">
           <input class="form-control input-round search-input" type="text" placeholder="Métier, ville, contrat..." name="search" value="">
         </div>
+        <!--
         <div class="checkboxes">
           <label>
              {{Form::checkbox('job', '1')}}[Métier]
@@ -39,6 +40,8 @@
             {{Form::checkbox('contract', '1')}}[Contrat]
           </label>
         </div>
+        -->
+        <div class="separator" style="height:10px;"></div>
         <div class="filter-btn">
           <div class="btn btn-dark-gray" id="btn-more">VOIR PLUS DE FILTRES</div>
           <div class="btn btn-dark-gray" id="btn-less">VOIR MOINS DE FILTRES</div>
@@ -95,6 +98,7 @@
           {!! Form::Label('filter', 'Filtre par:') !!}
           {!! Form::select('filter', [0 => '', 1 =>'Filtre 1', 2 => 'Filtre 2'], null, ['class' => 'form-control']) !!}
         </div>
+        <div class="separator"></div>
         <div class="btn btn-dark-gray" id="btn-filtres">APPLIQUER LES FILTRES</div>
       </div>
 
@@ -108,7 +112,8 @@
                 <div class="title">
                   {{ $offer->title }}
                 </div>
-                <p>Réf: BOU - Posté le 16/11/2018</p>
+
+                <p>Réf: {{$offer->id}} - Posté le {{$offer->start_at}}</p>
                 @php
                   $string = substr(strip_tags($offer->description), 0, 250);
                   if(strlen($string) < strlen(strip_tags($offer->description))){
@@ -132,33 +137,35 @@
           </div>
         @endforeach
       <br clear="all">
-      <div class="pagination-container">
-        @if($page > 0)
-          <a href="{{$pagination_url.($page - 1)}}" class="round"><div class="round"><i class="fa fa-angle-left" aria-hidden="true"></i></div></a>
-        @endif
-        @if($page > 2)
-          <a href="{{$pagination_url.($page-3)}}">...</a>
-        @endif
-        @if($page > 1)
-          <a href="{{$pagination_url.($page-2)}}">{{$page - 1}}</a>
-        @endif
-        @if($page > 0)
-          <a href="{{$pagination_url.($page-1)}}">{{$page}}</a>
-        @endif
-        <a href="javascript:void(0)" class="active">{{$page + 1}}</a>
-        @if(($page+1)*$items_per_page < $num_offers)
-          <a href="{{$pagination_url.($page +1)}}">{{$page +2}}</a>
-        @endif
-        @if(($page+2)*$items_per_page < $num_offers)
-          <a href="{{$pagination_url.($page + 2)}}">{{$page +3}}</a>
-        @endif
-        @if(($page+3)*$items_per_page < $num_offers)
-          <a href="{{$pagination_url.($page + 3)}}">...</a>
-        @endif
-        @if(($page+1)*$items_per_page < $num_offers)
-          <a href="{{$pagination_url.($page + 1)}}" class="round"><div class="round"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a>
-        @endif
-      </div>
+      @if($num_offers > $items_per_page)
+        <div class="pagination-container">
+          @if($page > 0)
+            <a href="{{$pagination_url.($page - 1)}}" class="round"><div class="round"><i class="fa fa-angle-left" aria-hidden="true"></i></div></a>
+          @endif
+          @if($page > 2)
+            <a href="{{$pagination_url.($page-3)}}">...</a>
+          @endif
+          @if($page > 1)
+            <a href="{{$pagination_url.($page-2)}}">{{$page - 1}}</a>
+          @endif
+          @if($page > 0)
+            <a href="{{$pagination_url.($page-1)}}">{{$page}}</a>
+          @endif
+          <a href="javascript:void(0)" class="active">{{$page + 1}}</a>
+          @if(($page+1)*$items_per_page < $num_offers)
+            <a href="{{$pagination_url.($page +1)}}">{{$page +2}}</a>
+          @endif
+          @if(($page+2)*$items_per_page < $num_offers)
+            <a href="{{$pagination_url.($page + 2)}}">{{$page +3}}</a>
+          @endif
+          @if(($page+3)*$items_per_page < $num_offers)
+            <a href="{{$pagination_url.($page + 3)}}">...</a>
+          @endif
+          @if(($page+1)*$items_per_page < $num_offers)
+            <a href="{{$pagination_url.($page + 1)}}" class="round"><div class="round"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a>
+          @endif
+        </div>
+      @endif
 
     </div>
   </div>
@@ -262,19 +269,17 @@
       });
 
       $(".selectBox").on('click',function(e){
-        showCheckboxes(this.getAttribute('checkbox'));
+
+        var checkbox = $(e.target).closest('.selectBox').next();
+        if(checkbox.hasClass('expanded')){
+          checkbox.removeClass('expanded')
+        }
+        else {
+          checkbox.addClass('expanded');
+        }
+
       });
     });
-    var expanded = false;
-    function showCheckboxes(num_select) {
-      var checkboxes = document.getElementById("checkboxes_"+num_select);
-      if (!expanded) {
-        checkboxes.style.display = "block";
-        expanded = true;
-      } else {
-        checkboxes.style.display = "none";
-        expanded = false;
-      }
-    }
+
   </script>
 @endpush

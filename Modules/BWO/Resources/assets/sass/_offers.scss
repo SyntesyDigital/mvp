@@ -36,6 +36,9 @@ body{
           }
           .checkboxes{
             padding:10px 0;
+
+
+
             label{
               margin:10px 15px 10px 0;
               @include font(14, 19, 300);
@@ -97,18 +100,23 @@ body{
           }
 
           .checkboxes {
-          display: none;
-          border: 1px #dadada solid;
-          background-color: rgb(255, 255, 255);
-          margin-top: -15px;
-          margin-bottom: 10px;
-              max-height: 75px;
-              overflow-y:scroll;
+            display: none;
+            border: 1px #dadada solid;
+            background-color: rgb(255, 255, 255);
+            margin-top: -15px;
+            margin-bottom: 10px;
+            max-height: 75px;
+            overflow-y:scroll;
+
+            &.expanded{
+                display: block;
+            }
+
           label {
             display: block;
             padding: 7px 10px;
             &:hover {
-              background-color: $brand-color-2;
+              color: $brand-color-2;
             }
             input{
               margin:3px 5px 0 0;
