@@ -89,7 +89,7 @@
           <h2 class="gray-square-text">CANDIDATURE SPONTANÉE</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor. Pellentesque bibendum eget lorem quis placerat. Suspendisse vestibulum sapien nibh, et lobortis libero laoreet nec. Ut eget ex ante. Mauris cursus nibh ac augue tincidunt, nec ultrices elit ullamcorper. Aenean in metus nunc. Vestibulum ac auctor dolor, sit amet lacinia orci. Proin at est velit.</p>
           <div class="centered">
-            <a href="" class="btn btn-dark-gray" ><i class="fa fa-pencil"></i>ENVOYER UNE CANDIDATURE</a>
+            <a href="{{route('spontanious.form')}}" class="btn btn-dark-gray" ><i class="fa fa-pencil"></i>ENVOYER UNE CANDIDATURE</a>
           </div>
         </div>
         <br clear="all">

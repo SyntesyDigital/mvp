@@ -27,11 +27,9 @@
         </li>
 
         <li>
-          <!--
           <a href="<?php echo e(route('rrhh.admin.customers.index')); ?>">
             <i class="fa fa-user-o"></i><span class="text">Clients</span>
           </a>
-          -->
         </li>
     </ul>
     <hr/>

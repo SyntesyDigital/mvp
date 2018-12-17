@@ -51,6 +51,9 @@ body{
       }
       .candidate-list{
         padding: 20px 15px;
+        h2{
+          padding-left:10px;
+        }
         .candidate-box{
           i{
             color:$brand-footer-light-gray-color;

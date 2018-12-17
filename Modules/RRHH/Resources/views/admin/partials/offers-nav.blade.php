@@ -27,11 +27,9 @@
         </li>
 
         <li>
-          <!--
           <a href="{{route('rrhh.admin.customers.index')}}">
             <i class="fa fa-user-o"></i><span class="text">Clients</span>
           </a>
-          -->
         </li>
     </ul>
     <hr/>
