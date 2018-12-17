@@ -9925,6 +9925,11 @@ a {
   color: #fff;
 }
 
+.btn.btn-soft-gray.selected {
+  background-color: #666666;
+  color: #fff;
+}
+
 .btn.btn-logout {
   padding: 8px 28px;
 }
@@ -10219,6 +10224,7 @@ body ol.breadcrumb li {
 body ol.breadcrumb li a {
   color: #666666;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 body ol.breadcrumb li a:hover {
@@ -11218,27 +11224,44 @@ body .banner h1 {
   margin: 45px 0 20px 0;
 }
 
-body .offers-container .blog-container {
+body .widget-blog.offers-container {
+  padding: 0px;
+  margin-top: 0px;
+}
+
+body .widget-blog.offers-container .blog-container {
   background-color: white;
   padding: 20px;
+  padding-top: 0px;
   color: #666666;
 }
 
-body .offers-container .blog-container .categories-container {
-  margin-top: 20px;
+body .widget-blog.offers-container .blog-container .categories-container {
+  margin-top: 0px;
 }
 
-body .offers-container .blog-container .categories-container h3 {
+body .widget-blog.offers-container .blog-container .categories-container h3 {
   font-size: 14px;
   line-height: 18px;
   font-weight: 600;
+  margin-top: 0px;
 }
 
-body .offers-container .blog-container .posts-list {
+body .widget-blog.offers-container .blog-container .categories-container ul {
+  padding: 0;
+}
+
+body .widget-blog.offers-container .blog-container .categories-container ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 10px;
+}
+
+body .widget-blog.offers-container .blog-container .posts-list {
   padding: 20px 0;
 }
 
-body .offers-container .blog-container .posts-list .post-box {
+body .widget-blog.offers-container .blog-container .posts-list .post-box {
   padding: 18px 0 0;
   text-align: left;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
@@ -11246,14 +11269,14 @@ body .offers-container .blog-container .posts-list .post-box {
   margin-bottom: 20px;
 }
 
-body .offers-container .blog-container .posts-list .post-box .image {
+body .widget-blog.offers-container .blog-container .posts-list .post-box .image {
   height: 192px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-body .offers-container .blog-container .posts-list .post-box .title {
+body .widget-blog.offers-container .blog-container .posts-list .post-box .title {
   margin: 10px 0 0;
   color: #666666;
   font-size: 20px;
@@ -11263,7 +11286,7 @@ body .offers-container .blog-container .posts-list .post-box .title {
   padding: 15px;
 }
 
-body .offers-container .blog-container .posts-list .post-box p {
+body .widget-blog.offers-container .blog-container .posts-list .post-box p {
   color: #d3d1ae;
   font-size: 12px;
   line-height: 14px;
@@ -11273,25 +11296,38 @@ body .offers-container .blog-container .posts-list .post-box p {
   padding: 0 15px;
 }
 
-body .offers-container .blog-container .posts-list .post-box p.description {
+body .widget-blog.offers-container .blog-container .posts-list .post-box p a {
+  color: #d3d1ae;
+}
+
+body .widget-blog.offers-container .blog-container .posts-list .post-box p a:hover {
+  text-decoration: underline;
+}
+
+body .widget-blog.offers-container .blog-container .posts-list .post-box .excerpt p {
   color: #666666;
   font-size: 14px;
   line-height: 18px;
   font-weight: 300;
-  margin-bottom: 15px;
-  height: 100px;
+  height: auto;
 }
 
-body .offers-container .blog-container .posts-list .post-box .detail {
+body .widget-blog.offers-container .blog-container .posts-list .post-box .detail {
   color: #ff0000;
   cursor: pointer;
   text-decoration: none;
+  padding: 0 15px;
+  margin-bottom: 15px;
 }
 
-body .offers-container .blog-container .posts-list .post-box .detail:hover {
+body .widget-blog.offers-container .blog-container .posts-list .post-box .detail:hover {
   color: #666666;
   cursor: pointer;
   text-decoration: none;
+}
+
+body .widget-blog.offers-container .read-more {
+  text-align: center;
 }
 
 body .banner h1 {
@@ -11308,7 +11344,7 @@ body .banner h1 {
 body .posts-container .post-container {
   background-color: white;
   padding: 10px;
-  margin-top: -130px;
+  margin-top: -80px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;

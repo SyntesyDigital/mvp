@@ -38,17 +38,47 @@ export default class Blog extends Component {
             loaded: false,
             filters : filters,
             showFilter:showFilter,
+            showCategories : '1',
+            categories : null,
             size:field.settings !== undefined && field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : 6,
         };
     }
 
+    queryCategories() {
+        var self = this;
+
+        var searchQuery = '';
+        var datesQuery = '';
+
+        const {field} = this.state;
+
+
+        axios.get(ASSETS+'api/categories?accept_lang='+LOCALE)
+          .then(function (response) {
+
+              if(response.status == 200
+                  && response.data.data !== undefined)
+              {
+                  self.setState({
+                      categories : response.data.data
+                  });
+              }
+
+
+          }).catch(function (error) {
+             console.log(error);
+           });
+    }
+
     componentDidMount() {
 
-        const {filters} = this.state;
-        const {init} = this.state;
+        const {init,showCategories,filters} = this.state;
 
         if(init == '1'){
           this.query(1,filters);
+        }
+        if(showCategories == '1'){
+          this.queryCategories();
         }
     }
 
@@ -110,6 +140,9 @@ export default class Blog extends Component {
         );
       }
 
+      return result;
+
+      /*
       return (
             <Masonry
                 className={'list-blog'} // default ''
@@ -122,7 +155,7 @@ export default class Blog extends Component {
                 {result}
             </Masonry>
         );
-
+      */
 
     //  return result;
     }
@@ -137,31 +170,59 @@ export default class Blog extends Component {
       this.query(1,filters);
     }
 
+    renderCategories() {
+
+       var result = [];
+       const categories = this.state.categories;
+            // console.log(tags);
+      const {filters} = this.state;
+      var category_id = filters!= null && filters.category != null?filters.category:null;
+
+       for(var key in categories){
+         result.push(
+           <li key={key}>
+               <a className={"btn btn-soft-gray "+(category_id != categories[key].id ? '' : 'selected')} href={routes["categoryNews"].replace(":slug",categories[key].slug)}> {categories[key].name}</a>
+           </li>
+         );
+       }
+
+       return result;
+     }
+
     render() {
 
         return (
-            <div className="posts-list">
+            <div>
+              <div className="categories-container">
+                <h3>CATÉGORIES</h3>
+                <ul>
+                  {this.renderCategories()}
+                </ul>
+              </div>
+              <div className="posts-list row">
 
-                {this.state.items == null &&
-                    <p>{/*Carregant dades...*/}</p>
-                }
 
-                {this.state.items != null && this.state.items.length == 0 &&
-                    <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
-                }
 
-                {this.state.items != null && this.state.items.length > 0 &&
-                    this.renderItems()
-                }
+                  {this.state.items == null &&
+                      <p>{/*Carregant dades...*/}</p>
+                  }
 
-                {this.state.lastPage &&
-                    <MoreResults
-                      currPage={this.state.currPage}
-                      lastPage={this.state.lastPage}
-                      onChange={this.onPageChange.bind(this)}
-                    />
-                }
+                  {this.state.items != null && this.state.items.length == 0 &&
+                      <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
+                  }
 
+                  {this.state.items != null && this.state.items.length > 0 &&
+                      this.renderItems()
+                  }
+
+              </div>
+              {this.state.lastPage &&
+                  <MoreResults
+                    currPage={this.state.currPage}
+                    lastPage={this.state.lastPage}
+                    onChange={this.onPageChange.bind(this)}
+                  />
+              }
             </div>
         );
     }

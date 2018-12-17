@@ -35,6 +35,15 @@ class NewsBlog extends Component {
       const title = this.processText(fields,'title');
       const descripcio = this.processText(fields,'excerpt');
 
+      var crop = "medium";
+      var url = null;
+
+      if(fields['image'].values !== undefined && fields['image'].values != null){
+        if(fields['image'].values.urls[crop] !== undefined){
+          url = fields['image'].values.urls[crop];
+        }
+      }
+
       var results = [];
       if(data != null){
         data = moment(data).format('L');
@@ -43,17 +52,16 @@ class NewsBlog extends Component {
       return (
 
         <div className="post-box">
-            <div className="image"
-              style={{ backgroundImage: ''}}></div>
+            <div className="image" style={{ backgroundImage: 'url("'+ASSETS+url+'")'}}></div>
             <div className="title">
               {title}
             </div>
             <p>{data != null ? 'Le '+data : ''} - {category != null &&
               <a href={routes["categoryNews"].replace(":slug",category_slug)}>{category} </a>
             }</p>
-            <p>
-              <span dangerouslySetInnerHTML={{__html: descripcio }} / >
-            </p>
+            <div className="excerpt" dangerouslySetInnerHTML={{__html: descripcio }}>
+            </div>
+            <a href={this.props.field.url} className="detail">Lire la suite</a>
         </div>
       );
 

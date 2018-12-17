@@ -43,6 +43,12 @@
       background-color:$brand-dark-gray-color;
       color:$brand-white-color;
     }
+
+    &.selected {
+      background-color:$brand-dark-gray-color;
+      color:$brand-white-color;
+    }
+
   }
   &.btn-logout{
     padding: 8px 28px;

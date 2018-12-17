@@ -6,7 +6,10 @@ if (!function_exists('breadcrumb')) {
     function page_breadcrumb($content)
     {
         $nodes = Modules\Architect\Entities\Content::with('fields')->defaultOrder()->ancestorsAndSelf($content->id);
-        $breadcrumb = [];
+        $breadcrumb = [[
+            'label' => 'Accueil',
+            'url' => route('home')
+        ]];
         $prefix = '';
 
         // Build breadcrumb path
@@ -35,7 +38,10 @@ if (!function_exists('breadcrumb')) {
     function typology_breadcrumb($content)
     {
 
-        $breadcrumb = [];
+        $breadcrumb = [[
+            'label' => 'Accueil',
+            'url' => route('home')
+        ]];
         $prefix = '';
 
         $blog = Modules\Architect\Entities\Content::whereField("slug","blog")->first();
@@ -74,7 +80,10 @@ if (!function_exists('breadcrumb')) {
 
     function breadcrumb_category($category)
     {
-        $breadcrumb = [];
+        $breadcrumb = [[
+            'label' => 'Accueil',
+            'url' => route('home')
+        ]];
         $prefix = '';
 
         $blog = Modules\Architect\Entities\Content::whereField("slug","blog")->first();

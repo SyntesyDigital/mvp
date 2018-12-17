@@ -238,6 +238,7 @@ body {
         a {
           color: $brand-dark-gray-color;
           text-decoration: none;
+          text-transform: uppercase;
           &:hover {
             color: $brand-red-color;
             text-decoration: none;
