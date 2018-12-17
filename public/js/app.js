@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 625);
+/******/ 	return __webpack_require__(__webpack_require__.s = 616);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -46840,7 +46840,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 578:
+/***/ 569:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49287,38 +49287,19 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
-/***/ 62:
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
+__webpack_require__(617);
+__webpack_require__(621);
+__webpack_require__(623);
+__webpack_require__(624);
+module.exports = __webpack_require__(625);
 
 
 /***/ }),
 
-/***/ 625:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(626);
-__webpack_require__(630);
-__webpack_require__(632);
-__webpack_require__(633);
-module.exports = __webpack_require__(634);
-
-
-/***/ }),
-
-/***/ 626:
+/***/ 617:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -49328,7 +49309,7 @@ module.exports = __webpack_require__(634);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(627);
+__webpack_require__(618);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -49336,16 +49317,16 @@ __webpack_require__(627);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(629);
+__webpack_require__(620);
 
 /***/ }),
 
-/***/ 627:
+/***/ 618:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(340);
-window.Popper = __webpack_require__(578).default;
+window.Popper = __webpack_require__(569).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -49356,7 +49337,7 @@ window.Popper = __webpack_require__(578).default;
 try {
   window.$ = window.jQuery = __webpack_require__(102);
 
-  __webpack_require__(628);
+  __webpack_require__(619);
 } catch (e) {}
 
 /**
@@ -49402,7 +49383,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 628:
+/***/ 619:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -49411,7 +49392,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-	 true ? factory(exports, __webpack_require__(102), __webpack_require__(578)) :
+	 true ? factory(exports, __webpack_require__(102), __webpack_require__(569)) :
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -53303,7 +53284,26 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 /***/ }),
 
-/***/ 629:
+/***/ 62:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ 620:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53373,6 +53373,34 @@ var Example = function (_Component) {
 if (document.getElementById('example')) {
     __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Example, null), document.getElementById('example'));
 }
+
+/***/ }),
+
+/***/ 621:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 623:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 624:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 625:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -53561,34 +53589,6 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-
-/***/ }),
-
-/***/ 630:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 632:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 633:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 634:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 

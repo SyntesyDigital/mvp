@@ -77,12 +77,12 @@
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="{{route('post')}}" class="read-more">Lire la suite</a></p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
           </div>
           <div class="post-box">
               <div class="title">TITLE ACTUALITÉ</div>
               <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="{{route('post')}}" class="read-more">Lire la suite</a></p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
           </div>
         </div>
         <div class="col-md-6 home-square home-square-gray p-l-10">

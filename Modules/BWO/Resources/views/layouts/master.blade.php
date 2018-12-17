@@ -56,7 +56,7 @@
           var civility_default = "{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}"
           var routes = {'login':"{{route('candidate.login')}}"}
         </script>
-
+        <script type="text/javascript" src="{{route('localization.js', App::getLocale())}}" ></script>
 
         <!-- Select2 -->
 

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Masonry from 'react-masonry-component';
 
 import MoreResults from './../Common/MoreResults';
-import FilterBarBlog from './../Common/FilterBarBlog';
 import NewsBlog from './../Typologies/NewsBlog';
 
 const masonryOptions = {
@@ -19,114 +18,82 @@ export default class Blog extends Component {
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const init = props.init ? props.init : '1';
-        const showTags = props.showTags ? props.showTags : '1';
         const showFilter = props.showFilter ? props.showFilter : '1';
         const categoryId = props.categoryId ? props.categoryId : null;
-        const tagId = props.tagId ? props.tagId : null;
-        const interviews = props.interviews ? props.interviews : null;
-        const text = props.text ? props.text : null;
-        const startDate = props.startDate ? props.startDate : null;
-        const endDate = props.endDate ? props.endDate : null;
 
         var filters = {};
         if(categoryId != null){
           filters.category =categoryId;
         }
 
-        if(tagId != null){
-          filters.tag =tagId;
-        }
-
-        if(interviews != null){
-          filters.interviews = interviews;
-        }
-
-        if(text != null){
-          filters.text = text;
-        }
-        if(startDate != null){
-          filters.startDate = startDate;
-        }
-        if(endDate != null){
-          filters.endDate = endDate;
-        }
-
-        if(filters.category == null && filters.tag == null && filters.interviews == null
-           && filters.text == null && filters.startDate == null && filters.endDate == null){
+        if(filters.category == null ){
           filters= null;
         }
-
 
         this.state = {
             field : field,
             init: init,
-            showTags: showTags,
             items : null,
             currPage : null,
             loaded: false,
-            textIdentifier : '',
-            dateIdentifier : '',
             filters : filters,
-            tags : null,
             showFilter:showFilter,
+            showCategories : '1',
+            categories : null,
             size:field.settings !== undefined && field.settings.itemsPerPage !== undefined ?  field.settings.itemsPerPage : 6,
         };
     }
 
+    queryCategories() {
+        var self = this;
+
+        var searchQuery = '';
+        var datesQuery = '';
+
+        const {field} = this.state;
+
+
+        axios.get(ASSETS+'api/categories?accept_lang='+LOCALE)
+          .then(function (response) {
+
+              if(response.status == 200
+                  && response.data.data !== undefined)
+              {
+                  self.setState({
+                      categories : response.data.data
+                  });
+              }
+
+
+          }).catch(function (error) {
+             console.log(error);
+           });
+    }
+
     componentDidMount() {
 
-        const {filters} = this.state;
-        const {init} = this.state;
-        const {showTags} = this.state;
+        const {init,showCategories,filters} = this.state;
 
         if(init == '1'){
           this.query(1,filters);
         }
-        if(showTags == '1'){
-          this.queryTags();
+        if(showCategories == '1'){
+          this.queryCategories();
         }
     }
 
     query(page,filters) {
         var self = this;
 
-        var searchQuery = '';
-        var datesQuery = '';
-        var entrevistaQuery = '';
-
         const {field} = this.state;
-
-        if(filters != null){
-
-          var fieldsQuery = '[:query]';
-
-          if(filters.text != null){
-            searchQuery = '["title","like","%'+filters.text+'%"]';
-          }
-          if(filters.startDate != null && filters.endDate != null) {
-            datesQuery = '["data",">=","'+filters.startDate+'"]';
-            datesQuery += ',["data","<=","'+filters.endDate+'"]';
-          }
-
-          if(filters.interviews != null && filters.interviews == '1' ){
-            entrevistaQuery = '["es-entrevista","=",'+filters.interviews+']';
-          }
-
-          var query = searchQuery+(searchQuery != '' && datesQuery != '' ? ',':'')+datesQuery+((searchQuery != '' || datesQuery != '') && entrevistaQuery != '' ? ',':'')+entrevistaQuery;
-          fieldsQuery = fieldsQuery.replace(':query',query);
-        }
-
-        console.log("Blog :: query : "+fieldsQuery);
 
         var params = {
             size : this.state.size,
             typology_id : 1,
             category_id : filters!= null && filters.category != null?filters.category:null,
-            tags : filters!= null && filters.tag != null?filters.tag:null,
-            fields : fieldsQuery,
             page : page ? page : null,
             accept_lang : LOCALE,
-            orderBy : 'data',
+            orderBy : 'date',
             sortedBy : 'desc',
             loads : 'category'
           };
@@ -157,56 +124,25 @@ export default class Blog extends Component {
            });
     }
 
-    queryTags() {
-        var self = this;
-
-        var searchQuery = '';
-        var datesQuery = '';
-
-        const {field} = this.state;
-
-
-        axios.get(ASSETS+'api/tags')
-          .then(function (response) {
-
-              if(response.status == 200
-                  && response.data.data !== undefined)
-              {
-                  self.setState({
-                      tags : response.data.data
-                  });
-              }
-
-
-          }).catch(function (error) {
-             console.log(error);
-           });
-    }
-
     renderItems() {
 
       var result = [];
       const {items} = this.state;
       var classEntrevista = '';
       for(var key in items){
-       // console.log("TypologyPaginated => ",items[key]);
-
-        if(null != items[key].fields["es-entrevista"].values && items[key].fields["es-entrevista"].values == '1'){
-          classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12 entrevista';
-        }else{
-          classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12';
-        }
-
 
         result.push(
-          <li className={classEntrevista} key={key}>
+          <div className="col-md-6 col-sm-6 col-xs-12" key={key}>
             <NewsBlog
               field={items[key]}
             />
-          </li>
+          </div>
         );
       }
 
+      return result;
+
+      /*
       return (
             <Masonry
                 className={'list-blog'} // default ''
@@ -219,27 +155,9 @@ export default class Blog extends Component {
                 {result}
             </Masonry>
         );
-
+      */
 
     //  return result;
-    }
-
-
-     renderTags() {
-
-      var result = [];
-      const tags = this.state.tags;
-           // console.log(tags);
-
-      for(var key in tags){
-        result.push(
-          <li key={key}>
-              <a href={routes["tagNews"].replace(":slug",tags[key].slug)}> {tags[key].name}</a>
-          </li>
-        );
-      }
-
-      return result;
     }
 
     onPageChange(page) {
@@ -252,57 +170,59 @@ export default class Blog extends Component {
       this.query(1,filters);
     }
 
+    renderCategories() {
+
+       var result = [];
+       const categories = this.state.categories;
+            // console.log(tags);
+      const {filters} = this.state;
+      var category_id = filters!= null && filters.category != null?filters.category:null;
+
+       for(var key in categories){
+         result.push(
+           <li key={key}>
+               <a className={"btn btn-soft-gray "+(category_id != categories[key].id ? '' : 'selected')} href={routes["categoryNews"].replace(":slug",categories[key].slug)}> {categories[key].name}</a>
+           </li>
+         );
+       }
+
+       return result;
+     }
+
     render() {
-        const {showFilter} = this.state;
-        var filterBar = '';
-        if(showFilter == '1'){
-          filterBar = <FilterBarBlog
-                  category={this.state.filters && this.state.filters.category?this.state.filters.category:null }
-                  text={this.state.filters && this.state.filters.text?this.state.filters.text:null}
-                  startDate= {this.state.filters && this.state.filters.startDate? this.state.filters.startDate:null}
-                  endDate={this.state.filters && this.state.filters.endDate? this.state.filters.endDate:null}
-                  onSubmit={this.handleFilterSubmit.bind(this)}
-                />;
-        }
 
         return (
-            <div className="blog-home">
+            <div>
+              <div className="categories-container">
+                <h3>CATÉGORIES</h3>
+                <ul>
+                  {this.renderCategories()}
+                </ul>
+              </div>
+              <div className="posts-list row">
 
 
-              {filterBar}
 
-                {this.state.items == null &&
-                    <p>{/*Carregant dades...*/}</p>
-                }
+                  {this.state.items == null &&
+                      <p>{/*Carregant dades...*/}</p>
+                  }
 
-                {this.state.items != null && this.state.items.length == 0 &&
-                    <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
-                }
+                  {this.state.items != null && this.state.items.length == 0 &&
+                      <p>{window.localization['GENERAL_WIDGET_LAST_TYPOLOGY_EMPTY']}</p>
+                  }
 
-                {this.state.items != null && this.state.items.length > 0 &&
-                  <div className="white">
-                    <div className="row">
-                      <div className="container">
-                          {this.renderItems()}
-                      </div>
-                    </div>
-                  </div>
-                }
+                  {this.state.items != null && this.state.items.length > 0 &&
+                      this.renderItems()
+                  }
 
-                {this.state.lastPage &&
-                    <MoreResults
-                      currPage={this.state.currPage}
-                      lastPage={this.state.lastPage}
-                      onChange={this.onPageChange.bind(this)}
-                    />
-                }
-
-                {this.state.tags != null && this.state.tags.length > 0 &&
-                  <ul className="tags_blog">
-                    {this.renderTags()}
-                  </ul>
-                }
-
+              </div>
+              {this.state.lastPage &&
+                  <MoreResults
+                    currPage={this.state.currPage}
+                    lastPage={this.state.lastPage}
+                    onChange={this.onPageChange.bind(this)}
+                  />
+              }
             </div>
         );
     }
@@ -313,26 +233,12 @@ if (document.getElementById('blog')) {
    document.querySelectorAll('[id=blog]').forEach(function(element){
        var field = element.getAttribute('field');
        var init = element.getAttribute('init');
-       var showTags = element.getAttribute('showTags');
-       var showFilter = element.getAttribute('showFilter');
        var categoryId = element.getAttribute('categoryId');
-       var tagId = element.getAttribute('tagId');
-       var interviews = element.getAttribute('interviews');
-       var text =  element.getAttribute('text');
-       var startDate =  element.getAttribute('startDate');
-       var endDate =  element.getAttribute('endDate');
 
        ReactDOM.render(<Blog
            field={field}
            init={init}
-           showTags={showTags}
-           showFilter={showFilter}
            categoryId={categoryId}
-           tagId={tagId}
-           interviews={interviews}
-           text={text}
-           startDate={startDate}
-           endDate={endDate}
          />, element);
    });
 }
