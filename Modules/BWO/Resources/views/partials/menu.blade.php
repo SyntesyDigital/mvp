@@ -12,6 +12,6 @@
     <a class="nav-link" href="#">BWO</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">CONTACT</a>
+    <a class="nav-link" href="{{route('contact.index')}}">CONTACT</a>
   </li>
 </ul>

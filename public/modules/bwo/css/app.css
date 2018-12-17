@@ -10518,7 +10518,11 @@ footer .footer-info .first-line-footer ul li a:hover {
 }
 
 form .input-round {
-  border-radius: 15px;
+  border-radius: 200px;
+}
+
+form #resume_file {
+  border-radius: 0px !important;
 }
 
 .full-width {
@@ -11543,6 +11547,10 @@ body .candidate-container .horizontal-inner-container .information-container .in
 
 body .candidate-container .horizontal-inner-container .candidate-list {
   padding: 20px 15px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list h2 {
+  padding-left: 10px;
 }
 
 body .candidate-container .horizontal-inner-container .candidate-list .candidate-box {

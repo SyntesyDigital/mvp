@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\RRHH\Http\Controllers\Front;
+namespace Modules\BWO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\RRHH\Http\Requests\Candidate\SpontaniousRequest;
@@ -21,12 +21,12 @@ class SpontaniousController extends Controller
             return redirect()->route('admin');
         }
 
-        return view('front.spontanious.form');
+        return view('bwo::spontanious.form');
     }
 
     public function success(Request $request)
     {
-        return view('front.spontanious.success');
+        return view('bwo::spontanious.success');
     }
 
     public function store(SpontaniousRequest $request)

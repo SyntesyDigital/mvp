@@ -12,14 +12,14 @@ return [
         ],
         "roles" => []
     ],
-
-    [
-        "route" => 'rrhh.admin.customers.index',
-        "label" => Lang::get('rrhh::header.customers'),
-        "patterns" => [
-            'architect/customers*',
-        ],
-        "roles" => []
-    ],
+    //
+    // [
+    //     "route" => 'rrhh.admin.customers.index',
+    //     "label" => Lang::get('rrhh::header.customers'),
+    //     "patterns" => [
+    //         'architect/customers*',
+    //     ],
+    //     "roles" => []
+    // ],
 
 ];
