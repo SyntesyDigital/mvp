@@ -61,9 +61,9 @@ Route::group([
     | SPONTANIOUS CANDIDATES
     |--------------------------------------------------------------------------
     */
-    //Route::get('/candidature-spontanee', ['as' => 'spontanious.form', 'uses' => 'Front\SpontaniousController@index']);
-    //Route::post('/candidature-spontanee', ['as' => 'spontanious.store', 'uses' => 'Front\SpontaniousController@store']);
-    //Route::get('/candidature-spontanee/success', ['as' => 'spontanious.success', 'uses' => 'Front\SpontaniousController@success']);
+    Route::get('/candidature-spontanee', ['as' => 'spontanious.form', 'uses' => 'SpontaniousController@index']);
+    Route::post('/candidature-spontanee', ['as' => 'spontanious.store', 'uses' => 'SpontaniousController@store']);
+    Route::get('/candidature-spontanee/success', ['as' => 'spontanious.success', 'uses' => 'SpontaniousController@success']);
 
 
     /*

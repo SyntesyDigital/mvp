@@ -10513,7 +10513,11 @@ footer .footer-info .first-line-footer ul li a:hover {
 }
 
 form .input-round {
-  border-radius: 15px;
+  border-radius: 200px;
+}
+
+form #resume_file {
+  border-radius: 0px !important;
 }
 
 .full-width {
