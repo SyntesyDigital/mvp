@@ -6,6 +6,7 @@ use Modules\RRHH\Entities\Offers\Candidate;
 use App\Models\User;
 use Datatables;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Lang;
 
 class CandidateRepository extends BaseRepository
 {
@@ -73,7 +74,7 @@ class CandidateRepository extends BaseRepository
             })
             ->addColumn('action', function ($item) {
                 return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> Voir</a>'.
-                '&nbsp; <a href="'.route('rrhh.admin.candidates.delete', $item).'" class="btn btn-link text-danger"><i class="fa fa-trash"></i> Suprimer</a>';
+                '&nbsp; <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('rrhh.admin.candidates.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> Suprimer</a>';
             })
             ->order(function ($query) {
                 $orders = request()->get('order');

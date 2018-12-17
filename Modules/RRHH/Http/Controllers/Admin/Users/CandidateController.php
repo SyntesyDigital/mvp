@@ -89,16 +89,37 @@ class CandidateController extends Controller
         return redirect()->route('rrhh.admin.candidates.show', $user);
     }
 
-    public function delete(User $user)
+    public function delete(User $user, Request $request)
     {
         try {
             $this->dispatchNow(new DeleteCandidate($user));
-            Session::flash('notify_success', 'Suppression effectué avec succès');
+
+
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => true
+                ]);
+            } else {
+                Session::flash('notify_success', 'Suppression effectué avec succès');
+            }
         } catch (\Exception $e) {
-            Session::flash('notify_error', $e->getMessage());
+            if($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $e->getMessage()
+                ], 500);
+            } else {
+                Session::flash('notify_error', $e->getMessage());
+            }
         }
 
-        return redirect()->route('rrhh::admin.candidates.index');
+        if($request->ajax()) {
+            return response()->json([
+                'success' => false
+            ], 500);
+        }
+
+        return redirect()->route('rrhh.admin.candidates.index');
     }
 
     public function applications(User $user)

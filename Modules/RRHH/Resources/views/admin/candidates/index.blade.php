@@ -27,28 +27,28 @@
           </div>
           <br clear="all">
           <table class="table" id="table-candidates" style="width:100%">
-                        <thead>
-                           <tr>
-                               <th>#</th>
-                               <th>Nom</th>
-                               <th data-filter="select" data-values="{!! base64_encode(json_encode(\App\Models\User::getStatus())) !!}">Etat</th>
-                               <th>Code postal</th>
-                               <th>Localisation</th>
-                               <th data-filter="select" data-values="{!! base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Candidate::getTypes())) !!}">Type</th>
-                               {{-- <th data-filter="select" data-values="{!! base64_encode(json_encode(\App\Models\User::getStatus())) !!}">Etat</th> --}}
-                               <th></th>
-                           </tr>
-                        </thead>
-                        <tfoot>
-                           <tr>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                               <th></th>
-                           </tr>
-                        </tfoot>
-                    </table>
+            <thead>
+               <tr>
+                   <th>#</th>
+                   <th>Nom</th>
+                   <th data-filter="select" data-values="{!! base64_encode(json_encode(\App\Models\User::getStatus())) !!}">Etat</th>
+                   <th>Code postal</th>
+                   <th>Localisation</th>
+                   <th data-filter="select" data-values="{!! base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Candidate::getTypes())) !!}">Type</th>
+                   {{-- <th data-filter="select" data-values="{!! base64_encode(json_encode(\App\Models\User::getStatus())) !!}">Etat</th> --}}
+                   <th></th>
+               </tr>
+            </thead>
+            <tfoot>
+               <tr>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+               </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 @endsection
@@ -58,7 +58,8 @@
     <!-- Datatables -->
     {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
-    {{ Html::script('/modules/architect/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/dialog.js') }}
     {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js') }}
 @endpush
 
@@ -79,5 +80,4 @@
     {{ Html::script('/modules/rrhh/js/textext.core.js') }}
     {{ Html::script('/modules/rrhh/js/textext.plugin.autocomplete.js') }}
     {{ Html::script('/modules/rrhh/js/textext.plugin.tags.js') }}
-
 @endpush
