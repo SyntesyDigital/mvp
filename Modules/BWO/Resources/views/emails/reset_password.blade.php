@@ -1,4 +1,4 @@
-@extends('bwo::layouts.email')
+@extends('layouts.email')
 
 @section('content')
   <tr>
@@ -7,7 +7,7 @@
         <tr>
           <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
               <p>
-                  Vous recevez cet e-mail, car nous avons reçu une demande de réinitialisation du mot de passe pour votre compte.
+                Vous recevez cet e-mail, car nous avons reçu une demande de réinitialisation du mot de passe pour votre compte.
               </p>
 
               <a href="{{ $url }}">Réinitialiser votre mot de passe</a>

@@ -36,6 +36,9 @@ body{
           }
           .checkboxes{
             padding:10px 0;
+
+
+
             label{
               margin:10px 15px 10px 0;
               @include font(14, 19, 300);
@@ -97,18 +100,23 @@ body{
           }
 
           .checkboxes {
-          display: none;
-          border: 1px #dadada solid;
-          background-color: rgb(255, 255, 255);
-          margin-top: -15px;
-          margin-bottom: 10px;
-              max-height: 75px;
-              overflow-y:scroll;
+            display: none;
+            border: 1px #dadada solid;
+            background-color: rgb(255, 255, 255);
+            margin-top: -15px;
+            margin-bottom: 10px;
+            max-height: 75px;
+            overflow-y:scroll;
+
+            &.expanded{
+                display: block;
+            }
+
           label {
             display: block;
             padding: 7px 10px;
             &:hover {
-              background-color: $brand-color-2;
+              color: $brand-color-2;
             }
             input{
               margin:3px 5px 0 0;
@@ -120,58 +128,78 @@ body{
       }
       .offers-list{
         padding: 20px 15px;
-        .offer-box{
-          padding: 18px 0 0;
-          text-align:center;
-          -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-          -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-          box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-          margin-bottom:20px;
-          .title{
-            padding:0 42px;
-            color:$brand-dark-gray-color;
-            @include font(20,22,600);
-            height:42px;
-            margin-bottom:10px;
-          }
-          p{
-            color:$brand-light-gray-color;
-            @include font(12,14,300);
-            margin-bottom:15px;
-            height: 14px;
-            &.description{
-              color:$brand-dark-gray-color;
-              @include font(14,18,300);
-              margin-bottom:15px;
-              height: 100px;
-              padding-left:25px;
-              padding-right:25px;
-            }
-          }
-          .buttons{
-            margin-bottom:20px;
-            a{
-              &.btn{
-                padding: 6px 28px;
-              }
-            }
-          }
-          .detail{
-            width:100%;
-            padding: 15px;
-            color:$brand-white-color;
-            @include font(18,20,600);
-            background-color: $brand-dark-gray-color;
-            cursor:pointer;
-            text-decoration: none;
-            &:hover{
-              background-color: $brand-red-color;
-              cursor:pointer;
-              text-decoration: none;
-            }
-          }
-        }
+
       }
+    }
+  }
+}
+
+.offer-box{
+  padding: 18px 0 0;
+  text-align:center;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+  height: 295px;
+
+  .title{
+    padding:0 42px;
+    color:$brand-dark-gray-color;
+    @include font(20,22,600);
+    height:42px;
+    margin-bottom:10px;
+    overflow: hidden;
+  }
+  p{
+    color:$brand-light-gray-color;
+    @include font(12,14,300);
+    margin-bottom:15px;
+    height: 14px;
+
+  }
+  .description{
+    p {
+      color:$brand-dark-gray-color;
+      @include font(14,18,300);
+      margin-bottom:15px;
+      height: 60px;
+      padding-left:25px;
+      padding-right:25px;
+    }
+  }
+  .buttons{
+    margin-bottom:20px;
+    height: 61px;
+    overflow: hidden;
+    padding-left:15px;
+    padding-right:15px;
+
+    a{
+      margin-right: 5px;
+      margin-bottom: 5px;
+      &.btn{
+        padding: 5px 17px;
+      }
+    }
+  }
+  .detail{
+    width:100%;
+    padding: 15px;
+    color:$brand-white-color;
+    @include font(18,20,600);
+    background-color: $brand-dark-gray-color;
+    cursor:pointer;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+
+    &:hover{
+      background-color: $brand-red-color;
+      cursor:pointer;
+      text-decoration: none;
     }
   }
 }

@@ -116,7 +116,7 @@
 
 
                                  <div class="row">
-                                    <button type="submit" id="upload-button" class="btn btn-primary">ENVOYER MON CV</button>
+                                    <button type="submit" id="upload-button" class="btn btn-soft-gray">ENVOYER MON CV</button>
                                     <img class="loader" id="upload-loader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                                 </div>
                             </form>
@@ -139,17 +139,25 @@
                         <div class="modal-body">
                             <form role="form" method="POST" action="">
                                 <h3>Choisissez vos alertes</h3>
-                                {{-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet </p> --}}
+
                                 {{ csrf_field() }}
 
                                 <div class="row">
                                     <div class="fileinputs">
-
+                                        <select name="alerts[]" id="alerts" class="form-control" multiple="multiple">
+                                        @php
+                                            $allTags = Modules\RRHH\Entities\Tag::orderBy('name')->get();
+                                        @endphp
+                                            @foreach ($allTags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
+
                                 </div>
 
                                  <div class="row">
-                                    <button type="button" class="btn btn-primary" onclick="app.offerapplications.addTag();app.offerapplications.goToApply()">CONTINUER</button>
+                                    <button type="button" class="btn  btn-soft-gray" onclick="app.offerapplications.addTag();app.offerapplications.goToApply()">CONTINUER</button>
                                 </div>
                             </form>
                         </div>
@@ -171,7 +179,7 @@
                         <div class="modal-body">
                                 <h3>Est vous sur de vouloir postuler?</h3>
                                  <div class="row">
-                                    <button type="button"  onclick="app.offerapplications.apply()" class="btn btn-primary  apply-btn">OUI</button>
+                                    <button type="button"  onclick="app.offerapplications.apply()" class="btn  btn-soft-gray  apply-btn">OUI</button>
                                     <button type="button"  onclick="$('#confirmationModal').modal('hide')" class="btn btn-secondary apply-btn" style="background-color: #394050;">NON</button>
                                     <img class="loader applyLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                                 </div>
@@ -193,7 +201,7 @@
                                 <h3>Votre compte a bien été créé</h3>
                                 <p>Vous pouvez maintenant postuler aux offres </p>
                                  <div class="row">
-                                    <button type="button"  onclick="app.offerapplications.apply()" class="btn btn-primary  apply-btn">POSTULER</button>
+                                    <a href="{{route('search')}}" class="btn  btn-soft-gray">POSTULER</a>
                                     <img class="loader applyLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                                 </div>
                         </div>
@@ -217,7 +225,7 @@
                                 </div>
                                 <br clear="all">
                                  <div class="row">
-                                    <button type="button" class="btn btn-primary">Mon Compte</button>
+                                    <button type="button" class="btn  btn-soft-gray">Mon Compte</button>
                                 </div>
                             </form>
                         </div>
@@ -248,7 +256,7 @@
     @push('javascripts')
       <script>
           $(document).ready(function() {
-              $('select#alerts').select2();
+              $('#alerts').select2();
           });
       </script>
     @endpush

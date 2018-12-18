@@ -21,6 +21,7 @@ app.offerapplications = {
             e.preventDefault();
             _this.addCV();
         });
+
     },
 
     apply: function() {
@@ -62,7 +63,7 @@ app.offerapplications = {
 
         $.ajax({
             type: "POST",
-            url: "/candidate/store",
+            url: routes['candidate.store'],
             data: {
                 civility: civility_default,
                 email: $('#reg-email').val(),
@@ -121,6 +122,7 @@ app.offerapplications = {
     },
 
     login: function() {
+
         $('#loginModalError').hide();
         $('#loginButton').hide();
         $('#loginLoader').show();
@@ -192,7 +194,7 @@ app.offerapplications = {
 
             $.ajax({
                 type: "POST",
-                url: '/candidate/addcv',
+                url: routes['candidate.addcv'],
                 data: formData,
                 cache: false,
                 processData: false,
@@ -231,7 +233,7 @@ app.offerapplications = {
         if (tag != '') {
             $.ajax({
                 type: "POST",
-                url: "/candidate/addtag",
+                url: routes['candidate.addtag'],
                 data: {
                     tag: tag
                 },

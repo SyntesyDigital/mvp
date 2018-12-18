@@ -43,16 +43,17 @@ class RegisterCandidate
     {
         $password = str::random(8);
 
-        $user = dispatch(new CreateUser(
-            $this->attributes['firstname'],
-            $this->attributes['lastname'],
-            $this->attributes['email'],
-            4,
-            $password,
-            User::STATUS_ACTIVE,
-            null,
-            $this->attributes['telephone']
-        ));
+        $user = dispatch_now(new CreateUser([
+            "firstname" => $this->attributes['firstname'],
+            "lastname" => $this->attributes['lastname'],
+            "email" => $this->attributes['email'],
+            "role_id" => 3,
+            "password" => $password,
+            "status" => User::STATUS_ACTIVE,
+            "telephone" => $this->attributes['telephone'],
+            "image" => null,
+            "agence" => null
+        ]));
 
         $date_formated = null;
         if (isset($this->attributes['birthday'])) {

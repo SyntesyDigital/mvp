@@ -20,6 +20,8 @@ require('./components/Common/Paginator');
 require('./components/Common/MoreResults');
 require('./components/Widgets/Blog');
 require('./components/Widgets/RelatedNews');
+require('./components/Widgets/LastNews');
+
 
 //javascripts
 require('./offers/offerapplications.js');

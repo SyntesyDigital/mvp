@@ -84,7 +84,7 @@
     </div><!-- end description -->
 
 
-    <div id="related-news" content="{{$content->id}}" tags="{{isset($content->tags)?$content->tags->pluck('id'):null}}" category="{{null !== $content->categories->first()?$content->categories()->first()->id:null }}" ></div>
+    <div id="related-news" content="{{$content->id}}" category="{{null !== $content->categories->first()?$content->categories()->first()->id:null }}" ></div>
 
     <!--
     <div class="other-posts">
@@ -115,8 +115,10 @@
 
 @push('javascripts')
 <script>
-    routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
-              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
+
+    routes = $.extend(routes,{"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+          "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" });
+
     $(function(){
 
     });

@@ -93051,6 +93051,7 @@ __webpack_require__(833);
 __webpack_require__(564);
 __webpack_require__(834);
 __webpack_require__(881);
+__webpack_require__(919);
 
 //javascripts
 __webpack_require__(882);
@@ -110582,7 +110583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsBlog__ = __webpack_require__(615);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(918);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -110608,8 +110609,6 @@ var RelatedNews = function (_Component) {
         var category = props.category ? props.category : '';
         var content = props.content ? props.content : '';
 
-        console.log("tags => ", tags);
-
         _this.state = {
             category: category,
             items: null,
@@ -110632,15 +110631,16 @@ var RelatedNews = function (_Component) {
         value: function query(page, filters) {
             var self = this;
 
-            var tags = this.state.tags;
+            var category = this.state.category;
 
 
             var params = {
                 size: 10,
-                typology_id: 2,
+                typology_id: 1,
                 category_id: category,
                 accept_lang: LOCALE,
-                order: 'data,desc'
+                order: 'date,desc',
+                loads: 'category'
             };
 
             axios.post(ASSETS + 'api/contents', params).then(function (response) {
@@ -110682,22 +110682,17 @@ var RelatedNews = function (_Component) {
                 console.log('Shuffled related results =>', items);
             }
 
-            var classEntrevista = '';
+            var classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12';
             var count = 0;
             for (var key in items) {
                 // CONTROLAR QEU AQUI NO SEA LA MISM NOTICIA QUE MOSTRAMOS
                 console.log("TypologyPaginated => ", content);
                 if (items[key].id != content && count < 3) {
-                    if (null != items[key].fields["es-entrevista"].values && items[key].fields["es-entrevista"].values == '1') {
-                        classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12 entrevista';
-                    } else {
-                        classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12';
-                    }
 
                     result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'li',
-                        { className: classEntrevista, key: key },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Typologies_NewsBlog__["a" /* default */], {
+                        'div',
+                        { className: 'col-md-6', key: key },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__["a" /* default */], {
                             field: items[key]
                         })
                     ));
@@ -110707,25 +110702,13 @@ var RelatedNews = function (_Component) {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'white' },
+                { className: 'other-posts' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'row' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'div',
-                        { className: 'container' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'h2',
-                            { className: 'subtitle-blog' },
-                            window.localization['GENERAL_WIDGET_RELATED_NEWS']
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'ul',
-                            { className: 'list-blog' },
-                            result
-                        )
-                    )
-                )
+                    'h3',
+                    null,
+                    'SUR LE M\xCAME SUJET'
+                ),
+                result
             );
         }
     }]);
@@ -110819,7 +110802,7 @@ app.offerapplications = {
 
         $.ajax({
             type: "POST",
-            url: "/candidate/store",
+            url: routes['candidate.store'],
             data: {
                 civility: civility_default,
                 email: $('#reg-email').val(),
@@ -110878,6 +110861,7 @@ app.offerapplications = {
     },
 
     login: function login() {
+
         $('#loginModalError').hide();
         $('#loginButton').hide();
         $('#loginLoader').show();
@@ -110949,7 +110933,7 @@ app.offerapplications = {
 
             $.ajax({
                 type: "POST",
-                url: '/candidate/addcv',
+                url: routes['candidate.addcv'],
                 data: formData,
                 cache: false,
                 processData: false,
@@ -110987,7 +110971,7 @@ app.offerapplications = {
         if (tag != '') {
             $.ajax({
                 type: "POST",
-                url: "/candidate/addtag",
+                url: routes['candidate.addtag'],
                 data: {
                     tag: tag
                 },
@@ -111021,6 +111005,270 @@ app.offerapplications = {
         }
     }
 };
+
+/***/ }),
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */,
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */,
+/* 903 */,
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */,
+/* 911 */,
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(609);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var NewsRelated = function (_Component) {
+  _inherits(NewsRelated, _Component);
+
+  function NewsRelated(props) {
+    _classCallCheck(this, NewsRelated);
+
+    var _this = _possibleConstructorReturn(this, (NewsRelated.__proto__ || Object.getPrototypeOf(NewsRelated)).call(this, props));
+
+    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
+    return _this;
+  }
+
+  _createClass(NewsRelated, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'processText',
+    value: function processText(fields, fieldName) {
+      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      //console.log("NewsBlog => ",this.props.field);
+
+      var fields = this.props.field.fields;
+
+      var category = this.props.field.category != null ? this.props.field.category.name : null;
+      var category_slug = this.props.field.category != null ? this.props.field.category.slug : null;
+      var data = fields.date.values != null ? fields.date.values : null;
+
+      var slug = this.processText(fields, 'slug');
+      var title = this.processText(fields, 'title');
+      var descripcio = this.processText(fields, 'excerpt');
+
+      var crop = "medium";
+      var url = null;
+
+      if (fields['image'].values !== undefined && fields['image'].values != null) {
+        if (fields['image'].values.urls[crop] !== undefined) {
+          url = fields['image'].values.urls[crop];
+        }
+      }
+
+      var results = [];
+      if (data != null) {
+        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
+      }
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'post-box' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'title' },
+          title
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          { className: 'date' },
+          data != null ? 'Le ' + data : '',
+          ' - ',
+          category != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: routes["categoryNews"].replace(":slug", category_slug) },
+            category,
+            ' '
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'excerpt', dangerouslySetInnerHTML: { __html: descripcio } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: this.props.field.url, className: 'read-more' },
+          'Lire la suite'
+        )
+      );
+    }
+  }]);
+
+  return NewsRelated;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (NewsRelated);
+
+/***/ }),
+/* 919 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(918);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var LastNews = function (_Component) {
+    _inherits(LastNews, _Component);
+
+    function LastNews(props) {
+        _classCallCheck(this, LastNews);
+
+        var _this = _possibleConstructorReturn(this, (LastNews.__proto__ || Object.getPrototypeOf(LastNews)).call(this, props));
+
+        _this.state = {
+            items: null
+        };
+        return _this;
+    }
+
+    _createClass(LastNews, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var filters = this.state.filters;
+
+
+            this.query(1, filters);
+        }
+    }, {
+        key: 'query',
+        value: function query(page, filters) {
+            var self = this;
+
+            var category = this.state.category;
+
+
+            var params = {
+                size: 2,
+                typology_id: 1,
+                accept_lang: LOCALE,
+                order: 'date,asc',
+                loads: 'category'
+            };
+
+            axios.post(ASSETS + 'api/contents', params).then(function (response) {
+
+                if (response.status == 200 && response.data.data !== undefined) {
+                    self.setState({
+                        items: response.data.data,
+                        lastPage: response.data.meta.last_page,
+                        currPage: response.data.meta.current_page,
+                        filters: filters
+                    });
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var result = [];
+            var _state = this.state,
+                items = _state.items,
+                content = _state.content;
+
+
+            for (var key in items) {
+                // CONTROLAR QEU AQUI NO SEA LA MISM NOTICIA QUE MOSTRAMOS
+                result.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-xs-12', key: key },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__["a" /* default */], {
+                        field: items[key]
+                    })
+                ));
+            }
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'other-posts' },
+                result
+            );
+        }
+    }]);
+
+    return LastNews;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (LastNews);
+
+
+if (document.getElementById('last-news')) {
+
+    document.querySelectorAll('[id=last-news]').forEach(function (element) {
+
+        __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(LastNews, null), element);
+    });
+}
 
 /***/ })
 /******/ ]);

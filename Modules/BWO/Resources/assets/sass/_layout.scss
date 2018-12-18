@@ -5,6 +5,9 @@ html{
 
 header{
   padding: 10px 20px 0px;
+  position: relative;
+  z-index: 5;
+  
   .menus{
     width:100%;
     @include font(14,20,400)
@@ -15,7 +18,7 @@ header{
       float:left;
     }
     @include mq(xs){
-      width:485px;
+      width:645px;
       float:right;
       .navbar-menu-user{
         float:none;
@@ -94,7 +97,7 @@ header{
         }
       }
       .navbar-header-main, #main-menu{
-        float:left;
+        float:right;
 
         @include mq(xs){
           float:right;
@@ -321,69 +324,6 @@ body {
 
   .three-offers-container{
     padding:50px 15px 30px;
-    .offer-box{
-      padding: 18px 0 0;
-      text-align:center;
-      -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-      -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-      margin-bottom:20px;
-      .title{
-        padding:0 42px;
-        color:$brand-dark-gray-color;
-        @include font(20,22,600);
-        height:42px;
-        margin-bottom:10px;
-      }
-      p{
-        color:$brand-light-gray-color;
-        @include font(12,14,300);
-        margin-bottom:15px;
-        height: 14px;
-      }
-      .buttons{
-        margin-bottom:20px;
-        a{
-          &.btn{
-            padding: 6px 28px;
-          }
-        }
-      }
-      .detail{
-        width:100%;
-        padding: 15px;
-        color:$brand-white-color;
-        @include font(18,20,600);
-        background-color: $brand-dark-gray-color;
-        cursor:pointer;
-        text-decoration: none;
-        &:hover{
-          background-color: $brand-red-color;
-          cursor:pointer;
-          text-decoration: none;
-        }
-      }
-    }
-
-
-    .offer-box-right, .offer-box-center, .offer-box-left{
-      max-width: 350px;
-      margin:0 auto;
-    }
-    @include mq(md){
-      .offer-box-right{
-        padding: 5px 0 5px 33px;
-      }
-      .offer-box-center{
-        padding: 5px 17px 5px 17px;
-      }
-      .offer-box-left{
-        padding: 5px 33px 5px 0;
-      }
-      .offer-box{
-        height:195px;
-      }
-    }
   }
   form{
     input{

@@ -5,7 +5,12 @@
 ])
 
 @section('content')
-  <div class="banner home-banner" style="background-image:url('{{asset('modules/bwo/images/home-banner.jpg')}}')">
+  @php
+    $images = 2;
+    $imageNum = rand(1,$images);
+  @endphp
+
+  <div class="banner home-banner" style="background-image:url('{{asset('modules/bwo/images/banners/'.$imageNum.'.jpg')}}')">
     <div class="horizontal-inner-container">
 
       <div class="banner-info-container">
@@ -33,19 +38,33 @@
   <div class="three-offers-container">
     <div class="horizontal-inner-container">
       @foreach($offers as $offer)
-        <div class="col-md-4 offer-box-left">
+        <div class="col-md-4">
           <div class="offer-box">
               <div class="title">
                 {{ $offer->title }}
               </div>
-              <p>Réf: BOU - Posté le 16/11/2018</p>
-              <div class="buttons">
-                <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
+              <p>Réf: {{$offer->id}} - Posté le {{$offer->start_at}}</p>
+              @php
+                $string = substr(strip_tags($offer->description), 0, 100);
+                if(strlen($string) < strlen(strip_tags($offer->description))){
+                  $string = substr($string, 0, strrpos($string, ' ')) . " ...";
+                }
+              @endphp
+              <div class="description">
+              <p>{!! $string !!}</p>
               </div>
-              <a href="{{route('offer.show', [
-                'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
-              ])}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+              @php
+               $otags = $offer->tags()->get();
+              @endphp
+              <div class="buttons">
+                @foreach($otags as $otag)
+                  <a href="#" class="btn btn-soft-gray tag">{{$otag->name}}</a>
+                @endforeach
+              </div>
+              <a href="{{ route('offer.show', [
+                                    'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
+                                    'id' => $offer->id
+                                ]) }}" class="detail" >DÉTAIL DE L'OFFRE</a>
           </div>
         </div>
       @endforeach
@@ -74,16 +93,9 @@
       <div class="horizontal-inner-container">
         <div class="col-md-6 home-square home-square-white">
           <h2 class="gray-square-text">INFORMATION SUR L'INTÉRIM</h2>
-          <div class="post-box">
-              <div class="title">TITLE ACTUALITÉ</div>
-              <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
-          </div>
-          <div class="post-box">
-              <div class="title">TITLE ACTUALITÉ</div>
-              <p class="date">Le 16/11/2018 - CATÉGORIE</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor...<a href="#" class="read-more">Lire la suite</a></p>
-          </div>
+
+          <div id="last-news"></div>
+
         </div>
         <div class="col-md-6 home-square home-square-gray p-l-10">
           <h2 class="gray-square-text">CANDIDATURE SPONTANÉE</h2>
@@ -100,7 +112,11 @@
 
   @push('javascripts')
     <script>
+      routes = $.extend(routes,{
+              "categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}",
 
+            });
       $(document).ready(function() {
           $(document).on("click",".btn-search",function() {
             $(this).closest('form').submit();
