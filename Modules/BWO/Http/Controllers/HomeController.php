@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Modules\RRHH\Entities\Offers\Offer;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use LinkedIn;
+
 class HomeController extends Controller
 {
     /**
