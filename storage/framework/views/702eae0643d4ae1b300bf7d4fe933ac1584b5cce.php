@@ -177,15 +177,7 @@
     <?php if($node["input"] == 'customers_contacts'): ?>
 
          <div class="form-group">
-            <?php echo Form::select(
-                    $node["name"],
-                    isset($item) ? \Modules\RRHH\Entities\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
-                    isset($item) ? $item->{str_replace('[]', '', $node["name"])} : old($node["name"]),
-                    [
-                        'class' => 'form-control'
-                    ]
-                ); ?>
-
+            
 
         </div>
     <?php endif; ?>

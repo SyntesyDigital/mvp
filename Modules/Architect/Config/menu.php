@@ -3,7 +3,7 @@
 return [
     [
         "route" => 'dashboard',
-        "label" => Lang::get('architect::header.home'),
+        "label" => 'architect::header.home',
         "patterns" => [
             'architect'
         ],
@@ -18,7 +18,7 @@ return [
     /*
     [
         "route" => 'typologies',
-        "label" => Lang::get('architect::header.typology'),
+        "label" => 'architect::header.typology'),
         "patterns" => [
             'architect/typologies*'
         ],
@@ -30,7 +30,7 @@ return [
 
     [
         "route" => 'contents',
-        "label" => Lang::get('architect::header.contents'),
+        "label" => 'architect::header.contents',
         "patterns" => [
             'architect/contents*'
         ],
@@ -39,7 +39,7 @@ return [
 
     [
         "route" => 'medias.index',
-        "label" => Lang::get('architect::header.media'),
+        "label" => 'architect::header.media',
         "patterns" => [
             'architect/medias*'
         ],
@@ -48,7 +48,7 @@ return [
 
     [
         "route" => 'settings',
-        "label" => Lang::get('architect::header.configuration'),
+        "label" => 'architect::header.configuration',
         "patterns" => [
             'architect/settings*'
         ],

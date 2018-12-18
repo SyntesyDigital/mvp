@@ -1,8 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="container leftbar-page">
-
   <?php echo $__env->make('rrhh::admin.partials.offers-nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
     <div class="col-xs-offset-2 col-xs-10 page-content">
 
         <h3 class="card-title">Liste des offres d'emploi</h3>
@@ -37,11 +35,8 @@
                 </tr>
             </tfoot>
         </table>
-
     </div>
-
 </div>
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('javascripts-libs'); ?>
@@ -52,6 +47,8 @@
 
     <?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
 
+    <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
+
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('javascripts'); ?>
@@ -59,7 +56,7 @@
 var csrf_token = "<?php echo e(csrf_token()); ?>";
 var routes = {
 	data : '<?php echo e(route("rrhh.admin.offers.index.data")); ?>',
-    recipients: '<?php echo e(route("rrhh.admin.offers.index.data.recipients")); ?>'
+    recipients : '<?php echo e(route("rrhh.admin.offers.index.data.recipients")); ?>'
 };
 </script>
 

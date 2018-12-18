@@ -95,7 +95,7 @@
                       'select' => 'Select',
                       'checkbox' => 'Checkbox',
                       'radios' => 'Radios',
-                  ], $sitelist->type, [
+                  ], isset($sitelist) ? $sitelist->type : null, [
                       'onchange' => 'app.sitelist.updatePreview();',
                       'class' => 'form-control',
                       'id' => 'type',
@@ -110,6 +110,7 @@
           {{ Form::close()}}
           <hr />
 
+          @if(isset($sitelist))
           <div class="form-group">
               {!!
                   Form::open([
@@ -122,6 +123,7 @@
               <input type="submit" value="Supprimer cette liste" class="btn btn-sm btn-danger" />
               {{ Form::close() }}
           </div>
+        @endif
       </div>
 
 </div>

@@ -29,9 +29,9 @@
     
     <li class="<?php echo e($isActive ? 'active' : false); ?>">
         <a href="<?php echo e(route($item['route'])); ?>">
-            <?php echo e($item['label']); ?>
+            <?php echo e(Lang::get($item['label'])); ?>
 
         </a>
     </li>
-    
+
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

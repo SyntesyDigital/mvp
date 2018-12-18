@@ -14,9 +14,9 @@ return [
     ],
 
 
-    [
-        "route" => 'rrhh.admin.massmail',
-        "icon" => "fa-paper-plane",
-        "label" => Lang::get('rrhh::settings.massmail'),
-    ],
+    // [
+    //     "route" => 'rrhh.admin.massmail',
+    //     "icon" => "fa-paper-plane",
+    //     "label" => Lang::get('rrhh::settings.massmail'),
+    // ],
 ];

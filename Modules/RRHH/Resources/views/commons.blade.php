@@ -1,9 +1,8 @@
 @extends('layouts.frontend')
 
-@section('title',$page->title)
+@section('title', $page->title)
 
 @section('content')
-
 <div class="breadcrumbs-container">
 	<div class="horizontal-inner-container">
 		<ol class="breadcrumb">
@@ -21,11 +20,4 @@
 @endsection
 
 @push('javascripts')
-
-<script>
-	$(function(){
-
-	});
-</script>
-
 @endpush

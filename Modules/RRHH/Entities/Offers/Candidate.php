@@ -44,6 +44,10 @@ class Candidate extends Model
         'job_3',
         'registration_number',
         'registered_at',
+
+        'contract_type',
+        'salary',
+        'important_information'
     ];
 
     public $timestamps = false;

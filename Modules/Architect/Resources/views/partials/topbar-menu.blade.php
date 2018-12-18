@@ -29,8 +29,8 @@
     {{-- Render the menu item --}}
     <li class="{{ $isActive ? 'active' : false }}">
         <a href="{{ route($item['route']) }}">
-            {{ $item['label'] }}
+            {{ Lang::get($item['label']) }}
         </a>
     </li>
-    
+
 @endforeach()

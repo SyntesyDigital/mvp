@@ -31,6 +31,12 @@
             <i class="fa fa-user-o"></i><span class="text">Clients</span>
           </a>
         </li>
+
+        <li>
+          <a href="{{route('rrhh.admin.massmail')}}">
+            <i class="fa fa-paper-plane"></i><span class="text">Envoyer un e-mail</span>
+          </a>
+        </li>
     </ul>
     <hr/>
     <ul>

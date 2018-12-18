@@ -180,7 +180,7 @@
     @if($node["input"] == 'customers_contacts')
 
          <div class="form-group">
-            {!!
+            {{-- {!!
                 Form::select(
                     $node["name"],
                     isset($item) ? \Modules\RRHH\Entities\CustomerContact::where('customer_id',$item->customer_id)->pluck('firstname', 'id'):[],
@@ -189,7 +189,7 @@
                         'class' => 'form-control'
                     ]
                 )
-            !!}
+            !!} --}}
 
         </div>
     @endif

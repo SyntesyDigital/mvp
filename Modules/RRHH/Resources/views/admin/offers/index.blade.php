@@ -3,9 +3,7 @@
 
 @section('content')
 <div class="container leftbar-page">
-
   @include('rrhh::admin.partials.offers-nav')
-
     <div class="col-xs-offset-2 col-xs-10 page-content">
 
         <h3 class="card-title">Liste des offres d'emploi</h3>
@@ -40,11 +38,8 @@
                 </tr>
             </tfoot>
         </table>
-
     </div>
-
 </div>
-
 @endsection
 
 @push('javascripts-libs')
@@ -52,14 +47,15 @@
     {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
     {{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
+
+    {{ Html::script('/modules/rrhh/js/libs/dialog.js')}}
 @endpush
 
 @push('javascripts')
 <script>
-var csrf_token = "{{csrf_token()}}";
 var routes = {
 	data : '{{ route("rrhh.admin.offers.index.data") }}',
-    recipients: '{{ route("rrhh.admin.offers.index.data.recipients") }}'
+    recipients : '{{ route("rrhh.admin.offers.index.data.recipients") }}'
 };
 </script>
 

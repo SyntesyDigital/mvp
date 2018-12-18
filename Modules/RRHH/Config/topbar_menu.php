@@ -4,7 +4,7 @@ return [
 
     [
         "route" => 'rrhh.admin.offers.index',
-        "label" => Lang::get('rrhh::header.offers'),
+        "label" => 'rrhh::header.offers',
         "patterns" => [
             'architect/offers*',
             'architect/candidates*',

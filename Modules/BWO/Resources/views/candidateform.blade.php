@@ -17,45 +17,92 @@
             <li>VOS INFORMATIONS</li>
           </ol>
 
-          <div>
-            <h2>MODIFIER VOS INFORMATIONS</h2>
-            <form>
-              <div class="col-md-6">
-                {!! Form::Label('surname', 'Prénom') !!}
-                {!! Form::text('surname', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::Label('nom', 'Nom') !!}
-                {!! Form::text('nom', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-12">
-                {!! Form::Label('address', 'Adresse') !!}
-                {!! Form::text('address', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::Label('postal_code', 'Code Postal') !!}
-                {!! Form::text('postal_code', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::Label('city', 'Ville') !!}
-                {!! Form::text('city', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::Label('phone', 'Teléphone') !!}
-                {!! Form::text('phone', '', ['class' => 'form-control']) !!}
-              </div>
-              <div class="col-md-6">
-                {!! Form::Label('email', 'E-mail') !!}
-                {!! Form::text('email', '', ['class' => 'form-control']) !!}
-              </div>
-              <br clear="all">
-              <div class="btn-red-container">
-                <button type="submit" class="btn btn-red">ENREGISTER</button>
-              </div>
-            </form>
-          </div>
+          <form>
 
-          <br clear="all">
+              <div>
+                <h2>MODIFIER VOS INFORMATIONS</h2>
+
+                  <div class="col-md-6">
+                    {!! Form::Label('surname', 'Prénom') !!}
+                    {!! Form::text('surname', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-6">
+                    {!! Form::Label('nom', 'Nom') !!}
+                    {!! Form::text('nom', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-12">
+                    {!! Form::Label('address', 'Adresse') !!}
+                    {!! Form::text('address', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-6">
+                    {!! Form::Label('postal_code', 'Code Postal') !!}
+                    {!! Form::text('postal_code', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-6">
+                    {!! Form::Label('city', 'Ville') !!}
+                    {!! Form::text('city', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-6">
+                    {!! Form::Label('phone', 'Teléphone') !!}
+                    {!! Form::text('phone', '', ['class' => 'form-control']) !!}
+                  </div>
+                  <div class="col-md-6">
+                    {!! Form::Label('email', 'E-mail') !!}
+                    {!! Form::text('email', '', ['class' => 'form-control']) !!}
+                  </div>
+
+              </div>
+
+              <br clear="all">
+
+              <div>
+                <h3>VOTRE RECHERCHE</h3>
+                <form>
+                  <div class="col-md-6">
+
+                      @php
+                        $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
+                        $contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+                            return [$item['value'] => $item['name']];
+                        })->toArray();
+                      @endphp
+
+                    {!! Form::Label('', 'Vous cherchez un contrat : ') !!}
+                    <ul>
+                    @foreach($contracts as $k => $v)
+                        <li>
+                            <label>
+                                {!!
+                                    Form::checkbox('contract_type[]', $k)
+                                !!}
+                                {{ $v }}
+                            </label>
+                        </li>
+                    @endforeach()
+                    </ul>
+
+                    {!! Form::Label('salary', 'Votre rénumération souhaitée : ') !!}
+                    {!! Form::text('salary', '', ['class' => 'form-control']) !!}
+                  </div>
+
+                  <div class="col-md-6">
+                      {!! Form::Label('important_information', 'Informations importantes (contraintes horaires, géographiques...) : ') !!}
+                      {!!
+                          Form::textarea('important_information', '', [
+                              'class' => 'form-control'
+                          ])
+                      !!}
+                  </div>
+
+                  <br clear="all">
+                  <div class="btn-red-container">
+                    <button type="submit" class="btn btn-red">ENREGISTER</button>
+                  </div>
+                </form>
+              </div>
+
+          </form>
+
         </div>
       </div>
     </div>
