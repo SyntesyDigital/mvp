@@ -115,14 +115,16 @@
 
                 <p>Réf: {{$offer->id}} - Posté le {{$offer->start_at}}</p>
                 @php
-                  $string = substr(strip_tags($offer->description), 0, 250);
+                  $string = substr(strip_tags($offer->description), 0, 100);
                   if(strlen($string) < strlen(strip_tags($offer->description))){
                     $string = substr($string, 0, strrpos($string, ' ')) . " ...";
                   }
                 @endphp
-                <p class="description">{!! $string !!}</p>
+                <div class="description">
+                  <p>{!! $string !!}</p>
+                </div>
                 @php
-                 $otags = $offer->tags()->limit(2)->get();
+                 $otags = $offer->tags()->get();
                 @endphp
                 <div class="buttons">
                   @foreach($otags as $otag)

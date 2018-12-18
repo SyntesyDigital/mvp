@@ -60,17 +60,17 @@
 					</nav>
 				</div>
 				<div class="navbar-menu navbar-menu-main">
-				<nav class="navbar">
-					<div class="navbar-header navbar-header-main">
-						<button id="btn-main-menu" class="navbar-toggle" type="button" data-toggle="collapse" data-target="#main-menu">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
+					<nav class="navbar">
+						<div class="navbar-header navbar-header-main">
+							<button id="btn-main-menu" class="navbar-toggle" type="button" data-toggle="collapse" data-target="#main-menu">
+								<i class="fa fa-bars"></i>
+							</button>
+						</div>
 
-					<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
-								@include ('bwo::partials.menu')
-					</div><!-- /.nav-collapse -->
-				</nav>
+						<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
+									@include ('bwo::partials.menu')
+						</div><!-- /.nav-collapse -->
+					</nav>
 			</div>
 			</div>
 			<div class="logo-container">
@@ -84,6 +84,8 @@
 
 		</div>
 	</div>
+
+
 </header><!-- end HEADER -->
 
 @push('javascripts')

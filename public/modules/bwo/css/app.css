@@ -9957,6 +9957,8 @@ html {
 
 header {
   padding: 10px 20px 0px;
+  position: relative;
+  z-index: 5;
 }
 
 header .menus {
@@ -9976,7 +9978,7 @@ header .menus .navbar-menu-main {
 
 @media (min-width: 48em) {
   header .menus {
-    width: 485px;
+    width: 645px;
     float: right;
   }
 
@@ -10068,7 +10070,7 @@ header .menus .navbar #user-menu li a.btn {
 
 header .menus .navbar .navbar-header-main,
 header .menus .navbar #main-menu {
-  float: left;
+  float: right;
 }
 
 @media (min-width: 48em) {
@@ -10335,84 +10337,6 @@ body .three-colors-separator .separator-piece.red {
 
 body .three-offers-container {
   padding: 50px 15px 30px;
-}
-
-body .three-offers-container .offer-box {
-  padding: 18px 0 0;
-  text-align: center;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-}
-
-body .three-offers-container .offer-box .title {
-  padding: 0 42px;
-  color: #666666;
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: 600;
-  height: 42px;
-  margin-bottom: 10px;
-}
-
-body .three-offers-container .offer-box p {
-  color: #d3d1ae;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 300;
-  margin-bottom: 15px;
-  height: 14px;
-}
-
-body .three-offers-container .offer-box .buttons {
-  margin-bottom: 20px;
-}
-
-body .three-offers-container .offer-box .buttons a.btn {
-  padding: 6px 28px;
-}
-
-body .three-offers-container .offer-box .detail {
-  width: 100%;
-  padding: 15px;
-  color: #fff;
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: 600;
-  background-color: #666666;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-body .three-offers-container .offer-box .detail:hover {
-  background-color: #ff0000;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-body .three-offers-container .offer-box-right,
-body .three-offers-container .offer-box-center,
-body .three-offers-container .offer-box-left {
-  max-width: 350px;
-  margin: 0 auto;
-}
-
-@media (min-width: 62em) {
-  body .three-offers-container .offer-box-right {
-    padding: 5px 0 5px 33px;
-  }
-
-  body .three-offers-container .offer-box-center {
-    padding: 5px 17px 5px 17px;
-  }
-
-  body .three-offers-container .offer-box-left {
-    padding: 5px 33px 5px 0;
-  }
-
-  body .three-offers-container .offer-box {
-    height: 195px;
-  }
 }
 
 body form input.form-control {
@@ -11100,15 +11024,16 @@ body .offers-container .horizontal-inner-container .offers-list {
   padding: 20px 15px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box {
+.offer-box {
   padding: 18px 0 0;
   text-align: center;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
+  height: 295px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box .title {
+.offer-box .title {
   padding: 0 42px;
   color: #666666;
   font-size: 20px;
@@ -11116,9 +11041,10 @@ body .offers-container .horizontal-inner-container .offers-list .offer-box .titl
   font-weight: 600;
   height: 42px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box p {
+.offer-box p {
   color: #d3d1ae;
   font-size: 12px;
   line-height: 14px;
@@ -11127,26 +11053,35 @@ body .offers-container .horizontal-inner-container .offers-list .offer-box p {
   height: 14px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box p.description {
+.offer-box .description p {
   color: #666666;
   font-size: 14px;
   line-height: 18px;
   font-weight: 300;
   margin-bottom: 15px;
-  height: 100px;
+  height: 60px;
   padding-left: 25px;
   padding-right: 25px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box .buttons {
+.offer-box .buttons {
   margin-bottom: 20px;
+  height: 61px;
+  overflow: hidden;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box .buttons a.btn {
-  padding: 6px 28px;
+.offer-box .buttons a {
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box .detail {
+.offer-box .buttons a.btn {
+  padding: 5px 17px;
+}
+
+.offer-box .detail {
   width: 100%;
   padding: 15px;
   color: #fff;
@@ -11156,9 +11091,13 @@ body .offers-container .horizontal-inner-container .offers-list .offer-box .deta
   background-color: #666666;
   cursor: pointer;
   text-decoration: none;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
 }
 
-body .offers-container .horizontal-inner-container .offers-list .offer-box .detail:hover {
+.offer-box .detail:hover {
   background-color: #ff0000;
   cursor: pointer;
   text-decoration: none;
