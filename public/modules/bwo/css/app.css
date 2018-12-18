@@ -9344,7 +9344,8 @@ img {
 }
 
 .rounded,
-.btn {
+.btn,
+body .modal div.fileinputs .select2 {
   border-radius: 200px;
 }
 
@@ -9779,7 +9780,8 @@ b {
 }
 
 .rounded,
-.btn {
+.btn,
+body .modal div.fileinputs .select2 {
   border-radius: 200px;
 }
 
@@ -10647,8 +10649,8 @@ body .modal .modal-content .modal-message {
 }
 
 body .modal .modal-content .modal-cv {
-  background-color: #7d7c7c;
-  color: #fff;
+  /*background-color: $brand-color-1;*/
+  color: #666666;
 }
 
 body .modal .mt-10 {
@@ -10662,8 +10664,9 @@ body .modal .button-upload-fake {
   width: 165px;
   float: left;
   position: relative;
-  top: -22px;
-  height: 20px;
+  top: -30px;
+  height: 28px;
+  line-height: 28px;
   padding: 0 5px;
   right: -183px;
 }
@@ -10677,7 +10680,11 @@ body .modal div.fileinputs {
 }
 
 body .modal div.fileinputs .select2 {
-  width: 100% !important;
+  width: 80% !important;
+}
+
+body .modal div.fileinputs .select2-selection--multiple {
+  border-radius: none;
 }
 
 body .modal div.fakefile {
@@ -10686,7 +10693,7 @@ body .modal div.fakefile {
   z-index: 1;
   margin: 0 auto;
   width: 350px;
-  height: 24px;
+  height: 30px;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -10697,7 +10704,7 @@ body .modal div.fakefile input {
   width: 100%;
   color: #3f3f3f;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 25px;
   font-weight: 100;
 }
 
@@ -10709,7 +10716,38 @@ body .modal input.file {
   z-index: 2;
   margin: 0 auto;
   width: 350px;
-  height: 24px;
+  height: 30px;
+}
+
+.select2-container {
+  z-index: 2500;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  color: #666666 !important;
+  background-color: #d3d1ae !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  border-radius: 200px !important;
+  color: #fff !important;
+  background-color: #666666 !important;
+  margin-top: 0px !important;
+  padding: 4px 12px !important;
+  border: none !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  padding: 3px 5px !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: #fff !important;
+  color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.select2-selection--multiple {
+  border-radius: 0px !important;
 }
 
 body .banner.home-banner .banner-info-container {

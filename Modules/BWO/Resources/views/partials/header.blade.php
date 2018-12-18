@@ -18,21 +18,21 @@
 										@if(Auth::check())
 											@if(Auth::user()->hasRole('candidate'))
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="{{route('candidate')}}">Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="{{route('candidate')}}"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
 											@endif
 											@if(Auth::user()->hasRole('enterprise'))
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="#">Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="#"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
 											@endif
 											@if(Auth::user()->hasRole('admin'))
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="{{route('dashboard')}}">Espace Admin
+													<a class="nav-link btn btn-soft-gray" href="{{route('dashboard')}}"><i class="fa fa-user-circle-o"></i> Espace Admin
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
@@ -40,7 +40,7 @@
 											<li class="nav-item">
 												<form id="logout-form" action="{{ route('logout') }}" method="POST">
 														{{csrf_field()}}
-													<button class="nav-link btn btn-dark-gray btn-logout" type="submit" >Deconnexion</button>
+													<button class="nav-link btn btn-dark-gray btn-logout" type="submit" ><i class="fa fa-sign-out"></i> Deconnexion</button>
 												</form>
 											</li>
 										@else

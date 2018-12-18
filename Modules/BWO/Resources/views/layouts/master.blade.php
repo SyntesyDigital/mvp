@@ -28,7 +28,7 @@
         <link href="{{asset('modules/bwo/css/app.css')}}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/css/font-awesome/css/font-awesome.min.css')}}" />
         <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/fonts/iconmoon/iconmoon.css')}}" />
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
         @stack('styles')
 
@@ -54,7 +54,12 @@
           const app = {};
           var csrf_token = "{{csrf_token()}}";
           var civility_default = "{{ Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE }}"
-          var routes = {'login':"{{route('candidate.login')}}"}
+          var routes = {
+            'login':"{{route('candidate.login')}}",
+            'candidate.store':"{{route('candidate.store')}}",
+            'candidate.addcv' : "{{route('candidate.addcv')}}",
+            'candidate.addtag' : "{{route('candidate.addtag')}}"
+          };
         </script>
         <script type="text/javascript" src="{{route('localization.js', App::getLocale())}}" ></script>
 
@@ -63,7 +68,6 @@
         @stack('javascripts-libs')
 
         <script type="text/javascript" src="{{asset('modules/bwo/js/app.js')}}" ></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
         <script>
@@ -77,15 +81,17 @@
                 $('#user-menu').removeClass('in');
               });
 
-              $(".application-btn").on('click',function(e){
-                  app.offerapplications.init(
-                    "{{ Auth::check() ? Auth::user()->id : 0 }}",
-                    this.id,
-                    "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
-                  );
-                  app.offerapplications.open();
+              app.offerapplications.init(
+                "{{ Auth::check() ? Auth::user()->id : 0 }}",
+                this.id,
+                "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
+              );
 
+              $(".application-btn").on('click',function(e){
+                  app.offerapplications.open();
               });
+
+
 
           });
 

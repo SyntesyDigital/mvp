@@ -24,7 +24,7 @@ class Blog extends Widget implements WidgetInterface
         'required'
     ];
 
-    //public $hidden = true;
+    public $hidden = true;
 
     public $settings = [
         'htmlId',

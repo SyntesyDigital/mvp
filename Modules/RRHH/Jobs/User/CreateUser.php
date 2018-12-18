@@ -41,53 +41,52 @@ class CreateUser
         ]);
 
         if(isset($this->attributes['role_id'])) {
-            $user->roles()->sync($this->attributes['role_id']);    
+            $user->roles()->sync($this->attributes['role_id']);
         }
-
 
         if (isset($this->attributes['agence'])) {
             $user->agences()->sync($this->attributes['agence']);
         }
 
-        // switch ($this->attributes['role_id']) {
-        //     case 4: //candidate
-        //         // Email to new candidate
-        //         $recipient = $this->email;
-        //         $params = [
-        //             'user' => $user,
-        //             'password' => $this->attributes['password'],
-        //             'subject' => 'Bienvenue sur BWO-interim !',
-        //             'reply_to' => '',
-        //         ];
-        //         Mail::send(['html' => 'emails.createcandidate'],
-        //             $params,
-        //             function ($message) use ($params, $recipient) {
-        //                 $message->to($recipient, null)
-        //                 ->replyTo($params['reply_to'], null)
-        //                 ->subject($params['subject']);
-        //             }
-        //         );
-        //     break;
-        //
-        //     case 1: //admin
-        //     case 2: //user
-        //         // Email to new candidate
-        //         $body = 'Votre mot de passe est '.$this->password;
-        //         $subject = 'Admin Enregistré';
-        //         $recipient = $this->email;
-        //         $params = ['body' => $body,
-        //                    'subject' => $subject,
-        //                    'reply_to' => 'info@menco.fr', ];
-        //         Mail::send(['html' => 'emails.createadmin'],
-        //             $params,
-        //             function ($message) use ($params,$recipient) {
-        //                 $message->to($recipient, null)
-        //                 ->replyTo($params['reply_to'], null)
-        //                 ->subject($params['subject']);
-        //             }
-        //         );
-        //     break;
-        // }
+        switch ($this->attributes['role_id']) {
+            case 3: //candidate
+                // Email to new candidate
+                $recipient = $this->attributes['email'];
+                $params = [
+                    'user' => $user,
+                    'password' => $this->attributes['password'],
+                    'subject' => 'Bienvenue sur BWO-interim !',
+                    'reply_to' => env('MAIL_COMPANY_EMAIL')
+                ];
+
+                Mail::send(['html' => 'bwo::emails.createcandidate'],
+                    $params,
+                    function ($message) use ($params, $recipient) {
+                        $message->to($recipient, null)
+                        ->replyTo($params['reply_to'], null)
+                        ->subject($params['subject']);
+                    }
+                );
+            break;
+
+            case 1: //admin
+            case 2: //recruiter
+                // Email to new candidat
+                $recipient = $this->email;
+                $params = ['body' => $body,
+                           'subject' => $subject,
+                           'reply_to' => env('MAIL_COMPANY_EMAIL')
+                         ];
+                Mail::send(['html' => 'bwo::emails.createadmin'],
+                    $params,
+                    function ($message) use ($params,$recipient) {
+                        $message->to($recipient, null)
+                        ->replyTo($params['reply_to'], null)
+                        ->subject($params['subject']);
+                    }
+                );
+            break;
+        }
 
         return $user;
     }

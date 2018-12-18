@@ -5,7 +5,12 @@
 ])
 
 @section('content')
-  <div class="banner home-banner" style="background-image:url('{{asset('modules/bwo/images/home-banner.jpg')}}')">
+  @php
+    $images = 2;
+    $imageNum = rand(1,$images);
+  @endphp
+
+  <div class="banner home-banner" style="background-image:url('{{asset('modules/bwo/images/banners/'.$imageNum.'.jpg')}}')">
     <div class="horizontal-inner-container">
 
       <div class="banner-info-container">
@@ -38,14 +43,26 @@
               <div class="title">
                 {{ $offer->title }}
               </div>
-              <p>Réf: BOU - Posté le 16/11/2018</p>
+              <p>Réf: {{$offer->id}} - Posté le {{$offer->start_at}}</p>
+              @php
+                $string = substr(strip_tags($offer->description), 0, 250);
+                if(strlen($string) < strlen(strip_tags($offer->description))){
+                  $string = substr($string, 0, strrpos($string, ' ')) . " ...";
+                }
+              @endphp
+              <p class="description">{!! $string !!}</p>
+              @php
+               $otags = $offer->tags()->limit(2)->get();
+              @endphp
               <div class="buttons">
-                <a href="#" class="btn btn-soft-gray tag">COMPTABILITÉ</a>
-                <a href="#" class="btn btn-soft-gray tag">INTERIM</a>
+                @foreach($otags as $otag)
+                  <a href="#" class="btn btn-soft-gray tag">{{$otag->name}}</a>
+                @endforeach
               </div>
-              <a href="{{route('offer.show', [
-                'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
-              ])}}" class="detail" >DÉTAIL DE L'OFFRE</a>
+              <a href="{{ route('offer.show', [
+                                    'job_1' => str_slug(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
+                                    'id' => $offer->id
+                                ]) }}" class="detail" >DÉTAIL DE L'OFFRE</a>
           </div>
         </div>
       @endforeach
@@ -93,8 +110,11 @@
 
   @push('javascripts')
     <script>
-      routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
-              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
+      routes = $.extend(routes,{
+              "categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}",
+
+            });
       $(document).ready(function() {
           $(document).on("click",".btn-search",function() {
             $(this).closest('form').submit();

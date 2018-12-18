@@ -33193,7 +33193,7 @@ module.exports = castPath;
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assignValue = __webpack_require__(567),
+var assignValue = __webpack_require__(568),
     baseAssignValue = __webpack_require__(610);
 
 /**
@@ -91881,6 +91881,110 @@ ZoomControl.propTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var ImageField = function (_Component) {
+  _inherits(ImageField, _Component);
+
+  function ImageField(props) {
+    _classCallCheck(this, ImageField);
+
+    var _this = _possibleConstructorReturn(this, (ImageField.__proto__ || Object.getPrototypeOf(ImageField)).call(this, props));
+
+    _this.state = {
+      id: null,
+      className: null,
+      url: "",
+      alt: "",
+      title: ""
+    };
+
+    return _this;
+  }
+
+  _createClass(ImageField, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.processProps(this.props);
+    }
+  }, {
+    key: 'processProps',
+    value: function processProps(props) {
+
+      console.log("ImageField :: props => ", props);
+
+      var crop = "medium";
+      if (props.field.settings != null && props.field.settings.cropsAllowed !== undefined && props.field.settings.cropsAllowed != null) {
+
+        crop = props.field.settings.cropsAllowed;
+      }
+
+      var url = null;
+      var alt = "";
+      var title = "";
+      if (props.field.values !== undefined && props.field.values != null) {
+        if (props.field.values.urls[crop] !== undefined) {
+          url = props.field.values.urls[crop];
+        }
+        //alt = props.field.values.metadata.fields.alt[LOCALE].value;
+        //title = props.field.values.metadata.fields.title[LOCALE].value;
+      }
+
+      this.setState({
+        url: url,
+        alt: alt,
+        title: title
+      });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("ImageField :: componentWillRecieveProps :: props => ", nextProps);
+
+      this.processProps(nextProps);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      //alt={this.state.alt}
+      //title={this.state.title}
+      var width = this.props.width !== undefined ? this.props.width : 'auto';
+      var height = this.props.height !== undefined ? this.props.height : 'auto';
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+        id: this.state.id,
+        className: this.state.className,
+        src: ASSETS + this.state.url,
+        width: width,
+        height: height
+      });
+    }
+  }]);
+
+  return ImageField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ImageField);
+
+/***/ }),
+/* 565 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
@@ -91948,7 +92052,7 @@ var MoreResults = function (_Component) {
 /* harmony default export */ __webpack_exports__["default"] = (MoreResults);
 
 /***/ }),
-/* 565 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -92070,7 +92174,7 @@ return EvEmitter;
 
 
 /***/ }),
-/* 566 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -92287,7 +92391,7 @@ return getSize;
 
 
 /***/ }),
-/* 567 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseAssignValue = __webpack_require__(610),
@@ -92321,7 +92425,7 @@ module.exports = assignValue;
 
 
 /***/ }),
-/* 568 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Uint8Array = __webpack_require__(405);
@@ -92343,7 +92447,6 @@ module.exports = cloneArrayBuffer;
 
 
 /***/ }),
-/* 569 */,
 /* 570 */,
 /* 571 */,
 /* 572 */,
@@ -92382,7 +92485,8 @@ module.exports = cloneArrayBuffer;
 /* 605 */,
 /* 606 */,
 /* 607 */,
-/* 608 */
+/* 608 */,
+/* 609 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92438,110 +92542,6 @@ var ListItem = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (ListItem);
-
-/***/ }),
-/* 609 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var ImageField = function (_Component) {
-  _inherits(ImageField, _Component);
-
-  function ImageField(props) {
-    _classCallCheck(this, ImageField);
-
-    var _this = _possibleConstructorReturn(this, (ImageField.__proto__ || Object.getPrototypeOf(ImageField)).call(this, props));
-
-    _this.state = {
-      id: null,
-      className: null,
-      url: "",
-      alt: "",
-      title: ""
-    };
-
-    return _this;
-  }
-
-  _createClass(ImageField, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.processProps(this.props);
-    }
-  }, {
-    key: 'processProps',
-    value: function processProps(props) {
-
-      console.log("ImageField :: props => ", props);
-
-      var crop = "medium";
-      if (props.field.settings != null && props.field.settings.cropsAllowed !== undefined && props.field.settings.cropsAllowed != null) {
-
-        crop = props.field.settings.cropsAllowed;
-      }
-
-      var url = null;
-      var alt = "";
-      var title = "";
-      if (props.field.values !== undefined && props.field.values != null) {
-        if (props.field.values.urls[crop] !== undefined) {
-          url = props.field.values.urls[crop];
-        }
-        //alt = props.field.values.metadata.fields.alt[LOCALE].value;
-        //title = props.field.values.metadata.fields.title[LOCALE].value;
-      }
-
-      this.setState({
-        url: url,
-        alt: alt,
-        title: title
-      });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      console.log("ImageField :: componentWillRecieveProps :: props => ", nextProps);
-
-      this.processProps(nextProps);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      //alt={this.state.alt}
-      //title={this.state.title}
-      var width = this.props.width !== undefined ? this.props.width : 'auto';
-      var height = this.props.height !== undefined ? this.props.height : 'auto';
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
-        id: this.state.id,
-        className: this.state.className,
-        src: ASSETS + this.state.url,
-        width: width,
-        height: height
-      });
-    }
-  }]);
-
-  return ImageField;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (ImageField);
 
 /***/ }),
 /* 610 */
@@ -92711,7 +92711,7 @@ module.exports = getAllKeysIn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(609);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(564);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92726,19 +92726,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var NewsBlog = function (_Component) {
-  _inherits(NewsBlog, _Component);
+var NewsRelated = function (_Component) {
+  _inherits(NewsRelated, _Component);
 
-  function NewsBlog(props) {
-    _classCallCheck(this, NewsBlog);
+  function NewsRelated(props) {
+    _classCallCheck(this, NewsRelated);
 
-    var _this = _possibleConstructorReturn(this, (NewsBlog.__proto__ || Object.getPrototypeOf(NewsBlog)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NewsRelated.__proto__ || Object.getPrototypeOf(NewsRelated)).call(this, props));
 
     __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
     return _this;
   }
 
-  _createClass(NewsBlog, [{
+  _createClass(NewsRelated, [{
     key: 'componentDidMount',
     value: function componentDidMount() {}
   }, {
@@ -92779,7 +92779,6 @@ var NewsBlog = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'post-box' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'image', style: { backgroundImage: 'url("' + ASSETS + url + '")' } }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'title' },
@@ -92787,7 +92786,7 @@ var NewsBlog = function (_Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
-          null,
+          { className: 'date' },
           data != null ? 'Le ' + data : '',
           ' - ',
           category != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -92800,17 +92799,17 @@ var NewsBlog = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'excerpt', dangerouslySetInnerHTML: { __html: descripcio } }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'a',
-          { href: this.props.field.url, className: 'detail' },
+          { href: this.props.field.url, className: 'read-more' },
           'Lire la suite'
         )
       );
     }
   }]);
 
-  return NewsBlog;
+  return NewsRelated;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (NewsBlog);
+/* harmony default export */ __webpack_exports__["a"] = (NewsRelated);
 
 /***/ }),
 /* 616 */,
@@ -93048,13 +93047,13 @@ __webpack_require__(829);
 __webpack_require__(830);
 __webpack_require__(832);
 __webpack_require__(833);
-__webpack_require__(564);
+__webpack_require__(565);
 __webpack_require__(834);
-__webpack_require__(881);
-__webpack_require__(919);
+__webpack_require__(882);
+__webpack_require__(883);
 
 //javascripts
-__webpack_require__(882);
+__webpack_require__(884);
 
 /***/ }),
 /* 824 */
@@ -104108,7 +104107,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_ListItem__ = __webpack_require__(608);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_ListItem__ = __webpack_require__(609);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104240,7 +104239,7 @@ if (document.getElementById('typology-last')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(609);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(564);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104343,8 +104342,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_MoreResults__ = __webpack_require__(564);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ListItem__ = __webpack_require__(608);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Common_MoreResults__ = __webpack_require__(565);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_ListItem__ = __webpack_require__(609);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104668,8 +104667,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_masonry_component__ = __webpack_require__(835);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_masonry_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_masonry_component__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_MoreResults__ = __webpack_require__(564);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Typologies_NewsBlog__ = __webpack_require__(615);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Common_MoreResults__ = __webpack_require__(565);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Typologies_NewsBlog__ = __webpack_require__(881);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -105283,7 +105282,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
         __webpack_require__(837),
-        __webpack_require__(566)
+        __webpack_require__(567)
       ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -105528,8 +105527,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD - RequireJS
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-        __webpack_require__(565),
         __webpack_require__(566),
+        __webpack_require__(567),
         __webpack_require__(838),
         __webpack_require__(840)
       ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter, getSize, utils, Item ) {
@@ -106780,8 +106779,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   if ( true ) {
     // AMD - RequireJS
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-        __webpack_require__(565),
-        __webpack_require__(566)
+        __webpack_require__(566),
+        __webpack_require__(567)
       ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -107345,7 +107344,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(565)
+      __webpack_require__(566)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter ) {
       return factory( window, EvEmitter );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -107715,7 +107714,7 @@ return ImagesLoaded;
 /* 842 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assignValue = __webpack_require__(567),
+var assignValue = __webpack_require__(568),
     copyObject = __webpack_require__(113),
     createAssigner = __webpack_require__(843),
     isArrayLike = __webpack_require__(42),
@@ -109765,7 +109764,7 @@ module.exports = omit;
 
 var Stack = __webpack_require__(334),
     arrayEach = __webpack_require__(859),
-    assignValue = __webpack_require__(567),
+    assignValue = __webpack_require__(568),
     baseAssign = __webpack_require__(860),
     baseAssignIn = __webpack_require__(861),
     cloneBuffer = __webpack_require__(862),
@@ -110132,7 +110131,7 @@ module.exports = initCloneArray;
 /* 866 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cloneArrayBuffer = __webpack_require__(568),
+var cloneArrayBuffer = __webpack_require__(569),
     cloneDataView = __webpack_require__(867),
     cloneRegExp = __webpack_require__(868),
     cloneSymbol = __webpack_require__(869),
@@ -110215,7 +110214,7 @@ module.exports = initCloneByTag;
 /* 867 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cloneArrayBuffer = __webpack_require__(568);
+var cloneArrayBuffer = __webpack_require__(569);
 
 /**
  * Creates a clone of `dataView`.
@@ -110284,7 +110283,7 @@ module.exports = cloneSymbol;
 /* 870 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cloneArrayBuffer = __webpack_require__(568);
+var cloneArrayBuffer = __webpack_require__(569);
 
 /**
  * Creates a clone of `typedArray`.
@@ -110578,12 +110577,124 @@ module.exports = customOmitClone;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(564);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var NewsBlog = function (_Component) {
+  _inherits(NewsBlog, _Component);
+
+  function NewsBlog(props) {
+    _classCallCheck(this, NewsBlog);
+
+    var _this = _possibleConstructorReturn(this, (NewsBlog.__proto__ || Object.getPrototypeOf(NewsBlog)).call(this, props));
+
+    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
+    return _this;
+  }
+
+  _createClass(NewsBlog, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'processText',
+    value: function processText(fields, fieldName) {
+      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      //console.log("NewsBlog => ",this.props.field);
+
+      var fields = this.props.field.fields;
+
+      var category = this.props.field.category != null ? this.props.field.category.name : null;
+      var category_slug = this.props.field.category != null ? this.props.field.category.slug : null;
+      var data = fields.date.values != null ? fields.date.values : null;
+
+      var slug = this.processText(fields, 'slug');
+      var title = this.processText(fields, 'title');
+      var descripcio = this.processText(fields, 'excerpt');
+
+      var crop = "medium";
+      var url = null;
+
+      if (fields['image'].values !== undefined && fields['image'].values != null) {
+        if (fields['image'].values.urls[crop] !== undefined) {
+          url = fields['image'].values.urls[crop];
+        }
+      }
+
+      var results = [];
+      if (data != null) {
+        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
+      }
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'post-box' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'image', style: { backgroundImage: 'url("' + ASSETS + url + '")' } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'title' },
+          title
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          data != null ? 'Le ' + data : '',
+          ' - ',
+          category != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: routes["categoryNews"].replace(":slug", category_slug) },
+            category,
+            ' '
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'excerpt', dangerouslySetInnerHTML: { __html: descripcio } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: this.props.field.url, className: 'detail' },
+          'Lire la suite'
+        )
+      );
+    }
+  }]);
+
+  return NewsBlog;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (NewsBlog);
+
+/***/ }),
+/* 882 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(918);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(615);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -110736,423 +110847,7 @@ if (document.getElementById('related-news')) {
 }
 
 /***/ }),
-/* 882 */
-/***/ (function(module, exports) {
-
-app.offerapplications = {
-
-    offer_id: '',
-    user_id: '',
-    cv: '',
-
-    init: function init(user, offer, cv) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': csrf_token
-            }
-        });
-
-        offer_id = offer;
-        user_id = user;
-        cv_url = cv;
-
-        var _this = this;
-
-        $('#cv-form').on('submit', function (e) {
-            e.preventDefault();
-            _this.addCV();
-        });
-    },
-
-    apply: function apply() {
-        $('.apply-btn').hide();
-        $('.applyLoader').show();
-        $.ajax({
-            type: "POST",
-            url: "/offers/application/" + offer_id + "/create",
-            data: {},
-            success: function success(data, textStatus, xhr) {
-                $('.apply-btn').show();
-                $('.applyLoader').hide();
-                $('.modal').modal('hide');
-                if (xhr.status == 304) {
-                    $('#alreadyPostuledModal').modal('show');
-                } else {
-                    $('#postuledModal').modal('show');
-                }
-                setTimeout(function () {
-                    location.reload();
-                }, 7000);
-            },
-            error: function error() {
-                $('.apply-btn').show();
-                $('.applyLoader').hide();
-                $('.modal').modal('hide');
-                $('#error-msg-modal').html('Il y a eu une erreur dans l\'application');
-                $('#errorModal').modal('show');
-            }
-        });
-    },
-
-    register: function register() {
-        $('#loginModalError').hide();
-        $('#regButton').hide();
-        $('#regLoader').show();
-        $('#loginModalError').css('display', 'none');
-
-        $.ajax({
-            type: "POST",
-            url: "/candidate/store",
-            data: {
-                civility: civility_default,
-                email: $('#reg-email').val(),
-                lastname: $('#reg-lastname').val(),
-                firstname: $('#reg-firstname').val(),
-                telephone: $('#reg-telephone').val(),
-                location: $('#reg-location').val(),
-                postal_code: $('#reg-postal_code').val()
-            },
-            success: function success(data, textStatus, xhr) {
-                user_id = data["data"][" user_id"];
-                $('.modal').modal('hide');
-                $('#cvModal').modal('show');
-                $('#regButton').show();
-                $('#regLoader').hide();
-            },
-            error: function error(jqXHR, textStatus, errorThrown) {
-                var error_data = false;
-                if (typeof jqXHR.responseJSON.errors["email"] !== 'undefined') {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
-                    error_data = true;
-                }
-                if (typeof jqXHR.responseJSON.errors["lastname"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["lastname"][0]);
-                    error_data = true;
-                }
-                if (typeof jqXHR.responseJSON.errors["firstname"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["firstname"][0]);
-                    error_data = true;
-                }
-                if (typeof jqXHR.responseJSON.errors["telephone"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["telephone"][0]);
-                    error_data = true;
-                }
-
-                if (typeof jqXHR.responseJSON.errors["postal_code"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["postal_code"][0]);
-                    error_data = true;
-                }
-
-                if (typeof jqXHR.responseJSON.errors["location"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["location"][0]);
-                    error_data = true;
-                }
-
-                if (error_data) {
-                    $('#loginModalError').css('display', 'inline-block');
-                } else {
-                    $('#loginModalError p').html('Il y a eu une erreur dans le registre');
-                }
-
-                $('#regButton').show();
-                $('#regLoader').hide();
-            }
-        });
-    },
-
-    login: function login() {
-        $('#loginModalError').hide();
-        $('#loginButton').hide();
-        $('#loginLoader').show();
-        $('#loginModalError').css('display', 'none');
-
-        $.ajax({
-            type: "POST",
-            url: routes.login,
-            data: {
-                email: $('#log-email').val(),
-                password: $('#log-password').val()
-            },
-            success: function success(data, textStatus, xhr) {
-
-                if (xhr.status == 304) {
-                    $('#loginModalError p').html('Mot de passe incorret');
-                    $('#loginModalError').css('display', 'inline-block');
-                    $('#loginButton').show();
-                    $('#loginLoader').hide();
-                } else {
-                    user_id = data["data"][" user_id"];
-                    cv_url = data["data"]["resume_file"];
-
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1000);
-                }
-            },
-            error: function error(jqXHR, textStatus, errorThrown) {
-                var error_data = false;
-                if (typeof jqXHR.responseJSON.errors["email"] !== 'undefined') {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
-                    error_data = true;
-                }
-                if (typeof jqXHR.responseJSON.errors["password"] !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["password"][0]);
-                    error_data = true;
-                }
-                if (error_data) {
-                    $('#loginModalError').css('display', 'inline-block');
-                } else {
-                    $('#loginModalError p').html('Il y a eu une erreur dans la connexion');
-                }
-                $('#loginButton').show();
-                $('#loginLoader').hide();
-            }
-        });
-    },
-
-    addFileTofake: function addFileTofake() {
-        var aux = $('#resume_file').val();
-        $('#fake-input').val(aux.replace(/^.*[\\\/]/, ''));
-    },
-
-    addCV: function addCV() {
-        $('#upload-button').hide();
-        $('#upload-loader').show();
-        $('#cvModalError').css('display', 'none');
-
-        //event.preventDefault();
-        if (typeof document.getElementById("resume_file").files[0] == 'undefined') {
-            $('#cvModalError p').html('Fichier invalide');
-            $('#cvModalError').css('display', 'inline-block');
-            $('#upload-button').show();
-            $('#upload-loader').hide();
-        } else {
-            var formData = new FormData();
-            formData.append("resume_file", document.getElementById("resume_file").files[0]);
-
-            $.ajax({
-                type: "POST",
-                url: '/candidate/addcv',
-                data: formData,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function success(response, textStatus, xhr) {
-                    cv_url = response["data"]["resume_file"];
-                    $('.modal').modal('hide');
-                    $('#alertsModal').modal('show');
-                    $('#upload-button').show();
-                    $('#upload-loader').hide();
-                },
-                error: function error(jqXHR, textStatus, errorThrown) {
-                    var error_data = false;
-                    if (typeof jqXHR.responseJSON.errors["resume_file"] !== 'undefined') {
-                        $('#cvModalError p').html(jqXHR.responseJSON.errors["resume_file"][0]);
-                        error_data = true;
-                    }
-                    if (error_data) {
-                        $('#cvModalError').css('display', 'inline-block');
-                    } else {
-                        $('#cvModalError p').html('Une erreur s\'est produite lors du chargement du CV');
-                        $('#cvModalError').css('display', 'inline-block');
-                    }
-                    $('#upload-button').show();
-                    $('#upload-loader').hide();
-                }
-
-            });
-        }
-    },
-
-    addTag: function addTag() {
-        var tag = $('#alerts').val();
-        $('#tagModalError').hide();
-        if (tag != '') {
-            $.ajax({
-                type: "POST",
-                url: "/candidate/addtag",
-                data: {
-                    tag: tag
-                },
-                success: function success(data, textStatus, xhr) {
-                    if (xhr.status == 304) {
-                        $('#tagModalError').css('display', 'inline-block');
-                    }
-                },
-                error: function error(jqXHR, textStatus, errorThrown) {
-                    var message = 'Une erreur s\'est produite';
-                    $('#tagModalError').show().html(message);
-                }
-            });
-        }
-    },
-
-    goToApply: function goToApply() {
-        $('.modal').modal('hide');
-        $('#registeredModal').modal('show');
-    },
-
-    open: function open() {
-        if (user_id == 0) {
-            $('#loginModal').modal('show');
-        } else {
-            if ('' == cv_url) {
-                $('#cvModal').modal('show');
-            } else {
-                $('#confirmationModal').modal('show');
-            }
-        }
-    }
-};
-
-/***/ }),
-/* 883 */,
-/* 884 */,
-/* 885 */,
-/* 886 */,
-/* 887 */,
-/* 888 */,
-/* 889 */,
-/* 890 */,
-/* 891 */,
-/* 892 */,
-/* 893 */,
-/* 894 */,
-/* 895 */,
-/* 896 */,
-/* 897 */,
-/* 898 */,
-/* 899 */,
-/* 900 */,
-/* 901 */,
-/* 902 */,
-/* 903 */,
-/* 904 */,
-/* 905 */,
-/* 906 */,
-/* 907 */,
-/* 908 */,
-/* 909 */,
-/* 910 */,
-/* 911 */,
-/* 912 */,
-/* 913 */,
-/* 914 */,
-/* 915 */,
-/* 916 */,
-/* 917 */,
-/* 918 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Fields_ImageField__ = __webpack_require__(609);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-var NewsRelated = function (_Component) {
-  _inherits(NewsRelated, _Component);
-
-  function NewsRelated(props) {
-    _classCallCheck(this, NewsRelated);
-
-    var _this = _possibleConstructorReturn(this, (NewsRelated.__proto__ || Object.getPrototypeOf(NewsRelated)).call(this, props));
-
-    __WEBPACK_IMPORTED_MODULE_2_moment___default.a.locale(LOCALE);
-    return _this;
-  }
-
-  _createClass(NewsRelated, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
-  }, {
-    key: 'processText',
-    value: function processText(fields, fieldName) {
-      return fields[fieldName].values != null && fields[fieldName].values[LOCALE] !== undefined ? fields[fieldName].values[LOCALE] : '';
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      //console.log("NewsBlog => ",this.props.field);
-
-      var fields = this.props.field.fields;
-
-      var category = this.props.field.category != null ? this.props.field.category.name : null;
-      var category_slug = this.props.field.category != null ? this.props.field.category.slug : null;
-      var data = fields.date.values != null ? fields.date.values : null;
-
-      var slug = this.processText(fields, 'slug');
-      var title = this.processText(fields, 'title');
-      var descripcio = this.processText(fields, 'excerpt');
-
-      var crop = "medium";
-      var url = null;
-
-      if (fields['image'].values !== undefined && fields['image'].values != null) {
-        if (fields['image'].values.urls[crop] !== undefined) {
-          url = fields['image'].values.urls[crop];
-        }
-      }
-
-      var results = [];
-      if (data != null) {
-        data = __WEBPACK_IMPORTED_MODULE_2_moment___default()(data).format('L');
-      }
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'post-box' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'title' },
-          title
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'p',
-          { className: 'date' },
-          data != null ? 'Le ' + data : '',
-          ' - ',
-          category != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
-            { href: routes["categoryNews"].replace(":slug", category_slug) },
-            category,
-            ' '
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'excerpt', dangerouslySetInnerHTML: { __html: descripcio } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'a',
-          { href: this.props.field.url, className: 'read-more' },
-          'Lire la suite'
-        )
-      );
-    }
-  }]);
-
-  return NewsRelated;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (NewsRelated);
-
-/***/ }),
-/* 919 */
+/* 883 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -111161,7 +110856,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(918);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Typologies_NewsRelated__ = __webpack_require__(615);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -111268,6 +110963,277 @@ if (document.getElementById('last-news')) {
         __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(LastNews, null), element);
     });
 }
+
+/***/ }),
+/* 884 */
+/***/ (function(module, exports) {
+
+app.offerapplications = {
+
+    offer_id: '',
+    user_id: '',
+    cv: '',
+
+    init: function init(user, offer, cv) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': csrf_token
+            }
+        });
+
+        offer_id = offer;
+        user_id = user;
+        cv_url = cv;
+
+        var _this = this;
+
+        $('#cv-form').on('submit', function (e) {
+            e.preventDefault();
+            _this.addCV();
+        });
+    },
+
+    apply: function apply() {
+        $('.apply-btn').hide();
+        $('.applyLoader').show();
+        $.ajax({
+            type: "POST",
+            url: "/offers/application/" + offer_id + "/create",
+            data: {},
+            success: function success(data, textStatus, xhr) {
+                $('.apply-btn').show();
+                $('.applyLoader').hide();
+                $('.modal').modal('hide');
+                if (xhr.status == 304) {
+                    $('#alreadyPostuledModal').modal('show');
+                } else {
+                    $('#postuledModal').modal('show');
+                }
+                setTimeout(function () {
+                    location.reload();
+                }, 7000);
+            },
+            error: function error() {
+                $('.apply-btn').show();
+                $('.applyLoader').hide();
+                $('.modal').modal('hide');
+                $('#error-msg-modal').html('Il y a eu une erreur dans l\'application');
+                $('#errorModal').modal('show');
+            }
+        });
+    },
+
+    register: function register() {
+        $('#loginModalError').hide();
+        $('#regButton').hide();
+        $('#regLoader').show();
+        $('#loginModalError').css('display', 'none');
+
+        $.ajax({
+            type: "POST",
+            url: routes['candidate.store'],
+            data: {
+                civility: civility_default,
+                email: $('#reg-email').val(),
+                lastname: $('#reg-lastname').val(),
+                firstname: $('#reg-firstname').val(),
+                telephone: $('#reg-telephone').val(),
+                location: $('#reg-location').val(),
+                postal_code: $('#reg-postal_code').val()
+            },
+            success: function success(data, textStatus, xhr) {
+                user_id = data["data"][" user_id"];
+                $('.modal').modal('hide');
+                $('#cvModal').modal('show');
+                $('#regButton').show();
+                $('#regLoader').hide();
+            },
+            error: function error(jqXHR, textStatus, errorThrown) {
+                var error_data = false;
+                if (typeof jqXHR.responseJSON.errors["email"] !== 'undefined') {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
+                    error_data = true;
+                }
+                if (typeof jqXHR.responseJSON.errors["lastname"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["lastname"][0]);
+                    error_data = true;
+                }
+                if (typeof jqXHR.responseJSON.errors["firstname"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["firstname"][0]);
+                    error_data = true;
+                }
+                if (typeof jqXHR.responseJSON.errors["telephone"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["telephone"][0]);
+                    error_data = true;
+                }
+
+                if (typeof jqXHR.responseJSON.errors["postal_code"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["postal_code"][0]);
+                    error_data = true;
+                }
+
+                if (typeof jqXHR.responseJSON.errors["location"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["location"][0]);
+                    error_data = true;
+                }
+
+                if (error_data) {
+                    $('#loginModalError').css('display', 'inline-block');
+                } else {
+                    $('#loginModalError p').html('Il y a eu une erreur dans le registre');
+                }
+
+                $('#regButton').show();
+                $('#regLoader').hide();
+            }
+        });
+    },
+
+    login: function login() {
+
+        $('#loginModalError').hide();
+        $('#loginButton').hide();
+        $('#loginLoader').show();
+        $('#loginModalError').css('display', 'none');
+
+        $.ajax({
+            type: "POST",
+            url: routes.login,
+            data: {
+                email: $('#log-email').val(),
+                password: $('#log-password').val()
+            },
+            success: function success(data, textStatus, xhr) {
+
+                if (xhr.status == 304) {
+                    $('#loginModalError p').html('Mot de passe incorret');
+                    $('#loginModalError').css('display', 'inline-block');
+                    $('#loginButton').show();
+                    $('#loginLoader').hide();
+                } else {
+                    user_id = data["data"][" user_id"];
+                    cv_url = data["data"]["resume_file"];
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function error(jqXHR, textStatus, errorThrown) {
+                var error_data = false;
+                if (typeof jqXHR.responseJSON.errors["email"] !== 'undefined') {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
+                    error_data = true;
+                }
+                if (typeof jqXHR.responseJSON.errors["password"] !== 'undefined' && !error_data) {
+                    $('#loginModalError p').html(jqXHR.responseJSON.errors["password"][0]);
+                    error_data = true;
+                }
+                if (error_data) {
+                    $('#loginModalError').css('display', 'inline-block');
+                } else {
+                    $('#loginModalError p').html('Il y a eu une erreur dans la connexion');
+                }
+                $('#loginButton').show();
+                $('#loginLoader').hide();
+            }
+        });
+    },
+
+    addFileTofake: function addFileTofake() {
+        var aux = $('#resume_file').val();
+        $('#fake-input').val(aux.replace(/^.*[\\\/]/, ''));
+    },
+
+    addCV: function addCV() {
+        $('#upload-button').hide();
+        $('#upload-loader').show();
+        $('#cvModalError').css('display', 'none');
+
+        //event.preventDefault();
+        if (typeof document.getElementById("resume_file").files[0] == 'undefined') {
+            $('#cvModalError p').html('Fichier invalide');
+            $('#cvModalError').css('display', 'inline-block');
+            $('#upload-button').show();
+            $('#upload-loader').hide();
+        } else {
+            var formData = new FormData();
+            formData.append("resume_file", document.getElementById("resume_file").files[0]);
+
+            $.ajax({
+                type: "POST",
+                url: routes['candidate.addcv'],
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function success(response, textStatus, xhr) {
+                    cv_url = response["data"]["resume_file"];
+                    $('.modal').modal('hide');
+                    $('#alertsModal').modal('show');
+                    $('#upload-button').show();
+                    $('#upload-loader').hide();
+                },
+                error: function error(jqXHR, textStatus, errorThrown) {
+                    var error_data = false;
+                    if (typeof jqXHR.responseJSON.errors["resume_file"] !== 'undefined') {
+                        $('#cvModalError p').html(jqXHR.responseJSON.errors["resume_file"][0]);
+                        error_data = true;
+                    }
+                    if (error_data) {
+                        $('#cvModalError').css('display', 'inline-block');
+                    } else {
+                        $('#cvModalError p').html('Une erreur s\'est produite lors du chargement du CV');
+                        $('#cvModalError').css('display', 'inline-block');
+                    }
+                    $('#upload-button').show();
+                    $('#upload-loader').hide();
+                }
+
+            });
+        }
+    },
+
+    addTag: function addTag() {
+        var tag = $('#alerts').val();
+        $('#tagModalError').hide();
+        if (tag != '') {
+            $.ajax({
+                type: "POST",
+                url: routes['candidate.addtag'],
+                data: {
+                    tag: tag
+                },
+                success: function success(data, textStatus, xhr) {
+                    if (xhr.status == 304) {
+                        $('#tagModalError').css('display', 'inline-block');
+                    }
+                },
+                error: function error(jqXHR, textStatus, errorThrown) {
+                    var message = 'Une erreur s\'est produite';
+                    $('#tagModalError').show().html(message);
+                }
+            });
+        }
+    },
+
+    goToApply: function goToApply() {
+        $('.modal').modal('hide');
+        $('#registeredModal').modal('show');
+    },
+
+    open: function open() {
+        if (user_id == 0) {
+            $('#loginModal').modal('show');
+        } else {
+            if ('' == cv_url) {
+                $('#cvModal').modal('show');
+            } else {
+                $('#confirmationModal').modal('show');
+            }
+        }
+    }
+};
 
 /***/ })
 /******/ ]);

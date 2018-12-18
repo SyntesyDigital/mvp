@@ -16,7 +16,7 @@
 @endphp
 
 <div>
-  <a target="{{$target}}" href="{{$link}}" id="{{$field['settings']['htmlId'] or ''}}" class="btn {{$field['settings']['htmlClass'] or ''}}">
+  <a target="{{$target}}" href="{{$link}}" id="{{$field['settings']['htmlId'] or ''}}" class="btn btn-soft-gray {{$field['settings']['htmlClass'] or ''}}">
     {{$linkField['value']['title'][App::getLocale()] or ''}}
   </a>
 </div>
