@@ -86,13 +86,12 @@ class OfferRepository extends BaseRepository
             ->addColumn('recipient', function ($item) {
                 return $item->recipient->full_name;
             })
+            ->addColumn('applied', function ($item) {
+                return '<a href="'.route('rrhh.admin.offer.applications.show', $item).'" class="btn btn-link"> <i class="fa fa-address-card"></i> '.$item->applications()->count().' </a>';
+            })
 
             ->addColumn('action', function ($item) {
                 $html = '';
-
-                if ($item->applications()->count()) {
-                    $html .= '<a href="'.route('rrhh.admin.offer.applications.show', $item).'" class="btn btn-sm btn-primary"><i class="fa fa-address-card"></i> Candidatures</a>';
-                }
 
                 $html .= '&nbsp; <a href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> Voir</a>';
 
@@ -102,6 +101,8 @@ class OfferRepository extends BaseRepository
 
                 return $html;
             })
+
+            ->rawColumns(['applied','action'])
 
             ->order(function ($query) {
                 $orders = request()->get('order');
@@ -143,7 +144,7 @@ class OfferRepository extends BaseRepository
         ->make(true);
     }
 
-    public function getSearchOffers($search, $contract, $job, $agence, $items_per_page = null, $page = 0)
+    public function getSearchOffers($search, $contract, $job, $agence, $items_per_page = null, $page = 0, $orderBy= null)
     {
         $qy = Offer::whereHas('fields', function ($q) use ($search, $contract, $job) {
             $q->where(function ($query) use ($search) {
@@ -212,12 +213,14 @@ class OfferRepository extends BaseRepository
 
     public function getRandomOffers($tags, $limit, $excluded_offer_id = null)
     {
-        return  Offer::whereHas('tags', function ($query) use ($tags) {
-            $query->whereIn('tags.id', $tags);
-        })
-                ->where('id', '!=', $excluded_offer_id)
-                ->where('status', Offer::STATUS_ACTIVE)
-                ->inRandomOrder()->limit($limit)->get();
+        $offers = Offer::whereHas('tags', function ($query) use ($tags) {
+              $query->whereIn('tags_offers.id', $tags);
+          })
+                  ->where('id', '!=', $excluded_offer_id)
+                  ->where('status', Offer::STATUS_ACTIVE)
+                  ->inRandomOrder()->limit($limit)->get();
+
+        return $offers;
     }
 
     public function getRandomOffersByAgence($agence, $limit, $excluded_offer_id = null, $tags = null)

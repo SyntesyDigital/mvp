@@ -95,8 +95,8 @@
           </div>
         </div>
         <div class="col-sm-4 select-container">
-          {!! Form::Label('filter', 'Filtre par:') !!}
-          {!! Form::select('filter', [0 => '', 1 =>'Filtre 1', 2 => 'Filtre 2'], null, ['class' => 'form-control']) !!}
+          {!! Form::Label('order', 'Filtre par:') !!}
+          {!! Form::select('order', ['' => '', 'date' =>'Date', 'name' => 'Name'], null, ['class' => 'form-control']) !!}
         </div>
         <div class="separator"></div>
         <div class="btn btn-dark-gray" id="btn-filtres">APPLIQUER LES FILTRES</div>

@@ -179,8 +179,8 @@
                         <div class="modal-body">
                                 <h3>Est vous sur de vouloir postuler?</h3>
                                  <div class="row">
-                                    <button type="button"  onclick="app.offerapplications.apply()" class="btn  btn-soft-gray  apply-btn">OUI</button>
-                                    <button type="button"  onclick="$('#confirmationModal').modal('hide')" class="btn btn-secondary apply-btn" style="background-color: #394050;">NON</button>
+                                    <button type="button"  onclick="$('#confirmationModal').modal('hide')" class="btn  btn-dark-gray">NON</button>
+                                    <button type="button"  onclick="app.offerapplications.apply()" class="btn btn-red apply-btn">OUI</button>
                                     <img class="loader applyLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                                 </div>
                         </div>

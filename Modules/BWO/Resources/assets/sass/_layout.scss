@@ -7,7 +7,7 @@ header{
   padding: 10px 20px 0px;
   position: relative;
   z-index: 5;
-  
+
   .menus{
     width:100%;
     @include font(14,20,400)
@@ -397,6 +397,7 @@ footer{
               color:$brand-footer-light-gray-color;
               &:hover{
                 color:$brand-white-color;
+                background-color: transparent;
               }
             }
           }

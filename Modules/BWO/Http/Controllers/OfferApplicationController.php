@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\RRHH\Http\Controllers\Front;
+namespace Modules\BWO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\RRHH\Jobs\Offers\CreateOfferApplication;

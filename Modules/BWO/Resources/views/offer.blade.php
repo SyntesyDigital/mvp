@@ -23,35 +23,35 @@
           <ol class="breadcrumb">
             <li><a href="{{route('home')}}">ACCUEIL</a></li>
             <li><a href="{{route('search')}}">OFFERS</a></li>
-            <li><a href="{{route('search')}}">MÉTIER 1</a></li>
-            <li>ASSISTANT COMPTABLE H/F</li>
+            <li><a href="{{route('search')}}?job[]={{$offer->job_1}}">{{ strtoupper(Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1')) }}</a></li>
+            <li>{{$offer->title}}</li>
           </ol>
-          <h1>ASSISTANT COMPTABLE H/F</h1>
+          <h1>{{$offer->title}}</h1>
           <div class="separator"></div>
-          <p class="first-info">Mérignac, Gironde, 33, Bâtiment, Contrat intérimaire - Publié le 14 mai 2018</p>
+          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{$offer->created_at}} </p>
           <div class="col-sm-4 col-md-3 information">
             <h2 class="gray-square-text">DÉTAILS</h2>
             <div class="block-info">
               <p><b>Lieu:</b></p>
-              <p>La Défense</p>
+              <p>{{$offer->address}}</p>
             </div>
             <div class="block-info">
               <p><b>Contrat:</b></p>
-              <p>CDI</p>
+              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }}</p>
             </div>
             <div class="block-info">
               <p><b>À partir du:</b></p>
-              <p>02/01/2019</p>
+              <p>{{$offer->start_at}}</p>
             </div>
             <div class="block-info">
               <p><b>Secteur:</b></p>
-              <p>Assistant / Secrétariat</p>
+              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }} / {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2') }}</p>
             </div>
             <div class="block-info">
               <p><b>Salaire:</b></p>
-              <p>30/34 K€ selon profil</p>
+              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
             </div>
-            <div class="reference">REF : LEG1 | 20/11/2018</div>
+            <div class="reference">REF : {{$offer->id}} | {{$offer->created_at}}</div>
             <div class="share-container">
               @php
       					$shareUrl = urlencode(Request::url());
@@ -67,15 +67,13 @@
         					<img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon">
         				</a>
 
-        				<a href="#"	class="share-button" title="Share on Instagram">
-        					<img src="{{asset('modules/bwo/images/instagram_icon.jpg')}}" class="social-icon">
-        				</a>
                 <a href="https://twitter.com/share?url={{$shareUrl}}&text={{$title}}"
         					class="share-button"
         					 onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
         					 target="_blank" title="Share on Twitter">
         					<img src="{{asset('modules/bwo/images/tw_icon.jpg')}}" class="social-icon">
         				</a>
+
                 <a href="mailto:?subject={{$title}}&body={{$shareUrl}}"
         					class="mail-button">
         					<img src="{{asset('modules/bwo/images/mail_icon.jpg')}}" class="social-icon">
@@ -84,23 +82,27 @@
             </div>
           </div>
           <div class="col-sm-8 col-md-9 description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat egestas fringilla. Donec quis convallis metus. Aenean vitae justo sed nibh rhoncus semper id ut urna. Proin sodales risus in lacinia ultricies. Quisque consequat purus egesta</p>
-            <p class="title">PRINCIPALES MISIONS</p>
-            <ul>
-              <li>Saise et suivi des comandes jusqu'à la facturation,</li>
-              <li>Suivi des expéditions en liaison avec la Supply Chain et l'entrepôt,</li>
-              <li>Préparation, contrôle et soumission des documents nécessaires aux expéditions (certificats d'origine, documents de transport...),</li>
-              <li>Suivi des reclamations clients et retours éventuels.</li>
-            </ul>
-            <p>Vous avez une expérience sur un poste similaire de 5 ans et votre anglais est usuel</p>
-            <ul>
-              <li>Maitrise du Pack Office et ERP sur AS400</li>
-            </ul>
+            {!! $offer->description !!}
             <p class="title">PROFIL RECHERCHÉ</p>
+						{!! $offer->perfil !!}
             <p><b>Diplôme: </b> bac + 2</p>
             <p><b>Expérience requise: </b> Expérience similaire de 5 ans</p>
             <p><b>Langue: </b>anglis opérationnel</p>
             <p><b>Logiciel: </b>PACK OFFICE</p>
+						<p><b>Horaries: </b>
+							@php
+								$values = Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->schedule, 'schedule');
+							@endphp
+
+							@if(is_array($values))
+								@foreach($values as $k => $v)
+									{{$v}} ,
+								@endforeach
+							@else
+								{{$values}}
+							@endif
+						</p>
+
           </div>
           <br clear="all">
           <div class="btn-red-container">

@@ -15,6 +15,8 @@ app.offerapplications = {
         user_id = user;
         cv_url = cv;
 
+        console.log("init :: offer_id : ",offer);
+
         var _this = this;
 
         $('#cv-form').on('submit', function(e) {
@@ -25,11 +27,16 @@ app.offerapplications = {
     },
 
     apply: function() {
+
+        console.log("apply :: ",
+          routes['offer.applications.create'].replace(':offer_id',offer_id)
+        );
+
         $('.apply-btn').hide();
         $('.applyLoader').show();
         $.ajax({
             type: "POST",
-            url: "/offers/application/" + offer_id + "/create",
+            url: routes['offer.applications.create'].replace(':offer_id',offer_id),
             data: {},
             success: function(data, textStatus, xhr) {
                 $('.apply-btn').show();

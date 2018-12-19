@@ -58,7 +58,9 @@
             'login':"{{route('candidate.login')}}",
             'candidate.store':"{{route('candidate.store')}}",
             'candidate.addcv' : "{{route('candidate.addcv')}}",
-            'candidate.addtag' : "{{route('candidate.addtag')}}"
+            'candidate.addtag' : "{{route('candidate.addtag')}}",
+            'candidate.addtag' : "{{route('candidate.addtag')}}",
+            'offer.applications.create' : "{{route('offer.applications.create',['offer' => ':offer_id'])}}"
           };
         </script>
         <script type="text/javascript" src="{{route('localization.js', App::getLocale())}}" ></script>
@@ -83,7 +85,7 @@
 
               app.offerapplications.init(
                 "{{ Auth::check() ? Auth::user()->id : 0 }}",
-                this.id,
+                {{isset($offer) ? $offer->id : null}},
                 "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
               );
 

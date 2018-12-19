@@ -28,8 +28,15 @@ class CandidateController extends Controller
         $httpCode = 500;
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             $httpCode = 200;
-            $data = ['user_id' => Auth::user()->id,
-                     'resume_file' => Auth::user()->candidate->resume_file, ];
+            if(Auth::user()->hasRole(['candidate'])){
+              $data = ['user_id' => Auth::user()->id,
+                     'resume_file' => Auth::user()->candidate->resume_file
+                   ];
+            }
+            else {
+              $data = ['user_id' => Auth::user()->id,
+                     'resume_file' => null];
+            }
         } else {
             $httpCode = 304;
         }

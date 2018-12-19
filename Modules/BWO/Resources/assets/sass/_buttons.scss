@@ -19,6 +19,11 @@
     &:focus, &:active, &:active:focus {
       background-color:$brand-dark-gray-color;
     }
+
+    &.unactivated{
+      background-color:$brand-dark-gray-color;
+    }
+
   }
   &.btn-dark-gray{
     color: $brand-white-color;

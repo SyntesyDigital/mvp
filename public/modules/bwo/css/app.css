@@ -9895,6 +9895,10 @@ a {
   background-color: #666666;
 }
 
+.btn.btn-red.unactivated {
+  background-color: #666666;
+}
+
 .btn.btn-dark-gray {
   color: #fff;
   background-color: #666666;
@@ -10422,6 +10426,7 @@ footer .footer-info .first-line-footer ul li a {
 
 footer .footer-info .first-line-footer ul li a:hover {
   color: #fff;
+  background-color: transparent;
 }
 
 @media (min-width: 48em) {
