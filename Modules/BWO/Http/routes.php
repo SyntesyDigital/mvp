@@ -3,13 +3,24 @@
 Route::get('sitemap.xml', 'Modules\BWO\Http\Controllers\SitemapController@sitemap')->name('sitemap');
 Route::group([
   'prefix' => LaravelLocalization::setLocale(),
-  'middleware' => ['web','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
+  'middleware' => [
+      'web',
+      'localeSessionRedirect',
+      'localizationRedirect',
+      'localeViewPath',
+      'localize'
+  ],
   'namespace' => 'Modules\BWO\Http\Controllers'
-], function()
-{
-
+], function() {
 
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | LINKEDIN CALLBACK
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/linkedin/callback', 'LinkedinController@callback')->name('linkedin.callback');
 
     /*
     |--------------------------------------------------------------------------

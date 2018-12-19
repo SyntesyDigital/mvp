@@ -36,7 +36,9 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $imagesUpload = ['image'];
+    protected $imagesUpload = [
+        'image'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +54,7 @@ class User extends Authenticatable
         'image',
         'language',
         'status',
+        'linkedin_id'
     ];
 
     protected $hashable = [
@@ -89,6 +92,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
     }
 
+
+    // FIXME : Use traits :)
     public function agences()
     {
         return $this->belongsToMany('Modules\RRHH\Entities\Agence', 'agence_user', 'user_id', 'agence_id');
@@ -103,6 +108,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('Modules\RRHH\Entities\Offers\Offer', 'recipient_id', 'id');
     }
+    //
 
     /**
      * Get the user's full name.
@@ -149,8 +155,9 @@ class User extends Authenticatable
         $this->notify(new MailResetPasswordToken($token));
     }
 
-    public function is($role) {
-        if($role == $this->roles) {
+    public function is($role)
+    {
+        if ($role == $this->roles) {
             return true;
         }
         return false;
