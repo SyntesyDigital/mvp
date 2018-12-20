@@ -38,9 +38,10 @@ class OfferController extends Controller
         return view('bwo::offer', [
             'offer' => $offer,
             'coords' => $offer->setGeo(),
-            'related_offers' => null !== $offer->recipient->agences()->first() ? $this->offers->getRandomOffersByAgence($offer->recipient->agences()->first()->id, 3, $offer->id, $offer->tags()->get()->pluck('id')) : null,
-            'related_offers_country' => $this->offers->getRandomOffers($offer->tags()->get()->pluck('id'), 3, $offer->id),
-            'allTags' => Tag::orderBy('name')->get(),
+            'related_offers' => $this->offers->getRandomOffers($offer->tags()->get()->pluck('id'), 3, $offer->id),
+            //'related_offers' => null !== $offer->recipient->agences()->first() ? $this->offers->getRandomOffersByAgence($offer->recipient->agences()->first()->id, 3, $offer->id, $offer->tags()->get()->pluck('id')) : null,
+
+            //'allTags' => Tag::orderBy('name')->get(),
             'search_params' => $request->session()->has('search_params') ? $request->session()->get('search_params') : false,
         ]);
     }

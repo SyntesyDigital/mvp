@@ -23,7 +23,7 @@
                                 <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
                                 <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD">Déplacer sur une<br/>autre annonce</a>
                             </div>
-                        @endforeachs
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@ class SendEmailTemplate
         $email = $this->email;
         $file = $this->file;
 
-        Mail::send('emails.template', [
+        Mail::send('bwo::emails.template', [
             'body' => $body,
         ], function ($message) use ($subject, $email, $body, $file) {
             $message

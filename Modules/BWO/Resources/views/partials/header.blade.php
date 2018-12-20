@@ -68,7 +68,9 @@
 						</div>
 
 						<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
-									@include ('bwo::partials.menu')
+									@include ('bwo::partials.menu',
+										["menu" => get_menu('header')]
+									)
 						</div><!-- /.nav-collapse -->
 					</nav>
 			</div>

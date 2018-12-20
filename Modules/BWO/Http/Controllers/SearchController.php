@@ -24,7 +24,8 @@ class SearchController extends Controller
             $request->get('job'),
             $request->get('agence'),
             $this->itemsPerPage,
-            $request->get('page') ? $request->get('page') : 0
+            $request->get('page') ? $request->get('page') : 0,
+            $request->get('order')
         );
         //delete page parameter for url contruction for pagination
         $params_array = $request->all();

@@ -7,7 +7,9 @@
 
 			<div class="footer-info">
 				<div class="first-line-footer">
-					@include ('bwo::partials.menu')
+					@include ('bwo::partials.menu',
+						["menu" => get_menu('footer')]
+					)
 				</div>
 				<div class="second-line-footer">
 					<div class="footer-social">
