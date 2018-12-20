@@ -85,16 +85,13 @@
 
               app.offerapplications.init(
                 "{{ Auth::check() ? Auth::user()->id : 0 }}",
-                {{isset($offer) ? $offer->id : null}},
+                "{{isset($offer) ? $offer->id : null}}",
                 "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
               );
 
               $(".application-btn").on('click',function(e){
                   app.offerapplications.open();
               });
-
-
-
           });
 
         </script>

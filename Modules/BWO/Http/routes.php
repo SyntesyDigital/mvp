@@ -17,10 +17,14 @@ Route::group([
 
     /*
     |--------------------------------------------------------------------------
-    | LINKEDIN CALLBACK
+    | LINKEDIN
     |--------------------------------------------------------------------------
     */
     Route::get('/linkedin/callback', 'LinkedinController@callback')->name('linkedin.callback');
+    Route::post('/linkedin/login/save', 'LinkedinController@create')->name('linkedin.create');
+    Route::get('/linkedin/login', 'LinkedinController@login')->name('linkedin.login');
+
+
 
     /*
     |--------------------------------------------------------------------------

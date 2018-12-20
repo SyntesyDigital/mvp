@@ -31,6 +31,7 @@ class RegisterCandidate
             'job_2',
             'job_3',
             'comment',
+            'linkedin_id'
         ]);
     }
 
@@ -52,7 +53,8 @@ class RegisterCandidate
             "status" => User::STATUS_ACTIVE,
             "telephone" => $this->attributes['telephone'],
             "image" => null,
-            "agence" => null
+            "agence" => null,
+            'linkedin_id' => isset($this->attributes['linkedin_id']) ? $this->attributes['linkedin_id'] : '',
         ]));
 
         $date_formated = null;
@@ -62,7 +64,7 @@ class RegisterCandidate
         }
 
         $candidate = new Candidate([
-            'civility' => $this->attributes['civility'],
+            'civility' => isset($this->attributes['civility']) ? $this->attributes['civility'] : 'M',
             'resume_file' => '',
             'recommendation_letter' => '',
             'type' => Candidate::TYPE_NORMAL,

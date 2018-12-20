@@ -14,9 +14,8 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct() {
-
-    }
+    public function __construct()
+    {}
 
     /**
      * Show the application dashboard.
@@ -25,17 +24,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
-        // $provider = new LinkedIn([
-        //     'clientId' => env('LINKEDIN_KEY'),
-        //     'clientSecret' => env('LINKEDIN_SECRET'),
-        //     'redirectUri' => env('LINKEDIN_REDIRECT_URI'),
-        // ]);
-        //
-        // return redirect($provider->getAuthorizationUrl());
-
         return view('bwo::home', [
-          'offers' => Offer::where('status', Offer::STATUS_ACTIVE)->orderBy('created_at', 'desc')->limit(6)->get()
+          'offers' => Offer::where('status', Offer::STATUS_ACTIVE)
+                ->orderBy('created_at', 'desc')
+                ->limit(6)
+                ->get()
         ]);
     }
 }

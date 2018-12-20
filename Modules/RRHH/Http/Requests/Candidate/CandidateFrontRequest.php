@@ -63,4 +63,5 @@ class CandidateFrontRequest extends FormRequest
             'location.required' => 'La ville est obligatoire',
         ];
     }
+
 }
