@@ -53,6 +53,18 @@ body{
         padding: 20px 15px;
         h2{
           padding-left:10px;
+          margin-top:0px;
+          @include font(26,30,500);
+          color:$brand-dark-gray-color;
+          text-transform: uppercase;
+        }
+        h3 {
+          padding-left:10px;
+          margin-top:20px;
+          @include font(20,26,500);
+          color:$brand-dark-gray-color;
+          text-transform: uppercase;
+
         }
         .candidate-box{
           i{
@@ -100,4 +112,93 @@ body{
       }
     }
   }
+
+  ul.candidate-menu {
+
+    background-color: $brand-light-gray-color;
+    height: 40px;
+    margin:0;
+    padding: 0;
+    padding-left:20px;
+
+    li {
+      display: inline-block;
+      list-style-type: none;
+      height: 40px;
+      a {
+
+        @extend .animate;
+
+        display: block;
+        text-transform: uppercase;
+        @include font(12,40,400);
+        color:$brand-dark-gray-color;
+        padding:0px 10px;
+        height: 40px;
+
+        &:hover{
+          background-color:$brand-dark-gray-color;
+          color:$brand-light-gray-color;
+          text-decoration: none;
+          height: 45px;
+          color:#fff;
+        }
+      }
+
+      &.active {
+        a {
+          background-color:$brand-dark-gray-color;
+          color:$brand-light-gray-color;
+          height: 45px;
+          color:#fff;
+        }
+      }
+
+
+    }
+  }
+
+  .table.dataTable {
+
+    td:first-child {
+      width: 40%;
+    }
+
+    td:last-child {
+      width: 20%;
+    }
+
+    .btn-link {
+      background-color:transparent;
+      color:$brand-color-1;
+    }
+  }
+
+  .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    background-color: $brand-dark-gray-color;
+    border-color: $brand-dark-gray-color;
+  }
+
+  .checkbox-list ul {
+
+    margin-left: 0;
+    padding:0;
+
+     li {
+       display:inline-block;
+       padding-right: 20px;
+     }
+  }
+
+  textarea.fixed-height {
+    height: 110px;
+  }
+
+  .doc-col {
+    border : 1px solid #dddddd;
+    padding: 20px;
+    padding-top:0px;
+    min-height: 270px;
+  }
+
 }

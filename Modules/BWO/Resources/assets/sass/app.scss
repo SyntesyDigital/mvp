@@ -9,7 +9,7 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-//@import "~font-awesome/scss/font-awesome";
+@import '~font-awesome/scss/font-awesome';
 
 @import 'helpers/init';
 @import 'helpers/common';
@@ -37,8 +37,10 @@
 @import 'candidate';
 
 // Components
+@import 'dropzones';
 @import 'fields/map';
 @import 'fields/date';
+
 
 @import 'widgets/paginator';
 @import 'widgets/lists';

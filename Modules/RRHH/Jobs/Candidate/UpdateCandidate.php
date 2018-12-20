@@ -35,6 +35,11 @@ class UpdateCandidate
             'job_2',
             'job_3',
             'comment',
+            'image',
+
+            'contract_type',
+            'salary',
+            'important_information'
         ]);
         $this->user = $user;
     }
@@ -46,6 +51,7 @@ class UpdateCandidate
 
     public function handle()
     {
+
         $user = dispatch(new UpdateUser($this->user, $this->attributes));
         if (isset($this->attributes['type'])) {
             if (Candidate::TYPE_NORMAL == $this->user->candidate->type && Candidate::TYPE_INTERIM == $this->attributes['type']) {
@@ -121,6 +127,17 @@ class UpdateCandidate
         }
         if (isset($this->attributes['comment'])) {
             $this->user->candidate->comment = $this->attributes['comment'];
+        }
+        if (isset($this->attributes['contract_type'])) {
+            $this->user->candidate->contract_type = $this->attributes['contract_type'];
+        }
+
+        if (isset($this->attributes['salary'])) {
+            $this->user->candidate->salary = $this->attributes['salary'];
+        }
+
+        if (isset($this->attributes['important_information'])) {
+            $this->user->candidate->important_information = $this->attributes['important_information'];
         }
 
         $this->user->candidate->save();

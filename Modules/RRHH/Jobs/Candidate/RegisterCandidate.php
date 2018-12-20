@@ -31,6 +31,10 @@ class RegisterCandidate
             'job_2',
             'job_3',
             'comment',
+
+            'contract_type',
+            'salary',
+            'important_information'
         ]);
     }
 
@@ -79,6 +83,10 @@ class RegisterCandidate
             'job_2' => isset($this->attributes['job_2']) ? $this->attributes['job_2'] : '',
             'job_3' => isset($this->attributes['job_3']) ? $this->attributes['job_3'] : '',
             'comment' => isset($this->attributes['comment']) ? $this->attributes['comment'] : '',
+
+            'contract_type' => isset($this->attributes['contract_type']) ? $this->attributes['contract_type'] : '',
+            'salary' => isset($this->attributes['salary']) ? $this->attributes['salary'] : '',
+            'important_information' => isset($this->attributes['important_information']) ? $this->attributes['important_information'] : '',
         ]);
 
         $candidate->user()->associate($user);

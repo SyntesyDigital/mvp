@@ -25,3 +25,5 @@ require('./components/Widgets/LastNews');
 
 //javascripts
 require('./offers/offerapplications.js');
+//require('./libs/dropzone/dropzone.min.js');
+//require('./libs/jquery.imageUploader.js');

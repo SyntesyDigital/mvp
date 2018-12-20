@@ -23,15 +23,6 @@ Route::group([
     | PAGES
     |--------------------------------------------------------------------------
     */
-    //Route::get('/{slug}.html', ['as' => 'page', 'uses' => 'Front\PageController@page']);
-    //Route::get('/recruteur/{slug}', ['as' => 'recruiter.category', 'uses' => 'Front\PageController@recruiterCategory']);
-    //Route::get('/recruteur/{category}/{slug}.html', ['as' => 'recruiter.page', 'uses' => 'Front\PageController@recruiterPage']);
-    //Route::get('/entreprise/{slug}.html', ['as' => 'entreprise.page', 'uses' => 'Front\PageController@recruiterPageEntreprise']);
-
-    //Route::get('/candidat/{slug}.html', ['as' => 'candidate.page', 'uses' => 'Front\PageController@candidatePage']);
-    //Route::get('/candidat/{slug}', ['as' => 'candidate.category', 'uses' => 'Front\PageController@candidateCategory']);
-
-    //Route::get('/agences/{slug}', ['as' => 'agences.page', 'uses' => 'Front\PageController@agencePage']);
     Route::get('/offers.xml', ['as' => 'offers.xml', 'uses' => 'Front\OfferXMLController@index']);
 
     /*
@@ -44,10 +35,32 @@ Route::group([
 
     /*
     |--------------------------------------------------------------------------
+    | CANDIDATE
+    |--------------------------------------------------------------------------
+    */
+
+    Route::group(['prefix' => 'candidate', 'as' => 'candidate', 'middleware' => ['role:candidate']], function () {
+        Route::get('/', ['as' => '.index', 'uses' => 'Candidate\HomeController@index']);
+        Route::get('/profile', ['as' => '.profile', 'uses' => 'Candidate\CandidateController@index']);
+        Route::get('/alert', ['as' => '.alert', 'uses' => 'Candidate\AlertController@index']);
+        Route::get('/application', ['as' => '.application', 'uses' => 'Candidate\ApplicationController@index']);
+        Route::get('/contact', ['as' => '.contact', 'uses' => 'Candidate\ContactController@index']);
+        Route::get('/document', ['as' => '.document', 'uses' => 'Candidate\DocumentController@index']);
+        Route::post('/profile/edit', ['as' => '.edit.profile', 'uses' => 'Candidate\CandidateController@store']);
+        Route::post('/profile/contact', ['as' => '.contact.send', 'uses' => 'Candidate\ContactController@send']);
+        Route::post('/profile/alerts', ['as' => '.alert.send', 'uses' => 'Candidate\AlertController@store']);
+        Route::get('/profile/applications/data', ['as' => '.applications.data', 'uses' => 'Candidate\ApplicationController@data']);
+        Route::post('/candidate/storecv', ['as' => '.profile.storecv', 'uses' => 'Candidate\DocumentController@storecv']);
+        Route::post('/candidate/storeletter', ['as' => '.profile.storeletter', 'uses' => 'Candidate\DocumentController@storeletter']);
+        Route::get('/candidate/downloadcv', ['as' => '.profile.downloadcv', 'uses' => 'Candidate\DocumentController@downloadCV']);
+        Route::get('/candidate/downloadletter', ['as' => '.profile.downloadletter', 'uses' => 'Candidate\DocumentController@downloadLetter']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
     | OFFER
     |--------------------------------------------------------------------------
     */
-    //Route::get('/offer/{offer}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
     Route::get('/emplois/{job_1}/{offer?}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
     Route::post('/offers/application/{offer}/create', ['as' => 'offer.applications.create', 'uses' => 'OfferApplicationController@create']);
     Route::post('/candidate/store', ['as' => 'candidate.store', 'uses' => 'CandidateController@store']);
@@ -81,13 +94,8 @@ Route::group([
     Route::get('/not-found', 'ContentController@languageNotFound')->name('language-not-found');
 
     //FIXME pass this routes to ContentController
-    //Route::get('/', 'BWOController@index')->name('home');
-    //Route::get('/offers', 'BWOController@offers')->name('offers');
-    //Route::get('/offer', 'BWOController@offer')->name('offer');
-    Route::get('/blog-old', 'BWOController@blog')->name('blog');
-    Route::get('/post-old', 'BWOController@post')->name('post');
-    Route::get('/candidate', 'BWOController@candidate')->name('candidate');
-    Route::get('/candidate/information', 'BWOController@candidateForm')->name('candidate.form');
+    //Route::get('/candidate', 'BWOController@candidate')->name('candidate');
+    Route::get('/candidate-old/information', 'BWOController@candidateForm')->name('candidate.form');
 
     Route::get('/{slug}','ContentController@show')
       ->where('slug', '([A-Za-z0-9\-\/]+)')

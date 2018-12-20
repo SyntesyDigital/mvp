@@ -39,7 +39,7 @@ class CandidateEditRequest extends FormRequest
                     'password' => 'sometimes|nullable|min:6|confirmed',
                     'location' => 'required',
                     'postal_code' => 'required',
-                    'birthday' => 'date_format:d/m/Y',
+                    'birthday' => 'nullable|date_format:d/m/Y',
                 ];
             break;
 
