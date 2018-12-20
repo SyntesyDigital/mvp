@@ -18,7 +18,7 @@
 										@if(Auth::check())
 											@if(Auth::user()->hasRole('candidate'))
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="{{route('candidate')}}"><i class="fa fa-user-circle-o"></i> Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="{{route('candidate.index')}}"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>

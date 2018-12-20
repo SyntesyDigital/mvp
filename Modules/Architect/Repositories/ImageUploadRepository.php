@@ -20,8 +20,8 @@ class ImageUploadRepository
     ];
 
     public static $messages = [
-        'file.mimes' => Lang::get("architect::fields.invalid_format_file"),
-        'file.required' => Lang::get("architect::fields.file_required"),
+      'file.mimes' => 'Format de fichier invalide',
+      'file.required' => 'Fichier manquant',
     ];
 
     public function upload($form_data, $resizeWidth = null)

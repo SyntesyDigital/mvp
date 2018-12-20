@@ -26,7 +26,7 @@
 
 
         <link href="{{asset('modules/bwo/css/app.css')}}" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/css/font-awesome/css/font-awesome.min.css')}}" />
+        <!--<link rel="stylesheet" media="all" href="{{ asset('modules/bwo/css/font-awesome/css/font-awesome.min.css')}}" />-->
         <link rel="stylesheet" media="all" href="{{ asset('modules/bwo/fonts/iconmoon/iconmoon.css')}}" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
@@ -67,9 +67,11 @@
 
         <!-- Select2 -->
 
+        <script src="{{asset('modules/architect/plugins/dropzone/dropzone.min.js')}}"></script>
         @stack('javascripts-libs')
 
         <script type="text/javascript" src="{{asset('modules/bwo/js/app.js')}}" ></script>
+        <script src="{{asset('modules/bwo/js/jquery.imageUploader.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
         <script>
@@ -85,7 +87,7 @@
 
               app.offerapplications.init(
                 "{{ Auth::check() ? Auth::user()->id : 0 }}",
-                "{{isset($offer) ? $offer->id : null}}",
+                {{isset($offer) ? $offer->id : 'null'}},
                 "{{ Auth::check() && (Auth::user()->candidate) ? Auth::user()->candidate->resume_file : '' }}"
               );
 

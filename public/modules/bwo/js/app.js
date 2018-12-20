@@ -93054,6 +93054,8 @@ __webpack_require__(883);
 
 //javascripts
 __webpack_require__(884);
+//require('./libs/dropzone/dropzone.min.js');
+//require('./libs/jquery.imageUploader.js');
 
 /***/ }),
 /* 824 */

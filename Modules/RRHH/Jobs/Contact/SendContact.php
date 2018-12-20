@@ -31,7 +31,10 @@ class SendContact
         Mail::send(['html' => 'bwo::emails.contact'],
             $params,
             function ($message) use ($params) {
-                $message->to(env('MAIL_COMPANY_EMAIL'), null)
+                $message
+                ->from($params['email'],$params['name'].' '.$params['lastname'])
+                ->to(env('MAIL_COMPANY_EMAIL'), env('MAIL_COMPANY_NAME'))
+                ->bcc($params['email'],$params['name'].' '.$params['lastname'])
                 ->subject('Nouveau mail de contact');
             }
         );

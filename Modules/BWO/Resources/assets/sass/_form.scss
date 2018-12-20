@@ -1,9 +1,17 @@
 form{
   .input-round{
-    border-radius: 200px;
+    border-radius: 20px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 20px;
   }
   #resume_file{
     border-radius:0px !important;
+  }
+
+  textarea.form-control {
+    border-radius: 20px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 20px;
   }
 
 }

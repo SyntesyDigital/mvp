@@ -52,6 +52,7 @@ class CandidateController extends Controller
         $data = [];
         $httpCode = 500;
         try {
+
             $candidate = $this->dispatchNow(RegisterCandidate::fromRequest($request));
             $data = ['user_id' => Auth::user()->id];
             $httpCode = 200;

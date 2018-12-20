@@ -62,6 +62,10 @@ class Candidate extends Model
         'updated_at',
     ];
 
+    protected $casts = [
+        'contract_type' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
