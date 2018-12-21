@@ -14596,6 +14596,9 @@ body .candidate-container .horizontal-inner-container .information-container .im
   width: 140px;
   border-radius: 50%;
   margin: 0 auto;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
 }
 
 body .candidate-container .horizontal-inner-container .information-container .information {
@@ -14840,7 +14843,8 @@ body .doc-col {
 }
 
 .dropzone-avatar a.btn.btn-table {
-  background-color: transparent;
+  background-color: #fff;
+  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 7px;
   color: #c41a1b;
@@ -14873,7 +14877,7 @@ body .doc-col {
 }
 
 .dropzone-avatar .image-container.uploaded .actions {
-  top: -12px;
+  top: 130px;
   pointer-events: auto;
 }
 
@@ -14934,7 +14938,8 @@ body .doc-col {
 }
 
 .dropzone-banner a.btn.btn-table {
-  background-color: transparent;
+  background-color: #fff;
+  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 7px;
   color: #c41a1b;
@@ -14967,7 +14972,7 @@ body .doc-col {
 }
 
 .dropzone-banner .image-container.uploaded .actions {
-  top: -14px;
+  top: 130px;
   pointer-events: auto;
 }
 

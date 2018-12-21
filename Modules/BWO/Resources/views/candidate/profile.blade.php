@@ -58,101 +58,113 @@
 
 						<h2>MODIFIER VOS INFORMATIONS</h2>
 
-						<div class="col-md-12 {{ (isset($errors)) && $errors->has('image') ? 'has-error' : null }}">
-							@include('bwo::components.dropzone-image',[
-								'image' => isset(Auth::user()->image) ?
-									Auth::user()->image : null,
-								'size' => 'avatar',
-								'id' => 'dropzone-1',
-								'name' => 'image',
-								'resizeWidth' => 500
-							])
-						</div>
+						<div class="row">
+							<div class="col-md-6 {{ (isset($errors)) && $errors->has('image') ? 'has-error' : null }}">
 
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('firstname') ? 'has-error' : null }}">
-						 	{!!Form::label('firstname', 'Prénom*')!!}
-							{!!
-								Form::text('firstname', Auth::user()->firstname, [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('lastname') ? 'has-error' : null }}">
-						 	{!!Form::label('lastname', 'Nom*')!!}
-							{!!
-								Form::text('lastname',  Auth::user()->lastname, [
-									'class' => 'form-control'
-								])
-							!!}
+								<div class="separator" style="height:40px;"></div>
 
-						</div>
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('telephone') ? 'has-error' : null }}">
-						 	{!!Form::label('telephone', 'Téléphone*')!!}
-							{!!
-								Form::text('telephone',  Auth::user()->telephone, [
-									'class' => 'form-control'
+								@include('bwo::components.dropzone-image',[
+									'image' => isset(Auth::user()->image) ?
+										Auth::user()->image : null,
+									'size' => 'avatar',
+									'id' => 'dropzone-1',
+									'name' => 'image',
+									'resizeWidth' => 500
 								])
-							!!}
-						</div>
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('email') ? 'has-error' : null }}">
-							{!!Form::label('email', 'E-mail*')!!}
-							{!!
-								Form::text('email',  Auth::user()->email, [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
-						<div class="col-md-6">
-							{!!Form::label('address', 'Adresse')!!}
-							{!!
-								Form::text('address', null !== Auth::user()? Auth::user()->candidate->address:old('address'), [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('postal_code') ? 'has-error' : null }}">
-							{!!Form::label('postal_code', 'Code Postal*')!!}
-							{!!
-								Form::text('postal_code', null !== Auth::user()? Auth::user()->candidate->postal_code:old('postal_code'), [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('location') ? 'has-error' : null }}">
-							{!!Form::label('location', 'Localité*')!!}
-							{!!
-								Form::text('location', null !== Auth::user()? Auth::user()->candidate->location:old('location'), [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
-						<div class="col-md-6">
-							{!!Form::label('country', 'Pays')!!}
-						 	@include('bwo::partials.countries', ['default' => null !== Auth::user()? Auth::user()->candidate->country:null])
-						</div>
 
-						<div class="col-md-6 {{ (isset($errors)) && $errors->has('birthday') ? 'has-error' : null }}" >
-							{!!Form::label('birthday', 'Date de naissance')!!}
-						 	@if( Auth::user() && Auth::user()->candidate->birthday != null)
-						 		@php
-						 			$date = explode('-',Auth::user()->candidate->birthday);
-	            					$date_formated = $date[2].'/'.$date[1].'/'.$date[0];
-						 		@endphp
-						 	@endif
-							{!!
-								Form::text('birthday', null !== Auth::user() && Auth::user()->candidate->birthday != null? $date_formated:'', [
-									'class' => 'form-control'
-								])
-							!!}
+							</div>
+							<div class="col-md-6">
+
+									<div class="{{ (isset($errors)) && $errors->has('firstname') ? 'has-error' : null }}">
+									 	{!!Form::label('firstname', 'Prénom*')!!}
+										{!!
+											Form::text('firstname', Auth::user()->firstname, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('lastname') ? 'has-error' : null }}">
+									 	{!!Form::label('lastname', 'Nom*')!!}
+										{!!
+											Form::text('lastname',  Auth::user()->lastname, [
+												'class' => 'form-control'
+											])
+										!!}
+
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('email') ? 'has-error' : null }}">
+										{!!Form::label('email', 'E-mail*')!!}
+										{!!
+											Form::text('email',  Auth::user()->email, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('telephone') ? 'has-error' : null }}">
+									 	{!!Form::label('telephone', 'Téléphone*')!!}
+										{!!
+											Form::text('telephone',  Auth::user()->telephone, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+
+								</div>
 						</div>
-						<div class="col-md-6">
-							{!!Form::label('birthplace', 'Lieu de naissance')!!}
-							{!!
-								Form::text('birthplace', null !== Auth::user()? Auth::user()->candidate->birthplace:old('birthplace'), [
-									'class' => 'form-control'
-								])
-							!!}
-						</div>
+						<div class="row">
+							<div class="col-md-6">
+								{!!Form::label('address', 'Adresse')!!}
+								{!!
+									Form::text('address', null !== Auth::user()? Auth::user()->candidate->address:old('address'), [
+										'class' => 'form-control'
+									])
+								!!}
+							</div>
+							<div class="col-md-6 {{ (isset($errors)) && $errors->has('postal_code') ? 'has-error' : null }}">
+								{!!Form::label('postal_code', 'Code Postal*')!!}
+								{!!
+									Form::text('postal_code', null !== Auth::user()? Auth::user()->candidate->postal_code:old('postal_code'), [
+										'class' => 'form-control'
+									])
+								!!}
+							</div>
+							<div class="col-md-6 {{ (isset($errors)) && $errors->has('location') ? 'has-error' : null }}">
+								{!!Form::label('location', 'Localité*')!!}
+								{!!
+									Form::text('location', null !== Auth::user()? Auth::user()->candidate->location:old('location'), [
+										'class' => 'form-control'
+									])
+								!!}
+							</div>
+							<div class="col-md-6">
+								{!!Form::label('country', 'Pays')!!}
+							 	@include('bwo::partials.countries', ['default' => null !== Auth::user()? Auth::user()->candidate->country:null])
+							</div>
+
+							<div class="col-md-6 {{ (isset($errors)) && $errors->has('birthday') ? 'has-error' : null }}" >
+								{!!Form::label('birthday', 'Date de naissance')!!}
+							 	@if( Auth::user() && Auth::user()->candidate->birthday != null)
+							 		@php
+							 			$date = explode('-',Auth::user()->candidate->birthday);
+		            					$date_formated = $date[2].'/'.$date[1].'/'.$date[0];
+							 		@endphp
+							 	@endif
+								{!!
+									Form::text('birthday', null !== Auth::user() && Auth::user()->candidate->birthday != null? $date_formated:'', [
+										'class' => 'form-control'
+									])
+								!!}
+							</div>
+							<div class="col-md-6">
+								{!!Form::label('birthplace', 'Lieu de naissance')!!}
+								{!!
+									Form::text('birthplace', null !== Auth::user()? Auth::user()->candidate->birthplace:old('birthplace'), [
+										'class' => 'form-control'
+									])
+								!!}
+							</div>
+
+					</div>
 
 						<br clear="all">
 						<br clear="all">

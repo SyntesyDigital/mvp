@@ -23,14 +23,18 @@
           </ol>
           <div class="col-md-8 information-container">
             <div class="col-md-4">
-              <div class="image" style="background-image:url('{{asset('modules/bwo/images/no_picture.jpg')}}')"></div>
+							@if(!isset(Auth::user()->image))
+              	<div class="image" style="background-image:url('{{asset('modules/bwo/images/no_picture.jpg')}}')"></div>
+							@else
+								<div class="image" style="background-image:url('{{ Storage::url(Auth::user()->image)}}')"></div>
+							@endif
             </div>
             <div class="col-md-8">
               <div class="information">
                 <p class="name">{{Auth::user()->firstname.', '.Auth::user()->lastname}}</p>
                 <p>{{ Auth::user()->candidate->address}}</p>
                 <p>{{ Auth::user()->email}}</p>
-                <div class="btn btn-soft-gray">CHANGER LA PHOTO DE PROFIL</div>
+                <a href="{{ route('candidate.profile') }}" class="btn btn-soft-gray"><i class="fa fa-pencil"></i> GÉRER VOS INFORMATIONS</a>
               </div>
             </div>
           </div>

@@ -62,6 +62,7 @@ class UpdateCandidate
             }
         }
 
+        /*
         if ((isset($this->attributes['resume_file']) && $this->user->candidate->resume_file != $this->attributes['resume_file'] && '' != $this->user->candidate->resume_file) || (! isset($this->attributes['resume_file']) && '' != $this->user->candidate->resume_file)) {
             (new DeleteFile($this->user->candidate->resume_file))->handle();
             $this->user->candidate->update([
@@ -75,6 +76,7 @@ class UpdateCandidate
                 'recommendation_letter' => '',
             ]);
         }
+        */
 
         if (isset($this->attributes['password']) && null != $this->attributes['password']) {
             $this->user->password = bcrypt($this->attributes['password']);

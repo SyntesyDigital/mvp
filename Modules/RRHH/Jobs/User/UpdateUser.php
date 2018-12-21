@@ -30,6 +30,7 @@ class UpdateUser
             'role_id',
             'agence',
             'status',
+            'image',
         ]);
     }
 
@@ -47,6 +48,7 @@ class UpdateUser
             'telephone',
             'status',
             'city',
+            'image'
         ]));
 
         if (isset($this->attributes['password']) && '' !== trim($this->attributes['password'])) {

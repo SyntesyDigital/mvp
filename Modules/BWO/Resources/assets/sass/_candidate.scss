@@ -28,6 +28,10 @@ body{
           width: 140px;
           border-radius: 50%;
           margin: 0 auto;
+          background-size: cover;
+          background-position: center;
+          border:1px solid #ccc;
+
         }
         .information{
           @include font(18,24,400);

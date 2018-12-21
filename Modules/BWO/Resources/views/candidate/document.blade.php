@@ -84,9 +84,11 @@
 								])
 							!!}
 							<br clear="all">
+							<!--
 							<div class="btn-red-container">
 								<input type="submit" value="Envoyer" class="btn btn-soft-gray" style="float: none;"/>
 							</div>
+							-->
 
 
 						{{ Form::close()}}
@@ -115,7 +117,7 @@
 					            'enctype' => 'multipart/form-data'
 					        ])
 					    !!}
-						{!!Form::label('recommendation_letter', 'Lettre de recommandation (pdf,doc,docx)')!!}
+						{!!Form::label('recommendation_letter', 'Ajouter lettre de recommandation (pdf,doc,docx)')!!}
 						{!!
 							Form::file('recommendation_letter', null, [
 								'class' => 'form-control',
@@ -124,9 +126,11 @@
 							])
 						!!}
 						<br />
+						<!--
 						<div class="btn-red-container">
 							<input type="submit" value="Envoyer" class="btn btn-soft-gray" style="float: none;"/>
 						</div>
+						-->
 						{{ Form::close()}}
 					</div>
 			</div>
