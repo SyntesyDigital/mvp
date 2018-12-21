@@ -32,7 +32,8 @@ mix.react('resources/assets/js/app.js', 'public/js')
 mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js')
   .sass('Modules/Architect/Resources/assets/sass/architect/app.scss', 'modules/architect/css');
 
-mix.sass('Modules/RRHH/Resources/assets/sass/app.scss', 'modules/rrhh/css');
+mix.react('Modules/RRHH/Resources/assets/js/app.js', 'modules/rrhh/js')
+  .sass('Modules/RRHH/Resources/assets/sass/app.scss', 'modules/rrhh/css');
 
 mix.js('Modules/BWO/Resources/assets/js/app.js', 'modules/bwo/js')
    .sass('Modules/BWO/Resources/assets/sass/app.scss', 'modules/bwo/css');

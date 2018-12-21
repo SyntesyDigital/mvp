@@ -79,6 +79,9 @@
 
 
 @push('javascripts')
+{{ Html::script('modules/rrhh/js/admin/customer_contacts/customer_contactslist.js') }}
+{{ Html::script('modules/rrhh/js/admin/customers/customersform.js') }}
+
 <script>
     var csrf_token = "{{csrf_token()}}";
 
@@ -91,9 +94,8 @@
        var routes = {
            data : '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}',
        };
-       {{ Html::script('/js/admin/customer_contacts/customer_contactslist.js') }}
+
    @endif
 </script>
 
-{{ Html::script('/js/admin/customers/customersform.js') }}
 @endpush

@@ -28,6 +28,20 @@ return [
                         'title' => 'Utilisateurs',
                         'subtitle' => '',
                         'childs' => [
+                            [
+                                'type' => 'col',
+                                'class' => 'col-md-12',
+                                'childs' => [
+                                    [
+                                        'type' => 'customer_users',
+                                        'input' => 'customer_users',
+                                        'identifier' => 'customer_users',
+                                        'name' => 'customer_users',
+                                        'label' => ''
+
+                                    ],
+                                ]
+                            ]
                         ]
                     ]
                 ],

@@ -51,6 +51,7 @@
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>
+        <script src="{{ asset('modules/rrhh/js/app.js') }}" defer></script>
 
         @stack('stylesheets')
 
