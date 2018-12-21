@@ -20,6 +20,7 @@ class CreateUser
             'status',
             'telephone',
             'agence',
+            'linkedin_id'
         ]);
     }
 
@@ -38,6 +39,7 @@ class CreateUser
             'telephone' => $this->attributes['telephone'],
             'status' => $this->attributes['status'],
             'language' => 'fr',
+            'linkedin_id' => isset($this->attributes['linkedin_id']) ? $this->attributes['linkedin_id'] : null,
         ]);
 
         if(isset($this->attributes['role_id'])) {
@@ -50,8 +52,8 @@ class CreateUser
 
         switch ($this->attributes['role_id']) {
             case 3: //candidate
-                // Email to new candidate
                 $recipient = $this->attributes['email'];
+
                 $params = [
                     'user' => $user,
                     'password' => $this->attributes['password'],
@@ -71,15 +73,17 @@ class CreateUser
 
             case 1: //admin
             case 2: //recruiter
-                // Email to new candidat
                 $recipient = $this->email;
-                $params = ['body' => $body,
-                           'subject' => $subject,
-                           'reply_to' => env('MAIL_COMPANY_EMAIL')
-                         ];
+
+                $params = [
+                    'body' => $body,
+                    'subject' => $subject,
+                    'reply_to' => env('MAIL_COMPANY_EMAIL')
+                ];
+
                 Mail::send(['html' => 'bwo::emails.createadmin'],
                     $params,
-                    function ($message) use ($params,$recipient) {
+                    function ($message) use ($params, $recipient) {
                         $message->to($recipient, null)
                         ->replyTo($params['reply_to'], null)
                         ->subject($params['subject']);

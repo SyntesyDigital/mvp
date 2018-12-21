@@ -163,8 +163,8 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class
-
+        Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -217,6 +217,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
         'Countries' => PeterColes\Countries\CountriesFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

@@ -7,20 +7,28 @@
                             <form role="form" method="POST" action="{{ route('login') }}">
                               {{ csrf_field() }}
                                 <h3>VOUS AVEZ UN COMPTE</h3>
-                                    <input type="text" id="log-email" name="email" value="" placeholder="Identifiant" class="form-control" />
-                                    @if ($errors->has('email'))
-                                      <p class="control-label error-login-p">{{ $errors->first('email') }}</p>
-                                    @endif
 
-                                    <input type="password" id="log-password" name="password" value="" placeholder="Mot de passe" class="form-control" />
-                                    @if ($errors->has('password'))
-                                      <p class="control-label error-login-p">{{ $errors->first('password') }}</p>
-                                    @endif
-                                    <a href="/password/reset">Mot de passe oublié ?</a>
-                                    <br clear="all">
+                                <input type="text" id="log-email" name="email" value="" placeholder="Identifiant" class="form-control" />
 
-                                    <button type="button" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
-                                    <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
+                                @if ($errors->has('email'))
+                                  <p class="control-label error-login-p">{{ $errors->first('email') }}</p>
+                                @endif
+
+                                <input type="password" id="log-password" name="password" value="" placeholder="Mot de passe" class="form-control" />
+
+                                @if ($errors->has('password'))
+                                  <p class="control-label error-login-p">{{ $errors->first('password') }}</p>
+                                @endif
+
+                                <a href="/password/reset">Mot de passe oublié ?</a>
+                                <br clear="all">
+
+                                <a href="{{ route('linkedin.login') }}">
+                                    <img src="/modules/BWO/images/linkedin-signin.png" width="220" />
+                                </a>
+
+                                <button type="button" onclick="app.offerapplications.login()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
+                                <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>
                     </div>
@@ -28,7 +36,7 @@
                         <div class="modal-body">
                             <form role="form" method="POST" action="">
                               {{ csrf_field() }}
-                                <h3>VOUS N'AVEZ DE COMPTE</h3>
+                                <h3>VOUS N'AVEZ PAS DE COMPTE</h3>
                                     <input type="text" id="reg-email" name="email" value="" placeholder="E-mail" class="form-control" />
                                     @if ($errors->has('email'))
                                       <p class="control-label error-login-p">{{ $errors->first('email') }}</p>

@@ -94,9 +94,6 @@
               $(".application-btn").on('click',function(e){
                   app.offerapplications.open();
               });
-
-
-
           });
 
         </script>
