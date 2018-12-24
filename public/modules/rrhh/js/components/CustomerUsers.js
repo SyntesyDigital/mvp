@@ -26,7 +26,6 @@ export default class CustomerUsers extends Component {
             firstname : 'Name 2',
             email : 'name2@gmail.com',
             telephone : '234234'
-            
           }
 
         ]

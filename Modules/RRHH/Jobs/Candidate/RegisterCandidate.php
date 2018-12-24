@@ -31,7 +31,7 @@ class RegisterCandidate
             'job_2',
             'job_3',
             'comment',
-            'linkedin_id'
+            'linkedin_id',
             'contract_type',
             'salary',
             'important_information'

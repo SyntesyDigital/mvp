@@ -24,9 +24,9 @@ class CreateSpontaniousCandidature
     {
         // dd($this->request->all());
         if (Auth::check()) {
-            $candidate = dispatch(new UpdateCandidate(Auth::user(), $this->request->all()));
+            $candidate = dispatch_now(new UpdateCandidate(Auth::user(), $this->request->all()));
         } else {
-            $candidate = dispatch(new RegisterCandidate($this->request->all(), false));
+            $candidate = dispatch_now(new RegisterCandidate($this->request->all(), false));
         }
 
         if (null != $this->request->file('resume_file')) {

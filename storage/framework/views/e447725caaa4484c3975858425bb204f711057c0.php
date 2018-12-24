@@ -18,21 +18,21 @@
 										<?php if(Auth::check()): ?>
 											<?php if(Auth::user()->hasRole('candidate')): ?>
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('candidate')); ?>">Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('candidate.index')); ?>"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
 											<?php endif; ?>
 											<?php if(Auth::user()->hasRole('enterprise')): ?>
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="#">Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="#"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
 											<?php endif; ?>
 											<?php if(Auth::user()->hasRole('admin')): ?>
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('dashboard')); ?>">Espace Admin
+													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('dashboard')); ?>"><i class="fa fa-user-circle-o"></i> Espace Admin
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
@@ -41,7 +41,7 @@
 												<form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
 														<?php echo e(csrf_field()); ?>
 
-													<button class="nav-link btn btn-dark-gray btn-logout" type="submit" >Deconnexion</button>
+													<button class="nav-link btn btn-dark-gray btn-logout" type="submit" ><i class="fa fa-sign-out"></i> Deconnexion</button>
 												</form>
 											</li>
 										<?php else: ?>
@@ -61,17 +61,19 @@
 					</nav>
 				</div>
 				<div class="navbar-menu navbar-menu-main">
-				<nav class="navbar">
-					<div class="navbar-header navbar-header-main">
-						<button id="btn-main-menu" class="navbar-toggle" type="button" data-toggle="collapse" data-target="#main-menu">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
+					<nav class="navbar">
+						<div class="navbar-header navbar-header-main">
+							<button id="btn-main-menu" class="navbar-toggle" type="button" data-toggle="collapse" data-target="#main-menu">
+								<i class="fa fa-bars"></i>
+							</button>
+						</div>
 
-					<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
-								<?php echo $__env->make('bwo::partials.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-					</div><!-- /.nav-collapse -->
-				</nav>
+						<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
+									<?php echo $__env->make('bwo::partials.menu',
+										["menu" => get_menu('header')]
+									, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div><!-- /.nav-collapse -->
+					</nav>
 			</div>
 			</div>
 			<div class="logo-container">
@@ -85,6 +87,8 @@
 
 		</div>
 	</div>
+
+
 </header><!-- end HEADER -->
 
 <?php $__env->startPush('javascripts'); ?>
