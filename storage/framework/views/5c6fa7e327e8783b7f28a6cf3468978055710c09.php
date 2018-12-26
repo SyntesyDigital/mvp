@@ -53,6 +53,7 @@
 
         <!-- App -->
         <script src="<?php echo e(asset('modules/architect/js/app.js')); ?>" defer></script>
+        <script src="<?php echo e(asset('modules/rrhh/js/app.js')); ?>" defer></script>
 
         <?php echo $__env->yieldPushContent('stylesheets'); ?>
 

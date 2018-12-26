@@ -47,13 +47,13 @@
 
     <?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
 
+
     <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
 
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('javascripts'); ?>
 <script>
-var csrf_token = "<?php echo e(csrf_token()); ?>";
 var routes = {
 	data : '<?php echo e(route("rrhh.admin.offers.index.data")); ?>',
     recipients : '<?php echo e(route("rrhh.admin.offers.index.data.recipients")); ?>'
