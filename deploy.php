@@ -23,6 +23,8 @@ add('writable_dirs', []);
 // Hosts
 
 host('bitbucket@bwo-interim.ablop.com')
+    ->stage('stage')
+    ->set('branch', 'dev')
     ->set('deploy_path', '/var/www/bwo-interim.ablop.com');
 
 // Tasks
