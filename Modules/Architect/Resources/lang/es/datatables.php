@@ -9,5 +9,8 @@ return [
     'si'            => 'Sí',
     'no'            => 'No',
     'continue'      => 'Quieres continuar ?',
-    'sure'          => 'Estas seguro ?'
+    'sure'          => 'Estas seguro ?',
+    'view'          => 'Ver',
+    'view_candidate'=> 'Ver perfil',
+    'process'       => 'Tratar'
 ];

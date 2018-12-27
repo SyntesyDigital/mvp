@@ -11,7 +11,6 @@ use Modules\RRHH\Jobs\Customer\UpdateCustomer;
 use Modules\RRHH\Entities\Customer;
 /*
 
-use Modules\RRHH\Jobs\Tags\UpdateCustomerTags;
 */
 use Modules\RRHH\Repositories\CustomerRepository;
 use Illuminate\Http\Request;

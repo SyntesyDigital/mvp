@@ -9,6 +9,9 @@ return [
     'si'            => 'Yes',
     'no'            => 'No',
     'continue'      => 'Do you want to continue ?',
-    'sure'          => 'Are you sure ?'
+    'sure'          => 'Are you sure ?',
+    'view'          => 'View',
+    'view_candidate'=> 'View profile',
+    'process'       => 'Process'
 
 ];

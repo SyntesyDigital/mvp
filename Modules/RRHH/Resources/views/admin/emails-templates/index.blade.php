@@ -46,8 +46,8 @@
                                     ])
                                 !!}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="submit" value="Supprimer" class="btn btn-sm btn-danger" />
-                                    <a href="{{ route('rrhh.admin.emailstemplates.show', $template) }}" class="btn btn-sm btn-success">Modifier</a>
+                                    <input type="submit" value="Supprimer" class="btn btn-link" />
+                                    <a href="{{ route('rrhh.admin.emailstemplates.show', $template) }}" class="btn btn-link"><i title="{{Lang::get('architect::datatables.edit')}}" class="fa fa-pencil"></i></a>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

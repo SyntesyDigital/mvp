@@ -19,12 +19,7 @@ $(function() {
 	    initComplete: function () {
 			var _this = this;
 			DataTableTools.init(this);
-
-			// this.on('search.dt', function() {
-			// 	setTimeout(function(){
-			// 		DataTableTools.init(_this);
-			// 	}, 500);
-			// });
+			$('#actions-th').css('min-width', '80px');
 	    }
     });
 });

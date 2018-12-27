@@ -8,6 +8,7 @@ use Auth;
 use Datatables;
 use DB;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Lang;
 
 class OfferRepository extends BaseRepository
 {
@@ -93,10 +94,10 @@ class OfferRepository extends BaseRepository
             ->addColumn('action', function ($item) {
                 $html = '';
 
-                $html .= '&nbsp; <a  href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-link"><i class="fa fa-pencil"></i> </a>';
+                $html .= '&nbsp; <a title="'.Lang::get("architect::datatables.edit").'"  href="'.route('rrhh.admin.offers.show', $item).'" class="btn btn-link"><i class="fa fa-pencil"></i> </a>';
 
                 if (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('recruiter') && $item->recipient_id == Auth::user()->id)) {
-                    $html .= '&nbsp; <a  href="'.route('rrhh.admin.offers.delete', $item).'" data-ajax="'.route('rrhh.admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-link text-danger" ><i class="fa fa-trash"></i> </a>';
+                    $html .= '&nbsp; <a  title="'.Lang::get("architect::datatables.delete").'" href="'.route('rrhh.admin.offers.delete', $item).'" data-ajax="'.route('rrhh.admin.offers.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sur de vouloir supprimer cette offre ?" class="btn btn-link text-danger" ><i class="fa fa-trash"></i> </a>';
                 }
 
                 return $html;
