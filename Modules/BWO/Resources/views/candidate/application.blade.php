@@ -84,7 +84,7 @@
 
 		$('#table-applications').DataTable({
         language: {
-            "url": "/plugins/datatables/locales/french.json"
+            "url": "/modules/rrhh/plugins/datatables/locales/french.json"
         },
         processing: true,
         serverSide: true,

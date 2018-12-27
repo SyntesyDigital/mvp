@@ -23,7 +23,7 @@
                     <th data-filter="select" data-values="{!! base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Offer::getStatus())) !!}">Etat</th>
                     <th>Nombre de candidatures</th>
                     <th data-filter="select" data-ajax="{{ route("rrhh.admin.offers.index.data.recipients") }}">Destinataire interne</th>
-                    <th></th>
+                    <th id="actions-th"></th>
                 </tr>
             </thead>
             <tfoot>
