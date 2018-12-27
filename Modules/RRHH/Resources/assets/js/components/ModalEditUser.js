@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import UserForm from './UserForm';
-
 class ModalEditUser extends Component {
 
     constructor(props)
@@ -13,16 +11,40 @@ class ModalEditUser extends Component {
           saving : false,
           contentSelected : null,
           isOpen : false,
-          errors : ''
+          errors : '',
+          fields : {
+            lastname : '',
+            firstname : '',
+            email : '',
+            telephone : '',
+            password : '',
+            password_confirmation : ''
+          }
         };
 
         this.onModalClose = this.onModalClose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps)
     {
-      if(nextProps.display){
-          this.modalOpen();
+      if(nextProps.display ){
+
+          if(!this.state.isOpen){
+
+            var editItem = nextProps.selectedItem !== undefined &&
+              nextProps.selectedItem != null ? nextProps.selectedItem : null;
+
+            var fields = this.state.fields;
+            if(editItem != null){
+              $.extend(fields,editItem);
+            }
+
+            console.log("componentWillReceiveProps :: edit fields : ",fields)
+
+            this.modalOpen(fields);
+          }
+
       } else {
           this.modalClose();
       }
@@ -39,20 +61,28 @@ class ModalEditUser extends Component {
       //this.modalOpen();
     }
 
-    modalOpen()
+    modalOpen(fields)
     {
         TweenMax.to($("#content-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
         this.setState({
-          isOpen : true
+          isOpen : true,
+          fields : fields
         });
     }
 
     modalClose() {
+
+      var fields = this.state.fields;
+      for(var key in fields){
+        fields[key] = '';
+      }
+
       var self =this;
         TweenMax.to($("#content-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({
             imageSelected : null,
-            isOpen : false
+            isOpen : false,
+            fields : fields
           });
         }});
     }
@@ -63,7 +93,7 @@ class ModalEditUser extends Component {
       e.preventDefault();
 
       //process the Form
-      var userAttributes = this.userForm.getAttributes();
+      var userAttributes = this.state.fields;
       console.log("ModalEditUser :: userAttributes => ",userAttributes);
 
       var self = this;
@@ -121,10 +151,23 @@ class ModalEditUser extends Component {
         }
       }
 
+      handleChange(e){
+
+        const {fields} = this.state;
+
+        fields[e.target.name] = e.target.value;
+
+        this.setState({
+          fields : fields
+        });
+
+      }
+
 
     render() {
 
         var zIndex = this.props.zIndex !== undefined ? this.props.zIndex : 10000;
+        const {fields} = this.state;
         //only linkable contents
 
         //console.log("ModalEditUser :: Field => ",this.props.field,route);
@@ -151,9 +194,38 @@ class ModalEditUser extends Component {
                       <div className="row">
                         <div className="col-xs-12">
 
-                            <UserForm
-                              ref={m => { this.userForm = m; }}
-                            />
+                          <div className="col-md-offset-1 col-md-10 col-xs-12">
+
+                            <div className="row">
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Nom</label>
+                                  <input type="text" className="form-control" id="lastname" name="lastname" placeholder="" value={fields.lastname} onChange={this.handleChange}/>
+                              </div>
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Prénom</label>
+                                  <input type="text" className="form-control" id="firstname" name="firstname" placeholder="" value={fields.firstname} onChange={this.handleChange}/>
+                              </div>
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Email</label>
+                                  <input type="text" className="form-control" id="email" name="email" placeholder="" value={fields.email} onChange={this.handleChange}/>
+                              </div>
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Telephone</label>
+                                  <input type="text" className="form-control" id="telephone" name="telephone" placeholder="" value={fields.telephone} onChange={this.handleChange}/>
+                              </div>
+
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Mot de passe</label>
+                                  <input type="password" className="form-control" id="password" name="password" minLength="6" placeholder=""value={fields.password} onChange={this.handleChange}/>
+                              </div>
+                              <div className="col-md-6 form-group">
+                                  <label htmlFor="name">Confirmez le mot de passe</label>
+                                  <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" minLength="6" placeholder="" value={fields.password_confirmation} onChange={this.handleChange}/>
+                              </div>
+                            </div>
+
+
+                          </div>
 
                         </div>
                       </div>

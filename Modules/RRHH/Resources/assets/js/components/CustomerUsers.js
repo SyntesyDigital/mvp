@@ -116,7 +116,6 @@ export default class CustomerUsers extends Component {
 
     console.log("CustomerUsers :: onEditUser => ",id);
 
-
     this.setState({
       display: true,
       user_id : id
@@ -155,7 +154,25 @@ export default class CustomerUsers extends Component {
     });
   }
 
+  getSelectedItem() {
+
+    const {user_id,items} = this.state;
+
+    if(user_id != null && items != null){
+      for(var i =0;i<items.length;i++){
+        if(items[i].id == user_id){
+          return items[i];
+        }
+      }
+    }
+
+    return null;
+  }
+
   render() {
+
+      var selectedItem = this.getSelectedItem();
+
       return (
           <div className="container">
 
@@ -163,7 +180,7 @@ export default class CustomerUsers extends Component {
               display={this.state.display}
               onUserCancel={this.onUserCancel.bind(this)}
               onUserSubmit={this.onUserSubmit.bind(this)}
-              user_id={this.state.user_id}
+              selectedItem={this.getSelectedItem()}
             />
 
 
