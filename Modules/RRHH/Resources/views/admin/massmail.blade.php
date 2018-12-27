@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{route('rrhh.admin.sitelists.index')}}" class="btn btn-default">
+                <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default">
                     <i class="fa fa-angle-left"></i>
                 </a>
 

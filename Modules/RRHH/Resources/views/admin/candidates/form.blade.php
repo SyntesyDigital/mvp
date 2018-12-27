@@ -38,7 +38,7 @@
             <div class="row">
               <div class="col-md-12">
 
-                <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+                <a href="{{URL::previous()}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
 
                 <h1>
                     <i class="fa fa-newspaper-o"></i>&nbsp;

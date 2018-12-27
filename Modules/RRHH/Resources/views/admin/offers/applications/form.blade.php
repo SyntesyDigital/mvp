@@ -1,14 +1,22 @@
 @extends('architect::layouts.master')
 
 @section('content')
-
-<div class="row">
-        <div class="col-md-offset-1 col-md-10">
-            <h3 class="card-title">Candidatures de l'offre {{ $offer->title }}  <i class="offer-closed" id="offer-closed" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) style="display:none" @endif>Offre fermée </i></h3>
+<div class="page-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{route('rrhh.admin.applications.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+                <h1><i class="fa fa-newspaper-o"></i>&nbsp;Candidatures de l'offre {{ $offer->title }} </h1>
+                <!--div class="float-buttons pull-right">
+                    <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
+                </div-->
+            </div>
         </div>
-        <br clear="all">
-        <br clear="all">
+    </div>
+</div>
 
+<div class="container rightbar-page">
+    <div class="col-md-9 page-content">
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body div-dz-content">
@@ -108,7 +116,7 @@
                 </div>
             </div>
         </div>
-
+      </div>
 </div>
 @endsection
 
@@ -118,14 +126,14 @@
 @endpush
 
 @push('javascripts')
-    {{ Html::script('/js/admin/content/contents/vendors/dropzone/dropzone.js') }}
+    {{ Html::script('/modules/rrhh/plugins/dropzone/dropzone.js') }}
 
     <script>
         var csrf_token = "{{csrf_token()}}",
         status_refused =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED}}",
         status_accepted =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED}}";
         status_interview =  "{{Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW}}";
-
+        route_update = "{{route('rrhh.admin.applications.update')}}";
         var other_offer_options  ='';
         @foreach ($other_offers as $oo)
             other_offer_options += '<option value="{{$oo->id}}">{{$oo->title}}</option>';
@@ -134,6 +142,6 @@
             app.offerapplications.init();
         });
     </script>
-    {{ Html::script('/js/admin/offers/app.js') }}
-    {{ Html::script('/js/admin/offers/offerapplications.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/offers/app.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/offers/offerapplications.js') }}
 @endpush
