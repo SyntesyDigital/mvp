@@ -20,6 +20,7 @@ $(function() {
 	    initComplete: function () {
 			var _this = this;
 			DataTableTools.init(this);
+			$('#actions-th').css('min-width', '50px');
 	    }
     });
 });

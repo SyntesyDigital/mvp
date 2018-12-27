@@ -1,7 +1,7 @@
 $(function() {
 	$('#table').DataTable({
 	    language: {
-	        "url": "/plugins/datatables/locales/french.json"
+	        "url": "/modules/rrhh/plugins/datatables/locales/french.json"
 	    },
 	    processing: true,
 	    serverSide: true,
@@ -19,12 +19,7 @@ $(function() {
 	    initComplete: function () {
 			var _this = this;
 			DataTableTools.init(this);
-
-			// this.on('search.dt', function() {
-			// 	setTimeout(function(){
-			// 		DataTableTools.init(_this);
-			// 	}, 500);
-			// });
+			$('#actions-th').css('min-width', '80px');
 	    }
     });
 });

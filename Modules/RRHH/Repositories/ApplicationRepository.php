@@ -7,6 +7,7 @@ use Datatables;
 use DB;
 use Form;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Lang;
 
 class ApplicationRepository extends BaseRepository
 {
@@ -71,8 +72,8 @@ class ApplicationRepository extends BaseRepository
 
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="#" class="btn btn-sm btn-danger" data-toogle="delete" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
-                    <a href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
+                    <a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?"><i class="fa fa-trash"></i></a>
+                    <a title="'.Lang::get("architect::datatables.view_candidate").'" href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-link"><i class="fa fa-address-card"></i></a>
                 ';
             })
 
@@ -174,9 +175,9 @@ class ApplicationRepository extends BaseRepository
 
             ->addColumn('action', function ($item) {
                 return '
-                    <a href="#" class="btn btn-sm btn-danger" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?">Supprimer</a>
-                    <a href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-sm btn-success">Voir le profil</a>
-                    <a href="'.route('rrhh.admin.offer.applications.show', $item->offer_id).'" class="btn btn-sm btn-primary">Traiter</a>
+                    <a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-ajax="'.route('rrhh.admin.applications.delete', $item).'" data-toogle="delete" data-confirm-message="Êtes-vous sûr de vouloir supprimer cette candidature ?"><i class="fa fa-trash"></i></a>
+                    <a title="'.Lang::get("architect::datatables.view_profile").'" href="'.route('rrhh.admin.candidates.show', $item->candidate->user).'" class="btn btn-link"><i class="fa fa-address-card"></i></a>
+                    <a title="'.Lang::get("architect::datatables.process").'" href="'.route('rrhh.admin.offer.applications.show', $item->offer_id).'" class="btn btn-link"><i class="fa fa-pencil"></i></a>
                 ';
             })
 

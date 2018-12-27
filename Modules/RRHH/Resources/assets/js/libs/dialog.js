@@ -6,11 +6,11 @@ var dialog = {
             buttons: {
                 confirm: {
                     label: 'Oui',
-                    className: 'btn-success'
+                    className: 'btn-primary'
                 },
                 cancel: {
                     label: 'Non',
-                    className: 'btn-danger'
+                    className: 'btn-default'
                 }
             },
             callback: function (result) {

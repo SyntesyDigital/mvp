@@ -73,8 +73,8 @@ class CandidateRepository extends BaseRepository
                 return isset($status[$item->status]) ? $status[$item->status] : null;
             })
             ->addColumn('action', function ($item) {
-                return '<a href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> Voir</a>'.
-                '&nbsp; <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('rrhh.admin.candidates.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> Suprimer</a>';
+                return '<a title="'.Lang::get("architect::datatables.view").'" href="'.route('rrhh.admin.candidates.show', $item).'" class="btn btn-link"><i class="fa fa-eye"></i> </a>'.
+                '&nbsp; <a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('rrhh.admin.candidates.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> </a>';
             })
             ->order(function ($query) {
                 $orders = request()->get('order');

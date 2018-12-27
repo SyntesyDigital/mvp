@@ -9,5 +9,8 @@ return [
     'si'            => 'Oui',
     'no'            => 'Non',
     'continue'      => 'Voulez-vous continuer ?',
-    'sure'          => 'Etes-vous sûre de vouloir continuer ?'
+    'sure'          => 'Etes-vous sûre de vouloir continuer ?',
+    'view'          => 'Voir',
+    'view_candidate'=> 'Voir profils',
+    'process'       => 'Traiter'
 ];

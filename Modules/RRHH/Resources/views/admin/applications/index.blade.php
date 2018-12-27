@@ -20,7 +20,7 @@
                                 <th>Offre</th>
                                 <th>Date de candidature</th>
                                 <th data-filter="select" data-values="{!! base64_encode(json_encode(\Modules\RRHH\Entities\Offers\Application::getStatus())) !!}">Etat</th>
-                                <th></th>
+                                <th id="actions-th"></th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -51,4 +51,6 @@
 @push('javascripts')
 {{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
 {{ Html::script('/modules/rrhh/js/admin/applications/index.js')}}
+{{ Html::script('/modules/rrhh/js/libs/dialog.js')}}
+
 @endpush

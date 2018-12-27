@@ -39,7 +39,7 @@
                             </td>
 
                             <td>
-                                <a href="{{ route('rrhh.admin.sitelists.show', $sl->id) }}" class="btn btn-sm btn-success pull-right">Modifier</a>
+                                <a href="{{ route('rrhh.admin.sitelists.show', $sl->id) }}" class="btn btn-link"><i title="{{Lang::get('architect::datatables.edit')}}" class="fa fa-pencil"></i></a>
                             </td>
                         </tr>
                         @endforeach
