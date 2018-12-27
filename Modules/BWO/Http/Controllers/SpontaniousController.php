@@ -33,7 +33,7 @@ class SpontaniousController extends Controller
     {
         try {
             if ($this->dispatchNow(CreateSpontaniousCandidature::fromRequest($request))) {
-                return redirect()->route('spontanious.success');
+                Session::flash('notify_success', 'Merci de nous avoir adressé votre candidature.');
             }
             Session::flash('notify_error', 'Une erreur est survenue lors de l\'enregistrement de votre candidature.');
         } catch (\Exception $e) {

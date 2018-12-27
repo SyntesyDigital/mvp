@@ -12,8 +12,13 @@ mix.webpackConfig({
         }),
         new CopyWebpackPlugin([
             {
-                from: 'Modules/RRHH/Resources/assets/js/',
-                to: './modules/rrhh/js/',
+                from: 'Modules/RRHH/Resources/assets/js/admin/',
+                to: './modules/rrhh/js/admin/',
+                toType: 'dir'
+            },
+            {
+                from: 'Modules/RRHH/Resources/assets/js/libs/',
+                to: './modules/rrhh/js/libs/',
                 toType: 'dir'
             },
             {
