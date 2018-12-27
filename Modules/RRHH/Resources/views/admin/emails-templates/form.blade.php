@@ -42,7 +42,7 @@
     {{-- RIGHT COLUMN --}}
     <div class="col-md-9 page-content">
       <div class="card-body jsonbuilder">
-        <div class="form-group">
+        <div class="form-group {{$errors->has("subject") ? 'has-error' : ''}}">
             <label>Sujet</label>
             {!!
                 Form::text(
@@ -55,7 +55,7 @@
             !!}
         </div>
 
-        <div class="form-group">
+        <div class="form-group {{$errors->has("body") ? 'has-error' : ''}}">
             <label>Corps du mail</label>
             {!!
                 Form::textarea(
@@ -73,7 +73,7 @@
     {{-- SIDEBAR --}}
     <div class="sidebar">
         <h3>Modèle d'email</h3>
-        <div class="form-group">
+        <div class="form-group {{$errors->has("identifier") ? 'has-error' : ''}}">
         {!!
             Form::select('identifier', config('emails_templates'),isset($template) ? $template->identifier : null, [
                 'class' => 'form-control',

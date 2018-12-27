@@ -92,7 +92,7 @@
               <h3>Informations du candidat</h3>
               <div class="row">
                   <div class="col-md-12">
-                      <div class="form-group">
+                      <div class="form-group {{$errors->has("civility") ? 'has-error' : ''}}">
                           <label for="civility">Civilité</label>
                           <div class="radio">
                               <label>
@@ -121,7 +121,7 @@
                   <div class="col-md-6">
                       <div class="row">
                           <div class="col-md-6">
-                              <div class="form-group">
+                              <div class="form-group {{$errors->has("firstname") ? 'has-error' : ''}}">
                                   {!! Form::label("firstname", 'Prénom') !!}
                                   {!!
                                       Form::text('firstname', isset($user) ? $user->firstname : null, [
@@ -134,7 +134,7 @@
                           </div>
 
                           <div class="col-md-6">
-                              <div class="form-group">
+                              <div class="form-group {{$errors->has("lastname") ? 'has-error' : ''}}">
                                   {!! Form::label("lastname", 'Nom') !!}
                                   {!!
                                       Form::text('lastname', isset($user) ? $user->lastname : null, [
@@ -180,7 +180,7 @@
                       </div>
 
 
-                      <div class="form-group">
+                      <div class="form-group {{$errors->has("email") ? 'has-error' : ''}}">
                           {!! Form::label('email', 'Email') !!}
                           {!!
                               Form::text('email', isset($user) ? $user->email : null, [

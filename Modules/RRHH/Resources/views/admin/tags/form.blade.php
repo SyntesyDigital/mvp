@@ -47,7 +47,7 @@
 
     {{-- RIGHT COLUMN --}}
       <div class="col-md-9 page-content">
-		  <div class="form-group">
+		  <div class="form-group {{$errors->has("name") ? 'has-error' : ''}}">
 			 {!! Form::label('name', 'Nom') !!}
              {!!
                  Form::text('name', isset($tag) ? $tag->name : null, [

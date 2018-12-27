@@ -65,7 +65,7 @@
               <h3 class="text-center"><b>Ajouter un element</b></h3>
           </div> --}}
 
-          <div class="form-group">
+          <div class="form-group {{$errors->has("name") ? 'has-error' : ''}}">
               <label for="name">Titre</label>
               {!!
                   Form::text('name', isset($sitelist) ? $sitelist->name : null, [
@@ -76,7 +76,7 @@
               !!}
           </div>
 
-          <div class="form-group">
+          <div class="form-group {{$errors->has("identifier") ? 'has-error' : ''}}">
              <label for="name">Identifiant</label>
              {!!
                  Form::text('identifier', isset($sitelist) ? $sitelist->identifier : null, [
@@ -88,7 +88,7 @@
              !!}
           </div>
 
-          <div class="form-group">
+          <div class="form-group {{$errors->has("type") ? 'has-error' : ''}}">
               <label for="type">Type de liste</label>
               {!!
                   Form::select('type', [

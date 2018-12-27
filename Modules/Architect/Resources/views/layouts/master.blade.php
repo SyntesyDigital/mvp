@@ -46,7 +46,34 @@
                 }
               }
             };
+
+
+            var error = "";
+
+
+
+            @if(isset($errors))
+
+                @if (count($errors) > 0)
+                    @foreach ($errors->all() as $error)
+                        error += "- {{$error}}<br/>";
+                    @endforeach
+                @endif
+            @endif
+
+            @if(Session::has('notify_error'))
+                error += "- {{ Session::get('notify_error') }}<br/>";
+            @endif
+
+            if(error != '')
+              toastr.error(error, 'Error', {timeOut: 10000});
+
+            @if(Session::has('notify_success'))
+              toastr.success("{{ Session::get('notify_success') }}", 'Success', {timeOut: 3000});
+            @endif
+
           });
+
         </script>
 
         <!-- App -->
@@ -73,50 +100,6 @@
                     @endif
 
     	        	<section id="content">
-
-                        @if(isset($errors))
-                            @if (count($errors) > 0)
-                                <div class="clearfix"></div>
-                                <div class="container container-error">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="alert alert-danger">
-                                		        <ul>
-                                		            @foreach ($errors->all() as $error)
-                                		                <li>{{ $error }}</li>
-                                		            @endforeach
-                                		        </ul>
-                                		    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                    		@endif
-                        @endif
-
-                        @if(Session::has('notify_error'))
-                            <div class="container  container-error">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="alert alert-danger">
-                                            {{ Session::get('notify_error') }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-                        @if(Session::has('notify_success'))
-                            <div class="container  container-error">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="alert alert-success">
-                                            {{ Session::get('notify_success') }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
     	        		@yield('content')
     	        	</section>
     	        </section>

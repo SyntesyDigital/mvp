@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 const acceptedFiles = 'application/pdf,application/doc',
       maxFilesize = 20, // MB
       paramName = 'file',
-      identifier = '.docs-dropfiles',
-      uploadUrl = routes['uploadPost'];
+      identifier = '.docs-dropfiles';
 
 export default class CustomerDocuments extends Component {
 
@@ -48,7 +47,7 @@ export default class CustomerDocuments extends Component {
       console.log("CustomerDocuments :: initDropzone");
 
       var settings = {
-          url: uploadUrl,
+          url: routes['uploadPost'],
           uploadMultiple: false,
           parallelUploads: 1,
           createImageThumbnails : false,

@@ -41,7 +41,7 @@
 {{-- FIELDS --}}
 @if($node['type'] == "field")
     @if($node["input"] == 'text')
-        <div class="form-group bmd-form-group">
+        <div class="form-group bmd-form-group  {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label class="bmd-label-floating">{{$node["label"]}}</label>
             <input type="text" class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
         </div>
@@ -53,21 +53,21 @@
 
 
     @if($node["input"] == 'date')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
         </div>
     @endif
 
     @if($node["input"] == 'textarea')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             <textarea class="form-control" id="{{$node["id"] or ''}}" rows="6" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
         </div>
     @endif
 
     @if($node["input"] == 'richtext')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             <textarea class="form-control" id="{{ $node["name"] }}_editor" name="{{$node["name"]}}" rows="6" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
         </div>
@@ -92,7 +92,7 @@
     @endif
 
     @if($node["input"] == 'checkbox')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>
                 <input type="checkbox" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" value="{{$node["value"] or old($node["name"])}}" @if($item && $item->{$node["name"]}) checked @endif />
                 {{$node["label"]}}
@@ -101,7 +101,7 @@
     @endif
 
     @if($node["input"] == 'tags')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             {!!
                 Form::select(
                     $node["name"],
@@ -122,7 +122,7 @@
     @endif
 
     @if($node["input"] == 'list')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             @php
                 $default = isset($node["default"]) ? $node["default"] : null;
@@ -143,7 +143,7 @@
     @endif
 
     @if($node["input"] == 'users')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             {!!
                 Form::users(
@@ -161,7 +161,7 @@
 
 
      @if($node["input"] == 'customers')
-        <div class="form-group">
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
             {!!
                 Form::customers(
@@ -179,7 +179,7 @@
 
     @if($node["input"] == 'customers_contacts')
 
-         <div class="form-group">
+         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             {{-- {!!
                 Form::select(
                     $node["name"],

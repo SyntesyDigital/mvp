@@ -18320,8 +18320,7 @@ var acceptedFiles = 'application/pdf,application/doc',
     maxFilesize = 20,
     // MB
 paramName = 'file',
-    identifier = '.docs-dropfiles',
-    uploadUrl = routes['uploadPost'];
+    identifier = '.docs-dropfiles';
 
 var CustomerDocuments = function (_Component) {
   _inherits(CustomerDocuments, _Component);
@@ -18363,7 +18362,7 @@ var CustomerDocuments = function (_Component) {
       console.log("CustomerDocuments :: initDropzone");
 
       var settings = {
-        url: uploadUrl,
+        url: routes['uploadPost'],
         uploadMultiple: false,
         parallelUploads: 1,
         createImageThumbnails: false,

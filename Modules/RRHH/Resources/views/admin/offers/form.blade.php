@@ -55,16 +55,16 @@
 
 @push('javascripts-libs')
 <!-- Datepicker -->
-{{ Html::style('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css') }}
-{{ Html::script('/modules/turisme/plugins/datepicker/moment-with-locales.min.js') }}
-{{ Html::script('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js') }}
+{{ Html::style('/modules/rrhh/plugins/datepicker/bootstrap-datetimepicker.min.css') }}
+{{ Html::script('/modules/rrhh/plugins/datepicker/moment-with-locales.min.js') }}
+{{ Html::script('/modules/rrhh/plugins/datepicker/bootstrap-datetimepicker.min.js') }}
 
 <!-- Select2 -->
 {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css') }}
 {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js') }}
 
 <!-- Vendors -->
-{{ Html::script('/modules/architect/plugins/ckeditor/ckeditor.js') }}
+{{ Html::script('/modules/rrhh/plugins/ckeditor/ckeditor.js') }}
 @endpush
 
 

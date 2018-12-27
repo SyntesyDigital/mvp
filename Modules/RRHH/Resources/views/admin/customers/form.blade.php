@@ -81,11 +81,12 @@
 
     <script>
       var csrf_token = "{{csrf_token()}}";
+      var routes = {
+          uploadPost : '{{route("upload-post")}}'
+      };
+
       @if(isset($customer))
-         var routes = {
-             data : '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}',
-             uploadPost : '{{route("upload-post")}}'
-         };
+         routes['data'] = '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}';
      @endif
     </script>
 

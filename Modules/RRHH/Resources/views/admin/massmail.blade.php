@@ -41,7 +41,7 @@
 
 	{{-- RIGHT COLUMN --}}
 	<div class="col-md-9 page-content">
-		<div class="form-group label-floating">
+		<div class="form-group label-floating {{$errors->has("subject") ? 'has-error' : ''}}">
 			{!! Form::label('Sujet') !!}
 			{!!
 				Form::text('subject', old('subject'), [
@@ -50,7 +50,7 @@
 			!!}
 	    </div>
 
-	    <div class="form-group label-floating">
+	    <div class="form-group label-floating {{$errors->has("reply_to") ? 'has-error' : ''}}">
 			{!! Form::label('Répondre à') !!}
 			{!!
 				Form::text('reply_to', old('reply_to', env('MAIL_NO_REPLY')), [
@@ -59,7 +59,7 @@
 			!!}
 	    </div>
 
-	    <div class="form-group label-floating">
+	    <div class="form-group label-floating {{$errors->has("message") ? 'has-error' : ''}}">
 			{!! Form::label('Message') !!}
 			{!!
 				Form::textarea('message', old('message'), [
