@@ -207,6 +207,13 @@
     </div>
 @endif
 
+@if($node["type"] == 'customer_documents')
+
+     <div class="form-group">
+        <div id="customer_documents"></div>
+    </div>
+@endif
+
 {{-- RECURSIVE CALL --}}
 @if(isset($node['childs']))
     @foreach($node['childs'] as $n)

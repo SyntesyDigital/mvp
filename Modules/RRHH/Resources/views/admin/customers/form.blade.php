@@ -71,10 +71,24 @@
 @endsection
 
 @push('javascripts-libs')
+    {{ Html::script('/modules/architect/plugins/dropzone/dropzone.min.js') }}
+    {{ HTML::style('/modules/architect/plugins/dropzone/dropzone.min.css') }}
+
     <!-- Datatables -->
     {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
     {{ Html::script('/modules/rrhh/js/libs/datatabletools.js')}}
+
+    <script>
+      var csrf_token = "{{csrf_token()}}";
+      @if(isset($customer))
+         var routes = {
+             data : '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}',
+             uploadPost : '{{route("upload-post")}}'
+         };
+     @endif
+    </script>
+
 @endpush
 
 
@@ -83,19 +97,10 @@
 {{ Html::script('modules/rrhh/js/admin/customers/customersform.js') }}
 
 <script>
-    var csrf_token = "{{csrf_token()}}";
-
     $(document).on('click', ".btn-submit-primary", function(e){
         e.preventDefault();
         this.closest('form').submit()
     });
-
-    @if(isset($customer))
-       var routes = {
-           data : '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}',
-       };
-
-   @endif
 </script>
 
 @endpush
