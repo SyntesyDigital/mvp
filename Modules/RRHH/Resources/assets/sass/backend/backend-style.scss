@@ -9,49 +9,10 @@
 @import '../helpers/common';
 @import '../helpers/mixins';
 
+@import '../variables';
+
 @import 'offers';
 
 //tools
 @import 'sitelists';
-
-/*
-//layouts
-@import 'layout';
-@import 'sidebar';
-@import 'auth';
-@import 'topnav';
-//sections
-@import 'contents';
-
-//compponents
-@import 'tabs';
-@import 'tables';
-@import 'threads';
-@import 'dropzones';
-@import 'modals';
-@import 'hiearchy-selector';
-@import 'connected-lists';
-
-@import 'sortable';
-@import 'dashboard';
-
-//contents
-@import 'jsonbuilder';
-@import 'modal';
-@import 'mediaselector';
-@import 'medias';
-@import '_content-nav';
-
-//tools
-@import 'sitelists';
-@import 'filelist';
-
-//tags
-@import 'tags';
-
-//candidates
-@import 'candidates';
-
-//offer applications
-@import 'offer-applications';
-*/
+@import 'forms';

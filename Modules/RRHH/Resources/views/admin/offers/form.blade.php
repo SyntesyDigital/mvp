@@ -21,6 +21,11 @@
                 <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
                 <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
                 <div class="float-buttons pull-right">
+
+                    @if(isset($offer))
+                      <a href="{{route('rrhh.admin.offer.applications.show', $offer)}}" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;{{$offer->applications()->count()}}  Candidatures </a>
+                    @endif
+
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
                 </div>
             </div>

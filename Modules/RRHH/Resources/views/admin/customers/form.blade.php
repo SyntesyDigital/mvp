@@ -20,7 +20,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a href="{{route('rrhh.admin.offers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+        <a href="{{route('rrhh.admin.customers.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
         <h1><i class="fa fa-newspaper-o"></i>&nbsp;Clients</h1>
         <div class="float-buttons pull-right">
 
