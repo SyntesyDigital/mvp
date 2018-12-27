@@ -83,7 +83,7 @@ app.offerapplications = {
 
                         $.ajax({
                             type: "POST",
-                            url: "/admin/offers/application/" + source.id + "/update",
+                            url: "/architect/admin/offers/application/" + source.id + "/update",
                             data: {
                                 "status": status
                             },
@@ -126,7 +126,7 @@ app.offerapplications = {
 
             $.ajax({
                 type: "POST",
-                url: "/admin/offers/application/" + source.id + "/update",
+                url: "/architect/admin/offers/application/" + source.id + "/update",
                 data: {
                     "status": status
                 },
@@ -146,7 +146,7 @@ app.offerapplications = {
     changeOffer: function(e, application_id) {
         e.preventDefault();
         bootbox.confirm({
-            message: '<form action="/admin/offers/application/' + application_id + '/move" method="post" id="changeOfferForm">' +
+            message: '<form action="/architect/admin/offers/application/' + application_id + '/move" method="post" id="changeOfferForm">' +
                 '     Sélectionez l\'offre:<br />' +
                 '     <select name="offer_select" id="offer_selec" class="form-control">' +
                 other_offer_options +
@@ -167,7 +167,7 @@ app.offerapplications = {
 
                     $.ajax({
                         type: "POST",
-                        url: "/admin/offers/application/" + application_id + "/move",
+                        url: "/architect/admin/offers/application/" + application_id + "/move",
                         data: {
                             "offer": document.getElementById("offer_selec").value
                         },
