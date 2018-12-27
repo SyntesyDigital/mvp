@@ -100,5 +100,6 @@ return [
     'add_fields' => 'Agrega campos',
     'default_template' => 'Plantilla por defecto',
     'template' => 'Plantilla',
-    'icon' => 'Icono'
+    'icon' => 'Icono',
+    'file_too_big' => 'Archivo demasiado grande'
 ];

@@ -100,5 +100,6 @@ return [
     'add_fields' => 'Ajouter champs',
     'default_template' => 'Modèle par défaut',
     'template' => 'Modèle',
-    'icon' => 'Icon'
+    'icon' => 'Icon',
+    'file_too_big' => 'Le fichier est trop gros !'
 ];

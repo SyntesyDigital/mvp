@@ -149,6 +149,20 @@ return [
               'title' => 'Documents du client',
               'subtitle' => '',
               'childs' => [
+                [
+                  'type' => 'col',
+                  'class' => 'col-md-12',
+                  'childs' => [
+                      [
+                          'type' => 'customer_documents',
+                          'input' => 'customer_documents',
+                          'identifier' => 'customer_documents',
+                          'name' => 'customer_documents',
+                          'label' => 'customer_documents'
+                      ]
+                  ]
+                ]
+
               ]
           ]
 

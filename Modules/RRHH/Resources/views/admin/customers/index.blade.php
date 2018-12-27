@@ -39,6 +39,13 @@
 </div>
 @endsection
 
+@push('javascripts-libs')
+    <!-- Datatables -->
+    {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
+    {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/datatabletools.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/dialog.js') }}
+@endpush
 
 @push('javascripts')
     <script>
@@ -48,6 +55,5 @@
     };
     </script>
 
-    {{ Html::script('js/libs/datatabletools.js')}}
-    {{ Html::script('/js/admin/customers/customerslist.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/customers/customerslist.js') }}
 @endpush
