@@ -16,20 +16,21 @@
 </div>
 
 <div class="container rightbar-page">
-    <div class="col-md-9 page-content">
-        <div class="col-md-3">
+    <div class="page-content kanban">
+        <div class="card-container">
+            <h4 class="card-title">Nouvelle</h4>
             <div class="card">
                 <div class="card-body div-dz-content">
-                    <h4 class="card-title">Nouvelle</h3>
+
                     <div class="dz dz-pending" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_PENDING }}')" ondragover="app.offerapplications.dragover(event)" @endif >
                         @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_PENDING )->get() as $oa)
                              <div class ="candidate-drop-item draggable" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD">Déplacer sur une<br/>autre annonce</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-default showHideDnD"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="btn btn-sm btn-default showHideDnD"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-default pink showHideDnD"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -37,19 +38,19 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="card-container">
+            <h4 class="card-title">A recontacter</h4>
             <div class="card">
                 <div class="card-body div-dz-content">
-                    <h4 class="card-title">A recontacter</h3>
                     <div class="dz dz-to-contact"   @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_TO_CONTACT }}')" ondragover="app.offerapplications.dragover(event)"  @endif  >
                         @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_TO_CONTACT )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD">Voir profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD">Télécharger CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})" class="btn btn-sm btn-danger  showHideDnD">Déplacer sur une<br/>autre annonce</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})" class="btn btn-sm btn-danger pink showHideDnD"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -57,19 +58,19 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="card-container">
+            <h4 class="card-title">Refusé</h4>
             <div class="card">
                 <div class="card-body div-dz-content">
-                    <h4 class="card-title">Refusé</h3>
                     <div class="dz dz-refused" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event, '{{ Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
                         @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_REFUSED )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true'  ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -77,19 +78,19 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="card-container">
+            <h4 class="card-title">Entretien</h4>
             <div class="card">
                 <div class="card-body div-dz-content">
-                    <h4 class="card-title">Entretien</h3>
                     <div class="dz dz-interview" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW }}')" ondragover="app.offerapplications.dragover(event)" @endif >
                         @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_INTERVIEW )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true' ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-primary showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -97,19 +98,19 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="card-container">
+            <h4 class="card-title">Accepter</h4>
             <div class="card">
                 <div class="card-body div-dz-content">
-                    <h4 class="card-title">Accepter</h3>
                     <div class="dz dz-accepted" @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) ondrop="app.offerapplications.drop(event,'{{ Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED }}')" ondragover="app.offerapplications.dragover(event)" @endif >
                         @foreach ($offer->applications()->where('type', Modules\RRHH\Entities\Offers\Application::TYPE_OFFER )->where('status', Modules\RRHH\Entities\Offers\Application::STATUS_ACCEPTED )->get() as $oa)
                              <div class ="candidate-drop-item draggable"  @if($offer->status == Modules\RRHH\Entities\Offers\Offer::STATUS_ACTIVE) draggable='true' ondragstart='app.offerapplications.dragstart(event)' @endif id="{{ $oa->id }}">
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;">Voir profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;">Télécharger CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger  showHideDnD" style="display:none;">Déplacer sur une<br/>autre annonce</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>

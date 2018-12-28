@@ -120,7 +120,7 @@ app.offerapplications = {
             } else {
                 elements_hide_show = source.getElementsByClassName("showHideDnD");
                 for (var i = 0; i < elements_hide_show.length; i++) {
-                    elements_hide_show[i].style.display = 'block';
+                    elements_hide_show[i].style.display = 'inline-block';
                 }
             }
 
