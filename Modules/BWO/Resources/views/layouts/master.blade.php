@@ -11,7 +11,7 @@
         <title>{!! $htmlTitle or 'BWO Interim' !!}</title>
         <meta name="description" content="{!! $metaDescription or '' !!}">
         <meta property="og:url" content="{{ Request::url() }}" />
-        <meta property="og:title" content="{!! $htmlTitle or 'Menco RH' !!}"/>
+        <meta property="og:title" content="{!! $htmlTitle or '' !!}"/>
         <meta property="og:description" content="{!! $socialDescription or '' !!}"/>
         <meta property="og:image" content="{!! $socialImage or asset('images/header-logo.jpg') !!}"/>
         <meta property="og:type" content="website"/>

@@ -208,7 +208,7 @@
 								<li>
 										<label>
 												{!!
-														Form::checkbox('contract_type[]', $k, in_array($k,Auth::user()->candidate->contract_type))
+														Form::checkbox('contract_type[]', $k, Auth::user()->candidate->contract_type != "" && in_array($k,Auth::user()->candidate->contract_type))
 												!!}
 												{{ $v }}
 										</label>

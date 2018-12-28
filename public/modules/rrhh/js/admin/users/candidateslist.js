@@ -1,5 +1,7 @@
 $(function() {
 
+    var filterTags = [];
+
     $('#table-candidates').DataTable({
         language: {
             "url": "/modules/rrhh/plugins/datatables/locales/french.json"
@@ -52,17 +54,40 @@ $(function() {
         }
     });
 
-    $('#textarea')
-        .textext({
-            plugins: 'tags autocomplete',
-        })
-        .bind('getSuggestions', function(e, data) {
-            var list = atags,
-                textext = $(e.target).textext()[0],
-                query = (data ? data.query : '') || '';
+    var updateTable = function(){
 
-            $(this).trigger('setSuggestions', {
-                result: textext.itemManager().filter(list, query)
-            });
-        });
+      //TODO filter datatable by tags
+      //datatable.fiterByTags(filterTags)
+    };
+
+
+    $('.toggle-select2').select2();
+
+    $('.toggle-select2').on('select2:select', function (e) {
+        var data = e.params.data;
+        console.log(data);
+
+        filterTags.push(data.id);
+        console.log("Filter tags vale : ",filterTags);
+
+        updateTable();
+
+    });
+
+    $('.toggle-select2').on('select2:unselect', function (e) {
+        var data = e.params.data;
+        console.log("unselect : ", data);
+
+        const index = filterTags.indexOf(data.id);
+
+        if (index !== -1) {
+          filterTags.splice(index, 1);
+        }
+
+        console.log("Filter tags vale : ",filterTags);
+
+        updateTable();
+
+    });
+
 });

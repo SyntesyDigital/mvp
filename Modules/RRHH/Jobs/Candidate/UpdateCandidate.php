@@ -37,6 +37,10 @@ class UpdateCandidate
             'comment',
             'image',
 
+            'tags',
+            'tags_edit',  //to check if editing tags,
+            'docs_edit',
+
             'contract_type',
             'salary',
             'important_information'
@@ -51,6 +55,8 @@ class UpdateCandidate
 
     public function handle()
     {
+
+        //dd($this->attributes);
 
         $user = dispatch(new UpdateUser($this->user, $this->attributes));
         if (isset($this->attributes['type'])) {
@@ -83,9 +89,20 @@ class UpdateCandidate
         }
 
         if (isset($this->attributes['resume_file'])) {
+
+            if($this->user->candidate->resume_file != $this->attributes['resume_file']){
+              (new DeleteFile($this->user->candidate->resume_file))->handle();
+            }
+
             $this->user->candidate->resume_file = $this->attributes['resume_file'] ? $this->attributes['resume_file'] : '';
         }
+
         if (isset($this->attributes['recommendation_letter'])) {
+
+            if($this->user->candidate->recommendation_letter != $this->attributes['recommendation_letter']){
+              (new DeleteFile($this->user->candidate->recommendation_letter))->handle();
+            }
+
             $this->user->candidate->recommendation_letter = $this->attributes['recommendation_letter'] ? $this->attributes['recommendation_letter'] : '';
         }
         if (isset($this->attributes['type'])) {
@@ -143,6 +160,14 @@ class UpdateCandidate
         }
 
         $this->user->candidate->save();
+
+        if (isset($this->attributes['tags'])) {
+          $this->user->candidate->tags()->sync($this->attributes['tags']);
+        }
+        else if(isset($this->attributes['tags_edit'])) {
+          //not tags defined so remove tags
+          $this->user->candidate->tags()->detach();
+        }
 
         return $this->user->candidate;
     }

@@ -5,27 +5,32 @@
 
   @foreach($languages as $language => $languageObject)
     @foreach($urls as $urlLanguages)
-        @php
-          $currentUrl = $urlLanguages[$language];
-        @endphp
-        <url>
-          <loc>{{$currentUrl["url"]}}@if(isset($currentUrl["slug"]))/{{$currentUrl["slug"]}}@endif</loc>
 
-          @if(isset($currentUrl["priority"]))
-            <priority>{{$currentUrl["priority"]}}</priority>
-          @endif
+        @if(isset($urlLanguages[$language]))
+          @php
+            $currentUrl = $urlLanguages[$language];
+          @endphp
+          <url>
+            <loc>{{$currentUrl["url"]}}@if(isset($currentUrl["slug"]))/{{$currentUrl["slug"]}}@endif</loc>
 
-          @foreach($urlLanguages as $key => $urlLanguage)
-             @php
-               $altUrl = $urlLanguages[$key];
-             @endphp
-             <xhtml:link
-                rel="alternate"
-                hreflang="{{$key}}"
-                href="{{$altUrl["url"]}}@if(isset($altUrl["slug"]))/{{$altUrl["slug"]}}@endif"
-                />
-          @endforeach
-        </url>
+            @if(isset($currentUrl["priority"]))
+              <priority>{{$currentUrl["priority"]}}</priority>
+            @endif
+
+            @foreach($urlLanguages as $key => $urlLanguage)
+               @if(isset($urlLanguages[$key]))
+                 @php
+                   $altUrl = $urlLanguages[$key];
+                 @endphp
+                 <xhtml:link
+                    rel="alternate"
+                    hreflang="{{$key}}"
+                    href="{{$altUrl["url"]}}@if(isset($altUrl["slug"]))/{{$altUrl["slug"]}}@endif"
+                    />
+                @endif
+            @endforeach
+          </url>
+        @endif
     @endforeach
   @endforeach
 </urlset>

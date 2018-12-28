@@ -190,6 +190,7 @@ section#content {
 }
 
 #logo-wrapper img {
-  width: 100%;
-  max-width: 287px;
+  /*max-width: 287px;*/
+  height: 100%;
+  width: auto !important;
 }

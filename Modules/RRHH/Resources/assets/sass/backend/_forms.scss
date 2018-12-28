@@ -1,4 +1,4 @@
-.field-group{
+.candidate-page .field-group{
 	.btn-link {
 		width: 100%;
     text-align: left;
@@ -82,9 +82,27 @@
 		padding: 20px 20px 10px;
 		text-align: center;
 
+		a {
+			word-break: break-all;
+		}
+
 		.text-danger {
 			padding: 0;
 		}
 	}
 
+}
+
+.tags-filter {
+	width: 30%;
+}
+
+.select2-container--default .select2-selection--multiple {
+	border-radius: 0px !important;
+	background-color: #fafafa !important;
+	border: 1px solid #ccc !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+	background-color: $brand-primary !important;
 }

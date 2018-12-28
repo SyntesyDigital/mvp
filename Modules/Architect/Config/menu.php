@@ -15,26 +15,13 @@ return [
         'name' => 'architect::plugins.topbar.menu'
     ],
 
-    /*
-    [
-        "route" => 'typologies',
-        "label" => 'architect::header.typology'),
-        "patterns" => [
-            'architect/typologies*'
-        ],
-        "roles" => [
-            'admin'
-        ]
-    ],
-    */
-
     [
         "route" => 'contents',
         "label" => 'architect::header.contents',
         "patterns" => [
             'architect/contents*'
         ],
-        "roles" => []
+        "roles" => ['admin']
     ],
 
     [
@@ -43,7 +30,7 @@ return [
         "patterns" => [
             'architect/medias*'
         ],
-        "roles" => []
+        "roles" => ['admin']
     ],
 
     [

@@ -42,7 +42,7 @@ class MailResetPasswordToken extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject('Réinitialiser votre mot de passe chez Menco.fr')
+            ->subject('Réinitialiser votre mot de passe')
             ->view('bwo::emails.reset_password', [
                 'url' => url('password/reset', $this->token),
             ]);
