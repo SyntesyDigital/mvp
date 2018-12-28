@@ -11,9 +11,22 @@ return [
     ],
 
     [
+        "route" => 'rrhh.admin.offers.index',
+        "label" => 'rrhh::header.offers',
+        "patterns" => [
+            'architect/offers*',
+            'architect/candidates*',
+            'architect/tags*'
+        ],
+        "roles" => []
+    ],
+
+    /*
+    [
         'group' => true,
         'name' => 'architect::plugins.topbar.menu'
     ],
+    */
 
     [
         "route" => 'contents',

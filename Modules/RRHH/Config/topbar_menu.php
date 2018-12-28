@@ -2,6 +2,7 @@
 
 return [
 
+    /*
     [
         "route" => 'rrhh.admin.offers.index',
         "label" => 'rrhh::header.offers',
@@ -12,6 +13,10 @@ return [
         ],
         "roles" => []
     ],
+
+    */
+
+
     //
     // [
     //     "route" => 'rrhh.admin.customers.index',
