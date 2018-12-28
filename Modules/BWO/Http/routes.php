@@ -94,6 +94,17 @@ Route::group([
     Route::get('/candidature-spontanee/success', ['as' => 'spontanious.success', 'uses' => 'SpontaniousController@success']);
 
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | ENTERPRISE
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/entreprises', ['as' => 'customer.index', 'uses' => 'Customer\HomeController@index']);
+    Route::get('/entreprises/profile', ['as' => 'customer.profile', 'uses' => 'Customer\CustomerController@index']);
+
+
     /*
     |--------------------------------------------------------------------------
     | ARCHITECT FRONT-END
@@ -119,5 +130,7 @@ Route::group([
     // Localization to JS
     Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
     Route::get('js/localization-{locale}.js', 'LocalizationController@localization')->name('localization.js');
+
+
 
 });

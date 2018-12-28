@@ -45,4 +45,13 @@ class BWOController extends Controller
     {
         return view('bwo::candidateform');
     }
+
+    public function customer()
+    {
+        return view('bwo::customer.home');
+    }
+    public function customerForm()
+    {
+        return view('bwo::customer.profile');
+    }
 }
