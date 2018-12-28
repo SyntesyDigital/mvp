@@ -243,7 +243,7 @@ li {
   cursor: move;
 }
 
-.field-group .btn-link {
+.candidate-page .field-group .btn-link {
   width: 100%;
   text-align: left;
   border: 1px solid #ccc;
@@ -253,7 +253,7 @@ li {
   margin: 0;
 }
 
-.field-group .field-name {
+.candidate-page .field-group .field-name {
   color: #455660;
   padding-left: 10px;
   text-transform: capitalize;
@@ -262,12 +262,12 @@ li {
   font-weight: 400;
 }
 
-.field-group .field-form {
+.candidate-page .field-group .field-form {
   padding: 20px 20px 20px 30px;
   border-left: 2px solid #ccc;
 }
 
-.field-group div.btn:not(.collapsed):before {
+.candidate-page .field-group div.btn:not(.collapsed):before {
   content: "\25BE";
   margin-right: 0px;
   position: absolute;
@@ -277,7 +277,7 @@ li {
   color: #455660;
 }
 
-.field-group div.btn.collapsed:before {
+.candidate-page .field-group div.btn.collapsed:before {
   content: "\25B8";
   margin-right: 0px;
   position: absolute;
@@ -287,7 +287,7 @@ li {
   color: #455660;
 }
 
-.field-group #collapsematricule .btn {
+.candidate-page .field-group #collapsematricule .btn {
   margin: 0;
 }
 

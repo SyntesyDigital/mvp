@@ -112,6 +112,22 @@ class Language extends Model
         return $languages;
     }
 
+    public static function getByIso()
+    {
+        $key = 'languages.byIso';
+        $languages = cache($key);
+
+        if(!isset($languages)) {
+            $languages = self::pluck('iso','id');
+
+            cache([
+                $key => $languages
+            ], now()->addSeconds(5 * 60));
+        }
+
+        return $languages;
+    }
+
     /*
      *  Scopes
      */

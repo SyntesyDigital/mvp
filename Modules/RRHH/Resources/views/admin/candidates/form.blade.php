@@ -74,7 +74,7 @@
                           </li-->
                           @if(isset($user))
                           <li>
-                              <a href="{{ route('rrhh.admin.candidates.delete', $user->id) }}" class="text-danger">
+                              <a href="#" data-redirect="{{route('rrhh.admin.candidates.index')}}" data-ajax="{{ route('rrhh.admin.candidates.delete', $user) }}" data-confirm-message="{{Lang::get('architect::datatables.sure')}}" data-toogle="delete" class="text-danger">
                                   <i class="fa fa-trash text-danger"></i>
                                   &nbsp;
                                   <span class="text-danger">{{ Lang::get('architect::fields.delete') }}</span>
@@ -91,9 +91,9 @@
         </div>
 
 
-        <div class="container rightbar-page">
+        <div class="container rightbar-page candidate-page">
 
-            <div class="col-md-9 page-content field-group">
+            <div class="col-md-9 page-content  field-group">
 
               {{-- <h3 class="card-title">Edition du candidat {{ isset($user) ? $user->full_name :'' }}</h3> --}}
 
@@ -277,7 +277,7 @@
 
 
               @if(isset($user))
-              <div id="headingmatricule" class="btn btn-link" data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
+              <div id="headingmatricule" class="btn btn-link"  data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
                 <span class="field-name">Convertir en intérimaire</span>
               </div>
 
@@ -526,6 +526,7 @@
     <!-- Datatables -->
     {{ Html::style('/modules/rrhh/plugins/datatables/datatables.min.css') }}
     {{ Html::script('/modules/rrhh/plugins/datatables/datatables.min.js') }}
+    {{ Html::script('/modules/rrhh/js/libs/dialog.js') }}
 
     <!-- Toastr -->
     {{ Html::style('/modules/rrhh/plugins/toastr/toastr.min.css') }}
@@ -580,6 +581,47 @@
                     atags.push('{{$at}}');
                 @endforeach
             @endif
+
+            $(document).on('click','[data-toogle="delete"]',function(e){
+                e.preventDefault();
+                var el = $(e.target).closest('[data-toogle="delete"]');
+
+                var ajax = el.data('ajax');
+                var redirect = el.data('redirect');
+                var confirmMessage = el.data('confirm-message');
+
+                dialog.confirm(confirmMessage, function(result){
+                    if(result) {
+
+                        if(ajax) {
+                            $.ajax({
+                                method: 'DELETE',
+                                url: ajax,
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                }
+                            })
+                            .done(function(response) {
+                                if(response.success) {
+                                    toastr.success(response.message, 'Succès !', {timeOut: 3000});
+
+                                    if(redirect) {
+                                        window.location = redirect;
+                                        return;
+                                    }
+
+                                } else {
+                                    toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                                }
+                            }).fail(function(response){
+                                toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                            });
+                            return;
+                        }
+                    }
+                });
+
+            });
 
         });
     </script>
