@@ -13,6 +13,8 @@
       <div class="grid-items">
         <div class="row">
             @foreach(config('settings') as $setting)
+
+              @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
                 <div class="col-xs-3">
                     <a href="{{ route($setting["route"]) }}">
                       <div class="grid-item">
@@ -23,6 +25,8 @@
                       </div>
                     </a>
                 </div>
+              @endif
+
             @endforeach()
         </div>
       </div>

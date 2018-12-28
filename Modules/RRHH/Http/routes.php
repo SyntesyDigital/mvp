@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 Route::group([
-  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth','role:admin|recruiter', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\RRHH\Http\Controllers'
 ], function() {

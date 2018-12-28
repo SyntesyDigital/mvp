@@ -13,59 +13,61 @@
       <div class="dashboard-items">
         <div class="row">
 
-            @if(Auth::user()->hasRole(["admin"]))
+            @if(Auth::user()->hasRole(["admin","recruiter"]))
 
               @include('architect::partials.dashboard-counter',[
-                "name" => Lang::get('architect::home.contents'),
-                "value" => Modules\Architect\Entities\Content::all()->count(),
+                "name" => "Offres",
+                "value" => Modules\RRHH\Entities\Offers\Offer::all()->count(),
                 "icon" => "fa-file-o",
-                "route" => route('contents')
+                "route" => route('rrhh.admin.offers.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => Lang::get('architect::home.media'),
-                "value" => Modules\Architect\Entities\Media::all()->count(),
-                "icon" => "fa-picture-o",
-                "route" => route('medias.index')
+                "name" => 'Candidatures',
+                "value" => Modules\RRHH\Entities\Offers\Application::all()->count(),
+                "icon" => "fa-address-card",
+                "route" => route('rrhh.admin.applications.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => Lang::get('architect::home.users'),
-                "value" => App\Models\User::all()->count(),
-                "icon" => "fa-users",
-                "route" => route('users')
+                "name" => 'Candidats',
+                "value" => Modules\RRHH\Entities\Offers\Candidate::all()->count(),
+                "icon" => "fa-user",
+                "route" => route('rrhh.admin.candidates.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
-                "name" => Lang::get('architect::home.languages'),
-                "value" => Modules\Architect\Entities\Language::all()->count(),
-                "icon" => "fa-flag",
-                "route" => route('languages')
+                "name" => "Clients",
+                "value" => Modules\RRHH\Entities\Customer::all()->count(),
+                "icon" => "fa-user-o",
+                "route" => route('rrhh.admin.customers.index')
               ])
 
             @endif
 
-            <div class="col-xs-6">
-              <!-- React Table.js -->
-              <div id="dashboard-table"
-                title={{Lang::get('architect::home.pages')}}
-                route={{route('contents.modal.data')."?is_page=1"}}
-              ></div>
-            </div>
+            @if(Auth::user()->hasRole(["admin"]))
+              <div class="col-xs-6">
+                <!-- React Table.js -->
+                <div id="dashboard-table"
+                  title={{Lang::get('architect::home.pages')}}
+                  route={{route('contents.modal.data')."?is_page=1"}}
+                ></div>
+              </div>
 
-            <div class="col-xs-6">
-              <!-- React Table.js -->
-              <div id="dashboard-table"
-                title={{Lang::get('architect::home.news')}}
-                route={{route('contents.modal.data')."?typology_id=1"}}
-              ></div>
-            </div>
+              <div class="col-xs-6">
+                <!-- React Table.js -->
+                <div id="dashboard-table"
+                  title={{Lang::get('architect::home.news')}}
+                  route={{route('contents.modal.data')."?typology_id=1"}}
+                ></div>
+              </div>
 
 
-            <div class="col-xs-12">
-              <!-- React SiteMap.js-->
-              <div id="dashboard-sitemap"></div>
-            </div>
+              <div class="col-xs-12">
+                <!-- React SiteMap.js-->
+                <div id="dashboard-sitemap"></div>
+              </div>
+            @endif
 
         </div>
       </div>

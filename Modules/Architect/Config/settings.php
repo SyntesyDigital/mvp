@@ -5,6 +5,7 @@ return [
         "route" => 'typologies',
         "icon" => "fa-th",
         "label" => Lang::get('architect::settings.typologies'),
+        "roles" => ["admin"]
     ],
     [
         "route" => 'users',
