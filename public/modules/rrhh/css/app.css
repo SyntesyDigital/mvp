@@ -120,7 +120,6 @@ li {
 }
 
 .kanban {
-  overflow-x: scroll;
   min-width: 1720px;
 }
 
@@ -195,13 +194,24 @@ li {
 }
 
 .sitelist .dashed-border {
-  border: 1px dashed #acacac;
+  border: 1px dashed #ccc;
   padding: 10px;
 }
 
 .sitelist .content-field-dropper {
-  border: 1px dashed #acacac;
   padding: 20px;
+}
+
+.sitelist .ajouter-element {
+  width: 100%;
+  text-align: center;
+}
+
+.sitelist .ajouter-element a {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  padding: 10px;
 }
 
 .sitelist #ajouter {

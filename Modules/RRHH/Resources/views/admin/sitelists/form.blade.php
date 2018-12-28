@@ -26,6 +26,30 @@
                 </h1>
 
                 <div class="float-buttons pull-right">
+
+                    <div class="actions-dropdown">
+                      <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
+                        {{Lang::get('architect::fields.actions')}}
+                        <b class="caret"></b>
+                        <div class="ripple-container"></div>
+                      </a>
+                        <ul class="dropdown-menu dropdown-menu-right default-padding">
+                            <li class="dropdown-header"></li>
+                            <li>
+                                <a href="{{route('rrhh.admin.sitelists.create')}}">
+                                    <i class="fa fa-plus-circle"></i>
+                                    &nbsp;{{Lang::get('architect::fields.new')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="general-delete-btn" class="text-danger">
+                                    <i class="fa fa-trash text-danger"></i>
+                                    &nbsp;
+                                    <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     {!!
                         Form::submit(Lang::get('architect::fields.save'), [
                             'class' => 'btn btn-primary'
@@ -57,13 +81,6 @@
 
   {{-- SIDEBAR --}}
       <div class="sidebar">
-          <a href="#" class="btn btn-primary" id="ajouter" onclick="app.sitelist.addNewElement()">
-              Ajouter un element à la liste
-          </a>
-          <hr />
-          {{-- <div class="dashed-border" id="ajouter" onclick="app.sitelist.addNewElement()">
-              <h3 class="text-center"><b>Ajouter un element</b></h3>
-          </div> --}}
 
           <div class="form-group {{$errors->has("name") ? 'has-error' : ''}}">
               <label for="name">Titre</label>
@@ -116,11 +133,11 @@
                   Form::open([
                       'url' => route('rrhh.admin.sitelists.delete', $sitelist->id),
                       'method' => 'POST',
-                      'class' => 'delete-sitelist-form'
+                      'class' => 'delete-sitelist-form',
+                      'id' => 'general-delete-form'
                   ])
               !!}
               <input type="hidden" name="_method" value="DELETE">
-              <input type="submit" value="Supprimer cette liste" class="btn btn-sm btn-danger" />
               {{ Form::close() }}
           </div>
         @endif
