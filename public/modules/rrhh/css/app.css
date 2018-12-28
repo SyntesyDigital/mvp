@@ -119,6 +119,72 @@ li {
   min-height: 400px;
 }
 
+.kanban {
+  overflow-x: scroll;
+  min-width: 1720px;
+}
+
+.kanban .card-container {
+  width: 340px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+}
+
+.kanban .card-container .card-title {
+  font-size: 20px;
+  padding-left: 7px;
+  color: #000;
+}
+
+.kanban .card-container .card {
+  background: transparent;
+  border: 1px solid #B0C5D1;
+}
+
+.kanban .card-container .card .card-body {
+  padding: 7px 15px;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item {
+  margin: 7px 0;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item p {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 100;
+  margin: 0;
+  color: #707070;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item p a {
+  padding: 2px 8px;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 100;
+  color: #707070;
+  text-transform: none;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item p a.pink {
+  color: #FA5070;
+  border-color: #FA5070;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item p a.pink .fa {
+  color: #FA5070;
+}
+
+.kanban .card-container .card .card-body .candidate-drop-item p a .fa {
+  top: 0px;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 100;
+}
+
 .sitelist {
   /*DRAG AND DROP */
   /* END DRAG AND DROP */

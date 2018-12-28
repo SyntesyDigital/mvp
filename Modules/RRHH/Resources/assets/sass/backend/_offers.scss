@@ -1,3 +1,53 @@
 #map-container{
 	min-height: 400px;
 }
+.kanban{
+	overflow-x: scroll;
+	min-width:  1720px;
+	.card-container{
+		width: 340px;
+		padding-left:10px;
+		padding-right:10px;
+		display: inline-block;
+		.card-title{
+			font-size: 20px;
+			padding-left:7px;
+			color:#000;
+		}
+		.card{
+	    background: transparent;
+			border:1px solid #B0C5D1;
+			.card-body{
+				padding:7px 15px;
+				.candidate-drop-item{
+					margin:7px 0;
+					background-color:#fff;
+					padding:20px;
+					p{
+						@include font(14,19,100);
+						margin:0;
+						color:#707070;
+						a{
+							padding:2px 8px;
+								@include font(14,19,100);
+								color:#707070;
+						    text-transform: none;
+								&.pink{
+									color:#FA5070;
+									border-color:#FA5070;
+									.fa{
+										color:#FA5070;
+									}
+								}
+								.fa{
+							    top: 0px;
+									@include font(14,19,100);
+								}
+						}
+					}
+
+				}
+			}
+		}
+	}
+}
