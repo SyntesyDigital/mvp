@@ -14609,6 +14609,10 @@ body .candidate-container .horizontal-inner-container .information-container .in
   text-align: center;
 }
 
+body .candidate-container .horizontal-inner-container .information-container .information.center {
+  text-align: center;
+}
+
 @media (min-width: 62em) {
   body .candidate-container .horizontal-inner-container .information-container .information {
     text-align: left;
@@ -14634,7 +14638,11 @@ body .candidate-container .horizontal-inner-container .candidate-list {
   padding: 20px 15px;
 }
 
-body .candidate-container .horizontal-inner-container .candidate-list h2 {
+body .candidate-container .horizontal-inner-container .candidate-list .bottom {
+  margin-top: 90px;
+}
+
+body .candidate-container .horizontal-inner-container .candidate-list s h2 {
   padding-left: 10px;
   margin-top: 0px;
   font-size: 26px;
@@ -14785,6 +14793,10 @@ body .doc-col {
   padding: 20px;
   padding-top: 0px;
   min-height: 270px;
+}
+
+.m-b-0 {
+  margin-bottom: 0px;
 }
 
 .dropzone-avatar {
