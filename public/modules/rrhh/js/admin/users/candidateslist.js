@@ -54,6 +54,13 @@ $(function() {
         }
     });
 
+    var updateTable = function(){
+
+      //TODO filter datatable by tags
+      //datatable.fiterByTags(filterTags)
+    };
+
+
     $('.toggle-select2').select2();
 
     $('.toggle-select2').on('select2:select', function (e) {
@@ -62,21 +69,25 @@ $(function() {
 
         filterTags.push(data.id);
         console.log("Filter tags vale : ",filterTags);
+
+        updateTable();
+
     });
 
-    /*
-    $('#textarea')
-        .textext({
-            plugins: 'tags autocomplete',
-        })
-        .bind('getSuggestions', function(e, data) {
-            var list = atags,
-                textext = $(e.target).textext()[0],
-                query = (data ? data.query : '') || '';
+    $('.toggle-select2').on('select2:unselect', function (e) {
+        var data = e.params.data;
+        console.log("unselect : ", data);
 
-            $(this).trigger('setSuggestions', {
-                result: textext.itemManager().filter(list, query)
-            });
-        });
-    */
+        const index = filterTags.indexOf(data.id);
+
+        if (index !== -1) {
+          filterTags.splice(index, 1);
+        }
+
+        console.log("Filter tags vale : ",filterTags);
+
+        updateTable();
+
+    });
+
 });

@@ -87,6 +87,7 @@ $(function() {
     // ------------------------------------------------------ //
     //          TAGS
     // ------------------------------------------------------ //
+    /*
     $('#textarea')
         .textext({
             plugins : 'tags autocomplete',
@@ -99,6 +100,7 @@ $(function() {
                 result : textext.itemManager().filter(list, query)
             });
         });
+    */
 
     $('.convert_interimaire').on('click', function(e){
         if($('#registration_number').val() == ''){
