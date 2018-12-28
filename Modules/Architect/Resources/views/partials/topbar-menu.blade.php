@@ -1,15 +1,5 @@
 @foreach($items as $item)
 
-    {{-- Add menu from another source (plugins, etc...) --}}
-    @if(isset($item['group']))
-        @if(config($item['name']))
-            @include('architect::partials.topbar-menu', [
-                'items' => config($item['name'])
-            ])
-        @endif
-        @continue;
-    @endif
-
     {{-- If current user can show this menu --}}
     @if(!empty($item['roles']))
         @if(!Auth::user()->hasRole([$item['roles']]))
