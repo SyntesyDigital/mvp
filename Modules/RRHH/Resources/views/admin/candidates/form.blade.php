@@ -33,12 +33,15 @@
             ])
         !!}
 
+        {!! Form::hidden('tags_edit', '1' ) !!}
+        {!! Form::hidden('docs_edit', '1' ) !!}
+
         <div class="page-bar">
           <div class="container">
             <div class="row">
               <div class="col-md-12">
 
-                <a href="{{URL::previous()}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+                <a href="{{route('rrhh.admin.candidates.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
 
                 <h1>
                     <i class="fa fa-newspaper-o"></i>&nbsp;
@@ -386,9 +389,9 @@
 
                   {!!
                       Form::select(
-                          'tags',
+                          'tags[]',
                           \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
-                          isset($userTags) ? str_replace('[]', '', $userTags) : old('tags'),
+                          isset($user->candidate->tags) ? $user->candidate->tags->pluck('id') : old('tags'),
                           [
                               'class' => 'form-control toggle-select2',
                               'multiple' => 'multiple'

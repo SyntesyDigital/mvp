@@ -1,5 +1,7 @@
 $(function() {
 
+    var filterTags = [];
+
     $('#table-candidates').DataTable({
         language: {
             "url": "/modules/rrhh/plugins/datatables/locales/french.json"
@@ -52,6 +54,17 @@ $(function() {
         }
     });
 
+    $('.toggle-select2').select2();
+
+    $('.toggle-select2').on('select2:select', function (e) {
+        var data = e.params.data;
+        console.log(data);
+
+        filterTags.push(data.id);
+        console.log("Filter tags vale : ",filterTags);
+    });
+
+    /*
     $('#textarea')
         .textext({
             plugins: 'tags autocomplete',
@@ -65,4 +78,5 @@ $(function() {
                 result: textext.itemManager().filter(list, query)
             });
         });
+    */
 });

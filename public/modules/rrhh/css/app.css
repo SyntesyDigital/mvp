@@ -253,8 +253,26 @@ li {
   text-align: center;
 }
 
+.file-form .file-wrapper a {
+  word-break: break-all;
+}
+
 .file-form .file-wrapper .text-danger {
   padding: 0;
+}
+
+.tags-filter {
+  width: 30%;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border-radius: 0px !important;
+  background-color: #fafafa !important;
+  border: 1px solid #ccc !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #4a9fea !important;
 }
 
 #customer_users {

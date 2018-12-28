@@ -57,7 +57,7 @@
             ])
         @endforeach
     </div>
-    <div class="sidebar">
+    <div class="sidebar" style="z-index:1000">
         @foreach(config('customers.form.right') as $node)
             @include('rrhh::admin.partials.form.node', [
               'node' => $node,

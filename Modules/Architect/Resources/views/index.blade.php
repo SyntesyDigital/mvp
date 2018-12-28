@@ -57,7 +57,7 @@
               <!-- React Table.js -->
               <div id="dashboard-table"
                 title={{Lang::get('architect::home.news')}}
-                route={{route('contents.modal.data')."?typology_id=2"}}
+                route={{route('contents.modal.data')."?typology_id=1"}}
               ></div>
             </div>
 

@@ -10,21 +10,30 @@
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 
-          <h3 class="card-title">Liste des candidats</h3>
-              <a href="{{route('rrhh.admin.candidates.create')}}" class="pull-right btn btn-primary">
-                  Ajouter un candidat
-              </a>
+          <h3 class="card-title">
+            Liste des candidats &nbsp;
+          </h3>
+          <a href="{{route('rrhh.admin.candidates.create')}}" class="btn btn-primary pull-right">
+              <i class="fa fa-plus-circle"></i>&nbsp; Ajouter un candidat
+          </a>
 
-          <h6 class="card-subtitle mb-2 text-muted">Tous les candidats</h6>
-          <div class="filter-tags-container">
-            <div class="input-div">
-              <label>Tags
-              <textarea type="text" name="tags"  id="textarea" class="example" rows="1"></textarea>
-              </label>
-            </div>
-           <br clear="all">
-
+          <div class="form-group tags-filter">
+            <label>Filter by tags</label>
+            {!!
+                Form::select(
+                    'tags[]',
+                    \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
+                    null,
+                    [
+                        'class' => 'form-control toggle-select2',
+                        'multiple' => 'multiple'
+                    ]
+                )
+            !!}
           </div>
+
+
+
           <br clear="all">
           <table class="table" id="table-candidates" style="width:100%">
             <thead>
@@ -61,6 +70,11 @@
     {{ Html::script('/modules/rrhh/js/libs/datatabletools.js') }}
     {{ Html::script('/modules/rrhh/js/libs/dialog.js') }}
     {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js') }}
+
+    <!-- Select2 -->
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css') }}
+    {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js') }}
+
 @endpush
 
 @push('javascripts')

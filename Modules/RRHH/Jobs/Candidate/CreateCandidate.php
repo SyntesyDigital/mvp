@@ -34,7 +34,7 @@ class CreateCandidate
             'job_1',
             'job_2',
             'job_3',
-            'comment',
+            'comment'
         ]);
     }
 
