@@ -140,6 +140,7 @@ li {
 .kanban .card-container .card {
   background: transparent;
   border: 1px solid #B0C5D1;
+  height: calc(100vh - 250px);
 }
 
 .kanban .card-container .card .card-body {
@@ -150,6 +151,9 @@ li {
   margin: 7px 0;
   background-color: #fff;
   padding: 20px;
+  border: 1px solid #DCE5EA;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
 }
 
 .kanban .card-container .card .card-body .candidate-drop-item p {

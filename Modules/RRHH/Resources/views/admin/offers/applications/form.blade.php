@@ -48,9 +48,9 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD"><i class="fa fa-eye"></i> Profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD"><i class="fa fa-download"></i> CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})" class="btn btn-sm btn-danger pink showHideDnD"><i class="fa fa-sign-out"></i> Déplacer</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-default showHideDnD"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="btn btn-sm btn-default showHideDnD"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})" class="btn btn-sm btn-default  pink showHideDnD"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -68,9 +68,9 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-default  showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="btn btn-sm btn-default  showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-default  pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -88,9 +88,9 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-primary showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-default  showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="btn btn-sm btn-default showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-default  pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
@@ -108,9 +108,9 @@
                                 <p>{{ $oa->candidate->user->lastname.' '.$oa->candidate->user->firstname }}<p>
                                 <p>{{ $oa->candidate->user->telephone }}<p>
                                 <p>{{ $oa->candidate->user->email }}<p>
-                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-success showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
-                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="showHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
-                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-danger pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
+                                <a href="{{route('rrhh.admin.candidates.show', $oa->candidate->user_id)}}" class="btn btn-sm btn-default  showHideDnD" style="display:none;"><i class="fa fa-eye"></i> Profile</a>
+                                <a href="{{route('rrhh.admin.candidates.downloadcv', $oa->candidate)}}" class="btn btn-sm btn-default  howHideDnD" style="display:none;"><i class="fa fa-download"></i> CV</a>
+                                <a href="" onclick="app.offerapplications.changeOffer(event,{{ $oa->id }})"  class="btn btn-sm btn-default  pink showHideDnD" style="display:none;"><i class="fa fa-sign-out"></i> Déplacer</a>
                             </div>
                         @endforeach
                     </div>
