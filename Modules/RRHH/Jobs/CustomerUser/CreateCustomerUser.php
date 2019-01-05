@@ -18,6 +18,7 @@ class CreateCustomerUser
             'lastname',
             'email',
             'password',
+            'telephone',
         ]);
         $this->customer = $customer;
     }
@@ -33,7 +34,7 @@ class CreateCustomerUser
         $this->attributes['password'] = trim(Hash::make($this->attributes['password']));
 
         $user = User::create($this->attributes);
-        $this->customer->users()->sync($user->id);
+        $this->customer->users()->save($user);
 
         if(isset($this->attributes['role_id'])) {
             $user->roles()->sync($this->attributes['role_id']);

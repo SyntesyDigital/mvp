@@ -18,6 +18,7 @@ class UpdateCustomerUser
             'lastname',
             'email',
             'password',
+            'telephone',
         ]);
         $this->customer = $customer;
         $this->user = $user;

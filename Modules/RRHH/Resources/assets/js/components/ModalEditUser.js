@@ -140,12 +140,11 @@ class ModalEditUser extends Component {
 
         const {fields} = this.state;
 
-        fields[e.target.name] = e.target.value;
+        fields[e.target.id] = e.target.value;
 
         this.setState({
           fields : fields
         });
-
       }
 
 
