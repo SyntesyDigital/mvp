@@ -8,12 +8,11 @@ use Illuminate\Http\Request;
 use Modules\RRHH\Entities\Customer;
 use App\Models\User;
 
-
 use Modules\RRHH\Http\Requests\Admin\CustomersUsers\CreateCustomerUserRequest;
 use Modules\RRHH\Http\Requests\Admin\CustomersUsers\UpdateCustomerUserRequest;
 use Modules\RRHH\Jobs\CustomerUser\CreateCustomerUser;
 use Modules\RRHH\Jobs\CustomerUser\UpdateCustomerUser;
-//use Modules\RRHH\Jobs\CustomerUser\DeleteCustomer;
+use Modules\RRHH\Jobs\CustomerUser\DeleteCustomerUser;
 
 use Session;
 
@@ -81,8 +80,22 @@ class AdminCustomerUserController extends Controller
         ], 500);
     }
 
-    public function delete(User $user)
+    public function delete(Customer $customer, User $user, Request $request)
     {
+        $error = null;
 
+        try {
+            $this->dispatchNow(DeleteCustomerUser::fromRequest($customer, $user, $request));
+
+            return response()->json([
+                "success" => true
+            ], 200);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+        }
+
+        return response()->json([
+            'error' => $error
+        ], 500);
     }
 }

@@ -19,8 +19,11 @@ export default class CustomerUsers extends Component {
   }
 
   componentDidMount() {
+      this.loadUsers();
+  }
+
+  loadUsers() {
       var self = this;
-      // Loading config
       if(this.state.config.type == "ajax") {
         axios.get(this.state.config.route)
             .then(function (response) {
@@ -35,29 +38,6 @@ export default class CustomerUsers extends Component {
       }
   }
 
-  loadUsers() {
-
-    //TODO api to load users
-    /*
-    axios.get('/architect/customer/users/')
-      .then(function (response) {
-
-          if(response.status == 200
-              && response.data.data !== undefined
-              && response.data.data.length > 0)
-          {
-              self.setState({
-                  items : response.data.data
-              });
-          }
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-    */
-
-  }
-
   onRemoveField(id,e) {
 
     e.preventDefault();
@@ -65,6 +45,27 @@ export default class CustomerUsers extends Component {
     console.log("CustomerUsers :: onRemoveField => ",id);
 
     var self = this;
+    var user = null;
+
+    // FIXME : find best way to do this :)
+    if(this.state.items) {
+        for(var i =0;i<this.state.items.length;i++){
+            if(this.state.items[i].id == id){
+                user = this.state.items[i];
+            }
+        }
+    }
+
+    if(user) {
+        axios.delete(user.routes.delete)
+            .then((response) => {
+                toastr.success('User remove correctly');
+                self.loadUsers();
+            })
+            .catch((error) => {
+                toastr.error('An error occurred');
+            });
+    }
 
     //TODO api remove item by id
     /*

@@ -92,9 +92,7 @@ class ModalEditUser extends Component {
 
       query
          .then((response) => {
-             if(response.data.success) {
-                 self.props.onUserSubmit();
-             }
+             self.props.onUserSubmit();
          })
          .catch((error) => {
              if (error.response) {
