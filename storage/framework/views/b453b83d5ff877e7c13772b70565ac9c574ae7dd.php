@@ -19,6 +19,11 @@
                 <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
                 <h1><i class="fa fa-newspaper-o"></i>&nbsp;Offers</h1>
                 <div class="float-buttons pull-right">
+
+                    <?php if(isset($offer)): ?>
+                      <a href="<?php echo e(route('rrhh.admin.offer.applications.show', $offer)); ?>" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;<?php echo e($offer->applications()->count()); ?>  Candidatures </a>
+                    <?php endif; ?>
+
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
                 </div>
             </div>
@@ -54,11 +59,11 @@
 
 <?php $__env->startPush('javascripts-libs'); ?>
 <!-- Datepicker -->
-<?php echo e(Html::style('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.css')); ?>
+<?php echo e(Html::style('/modules/rrhh/plugins/datepicker/bootstrap-datetimepicker.min.css')); ?>
 
-<?php echo e(Html::script('/modules/turisme/plugins/datepicker/moment-with-locales.min.js')); ?>
+<?php echo e(Html::script('/modules/rrhh/plugins/datepicker/moment-with-locales.min.js')); ?>
 
-<?php echo e(Html::script('/modules/turisme/plugins/datepicker/bootstrap-datetimepicker.min.js')); ?>
+<?php echo e(Html::script('/modules/rrhh/plugins/datepicker/bootstrap-datetimepicker.min.js')); ?>
 
 
 <!-- Select2 -->
@@ -68,7 +73,7 @@
 
 
 <!-- Vendors -->
-<?php echo e(Html::script('/modules/architect/plugins/ckeditor/ckeditor.js')); ?>
+<?php echo e(Html::script('/modules/rrhh/plugins/ckeditor/ckeditor.js')); ?>
 
 <?php $__env->stopPush(); ?>
 

@@ -15,7 +15,6 @@
 {{ Form::hidden('_method', isset($customer) ? 'PUT' : 'POST') }}
 {{ Form::hidden('id', isset($customer) ? $customer->id : '') }}
 
-
 <div class="page-bar">
   <div class="container">
     <div class="row">
@@ -68,6 +67,7 @@
 </div>
 
 {{ Form::close()}}
+
 @endsection
 
 @push('javascripts-libs')
@@ -84,10 +84,6 @@
       var routes = {
           uploadPost : '{{route("upload-post")}}'
       };
-
-      @if(isset($customer))
-         routes['data'] = '{{ route("rrhh.admin.customer_contacts.data", $customer->id) }}';
-     @endif
     </script>
 
 @endpush
@@ -96,12 +92,10 @@
 @push('javascripts')
 {{ Html::script('modules/rrhh/js/admin/customer_contacts/customer_contactslist.js') }}
 {{ Html::script('modules/rrhh/js/admin/customers/customersform.js') }}
-
 <script>
     $(document).on('click', ".btn-submit-primary", function(e){
         e.preventDefault();
         this.closest('form').submit()
     });
 </script>
-
 @endpush

@@ -37,9 +37,12 @@ return [
                                         'input' => 'customer_users',
                                         'identifier' => 'customer_users',
                                         'name' => 'customer_users',
-                                        'label' => ''
-
-                                    ],
+                                        'label' => '',
+                                        'config' => [
+                                            'type' => 'ajax',
+                                            'route' => 'rrhh.admin.customers.users.data'
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]

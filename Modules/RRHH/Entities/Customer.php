@@ -22,6 +22,11 @@ class Customer extends Model
         'status'
     ];
 
+    protected $appends = [
+        'name'
+    ];
+
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -39,6 +44,17 @@ class Customer extends Model
     public function getStringStatus()
     {
         return isset($this->getStatus()[$this->status]) ? $this->getStatus()[$this->status] : null;
+    }
+
+
+    public function getNameAttribute()
+    {
+        return $this->getFieldValue('name');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'customers_users');
     }
 
 }

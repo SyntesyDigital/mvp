@@ -67,22 +67,18 @@ Route::group([
     Route::get('/agences/{agence?}/downloadcv', 'Admin\AgenceController@downloadCV')->name('rrhh.admin.agences.downloadcv');
 
     // Customers
-    Route::get('/customers', 'Admin\CustomerController@index')->name('rrhh.admin.customers.index');
-    Route::get('/customers/create', 'Admin\CustomerController@create')->name('rrhh.admin.customers.create');
-    Route::post('/customers/store', 'Admin\CustomerController@store')->name('rrhh.admin.customers.store');
-    Route::get('/customers/data', 'Admin\CustomerController@data')->name('rrhh.admin.customers.data');
-    Route::get('/customers/{customer?}', 'Admin\CustomerController@show')->name('rrhh.admin.customers.show');
-    Route::put('/customers/{customer?}/update', 'Admin\CustomerController@update')->name('rrhh.admin.customers.update');
-    Route::delete('/customers/{customer?}/delete', 'Admin\CustomerController@delete')->name('rrhh.admin.customers.delete');
+    Route::get('/customers', 'Admin\AdminCustomerController@index')->name('rrhh.admin.customers.index');
+    Route::get('/customers/create', 'Admin\AdminCustomerController@create')->name('rrhh.admin.customers.create');
+    Route::post('/customers/store', 'Admin\AdminCustomerController@store')->name('rrhh.admin.customers.store');
+    Route::get('/customers/data', 'Admin\AdminCustomerController@data')->name('rrhh.admin.customers.data');
+    Route::get('/customers/{customer?}', 'Admin\AdminCustomerController@show')->name('rrhh.admin.customers.show');
+    Route::put('/customers/{customer?}/update', 'Admin\AdminCustomerController@update')->name('rrhh.admin.customers.update');
+    Route::delete('/customers/{customer?}/delete', 'Admin\AdminCustomerController@delete')->name('rrhh.admin.customers.delete');
 
-    // Customers contacts
-    Route::get('/customers/contacts/create/{customer}', 'Admin\CustomerContactController@create')->name('rrhh.admin.customer_contacts.create');
-    Route::post('/customers/contacts/store', 'Admin\CustomerContactController@store')->name('rrhh.admin.customer_contacts.store');
-    Route::get('/customers/contacts/data/{customer}', 'Admin\CustomerContactController@data')->name('rrhh.admin.customer_contacts.data');
-    Route::get('/customers/contacts/{customer_contact}', 'Admin\CustomerContactController@show')->name('rrhh.admin.customer_contacts.show');
-    Route::put('/customers/contacts/{customer_contact}/update', 'Admin\CustomerContactController@update')->name('rrhh.admin.customer_contacts.update');
-    Route::delete('/customers/contacts/{customer_contact}/delete', 'Admin\CustomerContactController@delete')->name('rrhh.admin.customer_contacts.delete');
-    Route::post('/customers/contacts/list/{customer}', 'Admin\CustomerContactController@list')->name('rrhh.admin.customer_contacts.list');
+    Route::get('/customers/{customer?}/users', 'Admin\AdminCustomerUserController@data')->name('rrhh.admin.customers.users.data');
+    Route::post('/customers/{customer?}/users', 'Admin\AdminCustomerUserController@create')->name('rrhh.admin.customers.users.create');
+    Route::put('/customers/{customer?}/users/{user?}/update', 'Admin\AdminCustomerUserController@update')->name('rrhh.admin.customers.users.update');
+    Route::delete('/customers/{customer?}/users/{user?}/delete', 'Admin\AdminCustomerUserController@delete')->name('rrhh.admin.customers.users.delete');
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('rrhh.admin.sitelists.index');

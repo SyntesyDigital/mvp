@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 import ModalEditUser from './ModalEditUser';
 
 export default class CustomerUsers extends Component {
@@ -8,29 +8,31 @@ export default class CustomerUsers extends Component {
   constructor(props)
   {
       super(props);
-
       this.state = {
-        display : true,
+        display : false,
         user_id : null,
-        items : [
-          {
-            id : 1,
-            lastname : 'Lastname 1',
-            firstname : 'Name 1',
-            email : 'name1@gmail.com',
-            telephone : '2342343'
-          },
-          {
-            id : 2,
-            lastname : 'Lastname 2',
-            firstname : 'Name 2',
-            email : 'name2@gmail.com',
-            telephone : '234234'
-          }
-
-        ]
+        config : props.config ? JSON.parse(atob(props.config)) : '',
+        initializated: false,
+        items : [],
+        routes : null,
       };
+  }
 
+  componentDidMount() {
+      var self = this;
+      // Loading config
+      if(this.state.config.type == "ajax") {
+        axios.get(this.state.config.route)
+            .then(function (response) {
+                self.setState({
+                    initializated : true,
+                    items : response.data.users,
+                    routes : response.data.routes
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+      }
   }
 
   loadUsers() {
@@ -82,28 +84,26 @@ export default class CustomerUsers extends Component {
   }
 
   renderUsers() {
-
     var self = this;
 
     return this.state.items.map((item, key) =>
       <div className="typology-field" key={key}>
         <div className="field-type">
-          <i className={"fa fa-user-o"}></i> &nbsp;
+            <i className={"fa fa-user-o"}></i> &nbsp;
         </div>
 
         <div className="field-inputs" onClick={this.onEditUser.bind(this,item.id)}>
-          <div className="field-name">
-            {item.firstname} {item.lastname}
-          </div>
-          <div className="field-name">
-            {item.email}
-          </div>
-
+            <div className="field-name">
+                {item.firstname} {item.lastname}
+            </div>
+            <div className="field-name">
+                {item.email}
+            </div>
         </div>
 
         <div className="field-actions">
-          <a href="" className="remove-field-btn" onClick={self.onRemoveField.bind(this,item.id)}> <i className="fa fa-trash"></i>  </a>
-          &nbsp;&nbsp;
+            <a href="" className="remove-field-btn" onClick={self.onRemoveField.bind(this,item.id)}> <i className="fa fa-trash"></i>  </a>
+            &nbsp;&nbsp;
         </div>
       </div>
     );
@@ -111,27 +111,20 @@ export default class CustomerUsers extends Component {
   }
 
   onEditUser(id,e) {
-
     e.preventDefault();
-
     console.log("CustomerUsers :: onEditUser => ",id);
-
     this.setState({
       display: true,
-      user_id : id
+      user_id : id,
     });
-
   }
 
   onCreateUser(e) {
-
     e.preventDefault();
-
     this.setState({
       display: true,
       user_id : null
     });
-
   }
 
   onUserCancel(){
@@ -142,7 +135,6 @@ export default class CustomerUsers extends Component {
   }
 
   onUserSubmit() {
-
     toastr.success('User saved correctly.');
 
     this.loadUsers();
@@ -155,37 +147,37 @@ export default class CustomerUsers extends Component {
   }
 
   getSelectedItem() {
-
     const {user_id,items} = this.state;
 
-    if(user_id != null && items != null){
-      for(var i =0;i<items.length;i++){
-        if(items[i].id == user_id){
-          return items[i];
+    if(user_id !== null && items != null){
+        for(var i =0;i<items.length;i++){
+            if(items[i].id == user_id){
+                return items[i];
+            }
         }
-      }
     }
 
     return null;
   }
 
   render() {
-
-      var selectedItem = this.getSelectedItem();
+      var users = this.state.initializated ? this.renderUsers() : '';
 
       return (
           <div className="container">
 
-            <ModalEditUser
-              display={this.state.display}
-              onUserCancel={this.onUserCancel.bind(this)}
-              onUserSubmit={this.onUserSubmit.bind(this)}
-              selectedItem={this.getSelectedItem()}
-            />
-
+            {this.state.initializated &&
+                <ModalEditUser
+                  display={this.state.display}
+                  onUserCancel={this.onUserCancel.bind(this)}
+                  onUserSubmit={this.onUserSubmit.bind(this)}
+                  selectedItem={this.getSelectedItem()}
+                  routes={this.state.routes}
+                />
+            }
 
             <div className="field-form fields-list-container">
-                {this.renderUsers()}
+                {users}
             </div>
 
             <div className="add-content-button">
@@ -199,5 +191,8 @@ export default class CustomerUsers extends Component {
 }
 
 if (document.getElementById('customer_users')) {
-    ReactDOM.render(<CustomerUsers />, document.getElementById('customer_users'));
+    var element = document.getElementById('customer_users');
+    var config = element.getAttribute('config');
+
+    ReactDOM.render(<CustomerUsers config={config} />, document.getElementById('customer_users'));
 }

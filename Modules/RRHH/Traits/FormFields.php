@@ -3,8 +3,6 @@ namespace Modules\RRHH\Traits;
 
 trait FormFields
 {
-
-
     public function getFields($form = null)
     {
         $form = $form ? $form : config('offers.form');

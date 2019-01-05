@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 class ModalEditUser extends Component {
 
@@ -12,6 +13,7 @@ class ModalEditUser extends Component {
           contentSelected : null,
           isOpen : false,
           errors : '',
+          routes : this.props.routes,
           fields : {
             lastname : '',
             firstname : '',
@@ -28,23 +30,19 @@ class ModalEditUser extends Component {
 
     componentWillReceiveProps(nextProps)
     {
-      if(nextProps.display ){
-
+      if(nextProps.display){
           if(!this.state.isOpen){
-
-            var editItem = nextProps.selectedItem !== undefined &&
-              nextProps.selectedItem != null ? nextProps.selectedItem : null;
-
+            var editItem = nextProps.selectedItem !== undefined && nextProps.selectedItem != null ? nextProps.selectedItem : null;
             var fields = this.state.fields;
+
             if(editItem != null){
-              $.extend(fields,editItem);
+                this.setState({
+                    'selectedItem': editItem
+                });
+                $.extend(fields,editItem);
             }
-
-            console.log("componentWillReceiveProps :: edit fields : ",fields)
-
             this.modalOpen(fields);
           }
-
       } else {
           this.modalClose();
       }
@@ -53,8 +51,6 @@ class ModalEditUser extends Component {
     onModalClose(e){
         e.preventDefault();
         this.props.onUserCancel();
-
-
     }
 
     componentDidMount(){
@@ -89,18 +85,12 @@ class ModalEditUser extends Component {
 
 
     onUserSubmit(e) {
-
       e.preventDefault();
-
-      //process the Form
-      var userAttributes = this.state.fields;
-      console.log("ModalEditUser :: userAttributes => ",userAttributes);
-
       var self = this;
+      var user = this.state.selectedItem;
+      var query = user ? axios.put(user.routes.update, this.state.fields) : axios.post(this.state.routes.create, this.state.fields);
 
-      //TODO save the user info
-      /*
-      axios.post('/architect/customer/user/store', userAttributes)
+      query
          .then((response) => {
              if(response.data.success) {
                  self.props.onUserSubmit();
@@ -114,10 +104,7 @@ class ModalEditUser extends Component {
              } else {
                  console.log('Error', error.message);
              }
-
          });
-      */
-
     }
 
     onSaveError(response)
@@ -127,7 +114,6 @@ class ModalEditUser extends Component {
         var stateErrors = {};
 
         if(errors) {
-
             var fields = errors.fields ? errors.fields : null;
 
             if(fields) {
@@ -137,13 +123,12 @@ class ModalEditUser extends Component {
                    })
                 });
             }
-
         }
 
         console.log('ERROR ====>', stateErrors);
 
         this.setState({
-          errors : stateErrors
+            errors : stateErrors
         });
 
         if(response.message) {
@@ -168,21 +153,14 @@ class ModalEditUser extends Component {
 
         var zIndex = this.props.zIndex !== undefined ? this.props.zIndex : 10000;
         const {fields} = this.state;
-        //only linkable contents
-
-        //console.log("ModalEditUser :: Field => ",this.props.field,route);
 
         return (
           <div style={{zIndex:zIndex}}>
             <div className="custom-modal" id="content-select">
               <div className="modal-background"></div>
-
-
                 <div className="modal-container">
                     <div className="modal-header">
-
                         <h2>{this.props.user_id != null ? 'Edit User ' : 'Create user' } </h2>
-
                       <div className="modal-buttons">
                         <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
                           <i className="fa fa-times"></i>
@@ -199,28 +177,28 @@ class ModalEditUser extends Component {
                             <div className="row">
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Nom</label>
-                                  <input type="text" className="form-control" id="lastname" name="lastname" placeholder="" value={fields.lastname} onChange={this.handleChange}/>
+                                  <input type="text" className="form-control" id="lastname" name="modal[lastname]" placeholder="" value={fields.lastname} onChange={this.handleChange}/>
                               </div>
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Prénom</label>
-                                  <input type="text" className="form-control" id="firstname" name="firstname" placeholder="" value={fields.firstname} onChange={this.handleChange}/>
+                                  <input type="text" className="form-control" id="firstname" name="modal[firstname]" placeholder="" value={fields.firstname} onChange={this.handleChange}/>
                               </div>
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Email</label>
-                                  <input type="text" className="form-control" id="email" name="email" placeholder="" value={fields.email} onChange={this.handleChange}/>
+                                  <input type="text" className="form-control" id="email" name="modal[email]" placeholder="" value={fields.email} onChange={this.handleChange}/>
                               </div>
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Telephone</label>
-                                  <input type="text" className="form-control" id="telephone" name="telephone" placeholder="" value={fields.telephone} onChange={this.handleChange}/>
+                                  <input type="text" className="form-control" id="telephone" name="modal[telephone]" placeholder="" value={fields.telephone} onChange={this.handleChange}/>
                               </div>
 
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Mot de passe</label>
-                                  <input type="password" className="form-control" id="password" name="password" minLength="6" placeholder=""value={fields.password} onChange={this.handleChange}/>
+                                  <input type="password" className="form-control" id="password" name="modal[password]" minLength="6" placeholder=""value={fields.password} onChange={this.handleChange}/>
                               </div>
                               <div className="col-md-6 form-group">
                                   <label htmlFor="name">Confirmez le mot de passe</label>
-                                  <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" minLength="6" placeholder="" value={fields.password_confirmation} onChange={this.handleChange}/>
+                                  <input type="password" className="form-control" id="password_confirmation" name="modal[password_confirmation]" minLength="6" placeholder="" value={fields.password_confirmation} onChange={this.handleChange}/>
                               </div>
                             </div>
 
