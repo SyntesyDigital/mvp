@@ -131,8 +131,8 @@ export default class CustomerDocuments extends Component {
         }
     })
     .then(function (response) {
-        toastr.success('User remove correctly');
-        self.loadUsers();
+        toastr.success('Document removed correctly');
+        self.loadDocs();
     }).catch(function (error) {
         toastr.error('An error occurred');
     });
