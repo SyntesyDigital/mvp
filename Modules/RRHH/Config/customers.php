@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'storage' => 'public/customers/:id/files',
     'rules' => [
         'name' => 'required',
         'phone_number' => 'required',
@@ -33,7 +34,7 @@ return [
                                 'class' => 'col-md-12',
                                 'childs' => [
                                     [
-                                        'type' => 'customer_users',
+                                        'type' => 'field',
                                         'input' => 'customer_users',
                                         'identifier' => 'customer_users',
                                         'name' => 'customer_users',
@@ -157,11 +158,15 @@ return [
                   'class' => 'col-md-12',
                   'childs' => [
                       [
-                          'type' => 'customer_documents',
+                          'type' => 'field',
                           'input' => 'customer_documents',
                           'identifier' => 'customer_documents',
                           'name' => 'customer_documents',
-                          'label' => 'customer_documents'
+                          'label' => 'customer_documents',
+                          'config' => [
+                              'type' => 'ajax',
+                              'route' => 'rrhh.admin.customers.documents.data'
+                          ]
                       ]
                   ]
                 ]

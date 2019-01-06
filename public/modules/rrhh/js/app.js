@@ -2653,6 +2653,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2664,6 +2666,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var acceptedFiles = 'application/pdf,application/doc',
     maxFilesize = 20,
     // MB
@@ -2671,269 +2674,265 @@ paramName = 'file',
     identifier = '.docs-dropfiles';
 
 var CustomerDocuments = function (_Component) {
-  _inherits(CustomerDocuments, _Component);
+    _inherits(CustomerDocuments, _Component);
 
-  function CustomerDocuments(props) {
-    _classCallCheck(this, CustomerDocuments);
+    function CustomerDocuments(props) {
+        _classCallCheck(this, CustomerDocuments);
 
-    var _this2 = _possibleConstructorReturn(this, (CustomerDocuments.__proto__ || Object.getPrototypeOf(CustomerDocuments)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (CustomerDocuments.__proto__ || Object.getPrototypeOf(CustomerDocuments)).call(this, props));
 
-    _this2.state = {
-      items: [{
-        id: 1,
-        name: 'doc_1.pdf',
-        url: 'sdfsdf'
-      }, {
-        id: 1,
-        name: 'doc_2.pdf',
-        url: 'sdfsdf'
-      }]
-    };
+        _this2.state = {
+            config: props.config ? JSON.parse(atob(props.config)) : '',
+            initializated: false,
+            routes: {},
+            items: [{
+                id: 1,
+                name: 'doc_1.pdf',
+                url: 'sdfsdf'
+            }, {
+                id: 1,
+                name: 'doc_2.pdf',
+                url: 'sdfsdf'
+            }]
+        };
 
-    _this2._dropzone = null;
+        console.log('CONFIG =>', _this2.state.config);
+        _this2._dropzone = null;
 
-    return _this2;
-  }
-
-  _createClass(CustomerDocuments, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-
-      this.initDropzone();
-      this.loadDocs();
+        return _this2;
     }
-  }, {
-    key: 'initDropzone',
-    value: function initDropzone() {
-      var _this = this;
 
-      console.log("CustomerDocuments :: initDropzone");
+    _createClass(CustomerDocuments, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadDocs();
+        }
+    }, {
+        key: 'initDropzone',
+        value: function initDropzone() {
+            var _this = this;
 
-      var settings = {
-        url: routes['uploadPost'],
-        uploadMultiple: false,
-        parallelUploads: 1,
-        createImageThumbnails: false,
-        //acceptedFiles: acceptedFiles,
-        addRemoveLinks: false,
-        maxFilesize: maxFilesize,
-        paramName: paramName
-      };
+            var settings = {
+                url: _this.state.routes.upload,
+                uploadMultiple: false,
+                parallelUploads: 1,
+                createImageThumbnails: false,
+                //acceptedFiles: acceptedFiles,
+                addRemoveLinks: false,
+                maxFilesize: maxFilesize,
+                paramName: paramName
+            };
 
-      console.log(settings);
+            this._dropzone = new Dropzone(identifier, settings);
 
-      this._dropzone = new Dropzone(identifier, settings);
+            this._dropzone.on("error", function (file, response) {
+                toastr.error(response.errors.file[0]);
+            });
 
-      this._dropzone.on("error", function (file, response) {
-        toastr.error(response.errors.file[0]);
-      });
+            this._dropzone.on("totaluploadprogress", function (progress) {
+                $(".progress-bar").parent().addClass("progress-striped active");
+                $(".progress-bar").width(progress + "%");
+                $(".progress-bar").html(progress + "%");
+            });
 
-      this._dropzone.on("totaluploadprogress", function (progress) {
-        $(".progress-bar").parent().addClass("progress-striped active");
-        $(".progress-bar").width(progress + "%");
-        $(".progress-bar").html(progress + "%");
-      });
+            this._dropzone.on("maxfilesreached", function () {
+                toastr.error('Too many files added !');
+            });
 
-      this._dropzone.on("maxfilesreached", function () {
-        toastr.error('Too many files added !');
-      });
+            this._dropzone.on("dragenter", function () {
+                $('.docs-dropfiles').addClass("active");
+            });
 
-      this._dropzone.on("dragenter", function () {
-        $('.docs-dropfiles').addClass("active");
-      });
+            this._dropzone.on("dragleave dragend dragover", function () {
+                $('.docs-dropfiles').removeClass("active");
+            });
 
-      this._dropzone.on("dragleave dragend dragover", function () {
-        $('.docs-dropfiles').removeClass("active");
-      });
+            this._dropzone.on("maxfilesexceeded", function (file) {
+                toastr.error(Lang.get('fields.file_too_big'));
+            });
 
-      this._dropzone.on("maxfilesexceeded", function (file) {
-        toastr.error(Lang.get('fields.file_too_big'));
-      });
+            this._dropzone.on("queuecomplete", function (file, response) {
+                setTimeout(function () {
+                    $(".progress-bar").parent().removeClass("progress-striped active");
+                    $(".progress-bar").width("0%");
+                    $(".progress-bar").html("");
+                }, 2000);
 
-      this._dropzone.on("queuecomplete", function (file, response) {
-        setTimeout(function () {
-          $(".progress-bar").parent().removeClass("progress-striped active");
-          $(".progress-bar").width("0%");
-          $(".progress-bar").html("");
-        }, 2000);
+                _this._dropzone.removeAllFiles(true);
+            });
 
-        _this._dropzone.removeAllFiles(true);
-      });
+            this._dropzone.on("success", function (file, response) {
+                _this.onSuccessUpload(_this);
+            });
+        }
+    }, {
+        key: 'onSuccessUpload',
+        value: function onSuccessUpload(_this) {
+            toastr.success(Lang.get('fields.success'));
+            _this.loadDocs();
+        }
+    }, {
+        key: 'loadDocs',
+        value: function loadDocs() {
+            var self = this;
+            if (this.state.config.type == "ajax") {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get(this.state.config.route).then(function (response) {
+                    self.setState({
+                        initializated: true,
+                        items: response.data.documents ? response.data.documents : [],
+                        routes: response.data.routes
+                    });
 
-      this._dropzone.on("success", function (file, response) {
-        _this.onSuccessUpload(_this);
-      });
-    }
-  }, {
-    key: 'onSuccessUpload',
-    value: function onSuccessUpload(_this) {
-      toastr.success(Lang.get('fields.success'));
-
-      _this.loadDocs();
-    }
-  }, {
-    key: 'loadDocs',
-    value: function loadDocs() {
-
-      //TODO api to load docs
-      /*
-      axios.get('/architect/customer/docs/')
-        .then(function (response) {
-             if(response.status == 200
-                && response.data.data !== undefined
-                && response.data.data.length > 0)
-            {
-                self.setState({
-                    items : response.data.data
+                    self.initDropzone();
+                    self.loadDocs();
+                }).catch(function (error) {
+                    console.log(error);
                 });
             }
-         }).catch(function (error) {
-           console.log(error);
-         });
-      */
+        }
+    }, {
+        key: 'onRemoveField',
+        value: function onRemoveField(id, e) {
 
-    }
-  }, {
-    key: 'onRemoveField',
-    value: function onRemoveField(id, e) {
+            e.preventDefault();
+            var self = this;
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(this.state.routes.delete, {
+                params: {
+                    id: id
+                }
+            }).then(function (response) {
+                toastr.success('User remove correctly');
+                self.loadUsers();
+            }).catch(function (error) {
+                toastr.error('An error occurred');
+            });
+        }
+    }, {
+        key: 'renderDocs',
+        value: function renderDocs() {
+            var _this3 = this;
 
-      e.preventDefault();
+            var self = this;
 
-      console.log("CustomerDocuments :: onRemoveField => ", id);
+            if (!this.state.items) {
+                return null;
+            }
 
-      var self = this;
+            return this.state.items.map(function (item, key) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'typology-field', key: key },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-type' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa fa-file" }),
+                        ' \xA0 Document'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-inputs' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'field-name' },
+                            item.uploaded_filename
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-actions' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: item.uploaded_filename, target: '_blank', className: 'btn-link' },
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-download' }),
+                            '  '
+                        ),
+                        ' \xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '', className: 'remove-field-btn', onClick: self.onRemoveField.bind(_this3, item.id) },
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }),
+                            '  '
+                        ),
+                        '\xA0\xA0'
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
 
-      //TODO api remove item by id
-      /*
-        axios.post('/architect/customer/docs/remove', {
-            id : id
-        })
-        .then((response) => {
-            toastr.success('User remove correctly');
-             self.loadUsers();
-        })
-        .catch((error) => {
-            toastr.error('An error occurred');
-        });
-      */
-    }
-  }, {
-    key: 'renderDocs',
-    value: function renderDocs() {
-      var _this3 = this;
+            var documents = this.state.initializated ? this.renderDocs() : '';
 
-      var self = this;
-
-      return this.state.items.map(function (item, key) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'typology-field', key: key },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'field-type' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa fa-file" }),
-            ' \xA0 Document'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'field-inputs' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'field-name' },
-              item.name
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'field-actions' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'a',
-              { href: item.url, target: '_blank', className: 'btn-link' },
-              ' ',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-download' }),
-              '  '
-            ),
-            ' \xA0',
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'a',
-              { href: '', className: 'remove-field-btn', onClick: self.onRemoveField.bind(_this3, item.id) },
-              ' ',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }),
-              '  '
-            ),
-            '\xA0\xA0'
-          )
-        );
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'container' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'row' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-md-4 image-col' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'image no-selected docs-dropfiles' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'p',
-                { align: 'center' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'strong',
-                  null,
-                  Lang.get('fields.drag_file')
-                ),
-                ' ',
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: '#', className: 'btn btn-default' },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-upload' }),
-                  ' ',
-                  Lang.get('fields.upload_file'),
-                  ' '
-                )
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'progress' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'progress-bar', role: 'progressbar', 'aria-valuenow': '0', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { width: '0%' } },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'sr-only' })
-              )
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-md-8' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'field-form fields-list-container' },
-              this.renderDocs()
-            )
-          )
-        )
-      );
-    }
-  }]);
+                { className: 'container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-4 image-col' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'image no-selected docs-dropfiles' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                { align: 'center' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'strong',
+                                    null,
+                                    Lang.get('fields.drag_file')
+                                ),
+                                ' ',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'a',
+                                    { href: '#', className: 'btn btn-default' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-upload' }),
+                                    ' ',
+                                    Lang.get('fields.upload_file'),
+                                    ' '
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'progress' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'progress-bar', role: 'progressbar', 'aria-valuenow': '0', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { width: '0%' } },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'sr-only' })
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-8' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'field-form fields-list-container' },
+                            documents
+                        )
+                    )
+                )
+            );
+        }
+    }]);
 
-  return CustomerDocuments;
+    return CustomerDocuments;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (CustomerDocuments);
 
 
 if (document.getElementById('customer_documents')) {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CustomerDocuments, null), document.getElementById('customer_documents'));
+    var element = document.getElementById('customer_documents');
+    var config = element.getAttribute('config');
+
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CustomerDocuments, { config: config }), document.getElementById('customer_documents'));
 }
 
 /***/ }),

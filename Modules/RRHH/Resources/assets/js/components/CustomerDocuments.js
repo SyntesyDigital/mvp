@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 const acceptedFiles = 'application/pdf,application/doc',
       maxFilesize = 20, // MB
@@ -12,42 +13,37 @@ export default class CustomerDocuments extends Component {
   {
       super(props);
 
-      this.state = {
-        items : [
-          {
-            id : 1,
-            name : 'doc_1.pdf',
-            url : 'sdfsdf'
-          },
-          {
-            id : 1,
-            name : 'doc_2.pdf',
-            url : 'sdfsdf'
-          }
+        this.state = {
+            config : props.config ? JSON.parse(atob(props.config)) : '',
+            initializated: false,
+            routes: {},
+            items : [{
+                id : 1,
+                name : 'doc_1.pdf',
+                url : 'sdfsdf'
+            },{
+                id : 1,
+                name : 'doc_2.pdf',
+                url : 'sdfsdf'
+            }]
+        };
 
-        ]
-      };
-
+        console.log('CONFIG =>', this.state.config);
       this._dropzone = null;
 
   }
 
   componentDidMount()
   {
-
-    this.initDropzone();
-    this.loadDocs();
-
+      this.loadDocs();
   }
 
   initDropzone()
   {
       var _this = this;
 
-      console.log("CustomerDocuments :: initDropzone");
-
       var settings = {
-          url: routes['uploadPost'],
+          url: _this.state.routes.upload,
           uploadMultiple: false,
           parallelUploads: 1,
           createImageThumbnails : false,
@@ -56,8 +52,6 @@ export default class CustomerDocuments extends Component {
           maxFilesize: maxFilesize,
           paramName: paramName,
       };
-
-      console.log(settings);
 
       this._dropzone = new Dropzone(identifier, settings);
 
@@ -97,7 +91,6 @@ export default class CustomerDocuments extends Component {
           _this._dropzone.removeAllFiles(true);
       });
 
-
       this._dropzone.on("success", function(file, response) {
           _this.onSuccessUpload(_this);
       });
@@ -106,61 +99,51 @@ export default class CustomerDocuments extends Component {
   onSuccessUpload(_this)
   {
       toastr.success(Lang.get('fields.success'));
-
       _this.loadDocs();
   }
 
   loadDocs() {
+      var self = this;
+      if(this.state.config.type == "ajax") {
+        axios.get(this.state.config.route)
+            .then(function (response) {
+                self.setState({
+                    initializated : true,
+                    items : response.data.documents ? response.data.documents : [],
+                    routes : response.data.routes
+                });
 
-    //TODO api to load docs
-    /*
-    axios.get('/architect/customer/docs/')
-      .then(function (response) {
-
-          if(response.status == 200
-              && response.data.data !== undefined
-              && response.data.data.length > 0)
-          {
-              self.setState({
-                  items : response.data.data
-              });
-          }
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-    */
-
+                self.initDropzone();
+                self.loadDocs();
+            }).catch(function (error) {
+                console.log(error);
+            });
+      }
   }
 
   onRemoveField(id,e) {
 
     e.preventDefault();
-
-    console.log("CustomerDocuments :: onRemoveField => ",id);
-
     var self = this;
-
-    //TODO api remove item by id
-    /*
-      axios.post('/architect/customer/docs/remove', {
-          id : id
-      })
-      .then((response) => {
-          toastr.success('User remove correctly');
-
-          self.loadUsers();
-      })
-      .catch((error) => {
-          toastr.error('An error occurred');
-      });
-    */
-
+    axios.delete(this.state.routes.delete, {
+        params: {
+            id : id
+        }
+    })
+    .then(function (response) {
+        toastr.success('User remove correctly');
+        self.loadUsers();
+    }).catch(function (error) {
+        toastr.error('An error occurred');
+    });
   }
 
   renderDocs() {
-
     var self = this;
+
+    if(!this.state.items) {
+        return null;
+    }
 
     return this.state.items.map((item, key) =>
       <div className="typology-field" key={key}>
@@ -170,13 +153,13 @@ export default class CustomerDocuments extends Component {
 
         <div className="field-inputs">
           <div className="field-name">
-            {item.name}
+            {item.uploaded_filename}
           </div>
 
         </div>
 
         <div className="field-actions">
-          <a href={item.url} target="_blank" className="btn-link"> <i className="fa fa-download"></i>  </a> &nbsp;
+          <a href={item.uploaded_filename} target="_blank" className="btn-link"> <i className="fa fa-download"></i>  </a> &nbsp;
           <a href="" className="remove-field-btn" onClick={self.onRemoveField.bind(this,item.id)}> <i className="fa fa-trash"></i>  </a>
           &nbsp;&nbsp;
         </div>
@@ -187,6 +170,8 @@ export default class CustomerDocuments extends Component {
 
 
   render() {
+
+      var documents = this.state.initializated ? this.renderDocs() : '';
 
       return (
           <div className="container">
@@ -210,7 +195,7 @@ export default class CustomerDocuments extends Component {
               </div>
               <div className="col-md-8">
                 <div className="field-form fields-list-container">
-                    {this.renderDocs()}
+                    {documents}
                 </div>
               </div>
             </div>
@@ -222,5 +207,8 @@ export default class CustomerDocuments extends Component {
 }
 
 if (document.getElementById('customer_documents')) {
-    ReactDOM.render(<CustomerDocuments />, document.getElementById('customer_documents'));
+    var element = document.getElementById('customer_documents');
+    var config = element.getAttribute('config');
+
+    ReactDOM.render(<CustomerDocuments config={config} />, document.getElementById('customer_documents'));
 }

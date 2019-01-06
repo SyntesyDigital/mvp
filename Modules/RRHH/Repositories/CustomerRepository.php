@@ -5,12 +5,23 @@ namespace Modules\RRHH\Repositories;
 use Modules\RRHH\Entities\Customer;
 use Datatables;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Config;
 
 class CustomerRepository extends BaseRepository
 {
     public function model()
     {
         return "Modules\\RRHH\\Entities\Customer";
+    }
+
+    public function getDocuments(Customer $customer)
+    {
+        $documents = json_decode($customer->getField('documents'), true);
+
+        return collect($documents)->map(function($document) use ($customer) {
+            $document["url"] = str_replace(':id', $customer->id, Config::get('customers.storage'));
+            return $document;
+        });
     }
 
     public function getDatatableData()

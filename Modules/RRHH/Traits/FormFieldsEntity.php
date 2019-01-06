@@ -1,11 +1,22 @@
 <?php
 namespace Modules\RRHH\Traits;
 
+use Modules\RRHH\Entities\CustomerField;
+
 trait FormFieldsEntity
 {
     public function fields()
     {
         return $this->hasMany($this->fieldModel);
+    }
+
+
+    public function saveField($key, $value)
+    {
+        return $this->fields()->save(new CustomerField([
+            'name' => $key,
+            'value' => $value
+        ]));
     }
 
     public function getField($key)

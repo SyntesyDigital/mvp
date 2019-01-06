@@ -35,9 +35,13 @@ trait FormFields
     }
 
 
-    public function saveFields($entity)
+    public function saveFields($entity, $except = [])
     {
-        $entity->fields()->delete();
+        if($except) {
+            $entity->fields()->whereNotIn('name', !is_array($except) ? [$except] : $except)->delete();
+        } else {
+            $entity->fields()->delete();
+        }
 
         foreach ($this->fields as $name) {
             $value = isset($this->attributes[$name]) ? $this->attributes[$name] : null;

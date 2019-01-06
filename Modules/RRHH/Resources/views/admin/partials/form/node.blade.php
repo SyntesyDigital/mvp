@@ -204,33 +204,50 @@
     @if($node["input"] == 'submit')
         <input value="Enregistrer" type="submit" class="btn {{$node["class"] or ''}}" />
     @endif
-@endif
 
-@if($node["type"] == 'customer_users')
+    @if($node["input"] == 'customer_documents')
 
-    @php
-        $customer = $item;
-        switch($node["config"]["type"]) {
-            case 'ajax':
-                $node["config"]["route"] = route($node["config"]["route"], $customer);
-            break;
-        }
-    @endphp
+        @php
+            $customer = $item;
+            switch($node["config"]["type"]) {
+                case 'ajax':
+                    $node["config"]["route"] = route($node["config"]["route"], $customer);
+                break;
+            }
+        @endphp
 
-     <div class="form-group">
-        <div
-            id="customer_users"
-            config="{{ isset($node["config"]) ? base64_encode(json_encode($node["config"], true))  : null }}"
-        >
+         <div class="form-group">
+            <div
+                id="customer_documents"
+                config="{{ isset($node["config"]) ? base64_encode(json_encode($node["config"], true))  : null }}"
+            ></div>
         </div>
-    </div>
+    @endif
+
+    @if($node["input"] == 'customer_users')
+
+        @php
+            $customer = $item;
+            switch($node["config"]["type"]) {
+                case 'ajax':
+                    $node["config"]["route"] = route($node["config"]["route"], $customer);
+                break;
+            }
+        @endphp
+
+         <div class="form-group">
+            <div
+                id="customer_users"
+                config="{{ isset($node["config"]) ? base64_encode(json_encode($node["config"], true))  : null }}"
+            >
+            </div>
+        </div>
+    @endif
 @endif
 
-@if($node["type"] == 'customer_documents')
-     <div class="form-group">
-        <div id="customer_documents"></div>
-    </div>
-@endif
+
+
+
 
 {{-- RECURSIVE CALL --}}
 @if(isset($node['childs']))

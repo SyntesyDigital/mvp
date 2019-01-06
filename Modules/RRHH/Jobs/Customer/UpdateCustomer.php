@@ -27,7 +27,7 @@ class UpdateCustomer
     {
         $this->customer->update($this->attributes);
 
-        $this->saveFields($this->customer);
+        $this->saveFields($this->customer, 'documents');
 
         return true;
     }
