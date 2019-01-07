@@ -76,6 +76,13 @@ class RRHHDatabaseSeeder extends Seeder
        $candidateRole->description = 'Candidate'; // optional
        $candidateRole->save();
 
+       //candidate
+       $customerRole = new Role();
+       $customerRole->name = 'customer';
+       $customerRole->display_name = 'Customer'; // optional
+       $customerRole->description = 'Customer'; // optional
+       $customerRole->save();
+
        // role attach alias
        $admin->attachRole($adminRole);
        $recruiter->attachRole($recruiterRole);

@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use Modules\RRHH\Traits\FormFieldsEntity;
 
+use Illuminate\Database\Eloquent\Builder;
+use DB;
+
 class Offer extends Model
 {
     use DatePresenter;
@@ -153,5 +156,31 @@ class Offer extends Model
 
             return null;
         }
+    }
+
+
+    public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
+    {
+        if(in_array($column, $this->fillable) || $column == "id") {
+            return $query->orderBy($column, $mode);
+        }
+
+        $columnName = $column . '_order';
+
+        $sql = DB::raw(sprintf('(
+            SELECT
+                offers_fields.value
+            FROM
+                offers_fields
+            WHERE
+                offers_fields.offer_id = offers.id
+            AND
+                offers_fields.name = "%s"
+            LIMIT 1
+        ) AS %s', $column, $columnName));
+
+        return $query
+            ->select('*', $sql)
+            ->orderBy($columnName, $mode);
     }
 }

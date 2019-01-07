@@ -5,6 +5,7 @@ namespace Modules\RRHH\Jobs\CustomerUser;
 use Modules\RRHH\Http\Requests\Admin\CustomersUsers\CreateCustomerUserRequest;
 
 use App\Models\User;
+use App\Models\Role;
 use Modules\RRHH\Entities\Customer;
 use Hash;
 
@@ -34,6 +35,8 @@ class CreateCustomerUser
         $this->attributes['password'] = trim(Hash::make($this->attributes['password']));
 
         $user = User::create($this->attributes);
+        $user->attachRole(Role::where('name', 'customer')->first());
+
         $this->customer->users()->save($user);
 
         if(isset($this->attributes['role_id'])) {

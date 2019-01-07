@@ -264,17 +264,23 @@
 
                             <div class="form-group">
                                 {!!Form::label('country', 'Pays')!!}
-
-                                @include('rrhh::front.partials.countries', [
-                                    'default' => isset($user->candidate->country) ? $user->candidate->country:null
-                                ])
+                                {!!
+                                    Form::select(
+                                        'country',
+                                        config('rrhh.countries'),
+                                        'France',
+                                        [
+                                            'class' => 'form-control input-round',
+                                            'id' => 'country',
+                                            'placeholder' => ''
+                                        ]
+                                    )
+                                !!}
                             </div>
-
                         </div>
                     </div><!-- first block -->
                   </div>
               </div>
-
 
               @if(isset($user))
               <div id="headingmatricule" class="btn btn-link"  data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">

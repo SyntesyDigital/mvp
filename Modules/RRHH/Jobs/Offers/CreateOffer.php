@@ -7,6 +7,7 @@ use Modules\RRHH\Entities\Offers\Offer;
 use Modules\RRHH\Entities\Offers\OfferField;
 use Config;
 use Modules\RRHH\Traits\FormFields;
+use Carbon\Carbon;
 
 class CreateOffer
 {
@@ -26,12 +27,10 @@ class CreateOffer
 
     public function handle()
     {
-
         $offer = Offer::create([
             'status' => $this->attributes['status'],
             'recipient_id' => $this->attributes['recipient_id'],
             'customer_id' => isset($this->attributes['customer_id']) ? $this->attributes['customer_id'] : null,
-            'customer_contact_id' => isset($this->attributes['customer_contact_id']) ? $this->attributes['customer_contact_id'] : null,
         ]);
 
         // Set tags
@@ -44,6 +43,10 @@ class CreateOffer
         // Set fields
         foreach ($this->fields as $name) {
             $value = isset($this->attributes[$name]) ? $this->attributes[$name] : null;
+
+            if($this->getFieldType($name, config('offers.form')) == "date") {
+                $value = Carbon::createFromFormat('d/m/Y', $value)->timestamp;
+            }
 
             if ($value && ! array_key_exists($name, $offer->toArray())) {
                 if (is_array($value)) {

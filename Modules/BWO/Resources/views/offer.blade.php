@@ -41,7 +41,7 @@
             </div>
             <div class="block-info">
               <p><b>À partir du:</b></p>
-              <p>{{$offer->start_at}}</p>
+              <p>{{ date('d/m/Y', $offer->start_at) }}</p>
             </div>
             <div class="block-info">
               <p><b>Secteur:</b></p>

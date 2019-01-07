@@ -96,12 +96,6 @@
 
     <?php echo e(Html::script('/modules/rrhh/js/admin/users/candidateslist.js')); ?>
 
-    <?php echo e(Html::script('/modules/rrhh/js/textext.core.js')); ?>
-
-    <?php echo e(Html::script('/modules/rrhh/js/textext.plugin.autocomplete.js')); ?>
-
-    <?php echo e(Html::script('/modules/rrhh/js/textext.plugin.tags.js')); ?>
-
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('architect::layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -3,9 +3,24 @@ namespace Modules\RRHH\Traits;
 
 trait FormFields
 {
+
+    public function getFieldType($name, $form)
+    {
+        foreach($this->parseNode(array_collapse($form)) as $field) {
+            if($field["name"] == $name) {
+                return $field["input"];
+            }
+        }
+
+        return null;
+    }
+
+
     public function getFields($form = null)
     {
         $form = $form ? $form : config('offers.form');
+
+        $this->getFieldType('start_at', $form);
 
         return collect($this->parseNode(array_collapse($form)))
             ->map(function ($field) {
@@ -49,7 +64,7 @@ trait FormFields
             $fieldClass = $entity->fieldModel;
             $relationKey = $entity->fieldKey;
 
-            if ($value && !array_key_exists($name, $entity->toArray())) {
+            if ($value && !array_key_exists($name, $entity->getFillable())) {
                 if (is_array($value)) {
                     foreach ($value as $k => $v) {
                         $fieldClass::create([

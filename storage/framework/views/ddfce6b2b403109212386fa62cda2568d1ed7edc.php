@@ -47,7 +47,7 @@
 
     
       <div class="col-md-9 page-content">
-		  <div class="form-group">
+		  <div class="form-group <?php echo e($errors->has("name") ? 'has-error' : ''); ?>">
 			 <?php echo Form::label('name', 'Nom'); ?>
 
              <?php echo Form::text('name', isset($tag) ? $tag->name : null, [

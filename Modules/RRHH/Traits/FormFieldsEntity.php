@@ -2,6 +2,8 @@
 namespace Modules\RRHH\Traits;
 
 use Modules\RRHH\Entities\CustomerField;
+use Illuminate\Database\Eloquent\Builder;
+use DB;
 
 trait FormFieldsEntity
 {
@@ -96,31 +98,6 @@ trait FormFieldsEntity
         return $query;
     }
 
-
-    public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
-    {
-        if(in_array($column, $this->fillable) || $column == "id") {
-            return $query->orderBy($column, $mode);
-        }
-
-        $columnName = $column . '_order';
-
-        $sql = DB::raw(sprintf('(
-            SELECT
-                customers_fields.value
-            FROM
-                customers_fields
-            WHERE
-                customers_fields.content_id = contents.id
-            AND
-                customers_fields.name = "%s"
-            LIMIT 1
-        ) AS %s', $column, $columnName));
-
-        return $query
-            ->select('*', $sql)
-            ->orderBy($columnName, $mode);
-    }
 
     public function __get($key)
     {

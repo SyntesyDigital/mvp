@@ -34,14 +34,8 @@ class SearchController extends Controller
         }
 
         return view('bwo::results', [
-            'offers' => $offers->sortByDesc(function ($offer, $key) {
-                return strtotime(Carbon::createFromFormat('d/m/Y', $offer->start_at));
-            }),
-            'num_offers' => count($this->offers->getSearchOffers(
-                            $request->get('search'),
-                            $request->get('contract'),
-                            $request->get('job'),
-                            $request->get('agence'))),
+            'offers' => $offers,
+            'num_offers' => $this->offers->getSearchOffers($request->get('search'), $request->get('contract'), $request->get('job'), $request->get('agence'))->count(),
             'offers_paginate' => $offers,
             'selected_agence' => $request->get('agence') ? $request->get('agence') : [],
             'selected_job' => $request->get('job') ? $request->get('job') : [],

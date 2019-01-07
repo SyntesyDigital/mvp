@@ -91,7 +91,4 @@
     </script>
 
     {{ Html::script('/modules/rrhh/js/admin/users/candidateslist.js') }}
-    {{ Html::script('/modules/rrhh/js/textext.core.js') }}
-    {{ Html::script('/modules/rrhh/js/textext.plugin.autocomplete.js') }}
-    {{ Html::script('/modules/rrhh/js/textext.plugin.tags.js') }}
 @endpush
