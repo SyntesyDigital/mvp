@@ -193,6 +193,10 @@ li {
   /* END DRAG AND DROP */
 }
 
+.sitelist .dragable-option .form-group .form-control {
+  border: none !important;
+}
+
 .sitelist .dashed-border {
   border: 1px dashed #ccc;
   padding: 10px;
@@ -200,6 +204,7 @@ li {
 
 .sitelist .content-field-dropper {
   padding: 20px;
+  padding-bottom: 0px;
 }
 
 .sitelist .ajouter-element {
@@ -225,7 +230,7 @@ li {
 
 .sitelist .input-name-option {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 14px;
   width: 90%;
   float: left;
   margin-bottom: 0px;
@@ -252,6 +257,53 @@ li {
 
 .sitelist .dragable-option {
   cursor: move;
+  border: 1px solid #ccc;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.sitelist .tool-box {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 150px;
+  text-align: right;
+}
+
+.sitelist .tool-box a {
+  font-size: 12px;
+  line-height: 50px;
+  font-weight: 400;
+  display: inline-block;
+  color: #fc4b6c;
+}
+
+.sitelist .content-add {
+  padding-right: 170px;
+  padding-left: 20px;
+}
+
+.sitelist .content-add input {
+  width: 45%;
+  margin-right: 5%;
+  height: 38px;
+}
+
+.sitelist .page-row {
+  border: 1px dashed #ccc;
+  text-align: center;
+  width: 100%;
+  padding: 10px 5px;
+  margin-bottom: 0px;
+  min-height: 90px;
+}
+
+.sitelist .form-group.form-group-lg {
+  padding-bottom: 0px !important;
 }
 
 .candidate-page .field-group .btn-link {

@@ -32,12 +32,12 @@ class SiteListController extends Controller
             $sitelist = $this->dispatchNow(CreateSiteList::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('admin.sitelists.show', $sitelist);
+            return redirect()->route('rrhh.admin.sitelists.show', $sitelist);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('rrhh::admin.sitelists.create');
+        return redirect()->route('rrhh.admin.sitelists.create');
     }
 
     public function show($id, Request $request)
@@ -61,13 +61,10 @@ class SiteListController extends Controller
 
     public function delete(SiteList $sitelist)
     {
-        try {
-            $this->dispatchNow(new DeleteSiteList($sitelist));
-            Session::flash('notify_success', 'Suppression effectué avec succès');
-        } catch (\Exception $e) {
-            Session::flash('notify_error', $e->getMessage());
-        }
-
-        return redirect()->route('rrhh::admin.sitelists.index');
+        return $this->dispatchNow(new DeleteSiteList($sitelist)) ? response()->json([
+            'success' => true
+        ]) : response()->json([
+            'success' => false
+        ], 500);
     }
 }
