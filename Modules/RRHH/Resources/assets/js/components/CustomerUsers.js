@@ -47,40 +47,46 @@ export default class CustomerUsers extends Component {
     var self = this;
     var user = null;
 
-    // FIXME : find best way to do this :)
-    if(this.state.items) {
-        for(var i =0;i<this.state.items.length;i++){
-            if(this.state.items[i].id == id){
-                user = this.state.items[i];
+    bootbox.confirm({
+        message: 'Etes-vous sur de vouloir supprimer ?',
+        buttons: {
+            confirm: {
+                label: 'Oui',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'Non',
+                className: 'btn-default'
+            }
+        },
+        callback: function(result) {
+            if (result) {
+
+                // FIXME : find best way to do this :)
+                if(self.state.items) {
+                    for(var i =0;i<self.state.items.length;i++){
+                        if(self.state.items[i].id == id){
+                            user = self.state.items[i];
+                        }
+                    }
+                }
+
+                if(user) {
+                    axios.delete(user.routes.delete)
+                        .then((response) => {
+                            toastr.success('User remove correctly');
+                            self.loadUsers();
+                        })
+                        .catch((error) => {
+                            toastr.error('An error occurred');
+                        });
+                }
+
             }
         }
-    }
+    });
 
-    if(user) {
-        axios.delete(user.routes.delete)
-            .then((response) => {
-                toastr.success('User remove correctly');
-                self.loadUsers();
-            })
-            .catch((error) => {
-                toastr.error('An error occurred');
-            });
-    }
 
-    //TODO api remove item by id
-    /*
-      axios.post('/architect/customer/users/remove', {
-          id : id
-      })
-      .then((response) => {
-          toastr.success('User remove correctly');
-
-          self.loadUsers();
-      })
-      .catch((error) => {
-          toastr.error('An error occurred');
-      });
-    */
 
   }
 

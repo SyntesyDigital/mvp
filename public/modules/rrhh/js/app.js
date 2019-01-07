@@ -2135,37 +2135,41 @@ var CustomerUsers = function (_Component) {
             var self = this;
             var user = null;
 
-            // FIXME : find best way to do this :)
-            if (this.state.items) {
-                for (var i = 0; i < this.state.items.length; i++) {
-                    if (this.state.items[i].id == id) {
-                        user = this.state.items[i];
+            bootbox.confirm({
+                message: 'Etes-vous sur de vouloir supprimer ?',
+                buttons: {
+                    confirm: {
+                        label: 'Oui',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Non',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function callback(result) {
+                    if (result) {
+
+                        // FIXME : find best way to do this :)
+                        if (self.state.items) {
+                            for (var i = 0; i < self.state.items.length; i++) {
+                                if (self.state.items[i].id == id) {
+                                    user = self.state.items[i];
+                                }
+                            }
+                        }
+
+                        if (user) {
+                            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(user.routes.delete).then(function (response) {
+                                toastr.success('User remove correctly');
+                                self.loadUsers();
+                            }).catch(function (error) {
+                                toastr.error('An error occurred');
+                            });
+                        }
                     }
                 }
-            }
-
-            if (user) {
-                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(user.routes.delete).then(function (response) {
-                    toastr.success('User remove correctly');
-                    self.loadUsers();
-                }).catch(function (error) {
-                    toastr.error('An error occurred');
-                });
-            }
-
-            //TODO api remove item by id
-            /*
-              axios.post('/architect/customer/users/remove', {
-                  id : id
-              })
-              .then((response) => {
-                  toastr.success('User remove correctly');
-                   self.loadUsers();
-              })
-              .catch((error) => {
-                  toastr.error('An error occurred');
-              });
-            */
+            });
         }
     }, {
         key: 'renderUsers',
@@ -2796,15 +2800,34 @@ var CustomerDocuments = function (_Component) {
 
             e.preventDefault();
             var self = this;
-            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(this.state.routes.delete, {
-                params: {
-                    id: id
+
+            bootbox.confirm({
+                message: 'Etes-vous sur de vouloir supprimer ?',
+                buttons: {
+                    confirm: {
+                        label: 'Oui',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Non',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function callback(result) {
+                    if (result) {
+
+                        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(self.state.routes.delete, {
+                            params: {
+                                id: id
+                            }
+                        }).then(function (response) {
+                            toastr.success('Document removed correctly');
+                            self.loadDocs();
+                        }).catch(function (error) {
+                            toastr.error('An error occurred');
+                        });
+                    }
                 }
-            }).then(function (response) {
-                toastr.success('Document removed correctly');
-                self.loadDocs();
-            }).catch(function (error) {
-                toastr.error('An error occurred');
             });
         }
     }, {
@@ -2842,7 +2865,7 @@ var CustomerDocuments = function (_Component) {
                         { className: 'field-actions' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'a',
-                            { href: item.uploaded_filename, target: '_blank', className: 'btn-link' },
+                            { href: '/' + item.url.replace('public', 'storage') + '/' + item.stored_filename, target: '_blank', className: 'btn-link' },
                             ' ',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-download' }),
                             '  '

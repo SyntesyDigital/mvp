@@ -125,17 +125,41 @@ export default class CustomerDocuments extends Component {
 
     e.preventDefault();
     var self = this;
-    axios.delete(this.state.routes.delete, {
-        params: {
-            id : id
+
+    bootbox.confirm({
+        message: 'Etes-vous sur de vouloir supprimer ?',
+        buttons: {
+            confirm: {
+                label: 'Oui',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'Non',
+                className: 'btn-default'
+            }
+        },
+        callback: function(result) {
+            if (result) {
+
+                axios.delete(self.state.routes.delete, {
+                    params: {
+                        id : id
+                    }
+                })
+                .then(function (response) {
+                    toastr.success('Document removed correctly');
+                    self.loadDocs();
+                }).catch(function (error) {
+                    toastr.error('An error occurred');
+                });
+
+            }
         }
-    })
-    .then(function (response) {
-        toastr.success('Document removed correctly');
-        self.loadDocs();
-    }).catch(function (error) {
-        toastr.error('An error occurred');
     });
+
+
+
+
   }
 
   renderDocs() {
@@ -159,7 +183,7 @@ export default class CustomerDocuments extends Component {
         </div>
 
         <div className="field-actions">
-          <a href={item.uploaded_filename} target="_blank" className="btn-link"> <i className="fa fa-download"></i>  </a> &nbsp;
+          <a href={'/'+item.url.replace('public','storage')+'/'+item.stored_filename} target="_blank" className="btn-link"> <i className="fa fa-download"></i>  </a> &nbsp;
           <a href="" className="remove-field-btn" onClick={self.onRemoveField.bind(this,item.id)}> <i className="fa fa-trash"></i>  </a>
           &nbsp;&nbsp;
         </div>
