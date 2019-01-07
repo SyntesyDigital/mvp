@@ -36,6 +36,17 @@
 </div>
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startPush('javascripts-libs'); ?>
+    <!-- Datatables -->
+    <?php echo e(Html::style('/modules/rrhh/plugins/datatables/datatables.min.css')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/plugins/datatables/datatables.min.js')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/js/libs/datatabletools.js')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
+
+<?php $__env->stopPush(); ?>
 
 <?php $__env->startPush('javascripts'); ?>
     <script>
@@ -45,9 +56,7 @@
     };
     </script>
 
-    <?php echo e(Html::script('js/libs/datatabletools.js')); ?>
-
-    <?php echo e(Html::script('/js/admin/customers/customerslist.js')); ?>
+    <?php echo e(Html::script('/modules/rrhh/js/admin/customers/customerslist.js')); ?>
 
 <?php $__env->stopPush(); ?>
 

@@ -32,7 +32,7 @@
      <div class="form-group">
         <div class="location-box">
             <label>{{$node["label"]}}</label>
-            <div id="{{$node["id"] or ''}}" class="map-container">
+            <div id="{{ $node["id"] or rand() }}" class="map-container">
             </div>
         </div>
      </div>
@@ -43,26 +43,33 @@
     @if($node["input"] == 'text')
         <div class="form-group bmd-form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label class="bmd-label-floating">{{$node["label"]}}</label>
-            <input type="text" class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+            <input
+                id="{{$node["id"] or rand()}}"
+                type="text"
+                class="form-control"
+                name="{{$node["name"]}}"
+                placeholder="{{$node["placeholder"] or ''}}"
+                value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}"
+            >
         </div>
     @endif
 
      @if($node["input"] == 'hidden')
-            <input type="hidden" class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+            <input type="hidden" class="form-control" id="{{ $node["id"] or rand() }}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
     @endif
 
 
     @if($node["input"] == 'date')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
-            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{ $node["id"] or rand() }}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
         </div>
     @endif
 
     @if($node["input"] == 'textarea')
         <div class="form-group">
             <label>{{$node["label"]}}</label>
-            <textarea class="form-control" id="{{$node["id"] or ''}}" rows="6" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
+            <textarea class="form-control" id="{{ $node["id"] or rand() }}" rows="6" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
         </div>
     @endif
 
@@ -94,7 +101,7 @@
     @if($node["input"] == 'checkbox')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>
-                <input type="checkbox" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" value="{{$node["value"] or old($node["name"])}}" @if($item && $item->{$node["name"]}) checked @endif />
+                <input type="checkbox" id="{{ $node["id"] or rand() }}" name="{{$node["name"]}}" value="{{$node["value"] or old($node["name"])}}" @if($item && $item->{$node["name"]}) checked @endif />
                 {{$node["label"]}}
             </label>
         </div>
@@ -178,7 +185,6 @@
 
 
     @if($node["input"] == 'customers_contacts')
-
          <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             {{-- {!!
                 Form::select(
@@ -198,21 +204,50 @@
     @if($node["input"] == 'submit')
         <input value="Enregistrer" type="submit" class="btn {{$node["class"] or ''}}" />
     @endif
+
+    @if($node["input"] == 'customer_documents')
+
+        @php
+            $customer = $item;
+            switch($node["config"]["type"]) {
+                case 'ajax':
+                    $node["config"]["route"] = route($node["config"]["route"], $customer);
+                break;
+            }
+        @endphp
+
+         <div class="form-group">
+            <div
+                id="customer_documents"
+                config="{{ isset($node["config"]) ? base64_encode(json_encode($node["config"], true))  : null }}"
+            ></div>
+        </div>
+    @endif
+
+    @if($node["input"] == 'customer_users')
+
+        @php
+            $customer = $item;
+            switch($node["config"]["type"]) {
+                case 'ajax':
+                    $node["config"]["route"] = route($node["config"]["route"], $customer);
+                break;
+            }
+        @endphp
+
+         <div class="form-group">
+            <div
+                id="customer_users"
+                config="{{ isset($node["config"]) ? base64_encode(json_encode($node["config"], true))  : null }}"
+            >
+            </div>
+        </div>
+    @endif
 @endif
 
-@if($node["type"] == 'customer_users')
 
-     <div class="form-group">
-        <div id="customer_users"></div>
-    </div>
-@endif
 
-@if($node["type"] == 'customer_documents')
 
-     <div class="form-group">
-        <div id="customer_documents"></div>
-    </div>
-@endif
 
 {{-- RECURSIVE CALL --}}
 @if(isset($node['childs']))

@@ -41,7 +41,7 @@
 
 <?php if($node['type'] == "field"): ?>
     <?php if($node["input"] == 'text'): ?>
-        <div class="form-group bmd-form-group">
+        <div class="form-group bmd-form-group  <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label class="bmd-label-floating"><?php echo e($node["label"]); ?></label>
             <input type="text" class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
         </div>
@@ -53,21 +53,21 @@
 
 
     <?php if($node["input"] == 'date'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <input type="text" autocomplete="off" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
         </div>
     <?php endif; ?>
 
     <?php if($node["input"] == 'textarea'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <textarea class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" rows="6" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
         </div>
     <?php endif; ?>
 
     <?php if($node["input"] == 'richtext'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <textarea class="form-control" id="<?php echo e($node["name"]); ?>_editor" name="<?php echo e($node["name"]); ?>" rows="6" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
         </div>
@@ -92,7 +92,7 @@
     <?php endif; ?>
 
     <?php if($node["input"] == 'checkbox'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label>
                 <input type="checkbox" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" value="<?php echo e(isset($node["value"]) ? $node["value"] : old($node["name"])); ?>" <?php if($item && $item->{$node["name"]}): ?> checked <?php endif; ?> />
                 <?php echo e($node["label"]); ?>
@@ -102,7 +102,7 @@
     <?php endif; ?>
 
     <?php if($node["input"] == 'tags'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <?php echo Form::select(
                     $node["name"],
                     \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
@@ -122,7 +122,7 @@
     <?php endif; ?>
 
     <?php if($node["input"] == 'list'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <?php
                 $default = isset($node["default"]) ? $node["default"] : null;
@@ -142,7 +142,7 @@
     <?php endif; ?>
 
     <?php if($node["input"] == 'users'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <?php echo Form::users(
                     $node["roles"],
@@ -159,7 +159,7 @@
 
 
      <?php if($node["input"] == 'customers'): ?>
-        <div class="form-group">
+        <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
             <?php echo Form::customers(
                     $node["name"],
@@ -176,7 +176,7 @@
 
     <?php if($node["input"] == 'customers_contacts'): ?>
 
-         <div class="form-group">
+         <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             
 
         </div>
