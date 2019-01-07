@@ -41,13 +41,15 @@
                                     &nbsp;{{Lang::get('architect::fields.new')}}
                                 </a>
                             </li>
+                            @if(isset($sitelist))
                             <li>
-                                <a href="#" id="general-delete-btn" class="text-danger">
+                                <a href="#" id="general-delete-btn" class="text-danger" data-redirection="{{route('rrhh.admin.sitelists.index')}}" data-ajax="{{route('rrhh.admin.sitelists.delete',$sitelist)}}">
                                     <i class="fa fa-trash text-danger"></i>
                                     &nbsp;
                                     <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>
                                 </a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                     {!!
@@ -64,7 +66,7 @@
 
 <div class="container rightbar-page sitelist">
 
-    {{-- RIGHT COLUMN --}}
+    {{-- LEFT COLUMN --}}
       <div class="col-md-9 page-content">
           <div class="card-body jsonbuilder">
             <h3 class="card-title">Définition de la liste</h3>
@@ -76,6 +78,11 @@
                         'class' => 'form-control'
                     ])
                 !!}
+
+            <div class="page-row add-row-block">
+              <a href="#" class="btn btn-default add-item"><i class="fa fa-plus-circle"></i> Ajouter une ligne</a>
+            </div>
+
           </div>
       </div>
 
@@ -100,7 +107,6 @@
                      'oninput' => 'app.sitelist.updatePreview();',
                      'class' => 'form-control',
                      'id' => 'identifier',
-                     'readonly' => 'readonly'
                  ])
              !!}
           </div>

@@ -16,17 +16,18 @@ app.sitelist = {
             name: "",
             value: ""
         });
-        this.parseJson()
+        this.parseJson();
     },
 
     parseJson: function() {
+
         var node = "<div class='row' id='options-ele'>";
         for (var i = 0; i < list_json.length; i++) {
             var ele = list_json[i];
             node += "<div class=\"col-md-12 dragable-option\" draggable=\"true\" ondragstart=\"app.sitelist.dragstart(event)\"  ondragenter=\"app.sitelist.dragenter(event)\" >" +
                 "<div class=\"content-add\">" +
                 "<div class=\"tool-box\">" +
-                "<a class=\"remove-action\" onclick=\"app.sitelist.removeContent(" + i + ")\"><i class=\"fa fa-remove\"></i></a>" +
+                "<a class=\"remove-action\" onclick=\"app.sitelist.removeContent(" + i + ")\"><i class=\"fa fa-trash\"></i> &nbsp; Supprimier </a>" +
                 "</div>" +
                 "<input type=\"text\" name=\"name_json\" oninput=\"list_json[" + i + "].name = this.value;app.sitelist.updatePreview();\" class=\"form-control input-lg input-name-option\" placeholder=\"name\" value=\"" + ele.name + "\"  />" +
                 "<input type=\"text\" name=\"value_json\" oninput=\"list_json[" + i + "].value = this.value;app.sitelist.updatePreview();\" class=\"form-control input-sm input-value-option\" placeholder=\"value\" value=\"" + ele.value + "\"  />" +
@@ -150,8 +151,12 @@ app.sitelist = {
 
 }
 
-$('form.delete-sitelist-form').on('submit', function(e) {
+$('#general-delete-btn').on('click', function(e) {
     e.preventDefault();
+
+    var route = $(e.target).closest('#general-delete-btn').data('ajax');
+    var redirection = $(e.target).closest('#general-delete-btn').data('redirection');
+
     bootbox.confirm({
         message: 'Etes-vous sur de vouloir supprimer cette List ?',
         buttons: {
@@ -166,10 +171,34 @@ $('form.delete-sitelist-form').on('submit', function(e) {
         },
         callback: function(result) {
             if (result) {
-                $('form.delete-sitelist-form')
-                    .off('submit')
-                    .trigger('submit');
+              $.ajax({
+                type:'DELETE',
+                url:route
+              })
+              .done(function(response) {
+
+                  if(response.success) {
+                      toastr.success('Suppression effectué avec succès', {timeOut: 10000});
+
+                      setTimeout(function(){
+                          window.location.href = redirection;
+                      },1500);
+
+                  } else {
+                      toastr.error( 'Error', {timeOut: 10000});
+                  }
+
+              }).fail(function(response){
+                  toastr.error('Error', {timeOut: 10000});
+              });
             }
         }
     });
+});
+
+$('.sitelist .add-item').on('click',function(e) {
+
+  e.preventDefault();
+
+  app.sitelist.addNewElement();
 });
