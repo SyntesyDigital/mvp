@@ -55,7 +55,7 @@
     <?php if($node["input"] == 'date'): ?>
         <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
-            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
+            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : rand()); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? date('d/m/Y', $item->{$node["name"]}) : old($node["name"])); ?>">
         </div>
     <?php endif; ?>
 

@@ -114,7 +114,7 @@ class Candidate extends Model
     public function scopeByTags($query, $tags = null)
     {
         return $tags ? $query->whereHas('tags', function ($query) use ($tags) {
-            $query->whereIn('tags.name', $tags);
+            $query->whereIn('tag_id', $tags);
         }) : $query;
     }
 }

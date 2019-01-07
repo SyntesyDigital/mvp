@@ -145,7 +145,7 @@ class OfferRepository extends BaseRepository
         ->make(true);
     }
 
-    public function getSearchOffers($search, $contract, $job, $agence, $items_per_page = null, $page = 0, $orderBy= null)
+    public function getSearchOffers($search, $contract, $job, $agence, $itemsPerPage = null, $page = 0, $orderBy = null)
     {
         $qy = Offer::whereHas('fields', function ($q) use ($search, $contract, $job) {
             $q->where(function ($query) use ($search) {
@@ -203,13 +203,17 @@ class OfferRepository extends BaseRepository
             });
         }
 
-        if ($items_per_page) {
-            $offset = $items_per_page * $page;
-            $qy->offset($offset)
-                ->limit($items_per_page);
+        if ($itemsPerPage) {
+            $qy
+                ->offset($itemsPerPage * $page)
+                ->limit($itemsPerPage);
         }
 
-        return  $qy->get();
+        if($orderBy) {
+            $qy->orderByField($orderBy, 'desc');
+        }
+
+        return $qy->get();
     }
 
     public function getRandomOffers($tags, $limit, $excluded_offer_id = null)

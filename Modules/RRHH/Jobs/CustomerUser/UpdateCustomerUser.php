@@ -5,6 +5,7 @@ namespace Modules\RRHH\Jobs\CustomerUser;
 use Modules\RRHH\Http\Requests\Admin\CustomersUsers\UpdateCustomerUserRequest;
 
 use App\Models\User;
+use App\Models\Role;
 use Modules\RRHH\Entities\Customer;
 use Hash;
 
@@ -39,6 +40,7 @@ class UpdateCustomerUser
         }
 
         $this->user->update($this->attributes);
+        $this->user->attachRole(Role::where('name', 'customer')->first());
 
         if(isset($this->attributes['role_id'])) {
             $this->user->roles()->sync($this->attributes['role_id']);

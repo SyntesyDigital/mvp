@@ -8,8 +8,8 @@
 
         </div>
         <div class="col-md-6 home-square p-l-10">
-          <h2 class="gray-square-text">ERREUR 500</h2>
-          <p class=subtitle>Une erreur est survenue.</p>
+          <h2 class="gray-square-text">ERREUR 404 - PAGE INTROUVABLE</h2>
+          <p class=subtitle>LA PAGE QUE VOUS CHERCHEZ N'EXISTE PAS. <br /> NOUS VOUS PRIONS DE BIEN VOULOIR NOUS EN EXCUSER.</p>
           <p>
               <a href="/" class="btn btn-dark-gray">Accédez à la page d’accueil </a>
           </p>

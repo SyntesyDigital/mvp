@@ -47,7 +47,8 @@
           <div class="btn btn-dark-gray" id="btn-less">VOIR MOINS DE FILTRES</div>
         </div>
       </div>
-      <div class="light-gray-search-container">
+
+      <div class="light-gray-search-container {{-- @if(request('contract[]') || request('jobs[]') || request('order')) show @endif --}}">
         <div class="col-sm-4 select-container">
           {!! Form::Label('job', 'Choisissez votre métier:') !!}
           <div class="multiselect">
@@ -89,14 +90,25 @@
                 $contracts = $contracts->toArray();
               @endphp
               @foreach($contracts as $key => $value)
-                <label for="contract_{{$key}}"><input type="checkbox" value="{{$key}}" name="contract[]" id="contract_{{$key}}" {{in_array($key,$selected_contract)?'checked="checked"':''}}  />{{$value}}</label>
+                <label for="contract_{{$key}}">
+                    <input type="checkbox" value="{{$key}}" name="contract[]" id="contract_{{$key}}" {{in_array($key,$selected_contract)?'checked="checked"':''}}  />
+                    {{$value}}
+                </label>
               @endforeach
             </div>
           </div>
         </div>
         <div class="col-sm-4 select-container">
-          {!! Form::Label('order', 'Filtre par:') !!}
-          {!! Form::select('order', ['' => '', 'date' =>'Date', 'name' => 'Name'], null, ['class' => 'form-control']) !!}
+          {!! Form::Label('order', 'Ordonner par:') !!}
+          {!!
+              Form::select('order', [
+                  'start_at' =>'Date',
+                  'salary' => 'Salaire'
+              ], request('order', null), [
+                  'class' => 'form-control',
+                  'placeholder' => '----'
+              ])
+          !!}
         </div>
         <div class="separator"></div>
         <div class="btn btn-dark-gray" id="btn-filtres">APPLIQUER LES FILTRES</div>
@@ -113,7 +125,7 @@
                   {{ $offer->title }}
                 </div>
 
-                <p>Réf: {{$offer->id}} - Posté le {{$offer->start_at}}</p>
+                <p>Réf: {{$offer->id}} - Posté le {{ date('d/m/Y', $offer->start_at) }}</p>
                 @php
                   $string = substr(strip_tags($offer->description), 0, 100);
                   if(strlen($string) < strlen(strip_tags($offer->description))){

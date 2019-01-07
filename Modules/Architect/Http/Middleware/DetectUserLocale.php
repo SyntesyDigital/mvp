@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Auth;
 
-
 class DetectUserLocale
 {
-    public function __construct(Application $app, Request $request) {
+    public function __construct(Application $app, Request $request)
+    {
         $this->app = $app;
         $this->request = $request;
     }

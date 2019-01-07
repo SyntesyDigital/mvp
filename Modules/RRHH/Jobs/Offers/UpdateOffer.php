@@ -56,11 +56,11 @@ class UpdateOffer
         //
         // TODO : Check if new tags and send alerts to candidates ONLY if offer is already published and date >= today()
         //
-        if (! $this->offer->update([
+        if (!$this->offer->update([
             'status' => $this->attributes['status'],
             'recipient_id' => $this->attributes['recipient_id'],
             'customer_id' => isset($this->attributes['customer_id']) ? $this->attributes['customer_id'] : null,
-            'customer_contact_id' => isset($this->attributes['customer_contact_id']) ? $this->attributes['customer_contact_id'] : null,
+            //'customer_contact_id' => isset($this->attributes['customer_contact_id']) ? $this->attributes['customer_contact_id'] : null,
         ])) {
             return false;
         }
@@ -72,9 +72,15 @@ class UpdateOffer
 
         // Set fields
         $this->offer->fields()->delete();
+
         foreach ($this->fields as $name) {
             $value = isset($this->attributes[$name]) ? $this->attributes[$name] : null;
-            if ($value && ! array_key_exists($name, $this->offer->toArray())) {
+
+            if($this->getFieldType($name, config('offers.form')) == "date") {
+                $value = Carbon::createFromFormat('d/m/Y', $value)->timestamp;
+            }
+
+            if ($value && ! array_key_exists($name, $this->offer->getFillable())) {
                 if (is_array($value)) {
                     foreach ($value as $k => $v) {
                         OfferField::create([

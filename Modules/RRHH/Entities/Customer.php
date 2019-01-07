@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use Modules\RRHH\Traits\FormFieldsEntity;
 
+use Illuminate\Database\Eloquent\Builder;
+use DB;
+
 class Customer extends Model
 {
     use FormFieldsEntity;
@@ -55,6 +58,32 @@ class Customer extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'customers_users');
+    }
+
+
+    public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
+    {
+        if(in_array($column, $this->fillable) || $column == "id") {
+            return $query->orderBy($column, $mode);
+        }
+
+        $columnName = $column . '_order';
+
+        $sql = DB::raw(sprintf('(
+            SELECT
+                customers_fields.value
+            FROM
+                customers_fields
+            WHERE
+                customers_fields.customer_id = customers.id
+            AND
+                customers_fields.name = "%s"
+            LIMIT 1
+        ) AS %s', $column, $columnName));
+
+        return $query
+            ->select('*', $sql)
+            ->orderBy($columnName, $mode);
     }
 
 }

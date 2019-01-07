@@ -28,7 +28,7 @@
           </ol>
           <h1>{{$offer->title}}</h1>
           <div class="separator"></div>
-          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{$offer->created_at}} </p>
+          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ date('d/m/Y', $offer->start_at) }} </p>
           <div class="col-sm-4 col-md-3 information">
             <h2 class="gray-square-text">DÉTAILS</h2>
             <div class="block-info">
@@ -41,7 +41,7 @@
             </div>
             <div class="block-info">
               <p><b>À partir du:</b></p>
-              <p>{{$offer->start_at}}</p>
+              <p>{{ date('d/m/Y', $offer->start_at) }}</p>
             </div>
             <div class="block-info">
               <p><b>Secteur:</b></p>
@@ -51,7 +51,7 @@
               <p><b>Salaire:</b></p>
               <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
             </div>
-            <div class="reference">REF : {{$offer->id}} | {{$offer->created_at}}</div>
+            <div class="reference">REF : {{$offer->id}} | {{ date('d/m/Y', $offer->start_at) }}</div>
             <div class="share-container">
               @php
       					$shareUrl = urlencode(Request::url());

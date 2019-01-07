@@ -55,7 +55,7 @@
     @if($node["input"] == 'date')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
-            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{ $node["id"] or rand() }}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? date('d/m/Y', $item->{$node["name"]}) : old($node["name"]) }}">
         </div>
     @endif
 

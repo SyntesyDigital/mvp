@@ -17,11 +17,6 @@ class CandidateRepository extends BaseRepository
 
     public function getDatatableData($roles, $tags = null)
     {
-        if ($tags !== null) {
-            $tags = str_replace(['[', ']', '"'], '', $tags);
-            $tags = $tags != '' ? explode(',', $tags) : null;
-        }
-
         $candidates = Candidate::leftJoin('users', 'users.id', '=', 'candidates.user_id')
             ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
