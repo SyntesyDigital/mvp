@@ -265,24 +265,21 @@
                                 <?php echo Form::label('country', 'Pays'); ?>
 
                                 <?php echo Form::select(
-                                            'country',
-                                            config('rrhh.countries'),
-                                            'France',
-                                            [
-                                                'class' => 'form-control input-round',
-                                                'id' => 'country',
-                                                'placeholder' => ''
-                                            ]
-                                        ); ?>
-
+                                        'country',
+                                        config('rrhh.countries'),
+                                        'France',
+                                        [
+                                            'class' => 'form-control input-round',
+                                            'id' => 'country',
+                                            'placeholder' => ''
+                                        ]
+                                    ); ?>
 
                             </div>
-
                         </div>
                     </div><!-- first block -->
                   </div>
               </div>
-
 
               <?php if(isset($user)): ?>
               <div id="headingmatricule" class="btn btn-link"  data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
