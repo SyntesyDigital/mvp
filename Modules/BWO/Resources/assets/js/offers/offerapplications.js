@@ -23,6 +23,7 @@ app.offerapplications = {
             _this.addCV();
         });
 
+        /*
         $('#loginModalForm').on('submit', function(e){
             app.offerapplications.login();
         });
@@ -30,6 +31,7 @@ app.offerapplications = {
         $('#registerModalForm').on('submit', function(e){
             app.offerapplications.register();
         });
+        */
     },
 
     apply: function()

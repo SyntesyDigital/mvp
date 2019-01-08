@@ -26,8 +26,7 @@
                                 <a href="{{ route('linkedin.login') }}">
                                     <img src="/modules/BWO/images/linkedin-signin.png" width="220" />
                                 </a>
-                                <input type="submit" value="Se Connecter" class="btn btn-red full-width mt-10" style="display:none;" />
-                                <button type="button" role="submit" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
+                                <button type="button" onclick="app.offerapplications.login()" role="submit" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
                                 <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>
@@ -66,8 +65,7 @@
                                  @if ($errors->has('location'))
                                    <p class="control-label error-login-p">{{ $errors->first('location') }}</p>
                                  @endif
-                                  <button type="button" id="regButton" class="btn btn-dark-gray full-width"><i class="fa fa-user"></i>Créer un compte</button>
-                                  <input type="submit" value="Créer un compte" class="btn btn-dark-gray full-width" style="display:none;" />
+                                  <button type="button" onclick="app.offerapplications.register()"  id="regButton" class="btn btn-dark-gray full-width"><i class="fa fa-user"></i>Créer un compte</button>
                                   <img class="loader" id="regLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
                             </form>
                         </div>
