@@ -21,6 +21,7 @@ require('./components/Common/MoreResults');
 require('./components/Widgets/Blog');
 require('./components/Widgets/RelatedNews');
 require('./components/Widgets/LastNews');
+require('./components/Common/CustomerDocuments');
 
 
 //javascripts

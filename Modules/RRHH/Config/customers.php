@@ -74,7 +74,7 @@ return [
                               'input' => 'text',
                               'identifier' => 'name',
                               'name' => 'name',
-                              'label' => 'Nom'
+                              'label' => 'Enterprise'
                           ],
 
                           [
@@ -82,7 +82,7 @@ return [
                               'input' => 'text',
                               'identifier' => 'firstname',
                               'name' => 'firstname',
-                              'label' => 'Prénom'
+                              'label' => 'Référent Prénom'
                           ],
 
                           [
@@ -90,7 +90,7 @@ return [
                               'input' => 'text',
                               'identifier' => 'lastname',
                               'name' => 'lastname',
-                              'label' => 'Nom'
+                              'label' => 'Référent Nom'
                           ],
 
                           [

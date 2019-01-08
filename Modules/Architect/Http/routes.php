@@ -40,7 +40,7 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth','role:recruiter|admin|customer', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()

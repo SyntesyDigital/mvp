@@ -98,13 +98,17 @@ Route::group([
 
     /*
     |--------------------------------------------------------------------------
-    | ENTERPRISE
+    | CUSTOMER
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/entreprises', ['as' => 'customer.index', 'uses' => 'Customer\HomeController@index']);
-    Route::get('/entreprises/profile', ['as' => 'customer.profile', 'uses' => 'Customer\CustomerController@index']);
+    Route::group(['prefix' => 'customer', 'as' => 'customer', 'middleware' => ['role:customer']], function () {
+      Route::get('/entreprises', ['as' => '.index', 'uses' => 'Customer\HomeController@index']);
+      Route::get('/entreprises/profile', ['as' => '.profile', 'uses' => 'Customer\CustomerController@index']);
+      Route::post('/entreprises/edit', ['as' => '.edit.profile', 'uses' => 'Customer\CustomerController@store']);
+      Route::get('/entreprises/documents', ['as' => '.document', 'uses' => 'Customer\DocumentController@index']);
 
+    });
 
     /*
     |--------------------------------------------------------------------------

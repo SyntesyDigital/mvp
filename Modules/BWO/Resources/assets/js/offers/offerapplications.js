@@ -179,6 +179,56 @@ app.offerapplications = {
         });
     },
 
+    loginEnterprise: function() {
+
+        $('#enterpriseError').hide();
+        $('#loginButton').hide();
+        $('#loginLoader').show();
+        $('#enterpriseError').css('display', 'none');
+
+        $.ajax({
+            type: "POST",
+            url: routes.login,
+            data: {
+                email: $('#enterprise-email').val(),
+                password: $('#enterprise-password').val(),
+            },
+            success: function(data, textStatus, xhr) {
+
+                if (xhr.status == 304) {
+                    $('#enterpriseError p').html('Mot de passe incorret');
+                    $('#enterpriseError').css('display', 'inline-block');
+                    $('#enterpriseButton').show();
+                    $('#enterpriseLoader').hide();
+                } else {
+                    user_id = data["data"][" user_id"];
+
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                var error_data = false;
+                if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {
+                    $('#enterpriseError p').html(jqXHR.responseJSON.errors["email"][0]);
+                    error_data = true;
+                }
+                if (typeof(jqXHR.responseJSON.errors["password"]) !== 'undefined' && !error_data) {
+                    $('#enterpriseError p').html(jqXHR.responseJSON.errors["password"][0]);
+                    error_data = true;
+                }
+                if (error_data) {
+                    $('#enterpriseError').css('display', 'inline-block');
+                } else {
+                    $('#enterpriseError p').html('Il y a eu une erreur dans la connexion');
+                }
+                $('#enterpriseButton').show();
+                $('#enterpriseLoader').hide();
+            }
+        });
+    },
+
     addFileTofake: function() {
         var aux = $('#resume_file').val();
         $('#fake-input').val(aux.replace(/^.*[\\\/]/, ''));
@@ -274,5 +324,11 @@ app.offerapplications = {
                 $('#confirmationModal').modal('show');
             }
         }
+    },
+
+    openEnterprise: function() {
+
+        $('#enterprise').modal('show');
+
     },
 }

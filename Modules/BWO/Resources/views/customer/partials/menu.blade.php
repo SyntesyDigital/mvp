@@ -3,6 +3,6 @@
 		<a href="{{ route('customer.profile') }}" >Vos Informations</a>
 	</li>
 	<li class="menu-item {{ $active_hex == 'documents'?'active':''}}">
-		<a href="" > Vos Documents</a>
+		<a href="{{ route('customer.document') }}" > Vos Documents</a>
 	</li>
 </ul>

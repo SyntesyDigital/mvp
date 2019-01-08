@@ -81,10 +81,6 @@ Route::group([
     Route::put('/customers/{customer?}/users/{user?}/update', 'Admin\AdminCustomerUserController@update')->name('rrhh.admin.customers.users.update');
     Route::delete('/customers/{customer?}/users/{user?}/delete', 'Admin\AdminCustomerUserController@delete')->name('rrhh.admin.customers.users.delete');
 
-    Route::get('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@data')->name('rrhh.admin.customers.documents.data');
-    Route::post('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@upload')->name('rrhh.admin.customers.documents.upload');
-    Route::delete('/customers/{customer?}/documents/delete', 'Admin\AdminCustomerDocumentsController@delete')->name('rrhh.admin.customers.documents.delete');
-
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('rrhh.admin.sitelists.index');
@@ -113,5 +109,17 @@ Route::group([
     Route::get('/emails-templates/{template?}', 'Admin\EmailTemplateController@show')->name('rrhh.admin.emailstemplates.show');
     Route::put('/emails-templates/{template?}/update', 'Admin\EmailTemplateController@update')->name('rrhh.admin.emailstemplates.update');
     Route::delete('/emails-templates/{template?}/delete', 'Admin\EmailTemplateController@delete')->name('rrhh.admin.emailstemplates.delete');
+
+});
+
+Route::group([
+  'middleware' => ['web', 'auth','role:admin|customer', 'DetectUserLocale'],
+  'prefix' => 'architect',
+  'namespace' => 'Modules\RRHH\Http\Controllers'
+], function() {
+
+  Route::get('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@data')->name('rrhh.admin.customers.documents.data');
+  Route::post('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@upload')->name('rrhh.admin.customers.documents.upload');
+  Route::delete('/customers/{customer?}/documents/delete', 'Admin\AdminCustomerDocumentsController@delete')->name('rrhh.admin.customers.documents.delete');
 
 });

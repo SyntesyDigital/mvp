@@ -93056,6 +93056,7 @@ __webpack_require__(565);
 __webpack_require__(839);
 __webpack_require__(887);
 __webpack_require__(888);
+__webpack_require__(925);
 
 //javascripts
 __webpack_require__(889);
@@ -111152,6 +111153,56 @@ app.offerapplications = {
         });
     },
 
+    loginEnterprise: function loginEnterprise() {
+
+        $('#enterpriseError').hide();
+        $('#loginButton').hide();
+        $('#loginLoader').show();
+        $('#enterpriseError').css('display', 'none');
+
+        $.ajax({
+            type: "POST",
+            url: routes.login,
+            data: {
+                email: $('#enterprise-email').val(),
+                password: $('#enterprise-password').val()
+            },
+            success: function success(data, textStatus, xhr) {
+
+                if (xhr.status == 304) {
+                    $('#enterpriseError p').html('Mot de passe incorret');
+                    $('#enterpriseError').css('display', 'inline-block');
+                    $('#enterpriseButton').show();
+                    $('#enterpriseLoader').hide();
+                } else {
+                    user_id = data["data"][" user_id"];
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function error(jqXHR, textStatus, errorThrown) {
+                var error_data = false;
+                if (typeof jqXHR.responseJSON.errors["email"] !== 'undefined') {
+                    $('#enterpriseError p').html(jqXHR.responseJSON.errors["email"][0]);
+                    error_data = true;
+                }
+                if (typeof jqXHR.responseJSON.errors["password"] !== 'undefined' && !error_data) {
+                    $('#enterpriseError p').html(jqXHR.responseJSON.errors["password"][0]);
+                    error_data = true;
+                }
+                if (error_data) {
+                    $('#enterpriseError').css('display', 'inline-block');
+                } else {
+                    $('#enterpriseError p').html('Il y a eu une erreur dans la connexion');
+                }
+                $('#enterpriseButton').show();
+                $('#enterpriseLoader').hide();
+            }
+        });
+    },
+
     addFileTofake: function addFileTofake() {
         var aux = $('#resume_file').val();
         $('#fake-input').val(aux.replace(/^.*[\\\/]/, ''));
@@ -111244,8 +111295,359 @@ app.offerapplications = {
                 $('#confirmationModal').modal('show');
             }
         }
+    },
+
+    openEnterprise: function openEnterprise() {
+
+        $('#enterprise').modal('show');
     }
 };
+
+/***/ }),
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */,
+/* 903 */,
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */,
+/* 911 */,
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */,
+/* 919 */,
+/* 920 */,
+/* 921 */,
+/* 922 */,
+/* 923 */,
+/* 924 */,
+/* 925 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var acceptedFiles = 'application/pdf,application/doc',
+    maxFilesize = 20,
+    // MB
+paramName = 'file',
+    identifier = '.docs-dropfiles';
+
+var CustomerDocuments = function (_Component) {
+    _inherits(CustomerDocuments, _Component);
+
+    function CustomerDocuments(props) {
+        _classCallCheck(this, CustomerDocuments);
+
+        var _this2 = _possibleConstructorReturn(this, (CustomerDocuments.__proto__ || Object.getPrototypeOf(CustomerDocuments)).call(this, props));
+
+        _this2.state = {
+            config: props.config ? JSON.parse(atob(props.config)) : '',
+            initializated: false,
+            routes: {},
+            items: [{
+                id: 1,
+                name: 'doc_1.pdf',
+                url: 'sdfsdf'
+            }, {
+                id: 1,
+                name: 'doc_2.pdf',
+                url: 'sdfsdf'
+            }]
+        };
+
+        console.log('CONFIG =>', _this2.state.config);
+        _this2._dropzone = null;
+
+        return _this2;
+    }
+
+    _createClass(CustomerDocuments, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadDocs();
+        }
+    }, {
+        key: 'initDropzone',
+        value: function initDropzone() {
+            var _this = this;
+
+            var settings = {
+                url: _this.state.routes.upload,
+                uploadMultiple: false,
+                parallelUploads: 1,
+                createImageThumbnails: false,
+                //acceptedFiles: acceptedFiles,
+                addRemoveLinks: false,
+                maxFilesize: maxFilesize,
+                paramName: paramName
+            };
+
+            this._dropzone = new Dropzone(identifier, settings);
+
+            this._dropzone.on("error", function (file, response) {
+                toastr.error(response.errors.file[0]);
+            });
+
+            this._dropzone.on("totaluploadprogress", function (progress) {
+                $(".progress-bar").parent().addClass("progress-striped active");
+                $(".progress-bar").width(progress + "%");
+                $(".progress-bar").html(progress + "%");
+            });
+
+            this._dropzone.on("maxfilesreached", function () {
+                toastr.error('Too many files added !');
+            });
+
+            this._dropzone.on("dragenter", function () {
+                $('.docs-dropfiles').addClass("active");
+            });
+
+            this._dropzone.on("dragleave dragend dragover", function () {
+                $('.docs-dropfiles').removeClass("active");
+            });
+
+            this._dropzone.on("maxfilesexceeded", function (file) {
+                toastr.error('Le fichier est trop gros !');
+            });
+
+            this._dropzone.on("queuecomplete", function (file, response) {
+                setTimeout(function () {
+                    $(".progress-bar").parent().removeClass("progress-striped active");
+                    $(".progress-bar").width("0%");
+                    $(".progress-bar").html("");
+                }, 2000);
+
+                _this._dropzone.removeAllFiles(true);
+            });
+
+            this._dropzone.on("success", function (file, response) {
+                _this.onSuccessUpload(_this);
+            });
+        }
+    }, {
+        key: 'onSuccessUpload',
+        value: function onSuccessUpload(_this) {
+            toastr.success('Action realisée avec succès !');
+            _this.loadDocs();
+        }
+    }, {
+        key: 'loadDocs',
+        value: function loadDocs() {
+            var self = this;
+            if (this.state.config.type == "ajax") {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get(this.state.config.route).then(function (response) {
+                    self.setState({
+                        initializated: true,
+                        items: response.data.documents ? response.data.documents : [],
+                        routes: response.data.routes
+                    });
+
+                    if (self._dropzone == null) {
+                        self.initDropzone();
+                    }
+                    //self.loadDocs();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    }, {
+        key: 'onRemoveField',
+        value: function onRemoveField(id, e) {
+
+            e.preventDefault();
+            var self = this;
+
+            bootbox.confirm({
+                message: 'Etes-vous sur de vouloir supprimer ?',
+                buttons: {
+                    confirm: {
+                        label: 'Oui',
+                        className: 'btn-red'
+                    },
+                    cancel: {
+                        label: 'Non',
+                        className: 'btn-dark-gray'
+                    }
+                },
+                callback: function callback(result) {
+                    if (result) {
+
+                        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(self.state.routes.delete, {
+                            params: {
+                                id: id
+                            }
+                        }).then(function (response) {
+                            toastr.success('Document removed correctly');
+                            self.loadDocs();
+                        }).catch(function (error) {
+                            toastr.error('An error occurred');
+                        });
+                    }
+                }
+            });
+        }
+    }, {
+        key: 'renderDocs',
+        value: function renderDocs() {
+            var _this3 = this;
+
+            var self = this;
+
+            if (!this.state.items) {
+                return null;
+            }
+
+            return this.state.items.map(function (item, key) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'typology-field', key: key },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-type' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa fa-file" }),
+                        ' \xA0 Document'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-inputs' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'field-name' },
+                            item.uploaded_filename
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'field-actions' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '/' + item.url.replace('public', 'storage') + '/' + item.stored_filename, target: '_blank', className: 'btn-link' },
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-download' }),
+                            '  '
+                        ),
+                        ' \xA0',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'a',
+                            { href: '', className: 'remove-field-btn', onClick: self.onRemoveField.bind(_this3, item.id) },
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }),
+                            '  '
+                        ),
+                        '\xA0\xA0'
+                    )
+                );
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var documents = this.state.initializated ? this.renderDocs() : '';
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'row' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-4 image-col' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'image no-selected docs-dropfiles' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                { align: 'center' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'strong',
+                                    null,
+                                    'Glisser un fichier ou'
+                                ),
+                                ' ',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'a',
+                                    { href: '#', className: 'btn btn-default' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-upload' }),
+                                    ' d\xE9poser le fichier '
+                                )
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'progress' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'progress-bar', role: 'progressbar', 'aria-valuenow': '0', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { width: '0%' } },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'sr-only' })
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-8' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'field-form fields-list-container' },
+                            documents
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CustomerDocuments;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (CustomerDocuments);
+
+
+if (document.getElementById('customer_documents')) {
+    var element = document.getElementById('customer_documents');
+    var config = element.getAttribute('config');
+
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CustomerDocuments, { config: config }), document.getElementById('customer_documents'));
+}
 
 /***/ })
 /******/ ]);

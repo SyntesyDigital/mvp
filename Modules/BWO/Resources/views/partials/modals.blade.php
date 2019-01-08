@@ -82,6 +82,46 @@
         </div>
     <!-- End Modal Login -->
 
+    <!-- Modal Enterprise -->
+        <div class="modal fade" id="enterprise" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="login-left">
+                        <div class="modal-body">
+                            <form role="form" method="POST" action="{{ route('login') }}">
+                              {{ csrf_field() }}
+                                <h3>VOUS AVEZ UN COMPTE</h3>
+
+                                <input type="text" id="enterprise-email" name="email" value="" placeholder="Identifiant" class="form-control" />
+
+                                @if ($errors->has('email'))
+                                  <p class="control-label error-login-p">{{ $errors->first('email') }}</p>
+                                @endif
+
+                                <input type="password" id="enterprise-password" name="password" value="" placeholder="Mot de passe" class="form-control" />
+
+                                @if ($errors->has('password'))
+                                  <p class="control-label error-login-p">{{ $errors->first('password') }}</p>
+                                @endif
+
+                                <a href="/password/reset">Mot de passe oublié ?</a>
+                                <br clear="all">
+
+                                <button type="button" onclick="app.offerapplications.loginEnterprise()" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
+                                <img class="loader" id="enterpriseLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="modal-error" id="enterpriseError">
+                        <p>Tous les champs sont obligatoires, merci de les compléter.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <!-- End Modal Login -->
+
     <!-- Modal Postuled -->
         <div class="modal fade" id="postuledModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

@@ -94,6 +94,9 @@
               $(".application-btn").on('click',function(e){
                   app.offerapplications.open();
               });
+              $(".enterprise-btn").on('click',function(e){
+                  app.offerapplications.openEnterprise();
+              });
           });
 
         </script>

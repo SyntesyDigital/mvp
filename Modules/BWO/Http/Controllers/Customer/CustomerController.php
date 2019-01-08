@@ -7,6 +7,9 @@ use Auth;
 use Illuminate\Http\Request;
 use Session;
 
+use Modules\RRHH\Http\Requests\Front\Customer\UpdateCustomerRequest;
+use Modules\RRHH\Jobs\Customer\UpdateFrontCustomer;
+
 class CustomerController extends Controller
 {
     public function __construct( ) {
@@ -24,15 +27,16 @@ class CustomerController extends Controller
         ]);
     }
 
-  /*  public function store(CandidateEditRequest $request)
+    public function store(UpdateCustomerRequest $request)
     {
+
         try {
-            $this->dispatchNow(new UpdateCandidate(Auth::user(), $request->all()));
-
-            return redirect()->route('candidate.profile')->with('success','Votre profil vient d\'être mis à jour.');
+            $this->dispatchNow(UpdateFrontCustomer::fromRequest(Auth::user(),$request));
+            Session::flash('notify_success', 'Enregistrement effectuée avec succès');
         } catch (\Exception $e) {
-
-            return redirect()->route('candidate.profile')->with('error',$e->getMessage());
+            Session::flash('notify_error', $e->getMessage());
         }
-    }*/
+
+        return redirect()->route('customer.profile')->with('success','Votre profil vient d\'être mis à jour.');
+    }
 }

@@ -10,7 +10,7 @@
 
 	<div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
 		<div class="horizontal-inner-container">
-			<h1>BONJOUR [ENTREPRISE]</h1>
+			<h1>BONJOUR {{Auth::user()->firstname}}</h1>
 		</div>
 	</div>
 
@@ -49,7 +49,7 @@
 
 				{!!
 		        Form::open([
-		            'url' => route('candidate.edit.profile'),
+		            'url' => route('customer.edit.profile'),
 		            'method' => 'POST',
 								'enctype' => 'multipart/form-data'
 		        ])
@@ -58,89 +58,182 @@
 
 						<h2>MODIFIER VOS INFORMATIONS</h2>
 
+						<h3>ENTERPRISE INFORMATIONS</h3>
+
 						<div class="row">
 
-								{{--<div class="separator" style="height:40px;"></div>
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('name') ? 'has-error' : null }}">
+									{!!Form::label('name', 'Enterprise')!!}
+									{!!
+										Form::text('name', Auth::user()->customer->first()->name, [
+											'class' => 'form-control'
+										])
+									!!}
+								</div>
+							</div>
 
-								@include('bwo::components.dropzone-image',[
-									'image' => isset(Auth::user()->image) ?
-										Auth::user()->image : null,
-									'size' => 'avatar',
-									'id' => 'dropzone-1',
-									'name' => 'image',
-									'resizeWidth' => 500
-								])--}}
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('firstname') ? 'has-error' : null }}">
-									 	{!!Form::label('firstname', 'Enterprise')!!}
-										{!!
-											Form::text('firstname', '', [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('email') ? 'has-error' : null }}">
+									{!!Form::label('email', 'Email')!!}
+									{!!
+										Form::text('email', Auth::user()->customer->first()->email, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('referent') ? 'has-error' : null }}">
-									 	{!!Form::label('referent', 'Référent')!!}
-										{!!
-											Form::text('referent', '', [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('firstname') ? 'has-error' : null }}">
+									{!!Form::label('firstname', 'Référent Prénom')!!}
+									{!!
+										Form::text('firstname', Auth::user()->customer->first()->firstname, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-12">
-									<div class="{{ (isset($errors)) && $errors->has('address') ? 'has-error' : null }}">
-										{!!Form::label('address', 'Adresse')!!}
-										{!!
-											Form::text('address', null !== Auth::user()? Auth::user()->candidate->address:old('address'), [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('lastname') ? 'has-error' : null }}">
+									{!!Form::label('lastname', 'Référent Nom')!!}
+									{!!
+										Form::text('lastname', Auth::user()->customer->first()->lastname, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('postal_code') ? 'has-error' : null }}">
-										{!!Form::label('postal_code', 'Code Postal*')!!}
-										{!!
-											Form::text('postal_code', null !== Auth::user()? Auth::user()->candidate->postal_code:old('postal_code'), [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('phone_number') ? 'has-error' : null }}">
+									{!!Form::label('phone_number', 'Téléphone')!!}
+									{!!
+										Form::text('phone_number', Auth::user()->customer->first()->phone_number, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('location') ? 'has-error' : null }}">
-										{!!Form::label('location', 'Localité*')!!}
-										{!!
-											Form::text('location', null !== Auth::user()? Auth::user()->candidate->location:old('location'), [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+
+
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('address') ? 'has-error' : null }}">
+									{!!Form::label('address', 'Adresse')!!}
+									{!!
+										Form::text('address', Auth::user()->customer->first()->address, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('telephone') ? 'has-error' : null }}">
-									 	{!!Form::label('telephone', 'Téléphone*')!!}
-										{!!
-											Form::text('telephone',  '', [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('postcode') ? 'has-error' : null }}">
+									{!!Form::label('postcode', 'Code postal')!!}
+									{!!
+										Form::text('postcode', Auth::user()->customer->first()->postcode, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
-								<div class="col-md-6">
-									<div class="{{ (isset($errors)) && $errors->has('email') ? 'has-error' : null }}">
-										{!!Form::label('email', 'E-mail*')!!}
-										{!!
-											Form::text('email',  '', [
-												'class' => 'form-control'
-											])
-										!!}
-									</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="{{ (isset($errors)) && $errors->has('city') ? 'has-error' : null }}">
+									{!!Form::label('city', 'Ville')!!}
+									{!!
+										Form::text('city', Auth::user()->customer->first()->city, [
+											'class' => 'form-control',
+										])
+									!!}
 								</div>
+							</div>
+
+
 						</div>
+
+
+						<h3>USER INFORMATIONS</h3>
+
+						<div class="row">
+
+								<div class="col-md-6 {{ (isset($errors)) && $errors->has('image') ? 'has-error' : null }}">
+
+									<div class="separator" style="height:40px;"></div>
+
+									@include('bwo::components.dropzone-image',[
+										'image' => isset(Auth::user()->image) ?
+											Auth::user()->image : null,
+										'size' => 'avatar',
+										'id' => 'dropzone-1',
+										'name' => 'image',
+										'resizeWidth' => 500
+									])
+
+								</div>
+
+								<div class="col-md-6">
+
+									<div class="{{ (isset($errors)) && $errors->has('user_firstname') ? 'has-error' : null }}">
+									 	{!!Form::label('user_firstname', 'Prénom*')!!}
+										{!!
+											Form::text('user_firstname', Auth::user()->firstname, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('user_lastname') ? 'has-error' : null }}">
+									 	{!!Form::label('user_lastname', 'Nom*')!!}
+										{!!
+											Form::text('user_lastname',  Auth::user()->lastname, [
+												'class' => 'form-control'
+											])
+										!!}
+
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('user_email') ? 'has-error' : null }}">
+										{!!Form::label('user_email', 'E-mail*')!!}
+										{!!
+											Form::text('user_email',  Auth::user()->email, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+									<div class="{{ (isset($errors)) && $errors->has('user_telephone') ? 'has-error' : null }}">
+									 	{!!Form::label('user_telephone', 'Téléphone*')!!}
+										{!!
+											Form::text('user_telephone',  Auth::user()->telephone, [
+												'class' => 'form-control'
+											])
+										!!}
+									</div>
+
+								</div>
+
+						</div>
+
+						<br clear="all">
+
+						<h3>Modifier votre mot de passe</h3>
+						<div class="col-md-6">
+							{!!Form::label('password', 'Mot de passe')!!}
+							{!!
+								Form::password('password',  [
+									'class' => 'form-control'
+								])
+							!!}
+						</div>
+						<div class="col-md-6">
+							{!!Form::label('password_confirmation', 'Répétez votre mot de passe')!!}
+							{!!
+								Form::password('password_confirmation',  [
+									'class' => 'form-control'
+								])
+							!!}
+						</div>
+
+
 
 					<br clear="all">
 
@@ -181,7 +274,7 @@
 @push('javascripts')
 	<script>
 		$(function() {
-		  $( "input[name='birthday']" ).datepicker({ dateFormat: "dd/mm/yy" });
+
 		});
 	</script>
 @endpush
