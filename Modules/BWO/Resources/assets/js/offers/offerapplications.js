@@ -4,7 +4,10 @@ app.offerapplications = {
     user_id: '',
     cv: '',
 
-    init: function(user, offer, cv) {
+    init: function(user, offer, cv)
+    {
+        var _this = this;
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': csrf_token
@@ -15,25 +18,25 @@ app.offerapplications = {
         user_id = user;
         cv_url = cv;
 
-        console.log("init :: offer_id : ",offer);
-
-        var _this = this;
-
         $('#cv-form').on('submit', function(e) {
             e.preventDefault();
             _this.addCV();
         });
 
+        $('#loginModalForm').on('submit', function(e){
+            app.offerapplications.login();
+        });
+
+        $('#registerModalForm').on('submit', function(e){
+            app.offerapplications.register();
+        });
     },
 
-    apply: function() {
-
-        console.log("apply :: ",
-          routes['offer.applications.create'].replace(':offer_id',offer_id)
-        );
-
+    apply: function()
+    {
         $('.apply-btn').hide();
         $('.applyLoader').show();
+
         $.ajax({
             type: "POST",
             url: routes['offer.applications.create'].replace(':offer_id',offer_id),
@@ -62,7 +65,8 @@ app.offerapplications = {
 
     },
 
-    register: function() {
+    register: function()
+    {
         $('#loginModalError').hide();
         $('#regButton').hide();
         $('#regLoader').show();
@@ -128,8 +132,8 @@ app.offerapplications = {
         });
     },
 
-    login: function() {
-
+    login: function()
+    {
         $('#loginModalError').hide();
         $('#loginButton').hide();
         $('#loginLoader').show();
@@ -179,12 +183,14 @@ app.offerapplications = {
         });
     },
 
-    addFileTofake: function() {
+    addFileTofake: function()
+    {
         var aux = $('#resume_file').val();
         $('#fake-input').val(aux.replace(/^.*[\\\/]/, ''));
     },
 
-    addCV: function() {
+    addCV: function()
+    {
         $('#upload-button').hide();
         $('#upload-loader').show();
         $('#cvModalError').css('display', 'none');
@@ -234,7 +240,8 @@ app.offerapplications = {
         }
     },
 
-    addTag: function() {
+    addTag: function()
+    {
         var tag = $('#alerts').val();
         $('#tagModalError').hide();
         if (tag != '') {
@@ -259,12 +266,14 @@ app.offerapplications = {
         }
     },
 
-    goToApply: function() {
+    goToApply: function()
+    {
         $('.modal').modal('hide');
         $('#registeredModal').modal('show');
     },
 
-    open: function() {
+    open: function()
+    {
         if (user_id == 0) {
             $('#loginModal').modal('show');
         } else {

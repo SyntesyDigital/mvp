@@ -51,7 +51,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Enterprise</a>
+												<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Entreprise</a>
 											</li>
 										@endif
 

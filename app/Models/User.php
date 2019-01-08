@@ -108,6 +108,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('Modules\RRHH\Entities\Offers\Offer', 'recipient_id', 'id');
     }
+
+    public function customer()
+    {
+        return $this->hasMany('Modules\RRHH\Entities\Customer', 'customer_id', 'id');
+    }
     //
 
     /**

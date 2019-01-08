@@ -47,15 +47,36 @@
         </div>
     @endif
 
-     @if($node["input"] == 'hidden')
-            <input type="hidden" class="form-control" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}">
+    @if($node["input"] == 'hidden')
+        <input
+            type="hidden"
+            class="form-control"
+            id="{{$node["id"] or ''}}"
+            name="{{$node["name"]}}"
+            placeholder="{{$node["placeholder"] or ''}}"
+            value="{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}"
+        >
     @endif
 
 
     @if($node["input"] == 'date')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
-            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="{{ $node["id"] or rand() }}" name="{{$node["name"]}}" placeholder="{{$node["placeholder"] or ''}}" value="{{ isset($item) ? date('d/m/Y', $item->{$node["name"]}) : old($node["name"]) }}">
+
+            @php
+                $date = isset($item) ? $item->{$node["name"]} : null;
+                $date = str_contains($date, '/') !== false ? Carbon\Carbon::createFromFormat('d/m/Y', $item->{$node["name"]})->timestamp : $date;
+            @endphp
+
+            <input
+                id="{{ $node["id"] or rand() }}"
+                type="text"
+                autocomplete="off"
+                class="form-control datepicker-offer"
+                name="{{$node["name"]}}"
+                placeholder="{{$node["placeholder"] or ''}}"
+                value="{{ $date ? date('d/m/Y', $date) : old($node["name"]) }}"
+            >
         </div>
     @endif
 
@@ -69,7 +90,15 @@
     @if($node["input"] == 'richtext')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>
-            <textarea class="form-control" id="{{ $node["name"] }}_editor" name="{{$node["name"]}}" rows="6" placeholder="{{$node["placeholder"] or ''}}">{{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}</textarea>
+            <textarea
+                id="{{ $node["name"] }}_editor"
+                class="form-control"
+                name="{{$node["name"]}}"
+                rows="6" p
+                laceholder="{{$node["placeholder"] or ''}}"
+            >
+            {{ isset($item) ? $item->{$node["name"]} : old($node["name"]) }}
+            </textarea>
         </div>
 
         <script type="text/javascript">
@@ -94,7 +123,12 @@
     @if($node["input"] == 'checkbox')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>
-                <input type="checkbox" id="{{$node["id"] or ''}}" name="{{$node["name"]}}" value="{{$node["value"] or old($node["name"])}}" @if($item && $item->{$node["name"]}) checked @endif />
+                <input
+                    id="{{$node["id"] or ''}}"
+                    type="checkbox"
+                    name="{{$node["name"]}}"
+                    value="{{$node["value"] or old($node["name"])}}" @if($item && $item->{$node["name"]}) checked @endif
+                >
                 {{$node["label"]}}
             </label>
         </div>
