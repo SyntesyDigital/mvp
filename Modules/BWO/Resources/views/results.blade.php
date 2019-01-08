@@ -125,7 +125,7 @@
                   {{ $offer->title }}
                 </div>
 
-                <p>Réf: {{$offer->id}} - Posté le {{ date('d/m/Y', $offer->start_at) }}</p>
+                <p>Réf: {{$offer->id}} - Posté le {{ $offer->start_at }}</p>
                 @php
                   $string = substr(strip_tags($offer->description), 0, 100);
                   if(strlen($string) < strlen(strip_tags($offer->description))){

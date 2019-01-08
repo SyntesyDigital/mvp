@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="<?php echo e(route('rrhh.admin.sitelists.index')); ?>" class="btn btn-default">
+                <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default">
                     <i class="fa fa-angle-left"></i>
                 </a>
 
@@ -39,7 +39,7 @@
 
 	
 	<div class="col-md-9 page-content">
-		<div class="form-group label-floating">
+		<div class="form-group label-floating <?php echo e($errors->has("subject") ? 'has-error' : ''); ?>">
 			<?php echo Form::label('Sujet'); ?>
 
 			<?php echo Form::text('subject', old('subject'), [
@@ -48,7 +48,7 @@
 
 	    </div>
 
-	    <div class="form-group label-floating">
+	    <div class="form-group label-floating <?php echo e($errors->has("reply_to") ? 'has-error' : ''); ?>">
 			<?php echo Form::label('Répondre à'); ?>
 
 			<?php echo Form::text('reply_to', old('reply_to', env('MAIL_NO_REPLY')), [
@@ -57,7 +57,7 @@
 
 	    </div>
 
-	    <div class="form-group label-floating">
+	    <div class="form-group label-floating <?php echo e($errors->has("message") ? 'has-error' : ''); ?>">
 			<?php echo Form::label('Message'); ?>
 
 			<?php echo Form::textarea('message', old('message'), [

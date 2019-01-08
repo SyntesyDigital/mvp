@@ -11,6 +11,8 @@
       <div class="grid-items">
         <div class="row">
             <?php $__currentLoopData = config('settings'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+              <?php if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']])): ?>
                 <div class="col-xs-3">
                     <a href="<?php echo e(route($setting["route"])); ?>">
                       <div class="grid-item">
@@ -22,6 +24,8 @@
                       </div>
                     </a>
                 </div>
+              <?php endif; ?>
+
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
       </div>

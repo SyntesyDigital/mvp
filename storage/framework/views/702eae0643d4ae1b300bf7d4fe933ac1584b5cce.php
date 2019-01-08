@@ -47,15 +47,36 @@
         </div>
     <?php endif; ?>
 
-     <?php if($node["input"] == 'hidden'): ?>
-            <input type="hidden" class="form-control" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>">
+    <?php if($node["input"] == 'hidden'): ?>
+        <input
+            type="hidden"
+            class="form-control"
+            id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>"
+            name="<?php echo e($node["name"]); ?>"
+            placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"
+            value="<?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>"
+        >
     <?php endif; ?>
 
 
     <?php if($node["input"] == 'date'): ?>
         <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
-            <input type="text" autocomplete="off" class="form-control datepicker-offer" id="<?php echo e(isset($node["id"]) ? $node["id"] : rand()); ?>" name="<?php echo e($node["name"]); ?>" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>" value="<?php echo e(isset($item) ? date('d/m/Y', $item->{$node["name"]}) : old($node["name"])); ?>">
+
+            <?php
+                $date = isset($item) ? $item->{$node["name"]} : null;
+                $date = str_contains($date, '/') !== false ? Carbon\Carbon::createFromFormat('d/m/Y', $item->{$node["name"]})->timestamp : $date;
+            ?>
+
+            <input
+                id="<?php echo e(isset($node["id"]) ? $node["id"] : rand()); ?>"
+                type="text"
+                autocomplete="off"
+                class="form-control datepicker-offer"
+                name="<?php echo e($node["name"]); ?>"
+                placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"
+                value="<?php echo e($date ? date('d/m/Y', $date) : old($node["name"])); ?>"
+            >
         </div>
     <?php endif; ?>
 
@@ -69,7 +90,16 @@
     <?php if($node["input"] == 'richtext'): ?>
         <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label><?php echo e($node["label"]); ?></label>
-            <textarea class="form-control" id="<?php echo e($node["name"]); ?>_editor" name="<?php echo e($node["name"]); ?>" rows="6" placeholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"><?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?></textarea>
+            <textarea
+                id="<?php echo e($node["name"]); ?>_editor"
+                class="form-control"
+                name="<?php echo e($node["name"]); ?>"
+                rows="6" p
+                laceholder="<?php echo e(isset($node["placeholder"]) ? $node["placeholder"] : ''); ?>"
+            >
+            <?php echo e(isset($item) ? $item->{$node["name"]} : old($node["name"])); ?>
+
+            </textarea>
         </div>
 
         <script type="text/javascript">
@@ -94,7 +124,12 @@
     <?php if($node["input"] == 'checkbox'): ?>
         <div class="form-group <?php echo e($errors->has($node["name"]) ? 'has-error' : ''); ?>">
             <label>
-                <input type="checkbox" id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>" name="<?php echo e($node["name"]); ?>" value="<?php echo e(isset($node["value"]) ? $node["value"] : old($node["name"])); ?>" <?php if($item && $item->{$node["name"]}): ?> checked <?php endif; ?> />
+                <input
+                    id="<?php echo e(isset($node["id"]) ? $node["id"] : ''); ?>"
+                    type="checkbox"
+                    name="<?php echo e($node["name"]); ?>"
+                    value="<?php echo e(isset($node["value"]) ? $node["value"] : old($node["name"])); ?>" <?php if($item && $item->{$node["name"]}): ?> checked <?php endif; ?>
+                >
                 <?php echo e($node["label"]); ?>
 
             </label>

@@ -68,13 +68,6 @@ return [
                                 'label' => 'Client',
                                 'placeholder' => '---',
                             ],
-                            //  [
-                            //     'type' => 'field',
-                            //     'input' => 'customers_contacts',
-                            //     'name' => 'customer_contact_id',
-                            //     'label' => 'Contact',
-                            //     'placeholder' => '---',
-                            // ],
                         ],
                     ],
                 ],
@@ -287,86 +280,8 @@ return [
                                               'type' => 'field',
                                               'input' => 'list',
                                               'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_cariste',
-                                              'label' => 'Permis cariste',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_nacelle',
-                                              'label' => 'Permis nacelle',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
                                               'name' => 'license_drive',
                                               'label' => 'Permis B',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'has_vehicle',
-                                              'label' => 'Véhiculé',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_electrical',
-                                              'label' => 'Habilitations électrique',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_pontier',
-                                              'label' => 'Permis de pontier élingueur',
-                                          ],
-                                      ],
-                                  ],
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_soudure',
-                                              'label' => 'Licence soudure',
                                           ],
                                       ],
                                   ],
