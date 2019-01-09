@@ -25,8 +25,25 @@
                     </a>
                 </div>
               <?php endif; ?>
-
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            
+            <?php $__currentLoopData = config('architect::plugins.settings'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $setting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']])): ?>
+                  <div class="col-xs-3">
+                      <a href="<?php echo e(route($setting["route"])); ?>">
+                        <div class="grid-item">
+                            <i class="fa <?php echo e($setting["icon"]); ?>"></i>
+                            <p class="grid-item-name">
+                                <?php echo e($setting["label"]); ?>
+
+                            </p>
+                        </div>
+                      </a>
+                  </div>
+                <?php endif; ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
         </div>
       </div>
 

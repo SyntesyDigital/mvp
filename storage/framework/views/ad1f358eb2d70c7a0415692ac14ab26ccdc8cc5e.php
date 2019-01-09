@@ -13,9 +13,7 @@
                 <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
-                        <?php echo $__env->make('architect::partials.topbar-menu', [
-                            'items' => config('architect::menu')
-                        ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo $__env->make('architect::partials.topbar-menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </ul>
                   </nav>
                 </div>

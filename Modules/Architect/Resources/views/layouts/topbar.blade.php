@@ -13,9 +13,7 @@
                 <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
-                        @include('architect::partials.topbar-menu', [
-                            'items' => config('architect::menu')
-                        ])
+                        @include('architect::partials.topbar-menu')
                     </ul>
                   </nav>
                 </div>

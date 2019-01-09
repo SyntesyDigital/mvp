@@ -70,13 +70,13 @@ class RRHHServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/settings.php',
-            'settings'
+            __DIR__.'/../Config/users.php',
+            'architect::settings.users'
         );
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/users.php',
-            'architect::settings.users'
+            __DIR__.'/../Config/settings.php',
+            'architect::plugins.settings'
         );
 
         $this->mergeConfigFrom(

@@ -1,4 +1,4 @@
-@foreach($items as $item)
+@foreach(config('architect::menu') as $item)
 
     {{-- If current user can show this menu --}}
     @if(!empty($item['roles']))
