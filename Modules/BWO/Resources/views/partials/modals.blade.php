@@ -24,7 +24,7 @@
                                 <br clear="all">
 
                                 <a href="{{ route('linkedin.login') }}">
-                                    <img src="/modules/BWO/images/linkedin-signin.png" width="220" />
+                                    <img src="/modules/bwo/images/linkedin-signin.png" width="220" />
                                 </a>
                                 <button type="button" onclick="app.offerapplications.login()" role="submit" id="loginButton" class="btn btn-red full-width mt-10"><i class="fa fa-user"></i>Se Connecter</button>
                                 <img class="loader" id="loginLoader" src="{{asset('modules/bwo/images/loader.gif')}}" />
