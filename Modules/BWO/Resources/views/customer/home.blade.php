@@ -3,7 +3,7 @@
 @endphp
 @extends('bwo::layouts.master',[
 	'pageTitle' => $title,
-	'htmlTitle' => 'Espace candidat'
+	'htmlTitle' => 'Espace entreprise'
 ])
 
 @section('content')
