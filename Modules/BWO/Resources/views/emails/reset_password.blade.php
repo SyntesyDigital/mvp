@@ -1,4 +1,4 @@
-@extends('layouts.email')
+@extends('bwo::layouts.email')
 
 @section('content')
   <tr>

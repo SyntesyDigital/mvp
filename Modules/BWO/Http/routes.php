@@ -2,13 +2,13 @@
 
 Route::get('sitemap.xml', 'Modules\BWO\Http\Controllers\SitemapController@sitemap')->name('sitemap');
 Route::group([
-  'prefix' => LaravelLocalization::setLocale(),
+  // 'prefix' => LaravelLocalization::setLocale(),
   'middleware' => [
       'web',
-      'localeSessionRedirect',
-      'localizationRedirect',
-      'localeViewPath',
-      'localize'
+      // 'localeSessionRedirect',
+      // 'localizationRedirect',
+      // 'localeViewPath',
+      // 'localize'
   ],
   'namespace' => 'Modules\BWO\Http\Controllers'
 ], function() {

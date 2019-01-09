@@ -26,6 +26,11 @@ class BWOServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        $this->commands([
+            \Modules\BWO\Console\OffersAlertsCandidates::class,
+            \Modules\BWO\Console\SendCandidateAlertsEmail::class,
+        ]);
     }
 
     /**

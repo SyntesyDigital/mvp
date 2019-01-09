@@ -12,20 +12,20 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
-    ];
+    protected $commands = [];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('offers:alerts')
+                 ->dailyAt('08:00');
+
+        $schedule->command('candidates:alerts')
+              ->everyFiveMinutes();
     }
 
     /**

@@ -1,9 +1,9 @@
-@extends('layouts.email')
+@extends('bwo::layouts.email')
 
 @section('content')
   <tr>
     <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
-      Cet email a été enregistré avec succes
+      Cet email a été enregistré avec succès
     </td>
   </tr>
   <tr>
