@@ -24,8 +24,24 @@ class DeleteCustomerDocument
 
     public function handle()
     {
-        $document = $this->repository->getDocuments($this->customer)->firstWhere('id', $this->attributes["id"]);
+        //$document = $this->repository->getDocuments($this->customer)->firstWhere('id', $this->attributes["id"]);
+        $documents = $this->repository->getDocuments($this->customer)->toArray();
 
+        $docs = [];
+        $document = null;
+        foreach($documents as $doc) {
+            if($doc["id"] !== $this->attributes["id"]) {
+                $docs[] = $doc;
+            } else {
+                $document = $doc;
+            }
+        }
+
+        if(!$document) {
+            return false;
+        }
+
+        // Remove file
         $filePath = sprintf('%s/%s',
             str_replace(':id', $this->customer->id, Config::get('customers.storage')),
             $document["stored_filename"]
@@ -35,15 +51,10 @@ class DeleteCustomerDocument
             Storage::delete($filePath);
         }
 
-        $attributes = $this->attributes;
-        $documents = $this->repository->getDocuments($this->customer)->filter(function($document) use ($attributes){
-            return $document["id"] !== $attributes["id"] ? true : false;
-        });
-
+        // Update document field
         $this->customer->fields()->where('name', 'documents')->delete();
 
-        // Save documents
-        if($this->customer->saveField('documents', $documents->toJson())) {
+        if($this->customer->saveField('documents', json_encode($docs))) {
             return true;
         }
 
