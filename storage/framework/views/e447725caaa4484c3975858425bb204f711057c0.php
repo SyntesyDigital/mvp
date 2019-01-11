@@ -16,6 +16,7 @@
 									<ul class="navbar-nav mr-auto buttons-nabvar">
 
 										<?php if(Auth::check()): ?>
+
 											<?php if(Auth::user()->hasRole('candidate')): ?>
 												<li class="nav-item">
 													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('candidate.index')); ?>"><i class="fa fa-user-circle-o"></i> Mon Espace
@@ -23,9 +24,9 @@
 													</a>
 												</li>
 											<?php endif; ?>
-											<?php if(Auth::user()->hasRole('enterprise')): ?>
+											<?php if(Auth::user()->hasRole('customer')): ?>
 												<li class="nav-item">
-													<a class="nav-link btn btn-soft-gray" href="#"><i class="fa fa-user-circle-o"></i> Mon Espace
+													<a class="nav-link btn btn-soft-gray" href="<?php echo e(route('customer.index')); ?>"><i class="fa fa-user-circle-o"></i> Mon Espace
 														<span class="sr-only">(current)</span>
 													</a>
 												</li>
@@ -52,7 +53,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link btn btn-dark-gray application-btn" href="#">Espace Enterprise</a>
+												<a class="nav-link btn btn-dark-gray enterprise-btn" href="#">Espace Enterprise</a>
 											</li>
 										<?php endif; ?>
 

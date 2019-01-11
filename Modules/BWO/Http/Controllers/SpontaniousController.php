@@ -18,7 +18,7 @@ class SpontaniousController extends Controller
     public function index(Request $request)
     {
         if (Auth::check() && Auth::user()->hasRole(['admin', 'recruiter'])) {
-            return redirect()->route('admin');
+            return redirect()->route('dashboard');
         }
 
         return view('bwo::spontanious.form');

@@ -30,8 +30,7 @@ class OfferController extends Controller
             'id' => $offer->id,
         ]);
 
-
-        if (url()->current() != $url) {
+        if (url()->current() != $url || $offer->status == Offer::STATUS_UNACTIVE) {
             abort(404);
         }
 

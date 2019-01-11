@@ -41,16 +41,18 @@
             </div>
             <div class="block-info">
               <p><b>À partir du:</b></p>
-              <p>{{ $offer->start_at }}</p>
+              <p>{{ Date('d/m/Y', $offer->start_at )}}</p>
             </div>
             <div class="block-info">
               <p><b>Secteur:</b></p>
               <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }} / {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2') }}</p>
             </div>
-            <div class="block-info">
-              <p><b>Salaire:</b></p>
-              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
-            </div>
+						@if($offer->salary)
+	            <div class="block-info">
+	              <p><b>Salaire:</b></p>
+	              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
+	            </div>
+						@endif
             <div class="reference">REF : {{$offer->id}} | {{ $offer->start_at }}</div>
             <div class="share-container">
               @php

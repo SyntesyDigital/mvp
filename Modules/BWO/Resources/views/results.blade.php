@@ -118,6 +118,45 @@
 
     <div class="offers-list" id="search-results">
 
+      @php $search_txt = ''; @endphp
+      @if($search)
+        @php $search_txt .= "'".$search."'"; @endphp
+      @endif
+      @if($selected_job)
+        @php $search_txt .= ' Métiers: '; $first = 1; @endphp
+        @foreach($selected_job as $jname)
+          @if($first)
+            @php $first = false; @endphp
+          @else
+            @php $search_txt .= ', '; @endphp
+          @endif
+          @php $search_txt .= $jname; @endphp
+        @endforeach
+      @endif
+      @if($selected_contract)
+        @php
+          $list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
+          $contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+              return [$item['value'] => $item['name']];
+          });
+          $contracts = $contracts->toArray();
+        @endphp
+        @php $search_txt .= ' Contrats: '; $first = 1; @endphp
+        @foreach($selected_contract as $jcontract)
+          @if($first)
+            @php $first = false; @endphp
+          @else
+            @php $search_txt .= ', '; @endphp
+          @endif
+          @php $search_txt .= $contracts[$jcontract]; @endphp
+        @endforeach
+      @endif
+      @if($search || $selected_job || $selected_contract)
+        <div class="col-md-12">
+          <p class="title-search">Votre recherche {{$search_txt}}</p>
+        </div>
+      @endif
+
         @foreach($offers as $offer)
           <div class="col-md-4">
             <div class="offer-box">
