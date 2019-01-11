@@ -52,7 +52,7 @@
 												</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link btn btn-dark-gray enterprise-btn" href="#">Espace Enterprise</a>
+												<a class="nav-link btn btn-dark-gray enterprise-btn" href="#">Espace Entreprise</a>
 											</li>
 										@endif
 
