@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Repositories\ContentRepository;
 use Modules\Architect\Repositories\CategoryRepository;
+use Modules\Architect\Repositories\UserRepository;
 
 // Jobs & Requests
 use Modules\Architect\Http\Requests\Content\CreateContentRequest;
@@ -40,16 +41,17 @@ use Modules\Architect\Fields\FieldsReactPageBuilderAdapter;
 class ContentController extends Controller
 {
 
-    public function __construct(ContentRepository $contents, CategoryRepository $categories) {
+    public function __construct(ContentRepository $contents, CategoryRepository $categories, UserRepository $users) {
         $this->contents = $contents;
         $this->categories = $categories;
+        $this->users = $users;
     }
 
     public function index(Request $request)
     {
         return view('architect::contents.index', [
             "typologies" => Typology::all(),
-            "users" => User::all()->mapWithKeys(function($user){
+            "users" => $this->users->getAllByRoles(['admin', 'editor', 'author'])->mapWithKeys(function($user){
                 return [$user->id => $user->full_name];
             })
         ]);

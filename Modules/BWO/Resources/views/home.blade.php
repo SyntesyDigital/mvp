@@ -15,7 +15,7 @@
 
       <div class="banner-info-container">
         <div class="banner-title">
-            <h2 class="gray-square-text">LA BONNE PERSONNE C'EST PEUT ÊTRE</h2>
+            <h2 class="gray-square-text">LA BONNE PERSONNE C'EST PEUT-ÊTRE</h2>
             <div class="extra-red-text">VOUS !</div>
         </div>
 

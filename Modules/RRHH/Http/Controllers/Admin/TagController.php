@@ -53,7 +53,7 @@ class TagController extends Controller
     public function update(Tag $tag, UpdateTagRequest $request)
     {
         try {
-            $tag = $this->dispatchNow(UpdateTag::fromRequest($tag, $request));
+            $this->dispatchNow(UpdateTag::fromRequest($tag, $request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());

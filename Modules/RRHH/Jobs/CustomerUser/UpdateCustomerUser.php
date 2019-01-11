@@ -40,10 +40,11 @@ class UpdateCustomerUser
         }
 
         $this->user->update($this->attributes);
-        $this->user->attachRole(Role::where('name', 'customer')->first());
 
         if(isset($this->attributes['role_id'])) {
             $this->user->roles()->sync($this->attributes['role_id']);
+        } else {
+            $this->user->roles()->sync(Role::where('name', 'customer')->first());
         }
 
         return $this->user;
