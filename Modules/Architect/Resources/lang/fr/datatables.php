@@ -11,6 +11,7 @@ return [
     'continue'      => 'Voulez-vous continuer ?',
     'sure'          => 'Etes-vous sûre de vouloir continuer ?',
     'view'          => 'Voir',
-    'view_candidate'=> 'Voir profils',
+    'view_candidate'=> 'Voir profil',
+    'view_profile'=>  'Voir profil',
     'process'       => 'Traiter'
 ];

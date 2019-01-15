@@ -151,10 +151,10 @@ app.offerapplications = {
             success: function(data, textStatus, xhr) {
 
                 if (xhr.status == 304) {
-                    $('#loginModalError p').html('Mot de passe incorret');
-                    $('#loginModalError').css('display', 'inline-block');
-                    $('#loginButton').show();
-                    $('#loginLoader').hide();
+                  $('#loginModalError p').html('Mot de passe incorret');
+                  $('#loginModalError').css('display', 'inline-block');
+                  $('#loginButton').show();
+                  $('#loginLoader').hide();
                 } else {
                     user_id = data["data"][" user_id"];
                     cv_url = data["data"]["resume_file"];
@@ -166,14 +166,20 @@ app.offerapplications = {
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 var error_data = false;
-                if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
-                    error_data = true;
+                if (errorThrown == 'Unauthorized') {
+                  $('#loginModalError p').html('Utilisateur desactivé');
+                  error_data = true;
+                }else{
+                  if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {
+                      $('#loginModalError p').html(jqXHR.responseJSON.errors["email"][0]);
+                      error_data = true;
+                  }
+                  if (typeof(jqXHR.responseJSON.errors["password"]) !== 'undefined' && !error_data) {
+                      $('#loginModalError p').html(jqXHR.responseJSON.errors["password"][0]);
+                      error_data = true;
+                  }
                 }
-                if (typeof(jqXHR.responseJSON.errors["password"]) !== 'undefined' && !error_data) {
-                    $('#loginModalError p').html(jqXHR.responseJSON.errors["password"][0]);
-                    error_data = true;
-                }
+
                 if (error_data) {
                     $('#loginModalError').css('display', 'inline-block');
                 } else {

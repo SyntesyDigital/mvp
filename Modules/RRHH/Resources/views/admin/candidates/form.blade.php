@@ -110,19 +110,26 @@
                               <label for="civility">Civilité</label>
                               <div class="radio">
                                   <label>
+                                      @if(isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE )
+                                        @php
+                                          $arrayM = [];
+                                          $arrayF = ['checked' => 'checked'];
+                                        @endphp
+                                      @else
+                                        @php
+                                          $arrayM = ['checked' => 'checked'];
+                                          $arrayF = [];
+                                        @endphp
+                                      @endif
                                       {{
-                                          Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE, [
-                                              'checked' => isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE  ? 'checked': ''
-                                          ])
+                                          Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE,$arrayM)
                                       }}
                                       Monsieur
                                   </label>
 
                                   <label>
                                       {{
-                                          Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE, [
-                                              'checked' => isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE  ? 'checked': ''
-                                          ])
+                                          Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE,$arrayF)
                                       }}
                                       Madame
                                   </label>
@@ -210,7 +217,7 @@
                                 {!!
                                     Form::text('telephone', isset($user) ? $user->telephone : null, [
                                         'class' => 'form-control',
-                                        'id' => 'password',
+                                        'id' => 'telephone',
                                         'minlength' => '6',
                                         'placeholder' => ''
                                     ])
@@ -376,7 +383,7 @@
                       Form::select('status',
                           [
                               App\Models\User::STATUS_ACTIVE => 'Actif',
-                              App\Models\User::STATUS_INACTIVE => 'Inactif',
+                              App\Models\User::STATUS_INACTIVE => 'Desactivé',
                           ],
                           isset($user) ? $user->status : null,
                           [

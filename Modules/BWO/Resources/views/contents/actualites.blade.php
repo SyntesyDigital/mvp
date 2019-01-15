@@ -31,10 +31,14 @@
               @foreach($categories as $cat)
                 <a href="{{route('blog.category.index' , $cat->getFieldValue('slug'))}}" class="btn btn-soft-gray">{{$cat->getFieldValue('name')}}</a>
               @endforeach
-
-
-            Le {{isset($fields['date']['value'])? date('d F Y', strtotime($fields['date']['value'])):""}}
-            par <span>{{$content->author->firstname.' '.$content->author->lastname }}</span>
+              @if(isset($fields['date']['value']))
+                @php
+    							$date = new Jenssegers\Date\Date(strtotime($fields['date']['value']));
+    							$date->setlocale('fr');
+  							@endphp
+                Le {{ $date->format('d F Y') }} par
+              @endif
+             <span>{{$content->author->firstname.' '.$content->author->lastname }}</span>
           </p>
         </div>
         <div class="col-sm-6 first-line">
@@ -52,9 +56,9 @@
                 <img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon">
               </a>
 
-              <a href="#"	class="share-button" title="Share on Instagram">
+              <!--a href="#"	class="share-button" title="Share on Instagram">
                 <img src="{{asset('modules/bwo/images/instagram_icon.jpg')}}" class="social-icon">
-              </a>
+              </a-->
               <a href="https://twitter.com/share?url={{$shareUrl}}&text={{$title}}"
                 class="share-button"
                  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"

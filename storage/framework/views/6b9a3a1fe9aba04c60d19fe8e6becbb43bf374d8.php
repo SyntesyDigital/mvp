@@ -29,12 +29,17 @@
             ]); ?>
 
 
+        <?php echo Form::hidden('tags_edit', '1' ); ?>
+
+        <?php echo Form::hidden('docs_edit', '1' ); ?>
+
+
         <div class="page-bar">
           <div class="container">
             <div class="row">
               <div class="col-md-12">
 
-                <a href="<?php echo e(URL::previous()); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+                <a href="<?php echo e(route('rrhh.admin.candidates.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
 
                 <h1>
                     <i class="fa fa-newspaper-o"></i>&nbsp;
@@ -70,7 +75,7 @@
                           </li-->
                           <?php if(isset($user)): ?>
                           <li>
-                              <a href="<?php echo e(route('rrhh.admin.candidates.delete', $user->id)); ?>" class="text-danger">
+                              <a href="#" data-redirect="<?php echo e(route('rrhh.admin.candidates.index')); ?>" data-ajax="<?php echo e(route('rrhh.admin.candidates.delete', $user)); ?>" data-confirm-message="<?php echo e(Lang::get('architect::datatables.sure')); ?>" data-toogle="delete" class="text-danger">
                                   <i class="fa fa-trash text-danger"></i>
                                   &nbsp;
                                   <span class="text-danger"><?php echo e(Lang::get('architect::fields.delete')); ?></span>
@@ -87,9 +92,9 @@
         </div>
 
 
-        <div class="container rightbar-page">
+        <div class="container rightbar-page candidate-page">
 
-            <div class="col-md-9 page-content field-group">
+            <div class="col-md-9 page-content  field-group">
 
               
 
@@ -106,17 +111,24 @@
                               <label for="civility">Civilité</label>
                               <div class="radio">
                                   <label>
-                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE, [
-                                              'checked' => isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE  ? 'checked': ''
-                                          ])); ?>
+                                      <?php if(isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE ): ?>
+                                        <?php
+                                          $arrayM = [];
+                                          $arrayF = ['checked' => 'checked'];
+                                        ?>
+                                      <?php else: ?>
+                                        <?php
+                                          $arrayM = ['checked' => 'checked'];
+                                          $arrayF = [];
+                                        ?>
+                                      <?php endif; ?>
+                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE,$arrayM)); ?>
 
                                       Monsieur
                                   </label>
 
                                   <label>
-                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE, [
-                                              'checked' => isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE  ? 'checked': ''
-                                          ])); ?>
+                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE,$arrayF)); ?>
 
                                       Madame
                                   </label>
@@ -204,7 +216,7 @@
 
                                 <?php echo Form::text('telephone', isset($user) ? $user->telephone : null, [
                                         'class' => 'form-control',
-                                        'id' => 'password',
+                                        'id' => 'telephone',
                                         'minlength' => '6',
                                         'placeholder' => ''
                                     ]); ?>
@@ -259,20 +271,25 @@
                             <div class="form-group">
                                 <?php echo Form::label('country', 'Pays'); ?>
 
+                                <?php echo Form::select(
+                                        'country',
+                                        config('rrhh.countries'),
+                                        'France',
+                                        [
+                                            'class' => 'form-control input-round',
+                                            'id' => 'country',
+                                            'placeholder' => ''
+                                        ]
+                                    ); ?>
 
-                                <?php echo $__env->make('rrhh::front.partials.countries', [
-                                    'default' => isset($user->candidate->country) ? $user->candidate->country:null
-                                ], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                             </div>
-
                         </div>
                     </div><!-- first block -->
                   </div>
               </div>
 
-
               <?php if(isset($user)): ?>
-              <div id="headingmatricule" class="btn btn-link" data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
+              <div id="headingmatricule" class="btn btn-link"  data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
                 <span class="field-name">Convertir en intérimaire</span>
               </div>
 
@@ -365,7 +382,7 @@
                   <?php echo Form::select('status',
                           [
                               App\Models\User::STATUS_ACTIVE => 'Actif',
-                              App\Models\User::STATUS_INACTIVE => 'Inactif',
+                              App\Models\User::STATUS_INACTIVE => 'Desactivé',
                           ],
                           isset($user) ? $user->status : null,
                           [
@@ -383,9 +400,9 @@
                   <h3 class="card-title">Tags</h3>
 
                   <?php echo Form::select(
-                          'tags',
+                          'tags[]',
                           \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
-                          isset($userTags) ? str_replace('[]', '', $userTags) : old('tags'),
+                          isset($user->candidate->tags) ? $user->candidate->tags->pluck('id') : old('tags'),
                           [
                               'class' => 'form-control toggle-select2',
                               'multiple' => 'multiple'
@@ -522,6 +539,8 @@
 
     <?php echo e(Html::script('/modules/rrhh/plugins/datatables/datatables.min.js')); ?>
 
+    <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
+
 
     <!-- Toastr -->
     <?php echo e(Html::style('/modules/rrhh/plugins/toastr/toastr.min.css')); ?>
@@ -582,6 +601,47 @@
                     atags.push('<?php echo e($at); ?>');
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endif; ?>
+
+            $(document).on('click','[data-toogle="delete"]',function(e){
+                e.preventDefault();
+                var el = $(e.target).closest('[data-toogle="delete"]');
+
+                var ajax = el.data('ajax');
+                var redirect = el.data('redirect');
+                var confirmMessage = el.data('confirm-message');
+
+                dialog.confirm(confirmMessage, function(result){
+                    if(result) {
+
+                        if(ajax) {
+                            $.ajax({
+                                method: 'DELETE',
+                                url: ajax,
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                }
+                            })
+                            .done(function(response) {
+                                if(response.success) {
+                                    toastr.success(response.message, 'Succès !', {timeOut: 3000});
+
+                                    if(redirect) {
+                                        window.location = redirect;
+                                        return;
+                                    }
+
+                                } else {
+                                    toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                                }
+                            }).fail(function(response){
+                                toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                            });
+                            return;
+                        }
+                    }
+                });
+
+            });
 
         });
     </script>

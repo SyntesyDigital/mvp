@@ -29,9 +29,14 @@ class CandidateController extends Controller
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             $httpCode = 200;
             if(Auth::user()->hasRole(['candidate'])){
-              $data = ['user_id' => Auth::user()->id,
-                     'resume_file' => Auth::user()->candidate->resume_file
-                   ];
+              if(Auth::user()->status == User::STATUS_INACTIVE){
+                Auth::logout();
+                $httpCode = 401;
+              }else{
+                $data = ['user_id' => Auth::user()->id,
+                       'resume_file' => Auth::user()->candidate->resume_file
+                     ];
+              }
             }
             else {
               $data = ['user_id' => Auth::user()->id,

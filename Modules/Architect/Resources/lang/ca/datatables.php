@@ -12,6 +12,7 @@ return [
     'sure'          => 'Estàs segur?',
     'view'          => 'Veure',
     'view_candidate'=> 'Veure perfil',
+    'view_profile'=> 'Veure perfil',
     'process'       => 'Tractar'
 
 ];
