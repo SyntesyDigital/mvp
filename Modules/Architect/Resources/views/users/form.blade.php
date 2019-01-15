@@ -157,13 +157,15 @@
 
                       @php
                         $userRole = isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role');
+                        $roles = App\Models\Role::pluck('display_name', 'id')->toArray();
+                        array_splice($roles,2);
                       @endphp
 
                       <label>{{Lang::get('architect::fields.role')}}</label>
                       {!!
                           Form::select(
                               'role_id',
-                              App\Models\Role::pluck('display_name', 'id'),
+                              $roles,
                               $userRole,
                               [
                                   'class' => 'form-control',

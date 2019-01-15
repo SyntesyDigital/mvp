@@ -18,7 +18,10 @@
 						<a href="http://www.viadeo.com/"><i class="fa fa-viadeo"></i></a>
 					</div>
 					<div class="footer-copyright">
-						<a href="#">COPYRIGHT &#169; 2018 BWO</a> - <a href="#">INFORMATIONS LÉGALES</a>
+						<a href="#">COPYRIGHT &#169; 2018 BWO</a>
+						@include ('bwo::partials.menu_simple',
+							["menu" => get_menu('footer_2')]
+						)
 					</div>
 				</div>
 			</div>
