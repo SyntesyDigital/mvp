@@ -2,12 +2,11 @@
 
 @section('content')
 
-
-<div class="row">
+<div class="row filelists" style="margin-top:50px;">
     {!!
         Form::open([
             'id'  => 'form-filelist',
-            'url' => route('admin.tools.filelist.update', $filelist->id),
+            'url' => route('rrhh.tools.filelist.update', $filelist->id),
             'method' => 'POST',
             'enctype' => 'multipart/form-data'
         ])
@@ -97,14 +96,16 @@
 @push('javascripts-libs')
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></link>
+
 @endpush
 
 @push('javascripts')
 
-    {{ Html::script('/js/admin/content/contents/vendors/dropzone/dropzone.js') }}
+    <!-- Dropzone -->
+    {{ Html::script('/modules/rrhh/plugins/dropzone/dropzone.js') }}
 
-    {{ Html::script('/js/admin/tools/app.js') }}
-    {{ Html::script('/js/admin/tools/app.filelist.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/tools/app.js') }}
+    {{ Html::script('/modules/rrhh/js/admin/tools/app.filelist.js') }}
     <script type="text/javascript">
         var token = "{{ csrf_token() }}";
 

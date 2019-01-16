@@ -25,12 +25,6 @@ Route::group([
     Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
     Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
-    /*
-    |--------------------------------------------------------------------------
-    | FILE UPLOAD
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
 });
 
 
@@ -61,6 +55,21 @@ Route::group([
     Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
     Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| COMMON FUNCTIONS
+|--------------------------------------------------------------------------
+*/
+Route::group([
+  'middleware' => ['web', 'auth','role:recruiter|admin|customer|candidate', 'DetectUserLocale'],
+  'prefix' => 'architect',
+  'namespace' => 'Modules\Architect\Http\Controllers'
+], function()
+{
+
     /*
     |--------------------------------------------------------------------------
     | FILE UPLOAD
@@ -68,7 +77,6 @@ Route::group([
     */
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
 });
-
 
 /*
 |--------------------------------------------------------------------------

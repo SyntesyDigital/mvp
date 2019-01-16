@@ -31,7 +31,7 @@ class FileListController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('admin.tools.filelist.index');
+        return redirect()->route('rrhh.tools.filelist.index');
     }
 
     public function store(CreateFileRequest $request)
@@ -42,7 +42,7 @@ class FileListController extends Controller
     public function delete(Request $request)
     {
         $filename = $request->get('filename');
-        if ($this->dispatchNow(new DeleteFile($filename))) {
+        if (dispatch_now(new DeleteFile($filename))) {
             return 'deleted';
         } else {
             return 'error';

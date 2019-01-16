@@ -579,3 +579,49 @@ li {
   border: 1px dashed #4a9fea;
 }
 
+.filelists .medias-dropfiles {
+  border: 2px dotted #dcdcdc;
+  padding: 30px 50px;
+}
+
+.filelists .content-add {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+.filelists .content-add h4 {
+  font-size: 18px;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.filelists .content-add .tool-box {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+.filelists .content-add .tool-box a {
+  padding-right: 15px;
+}
+
+.filelists .content-add .filename-list {
+  width: 80%;
+}
+
+.filelists .content-add .filefields-list {
+  width: 30%;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.filelists .content-add .filefields-list-last {
+  width: 30%;
+  display: inline-block;
+  padding-right: 5px;
+}
+
