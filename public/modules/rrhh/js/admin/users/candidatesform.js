@@ -77,8 +77,6 @@ $(function() {
             {data: 'title', name: 'title'},
             {data: 'created_at', name: 'created_at'},
             {data: 'status', name: 'status'},
-            {data: 'action', name: 'action'},
-
         ],
         initComplete: function () {
             //$('#textarea').textext()[0].tags().addTags(utags);
