@@ -38,14 +38,14 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'artisan:migrate');
-after('artisan:migrate', 'artisan:config-clear');
+after('deploy:symlink', 'artisan:config:clear');
 
 desc('Send my SSH key to the server');
 task('ssh:sendmykey', function () {
     run("ssh-copy-id -i ~/.ssh/id_rsa bitbucket@195.244.21.141");
 });
 
-desc('Reset config cache');
-task('artisan:config-clear', function () {
-    run("php  {{deploy_path}}/current/artisan config:clear");
-});
+// desc('Reset config cache');
+// task('artisan:config-clear', function () {
+//     run("php  {{deploy_path}}/current/artisan config:clear");
+// });
