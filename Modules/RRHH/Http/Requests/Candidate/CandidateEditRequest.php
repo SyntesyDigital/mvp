@@ -55,7 +55,6 @@ class CandidateEditRequest extends FormRequest
                     'birthday' => 'date_format:d/m/Y',
                 ];
             break;
-
             default:
             break;
         }
