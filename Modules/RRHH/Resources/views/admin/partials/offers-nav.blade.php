@@ -38,5 +38,12 @@
           <a href="{{route('rrhh.admin.tags.index')}}"><i class="fa fa-tag"></i><span class="text">Tags</span> </a>
         </li>
     </ul>
+    <ul>
+        <li class="{{ Request::is('architect/filelist') ? 'active' : '' }}">
+          <a href="{{route('rrhh.tools.filelist.index')}}"><i class="fa fa-file"></i><span class="text">Documents</span> </a>
+        </li>
+    </ul>
+
     <hr/>
+
 </div>

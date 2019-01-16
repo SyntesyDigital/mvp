@@ -75,11 +75,11 @@ app.filelist = {
                 buttons: {
                     confirm: {
                       label: 'Oui',
-                      className: 'btn-success'
+                      className: 'btn-primary'
                     },
                     cancel: {
                       label: 'Non',
-                      className: 'btn-danger'
+                      className: 'btn-default'
                     }
                 },
                 callback: function (result) {
@@ -159,7 +159,7 @@ app.filelist = {
 
         $.ajax( {
             type: "POST",
-            url: "/admin/tools/filelist/delete",
+            url: "/architect/tools/filelist/delete",
             data: {
                 "filename" : filename
                 },
@@ -171,7 +171,7 @@ app.filelist = {
                 }
             },
             error: function () {
-                alert('error');
+                toastr.error('Il y avait une erreur');
             }
         });
 
@@ -182,7 +182,7 @@ app.filelist = {
         value = $('input[name="value"]').val();
         $.ajax( {
             type: "POST",
-            url: "/admin/tools/filelist/sort",
+            url: "/architect/tools/filelist/sort",
             data: {
                 "value" : value
                 },
@@ -229,12 +229,13 @@ app.filelist = {
                 +"<div class='content-add content-add-list'>"
                     +"<div class='tool-box'>"
                         +"<a class='edit-action' num='"+i+"'><i class='fa fa-pencil'></i></a>"
-                        +"<a class='remove-action'  num='"+i+"' ><i class='fa fa-remove'></i></a>"
+                        +"<a class='remove-action text-danger'  num='"+i+"' ><i class='fa fa-trash'></i></a>"
                     +"</div>"
-                    +"<h4 class='filename-list'><b><span class='fname'>"+list_json[i].filename+"</span></b></h4>"
-                    +"<p class='filefields-list'><b>Fichier: </b><span class='furl'>"+list_json[i].fileurl+"</span></p>"
-                    +"<p class='filefields-list'><b>Envoyé: </b><span class='fdate'>"+ app.filelist.getFrenchMonth(list_json[i].filedate)+"</span></p>"
-                    +"<p class='filefields-list-last'><b>Type: </b><span class='ftype'>"+list_json[i].filetype+"</span> <b>Visible: </b><span class='fvisible'>"+visible+"</span></p>"
+                    +"<h4 class='filename-list'><i class='fa fa-file'></i> <b><span class='fname'>"+list_json[i].filename+"</span></b></h4>"
+                    //+"<p class='filefields-list'><b>Fichier: </b><span class='furl'>"+list_json[i].fileurl+"</span></p>"
+                    //+"<p class='filefields-list'><b>Envoyé: </b><span class='fdate'>"+ app.filelist.getFrenchMonth(list_json[i].filedate)+"</span></p>"
+                    +"<p class='filefields-list'><b>Type: </b><span class='ftype'>"+list_json[i].filetype+"</span> </p>"
+                    +"<p class='filefields-list'><b>Visible: </b><span class='fvisible'>"+visible+"</span></p>"
                 +"</div>"
             +"</div>";
         }

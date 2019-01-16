@@ -92,11 +92,11 @@ Route::group([
 
 
     // File List
-    // Route::get('/filelist', ['as' => '.tools.filelist.index', 'uses' => 'Admin\Tools\FileListController@index']);
-    // Route::put('/tools/filelist/{sitelist?}/update', ['as' => '.tools.filelist.update', 'uses' => 'Admin\Tools\FileListController@update']);
-    // Route::post('/tools/filelist/store', ['as' => '.tools.filelist.store', 'uses' => 'Admin\Tools\FileListController@store']);
-    // Route::post('/tools/filelist/delete', ['as' => '.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@delete']);
-    // Route::post('/tools/filelist/sort', ['as' => '.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@sort']);
+    Route::get('/filelist', ['as' => 'rrhh.tools.filelist.index', 'uses' => 'Admin\Tools\FileListController@index']);
+    Route::put('/tools/filelist/{sitelist?}/update', ['as' => 'rrhh.tools.filelist.update', 'uses' => 'Admin\Tools\FileListController@update']);
+    Route::post('/tools/filelist/store', ['as' => 'rrhh.tools.filelist.store', 'uses' => 'Admin\Tools\FileListController@store']);
+    Route::post('/tools/filelist/delete', ['as' => 'rrhh.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@delete']);
+    Route::post('/tools/filelist/sort', ['as' => 'rrhh.tools.filelist.delete', 'uses' => 'Admin\Tools\FileListController@sort']);
 
     // Mass Mail Sending
     Route::get('/massmail', 'Admin\MassmailController@index')->name('rrhh.admin.massmail');
