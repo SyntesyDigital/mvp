@@ -73,7 +73,6 @@ class SpontaniousRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => ' ',
             'location.required' => 'Vous devez indiquer une ville',
             'email.unique' => 'Cette adresse e-mail est déjà utilisée',
             'resume_file.required' => 'Vous devez envoyer votre C.V.',

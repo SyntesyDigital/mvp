@@ -3,7 +3,7 @@
 @section('content')
     <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
       <div class="horizontal-inner-container">
-          <h1>CONTACTEZ-NOUS</h1>
+          <h1>Déposez votre candidature spontanée</h1>
         </div>
       </div>
     </div>

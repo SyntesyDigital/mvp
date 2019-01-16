@@ -168,5 +168,9 @@ return [
         'time'                  => 'heure',
         'available'             => 'disponible',
         'size'                  => 'taille',
+        'civility'              => 'civilité',
+        'telephone'             => 'téléphone',
+        'firstname'             => 'prénom',
+        'lastname'              => 'nom'
     ],
 ];
