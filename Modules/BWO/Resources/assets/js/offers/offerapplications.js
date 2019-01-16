@@ -167,7 +167,7 @@ app.offerapplications = {
             error: function(jqXHR, textStatus, errorThrown) {
                 var error_data = false;
                 if (errorThrown == 'Unauthorized') {
-                  $('#loginModalError p').html('Utilisateur desactivé');
+                  $('#loginModalError p').html('Utilisateur désactivé');
                   error_data = true;
                 }else{
                   if (typeof(jqXHR.responseJSON.errors["email"]) !== 'undefined') {

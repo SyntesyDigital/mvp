@@ -386,7 +386,7 @@
                       Form::select('status',
                           [
                               App\Models\User::STATUS_ACTIVE => 'Actif',
-                              App\Models\User::STATUS_INACTIVE => 'Desactivé',
+                              App\Models\User::STATUS_INACTIVE => 'Désactivé',
                           ],
                           isset($user) ? $user->status : null,
                           [
