@@ -26,8 +26,8 @@ class ContactRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'lastname' => 'required',
-                    'name' => 'required',
+                    'last_name' => 'required',
+                    'first_name' => 'required',
                     'email' => 'required|email',
                     'subject' => 'required',
                     'message' => 'required',

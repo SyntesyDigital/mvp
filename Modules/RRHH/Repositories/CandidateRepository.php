@@ -59,7 +59,7 @@ class CandidateRepository extends BaseRepository
             })
             ->filterColumn('status', function ($query, $keyword) {
                 if ($keyword) {
-                    $query->whereRaw('users.status LIKE ?', ["%$keyword%"]);
+                    $query->whereRaw('users.status LIKE ?', ["$keyword"]);
                 }
             })
             ->addColumn('status', function ($item) {

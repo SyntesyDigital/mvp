@@ -359,6 +359,8 @@
                                  <th>Titre</th>
                                  <th>Date de création</th>
                                  <th>Etat</th>
+                                 <th>Action</th>
+
                              </tr>
                          </thead>
                          <tfoot>

@@ -42,10 +42,10 @@ class CreateUser
             'linkedin_id' => isset($this->attributes['linkedin_id']) ? $this->attributes['linkedin_id'] : null,
         ]);
 
+
         if(isset($this->attributes['role_id'])) {
             $user->roles()->sync($this->attributes['role_id']);
         }
-
         if (isset($this->attributes['agence'])) {
             $user->agences()->sync($this->attributes['agence']);
         }

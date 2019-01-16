@@ -7,7 +7,9 @@
 
 			<div class="footer-info">
 				<div class="first-line-footer">
-					<?php echo $__env->make('bwo::partials.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					<?php echo $__env->make('bwo::partials.menu',
+						["menu" => get_menu('footer')]
+					, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				</div>
 				<div class="second-line-footer">
 					<div class="footer-social">
@@ -16,7 +18,10 @@
 						<a href="http://www.viadeo.com/"><i class="fa fa-viadeo"></i></a>
 					</div>
 					<div class="footer-copyright">
-						<a href="#">COPYRIGHT &#169; 2018 BWO</a> - <a href="#">INFORMATIONS LÉGALES</a>
+						<a href="#">COPYRIGHT &#169; 2018 BWO</a>
+						<?php echo $__env->make('bwo::partials.menu_simple',
+							["menu" => get_menu('footer_2')]
+						, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 					</div>
 				</div>
 			</div>

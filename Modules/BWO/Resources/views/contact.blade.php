@@ -63,7 +63,7 @@
               <div class="col-md-6">
                 {!! Form::Label('surname', 'Prénom') !!}
                 {!!
-                  Form::text('lastname', null, [
+                  Form::text('first_name', null, [
                     'class' => 'form-control',
                     'placeholder' => 'Prénom'
                   ])
@@ -72,7 +72,7 @@
               <div class="col-md-6">
                 {!! Form::Label('nom', 'Nom') !!}
                 {!!
-  								Form::text('name', null, [
+  								Form::text('last_name', null, [
   									'class' => 'form-control',
   									'placeholder' => 'Nom'
   								])

@@ -9,8 +9,8 @@ class SendContact
     public function __construct(array $attributes = [])
     {
         $this->inputs = array_only($attributes, [
-            'lastname',
-            'name',
+            'last_name',
+            'first_name',
             'email',
             'subject',
             'message',
@@ -21,8 +21,8 @@ class SendContact
     {
         $params = [
             'subject' => $this->inputs['subject'],
-            'lastname' => $this->inputs['lastname'],
-            'name' => $this->inputs['name'],
+            'lastname' => $this->inputs['last_name'],
+            'name' => $this->inputs['first_name'],
             'email' => $this->inputs['email'],
             'subject' => $this->inputs['subject'],
             'comment' => $this->inputs['message'],

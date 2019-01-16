@@ -13,7 +13,7 @@
 
 <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/blog-banner.jpg')}}')">
   <div class="horizontal-inner-container">
-      <h1>ACTUALITÉ</h1>
+      <h1>ACTUALITÉS</h1>
     </div>
   </div>
 </div>

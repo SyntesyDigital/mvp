@@ -45,6 +45,7 @@ class RegisterCandidate
 
     public function handle()
     {
+
         $password = str::random(8);
 
         $user = dispatch_now(new CreateUser([

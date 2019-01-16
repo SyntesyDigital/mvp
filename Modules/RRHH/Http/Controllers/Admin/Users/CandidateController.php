@@ -23,6 +23,8 @@ use Modules\RRHH\Repositories\UserRepository;
 
 use Datatables;
 use Session;
+use Lang;
+use Form;
 
 class CandidateController extends Controller
 {
@@ -134,6 +136,19 @@ class CandidateController extends Controller
                ->addColumn('status', function ($item) {
                    return $item->getStatusString();
                })
+               ->addColumn('action', function ($item) {
+                   if(isset($item->offer)){
+                     return '<a title="'.Lang::get("architect::datatables.process").'" href="'.route('rrhh.admin.offer.applications.show', $item->offer_id).'" class="btn"><i class="fa fa-pencil"></i></a> &nbsp';
+                   }else{
+                    /* return Form::select('status', $item->getStatus(), $item->status, [
+                         'data-url' => route('rrhh.admin.applications.spontaneous.update.status'),
+                         'data-id' => $item->id,
+                         'data-toogle' => 'save-onchange',
+                     ]);*/
+                     return '';
+                   }
+               })
+
            ->make(true);
     }
 
