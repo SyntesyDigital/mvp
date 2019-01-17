@@ -20,7 +20,7 @@ class CreateUrlsCategory
 
         Language::getAllCached()->map(function($language) use ($category) {
             $slug = $category->getFullSlug($language->id);
-            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
             if($slug) {
                 $category->urls()->create([

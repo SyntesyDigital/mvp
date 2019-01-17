@@ -34,7 +34,7 @@ class UpdateUrlsTypology
 
             if(isset($attr->value)) {
 
-                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
                 if($isMultiLanguage) {
                     $url = sprintf('/%s/%s',

@@ -26,7 +26,7 @@ class CreateUrlsContent
         Language::getAllCached()->map(function($language) use ($content) {
             $url = $content->getFullSlug($language->id);
 
-            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
             if($url) {
                 $content->urls()->create([
@@ -56,7 +56,7 @@ class CreateUrlsContent
 
         foreach(Language::getAllCached() as $language) {
 
-            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
             if($isMultiLanguage) {
                 $url = sprintf(
