@@ -100,7 +100,11 @@
 
 
               <div id="headingtitle" class="btn btn-link" data-toggle="collapse" data-target="#collapsetitle" aria-expanded="true" aria-controls="collapsetitle">
-                <span class="field-name">Informations du candidat</span>
+                <?php if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM): ?>
+                  <span class="field-name">Informations du intérimaire</span>
+                <?php else: ?>
+                  <span class="field-name">Informations du candidat</span>
+                <?php endif; ?>
               </div>
 
               <div id="collapsetitle" class="collapse in" aria-labelledby="headingtitle" aria-expanded="true" aria-controls="collapsetitle" style="">
