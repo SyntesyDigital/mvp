@@ -32,6 +32,7 @@ return [
     'language'  => 'Idioma',
     'role'      => 'Rol',
     'save'      => 'Guardar',
+    'cancel'    => 'Cancelar',
     'actions'   => 'Accions',
     'new'       => 'Nou',
     'delete'    =>  'Esborrar',
