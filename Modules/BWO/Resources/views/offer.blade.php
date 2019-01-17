@@ -1,9 +1,11 @@
+
 @php
 	$metaDescription = strip_tags(str_replace('&#39;', '\'', $offer->description));
 	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
 	$metaDescription = trim(substr(strip_tags($metaDescription), 0, 180));
-	$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
+	//$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
 @endphp
+
 
 @extends('bwo::layouts.master', [
 	'socialTitle' => $offer->title,
