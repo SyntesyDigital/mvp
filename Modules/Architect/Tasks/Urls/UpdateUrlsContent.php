@@ -93,13 +93,21 @@ class UpdateUrlsContent
                  ->first();
 
             if($attr) {
+
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+
                 $content->urls()->create([
                     'language_id' => $language->id,
-                    'url' => sprintf('/%s/%s/%s',
-                       $language->iso,
-                       $attr->value, // Typology slug
-                       $content->getFieldValue('slug', $language->id) // Article slug
-                    )
+                    'url' => $isMultiLanguage ?
+                        sprintf('/%s/%s/%s',
+                         $language->iso,
+                         $attr->value, // Typology slug
+                         $content->getFieldValue('slug', $language->id))  // Article slug
+                       :
+                         sprintf('/%s/%s',
+                          $attr->value, // Typology slug
+                          $content->getFieldValue('slug', $language->id))  // Article slug
+
                 ]);
             }
          }
