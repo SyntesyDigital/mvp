@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\RRHH\Http\Requests\Candidate;
+namespace Modules\RRHH\Http\Requests\Agence;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
