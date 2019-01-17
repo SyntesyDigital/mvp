@@ -364,12 +364,13 @@
                                  <th>Titre</th>
                                  <th>Date de création</th>
                                  <th>Etat</th>
-                                 <th>Action</th>
+                                 <th></th>
 
                              </tr>
                          </thead>
                          <tfoot>
                              <tr>
+                                 <th></th>
                                  <th></th>
                                  <th></th>
                                  <th></th>
