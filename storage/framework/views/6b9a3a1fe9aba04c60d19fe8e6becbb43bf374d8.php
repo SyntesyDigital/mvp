@@ -100,7 +100,11 @@
 
 
               <div id="headingtitle" class="btn btn-link" data-toggle="collapse" data-target="#collapsetitle" aria-expanded="true" aria-controls="collapsetitle">
-                <span class="field-name">Informations du candidat</span>
+                <?php if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM): ?>
+                  <span class="field-name">Informations du intérimaire</span>
+                <?php else: ?>
+                  <span class="field-name">Informations du candidat</span>
+                <?php endif; ?>
               </div>
 
               <div id="collapsetitle" class="collapse in" aria-labelledby="headingtitle" aria-expanded="true" aria-controls="collapsetitle" style="">
@@ -180,7 +184,8 @@
                                         <?php endif; ?>
                                         <?php echo Form::text('birthday', isset($user) && $user->candidate->birthday != null? $date_formated:'', [
                                                 'class' => 'form-control',
-                                                'id' => 'birthday'
+                                                'id' => 'birthday',
+                                                'autocomplete' => 'off'
                                             ]); ?>
 
                                     </div>
@@ -384,7 +389,7 @@
                   <?php echo Form::select('status',
                           [
                               App\Models\User::STATUS_ACTIVE => 'Actif',
-                              App\Models\User::STATUS_INACTIVE => 'Desactivé',
+                              App\Models\User::STATUS_INACTIVE => 'Désactivé',
                           ],
                           isset($user) ? $user->status : null,
                           [
@@ -439,7 +444,7 @@
               <h3>Fichiers du candidat</h3>
 
               <!-- Fichier CV -->
-              <div class="form-group file-form">
+              <div class="form-group file-form medias">
                   <label for="name">C.V.</label>
 
                   <?php if(isset($user) && $user->candidate->resume_file != ''): ?>
@@ -587,6 +592,7 @@
         $(document).ready(function() {
 
             $('.toggle-select2').select2();
+            $("#birthday").datepicker({format: "dd/mm/yyyy"});
 
             $(document).on('click', ".btn-submit-primary", function(e){
                 e.preventDefault();

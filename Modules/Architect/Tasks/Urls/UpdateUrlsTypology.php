@@ -33,12 +33,23 @@ class UpdateUrlsTypology
                 ->first();
 
             if(isset($attr->value)) {
-                $this->typology->urls()->create([
-                    'language_id' => $language->id,
-                    'url' => sprintf('/%s/%s',
+
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+
+                if($isMultiLanguage) {
+                    $url = sprintf('/%s/%s',
                         $language->iso,
                         $attr->value
-                    )
+                    );
+                } else {
+                    $url = sprintf('/%s',
+                        $attr->value
+                    );
+                }
+
+                $this->typology->urls()->create([
+                    'language_id' => $language->id,
+                    'url' => $url
                 ]);
             }
         });

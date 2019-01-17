@@ -124,13 +124,15 @@
       @endif
       @if($selected_job)
         @php $search_txt .= ' Métiers: '; $first = 1; @endphp
-        @foreach($selected_job as $jname)
-          @if($first)
-            @php $first = false; @endphp
-          @else
-            @php $search_txt .= ', '; @endphp
+        @foreach($jobs as $key => $value)
+          @if(in_array($key,$selected_job))
+            @if($first)
+              @php $first = false; @endphp
+            @else
+              @php $search_txt .= ', '; @endphp
+            @endif
+            @php $search_txt .= $value; @endphp
           @endif
-          @php $search_txt .= $jname; @endphp
         @endforeach
       @endif
       @if($selected_contract)
@@ -153,7 +155,11 @@
       @endif
       @if($search || $selected_job || $selected_contract)
         <div class="col-md-12">
-          <p class="title-search">Votre recherche {{$search_txt}}</p>
+          @if(count($offers) > 0)
+            <p class="title-search">Votre recherche {{$search_txt}}</p>
+          @else
+            <p class="title-search">Pas de résultat pour votre recherche {{$search_txt}}</p>
+          @endif
         </div>
       @endif
 

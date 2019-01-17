@@ -40,6 +40,7 @@ return [
     'exists'               => 'Le champ :attribute sélectionné est invalide.',
     'file'                 => 'Le champ :attribute doit être un fichier.',
     'filled'               => 'Le champ :attribute doit avoir une valeur.',
+    'file_extension'       => 'Format de fichier non autorisé',
     'gt'                   => [
         'numeric' => 'La valeur de :attribute doit être supérieure à :value.',
         'file'    => 'La taille du fichier de :attribute doit être supérieure à :value kilo-octets.',
