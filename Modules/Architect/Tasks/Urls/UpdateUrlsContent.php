@@ -35,11 +35,14 @@ class UpdateUrlsContent
         $languages->map(function($language) use ($content) {
             if(in_array($language->id, $content->languages->pluck('id')->toArray())) {
                 $slug = $content->getFullSlug($language->id);
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
 
                 if($slug) {
                     $content->urls()->create([
                         'language_id' => $language->id,
-                        'url' => '/' . $language->iso . '/' . $slug,
+                        'url' => $isMultiLanguage
+                            ? '/' . $language->iso . '/' . $slug,
+                            : '/' . $slug
                     ]);
                 }
             }
@@ -51,11 +54,14 @@ class UpdateUrlsContent
             $languages->map(function($language) use ($descendant) {
                 if(in_array($language->id, $descendant->languages->pluck('id')->toArray())) {
                     $slug = $descendant->getFullSlug($language->id);
+                    $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
 
                     if($slug) {
                         $descendant->urls()->create([
                             'language_id' => $language->id,
-                            'url' => '/' . $language->iso . '/' . $slug
+                            'url' => $isMultiLanguage
+                                ? '/' . $language->iso . '/' . $slug
+                                : '/' . $slug
                         ]);
                     }
                 }

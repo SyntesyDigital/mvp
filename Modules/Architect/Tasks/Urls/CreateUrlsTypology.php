@@ -18,10 +18,14 @@ class CreateUrlsTypology
 
         Language::getAllCached()->map(function($language) use ($typology) {
             $slug = $typology->getSlug($language->id);
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
+
             if($slug) {
                 $typology->urls()->create([
                     'language_id' => $language->id,
-                    'url' => '/' . $language->iso . '/' . $slug
+                    'url' => $isMultiLanguage
+                        ? '/' . $language->iso . '/' . $slug
+                        : '/' . $slug
                 ]);
             }
         });

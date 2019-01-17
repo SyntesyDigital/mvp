@@ -17,13 +17,17 @@ class CreateUrlsCategory
     {
         $category = $this->category;
 
+
         Language::getAllCached()->map(function($language) use ($category) {
             $slug = $category->getFullSlug($language->id);
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE') ?: true;
 
             if($slug) {
                 $category->urls()->create([
                     'language_id' => $language->id,
-                    'url' => '/' . $language->iso . '/' . $slug
+                    'url' => $isMultiLanguage
+                        ? '/' . $language->iso . '/' . $slug
+                        : '/' . $slug
                 ]);
             }
         });
