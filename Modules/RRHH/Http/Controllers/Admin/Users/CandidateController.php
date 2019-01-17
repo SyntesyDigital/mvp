@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Modules\RRHH\Jobs\Candidate\CreateCandidate;
 use Modules\RRHH\Jobs\Candidate\CreateFile;
 use Modules\RRHH\Jobs\Candidate\DeleteCandidate;
-use Modules\RRHH\Jobs\Candidate\UpdateCandidate;
+use Modules\RRHH\Jobs\Candidate\UpdateAdminCandidate;
 use Modules\RRHH\Jobs\Tags\UpdateCandidateTags;
 
 use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
@@ -82,7 +82,7 @@ class CandidateController extends Controller
     public function update(User $user, CandidateRequest $request)
     {
         try {
-            $this->dispatchNow(UpdateCandidate::fromRequest($user, $request));
+            $this->dispatchNow(UpdateAdminCandidate::fromRequest($user, $request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());

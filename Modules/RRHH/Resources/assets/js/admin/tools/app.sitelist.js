@@ -9,6 +9,12 @@ app.sitelist = {
             list_json = JSON.parse($('input[name="value"]').val());
         }
         this.parseJson();
+
+        //FIXME there is an error than only occurs first initialisation
+        var self = this;
+        setInterval(function(){
+          self.parseJson();
+        },1000);
     },
 
     addNewElement: function() {

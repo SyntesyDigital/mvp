@@ -2,12 +2,12 @@
 
 namespace Modules\RRHH\Jobs\Candidate;
 
-use Modules\RRHH\Http\Requests\Candidate\CandidateEditRequest;
+use Modules\RRHH\Http\Requests\Admin\Candidate\CandidateRequest;
 use Modules\RRHH\Jobs\User\UpdateUser;
 use Modules\RRHH\Entities\Offers\Candidate;
 use App\Models\User;
 
-class UpdateCandidate
+class UpdateAdminCandidate
 {
     public function __construct(User $user, array $attributes = [])
     {

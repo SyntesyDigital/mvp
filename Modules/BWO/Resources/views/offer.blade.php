@@ -28,7 +28,7 @@
           </ol>
           <h1>{{$offer->title}}</h1>
           <div class="separator"></div>
-          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ $offer->start_at }} </p>
+          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ Date('d/m/Y', $offer->start_at )}} </p>
           <div class="col-sm-4 col-md-3 information">
             <h2 class="gray-square-text">DÉTAILS</h2>
             <div class="block-info">
@@ -53,7 +53,7 @@
 	              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
 	            </div>
 						@endif
-            <div class="reference">REF : {{$offer->id}} | {{ $offer->start_at }}</div>
+            <div class="reference">REF : {{$offer->id}} | {{ Date('d/m/Y', $offer->start_at )}}</div>
             <div class="share-container">
               @php
       					$shareUrl = urlencode(Request::url());
@@ -109,7 +109,8 @@
           <br clear="all">
           <div class="btn-red-container">
 
-            @if(Auth::check() && !Auth::user()->hasRole(['admin', 'recruiter']))
+            @if(Auth::check())
+							@if(!Auth::user()->hasRole(['admin', 'recruiter','customer']))
                 @if($offer->hasAlreadyCandidate())
                   <a id="{{$offer->id}}"  class="btn btn-red unactivated">
                     <i class="fa fa-check"></i> Déjà postulé
@@ -119,6 +120,14 @@
                     <i class="fa fa-file-text-o"></i> POSTULER
                   </a>
                 @endif
+							@else
+								<!--
+								<a id="{{$offer->id}}"  class="btn btn-red unactivated">
+									<i class="fa fa-check"></i> POSTULER
+								</a>
+								-->
+							@endif
+
             @else
                 <a id="{{$offer->id}}"  class="btn btn-red application-btn">
                   <i class="fa fa-file-text-o"></i> POSTULER
