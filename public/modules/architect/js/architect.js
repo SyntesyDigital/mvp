@@ -860,9 +860,7 @@ architect.menu.form = {
 
     onSaveSuccess : function(response)
     {
-
-
-        toastr.success('Menu guardat correctament!');
+        toastr.success(Lang.get('fields.success'));
     },
 
 
@@ -878,7 +876,7 @@ architect.menu.form = {
          $(".add-row-block").addClass('has-error');
        }
 
-       toastr.error('Algun error al guardar');
+       toastr.error(Lang.get('fields.error'));
 
      }
 

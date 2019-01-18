@@ -2,10 +2,18 @@
   $htmlClass = isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '';
   $pageType = isset($contentSettings) && isset($contentSettings['pageType']) ? $contentSettings['pageType'] : '';
   $idClass = isset($content) ? "id_".$content->id : '';
+
+  $metaDescription = null;
+  if(isset($content)){
+    $metaDescription = strip_tags(str_replace('&#39;', '\'', $content->getFieldValue('description')));
+  	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
+  }
+
 @endphp
 
 @extends('bwo::layouts.master',[
-  'title' => isset($content) ? $content->getFieldValue('title') : '',
+  'htmlTitle' => isset($content) ? $content->getFieldValue('title') : '',
+  'metaDescription' => isset($metaDescription) ? $metaDescription : '',
   'mainClass' => $pageType.' '.$htmlClass.' '.$idClass,
   'routeAttributes' => $content->getFullSlug()
 ])
@@ -16,7 +24,7 @@
 
 <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/blog-banner.jpg')}}')">
   <div class="horizontal-inner-container">
-      <h1>{{$content->getFieldValue('title')}}</h1>
+      <!--<h1>{{$content->getFieldValue('title')}}</h1>-->
     </div>
   </div>
 </div>
