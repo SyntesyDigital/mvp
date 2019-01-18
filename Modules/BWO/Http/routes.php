@@ -32,7 +32,7 @@ Route::group([
     | OFFERS
     |--------------------------------------------------------------------------
     */
-    Route::get('/emplois', ['as' => 'search', 'uses' => 'SearchController@index']);
+    Route::get('/offres-d-emploi', ['as' => 'search', 'uses' => 'SearchController@index']);
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ Route::group([
     | OFFER
     |--------------------------------------------------------------------------
     */
-    Route::get('/emplois/{job_1}/{offer?}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
+    Route::get('/offres-d-emploi/{job_1}/{offer?}', ['as' => 'offer.show', 'uses' => 'OfferController@index']);
     Route::post('/offers/application/{offer}/create', ['as' => 'offer.applications.create', 'uses' => 'OfferApplicationController@create']);
     Route::post('/candidate/store', ['as' => 'candidate.store', 'uses' => 'CandidateController@store']);
     Route::post('/candidate/login', ['as' => 'candidate.login', 'uses' => 'CandidateController@login']);
