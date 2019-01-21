@@ -4,17 +4,12 @@
 	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
 	$metaDescription = trim(substr(strip_tags($metaDescription), 0, 180));
 	//$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
-	$titleOffreSEO = $offer->title;
-	if($offer->address){
-		$titleOffreSEO = $offer->$title.' '.$offer->address;
-	}
-
 @endphp
 
 
 @extends('bwo::layouts.master', [
 	'socialTitle' => $offer->title,
-	'htmlTitle' => $titleOffreSEO,
+	'htmlTitle' => $offer->title,
 	'pageTitle' => $offer->title,
 	'headerDescription' => $offer->address,
 	'metaDescription' => $metaDescription,
@@ -35,15 +30,13 @@
           </ol>
           <h1>{{$offer->title}}</h1>
           <div class="separator"></div>
-          <p class="first-info">{{$offer->contract}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ Date('d/m/Y', $offer->start_at )}} </p>
+          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ Date('d/m/Y', $offer->start_at )}} </p>
           <div class="col-sm-4 col-md-3 information">
             <h2 class="gray-square-text">DÉTAILS</h2>
-						@if($offer->address)
             <div class="block-info">
               <p><b>Lieu:</b></p>
               <p>{{$offer->address}}</p>
             </div>
-						@endif
             <div class="block-info">
               <p><b>Contrat:</b></p>
               <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }}</p>
@@ -52,18 +45,10 @@
               <p><b>À partir du:</b></p>
               <p>{{ Date('d/m/Y', $offer->start_at )}}</p>
             </div>
-						@if($offer->job_1)
             <div class="block-info">
-              <p><b>Métier:</b></p>
-              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }}</p>
+              <p><b>Secteur:</b></p>
+              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }} / {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2') }}</p>
             </div>
-						@endif
-						@if($offer->job_2)
-						<div class="block-info">
-							<p><b>Secteur:</b></p>
-							<p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2') }}</p>
-						</div>
-						@endif
 						@if($offer->salary)
 	            <div class="block-info">
 	              <p><b>Salaire:</b></p>
