@@ -13,12 +13,12 @@
 				</div>
 				<div class="second-line-footer">
 					<div class="footer-social">
-						<a href="https://www.facebook.com/" ><i class="fa fa-facebook"></i></a>
-						<a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a>
-						<a href="http://www.viadeo.com/"><i class="fa fa-viadeo"></i></a>
+						<a href="https://://www.facebook.com/BWO-Agence-demploi-772528346229866" ><i class="fa fa-facebook"></i></a>
+						<a href="https://www.linkedin.com/company/bwo"><i class="fa fa-linkedin"></i></a>
+						<a href="https://www.viadeo.com/fr/company/bwo/"><i class="fa fa-viadeo"></i></a>
 					</div>
 					<div class="footer-copyright">
-						<a href="#">COPYRIGHT &#169; 2018 BWO</a>
+						<a href="#">COPYRIGHT &#169; @php echo date("Y") @endphp BWO</a>
 						@include ('bwo::partials.menu_simple',
 							["menu" => get_menu('footer_2')]
 						)
