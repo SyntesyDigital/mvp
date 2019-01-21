@@ -13190,7 +13190,7 @@ header .menus .navbar #main-menu {
 
 header .menus .navbar #main-menu ul {
   padding-left: 0px;
-  max-width: 100%;
+  /*max-width: 100%;*/
 }
 
 header .menus .navbar #main-menu ul li a {
@@ -14392,6 +14392,9 @@ body .widget-blog.offers-container .blog-container .posts-list .post-box .title 
   font-weight: 600;
   height: 42px;
   padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 body .widget-blog.offers-container .blog-container .posts-list .post-box p {
