@@ -147,7 +147,7 @@
 
 
 				@if(Auth::user()->candidate->type != \Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM)
-					<h3>Autre documents</h3>
+					<h3>Autres documents</h3>
 					<br />
 					<p>Seuls nos intérimaires ont accès aux documents</p>
 				@else
@@ -157,7 +157,7 @@
 						$documents = isset($list) ? json_decode($list->value) : null;
 					@endphp
 
-					<h3>Autre documents</h3>
+					<h3>Autres documents</h3>
 
 					@if($documents)
 					<table class="table">
