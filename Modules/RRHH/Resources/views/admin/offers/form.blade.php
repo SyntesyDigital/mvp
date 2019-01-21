@@ -23,10 +23,16 @@
                 <div class="float-buttons pull-right">
 
                     @if(isset($offer))
-                      <a href="{{route('rrhh.admin.offer.applications.show', $offer)}}" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;{{$offer->applications()->count()}}  Candidatures </a>
+                        <a href="{{route('rrhh.admin.offer.applications.show', $offer)}}" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;{{$offer->applications()->count()}}  Candidatures </a>
+
+                        @if(env('FACEBOOK_APP_ID'))
+                            <a href="{{route('rrhh.admin.offer.applications.publish.facebook', $offer)}}" class="btn btn-default"> <i class="fa fa-cloud-upload"></i> &nbsp; Publier sur facebook </a>
+                        @endif
                     @endif
 
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
+
+
                 </div>
             </div>
         </div>

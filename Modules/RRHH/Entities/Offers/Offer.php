@@ -13,9 +13,13 @@ use Modules\RRHH\Traits\FormFieldsEntity;
 
 use Illuminate\Database\Eloquent\Builder;
 use DB;
+use Illuminate\Notifications\Notifiable;
+
 
 class Offer extends Model
 {
+
+    use Notifiable;
     use DatePresenter;
     use FormFieldsEntity;
 

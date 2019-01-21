@@ -42,6 +42,7 @@ Route::group([
     Route::get('/offers/{offer?}', 'Admin\Offers\OfferController@show')->name('rrhh.admin.offers.show');
     Route::put('/offers/{offer?}/update', 'Admin\Offers\OfferController@update')->name('rrhh.admin.offers.update');
     Route::delete('/offers/{offer?}/delete', 'Admin\Offers\OfferController@delete')->name('rrhh.admin.offers.delete');
+    Route::get('/offers/{offer?}/publish/facebook', 'Admin\Offers\OfferController@publishFacebook')->name('rrhh.admin.offer.applications.publish.facebook');
 
     // Applications
     Route::get('/applications','Admin\Offers\ApplicationController@index')->name('rrhh.admin.applications.index');

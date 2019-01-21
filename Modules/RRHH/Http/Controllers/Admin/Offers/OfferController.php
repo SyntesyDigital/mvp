@@ -10,11 +10,13 @@ use Modules\RRHH\Jobs\Offers\CreateOffer;
 use Modules\RRHH\Jobs\Offers\DeleteOffer;
 use Modules\RRHH\Jobs\Offers\UpdateOffer;
 use Modules\RRHH\Entities\Offers\Offer;
+use Modules\RRHH\Notifications\PublishOnFacebookPage;
 use Modules\RRHH\Repositories\OfferRepository;
 use Modules\RRHH\Repositories\UserRepository;
 use Config;
 use Illuminate\Http\Request;
 use Session;
+use Facebook\Facebook;
 
 class OfferController extends Controller
 {
@@ -110,5 +112,44 @@ class OfferController extends Controller
                 $item->id => $item->full_name,
             ];
         }));
+    }
+
+    // FIXME : Put this on a job :)
+    public function publishFacebook(Offer $offer, Request $request)
+    {
+        $fb = new Facebook([
+            'app_id' => env('FACEBOOK_APP_ID'),
+            'app_secret' => env('FACEBOOK_APP_SECRET'),
+            'default_graph_version' => 'v3.2'
+        ]);
+
+        $longLivedToken = $fb->getOAuth2Client()->getLongLivedAccessToken(env('FACEBOOK_ACCESS_TOKEN'));
+        $fb->setDefaultAccessToken($longLivedToken);
+
+        $response = $fb->sendRequest('GET', env('FACEBOOK_PAGE_ID'), ['fields' => 'access_token'])
+            ->getDecodedBody();
+
+        $foreverPageAccessToken = $response['access_token'];
+
+        $url = route('offer.show', [
+            'job_1' => str_slug(\Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
+            'id' => $offer->id
+        ]);
+
+        $fb->setDefaultAccessToken($foreverPageAccessToken);
+        $result = $fb->sendRequest('POST', env('FACEBOOK_PAGE_ID') . "/feed", [
+            'message' => $offer->title,
+            'link' => $url,
+        ]);
+
+        $response = json_decode($result->getBody());
+
+        if(isset($response->id)) {
+            Session::flash('notify_success', 'L\'offre a été publié sur la page facebook');
+        } else {
+            Session::flash('notify_error', 'Une erreur est survenue');
+        }
+
+        return redirect()->route('rrhh.admin.offers.show', $offer);
     }
 }
