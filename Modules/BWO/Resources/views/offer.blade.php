@@ -14,7 +14,7 @@
 
 @extends('bwo::layouts.master', [
 	'socialTitle' => $offer->title,
-	'htmlTitle' => $offer->title,
+	'htmlTitle' => $titleOffreSEO,
 	'pageTitle' => $offer->title,
 	'headerDescription' => $offer->address,
 	'metaDescription' => $metaDescription,
