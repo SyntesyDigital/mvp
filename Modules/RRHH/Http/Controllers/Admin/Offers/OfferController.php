@@ -115,6 +115,8 @@ class OfferController extends Controller
     }
 
     // FIXME : Put this on a job :)
+    // https://blog.damirmiladinov.com/php/getting-page-access-token-and-posting-on-facebook-page-with-php.html#.XEXcls9KhTZ
+
     public function publishFacebook(Offer $offer, Request $request)
     {
         $fb = new Facebook([
