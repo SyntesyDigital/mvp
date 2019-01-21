@@ -78,7 +78,7 @@
 
         @if($fields['image-body']['value'])
           <img
-            src="{{ isset($fields['image-body']['value']['urls']['large']) ? asset($fields['image-body']['value']['urls']['large']) : null }}"
+            src="{{ isset($fields['image-body']['value']['urls']['image_actu']) ? asset($fields['image-body']['value']['urls']['image_actu']) : null }}"
             alt="{{$fields['image-body']['value']->metadata['fields']['alt'][App::getLocale()]['value'] or ''}}"
             title="{{$fields['image-body']['value']->metadata['fields']['title'][App::getLocale()]['value'] or ''}}"
           />
