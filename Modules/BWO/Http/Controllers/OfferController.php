@@ -44,4 +44,21 @@ class OfferController extends Controller
             'search_params' => $request->session()->has('search_params') ? $request->session()->get('search_params') : false,
         ]);
     }
+
+    public function preview(Offer $offer, Request $request)
+    {
+
+        $url = route('offer.show', [
+            'job_1' => str_slug(SiteList::getListValue($offer->job_1, 'jobs1'), '-'),
+            'id' => $offer->id,
+        ]);
+
+        return view('bwo::offer', [
+            'offer' => $offer,
+            'coords' => $offer->setGeo(),
+            'related_offers' => $this->offers->getRandomOffers($offer->tags()->get()->pluck('id'), 3, $offer->id),
+            'search_params' => $request->session()->has('search_params') ? $request->session()->get('search_params') : false,
+        ]);
+    }
+
 }

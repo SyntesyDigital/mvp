@@ -157,8 +157,7 @@
 
                       @php
                         $userRole = isset($user) && $user->roles && $user->roles->count() > 0 ? $user->roles->first()->id : old('role');
-                        $roles = App\Models\Role::pluck('display_name', 'id')->toArray();
-                        array_splice($roles,2);
+                        $roles = App\Models\Role::where('id','<=',2)->pluck('display_name', 'id')->toArray();
                       @endphp
 
                       <label>{{Lang::get('architect::fields.role')}}</label>

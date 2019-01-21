@@ -24,6 +24,7 @@
 
                     @if(isset($offer))
                       <a href="{{route('rrhh.admin.offer.applications.show', $offer)}}" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;{{$offer->applications()->count()}}  Candidatures </a>
+                      <a href="{{route('offers.preview', $offer)}}" class="btn btn-default" target="_blank"> <i class="fa fa-eye"></i> &nbsp; Prévisualisation </a>
                     @endif
 
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
