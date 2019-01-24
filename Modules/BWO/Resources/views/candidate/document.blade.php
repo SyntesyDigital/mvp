@@ -142,6 +142,29 @@
 
 		<br/>
 
+
+		<br/>
+
+
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h3>Télécharger des documents</h3>
+				<br />
+
+				<div
+					id="candidate_documents"
+					config="{{ base64_encode(json_encode([
+							'type' => 'ajax',
+							'route' => route('rrhh.admin.candidates.documents.data',Auth::user()->candidate->first())
+						], true))}}"
+				></div>
+
+			</div>
+		</div>
+
+		<br/>
+
 		<div class="row">
 			<div class="col-xs-12">
 
@@ -219,6 +242,11 @@
 @endpush
 
 @push('javascripts')
+
+	<script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
+	<link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
+	{{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+
 	<script>
 	$(document).ready(function() {
 		$(document ).on('change','#resume_file' , function(){ $('#resume_file-form').submit(); });

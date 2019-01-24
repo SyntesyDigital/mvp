@@ -22,6 +22,7 @@ require('./components/Widgets/Blog');
 require('./components/Widgets/RelatedNews');
 require('./components/Widgets/LastNews');
 require('./components/Common/CustomerDocuments');
+require('./components/Common/CandidateDocuments');
 
 
 //javascripts

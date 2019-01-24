@@ -380,6 +380,24 @@
                   </div>
               </div>
             @endif
+
+            @if(isset($user))
+
+                <div id="headingdocuments" class="btn btn-link" data-toggle="collapse" data-target="#collapseddocuments" aria-expanded="true" aria-controls="collapseddocuments">
+                  <span class="field-name">Documents</span>
+                </div>
+
+                <div id="collapseddocuments" class="collapse in" aria-labelledby="headingdocuments" aria-expanded="true" aria-controls="collapseddocuments" style="">
+                    <div class="field-form">
+                        <div id="candidate-documents"
+                          config="{{ base64_encode(json_encode([
+                              'type' => 'ajax',
+                              'route' => route('rrhh.admin.candidates.documents.data',$user->candidate()->first())
+                          ], true))}}"
+                        ></div>
+                    </div>
+                </div>
+              @endif
           </div>
 
           <div class="sidebar">

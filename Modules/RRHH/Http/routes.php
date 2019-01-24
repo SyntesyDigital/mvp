@@ -33,6 +33,8 @@ Route::group([
     Route::post('/candidates/filestore', 'Admin\Users\CandidateController@filestore')->name('rrhh.admin.candidates.filestore');
     Route::get('/candidates/{candidate?}/downloadcv', 'Admin\Users\CandidateController@downloadCV')->name('rrhh.admin.candidates.downloadcv');
 
+
+
     // Offers
     Route::get('/offers', 'Admin\Offers\OfferController@index')->name('rrhh.admin.offers.index');
     Route::get('/offers/data', 'Admin\Offers\OfferController@data')->name('rrhh.admin.offers.index.data');
@@ -122,5 +124,17 @@ Route::group([
   Route::get('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@data')->name('rrhh.admin.customers.documents.data');
   Route::post('/customers/{customer?}/documents', 'Admin\AdminCustomerDocumentsController@upload')->name('rrhh.admin.customers.documents.upload');
   Route::delete('/customers/{customer?}/documents/delete', 'Admin\AdminCustomerDocumentsController@delete')->name('rrhh.admin.customers.documents.delete');
+
+});
+
+Route::group([
+  'middleware' => ['web', 'auth','role:admin|candidate', 'DetectUserLocale'],
+  'prefix' => 'architect',
+  'namespace' => 'Modules\RRHH\Http\Controllers'
+], function() {
+
+  Route::get('/candidates/{candidate}/documents', 'Admin\AdminCandidateDocumentsController@data')->name('rrhh.admin.candidates.documents.data');
+  Route::post('/candidates/{candidate}/documents', 'Admin\AdminCandidateDocumentsController@upload')->name('rrhh.admin.candidates.documents.upload');
+  Route::delete('/candidates/{candidate}/documents/delete', 'Admin\AdminCandidateDocumentsController@delete')->name('rrhh.admin.candidates.documents.delete');
 
 });
