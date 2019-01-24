@@ -51,7 +51,7 @@
                 <img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon" alt="Partager sur Facebook">
               </a>
               <a href="http://www.linkedin.com/shareArticle?mini=true&title={{$content->getFieldValue('title')}}&url={{ Request::url() }}" target="_blank"	class="share-button" title="Partager sur Linkedin">
-                <img src="{{asset('modules/bwo/images/linkedin.png')}}" class="social-icon" alt="Partager sur Linkedin">
+                <img src="{{asset('modules/bwo/images/linkedin.png')}}" class="social-icon"  alt="Partager sur Linkedin">
               </a>
               <a href="https://twitter.com/share?url={{ Request::url() }}&text={{$content->getFieldValue('title')}}"
                 class="share-button"
