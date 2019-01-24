@@ -20,11 +20,6 @@
             <i class="fa fa-user"></i><span class="text">Candidats</span> </a>
         </li>
 
-        <li class="{{ Request::is('architect/customers') ? 'active' : '' }}">
-          <a href="{{route('rrhh.admin.customers.index')}}">
-            <i class="fa fa-user-o"></i><span class="text">Clients</span>
-          </a>
-        </li>
 
         <li>
           <a href="{{route('rrhh.admin.massmail')}}">
