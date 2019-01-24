@@ -15,7 +15,6 @@ return [
         "label" => 'rrhh::header.offers',
         "patterns" => [
             'architect/offers*',
-            'architect/candidates*',
             'architect/tags*'
         ],
         "roles" => []
@@ -27,7 +26,22 @@ return [
         'name' => 'architect::plugins.topbar.menu'
     ],
     */
-
+    [
+        "route" => 'rrhh.admin.customers.index',
+        "label" => 'architect::header.customers',
+        "patterns" => [
+            'architect/customers*'
+        ],
+        "roles" => ['admin']
+    ],
+    [
+        "route" => 'rrhh.admin.candidates.index',
+        "label" => 'architect::header.candidates',
+        "patterns" => [
+            'architect/candidates*'
+        ],
+        "roles" => ['admin']
+    ],
     [
         "route" => 'contents',
         "label" => 'architect::header.contents',
@@ -37,7 +51,7 @@ return [
         "roles" => ['admin']
     ],
 
-    [
+  /*  [
         "route" => 'medias.index',
         "label" => 'architect::header.media',
         "patterns" => [
@@ -45,7 +59,7 @@ return [
         ],
         "roles" => ['admin']
     ],
-
+*/
     [
         "route" => 'settings',
         "label" => 'architect::header.configuration',
