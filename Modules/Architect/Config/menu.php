@@ -27,18 +27,18 @@ return [
     ],
     */
     [
-        "route" => 'rrhh.admin.customers.index',
-        "label" => 'architect::header.customers',
+        "route" => 'rrhh.admin.candidates.index',
+        "label" => 'rrhh::header.candidates',
         "patterns" => [
-            'architect/customers*'
+            'architect/candidates*'
         ],
         "roles" => ['admin']
     ],
     [
-        "route" => 'rrhh.admin.candidates.index',
-        "label" => 'architect::header.candidates',
+        "route" => 'rrhh.admin.customers.index',
+        "label" => 'rrhh::header.customers',
         "patterns" => [
-            'architect/candidates*'
+            'architect/customers*'
         ],
         "roles" => ['admin']
     ],
