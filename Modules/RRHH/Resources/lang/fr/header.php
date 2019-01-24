@@ -10,5 +10,6 @@ return [
     'my_profile'    => 'Mon profil',
     'disconnect'    => 'Déconnecter',
     'offers'        => 'Offres d\'emploi',
-    'customers'     => 'Clients'
+    'customers'     => 'Clients',
+    'candidates'    => 'Candidats'
 ];

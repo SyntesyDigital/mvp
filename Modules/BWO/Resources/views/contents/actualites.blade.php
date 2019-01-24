@@ -43,29 +43,23 @@
         </div>
         <div class="col-sm-6 first-line">
           <div class="share-container">
-            @php
-              $shareUrl = '';
-              $title = '';
-              $description =  '';
-            @endphp
              Partager:
-             <a href="https://www.facebook.com/sharer/sharer.php?u={{$shareUrl}}&t={{$title}}"
+             <a href="https://www.facebook.com/sharer/sharer.php?u={{ Request::url() }}&t={{$content->getFieldValue('title')}}"
                 class="share-button first-share-btn"
                  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
                  target="_blank" title="Share on Facebook">
-                <img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon">
+                <img src="{{asset('modules/bwo/images/fb_icon.jpg')}}" class="social-icon" alt="Partager sur Facebook">
               </a>
-
-              <!--a href="#"	class="share-button" title="Share on Instagram">
-                <img src="{{asset('modules/bwo/images/instagram_icon.jpg')}}" class="social-icon">
-              </a-->
-              <a href="https://twitter.com/share?url={{$shareUrl}}&text={{$title}}"
+              <a href="http://www.linkedin.com/shareArticle?mini=true&title={{$content->getFieldValue('title')}}&url={{ Request::url() }}" target="_blank"	class="share-button" title="Partager sur Linkedin">
+                <img src="{{asset('modules/bwo/images/linkedin.png')}}" class="social-icon"  alt="Partager sur Linkedin">
+              </a>
+              <a href="https://twitter.com/share?url={{ Request::url() }}&text={{$content->getFieldValue('title')}}"
                 class="share-button"
                  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
                  target="_blank" title="Share on Twitter">
-                <img src="{{asset('modules/bwo/images/tw_icon.jpg')}}" class="social-icon">
+                <img src="{{asset('modules/bwo/images/tw_icon.jpg')}}" class="social-icon" alt="Partager sur Twitter">
               </a>
-              <a href="mailto:?subject={{$title}}&body={{$shareUrl}}"
+              <a href="mailto:?subject={{$content->getFieldValue('title')}}&body={{ Request::url() }}"
                 class="mail-button">
                 <img src="{{asset('modules/bwo/images/mail_icon.jpg')}}" class="social-icon">
               </a>
