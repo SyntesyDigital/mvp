@@ -47,7 +47,8 @@ class Candidate extends Model
 
         'contract_type',
         'salary',
-        'important_information'
+        'important_information',
+        'documents'
     ];
 
     public $timestamps = false;

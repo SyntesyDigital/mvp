@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 
 import TextField from './../ContentFields/TextField';
 import SlugField from './../ContentFields/SlugField';
+import RichTextField from './../ContentFields/RichTextField';
 
 import FirstEmptyRow from './RowTypes/FirstEmptyRow';
 import Row from './RowTypes/Row';
@@ -995,6 +996,13 @@ class PageBuilder extends Component {
             translations={this.props.translations}
             onFieldChange={this.props.onFieldChange}
             errors={this.props.errors.slug}
+          />
+
+          <RichTextField
+            field={this.props.description}
+            translations={this.props.translations}
+            onFieldChange={this.props.onFieldChange}
+            errors={this.props.errors.description}
           />
 
           {this.props.layout != null &&

@@ -7,6 +7,7 @@ use App\Models\User;
 use Datatables;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Lang;
+use Config;
 
 class CandidateRepository extends BaseRepository
 {
@@ -103,4 +104,15 @@ class CandidateRepository extends BaseRepository
             })
         ->make(true);
     }
+
+    public function getDocuments(Candidate $candidate)
+    {
+        $documents = json_decode($candidate->documents, true);
+
+        return collect($documents)->map(function($document) use ($candidate) {
+            $document["url"] = str_replace(':id', $candidate->id, Config::get('candidates.storage'));
+            return $document;
+        });
+    }
+
 }

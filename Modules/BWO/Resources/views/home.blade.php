@@ -1,6 +1,6 @@
 @extends('bwo::layouts.master', [
-  'htmlTitle' => '',
-  'metaDescription' => '',
+  'htmlTitle' => 'BWO, votre agence d\'intérim tertiaire à Paris 75012',
+  'metaDescription' => 'BWO Paris, agence pour l\'emploi tertiaire. Assistanat, secrétariat, comptabilité, contrôle gestion, fonctions support… Intérim, CDD et CDI 75, 92, 93, 94.',
   'headerDiv' => 'home-header'
 ])
 
@@ -44,7 +44,7 @@
                 {{ $offer->title }}
               </div>
 
-              <p>Réf: {{$offer->id}} - Posté le {{ $offer->start_at }}</p>
+              <p>Réf: {{$offer->id}} - Posté le {{ Date('d/m/Y', $offer->start_at )}}</p>
               @php
                 $string = substr(strip_tags($offer->description), 0, 100);
                 if(strlen($string) < strlen(strip_tags($offer->description))){
@@ -93,14 +93,14 @@
   <div class="doble-bk-information-container">
       <div class="horizontal-inner-container">
         <div class="col-md-6 home-square home-square-white">
-          <h2 class="gray-square-text">INFORMATION SUR L'INTÉRIM</h2>
+          <h2 class="gray-square-text">EMPLOI & INTÉRIM ACTUS</h2>
 
           <div id="last-news"></div>
 
         </div>
         <div class="col-md-6 home-square home-square-gray p-l-10">
           <h2 class="gray-square-text">CANDIDATURE SPONTANÉE</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vehicula at libero at ornare. Nunc at iaculis nisi, porta dapibus dolor. Pellentesque bibendum eget lorem quis placerat. Suspendisse vestibulum sapien nibh, et lobortis libero laoreet nec. Ut eget ex ante. Mauris cursus nibh ac augue tincidunt, nec ultrices elit ullamcorper. Aenean in metus nunc. Vestibulum ac auctor dolor, sit amet lacinia orci. Proin at est velit.</p>
+          <p>Vous recherchez un emploi dans le secteur tertiaire sur Paris et  en banlieue ? Déposez votre candidature sur le site de BWO, notre équipe, chargée du recrutement, analysera votre profil professionnel avec le plus grand intérêt.</p>
           <div class="centered">
             <a href="{{route('spontanious.form')}}" class="btn btn-dark-gray" ><i class="fa fa-pencil"></i>ENVOYER UNE CANDIDATURE</a>
           </div>

@@ -33,7 +33,14 @@ return [
             'ratio' => '1:1',
             'width' => 225,
             'height' => 225
-        ]
+        ],
+        [
+            'name' => 'image_actu',
+            'directory' => 'image_actu',
+            'ratio' => '1:1',
+            'width' => 800,
+            'height' => 800
+        ],
     ]
 
 ];

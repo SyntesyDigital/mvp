@@ -93,14 +93,42 @@ class UpdateUrlsContent
                  ->first();
 
             if($attr) {
-                $content->urls()->create([
-                    'language_id' => $language->id,
-                    'url' => sprintf('/%s/%s/%s',
-                       $language->iso,
-                       $attr->value, // Typology slug
-                       $content->getFieldValue('slug', $language->id) // Article slug
-                    )
-                ]);
+
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+                $category = $content->categories()->first();
+
+                if($category != null ){
+                  $content->urls()->create([
+                      'language_id' => $language->id,
+                      'url' => $isMultiLanguage ?
+                          sprintf('/%s/%s/%s/%s',
+                           $language->iso,
+                           $attr->value, // Typology slug
+                           $category->getFieldValue('slug',$language->id),
+                           $content->getFieldValue('slug', $language->id))  // Article slug
+                         :
+                           sprintf('/%s/%s/%s',
+                            $attr->value, // Typology slug
+                            $category->getFieldValue('slug',$language->id),
+                            $content->getFieldValue('slug', $language->id))  // Article slug
+
+                  ]);
+                }
+                else {
+                  $content->urls()->create([
+                      'language_id' => $language->id,
+                      'url' => $isMultiLanguage ?
+                          sprintf('/%s/%s/%s',
+                           $language->iso,
+                           $attr->value, // Typology slug
+                           $content->getFieldValue('slug', $language->id))  // Article slug
+                         :
+                           sprintf('/%s/%s',
+                            $attr->value, // Typology slug
+                            $content->getFieldValue('slug', $language->id))  // Article slug
+
+                  ]);
+                }
             }
          }
 

@@ -72,6 +72,7 @@
             <h3 class="card-title">Définition de la liste</h3>
             <ul class="tabs"></ul>
                 <div class="content-field-dropper"  ondrop="app.sitelist.drop(event)" ondragover="app.sitelist.dragover(event)" ></div>
+
                 {!!
                     Form::hidden('value', isset($sitelist) ? $sitelist->value : null, [
                         'rows' => 20,

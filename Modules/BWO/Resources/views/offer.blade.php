@@ -1,3 +1,4 @@
+
 @php
 	$metaDescription = strip_tags(str_replace('&#39;', '\'', $offer->description));
 	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
@@ -5,9 +6,10 @@
 	$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
 @endphp
 
+
 @extends('bwo::layouts.master', [
 	'socialTitle' => $offer->title,
-	'htmlTitle' => $offer->title,
+	'htmlTitle' => $offer->title.' '.$offer->address,
 	'pageTitle' => $offer->title,
 	'headerDescription' => $offer->address,
 	'metaDescription' => $metaDescription,
@@ -28,13 +30,15 @@
           </ol>
           <h1>{{$offer->title}}</h1>
           <div class="separator"></div>
-          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ $offer->start_at }} </p>
+          <p class="first-info">{{$offer->address}}, Contrat {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }} - Publié le {{ Date('d/m/Y', $offer->start_at )}} </p>
           <div class="col-sm-4 col-md-3 information">
             <h2 class="gray-square-text">DÉTAILS</h2>
+						@if($offer->address)
             <div class="block-info">
               <p><b>Lieu:</b></p>
               <p>{{$offer->address}}</p>
             </div>
+					@endif
             <div class="block-info">
               <p><b>Contrat:</b></p>
               <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->contract, 'contracts') }}</p>
@@ -43,17 +47,25 @@
               <p><b>À partir du:</b></p>
               <p>{{ Date('d/m/Y', $offer->start_at )}}</p>
             </div>
+						@if($offer->job_1)
+						<div class="block-info">
+							<p><b>Métier:</b></p>
+							<p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }}</p>
+						</div>
+						@endif
+						@if($offer->job_2)
             <div class="block-info">
               <p><b>Secteur:</b></p>
-              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_1, 'jobs1') }} / {{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs2') }}</p>
+              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->job_2, 'jobs1') }} </p>
             </div>
+						@endif
 						@if($offer->salary)
 	            <div class="block-info">
 	              <p><b>Salaire:</b></p>
 	              <p>{{ Modules\RRHH\Entities\Tools\SiteList::getListValue($offer->salary, 'salaries') }}</p>
 	            </div>
 						@endif
-            <div class="reference">REF : {{$offer->id}} | {{ $offer->start_at }}</div>
+            <div class="reference">REF : {{$offer->id}} | {{ Date('d/m/Y', $offer->start_at )}}</div>
             <div class="share-container">
               @php
       					$shareUrl = urlencode(Request::url());
@@ -109,7 +121,8 @@
           <br clear="all">
           <div class="btn-red-container">
 
-            @if(Auth::check() && !Auth::user()->hasRole(['admin', 'recruiter']))
+            @if(Auth::check())
+							@if(!Auth::user()->hasRole(['admin', 'recruiter','customer']))
                 @if($offer->hasAlreadyCandidate())
                   <a id="{{$offer->id}}"  class="btn btn-red unactivated">
                     <i class="fa fa-check"></i> Déjà postulé
@@ -119,6 +132,14 @@
                     <i class="fa fa-file-text-o"></i> POSTULER
                   </a>
                 @endif
+							@else
+								<!--
+								<a id="{{$offer->id}}"  class="btn btn-red unactivated">
+									<i class="fa fa-check"></i> POSTULER
+								</a>
+								-->
+							@endif
+
             @else
                 <a id="{{$offer->id}}"  class="btn btn-red application-btn">
                   <i class="fa fa-file-text-o"></i> POSTULER

@@ -1,7 +1,7 @@
 <?php
 
 return [
-	"category.index" =>    "categorie/{slug}",
-	"tag.index" =>    "tag/{slug}"
+	"category.index" =>    "blog/categorie/{slug}",
+	"tag.index" =>    "blog/tag/{slug}"
 
 ];

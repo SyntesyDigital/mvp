@@ -142,12 +142,35 @@
 
 		<br/>
 
+
+		<br/>
+
+
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h3>Télécharger des documents</h3>
+				<br />
+
+				<div
+					id="candidate_documents"
+					config="{{ base64_encode(json_encode([
+							'type' => 'ajax',
+							'route' => route('rrhh.admin.candidates.documents.data',Auth::user()->candidate()->first())
+						], true))}}"
+				></div>
+
+			</div>
+		</div>
+
+		<br/>
+
 		<div class="row">
 			<div class="col-xs-12">
 
 
 				@if(Auth::user()->candidate->type != \Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM)
-					<h3>Autre documents</h3>
+					<h3>Autres documents</h3>
 					<br />
 					<p>Seuls nos intérimaires ont accès aux documents</p>
 				@else
@@ -157,7 +180,7 @@
 						$documents = isset($list) ? json_decode($list->value) : null;
 					@endphp
 
-					<h3>Autre documents</h3>
+					<h3>Autres documents</h3>
 
 					@if($documents)
 					<table class="table">
@@ -219,6 +242,11 @@
 @endpush
 
 @push('javascripts')
+
+	<script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
+	<link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
+	{{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
+
 	<script>
 	$(document).ready(function() {
 		$(document ).on('change','#resume_file' , function(){ $('#resume_file-form').submit(); });

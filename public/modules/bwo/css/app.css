@@ -13191,7 +13191,7 @@ header .menus .navbar #main-menu {
 
 header .menus .navbar #main-menu ul {
   padding-left: 0px;
-  max-width: 100%;
+  /*max-width: 100%;*/
 }
 
 header .menus .navbar #main-menu ul li a {
@@ -13531,6 +13531,25 @@ footer .footer-info .first-line-footer ul li a:hover {
   footer .footer-info .first-line-footer ul li {
     margin-left: 30px;
   }
+}
+
+.post-container {
+  /*
+  img {
+    max-width: 100%;
+    margin: 0 5%;
+    width: auto;
+    width: 90%;
+  }
+  */
+}
+
+.post-container .page-builder {
+  padding: 0 20px 40px;
+}
+
+.post-container .page-builder h2 {
+  color: #666;
 }
 
 form .input-round {
@@ -14378,6 +14397,9 @@ body .widget-blog.offers-container .blog-container .posts-list .post-box .title 
   font-weight: 600;
   height: 42px;
   padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 body .widget-blog.offers-container .blog-container .posts-list .post-box p {
@@ -15078,23 +15100,28 @@ body .doc-col {
   right: 100px;
 }
 
-#customer_documents .dz-preview {
+#customer_documents .dz-preview,
+#candidate_documents .dz-preview {
   display: none;
 }
 
-#customer_documents .container {
+#customer_documents .container,
+#candidate_documents .container {
   width: 100% !important;
 }
 
-#customer_documents .btn-default {
+#customer_documents .btn-default,
+#candidate_documents .btn-default {
   background-color: #e0e0e0;
 }
 
-#customer_documents .fields-list-container {
+#customer_documents .fields-list-container,
+#candidate_documents .fields-list-container {
   padding: 0px;
 }
 
-#customer_documents .typology-field .field-type {
+#customer_documents .typology-field .field-type,
+#candidate_documents .typology-field .field-type {
   display: inline-block;
   width: 150px;
   position: absolute;
@@ -15109,7 +15136,8 @@ body .doc-col {
   margin-bottom: 10px;
 }
 
-#customer_documents .typology-field .field-actions {
+#customer_documents .typology-field .field-actions,
+#candidate_documents .typology-field .field-actions {
   position: absolute;
   top: 11px;
   right: 0px;
@@ -15118,18 +15146,21 @@ body .doc-col {
   height: 20px;
 }
 
-#customer_documents .typology-field .field-actions a {
+#customer_documents .typology-field .field-actions a,
+#candidate_documents .typology-field .field-actions a {
   font-size: 12px;
   line-height: 50px;
   font-weight: 400;
   display: inline-block;
 }
 
-#customer_documents .typology-field a.remove-field-btn {
+#customer_documents .typology-field a.remove-field-btn,
+#candidate_documents .typology-field a.remove-field-btn {
   color: #fc4b6c;
 }
 
-#customer_documents .typology-field .field-name {
+#customer_documents .typology-field .field-name,
+#candidate_documents .typology-field .field-name {
   line-height: 46px;
   text-align: left;
   padding-left: 15px;
@@ -15140,38 +15171,45 @@ body .doc-col {
   text-overflow: ellipsis;
 }
 
-#customer_documents .typology-field .field-inputs {
+#customer_documents .typology-field .field-inputs,
+#candidate_documents .typology-field .field-inputs {
   padding-right: 100;
   position: relative;
   padding-left: 160px;
   padding-top: 2px;
 }
 
-#customer_documents .typology-field .field-actions {
+#customer_documents .typology-field .field-actions,
+#candidate_documents .typology-field .field-actions {
   width: 80px;
 }
 
-#customer_documents .typology-field i.fa {
+#customer_documents .typology-field i.fa,
+#candidate_documents .typology-field i.fa {
   font-size: 16px;
   padding-right: 10px;
 }
 
-#customer_documents .fields-list-container {
+#customer_documents .fields-list-container,
+#candidate_documents .fields-list-container {
   border: none;
 }
 
-#customer_documents .image-col .image {
+#customer_documents .image-col .image,
+#candidate_documents .image-col .image {
   background-color: #fafafa;
   border: 1px dashed #ccc;
   cursor: pointer;
   padding: 30px 20px;
 }
 
-#customer_documents .image-col .image p {
+#customer_documents .image-col .image p,
+#candidate_documents .image-col .image p {
   pointer-events: none;
 }
 
-#customer_documents .image-col .image:hover {
+#customer_documents .image-col .image:hover,
+#candidate_documents .image-col .image:hover {
   border: 1px dashed #000;
 }
 

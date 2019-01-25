@@ -149,7 +149,7 @@ export default class CustomerDocuments extends Component {
                     }
                 })
                 .then(function (response) {
-                    toastr.success('Document removed correctly');
+                    toastr.success('Document supprimé correctement');
                     self.loadDocs();
                 }).catch(function (error) {
                     toastr.error('An error occurred');

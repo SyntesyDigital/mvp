@@ -46,7 +46,9 @@ class ImageUploadRepository
 
         $allowed_filename = uniqid(rand(), false) . '.' . $extension;
 
-        $prefix = 'public/cache/' . date('Y').'/'.date('m').'/';
+        //$prefix = storage_path() . '/app/public/cache/' . date('Y').'/'.date('m').'/';
+
+        $prefix = 'cache/' . date('Y').'/'.date('m').'/';
 
         $result = $this->processImageSize($photo, $allowed_filename, $resizeWidth, $prefix);
 
@@ -59,7 +61,7 @@ class ImageUploadRepository
 
         return [
             'error' => false,
-            'filename' => $prefix.$allowed_filename,
+            'filename' => '/public/'.$prefix.$allowed_filename,
             'storage_filename' => Storage::url($prefix.$allowed_filename),
         ];
     }
@@ -83,17 +85,19 @@ class ImageUploadRepository
         $hash = md5($image->__toString());
 
         // use hash as a name
-        $path = "cache/{$hash}.jpg";
+        $path = $prefix.$filename;
 
         // save it locally to ~/public/images/{$hash}.jpg
-        $image->save(public_path($path));
+        //$image->save(public_path($path));
+        $image->save(storage_path() . '/app/public/'.$path);
 
-        Storage::put($prefix.$filename, $image->__toString());
+
+        //Storage::put($prefix.$filename, $image->__toString());
 
         //delete temporal image
-        $image->destroy();
+        //$image->destroy();
 
-        unlink($path);
+        //unlink($path);
 
         return true;
     }

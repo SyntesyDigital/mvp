@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 979);
+/******/ 	return __webpack_require__(__webpack_require__.s = 980);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -77,13 +77,6 @@ if (false) {
   module.exports = __webpack_require__(87);
 }
 
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(69);
 
 /***/ }),
 
@@ -23811,6 +23804,13 @@ module.exports = reactDom;
 
 /***/ }),
 
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(69);
+
+/***/ }),
+
 /***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24916,26 +24916,27 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 /***/ }),
 
-/***/ 979:
+/***/ 980:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(980);
+module.exports = __webpack_require__(981);
 
 
 /***/ }),
 
-/***/ 980:
+/***/ 981:
 /***/ (function(module, exports, __webpack_require__) {
 
 //require('./bootstrap');
 
 //Components
-__webpack_require__(981);
-__webpack_require__(983);
+__webpack_require__(982);
+__webpack_require__(984);
+__webpack_require__(985);
 
 /***/ }),
 
-/***/ 981:
+/***/ 982:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24944,9 +24945,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ModalEditUser__ = __webpack_require__(982);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ModalEditUser__ = __webpack_require__(983);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -25166,7 +25167,7 @@ if (document.getElementById('customer_users')) {
 
 /***/ }),
 
-/***/ 982:
+/***/ 983:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25174,7 +25175,7 @@ if (document.getElementById('customer_users')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -25375,7 +25376,7 @@ var ModalEditUser = function (_Component) {
 
 /***/ }),
 
-/***/ 983:
+/***/ 984:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25384,7 +25385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -25571,7 +25572,7 @@ var CustomerDocuments = function (_Component) {
                                 id: id
                             }
                         }).then(function (response) {
-                            toastr.success('Document removed correctly');
+                            toastr.success('Document supprimé correctement');
                             self.loadDocs();
                         }).catch(function (error) {
                             toastr.error('An error occurred');
@@ -25615,6 +25616,250 @@ if (document.getElementById('customer_documents')) {
     var config = element.getAttribute('config');
 
     __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CustomerDocuments, { config: config }), document.getElementById('customer_documents'));
+}
+
+/***/ }),
+
+/***/ 985:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+
+var acceptedFiles = 'application/pdf,application/doc',
+    maxFilesize = 20,
+
+// MB
+paramName = 'file',
+    identifier = '.docs-dropfiles';
+
+var CandidateDocuments = function (_Component) {
+    _inherits(CandidateDocuments, _Component);
+
+    function CandidateDocuments(props) {
+        _classCallCheck(this, CandidateDocuments);
+
+        var _this2 = _possibleConstructorReturn(this, (CandidateDocuments.__proto__ || Object.getPrototypeOf(CandidateDocuments)).call(this, props));
+
+        _this2.state = {
+            config: props.config ? JSON.parse(atob(props.config)) : '',
+            initializated: false,
+            routes: {},
+            items: [{
+                id: 1,
+                name: 'doc_1.pdf',
+                url: 'sdfsdf'
+            }, {
+                id: 1,
+                name: 'doc_2.pdf',
+                url: 'sdfsdf'
+            }]
+        };
+
+        console.log('CONFIG =>', _this2.state.config);
+        _this2._dropzone = null;
+
+        return _this2;
+    }
+
+    _createClass(CandidateDocuments, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.loadDocs();
+        }
+    }, {
+        key: 'initDropzone',
+        value: function initDropzone() {
+            var _this = this;
+
+            var settings = {
+                url: _this.state.routes.upload,
+                uploadMultiple: false,
+                parallelUploads: 1,
+                createImageThumbnails: false,
+                //acceptedFiles: acceptedFiles,
+                addRemoveLinks: false,
+                maxFilesize: maxFilesize,
+                paramName: paramName
+            };
+
+            this._dropzone = new Dropzone(identifier, settings);
+
+            this._dropzone.on("error", function (file, response) {
+                toastr.error(response.errors.file[0]);
+            });
+
+            this._dropzone.on("totaluploadprogress", function (progress) {
+                $(".progress-bar").parent().addClass("progress-striped active");
+                $(".progress-bar").width(progress + "%");
+                $(".progress-bar").html(progress + "%");
+            });
+
+            this._dropzone.on("maxfilesreached", function () {
+                toastr.error('Too many files added !');
+            });
+
+            this._dropzone.on("dragenter", function () {
+                $('.docs-dropfiles').addClass("active");
+            });
+
+            this._dropzone.on("dragleave dragend dragover", function () {
+                $('.docs-dropfiles').removeClass("active");
+            });
+
+            this._dropzone.on("maxfilesexceeded", function (file) {
+                toastr.error(Lang.get('fields.file_too_big'));
+            });
+
+            this._dropzone.on("queuecomplete", function (file, response) {
+                setTimeout(function () {
+                    $(".progress-bar").parent().removeClass("progress-striped active");
+                    $(".progress-bar").width("0%");
+                    $(".progress-bar").html("");
+                }, 2000);
+
+                _this._dropzone.removeAllFiles(true);
+            });
+
+            this._dropzone.on("success", function (file, response) {
+                _this.onSuccessUpload(_this);
+            });
+        }
+    }, {
+        key: 'onSuccessUpload',
+        value: function onSuccessUpload(_this) {
+            toastr.success(Lang.get('fields.success'));
+            _this.loadDocs();
+        }
+    }, {
+        key: 'loadDocs',
+        value: function loadDocs() {
+            var self = this;
+            if (this.state.config.type == "ajax") {
+                __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get(this.state.config.route).then(function (response) {
+                    self.setState({
+                        initializated: true,
+                        items: response.data.documents ? response.data.documents : [],
+                        routes: response.data.routes
+                    });
+
+                    self.initDropzone();
+                    self.loadDocs();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    }, {
+        key: 'onRemoveField',
+        value: function onRemoveField(id, e) {
+
+            e.preventDefault();
+            var self = this;
+
+            bootbox.confirm({
+                message: 'Etes-vous sur de vouloir supprimer ?',
+                buttons: {
+                    confirm: {
+                        label: 'Oui',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Non',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function callback(result) {
+                    if (result) {
+
+                        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete(self.state.routes.delete, {
+                            params: {
+                                id: id
+                            }
+                        }).then(function (response) {
+                            toastr.success('Document supprimé correctement');
+                            self.loadDocs();
+                        }).catch(function (error) {
+                            toastr.error('An error occurred');
+                        });
+                    }
+                }
+            });
+        }
+    }, {
+        key: 'renderDocs',
+        value: function renderDocs() {
+            var _this3 = this;
+
+            var self = this;
+
+            if (!this.state.items) {
+                return null;
+            }
+
+            return this.state.items.map(function (item, key) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', key: key }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-type' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa fa-file" }), ' \xA0 Document'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name' }, item.uploaded_filename)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '/' + item.url.replace('public', 'storage') + '/' + item.stored_filename, target: '_blank', className: '' }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-download' }), '  '), ' \xA0', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: self.onRemoveField.bind(_this3, item.id) }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), '  '), '\xA0\xA0'));
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var documents = this.state.initializated ? this.renderDocs() : '';
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-4 image-col' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'image no-selected docs-dropfiles' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('p', { align: 'center' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('strong', null, Lang.get('fields.drag_file')), ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '#', className: 'btn btn-default' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-upload' }), ' ', Lang.get('fields.upload_file'), ' '))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'progress' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'progress-bar', role: 'progressbar', 'aria-valuenow': '0', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { width: '0%' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'sr-only' })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-8' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-form fields-list-container' }, documents))));
+        }
+    }]);
+
+    return CandidateDocuments;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (CandidateDocuments);
+
+if (document.getElementById('candidate-documents')) {
+    var element = document.getElementById('candidate-documents');
+    var config = element.getAttribute('config');
+
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CandidateDocuments, { config: config }), document.getElementById('candidate-documents'));
 }
 
 /***/ })

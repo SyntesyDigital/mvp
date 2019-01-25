@@ -9,6 +9,7 @@
         "acoustep/entrust-gui": "5.2.x-dev",
         "doctrine/dbal": "^2.7",
         "elasticsearch/elasticsearch": "^6.0",
+        "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "~4.0",
         "fzaninotto/faker": "^1.8",
         "google/apiclient": "^2.2",

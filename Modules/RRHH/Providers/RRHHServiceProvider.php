@@ -65,6 +65,11 @@ class RRHHServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
+            __DIR__.'/../Config/candidates.php',
+            'candidates'
+        );
+
+        $this->mergeConfigFrom(
             __DIR__.'/../Config/emails_templates.php',
             'emails_templates'
         );

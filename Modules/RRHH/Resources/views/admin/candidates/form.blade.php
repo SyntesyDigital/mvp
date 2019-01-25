@@ -352,6 +352,55 @@
 
               @if(isset($user))
 
+              <div id="headingrecherche" class="btn btn-link" data-toggle="collapse" data-target="#collapserecherche" aria-expanded="true" aria-controls="collapserecherche">
+                <span class="field-name">Votre recherche</span>
+              </div>
+
+              <div id="collapserecherche" class="collapse in" aria-labelledby="headingrecherche" aria-expanded="true" aria-controls="collapserecherche" style="">
+                  <div class="field-form">
+
+                      <div class="form-group">
+                          {!! Form::Label('contract_type', 'Vous cherchez un contrat : ') !!}
+                          @php
+            								$list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
+            								$contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+            										return [$item['value'] => $item['name']];
+            								})->toArray();
+            							@endphp
+
+                          <ul>
+                          @foreach($contracts as $k => $v)
+                              @if($user->candidate->contract_type != "" && in_array($k,$user->candidate->contract_type))
+              								<li>
+              										<label>
+		                                   {{ $v }}
+              										</label>
+              								</li>
+                              @endif
+              						@endforeach()
+                          </ul>
+
+                      </div>
+
+                      <div class="form-group">
+                          {!! Form::Label('salary', 'Votre rénumération souhaitée : ') !!}
+                          {{ $user->candidate->salary }}
+
+                      </div>
+
+                      <div class="form-group">
+                          {!! Form::Label('important_information', 'Informations importantes (contraintes horaires, géographiques...) : ') !!}
+                          <br/>
+                          {{ $user->candidate->important_information }}
+
+                      </div>
+                  </div>
+
+
+              </div>
+
+
+
               <div id="headingcandidatures" class="btn btn-link" data-toggle="collapse" data-target="#collapsecandidatures" aria-expanded="true" aria-controls="collapsecandidatures">
                 <span class="field-name">Candidatures</span>
               </div>
@@ -364,12 +413,13 @@
                                  <th>Titre</th>
                                  <th>Date de création</th>
                                  <th>Etat</th>
-                                 <th>Action</th>
+                                 <th></th>
 
                              </tr>
                          </thead>
                          <tfoot>
                              <tr>
+                                 <th></th>
                                  <th></th>
                                  <th></th>
                                  <th></th>
@@ -379,6 +429,24 @@
                   </div>
               </div>
             @endif
+
+            @if(isset($user))
+
+                <div id="headingdocuments" class="btn btn-link" data-toggle="collapse" data-target="#collapseddocuments" aria-expanded="true" aria-controls="collapseddocuments">
+                  <span class="field-name">Documents</span>
+                </div>
+
+                <div id="collapseddocuments" class="collapse in" aria-labelledby="headingdocuments" aria-expanded="true" aria-controls="collapseddocuments" style="">
+                    <div class="field-form">
+                        <div id="candidate-documents"
+                          config="{{ base64_encode(json_encode([
+                              'type' => 'ajax',
+                              'route' => route('rrhh.admin.candidates.documents.data',$user->candidate()->first())
+                          ], true))}}"
+                        ></div>
+                    </div>
+                </div>
+              @endif
           </div>
 
           <div class="sidebar">

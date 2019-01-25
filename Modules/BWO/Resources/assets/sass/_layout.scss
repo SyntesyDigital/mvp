@@ -132,7 +132,8 @@ header{
         }
         ul{
           padding-left:0px;
-          max-width: 100%;
+          /*max-width: 100%;*/
+
           li{
           a{
             color:$brand-black-color;
@@ -435,4 +436,25 @@ footer{
 
     }
 
+}
+
+.post-container {
+
+  .page-builder {
+    padding: 0 20px 40px;
+
+    h2 {
+      color: #666;
+    }
+
+  }
+
+  /*
+  img {
+    max-width: 100%;
+    margin: 0 5%;
+    width: auto;
+    width: 90%;
+  }
+  */
 }

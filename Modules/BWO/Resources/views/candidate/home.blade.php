@@ -66,7 +66,7 @@
             <div class="candidate-box">
               <i class="fa fa-briefcase"></i>
               <div class="btn-container">
-                <a href="" class="btn btn-dark-gray">VOS DOCUMENTS</a>
+                <a href="{{ route('candidate.document') }}" class="btn btn-dark-gray">VOS DOCUMENTS</a>
               </div>
             </div>
           </div>

@@ -532,11 +532,13 @@ li {
   display: inline-block;
 }
 
-#customer_documents .fields-list-container {
+#customer_documents .fields-list-container,
+#candidate-documents .fields-list-container {
   padding: 0px;
 }
 
-#customer_documents .typology-field .field-name {
+#customer_documents .typology-field .field-name,
+#candidate-documents .typology-field .field-name {
   line-height: 46px;
   text-align: left;
   padding-left: 15px;
@@ -547,35 +549,42 @@ li {
   text-overflow: ellipsis;
 }
 
-#customer_documents .typology-field .field-inputs {
+#customer_documents .typology-field .field-inputs,
+#candidate-documents .typology-field .field-inputs {
   padding-right: 100;
 }
 
-#customer_documents .typology-field .field-actions {
+#customer_documents .typology-field .field-actions,
+#candidate-documents .typology-field .field-actions {
   width: 80px;
 }
 
-#customer_documents .typology-field i.fa {
+#customer_documents .typology-field i.fa,
+#candidate-documents .typology-field i.fa {
   font-size: 16px;
   padding-right: 10px;
 }
 
-#customer_documents .fields-list-container {
+#customer_documents .fields-list-container,
+#candidate-documents .fields-list-container {
   border: none;
 }
 
-#customer_documents .image-col .image {
+#customer_documents .image-col .image,
+#candidate-documents .image-col .image {
   background-color: #fafafa;
   border: 1px dashed #ccc;
   cursor: pointer;
   padding: 30px 20px;
 }
 
-#customer_documents .image-col .image p {
+#customer_documents .image-col .image p,
+#candidate-documents .image-col .image p {
   pointer-events: none;
 }
 
-#customer_documents .image-col .image:hover {
+#customer_documents .image-col .image:hover,
+#candidate-documents .image-col .image:hover {
   border: 1px dashed #4a9fea;
 }
 

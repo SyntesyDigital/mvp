@@ -36,6 +36,13 @@ class PageContainer extends Component {
       name:"Enllaç permanent"
     };
 
+    var descriptionField = {
+        id:0,
+        identifier:"description",
+        value:{},
+        name:"Description"
+    };
+
     // Build translations state from content languages fields
     var translations = {};
     LANGUAGES.map(function(language){
@@ -68,6 +75,12 @@ class PageContainer extends Component {
                         slugField.value[language.iso] = field.value;
                     }
                 }
+
+                if(field.name == "description") {
+                    if(language.id == field.language_id) {
+                        descriptionField.value[language.iso] = field.value;
+                    }
+                }
             });
         });
     }
@@ -84,6 +97,7 @@ class PageContainer extends Component {
          tagsList : props.tags ? props.tags : [], // La lista de los tags
          title : titleField,
          slug : slugField,
+         description : descriptionField,
          translations: translations,
          author: props.content ? props.content.author_id : CURRENT_USER.id,
          authors: props.authors,
@@ -238,6 +252,7 @@ class PageContainer extends Component {
           fields : {
               title : this.state.title,
               slug : this.state.slug,
+              description : this.state.description
           },
           parent_id: this.state.parent_id,
           content_id : this.state.content !== undefined ? this.state.content.id : null,
@@ -562,6 +577,7 @@ class PageContainer extends Component {
                 onFieldChange={this.handleFieldChange}
                 title={this.state.title}
                 slug={this.state.slug}
+                description={this.state.description}
                 saved={this.props.saved}
                 errors={this.state.errors}
               />

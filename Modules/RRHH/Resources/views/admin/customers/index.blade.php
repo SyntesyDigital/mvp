@@ -4,7 +4,7 @@
 @section('content')
 <div class="container leftbar-page">
 
-  @include('rrhh::admin.partials.offers-nav')
+  @include('rrhh::admin.partials.customers-nav')
 
   <div class="col-xs-offset-2 col-xs-10 page-content">
 

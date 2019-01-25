@@ -1,9 +1,13 @@
-@extends('bwo::layouts.master')
+@extends('bwo::layouts.master', [
+	'htmlTitle' => 'Candidat ou entreprise, contacter l\'agence pour l\'emploi BWO Paris',
+	'metaDescription' => 'Vous êtes demandeur d\'emploi ou recruteur ? Candidat ou entreprise, contactez l\'agence pour l\'emploi BWO Paris.'
+])
+
 
 @section('content')
     <div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/offer-banner.jpg')}}')">
       <div class="horizontal-inner-container">
-          <h1>CONTACTEZ-NOUS</h1>
+          <h1>Contactez l'agence pour l'emploi BWO Paris</h1>
         </div>
       </div>
     </div>
@@ -18,7 +22,7 @@
 
           <div>
             <h2>CONTACTEZ-NOUS</h2>
-
+<p>Entreprises ou candidats en recherche de poste sur Paris et en banlieue (92, 93 et 94), contactez notre agence pour l'emploi BWO Paris spécialisée dans les métiers du tertiaire. Intérim, CDD, CDI… Notre équipe se fera un plaisir de répondre à vos demandes.<p>
             @if(Session::has('notify_success'))
               <div class="row">
                 <div class="col-md-12">
