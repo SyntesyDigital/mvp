@@ -98,11 +98,12 @@
               {{-- <h3 class="card-title">Edition du candidat {{ isset($user) ? $user->full_name :'' }}</h3> --}}
 
 
+
               <div id="headingtitle" class="btn btn-link" data-toggle="collapse" data-target="#collapsetitle" aria-expanded="true" aria-controls="collapsetitle">
                 @if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM)
-                  <span class="field-name">Informations du intérimaire</span>
+                  <span class="field-name">Information de l'intérimaire</span>
                 @else
-                  <span class="field-name">Informations du candidat</span>
+                  <span class="field-name">Information du candidate</span>
                 @endif
               </div>
 
