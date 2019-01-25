@@ -6,7 +6,7 @@ return [
     'indica_css'   => 'Indiquez la classe CSS personnalisée',
     'edition'     => 'Edition',
     'cancel'       => 'Annuler',
-    'accept'      => 'Acceptez',
+    'accept'      => 'Enregistrer',
     'has_container' => 'A un conteneur ?',
     'without_program' => 'Sans programme',
     'indica_title'   => 'Indiquez le titre',

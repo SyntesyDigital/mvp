@@ -17,7 +17,7 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>Subject</th>
+                            <th>Sujet</th>
                             <th>Identifiant</th>
                             <th></th>
                         </tr>

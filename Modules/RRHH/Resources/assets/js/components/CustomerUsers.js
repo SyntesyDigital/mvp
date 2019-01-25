@@ -142,7 +142,7 @@ export default class CustomerUsers extends Component {
   }
 
   onUserSubmit() {
-    toastr.success('User saved correctly.');
+    toastr.success('Utilisateur enregistré correctement');
 
     this.loadUsers();
 

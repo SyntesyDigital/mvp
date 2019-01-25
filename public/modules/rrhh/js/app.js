@@ -25110,7 +25110,7 @@ var CustomerUsers = function (_Component) {
     }, {
         key: 'onUserSubmit',
         value: function onUserSubmit() {
-            toastr.success('User saved correctly.');
+            toastr.success('Utilisateur enregistré correctement');
 
             this.loadUsers();
 

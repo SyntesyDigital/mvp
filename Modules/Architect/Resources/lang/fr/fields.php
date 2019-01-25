@@ -36,7 +36,7 @@ return [
     'new'       => 'Nouveau',
     'delete'    =>  'Supprimer',
     'add'       => 'Ajouter',
-    'cancel'    => 'Cancelar',
+    'cancel'    => 'Annuler',
     'name'      => 'Nom',
     'tipus'     => 'Type',
     'updated'   => 'Mis à jour',

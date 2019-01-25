@@ -21,7 +21,7 @@ class PageItem extends Component {
     var self = this;
 
     bootbox.confirm({
-				message: Lang.get('models.delete_permanently_alert'),
+				message: Lang.get('modals.delete_permanently_alert'),
 				buttons: {
 						confirm: {
 								label: Lang.get('fields.si'),

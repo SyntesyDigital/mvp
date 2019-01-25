@@ -23,7 +23,7 @@
                 </a>
 
                 <h1>
-                    <i class="fa fa-reorder"></i> {{ Lang::get('rrhh::settings.emailstemplates') }}
+                    <i class="fa fa-reorder"></i> {{ Lang::get('rrhh::settings.emails_templates') }}
                 </h1>
 
                 <div class="float-buttons pull-right">
