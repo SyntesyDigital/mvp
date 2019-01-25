@@ -80,6 +80,13 @@ if (false) {
 
 /***/ }),
 
+/***/ 10:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(74);
+
+/***/ }),
+
 /***/ 100:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -210,13 +217,6 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-
-/***/ }),
-
-/***/ 12:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(74);
 
 /***/ }),
 
@@ -31342,7 +31342,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(12);
+window.axios = __webpack_require__(10);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

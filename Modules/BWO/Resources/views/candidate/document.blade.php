@@ -156,7 +156,7 @@
 					id="candidate_documents"
 					config="{{ base64_encode(json_encode([
 							'type' => 'ajax',
-							'route' => route('rrhh.admin.candidates.documents.data',Auth::user()->candidate->first())
+							'route' => route('rrhh.admin.candidates.documents.data',Auth::user()->candidate()->first())
 						], true))}}"
 				></div>
 
