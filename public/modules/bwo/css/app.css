@@ -13532,19 +13532,23 @@ footer .footer-info .first-line-footer ul li a:hover {
   }
 }
 
+.post-container {
+  /*
+  img {
+    max-width: 100%;
+    margin: 0 5%;
+    width: auto;
+    width: 90%;
+  }
+  */
+}
+
 .post-container .page-builder {
   padding: 0 20px 40px;
 }
 
 .post-container .page-builder h2 {
   color: #666;
-}
-
-.post-container img {
-  max-width: 100%;
-  margin: 0 5%;
-  width: auto;
-  width: 90%;
 }
 
 form .input-round {
