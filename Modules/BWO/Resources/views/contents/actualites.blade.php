@@ -2,11 +2,21 @@
   $htmlClass = 'blog '.(isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '');
   $pageType = isset($content->typology->name) ? $content->typology->name : '';
   $idClass = isset($content) ? "id_".$content->id : '';
+  $descExcerpt = isset($content) ? $content->getFieldValue('excerpt') : '';
+  $metaDescription = strip_tags(str_replace('&#39;', '\'',$descExcerpt));
+	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
+	$metaDescription = trim(substr(strip_tags($metaDescription), 0, 180));
+	$metaDescription = mb_substr($metaDescription, 0, strrpos($metaDescription, ' ')) . " ...";
+//echo $descExcerpt;
+
 @endphp
 
 @extends('bwo::layouts.master',[
   'title' => isset($content) ? $content->getFieldValue('title') : '',
-  'mainClass' => $pageType.' blog '.$htmlClass.' '.$idClass
+  'mainClass' => $pageType.' blog '.$htmlClass.' '.$idClass,
+  'htmlTitle' => isset($content) ? $content->getFieldValue('title-html') : '',
+  'metaDescription' => $metaDescription,
+  'socialDescription' => $metaDescription
 ])
 
 @section('content')

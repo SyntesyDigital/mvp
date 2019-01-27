@@ -19,10 +19,9 @@
 
         <!-- twitter -->
         <meta name="twitter:card" content="summary_large_image"/>
-    		<meta name="twitter:site" content=""/>
-    		<meta name="twitter:creator" content=""/>
-    		<meta name="twitter:title" content=""/>
-    		<meta name="twitter:description" content=""/>
+    		<meta name="twitter:site" content="{{ Request::url() }}"/>
+    		<meta name="twitter:title" content="{!! $htmlTitle or 'BWO Interim' !!}"/>
+    		<meta name="twitter:description" content="{!! $metaDescription or '' !!}"/>
 
 
         <link href="{{asset('modules/bwo/css/app.css')}}" rel="stylesheet" type="text/css" />

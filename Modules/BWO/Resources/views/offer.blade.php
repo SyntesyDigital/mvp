@@ -1,4 +1,3 @@
-
 @php
 	$metaDescription = strip_tags(str_replace('&#39;', '\'', $offer->description));
 	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
