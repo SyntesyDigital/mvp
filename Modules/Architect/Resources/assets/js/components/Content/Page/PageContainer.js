@@ -26,14 +26,14 @@ class PageContainer extends Component {
         id:0,
         identifier:"title",
         value:{},
-        name:"Títol"
+        name:"Titre"
     };
 
     var slugField = {
       id:1,
       identifier:"slug",
       value:{},
-      name:"Enllaç permanent"
+      name:"Lien permanent"
     };
 
     var descriptionField = {
