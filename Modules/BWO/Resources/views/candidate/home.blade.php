@@ -38,6 +38,7 @@
               </div>
             </div>
           </div>
+			<br clear="all">
           <div class="col-md-4">
             <div class="candidate-box">
               <i class="fa fa-bell"></i>
@@ -51,14 +52,6 @@
               <i class="fa fa-user-circle-o"></i>
               <div class="btn-container">
                 <a href="{{ route('candidate.profile') }}" class="btn btn-dark-gray">GÉRER VOS INFORMATIONS</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="candidate-box">
-              <i class="fa fa-address-card"></i>
-              <div class="btn-container">
-                <a href="{{ route('candidate.application') }}" class="btn btn-dark-gray">VOS CANDIDATURES</a>
               </div>
             </div>
           </div>
