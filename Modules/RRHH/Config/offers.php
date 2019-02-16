@@ -262,34 +262,6 @@ return [
                   [
                       'type' => 'br',
                   ],
-
-                  // Permis etc...
-                  [
-                      'type' => 'box',
-                      'title' => 'Permis, licences, habilitations...',
-                      'subtitle' => '',
-                      'childs' => [
-                          [
-                              'type' => 'row',
-                              'childs' => [
-                                  [
-                                      'type' => 'col',
-                                      'class' => 'col-md-12',
-                                      'childs' => [
-                                          [
-                                              'type' => 'field',
-                                              'input' => 'list',
-                                              'identifier' => 'offers_radios_licenses',
-                                              'name' => 'license_drive',
-                                              'label' => 'Permis B',
-                                          ],
-                                      ],
-                                  ],
-                              ],
-                          ],
-                      ],
-                  ],
-
                   [
                       'type' => 'br',
                   ],
