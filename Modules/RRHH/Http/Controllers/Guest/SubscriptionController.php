@@ -30,6 +30,6 @@ class SubscriptionController extends Controller
 
         return redirect()
                 ->route('home')
-                ->with('flash_message', 'Ton inscription à été enregistré.');
+                ->with('flash_message', 'Votre inscription à été enregistré.');
     }
 }
