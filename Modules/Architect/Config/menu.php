@@ -11,37 +11,14 @@ return [
     ],
 
     [
-        "route" => 'extranet.admin.offers.index',
-        "label" => 'extranet::header.offers',
+        "route" => 'extranet.admin.models.index',
+        "label" => 'extranet::header.models',
         "patterns" => [
-            'architect/offers*',
-            'architect/tags*'
+            'architect/extranet*',
         ],
         "roles" => []
     ],
 
-    /*
-    [
-        'group' => true,
-        'name' => 'architect::plugins.topbar.menu'
-    ],
-    */
-    [
-        "route" => 'extranet.admin.candidates.index',
-        "label" => 'extranet::header.candidates',
-        "patterns" => [
-            'architect/candidates*'
-        ],
-        "roles" => ['admin']
-    ],
-    [
-        "route" => 'extranet.admin.customers.index',
-        "label" => 'extranet::header.customers',
-        "patterns" => [
-            'architect/customers*'
-        ],
-        "roles" => ['admin']
-    ],
     [
         "route" => 'contents',
         "label" => 'architect::header.contents',
@@ -51,15 +28,6 @@ return [
         "roles" => ['admin']
     ],
 
-  /*  [
-        "route" => 'medias.index',
-        "label" => 'architect::header.media',
-        "patterns" => [
-            'architect/medias*'
-        ],
-        "roles" => ['admin']
-    ],
-*/
     [
         "route" => 'settings',
         "label" => 'architect::header.configuration',
