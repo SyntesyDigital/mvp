@@ -11,8 +11,13 @@ Route::group([
   'namespace' => 'Modules\Extranet\Http\Controllers'
 ], function() {
 
-    // Offers
-    Route::get('/models', 'Admin\ModelController@index')->name('extranet.admin.models.index');
+    // Extranet
+    Route::get('/extranet', 'ExtranetController@index')->name('extranet.extranet.index');
+
+    // Models
+    Route::get('/models', 'ModelController@index')->name('extranet.models.index');
+    Route::get('/models/create', 'ModelController@create')->name('extranet.models.create');
+
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('extranet.admin.sitelists.index');

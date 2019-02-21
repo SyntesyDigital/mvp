@@ -55,28 +55,8 @@ class ExtranetServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/offers.php',
-            'offers'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/customers.php',
-            'customers'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/candidates.php',
-            'candidates'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/emails_templates.php',
-            'emails_templates'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../Config/users.php',
-            'architect::settings.users'
+            __DIR__.'/../Config/models.php',
+            'models'
         );
 
         $this->mergeConfigFrom(

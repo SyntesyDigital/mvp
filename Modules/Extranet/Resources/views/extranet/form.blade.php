@@ -31,7 +31,7 @@
                     @endif
 
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
-                    
+
                 </div>
             </div>
         </div>
