@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RrhhMigrationModule extends Migration
+class ExtranetMigrationModule extends Migration
 {
     /**
      * Run the migrations.
@@ -46,7 +46,7 @@ class RrhhMigrationModule extends Migration
 
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('site_lists');
-        
+
         Schema::enableForeignKeyConstraints();
     }
 }
