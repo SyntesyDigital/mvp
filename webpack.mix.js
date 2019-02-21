@@ -12,18 +12,18 @@ mix.webpackConfig({
         }),
         new CopyWebpackPlugin([
             {
-                from: 'Modules/RRHH/Resources/assets/js/admin/',
-                to: './modules/rrhh/js/admin/',
+                from: 'Modules/Extranet/Resources/assets/js/admin/',
+                to: './modules/extranet/js/admin/',
                 toType: 'dir'
             },
             {
-                from: 'Modules/RRHH/Resources/assets/js/libs/',
-                to: './modules/rrhh/js/libs/',
+                from: 'Modules/Extranet/Resources/assets/js/libs/',
+                to: './modules/extranet/js/libs/',
                 toType: 'dir'
             },
             {
-                from: 'Modules/RRHH/Resources/assets/plugins/',
-                to: './modules/rrhh/plugins/',
+                from: 'Modules/Extranet/Resources/assets/plugins/',
+                to: './modules/extranet/plugins/',
                 toType: 'dir'
             }
         ])
@@ -37,11 +37,11 @@ mix.react('resources/assets/js/app.js', 'public/js')
 mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js')
   .sass('Modules/Architect/Resources/assets/sass/architect/app.scss', 'modules/architect/css');
 
-mix.react('Modules/RRHH/Resources/assets/js/app.js', 'modules/rrhh/js')
-  .sass('Modules/RRHH/Resources/assets/sass/app.scss', 'modules/rrhh/css');
+mix.react('Modules/Extranet/Resources/assets/js/app.js', 'modules/extranet/js')
+  .sass('Modules/Extranet/Resources/assets/sass/app.scss', 'modules/extranet/css');
 
-mix.js('Modules/BWO/Resources/assets/js/app.js', 'modules/bwo/js')
-   .sass('Modules/BWO/Resources/assets/sass/app.scss', 'modules/bwo/css');
+mix.js('Modules/Front/Resources/assets/js/app.js', 'modules/front/js')
+   .sass('Modules/Front/Resources/assets/sass/app.scss', 'modules/front/css');
 
 
 // Compile Architect lib
@@ -63,12 +63,12 @@ mix.scripts([
 
 // Compile Architect lib
 // mix.scripts([
-//     'Modules/RRHH/Resources/assets/js/admin/agences/agencesform.js',
-// ], 'public/modules/rrhh/js/admin/agences/agencesform.js');
+//     'Modules/Extranet/Resources/assets/js/admin/agences/agencesform.js',
+// ], 'public/modules/extranet/js/admin/agences/agencesform.js');
 //
 // mix.scripts([
-//     'Modules/RRHH/Resources/assets/js/admin/agences/agenceslist.js',
-// ], 'public/modules/rrhh/js/admin/agences/agenceslist.js');
+//     'Modules/Extranet/Resources/assets/js/admin/agences/agenceslist.js',
+// ], 'public/modules/extranet/js/admin/agences/agenceslist.js');
 
 // mix.scripts([
 //   'Modules/Architect/Resources/assets/js/architect/architect.js',
@@ -81,7 +81,7 @@ mix.scripts([
 //   'Modules/Architect/Resources/assets/js/architect/architect.menu.js',
 //   'Modules/Architect/Resources/assets/js/architect/architect.languages.js',
 //   'Modules/Architect/Resources/assets/js/architect/architect.translations.js'
-// ], 'public/modules/rrhh/js/admin.js');
+// ], 'public/modules/extranet/js/admin.js');
 
 
 mix.browserSync('http://localhost:8000');

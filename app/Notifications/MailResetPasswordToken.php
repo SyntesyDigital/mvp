@@ -43,7 +43,7 @@ class MailResetPasswordToken extends Notification
     {
         return (new MailMessage())
             ->subject('Réinitialiser votre mot de passe')
-            ->view('bwo::emails.reset_password', [
+            ->view('front::emails.reset_password', [
                 'url' => url('password/reset', $this->token),
             ]);
     }

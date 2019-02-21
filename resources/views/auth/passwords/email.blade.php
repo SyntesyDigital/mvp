@@ -1,8 +1,8 @@
-@extends('bwo::layouts.master')
+@extends('front::layouts.master')
 
 @section('content')
 
-<div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/bwo/images/blog-banner.jpg')}}')">
+<div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/front/images/blog-banner.jpg')}}')">
   <div class="horizontal-inner-container">
       <h1 class="title-up">Réinitialiser votre mot de passe</h1>
     </div>

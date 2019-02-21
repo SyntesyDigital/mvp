@@ -11,8 +11,8 @@ return [
     ],
 
     [
-        "route" => 'rrhh.admin.offers.index',
-        "label" => 'rrhh::header.offers',
+        "route" => 'extranet.admin.offers.index',
+        "label" => 'extranet::header.offers',
         "patterns" => [
             'architect/offers*',
             'architect/tags*'
@@ -27,16 +27,16 @@ return [
     ],
     */
     [
-        "route" => 'rrhh.admin.candidates.index',
-        "label" => 'rrhh::header.candidates',
+        "route" => 'extranet.admin.candidates.index',
+        "label" => 'extranet::header.candidates',
         "patterns" => [
             'architect/candidates*'
         ],
         "roles" => ['admin']
     ],
     [
-        "route" => 'rrhh.admin.customers.index',
-        "label" => 'rrhh::header.customers',
+        "route" => 'extranet.admin.customers.index',
+        "label" => 'extranet::header.customers',
         "patterns" => [
             'architect/customers*'
         ],

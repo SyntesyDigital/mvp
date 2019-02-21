@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Project name
-set('application', 'BWO_RH');
+set('application', 'Front_RH');
 
 // Project repository
 set('repository', 'git@bitbucket.org:syntesy/architect_v2.git');
@@ -22,10 +22,10 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('bitbucket@bwo-interim.ablop.com')
+host('bitbucket@front-interim.ablop.com')
     ->stage('stage')
     ->set('branch', 'dev')
-    ->set('deploy_path', '/var/www/bwo-interim.ablop.com');
+    ->set('deploy_path', '/var/www/front-interim.ablop.com');
 
 // Tasks
 

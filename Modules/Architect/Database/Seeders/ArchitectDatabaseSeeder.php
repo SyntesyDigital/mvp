@@ -20,23 +20,14 @@ class ArchitectDatabaseSeeder extends Seeder
     public function run()
     {
         Language::create([
-            'name' => 'Català',
-            'iso' => 'ca'
-        ]);
-
-        Language::create([
-            'name' => 'Español',
-            'iso' => 'es'
-        ]);
-
-        Language::create([
-            'name' => 'English',
-            'iso' => 'en'
+            'name' => 'Français',
+            'iso' => 'fr',
+            'default' => 1
         ]);
 
 
         Model::unguard();
-/*
+
         // Admin
         $adminRole = new Role();
         $adminRole->name         = 'admin';
@@ -81,7 +72,7 @@ class ArchitectDatabaseSeeder extends Seeder
             'firstname' => 'John',
             'lastname' => 'Editor',
         ]);
-        $editor->attachRole($editorRole);*/
+        $editor->attachRole($editorRole);
 
     }
 }

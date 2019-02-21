@@ -17,30 +17,30 @@
 
               @include('architect::partials.dashboard-counter',[
                 "name" => "Offres",
-                "value" => Modules\RRHH\Entities\Offers\Offer::all()->count(),
+                "value" => Modules\Extranet\Entities\Offers\Offer::all()->count(),
                 "icon" => "fa-file-o",
-                "route" => route('rrhh.admin.offers.index')
+                "route" => route('extranet.admin.offers.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
                 "name" => 'Candidatures',
-                "value" => Modules\RRHH\Entities\Offers\Application::all()->count(),
+                "value" => Modules\Extranet\Entities\Offers\Application::all()->count(),
                 "icon" => "fa-address-card",
-                "route" => route('rrhh.admin.applications.index')
+                "route" => route('extranet.admin.applications.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
                 "name" => 'Candidats',
-                "value" => Modules\RRHH\Entities\Offers\Candidate::all()->count(),
+                "value" => Modules\Extranet\Entities\Offers\Candidate::all()->count(),
                 "icon" => "fa-user",
-                "route" => route('rrhh.admin.candidates.index')
+                "route" => route('extranet.admin.candidates.index')
               ])
 
               @include('architect::partials.dashboard-counter',[
                 "name" => "Clients",
-                "value" => Modules\RRHH\Entities\Customer::all()->count(),
+                "value" => Modules\Extranet\Entities\Customer::all()->count(),
                 "icon" => "fa-user-o",
-                "route" => route('rrhh.admin.customers.index')
+                "route" => route('extranet.admin.customers.index')
               ])
 
             @endif

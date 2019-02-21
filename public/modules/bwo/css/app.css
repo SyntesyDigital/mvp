@@ -13841,7 +13841,7 @@ body .gray-information-container .home-square .gray-square-text {
   width: 375px;
 }
 
-body .gray-information-container .img-bwo {
+body .gray-information-container .img-front {
   height: 180px;
   width: 330px;
   margin: 0 auto;
@@ -13850,7 +13850,7 @@ body .gray-information-container .img-bwo {
 }
 
 @media (min-width: 62em) {
-  body .gray-information-container .img-bwo {
+  body .gray-information-container .img-front {
     float: right;
     margin: 0 55px 0 0;
   }
@@ -14048,7 +14048,7 @@ body .offers-container .horizontal-inner-container form .lightest-gray-search-co
 }
 
 body .offers-container .horizontal-inner-container form .lightest-gray-search-container .checkboxes label input[type='checkbox']:checked {
-  background: url("/modules/bwo/images/offers-check.jpg");
+  background: url("/modules/front/images/offers-check.jpg");
   background-position: center;
 }
 

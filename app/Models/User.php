@@ -10,7 +10,7 @@ use Modules\Architect\Traits\ImageUpload;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 use Acoustep\EntrustGui\Contracts\HashMethodInterface;
-use Modules\RRHH\Entities\Offers\Candidate;
+use Modules\Extranet\Entities\Offers\Candidate;
 use App\Notifications\MailResetPasswordToken;
 use Esensi\Model\Contracts\ValidatingModelInterface;
 use Esensi\Model\Traits\ValidatingModelTrait;
@@ -96,22 +96,22 @@ class User extends Authenticatable
     // FIXME : Use traits :)
     public function agences()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\Agence', 'agence_user', 'user_id', 'agence_id');
+        return $this->belongsToMany('Modules\Extranet\Entities\Agence', 'agence_user', 'user_id', 'agence_id');
     }
 
     public function candidate()
     {
-        return $this->hasOne('Modules\RRHH\Entities\Offers\Candidate');
+        return $this->hasOne('Modules\Extranet\Entities\Offers\Candidate');
     }
 
     public function customer()
      {
-         return $this->belongsToMany('Modules\RRHH\Entities\Customer', 'customers_users', 'user_id', 'customer_id');
+         return $this->belongsToMany('Modules\Extranet\Entities\Customer', 'customers_users', 'user_id', 'customer_id');
      }
 
     public function offers()
     {
-        return $this->hasMany('Modules\RRHH\Entities\Offers\Offer', 'recipient_id', 'id');
+        return $this->hasMany('Modules\Extranet\Entities\Offers\Offer', 'recipient_id', 'id');
     }
 
     //

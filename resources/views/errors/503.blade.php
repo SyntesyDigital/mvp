@@ -1,10 +1,10 @@
-@extends('bwo::layouts.master')
+@extends('front::layouts.master')
 
 @section('content')
     <div class="gray-information-container" style="min-height:500px;">
       <div class="horizontal-inner-container">
         <div class="col-md-6 home-square home-square-logo">
-          <div class="img-bwo" style="background-image:url('{{asset('modules/bwo/images/home-bwo.jpg')}}')"></div>
+          <div class="img-front" style="background-image:url('{{asset('modules/front/images/home-front.jpg')}}')"></div>
 
         </div>
         <div class="col-md-6 home-square p-l-10">
