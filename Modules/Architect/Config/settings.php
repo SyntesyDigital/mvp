@@ -2,6 +2,12 @@
 
 return [
     [
+        "route" => 'models',
+        "icon" => "fa-sitemap",
+        "label" => Lang::get('architect::settings.models'),
+        "roles" => ["admin"]
+    ],
+    [
         "route" => 'typologies',
         "icon" => "fa-th",
         "label" => Lang::get('architect::settings.typologies'),

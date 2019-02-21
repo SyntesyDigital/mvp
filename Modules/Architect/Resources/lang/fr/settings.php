@@ -9,4 +9,5 @@ return [
     'menu'        => 'Menu',
     'templates'   => 'Modèle',
     'typologies'  => 'Tipologies',
+    'models'      => 'Modeles',
 ];

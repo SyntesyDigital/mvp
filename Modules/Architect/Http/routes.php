@@ -166,6 +166,9 @@ Route::group([
   Route::delete('/typologies/{typology?}/delete', 'TypologyController@delete')->name('typologies.delete');
   Route::get('/typologies/{typology?}', 'TypologyController@show')->name('typologies.show');
 
+  //models
+  Route::get('/models',  'TypologyController@index')->name('models');
+
   // Languages
   Route::get('/languages', 'LanguageController@index')->name('languages');
   Route::get('/languages/data', 'LanguageController@data')->name('languages.data');
