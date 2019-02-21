@@ -9,5 +9,5 @@ return [
     'configuration' => 'Configuration',
     'my_profile'    => 'Mon profil',
     'disconnect'    => 'Déconnecter',
-    'models'        => 'Modèles',
+    'extranet'      => 'Extranet',
 ];

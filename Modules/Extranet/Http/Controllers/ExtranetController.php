@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Extranet\Http\Controllers\Admin;
+namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -9,7 +9,7 @@ use Config;
 use Illuminate\Http\Request;
 use Session;
 
-class ModelController extends Controller
+class ExtranetController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
@@ -17,7 +17,7 @@ class ModelController extends Controller
 
     public function index(Request $request)
     {
-        return view('extranet::admin.models.index');
+        return view('extranet::extranet.index');
     }
 
     public function data(Request $request)

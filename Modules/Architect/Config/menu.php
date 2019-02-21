@@ -11,8 +11,8 @@ return [
     ],
 
     [
-        "route" => 'extranet.admin.models.index',
-        "label" => 'extranet::header.models',
+        "route" => 'extranet.extranet.index',
+        "label" => 'extranet::header.extranet',
         "patterns" => [
             'architect/extranet*',
         ],

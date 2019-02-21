@@ -45,7 +45,7 @@ return [
                                 'identifier' => 'offer_status',
                                 'name' => 'status',
                                 'label' => 'Status',
-                                'default' => Modules\Extranet\Entities\Offers\Offer::STATUS_UNACTIVE
+                                'default' => ''
                             ],
                             [
                                 'type' => 'field',
