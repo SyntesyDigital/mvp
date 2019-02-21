@@ -1,9 +1,9 @@
 @extends('architect::layouts.master')
 
 @section('content')
-    <div id="typology-form"
-    @if((isset($typology)) && $typology)typology={{base64_encode($typology->toJson())}}@endif
-    ></div>
+  <div id="model-form"
+    @if((isset($model)) && $model)$model={{base64_encode(json_encode($model))}}@endif
+  ></div>
 @stop
 
 @push('plugins')
@@ -14,8 +14,8 @@
 @push('javascripts-libs')
 <script>
 var routes = {
-  'typologies' : "{{route('typologies')}}",
-  'showTypology' : "{{route('typologies.show',['id' => ':id'])}}"
+  'models' : "{{route('extranet.models.index')}}",
+  'showModel' : "{{route('extranet.models.show',['id' => ':id'])}}"
 };
 </script>
 

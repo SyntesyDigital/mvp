@@ -11,6 +11,7 @@
 
         <div class="grid-items">
           <div class="row">
+              @php /*
               @foreach($typologies as $typology)
                 <div class="col-xs-3">
                     <a href="{{ route('typologies.show', $typology) }}">
@@ -23,6 +24,8 @@
                     </a>
                 </div>
               @endforeach()
+              */
+              @endphp
           </div>
         </div>
 
