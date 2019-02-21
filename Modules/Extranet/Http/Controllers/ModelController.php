@@ -30,6 +30,11 @@ class ModelController extends Controller
         return view('extranet::models.form');
     }
 
+    public function show(Request $request, $id)
+    {
+        return view('extranet::models.form',["model" => null]);
+    }
+
     /*
 
     public function update(Offer $offer, UpdateOfferRequest $request)

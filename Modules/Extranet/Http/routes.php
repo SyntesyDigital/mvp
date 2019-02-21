@@ -17,6 +17,7 @@ Route::group([
     // Models
     Route::get('/models', 'ModelController@index')->name('extranet.models.index');
     Route::get('/models/create', 'ModelController@create')->name('extranet.models.create');
+    Route::get('/models/{id}/show', 'ModelController@show')->name('extranet.models.show');
 
 
     // Lists
