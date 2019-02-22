@@ -31,9 +31,9 @@ class ModelController extends Controller
         return view('extranet::models.form');
     }
 
-    public function create(Request $request)
+    public function show(Request $request, $id)
     {
-        dd($request->all());
+        return view('extranet::models.form',["model" => null]);
     }
 
     /*

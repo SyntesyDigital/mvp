@@ -16,6 +16,7 @@ class CreateModelsTable extends Migration
         Schema::create('models', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
+            $table->string('type');
             $table->string('icon')->nullable();
             $table->text('config');
             $table->timestamps();
