@@ -6,18 +6,18 @@
       <div class="col-md-offset-2 col-md-8">
 
         <div class="page-title">
-          <h1>Models</h1> <a href="{{route('extranet.models.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('architect::tipology.add')}}</a>
+          <h1>{{Lang::get('extranet::models.models')}}</h1> <a href="{{route('extranet.models.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('extranet::models.add')}}</a>
         </div>
 
         <div class="grid-items">
           <div class="row">
-              @foreach($typologies as $typology)
+              @foreach($models as $model)
                 <div class="col-xs-3">
                     <a href="{{ route('typologies.show', $typology) }}">
                       <div class="grid-item">
                           <i class="fa {{$typology->icon}}"></i>
                           <p class="grid-item-name">
-                              {{$typology->name}}
+                              {{$model->title}}
                           </p>
                       </div>
                     </a>

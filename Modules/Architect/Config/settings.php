@@ -2,7 +2,7 @@
 
 return [
     [
-        "route" => 'models',
+        "route" => 'extranet.models.index',
         "icon" => "fa-sitemap",
         "label" => Lang::get('architect::settings.models'),
         "roles" => ["admin"]

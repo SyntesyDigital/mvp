@@ -3,7 +3,7 @@
 namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use Modules\Extranet\Repositories\ExtranetModelRepository;
 
 use Config;
 use Illuminate\Http\Request;
@@ -11,13 +11,14 @@ use Session;
 
 class ModelController extends Controller
 {
-    public function __construct() {
+    public function __construct(ExtranetModelRepository $models) {
+        $this->models = $models;
         $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
-        return view('extranet::models.index');
+        return view('extranet::models.index',['models' => $this->models]);
     }
 
     public function data(Request $request)
@@ -28,6 +29,11 @@ class ModelController extends Controller
     public function create()
     {
         return view('extranet::models.form');
+    }
+
+    public function create(Request $request)
+    {
+        dd($request->all());
     }
 
     /*

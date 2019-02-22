@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtranetModel extends Model
 {
-    //protected $table = 'agences';
 
-    //TODO for @Dani
+    protected $table = 'models';
 
     protected $fillable = [
-
+        'title',
+        'icon',
+        'config',
     ];
 
     protected $dates = [

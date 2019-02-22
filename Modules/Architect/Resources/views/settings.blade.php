@@ -12,7 +12,7 @@
 
       <div class="grid-items">
         <div class="row">
-            @foreach(config('settings') as $setting)
+           @foreach(config('settings') as $setting)
 
               @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
                 <div class="col-xs-3">
@@ -26,7 +26,7 @@
                     </a>
                 </div>
               @endif
-            @endforeach()
+            @endforeach() 
 
             {{-- Plugins settings --}}
             @foreach(config('architect::plugins.settings') as $setting)
