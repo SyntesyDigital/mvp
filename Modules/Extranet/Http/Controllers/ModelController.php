@@ -26,8 +26,9 @@ class ModelController extends Controller
 
     }
 
-    public function create()
+    public function create($class)
     {
+        dd($class);
         return view('extranet::models.form');
     }
 

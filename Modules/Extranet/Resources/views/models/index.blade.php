@@ -1,12 +1,14 @@
 @extends('architect::layouts.master')
 
+@include('extranet::models.modal-new')
+
 @section('content')
   <div class="container grid-page">
     <div class="row">
       <div class="col-md-offset-2 col-md-8">
 
         <div class="page-title">
-          <h1>{{Lang::get('extranet::models.models')}}</h1> <a href="{{route('extranet.models.create')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('extranet::models.add')}}</a>
+          <h1>{{Lang::get('extranet::models.models')}}</h1> <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle"></i> &nbsp; {{Lang::get('extranet::models.add')}}</a>
         </div>
 
         <div class="grid-items">
@@ -32,3 +34,23 @@
   </div>
 
 @stop
+
+@push('javascripts')
+
+<script>
+$(function(){
+
+  $(".btn-primary").click(function(e){
+    e.preventDefault();
+    TweenMax.to($("#new-model-modal"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+  });
+
+  $(document).on('click',"#new-model-modal .close-btn",function(e){
+    e.preventDefault();
+    TweenMax.to($("#new-model-modal"),0.5,{opacity:0,display:"none",ease:Power2.easeInOut});
+  });
+
+});
+</script>
+
+@endpush

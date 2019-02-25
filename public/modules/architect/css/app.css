@@ -18357,6 +18357,52 @@ nav.main-nav ul li.active a {
   /*padding-bottom:0px;*/
 }
 
+.custom-modal.model-modal .modal-container {
+  max-width: 840px;
+  margin: auto;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .cell {
+  padding: 5px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #5A5A5A;
+  font-weight: 300;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .first-column {
+  text-align: center;
+  width: 120px;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .second-column {
+  overflow: hidden;
+  text-align: right;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-header {
+  background-color: #F4F4F4;
+  padding: 5px;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-row {
+  padding: 5px;
+  border-bottom: 1px solid #B9B9B9;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-row .first-column {
+  float: left;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-row .second-column a {
+  color: #5A5A5A;
+  text-decoration: none;
+}
+
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-row .second-column a i {
+  margin-right: 5px;
+}
+
 .medias .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;
