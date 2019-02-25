@@ -4,11 +4,12 @@ import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper'
 
+
 /*
-import ModelDropZone from './ModelDropZone';
 import ModelModal from './ModelModal';
 */
 
+import ModelDropZone from './ModelDropZone';
 import ModelDragField from './ModelDragField';
 import ModelBar from './ModelBar';
 import ModelSidebar from './ModelSidebar';
@@ -26,11 +27,7 @@ class ModelContainer extends Component {
          inputs: {
              name: "",
              identifier: "",
-             icon: "",
-             template: "",
-             slug : null,
-             categories: props.model ? props.model.has_categories : false,
-             tags: props.model ? props.model.has_tags : false,
+             icon: ""
          },
          errors: {
              name: null,
@@ -258,21 +255,21 @@ class ModelContainer extends Component {
      getFormData() {
 
          return {
-             has_slug : this.state.inputs.slug ? true : false,
-             slug : this.state.inputs.slug,
-             has_tags : this.state.inputs.tags,
-             has_categories : this.state.inputs.categories,
              name : this.state.inputs.name,
              identifier : this.state.inputs.identifier,
              fields : this.state.fields,
              icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null,
-             slug : this.state.inputs.slug
          };
      }
 
      create() {
          var _this = this;
 
+         //FIXME Dani create here :)
+
+         console.log(this.getFormData());
+
+         /*
          axios.post('/architect/typologies', this.getFormData())
             .then((response) => {
                 if(response.data.success) {
@@ -296,12 +293,16 @@ class ModelContainer extends Component {
                 }
                 //console.log(error.config);
             });
+            */
      }
 
     delete()
     {
         var _this = this;
 
+        //FIXME Dani delete here :)
+
+        /*
         axios.delete('/architect/typologies/' + this.state.model.id + '/delete')
             .then((response) => {
                 if(response.data.success) {
@@ -319,11 +320,15 @@ class ModelContainer extends Component {
                     console.log('Error', error.message);
                 }
             });
+            */
     }
 
     update() {
         var _this = this;
 
+        //FIXME Dani create here :)
+
+        /*
         axios.put('/architect/typologies/' + this.state.model.id + '/update', this.getFormData())
              .then((response) => {
                  if(response.data.success) {
@@ -340,6 +345,7 @@ class ModelContainer extends Component {
                  }
                  //console.log(error.config);
              });
+             */
     }
 
      onSaveSuccess(response) {
@@ -353,7 +359,7 @@ class ModelContainer extends Component {
             fields[i].saved = true;
           }
 
-          console.log("ModelSaved : ",fields);
+          //console.log("ModelSaved : ",fields);
 
          this.setState({
              model : response.model,
@@ -406,7 +412,7 @@ class ModelContainer extends Component {
     render() {
 
         return (
-          <div>
+          <div id="model-container">
 
           <ModelBar
             icon={this.state.inputs.icon}
@@ -429,7 +435,7 @@ class ModelContainer extends Component {
 
 
                 <div className="col-md-9 page-content">
-                  {/*
+                  {
                   <ModelDropZone
                     errors={this.state.errors}
                     created={this.state.model !== undefined && this.state.model != null}
@@ -438,10 +444,10 @@ class ModelContainer extends Component {
                     onFieldChanged={this.handleFieldChange}
                     moveField={this.moveField}
                     onRemoveField={this.handleRemoveField}
-                    onSettingsFieldChange={this.handleSettingsChanged}
-                    onOpenSettings={this.handleOpenSettings}
+                    //onSettingsFieldChange={this.handleSettingsChanged}
+                    //onOpenSettings={this.handleOpenSettings}
                   />
-                  */}
+                  }
                 </div>
 
 
@@ -459,7 +465,7 @@ class ModelContainer extends Component {
 
             </div>
           </DragDropContextProvider>
-    
+
 
           </div>
       );

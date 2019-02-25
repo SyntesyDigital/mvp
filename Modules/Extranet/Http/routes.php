@@ -19,7 +19,6 @@ Route::group([
     Route::get('/models/create', 'ModelController@create')->name('extranet.models.create');
     Route::get('/models/{id}/show', 'ModelController@show')->name('extranet.models.show');
 
-
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('extranet.admin.sitelists.index');
     Route::get('/sitelists/create', 'Admin\SiteListController@create')->name('extranet.admin.sitelists.create');

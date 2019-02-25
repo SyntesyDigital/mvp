@@ -27,20 +27,18 @@ export default class ModelForm extends Component {
     {
         if(this.state.model) {
             // Build field list
-            /*
+
             var fields = [];
             this.state.model.fields.map(function(field){
                 fields.push({
                     icon : field.icon,
                     id : field.id,
-                    label : field.type,
+                    label : field.label,
                     name : field.name,
                     identifier : field.identifier,
                     type : field.type,
-                    rules : field.rules,
-                    settings : field.settings,
                     saved : true,
-                    editable : field.type == FIELDS.SLUG.type ? false : true
+                    editable : true
                 });
                 //console.log("field text => ",field);
             });
@@ -55,16 +53,9 @@ export default class ModelForm extends Component {
                     icon: {
                       value : this.state.model.icon,
                       label : this.state.model.icon
-                    },
-                    template: "",
-                    slug: Object.keys(slug).length !== 0 ? slug : null,
-                    categories: false,
-                    tags: false,
-                    categories: this.state.model.has_categories,
-                    tags: this.state.model.has_tags
+                    }
                 }
             });
-            */
         }
         else {
           var fields = [];
@@ -74,7 +65,6 @@ export default class ModelForm extends Component {
           });
 
         }
-
     }
 
     render() {

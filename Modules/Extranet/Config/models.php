@@ -31,7 +31,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt1',
           'name' => 'broker_number',
           'label' => 'form.sinister.label.broker_number',
           'placeholder' => '',
@@ -40,7 +40,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt2',
           'name' => 'insurer_number',
           'label' => 'form.sinister.label.insurer_number',
           'placeholder' => '',
@@ -49,7 +49,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt3',
           'name' => 'customer_reference',
           'label' => 'form.sinister.label.customer_reference',
           'placeholder' => '',
@@ -58,7 +58,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt4',
           'name' => 'reassureur_reference',
           'label' => 'form.sinister.label.reassureur_reference',
           'placeholder' => '',
@@ -67,7 +67,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt5',
           'name' => 'apperteur_reference',
           'label' => 'form.sinister.label.apperteur_reference',
           'placeholder' => '',
@@ -76,7 +76,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt6',
           'name' => 'ref_expert',
           'label' => 'form.sinister.label.ref_expert',
           'placeholder' => '',
@@ -85,7 +85,7 @@ return [
         [
           'type' => 'field',
           'input' => 'date',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt7',
           'name' => 'occurrence_date',
           'label' => 'form.sinister.label.occurrence_date',
           'placeholder' => '',
@@ -94,7 +94,7 @@ return [
         [
           'type' => 'field',
           'input' => 'date',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt8',
           'name' => 'declaration_date',
           'label' => 'form.sinister.label.declaration_date',
           'placeholder' => '',
@@ -103,7 +103,7 @@ return [
         [
           'type' => 'field',
           'input' => 'date',  //
-          'identifier' => 'Nocbt',
+          'identifier' => 'Nocbt9',
           'name' => 'close_date',
           'label' => 'form.sinister.label.close_date',
           'placeholder' => '',

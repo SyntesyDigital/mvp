@@ -17,8 +17,8 @@ class ModelSidebar extends Component {
         fields : {}
     };
 
-    console.log("ModelSidebar :: icon : ");
-    console.log(this.props.fields.icon);
+    //console.log("ModelSidebar :: icon : ");
+    //console.log(this.props.fields.icon);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);

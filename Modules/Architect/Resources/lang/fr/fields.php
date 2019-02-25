@@ -17,7 +17,7 @@ return [
     'file' => 'Fichier',
     'translated_file' => 'Fichier traduit',
     'key_values' => 'Clé/Valeur',
-
+    'identifier' => 'Identifiant',
     'title' => 'Titre',
     'description' => 'Description',
     'subtitle' => 'Sous-titre',
