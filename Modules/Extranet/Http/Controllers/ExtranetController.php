@@ -45,13 +45,16 @@ class ExtranetController extends Controller
 
         return redirect()->route('extranet.admin.offers.show', $offer);
     }
-
+    */
     public function create(Request $request)
     {
-        return view('extranet::admin.offers.form', [
-            'form' => Config::get('offers.form'),
+        //FIXME change with fields from Model json
+        //FIXME change form_name -> name, name -> label
+        return view('extranet::extranet.form', [
+            'modelForm' => Config::get('models.sinister.fields'),
         ]);
     }
+    /*
 
     public function store(CreateOfferRequest $request)
     {

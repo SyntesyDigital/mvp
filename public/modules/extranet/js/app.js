@@ -36997,6 +36997,7 @@ var ModelDropZone = function (_Component) {
 				input: field.input,
 				name: Lang.get(field.label),
 				identifier: field.identifier,
+				form_name: field.name,
 				saved: false,
 				editable: true
 			};
@@ -37415,8 +37416,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -37426,13 +37425,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var fieldSource = {
 	beginDrag: function beginDrag(props) {
-		var _ref;
-
-		return _ref = {
+		return {
 			input: props.definition.input,
-			label: props.definition.name,
-			type: props.definition.type
-		}, _defineProperty(_ref, 'label', props.definition.label), _defineProperty(_ref, 'identifier', props.definition.identifier), _ref;
+			name: props.definition.name,
+			type: props.definition.type,
+			label: props.definition.label,
+			identifier: props.definition.identifier
+		};
 	},
 	endDrag: function endDrag(props, monitor) {
 		var item = monitor.getItem();

@@ -9,7 +9,7 @@ const fieldSource = {
 	beginDrag(props) {
 		return {
 			input: props.definition.input,
-			label: props.definition.name,
+			name: props.definition.name,
 			type: props.definition.type,
 			label: props.definition.label,
 			identifier: props.definition.identifier

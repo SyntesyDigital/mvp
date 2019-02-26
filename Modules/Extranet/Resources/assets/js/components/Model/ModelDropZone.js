@@ -62,6 +62,7 @@ class ModelDropZone extends Component {
 			input : field.input,
 			name : Lang.get(field.label),
 			identifier : field.identifier,
+			form_name : field.name,
 			saved : false,
 			editable : true
 		};

@@ -13,6 +13,7 @@ Route::group([
 
     // Extranet
     Route::get('/extranet', 'ExtranetController@index')->name('extranet.extranet.index');
+    Route::get('/extranet/create', 'ExtranetController@create')->name('extranet.extranet.create');
 
     // Models
     Route::get('/models', 'ModelController@index')->name('extranet.models.index');

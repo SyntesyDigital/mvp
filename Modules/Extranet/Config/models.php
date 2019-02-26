@@ -16,7 +16,6 @@ return [
           'responsability' => 'required',
           'nature' => 'required',
           'circumstance' => 'required',
-
       ],
       'GET' => [
         //json to match fields. Math with identifier
@@ -31,7 +30,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt1',
+          'identifier' => '_numSoc',
           'name' => 'broker_number',
           'label' => 'form.sinister.label.broker_number',
           'placeholder' => '',
@@ -40,7 +39,7 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt2',
+          'identifier' => '_idPer',
           'name' => 'insurer_number',
           'label' => 'form.sinister.label.insurer_number',
           'placeholder' => '',
@@ -145,7 +144,6 @@ return [
           'placeholder' => '',
           'default' => ''
         ]
-
       ]
     ],
     'police' => [
