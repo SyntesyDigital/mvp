@@ -52,7 +52,7 @@ class ModelContainer extends Component {
      this.delete = this.delete.bind(this);
  }
 
- handleInputChange(field) {
+  handleInputChange(field) {
 
      const inputs = this.state.inputs;
 
@@ -80,9 +80,9 @@ class ModelContainer extends Component {
          inputs: inputs
      });
 
- }
+  }
 
- handleFieldAdded(field) {
+  handleFieldAdded(field) {
 
      const fields = this.state.fields;
 
@@ -91,9 +91,9 @@ class ModelContainer extends Component {
      this.setState({
          fields: fields
      });
- }
+  }
 
- moveField(dragIndex, hoverIndex) {
+  moveField(dragIndex, hoverIndex) {
      const {
          fields
      } = this.state
@@ -109,9 +109,9 @@ class ModelContainer extends Component {
              },
          }),
      )
- }
+  }
 
- handleRemoveField(fieldId) {
+  handleRemoveField(fieldId) {
 
      const {
          fields
@@ -128,9 +128,9 @@ class ModelContainer extends Component {
          fields: fields
      });
 
- }
+  }
 
- handleFieldChange(field) {
+  handleFieldChange(field) {
      const {
          fields
      } = this.state;
@@ -147,9 +147,9 @@ class ModelContainer extends Component {
          fields: fields
      });
 
- }
+  }
 
- handleOpenSettings(fieldId) {
+  handleOpenSettings(fieldId) {
 
      const {
          fields
@@ -171,10 +171,10 @@ class ModelContainer extends Component {
          ease: Power2.easeInOut
      });
 
- }
+  }
 
 
- handleSettingsChanged(field) {
+  handleSettingsChanged(field) {
 
      const settingsField = this.state.settingsField;
 
@@ -199,10 +199,10 @@ class ModelContainer extends Component {
          fields : fields,
          settingsField: settingsField
      });
- }
+  }
 
 
- handleModalClose(e) {
+  handleModalClose(e) {
 
      e.preventDefault();
 
@@ -232,243 +232,232 @@ class ModelContainer extends Component {
          }
      });
 
+  }
+
+  handleSubmitForm(e) {
+     e.preventDefault();
+
+     this.setState({
+         errors :  {
+             name: null,
+             identifier: null,
+             fields: null,
+         }
+     });
+
+     if(this.state.model) {
+         this.update();
+     } else {
+         this.create();
+     }
+  }
+
+  getFormData() {
+
+     return {
+         name : this.state.inputs.name,
+         identifier : this.state.inputs.identifier,
+         fields : this.state.fields,
+         icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null,
+     };
+  }
+
+  create() {
+     var _this = this;
+
+     console.log(this.getFormData());
+
+     axios.post('/architect/models/store', this.getFormData())
+        .then((response) => {
+            if(response.data.success) {
+                _this.onSaveSuccess(response.data);
+
+                //console.log(response.data);
+
+                setTimeout(function(){
+                    window.location.href = routes.showModel.replace(':id',response.data.model_id);
+                },1500);
+
+            }
+        })
+        .catch((error) => {
+            if (error.response) {
+                _this.onSaveError(error.response.data);
+            } else if (error.message) {
+                toastr.error(error.message);
+            } else {
+                console.log(Lang.get('fields.error'), error.message);
+            }
+            //console.log(error.config);
+        });
+
  }
 
-     handleSubmitForm(e) {
-         e.preventDefault();
+  delete()
+  {
+      var _this = this;
 
-         this.setState({
-             errors :  {
-                 name: null,
-                 identifier: null,
-                 fields: null,
+      axios.delete('/architect/models/' + this.state.model.id + '/delete')
+          .then((response) => {
+              if(response.data.success) {
+                  _this.onSaveSuccess(response.data);
+
+                  window.location.href = routes['models'];
+              }
+          })
+          .catch((error) => {
+              if (error.response) {
+                  _this.onSaveError(error.response.data);
+              } else if (error.message) {
+                  toastr.error(error.message);
+              } else {
+                  console.log('Error', error.message);
+              }
+          });
+  }
+
+  update() {
+    var _this = this;
+
+    axios.put('/architect/models/' + this.state.model.id + '/update', this.getFormData())
+         .then((response) => {
+             if(response.data.success) {
+                 _this.onSaveSuccess(response.data);
              }
-         });
-
-         if(this.state.model) {
-             this.update();
-         } else {
-             this.create();
-         }
-     }
-
-     getFormData() {
-
-         return {
-             name : this.state.inputs.name,
-             identifier : this.state.inputs.identifier,
-             fields : this.state.fields,
-             icon : this.state.inputs.icon.value ? this.state.inputs.icon.value : null,
-         };
-     }
-
-     create() {
-         var _this = this;
-
-         //FIXME Dani create here :)
-
-         console.log(this.getFormData());
-
-         /*
-         axios.post('/architect/typologies', this.getFormData())
-            .then((response) => {
-                if(response.data.success) {
-                    _this.onSaveSuccess(response.data);
-
-                    //console.log(response.data);
-
-                    setTimeout(function(){
-                        window.location.href = routes.showModel.replace(':id',response.data.model.id);
-                    },1500);
-
-                }
-            })
-            .catch((error) => {
-                if (error.response) {
-                    _this.onSaveError(error.response.data);
-                } else if (error.message) {
-                    toastr.error(error.message);
-                } else {
-                    console.log(Lang.get('fields.error'), error.message);
-                }
-                //console.log(error.config);
-            });
-            */
-     }
-
-    delete()
-    {
-        var _this = this;
-
-        //FIXME Dani delete here :)
-
-        /*
-        axios.delete('/architect/typologies/' + this.state.model.id + '/delete')
-            .then((response) => {
-                if(response.data.success) {
-                    _this.onSaveSuccess(response.data);
-
-                    window.location.href = routes['typologies'];
-                }
-            })
-            .catch((error) => {
-                if (error.response) {
-                    _this.onSaveError(error.response.data);
-                } else if (error.message) {
-                    toastr.error(error.message);
-                } else {
-                    console.log('Error', error.message);
-                }
-            });
-            */
-    }
-
-    update() {
-        var _this = this;
-
-        //FIXME Dani create here :)
-
-        /*
-        axios.put('/architect/typologies/' + this.state.model.id + '/update', this.getFormData())
-             .then((response) => {
-                 if(response.data.success) {
-                     _this.onSaveSuccess(response.data);
-                 }
-             })
-             .catch((error) => {
-                 if (error.response) {
-                     _this.onSaveError(error.response.data);
-                 } else if (error.message) {
-                     toastr.error(error.message);
-                 } else {
-                     console.log('Error', error.message);
-                 }
-                 //console.log(error.config);
-             });
-             */
-    }
-
-     onSaveSuccess(response) {
-
-          //set all fields to saved
-          //console.log("onSaveSuccess => ",response);
-
-          const fields = this.state.fields;
-
-          for(var i=0;i<fields.length;i++){
-            fields[i].saved = true;
-          }
-
-          //console.log("ModelSaved : ",fields);
-
-         this.setState({
-             model : response.model,
-             fields : fields
          })
+         .catch((error) => {
+             if (error.response) {
+                 _this.onSaveError(error.response.data);
+             } else if (error.message) {
+                 toastr.error(error.message);
+             } else {
+                 console.log('Error', error.message);
+             }
+             //console.log(error.config);
+         });
+  }
 
-         toastr.success(Lang.get('fields.success'));
+  onSaveSuccess(response) {
 
-     }
+      //set all fields to saved
+      //console.log("onSaveSuccess => ",response);
 
-    onSaveError(response) {
-        var _this = this;
-        var errors = response.errors ? response.errors : null;
-        var stateErrors = this.state.errors;
+      const fields = this.state.fields;
 
-        if(errors) {
-            Object.keys(stateErrors).map(function(k){
-                stateErrors[k] = errors[k] ? true : false;
-
-                if(errors[k]) {
-                    toastr.error(errors[k]);
-                }
-            });
-
-            this.setState({
-                errors : stateErrors
-            });
-        }
-
-        if(response.message) {
-            toastr.error(response.message);
-        }
-    }
-
-    renderFields() {
-
-      var result = null;
-
-      if(this.state.fieldsList){
-
-        result = this.state.fieldsList.map((item,i) =>
-          <ModelDragField definition={item} key={i}/>
-        )
+      for(var i=0;i<fields.length;i++){
+        fields[i].saved = true;
       }
 
-      return result;
+      //console.log("ModelSaved : ",fields);
+
+     this.setState({
+         model : response.model,
+         fields : fields
+     })
+
+     toastr.success(Lang.get('fields.success'));
+
+  }
+
+  onSaveError(response) {
+    var _this = this;
+    var errors = response.errors ? response.errors : null;
+    var stateErrors = this.state.errors;
+
+    if(errors) {
+        Object.keys(stateErrors).map(function(k){
+            stateErrors[k] = errors[k] ? true : false;
+
+            if(errors[k]) {
+                toastr.error(errors[k]);
+            }
+        });
+
+        this.setState({
+            errors : stateErrors
+        });
     }
 
+    if(response.message) {
+        toastr.error(response.message);
+    }
+  }
 
-    render() {
+  renderFields() {
 
-        return (
-          <div id="model-container">
+  var result = null;
 
-          <ModelBar
-            icon={this.state.inputs.icon}
-            name={this.state.inputs.name}
-            onSubmitForm={this.handleSubmitForm}
+  if(this.state.fieldsList){
+
+    result = this.state.fieldsList.map((item,i) =>
+      <ModelDragField definition={item} key={i}/>
+    )
+  }
+
+  return result;
+  }
+
+
+  render() {
+
+    return (
+      <div id="model-container">
+
+      <ModelBar
+        icon={this.state.inputs.icon}
+        name={this.state.inputs.name}
+        onSubmitForm={this.handleSubmitForm}
+      />
+
+      <DragDropContextProvider backend={HTML5Backend}>
+
+        <div className="container rightbar-page">
+
+          {/*
+          <ModelModal
+            field={this.state.settingsField}
+            id="settings-modal"
+            onModalClose={this.handleModalClose}
+            onSettingsFieldChange={this.handleSettingsChanged}
           />
+          */}
 
-          <DragDropContextProvider backend={HTML5Backend}>
 
-            <div className="container rightbar-page">
-
-              {/*
-              <ModelModal
-                field={this.state.settingsField}
-                id="settings-modal"
-                onModalClose={this.handleModalClose}
-                onSettingsFieldChange={this.handleSettingsChanged}
+            <div className="col-md-9 page-content">
+              {
+              <ModelDropZone
+                errors={this.state.errors}
+                created={this.state.model !== undefined && this.state.model != null}
+                fields={this.state.fields}
+                onFieldAdded={this.handleFieldAdded}
+                onFieldChanged={this.handleFieldChange}
+                moveField={this.moveField}
+                onRemoveField={this.handleRemoveField}
+                //onSettingsFieldChange={this.handleSettingsChanged}
+                //onOpenSettings={this.handleOpenSettings}
               />
-              */}
-
-
-                <div className="col-md-9 page-content">
-                  {
-                  <ModelDropZone
-                    errors={this.state.errors}
-                    created={this.state.model !== undefined && this.state.model != null}
-                    fields={this.state.fields}
-                    onFieldAdded={this.handleFieldAdded}
-                    onFieldChanged={this.handleFieldChange}
-                    moveField={this.moveField}
-                    onRemoveField={this.handleRemoveField}
-                    //onSettingsFieldChange={this.handleSettingsChanged}
-                    //onOpenSettings={this.handleOpenSettings}
-                  />
-                  }
-                </div>
-
-
-                <ModelSidebar
-                    fields={this.state.inputs}
-                    errors={this.state.errors}
-                    onFieldChange={this.handleInputChange}
-                    deleteHandler={this.delete}
-                    translations={this.props.translations}
-                >
-
-                {this.renderFields()}
-
-                </ModelSidebar>
-
+              }
             </div>
-          </DragDropContextProvider>
 
 
-          </div>
-      );
+            <ModelSidebar
+                fields={this.state.inputs}
+                errors={this.state.errors}
+                onFieldChange={this.handleInputChange}
+                deleteHandler={this.delete}
+                translations={this.props.translations}
+            >
+
+            {this.renderFields()}
+
+            </ModelSidebar>
+
+        </div>
+      </DragDropContextProvider>
+
+
+      </div>
+  );
   }
 
 }

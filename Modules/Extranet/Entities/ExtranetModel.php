@@ -12,6 +12,8 @@ class ExtranetModel extends Model
 
     protected $fillable = [
         'title',
+        'type',
+        'identifier',
         'icon',
         'config',
     ];
@@ -19,7 +21,6 @@ class ExtranetModel extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
 }

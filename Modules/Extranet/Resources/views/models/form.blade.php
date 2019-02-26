@@ -2,7 +2,7 @@
 
 @section('content')
   <div id="model-form"
-    @if((isset($model)) && $model)$model={{base64_encode(json_encode($model))}}@endif
+    @if((isset($model)) && $model) model={{base64_encode(json_encode($model))}}@endif
   ></div>
 @stop
 

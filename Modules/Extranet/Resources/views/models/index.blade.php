@@ -15,9 +15,9 @@
           <div class="row">
               @foreach($models as $model)
                 <div class="col-xs-3">
-                    <a href="{{ route('typologies.show', $typology) }}">
+                    <a href="{{ route('extranet.models.show', $model) }}">
                       <div class="grid-item">
-                          <i class="fa {{$typology->icon}}"></i>
+                          <i class="fa {{$model->icon}}"></i>
                           <p class="grid-item-name">
                               {{$model->title}}
                           </p>

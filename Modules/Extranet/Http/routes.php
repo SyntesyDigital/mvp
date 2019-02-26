@@ -19,6 +19,9 @@ Route::group([
     Route::get('/models', 'ModelController@index')->name('extranet.models.index');
     Route::get('/models/create/{class}', 'ModelController@create')->name('extranet.models.create');
     Route::get('/models/{id}/show', 'ModelController@show')->name('extranet.models.show');
+    Route::post('/models/store', 'ModelController@store')->name('extranet.models.store');
+    Route::put('/models/{model}/update', 'ModelController@update')->name('extranet.models.update');
+    Route::delete('/survey/{model}/delete', 'ModelController@delete')->name('extranet.models.delete');
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('extranet.admin.sitelists.index');
