@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Session;
+use App\Jobs\Login;
 
 class LoginController extends Controller
 {
@@ -40,18 +42,11 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if(Auth::user()->hasRole('candidate')) {
-            return route('candidate.index');
-        }
-
         if(Auth::user()->hasRole('admin')) {
-            return '/architect';
+          //login to WS
+          dispatch_now(new Login());
         }
 
-        if(Auth::user()->hasRole('customer')) {
-            return route('customer.index');
-        }
-
-        return '/';
+        return '/architect';
     }
 }
