@@ -49,7 +49,7 @@ class ExtranetController extends Controller
     */
     public function create(Request $request)
     {
-      dd(json_decode($this->models->first()->config));
+      //dd(json_decode($this->models->first()->config));
         //FIXME change with fields from Model json
         //FIXME change form_name -> name, name -> label
         return view('extranet::extranet.form', [
