@@ -20,7 +20,6 @@
                     <th>#</th>
                     <th>Titre</th>
                     <th>Date de création</th>
-                    <th data-filter="select" data-values="{!! base64_encode(json_encode(\Modules\Extranet\Entities\Offers\Offer::getStatus())) !!}">Etat</th>
                     <th>Nombre de candidatures</th>
                     <th data-filter="select" data-ajax="#">Destinataire interne</th>
                     <th id="actions-th"></th>
@@ -34,10 +33,9 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
             </tfoot>
-        </table>
+        </table> 
     </div>
 </div>
 @endsection
@@ -58,5 +56,5 @@ var routes = {
 };
 </script>
 
-{{ Html::script('/modules/extranet/js/admin/offers/index.js')}}
+{{ Html::script('/modules/extranet/js/admin/extranet/index.js')}}
 @endpush

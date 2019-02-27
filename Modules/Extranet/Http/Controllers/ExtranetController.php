@@ -3,7 +3,7 @@
 namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use Modules\Extranet\Repositories\ExtranetModelRepository;
 
 use Config;
 use Illuminate\Http\Request;
@@ -11,13 +11,14 @@ use Session;
 
 class ExtranetController extends Controller
 {
-    public function __construct() {
+    public function __construct(ExtranetModelRepository $models) {
+        $this->models = $models;
         $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
-        return view('extranet::extranet.index');
+        return view('extranet::extranet.index',['models' => $this->models->all()]);
     }
 
     public function data(Request $request)
@@ -48,6 +49,7 @@ class ExtranetController extends Controller
     */
     public function create(Request $request)
     {
+      dd(json_decode($this->models->first()->config));
         //FIXME change with fields from Model json
         //FIXME change form_name -> name, name -> label
         return view('extranet::extranet.form', [
