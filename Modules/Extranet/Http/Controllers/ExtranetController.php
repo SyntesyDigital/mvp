@@ -4,6 +4,7 @@ namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ExtranetModelRepository;
+use Modules\Extranet\Transformers\ModelReactTransformer;
 
 use Config;
 use Illuminate\Http\Request;
@@ -49,11 +50,10 @@ class ExtranetController extends Controller
     */
     public function create(Request $request)
     {
-      //dd(json_decode($this->models->first()->config));
-        //FIXME change with fields from Model json
-        //FIXME change form_name -> name, name -> label
+        $model = new ModelReactTransformer($this->models->first()->config);
+
         return view('extranet::extranet.form', [
-            'modelForm' => Config::get('models.sinister.fields'),
+            'modelForm' => $model->toArray()
         ]);
     }
     /*
