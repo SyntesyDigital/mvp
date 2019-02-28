@@ -8,8 +8,8 @@
 
         <h3 class="card-title">Liste des offres d'emploi</h3>
 
-        <a href="#" class="pull-right btn btn-primary">
-            Ajouter une offre
+        <a href="{{route('extranet.extranet.create',$model->id)}}" class="pull-right btn btn-primary">
+            Ajouter une {{$model->title}}
         </a>
 
         <h6 class="card-subtitle mb-2 text-muted">Retrouvez-ici l'ensemble des offres d'emploi</h6>
@@ -35,7 +35,7 @@
                     <th></th>
                 </tr>
             </tfoot>
-        </table> 
+        </table>
     </div>
 </div>
 @endsection

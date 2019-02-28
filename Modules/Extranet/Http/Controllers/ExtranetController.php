@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ExtranetModelRepository;
 use Modules\Extranet\Transformers\ModelReactTransformer;
 
+use Modules\Extranet\Entities\ExtranetModel;
+
+use Modules\Extranet\Jobs\Sinister\SinistreCreate;
+
+use Modules\Extranet\Http\Requests\Sinister\CreateSinisterRequest;
+
 use Config;
 use Illuminate\Http\Request;
 use Session;
@@ -17,14 +23,42 @@ class ExtranetController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index(ExtranetModel $model = null, Request $request)
     {
-        return view('extranet::extranet.index',['models' => $this->models->all()]);
+        return view('extranet::extranet.index',
+                    [
+                      'models' => $this->models->all(),
+                      'model' => $model != null?$model: $this->models->first()
+                    ]);
     }
 
     public function data(Request $request)
     {
 
+    }
+
+    public function create(ExtranetModel $model, Request $request)
+    {
+        $model = new ModelReactTransformer($this->models->first()->config);
+
+        return view('extranet::extranet.form', [
+            'modelForm' => $model->toArray()
+        ]);
+    }
+
+    public function store(CreateSinisterRequest $request)
+    {
+      dd($request->all());
+        try {
+            $sinister = $this->dispatchNow(CreateSinister::fromRequest($request));
+            Session::flash('notify_success', 'Enregistrement effectué avec succès');
+
+            return redirect()->route('extranet.models.show', $sinister);
+        } catch (\Exception $e) {
+            Session::flash('notify_error', $e->getMessage());
+        }
+
+        return redirect()->route('extranet.models.create');
     }
 
     /*
@@ -48,14 +82,7 @@ class ExtranetController extends Controller
         return redirect()->route('extranet.admin.offers.show', $offer);
     }
     */
-    public function create(Request $request)
-    {
-        $model = new ModelReactTransformer($this->models->first()->config);
 
-        return view('extranet::extranet.form', [
-            'modelForm' => $model->toArray()
-        ]);
-    }
     /*
 
     public function store(CreateOfferRequest $request)

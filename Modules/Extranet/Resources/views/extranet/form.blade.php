@@ -2,19 +2,17 @@
 
 @section('content')
 
-@php
-/*
+
 {!!
     Form::open([
         'url' => isset($offer)
-            ? route('extranet.admin.offers.update', $offer)
-            : route('extranet.admin.offers.store'),
-        'method' => isset($offer) ? 'PUT' : 'POST',
-        'id' => 'form-offer'
+            ? route('extranet.update', $offer)
+            : route('extranet.store'),
+        'method' => isset($model) ? 'PUT' : 'POST',
+        'id' => 'form-model'
     ])
 !!}
-*/
-@endphp
+
 
 {{ Form::hidden('_method', isset($model) ? 'PUT' : 'POST') }}
 

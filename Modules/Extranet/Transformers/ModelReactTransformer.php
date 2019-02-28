@@ -33,12 +33,8 @@ class ModelReactTransformer extends Resource
         $info[$i]['type'] = $field->type;
         $info[$i]['input'] = $field->input;
         $info[$i]['name'] = $field->form_name;
-
-        // CUAL del las dos infos se pone ocmo label???
-        $info[$i]['label'] = $field->label;
+    //    $info[$i]['label'] = $field->label;
         $info[$i]['label'] = $field->name;
-
-
         $info[$i]['identifier'] = $field->identifier;
         $info[$i]['saved'] = $field->saved;
         $info[$i]['editable'] = $field->editable;

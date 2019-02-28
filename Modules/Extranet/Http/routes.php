@@ -12,8 +12,10 @@ Route::group([
 ], function() {
 
     // Extranet
-    Route::get('/extranet', 'ExtranetController@index')->name('extranet.extranet.index');
-    Route::get('/extranet/create', 'ExtranetController@create')->name('extranet.extranet.create');
+    Route::get('/extranet/{model?}', 'ExtranetController@index')->name('extranet.extranet.index');
+    Route::get('/extranet/create/{model}', 'ExtranetController@create')->name('extranet.extranet.create');
+    Route::post('/extranet/store', 'ExtranetController@store')->name('extranet.store');
+    Route::post('/extranet/{model}/update', 'ExtranetController@update')->name('extranet.update');
 
     // Models
     Route::get('/models', 'ModelController@index')->name('extranet.models.index');
@@ -21,7 +23,7 @@ Route::group([
     Route::get('/models/{id}/show', 'ModelController@show')->name('extranet.models.show');
     Route::post('/models/store', 'ModelController@store')->name('extranet.models.store');
     Route::put('/models/{model}/update', 'ModelController@update')->name('extranet.models.update');
-    Route::delete('/survey/{model}/delete', 'ModelController@delete')->name('extranet.models.delete');
+    Route::delete('/models/{model}/delete', 'ModelController@delete')->name('extranet.models.delete');
 
     // Lists
     Route::get('/sitelists', 'Admin\SiteListController@index')->name('extranet.admin.sitelists.index');

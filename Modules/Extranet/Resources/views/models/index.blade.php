@@ -1,6 +1,5 @@
 @extends('architect::layouts.master')
 
-@include('extranet::models.modal-new')
 
 @section('content')
   <div class="container grid-page">
@@ -32,6 +31,7 @@
       </div>
     </div>
   </div>
+  @include('extranet::models.modal-new')
 
 @stop
 

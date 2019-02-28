@@ -296,7 +296,6 @@ class ModelContainer extends Component {
   delete()
   {
       var _this = this;
-
       axios.delete('/architect/models/' + this.state.model.id + '/delete')
           .then((response) => {
               if(response.data.success) {

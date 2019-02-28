@@ -12,7 +12,7 @@ app.sitelist = {
 
         //FIXME there is an error than only occurs first initialisation
         var self = this;
-        setTimeout(function(){
+        setInterval(function(){
           self.parseJson();
         },1000);
     },
