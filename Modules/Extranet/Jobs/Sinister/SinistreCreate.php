@@ -22,36 +22,16 @@ class SinistreCreate
         $this->policeId = $policeId;
 
         $this->attributes = array_only($attributes, [
-          'client_id',
-          'code_cie',
-          'broker_number',
+          'code_cie', //isset($policy)?$policy->compagnie:''
+          'numsoc', //  ''
           'insurer_number',
-          'customer_reference',
-          'reassureur_reference',
-          'apperteur_reference',
-          'ref_expert',
-          'numsoc',
           'type',
           'occurrence_date',
           'close_date',
-          //'damages_others',
-          //'damages_insured',
-          //'wounded',
           'declaration_date',
           'responsability',
           'nature',
-          //'notice_of_termination',
           'circumstance',
-          'subsidiary_company',
-          'paid_rc',
-          'remaining_provision',
-          'paid_damages',
-          'remaining_provision_damages',
-          'pending_recourse',
-          'paid_recourse',
-          'customer_franchise',
-          'idper',
-          'garanties',
           'documents'
         ]);
     }
@@ -67,43 +47,29 @@ class SinistreCreate
 
         $sinister = new SinistreRepository();
         $jsonData = [
-              "numCie" => $data['insurer_number'],
+              "numCie" => '',
               'idPol' => $this->policeId,
               'numSoc' => isset($data['numsoc']) && $data['numsoc']!= ''? $data['numsoc'] : Auth::user()->company->num_soc,
-
               'mouvement' => 'OUVSIN',
               'motif' => 'OUVSIN',
               'numAuto' => 'O',
-
               'circonstance' => $data["nature"],
-
               'txResp' => $data['responsability'],
               'codeCie' => $data['code_cie'],
-
               'dateOuverture' => date('d/m/Y'),
               'dateSurvenance' => $data["occurrence_date"],
               'dateDeclaration' => $data["declaration_date"],
               'dateCloture' => $data["close_date"],
-
               'type' => $data["type"],
               'causeCirconstance' => $data['circumstance'],
-
               'listPer' => [[
-                  "idPer"=> $data["idper"],
+                  "idPer"=> '',
                   "categ"=> "ASSURE"
               ]],
               'listInfos' => [
-
               ]
             ];
 
-
-        if(isset($data["subsidiary_company"]) && $data["subsidiary_company"]){
-            $jsonData['listPer'][] = [
-              "idPer"=> $data["subsidiary_company"],
-              "categ"=> "FILIALE"
-            ];
-        }
 
         //echo(json_encode($jsonData));
         //exit();
@@ -112,14 +78,8 @@ class SinistreCreate
 
         if(isset($createResponse->id)){
 
-          //if has garanties add them to sinister
-          if(isset($data['garanties']) && sizeof($data['garanties'])){
-            dispatch(new SinistreCostCreate($createResponse->id,$data['garanties']));
-          }
-
           if(isset($data['documents']) && sizeof($data['documents'])){
             foreach($data['documents'] as $document){
-
               dispatch(new DocumentUpload($createResponse->id,$document));
             }
           }
