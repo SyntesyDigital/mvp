@@ -3,21 +3,31 @@ $assetPath : "/images";
 
 // Body
 $body-bg: #fff;
-$gray-background:#e0dfc7;
 
-// colors
-$brand-black-color : #000; //dark
-$brand-white-color : #fff; //light gray
-$brand-dark-gray-color : #666666; //dark gray
-$brand-light-gray-color : #d3d1ae; //light gray
-$brand-footer-light-gray-color : #d2d1ad;
-$brand-lightest-gray-color : #e0dfc7; //lightesr gray
-$brand-light-gray-input : #e9e8d7; //modal inputs
+// Borders
+$laravel-border-color: darken($body-bg, 10%);
+$list-group-border: $laravel-border-color;
+$navbar-default-border: $laravel-border-color;
+$panel-default-border: $laravel-border-color;
+$panel-inner-border: $laravel-border-color;
 
-$brand-red-color: #ff0000;
+// Brands
+$brand-primary: #3097D1;
+$brand-info: #8eb4cb;
+$brand-success: #2ab27b;
+$brand-warning: #cbb956;
+$brand-danger: #bf5329;
 
-$brand-color-1 : #7d7c7c; //gray blue baackground buttons
-$brand-color-2 : #c41a1b; //dark red, buttons
+// Panels
+$panel-default-heading-bg: #fff;
 
+$brand-dark-color-1 : #000; //dark
+$brand-dark-color-2 : #818181; //buttons dark
+$brand-dark-color-3 : #282423; //back graph
 
-$brand-font-1 : Roboto;
+$brand-light-color-1: #F5F5F5;  //box gray
+$brand-light-color-2: #E3E3E3;  //box gray, button hover gray
+
+$brand-color-1 : #FFBA00; //orange
+
+$brand-font-1 : Arial, sans-serif;

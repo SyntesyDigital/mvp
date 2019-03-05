@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import NewsRelated from './../Typologies/NewsRelated';
+import NewsBlog from './../Typologies/NewsBlog';
 
 
 export default class RelatedNews extends Component {
@@ -13,6 +13,9 @@ export default class RelatedNews extends Component {
         const tags = props.tags ? JSON.parse(props.tags) : '';
         const category = props.category ? props.category : '';
         const content = props.content ? props.content : '';
+
+
+        console.log("tags => ",tags);
 
         this.state = {
             category : category,
@@ -32,15 +35,14 @@ export default class RelatedNews extends Component {
     query(page,filters) {
         var self = this;
 
-        const {category} = this.state;
+        const {tags} = this.state;
 
         var params = {
             size : 10,
-            typology_id : 1,
+            typology_id : 2,
             category_id : category,
             accept_lang : LOCALE,
-            order : 'date,desc',
-            loads : 'category'
+            order : 'data,desc'
         };
 
         axios.post(ASSETS+'api/contents',params)
@@ -79,35 +81,46 @@ export default class RelatedNews extends Component {
             console.log('Shuffled related results =>',items);
       }
 
-      var classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12';
+      var classEntrevista = '';
       var count = 0;
       for(var key in items){
         // CONTROLAR QEU AQUI NO SEA LA MISM NOTICIA QUE MOSTRAMOS
         console.log("TypologyPaginated => ", content);
         if(items[key].id != content && count < 3){
+          if(null != items[key].fields["es-entrevista"].values && items[key].fields["es-entrevista"].values == '1'){
+            classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12 entrevista';
+          }else{
+            classEntrevista = 'item_blog col-md-4 col-sm-4 col-xs-12';
+          }
 
           result.push(
-            <div className="col-md-6" key={key}>
-              <NewsRelated
+            <li className={classEntrevista} key={key}>
+              <NewsBlog
                 field={items[key]}
               />
-            </div>
+            </li>
           );
           count = count + 1;
 
         }
+
+
       }
 
 
 
       return (
+            <div className="white">
+              <div className="row">
+                <div className="container">
+                  <h2 className="subtitle-blog">{window.localization['GENERAL_WIDGET_RELATED_NEWS']}</h2>
+                  <ul className="list-blog">
+                      {result}
 
-          <div className="other-posts">
-            <h3>SUR LE MÊME SUJET</h3>
-
-            {result}
-
-          </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
       );
     }
 }

@@ -19,10 +19,10 @@ class MoreResults extends Component {
         const nextPage = this.props.currPage < this.props.lastPage ? (this.props.currPage + 1) : this.props.lastPage;
         const display_button = this.props.currPage < this.props.lastPage && (null == this.props.maxItems || this.props.maxItems > this.props.currentItems) ?true:false;
 
-        return ( <div className="read-more">
+        return ( <div>
                     {display_button &&
                       <div className="navigation">
-                        <a href="#" className="btn btn-soft-gray" onClick={(e) => this.onPageChange(nextPage, e)}> {window.localization['GENERAL_READ_MORE']}</a>
+                        <p className="btn"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> {window.localization['GENERAL_READ_MORE']}</a></p>
                       </div>
                     }
                 </div>

@@ -6,10 +6,7 @@ if (!function_exists('breadcrumb')) {
     function page_breadcrumb($content)
     {
         $nodes = Modules\Architect\Entities\Content::with('fields')->defaultOrder()->ancestorsAndSelf($content->id);
-        $breadcrumb = [[
-            'label' => 'Accueil',
-            'url' => route('home')
-        ]];
+        $breadcrumb = [];
         $prefix = '';
 
         // Build breadcrumb path
@@ -22,15 +19,19 @@ if (!function_exists('breadcrumb')) {
         }
 
         // Build HTML
-        $html = '<ol class="breadcrumb">';
-
+        $html = '';
         foreach($breadcrumb as $k => $v) {
-            $html .= sprintf('<li><a href="%s">%s</a></li>',
+            $arrow = "";
+            if($k != sizeof($breadcrumb)-1){
+              $arrow = " > ";
+            }
+
+            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '</ol>';
+        $html .= '';
 
         return $html;
     }
@@ -38,10 +39,7 @@ if (!function_exists('breadcrumb')) {
     function typology_breadcrumb($content)
     {
 
-        $breadcrumb = [[
-            'label' => 'Accueil',
-            'url' => route('home')
-        ]];
+        $breadcrumb = [];
         $prefix = '';
 
         $blog = Modules\Architect\Entities\Content::whereField("slug","blog")->first();
@@ -65,25 +63,26 @@ if (!function_exists('breadcrumb')) {
         ]);
 
         // Build HTML
-        $html = '<ol class="breadcrumb">';
+        $html = '';
         foreach($breadcrumb as $k => $v) {
+            $arrow = "";
+            if($k != sizeof($breadcrumb)-1){
+              $arrow = " > ";
+            }
 
-            $html .= sprintf('<li><a href="%s">%s</a></li>',
+            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '</ol>';
+        $html .= '';
 
         return $html;
     }
 
     function breadcrumb_category($category)
     {
-        $breadcrumb = [[
-            'label' => 'Accueil',
-            'url' => route('home')
-        ]];
+        $breadcrumb = [];
         $prefix = '';
 
         $blog = Modules\Architect\Entities\Content::whereField("slug","blog")->first();
@@ -99,19 +98,19 @@ if (!function_exists('breadcrumb')) {
         ]);
 
         // Build HTML
-        $html = '<ol class="breadcrumb">';
+        $html = '';
         foreach($breadcrumb as $k => $v) {
             $arrow = "";
             if($k != sizeof($breadcrumb)-1){
               $arrow = " > ";
             }
 
-            $html .= sprintf('<li><a href="%s">%s</a></li>',
+            $html .= sprintf('<a href="%s">%s</a>'.$arrow,
                 $v['url'],
                 $v['label']
             );
         }
-        $html .= '</ol>';
+        $html .= '';
 
         return $html;
     }

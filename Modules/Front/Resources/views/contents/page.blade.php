@@ -2,37 +2,43 @@
   $htmlClass = isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '';
   $pageType = isset($contentSettings) && isset($contentSettings['pageType']) ? $contentSettings['pageType'] : '';
   $idClass = isset($content) ? "id_".$content->id : '';
-
-  $metaDescription = null;
-  if(isset($content)){
-    $metaDescription = strip_tags(str_replace('&#39;', '\'', $content->getFieldValue('description')));
-  	$metaDescription = str_replace(array("\r\n", "\r", "\n"), "", $metaDescription);
-  }
-
 @endphp
 
-@extends('front::layouts.master',[
-  'htmlTitle' => isset($content) ? $content->getFieldValue('title') : '',
-  'metaDescription' => isset($metaDescription) ? $metaDescription : '',
+@extends('front::layouts.app',[
+  'title' => isset($content) ? $content->getFieldValue('title') : '',
   'mainClass' => $pageType.' '.$htmlClass.' '.$idClass,
   'routeAttributes' => $content->getFullSlug()
 ])
 
 @section('content')
 
-@if(isset($content))
+@if(isset($content) && $content->parent_id != null)
+<div class="single">
+  <div class="breadcrumb">
+       <div class="container">
+        <div class="row">
+          <div class="detalls-single">
+      		  <div class="col-md-10  col-sm-9 col-xs-12">
+      		  	<div class="ariadna">
+                {!! breadcrumb($content) !!}
+              </div>
+      		  </div>
 
-<div class="banner banner-small offer-banner" style="background-image:url('{{asset('modules/front/images/blog-banner.jpg')}}')">
-  <div class="horizontal-inner-container">
-      <!--<h1>{{$content->getFieldValue('title')}}</h1>-->
-    </div>
+      		  <div class="col-md-2 col-sm-3 col-xs-6">
+      		  	<div id="selected-items" class="seleccio" style="display:none;">
+                <span id="number">0</span>
+                <a href="#" id="selected-area">La meva sel.lecció</a>
+              </div>
+      		  </div>
+    	   </div>
+  		 </div>
+  	</div>
   </div>
 </div>
-
-<div class="posts-container">
-  <div class="horizontal-inner-container post-container">
-    {!! breadcrumb($content) !!}
 @endif
+
+
+
 <!-- ARTICLE -->
 <article class="page-builder">
 
@@ -44,20 +50,13 @@
       @endforeach
     @endif
 </article>
-
-@if(isset($content))
-  </div>
-</div>
-@endif
-
 <!-- END ARTICLE -->
 @endsection
 
 @push('javascripts')
 <script>
-    routes = $.extend(routes,{"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
-          "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" });
-
+    routes = {"categoryNews" : "{{route('blog.category.index' ,['slug' => ':slug'])}}",
+              "tagNews"      : "{{route('blog.tag.index' ,['slug' => ':slug'])}}" };
     $(function(){
 
     });
