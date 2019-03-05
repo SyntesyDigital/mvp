@@ -62,7 +62,7 @@ class BobyRepository
         } else {
             $response = $this->client->get(VeosWsUrl::get() . 'boBy/'.$name, [
                 'headers' => [
-                    'Authorization' => "Bearer " . Session::get('token')
+                    'Authorization' => "Bearer " . Session::get('iga_token')
                 ]
             ]);
 

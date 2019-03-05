@@ -39,18 +39,20 @@ class ExtranetController extends Controller
 
     public function create(ExtranetModel $model, Request $request)
     {
+        $modelId = $model->id;
         $model = new ModelReactTransformer($this->models->first()->config);
 
         return view('extranet::extranet.form', [
-            'modelForm' => $model->toArray()
+            'modelForm' => $model->toArray(),
+            'modelId' => $modelId
         ]);
     }
 
     public function store(CreateSinisterRequest $request)
     {
-      dd($request->all());
+        $modelId = $request->get('model');
         try {
-            $sinister = $this->dispatchNow(CreateSinister::fromRequest($request));
+            $sinister = $this->dispatchNow(SinistreCreate::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
             return redirect()->route('extranet.models.show', $sinister);
@@ -58,19 +60,19 @@ class ExtranetController extends Controller
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('extranet.models.create');
+        return redirect()->route('extranet.models.create',$modelId);
     }
 
-    /*
-    public function show(Offer $offer, Request $request)
+  /*  public function show($sinister, Request $request)
     {
-        return view('extranet::admin.offers.form', [
+        // AQUI HACER EL GET DEL BOBBY PARA OBTENER LOS DATOS DEL SINISTER... TAMBIEN DE ALGUAN FORMA DEBERIAMOS SABER A QUE MODELO PERTENECE O DE MOMENTO CARGARLO A MANO
+        return view('extranet::admin.models.form', [
             'form' => Config::get('offers.form'),
             'offer' => $offer,
         ]);
-    }
+    } */
 
-    public function update(Offer $offer, UpdateOfferRequest $request)
+/*    public function update(Offer $offer, UpdateOfferRequest $request)
     {
         try {
             $offer = $this->dispatchNow(UpdateOffer::fromRequest($offer, $request));

@@ -2,7 +2,7 @@
 
 namespace Modules\Extranet\Jobs\Sinister;
 
-use Modules\Extranet\Http\Requests\Sinister\SaveSinisterRequest;
+use Modules\Extranet\Http\Requests\Sinister\CreateSinisterRequest;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -17,14 +17,18 @@ class SinistreCreate
     private $policeId;
     private $attributes;
 
-    public function __construct($policeId,array $attributes = [])
+    public function __construct(array $attributes = [])
     {
-        $this->policeId = $policeId;
 
         $this->attributes = array_only($attributes, [
           'code_cie', //isset($policy)?$policy->compagnie:''
           'numsoc', //  ''
-          'insurer_number',
+          'insurer_number', //esta en form pero no se donde guardarlo en WS
+          'broker_number', //esta en form pero no se donde guardarlo en WS
+          'customer_reference', //esta en form pero no se donde guardarlo en WS
+          'reassureur_reference', //esta en form pero no se donde guardarlo en WS
+          'apperteur_reference', //esta en form pero no se donde guardarlo en WS
+          'ref_expert', //esta en form pero no se donde guardarlo en WS
           'type',
           'occurrence_date',
           'close_date',
@@ -36,9 +40,9 @@ class SinistreCreate
         ]);
     }
 
-    public static function fromRequest($policeId,SaveSinisterRequest $request)
+    public static function fromRequest(CreateSinisterRequest $request)
     {
-        return new SinistreCreate($policeId,$request->all());
+        return new SinistreCreate($request->all());
     }
 
     public function handle()
@@ -47,43 +51,40 @@ class SinistreCreate
 
         $sinister = new SinistreRepository();
         $jsonData = [
-              "numCie" => '',
-              'idPol' => $this->policeId,
-              'numSoc' => isset($data['numsoc']) && $data['numsoc']!= ''? $data['numsoc'] : Auth::user()->company->num_soc,
+              'numCie' => '',
+              'idPol' => '11000145',
+              'numSoc' => 'CI01',
               'mouvement' => 'OUVSIN',
-              'motif' => 'OUVSIN',
+              'motif' => 'EXTSIN',
               'numAuto' => 'O',
-              'circonstance' => $data["nature"],
+              'numAutoCie' =>'',
+              'type' => $data["type"],
               'txResp' => $data['responsability'],
-              'codeCie' => $data['code_cie'],
+              'circonstance' => $data["nature"],
+              'causeCirconstance' => $data['circumstance'],
               'dateOuverture' => date('d/m/Y'),
               'dateSurvenance' => $data["occurrence_date"],
               'dateDeclaration' => $data["declaration_date"],
               'dateCloture' => $data["close_date"],
-              'type' => $data["type"],
-              'causeCirconstance' => $data['circumstance'],
-              'listPer' => [[
-                  "idPer"=> '',
-                  "categ"=> "ASSURE"
-              ]],
+              'dommages'=>'test',
+              'codeProduit'=>'AUTO',
+              'codeCie' =>"ALZ_CI",
+              'libMvt'=>'Ouverture Sinistre',
+              'libMotif'=>'Prueba-declaration Extranet',
+              'loadAssure'=>'1',
               'listInfos' => [
-              ]
+                 ['key'=>'ALCOOL_STUP','value'=>'S']
+              ],
+              'risque5'=>'Paris',
+              'risque4'=>'23000',
+              'cdIda'=>'10'
             ];
 
 
-        //echo(json_encode($jsonData));
-        //exit();
 
         $createResponse = $sinister->create($jsonData);
 
         if(isset($createResponse->id)){
-
-          if(isset($data['documents']) && sizeof($data['documents'])){
-            foreach($data['documents'] as $document){
-              dispatch(new DocumentUpload($createResponse->id,$document));
-            }
-          }
-
           return $createResponse->id;
         }
 

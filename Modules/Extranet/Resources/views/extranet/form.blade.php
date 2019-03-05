@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 {!!
     Form::open([
         'url' => isset($offer)
@@ -30,7 +29,7 @@
     </div>
 </div>
 
-
+<input type="hidden" name="model" value="{{$modelId}}" />
 <div class="container rightbar-page">
     <div class="col-md-8 col-md-offset-2 page-content">
 

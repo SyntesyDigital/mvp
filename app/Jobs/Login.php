@@ -45,7 +45,7 @@ class Login
 
                 $loginResult = json_decode($login->getBody()->getContents());
 
-                Session::put('token', $loginResult->token);
+                Session::put('iga_token', $loginResult->token);
 
                 return true;
             }
