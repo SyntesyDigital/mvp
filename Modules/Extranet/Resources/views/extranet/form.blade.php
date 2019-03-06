@@ -4,16 +4,16 @@
 
 {!!
     Form::open([
-        'url' => isset($offer)
-            ? route('extranet.update', $offer)
+        'url' => isset($extranet_id)
+            ? route('extranet.update', $extranet_id)
             : route('extranet.store'),
-        'method' => isset($model) ? 'PUT' : 'POST',
+        'method' => isset($extranet_id) ? 'PUT' : 'POST',
         'id' => 'form-model'
     ])
 !!}
 
 
-{{ Form::hidden('_method', isset($model) ? 'PUT' : 'POST') }}
+{{ Form::hidden('_method', isset($extranet_id) ? 'PUT' : 'POST') }}
 
 <div class="page-bar">
     <div class="container">
@@ -36,7 +36,7 @@
         @foreach($modelForm as $node)
             @include('extranet::extranet.partials.node', [
               'node' => $node,
-              'item' => isset($offer) ? $offer : null
+              'item' => isset($model_filled) ? $model_filled : null
             ])
         @endforeach
     </div>

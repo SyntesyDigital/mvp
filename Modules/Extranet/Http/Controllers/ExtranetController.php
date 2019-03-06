@@ -4,6 +4,8 @@ namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ExtranetModelRepository;
+use Modules\Extranet\Repositories\SinistreRepository;
+
 use Modules\Extranet\Transformers\ModelReactTransformer;
 
 use Modules\Extranet\Entities\ExtranetModel;
@@ -18,8 +20,9 @@ use Session;
 
 class ExtranetController extends Controller
 {
-    public function __construct(ExtranetModelRepository $models) {
+    public function __construct(ExtranetModelRepository $models, SinistreRepository $sinisters) {
         $this->models = $models;
+        $this->sinisters = $sinisters;
         $this->middleware('auth');
     }
 
@@ -61,6 +64,23 @@ class ExtranetController extends Controller
         }
 
         return redirect()->route('extranet.models.create',$modelId);
+    }
+
+    public function show($extranet_id,Request $request)
+    {
+      $extranet_id = 11000381; //delete this
+      $sinistre = $this->sinisters->find($extranet_id);
+      $modelId = $this->models->first()->id; //pongo 1o pq es el primer model pero deberia venir con la indo del sinister
+      $model = new ModelReactTransformer($this->models->first()->config);  // el modelo deberiamos obtenerlo de la info del sinister y pasarlo por el transformer pero de momento agarramosel primero porque tendremos ese.
+      // aqui hay que hacer que en model se devuelva un transformer pero que contenga los valores de los campos en la variable model filled.
+      // Esta variable tiene que ser un objeto $item->NOMCAMP donde nomcamp es el name de los nodes que pasamos en modelForm. ahi directamente el valor.
+      return  view('extranet::extranet.form', [
+        'modelForm' => $model->toArray(),
+        'modelId' => $modelId,
+        'sinistre' => $sinistre,
+        'extranet_id' => $extranet_id
+      ]);
+
     }
 
   /*  public function show($sinister, Request $request)

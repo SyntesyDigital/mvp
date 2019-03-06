@@ -14,6 +14,7 @@ Route::group([
     // Extranet
     Route::get('/extranet/{model?}', 'ExtranetController@index')->name('extranet.extranet.index');
     Route::get('/extranet/create/{model}', 'ExtranetController@create')->name('extranet.extranet.create');
+    Route::get('/extranet/show/{extranet_id}', 'ExtranetController@show')->name('extranet.extranet.show');
     Route::post('/extranet/store', 'ExtranetController@store')->name('extranet.store');
     Route::post('/extranet/{model}/update', 'ExtranetController@update')->name('extranet.update');
 
