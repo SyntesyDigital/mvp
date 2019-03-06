@@ -62,20 +62,14 @@
 
 <script>
   $(document).ready(function() {
-
-      $(document).on('click', ".btn-submit-primary", function(e){
-          e.preventDefault();
-          this.closest('form').submit()
-      });
-
-
-
+    $(document).on('click', ".btn-submit-primary", function(e){
+        e.preventDefault();
+        this.closest('form').submit()
+    });
     $('#form-model .datepicker-extranet').datepicker({
          weekStart: 1,
          format: 'dd/mm/yyyy'
     });
-
-
   });
 </script>
 @endpush
