@@ -72,7 +72,7 @@
                 id="{{ $node["id"] or rand() }}"
                 type="text"
                 autocomplete="off"
-                class="form-control datepicker-offer"
+                class="form-control datepicker-extranet"
                 name="{{$node["name"]}}"
                 placeholder="{{$node["placeholder"] or ''}}"
                 value="{{ $date ? date('d/m/Y', $date) : old($node["name"]) }}"
