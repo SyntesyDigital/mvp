@@ -1,6 +1,8 @@
-<div id="{{$field['settings']['htmlId'] or ''}}"  class="banner banner-small offer-banner {{$field['settings']['htmlClass'] or ''}}" style="background-image:url('{{asset('modules/front/images/blog-banner.jpg')}}')">
-  <div class="horizontal-inner-container">
-      <h1>{{$content->getFieldValue('title')}}</h1>
+<div id="{{$field['settings']['htmlId'] or ''}}" class="grey-intro {{$field['settings']['htmlClass'] or ''}}">
+  <div class="container">
+      <div class="row">
+	    <div class="claim col-md-9 col-sm-10 col-xs-12 centered">
+			<h1>{{$content->getFieldValue('title')}}</h1>
 
       @include('front::partials.fields.'.$field['fields'][0]['type'],
         [
@@ -10,6 +12,7 @@
         ]
       )
 
-    </div>
-  </div>
+		  </div>
+	  </div>
+	</div>
 </div>

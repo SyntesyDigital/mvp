@@ -39,11 +39,7 @@ $mq-breakpoints: (
 
     // Tweakpoints
     desktopAd: 810px,
-    mobileLandscape: 480px,
-
-    md:868px,
-    xs:672px
-
+    mobileLandscape: 480px
 ) !default;
 
 /// Static breakpoint (for fixed-width layouts)
@@ -291,6 +287,6 @@ $mq-media-type: all !default;
 }
 
 @if length($mq-show-breakpoints) > 0 {
-
+  
     //@include mq-show-breakpoints;
 }

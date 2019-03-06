@@ -26,11 +26,6 @@ class FrontServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-
-        $this->commands([
-            \Modules\Front\Console\OffersAlertsCandidates::class,
-            \Modules\Front\Console\SendCandidateAlertsEmail::class,
-        ]);
     }
 
     /**
@@ -39,7 +34,7 @@ class FrontServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
+    {   
         foreach (glob(__DIR__.'/../Helpers/*.php') as $filename){
             require_once($filename);
         }
@@ -98,8 +93,7 @@ class FrontServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     *
-     * @return void
+     * @source https://github.com/sebastiaanluca/laravel-resource-flow/blob/develop/src/Modules/ModuleServiceProvider.php#L66
      */
     public function registerFactories()
     {

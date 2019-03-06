@@ -2,41 +2,115 @@
 
 namespace Modules\Front\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Modules\Extranet\Http\Requests\Front\ContactRequest;
-use Modules\Extranet\Jobs\Contact\SendContact;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
+
+use Modules\Front\Jobs\Contact\SaveContact;
+use Modules\Front\Jobs\Contact\SaveContactWithSelection;
+use Modules\Front\Jobs\Contact\SaveNewsletter;
+use Modules\Front\Jobs\Contact\SavePress;
+
+use Modules\Front\Http\Requests\SaveContactRequest;
+use Modules\Front\Http\Requests\SaveContactWithSelectionRequest;
+use Modules\Front\Http\Requests\SaveNewsletterRequest;
+use Modules\Front\Http\Requests\SavePressRequest;
+
 
 class ContactController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
+    public function save(SaveContactRequest $request)
     {
+
+      $contact = dispatch_now(SaveContact::fromRequest($request));
+
+      return $contact ? response()->json([
+          'success' => true,
+          'contact' => $contact
+      ]) : response()->json([
+          'success' => false
+      ], 500);
+
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function saveWithSelection(SaveContactWithSelectionRequest $request)
     {
-        return view('front::contact');
+
+      $contact = dispatch_now(SaveContactWithSelection::fromRequest($request));
+
+      return $contact ? response()->json([
+          'success' => true,
+          'contact' => $contact
+      ]) : response()->json([
+          'success' => false
+      ], 500);
+
     }
 
-    public function send(ContactRequest $request)
+    public function saveNewsletter(SaveNewsletterRequest $request)
     {
-        if ($sent = $this->dispatch(new SendContact($request->all()))) {
-            Session::flash('notify_success', 'Votre message vient d\'être envoyé.');
 
-            return redirect()->route('contact.index');
-        }
+      $contact = dispatch_now(SaveNewsletter::fromRequest($request));
 
-        Session::flash('notify_error', "Une erreur s'est produite lors de l'envoi de le message.");
+      return $contact ? response()->json([
+          'success' => true,
+          'contact' => $contact
+      ]) : response()->json([
+          'success' => false
+      ], 500);
 
-        return redirect()->route('contact.index')->withInput();
     }
+
+    public function savePress(SavePressRequest $request)
+    {
+
+      $contact = dispatch_now(SavePress::fromRequest($request));
+
+      return $contact ? response()->json([
+          'success' => true,
+          'contact' => $contact
+      ]) : response()->json([
+          'success' => false
+      ], 500);
+
+    }
+
+    public function downloadFile(Request $request, $id){
+
+      //id : 140-4-1234123434
+      //{content_id}-{typology}-{config}-{timestamp}
+      $idArray = explode('-',$id);
+      $contentId = $idArray[0];
+      $typology = $idArray[1];
+      $timestamp = $idArray[sizeof($idArray)-1];
+
+      $now = time();
+      $diff = $now - $timestamp;
+
+      if($diff > 86400 * 2){ //two days
+          abort(404);
+      }
+
+      $pathToFile = "";
+      $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+
+      if($typology == 7){ //cartografia
+
+        $format = $idArray[2];
+        $resolution = $idArray[3];
+        $size = $idArray[4];
+        $pathToFile = $root."/downloads/7/".$contentId."-".$format."-".$resolution."-".$size.".zip";
+      }
+      else if($typology == 14){ //logos
+        $pathToFile = $root."/downloads/14/".$contentId.".zip";
+      }
+
+      if($pathToFile == "")
+        abort(404);
+
+      return response()->download($pathToFile);
+
+    }
+
+
 }

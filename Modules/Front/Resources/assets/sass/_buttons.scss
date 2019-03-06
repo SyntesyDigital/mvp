@@ -1,73 +1,34 @@
 .btn{
 
-  background-color:$brand-black-color;
+  background-color:$brand-light-color-1;
   @extend .rounded;
   text-transform:uppercase;
   padding:9px 28px;
-  @include font(12,14,400);
+  @include font(14,16,400);
   color:#000;
   border:none;
 
   @extend .animate;
-  outline: none;
-  &.btn-red{
-    color: $brand-white-color;
-    background-color:$brand-red-color;
-    &:hover {
-      background-color:$brand-dark-gray-color;
-    }
-    &:focus, &:active, &:active:focus {
-      background-color:$brand-dark-gray-color;
-    }
 
-    &.unactivated{
-      background-color:$brand-dark-gray-color;
-    }
-
+  &:hover {
+    background-color:$brand-dark-color-2;
+    color:#fff;
+    outline: none;
   }
-  &.btn-dark-gray{
-    color: $brand-white-color;
-    background-color:$brand-dark-gray-color;
-    &:hover {
-      background-color:$brand-red-color;
-    }
 
-    &:focus, &:active, &:active:focus {
-      background-color:$brand-red-color;
-    }
+  &:focus, &:active, &:active:focus {
+    background-color:$brand-light-color-1;
+    color:#000;
+    outline: none;
   }
-  &.btn-soft-gray{
-    color:$brand-dark-gray-color;
-    background-color:$brand-light-gray-color;
-    &:hover {
-      background-color:$brand-dark-gray-color;
-      color:$brand-white-color;
-    }
 
-    &:focus, &:active, &:active:focus {
-      background-color:$brand-dark-gray-color;
-      color:$brand-white-color;
-    }
-
-    &.selected {
-      background-color:$brand-dark-gray-color;
-      color:$brand-white-color;
-    }
-
-    &.tag {
-      color:$brand-dark-gray-color;
-      border:1px solid $brand-dark-gray-color;
-      background-color:transparent;
-      cursor:default;
-      &:hover{
-        color:$brand-dark-gray-color;
-        border:1px solid $brand-dark-gray-color;
-        background-color:transparent;
-      }
-    }
-
+  &.selected {
+    background-color:$brand-dark-color-2;
+    color:#fff;
   }
-  &.btn-logout{
-    padding: 8px 28px;
+
+  &:visited{
+    background-color:auto;
   }
+
 }

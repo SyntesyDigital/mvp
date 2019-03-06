@@ -12,20 +12,25 @@ require('./libs/jquery-ui-1.12.1/jquery-ui.min.js');
 require('./libs/slick/slick.js');
 require('./libs/tweenMax/tweenmax.js');
 
-//react components
+//require('./components/Home');
 require('./components/Fields/MapField');
 require('./components/Widgets/TypologyLast');
 require('./components/Widgets/TypologyPaginated');
+require('./components/Widgets/TypologyByCategory');
+require('./components/Widgets/TypologySearchDate');
+require('./components/Widgets/TypologyCarousel');
+require('./components/Widgets/TypologySelectionFilters');
+require('./components/Widgets/ContactForm');
 require('./components/Common/Paginator');
 require('./components/Common/MoreResults');
+require('./components/Widgets/MembersByProgram');
+require('./components/Widgets/Members');
+require('./components/Widgets/Agencies');
+require('./components/Widgets/Companies');
+require('./components/Widgets/Subscribe');
+require('./components/Widgets/ContactFormPress');
+require('./components/Widgets/MenuBanner');
 require('./components/Widgets/Blog');
+require('./components/Widgets/Search');
 require('./components/Widgets/RelatedNews');
-require('./components/Widgets/LastNews');
-require('./components/Common/CustomerDocuments');
-require('./components/Common/CandidateDocuments');
-
-
-//javascripts
-require('./offers/offerapplications.js');
-//require('./libs/dropzone/dropzone.min.js');
-//require('./libs/jquery.imageUploader.js');
+require('./components/Widgets/TypologyHorizontalCarousel');
