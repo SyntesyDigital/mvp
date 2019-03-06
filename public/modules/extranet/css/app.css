@@ -305,19 +305,20 @@ li {
   border: 1px dashed #4a9fea;
 }
 
-.filelists .medias-dropfiles {
+.sitelist .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;
 }
 
-.filelists .content-add {
+.sitelist .content-add {
+  background-color: #fafafa;
   border: 1px solid #ccc;
   border-radius: 6px;
   margin-bottom: 5px;
   padding: 10px;
 }
 
-.filelists .content-add h4 {
+.sitelist .content-add h4 {
   font-size: 18px;
   line-height: 20px;
   padding: 0;
@@ -325,27 +326,34 @@ li {
   margin-bottom: 5px;
 }
 
-.filelists .content-add .tool-box {
+.sitelist .content-add .tool-box {
   position: absolute;
   right: 0px;
   top: 5px;
 }
 
-.filelists .content-add .tool-box a {
+.sitelist .content-add .tool-box a {
   padding-right: 15px;
+  color: #fc4b6c;
+  font-size: 12px;
+  line-height: 40px;
 }
 
-.filelists .content-add .filename-list {
-  width: 80%;
+.sitelist .content-add input {
+  width: 40%;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0;
+  padding: 0;
 }
 
-.filelists .content-add .filefields-list {
+.sitelist .content-add .filefields-list {
   width: 30%;
   display: inline-block;
   padding-right: 5px;
 }
 
-.filelists .content-add .filefields-list-last {
+.sitelist .content-add .filefields-list-last {
   width: 30%;
   display: inline-block;
   padding-right: 5px;

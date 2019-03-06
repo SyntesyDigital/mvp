@@ -3,12 +3,10 @@
   $fieldValue = isset($field['value']) ? $field['value'] : (isset($field['values']) ? $field['values'] : null);
 
   $url = isset($fieldValue) && isset($fieldValue['urls']['files']) ? asset($fieldValue['urls']['files']) : null;
-  $label = (isset($labelFieldName) && $labelFieldName ? $field['name'] : lang('widgets.download_pdf') );
+  $label = (isset($labelFieldName) && $labelFieldName ? $field['name'] : 'Télécharger le document' );
 
 @endphp
-@if(!isset($div))
-<div>
-@endif
+
 @if(isset($url))
   <a
     id="{{$settings['htmlId'] or ''}}"
@@ -16,9 +14,6 @@
     target="_blank"
     href="{{$url}}"
   >
-    {{$label}}
+    <i class="fa fa-download"></i> {{$label}}
   </a>
-@endif
-@if(!isset($div))
-</div>
 @endif

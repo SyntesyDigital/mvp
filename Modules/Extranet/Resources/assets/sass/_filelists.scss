@@ -1,12 +1,12 @@
-.filelists {
+.sitelist {
   .medias-dropfiles{
     border: 2px dotted #dcdcdc;
     padding: 30px 50px;
   }
 
-
-
   .content-add {
+
+    background-color: #fafafa;
 
     h4{
       font-size: 18px;
@@ -28,11 +28,18 @@
 
       a {
         padding-right: 15px;
+        color: #fc4b6c;
+        font-size: 12px;
+        line-height: 40px;
       }
     }
 
-    .filename-list {
-      width:80%;
+    input {
+      width: 40%;
+      display: inline-block;
+      margin-right: 20px;
+      margin-bottom: 0;
+      padding: 0;
     }
 
     .filefields-list {

@@ -14,7 +14,7 @@ Gilles van den Hoven <gilles@webunity.nl>
 Micheil Bryan Smith <micheil@brandedcode.com>
 Jörn Zaefferer <joern.zaefferer@gmail.com>
 Marc Grabanski <m@marcgrabanski.com>
-Keith Wood <kfrontod@iinet.com.au>
+Keith Wood <kbwood@iinet.com.au>
 Brandon Aaron <brandon.aaron@gmail.com>
 Scott González <scott.gonzalez@gmail.com>
 Eduardo Lundgren <eduardolundgren@gmail.com>

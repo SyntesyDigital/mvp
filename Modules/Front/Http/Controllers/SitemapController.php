@@ -10,7 +10,6 @@ use App\Http\Requests\ReserveRequest;
 use Illuminate\Support\Facades\DB;
 
 use Modules\Architect\Entities\Language;
-use Modules\Architect\Entities\Content;
 use Modules\Architect\Repositories\ContentRepository;
 use LaravelLocalization;
 
@@ -25,44 +24,36 @@ class SitemapController extends Controller
 		public function sitemap()
 		{
 
-			$languages = LaravelLocalization::getSupportedLocales();
-			$languagesByIso = Language::getByIso();
+			$languages = Language::getAllCached();
+      $contents = $this->contents->findWhere(['is_page'=>1]);
 
-      $contents = $this->contents->findWhere(['is_page'=>1,'status'=>1]);
-			$urls = [];
-			//dd($contents->toArray());
+      //get all contents with url
 
-			foreach($contents as $content){
-				$contentUrls = [];
+      foreach($languages as $language){
 
-				foreach($content->urls as $url){
-					$contentUrls[$languagesByIso[$url->language_id]] = [
-						"url" => $url->url,
-						"priority"=> 1
-					];
-				}
+        //filter contents by enabled by this language
+        //get full slug with this language
+        //get the url
+        //priority 1
 
-				array_push($urls,$contentUrls);
-			}
+        $language->iso;
+				$language->id;
 
-			$contents = Content::whereHas('typology', function($query) {
-			    return $query->where('has_slug', 1);
-			})->get();
+      }
 
-			foreach($contents as $content){
-				$contentUrls = [];
+      //same with contents
+        //get all conotents with slug = 1
+        //get all slugs with code
+        //priotiy 0.8
 
-				foreach($content->urls as $url){
-					$contentUrls[$languagesByIso[$url->language_id]] = [
-						"url" => $url->url,
-						"priority"=> 0.8
-					];
-				}
 
-				array_push($urls,$contentUrls);
-			}
+        /*
+        //routes format
+        $url[$language] = ["url" => $translatedUrl,"priority"=> 1];
+        */
 
-			return response()->view('front::sitemap', [
+
+			return response()->view('sitemap', [
 	      "urls" => $urls,
 				"languages" => $languages
 	  	])->header('Content-Type', 'text/xml');

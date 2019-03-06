@@ -56,12 +56,12 @@ class Handler extends ExceptionHandler
         else {
             // 404 page when a model is not found
            if ($e instanceof \ModelNotFoundException) {
-               return response()->view('turisme::errors.404', [], 404);
+               return response()->view('front::errors.404', [], 404);
            }
 
            // custom error message
            if ($e instanceof \ErrorException) {
-               return response()->view('turisme::errors.500', [], 500);
+               return response()->view('front::errors.500', [], 500);
            } else {
                return parent::render($request, $e);
            }
