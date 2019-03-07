@@ -40,11 +40,13 @@ class ExtranetController extends Controller
     public function create(ExtranetModel $model, Request $request)
     {
         $modelId = $model->id;
+
         $model = new ModelReactTransformer($this->models->first()->config);
 
         return view('extranet::extranet.form', [
             'modelForm' => $model->toArray(),
-            'modelId' => $modelId
+            'modelId' => $modelId,
+            'natures' => $this->models->getNatures()
         ]);
     }
 
@@ -55,12 +57,12 @@ class ExtranetController extends Controller
             $sinister = $this->dispatchNow(SinistreCreate::fromRequest($request));
             Session::flash('notify_success', 'Enregistrement effectué avec succès');
 
-            return redirect()->route('extranet.models.show', $sinister);
+            return redirect()->route('extranet.extranet.show', $sinister);
         } catch (\Exception $e) {
             Session::flash('notify_error', $e->getMessage());
         }
 
-        return redirect()->route('extranet.models.create',$modelId);
+        return redirect()->route('extranet.extranet.create',$modelId);
     }
 
   /*  public function show($sinister, Request $request)

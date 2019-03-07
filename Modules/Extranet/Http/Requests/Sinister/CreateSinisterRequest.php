@@ -4,6 +4,8 @@ namespace Modules\Extranet\Http\Requests\Sinister;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Config;
+
 class CreateSinisterRequest extends FormRequest
 {
     /**
@@ -23,27 +25,6 @@ class CreateSinisterRequest extends FormRequest
      */
     public function rules()
     {
-        switch ($this->method()) {
-            case 'GET':
-            case 'DELETE':
-                return [];
-
-            case 'POST':
-                return [
-            //        'name' => 'required',
-
-                ];
-                break;
-
-            case 'PUT':
-            case 'PATCH':
-                return [
-                //    'name' => 'required',
-                ];
-                break;
-
-            default:
-                break;
-        }
+        return Config::get('models.sinister.rules');
     }
 }

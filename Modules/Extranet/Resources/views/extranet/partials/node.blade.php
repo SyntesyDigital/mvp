@@ -176,6 +176,28 @@
         </div>
     @endif
 
+    @if($node["input"] == 'boby')
+        <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
+            <label>{{$node["label"]}}</label>
+            @php
+                $default = isset($node["default"]) ? $node["default"] : null;
+            @endphp
+
+            {!!
+
+                Form::select(
+                    $node["name"],
+                    $natures,
+                    isset($item) ? $item->{$node["name"]} : $default,
+                    [
+                        'class' => 'form-control',
+                        'placeholder' => isset($node["placeholder"]) ? $node["placeholder"] : '-'
+                    ]
+                )
+            !!}
+        </div>
+    @endif
+
     @if($node["input"] == 'users')
         <div class="form-group {{$errors->has($node["name"]) ? 'has-error' : ''}}">
             <label>{{$node["label"]}}</label>

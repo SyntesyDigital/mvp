@@ -204,6 +204,7 @@ return [
         'title' => 'Sinistre',
         'title_garanties' => 'Règlements et provisions',
         'label' => [
+            'firstname' => '',
             'add' => 'Saisie du sinistre',
             'country' => 'Pays',
             'detail' => 'Détail du sinistre',

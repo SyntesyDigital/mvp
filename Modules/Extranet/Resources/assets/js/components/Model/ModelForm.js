@@ -37,6 +37,8 @@ export default class ModelForm extends Component {
                     name : field.name,
                     identifier : field.identifier,
                     type : field.type,
+                    input : field.input,
+                    form_name : field.form_name,
                     saved : true,
                     editable : true
                 });
