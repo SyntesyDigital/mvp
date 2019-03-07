@@ -126,7 +126,7 @@ return [
         ],
         [
           'type' => 'field',
-          'input' => 'text',  //
+          'input' => 'textarea',  //
           'identifier' => 'causeCirconstance',
           'name' => 'circumstance',
           'label' => 'form.sinister.label.circumstance',

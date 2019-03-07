@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use Auth;
 use Session;
 use App\Extensions\VeosWsUrl;
+use Config;
 
 class SinistreRepository
 {
@@ -70,6 +71,39 @@ class SinistreRepository
     }
 
 
+    private function getListInfoValue($identifier,$listInfos){
+      $key = explode('.',$identifier)[1];
+
+      foreach($listInfos as $info){
+        if($info->key == $key){
+          return $info->value;
+        }
+      }
+      return '';
+    }
+
+    public function processGet($sinister)
+    {
+      $fields = Config::get('models.sinister.fields');
+
+      $formValues = (object)[];
+      foreach($fields as $field) {
+
+        $key = $field["identifier"];
+
+        if(str_contains($key,'listInfos')){
+          //is a listInfo
+          $formValues->{$field['name']} = $this->getListInfoValue(
+            $field['identifier'],$sinister->listInfos);
+        }
+        else {
+          $formValues->{$field['name']} = $sinister->{$key};
+        }
+      }
+
+      return $formValues;
+
+    }
 
 
 }

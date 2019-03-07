@@ -5,6 +5,7 @@ namespace Modules\Extranet\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ExtranetModelRepository;
 use Modules\Extranet\Repositories\SinistreRepository;
+use Modules\Extranet\Repositories\BobyRepository;
 
 use Modules\Extranet\Transformers\ModelReactTransformer;
 
@@ -20,9 +21,11 @@ use Session;
 
 class ExtranetController extends Controller
 {
-    public function __construct(ExtranetModelRepository $models, SinistreRepository $sinisters) {
+    public function __construct(ExtranetModelRepository $models,
+      SinistreRepository $sinisters, BobyRepository $boby) {
         $this->models = $models;
         $this->sinisters = $sinisters;
+        $this->boby = $boby;
         $this->middleware('auth');
     }
 
@@ -49,7 +52,7 @@ class ExtranetController extends Controller
         return view('extranet::extranet.form', [
             'modelForm' => $model->toArray(),
             'modelId' => $modelId,
-            'natures' => $this->models->getNatures()
+            'natures' => $this->boby->getNatures()
         ]);
     }
 
@@ -68,50 +71,28 @@ class ExtranetController extends Controller
         return redirect()->route('extranet.extranet.create',$modelId);
     }
 
-    public function show($extranet_id,Request $request)
+    public function show($sinisterId,Request $request)
     {
-      $extranet_id = 11000381; //delete this
-      $sinistre = $this->sinisters->find($extranet_id);
-      $modelId = $this->models->first()->id; //pongo 1o pq es el primer model pero deberia venir con la indo del sinister
+
+      $sinistre = $this->sinisters->find($sinisterId);
+      $modelId = $this->models->first()->id;
       $model = new ModelReactTransformer($this->models->first()->config);
 
-      // $this var is to fill values on dynamic form
-      $sinistre_values = [
-          'type'            => $sinistre->type,
-          'responsability'  => $sinistre->txResp,
-          'nature'      => $sinistre->circonstance,
-          'circumstance'      => $sinistre->causeCirconstance,
-    //      ''      => $sinistre->dateOuverture,
-          'occurrence_date'      => $sinistre->dateSurvenance,
-          'declaration_date'      => $sinistre->dateDeclaration,
-          'close_date'      => $sinistre->dateCloture,
-          // variables from below are needed on form are not being stored on WS (from insurer_number to ref_expert)
-          'insurer_number'      => isset($sinistre_values->insurer_number)?$sinistre_values->insurer_number:'',
-          'broker_number'      => isset($sinistre_values->broker_number)?$sinistre_values->broker_number:'',
-          'customer_reference'      => isset($sinistre_values->customer_reference)?$sinistre_values->customer_reference:'',
-          'reassureur_reference'      => isset($sinistre_values->reassureur_reference)?$sinistre_values->reassureur_reference:'',
-          'apperteur_reference'      => isset($sinistre_values->apperteur_reference)?$sinistre_values->apperteur_reference:'',
-          'ref_expert'      => isset($sinistre_values->ref_expert)?$sinistre_values->ref_expert:''
-      ];
+
+
+      //process all fields
+      $sinistreValues = $this->sinisters->processGet($sinistre);
 
       return  view('extranet::extranet.form', [
         'modelForm' => $model->toArray(),
         'modelId' => $modelId,
+        'natures' => $this->boby->getNatures(),
         'sinistre' => $sinistre,
-        'extranet_id' => $extranet_id,
-        'sinistre_values' => json_decode(json_encode($sinistre_values), FALSE)
+        'extranet_id' => $sinisterId,
+        'sinistre_values' => $sinistreValues
       ]);
 
     }
-
-  /*  public function show($sinister, Request $request)
-    {
-        // AQUI HACER EL GET DEL BOBBY PARA OBTENER LOS DATOS DEL SINISTER... TAMBIEN DE ALGUAN FORMA DEBERIAMOS SABER A QUE MODELO PERTENECE O DE MOMENTO CARGARLO A MANO
-        return view('extranet::admin.models.form', [
-            'form' => Config::get('offers.form'),
-            'offer' => $offer,
-        ]);
-    } */
 
 /*    public function update(Offer $offer, UpdateOfferRequest $request)
     {

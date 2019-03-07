@@ -39,6 +39,10 @@
               'item' => isset($sinistre_values) ? $sinistre_values : null
             ])
         @endforeach
+
+        <br/>
+        <br/>
+
     </div>
 </div>
 

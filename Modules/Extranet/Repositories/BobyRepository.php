@@ -18,39 +18,6 @@ class BobyRepository
         $this->client = new Client();
     }
 
-    /*
-    public function postQuery($name, $params = null)
-    {
-        $cacheKey = md5(Auth::user()->role . "_" . $name . json_encode($params));
-
-        if (Cache::has($cacheKey)) {
-            $beans = Cache::get($cacheKey);
-        } else {
-            $response = $this->client->post(VeosWsUrl::get() . 'boBy/list', [
-                'json' => ["requests" =>[[
-                    "name" => $name,
-                    "params" => $params
-                ]]],
-                'headers' => [
-                    'Authorization' => "Bearer " . Session::get('token')
-                ]
-            ]);
-
-            $result = json_decode($response->getBody());
-            if(isset($result->responses[0])) {
-                if((isset($result->responses[0]->statusCode)) && $result->responses[0]->statusCode == 1) {
-                    throw new \Exception($result->responses[0]->statusMessage);
-                }
-            }
-            $beans = isset($result->responses[0]->beans) ? $result->responses[0]->beans : null;
-
-            Cache::put($cacheKey, $beans, config('cache.time'));
-        }
-
-        return $beans;
-    }
-    */
-
     public function getQuery($name)
     {
         $cacheKey = md5("getQuery_" . $name);
@@ -82,5 +49,19 @@ class BobyRepository
 
         return $beans;
     }
+
+    public function getNatures()
+    {
+        $beans = $this->getQuery('WS_EXTSTD_CIRCONSTANCE?CDPROD=AUTO');
+
+        $data = [];
+        foreach($beans as $bean){
+          $data[$bean->codeCirconst] = $bean->circonstance;
+        }
+
+        return $data;
+    }
+
+
 
 }
