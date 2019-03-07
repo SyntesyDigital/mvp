@@ -83,7 +83,7 @@ class SinistreCreate
           }
         }
 
-        dd($jsonData);
+        //dd($jsonData);
 
         $createResponse = $sinister->create($jsonData);
 
