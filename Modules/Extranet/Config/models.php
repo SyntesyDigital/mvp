@@ -2,89 +2,78 @@
 
 return [
     'sinister' => [
+      'method' => 'sinister',
       'rules' => [
-          'broker_number' => 'required',
-          'insurer_number' => 'required',
-          'customer_reference' => 'required',
-          'reassureur_reference' => 'required',
-          'apperteur_reference' => 'required',
-          'ref_expert' => 'required',
           'occurrence_date' => 'required',
-          'declaration_date' => 'required',
-          'close_date' => 'required',
-          'type' => 'required',
-          'responsability' => 'required',
           'nature' => 'required',
-          'circumstance' => 'required',
       ],
       'GET' => [
-        //json to match fields. Math with identifier
+        //json to match fields. Match with identifier
       ],
       'PUT' => [
         //create fields match
       ],
       'POST' => [
-        //edit fields
+        'idPol' => '11000145',
+        'numSoc' => 'CI01',
+        'mouvement' => 'OUVSIN',
+        'motif' => 'EXTSIN',
+        'numAuto' => 'O',
+        'numAutoCie' =>'',
+
+        'type' => '',  //type list
+        'txResp' => '',  //responsability list
+        'circonstance' => '',  //nature from boby, required
+
+        'causeCirconstance' => '',  //circumstance
+        'dateOuverture' => '_now',  //codes to recognize internal functions
+        'dateSurvenance' => '', //occurrence_date, required
+        'dateDeclaration' => '', //declaration_date
+        'dateCloture' => '', //close_date
+        'dommages'=>'test',
+        'codeProduit'=>'AUTO',
+        'codeCie' =>"ALZ_CI",
+        'libMvt'=>'Ouverture Sinistre',
+        'libMotif'=>'Prueba-declaration Extranet',
+        'loadAssure'=>'1',
+        'listInfos' => [
+           ['key'=>'DECLARANT_NOM','value'=>''],
+           ['key'=>'DECLARANT_PRENOM','value'=>''],
+           ['key'=>'DECLARANT_MAIL','value'=>''],
+        ],
       ],
       'fields' => [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => '_numSoc',
-          'name' => 'broker_number',
-          'label' => 'form.sinister.label.broker_number',
+          'identifier' => 'listInfos.DECLARANT_NOM',
+          'name' => 'first_name',
+          'label' => 'form.customer.label.first_name',
           'placeholder' => '',
           'default' => ''
         ],
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => '_idPer',
-          'name' => 'insurer_number',
-          'label' => 'form.sinister.label.insurer_number',
+          'identifier' => 'listInfos.DECLARANT_PRENOM',
+          'name' => 'last_name',
+          'label' => 'form.customer.label.last_name',
           'placeholder' => '',
           'default' => ''
         ],
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'Nocbt3',
-          'name' => 'customer_reference',
-          'label' => 'form.sinister.label.customer_reference',
+          'identifier' => 'listInfos.DECLARANT_MAIL',
+          'name' => 'email',
+          'label' => 'form.customer.label.email',
           'placeholder' => '',
           'default' => ''
         ],
         [
           'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'Nocbt4',
-          'name' => 'reassureur_reference',
-          'label' => 'form.sinister.label.reassureur_reference',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'Nocbt5',
-          'name' => 'apperteur_reference',
-          'label' => 'form.sinister.label.apperteur_reference',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'Nocbt6',
-          'name' => 'ref_expert',
-          'label' => 'form.sinister.label.ref_expert',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'date',  //
-          'identifier' => 'Nocbt7',
+          'input' => 'date',
+          'identifier' => 'dateSurvenance', //referece to VEOS
           'name' => 'occurrence_date',
           'label' => 'form.sinister.label.occurrence_date',
           'placeholder' => '',
@@ -93,7 +82,7 @@ return [
         [
           'type' => 'field',
           'input' => 'date',  //
-          'identifier' => 'Nocbt8',
+          'identifier' => 'dateDeclaration',
           'name' => 'declaration_date',
           'label' => 'form.sinister.label.declaration_date',
           'placeholder' => '',
@@ -102,7 +91,7 @@ return [
         [
           'type' => 'field',
           'input' => 'date',  //
-          'identifier' => 'Nocbt9',
+          'identifier' => 'dateCloture',
           'name' => 'close_date',
           'label' => 'form.sinister.label.close_date',
           'placeholder' => '',
@@ -111,7 +100,7 @@ return [
         [
           'type' => 'field',
           'input' => 'list',  //
-          'identifier' => 'types',
+          'identifier' => 'type',
           'name' => 'type',
           'label' => 'form.sinister.label.type',
           'placeholder' => '',
@@ -120,7 +109,7 @@ return [
         [
           'type' => 'field',
           'input' => 'list',  //
-          'identifier' => 'responsabilities',
+          'identifier' => 'txResp',
           'name' => 'responsability',
           'label' => 'form.sinister.label.responsability',
           'placeholder' => '',
@@ -128,8 +117,8 @@ return [
         ],
         [
           'type' => 'field',
-          'input' => 'list',  //
-          'identifier' => 'nature',
+          'input' => 'boby',  //defines filled by boby
+          'identifier' => 'circonstance',
           'name' => 'nature',
           'label' => 'form.sinister.label.nature',
           'placeholder' => '',
@@ -138,13 +127,13 @@ return [
         [
           'type' => 'field',
           'input' => 'text',  //
-          'identifier' => 'circumstance',
+          'identifier' => 'causeCirconstance',
           'name' => 'circumstance',
           'label' => 'form.sinister.label.circumstance',
           'placeholder' => '',
           'default' => ''
-        ]
-      ]
+        ],
+      ],
     ],
     'police' => [
 

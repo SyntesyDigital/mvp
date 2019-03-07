@@ -13,6 +13,14 @@ class ExtranetModelRepository extends BaseRepository
         return "Modules\\Extranet\\Entities\ExtranetModel";
     }
 
+    public function getNatures()
+    {
+      return [
+        "41" => "Accident avec un véhicule identifié",
+        "42" => "Véhicule retrouvé endommagé en stationnement"
+      ];
+    }
+
   /*  public function getDatatableData()
     {
         $agences = Agence::select(
