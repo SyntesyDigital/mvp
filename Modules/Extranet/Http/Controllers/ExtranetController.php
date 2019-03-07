@@ -71,14 +71,33 @@ class ExtranetController extends Controller
       $extranet_id = 11000381; //delete this
       $sinistre = $this->sinisters->find($extranet_id);
       $modelId = $this->models->first()->id; //pongo 1o pq es el primer model pero deberia venir con la indo del sinister
-      $model = new ModelReactTransformer($this->models->first()->config);  // el modelo deberiamos obtenerlo de la info del sinister y pasarlo por el transformer pero de momento agarramosel primero porque tendremos ese.
-      // aqui hay que hacer que en model se devuelva un transformer pero que contenga los valores de los campos en la variable model filled.
-      // Esta variable tiene que ser un objeto $item->NOMCAMP donde nomcamp es el name de los nodes que pasamos en modelForm. ahi directamente el valor.
+      $model = new ModelReactTransformer($this->models->first()->config);
+
+      // $this var is to fill values on dynamic form
+      $sinistre_values = [
+          'type'            => $sinistre->type,
+          'responsability'  => $sinistre->txResp,
+          'nature'      => $sinistre->circonstance,
+          'circumstance'      => $sinistre->causeCirconstance,
+    //      ''      => $sinistre->dateOuverture,
+          'occurrence_date'      => $sinistre->dateSurvenance,
+          'declaration_date'      => $sinistre->dateDeclaration,
+          'close_date'      => $sinistre->dateCloture,
+          // variables from below are needed on form are not being stored on WS (from insurer_number to ref_expert)
+          'insurer_number'      => isset($sinistre_values->insurer_number)?$sinistre_values->insurer_number:'',
+          'broker_number'      => isset($sinistre_values->broker_number)?$sinistre_values->broker_number:'',
+          'customer_reference'      => isset($sinistre_values->customer_reference)?$sinistre_values->customer_reference:'',
+          'reassureur_reference'      => isset($sinistre_values->reassureur_reference)?$sinistre_values->reassureur_reference:'',
+          'apperteur_reference'      => isset($sinistre_values->apperteur_reference)?$sinistre_values->apperteur_reference:'',
+          'ref_expert'      => isset($sinistre_values->ref_expert)?$sinistre_values->ref_expert:''
+      ];
+
       return  view('extranet::extranet.form', [
         'modelForm' => $model->toArray(),
         'modelId' => $modelId,
         'sinistre' => $sinistre,
-        'extranet_id' => $extranet_id
+        'extranet_id' => $extranet_id,
+        'sinistre_values' => json_decode(json_encode($sinistre_values), FALSE)
       ]);
 
     }

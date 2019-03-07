@@ -36,7 +36,7 @@
         @foreach($modelForm as $node)
             @include('extranet::extranet.partials.node', [
               'node' => $node,
-              'item' => isset($model_filled) ? $model_filled : null
+              'item' => isset($sinistre_values) ? $sinistre_values : null
             ])
         @endforeach
     </div>
