@@ -36694,6 +36694,8 @@ var ModelContainer = function (_Component) {
                 }
             });
 
+            console.log("handleSubmitForm => ", this.state.model);
+
             if (this.state.model) {
                 this.update();
             } else {
@@ -36784,7 +36786,7 @@ var ModelContainer = function (_Component) {
         value: function onSaveSuccess(response) {
 
             //set all fields to saved
-            //console.log("onSaveSuccess => ",response);
+            console.log("onSaveSuccess => ", response);
 
             var fields = this.state.fields;
 
@@ -36795,7 +36797,7 @@ var ModelContainer = function (_Component) {
             //console.log("ModelSaved : ",fields);
 
             this.setState({
-                model: response.model,
+                //model : response.model,
                 fields: fields
             });
 

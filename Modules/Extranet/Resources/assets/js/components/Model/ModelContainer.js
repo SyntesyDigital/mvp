@@ -245,6 +245,8 @@ class ModelContainer extends Component {
          }
      });
 
+     console.log("handleSubmitForm => ",this.state.model);
+
      if(this.state.model) {
          this.update();
      } else {
@@ -339,7 +341,7 @@ class ModelContainer extends Component {
   onSaveSuccess(response) {
 
       //set all fields to saved
-      //console.log("onSaveSuccess => ",response);
+      console.log("onSaveSuccess => ",response);
 
       const fields = this.state.fields;
 
@@ -350,9 +352,9 @@ class ModelContainer extends Component {
       //console.log("ModelSaved : ",fields);
 
      this.setState({
-         model : response.model,
+         //model : response.model,
          fields : fields
-     })
+     });
 
      toastr.success(Lang.get('fields.success'));
 

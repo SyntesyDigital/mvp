@@ -7,12 +7,6 @@ return [
           'occurrence_date' => 'required',
           'nature' => 'required',
       ],
-      'GET' => [
-        //json to match fields. Match with identifier
-      ],
-      'PUT' => [
-        //create fields match
-      ],
       'POST' => [
         'idPol' => '11000145',
         'numSoc' => 'CI01',
@@ -135,13 +129,16 @@ return [
         ],
       ],
     ],
-    'police' => [
+    'personee' => [
 
     ],
-    'customer' => [
+    'contrat' => [
 
     ],
-    'bonus' => [
+    'document' => [
+
+    ],
+    'quittance' => [
 
     ]
 ];

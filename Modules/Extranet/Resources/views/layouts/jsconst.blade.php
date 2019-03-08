@@ -3,6 +3,8 @@
   const ICONS = {
     "text" : 'fa-font',
     "date" : 'fa-calendar',
-    "list" : 'fa-list'
+    "list" : 'fa-list',
+    "textarea" : 'fa-align-left',
+    "boby" : 'fa-cloud-download',
   };
 </script>

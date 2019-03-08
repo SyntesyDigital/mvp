@@ -4,10 +4,10 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Project name
-set('application', 'Front_RH');
+set('application', 'Architect IGA');
 
 // Project repository
-set('repository', 'git@bitbucket.org:syntesy/architect_v2.git');
+set('repository', 'git@bitbucket.org:syntesy/architect-iga.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -16,16 +16,17 @@ set('git_tty', true);
 add('shared_files', []);
 add('shared_dirs', []);
 
+set('keep_releases', 10);
+
 // Writable dirs by web server
 add('writable_dirs', []);
 
 
 // Hosts
-
-host('bitbucket@front-interim.ablop.com')
+host('bitbucket@architect-iga.syntesy.io')
     ->stage('stage')
     ->set('branch', 'dev')
-    ->set('deploy_path', '/var/www/front-interim.ablop.com');
+    ->set('deploy_path', '/var/www/architect-iga.syntesy.io');
 
 // Tasks
 
@@ -40,10 +41,12 @@ after('deploy:failed', 'deploy:unlock');
 before('deploy:symlink', 'artisan:migrate');
 after('deploy:symlink', 'artisan:config-clear');
 
+/*
 desc('Send my SSH key to the server');
 task('ssh:sendmykey', function () {
     run("ssh-copy-id -i ~/.ssh/id_rsa bitbucket@195.244.21.141");
 });
+*/
 
 desc('Reset config cache');
 task('artisan:config-clear', function () {

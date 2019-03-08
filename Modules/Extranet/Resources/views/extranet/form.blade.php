@@ -7,20 +7,19 @@
         'url' => isset($extranet_id)
             ? route('extranet.update', $extranet_id)
             : route('extranet.store'),
-        'method' => isset($extranet_id) ? 'PUT' : 'POST',
+        'method' => 'POST',
         'id' => 'form-model'
     ])
 !!}
 
-
-{{ Form::hidden('_method', isset($extranet_id) ? 'PUT' : 'POST') }}
+{{ Form::hidden('_method','POST') }}
 
 <div class="page-bar">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <a href="{{route('extranet.extranet.index')}}" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
-                <h1><i class="fa fa-newspaper-o"></i>&nbsp;Sinister</h1>
+                <h1><i class="fa {{$model->icon}}"></i>&nbsp;{{$model->title}}</h1>
                 <div class="float-buttons pull-right">
                     <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
                 </div>

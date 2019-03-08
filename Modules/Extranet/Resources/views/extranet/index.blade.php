@@ -6,13 +6,13 @@
   @include('extranet::admin.partials.models-nav')
     <div class="col-xs-offset-2 col-xs-10 page-content">
 
-        <h3 class="card-title">Liste des offres d'emploi</h3>
+        <h3 class="card-title">{{$model->title}}</h3>
 
         <a href="{{route('extranet.extranet.create',$model->id)}}" class="pull-right btn btn-primary">
             Ajouter une {{$model->title}}
         </a>
 
-        <h6 class="card-subtitle mb-2 text-muted">Retrouvez-ici l'ensemble des offres d'emploi</h6>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
 
         <table class="table" id="table" data-url="#" style="width:100%">
             <thead>
@@ -20,15 +20,11 @@
                     <th>#</th>
                     <th>Titre</th>
                     <th>Date de création</th>
-                    <th>Nombre de candidatures</th>
-                    <th data-filter="select" data-ajax="#">Destinataire interne</th>
                     <th id="actions-th"></th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th></th>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
