@@ -1,5 +1,4 @@
 $(function() {
-	/*
 	$('#table').DataTable({
 	    language: {
 	        "url": "/modules/extranet/plugins/datatables/locales/french.json"
@@ -23,5 +22,4 @@ $(function() {
 			$('#actions-th').css('min-width', '50px');
 	    }
     });
-		*/
 });

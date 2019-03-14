@@ -9,15 +9,15 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\ContentField;
 use Modules\Architect\Entities\Language;
 
-class Blog extends Widget implements WidgetInterface
+class Header extends Widget implements WidgetInterface
 {
     public $type = 'widget';
-    public $icon = 'fa-file-o';
-    public $name = 'BLOG';
+    public $icon = 'fa-font';
+    public $name = 'HEADER';
     public $component = 'CommonWidget';
 
     public $fields = [
-      //  'title' => 'Modules\Architect\Fields\Types\Text'
+        'description' => 'Modules\Architect\Fields\Types\RichText',
     ];
 
     public $rules = [
@@ -28,8 +28,8 @@ class Blog extends Widget implements WidgetInterface
 
     public $settings = [
         'htmlId',
-        'htmlClass',
-        'itemsPerPage',
+        'htmlClass'
     ];
+
 }
 ?>
