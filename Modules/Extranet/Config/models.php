@@ -38,11 +38,11 @@ return [
       ],
       'fields' => [
         [
-          'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'listInfos.DECLARANT_NOM',
-          'name' => 'first_name',
-          'label' => 'form.customer.label.first_name',
+          'type' => 'field',  // field type for layout
+          'input' => 'text',  // field input type for form visualization
+          'identifier' => 'listInfos.DECLARANT_NOM',  //field relative to VEOS POST
+          'name' => 'first_name', //form name, relative to rules
+          'label' => 'form.customer.label.first_name',  //label to internationalization
           'placeholder' => '',
           'default' => ''
         ],
@@ -111,7 +111,7 @@ return [
         ],
         [
           'type' => 'field',
-          'input' => 'boby',  //defines filled by boby
+          'input' => 'boby',  //defines filled by boby, needs more configuration
           'identifier' => 'circonstance',
           'name' => 'nature',
           'label' => 'form.sinister.label.nature',

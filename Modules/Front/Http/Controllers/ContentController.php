@@ -94,6 +94,7 @@ class ContentController extends Controller
     public function show(Request $request, $slug)
     {
       //$slug = $request->segment(count($request->segments()));
+
       $slug = '/'.App::getLocale().'/'.$slug;
 
       $url = Url::where('url', $slug)

@@ -71,17 +71,10 @@ class SinistreRepository
     }
 
 
-    private function getListInfoValue($identifier,$listInfos){
-      $key = explode('.',$identifier)[1];
-
-      foreach($listInfos as $info){
-        if($info->key == $key){
-          return $info->value;
-        }
-      }
-      return '';
-    }
-
+    /**********************************************************************
+    *   Transformer to implement comunication between JSON from VEOS
+    *   and html form data.
+    */
     public function processGet($sinister)
     {
       $fields = Config::get('models.sinister.fields');
@@ -103,6 +96,17 @@ class SinistreRepository
 
       return $formValues;
 
+    }
+
+    private function getListInfoValue($identifier,$listInfos){
+      $key = explode('.',$identifier)[1];
+
+      foreach($listInfos as $info){
+        if($info->key == $key){
+          return $info->value;
+        }
+      }
+      return '';
     }
 
 

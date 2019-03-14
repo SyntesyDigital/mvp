@@ -22,12 +22,11 @@ Route::group([
     Route::get('/', 'ContentController@index')->name('home');
     Route::get('/not-found', 'ContentController@languageNotFound')->name('language-not-found');
 
+    // Localization to JS
+    Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
+    Route::get('js/localization-{locale}.js', 'LocalizationController@localization')->name('localization.js');
 
     Route::get('/{slug}','ContentController@show')
       ->where('slug', '([A-Za-z0-9\-\/]+)')
       ->name('content.show');
-
-    // Localization to JS
-    Route::get('js/lang-{locale}.js', 'LocalizationController@index')->name('messages');
-    Route::get('js/localization-{locale}.js', 'LocalizationController@localization')->name('localization.js');
 });

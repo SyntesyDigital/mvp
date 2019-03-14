@@ -62,6 +62,7 @@ class SinistreCreate
 
         $jsonData = Config::get('models.sinister.POST');
 
+        //process all data from form to JSON
         foreach($this->attributes as $key => $value){
           $jsonKey = $this->keys[$key];
 
@@ -83,8 +84,7 @@ class SinistreCreate
           }
         }
 
-        //dd($jsonData);
-
+        //process json data
         $createResponse = $sinister->create($jsonData);
 
         if(isset($createResponse->id)){
