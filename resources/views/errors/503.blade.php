@@ -1,47 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('front::layouts.app')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('content')
+    <div class="gray-information-container" style="min-height:500px;">
+      <div class="horizontal-inner-container">
+        <div class="col-md-6 home-square home-square-logo">
+          <div class="img-front" style="background-image:url('{{asset('modules/front/images/home-front.jpg')}}')"></div>
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
         </div>
-    </body>
-</html>
+        <div class="col-md-6 home-square p-l-10">
+          <h2 class="gray-square-text">ERREUR 500</h2>
+          <p class=subtitle>Une erreur est survenue.</p>
+          <p>
+              <a href="/" class="btn btn-dark-gray">Accédez à la page d’accueil </a>
+          </p>
+        </div>
+        <br clear="all">
+      </div>
+    </div>
+@endsection

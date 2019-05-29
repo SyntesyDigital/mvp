@@ -32,6 +32,7 @@ return [
     'language'  => 'Idioma',
     'role'      => 'Rol',
     'save'      => 'Guardar',
+    'cancel'    => 'Cancelar',
     'actions'   => 'Accions',
     'new'       => 'Nou',
     'delete'    =>  'Esborrar',
@@ -100,7 +101,6 @@ return [
     'add_fields' => 'Afegeix camps',
     'default_template' => 'Plantilla per defecte',
     'template' => 'Plantilla',
-    'icon' => 'Icona'
-
-
+    'icon' => 'Icona',
+    'file_too_big' => 'Arxiu massa gran'
 ];

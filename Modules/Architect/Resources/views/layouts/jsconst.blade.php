@@ -1,5 +1,5 @@
 <script>
-  const WEBROOT = '{{ route("home") }}';
+  const WEBROOT = '/';
   const ASSETS = '{{ asset('') }}';
   const IMAGES_FORMATS = {!! json_encode(config('images.formats'), JSON_PRETTY_PRINT) !!};
   const FIELDS = {!! json_encode(Modules\Architect\Fields\FieldConfig::get(), JSON_PRETTY_PRINT) !!};

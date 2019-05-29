@@ -40,7 +40,7 @@ class DateField extends Component {
              timeIntervals={15}
              dateFormat="DD/MM/YYYY HH:mm"
              timeCaption={Lang.get('fields.hour')}
-             locale="ca-es"
+             locale="fr"
          />
 
       </div>

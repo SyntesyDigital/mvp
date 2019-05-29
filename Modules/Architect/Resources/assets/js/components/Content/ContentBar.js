@@ -144,7 +144,7 @@ class ContentBar extends Component {
 
                   <div className="actions-dropdown">
                     <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
-                      Accions
+                      {Lang.get('fields.actions') } 
                       <b className="caret"></b>
                       <div className="ripple-container"></div>
                     </a>

@@ -47,10 +47,10 @@ export default class Table extends Component {
     }
 
     getCircleClass(name){
-      if(name == "Publicat"){
+      if(name == "Publié"){
         return 'published';
       }
-      else if(name == "Esborrany"){
+      else if(name == "Brouillon"){
         return 'draft';
       }
       return '';

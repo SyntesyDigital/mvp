@@ -87,7 +87,8 @@ class Language extends Model
 
     public static function getCurrentLanguage()
     {
-        return self::getAllCached()->where('iso', App::getLocale())->first();
+        $currentLang = self::getAllCached()->where('iso', App::getLocale())->first();
+        return $currentLang ? $currentLang : self::getDefault();
     }
 
 
@@ -103,6 +104,21 @@ class Language extends Model
 
         if(!isset($languages)) {
             $languages = self::all();
+
+            cache([
+                $key => $languages
+            ], now()->addSeconds(5 * 60));
+        }
+        return $languages;
+    }
+
+    public static function getByIso()
+    {
+        $key = 'languages.byIso';
+        $languages = cache($key);
+
+        if(!isset($languages)) {
+            $languages = self::pluck('iso','id');
 
             cache([
                 $key => $languages

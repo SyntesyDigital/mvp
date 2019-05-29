@@ -65,7 +65,7 @@ class TypologyModal extends Component {
                       name="entryTitle"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Títol principal"
+                      label="Titre"
                     />
 
                     <BooleanSettingsField
@@ -73,7 +73,7 @@ class TypologyModal extends Component {
                       name="required"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Camp obligatori"
+                      label="Champ obligatoire"
                     />
 
                     <BooleanSettingsField
@@ -81,7 +81,7 @@ class TypologyModal extends Component {
                       name="unique"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Camp únic"
+                      label="Champ unique"
                     />
 
                     <InputSettingsField
@@ -89,8 +89,8 @@ class TypologyModal extends Component {
                       name="minCharacters"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Caràcters mínims"
-                      inputLabel="Indica el número mínim de caràcters"
+                      label="Caractères minimum"
+                      inputLabel="Indique le nombre minimum de caractères"
                     />
 
                     <InputSettingsField
@@ -98,8 +98,8 @@ class TypologyModal extends Component {
                       name="maxCharacters"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Caràcters màxims"
-                      inputLabel="Indica el número màxim de caràcters"
+                      label="Caractères maximum"
+                      inputLabel="Indique le nombre maximum de caractères"
                     />
 
                     <InputSettingsField
@@ -107,8 +107,8 @@ class TypologyModal extends Component {
                       name="maxItems"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Número màxim d'elements"
-                      inputLabel="Indica el número màxim"
+                      label="Nombre maximum d'éléments"
+                      inputLabel="Indique le nombre maximum"
                     />
 
 
@@ -117,8 +117,8 @@ class TypologyModal extends Component {
                       name="minItems"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Número mínim d'elements"
-                      inputLabel="Indica el número mínim"
+                      label="Nombre minimum d'éléments"
+                      inputLabel="Indiquez le nombre minimum"
                     />
 
                     <InputSettingsField
@@ -126,8 +126,8 @@ class TypologyModal extends Component {
                       name="fieldHeight"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Alçada del camp"
-                      inputLabel="Indica la alçada en pixels"
+                      label="Hauteur du champ"
+                      inputLabel="Indique la hauteur en pixels"
                     />
 
                     <CheckboxesSettingsField
@@ -135,7 +135,7 @@ class TypologyModal extends Component {
                       name="typologiesAllowed"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Tipologies permeses"
+                      label="Typologies autorisées"
                       options={TYPOLOGIES}
                     />
 
@@ -144,7 +144,7 @@ class TypologyModal extends Component {
                       name="cropsAllowed"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
-                      label="Mides permeses"
+                      label="Tailles autorisées"
                       options={this.getCropsformats()}
                     />
 
@@ -168,7 +168,7 @@ class TypologyModal extends Component {
               </div>
 
               <div className="modal-footer">
-                <a href="" className="btn btn-default" onClick={this.props.onModalClose}> Tancar </a> &nbsp;
+                <a href="" className="btn btn-default" onClick={this.props.onModalClose}> Fermer </a> &nbsp;
                 {/*
                 <a href="" className="btn btn-primary"> Guardar </a>
                 */

@@ -35,11 +35,14 @@ class UpdateUrlsContent
         $languages->map(function($language) use ($content) {
             if(in_array($language->id, $content->languages->pluck('id')->toArray())) {
                 $slug = $content->getFullSlug($language->id);
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
                 if($slug) {
                     $content->urls()->create([
                         'language_id' => $language->id,
-                        'url' => '/' . $language->iso . '/' . $slug,
+                        'url' => $isMultiLanguage
+                            ? '/' . $language->iso . '/' . $slug
+                            : '/' . $slug
                     ]);
                 }
             }
@@ -51,11 +54,14 @@ class UpdateUrlsContent
             $languages->map(function($language) use ($descendant) {
                 if(in_array($language->id, $descendant->languages->pluck('id')->toArray())) {
                     $slug = $descendant->getFullSlug($language->id);
+                    $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
 
                     if($slug) {
                         $descendant->urls()->create([
                             'language_id' => $language->id,
-                            'url' => '/' . $language->iso . '/' . $slug
+                            'url' => $isMultiLanguage
+                                ? '/' . $language->iso . '/' . $slug
+                                : '/' . $slug
                         ]);
                     }
                 }
@@ -87,14 +93,42 @@ class UpdateUrlsContent
                  ->first();
 
             if($attr) {
-                $content->urls()->create([
-                    'language_id' => $language->id,
-                    'url' => sprintf('/%s/%s/%s',
-                       $language->iso,
-                       $attr->value, // Typology slug
-                       $content->getFieldValue('slug', $language->id) // Article slug
-                    )
-                ]);
+
+                $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+                $category = $content->categories()->first();
+
+                if($category != null ){
+                  $content->urls()->create([
+                      'language_id' => $language->id,
+                      'url' => $isMultiLanguage ?
+                          sprintf('/%s/%s/%s/%s',
+                           $language->iso,
+                           $attr->value, // Typology slug
+                           $category->getFieldValue('slug',$language->id),
+                           $content->getFieldValue('slug', $language->id))  // Article slug
+                         :
+                           sprintf('/%s/%s/%s',
+                            $attr->value, // Typology slug
+                            $category->getFieldValue('slug',$language->id),
+                            $content->getFieldValue('slug', $language->id))  // Article slug
+
+                  ]);
+                }
+                else {
+                  $content->urls()->create([
+                      'language_id' => $language->id,
+                      'url' => $isMultiLanguage ?
+                          sprintf('/%s/%s/%s',
+                           $language->iso,
+                           $attr->value, // Typology slug
+                           $content->getFieldValue('slug', $language->id))  // Article slug
+                         :
+                           sprintf('/%s/%s',
+                            $attr->value, // Typology slug
+                            $content->getFieldValue('slug', $language->id))  // Article slug
+
+                  ]);
+                }
             }
          }
 

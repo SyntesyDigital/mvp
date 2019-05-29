@@ -26,10 +26,14 @@ class CreateUrlsContent
         Language::getAllCached()->map(function($language) use ($content) {
             $url = $content->getFullSlug($language->id);
 
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+
             if($url) {
                 $content->urls()->create([
                     'language_id' => $language->id,
-                    'url' => '/' . $language->iso . "/" . $url
+                    'url' => $isMultiLanguage
+                        ? '/' . $language->iso . "/" . $url
+                        : "/" . $url
                 ]);
             }
         });
@@ -51,14 +55,53 @@ class CreateUrlsContent
         }
 
         foreach(Language::getAllCached() as $language) {
+
+            $isMultiLanguage = env('ARCHITECT_MULTI_LANGUAGE', true);
+
+            $category = $this->content->categories()->first();
+
+            if($category != null) {
+
+              if($isMultiLanguage) {
+                  $url = sprintf(
+                      '/%s/%s/%s/%s',
+                      $language->iso,
+                      $this->content->typology->getSlug($language->id),
+                      $category->getFieldValue('slug',$language->id),
+                      $this->content->getFieldValue('slug', $language->id)
+                  );
+              } else {
+                  $url = sprintf(
+                      '/%s/%s/%s',
+                      $this->content->typology->getSlug($language->id),
+                      $category->getFieldValue('slug',$language->id),
+                      $this->content->getFieldValue('slug', $language->id)
+                  );
+              }
+
+            }
+            else {
+              if($isMultiLanguage) {
+                  $url = sprintf(
+                      '/%s/%s/%s',
+                      $language->iso,
+                      $this->content->typology->getSlug($language->id),
+                      $this->content->getFieldValue('slug', $language->id)
+                  );
+              } else {
+                  $url = sprintf(
+                      '/%s/%s',
+                      $this->content->typology->getSlug($language->id),
+                      $this->content->getFieldValue('slug', $language->id)
+                  );
+              }
+            }
+
+
+
             $this->content->urls()->create([
                 'language_id' => $language->id,
-                'url' => sprintf(
-                    '/%s/%s/%s',
-                    $language->iso,
-                    $this->content->typology->getSlug($language->id),
-                    $this->content->getFieldValue('slug', $language->id)
-                ),
+                'url' => $url,
             ]);
         }
 

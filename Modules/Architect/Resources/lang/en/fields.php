@@ -32,6 +32,7 @@ return [
     'language'  => 'Language',
     'role'      => 'Role',
     'save'      => 'Save',
+    'cancel'    => 'Cancel',
     'actions'   => 'Actions',
     'new'       => 'New',
     'delete'    =>  'Delete',
@@ -100,6 +101,7 @@ return [
         'add_fields' => 'Add fields',
         'default_template' => 'Default template',
         'template' => 'Template',
-        'icon' => 'Icon'
+        'icon' => 'Icon',
+        'file_too_big' => 'File too big'
 
 ];

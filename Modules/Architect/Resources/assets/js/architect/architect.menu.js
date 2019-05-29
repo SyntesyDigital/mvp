@@ -22,7 +22,7 @@ architect.menu = {
             //serverSide: true,
     	      pageLength: 20,
             language: {
-                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
+                url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Catalan.json"
             },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -32,7 +32,7 @@ architect.menu = {
             initComplete: function(settings, json) {
                 DataTableTools.init(this, {
                     onDelete: function(response) {
-                        toastr.success(response.message, Lang.get('fields.success'), {timeOut: 3000});
+                        toastr.success(response.message, 'Success !', {timeOut: 3000});
                         _this.refresh();
                     }
                 });
@@ -96,11 +96,12 @@ architect.menu.form = {
         this.currentId = 1000; // FIXME que sea otro valor
 
 
+        /*
         $(document).on('click','.item-bar',function(e){
 
           var item = $(e.target).closest('.item-bar');
 
-          console.log("item-bar :: clicked!",item);
+          //console.log("item-bar :: clicked!",item);
 
           if(item.hasClass('collapsed')){
               //item.parent().find('ol').css({display:'block'});
@@ -113,6 +114,7 @@ architect.menu.form = {
             item.addClass('collapsed');
           }
         });
+        */
 
 
     },
@@ -126,7 +128,7 @@ architect.menu.form = {
 
         e.preventDefault();
 
-        console.log("architect.menu.form :: add-new-item",_this._editModal);
+        //console.log("architect.menu.form :: add-new-item",_this._editModal);
 
         if(_this._editModal !== undefined) {
             _this._editModal.modalOpen();
@@ -156,14 +158,14 @@ architect.menu.form = {
 
     refresh : function()
     {
-      console.log("architect.menu.form :: refresh");
+      //console.log("architect.menu.form :: refresh");
     },
 
     appendItem : function(item)
     {
         var classSelector = "";
 
-    		console.log("architect.menu :: appendItem => ",item);
+    		//console.log("architect.menu :: appendItem => ",item);
     		//console.log(item.parent_id);
 
         if(item.parent_id == null){
@@ -181,8 +183,8 @@ architect.menu.form = {
               '<div class="item-bar">'+
       	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+(item.name != null ? item.name : '')+'</span>'+
       	  			'<div class="actions">'+
-      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; '+ Lang.get('fields.edit')+'</a>&nbsp;'+
-      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; '+ Lang.get('fields.delete')+'</a>'+
+      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
+      		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
       		  		'</div>'+
               '</div>'+
     	  			'<ol class="category-container-'+item.id+'">'+
@@ -214,7 +216,7 @@ architect.menu.form = {
             var data = self.group.sortable("serialize").get();
             _super($item, container);
 
-            console.log("architect.menu.form :: Data => ",data)
+            //console.log("architect.menu.form :: Data => ",data)
         }
       });
 
@@ -226,7 +228,7 @@ architect.menu.form = {
 
       $.getJSON(routes.getData,function(data){
 
-        console.log("architect.menu :: loadData :: ",data);
+        //console.log("architect.menu :: loadData :: ",data);
 
     		//create tree
     		var items = data;
@@ -239,10 +241,10 @@ architect.menu.form = {
 
     createItem : function(field) {
 
-      console.log("createItem : "+field);
+      //console.log("createItem : "+field);
 
       var data = {
-      	"name": field.value.title['es'],
+      	"name": field.value.title[DEFAULT_LOCALE],
       	"id": this.currentId++,
       	"parent_id": null,
       	"order": null,
@@ -258,7 +260,7 @@ architect.menu.form = {
     editItem : function(item) {
 
       var itemId = item.attr('id').split('-')[1];
-      console.log("architect.menu editItem => ",itemId);
+      //console.log("architect.menu editItem => ",itemId);
 
       this._editModal.modalOpen(
         item.data('field'),
@@ -269,10 +271,10 @@ architect.menu.form = {
 
     updateItem : function(field,itemId) {
 
-      console.log("architect.menu.updateItem => ",field,itemId);
+      //console.log("architect.menu.updateItem => ",field,itemId);
 
       $("#menu-"+itemId).data('field',JSON.stringify(field));
-      $("#menu-"+itemId).find('#item-name').first().html(field.value.title['es']);
+      $("#menu-"+itemId).find('#item-name').first().html(field.value.title[DEFAULT_LOCALE]);
 
     },
 
@@ -280,7 +282,7 @@ architect.menu.form = {
     {
         var ajax = item.data('ajax');
 
-        architect.dialog.confirm( Lang.get('datatables.sure'), function(result){
+        architect.dialog.confirm("Estas segur ? ", function(result){
             if(result) {
 
                 var itemId = item.attr('id').split('-')[1];
@@ -328,7 +330,7 @@ architect.menu.form = {
         })
         .done(function(response) {
 
-            console.log("Response errors => ",response);
+            //console.log("Response errors => ",response);
 
             if(response.success) {
                 self.onSaveSuccess(response);
@@ -367,8 +369,6 @@ architect.menu.form = {
 
     onSaveSuccess : function(response)
     {
-
-
         toastr.success(Lang.get('fields.success'));
     },
 

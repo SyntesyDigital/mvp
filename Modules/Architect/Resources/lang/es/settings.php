@@ -7,5 +7,8 @@ return [
     'languages'   => 'Lenguajes',
     'translations'  => 'Traducciones',
     'menu'        => 'Menu',
-    'templates'   => 'Plantillas'
+    'templates'   => 'Plantillas',
+    'typologies' => 'Tipologies',
+    'models'      => 'Modelos',
+
 ];

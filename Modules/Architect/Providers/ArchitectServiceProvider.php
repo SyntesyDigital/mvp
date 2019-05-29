@@ -28,7 +28,6 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $router->aliasMiddleware('DetectUserLocale', \Modules\Architect\Http\Middleware\DetectUserLocale::class);
-
     }
 
     /**
@@ -63,10 +62,18 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../Config/elasticsearch.php', 'architect.elasticsearch');
         $this->mergeConfigFrom(__DIR__.'/../Config/images.php', 'images');
         $this->mergeConfigFrom(__DIR__.'/../Config/database.php', 'database.connections');
+        $this->mergeConfigFrom(__DIR__.'/../Config/settings.php', 'settings');
 
         // We really use-it ?
         $this->mergeConfigFrom(__DIR__.'/../Config/medias.php', 'medias');
         $this->mergeConfigFrom(__DIR__.'/../Config/fields.php', 'fields');
+
+        $this->mergeConfigFrom(__DIR__.'/../Config/menu.php', 'architect::menu');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/users.php',
+            'architect::settings.users'
+        );
     }
 
     /**
@@ -110,7 +117,7 @@ class ArchitectServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production')) {
+        if (!app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
     }

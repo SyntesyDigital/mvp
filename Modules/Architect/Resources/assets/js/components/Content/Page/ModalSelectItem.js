@@ -135,7 +135,7 @@ class ModalSelectItem extends Component {
 
     var fields = [];
 
-    var nonAllowed = [FIELDS["SLUG"].type,FIELDS["KEY_VALUES"].type,
+    var nonAllowed = [FIELDS["CONTENTS"].type,FIELDS["SLUG"].type,FIELDS["KEY_VALUES"].type,
       FIELDS["IMAGES"].type,FIELDS["BOOLEAN"].type,FIELDS["URL"].type];
 
     for( var key in FIELDS){
@@ -172,7 +172,7 @@ class ModalSelectItem extends Component {
           widgets.push(
             <div className="col-xs-4" key={key}>
               <a href="" onClick={this.addItem.bind(this,WIDGETS[key])}>
-                <div className="grid-item with-image" style={{backgroundImage:'url('+ASSETS+'modules/turisme/images/widgets/'+WIDGETS[key]['label'].toLowerCase()+'.jpg)'}}>
+                <div className="grid-item with-image" style={{backgroundImage:'url('+ASSETS+'modules/front/images/widgets/'+WIDGETS[key]['label'].toLowerCase()+'.jpg)'}}>
                   {/*<i className={"fa "+ WIDGETS[key].icon}></i>*/}
                   <p className="grid-item-name">
                     {WIDGETS[key].name}

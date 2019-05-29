@@ -36,6 +36,7 @@ return [
     'new'       => 'Nuevo',
     'delete'    =>  'Borrar',
     'add'       => 'Añadir',
+    'cancel'    => 'Cancelar',
     'name'      => 'Nombre',
     'tipus'     => 'Tipo',
     'updated'   => 'Actualizado',
@@ -100,5 +101,6 @@ return [
     'add_fields' => 'Agrega campos',
     'default_template' => 'Plantilla por defecto',
     'template' => 'Plantilla',
-    'icon' => 'Icono'
+    'icon' => 'Icono',
+    'file_too_big' => 'Archivo demasiado grande'
 ];

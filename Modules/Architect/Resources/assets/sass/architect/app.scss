@@ -9,6 +9,7 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 //@import "node_modules/react-select/dist/react-select.css";
 @import '~leaflet/dist/leaflet.css';
+@import '~font-awesome/scss/font-awesome';
 
 // Material Kit
 // https://www.creative-tim.com/product/material-kit
@@ -41,3 +42,5 @@
 
 @import 'menu';
 @import 'sortable';
+
+@import 'theme';

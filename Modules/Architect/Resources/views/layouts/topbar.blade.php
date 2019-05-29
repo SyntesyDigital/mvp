@@ -13,45 +13,7 @@
                 <div class="col-xs-8">
                   <nav class="main-nav">
                     <ul>
-
-                      <li class="{{ Request::is('architect') ? 'active' : '' }}">
-                        <a href="{{route('dashboard')}}">
-                        {{Lang::get('architect::header.home')}}
-                        </a>
-                      </li>
-
-                      <li class="{{ Request::is('architect/offers*') ||  Request::is('architect/candidates*')  ||  Request::is('architect/customers*') || Request::is('architect/tags*') ? 'active' : '' }}">
-                        <a href="{{route('rrhh.admin.offers.index')}}">
-                        {{Lang::get('architect::header.offers')}}
-                        </a>
-                      </li>
-
-                        @if(Auth::user()->hasRole(["admin"]))
-                      <li class="{{ Request::is('architect/typologies*') ? 'active' : '' }}">
-                        <a href="{{route('typologies')}}">
-                          {{Lang::get('architect::header.typology')}}
-                        </a>
-                      </li>
-                        @endif
-                      <li class="{{ Request::is('architect/contents*') ? 'active' : '' }}">
-                        <a href="{{route('contents')}}">
-                        {{Lang::get('architect::header.contents')}}
-                        </a>
-                      </li>
-
-                      <li class="{{ Request::is('architect/medias*') ? 'active' : '' }}">
-                        <a href="{{route('medias.index')}}">
-                          {{Lang::get('architect::header.media')}}
-                        </a>
-                      </li>
-
-                       @if(Auth::user()->hasRole(["admin"]))
-                      <li class="{{ Request::is('architect/settings*') ? 'active' : '' }}">
-                        <a href="{{route('settings')}}">
-                          {{Lang::get('architect::header.configuration')}}
-                        </a>
-                      </li>
-                      @endif
+                        @include('architect::partials.topbar-menu')
                     </ul>
                   </nav>
                 </div>

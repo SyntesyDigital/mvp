@@ -194,7 +194,7 @@
 
   .sidebar{
 
-    z-index:100;
+    z-index:400;
 
     border-left:1px solid #ccc;
     position: fixed;
@@ -202,7 +202,7 @@
     top:0px;
     right:0px;
     padding:20px;
-    margin-top: 130px;
+    margin-top: 135px;
     height: calc(100vh - 110px);
     overflow: scroll;
 

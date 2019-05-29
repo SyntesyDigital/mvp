@@ -12,61 +12,37 @@
 
       <div class="grid-items">
         <div class="row">
+           @foreach(config('settings') as $setting)
 
-            <div class="col-xs-3">
-                <a href="{{route('users')}}">
-                  <div class="grid-item">
-                      <i class="fa fa-users"></i>
-                      <p class="grid-item-name">
-                          {{Lang::get('architect::settings.users')}}
-                      </p>
-                  </div>
-                </a>
-            </div>
+              @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
+                <div class="col-xs-3">
+                    <a href="{{ route($setting["route"]) }}">
+                      <div class="grid-item">
+                          <i class="fa {{ $setting["icon"] }}"></i>
+                          <p class="grid-item-name">
+                              {{ $setting["label"] }}
+                          </p>
+                      </div>
+                    </a>
+                </div>
+              @endif
+            @endforeach() 
 
-            <div class="col-xs-3">
-                <a href="{{route('languages')}}">
-                  <div class="grid-item">
-                      <i class="fa fa-flag"></i>
-                      <p class="grid-item-name">
-                          {{Lang::get('architect::settings.languages')}}
-                      </p>
+            {{-- Plugins settings --}}
+            @foreach(config('architect::plugins.settings') as $setting)
+                @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
+                  <div class="col-xs-3">
+                      <a href="{{ route($setting["route"]) }}">
+                        <div class="grid-item">
+                            <i class="fa {{ $setting["icon"] }}"></i>
+                            <p class="grid-item-name">
+                                {{ $setting["label"] }}
+                            </p>
+                        </div>
+                      </a>
                   </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="{{route('translations')}}">
-                  <div class="grid-item">
-                      <i class="fa fa-list-alt"></i>
-                      <p class="grid-item-name">
-                          {{Lang::get('architect::settings.translations')}}
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="{{route('menu.index')}}">
-                  <div class="grid-item">
-                      <i class="fa fa-list"></i>
-                      <p class="grid-item-name">
-                          {{Lang::get('architect::settings.menu')}}
-                      </p>
-                  </div>
-                </a>
-            </div>
-
-            <div class="col-xs-3">
-                <a href="{{route('pagelayouts')}}">
-                  <div class="grid-item">
-                      <i class="fa fa-columns"></i>
-                      <p class="grid-item-name">
-                          {{Lang::get('architect::settings.templates')}}
-                      </p>
-                  </div>
-                </a>
-            </div>
+                @endif
+            @endforeach()
 
         </div>
       </div>

@@ -9,16 +9,53 @@
         ]); ?>
 
 
-        <input type="hidden" name="id" value="<?php echo e(isset($user->id) ? $user->id : ''); ?>" />
-        <input type="hidden" name="_method" value="<?php echo e(isset($user) ? 'PUT' : 'POST'); ?>">
+        <?php echo Form::hidden('id', isset($user) ? $user->id : null); ?>
+
+        <?php echo Form::hidden('_method', isset($user) ? 'PUT' : 'POST'); ?>
+
+
+        <?php echo Form::hidden('type', isset($user->candidate->type) && $user->candidate->type != '' ? $user->candidate->type : Modules\RRHH\Entities\Offers\Candidate::TYPE_NORMAL, [
+                'id' => 'type',
+            ]); ?>
+
+
+        <?php echo Form::hidden('old_status', isset($user) && $user->status, [
+                'id' => 'old_status',
+            ]); ?>
+
+
+        <?php echo Form::hidden('role_id', isset($role) ? $role->id : null , [
+                'id' => 'role_id',
+            ]); ?>
+
+
+        <?php echo Form::hidden('tags_edit', '1' ); ?>
+
+        <?php echo Form::hidden('docs_edit', '1' ); ?>
+
 
         <div class="page-bar">
           <div class="container">
             <div class="row">
               <div class="col-md-12">
-                <a href="<?php echo e(route('rrhh.admin.offers.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
-                <h1><i class="fa fa-newspaper-o"></i>&nbsp;Candidates</h1>
+
+                <a href="<?php echo e(route('rrhh.admin.candidates.index')); ?>" class="btn btn-default"> <i class="fa fa-angle-left"></i> </a>
+
+                <h1>
+                    <i class="fa fa-newspaper-o"></i>&nbsp;
+                    <?php if(isset($user)): ?>
+                        Edition du candidat <?php echo e($user->firstname); ?> <?php echo e($user->lastname); ?>
+
+                    <?php else: ?>
+                        Création d'un candidat
+                    <?php endif; ?>
+                </h1>
+
                 <div class="float-buttons pull-right">
+
+                  <?php if(isset($user)): ?>
+                    <a href="#headingcandidatures" class="btn btn-default"> <i class="fa fa-address-card"></i> &nbsp;<?php echo e($user->candidate->applications->count()); ?> Candidatures </a>
+                  <?php endif; ?>
 
                   <div class="actions-dropdown">
                       <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
@@ -36,17 +73,17 @@
 
                               </a>
                           </li-->
-                            <li>
-                              <a href="#" data-confirm-message="Tu es sûr ?" data-toogle="delete" data-ajax="<?php echo e(route('rrhh.admin.candidates.delete', $user->id)); ?>" class="text-danger">
+                          <?php if(isset($user)): ?>
+                          <li>
+                              <a href="#" data-redirect="<?php echo e(route('rrhh.admin.candidates.index')); ?>" data-ajax="<?php echo e(route('rrhh.admin.candidates.delete', $user)); ?>" data-confirm-message="<?php echo e(Lang::get('architect::datatables.sure')); ?>" data-toogle="delete" class="text-danger">
                                   <i class="fa fa-trash text-danger"></i>
                                   &nbsp;
                                   <span class="text-danger"><?php echo e(Lang::get('architect::fields.delete')); ?></span>
                               </a>
                           </li>
+                        <?php endif; ?>
                       </ul>
                     </div>
-
-
                   <a href="" class="btn btn-primary btn-submit-primary"> <i class="fa fa-cloud-upload"></i> &nbsp; Sauvegarder </a>
                 </div>
               </div>
@@ -55,318 +92,642 @@
         </div>
 
 
-          <div class="container rightbar-page">
+        <div class="container rightbar-page candidate-page">
 
-            <div class="col-md-9 page-content">
+            <div class="col-md-9 page-content  field-group">
 
-              <h3 class="card-title">Edition du candidat <?php echo e(isset($user) ? $user->full_name :''); ?></h3>
+              
 
-              <div class="form-group">
-                  <label for="civility">Civilité</label>
 
-                  <div class="radio" style="display: inline; margin-left:20px;">
-                      <label style="font-size: .8em">
-                           <input type="radio"  name="civility"  value="<?php echo e(Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE); ?>" <?php echo e(isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE  ?'checked':''); ?>>Monsieur
-                      </label>
-                      <label style="font-size: .8em">
-                          <input type="radio" name="civility" value="<?php echo e(Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE); ?>" <?php echo e(isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE  ?'checked':''); ?>>Madame
-                      </label>
+              <div id="headingtitle" class="btn btn-link" data-toggle="collapse" data-target="#collapsetitle" aria-expanded="true" aria-controls="collapsetitle">
+                <?php if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM): ?>
+                  <span class="field-name">Informations du intérimaire</span>
+                <?php else: ?>
+                  <span class="field-name">Informations du candidat</span>
+                <?php endif; ?>
+              </div>
+
+              <div id="collapsetitle" class="collapse in" aria-labelledby="headingtitle" aria-expanded="true" aria-controls="collapsetitle" style="">
+                <div class="field-form">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group <?php echo e($errors->has("civility") ? 'has-error' : ''); ?>">
+                              <label for="civility">Civilité</label>
+                              <div class="radio">
+                                  <label>
+                                      <?php if(isset($user) && $user->candidate->civility == Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE ): ?>
+                                        <?php
+                                          $arrayM = [];
+                                          $arrayF = ['checked' => 'checked'];
+                                        ?>
+                                      <?php else: ?>
+                                        <?php
+                                          $arrayM = ['checked' => 'checked'];
+                                          $arrayF = [];
+                                        ?>
+                                      <?php endif; ?>
+                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_MALE,$arrayM)); ?>
+
+                                      Monsieur
+                                  </label>
+
+                                  <label>
+                                      <?php echo e(Form::radio('civility', Modules\RRHH\Entities\Offers\Candidate::CIVILITY_FEMALE,$arrayF)); ?>
+
+                                      Madame
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="name">Nom</label>
-                  <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" value="<?php echo e(isset($user->lastname) ? $user->lastname : ''); ?>">
-              </div>
-              <div class="form-group">
-                  <label for="name">Prénom</label>
-                  <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="<?php echo e(isset($user->firstname) ? $user->firstname : ''); ?>">
-              </div>
 
-              <div class="form-group">
-                  <label for="name">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?php echo e(isset($user->email) ? $user->email : ''); ?>">
-              </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group <?php echo e($errors->has("firstname") ? 'has-error' : ''); ?>">
+                                        <?php echo Form::label("firstname", 'Prénom'); ?>
 
-              <div class="form-group">
-                  <label for="name">Mot de passe</label>
-                  <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="" value="<?php echo e(''); ?>">
-              </div>
-              <div class="form-group">
-                  <label for="name">Telephone</label>
-                  <input type="text" class="form-control" id="telephone" name="telephone" placeholder="" value="<?php echo e(isset($user->telephone) ? $user->telephone : ''); ?>">
-              </div>
+                                        <?php echo Form::text('firstname', isset($user) ? $user->firstname : null, [
+                                                'class' => 'form-control',
+                                                'id' => 'firstname',
+                                                'placeholder' => ''
+                                            ]); ?>
 
-              <div class="form-group">
-                  <?php echo Form::label('address', 'Adresse'); ?>
+                                    </div>
+                                </div>
 
-                  <?php echo Form::text('address', isset($user->candidate->address)? $user->candidate->address:'', [
-                          'class' => 'form-control',
-                          'id' => 'address'
-                      ]); ?>
+                                <div class="col-md-6">
+                                    <div class="form-group <?php echo e($errors->has("lastname") ? 'has-error' : ''); ?>">
+                                        <?php echo Form::label("lastname", 'Nom'); ?>
 
-              </div>
+                                        <?php echo Form::text('lastname', isset($user) ? $user->lastname : null, [
+                                                'class' => 'form-control',
+                                                'id' => 'lastname',
+                                                'placeholder' => ''
+                                            ]); ?>
 
-              <div class="form-group">
-                  <?php echo Form::label('postal_code', 'Code Postal'); ?>
+                                    </div>
+                                </div>
+                            </div>
 
-                  <?php echo Form::text('postal_code', isset($user->candidate->postal_code) ?$user->candidate->postal_code:'', [
-                          'class' => 'form-control',
-                          'id' => 'postal_code'
-                      ]); ?>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <?php echo Form::label('birthday', 'Date de naissance'); ?>
 
-              </div>
+                                        <?php if( isset($user) && $user->candidate->birthday != null): ?>
+                                            <?php
+                                                $date = explode('-',$user->candidate->birthday);
+                                                $date_formated = $date[2].'/'.$date[1].'/'.$date[0];
+                                            ?>
+                                        <?php endif; ?>
+                                        <?php echo Form::text('birthday', isset($user) && $user->candidate->birthday != null? $date_formated:'', [
+                                                'class' => 'form-control',
+                                                'id' => 'birthday',
+                                                'autocomplete' => 'off'
+                                            ]); ?>
 
-              <div class="form-group">
-                  <?php echo Form::label('location', 'Localité'); ?>
+                                    </div>
+                                </div>
 
-                  <?php echo Form::text('location', isset($user->candidate->location) ? $user->candidate->location:'', [
-                          'class' => 'form-control',
-                          'id' => 'location'
-                      ]); ?>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <?php echo Form::label('birthplace', 'Lieu de naissance'); ?>
 
-              </div>
+                                        <?php echo Form::text('birthplace', isset($user->candidate->birthplace) ? $user->candidate->birthplace:'', [
+                                                'class' => 'form-control',
+                                                'id' => 'birthplace'
+                                            ]); ?>
 
-              <div class="form-group">
-                  <?php echo Form::label('country', 'Pays'); ?>
+                                    </div>
+                                </div>
+                            </div>
 
-                  <?php echo $__env->make('rrhh::front.partials.countries', ['default' => isset($user->candidate->country) ? $user->candidate->country:null], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-              </div>
 
-              <div class="form-group">
-                  <?php echo Form::label('birthday', 'Date de naissance'); ?>
+                            <div class="form-group <?php echo e($errors->has("email") ? 'has-error' : ''); ?>">
+                                <?php echo Form::label('email', 'Email'); ?>
 
-                  <?php if( isset($user) && $user->candidate->birthday != null): ?>
-                      <?php
-                          $date = explode('-',$user->candidate->birthday);
-                          $date_formated = $date[2].'/'.$date[1].'/'.$date[0];
-                      ?>
-                  <?php endif; ?>
-                  <?php echo Form::text('birthday', isset($user) && $user->candidate->birthday != null? $date_formated:'', [
-                          'class' => 'form-control',
-                          'id' => 'birthday'
-                      ]); ?>
+                                <?php echo Form::text('email', isset($user) ? $user->email : null, [
+                                        'class' => 'form-control',
+                                        'id' => 'email',
+                                        'placeholder' => ''
+                                    ]); ?>
 
-              </div>
+                            </div>
 
-              <div class="form-group">
-                  <?php echo Form::label('birthplace', 'Ĺieu de naissance'); ?>
+                            <div class="form-group">
+                                <?php echo Form::label('telephone', 'Telephone'); ?>
 
-                  <?php echo Form::text('birthplace', isset($user->candidate->birthplace) ? $user->candidate->birthplace:'', [
-                          'class' => 'form-control',
-                          'id' => 'birthplace'
-                      ]); ?>
+                                <?php echo Form::text('telephone', isset($user) ? $user->telephone : null, [
+                                        'class' => 'form-control',
+                                        'id' => 'telephone',
+                                        'minlength' => '6',
+                                        'placeholder' => ''
+                                    ]); ?>
 
-              </div>
+                            </div>
 
-              <div class="form-group">
-                  <?php echo Form::label('comment', 'Commentaire'); ?>
+                            <div class="form-group">
+                                <?php echo Form::label('password', 'Mot de passe'); ?>
 
-                  <?php echo Form::textarea('comment',  isset($user->candidate->comment) ? $user->candidate->comment:'', [
-                          'class' => 'form-control',
-                          'rows' => 3,
-                          'id' => 'comment'
-                      ]); ?>
+                                <?php echo Form::password('password', [
+                                        'class' => 'form-control',
+                                        'id' => 'password',
+                                        'minlength' => 6,
+                                        'placeholder' => ''
+                                    ]); ?>
 
-              </div>
+                            </div>
 
-              <div class="form-group">
-                  <label for="status">Etat</label>
-                  <select name="status" id="status" class="form-control" >
-                      <option value="<?php echo e(App\Models\User::STATUS_ACTIVE); ?>" <?php if(isset($user)): ?> <?php if($user->status == App\Models\User::STATUS_ACTIVE): ?> selected <?php endif; ?> <?php endif; ?>>Actif</option>
-                      <option value="<?php echo e(App\Models\User::STATUS_INACTIVE); ?>" <?php if(isset($user)): ?> <?php if($user->status == App\Models\User::STATUS_INACTIVE): ?> selected <?php endif; ?> <?php endif; ?>>Désactivé</option>
-                  </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <?php echo Form::label('address', 'Adresse'); ?>
+
+                                <?php echo Form::text('address', isset($user->candidate->address)? $user->candidate->address:'', [
+                                        'class' => 'form-control',
+                                        'id' => 'address'
+                                    ]); ?>
+
+                            </div>
+
+                            <div class="form-group">
+                                <?php echo Form::label('postal_code', 'Code Postal'); ?>
+
+                                <?php echo Form::text('postal_code', isset($user->candidate->postal_code) ?$user->candidate->postal_code:'', [
+                                        'class' => 'form-control',
+                                        'id' => 'postal_code'
+                                    ]); ?>
+
+                            </div>
+
+                            <div class="form-group">
+                                <?php echo Form::label('location', 'Localité'); ?>
+
+                                <?php echo Form::text('location', isset($user->candidate->location) ? $user->candidate->location:'', [
+                                        'class' => 'form-control',
+                                        'id' => 'location'
+                                    ]); ?>
+
+                            </div>
+
+                            <div class="form-group">
+                                <?php echo Form::label('country', 'Pays'); ?>
+
+                                <?php echo Form::select(
+                                        'country',
+                                        config('rrhh.countries'),
+                                        'France',
+                                        [
+                                            'class' => 'form-control input-round',
+                                            'id' => 'country',
+                                            'placeholder' => ''
+                                        ]
+                                    ); ?>
+
+                            </div>
+                        </div>
+                    </div><!-- first block -->
+                  </div>
               </div>
 
               <?php if(isset($user)): ?>
+              <div id="headingmatricule" class="btn btn-link"  data-toggle="collapse" data-target="#collapsematricule" aria-expanded="true" aria-controls="collapsematricule">
+                <span class="field-name">Convertir en intérimaire</span>
+              </div>
+
+              <div id="collapsematricule" class="collapse in" aria-labelledby="headingmatricule" aria-expanded="true" aria-controls="collapsematricule" style="">
+                <div class="field-form">
                   <div class="form-group">
-                      <label for="registration_number" style="display: block;">Matricule</label>
-                      <?php if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM): ?>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <input type="text" class="form-control" id="registration_number" name="registration_number" value="<?php echo e($user->candidate->registration_number); ?>" >
-                              </div>
-                              <div class="col-sm-6">
-                                  <p>Intérimaire depuis le <?php echo e($user->candidate->registered_at); ?></p>
-                              </div>
+                      <label for="registration_number">Matricule</label>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <?php if(isset($user)): ?>
+                                  <?php echo e(Form::text('registration_number', isset($user) ? $user->candidate->registration_number : null, [
+                                          'class' => 'form-control',
+                                          'id' => 'registration_number'
+                                      ])); ?>
+
+                              <?php else: ?>
+                                  <?php echo e(Form::hidden('registration_number', '')); ?>
+
+                              <?php endif; ?>
                           </div>
-                      <?php else: ?>
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <input type="text" class="form-control" id="registration_number" name="registration_number" value="<?php echo e(isset($user->candidate->registration_number) ? $user->candidate->registration_number : ''); ?>" >
-                              </div>
-                              <div class="col-sm-6">
-                                  <input value="Convertir en intérimaire" type="button" class="btn btn-sm btn-primary pull-right convert_interimaire" />
-                              </div>
+
+                          <div class="col-sm-6">
+                                  <?php if($user->candidate->type == Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM): ?>
+                                       <p>Intérimaire depuis le <?php echo e($user->candidate->registered_at); ?></p>
+                                  <?php else: ?>
+                                      <input value="Convertir" type="button" class="btn btn-default convert_interimaire" />
+                                  <?php endif; ?>
                           </div>
-                      <?php endif; ?>
+                      </div>
                   </div>
-              <?php else: ?>
-                  <input type="hidden" name="registration_number" value="" >
+                </div>
+              </div>
               <?php endif; ?>
-              <input type="hidden" name="type" id="type" value="<?php echo e(isset($user->candidate->type) && $user->candidate->type!=''?$user->candidate->type:Modules\RRHH\Entities\Offers\Candidate::TYPE_NORMAL); ?>" >
 
-              <div class="form-group">
-                  <label for="name">C.V.</label>
+              <div id="headingcomment" class="btn btn-link" data-toggle="collapse" data-target="#collapsecomment" aria-expanded="true" aria-controls="collapsecomment">
+                <span class="field-name">Commentaire</span>
+              </div>
 
-                  <?php if(isset($user) && $user->candidate->resume_file != ''): ?>
-                      <?php $display_1 = 'display:none'; ?>
-                      <small class="filename-small" id="filename-p_1">
-                          <i class='fa fa-file'>
-                              <a href="/storage/candidates/<?php echo e($user->candidate->resume_file); ?>" target="_blank"><?php echo e($user->candidate->resume_file); ?></a>
-                          </i>
-                          <i class='fa fa-remove remove-file-click' onclick="deleteFile('1')"></i>
-                      </small>
-                  <?php else: ?>
-                      <?php $display_1 = ''; ?>
-                      <small class="filename-small" id="filename-p_1"></small>
-                  <?php endif; ?>
+              <div id="collapsecomment" class="collapse in" aria-labelledby="headingcomment" aria-expanded="true" aria-controls="collapsecomment" style="">
+                  <div class="field-form">
+                      <!-- Commentaire -->
+                      <div class="form-group">
+                          <?php echo Form::label('comment', 'Commentaire'); ?>
 
-                  <div class="medias-dropfiles medias-dropfiles_1 dz-div dz-div_1" style="<?php echo e($display_1); ?>">
-                      <p align="center">
-                          <strong>Déposez vos fichiers</strong> <br />
-                          <small>ou cliquez-ici</small>
-                      <p>
-                  </div>
-                  <div class="progress dz-div dz-div_1" style="<?php echo e($display_1); ?>">
-                      <div class="progress-bar progress-bar_1" role="progressbar" aria-valuenow="0"
-                      aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                      <span class="sr-only">70% Complete</span>
+                          <?php echo Form::textarea('comment',  isset($user->candidate->comment) ? $user->candidate->comment:'', [
+                                  'class' => 'form-control',
+                                  'rows' => 4,
+                                  'id' => 'comment'
+                              ]); ?>
+
                       </div>
                   </div>
               </div>
 
+              <?php if(isset($user)): ?>
+
+              <div id="headingrecherche" class="btn btn-link" data-toggle="collapse" data-target="#collapserecherche" aria-expanded="true" aria-controls="collapserecherche">
+                <span class="field-name">Votre recherche</span>
+              </div>
+
+              <div id="collapserecherche" class="collapse in" aria-labelledby="headingrecherche" aria-expanded="true" aria-controls="collapserecherche" style="">
+                  <div class="field-form">
+
+                      <div class="form-group">
+                          <?php echo Form::Label('contract_type', 'Vous cherchez un contrat : '); ?>
+
+                          <?php
+            								$list = Modules\RRHH\Entities\Tools\SiteList::where('identifier', 'contracts')->first();
+            								$contracts = collect(json_decode($list->value, true))->mapWithKeys(function ($item, $key) {
+            										return [$item['value'] => $item['name']];
+            								})->toArray();
+            							?>
+
+                          <ul>
+                          <?php $__currentLoopData = $contracts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                              <?php if($user->candidate->contract_type != "" && in_array($k,$user->candidate->contract_type)): ?>
+              								<li>
+              										<label>
+		                                   <?php echo e($v); ?>
+
+              										</label>
+              								</li>
+                              <?php endif; ?>
+              						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                          </ul>
+
+                      </div>
+
+                      <div class="form-group">
+                          <?php echo Form::Label('salary', 'Votre rénumération souhaitée : '); ?>
+
+                          <?php echo e($user->candidate->salary); ?>
+
+
+                      </div>
+
+                      <div class="form-group">
+                          <?php echo Form::Label('important_information', 'Informations importantes (contraintes horaires, géographiques...) : '); ?>
+
+                          <br/>
+                          <?php echo e($user->candidate->important_information); ?>
+
+
+                      </div>
+                  </div>
+
+
+              </div>
+
+
+
+              <div id="headingcandidatures" class="btn btn-link" data-toggle="collapse" data-target="#collapsecandidatures" aria-expanded="true" aria-controls="collapsecandidatures">
+                <span class="field-name">Candidatures</span>
+              </div>
+
+              <div id="collapsecandidatures" class="collapse in" aria-labelledby="headingcandidatures" aria-expanded="true" aria-controls="collapsecandidatures" style="">
+                  <div class="field-form">
+                      <table class="table" id="table-candidatures">
+                         <thead>
+                             <tr>
+                                 <th>Titre</th>
+                                 <th>Date de création</th>
+                                 <th>Etat</th>
+                                 <th></th>
+
+                             </tr>
+                         </thead>
+                         <tfoot>
+                             <tr>
+                                 <th></th>
+                                 <th></th>
+                                 <th></th>
+                                 <th></th>
+                             </tr>
+                         </tfoot>
+                     </table>
+                  </div>
+              </div>
+            <?php endif; ?>
+
+            <?php if(isset($user)): ?>
+
+                <div id="headingdocuments" class="btn btn-link" data-toggle="collapse" data-target="#collapseddocuments" aria-expanded="true" aria-controls="collapseddocuments">
+                  <span class="field-name">Documents</span>
+                </div>
+
+                <div id="collapseddocuments" class="collapse in" aria-labelledby="headingdocuments" aria-expanded="true" aria-controls="collapseddocuments" style="">
+                    <div class="field-form">
+                        <div id="candidate-documents"
+                          config="<?php echo e(base64_encode(json_encode([
+                              'type' => 'ajax',
+                              'route' => route('rrhh.admin.candidates.documents.data',$user->candidate()->first())
+                          ], true))); ?>"
+                        ></div>
+                    </div>
+                </div>
+              <?php endif; ?>
+          </div>
+
+          <div class="sidebar">
+
+              <!-- Status -->
               <div class="form-group">
+                  <?php echo Form::label('status', 'Etat'); ?>
+
+                  <?php echo Form::select('status',
+                          [
+                              App\Models\User::STATUS_ACTIVE => 'Actif',
+                              App\Models\User::STATUS_INACTIVE => 'Désactivé',
+                          ],
+                          isset($user) ? $user->status : null,
+                          [
+                              'class' => 'form-control',
+                              'id' => 'status'
+                          ]
+                      ); ?>
+
+              </div>
+
+              <?php if(isset($user)): ?>
+
+                  <hr/>
+
+                  <h3 class="card-title">Tags</h3>
+
+                  <?php echo Form::select(
+                          'tags[]',
+                          \Modules\RRHH\Entities\Tag::pluck('name', 'id'),
+                          isset($user->candidate->tags) ? $user->candidate->tags->pluck('id') : old('tags'),
+                          [
+                              'class' => 'form-control toggle-select2',
+                              'multiple' => 'multiple'
+                          ]
+                      ); ?>
+
+
+                  <div class="separator" style="height:20px;"></div>
+
+                  <!--
+
+                  <?php echo Form::open([
+                          'url' => route('rrhh.admin.candidates.updatetags', $user),
+                          'method' => 'POST'
+                          ]); ?>
+
+
+                  <h3 class="card-title">Tags</h3>
+                  <textarea type="text" name="tags" id="tags_fields" class="example" rows="1"></textarea>
+                  <input value="Sauvegarder" type="submit" class="btn btn-success pull-right" />
+
+                <?php echo Form::close(); ?>
+
+
+                -->
+
+              <?php endif; ?>
+
+
+              <hr />
+
+              <h3>Fichiers du candidat</h3>
+
+              <!-- Fichier CV -->
+              <div class="form-group file-form medias">
+                  <label for="name">C.V.</label>
+
+                  <?php if(isset($user) && $user->candidate->resume_file != ''): ?>
+                    <div class="file-wrapper" id="filename-p_1">
+                      <small class="filename-small" >
+
+                          <a href="/storage/candidates/<?php echo e($user->candidate->resume_file); ?>" target="_blank">
+                            <i class='fa fa-download'></i> &nbsp;
+                            <?php echo e($user->candidate->resume_file); ?>
+
+                          </a>
+
+                          <a href="#" class="btn btn-link text-danger" onclick="deleteFile('1')">
+                            <i class='fa fa-trash remove-file-click'></i> Supprimier
+                          </a>
+                      </small>
+                    </div>
+                  <?php else: ?>
+                      <small class="filename-small" id="filename-p_1"></small>
+                  <?php endif; ?>
+
+                  <div class="medias-dropfiles medias-dropfiles_1 dz-div dz-div_1" style="<?php echo e(isset($user) && $user->candidate->resume_file != '' ? 'display:none' : null); ?>">
+                      <p align="center">
+                          <strong>Déposez vos fichiers</strong> <br />
+                          <small>ou cliquez-ici</small>
+                      <p>
+                  </div>
+                  <div class="progress dz-div dz-div_1" style="<?php echo e(isset($user) && $user->candidate->resume_file != '' ? 'display:none' : null); ?>">
+                      <div class="progress-bar progress-bar_1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                          <span class="sr-only">70% Complete</span>
+                      </div>
+                  </div>
+
+                  <?php echo Form::hidden('resume_file', isset($user) ? $user->candidate->resume_file : null, [
+                          'id' => 'resume_file'
+                      ]); ?>
+
+
+              </div>
+
+              <!-- Fichier Lettre de recommandation -->
+              <div class="form-group file-form">
                   <label for="name">Lettre de recommandation</label>
 
                   <?php if(isset($user) && $user->candidate->recommendation_letter != ''): ?>
-                      <?php $display_2 = 'display:none'; ?>
-                      <small class="filename-small" id="filename-p_2">
-                          <i class='fa fa-file'>
-                              <a href="/storage/candidates/<?php echo e($user->candidate->recommendation_letter); ?>" target="_blank"><?php echo e($user->candidate->recommendation_letter); ?></a>
-                          </i>
-                          <i class='fa fa-remove remove-file-click' onclick="deleteFile('2')"></i>
-                      </small>
-                  <?php else: ?>
-                      <?php $display_2 = ''; ?>
-                      <small class="filename-small" id="filename-p_2"></small>
+                    <div class="file-wrapper" id="filename-p_2">
+                      <small class="filename-small" >
 
+                          <a href="/storage/candidates/<?php echo e($user->candidate->recommendation_letter); ?>" target="_blank">
+                            <i class='fa fa-download'></i> &nbsp;
+                            <?php echo e($user->candidate->recommendation_letter); ?>
+
+
+                          </a>
+                          <a href="#" class="btn btn-link text-danger" onclick="deleteFile('2')">
+                            <i class='fa fa-trash remove-file-click'></i> Supprimier
+                          </a>
+                      </small>
+                    </div>
+                  <?php else: ?>
+                      <small class="filename-small" id="filename-p_2"></small>
                   <?php endif; ?>
 
-                  <div class="medias-dropfiles medias-dropfiles_2 dz-div dz-div_2" style="<?php echo e($display_2); ?>">
+                  <div class="medias-dropfiles medias-dropfiles_2 dz-div dz-div_2" style="<?php echo e(isset($user) && $user->candidate->recommendation_letter != '' ? 'display:none' : null); ?>">
                       <p align="center">
                           <strong>Déposez vos fichiers</strong> <br />
                           <small>ou cliquez-ici</small>
                       <p>
                   </div>
 
-                  <div class="progress dz-div dz-div_2" style="<?php echo e($display_2); ?>">
-                    <div class="progress-bar progress-bar_2" role="progressbar" aria-valuenow="0"
-                      aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                      <span class="sr-only">70% Complete</span>
-                    </div>
+                  <div class="progress dz-div dz-div_2" style="<?php echo e(isset($user) && $user->candidate->recommendation_letter != '' ? 'display:none' : null); ?>">
+                      <div class="progress-bar progress-bar_2" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                          <span class="sr-only">70% Complete</span>
+                      </div>
                   </div>
-                  <small id="filename-p_2"></small>
-              </div>
-              <input type="hidden" id="resume_file" name="resume_file" value="<?php echo e(isset($user->candidate->resume_file) ? $user->candidate->resume_file : ''); ?>" >
-              <input type="hidden" id="recommendation_letter" name="recommendation_letter" value="<?php echo e(isset($user->candidate->recommendation_letter) ? $user->candidate->recommendation_letter : ''); ?>" >
-              <input type="hidden" name="old_status" id="old_status" value="<?php echo e(isset( $user) && $user->status == App\Models\User::STATUS_ACTIVE ? App\Models\User::STATUS_ACTIVE:App\Models\User::STATUS_INACTIVE); ?>" />
-              <input type="hidden" name="role_id" id="role_id" value="<?php echo e(App\Models\Role::where('name','candidate')->first()->id); ?>" />
-          </div>
 
-          <div class="sidebar">
-          <?php if(isset($user)): ?>
+                  <?php echo Form::hidden('recommendation_letter', isset($user) ? $user->candidate->recommendation_letter : null, [
+                          'id' => 'recommendation_letter'
+                      ]); ?>
 
-          <?php echo Form::open([
-                  'url' => route('rrhh.admin.candidates.updatetags', $user),
-                  'method' => 'POST'
-                  ]); ?>
 
-              <div class="card" style="margin-bottom:30px;">
-                  <div class="card-body">
-                      <h3 class="card-title">Tags</h3>
-                      <textarea type="text" name="tags"  id="textarea" class="example" rows="1"></textarea>
-                      <input value="Sauvegarder" type="submit" class="btn btn-success pull-right" />
-                  </div>
               </div>
 
-              <h3 class="card-title">Candidatures</h3>
-
-              <table class="table" id="table-candidatures">
-                 <thead>
-                     <tr>
-                         <th>Titre</th>
-                         <th>Date de création</th>
-                         <th>Etat</th>
-                     </tr>
-                 </thead>
-                 <tfoot>
-                     <tr>
-                         <th></th>
-                         <th></th>
-                         <th></th>
-                     </tr>
-                 </tfoot>
-             </table>
-          <?php echo e(Form::close()); ?>
+        <?php echo Form::close(); ?>
 
 
-          <?php endif; ?>
-        </div>
+        <div class="separator" style="height:50px;"></div>
+
 
         </div>
 
-    <?php echo e(Form::close()); ?>
-
-
-
+    </div>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('javascripts-libs'); ?>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"></link>
+    <!-- Datatables -->
+    <?php echo e(Html::style('/modules/rrhh/plugins/datatables/datatables.min.css')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/plugins/datatables/datatables.min.js')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/js/libs/dialog.js')); ?>
+
+
+    <!-- Toastr -->
+    <?php echo e(Html::style('/modules/rrhh/plugins/toastr/toastr.min.css')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/plugins/toastr/toastr.min.js')); ?>
+
+
+    <!-- Dropzone -->
+    <?php echo e(Html::script('/modules/rrhh/plugins/dropzone/dropzone.js')); ?>
+
+
+    <!-- Select2 -->
+    <?php echo e(Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')); ?>
+
+    <?php echo e(Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js')); ?>
+
+
 <?php $__env->stopPush(); ?>
 
 
 <?php $__env->startPush('javascripts'); ?>
-    <?php echo e(Html::script('/js/admin/content/contents/vendors/dropzone/dropzone.js')); ?>
+
+    <?php echo e(Html::script('/modules/rrhh/js/admin/users/candidatesform.js')); ?>
+
 
 
     <script>
+        var routes = {
+            data : '<?php echo e(isset($user) ? route("rrhh.admin.candidates.applications.data",  $user) : null); ?>',
+            uploads : {
+                resumeFile : '<?php echo e(route('rrhh.admin.candidates.filestore')); ?>',
+                recommendationLetterFile : '<?php echo e(route('rrhh.admin.candidates.filestore')); ?>',
+             }
+        };
+
         var inactive_value = '<?php echo e(App\Models\User::STATUS_INACTIVE); ?>';
         var type_interim_value = '<?php echo e(Modules\RRHH\Entities\Offers\Candidate::TYPE_INTERIM); ?>';
         var csrf_token = "<?php echo e(csrf_token()); ?>";
-        var routes = '';
         var utags = [];
         var atags = [];
 
-        $(document).on('click', ".btn-submit-primary", function(e){
-            e.preventDefault();
-            this.closest('form').submit()
+        $(document).ready(function() {
+
+            $('.toggle-select2').select2();
+            $("#birthday").datepicker({format: "dd/mm/yyyy"});
+
+            $(document).on('click', ".btn-submit-primary", function(e){
+                e.preventDefault();
+                this.closest('form').submit();
+            });
+
+            <?php if(isset($user)): ?>
+
+                <?php $__currentLoopData = $userTags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ut): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    utags.push('<?php echo e($ut); ?>');
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                <?php $__currentLoopData = $allTAgs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $at): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    atags.push('<?php echo e($at); ?>');
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+
+            $(document).on('click','[data-toogle="delete"]',function(e){
+                e.preventDefault();
+                var el = $(e.target).closest('[data-toogle="delete"]');
+
+                var ajax = el.data('ajax');
+                var redirect = el.data('redirect');
+                var confirmMessage = el.data('confirm-message');
+
+                dialog.confirm(confirmMessage, function(result){
+                    if(result) {
+
+                        if(ajax) {
+                            $.ajax({
+                                method: 'DELETE',
+                                url: ajax,
+                                data: {
+                                    _token: $('meta[name="csrf-token"]').attr('content'),
+                                }
+                            })
+                            .done(function(response) {
+                                if(response.success) {
+                                    toastr.success(response.message, 'Succès !', {timeOut: 3000});
+
+                                    if(redirect) {
+                                        window.location = redirect;
+                                        return;
+                                    }
+
+                                } else {
+                                    toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                                }
+                            }).fail(function(response){
+                                toastr.error(response.message, 'Erreur !', {timeOut: 3000});
+                            });
+                            return;
+                        }
+                    }
+                });
+
+            });
+
         });
     </script>
 
-    <?php if(isset($user)): ?>
-        <script>
-            var routes = {
-                data : '<?php echo e(route("rrhh.admin.candidates.applications.data",  $user)); ?>',
-            };
-             <?php $__currentLoopData = $userTags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ut): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                utags.push('<?php echo e($ut); ?>');
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php $__currentLoopData = $allTAgs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $at): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                atags.push('<?php echo e($at); ?>');
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </script>
-    <?php endif; ?>
-
-    <?php echo e(Html::script('/js/textext.core.js')); ?>
-
-    <?php echo e(Html::script('/js/textext.plugin.autocomplete.js')); ?>
-
-    <?php echo e(Html::script('/js/textext.plugin.tags.js')); ?>
-
-    <?php echo e(Html::script('/js/admin/users/candidatesform.js')); ?>
 
 <?php $__env->stopPush(); ?>
 

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'hello' => 'Bonjour',
+    'hello'         => 'Bonjour',
     'home'          => 'Accueil',
     'typology'      => 'Typologie',
     'contents'      => 'Contenu',
@@ -9,5 +9,4 @@ return [
     'configuration' => 'Configuration',
     'my_profile'    => 'Mon profil',
     'disconnect'    => 'Déconnecter',
-    'offers'        => 'Offres'
 ];

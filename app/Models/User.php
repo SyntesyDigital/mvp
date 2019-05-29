@@ -10,7 +10,7 @@ use Modules\Architect\Traits\ImageUpload;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 use Acoustep\EntrustGui\Contracts\HashMethodInterface;
-use Modules\RRHH\Entities\Offers\Candidate;
+use Modules\Extranet\Entities\Offers\Candidate;
 use App\Notifications\MailResetPasswordToken;
 use Esensi\Model\Contracts\ValidatingModelInterface;
 use Esensi\Model\Traits\ValidatingModelTrait;
@@ -36,7 +36,9 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $imagesUpload = ['image'];
+    protected $imagesUpload = [
+        'image'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +54,7 @@ class User extends Authenticatable
         'image',
         'language',
         'status',
+        'linkedin_id'
     ];
 
     protected $hashable = [
@@ -86,23 +89,32 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\Role', 'role_user', 'user_id', 'role_id');
+        return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
     }
 
+
+    // FIXME : Use traits :)
     public function agences()
     {
-        return $this->belongsToMany('Modules\RRHH\Entities\Agence', 'agence_user', 'user_id', 'agence_id');
+        return $this->belongsToMany('Modules\Extranet\Entities\Agence', 'agence_user', 'user_id', 'agence_id');
     }
 
     public function candidate()
     {
-        return $this->hasOne('Modules\RRHH\Entities\Offers\Candidate');
+        return $this->hasOne('Modules\Extranet\Entities\Offers\Candidate');
     }
+
+    public function customer()
+     {
+         return $this->belongsToMany('Modules\Extranet\Entities\Customer', 'customers_users', 'user_id', 'customer_id');
+     }
 
     public function offers()
     {
-        return $this->hasMany('Modules\RRHH\Entities\Offers\Offer', 'recipient_id', 'id');
+        return $this->hasMany('Modules\Extranet\Entities\Offers\Offer', 'recipient_id', 'id');
     }
+
+    //
 
     /**
      * Get the user's full name.
@@ -149,8 +161,9 @@ class User extends Authenticatable
         $this->notify(new MailResetPasswordToken($token));
     }
 
-    public function is($role) {
-        if($role == $this->roles) {
+    public function is($role)
+    {
+        if ($role == $this->roles) {
             return true;
         }
         return false;

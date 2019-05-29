@@ -9,11 +9,14 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Auth;
 use Modules\Architect\Http\Requests\SaveContent;
 
+use Modules\Extranet\Repositories\BobyRepository;
+
+use App\Jobs\Login;
+
 class ArchitectController extends Controller
 {
     public function index()
     {
-
         return view('architect::index');
     }
 
