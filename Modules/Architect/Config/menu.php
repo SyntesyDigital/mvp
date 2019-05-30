@@ -11,15 +11,6 @@ return [
     ],
 
     [
-        "route" => 'extranet.extranet.index',
-        "label" => 'extranet::header.extranet',
-        "patterns" => [
-            'architect/extranet*',
-        ],
-        "roles" => []
-    ],
-
-    [
         "route" => 'contents',
         "label" => 'architect::header.contents',
         "patterns" => [
