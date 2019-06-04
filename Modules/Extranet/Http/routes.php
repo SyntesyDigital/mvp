@@ -28,4 +28,22 @@ Route::group([
     Route::delete('/sitelists/{sitelist?}/delete', 'Admin\SiteListController@delete')->name('extranet.admin.sitelists.delete');
 
 
+    // Elements
+    Route::get('/elements', 'ElementController@index')->name('extranet.elements.index');
+    Route::get('/elements/{element_type}', 'ElementController@type_index')->name('extranet.elements.type_index');
+    Route::get('/elements/create/{element_type}/{model_id}/{model_title}/{model_ws}/{model_param}/{model_icon}', 'ElementController@create')->name('extranet.element.create');
+    Route::get('/elements/{id}/show', 'ElementController@show')->name('extranet.elements.show');
+    Route::post('/elements/store', 'ElementController@store')->name('extranet.elements.store');
+    Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');
+    Route::delete('/elements/{element}/delete', 'ElementController@delete')->name('extranet.elements.delete');
+
+    // Routes Parameters
+    Route::get('/routes_parameters', 'RouteParameterController@index')->name('extranet.routes_parameters.index');
+    Route::get('/routes_parameters/data', 'RouteParameterController@data')->name('extranet.routes_parameters.data');
+    Route::get('/routes_parameters/create', 'RouteParameterController@create')->name('extranet.routes_parameters.create');
+    Route::get('/routes_parameters/{route_parameter}/show', 'RouteParameterController@show')->name('extranet.routes_parameters.show');
+    Route::post('/routes_parameters/store', 'RouteParameterController@store')->name('extranet.routes_parameters.store');
+    Route::put('/routes_parameters/{route_parameter}/update', 'RouteParameterController@update')->name('extranet.routes_parameters.update');
+    Route::delete('/routes_parameters/{route_parameter}/delete', 'RouteParameterController@delete')->name('extranet.routes_parameters.delete');
+
 });

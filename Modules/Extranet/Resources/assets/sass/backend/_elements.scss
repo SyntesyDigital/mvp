@@ -1,0 +1,10 @@
+.grid-items{
+	.dashed{
+		a{
+			.grid-item{
+				border: 1px dashed #ccc;
+				background-color: transparent;
+			}
+		}
+	}
+}

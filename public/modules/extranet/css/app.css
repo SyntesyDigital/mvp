@@ -124,6 +124,11 @@ li {
   text-align: left;
 }
 
+.grid-items .dashed a .grid-item {
+  border: 1px dashed #ccc;
+  background-color: transparent;
+}
+
 .sitelist .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;

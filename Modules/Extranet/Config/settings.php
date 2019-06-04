@@ -1,11 +1,11 @@
 <?php
 
-return [
+return [/*
     [
         "route" => 'extranet.admin.sitelists.index',
         "icon" => "fa-reorder",
         "label" => Lang::get('extranet::settings.list'),
-    ],
+    ], */
 
 
     // [

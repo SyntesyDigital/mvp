@@ -10,6 +10,28 @@ class Element extends Model
 {
     use HasUrl;
 
+    const TYPES = [
+        'form' => [
+            'name' => 'Formulaire',
+            'identifier' => 'form',
+            'icon' => 'fa fa-list-alt',
+            'WS_NAME' => 'WS_EXT2_DEF_FC' /* AQUEST NO ES CORRECTE, FALTA*/
+        ],
+        'table' => [
+            'name' => 'Tableau',
+            'identifier' => 'table',
+            'icon' => 'fa fa-table',
+            'WS_NAME' => 'WS_EXT2_DEF_TB'
+        ],
+        'file' => [
+            'name' => 'Fiche',
+            'identifier' => 'file',
+            'icon' => 'fa fa-columns',
+            'WS_NAME' => 'WS_EXT2_DEF_FC'
+        ],
+    ];
+
+
     /**
      * The database table used by the model.
      *

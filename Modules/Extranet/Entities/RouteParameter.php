@@ -5,7 +5,7 @@ namespace Modules\Extranet\Entities;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Element extends Model
+class RouteParameter extends Model
 {
 
     /**

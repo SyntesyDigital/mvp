@@ -18379,13 +18379,13 @@ nav.main-nav ul li.active a {
 }
 
 .custom-modal.model-modal .modal-container .modal-content .container .table .first-column {
-  text-align: center;
-  width: 120px;
+  text-align: left;
+  overflow: hidden;
 }
 
 .custom-modal.model-modal .modal-container .modal-content .container .table .second-column {
-  overflow: hidden;
-  text-align: right;
+  text-align: center;
+  width: 120px;
 }
 
 .custom-modal.model-modal .modal-container .modal-content .container .table .table-header {
@@ -18398,8 +18398,8 @@ nav.main-nav ul li.active a {
   border-bottom: 1px solid #B9B9B9;
 }
 
-.custom-modal.model-modal .modal-container .modal-content .container .table .table-row .first-column {
-  float: left;
+.custom-modal.model-modal .modal-container .modal-content .container .table .table-row .second-column {
+  float: right;
 }
 
 .custom-modal.model-modal .modal-container .modal-content .container .table .table-row .second-column a {
