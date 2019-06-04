@@ -19,8 +19,8 @@ class Login
 
     public function __construct()
     {
-        $this->uid = 'EXTRANET';
-        $this->passwd = 'EXT01';
+        $this->uid = 'MSN';
+        $this->passwd = 'MSN';
     }
 
     public function handle()
@@ -38,8 +38,6 @@ class Login
                     'passwd' => $this->passwd
                 ]
             ]);
-
-
 
             if ($login) {
 
