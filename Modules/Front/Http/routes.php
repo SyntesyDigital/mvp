@@ -2,7 +2,7 @@
 
 //Route::get('sitemap.xml', 'Modules\Front\Http\Controllers\SitemapController@sitemap')->name('sitemap');
 
-/*
+
 Route::group([
   'prefix' => LaravelLocalization::setLocale(),
   'middleware' => ['web','auth:veos-ws','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
@@ -32,4 +32,3 @@ Route::group([
       ->where('slug', '([A-Za-z0-9\-\/]+)')
       ->name('content.show');
 });
-*/

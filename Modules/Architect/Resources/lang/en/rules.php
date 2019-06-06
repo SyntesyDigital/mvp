@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'error' => 'Error! One or more fields are empty or with an incorrect value.',
     'required' => 'Field is empty !',
     'maxCharacters' => 'Max reached',
     'minCharacters' => 'Max reached',

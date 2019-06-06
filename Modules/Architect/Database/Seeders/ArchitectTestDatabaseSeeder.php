@@ -6,9 +6,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
 use Modules\Architect\Entities\Language;
+use Modules\Architect\Entities\Typology;
 use App\Models\Permission;
 
-class ArchitectDatabaseSeeder extends Seeder
+class ArchitectTestDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -31,6 +32,7 @@ class ArchitectDatabaseSeeder extends Seeder
             'name' => 'English',
             'iso' => 'en'
         ]);
+
 
         Model::unguard();
 

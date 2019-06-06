@@ -21,8 +21,6 @@ use Modules\Architect\Jobs\Tag\DeleteTag;
 // Models
 use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\Typology;
-use App\Models\User;
-use App\Models\Role;
 use Lang;
 
 class TagController extends Controller

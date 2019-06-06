@@ -13,13 +13,13 @@
 
         <!-- Global style -->
         <link rel="stylesheet" media="all" href="{{ asset('modules/architect/css/app.css')}}" />
-        <link rel="stylesheet" media="all" href="{{ asset('modules/extranet/css/app.css')}}" />
+        <link rel="stylesheet" media="all" href="{{ asset('modules/rrhh/css/app.css')}}" />
+        <link rel="stylesheet" media="all" href="{{ asset('modules/documents/css/app.css')}}" />
 
         <!-- Fonts -->
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">-->
 
         @include('architect::layouts.jsconst')
-        @include('extranet::layouts.jsconst')
 
         <!-- Jquery -->
         <script src="{{ asset('modules/architect/plugins/jquery/jquery-3.2.1.min.js') }}"></script>
@@ -79,7 +79,8 @@
 
         <!-- App -->
         <script src="{{ asset('modules/architect/js/app.js') }}" defer></script>
-        <script src="{{ asset('modules/extranet/js/app.js') }}" defer></script>
+        <script src="{{ asset('modules/rrhh/js/app.js') }}" defer></script>
+        <script src="{{ asset('modules/documents/js/app.js') }}" defer></script>
 
         @stack('stylesheets')
 

@@ -27,7 +27,7 @@
               <div class="grid-items">
                 <div class="row">
 
-                    @if(Auth::user()->hasRole(["admin", "editor"]))
+                    @if(has_roles([ROLE_ADMIN]))
                   <div class="col-xs-3">
                     <a href="{{route('contents.page.create')}}">
                       <div class="grid-item">

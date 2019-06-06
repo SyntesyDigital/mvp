@@ -12,9 +12,9 @@
 
       <div class="grid-items">
         <div class="row">
-           @foreach(config('settings') as $setting)
+            @foreach(config('settings') as $setting)
 
-              @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
+              @if(empty($item['roles']) || has_roles([$item['roles']]))
                 <div class="col-xs-3">
                     <a href="{{ route($setting["route"]) }}">
                       <div class="grid-item">
@@ -26,11 +26,11 @@
                     </a>
                 </div>
               @endif
-            @endforeach() 
+            @endforeach()
 
             {{-- Plugins settings --}}
             @foreach(config('architect::plugins.settings') as $setting)
-                @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
+                @if(empty($item['roles']) || has_roles([$item['roles']]))
                   <div class="col-xs-3">
                       <a href="{{ route($setting["route"]) }}">
                         <div class="grid-item">

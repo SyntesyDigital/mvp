@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 
 use Modules\Architect\Repositories\MenuRepository;
 
-use App\Models\User;
 use Auth;
 use Session;
 

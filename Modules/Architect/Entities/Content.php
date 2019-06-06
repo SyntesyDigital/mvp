@@ -96,16 +96,6 @@ class Content extends Model
         return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'content_id', 'category_id');
     }
 
-    public function parameters()
-    {
-        return $this->belongsToMany('\Modules\Extranet\Entities\RouteParameter', 'contents_routes_parameters',  'content_id', 'route_parameter_id');
-    }
-
-    public function author()
-    {
-        return $this->hasOne('App\Models\User', "id", "author_id");
-    }
-
     public function page()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
@@ -113,7 +103,12 @@ class Content extends Model
 
     public function parent()
     {
-    	return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
+    	  return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
+    }
+
+    public function isStatusPublished()
+    {
+        return $this->status == self::STATUS_PUBLISHED;
     }
 
     public function getStringStatus()

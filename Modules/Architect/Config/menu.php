@@ -20,6 +20,15 @@ return [
     ],
 
     [
+        "route" => 'medias.index',
+        "label" => 'architect::header.media',
+        "patterns" => [
+            'architect/medias*'
+        ],
+        "roles" => ['admin']
+    ],
+
+    [
         "route" => 'settings',
         "label" => 'architect::header.configuration',
         "patterns" => [

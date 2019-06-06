@@ -43,11 +43,6 @@ class Media extends Model
      */
     protected $hidden = [];
 
-    public function author()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'author_id');
-    }
-
     public function getMetaJSON()
     {
         return json_encode($this->metadata);

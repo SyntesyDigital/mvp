@@ -19,5 +19,9 @@ return [
 
         'index' => env('ELASTICSEARCH_INDEX', 'architect')
     ],
-    'fallback_language' => 'ca'
+    'fallback_language' => 'ca',
+
+    'aliases' => [
+        'Datatables' => Yajra\DataTables\Facades\DataTables::class,
+    ]
 ];

@@ -26,7 +26,7 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              {{Lang::get('architect::header.hello')}} {{Auth::user()->firstname}},
+                              {{Lang::get('architect::header.hello')}} {{Auth::user()->lastname}},
                               <b class="caret"></b>
                               <div class="ripple-container"></div>
                             </a>

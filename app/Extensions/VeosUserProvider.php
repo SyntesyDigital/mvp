@@ -14,15 +14,13 @@ class VeosUserProvider implements UserProvider {
 
     public function __construct()
     {
+
        if($this->user()) {
 
            switch($this->user()->role) {
-               case ROLE_CORRESPONDANT:
-               case ROLE_CLIENT_INTERNATIONAL:
-               case ROLE_DIRECTION_BUREAU:
-               case ROLE_HOLDING:
-               case ROLE_COURTIER_MASTER:
-               case ROLE_CLIENT_LOCAL:
+               case ROLE_ADMIN:
+               case ROLE_AUTHOR:
+               case ROLE_EDITOR:
                     break;
 
                 default:

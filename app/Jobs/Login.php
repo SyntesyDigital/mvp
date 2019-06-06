@@ -12,6 +12,8 @@ use Lang;
 use Auth;
 use Config;
 
+use App\Http\Requests\LoginRequest;
+
 use App\Extensions\VeosWsUrl;
 
 class Login
@@ -68,6 +70,8 @@ class Login
                 ]
             ]);
 
+
+
             if ($login) {
 
                 $loginResult = json_decode($login->getBody()->getContents());
@@ -94,7 +98,9 @@ class Login
                         'phone' => isset($user->tel) ? $user->tel : null,
                         'token' => $loginResult->token,
                         'testMode' => $this->testMode,
-                        'recMode' => $this->recMode
+                        'recMode' => $this->recMode,
+                        'role' => ROLE_ADMIN,  //TODO set different roles,
+                        'language' => 'fr'
                     ];
 
                     Session::put('user', json_encode($userData));

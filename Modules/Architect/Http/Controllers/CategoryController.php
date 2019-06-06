@@ -24,8 +24,6 @@ use Modules\Architect\Jobs\Category\UpdateCategoryOrder;
 // Models
 use Modules\Architect\Entities\Category;
 use Modules\Architect\Entities\Typology;
-use App\Models\User;
-use App\Models\Role;
 use Lang;
 
 class CategoryController extends Controller

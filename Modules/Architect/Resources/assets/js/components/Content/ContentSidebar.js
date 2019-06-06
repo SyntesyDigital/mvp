@@ -160,7 +160,7 @@ class ContentSidebar extends Component {
           <div className="publish-group">
             { this.props.status == 1 &&
               <div className="publish-form sidebar-item">
-                  <b>Estat</b> : <i className="fa fa-circle text-success"></i> {Lang.get('fields.published')} <br/>
+                  <i className="fa fa-circle text-success"></i> {Lang.get('fields.published')} <br/>
                   {!architect.currentUserHasRole('author') &&
                     <a className="btn btn-default" href="" onClick={this.props.onUnpublish}> {Lang.get('fields.unpublish')} </a>
                   }
@@ -170,7 +170,7 @@ class ContentSidebar extends Component {
 
             {this.props.status == 0 &&
               <div className="publish-form sidebar-item">
-                  <b>Estat</b> : <i className="fa fa-circle text-warning"></i> {Lang.get('fields.draft')} <br/>
+                  <i className="fa fa-circle text-warning"></i> {Lang.get('fields.draft')} <br/>
                   {!architect.currentUserHasRole('author') &&
                     <a className="btn btn-success" href=""  onClick={this.props.onPublish}> {Lang.get('fields.publish')} </a>
                   }

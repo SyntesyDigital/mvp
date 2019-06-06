@@ -53,16 +53,5 @@ class LoginController extends Controller
             $this->username() => [trans('auth.failed')],
         ]);
     }
-
-    /*
-    protected function redirectTo()
-    {
-        if(Auth::user()->hasRole('admin')) {
-          //login to WS
-          dispatch_now(new Login());
-        }
-
-        return '/architect';
-    }
-    */
+    
 }

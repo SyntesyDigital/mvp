@@ -1,62 +1,16 @@
 <?php
 
 
-/*
 Auth::routes();
 
 Route::group([
-  'middleware' => ['auth:veos-ws'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
 {
 
     Route::get('/', 'ArchitectController@index')->name('dashboard');
-
-    // Account
-    Route::post('/account/save', 'AccountController@save')->name('account.save');
-    Route::get('/account', 'AccountController@index')->name('account');
-
-    // Users
-    Route::get('/users', 'UserController@index')->name('users');
-    Route::get('/users/data', 'UserController@data')->name('users.data');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
-    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
-
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| CUSTOMER
-|--------------------------------------------------------------------------
-*/
-/*
-Route::group([
-  //'middleware' => ['web', 'auth','role:recruiter|admin|customer', 'DetectUserLocale'],
-  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
-  'prefix' => 'architect',
-  'namespace' => 'Modules\Architect\Http\Controllers'
-], function()
-{
-
-    Route::get('/', 'ArchitectController@index')->name('dashboard');
-
-    // Account
-    Route::post('/account/save', 'AccountController@save')->name('account.save');
-    Route::get('/account', 'AccountController@index')->name('account');
-
-    // Users
-    Route::get('/users', 'UserController@index')->name('users');
-    Route::get('/users/data', 'UserController@data')->name('users.data');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
-    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
 });
 
@@ -66,10 +20,8 @@ Route::group([
 | COMMON FUNCTIONS
 |--------------------------------------------------------------------------
 */
-/*
 Route::group([
-  //'middleware' => ['web', 'auth','role:recruiter|admin|customer|candidate', 'DetectUserLocale'],
-  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN,ROLE_EDITOR', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -80,7 +32,6 @@ Route::group([
     | FILE UPLOAD
     |--------------------------------------------------------------------------
     */
-    /*
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
 });
 
@@ -89,10 +40,9 @@ Route::group([
 | ADMIN
 |--------------------------------------------------------------------------
 */
-/*
+
 Route::group([
-  //'middleware' => ['web', 'auth:veos-ws','role:admin', 'DetectUserLocale'],
-  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN,ROLE_CLIENT', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -198,4 +148,3 @@ Route::group([
   //Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
 });
-*/
