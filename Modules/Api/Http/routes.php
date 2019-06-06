@@ -1,6 +1,8 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'api', 'namespace' => 'Modules\Api\Http\Controllers'], function()
+
+/*
+Route::group(['middleware' => ['web','auth:veos-ws'], 'prefix' => 'api', 'namespace' => 'Modules\Api\Http\Controllers'], function()
 {
     Route::get('/contents', 'ContentController@index');
     Route::post('/contents', 'ContentController@index');
@@ -12,3 +14,4 @@ Route::group(['middleware' => 'web', 'prefix' => 'api', 'namespace' => 'Modules\
 
     Route::get('/search', 'SearchController@search');
 });
+*/

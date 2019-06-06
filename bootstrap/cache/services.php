@@ -28,28 +28,27 @@
     24 => 'Intervention\\Image\\ImageServiceProvider',
     25 => 'Jenssegers\\Date\\DateServiceProvider',
     26 => 'Kalnoy\\Nestedset\\NestedSetServiceProvider',
-    27 => 'Laravel\\Socialite\\SocialiteServiceProvider',
-    28 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    29 => 'Collective\\Html\\HtmlServiceProvider',
-    30 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
-    31 => 'Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider',
-    32 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    33 => 'PeterColes\\Countries\\CountriesServiceProvider',
-    34 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
-    35 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    36 => 'Zizaco\\Entrust\\EntrustServiceProvider',
-    37 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    38 => 'NotificationChannels\\FacebookPoster\\FacebookPosterServiceProvider',
-    39 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    27 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    28 => 'Collective\\Html\\HtmlServiceProvider',
+    29 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
+    30 => 'Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider',
+    31 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
+    32 => 'PeterColes\\Countries\\CountriesServiceProvider',
+    33 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
+    34 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    35 => 'Zizaco\\Entrust\\EntrustServiceProvider',
+    36 => 'Barryvdh\\Debugbar\\ServiceProvider',
+    37 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    38 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    39 => 'NotificationChannels\\FacebookPoster\\FacebookPosterServiceProvider',
     40 => 'Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider',
     41 => 'App\\Providers\\AppServiceProvider',
     42 => 'App\\Providers\\AuthServiceProvider',
     43 => 'App\\Providers\\EventServiceProvider',
     44 => 'App\\Providers\\RouteServiceProvider',
-    45 => 'Zizaco\\Entrust\\EntrustServiceProvider',
-    46 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    47 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
-    48 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    45 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    46 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
+    47 => 'Laravel\\Socialite\\SocialiteServiceProvider',
   ),
   'eager' => 
   array (
@@ -82,9 +81,8 @@
     26 => 'App\\Providers\\AuthServiceProvider',
     27 => 'App\\Providers\\EventServiceProvider',
     28 => 'App\\Providers\\RouteServiceProvider',
-    29 => 'Zizaco\\Entrust\\EntrustServiceProvider',
-    30 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    31 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
+    29 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    30 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
   ),
   'deferred' => 
   array (
@@ -187,13 +185,13 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
-    'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'html' => 'Collective\\Html\\HtmlServiceProvider',
     'form' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
   ),
   'when' => 
   array (
@@ -233,9 +231,6 @@
     'Illuminate\\Validation\\ValidationServiceProvider' => 
     array (
     ),
-    'Laravel\\Socialite\\SocialiteServiceProvider' => 
-    array (
-    ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
     array (
     ),
@@ -243,6 +238,9 @@
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Socialite\\SocialiteServiceProvider' => 
     array (
     ),
   ),

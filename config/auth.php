@@ -45,6 +45,11 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'veos-ws' => [
+            'driver' => 'veos-ws',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -67,8 +72,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-            'table' => 'users',
+            'model' => App\User::class,
+            //'table' => 'users',
         ],
 
         // 'users' => [

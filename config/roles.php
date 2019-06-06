@@ -1,0 +1,13 @@
+<?php
+
+return [
+    'ROLE_CORRESPONDANT' => 1,
+    'ROLE_CLIENT_INTERNATIONAL' => 2,
+    'ROLE_COURTIER_MASTER' => 3,
+    'ROLE_CLIENT_LOCAL' => 4,
+    'ROLE_DIRECTION_BUREAU' => 5,
+    'ROLE_DIRECTION_GENERALE' => 5,
+    'ROLE_HOLDING' => 6,
+    'ROLE_APPORTEUR' => 7,
+    'ROLE_CLIENT_FLOTTE' => 8,
+];

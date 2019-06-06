@@ -5,8 +5,10 @@
 | ADMIN
 |--------------------------------------------------------------------------
 */
+/*
 Route::group([
-  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
+  //'middleware' => ['web', 'auth:veos-ws','role:admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Extranet\Http\Controllers'
 ], function() {
@@ -47,3 +49,4 @@ Route::group([
     Route::delete('/routes_parameters/{route_parameter}/delete', 'RouteParameterController@delete')->name('extranet.routes_parameters.delete');
 
 });
+*/

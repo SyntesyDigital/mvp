@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Extensions\VeosUserProvider;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +29,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Auth::extend('veos-ws', function($app, $name, array $config) {
+            return new VeosUserProvider();
+        });
     }
 }

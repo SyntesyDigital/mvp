@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Session;
+use Config;
+
+use App\Http\Requests\LoginRequest;
 use App\Jobs\Login;
 
 class LoginController extends Controller
@@ -40,6 +43,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function login(LoginRequest $request)
+    {
+        if(dispatch_now(Login::fromRequest($request))) {
+            return redirect($this->redirectTo);
+        }
+
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+        ]);
+    }
+
+    /*
     protected function redirectTo()
     {
         if(Auth::user()->hasRole('admin')) {
@@ -49,4 +64,5 @@ class LoginController extends Controller
 
         return '/architect';
     }
+    */
 }

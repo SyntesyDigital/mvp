@@ -1,10 +1,11 @@
 <?php
 
 
+/*
 Auth::routes();
 
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin', 'DetectUserLocale'],
+  'middleware' => ['auth:veos-ws'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -33,8 +34,10 @@ Route::group([
 | CUSTOMER
 |--------------------------------------------------------------------------
 */
+/*
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin|customer', 'DetectUserLocale'],
+  //'middleware' => ['web', 'auth','role:recruiter|admin|customer', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -63,8 +66,10 @@ Route::group([
 | COMMON FUNCTIONS
 |--------------------------------------------------------------------------
 */
+/*
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin|customer|candidate', 'DetectUserLocale'],
+  //'middleware' => ['web', 'auth','role:recruiter|admin|customer|candidate', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -75,6 +80,7 @@ Route::group([
     | FILE UPLOAD
     |--------------------------------------------------------------------------
     */
+    /*
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
 });
 
@@ -83,9 +89,10 @@ Route::group([
 | ADMIN
 |--------------------------------------------------------------------------
 */
-
+/*
 Route::group([
-  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
+  //'middleware' => ['web', 'auth:veos-ws','role:admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -191,3 +198,4 @@ Route::group([
   //Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
 });
+*/
