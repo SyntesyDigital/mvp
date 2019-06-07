@@ -110,8 +110,7 @@ architect.medias = {
               {data: 'preview', name: 'preview'},
   	          {data: 'uploaded_filename', name: 'uploaded_filename'},
               {data: 'type', name: 'type'},
-              {data: 'author', name: 'author'},
-    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+              {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
 

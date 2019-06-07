@@ -28,7 +28,6 @@ class ContentPageTest extends TestCase
         'page' => [
             'status' => 0,
             'typology_id' => null,
-            'author_id' => null,
             'is_page' => true,
             'definition' => [],
             'translations' => [

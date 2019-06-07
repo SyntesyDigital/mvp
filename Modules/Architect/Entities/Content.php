@@ -45,7 +45,6 @@ class Content extends Model
         'status',
         'typology_id',
         'user_id',
-        'author_id',
         'parent_id',
         'is_page',
         'published_at',
@@ -241,10 +240,5 @@ class Content extends Model
         return $tagsId ? $query->whereHas('tags', function($q) use($tagsId) {
             $q->whereIn('tag_id', $tagsId);
         }) : $query;
-    }
-
-    public function scopeByAuthorId(Builder $query, $authorId)
-    {
-        return $query->where('author_id', $authorId);
     }
 }

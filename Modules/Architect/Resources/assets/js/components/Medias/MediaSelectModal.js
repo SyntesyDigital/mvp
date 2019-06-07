@@ -157,10 +157,9 @@ class MediaSelectModal extends Component {
     	    ajax: this.getRoute(mediaType),
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},
-                {data: 'preview', name: 'preview'},
-    	        {data: 'uploaded_filename', name: 'uploaded_filename'},
-                {data: 'type', name: 'type'},
-                {data: 'author', name: 'author'},
+              {data: 'preview', name: 'preview'},
+  	          {data: 'uploaded_filename', name: 'uploaded_filename'},
+              {data: 'type', name: 'type'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
@@ -279,13 +278,11 @@ class MediaSelectModal extends Component {
                      <th></th>
                      <th>{Lang.get('fields.filename')}</th>
                      <th data-filter="select">{Lang.get('fields.tipus')}</th>
-                     <th data-filter="select">{Lang.get('fields.author')}</th>
                      <th></th>
                  </tr>
               </thead>
               <tfoot>
                  <tr>
-                     <th></th>
                      <th></th>
                      <th></th>
                      <th></th>

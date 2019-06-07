@@ -11,13 +11,7 @@ var architect = {
             return false;
         }
 
-        var role = user.roles.filter(function(r){
-            if(r.name == roleName) {
-                return r;
-            }
-        });
-
-        return role.length > 0 ? true : false;
+        return roleName == user.role;
     },
 
 };
@@ -161,8 +155,7 @@ architect.medias = {
               {data: 'preview', name: 'preview'},
   	          {data: 'uploaded_filename', name: 'uploaded_filename'},
               {data: 'type', name: 'type'},
-              {data: 'author', name: 'author'},
-    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+              {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
 
@@ -237,7 +230,6 @@ architect.contents = {
                 {data: 'title', name: 'title'},
                 {data: 'typology', name: 'typology'},
                 {data: 'updated', name: 'updated'},
-                {data: 'author', name: 'author'},
                 {data: 'status', name: 'status'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],

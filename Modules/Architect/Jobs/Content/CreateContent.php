@@ -21,7 +21,6 @@ class CreateContent
         $this->languages = Language::getAllCached();
         $this->attributes = array_only($attributes, [
             'typology_id',
-            'author_id',
             'category_id',
             'parent_id',
             'status',
@@ -45,7 +44,6 @@ class CreateContent
         $this->content = Content::create([
             'status' => $this->attributes['status'] ? $this->attributes['status'] : 0,
             'typology_id' => isset($this->attributes['typology_id']) ? $this->attributes['typology_id'] : null,
-            'author_id' => $this->attributes['author_id'],
             'is_page' => isset($this->attributes['is_page']) ? $this->attributes['is_page'] : 0,
             'parent_id' => isset($this->attributes['parent_id']) ? $this->attributes['parent_id'] : null,
             'settings' => isset($this->attributes['settings']) ? json_encode($this->attributes['settings']) : null,

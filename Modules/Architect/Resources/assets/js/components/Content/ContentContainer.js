@@ -45,8 +45,6 @@ class ContentContainer extends Component {
          tags : this.props.content.tags ? this.props.content.tags : [],   // Los tags del contenido que hay que guardar
          tagsList : props.tags ? props.tags : [], // La lista de los tags
          translations: translations,
-         author: props.content ? props.content.author_id : CURRENT_USER.id,
-         authors: props.authors,
          content: props.content,
          typology: props.typology,
          categories: props.categories,
@@ -242,7 +240,6 @@ class ContentContainer extends Component {
           category_id : this.state.category,
           tags : this.state.tags,
           fields : this.state.fields,
-          author_id : this.state.author,
           translations : this.state.translations,
           settings : this.state.settings,
       };
@@ -355,10 +352,6 @@ class ContentContainer extends Component {
                     stateErrors[identifier] = field[identifier];
                 })
              });
-         }
-
-         if(errors['author_id'] !== undefined) {
-            stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
      }
 
@@ -530,8 +523,6 @@ class ContentContainer extends Component {
                 tags={this.state.tags}
                 tagsList={this.state.tagsList}
                 translations={this.state.translations}
-                author={this.state.author}
-                authors={this.state.authors}
                 createdAt={this.state.created_at}
                 onPublish={this.handlePublish}
                 onUnpublish={this.handleUnpublish}

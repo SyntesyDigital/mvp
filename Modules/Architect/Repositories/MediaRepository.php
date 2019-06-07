@@ -20,22 +20,13 @@ class MediaRepository extends BaseRepository
 
     public function getDatatable()
     {
-        $medias = Media::leftJoin('users', 'users.id', '=', 'medias.author_id')
-            ->select(
-                'medias.*',
-                'users.firstname',
-                'users.lastname'
+        $medias = Media::select(
+                'medias.*'
             )
             ->type(request('type'))
             ->orderBy('created_at', 'desc');
 
         return Datatables::of($medias)
-            ->filterColumn('author', function ($query, $keyword) {
-                $query->whereRaw("CONCAT(users.firstname,' ',users.lastname) like ?", ["%{$keyword}%"]);
-            })
-            ->addColumn('author', function ($item) {
-                return $item->author->full_name;
-            })
             ->addColumn('preview', function ($item) {
                 switch($item->type) {
                     case "image":

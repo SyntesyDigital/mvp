@@ -99,8 +99,6 @@ class PageContainer extends Component {
          slug : slugField,
          description : descriptionField,
          translations: translations,
-         author: props.content ? props.content.author_id : CURRENT_USER.id,
-         authors: props.authors,
          content: props.content,
          pages: props.pages ? props.pages : null,
          languages: props.languages,
@@ -262,7 +260,6 @@ class PageContainer extends Component {
           settings : this.state.settings,
           category_id : this.state.category,
           tags : this.state.tags,
-          author_id : this.state.author,
           translations : this.state.translations
       };
   }
@@ -367,10 +364,6 @@ class PageContainer extends Component {
                     stateErrors[identifier] = field[identifier];
                 })
              });
-         }
-
-         if(errors['author_id'] !== undefined) {
-            stateErrors['author_id'] = errors['author_id'][0] ? errors['author_id'][0] : null;
          }
 
      }
@@ -553,8 +546,6 @@ class PageContainer extends Component {
                 tags={this.state.tags}
                 tagsList={this.state.tagsList}
                 translations={this.state.translations}
-                author={this.state.author}
-                authors={this.state.authors}
                 createdAt={this.state.created_at}
                 onPublish={this.handlePublish}
                 onUnpublish={this.handleUnpublish}

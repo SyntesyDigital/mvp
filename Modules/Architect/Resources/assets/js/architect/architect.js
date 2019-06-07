@@ -11,13 +11,7 @@ var architect = {
             return false;
         }
 
-        var role = user.roles.filter(function(r){
-            if(r.name == roleName) {
-                return r;
-            }
-        });
-
-        return role.length > 0 ? true : false;
+        return roleName == user.role;
     },
 
 };

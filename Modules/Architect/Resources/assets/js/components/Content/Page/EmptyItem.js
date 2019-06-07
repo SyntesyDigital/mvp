@@ -20,7 +20,7 @@ class EmptyItem extends Component {
 
     return (
       <div className="row empty-item">
-          {!architect.currentUserHasRole('author') &&
+          {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
             <a href="" className="btn btn-link" onClick={this.onSelectItem.bind(this)}>
               <i className="fa fa-plus"></i>
             </a>

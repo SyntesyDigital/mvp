@@ -32,12 +32,7 @@
                             </a>
                               <ul class="dropdown-menu dropdown-menu-right default-padding">
                                   <li class="dropdown-header"></li>
-                                  <li>
-                                      <a href="{{route('users.show',Auth::user()->id)}}">
-                                          <i class="fa fa-user"></i>
-                                          &nbsp;{{Lang::get('architect::header.my_profile')}}
-                                      </a>
-                                  </li>
+
                                   <li>
                                       <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                           <i class="fa fa-sign-out"></i> &nbsp; {{Lang::get('architect::header.disconnect')}}

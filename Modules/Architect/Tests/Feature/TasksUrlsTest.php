@@ -51,7 +51,6 @@ class TasksUrlsTest extends TestCase
         'content' => [
             'status' => 0,
             'typology_id' => null,
-            'author_id' => null,
             'is_page' => false,
             'translations' => [
                 'es' => true,

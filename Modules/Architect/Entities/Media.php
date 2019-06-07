@@ -32,8 +32,7 @@ class Media extends Model
          'mime_type',
          'stored_filename',
          'uploaded_filename',
-         'metadata',
-         'author_id'
+         'metadata'
      ];
 
     /**

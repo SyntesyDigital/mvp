@@ -30,7 +30,6 @@ architect.contents = {
                 {data: 'title', name: 'title'},
                 {data: 'typology', name: 'typology'},
                 {data: 'updated', name: 'updated'},
-                {data: 'author', name: 'author'},
                 {data: 'status', name: 'status'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],

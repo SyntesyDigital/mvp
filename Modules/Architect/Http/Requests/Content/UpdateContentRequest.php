@@ -15,15 +15,13 @@ class UpdateContentRequest extends FormRequest
     {
         if(request('is_page')) {
             return [
-                'status' => 'required',
-                'author_id' => 'required',
+                'status' => 'required'
             ];
         }
 
         return [
             'status' => 'required',
             'typology_id' => 'required',
-            'author_id' => 'required',
             'fields' => ['required', new ContentField]
         ];
     }

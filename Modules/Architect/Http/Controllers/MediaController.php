@@ -55,7 +55,7 @@ class MediaController extends Controller
 
     public function show($id, Request $request)
     {
-        $media = $this->medias->with('author')->find($id);
+        $media = $this->medias->find($id);
 
         return response()->json([
             'success' => $media ? true : false,

@@ -13,4 +13,6 @@
   const CONTENT_SETTINGS = ['htmlClass'];
   const CATEGORIES = {!! json_encode(Modules\Architect\Entities\Category::all(), JSON_PRETTY_PRINT) !!};
   const DEFAULT_LOCALE = '{{ Modules\Architect\Entities\Language::getDefault()->iso}}';
+  const ROLES = {!! json_encode(config('roles'), JSON_PRETTY_PRINT) !!};
+
 </script>

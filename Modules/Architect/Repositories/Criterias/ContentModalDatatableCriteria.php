@@ -39,7 +39,6 @@ class ContentModalDatatableCriteria implements CriteriaInterface
                     });
                 }
             })->with(
-                'author',
                 'typology',
                 'urls',
                 'page',

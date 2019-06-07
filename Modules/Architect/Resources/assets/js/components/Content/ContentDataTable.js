@@ -59,7 +59,6 @@ class ContentDataTable extends Component {
                 {data: 'title', name: 'title'},
                 {data: 'typology', name: 'typology'},
                 {data: 'updated', name: 'updated'},
-                {data: 'author', name: 'author'},
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
@@ -102,14 +101,12 @@ class ContentDataTable extends Component {
                        <th>{Lang.get('fields.name')}</th>
                        <th>{Lang.get('fields.tipus')}</th>
                        <th>{Lang.get('fields.updated')}</th>
-                       <th>{Lang.get('fields.author')}</th>
                        <th>{Lang.get('fields.status')}</th>
                        <th></th>
                    </tr>
                 </thead>
                 <tfoot>
                    <tr>
-                       <th></th>
                        <th></th>
                        <th></th>
                        <th></th>

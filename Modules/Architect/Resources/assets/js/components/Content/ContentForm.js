@@ -12,7 +12,6 @@ export default class ContentForm extends Component {
 
         this.state = {
             typology : props.typology ? JSON.parse(atob(props.typology)) : '',
-            authors : props.users ? JSON.parse(atob(props.users)) : '',
             content : props.content ? JSON.parse(atob(props.content)) : '',
             fields : props.fields ? JSON.parse(atob(props.fields)) : '',
             tags : props.tags ? JSON.parse(atob(props.tags)) : '',
@@ -40,7 +39,6 @@ export default class ContentForm extends Component {
             <div>
                 {!page &&
                   <ContentContainer
-                    authors={this.state.authors}
                     typology={this.state.typology}
                     content={this.state.content}
                     fields={this.state.fields}
@@ -54,7 +52,6 @@ export default class ContentForm extends Component {
 
                 {page &&
                   <PageContainer
-                    authors={this.state.authors}
                     content={this.state.content}
                     categories={this.state.categories}
                     tags={this.state.tags}

@@ -44,13 +44,11 @@
                                <th></th>
                                <th>{{Lang::get('architect::fields.filename')}}</th>
                                <th data-filter="select">{{Lang::get('architect::fields.tipus')}}</th>
-                               <th data-filter="select">{{Lang::get('architect::fields.author')}}</th>
                                <th></th>
                            </tr>
                         </thead>
                         <tfoot>
                            <tr>
-                               <th></th>
                                <th></th>
                                <th></th>
                                <th></th>

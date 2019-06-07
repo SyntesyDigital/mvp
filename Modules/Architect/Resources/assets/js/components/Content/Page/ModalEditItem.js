@@ -111,56 +111,6 @@ class ModalEditItem extends Component {
     this.onModalClose = this.onModalClose.bind(this);
   }
 
-  loadAxes() {
-    var self = this;
-
-    axios.get(ASSETS+'externalapi/axes')
-      .then(function (response) {
-
-          if(response.status == 200
-              && response.data.data !== undefined
-              && response.data.data.length > 0)
-          {
-              self.setState({
-                  axes : response.data.data
-              });
-          }
-
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-  }
-
-
-
-  loadPrograms() {
-    var self = this;
-
-    axios.get(ASSETS+'externalapi/programs')
-      .then(function (response) {
-
-          if(response.status == 200
-              && response.data.data !== undefined
-              && response.data.data.length > 0)
-          {
-
-              response.data.data.unshift({
-                "id": '',
-          			"description_es": Lang.get('modals.without_program'),
-              });
-
-              self.setState({
-                  programs : response.data.data
-              });
-          }
-
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-  }
-
   loadCategories() {
 
     var self = this;
@@ -244,8 +194,6 @@ class ModalEditItem extends Component {
         this.modalOpen();
     }
 
-    this.loadAxes();
-    this.loadPrograms();
     this.loadCategories();
 
   }
@@ -1150,7 +1098,7 @@ class ModalEditItem extends Component {
                         this.renderField()}
 
                     </div>
-                    <div className={"col-xs-4 settings-col "+(architect.currentUserHasRole('author') ? "disabled":"")}>
+                    <div className={"col-xs-4 settings-col "+(architect.currentUserHasRole(ROLES['ROLE_EDITOR']) ? "disabled":"")}>
                       {this.renderSettings()}
                     </div>
                   </div>
