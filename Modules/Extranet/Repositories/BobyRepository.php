@@ -22,14 +22,12 @@ class BobyRepository
     {
         $cacheKey = md5("getQuery_" . $name);
 
-        //dd(Session::get('token'));
-
         if (Cache::has($cacheKey) && false) {
             $beans = Cache::get($cacheKey);
         } else {
             $response = $this->client->get(VeosWsUrl::get() . 'boBy/'.$name, [
                 'headers' => [
-                    'Authorization' => "Bearer " . Session::get('iga_token')
+                    'Authorization' => "Bearer " . Auth::user()->token
                 ]
             ]);
 
@@ -42,26 +40,36 @@ class BobyRepository
         return $beans;
     }
 
-
-    public function getIGA()
+    public function postQuery($name, $params = null)
     {
-        $beans = $this->getQuery('WS_EXTSTD_IDA');
+        $cacheKey = md5("postQuery_" . $name . json_encode($params));
+
+        if (Cache::has($cacheKey)) {
+            $beans = Cache::get($cacheKey);
+        } else {
+            $response = $this->client->post(VeosWsUrl::get() . 'boBy/list', [
+                'json' => ["requests" =>[[
+                    "name" => $name,
+                    "params" => $params
+                ]]],
+                'headers' => [
+                    'Authorization' => "Bearer " . Auth::user()->token
+                ]
+            ]);
+
+            $result = json_decode($response->getBody());
+            if(isset($result->responses[0])) {
+                if((isset($result->responses[0]->statusCode)) && $result->responses[0]->statusCode == 1) {
+                    throw new \Exception($result->responses[0]->statusMessage);
+                }
+            }
+            $beans = isset($result->responses[0]->beans) ? $result->responses[0]->beans : null;
+
+            Cache::put($cacheKey, $beans, config('cache.time'));
+        }
 
         return $beans;
     }
-
-    public function getNatures()
-    {
-        $beans = $this->getQuery('WS_EXTSTD_CIRCONSTANCE?CDPROD=AUTO');
-
-        $data = [];
-        foreach($beans as $bean){
-          $data[$bean->codeCirconst] = $bean->circonstance;
-        }
-
-        return $data;
-    }
-
 
 
 }

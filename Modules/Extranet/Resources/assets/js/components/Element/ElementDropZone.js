@@ -5,7 +5,7 @@ import { DropTarget } from 'react-dnd'
 import update from 'immutability-helper'
 
 import FieldTypes from './FieldTypes'
-import ModelField from './ModelField'
+import ElementField from './ElementField'
 
 const fieldTarget = {
 	drop(props, monitor, component) {
@@ -26,7 +26,7 @@ function collect(connect, monitor) {
   };
 }
 
-class ModelDropZone extends Component {
+class ElementDropZone extends Component {
 
 	constructor(props){
     super(props);
@@ -97,7 +97,7 @@ class ModelDropZone extends Component {
 
 		return (
 			fields.map((item, i) => (
-				<ModelField
+				<ElementField
 					created={this.props.created}
 					saved={item.saved}
 					editable={item.editable}
@@ -155,10 +155,10 @@ class ModelDropZone extends Component {
 
 }
 
-ModelDropZone.propTypes = {
+ElementDropZone.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired,
 };
 
-export default DropTarget(FieldTypes.FIELD, fieldTarget, collect)(ModelDropZone);
+export default DropTarget(FieldTypes.FIELD, fieldTarget, collect)(ElementDropZone);

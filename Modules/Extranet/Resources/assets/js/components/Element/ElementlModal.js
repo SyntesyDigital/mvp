@@ -7,7 +7,7 @@ import CheckboxesSettingsField from './Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './Settings/SelectorSettingsField';
 import RadioSettingsField from './Settings/RadioSettingsField';
 
-class ModelModal extends Component {
+class ElementModal extends Component {
 
   constructor(props) {
     super(props);
@@ -183,4 +183,4 @@ class ModelModal extends Component {
   }
 
 }
-export default ModelModal;
+export default ElementModal;

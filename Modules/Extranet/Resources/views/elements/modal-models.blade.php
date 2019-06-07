@@ -21,12 +21,12 @@
             <div class="col-xs-12 table">
               <div class="table-header">
                 <div class="cell first-column">Nom</div>
+                <div class="cell first-column"></div>
               </div>
               @foreach ($models as $model)
                 <div class="table-row">
-                  @php $icon = isset($model->ICON)?$model->ICON:'fa fa-reorder'; @endphp
                   <div class="cell second-column">
-                    <a href="{{route('extranet.element.create',[$element_type_array['identifier'],$model->ID,$model->TITRE,$model->WS,$model->PARAM ,$icon])}}"><i class="fa fa-plus"></i> Ajouter</a>
+                    <a href="{{route('extranet.element.create',[$element_type_array['identifier'],$model->ID])}}"><i class="fa fa-plus"></i> Ajouter</a>
                   </div>
                   <div class="cell first-column">{{$model->TITRE}}</div>
 

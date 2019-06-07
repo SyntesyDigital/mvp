@@ -24,7 +24,6 @@ class ElementController extends Controller
 {
     public function __construct(ElementRepository $elements) {
         $this->elements = $elements;
-        $this->middleware('auth');
     }
 
     public function index()
@@ -32,9 +31,10 @@ class ElementController extends Controller
         return view('extranet::elements.index');
     }
 
-    public function type_index($element_type,Request $request)
+    public function typeIndex($element_type,Request $request)
     {
-        $models = $this->elements->GetModelsByType($element_type);
+        $models = $this->elements->getModelsByType($element_type);
+
         return view('extranet::elements.type_index',
                 [
                   'elements' => $this->elements->getElementsByType($element_type),
@@ -43,21 +43,32 @@ class ElementController extends Controller
                 ]);
     }
 
-    public function data( Request $request)
-    {
-      return $this->elements->getDatatableData();
+    private function getModelById($models,$modelId){
+
+        foreach($models as $model){
+          if($model->ID == $modelId){
+            return $model;
+          }
+        }
+        return null;
     }
 
-    public function create($element_type, $model_id, $model_title, $model_ws, $model_param, $model_icon, Request $request)
+    public function create($element_type, $model_id, Request $request)
     {
+        //get model and fields
+        $models = $this->elements->getModelsByType($element_type);
+        $model = $this->getModelById($models,$model_id);
+
+        if(!$model)
+          abort(500);
+
+        $fields = $this->elements->getFieldsByElement($model->WS);
+
         return view('extranet::elements.form',
                 [
                   'element_type' => $element_type,
-                  'model_id' => $model_id,
-                  'model_title' => $model_title,
-                  'model_ws' => $model_ws,
-                  'model_param' => $model_param,
-                  'model_icon' => $model_icon
+                  'model' => $model,
+                  'fields' => $fields
                 ]);
     }
 

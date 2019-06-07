@@ -6,17 +6,17 @@ import update from 'immutability-helper'
 
 
 /*
-import ModelModal from './ModelModal';
+import ElementModal from './ElementModal';
 */
 
-import ModelDropZone from './ModelDropZone';
-import ModelDragField from './ModelDragField';
-import ModelBar from './ModelBar';
-import ModelSidebar from './ModelSidebar';
+import ElementDropZone from './ElementDropZone';
+import ElementDragField from './ElementDragField';
+import ElementBar from './ElementBar';
+import ElementSidebar from './ElementSidebar';
 
 import axios from 'axios';
 
-class ModelContainer extends Component {
+class ElementContainer extends Component {
 
   constructor(props) {
      super(props);
@@ -74,7 +74,7 @@ class ModelContainer extends Component {
          inputs[field.name] = field.value;
      }
 
-     //console.log("ModelContainer :: handleInputChange => ",inputs);
+     //console.log("ElementContainer :: handleInputChange => ",inputs);
 
      this.setState({
          inputs: inputs
@@ -277,7 +277,7 @@ class ModelContainer extends Component {
                 //console.log(response.data);
 
                 setTimeout(function(){
-                    window.location.href = routes.showModel.replace(':id',response.data.model_id);
+                    window.location.href = routes.showElement.replace(':id',response.data.model_id);
                 },1500);
 
             }
@@ -349,7 +349,7 @@ class ModelContainer extends Component {
         fields[i].saved = true;
       }
 
-      //console.log("ModelSaved : ",fields);
+      //console.log("ElementSaved : ",fields);
 
      this.setState({
          //model : response.model,
@@ -391,7 +391,7 @@ class ModelContainer extends Component {
   if(this.state.fieldsList){
 
     result = this.state.fieldsList.map((item,i) =>
-      <ModelDragField definition={item} key={i}/>
+      <ElementDragField definition={item} key={i}/>
     )
   }
 
@@ -404,7 +404,7 @@ class ModelContainer extends Component {
     return (
       <div id="model-container">
 
-      <ModelBar
+      <ElementBar
         icon={this.state.inputs.icon}
         name={this.state.inputs.name}
         onSubmitForm={this.handleSubmitForm}
@@ -415,7 +415,7 @@ class ModelContainer extends Component {
         <div className="container rightbar-page">
 
           {/*
-          <ModelModal
+          <ElementModal
             field={this.state.settingsField}
             id="settings-modal"
             onModalClose={this.handleModalClose}
@@ -426,7 +426,7 @@ class ModelContainer extends Component {
 
             <div className="col-md-9 page-content">
               {
-              <ModelDropZone
+              <ElementDropZone
                 errors={this.state.errors}
                 created={this.state.model !== undefined && this.state.model != null}
                 fields={this.state.fields}
@@ -441,7 +441,7 @@ class ModelContainer extends Component {
             </div>
 
 
-            <ModelSidebar
+            <ElementSidebar
                 fields={this.state.inputs}
                 errors={this.state.errors}
                 onFieldChange={this.handleInputChange}
@@ -451,7 +451,7 @@ class ModelContainer extends Component {
 
             {this.renderFields()}
 
-            </ModelSidebar>
+            </ElementSidebar>
 
         </div>
       </DragDropContextProvider>
@@ -464,4 +464,4 @@ class ModelContainer extends Component {
 }
 
 
-export default ModelContainer;
+export default ElementContainer;

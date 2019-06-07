@@ -14,10 +14,12 @@ use Session;
 use App\Extensions\VeosWsUrl;
 use Config;
 
+
 class ElementRepository extends BaseRepository
 {
-    public function __construct()
+    public function __construct(BobyRepository $boby)
     {
+        $this->boby = $boby;
         $this->client = new Client();
     }
 
@@ -37,21 +39,75 @@ class ElementRepository extends BaseRepository
     *
     *   @return Models List
     */
-    public function GetModelsByType($type)
+    public function getModelsByType($type)
     {
-        $jsonData = [
-              'requests' =>  [
-                 ['name'=>Element::TYPES[$type]['WS_NAME']]
-              ]
-            ];
+        $beans = $this->boby->postQuery(Element::TYPES[$type]['WS_NAME']);
 
-        $response = $this->client->post(VeosWsUrl::get() . 'boBy/list/', [
-            'json' => $jsonData,
-            'headers' => [
-                'Authorization' => "Bearer " . 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUb2tlbiBBdXRoIiwiaWRQZXIiOiIxMTMzNjIyMyIsImNhdGVnIjoiVVNFUkVYVCIsImlzcyI6InZlb3MyIC0gUkVDRVRURSAtIEFSSUxJTSIsImxhbmd1YWdlIjoiRiIsImV4cCI6MTU1OTY1NTI5MywiaWF0IjoxNTU5NjQ0NDkzfQ.22DQHm8-wp6v0qzefE7v2msB8GM3-4Y5QgsIQzH0TbM',
-            ]
-        ]);
-        return json_decode($response->getBody())->responses[0]->beans;
+        return $beans;
+    }
+
+    /*
+    *   Return fields from all field definition and filter by WS
+    */
+    public function getFieldsByElement($WS)
+    {
+        $beans = $this->boby->postQuery("WS_EXT2_DEF_CHAMPS");
+
+        $fields = [];
+        foreach($beans as $bean){
+          if($bean->WS == $WS){
+            $fields[] = $this->formatField($bean);
+          }
+        }
+
+        return $fields;
+    }
+
+    private function mapFieldType($wsType)
+    {
+        $mapping = [
+          "texte" => "text",
+          "num" => "number",
+          "date" => "date"
+        ];
+
+        return isset($mapping[$wsType]) ?
+          $mapping[$wsType] : '';
+    }
+
+    private function mapIcons($wsType)
+    {
+        $icons = [
+          "texte" => "fa-font",
+          "num" => "fa-calculator",
+          "date" => "fa-calendar"
+        ];
+
+        return isset($icons[$wsType]) ?
+          $icons[$wsType] : '';
+    }
+
+    private function formatField($field)
+    {
+        $identifier = $field->REF;
+        $definition = explode(",",$field->DEF);
+        $parameters = [];
+        foreach($definition as $parameter){
+          $parameter = explode(":",$parameter);
+          $parameters[trim($parameter[0])] = isset($parameter[1]) ?
+            trim($parameter[1]) : '';
+        }
+
+        return [
+          'type' => $this->mapFieldType($parameters['format']),
+          'identifier' => $identifier,
+          'name' => isset($parameters['lib']) ? $parameters['lib'] : '',
+          'icon' => $this->mapIcons($parameters['format']),
+          'help' => isset($parameters['tooltip']) ? $parameters['tooltip'] : '',
+          'default' => '',
+          'boby' => ''
+        ];
+
     }
 
 

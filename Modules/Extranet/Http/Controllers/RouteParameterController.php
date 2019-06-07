@@ -27,7 +27,6 @@ class RouteParameterController extends Controller
 {
     public function __construct(RouteParameterRepository $routes_parameters) {
         $this->routes_parameters = $routes_parameters;
-        $this->middleware('auth');
     }
 
     public function index(Request $request)

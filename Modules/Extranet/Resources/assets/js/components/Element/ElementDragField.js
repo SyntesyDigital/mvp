@@ -33,7 +33,7 @@ function collect(connect, monitor) {
 	}
 }
 
-class ModelDragField extends Component {
+class ElementDragField extends Component {
 	render() {
 		const { isDragging, connectDragSource } = this.props
 		const opacity = isDragging ? 0.4 : 1
@@ -46,7 +46,7 @@ class ModelDragField extends Component {
 	}
 }
 
-ModelDragField.propTypes = {
+ElementDragField.propTypes = {
 	connectDragSource: PropTypes.func.isRequired,
 	isDragging: PropTypes.bool.isRequired,
 	//input: PropTypes.string.isRequired,
@@ -54,4 +54,4 @@ ModelDragField.propTypes = {
 	//icon : PropTypes.string.isRequired,
 };
 
-export default DragSource(FieldTypes.FIELD, fieldSource, collect)(ModelDragField);
+export default DragSource(FieldTypes.FIELD, fieldSource, collect)(ElementDragField);

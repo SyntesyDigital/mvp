@@ -1,4 +1,4 @@
 //require('./bootstrap');
 
 //Components
-require('./components/Model/ModelForm');
+require('./components/Element/ElementForm');

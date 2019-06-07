@@ -27,7 +27,6 @@ class ModelController extends Controller
 {
     public function __construct(ExtranetModelRepository $models) {
         $this->models = $models;
-        $this->middleware('auth');
     }
 
     public function index(Request $request)

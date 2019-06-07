@@ -2,10 +2,16 @@
 
 return [
     [
+        "route" => 'extranet.elements.index',
+        "icon" => "fa-sitemap",
+        "label" => 'Éléments',
+        "roles" => [ROLE_ADMIN]
+    ],
+    [
         "route" => 'typologies',
         "icon" => "fa-th",
         "label" => Lang::get('architect::settings.typologies'),
-        "roles" => ["admin"]
+        "roles" => [ROLE_ADMIN]
     ],
 
     [

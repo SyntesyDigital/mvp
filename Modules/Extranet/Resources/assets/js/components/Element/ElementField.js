@@ -81,7 +81,7 @@ function collectSource(connect, monitor) {
   };
 }
 
-class ModelField extends Component {
+class ElementField extends Component {
 
 	constructor(props) {
 	    super(props);
@@ -98,7 +98,7 @@ class ModelField extends Component {
 
 	componentWillReceiveProps(nextProps) {
 
-    //console.log("ModelField ::will recieve props : =>",nextProps);
+    //console.log("ElementField ::will recieve props : =>",nextProps);
 	}
 
 	onRemoveField(event) {
@@ -171,7 +171,7 @@ class ModelField extends Component {
 			identifier : identifier
     };
 
-		//console.log("ModelField :: handleIdentifierChange => ",field);
+		//console.log("ElementField :: handleIdentifierChange => ",field);
 
 	  this.props.onFieldChange(field);
 
@@ -249,7 +249,7 @@ class ModelField extends Component {
 
 }
 
-ModelField.propTypes = {
+ElementField.propTypes = {
 	connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
@@ -264,4 +264,4 @@ ModelField.propTypes = {
 export default flow(
   DragSource(FieldTypes.SORT_FIELD, fieldSource, collectSource),
   DropTarget(FieldTypes.SORT_FIELD, fieldTarget, collectTarget)
-)(ModelField);
+)(ElementField);

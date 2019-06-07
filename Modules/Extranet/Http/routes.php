@@ -7,7 +7,7 @@
 */
 
 Route::group([
-  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Extranet\Http\Controllers'
 ], function() {
@@ -31,8 +31,8 @@ Route::group([
 
     // Elements
     Route::get('/elements', 'ElementController@index')->name('extranet.elements.index');
-    Route::get('/elements/{element_type}', 'ElementController@type_index')->name('extranet.elements.type_index');
-    Route::get('/elements/create/{element_type}/{model_id}/{model_title}/{model_ws}/{model_param}/{model_icon}', 'ElementController@create')->name('extranet.element.create');
+    Route::get('/elements/{element_type}', 'ElementController@typeIndex')->name('extranet.elements.typeIndex');
+    Route::get('/elements/create/{element_type}/{model_id}', 'ElementController@create')->name('extranet.element.create');
     Route::get('/elements/{id}/show', 'ElementController@show')->name('extranet.elements.show');
     Route::post('/elements/store', 'ElementController@store')->name('extranet.elements.store');
     Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');

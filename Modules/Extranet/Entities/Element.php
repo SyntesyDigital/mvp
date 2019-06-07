@@ -15,19 +15,19 @@ class Element extends Model
             'name' => 'Formulaire',
             'identifier' => 'form',
             'icon' => 'fa fa-list-alt',
-            'WS_NAME' => 'WS_EXT2_DEF_FC' /* AQUEST NO ES CORRECTE, FALTA*/
+            'WS_NAME' => '' //TODO chagne with correct
         ],
         'table' => [
             'name' => 'Tableau',
             'identifier' => 'table',
             'icon' => 'fa fa-table',
-            'WS_NAME' => 'WS_EXT2_DEF_TB'
+            'WS_NAME' => 'WS_EXT2_DEF_MODELES'
         ],
         'file' => [
             'name' => 'Fiche',
             'identifier' => 'file',
             'icon' => 'fa fa-columns',
-            'WS_NAME' => 'WS_EXT2_DEF_FC'
+            'WS_NAME' => 'WS_EXT2_DEF_MODELES'
         ],
     ];
 

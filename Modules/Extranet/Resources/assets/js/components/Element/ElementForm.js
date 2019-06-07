@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import ModelContainer from './ModelContainer';
+import ElementContainer from './ElementContainer';
 
 
-export default class ModelForm extends Component {
+export default class ElementForm extends Component {
 
     constructor(props)
     {
@@ -17,19 +17,21 @@ export default class ModelForm extends Component {
         });
 
         this.state = {
+            element : props.element ? JSON.parse(atob(props.element)) : '',
             model : props.model ? JSON.parse(atob(props.model)) : '',
-            fieldsList : MODELS.sinister.fields,
+            fieldsList :  props.fields ? JSON.parse(atob(props.fields)) : '',
             translations: translations,
         };
+
     }
 
     componentDidMount()
     {
-        if(this.state.model) {
+        if(this.state.element) {
             // Build field list
 
             var fields = [];
-            this.state.model.fields.map(function(field){
+            this.state.element.fields.map(function(field){
                 fields.push({
                     icon : field.icon,
                     id : field.id,
@@ -45,16 +47,16 @@ export default class ModelForm extends Component {
                 //console.log("field text => ",field);
             });
 
-            this.modelContainer.setState({
-                model : this.state.model,
+            this.elementContainer.setState({
+                element : this.state.element,
                 fields : fields,
-                icon : this.state.model.icon,
+                icon : this.state.element.icon,
                 inputs : {
-                    name: this.state.model.name,
-                    identifier: this.state.model.identifier,
+                    name: this.state.element.name,
+                    identifier: this.state.element.identifier,
                     icon: {
-                      value : this.state.model.icon,
-                      label : this.state.model.icon
+                      value : this.state.element.icon,
+                      label : this.state.element.icon
                     }
                 }
             });
@@ -62,7 +64,7 @@ export default class ModelForm extends Component {
         else {
           var fields = [];
 
-          this.modelContainer.setState({
+          this.elementContainer.setState({
             fields : fields
           });
 
@@ -73,9 +75,9 @@ export default class ModelForm extends Component {
         return (
             <div>
                 {
-                <ModelContainer
-                    model={this.state.model ? this.state.model : null}
-                    ref={(modelContainer) => this.modelContainer = modelContainer}
+                <ElementContainer
+                    element={this.state.element ? this.state.element : null}
+                    ref={(elementContainer) => this.elementContainer = elementContainer}
                     translations={this.state.translations}
                     fieldsList={this.state.fieldsList}
                 />
@@ -85,9 +87,12 @@ export default class ModelForm extends Component {
     }
 }
 
-if (document.getElementById('model-form')) {
-    var element = document.getElementById('model-form');
-    var model = element.getAttribute('model');
+if (document.getElementById('element-form')) {
+    var htmlElement = document.getElementById('element-form');
 
-    ReactDOM.render(<ModelForm model={model} />, element);
+    ReactDOM.render(<ElementForm
+      element={htmlElement.getAttribute('element')}
+      fields={htmlElement.getAttribute('fields')}
+      model={htmlElement.getAttribute('model')}
+    />, htmlElement);
 }

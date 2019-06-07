@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 
-class ModelBar extends Component {
+class ElementBar extends Component {
 
   constructor(props){
     super(props);
@@ -45,4 +45,4 @@ class ModelBar extends Component {
   }
 
 }
-export default ModelBar;
+export default ElementBar;

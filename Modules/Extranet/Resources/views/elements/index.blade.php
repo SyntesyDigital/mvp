@@ -18,7 +18,7 @@ $element_types = \Modules\Extranet\Entities\Element::TYPES;
         <div class="row">
           @foreach($element_types as $element_type)
             <div class="col-xs-3">
-                <a href="{{ route('extranet.elements.type_index', $element_type["identifier"]) }}">
+                <a href="{{ route('extranet.elements.typeIndex', $element_type["identifier"]) }}">
                   <div class="grid-item">
                       <i class="fa {{ $element_type["icon"] }}"></i>
                       <p class="grid-item-name">
