@@ -6,7 +6,7 @@
     <div class="modal-container">
 
       <div class="modal-header">
-        <h2><iclass="fa fa-reorder"></i> Select model</h2>
+        <h2><i class="fa fa-reorder"></i> Select model</h2>
 
         <div class="modal-buttons">
           <a class="btn btn-default close-button-modal close-btn" >

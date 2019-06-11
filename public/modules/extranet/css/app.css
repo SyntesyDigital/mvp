@@ -129,6 +129,41 @@ li {
   background-color: transparent;
 }
 
+#modal-models {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 300;
+}
+
+#modal-models .table-header {
+  padding: 10px 20px;
+  background-color: #F4F4F4;
+}
+
+#modal-models .table-row {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#modal-models .table-row .second-column {
+  float: right;
+}
+
+#modal-models .table-row .second-column a {
+  color: #455660;
+  text-decoration: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#modal-models .table-row .second-column a:hover {
+  text-decoration: none;
+}
+
+#modal-models .table-row .first-column {
+  overflow: hidden;
+}
+
 .sitelist .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;
