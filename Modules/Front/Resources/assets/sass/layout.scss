@@ -3,10 +3,74 @@ html{
   box-sizing: border-box;
 }
 
+
+
+header{
+  border-bottom: none !important;
+  &:first-child{
+      .row{
+        &.row-header{
+          margin-bottom: 0;
+          .logo-container{
+            background-color: $header-logo-background-color;
+            text-align: center;
+            padding: 0 25px;
+            img{
+            }
+          }
+
+          .right-part-header{
+            padding: 15px 25px;
+            background-color: $header-right-part-background-color;
+            color: $header-right-part-text-color;
+            height: 62px;
+            .navbar{
+              border: none;
+            }
+            .menu{
+              width: 40px;
+              height: 40px;
+              float:left;
+            }
+            .user-info{
+              overflow: hidden;
+              .button-logout-container{
+                float:right;
+              }
+              .user-name{
+                float: right;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+}
+
+footer{
+  height: 50px;
+  background-color: $footer-background-color;
+  text-align: center;
+  padding:15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  p{
+    color:$footer-text-color;
+    text-align: center;
+    @include font(16,18,400);
+    display:inline;
+  }
+
+}
+
 body {
   font-family: $brand-font-1;
   background-color: $body-bg;
-  color:$brand-dark-color-1;
+  color:$primary-color;
   position:relative;
 
   /* 16px / 24px */
@@ -24,81 +88,13 @@ body {
 
 }
 
-form.nova-cerca{
-  overflow:inherit !important;
+.separator{
+  height: 1px;
+  width: 80%;
+  margin: 20px auto;
+  border-bottom: 1px solid $separator-line-color;
 }
-
-/*
-article.page-builder{
-  overflow: hidden;
-}
-*/
-
-.carousel-inner > .item {
-  height:250px !important;
-  .carousel-caption {
-      background-color: rgba(0,0,0,0.3);
-      color:#fff;
-      padding-left: 80px;
-  }
-}
-
-.blog #number, .blog a, .blog a:hover, .blog a:visited, .blog .opcions a, .blog h1, .blog h3, .blog .list-items ul a, .blog .list-items ul a:hover, .blog .list-items ul a:visited {
-  color: rgb(198, 76, 44) !important;
-}
-
-.blog #number, .blog a, .blog a:hover, .blog a:visited, .blog .opcions a, .blog h1, .blog h3, .blog .list-items ul a, .blog .list-items ul a:hover, .blog .list-items ul a:visited {
-  color: rgb(198, 76, 44);
-}
-
-.list-blog {
-  .post {
-      padding:10px;
-  }
-  .cat-Juridique, .cat-Juridico {
-      background-color:rgba(198,76,44,0.8);
-      a {
-        color:#fff !important;
-      }
-
-      h3 a {
-        color:#fff !important;
-      }
-  }
-
-}
-
-
-
-
-
-
-.navbar-nav.navbar-right {
-  width: 100px !important;
-}
-
-.corporatiu img {
-  width: 100px !important;
-}
-
-.intranet {
-  position: absolute;
-  top: 30px;
-  left: 170px;
-  text-transform: uppercase;
-  color: #b0acaa;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -38px;
-    left: -20px;
-    border-left: 1px solid #c54a2b;
-    height: 60px;
-  }
-
-}
-
-.buscar input {
-  border: 1px solid #464646 !important;
+.row{
+  margin-right: 0px;
+  margin-left:0px;
 }

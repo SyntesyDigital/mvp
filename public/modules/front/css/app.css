@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);/* required styles */
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap);/* required styles */
 
 .leaflet-pane,
 .leaflet-tile,
@@ -2379,7 +2379,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #fff;
+  background-color: #F7F7F7;
 }
 
 input,
@@ -2428,7 +2428,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #fff;
+  background-color: #F7F7F7;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -4049,7 +4049,7 @@ th {
 }
 
 .table .table {
-  background-color: #fff;
+  background-color: #F7F7F7;
 }
 
 .table-condensed > thead > tr > th,
@@ -6097,7 +6097,7 @@ tbody.collapse.in {
 .nav-tabs > li.active > a:focus {
   color: #555555;
   cursor: default;
-  background-color: #fff;
+  background-color: #F7F7F7;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }
@@ -6197,7 +6197,7 @@ tbody.collapse.in {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #fff;
+    border-bottom-color: #F7F7F7;
   }
 }
 
@@ -6640,7 +6640,7 @@ tbody.collapse.in {
 
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #e6e5e5;
+  border-color: #dedddd;
 }
 
 .navbar-default .navbar-brand {
@@ -6729,7 +6729,7 @@ tbody.collapse.in {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #e6e5e5;
+  border-color: #dedddd;
 }
 
 .navbar-default .navbar-link {
@@ -7265,7 +7265,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #fff;
+  background-color: #F7F7F7;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
@@ -7547,7 +7547,7 @@ a.thumbnail.active {
   padding: 10px 15px;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid #e6e5e5;
+  border: 1px solid #dedddd;
 }
 
 .list-group-item:first-child {
@@ -7830,7 +7830,7 @@ button.list-group-item-danger.active:focus {
 .panel-footer {
   padding: 10px 15px;
   background-color: #f5f5f5;
-  border-top: 1px solid #e6e5e5;
+  border-top: 1px solid #dedddd;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -8051,7 +8051,7 @@ button.list-group-item-danger.active:focus {
 
 .panel-group .panel-heading + .panel-collapse > .panel-body,
 .panel-group .panel-heading + .panel-collapse > .list-group {
-  border-top: 1px solid #e6e5e5;
+  border-top: 1px solid #dedddd;
 }
 
 .panel-group .panel-footer {
@@ -8059,21 +8059,21 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-group .panel-footer + .panel-collapse .panel-body {
-  border-bottom: 1px solid #e6e5e5;
+  border-bottom: 1px solid #dedddd;
 }
 
 .panel-default {
-  border-color: #e6e5e5;
+  border-color: #dedddd;
 }
 
 .panel-default > .panel-heading {
   color: #333333;
   background-color: #fff;
-  border-color: #e6e5e5;
+  border-color: #dedddd;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #e6e5e5;
+  border-top-color: #dedddd;
 }
 
 .panel-default > .panel-heading .badge {
@@ -8082,7 +8082,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #e6e5e5;
+  border-bottom-color: #dedddd;
 }
 
 .panel-primary {
@@ -9868,7 +9868,11 @@ a {
   line-height: 16px;
   font-weight: 400;
   color: #000;
-  border: none;
+  border-radius: 0;
+}
+
+.btn i {
+  margin-right: 10px;
 }
 
 .btn:hover {
@@ -9894,16 +9898,95 @@ a {
   background-color: auto;
 }
 
+.btn.btn-primary {
+  background-color: #E84B37;
+  color: #fff;
+  border-color: #E84B37;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary:active:focus,
+.btn.btn-primary:hover {
+  background-color: #2A3649;
+  color: #fff;
+  border-color: #2A3649;
+}
+
 html {
   height: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
+header {
+  border-bottom: none !important;
+}
+
+header:first-child .row.row-header {
+  margin-bottom: 0;
+}
+
+header:first-child .row.row-header .logo-container {
   background-color: #fff;
-  color: #000;
+  text-align: center;
+  padding: 0 25px;
+}
+
+header:first-child .row.row-header .right-part-header {
+  padding: 15px 25px;
+  background-color: #1B3A6A;
+  color: #fff;
+  height: 62px;
+}
+
+header:first-child .row.row-header .right-part-header .navbar {
+  border: none;
+}
+
+header:first-child .row.row-header .right-part-header .menu {
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+
+header:first-child .row.row-header .right-part-header .user-info {
+  overflow: hidden;
+}
+
+header:first-child .row.row-header .right-part-header .user-info .button-logout-container {
+  float: right;
+}
+
+header:first-child .row.row-header .right-part-header .user-info .user-name {
+  float: right;
+  margin-right: 10px;
+}
+
+footer {
+  height: 50px;
+  background-color: #A8A8A8;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+footer p {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+  display: inline;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #F7F7F7;
+  color: #2A3649;
   position: relative;
   /* 16px / 24px */
   font-size: 14px;
@@ -9918,98 +10001,16 @@ body {
   min-height: 100%;
 }
 
-form.nova-cerca {
-  overflow: inherit !important;
+.separator {
+  height: 1px;
+  width: 80%;
+  margin: 20px auto;
+  border-bottom: 1px solid rgba(42, 54, 73, 0.22);
 }
 
-/*
-article.page-builder{
-  overflow: hidden;
-}
-*/
-
-.carousel-inner > .item {
-  height: 250px !important;
-}
-
-.carousel-inner > .item .carousel-caption {
-  background-color: rgba(0, 0, 0, 0.3);
-  color: #fff;
-  padding-left: 80px;
-}
-
-.blog #number,
-.blog a,
-.blog a:hover,
-.blog a:visited,
-.blog .opcions a,
-.blog h1,
-.blog h3,
-.blog .list-items ul a,
-.blog .list-items ul a:hover,
-.blog .list-items ul a:visited {
-  color: #c64c2c !important;
-}
-
-.blog #number,
-.blog a,
-.blog a:hover,
-.blog a:visited,
-.blog .opcions a,
-.blog h1,
-.blog h3,
-.blog .list-items ul a,
-.blog .list-items ul a:hover,
-.blog .list-items ul a:visited {
-  color: #c64c2c;
-}
-
-.list-blog .post {
-  padding: 10px;
-}
-
-.list-blog .cat-Juridique,
-.list-blog .cat-Juridico {
-  background-color: rgba(198, 76, 44, 0.8);
-}
-
-.list-blog .cat-Juridique a,
-.list-blog .cat-Juridico a {
-  color: #fff !important;
-}
-
-.list-blog .cat-Juridique h3 a,
-.list-blog .cat-Juridico h3 a {
-  color: #fff !important;
-}
-
-.navbar-nav.navbar-right {
-  width: 100px !important;
-}
-
-.corporatiu img {
-  width: 100px !important;
-}
-
-.intranet {
-  position: absolute;
-  top: 30px;
-  left: 170px;
-  text-transform: uppercase;
-  color: #b0acaa;
-}
-
-.intranet:before {
-  content: '';
-  position: absolute;
-  top: -38px;
-  left: -20px;
-  border-left: 1px solid #c54a2b;
-  height: 60px;
-}
-
-.buscar input {
-  border: 1px solid #464646 !important;
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 .custom-modal {
@@ -10268,6 +10269,100 @@ form.contact-form .checkbox {
   right: 100px;
 }
 
+.login-container {
+  padding: 45px 20px;
+}
+
+.login-container .icons {
+  padding: 30px 15px;
+  text-align: center;
+}
+
+.login-container .icons .icon-box {
+  padding: 20px 20px;
+  margin-bottom: 20px;
+}
+
+.login-container .icons .icon-box .icon i {
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: 400;
+}
+
+.login-container .icons .icon-box .title {
+  margin-top: 5px;
+  min-height: 56px;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.login-container .icons .icon-box p {
+  padding: 0px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+}
+
+.login-container .icons p {
+  padding: 5px 15px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+}
+
+.login-container .login-box-container {
+  padding: 0 40px;
+}
+
+.login-container .login-box-container .login-box {
+  padding: 20px 40px;
+  border: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+}
+
+.login-container .login-box-container .login-box form {
+  border: none;
+  padding: 0;
+}
+
+.login-container .login-box-container .login-box form h2 {
+  text-align: center;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.login-container .login-box-container .login-box form .form-group {
+  margin-top: 10px;
+}
+
+.login-container .login-box-container .login-box form .form-group label {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.login-container .login-box-container .login-box form .form-group .form-control {
+  border-color: #A8A8A8;
+}
+
+.login-container .login-box-container .login-box form .form-group .buttons-group {
+  text-align: center;
+}
+
+.login-container .login-box-container .login-box form .form-group .forgot {
+  margin: 20px;
+}
+
+.login-container .login-box-container .login-box form .form-group .forgot a {
+  color: #2A3649;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;
@@ -10285,7 +10380,7 @@ form.contact-form .checkbox {
 
 .react-datepicker-wrapper {
   display: block;
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .react-datepicker-wrapper .react-datepicker__input-container {
@@ -10298,7 +10393,7 @@ form.contact-form .checkbox {
   font-size: 12px;
   line-height: 30px;
   font-weight: 300;
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
   width: 30px;
 }
 
@@ -10307,7 +10402,7 @@ form.contact-form .checkbox {
   font-size: 12px;
   line-height: 20px;
   font-weight: 400;
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
@@ -10315,7 +10410,7 @@ form.contact-form .checkbox {
   font-size: 12px;
   line-height: 20px;
   font-weight: 300;
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .react-datepicker__time-container {

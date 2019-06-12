@@ -2,7 +2,7 @@
 $assetPath : "/images";
 
 // Body
-$body-bg: #fff;
+$body-bg: #F7F7F7;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -20,14 +20,32 @@ $brand-danger: #bf5329;
 
 // Panels
 $panel-default-heading-bg: #fff;
-
-$brand-dark-color-1 : #000; //dark
+$brand-dark-color-1 : #2A3649; //dark
 $brand-dark-color-2 : #818181; //buttons dark
 $brand-dark-color-3 : #282423; //back graph
-
 $brand-light-color-1: #F5F5F5;  //box gray
 $brand-light-color-2: #E3E3E3;  //box gray, button hover gray
-
 $brand-color-1 : #FFBA00; //orange
+$brand-font-1 :  'Roboto', sans-serif;
 
-$brand-font-1 : Arial, sans-serif;
+//HEADER
+$header-logo-background-color : #fff;
+$header-right-part-background-color : #1B3A6A;
+$header-right-part-text-color: #fff;
+
+//footer
+$footer-background-color : #A8A8A8;
+$footer-text-color: #fff;
+
+//separator
+$separator-line-color: rgba(42, 54, 73, 0.22);
+
+//login
+
+$login-background-color: #FFFFFF;
+$login-border-color: #DBDBDB;
+
+//buttons for primary-btn:hover, secondary btn,
+$primary-color:#2A3649;
+//buttons for primary-btn, hover on other btn, hover on texts...
+$secondary-color:#E84B37;

@@ -1,52 +1,42 @@
 <!-- HEADER -->
 <header>
-<!-- CORPO i IDIOMES -->
-	<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-sm-6 col-xs-6">
-					<div class="corporatiu"><a href="{{route('home')}}">
-						<img src="{{asset('modules/architect/images/client-logo.jpg')}}" height="40" alt=""/></a>
+	<!-- CORPO i IDIOMES -->
+				<div class="row row-header">
+					<div class="col-md-3 col-sm-4 col-xs-6 logo-container">
+						<a href="{{route('home')}}">
+							<img src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
+						</a>
 					</div>
-				</div>
-				<div class="col-md-3 col-sm-4 col-xs-4 pull-right">
-					<div class="idiomes">
-						@include("front::partials.languages")
+					<div class="col-md-9 col-sm-8 col-xs-6 right-part-header">
+						<div class="menu-container">
+							<div class="menu">
+								<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+									<span class="sr-only">Menu</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+							</div>
+							<div class="user-info">
+								<div class="button-logout-container"><a href="btn btn-logout"><i class="fa fa-sign-out"></i> Déconnecter</a></div>
+								<p class="user-name">Bonjour, John Doe</p>
+							</div>
+						</div>
+						<div class="user-container">
+							</div>
 					</div>
+
+
+
+					<!--div class="col-md-3 col-sm-4 col-xs-4 pull-right">
+						<div class="idiomes">
+							@include("front::partials.languages")
+						</div>
+					</div-->
 				</div>
-			</div>
-	</div>
 	<!-- END CORPO I IDIOMES -->
 	<!-- MENU I SEARCH -->
-	<div class="container">
-	<nav class="navbar">
-		<div class="navbar-header">
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
-			<span class="sr-only">Menu</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-	</div>
 
-	<div id="main-menu" class="collapse navbar-collapse js-navbar-collapse">
-
-		 		<!-- buscador -->
-				<form class="col-md-12 buscar" method="GET" action="{{route('front.search')}}">
-					<input type="text" name="q" placeholder="Entrez le mot que vous recherchez...">
-				</form>
-				<!-- end buscador -->
-
-				@include('front::partials.menu_header',[
-					"menu" => get_menu('header')
-				])
-
-		<ul class="nav navbar-nav navbar-right col-md-3 col-sm-12 col-xs-12">
-
-			<li class="boto-search">Buscar </li>
-		</ul>
-	</div><!-- /.nav-collapse -->
-	</nav>
-</div>
 </header><!-- end HEADER -->
 
 @push('javascripts')
