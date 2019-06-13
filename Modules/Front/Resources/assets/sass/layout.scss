@@ -101,6 +101,7 @@ footer{
   position: relative;
   margin-left: 230px;
   padding:15px;
+  overflow: hidden;
   @extend .animate;
   &.collapsed{
     margin-left:0px;
