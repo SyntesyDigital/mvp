@@ -44,9 +44,14 @@
         @stack('modal')
 
         @include ('front::partials.header')
+        <div>
 
-        @yield('content')
 
+          @include ('front::partials.sidebar')
+          <div class="content-wrapper">
+            @yield('content')
+          </div>
+        </div>
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('front::partials.footer')
         <script>

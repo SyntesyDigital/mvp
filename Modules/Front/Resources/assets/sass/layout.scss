@@ -12,6 +12,7 @@ header{
         &.row-header{
           margin-bottom: 0;
           .logo-container{
+            @extend .animate;
             background-color: $header-logo-background-color;
             text-align: center;
             padding: 0 25px;
@@ -34,18 +35,47 @@ header{
             }
             .user-info{
               overflow: hidden;
-              .button-logout-container{
+              .button-header-container{
                 float:right;
+                margin-left: 10px;
+                .btn-header{
+                  border:1px solid $header-right-part-text-color;
+                  color:$header-right-part-text-color;
+                  background-color: transparent;
+                  text-transform: none;
+                  &:hover{
+                    border:1px solid $secondary-color;
+                    color:$secondary-color;
+                  }
+                  i{
+                    display: inline;
+                    margin-right:0px;
+                  }
+                  .button-text{
+                    margin-left: 10px;
+                    display: none;
+                  }
+                }
               }
               .user-name{
                 float: right;
                 margin-right: 10px;
+                padding-top: 10px;
               }
             }
           }
         }
       }
     }
+  .navbar-toggle {;
+    display: block;
+    border: 1px solid $header-right-part-text-color;
+    margin-right: 0;
+    margin-top: 0;
+    .icon-bar{
+      background: $header-right-part-text-color;
+    }
+  }
 }
 
 footer{
@@ -63,6 +93,73 @@ footer{
     text-align: center;
     @include font(16,18,400);
     display:inline;
+  }
+
+}
+
+.content-wrapper{
+  position: relative;
+  margin-left: 230px;
+  padding:15px;
+  @extend .animate;
+  &.collapsed{
+    margin-left:0px;
+  }
+}
+.sidebar{
+  width:230px;
+  position:absolute;
+  overflow: hidden;
+  background-color: $sidebar-background-color;
+  @include font(16,21,400);
+  padding:8px 0px 8px;
+  height: calc(100vh - 174px);
+  @extend .animate;
+  &.collapsed{
+    width:0px;
+    ul{
+      li{
+        padding-left:30px;
+        &:hover, &.active{
+          padding-left:26px;
+        }
+        i{
+          @extend .animate;
+          font-size: 21px;
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+  ul{
+    margin:0px;
+    padding:0px;
+    list-style-type: none;
+    li{
+      padding: 15px;
+      padding-left:19px;
+      &:hover, &.active{
+        padding-left:15px;
+        background-color: $sidebar-active-background-color;
+        border-left: 4px solid $secondary-color;
+        a{
+          color:$secondary-color;
+        }
+      }
+      a{
+        color:$primary-color;
+        width:100%;
+        cursor:pointer;
+        text-decoration: none;
+        &:hover{
+          color:$secondary-color;
+          text-decoration: none;
+        }
+        i{
+          margin-right:10px;
+        }
+      }
+    }
   }
 
 }
@@ -97,4 +194,53 @@ body {
 .row{
   margin-right: 0px;
   margin-left:0px;
+}
+
+@media (min-width: 768px){
+  header{
+    &:first-child{
+      .row{
+        &.row-header{
+          .logo-container{
+            width: 230px;
+            float:left;
+            &.collapsed{
+              width: 100px;
+              padding:0 5px;
+            }
+          }
+          .right-part-header{
+            overflow: hidden;
+            .user-info{
+              .button-header-container{
+                .btn-header{
+                  .button-text{
+                    display: inline;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .navbar-toggle {;
+      display: block;
+    }
+  }
+  .content-wrapper{
+    position: relative;
+    margin-left: 230px;
+    &.collapsed{
+      margin-left:100px;
+    }
+  }
+  .sidebar{
+    width:230px;
+    height: calc(100vh - 112px);
+    &.collapsed{
+      width:100px;
+    }
+  }
 }

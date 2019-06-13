@@ -42,6 +42,7 @@
 <!-- ARTICLE -->
 <article class="page-builder">
 
+  AAAAAAAAAAAA
     @if($page)
       @foreach($page as $node)
           @include('front::partials.node', [
