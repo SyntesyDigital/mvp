@@ -21,7 +21,7 @@
 								<div class="user-info">
 									<div class="button-header-container"><a href="" class="btn btn-header"><i class="fa fa-sign-out"></i> <p class="button-text">Déconnecter</p></a></div>
 									@if(Auth::user()->role == 1)
-										<div class="button-header-container"><a href="" class="btn btn-header"><i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
+										<div class="button-header-container"><a href="{{route('dashboard')}}" class="btn btn-header"><i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
 									@endif
 									<p class="user-name">Bonjour, {{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
 								</div>

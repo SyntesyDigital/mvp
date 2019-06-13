@@ -46,11 +46,16 @@
         @include ('front::partials.header')
         <div>
 
-
-          @include ('front::partials.sidebar')
-          <div class="content-wrapper">
+          @if(null !== Auth::user())
+            @include ('front::partials.sidebar')
+            <div class="content-wrapper">
+              @yield('content')
+            </div>
+          @else
             @yield('content')
-          </div>
+
+          @endif
+
         </div>
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('front::partials.footer')

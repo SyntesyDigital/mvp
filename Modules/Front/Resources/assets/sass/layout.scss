@@ -163,7 +163,24 @@ footer{
   }
 
 }
+.breadcrumb{
+  border-bottom: 1px solid $separator-line-color;
+  .container{
+    padding-left:0;
+    @include font(12,16,400);
+    color:$primary-color;
+    a{
+      @include font(12,16,400);
+      color:$primary-color;
+      margin: 0 5px;
+      &:hover{
+        color:$secondary-color;
+        text-decoration: none;
+      }
+    }
+  }
 
+}
 body {
   font-family: $brand-font-1;
   background-color: $body-bg;
