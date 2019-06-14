@@ -45,7 +45,7 @@
               @csrf
               <h2>Connexion</h2>
               <div class="form-group row">
-                  <label for="email" class="col-sm-4 col-form-label text-md-right">Utilisateur</label>
+                  <label for="email" class="col-sm-12 col-form-label text-md-right">Utilisateur</label>
 
                   <div class="col-md-12">
                       <input id="uid" type="text" class="form-control{{ $errors->has('uid') ? ' is-invalid' : '' }}" name="uid" value="{{ old('uid') }}" placeholder="" required autofocus>
@@ -59,7 +59,7 @@
               </div>
 
               <div class="form-group row">
-                  <label for="passwd" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
+                  <label for="passwd" class="col-md-12 col-form-label text-md-right">Mot de passe</label>
 
                   <div class="col-md-12">
                       <input id="passwd" type="password" class="form-control{{ $errors->has('passwd') ? ' is-invalid' : '' }}" name="passwd"  placeholder="" required>
