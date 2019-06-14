@@ -1,10 +1,9 @@
 <script>
-  const MODELS = {!! json_encode(Config('models'), JSON_PRETTY_PRINT) !!};
-  const ICONS = {
-    "text" : 'fa-font',
-    "date" : 'fa-calendar',
-    "list" : 'fa-list',
-    "textarea" : 'fa-align-left',
-    "boby" : 'fa-cloud-download',
-  };
+  const MODELS_FIELDS = {!! json_encode(Config('models.fields'), JSON_PRETTY_PRINT) !!};
+  const TEXT = 'text';
+  const NUMBER = 'number';
+  const DATE = 'date';
+  const SELECT = 'select';
+  const FILE = 'file';
+  const RICHTEXT = 'richtext';
 </script>

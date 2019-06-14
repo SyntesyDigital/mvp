@@ -64,12 +64,17 @@ class ElementController extends Controller
 
         $fields = $this->elements->getFieldsByElement($model->WS);
 
-        return view('extranet::elements.form',
-                [
-                  'element_type' => $element_type,
-                  'model' => $model,
-                  'fields' => $fields
-                ]);
+        $data = [
+          'element_type' => $element_type,
+          'model' => $model,
+          'fields' => $fields
+        ];
+
+        if($request->has('debug')){
+          dd($data);
+        }
+
+        return view('extranet::elements.form', $data);
     }
 
     public function show(Element $element, Request $request)

@@ -1,98 +1,96 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
+
+import {initState} from './actions/';
 
 import ElementContainer from './ElementContainer';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import update from 'immutability-helper'
 
+import ElementSidebar from './ElementSidebar';
+import ElementDropZoneContainer from './ElementDropZoneContainer';
 
-export default class ElementForm extends Component {
+import ElementDragField from './ElementDragField';
+import ElementBar from './ElementBar';
 
-    constructor(props)
-    {
-        super(props);
+class ElementForm extends Component {
 
-        // Set translations
-        var translations = {};
-        LANGUAGES.map(function(v,k){
-            translations[v.iso] = true;
-        });
+    constructor(props) {
+      super(props);
 
-        this.state = {
-            element : props.element ? JSON.parse(atob(props.element)) : '',
-            model : props.model ? JSON.parse(atob(props.model)) : '',
-            fieldsList :  props.fields ? JSON.parse(atob(props.fields)) : '',
-            translations: translations,
-        };
+			//init redux state with component parameters
+			var data = {
+				element : props.element ? JSON.parse(atob(props.element)) : null,
+				model : props.model ? JSON.parse(atob(props.model)) : null,
+				fieldsList :  props.fields ? JSON.parse(atob(props.fields)) : [],
+			};
+
+			this.props.initState(data);
+
+			//TODO if element != '' fill fields
 
     }
 
-    componentDidMount()
-    {
-        if(this.state.element) {
-            // Build field list
+		renderFields() {
 
-            var fields = [];
-            this.state.element.fields.map(function(field){
-                fields.push({
-                    icon : field.icon,
-                    id : field.id,
-                    label : field.label,
-                    name : field.name,
-                    identifier : field.identifier,
-                    type : field.type,
-                    input : field.input,
-                    form_name : field.form_name,
-                    saved : true,
-                    editable : true
-                });
-                //console.log("field text => ",field);
-            });
+		  var result = null;
 
-            this.elementContainer.setState({
-                element : this.state.element,
-                fields : fields,
-                icon : this.state.element.icon,
-                inputs : {
-                    name: this.state.element.name,
-                    identifier: this.state.element.identifier,
-                    icon: {
-                      value : this.state.element.icon,
-                      label : this.state.element.icon
-                    }
-                }
-            });
-        }
-        else {
-          var fields = [];
+			//console.log("renderFields => ",this.props.app);
 
-          this.elementContainer.setState({
-            fields : fields
-          });
+		  if(this.props.app.fieldsList){
 
-        }
-    }
+		    result = this.props.app.fieldsList.map((item,i) =>
+		      <ElementDragField definition={item} key={i}/>
+		    )
+		  }
+
+		  return result;
+
+	  }
 
     render() {
-        return (
-            <div>
+
+      return (
+				<div id="model-container">
+
+					<ElementBar />
+
+	  			<DragDropContextProvider backend={HTML5Backend}>
+            <div className="container rightbar-page">
+
+              <div className="col-md-9 page-content">
                 {
-                <ElementContainer
-                    element={this.state.element ? this.state.element : null}
-                    ref={(elementContainer) => this.elementContainer = elementContainer}
-                    translations={this.state.translations}
-                    fieldsList={this.state.fieldsList}
-                />
+                <ElementDropZoneContainer />
                 }
+              </div>
+
+  						<ElementSidebar>
+
+  						{this.renderFields()}
+
+              </ElementSidebar>
+
             </div>
-        );
+	        </DragDropContextProvider>
+
+				</div>
+      );
     }
 }
 
-if (document.getElementById('element-form')) {
-    var htmlElement = document.getElementById('element-form');
-
-    ReactDOM.render(<ElementForm
-      element={htmlElement.getAttribute('element')}
-      fields={htmlElement.getAttribute('fields')}
-      model={htmlElement.getAttribute('model')}
-    />, htmlElement);
+const mapStateToProps = state => {
+    return {
+        app: state.app
+    }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        initState: (payload) => {
+            return dispatch(initState(payload));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ElementForm);
