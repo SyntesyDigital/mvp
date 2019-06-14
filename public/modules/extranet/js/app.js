@@ -28622,7 +28622,7 @@ var baseTimes = __webpack_require__(358),
     isArray = __webpack_require__(7),
     isBuffer = __webpack_require__(154),
     isIndex = __webpack_require__(72),
-    isTypedArray = __webpack_require__(179);
+    isTypedArray = __webpack_require__(180);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -29157,12 +29157,49 @@ module.exports = LazyWrapper;
 
 
 /***/ }),
-/* 171 */,
+/* 171 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(947);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(955);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hooks_useDispatch__ = __webpack_require__(962);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__hooks_useSelector__ = __webpack_require__(963);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__hooks_useStore__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_batch__ = __webpack_require__(736);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_reactBatchedUpdates__ = __webpack_require__(964);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_shallowEqual__ = __webpack_require__(738);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
+/* unused harmony reexport connectAdvanced */
+/* unused harmony reexport ReactReduxContext */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__connect_connect__["a"]; });
+/* unused harmony reexport batch */
+/* unused harmony reexport useDispatch */
+/* unused harmony reexport useSelector */
+/* unused harmony reexport useStore */
+/* unused harmony reexport shallowEqual */
+
+
+
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_7__utils_batch__["b" /* setBatch */])(__WEBPACK_IMPORTED_MODULE_8__utils_reactBatchedUpdates__["a" /* unstable_batchedUpdates */]);
+
+
+/***/ }),
 /* 172 */,
 /* 173 */,
 /* 174 */,
 /* 175 */,
-/* 176 */
+/* 176 */,
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(15);
@@ -29179,8 +29216,8 @@ module.exports = defineProperty;
 
 
 /***/ }),
-/* 177 */,
-/* 178 */
+/* 178 */,
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var eq = __webpack_require__(45),
@@ -29216,7 +29253,7 @@ module.exports = isIterateeCall;
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsTypedArray = __webpack_require__(361),
@@ -29249,7 +29286,7 @@ module.exports = isTypedArray;
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayLikeKeys = __webpack_require__(153),
@@ -29287,7 +29324,7 @@ module.exports = keysIn;
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports) {
 
 /**
@@ -29318,7 +29355,7 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(15),
@@ -29331,7 +29368,7 @@ module.exports = Set;
 
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(15),
@@ -29344,8 +29381,8 @@ module.exports = WeakMap;
 
 
 /***/ }),
-/* 184 */,
-/* 185 */
+/* 185 */,
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MapCache = __webpack_require__(78);
@@ -29424,7 +29461,7 @@ module.exports = memoize;
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports) {
 
 /**
@@ -29448,7 +29485,7 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var createFlow = __webpack_require__(658);
@@ -29478,43 +29515,6 @@ var createFlow = __webpack_require__(658);
 var flow = createFlow();
 
 module.exports = flow;
-
-
-/***/ }),
-/* 188 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Provider__ = __webpack_require__(947);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_connectAdvanced__ = __webpack_require__(737);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__connect_connect__ = __webpack_require__(955);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hooks_useDispatch__ = __webpack_require__(962);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__hooks_useSelector__ = __webpack_require__(963);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__hooks_useStore__ = __webpack_require__(742);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils_batch__ = __webpack_require__(736);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_reactBatchedUpdates__ = __webpack_require__(964);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__utils_shallowEqual__ = __webpack_require__(738);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__components_Provider__["a"]; });
-/* unused harmony reexport connectAdvanced */
-/* unused harmony reexport ReactReduxContext */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__connect_connect__["a"]; });
-/* unused harmony reexport batch */
-/* unused harmony reexport useDispatch */
-/* unused harmony reexport useSelector */
-/* unused harmony reexport useStore */
-/* unused harmony reexport shallowEqual */
-
-
-
-
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_7__utils_batch__["b" /* setBatch */])(__WEBPACK_IMPORTED_MODULE_8__utils_reactBatchedUpdates__["a" /* unstable_batchedUpdates */]);
 
 
 /***/ }),
@@ -30511,7 +30511,7 @@ module.exports = apply;
 /***/ (function(module, exports, __webpack_require__) {
 
 var constant = __webpack_require__(356),
-    defineProperty = __webpack_require__(176),
+    defineProperty = __webpack_require__(177),
     identity = __webpack_require__(70);
 
 /**
@@ -31837,7 +31837,7 @@ var SetCache = __webpack_require__(92),
     arrayIncludesWith = __webpack_require__(161),
     cacheHas = __webpack_require__(93),
     createSet = __webpack_require__(618),
-    setToArray = __webpack_require__(186);
+    setToArray = __webpack_require__(187);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -32316,7 +32316,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isSafari = exports.isFirefox = undefined;
 
-var _memoize = __webpack_require__(185);
+var _memoize = __webpack_require__(186);
 
 var _memoize2 = _interopRequireDefault(_memoize);
 
@@ -33454,13 +33454,197 @@ module.exports = exports["default"];
 /***/ }),
 /* 410 */,
 /* 411 */,
-/* 412 */,
+/* 412 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["f"] = initState;
+/* harmony export (immutable) */ __webpack_exports__["g"] = inputChange;
+/* harmony export (immutable) */ __webpack_exports__["l"] = submitForm;
+/* unused harmony export createElement */
+/* unused harmony export updateElement */
+/* harmony export (immutable) */ __webpack_exports__["e"] = deleteElement;
+/* unused harmony export onSaveSuccess */
+/* unused harmony export onSaveError */
+/* harmony export (immutable) */ __webpack_exports__["a"] = addField;
+/* harmony export (immutable) */ __webpack_exports__["h"] = moveField;
+/* harmony export (immutable) */ __webpack_exports__["b"] = changeField;
+/* harmony export (immutable) */ __webpack_exports__["k"] = removeField;
+/* harmony export (immutable) */ __webpack_exports__["j"] = openModalSettings;
+/* harmony export (immutable) */ __webpack_exports__["c"] = changeFieldSettings;
+/* harmony export (immutable) */ __webpack_exports__["d"] = closeModalSettings;
+/* harmony export (immutable) */ __webpack_exports__["i"] = onModalSettingsClosed;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants___ = __webpack_require__(745);
+
+
+function initState(payload) {
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["f" /* INIT_STATE */], payload: payload };
+};
+
+function inputChange(field) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["g" /* INPUT_CHANGE */], field: field };
+}
+
+function submitForm(data) {
+
+    console.log("submitForm :: ", data);
+
+    if (data.modelId == null) {
+        return createElement(data);
+    } else {
+        return updateElement(data);
+    }
+}
+
+function createElement(data) {
+
+    var _this = this;
+
+    return function (dispatch) {
+
+        axios.post('/architect/elements/store', data).then(function (response) {
+            if (response.data.success) {
+
+                dispatch(onSaveSuccess(response.data));
+
+                /*
+                setTimeout(function(){
+                    window.location.href = routes.showElement.replace(':id',response.data.model_id);
+                },1500);
+                */
+            }
+        }).catch(function (error) {
+            if (error.response) {
+                dispatch(onSaveError(error.response.data));
+            } else if (error.message) {
+                toastr.error(error.message);
+            } else {
+                console.log(Lang.get('fields.error'), error.message);
+            }
+        });
+    };
+}
+
+function updateElement(data) {
+
+    var _this = this;
+
+    return function (dispatch) {
+
+        axios.put('/architect/models/' + data.modelId + '/update', data).then(function (response) {
+            if (response.data.success) {
+                dispatch(onSaveSuccess(response.data));
+            }
+        }).catch(function (error) {
+            if (error.response) {
+                dispatch(onSaveError(error.response.data));
+            } else if (error.message) {
+                toastr.error(error.message);
+            } else {
+                console.log('Error', error.message);
+            }
+            //console.log(error.config);
+        });
+    };
+}
+
+function deleteElement(modelId) {
+
+    var _this = this;
+
+    return function (dispatch) {
+
+        axios.delete('/architect/models/' + modelId + '/delete').then(function (response) {
+            if (response.data.success) {
+
+                dispatch(onSaveSuccess(response.data));
+
+                //window.location.href = routes['models'];
+            }
+        }).catch(function (error) {
+            if (error.response) {
+                dispatch(onSaveError(error.response.data));
+            } else if (error.message) {
+                toastr.error(error.message);
+            } else {
+                console.log('Error', error.message);
+            }
+        });
+    };
+}
+
+//TODO needs test
+function onSaveSuccess(response) {
+    //set all fields to saved
+
+    toastr.success(Lang.get('fields.success'));
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["i" /* SAVE_SUCCESS */], payload: response.element };
+}
+
+function onSaveError(response) {
+
+    var errors = response.errors ? response.errors : null;
+
+    if (response.message) {
+        toastr.error(response.message);
+    }
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["h" /* SAVE_ERROR */], payload: errors };
+}
+
+function addField(payload) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["b" /* FIELD_ADD */], payload: payload };
+}
+
+function moveField(dragIndex, hoverIndex) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["d" /* FIELD_MOVE */], payload: {
+            dragIndex: dragIndex,
+            hoverIndex: hoverIndex
+        } };
+}
+
+function changeField(payload) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["c" /* FIELD_CHANGE */], payload: payload };
+}
+
+function removeField(fieldId) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["e" /* FIELD_REMOVE */], payload: fieldId };
+}
+
+function openModalSettings(fieldId) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["m" /* SETTINGS_OPEN */], payload: fieldId };
+}
+
+function changeFieldSettings(field) {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["j" /* SETTINGS_CHANGE */], payload: field };
+}
+
+function closeModalSettings() {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["k" /* SETTINGS_CLOSE */] };
+}
+
+function onModalSettingsClosed() {
+
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["l" /* SETTINGS_CLOSED */] };
+}
+
+/***/ }),
 /* 413 */,
 /* 414 */,
 /* 415 */,
 /* 416 */,
 /* 417 */,
-/* 418 */
+/* 418 */,
+/* 419 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33489,7 +33673,7 @@ var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8), __webpack_require__(60)(module)))
 
 /***/ }),
-/* 419 */
+/* 420 */
 /***/ (function(module, exports) {
 
 /**
@@ -33519,7 +33703,7 @@ module.exports = baseFindIndex;
 
 
 /***/ }),
-/* 420 */
+/* 421 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38852,9 +39036,9 @@ var index$1 = manageState(Select);
 
 
 /***/ }),
-/* 421 */,
 /* 422 */,
-/* 423 */
+/* 423 */,
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38868,7 +39052,7 @@ if (false) {
 
 
 /***/ }),
-/* 424 */
+/* 425 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38880,7 +39064,7 @@ var ReactReduxContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCont
 /* unused harmony default export */ var _unused_webpack_default_export = (ReactReduxContext);
 
 /***/ }),
-/* 425 */
+/* 426 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38890,7 +39074,7 @@ var ReactReduxContext = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createCont
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return applyMiddleware; });
 /* unused harmony export compose */
 /* unused harmony export __DO_NOT_USE__ActionTypes */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_symbol_observable__ = __webpack_require__(419);
 
 
 /**
@@ -39530,166 +39714,6 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
 
 
 /***/ }),
-/* 426 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["d"] = initState;
-/* harmony export (immutable) */ __webpack_exports__["e"] = inputChange;
-/* harmony export (immutable) */ __webpack_exports__["h"] = submitForm;
-/* unused harmony export createElement */
-/* unused harmony export updateElement */
-/* harmony export (immutable) */ __webpack_exports__["c"] = deleteElement;
-/* unused harmony export onSaveSuccess */
-/* unused harmony export onSaveError */
-/* harmony export (immutable) */ __webpack_exports__["a"] = addField;
-/* harmony export (immutable) */ __webpack_exports__["f"] = moveField;
-/* harmony export (immutable) */ __webpack_exports__["b"] = changeField;
-/* harmony export (immutable) */ __webpack_exports__["g"] = removeField;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants___ = __webpack_require__(745);
-
-
-function initState(payload) {
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["f" /* INIT_STATE */], payload: payload };
-};
-
-function inputChange(field) {
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["g" /* INPUT_CHANGE */], field: field };
-}
-
-function submitForm(data) {
-
-    console.log("submitForm :: ", data);
-
-    if (data.modelId == null) {
-        return createElement(data);
-    } else {
-        return updateElement(data);
-    }
-}
-
-function createElement(data) {
-
-    var _this = this;
-
-    return function (dispatch) {
-
-        axios.post('/architect/elements/store', data).then(function (response) {
-            if (response.data.success) {
-
-                dispatch(onSaveSuccess(response.data));
-
-                /*
-                setTimeout(function(){
-                    window.location.href = routes.showElement.replace(':id',response.data.model_id);
-                },1500);
-                */
-            }
-        }).catch(function (error) {
-            if (error.response) {
-                dispatch(onSaveError(error.response.data));
-            } else if (error.message) {
-                toastr.error(error.message);
-            } else {
-                console.log(Lang.get('fields.error'), error.message);
-            }
-        });
-    };
-}
-
-function updateElement(data) {
-
-    var _this = this;
-
-    return function (dispatch) {
-
-        axios.put('/architect/models/' + data.modelId + '/update', data).then(function (response) {
-            if (response.data.success) {
-                dispatch(onSaveSuccess(response.data));
-            }
-        }).catch(function (error) {
-            if (error.response) {
-                dispatch(onSaveError(error.response.data));
-            } else if (error.message) {
-                toastr.error(error.message);
-            } else {
-                console.log('Error', error.message);
-            }
-            //console.log(error.config);
-        });
-    };
-}
-
-function deleteElement(modelId) {
-
-    var _this = this;
-
-    return function (dispatch) {
-
-        axios.delete('/architect/models/' + modelId + '/delete').then(function (response) {
-            if (response.data.success) {
-
-                dispatch(onSaveSuccess(response.data));
-
-                //window.location.href = routes['models'];
-            }
-        }).catch(function (error) {
-            if (error.response) {
-                dispatch(onSaveError(error.response.data));
-            } else if (error.message) {
-                toastr.error(error.message);
-            } else {
-                console.log('Error', error.message);
-            }
-        });
-    };
-}
-
-//TODO needs test
-function onSaveSuccess(response) {
-    //set all fields to saved
-
-    toastr.success(Lang.get('fields.success'));
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["i" /* SAVE_SUCCESS */], payload: response.element };
-}
-
-function onSaveError(response) {
-
-    var errors = response.errors ? response.errors : null;
-
-    if (response.message) {
-        toastr.error(response.message);
-    }
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["h" /* SAVE_ERROR */], payload: errors };
-}
-
-function addField(payload) {
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["b" /* FIELD_ADD */], payload: payload };
-}
-
-function moveField(dragIndex, hoverIndex) {
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["d" /* FIELD_MOVE */], payload: {
-            dragIndex: dragIndex,
-            hoverIndex: hoverIndex
-        } };
-}
-
-function changeField(payload) {
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["c" /* FIELD_CHANGE */], payload: payload };
-}
-
-function removeField(fieldId) {
-
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["e" /* FIELD_REMOVE */], payload: fieldId };
-}
-
-/***/ }),
 /* 427 */,
 /* 428 */,
 /* 429 */,
@@ -40048,7 +40072,7 @@ var _isPlainObject = __webpack_require__(24);
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-var _symbolObservable = __webpack_require__(418);
+var _symbolObservable = __webpack_require__(419);
 
 var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -40506,7 +40530,7 @@ module.exports = setCacheHas;
 /* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseFindIndex = __webpack_require__(419),
+var baseFindIndex = __webpack_require__(420),
     baseIsNaN = __webpack_require__(613),
     strictIndexOf = __webpack_require__(614);
 
@@ -40609,7 +40633,7 @@ function refCount() {
 /* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(181),
+var arrayFilter = __webpack_require__(182),
     baseRest = __webpack_require__(43),
     baseXor = __webpack_require__(617),
     isArrayLikeObject = __webpack_require__(81);
@@ -40685,9 +40709,9 @@ module.exports = baseXor;
 /* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Set = __webpack_require__(182),
+var Set = __webpack_require__(183),
     noop = __webpack_require__(162),
-    setToArray = __webpack_require__(186);
+    setToArray = __webpack_require__(187);
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -43900,8 +43924,8 @@ exports.default = HTML5Backend;
 
 var baseRest = __webpack_require__(43),
     eq = __webpack_require__(45),
-    isIterateeCall = __webpack_require__(178),
-    keysIn = __webpack_require__(180);
+    isIterateeCall = __webpack_require__(179),
+    keysIn = __webpack_require__(181);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -44590,7 +44614,7 @@ module.exports = createFlow;
 /* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var WeakMap = __webpack_require__(183);
+var WeakMap = __webpack_require__(184);
 
 /** Used to store function metadata. */
 var metaMap = WeakMap && new WeakMap;
@@ -48669,10 +48693,10 @@ var getBatch = function getBatch() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_is__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_is__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_is___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_is__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils_Subscription__ = __webpack_require__(701);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Context__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Context__ = __webpack_require__(425);
 
 
 
@@ -49218,7 +49242,7 @@ function useStore() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(704);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Context__ = __webpack_require__(425);
 
 
 
@@ -49250,7 +49274,7 @@ function useReduxContext() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_reducer__ = __webpack_require__(965);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fontawesome_reducer__ = __webpack_require__(966);
 
@@ -49279,6 +49303,10 @@ function useReduxContext() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FIELD_MOVE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return FIELD_REMOVE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FIELD_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SETTINGS_OPEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SETTINGS_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SETTINGS_CLOSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SETTINGS_CLOSED; });
 var INIT_STATE = "INIT_STATE";
 var INPUT_CHANGE = "INPUT_CHANGE";
 var DELETE_ELEMENT = "DELETE_ELEMENT";
@@ -49292,6 +49320,11 @@ var FIELD_ADD = "FIELD_ADD";
 var FIELD_MOVE = "FIELD_MOVE";
 var FIELD_REMOVE = "FIELD_REMOVE";
 var FIELD_CHANGE = "FIELD_CHANGE";
+
+var SETTINGS_OPEN = "SETTINGS_OPEN";
+var SETTINGS_CHANGE = "SETTINGS_CHANGE";
+var SETTINGS_CLOSE = "SETTINGS_CLOSE";
+var SETTINGS_CLOSED = "SETTINGS_CLOSED";
 
 /***/ }),
 /* 746 */
@@ -49380,10 +49413,25 @@ var ElementDropZone = function (_Component) {
 		_this.handleRemoveField = _this.handleRemoveField.bind(_this);
 		_this.handleFieldChange = _this.handleFieldChange.bind(_this);
 		_this.handleOpenSettings = _this.handleOpenSettings.bind(_this);
+
+		_this.ini;
 		return _this;
 	}
 
 	_createClass(ElementDropZone, [{
+		key: 'getMaxId',
+		value: function getMaxId() {
+			var fields = this.props.fields;
+
+			var maxId = 1;
+
+			for (var key in fields) {
+				maxId = Math.max(fields[key].id, maxId);
+			}
+
+			return maxId;
+		}
+	}, {
 		key: 'exploteToObject',
 		value: function exploteToObject(fields) {
 
@@ -49410,13 +49458,15 @@ var ElementDropZone = function (_Component) {
 			}
 
 			var field = {
-				id: this.props.fields.length + 1,
+				id: this.getMaxId() + 1,
 				type: field.type,
 				name: field.name,
 				identifier: field.identifier,
 				icon: field.icon,
 				saved: false,
-				editable: true
+				editable: true,
+				rules: this.exploteToObject(field.rules),
+				settings: this.exploteToObject(field.settings)
 			};
 
 			this.props.onFieldAdded(field);
@@ -49566,7 +49616,10 @@ var fieldSource = {
 			type: props.definition.type,
 			icon: props.definition.icon,
 			identifier: props.definition.identifier,
-			added: props.definition.added
+			added: props.definition.added,
+			formats: props.definition.formats,
+			rules: props.definition.rules,
+			settings: props.definition.settings
 		};
 	},
 	endDrag: function endDrag(props, monitor) {
@@ -49631,8 +49684,8 @@ ElementDragField.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(412);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -49708,8 +49761,6 @@ var ElementBar = function (_Component) {
     key: 'render',
     value: function render() {
 
-      console.log("ElementBar => ", this.props.app);
-
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'page-bar' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-12' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: routes['models'], className: 'btn btn-default' }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-angle-left' }), ' '), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h1', null, this.props.app.inputs.icon != "" && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: this.props.app.inputs.icon.value }), '\xA0', this.props.app.inputs.name != "" ? this.props.app.inputs.name : "Nouveau élément"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'float-buttons pull-right' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-primary', onClick: this.onSubmitForm.bind(this) }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-cloud-upload' }), ' \xA0 ', Lang.get('fields.save'), ' '))))));
     }
   }]);
@@ -49726,7 +49777,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     submitForm: function submitForm(data) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["h" /* submitForm */])(data));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["l" /* submitForm */])(data));
     }
   };
 };
@@ -49742,9 +49793,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_select__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_select__ = __webpack_require__(421);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__SelectOption__ = __webpack_require__(970);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__SelectValue__ = __webpack_require__(971);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -49901,10 +49952,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     inputChange: function inputChange(field) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["e" /* inputChange */])(field));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["g" /* inputChange */])(field));
     },
     deleteElement: function deleteElement(modelId) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["c" /* deleteElement */])(modelId));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["e" /* deleteElement */])(modelId));
     }
   };
 };
@@ -50187,11 +50238,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reducers_index__ = __webpack_require__(744);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ElementForm__ = __webpack_require__(967);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__configureStore__ = __webpack_require__(973);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__configureStore__ = __webpack_require__(979);
 
 
 
@@ -50226,7 +50277,7 @@ if (document.getElementById('element-form')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(950);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Context__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Context__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_Subscription__ = __webpack_require__(701);
 
 
@@ -50348,7 +50399,7 @@ function _inheritsLoose(subClass, superClass) {
  */
 
 if (true) {
-  var ReactIs = __webpack_require__(423);
+  var ReactIs = __webpack_require__(424);
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
@@ -50609,7 +50660,7 @@ exports.isSuspense = isSuspense;
 
 
 
-var ReactIs = __webpack_require__(423);
+var ReactIs = __webpack_require__(424);
 var assign = __webpack_require__(16);
 
 var ReactPropTypesSecret = __webpack_require__(735);
@@ -51313,7 +51364,7 @@ module.exports = checkPropTypes;
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
  */
-var ReactIs = __webpack_require__(423);
+var ReactIs = __webpack_require__(424);
 var REACT_STATICS = {
     childContextTypes: true,
     contextType: true,
@@ -51533,7 +51584,7 @@ function createConnect(_temp) {
 /* unused harmony export whenMapDispatchToPropsIsFunction */
 /* unused harmony export whenMapDispatchToPropsIsMissing */
 /* unused harmony export whenMapDispatchToPropsIsObject */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrapMapToProps__ = __webpack_require__(739);
 
 
@@ -51963,6 +52014,16 @@ var _extends = Object.assign || function (target) {
     }return target;
 };
 
+var _initialState;
+
+function _defineProperty(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+    } else {
+        obj[key] = value;
+    }return obj;
+}
+
 
 
 
@@ -51972,7 +52033,7 @@ LANGUAGES.map(function (v, k) {
     translations[v.iso] = true;
 });
 
-var initialState = {
+var initialState = (_initialState = {
     translations: translations,
     fields: [],
     inputs: {
@@ -51989,13 +52050,14 @@ var initialState = {
     fieldsList: [],
     model: null,
     element: null
-};
+}, _defineProperty(_initialState, 'settingsField', null), _defineProperty(_initialState, 'modalSettingsDisplay', false), _initialState);
 
 function appReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
     var action = arguments[1];
     var fields = state.fields,
-        fieldsList = state.fieldsList;
+        fieldsList = state.fieldsList,
+        settingsField = state.settingsField;
 
     switch (action.type) {
         case __WEBPACK_IMPORTED_MODULE_0__constants__["f" /* INIT_STATE */]:
@@ -52122,6 +52184,47 @@ function appReducer() {
             return _extends({}, state, {
                 fields: fields
             });
+
+        case __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* SETTINGS_OPEN */]:
+
+            var newField = null;
+
+            for (var key in fields) {
+                if (fields[key].id == action.payload) {
+                    newField = fields[key];
+                    break;
+                }
+            }
+
+            return _extends({}, state, {
+                settingsField: newField,
+                modalSettingsDisplay: true
+            });
+
+        case __WEBPACK_IMPORTED_MODULE_0__constants__["j" /* SETTINGS_CHANGE */]:
+
+            var field = action.payload;
+
+            settingsField[field.source][field.name] = field.value;
+
+            //console.log("SETTINGS_CHANGE :: ",settingsField);
+
+            return _extends({}, state, {
+                settingsField: settingsField
+            });
+
+        case __WEBPACK_IMPORTED_MODULE_0__constants__["k" /* SETTINGS_CLOSE */]:
+
+            return _extends({}, state, {
+                modalSettingsDisplay: false
+            });
+
+        case __WEBPACK_IMPORTED_MODULE_0__constants__["l" /* SETTINGS_CLOSED */]:
+
+            return _extends({}, state, {
+                settingsField: null
+            });
+
         default:
             return state;
     }
@@ -53275,8 +53378,8 @@ function fontawesomeReducer() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions___ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions___ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ElementContainer__ = __webpack_require__(968);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dnd__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dnd__);
@@ -53288,6 +53391,7 @@ function fontawesomeReducer() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ElementDropZoneContainer__ = __webpack_require__(972);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ElementDragField__ = __webpack_require__(747);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ElementBar__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ElementModal__ = __webpack_require__(973);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -53317,6 +53421,7 @@ function _inherits(subClass, superClass) {
         throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
+
 
 
 
@@ -53377,7 +53482,9 @@ var ElementForm = function (_Component) {
         key: 'render',
         value: function render() {
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'model-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__ElementBar__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_dnd__["DragDropContextProvider"], { backend: __WEBPACK_IMPORTED_MODULE_5_react_dnd_html5_backend___default.a }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container rightbar-page' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-9 page-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ElementDropZoneContainer__["a" /* default */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ElementSidebar__["a" /* default */], null, this.renderFields()))));
+            console.log("\n\nElementForm :: render!");
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'model-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__ElementBar__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_dnd__["DragDropContextProvider"], { backend: __WEBPACK_IMPORTED_MODULE_5_react_dnd_html5_backend___default.a }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container rightbar-page' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ElementModal__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-9 page-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ElementDropZoneContainer__["a" /* default */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ElementSidebar__["a" /* default */], null, this.renderFields()))));
         }
     }]);
 
@@ -53393,7 +53500,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         initState: function initState(payload) {
-            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions___["d" /* initState */])(payload));
+            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions___["f" /* initState */])(payload));
         }
     };
 };
@@ -53648,7 +53755,7 @@ var ElementContainer = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dnd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dnd__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__FieldTypes__ = __webpack_require__(705);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_flow__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_flow__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_flow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_flow__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -53890,7 +53997,7 @@ var ElementField = function (_Component) {
 
 			var opacity = isDragging ? 0 : 1;
 
-			return connectDragSource(connectDropTarget(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', style: _extends({}, style, { opacity: opacity }) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: "field-type " }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.icon }), ' \xA0', MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: this.props.editable ? false : true, type: 'text', className: 'form-control', name: 'name', placeholder: 'Nom', value: this.state.name, onChange: this.handleChange })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: true, type: 'text', className: 'form-control', name: 'identifier', placeholder: 'Idenfiticador', value: this.state.identifier, onChange: this.handleChange })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', onClick: this.onOpenSettings }, ' ', Lang.get('header.configuration')), ' \xA0\xA0', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0'))));
+			return connectDragSource(connectDropTarget(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', style: _extends({}, style, { opacity: opacity }) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: "field-type " }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.icon }), ' \xA0', MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: this.props.editable ? false : true, type: 'text', className: 'form-control', name: 'name', placeholder: 'Nom', value: this.state.name, onChange: this.handleChange })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: true, type: 'text', className: 'form-control', name: 'identifier', placeholder: 'Idenfiticador', value: this.state.identifier, onChange: this.handleChange })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', onClick: this.onOpenSettings }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-pencil-alt' }), ' ', Lang.get('header.configuration')), ' \xA0\xA0', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0'))));
 		}
 	}]);
 
@@ -54113,8 +54220,8 @@ SelectValue.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ElementDropZone__ = __webpack_require__(746);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -54153,6 +54260,7 @@ function _inherits(subClass, superClass) {
 
 
 
+
 var ElementDropZoneContainer = function (_Component) {
 	_inherits(ElementDropZoneContainer, _Component);
 
@@ -54172,13 +54280,11 @@ var ElementDropZoneContainer = function (_Component) {
 		value: function handleRemoveField(fieldId) {
 			this.props.removeField(fieldId);
 		}
-
-		/*
-  	handleOpenSettings(fieldId) {
-  	this.props.onOpenSettings(fieldId);
-  }
-  	*/
-
+	}, {
+		key: 'handleOpenSettings',
+		value: function handleOpenSettings(fieldId) {
+			this.props.onOpenSettings(fieldId);
+		}
 	}, {
 		key: 'handleFieldAdded',
 		value: function handleFieldAdded(field) {
@@ -54200,10 +54306,11 @@ var ElementDropZoneContainer = function (_Component) {
 				onFieldAdded: this.handleFieldAdded.bind(this),
 				onFieldChanged: this.handleFieldChange.bind(this),
 				moveField: this.moveField.bind(this),
-				onRemoveField: this.handleRemoveField.bind(this)
+				onRemoveField: this.handleRemoveField.bind(this),
+				onOpenSettings: this.handleOpenSettings.bind(this)
 
 				//onSettingsFieldChange={this.handleSettingsChanged}
-				//onOpenSettings={this.handleOpenSettings}
+
 			});
 		}
 	}]);
@@ -54226,10 +54333,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["b" /* changeField */])(field));
 		},
 		removeField: function removeField(fieldId) {
-			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["g" /* removeField */])(fieldId));
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["k" /* removeField */])(fieldId));
 		},
 		moveField: function moveField(dragIndex, hoverIndex) {
-			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["f" /* moveField */])(dragIndex, hoverIndex));
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["h" /* moveField */])(dragIndex, hoverIndex));
+		},
+		onOpenSettings: function onOpenSettings(fieldId) {
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["j" /* openModalSettings */])(fieldId));
 		}
 	};
 };
@@ -54241,9 +54351,986 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Settings_BooleanSettingsField__ = __webpack_require__(974);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__ = __webpack_require__(975);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Settings_CheckboxesSettingsField__ = __webpack_require__(976);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Settings_SelectorSettingsField__ = __webpack_require__(977);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Settings_RadioSettingsField__ = __webpack_require__(978);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__actions___ = __webpack_require__(412);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ElementModal = function (_Component) {
+  _inherits(ElementModal, _Component);
+
+  function ElementModal(props) {
+    _classCallCheck(this, ElementModal);
+
+    var _this = _possibleConstructorReturn(this, (ElementModal.__proto__ || Object.getPrototypeOf(ElementModal)).call(this, props));
+
+    _this.handleFieldSettingsChange = _this.handleFieldSettingsChange.bind(_this);
+    _this.onModalClose = _this.onModalClose.bind(_this);
+
+    _this.state = {
+      id: 'modal-element-settings',
+      isOpen: false
+    };
+
+    return _this;
+  }
+
+  _createClass(ElementModal, [{
+    key: 'handleFieldSettingsChange',
+    value: function handleFieldSettingsChange(field) {
+      this.props.changeFieldSettings(field);
+    }
+  }, {
+    key: 'onModalClose',
+    value: function onModalClose(e) {
+      e.preventDefault();
+
+      this.props.closeModalSettings();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("ElementModal :: ", nextProps);
+
+      if (nextProps.display != this.state.isOpen) {
+        if (nextProps.display) {
+          this.openModal();
+        } else {
+          this.closeModal();
+        }
+      }
+    }
+  }, {
+    key: 'openModal',
+    value: function openModal() {
+      $("#" + this.state.id).css({
+        display: "block"
+      });
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        opacity: 1,
+        ease: Power2.easeInOut
+      });
+      this.setState({
+        isOpen: true
+      });
+    }
+  }, {
+    key: 'closeModal',
+    value: function closeModal() {
+      var self = this;
+
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        display: "none",
+        opacity: 0,
+        ease: Power2.easeInOut,
+        onComplete: function onComplete() {
+          self.setState({
+            isOpen: false
+          });
+          self.props.onModalSettingsClosed();
+        }
+      });
+    }
+  }, {
+    key: 'getFormatsList',
+    value: function getFormatsList() {
+
+      var field = this.props.app.settingsField;
+
+      if (!field) return [];
+
+      return MODELS_FIELDS[field.type].formats.map(function (item, index) {
+        return { name: Lang.get('fields.' + item), value: item };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var field = this.props.app.settingsField;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'custom-modal', id: this.state.id }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-container' }, field != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-header' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + field.icon }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h2', null, field.name, ' | ', Lang.get('header.configuration')), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-buttons' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { className: 'btn btn-default close-button-modal', onClick: this.onModalClose }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times' })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_BooleanSettingsField__["a" /* default */], {
+        field: field,
+        name: 'required',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Champ obligatoire'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Settings_SelectorSettingsField__["a" /* default */], {
+        field: field,
+        name: 'format',
+        source: 'settings',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Format',
+        options: this.getFormatsList()
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_BooleanSettingsField__["a" /* default */], {
+        field: field,
+        name: 'unique',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Champ unique'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__["a" /* default */], {
+        field: field,
+        name: 'minCharacters',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Caract\xE8res minimum',
+        inputLabel: 'Indique le nombre minimum de caract\xE8res'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__["a" /* default */], {
+        field: field,
+        name: 'maxCharacters',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Caract\xE8res maximum',
+        inputLabel: 'Indique le nombre maximum de caract\xE8res'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__["a" /* default */], {
+        field: field,
+        name: 'maxItems',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Nombre maximum d\'\xE9l\xE9ments',
+        inputLabel: 'Indique le nombre maximum'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__["a" /* default */], {
+        field: field,
+        name: 'minItems',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Nombre minimum d\'\xE9l\xE9ments',
+        inputLabel: 'Indiquez le nombre minimum'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Settings_InputSettingsField__["a" /* default */], {
+        field: field,
+        name: 'fieldHeight',
+        source: 'settings',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Hauteur du champ',
+        inputLabel: 'Indique la hauteur en pixels'
+      })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-footer' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default', onClick: this.onModalClose }, ' Fermer '), ' \xA0'))));
+    }
+  }]);
+
+  return ElementModal;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    app: state.app,
+    display: state.app.modalSettingsDisplay
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    closeModalSettings: function closeModalSettings() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actions___["d" /* closeModalSettings */])());
+    },
+    onModalSettingsClosed: function onModalSettingsClosed() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actions___["i" /* onModalSettingsClosed */])());
+    },
+    changeFieldSettings: function changeFieldSettings(field) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actions___["c" /* changeFieldSettings */])(field));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps, mapDispatchToProps)(ElementModal));
+
+/***/ }),
+/* 974 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var BooleanSettingsField = function (_Component) {
+  _inherits(BooleanSettingsField, _Component);
+
+  function BooleanSettingsField(props) {
+    _classCallCheck(this, BooleanSettingsField);
+
+    var _this = _possibleConstructorReturn(this, (BooleanSettingsField.__proto__ || Object.getPrototypeOf(BooleanSettingsField)).call(this, props));
+
+    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(BooleanSettingsField, [{
+    key: 'handleFieldChange',
+    value: function handleFieldChange(event) {
+      var field = {
+        name: event.target.name,
+        source: this.props.source,
+        value: event.target.checked
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var display = false;
+      var checkbox = null;
+      if (this.props.field != null && this.props.field[this.props.source] != null && this.props.field[this.props.source][this.props.name] !== undefined) {
+        checkbox = this.props.field[this.props.source][this.props.name];
+        display = true;
+      }
+
+      console.log("BooleanSettingsField :: display => ", display);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field', style: { display: display ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+        type: 'checkbox',
+        name: this.props.name,
+        checked: checkbox != null ? checkbox : false,
+        onChange: this.handleFieldChange
+      }), this.props.label)));
+    }
+  }]);
+
+  return BooleanSettingsField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (BooleanSettingsField);
+
+/***/ }),
+/* 975 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var InputSettingsField = function (_Component) {
+  _inherits(InputSettingsField, _Component);
+
+  function InputSettingsField(props) {
+    _classCallCheck(this, InputSettingsField);
+
+    var _this = _possibleConstructorReturn(this, (InputSettingsField.__proto__ || Object.getPrototypeOf(InputSettingsField)).call(this, props));
+
+    var checkbox = null;
+    var input = "";
+    var display = false;
+
+    _this.state = {
+      checkbox: checkbox,
+      input: input,
+      display: display
+    };
+
+    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+
+    return _this;
+  }
+
+  _createClass(InputSettingsField, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.processProps(this.props);
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.processProps(nextProps);
+    }
+  }, {
+    key: 'processProps',
+    value: function processProps(nextProps) {
+      var checkbox = null;
+      var input = "";
+      var display = false;
+
+      //console.log("InputSettingsField :: componentWillRecieveProps");
+      //console.log(nextProps);
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+
+        input = nextProps.field[nextProps.source][nextProps.name] == null ? '' : nextProps.field[nextProps.source][nextProps.name];
+      }
+
+      this.setState({
+        checkbox: checkbox,
+        input: input,
+        display: display
+      });
+    }
+  }, {
+    key: 'handleFieldChange',
+    value: function handleFieldChange(event) {
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.checked ? "" : null
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.value
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _state = this.state,
+          checkbox = _state.checkbox,
+          input = _state.input;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { display: this.state.display ? 'block' : 'none' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox',
+        name: this.props.name,
+        checked: this.state.checkbox != null ? checkbox : false,
+        onChange: this.handleFieldChange
+      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config', style: { display: this.state.checkbox != null && this.state.checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { htmlFor: 'num', className: 'bmd-label-floating' }, this.props.inputLabel), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: '', className: 'form-control', id: 'num', value: this.state.input, onChange: this.handleInputChange })))));
+    }
+  }]);
+
+  return InputSettingsField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (InputSettingsField);
+
+/***/ }),
+/* 976 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var CheckboxesSettingsField = function (_Component) {
+  _inherits(CheckboxesSettingsField, _Component);
+
+  function CheckboxesSettingsField(props) {
+    _classCallCheck(this, CheckboxesSettingsField);
+
+    var _this = _possibleConstructorReturn(this, (CheckboxesSettingsField.__proto__ || Object.getPrototypeOf(CheckboxesSettingsField)).call(this, props));
+
+    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
+    _this.handleCheckboxChange = _this.handleCheckboxChange.bind(_this);
+    _this.existInput = _this.existInput.bind(_this);
+
+    _this.state = {
+      checkbox: null,
+      fields: [],
+      display: false
+    };
+
+    return _this;
+  }
+
+  _createClass(CheckboxesSettingsField, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var checkbox = null;
+      var display = false;
+      var fields = [];
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+        fields = nextProps.field[nextProps.source][nextProps.name];
+      }
+
+      this.setState({
+        checkbox: checkbox,
+        fields: fields,
+        display: display
+      });
+    }
+  }, {
+    key: 'handleFieldChange',
+    value: function handleFieldChange(event) {
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.checked ? [] : null
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'handleCheckboxChange',
+    value: function handleCheckboxChange(event) {
+
+      var fields = this.state.fields;
+
+      console.log("CheckboxesSettingsField::handleFieldChange");
+      console.log(event.target.value);
+
+      if (event.target.checked) {
+        //add value
+        if (!this.existInput(event.target.value)) {
+          fields.push(parseInt(event.target.value));
+        }
+      } else {
+        //remove value
+        this.removeValue(event.target.value, fields);
+      }
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: fields
+      };
+
+      //console.log("selectorSettingsField");
+      //console.log(field);
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'removeValue',
+    value: function removeValue(value, fields) {
+
+      for (var i = fields.length - 1; i >= 0; i--) {
+        if (fields[i] == value) {
+          fields.splice(i, 1);
+        }
+      }
+    }
+  }, {
+    key: 'existInput',
+    value: function existInput(value) {
+
+      //console.log("SelectorSettings : existInput : "+value);
+      var fields = this.state.fields;
+
+      if (fields == null) {
+        return false;
+      }
+
+      if (fields.indexOf(value) != -1) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: 'renderOptions',
+    value: function renderOptions() {
+      var _this2 = this;
+
+      return this.props.options.map(function (item, i) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { className: 'form-check-label', key: i }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-check-input', type: 'checkbox',
+          checked: _this2.existInput(item.id),
+          value: item.id,
+          onChange: _this2.handleCheckboxChange
+        }), ' ', '\xA0', item.name, '\xA0', '\xA0');
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _state = this.state,
+          checkbox = _state.checkbox,
+          display = _state.display,
+          fields = _state.fields;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { display: display ? 'block' : 'none' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox',
+        name: this.props.name,
+        checked: checkbox != null ? checkbox : false,
+        onChange: this.handleFieldChange
+      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config', style: { display: checkbox != null && checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, this.renderOptions()))));
+    }
+  }]);
+
+  return CheckboxesSettingsField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* unused harmony default export */ var _unused_webpack_default_export = (CheckboxesSettingsField);
+
+/***/ }),
+/* 977 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var SelectorSettingsField = function (_Component) {
+  _inherits(SelectorSettingsField, _Component);
+
+  function SelectorSettingsField(props) {
+    _classCallCheck(this, SelectorSettingsField);
+
+    var _this = _possibleConstructorReturn(this, (SelectorSettingsField.__proto__ || Object.getPrototypeOf(SelectorSettingsField)).call(this, props));
+
+    _this.state = {
+      checkbox: null,
+      value: '',
+      display: false
+    };
+
+    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(SelectorSettingsField, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.processProps(this.props);
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.processProps(nextProps);
+      /*
+        var display = false;
+        var value = "";
+         if(nextProps.field != null
+            && nextProps.field[nextProps.source] != null
+            && nextProps.field[nextProps.source][nextProps.name] !== undefined)
+        {
+          display = true;
+          if(nextProps.field[nextProps.source][nextProps.name] != null ) {
+              value = nextProps.field[nextProps.source][nextProps.name];
+          }
+        }
+         this.setState({
+            value : value,
+            display : display
+        });
+        */
+    }
+  }, {
+    key: 'handleFieldChange',
+    value: function handleFieldChange(event) {
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.checked ? this.props.options[0].value : null
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.value
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'processProps',
+    value: function processProps(nextProps) {
+      var checkbox = null;
+      var value = "";
+      var display = false;
+
+      //console.log("InputSettingsField :: componentWillRecieveProps");
+      //console.log(nextProps);
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+
+        value = nextProps.field[nextProps.source][nextProps.name] == null ? '' : nextProps.field[nextProps.source][nextProps.name];
+      }
+
+      this.setState({
+        checkbox: checkbox,
+        value: value,
+        display: display
+      });
+    }
+  }, {
+    key: 'renderOptions',
+    value: function renderOptions() {
+      return this.props.options.map(function (item, i) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { value: item.value, key: i }, item.name);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _state = this.state,
+          checkbox = _state.checkbox,
+          value = _state.value,
+          display = _state.display;
+
+      console.log("SelectorSettingsValue => ", value);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { display: display ? 'block' : 'none' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox',
+        name: this.props.name,
+        checked: this.state.checkbox != null ? checkbox : false,
+        onChange: this.handleFieldChange
+      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config', style: { display: checkbox != null && checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('select', { className: 'form-control', name: this.props.name, value: value, onChange: this.handleInputChange }, this.renderOptions())))));
+    }
+  }]);
+
+  return SelectorSettingsField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (SelectorSettingsField);
+
+/***/ }),
+/* 978 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var RadioSettingsField = function (_Component) {
+  _inherits(RadioSettingsField, _Component);
+
+  function RadioSettingsField(props) {
+    _classCallCheck(this, RadioSettingsField);
+
+    var _this = _possibleConstructorReturn(this, (RadioSettingsField.__proto__ || Object.getPrototypeOf(RadioSettingsField)).call(this, props));
+
+    _this.state = {
+      checkbox: false,
+      value: null,
+      display: false
+    };
+
+    _this.handleFieldChange = _this.handleFieldChange.bind(_this);
+    _this.handleCheckboxChange = _this.handleCheckboxChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(RadioSettingsField, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+
+      var checkbox = false;
+      var display = false;
+      var value = null;
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+        value = nextProps.field[nextProps.source][nextProps.name];
+      }
+
+      this.setState({
+        checkbox: checkbox,
+        value: value,
+        display: display
+      });
+    }
+  }, {
+    key: 'handleFieldChange',
+    value: function handleFieldChange(event) {
+
+      this.setState({
+        checkbox: event.target.checked
+      });
+
+      if (!event.target.checked && this.state.value != null) {
+
+        var field = {
+          name: this.props.name,
+          source: this.props.source,
+          value: null
+        };
+
+        this.props.onFieldChange(field);
+      }
+    }
+  }, {
+    key: 'handleCheckboxChange',
+    value: function handleCheckboxChange(event) {
+      console.log('=> handleCheckboxChange');
+      console.log('value => ', event.target.value);
+
+      this.setState({
+        value: event.target.value
+      });
+
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.value
+      };
+
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: 'renderOptions',
+    value: function renderOptions() {
+
+      var self = this;
+      var value = this.state.value;
+
+      return this.props.options.map(function (item, i) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { className: 'form-check-label', key: i }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'form-check-input', type: 'radio',
+          checked: value != null && value == item.value ? true : false,
+          name: self.props.name,
+          value: item.value,
+          onChange: self.handleCheckboxChange
+        }), ' ', '\xA0', item.name, '\xA0', '\xA0');
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _state = this.state,
+          checkbox = _state.checkbox,
+          display = _state.display,
+          fields = _state.fields;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { display: display ? 'block' : 'none' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox',
+        name: this.props.name,
+        checked: checkbox,
+        onChange: this.handleFieldChange
+      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config', style: { display: checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, this.renderOptions()))));
+    }
+  }]);
+
+  return RadioSettingsField;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* unused harmony default export */ var _unused_webpack_default_export = (RadioSettingsField);
+
+/***/ }),
+/* 979 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reducers__ = __webpack_require__(744);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux_thunk__ = __webpack_require__(974);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_redux_thunk__ = __webpack_require__(980);
 
 
 
@@ -54256,7 +55343,7 @@ function configureStore() {
 /* harmony default export */ __webpack_exports__["a"] = (configureStore);
 
 /***/ }),
-/* 974 */
+/* 980 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

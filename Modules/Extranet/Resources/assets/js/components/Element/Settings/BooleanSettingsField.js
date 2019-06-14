@@ -30,6 +30,8 @@ class BooleanSettingsField extends Component {
       display = true;
     }
 
+    console.log("BooleanSettingsField :: display => ",display);
+
     return (
       <div className="setup-field" style={{display : display ? "block":"none"}}>
         <div className="togglebutton">

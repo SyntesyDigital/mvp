@@ -35,6 +35,20 @@ class ElementDropZone extends Component {
 		this.handleRemoveField = this.handleRemoveField.bind(this);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 		this.handleOpenSettings = this.handleOpenSettings.bind(this);
+
+		this.ini
+	}
+
+	getMaxId() {
+		const fields = this.props.fields;
+
+		var maxId = 1;
+
+		for(var key in fields){
+			maxId = Math.max(fields[key].id,maxId);
+		}
+
+		return maxId;
 	}
 
 	exploteToObject(fields) {
@@ -61,13 +75,15 @@ class ElementDropZone extends Component {
 		}
 
 		var field = {
-			id : this.props.fields.length + 1,
+			id : this.getMaxId() + 1,
 			type : field.type,
 			name : field.name,
 			identifier : field.identifier,
 			icon : field.icon,
 			saved : false,
-			editable : true
+			editable : true,
+			rules : this.exploteToObject(field.rules),
+			settings : this.exploteToObject(field.settings)
 		};
 
 		this.props.onFieldAdded(field);

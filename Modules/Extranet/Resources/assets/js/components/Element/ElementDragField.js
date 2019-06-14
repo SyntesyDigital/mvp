@@ -14,6 +14,9 @@ const fieldSource = {
 			icon: props.definition.icon,
 			identifier: props.definition.identifier,
 			added: props.definition.added,
+			formats : props.definition.formats,
+			rules: props.definition.rules,
+			settings: props.definition.settings
 		}
 	},
 

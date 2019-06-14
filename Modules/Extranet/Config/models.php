@@ -9,12 +9,15 @@ return [
         'icon' => 'fa fa-font',
         'formats' => [
           'email',
-          'color'
+          'telephone'
         ],
         'rules' => [
-          'isRequired',
+          'required',
+          'minCharacters',
+          'maxCharacters'
         ],
         'settings' => [
+          'format',
           'maxLength',
         ]
       ],
@@ -24,32 +27,31 @@ return [
         'label' => 'Number',
         'icon' => 'fa fa-calculator',
         'formats' => [
-          'id',
           'price',
-          'quantity',
+          'price_with_decimals',
         ],
         'rules' => [
-          'isRequired'
+          'required'
         ],
         'settings' => [
+          'format',
         ]
       ],
       'date' => [
         'mapping' => 'date',
         'identifier' => 'date',
         'label' => 'Date',
-        'icon' => 'fa fa-calendar',
+        'icon' => 'far fa-calendar',
         'formats' => [
-          'dayMonthYear',
-          'monthYear',
-          'year',
-          'text'
+          'day_month_year',
+          'month_year',
+          'year'
         ],
         'rules' => [
-          'dateFormat',
-          'isRequired'
+          'required',
         ],
         'settings' => [
+          'format',
         ]
       ],
       'select' => [
@@ -60,6 +62,7 @@ return [
         'formats' => [
         ],
         'rules' => [
+          'required',
         ],
         'settings' => [
           'ws' => ''
@@ -71,6 +74,12 @@ return [
         'label' => 'File',
         'icon' => 'fas fa-paperclip',
         'formats' => [
+        ],
+        'rules' => [
+          'required',
+        ],
+        'settings' => [
+          'ws' => ''
         ]
       ],
       'richtext' => [
@@ -79,6 +88,14 @@ return [
         'label' => 'Rich Text',
         'icon' => 'fas fa-align-left',
         'formats' => [
+        ],
+        'rules' => [
+          'required',
+          'minCharacters',
+          'maxCharacters'
+        ],
+        'settings' => [
+          'ws' => ''
         ]
       ]
     ]

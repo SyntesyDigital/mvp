@@ -11,3 +11,8 @@ export const FIELD_ADD = "FIELD_ADD";
 export const FIELD_MOVE = "FIELD_MOVE";
 export const FIELD_REMOVE = "FIELD_REMOVE";
 export const FIELD_CHANGE = "FIELD_CHANGE";
+
+export const SETTINGS_OPEN = "SETTINGS_OPEN";
+export const SETTINGS_CHANGE = "SETTINGS_CHANGE";
+export const SETTINGS_CLOSE = "SETTINGS_CLOSE";
+export const SETTINGS_CLOSED = "SETTINGS_CLOSED";

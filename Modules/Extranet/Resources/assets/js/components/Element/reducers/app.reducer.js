@@ -8,7 +8,12 @@ import {
   FIELD_ADD,
   FIELD_MOVE,
   FIELD_REMOVE,
-  FIELD_CHANGE
+  FIELD_CHANGE,
+
+  SETTINGS_OPEN,
+  SETTINGS_CHANGE,
+  SETTINGS_CLOSE,
+  SETTINGS_CLOSED
 
 } from '../constants';
 
@@ -36,12 +41,14 @@ const initialState =  {
   settingsField: null,
   fieldsList : [],
   model : null,
-  element : null
+  element : null,
+  settingsField : null,
+  modalSettingsDisplay : false
 }
 
 function appReducer(state = initialState, action) {
 
-    const {fields, fieldsList} = state;
+    const {fields, fieldsList, settingsField} = state;
 
     switch(action.type) {
         case INIT_STATE:
@@ -180,6 +187,52 @@ function appReducer(state = initialState, action) {
               ...state,
               fields
             }
+
+        case SETTINGS_OPEN :
+
+            var newField = null;
+
+            for(var key in fields){
+              if(fields[key].id == action.payload){
+                newField = fields[key];
+                break;
+              }
+            }
+
+            return {
+              ...state,
+              settingsField : newField,
+              modalSettingsDisplay : true
+            }
+
+        case SETTINGS_CHANGE :
+
+            var field = action.payload;
+
+            settingsField[field.source][field.name] = field.value;
+
+            //console.log("SETTINGS_CHANGE :: ",settingsField);
+
+            return {
+              ...state,
+              settingsField : settingsField
+            }
+
+        case SETTINGS_CLOSE :
+
+            return {
+              ...state,
+              modalSettingsDisplay : false
+            }
+
+        case SETTINGS_CLOSED :
+
+            return {
+              ...state,
+              settingsField : null
+            }
+
+
         default:
             return state;
     }

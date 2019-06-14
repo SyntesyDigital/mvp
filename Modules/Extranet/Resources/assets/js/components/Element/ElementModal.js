@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
 
 import BooleanSettingsField from './Settings/BooleanSettingsField';
 import InputSettingsField from './Settings/InputSettingsField';
@@ -7,48 +8,110 @@ import CheckboxesSettingsField from './Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './Settings/SelectorSettingsField';
 import RadioSettingsField from './Settings/RadioSettingsField';
 
+import {
+  closeModalSettings,
+  onModalSettingsClosed,
+  changeFieldSettings
+} from './actions/';
+
 class ElementModal extends Component {
 
   constructor(props) {
     super(props);
 
     this.handleFieldSettingsChange = this.handleFieldSettingsChange.bind(this);
+    this.onModalClose = this.onModalClose.bind(this);
+
+
+    this.state = {
+      id : 'modal-element-settings',
+      isOpen : false
+    };
 
   }
 
   handleFieldSettingsChange(field) {
-      this.props.onSettingsFieldChange(field);
+      this.props.changeFieldSettings(field);
   }
 
-  handleInputSettingsChange(event) {
+  onModalClose(e) {
+    e.preventDefault();
 
+    this.props.closeModalSettings();
   }
 
-  getCropsformats() {
-      var formats = [];
-      IMAGES_FORMATS.map(function(format, k){
-          formats.push({
-              name : format.name+" ("+format.width+"x"+format.height+")",
-              value : format.name
-          });
+  componentWillReceiveProps(nextProps) {
+      console.log("ElementModal :: ",nextProps);
+
+      if(nextProps.display != this.state.isOpen){
+          if(nextProps.display){
+            this.openModal();
+          }
+          else {
+            this.closeModal();
+          }
+      }
+  }
+
+  openModal() {
+      $("#"+this.state.id).css({
+          display: "block"
+      });
+      TweenMax.to($("#"+this.state.id), 0.5, {
+          opacity: 1,
+          ease: Power2.easeInOut
+      });
+      this.setState({
+          isOpen : true
       });
 
-      return formats;
+  }
+
+  closeModal() {
+      var self = this;
+
+      TweenMax.to($("#"+this.state.id), 0.5, {
+          display: "none",
+          opacity: 0,
+          ease: Power2.easeInOut,
+          onComplete: function() {
+              self.setState({
+                  isOpen : false
+              });
+              self.props.onModalSettingsClosed();
+          }
+      });
+  }
+
+  getFormatsList() {
+
+    const field = this.props.app.settingsField;
+
+    if(!field)
+      return [];
+
+    return MODELS_FIELDS[field.type].formats.map((item,index) => {
+      return {name:Lang.get('fields.'+item),value:item};
+    });
+
   }
 
   render() {
+
+    const field = this.props.app.settingsField;
+
     return (
-      <div className="custom-modal" id={this.props.id}>
+      <div className="custom-modal" id={this.state.id}>
         <div className="modal-background"></div>
           <div className="modal-container">
-            {this.props.field != null &&
+            {field != null &&
               <div className="modal-header">
 
-                  <i className={"fa "+this.props.field.icon}></i>
-                  <h2>{this.props.field.name} | {Lang.get('header.configuration')}</h2>
+                  <i className={"fa "+field.icon}></i>
+                  <h2>{field.name} | {Lang.get('header.configuration')}</h2>
 
                 <div className="modal-buttons">
-                  <a className="btn btn-default close-button-modal" onClick={this.props.onModalClose}>
+                  <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>
                     <i className="fa fa-times"></i>
                   </a>
                 </div>
@@ -59,25 +122,25 @@ class ElementModal extends Component {
                 <div className="row">
                   <div className="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
 
-
                     <BooleanSettingsField
-                      field={this.props.field}
-                      name="entryTitle"
-                      source="settings"
-                      onFieldChange={this.handleFieldSettingsChange}
-                      label="Titre"
-                    />
-
-                    <BooleanSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="required"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Champ obligatoire"
                     />
 
+                    <SelectorSettingsField
+                      field={field}
+                      name="format"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Format"
+                      options={this.getFormatsList()}
+                    />
+
                     <BooleanSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="unique"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -85,7 +148,7 @@ class ElementModal extends Component {
                     />
 
                     <InputSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="minCharacters"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -94,7 +157,7 @@ class ElementModal extends Component {
                     />
 
                     <InputSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="maxCharacters"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -103,7 +166,7 @@ class ElementModal extends Component {
                     />
 
                     <InputSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="maxItems"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -113,7 +176,7 @@ class ElementModal extends Component {
 
 
                     <InputSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="minItems"
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -122,7 +185,7 @@ class ElementModal extends Component {
                     />
 
                     <InputSettingsField
-                      field={this.props.field}
+                      field={field}
                       name="fieldHeight"
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
@@ -130,37 +193,7 @@ class ElementModal extends Component {
                       inputLabel="Indique la hauteur en pixels"
                     />
 
-                    <CheckboxesSettingsField
-                      field={this.props.field}
-                      name="typologiesAllowed"
-                      source="settings"
-                      onFieldChange={this.handleFieldSettingsChange}
-                      label="Typologies autorisées"
-                      options={TYPOLOGIES}
-                    />
 
-                    <RadioSettingsField
-                      field={this.props.field}
-                      name="cropsAllowed"
-                      source="settings"
-                      onFieldChange={this.handleFieldSettingsChange}
-                      label="Tailles autorisées"
-                      options={this.getCropsformats()}
-                    />
-
-                    {/*
-                    <SelectorSettingsField
-                      field={this.props.field}
-                      name="listAllowed"
-                      source="settings"
-                      onFieldChange={this.handleFieldSettingsChange}
-                      label="Llista seleccionada"
-                      options={[
-                        {name:"Llista 1",value:1},
-                        {name:"Llista 2",value:2}
-                      ]}
-                    />
-                    */}
 
 
                   </div>
@@ -168,19 +201,36 @@ class ElementModal extends Component {
               </div>
 
               <div className="modal-footer">
-                <a href="" className="btn btn-default" onClick={this.props.onModalClose}> Fermer </a> &nbsp;
-                {/*
-                <a href="" className="btn btn-primary"> Guardar </a>
-                */
-                }
+                <a href="" className="btn btn-default" onClick={this.onModalClose}> Fermer </a> &nbsp;
               </div>
 
             </div>
         </div>
-        }
       </div>
     );
   }
 
 }
-export default ElementModal;
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        display: state.app.modalSettingsDisplay,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        closeModalSettings: () => {
+            return dispatch(closeModalSettings());
+        },
+        onModalSettingsClosed: () => {
+            return dispatch(onModalSettingsClosed());
+        },
+        changeFieldSettings: (field) => {
+            return dispatch(changeFieldSettings(field))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ElementModal);

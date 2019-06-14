@@ -43,7 +43,8 @@ class InputSettingsField extends Component {
       checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
       display = true;
 
-      input = nextProps.field[nextProps.source][nextProps.name];
+      input = nextProps.field[nextProps.source][nextProps.name] == null ?
+        '' : nextProps.field[nextProps.source][nextProps.name];
     }
 
     this.setState({
