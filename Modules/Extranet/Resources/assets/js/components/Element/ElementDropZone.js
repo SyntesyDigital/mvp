@@ -53,16 +53,19 @@ class ElementDropZone extends Component {
 
 	addField(field) {
 
-		console.log("add field =>",field);
+		//console.log("add field =>",field);
+
+		if(field.added){
+			toastr.error('Not possible to add same field twice');
+			return;
+		}
 
 		var field = {
 			id : this.props.fields.length + 1,
 			type : field.type,
-			label : field.label,
-			input : field.input,
-			name : Lang.get(field.label),
+			name : field.name,
 			identifier : field.identifier,
-			form_name : field.name,
+			icon : field.icon,
 			saved : false,
 			editable : true
 		};
@@ -105,9 +108,8 @@ class ElementDropZone extends Component {
 					index={i}
 					id={item.id}
 					type={item.type}
-					label={item.label}
-					input={item.input}
 					name={item.name}
+					icon={item.icon}
 					settings={item.settings}
 					identifier={item.identifier}
 					moveField={this.moveField}

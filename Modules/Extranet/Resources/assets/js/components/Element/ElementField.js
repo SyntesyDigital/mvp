@@ -87,8 +87,8 @@ class ElementField extends Component {
 	    super(props);
 
 				this.state = {
-            name : this.props.name,
-						identifier : this.props.identifier
+            name : props.name,
+						identifier : props.identifier
         };
 
 	    this.onRemoveField = this.onRemoveField.bind(this);
@@ -201,44 +201,25 @@ class ElementField extends Component {
 
       <div className="typology-field" style={{ ...style, opacity }}>
         <div className={"field-type "}>
-          <i className={"fa "+ICONS[this.props.input]}></i> &nbsp; {Lang.get(this.props.label)}
+          <i className={"fa "+this.props.icon}></i> &nbsp;
+					{MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''}
         </div>
 
         <div className="field-inputs">
           <div className="row">
-            <div className="field-name col-xs-8">
+            <div className="field-name col-xs-6">
               <input disabled={this.props.editable ? false : true} type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
-            <div className="field-id col-xs-4">
+						<div className="field-name col-xs-6">
+							<input disabled type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} onChange={this.handleChange}/>
+						</div>
 
-							{/*
-							{this.props.editable &&
-								<SlugInput
-									className="form-control"
-									name="identifier"
-									placeholder="Idenfiticador"
-									sourceValue={this.state.name}
-									value={this.state.identifier}
-									blocked={this.props.saved}
-									onFieldChange={this.handleIdentifierChange.bind(this)}
-								/>
-							}
-							*/}
-
-							{!this.props.editable &&
-									<input disabled type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} onChange={this.handleChange}/>
-							}
-
-							{/*
-							<input type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} />
-							*/}
-            </div>
           </div>
         </div>
 
         <div className="field-actions">
 
-					{/*<a href="" onClick={this.onOpenSettings}> {Lang.get('header.configuration')}</a> &nbsp;&nbsp;*/}
+					<a href="" onClick={this.onOpenSettings}> {Lang.get('header.configuration')}</a> &nbsp;&nbsp;
 					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
 					&nbsp;&nbsp;
 
@@ -256,8 +237,8 @@ ElementField.propTypes = {
 	isDragging: PropTypes.bool.isRequired,
 	id: PropTypes.any.isRequired,
 	type: PropTypes.string.isRequired,
-	label : PropTypes.string.isRequired,
-	input : PropTypes.string.isRequired,
+	//label : PropTypes.string.isRequired,
+	//input : PropTypes.string.isRequired,
 	moveField: PropTypes.func.isRequired,
 };
 

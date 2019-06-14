@@ -65,11 +65,14 @@ class ElementRepository extends BaseRepository
 
     private function mapFieldType($wsType)
     {
-        $mapping = [
-          "texte" => "text",
-          "num" => "number",
-          "date" => "date"
-        ];
+
+        $fields = Config('models.fields');
+
+        $mapping = [];
+
+        foreach($fields as $field){
+          $mapping[$field['mapping']] = $field['identifier'];
+        }
 
         return isset($mapping[$wsType]) ?
           $mapping[$wsType] : '';
@@ -77,11 +80,13 @@ class ElementRepository extends BaseRepository
 
     private function mapIcons($wsType)
     {
-        $icons = [
-          "texte" => "fa-font",
-          "num" => "fa-calculator",
-          "date" => "fa-calendar"
-        ];
+        $fields = Config('models.fields');
+
+        $icons = [];
+
+        foreach($fields as $field){
+          $icons[$field['mapping']] = $field['icon'];
+        }
 
         return isset($icons[$wsType]) ?
           $icons[$wsType] : '';
@@ -98,6 +103,10 @@ class ElementRepository extends BaseRepository
             trim($parameter[1]) : '';
         }
 
+        $parameters['format'] = isset($parameters['format']) &&
+          $parameters['format'] != '' ?
+          $parameters['format'] : 'texte';
+
         return [
           'type' => $this->mapFieldType($parameters['format']),
           'identifier' => $identifier,
@@ -105,7 +114,8 @@ class ElementRepository extends BaseRepository
           'icon' => $this->mapIcons($parameters['format']),
           'help' => isset($parameters['tooltip']) ? $parameters['tooltip'] : '',
           'default' => '',
-          'boby' => ''
+          'boby' => '',
+          'added' => false
         ];
 
     }
