@@ -1,10 +1,12 @@
 <!--h2>{{$content->title}}</h2-->
 
 <div class="element-file-container">
-  <div class="element-file-container-head">
+  <div class="element-collapsable element-file-container-head" data-toggle="collapse" data-target="#collapsetable" aria-expanded="true" aria-controls="collapsetable">
     FICHE SINISTRE
   </div>
-  <div class="element-file-container-body">
+  <div id="collapsetable" class="element-file-container-body collapse in">
+  <!-- id={"collapse"+this.props.field.identifier} -->
+
       <div class="row">
         <div class="col-md-6">
           <div class="element-file-input-container">

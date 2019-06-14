@@ -69,7 +69,6 @@ header{
     }
   .navbar-toggle {;
     display: block;
-    border: 1px solid $header-right-part-text-color;
     margin-right: 0;
     margin-top: 0;
     .icon-bar{
@@ -99,7 +98,7 @@ footer{
 
 .content-wrapper{
   position: relative;
-  margin-left: 230px;
+//  margin-left: 230px;
   padding:15px;
   overflow: hidden;
   @extend .animate;
@@ -108,8 +107,9 @@ footer{
   }
 }
 .sidebar{
-  width:230px;
   position:absolute;
+  width: 100%;
+  z-index: 100;
   overflow: hidden;
   background-color: $sidebar-background-color;
   @include font(16,21,400);
@@ -243,7 +243,6 @@ body {
         }
       }
     }
-
     .navbar-toggle {;
       display: block;
     }

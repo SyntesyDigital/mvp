@@ -31,7 +31,7 @@
                   <div class="col-xs-3">
                     <a href="{{route('contents.page.create')}}">
                       <div class="grid-item">
-                        <i class="fa fa-file-o"></i>
+                        <i class="far fa-file"></i>
                         <p class="grid-item-name">
                           {{Lang::get('architect::fields.page')}}
                         </p>

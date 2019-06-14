@@ -39,7 +39,7 @@
                             </td>
 
                             <td>
-                                <a href="{{ route('extranet.admin.sitelists.show', $sl->id) }}" class="btn btn-link"><i title="{{Lang::get('architect::datatables.edit')}}" class="fa fa-pencil"></i></a>
+                                <a href="{{ route('extranet.admin.sitelists.show', $sl->id) }}" class="btn btn-link"><i title="{{Lang::get('architect::datatables.edit')}}" class="fa fa-pencil-alt"></i></a>
                             </td>
                         </tr>
                         @endforeach

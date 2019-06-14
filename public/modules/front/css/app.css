@@ -10001,7 +10001,6 @@ header:first-child .row.row-header .right-part-header .user-info .user-name {
 
 header .navbar-toggle {
   display: block;
-  border: 1px solid #fff;
   margin-right: 0;
   margin-top: 0;
 }
@@ -10032,7 +10031,6 @@ footer p {
 
 .content-wrapper {
   position: relative;
-  margin-left: 230px;
   padding: 15px;
   overflow: hidden;
 }
@@ -10042,8 +10040,9 @@ footer p {
 }
 
 .sidebar {
-  width: 230px;
   position: absolute;
+  width: 100%;
+  z-index: 100;
   overflow: hidden;
   background-color: #E8E8E8;
   font-size: 16px;
@@ -10574,6 +10573,7 @@ form.contact-form .checkbox {
 }
 
 .element-file-container .element-file-container-body {
+  background-color: #fff;
   border: 1px solid #E0E0E0;
   padding: 10px 20px;
 }
@@ -10597,6 +10597,30 @@ form.contact-form .checkbox {
   line-height: 19px;
   font-weight: 400;
   padding: 0;
+}
+
+.element-collapsable {
+  cursor: pointer;
+}
+
+.element-collapsable.collapsed:before {
+  content: "\25B8";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #2A3649;
+}
+
+.element-collapsable:before {
+  content: "\25BE";
+  margin-right: 0px;
+  position: absolute;
+  top: 9px;
+  right: 19px;
+  font-size: 18px;
+  color: #2A3649;
 }
 
 .element-form-container {
@@ -10628,7 +10652,6 @@ form.contact-form .checkbox {
 
 .element-form-container .element-form-row .buttons .btn-back {
   border: 1px solid #2A3649;
-  border-bottom: 2px solid #2A3649;
 }
 
 .element-form-container .element-form-row .buttons .btn-back:hover {

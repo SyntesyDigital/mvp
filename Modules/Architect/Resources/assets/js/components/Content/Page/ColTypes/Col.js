@@ -129,7 +129,7 @@ class Col extends Component {
               }
               &nbsp;&nbsp;
               <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
-                <i className="fa fa-pencil"></i>
+                <i className="fa fa-pencil-alt"></i>
               </a>
             </div>
           }

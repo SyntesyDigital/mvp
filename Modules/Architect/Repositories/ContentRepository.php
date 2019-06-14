@@ -127,7 +127,7 @@ class ContentRepository extends BaseRepository
                   $buttons .= '<a title="Previsualitzar" href="'.route('preview', $item->id).'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
                 //}
 
-                $buttons .= '<a title="'.Lang::get("architect::datatables.edit").'" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp';
+                $buttons .= '<a title="'.Lang::get("architect::datatables.edit").'" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil-alt"></i> </a> &nbsp';
 
                 //si no es ( pagina y author a la vez add remove)
                 if(!($item->page && has_roles([ROLE_EDITOR]) )){

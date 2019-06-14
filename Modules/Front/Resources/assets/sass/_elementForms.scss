@@ -1,6 +1,6 @@
 .element-form-container{
   margin: 20px 0;
-  background-color: $element-form-background;
+  background-color: $elements-background-color;
   padding:40px 20px;
   .element-form-row{
     margin:15px 0;
@@ -18,7 +18,6 @@
       }
       .btn-back{
         border:1px solid $primary-color;
-        border-bottom: 2px solid $primary-color;
         &:hover{
           background-color: $sidebar-background-color;
           border-color: $sidebar-background-color;

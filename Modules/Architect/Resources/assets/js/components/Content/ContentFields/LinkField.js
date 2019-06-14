@@ -312,7 +312,7 @@ class LinkField extends Component
 
             {(pageValues.typology === undefined || pageValues.typology == null) &&
               <div className="field-type">
-                <i className="fa fa-file-o"></i>
+                <i className="far fa-file"></i>
                 &nbsp; {Lang.get('fields.page')}
               </div>
             }

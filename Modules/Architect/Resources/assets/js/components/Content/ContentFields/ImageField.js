@@ -83,7 +83,7 @@ class ImageField extends Component {
 
           {defined && value.url != "" &&
             <div className="image-buttons">
-              {/*<a href="" className="btn btn-link"><i className="fa fa-pencil"></i> Editar</a>*/}
+              {/*<a href="" className="btn btn-link"><i className="fa fa-pencil-alt"></i> Editar</a>*/}
                <a href="" className="btn btn-link text-danger" onClick={this.cancelImage}><i className="fa fa-times"></i> {Lang.get('fields.delete')}</a>
             </div>
            }

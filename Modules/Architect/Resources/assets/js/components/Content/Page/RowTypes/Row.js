@@ -291,7 +291,7 @@ class Row extends Component {
             {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
               <div className="right-buttons">
                 <a href="" className="btn btn-link" onClick={this.onEditClass.bind(this)}>
-                  <i className="fa fa-pencil"></i>
+                  <i className="fa fa-pencil-alt"></i>
                 </a>
                 {!isWrapper &&
                   <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>

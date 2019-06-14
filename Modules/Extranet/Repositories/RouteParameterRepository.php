@@ -26,7 +26,7 @@ class RouteParameterRepository extends BaseRepository
                 return $item->name;
             })
             ->addColumn('action', function ($item) {
-                return '<a href="'.route('extranet.routes_parameters.show', $item).'" class="btn btn-link text-pimary "><i class="fa fa-pencil"></i></a>
+                return '<a href="'.route('extranet.routes_parameters.show', $item).'" class="btn btn-link text-pimary "><i class="fa fa-pencil-alt"></i></a>
                 <a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('extranet.routes_parameters.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> </a>';
             })
         ->make(true);

@@ -200,7 +200,7 @@ class ModalSelectItem extends Component {
       // <div className="col-xs-3">
       //   <a href="" onClick={this.addWidget.bind(this)}>
       //     <div className="grid-item">
-      //       <i className="fa fa-file-o"></i>
+      //       <i className="far fa-file"></i>
       //       <p className="grid-item-name">
       //         Widget Simple
       //       </p>

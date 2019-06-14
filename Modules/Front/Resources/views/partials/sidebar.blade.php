@@ -13,7 +13,7 @@
 		</li>
 		<li>
 			<a>
-					<i class="fa fa-file-o" ></i><span class="sidebar-text"> Policies</span>
+					<i class="far fa-file" ></i><span class="sidebar-text"> Policies</span>
 			</a>
 		</li>
 	</ul>

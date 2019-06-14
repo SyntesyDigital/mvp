@@ -183,7 +183,7 @@ architect.menu.form = {
               '<div class="item-bar">'+
       	  			'<i class="fa fa-bars"></i> &nbsp; <span id="item-name">'+(item.name != null ? item.name : '')+'</span>'+
       	  			'<div class="actions">'+
-      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil"></i> &nbsp; Editar</a>&nbsp;'+
+      		  			'<a href="#" class="btn btn-link btn-edit"><i class="fa fa-pencil-alt"></i> &nbsp; Editar</a>&nbsp;'+
       		  			'<a href="#" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; Esborrar</a>'+
       		  		'</div>'+
               '</div>'+
