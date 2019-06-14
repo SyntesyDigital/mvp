@@ -1,0 +1,27 @@
+.element-file-container{
+  margin:20px 0;
+  .element-file-container-head{
+    background-color: $sidebar-background-color;
+    @include font(16,21,400);
+    text-transform: uppercase;
+    padding:10px 15px;
+  }
+  .element-file-container-body{
+    border: 1px solid $element-file-border;
+    padding:10px 20px;
+    .element-file-input-container{
+      padding:7px 0px;
+      margin:5px 0;
+      overflow: hidden;
+      border-bottom: 1px solid $sidebar-background-color;
+      .element-file-title{
+        @include font(14,19,600);
+        padding:0;
+      }
+      .element-file-content{
+        @include font(14,19,400);
+        padding:0;
+      }
+    }
+  }
+}
