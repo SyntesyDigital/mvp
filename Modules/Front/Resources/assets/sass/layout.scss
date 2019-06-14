@@ -133,6 +133,9 @@ footer{
       }
     }
   }
+  &.initial{
+    width:0px !important;
+  }
   ul{
     margin:0px;
     padding:0px;
@@ -261,6 +264,9 @@ body {
     min-height: calc(100vh - 112px);
     &.collapsed{
       width:100px;
+    }
+    &.initial{
+      width:230px !important;
     }
   }
 }

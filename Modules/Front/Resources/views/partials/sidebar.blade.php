@@ -1,5 +1,5 @@
 
-<div id="sidebar" class="sidebar">
+<div id="sidebar" class="sidebar initial">
 	<ul>
 		<li class="active">
 			<a>
