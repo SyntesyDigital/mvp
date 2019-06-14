@@ -7,48 +7,24 @@ class SelectorSettingsField extends Component {
     super(props);
 
     this.state = {
+        checkbox : null,
         value : '',
         display : false
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount()
   {
-      var display = false;
-      var value = "";
-
-      if(this.props.field != null
-          && this.props.field[this.props.source] != null
-          && this.props.field[this.props.source][this.props.name] !== undefined)
-      {
-        display = true;
-        if(this.props.field[this.props.source][this.props.name] != null ) {
-            value = this.props.field[this.props.source][this.props.name];
-        }
-      }
-
-      this.setState({
-          value : value,
-          display : display
-      });
+      this.processProps(this.props);
   }
-
-  handleFieldChange(event) {
-
-    var field = {
-      name : this.props.name,
-      source : this.props.source,
-      value : event.target.value
-    };
-
-    this.props.onFieldChange(field);
-  }
-
 
   componentWillReceiveProps(nextProps)
   {
+    this.processProps(nextProps);
+    /*
       var display = false;
       var value = "";
 
@@ -66,6 +42,56 @@ class SelectorSettingsField extends Component {
           value : value,
           display : display
       });
+      */
+  }
+
+  handleFieldChange(event) {
+
+    var field = {
+      name : this.props.name,
+      source : this.props.source,
+      value : event.target.checked ?
+        this.props.options[0].value : null
+    };
+
+    this.props.onFieldChange(field);
+  }
+
+  handleInputChange(event) {
+
+    var field = {
+      name : this.props.name,
+      source : this.props.source,
+      value : event.target.value
+    };
+
+    this.props.onFieldChange(field);
+
+  }
+
+  processProps(nextProps){
+    var checkbox = null;
+    var value = "";
+    var display = false;
+
+    //console.log("InputSettingsField :: componentWillRecieveProps");
+    //console.log(nextProps);
+
+    if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
+       nextProps.field[nextProps.source][nextProps.name] !== undefined){
+
+      checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+      display = true;
+
+      value = nextProps.field[nextProps.source][nextProps.name] == null ?
+        '' : nextProps.field[nextProps.source][nextProps.name];
+    }
+
+    this.setState({
+      checkbox : checkbox,
+      value : value,
+      display : display
+    });
   }
 
 
@@ -78,7 +104,7 @@ class SelectorSettingsField extends Component {
 
   render() {
 
-    const {value,display} = this.state;
+    const {checkbox,value,display} = this.state;
 
     console.log("SelectorSettingsValue => ",value);
 
@@ -87,14 +113,19 @@ class SelectorSettingsField extends Component {
         <div className="setup-field">
 
           <div className="togglebutton">
-            <div>
-              <label>{this.props.label}</label>
-            </div>
+            <label>
+                <input type="checkbox"
+                  name={this.props.name}
+                  checked={ this.state.checkbox != null ? checkbox : false }
+                  onChange={this.handleFieldChange}
+                />
+                {this.props.label}
+            </label>
           </div>
 
-          <div className="setup-field-config">
+          <div className="setup-field-config" style={{display : checkbox != null && checkbox ? "block" : "none" }}>
             <div className="form-group bmd-form-group">
-              <select className="form-control" name={this.props.name} value={value} onChange={this.handleFieldChange} >
+              <select className="form-control" name={this.props.name} value={value} onChange={this.handleInputChange} >
                 {this.renderOptions()}
               </select>
             </div>

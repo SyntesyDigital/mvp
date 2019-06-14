@@ -219,7 +219,7 @@ class ElementField extends Component {
 
         <div className="field-actions">
 
-					<a href="" onClick={this.onOpenSettings}> {Lang.get('header.configuration')}</a> &nbsp;&nbsp;
+					<a href="" onClick={this.onOpenSettings}> <i className="fas fa-pencil-alt"></i> {Lang.get('header.configuration')}</a> &nbsp;&nbsp;
 					<a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
 					&nbsp;&nbsp;
 

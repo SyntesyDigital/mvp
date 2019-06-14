@@ -38,8 +38,6 @@ class ElementBar extends Component {
 
   render() {
 
-    console.log("ElementBar => ",this.props.app);
-
     return (
       <div className="page-bar">
         <div className="container">

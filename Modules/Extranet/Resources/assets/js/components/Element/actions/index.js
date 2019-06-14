@@ -11,7 +11,12 @@ import {
   FIELD_ADD,
   FIELD_MOVE,
   FIELD_REMOVE,
-  FIELD_CHANGE
+  FIELD_CHANGE,
+
+  SETTINGS_OPEN,
+  SETTINGS_CHANGE,
+  SETTINGS_CLOSE,
+  SETTINGS_CLOSED
 
 } from "../constants/";
 
@@ -172,5 +177,29 @@ export function changeField(payload) {
 export function removeField(fieldId) {
 
   return {type : FIELD_REMOVE, payload : fieldId};
+
+}
+
+export function openModalSettings(fieldId) {
+
+  return {type : SETTINGS_OPEN, payload : fieldId};
+
+}
+
+export function changeFieldSettings(field) {
+
+  return {type : SETTINGS_CHANGE, payload : field};
+
+}
+
+export function closeModalSettings() {
+
+  return {type : SETTINGS_CLOSE};
+
+}
+
+export function onModalSettingsClosed() {
+
+  return {type : SETTINGS_CLOSED};
 
 }

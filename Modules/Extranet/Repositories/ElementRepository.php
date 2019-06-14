@@ -92,6 +92,21 @@ class ElementRepository extends BaseRepository
           $icons[$wsType] : '';
     }
 
+    private function getFieldType($wsType)
+    {
+        $fields = Config('models.fields');
+
+        if($wsType != null && $wsType != ''){
+          foreach($fields as $field){
+            if($field['mapping'] == $wsType){
+                return $field;
+            }
+          }
+        }
+
+        return $fields['text'];
+    }
+
     private function formatField($field)
     {
         $identifier = $field->REF;
@@ -103,19 +118,20 @@ class ElementRepository extends BaseRepository
             trim($parameter[1]) : '';
         }
 
-        $parameters['format'] = isset($parameters['format']) &&
-          $parameters['format'] != '' ?
-          $parameters['format'] : 'texte';
+        $fieldType = $this->getFieldType($parameters['format']);
 
         return [
-          'type' => $this->mapFieldType($parameters['format']),
+          'type' => $fieldType['identifier'],
           'identifier' => $identifier,
           'name' => isset($parameters['lib']) ? $parameters['lib'] : '',
-          'icon' => $this->mapIcons($parameters['format']),
+          'icon' => $fieldType['icon'],
           'help' => isset($parameters['tooltip']) ? $parameters['tooltip'] : '',
           'default' => '',
           'boby' => '',
-          'added' => false
+          'added' => false,
+          'formats' => $fieldType['formats'],
+          'rules' => $fieldType['rules'],
+          'settings' => $fieldType['settings']
         ];
 
     }

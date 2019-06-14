@@ -13,6 +13,7 @@ import ElementDropZoneContainer from './ElementDropZoneContainer';
 
 import ElementDragField from './ElementDragField';
 import ElementBar from './ElementBar';
+import ElementModal from './ElementModal';
 
 class ElementForm extends Component {
 
@@ -51,13 +52,17 @@ class ElementForm extends Component {
 
     render() {
 
+      console.log("\n\nElementForm :: render!");
+
       return (
 				<div id="model-container">
 
-					<ElementBar />
+          <ElementBar />
 
 	  			<DragDropContextProvider backend={HTML5Backend}>
             <div className="container rightbar-page">
+
+              <ElementModal />
 
               <div className="col-md-9 page-content">
                 {

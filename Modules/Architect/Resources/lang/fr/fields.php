@@ -102,5 +102,12 @@ return [
     'default_template' => 'Modèle par défaut',
     'template' => 'Modèle',
     'icon' => 'Icone',
-    'file_too_big' => 'Le fichier est trop volumineux.'
+    'file_too_big' => 'Le fichier est trop volumineux.',
+    'id' => 'Id',
+    'price' => 'Prix',
+    'price_with_decimals' => 'Prix avec décimales',
+    'day_month_year' => 'Jour / mois / année',
+    'month_year' => 'Mois / année',
+    'year' => 'Année',
+    'telephone' => 'Téléphone'
 ];

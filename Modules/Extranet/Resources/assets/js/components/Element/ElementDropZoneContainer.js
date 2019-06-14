@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import {connect} from 'react-redux';
 
-import {addField, removeField, moveField, changeField} from './actions/';
+import {
+	addField, removeField, moveField, changeField,
+	openModalSettings
+} from './actions/';
+
 import ElementDropZone from './ElementDropZone';
 
 
@@ -21,13 +25,9 @@ class ElementDropZoneContainer extends Component {
 		this.props.removeField(fieldId);
 	}
 
-	/*
-
 	handleOpenSettings(fieldId) {
 		this.props.onOpenSettings(fieldId);
 	}
-
-	*/
 
 	handleFieldAdded(field) {
 		this.props.addField(field);
@@ -48,9 +48,10 @@ class ElementDropZoneContainer extends Component {
 				onFieldChanged={this.handleFieldChange.bind(this)}
 				moveField={this.moveField.bind(this)}
 				onRemoveField={this.handleRemoveField.bind(this)}
+				onOpenSettings={this.handleOpenSettings.bind(this)}
 
 				//onSettingsFieldChange={this.handleSettingsChanged}
-				//onOpenSettings={this.handleOpenSettings}
+
 			/>
 		);
 
@@ -78,6 +79,9 @@ const mapDispatchToProps = dispatch => {
 				},
 				moveField : (dragIndex, hoverIndex) => {
 						return dispatch(moveField(dragIndex, hoverIndex));
+				},
+				onOpenSettings : (fieldId) => {
+						return dispatch(openModalSettings(fieldId));
 				}
     }
 }
