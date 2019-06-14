@@ -32,7 +32,7 @@
         <link href="{{asset('modules/front/css/app.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">-->
 
         <!--
         <link href="{{asset('modules/front/css/front.css')}}" rel="stylesheet" type="text/css" />
@@ -49,6 +49,9 @@
         @stack('modal')
 
         @include ('front::partials.header')
+
+        Hello!
+        <i class="fab fa-accessible-icon"></i>
 
         @yield('content')
 

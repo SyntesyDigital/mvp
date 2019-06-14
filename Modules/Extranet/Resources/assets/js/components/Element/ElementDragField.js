@@ -7,12 +7,13 @@ import FieldTypes from './FieldTypes';
 
 const fieldSource = {
 	beginDrag(props) {
+
 		return {
-			input: props.definition.input,
 			name: props.definition.name,
 			type: props.definition.type,
-			label: props.definition.label,
-			identifier: props.definition.identifier
+			icon: props.definition.icon,
+			identifier: props.definition.identifier,
+			added: props.definition.added,
 		}
 	},
 
@@ -21,7 +22,7 @@ const fieldSource = {
 		const dropResult = monitor.getDropResult()
 
 		if (dropResult) {
-			console.log(`You dropped ${item.input}!`);
+			//console.log(`You dropped ${item.identifier}!`);
 		}
 	},
 }
@@ -35,12 +36,12 @@ function collect(connect, monitor) {
 
 class ElementDragField extends Component {
 	render() {
-		const { isDragging, connectDragSource } = this.props
-		const opacity = isDragging ? 0.4 : 1
+		const { isDragging, connectDragSource, definition } = this.props
+		const opacity = isDragging || definition.added ? 0.4 : 1
 
 		return connectDragSource(
 			<div className="field" style={{ opacity }}>
-				<i className={"fa "+ICONS[this.props.definition.input]}></i> &nbsp; {Lang.get(this.props.definition.label)}
+				<i className={"fa "+this.props.definition.icon}></i> &nbsp; {Lang.get(this.props.definition.name)}
 			</div>
 		)
 	}

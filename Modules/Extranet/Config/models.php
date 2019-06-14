@@ -1,144 +1,85 @@
 <?php
 
 return [
-    'sinister' => [
-      'method' => 'sinister',
-      'rules' => [
-          'occurrence_date' => 'required',
-          'nature' => 'required',
+    'fields' => [
+      'text' => [
+        'mapping' => 'texte',
+        'identifier' => 'text',
+        'label' => 'Text',
+        'icon' => 'fa fa-font',
+        'formats' => [
+          'email',
+          'color'
+        ],
+        'rules' => [
+          'isRequired',
+        ],
+        'settings' => [
+          'maxLength',
+        ]
       ],
-      'POST' => [
-        'idPol' => '11000145',
-        'numSoc' => 'CI01',
-        'mouvement' => 'OUVSIN',
-        'motif' => 'EXTSIN',
-        'numAuto' => 'O',
-        'numAutoCie' =>'',
-
-        'type' => '',  //type list
-        'txResp' => '',  //responsability list
-        'circonstance' => '',  //nature from boby, required
-
-        'causeCirconstance' => '',  //circumstance
-        'dateOuverture' => '_now',  //codes to recognize internal functions
-        'dateSurvenance' => '', //occurrence_date, required
-        'dateDeclaration' => '', //declaration_date
-        'dateCloture' => '', //close_date
-        'dommages'=>'test',
-        'codeProduit'=>'AUTO',
-        'codeCie' =>"ALZ_CI",
-        'libMvt'=>'Ouverture Sinistre',
-        'libMotif'=>'Prueba-declaration Extranet',
-        'loadAssure'=>'1',
-        'listInfos' => [
-           ['key'=>'DECLARANT_NOM','value'=>''],
-           ['key'=>'DECLARANT_PRENOM','value'=>''],
-           ['key'=>'DECLARANT_MAIL','value'=>''],
+      'number' => [
+        'mapping' => 'num',
+        'identifier' => 'number',
+        'label' => 'Number',
+        'icon' => 'fa fa-calculator',
+        'formats' => [
+          'id',
+          'price',
+          'quantity',
         ],
+        'rules' => [
+          'isRequired'
+        ],
+        'settings' => [
+        ]
       ],
-      'fields' => [
-        [
-          'type' => 'field',  // field type for layout
-          'input' => 'text',  // field input type for form visualization
-          'identifier' => 'listInfos.DECLARANT_NOM',  //field relative to VEOS POST
-          'name' => 'first_name', //form name, relative to rules
-          'label' => 'form.customer.label.first_name',  //label to internationalization
-          'placeholder' => '',
-          'default' => ''
+      'date' => [
+        'mapping' => 'date',
+        'identifier' => 'date',
+        'label' => 'Date',
+        'icon' => 'fa fa-calendar',
+        'formats' => [
+          'dayMonthYear',
+          'monthYear',
+          'year',
+          'text'
         ],
-        [
-          'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'listInfos.DECLARANT_PRENOM',
-          'name' => 'last_name',
-          'label' => 'form.customer.label.last_name',
-          'placeholder' => '',
-          'default' => ''
+        'rules' => [
+          'dateFormat',
+          'isRequired'
         ],
-        [
-          'type' => 'field',
-          'input' => 'text',  //
-          'identifier' => 'listInfos.DECLARANT_MAIL',
-          'name' => 'email',
-          'label' => 'form.customer.label.email',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'date',
-          'identifier' => 'dateSurvenance', //referece to VEOS
-          'name' => 'occurrence_date',
-          'label' => 'form.sinister.label.occurrence_date',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'date',  //
-          'identifier' => 'dateDeclaration',
-          'name' => 'declaration_date',
-          'label' => 'form.sinister.label.declaration_date',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'date',  //
-          'identifier' => 'dateCloture',
-          'name' => 'close_date',
-          'label' => 'form.sinister.label.close_date',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'list',  //
-          'identifier' => 'type',
-          'name' => 'type',
-          'label' => 'form.sinister.label.type',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'list',  //
-          'identifier' => 'txResp',
-          'name' => 'responsability',
-          'label' => 'form.sinister.label.responsability',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'boby',  //defines filled by boby, needs more configuration
-          'identifier' => 'circonstance',
-          'name' => 'nature',
-          'label' => 'form.sinister.label.nature',
-          'placeholder' => '',
-          'default' => ''
-        ],
-        [
-          'type' => 'field',
-          'input' => 'textarea',  //
-          'identifier' => 'causeCirconstance',
-          'name' => 'circumstance',
-          'label' => 'form.sinister.label.circumstance',
-          'placeholder' => '',
-          'default' => ''
-        ],
+        'settings' => [
+        ]
       ],
-    ],
-    'personee' => [
-
-    ],
-    'contrat' => [
-
-    ],
-    'document' => [
-
-    ],
-    'quittance' => [
-
+      'select' => [
+        'mapping' => 'select',
+        'identifier' => 'select',
+        'label' => 'Boby List',
+        'icon' => 'fas fa-list-ul',
+        'formats' => [
+        ],
+        'rules' => [
+        ],
+        'settings' => [
+          'ws' => ''
+        ]
+      ],
+      'file' => [
+        'mapping' => 'file',
+        'identifier' => 'file',
+        'label' => 'File',
+        'icon' => 'fas fa-paperclip',
+        'formats' => [
+        ]
+      ],
+      'richtext' => [
+        'mapping' => 'richtext',
+        'identifier' => 'richtext',
+        'label' => 'Rich Text',
+        'icon' => 'fas fa-align-left',
+        'formats' => [
+        ]
+      ]
     ]
 ];

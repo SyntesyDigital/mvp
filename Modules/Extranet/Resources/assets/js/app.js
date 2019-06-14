@@ -1,4 +1,4 @@
-//require('./bootstrap');
+require('./bootstrap');
 
 //Components
-require('./components/Element/ElementForm');
+require('./components/Element/ElementApp');
