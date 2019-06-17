@@ -33,7 +33,7 @@ Route::group([
     Route::get('/elements', 'ElementController@index')->name('extranet.elements.index');
     Route::get('/elements/{element_type}', 'ElementController@typeIndex')->name('extranet.elements.typeIndex');
     Route::get('/elements/create/{element_type}/{model_id}', 'ElementController@create')->name('extranet.element.create');
-    Route::get('/elements/{id}/show', 'ElementController@show')->name('extranet.elements.show');
+    Route::get('/elements/{element}/show', 'ElementController@show')->name('extranet.elements.show');
     Route::post('/elements/store', 'ElementController@store')->name('extranet.elements.store');
     Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');
     Route::delete('/elements/{element}/delete', 'ElementController@delete')->name('extranet.elements.delete');

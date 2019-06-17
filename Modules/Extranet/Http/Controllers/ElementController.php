@@ -79,34 +79,50 @@ class ElementController extends Controller
 
     public function show(Element $element, Request $request)
     {
-        return view('extranet::elements.form',["element" => $element]);
+    //  dd($element->fields);
+      $models = $this->elements->getModelsByType( $element->type);
+      $model = $this->getModelById($models,$element->model_ws);
+      $fields = $this->elements->getFieldsByElement($model->WS);
+
+      $data = [
+        'element_type' => $element->type,
+        'model' => $model,
+        'fields' => $fields,
+        'element' => $element
+      ];
+
+        return view('extranet::elements.form',$data);
     }
 
     public function store(CreateElementRequest $request)
     {
       try {
             $element = $this->dispatchNow(CreateElement::fromRequest($request));
-            Session::flash('notify_success', 'Enregistrement effectué avec succès');
-
-            return redirect()->route('extranet.elements.show', $element);
+            return response()->json([
+                      'success' => true,
+                      'element' => $element
+                  ]);
         } catch (\Exception $e) {
-            Session::flash('notify_error', $e->getMessage());
         }
-
-        return redirect()->route('extranet.elements.create')->withInput();
+        return response()->json([
+            'success' => false
+        ], 500);
 
     }
 
     public function update(Element $element, UpdateElementRequest $request)
     {
         try {
-            $this->dispatchNow(UpdateElement::fromRequest($element, $request));
-            Session::flash('notify_success', 'Enregistrement effectué avec succès');
-        } catch (\Exception $e) {
-            Session::flash('notify_error', $e->getMessage());
-        }
-
-        return redirect()->route('extranet.elements.show', $element);
+              $element = $this->dispatchNow(UpdateElement::fromRequest($element, $request));
+              return response()->json([
+                        'success' => true,
+                        'element' => $element
+                    ]);
+          } catch (\Exception $e) {
+          }
+          return response()->json([
+              'success' => false
+          ], 500);
     }
 
     public function delete(Element $element, DeleteElementRequest $request)

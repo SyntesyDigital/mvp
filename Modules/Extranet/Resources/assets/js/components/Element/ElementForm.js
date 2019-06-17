@@ -25,6 +25,8 @@ class ElementForm extends Component {
 				element : props.element ? JSON.parse(atob(props.element)) : null,
 				model : props.model ? JSON.parse(atob(props.model)) : null,
 				fieldsList :  props.fields ? JSON.parse(atob(props.fields)) : [],
+        wsModelIdentifier :  props.wsModelIdentifier ? props.wsModelIdentifier : null,
+        elementType :  props.elementType ? props.elementType : null,
 			};
 
 			this.props.initState(data);

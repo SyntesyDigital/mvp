@@ -17,7 +17,7 @@ class ElementField extends Model
      *
      * @var string
      */
-    protected $table = 'contents_fields';
+    protected $table = 'elements_fields';
 
     /**
      * The attributes that are mass assignable.

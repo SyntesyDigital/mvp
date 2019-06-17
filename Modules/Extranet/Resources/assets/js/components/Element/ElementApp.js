@@ -20,6 +20,8 @@ if (document.getElementById('element-form')) {
           element={htmlElement.getAttribute('element')}
           fields={htmlElement.getAttribute('fields')}
           model={htmlElement.getAttribute('model')}
+          wsModelIdentifier={htmlElement.getAttribute('wsModelIdentifier')}
+          elementType={htmlElement.getAttribute('elementType')}
         />
       </Provider>
     , htmlElement);

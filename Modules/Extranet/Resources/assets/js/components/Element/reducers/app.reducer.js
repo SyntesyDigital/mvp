@@ -73,12 +73,18 @@ function appReducer(state = initialState, action) {
               };
             }
 
+
+
+
+
             return {
                 ...state,
                 element : action.payload.element,
                 model : action.payload.model,
                 fieldsList : action.payload.fieldsList,
-                inputs : elementInputs
+                inputs : elementInputs,
+                wsModelIdentifier : action.payload.wsModelIdentifier,
+                elementType :  action.payload.elementType,
             }
         case INPUT_CHANGE :
 

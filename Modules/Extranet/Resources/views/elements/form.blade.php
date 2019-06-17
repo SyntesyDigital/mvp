@@ -4,6 +4,8 @@
     <div id="element-form"
       fields={{base64_encode(json_encode($fields,true))}}
       model={{base64_encode(json_encode($model,true))}}
+      wsModelIdentifier={{$model->ID}}
+      elementType={{$element_type}}
       @if((isset($element)) && $element)element={{base64_encode($element->toJson())}}@endif
     ></div>
 @stop
@@ -16,8 +18,8 @@
 @push('javascripts-libs')
 <script>
 var routes = {
-  'typologies' : "{{route('typologies')}}",
-  'showTypology' : "{{route('typologies.show',['id' => ':id'])}}"
+  'elements' : "{{route('extranet.elements.typeIndex',$element_type)}}",
+  'showElement' : "{{route('extranet.elements.show',['element' => ':element'])}}"
 };
 </script>
 

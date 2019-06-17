@@ -47,20 +47,18 @@ export function submitForm(data) {
 export function createElement(data) {
 
   var _this = this;
+  console.log('CREATE::',data);
 
   return (dispatch) => {
 
     axios.post('/architect/elements/store', data)
        .then((response) => {
+
            if(response.data.success) {
-
                dispatch(onSaveSuccess(response.data))
-
-               /*
                setTimeout(function(){
-                   window.location.href = routes.showElement.replace(':id',response.data.model_id);
+                   window.location.href = routes.showElement.replace(':element',response.data.element.id);
                },1500);
-               */
            }
        })
        .catch((error) => {
@@ -79,7 +77,7 @@ export function createElement(data) {
 export function updateElement(data) {
 
     var _this = this;
-
+    console.log('UPDATE::',data);
     return (dispatch) => {
 
       axios.put('/architect/models/' + data.modelId + '/update', data)

@@ -32,6 +32,8 @@ class ElementBar extends Component {
          identifier : this.props.app.inputs.identifier,
          fields : this.props.app.fields,
          icon : this.props.app.inputs.icon.value ? this.props.app.inputs.icon.value : null,
+         wsModelIdentifier :  this.props.app.wsModelIdentifier ? this.props.app.wsModelIdentifier : null,
+         elementType :  this.props.app.elementType ? this.props.app.elementType : null,
      };
 
   }
@@ -44,7 +46,7 @@ class ElementBar extends Component {
           <div className="row">
 
             <div className="col-md-12">
-              <a href={routes['models']} className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
+              <a href={routes['elements']} className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
               <h1>
                 {this.props.app.inputs.icon != "" &&
                   <i className={this.props.app.inputs.icon.value}></i>
