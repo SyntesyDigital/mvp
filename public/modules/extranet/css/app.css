@@ -164,6 +164,10 @@ li {
   overflow: hidden;
 }
 
+#modal-models .table-row .first-column i {
+  width: 30px;
+}
+
 .sitelist .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;

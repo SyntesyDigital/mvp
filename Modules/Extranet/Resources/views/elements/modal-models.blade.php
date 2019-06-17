@@ -28,7 +28,7 @@
                   <div class="cell second-column">
                     <a href="{{route('extranet.element.create',[$element_type_array['identifier'],$model->ID])}}"><i class="fa fa-plus"></i> Ajouter</a>
                   </div>
-                  <div class="cell first-column">{{$model->TITRE}}</div>
+                  <div class="cell first-column"><i class="{{$model->ICONE}}"></i> {{$model->TITRE}}</div>
 
                 </div>
               @endforeach

@@ -34,7 +34,6 @@ class ElementController extends Controller
     public function typeIndex($element_type,Request $request)
     {
         $models = $this->elements->getModelsByType($element_type);
-
         return view('extranet::elements.type_index',
                 [
                   'elements' => $this->elements->getElementsByType($element_type),
