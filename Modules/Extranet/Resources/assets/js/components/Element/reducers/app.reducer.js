@@ -13,7 +13,10 @@ import {
   SETTINGS_OPEN,
   SETTINGS_CHANGE,
   SETTINGS_CLOSE,
-  SETTINGS_CLOSED
+  SETTINGS_CLOSED,
+
+  ADD_PARAMETER,
+  REMOVE_PARAMETER
 
 } from '../constants';
 
@@ -48,7 +51,7 @@ const initialState =  {
 
 function appReducer(state = initialState, action) {
 
-    const {fields, fieldsList, settingsField} = state;
+    const {fields, fieldsList, settingsField, parameters, parametersList} = state;
 
     switch(action.type) {
         case INIT_STATE:
@@ -73,10 +76,6 @@ function appReducer(state = initialState, action) {
               };
             }
 
-
-
-
-
             return {
                 ...state,
                 element : action.payload.element,
@@ -85,6 +84,8 @@ function appReducer(state = initialState, action) {
                 inputs : elementInputs,
                 wsModelIdentifier : action.payload.wsModelIdentifier,
                 elementType :  action.payload.elementType,
+                parameters: action.payload.parameters,
+                parametersList : action.payload.parametersList
             }
         case INPUT_CHANGE :
 
@@ -237,6 +238,42 @@ function appReducer(state = initialState, action) {
               ...state,
               settingsField : null
             }
+
+
+        case ADD_PARAMETER :
+            var found = false;
+            for(var i=0;i<parameters.length;i++){
+              if(parameters[i].id == action.payload.id){
+                found = true;
+                break;
+              }
+            }
+
+            if(!found){
+              parameters.push(action.payload);
+            }
+
+
+            return {
+              ...state,
+              parameters
+            }
+
+
+        case REMOVE_PARAMETER :
+            var found = false;
+            for(var i=0;i<parameters.length;i++){
+              if(parameters[i].id == action.payload){
+                parameters.splice(i,1);
+                break;
+              }
+            }
+
+            return {
+              ...state,
+              parameters
+            }
+
 
 
         default:

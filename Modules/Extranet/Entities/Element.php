@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Modules\Architect\Traits\HasUrl;
 
+use Modules\Extranet\Entities\RouteParameter;
+
 class Element extends Model
 {
     use HasUrl;
@@ -92,6 +94,12 @@ class Element extends Model
             $q->where('name', $name);
             $q->where('value', $value);
         });
+    }
+
+    public function getParameters()
+    {
+        $parametersArray = $this->attrs->where('name', 'parameter')->pluck('value');
+        return  RouteParameter::whereIn('id', $parametersArray)->get();
     }
 
     public function getSlug($languageId)

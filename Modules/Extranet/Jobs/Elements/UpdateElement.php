@@ -22,7 +22,8 @@ class UpdateElement
           'icon',
           'wsModelIdentifier',
           'elementType',
-          'has_parameters'
+          'has_parameters',
+          'parameters'
       ]);
     }
 
@@ -36,7 +37,7 @@ class UpdateElement
       $this->element->name = $this->attributes['name'];
       $this->element->identifier = $this->attributes['identifier'];
       $this->element->icon =$this->attributes["icon"];
-      //'has_parameters'
+      $this->element->has_parameters = count($this->attributes["parameters"]) > 0 ?1:0
       $this->element->save();
 
       $this->element->fields()->delete();
@@ -53,7 +54,17 @@ class UpdateElement
           ]));
       }
 
-//      $this->typology->load('fields', 'attrs');
+      $this->typology->attrs()->delete();
+
+      if(count($this->attributes["parameters"]) > 0){
+        foreach ($this->attributes["parameters"] as $parameter) {
+          $element->attrs()->save(new ElementAttribute([
+              'name' => 'parameter',
+              'value' => $parameter['id']
+          ]));
+        }
+      }
+
 //      (new UpdateUrlsTypology($this->typology))->run();
 
       return $this->element;

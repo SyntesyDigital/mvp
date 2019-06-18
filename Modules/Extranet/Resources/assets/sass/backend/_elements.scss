@@ -38,3 +38,11 @@
 		}
 	}
 }
+li{
+	&.react-autosuggest__suggestion{
+		padding:0;
+		span{
+			padding: 6px 20px;
+		}
+	}
+}

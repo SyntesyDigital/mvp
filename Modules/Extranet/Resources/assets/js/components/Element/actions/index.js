@@ -16,7 +16,10 @@ import {
   SETTINGS_OPEN,
   SETTINGS_CHANGE,
   SETTINGS_CLOSE,
-  SETTINGS_CLOSED
+  SETTINGS_CLOSED,
+
+  ADD_PARAMETER,
+  REMOVE_PARAMETER
 
 } from "../constants/";
 
@@ -199,5 +202,18 @@ export function closeModalSettings() {
 export function onModalSettingsClosed() {
 
   return {type : SETTINGS_CLOSED};
+
+}
+
+
+export function addParameter(payload) {
+
+  return {type : ADD_PARAMETER, payload : payload};
+
+}
+
+export function removeParameter(payload) {
+
+  return {type : REMOVE_PARAMETER, payload : payload};
 
 }

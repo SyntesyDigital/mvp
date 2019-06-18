@@ -19,6 +19,8 @@ if (document.getElementById('element-form')) {
         <ElementForm
           element={htmlElement.getAttribute('element')}
           fields={htmlElement.getAttribute('fields')}
+          parametersList={htmlElement.getAttribute('parametersList')}
+          parameters={htmlElement.getAttribute('parameters')}
           model={htmlElement.getAttribute('model')}
           wsModelIdentifier={htmlElement.getAttribute('wsModelIdentifier')}
           elementType={htmlElement.getAttribute('elementType')}

@@ -99,9 +99,10 @@ class ElementRepository extends BaseRepository
 
     private function getFieldType($wsType)
     {
+
         $fields = Config('models.fields');
 
-        if($wsType != null && $wsType != ''){
+        if(isset($wsType['format']) && $wsType['format'] != null && $wsType['format'] != ''){
           foreach($fields as $field){
             if($field['mapping'] == $wsType){
                 return $field;
@@ -123,7 +124,7 @@ class ElementRepository extends BaseRepository
             trim($parameter[1]) : '';
         }
 
-        $fieldType = $this->getFieldType($parameters['format']);
+        $fieldType = $this->getFieldType($parameters);
 
         return [
           'type' => $fieldType['identifier'],

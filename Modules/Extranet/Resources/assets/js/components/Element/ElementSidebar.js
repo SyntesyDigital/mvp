@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import {connect} from 'react-redux';
 
 import {inputChange, deleteElement} from './actions/';
+import ParameterManager from "./ParameterManager";
 
 import Select from 'react-select';
 
@@ -94,7 +95,7 @@ class ElementSidebar extends Component {
     this.props.inputChange(field);
   }
 
-   render() {
+  render() {
 
     return (
       <div className="sidebar">
@@ -120,6 +121,19 @@ class ElementSidebar extends Component {
         </div>
 
         <hr/>
+
+        <div className="form-group bmd-form-group sidebar-item">
+          <ParameterManager
+          /*  parameters={this.props.parameters}
+            parametersList={this.props.parametersList}
+            element={this.props.element}
+            onParameterAdded={this.props.onParameterAdded}
+            onRemovePArameter={this.props.onParametereTag}*/
+          />
+        </div>
+
+        <hr/>
+
 
         <h3>{ Lang.get('fields.add_fields')}</h3>
 

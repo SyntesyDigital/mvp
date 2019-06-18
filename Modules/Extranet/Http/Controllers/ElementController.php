@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ElementRepository;
 
 use Modules\Extranet\Entities\Element;
+use Modules\Extranet\Entities\RouteParameter;
 
 use Modules\Extranet\Http\Requests\Elements\CreateElementRequest;
 use Modules\Extranet\Http\Requests\Elements\UpdateElementRequest;
@@ -62,11 +63,13 @@ class ElementController extends Controller
           abort(500);
 
         $fields = $this->elements->getFieldsByElement($model->WS);
+        $parametersList = RouteParameter::all();
 
         $data = [
           'element_type' => $element_type,
           'model' => $model,
-          'fields' => $fields
+          'fields' => $fields,
+          'parametersList' => $parametersList
         ];
 
         if($request->has('debug')){
@@ -78,16 +81,17 @@ class ElementController extends Controller
 
     public function show(Element $element, Request $request)
     {
-    //  dd($element->fields);
       $models = $this->elements->getModelsByType( $element->type);
       $model = $this->getModelById($models,$element->model_ws);
       $fields = $this->elements->getFieldsByElement($model->WS);
-
+      $parametersList = RouteParameter::all();
       $data = [
         'element_type' => $element->type,
         'model' => $model,
         'fields' => $fields,
-        'element' => $element
+        'element' => $element,
+        'parametersList' => $parametersList,
+        'parameters' => $element->getParameters()
       ];
 
         return view('extranet::elements.form',$data);

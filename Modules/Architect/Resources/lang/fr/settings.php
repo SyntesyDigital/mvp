@@ -9,4 +9,7 @@ return [
     'menu'        => 'Menu',
     'templates'   => 'Modèle',
     'typologies'  => 'Tipologies',
+    'routes_parameters' => 'Parametres',
+    'elements'    => 'Éléments',
+    'list'        => 'Listes'
 ];

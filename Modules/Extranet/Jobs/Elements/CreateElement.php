@@ -4,6 +4,7 @@ namespace Modules\Extranet\Jobs\Element;
 use Modules\Extranet\Http\Requests\Elements\CreateElementRequest;
 use Modules\Extranet\Entities\Element;
 use Modules\Extranet\Entities\ElementField;
+use Modules\Extranet\Entities\ElementAttribute;
 
 use Config;
 use Carbon\Carbon;
@@ -21,7 +22,8 @@ class CreateElement
           'icon',
           'wsModelIdentifier',
           'elementType',
-          'has_parameters'
+          'has_parameters',
+          'parameters'
       ]);
     }
 
@@ -32,14 +34,13 @@ class CreateElement
 
     public function handle()
     {
-
       $element = Element::create([
         'identifier' => $this->attributes['identifier'],
         'name' => $this->attributes['name'],
         'icon' => isset($this->attributes["icon"]) ? $this->attributes["icon"] : null,
         'model_ws' => isset($this->attributes["wsModelIdentifier"]) ? $this->attributes["wsModelIdentifier"] : null,
         'type' => isset($this->attributes["elementType"]) ? $this->attributes["elementType"] : null,
-        //'has_parameters'
+        'has_parameters' => count($this->attributes["parameters"]) > 0 ?1:0
       ]);
 
       foreach($this->attributes["fields"] as $field) {
@@ -52,6 +53,15 @@ class CreateElement
               'settings' => $field['settings'],
               //boby????
           ]));
+      }
+
+      if(count($this->attributes["parameters"]) > 0){
+        foreach ($this->attributes["parameters"] as $parameter) {
+          $element->attrs()->save(new ElementAttribute([
+              'name' => 'parameter',
+              'value' => $parameter['id']
+          ]));
+        }
       }
 
 //      (new CreateUrlsTypology($typology))->run();

@@ -168,6 +168,14 @@ li {
   width: 30px;
 }
 
+li.react-autosuggest__suggestion {
+  padding: 0;
+}
+
+li.react-autosuggest__suggestion span {
+  padding: 6px 20px;
+}
+
 .sitelist .medias-dropfiles {
   border: 2px dotted #dcdcdc;
   padding: 30px 50px;
