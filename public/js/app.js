@@ -60,11 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
-/******/ 	return __webpack_require__(__webpack_require__.s = 830);
-=======
-/******/ 	return __webpack_require__(__webpack_require__.s = 836);
->>>>>>> dev-5-delivery
+/******/ 	return __webpack_require__(__webpack_require__.s = 837);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -78,11 +74,7 @@
 if (false) {
   module.exports = require('./cjs/react.production.min.js');
 } else {
-<<<<<<< HEAD
-  module.exports = __webpack_require__(110);
-=======
   module.exports = __webpack_require__(113);
->>>>>>> dev-5-delivery
 }
 
 
@@ -294,67 +286,6 @@ module.exports = function parseHeaders(headers) {
 
 var utils = __webpack_require__(4);
 
-// Headers whose duplicates are ignored by node
-// c.f. https://nodejs.org/api/http.html#http_message_headers
-var ignoreDuplicateOf = [
-  'age', 'authorization', 'content-length', 'content-type', 'etag',
-  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
-  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
-  'referer', 'retry-after', 'user-agent'
-];
-
-/**
- * Parse headers into an object
- *
- * ```
- * Date: Wed, 27 Aug 2014 08:58:49 GMT
- * Content-Type: application/json
- * Connection: keep-alive
- * Transfer-Encoding: chunked
- * ```
- *
- * @param {String} headers Headers needing to be parsed
- * @returns {Object} Headers parsed into an object
- */
-module.exports = function parseHeaders(headers) {
-  var parsed = {};
-  var key;
-  var val;
-  var i;
-
-  if (!headers) { return parsed; }
-
-  utils.forEach(headers.split('\n'), function parser(line) {
-    i = line.indexOf(':');
-    key = utils.trim(line.substr(0, i)).toLowerCase();
-    val = utils.trim(line.substr(i + 1));
-
-    if (key) {
-      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
-        return;
-      }
-      if (key === 'set-cookie') {
-        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
-      } else {
-        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-      }
-    }
-  });
-
-  return parsed;
-};
-
-
-/***/ }),
-
-/***/ 101:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(4);
-
 module.exports = (
   utils.isStandardBrowserEnv() ?
 
@@ -423,11 +354,7 @@ module.exports = (
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 102:
-=======
 /***/ 105:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -488,11 +415,7 @@ module.exports = (
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 103:
-=======
 /***/ 106:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -552,30 +475,18 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 104:
-=======
 /***/ 107:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(4);
-<<<<<<< HEAD
-var transformData = __webpack_require__(105);
-var isCancel = __webpack_require__(48);
-var defaults = __webpack_require__(25);
-var isAbsoluteURL = __webpack_require__(106);
-var combineURLs = __webpack_require__(107);
-=======
 var transformData = __webpack_require__(108);
 var isCancel = __webpack_require__(49);
 var defaults = __webpack_require__(26);
 var isAbsoluteURL = __webpack_require__(109);
 var combineURLs = __webpack_require__(110);
->>>>>>> dev-5-delivery
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -658,11 +569,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 105:
-=======
 /***/ 108:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -690,11 +597,7 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 106:
-=======
 /***/ 109:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -716,11 +619,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 107:
-=======
 /***/ 110:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -742,11 +641,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 108:
-=======
 /***/ 111:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -811,11 +706,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 109:
-=======
 /***/ 112:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -850,11 +741,7 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 110:
-=======
 /***/ 113:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -875,13 +762,8 @@ if (true) {
   (function() {
 'use strict';
 
-<<<<<<< HEAD
-var _assign = __webpack_require__(111);
-var checkPropTypes = __webpack_require__(26);
-=======
 var _assign = __webpack_require__(16);
 var checkPropTypes = __webpack_require__(114);
->>>>>>> dev-5-delivery
 
 // TODO: this is special because it gets imported during build.
 
@@ -2768,11 +2650,7 @@ module.exports = react;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 111:
-=======
 /***/ 114:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2902,11 +2780,7 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 112:
-=======
 /***/ 116:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2928,17 +2802,10 @@ if (true) {
 'use strict';
 
 var React = __webpack_require__(1);
-<<<<<<< HEAD
-var _assign = __webpack_require__(83);
-var checkPropTypes = __webpack_require__(26);
-var scheduler = __webpack_require__(113);
-var tracing = __webpack_require__(115);
-=======
 var _assign = __webpack_require__(16);
 var checkPropTypes = __webpack_require__(84);
 var scheduler = __webpack_require__(118);
 var tracing = __webpack_require__(120);
->>>>>>> dev-5-delivery
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -24199,9 +24066,6 @@ module.exports = reactDom;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 113:
-=======
 /***/ 117:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24223,7 +24087,6 @@ module.exports = ReactPropTypesSecret;
 /***/ }),
 
 /***/ 118:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24232,21 +24095,13 @@ module.exports = ReactPropTypesSecret;
 if (false) {
   module.exports = require('./cjs/scheduler.production.min.js');
 } else {
-<<<<<<< HEAD
-  module.exports = __webpack_require__(114);
-=======
   module.exports = __webpack_require__(119);
->>>>>>> dev-5-delivery
 }
 
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 114:
-=======
 /***/ 119:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24954,11 +24809,7 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 115:
-=======
 /***/ 120:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24967,21 +24818,13 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
 if (false) {
   module.exports = require('./cjs/scheduler-tracing.production.min.js');
 } else {
-<<<<<<< HEAD
-  module.exports = __webpack_require__(116);
-=======
   module.exports = __webpack_require__(121);
->>>>>>> dev-5-delivery
 }
 
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 116:
-=======
 /***/ 121:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25415,13 +25258,6 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(93);
-
-/***/ }),
-
-/***/ 168:
-=======
 "use strict";
 /*
 object-assign
@@ -25524,8 +25360,7 @@ module.exports = __webpack_require__(96);
 
 /***/ }),
 
-/***/ 173:
->>>>>>> dev-5-delivery
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -36131,11 +35966,7 @@ return jQuery;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 170:
-=======
 /***/ 175:
->>>>>>> dev-5-delivery
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38789,11 +38620,7 @@ if (false) {
   checkDCE();
   module.exports = require('./cjs/react-dom.production.min.js');
 } else {
-<<<<<<< HEAD
-  module.exports = __webpack_require__(112);
-=======
   module.exports = __webpack_require__(116);
->>>>>>> dev-5-delivery
 }
 
 
@@ -38806,11 +38633,7 @@ if (false) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(4);
-<<<<<<< HEAD
-var normalizeHeaderName = __webpack_require__(96);
-=======
 var normalizeHeaderName = __webpack_require__(99);
->>>>>>> dev-5-delivery
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -38943,13 +38766,8 @@ module.exports = function(module) {
 "use strict";
 
 
-<<<<<<< HEAD
-var bind = __webpack_require__(45);
-var isBuffer = __webpack_require__(94);
-=======
 var bind = __webpack_require__(46);
 var isBuffer = __webpack_require__(97);
->>>>>>> dev-5-delivery
 
 /*global toString:true*/
 
@@ -39253,11 +39071,7 @@ module.exports = {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 420:
-=======
 /***/ 428:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -56399,19 +56213,11 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(4);
-<<<<<<< HEAD
-var settle = __webpack_require__(97);
-var buildURL = __webpack_require__(99);
-var parseHeaders = __webpack_require__(100);
-var isURLSameOrigin = __webpack_require__(101);
-var createError = __webpack_require__(47);
-=======
 var settle = __webpack_require__(100);
 var buildURL = __webpack_require__(102);
 var parseHeaders = __webpack_require__(103);
 var isURLSameOrigin = __webpack_require__(104);
 var createError = __webpack_require__(48);
->>>>>>> dev-5-delivery
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -56491,11 +56297,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-<<<<<<< HEAD
-      var cookies = __webpack_require__(102);
-=======
       var cookies = __webpack_require__(105);
->>>>>>> dev-5-delivery
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -56580,11 +56382,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-<<<<<<< HEAD
-var enhanceError = __webpack_require__(98);
-=======
 var enhanceError = __webpack_require__(101);
->>>>>>> dev-5-delivery
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -56835,102 +56633,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 83:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-=======
 /***/ 8:
 /***/ (function(module, exports) {
 
@@ -56955,31 +56657,19 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
->>>>>>> dev-5-delivery
 
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 830:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(831);
-=======
-/***/ 836:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(837);
->>>>>>> dev-5-delivery
-
-
-/***/ }),
-
-<<<<<<< HEAD
-/***/ 831:
-=======
 /***/ 837:
->>>>>>> dev-5-delivery
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(838);
+
+
+/***/ }),
+
+/***/ 838:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -56989,11 +56679,7 @@ module.exports = __webpack_require__(837);
  * building robust, powerful web applications using React + Laravel.
  */
 
-<<<<<<< HEAD
-__webpack_require__(832);
-=======
-__webpack_require__(838);
->>>>>>> dev-5-delivery
+__webpack_require__(839);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -57001,29 +56687,16 @@ __webpack_require__(838);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-<<<<<<< HEAD
-__webpack_require__(834);
+__webpack_require__(841);
 
 /***/ }),
 
-/***/ 832:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-window._ = __webpack_require__(420);
-window.Popper = __webpack_require__(170).default;
-=======
-__webpack_require__(840);
-
-/***/ }),
-
-/***/ 838:
+/***/ 839:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(428);
 window.Popper = __webpack_require__(175).default;
->>>>>>> dev-5-delivery
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -57032,15 +56705,9 @@ window.Popper = __webpack_require__(175).default;
  */
 
 try {
-<<<<<<< HEAD
-  window.$ = window.jQuery = __webpack_require__(168);
+  window.$ = window.jQuery = __webpack_require__(174);
 
-  __webpack_require__(833);
-=======
-  window.$ = window.jQuery = __webpack_require__(173);
-
-  __webpack_require__(839);
->>>>>>> dev-5-delivery
+  __webpack_require__(840);
 } catch (e) {}
 
 /**
@@ -57086,11 +56753,117 @@ if (token) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 833:
-=======
-/***/ 839:
->>>>>>> dev-5-delivery
+/***/ 84:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var printWarning = function() {};
+
+if (true) {
+  var ReactPropTypesSecret = __webpack_require__(117);
+  var loggedTypeFailures = {};
+  var has = Function.call.bind(Object.prototype.hasOwnProperty);
+
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (true) {
+    for (var typeSpecName in typeSpecs) {
+      if (has(typeSpecs, typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        if (error && !(error instanceof Error)) {
+          printWarning(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          );
+        }
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          printWarning(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Resets warning cache when testing.
+ *
+ * @private
+ */
+checkPropTypes.resetWarningCache = function() {
+  if (true) {
+    loggedTypeFailures = {};
+  }
+}
+
+module.exports = checkPropTypes;
+
+
+/***/ }),
+
+/***/ 840:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -57099,11 +56872,7 @@ if (token) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-<<<<<<< HEAD
-   true ? factory(exports, __webpack_require__(168), __webpack_require__(170)) :
-=======
-   true ? factory(exports, __webpack_require__(173), __webpack_require__(175)) :
->>>>>>> dev-5-delivery
+   true ? factory(exports, __webpack_require__(174), __webpack_require__(175)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (global = global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
 }(this, function (exports, $, Popper) { 'use strict';
@@ -61536,121 +61305,7 @@ if (token) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 834:
-=======
-/***/ 84:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var printWarning = function() {};
-
-if (true) {
-  var ReactPropTypesSecret = __webpack_require__(117);
-  var loggedTypeFailures = {};
-  var has = Function.call.bind(Object.prototype.hasOwnProperty);
-
-  printWarning = function(text) {
-    var message = 'Warning: ' + text;
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (true) {
-    for (var typeSpecName in typeSpecs) {
-      if (has(typeSpecs, typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error(
-              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
-              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
-            );
-            err.name = 'Invariant Violation';
-            throw err;
-          }
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-          error = ex;
-        }
-        if (error && !(error instanceof Error)) {
-          printWarning(
-            (componentName || 'React class') + ': type specification of ' +
-            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
-            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
-            'You may have forgotten to pass an argument to the type checker ' +
-            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
-            'shape all require an argument).'
-          );
-        }
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          printWarning(
-            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
-          );
-        }
-      }
-    }
-  }
-}
-
-/**
- * Resets warning cache when testing.
- *
- * @private
- */
-checkPropTypes.resetWarningCache = function() {
-  if (true) {
-    loggedTypeFailures = {};
-  }
-}
-
-module.exports = checkPropTypes;
-
-
-/***/ }),
-
-/***/ 840:
->>>>>>> dev-5-delivery
+/***/ 841:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61719,54 +61374,16 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 9:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 93:
-=======
 /***/ 96:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(4);
-<<<<<<< HEAD
-var bind = __webpack_require__(45);
-var Axios = __webpack_require__(95);
-var defaults = __webpack_require__(25);
-=======
 var bind = __webpack_require__(46);
 var Axios = __webpack_require__(98);
 var defaults = __webpack_require__(26);
->>>>>>> dev-5-delivery
 
 /**
  * Create an instance of Axios
@@ -61799,25 +61416,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-<<<<<<< HEAD
-axios.Cancel = __webpack_require__(49);
-axios.CancelToken = __webpack_require__(108);
-axios.isCancel = __webpack_require__(48);
-=======
 axios.Cancel = __webpack_require__(50);
 axios.CancelToken = __webpack_require__(111);
 axios.isCancel = __webpack_require__(49);
->>>>>>> dev-5-delivery
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-<<<<<<< HEAD
-axios.spread = __webpack_require__(109);
-=======
 axios.spread = __webpack_require__(112);
->>>>>>> dev-5-delivery
 
 module.exports = axios;
 
@@ -61827,11 +61434,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 94:
-=======
 /***/ 97:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports) {
 
 /*!
@@ -61849,11 +61452,7 @@ module.exports = function isBuffer (obj) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 95:
-=======
 /***/ 98:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61861,13 +61460,8 @@ module.exports = function isBuffer (obj) {
 
 var defaults = __webpack_require__(26);
 var utils = __webpack_require__(4);
-<<<<<<< HEAD
-var InterceptorManager = __webpack_require__(103);
-var dispatchRequest = __webpack_require__(104);
-=======
 var InterceptorManager = __webpack_require__(106);
 var dispatchRequest = __webpack_require__(107);
->>>>>>> dev-5-delivery
 
 /**
  * Create a new instance of Axios
@@ -61945,11 +61539,7 @@ module.exports = Axios;
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ 96:
-=======
 /***/ 99:
->>>>>>> dev-5-delivery
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61967,146 +61557,6 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 };
 
 
-<<<<<<< HEAD
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var createError = __webpack_require__(47);
-
-/**
- * Resolve or reject a Promise based on response status.
- *
- * @param {Function} resolve A function that resolves the promise.
- * @param {Function} reject A function that rejects the promise.
- * @param {object} response The response.
- */
-module.exports = function settle(resolve, reject, response) {
-  var validateStatus = response.config.validateStatus;
-  // Note: status is not exposed by XDomainRequest
-  if (!response.status || !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  } else {
-    reject(createError(
-      'Request failed with status code ' + response.status,
-      response.config,
-      null,
-      response.request,
-      response
-    ));
-  }
-};
-
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Update an Error with the specified config, error code, and response.
- *
- * @param {Error} error The error to update.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The error.
- */
-module.exports = function enhanceError(error, config, code, request, response) {
-  error.config = config;
-  if (code) {
-    error.code = code;
-  }
-  error.request = request;
-  error.response = response;
-  return error;
-};
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var utils = __webpack_require__(4);
-
-function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%40/gi, '@').
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+').
-    replace(/%5B/gi, '[').
-    replace(/%5D/gi, ']');
-}
-
-/**
- * Build a URL by appending params to the end
- *
- * @param {string} url The base of the url (e.g., http://www.google.com)
- * @param {object} [params] The params to be appended
- * @returns {string} The formatted url
- */
-module.exports = function buildURL(url, params, paramsSerializer) {
-  /*eslint no-param-reassign:0*/
-  if (!params) {
-    return url;
-  }
-
-  var serializedParams;
-  if (paramsSerializer) {
-    serializedParams = paramsSerializer(params);
-  } else if (utils.isURLSearchParams(params)) {
-    serializedParams = params.toString();
-  } else {
-    var parts = [];
-
-    utils.forEach(params, function serialize(val, key) {
-      if (val === null || typeof val === 'undefined') {
-        return;
-      }
-
-      if (utils.isArray(val)) {
-        key = key + '[]';
-      } else {
-        val = [val];
-      }
-
-      utils.forEach(val, function parseValue(v) {
-        if (utils.isDate(v)) {
-          v = v.toISOString();
-        } else if (utils.isObject(v)) {
-          v = JSON.stringify(v);
-        }
-        parts.push(encode(key) + '=' + encode(v));
-      });
-    });
-
-    serializedParams = parts.join('&');
-  }
-
-  if (serializedParams) {
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
-  }
-
-  return url;
-};
-
-
-=======
->>>>>>> dev-5-delivery
 /***/ })
 
 /******/ });
