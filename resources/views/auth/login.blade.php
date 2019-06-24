@@ -77,7 +77,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-sign-out"></i>Connexion
                     </button>
-                    <p class="forgot"><a hre="">Mot de pass obluié ?</a></p>
+                    <!--<p class="forgot"><a hre="">Mot de pass obluié ?</a></p>-->
                 </div>
               </div>
           </form>

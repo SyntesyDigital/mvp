@@ -12,7 +12,7 @@ use Modules\Architect\Entities\Language;
 class ElementTable extends Widget implements WidgetInterface
 {
     public $type = 'widget';
-    public $icon = 'fa-file-o';
+    public $icon = 'fa fa-table';
     public $name = 'ELEMENT_TABLE';
     public $component = 'CommonWidget';
 

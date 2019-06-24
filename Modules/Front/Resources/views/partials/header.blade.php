@@ -19,7 +19,20 @@
 									</button>
 								</div>
 								<div class="user-info">
+<<<<<<< HEAD
 									<div class="button-header-container"><a href="" class="btn btn-header"><i class="fa fa-sign-out"></i> <p class="button-text">Déconnecter</p></a></div>
+=======
+
+									<div class="button-header-container">
+											<a href="" class="btn btn-header" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+													<i class="fa fa-sign-out"></i> <p class="button-text">Déconnecter</p>
+											</a>
+											<form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+											{{csrf_field()}}
+											</form>
+									</div>
+
+>>>>>>> dev-5-delivery
 									@if(Auth::user()->role == 1)
 										<div class="button-header-container"><a href="{{route('dashboard')}}" class="btn btn-header"><i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
 									@endif
