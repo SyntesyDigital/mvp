@@ -12,7 +12,7 @@ use Modules\Architect\Entities\Language;
 class Separator extends Widget implements WidgetInterface
 {
     public $type = 'widget';
-    public $icon = 'fa-arrows-v';
+    public $icon = 'fa-arrows-alt-v';
     public $name = 'SEPARATOR';
     public $component = 'CommonWidget';
 

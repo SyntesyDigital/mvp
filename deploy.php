@@ -4,10 +4,10 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Project name
-set('application', 'Architect IGA');
+set('application', 'Arilim');
 
 // Project repository
-set('repository', 'git@bitbucket.org:syntesy/architect-iga.git');
+set('repository', 'git@bitbucket.org:syntesy/arilim.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);

@@ -97,14 +97,14 @@ class ElementRepository extends BaseRepository
           $icons[$wsType] : '';
     }
 
-    private function getFieldType($wsType)
+    private function getFieldType($parameters)
     {
 
         $fields = Config('models.fields');
 
-        if(isset($wsType['format']) && $wsType['format'] != null && $wsType['format'] != ''){
+        if(isset($parameters['format']) && $parameters['format'] != null && $parameters['format'] != ''){
           foreach($fields as $field){
-            if($field['mapping'] == $wsType){
+            if($field['mapping'] == $parameters['format']){
                 return $field;
             }
           }

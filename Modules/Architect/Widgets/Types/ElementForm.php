@@ -12,7 +12,7 @@ use Modules\Architect\Entities\Language;
 class ElementForm extends Widget implements WidgetInterface
 {
     public $type = 'widget';
-    public $icon = 'fa-file-o';
+    public $icon = 'fa fa fa-list-alt';
     public $name = 'ELEMENT_FORM';
     public $component = 'CommonWidget';
 

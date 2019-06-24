@@ -10,7 +10,7 @@ use Modules\Architect\Entities\ContentField;
 class Image extends Field implements FieldInterface
 {
     public $type = 'image';
-    public $icon = 'fa-picture-o';
+    public $icon = 'fa-image';
     public $name = 'IMAGE';
 
     public $rules = [
