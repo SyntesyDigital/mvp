@@ -23,13 +23,17 @@ class ElementForm extends Component {
 			//init redux state with component parameters
 			var data = {
 				element : props.element ? JSON.parse(atob(props.element)) : null,
+        fields : props.fields ? JSON.parse(atob(props.fields)) : [],
 				model : props.model ? JSON.parse(atob(props.model)) : null,
 				fieldsList :  props.fields ? JSON.parse(atob(props.fields)) : [],
         wsModelIdentifier :  props.wsModelIdentifier ? props.wsModelIdentifier : null,
         elementType :  props.elementType ? props.elementType : null,
         parametersList: props.parametersList ? JSON.parse(atob(props.parametersList)) : [],
         parameters: props.parameters ? JSON.parse(atob(props.parameters)) : [],
+
 			};
+
+      console.log("Data => ",data);
 
 			this.props.initState(data);
 

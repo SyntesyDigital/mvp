@@ -49,6 +49,15 @@ const initialState =  {
   modalSettingsDisplay : false
 }
 
+function checkIfFieldAdded(field,fields) {
+  for(var key in fields){
+    if(fields[key].identifier == field.identifier){
+      return true;
+    }
+  }
+  return false;
+}
+
 function appReducer(state = initialState, action) {
 
     const {fields, fieldsList, settingsField, parameters, parametersList} = state;
@@ -75,6 +84,25 @@ function appReducer(state = initialState, action) {
                 }
               };
             }
+            else {
+              //element already defined
+              elementInputs = {
+                name: action.payload.element.name,
+                identifier: action.payload.element.identifier,
+                icon: {
+                  label: action.payload.element.icon,
+                  value: action.payload.element.icon
+                }
+              };
+
+              //check if field already added
+              for(var key in action.payload.fieldsList){
+                action.payload.fieldsList[key].added = checkIfFieldAdded(
+                  action.payload.fieldsList[key],action.payload.element.fields
+                );
+              }
+
+            }
 
             return {
                 ...state,
@@ -85,7 +113,9 @@ function appReducer(state = initialState, action) {
                 wsModelIdentifier : action.payload.wsModelIdentifier,
                 elementType :  action.payload.elementType,
                 parameters: action.payload.parameters,
-                parametersList : action.payload.parametersList
+                parametersList : action.payload.parametersList,
+                fields : action.payload.element != null ?
+                  action.payload.element.fields : []
             }
         case INPUT_CHANGE :
 

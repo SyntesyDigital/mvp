@@ -38,7 +38,7 @@ export function submitForm(data) {
 
   console.log("submitForm :: ",data);
 
-  if(data.modelId == null){
+  if(data.elementId == null){
       return createElement(data);
   }
   else {
@@ -83,7 +83,7 @@ export function updateElement(data) {
     console.log('UPDATE::',data);
     return (dispatch) => {
 
-      axios.put('/architect/models/' + data.modelId + '/update', data)
+      axios.put('/architect/elements/' + data.elementId + '/update', data)
            .then((response) => {
                if(response.data.success) {
                    dispatch(onSaveSuccess(response.data));
@@ -103,19 +103,19 @@ export function updateElement(data) {
 
 }
 
-export function deleteElement(modelId) {
+export function deleteElement(elementId) {
 
   var _this = this;
 
   return (dispatch) => {
 
-      axios.delete('/architect/models/' + modelId + '/delete')
+      axios.delete('/architect/elements/' + elementId + '/delete')
           .then((response) => {
               if(response.data.success) {
 
                   dispatch(onSaveSuccess(response.data))
 
-                  //window.location.href = routes['models'];
+                  window.location.href = routes['elements'];
               }
           })
           .catch((error) => {

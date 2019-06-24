@@ -56,7 +56,7 @@ class ElementSidebar extends Component {
         },
         callback: function (result) {
           if(result){
-            self.props.deleteElement(self.app.model.id);
+            self.props.deleteElement(self.props.app.element.id);
           }
         }
     });
@@ -145,7 +145,7 @@ class ElementSidebar extends Component {
 
         {this.props.app.element != null &&
           <div className="text-right">
-            <a className="btn btn-link text-danger" onClick={this.handleDeleteElement}><i className="fa fa-trash"></i> Esborrar</a>
+            <a className="btn btn-link text-danger" onClick={this.handleDeleteElement}><i className="fa fa-trash"></i> Supprimer</a>
           </div>
         }
 
@@ -167,8 +167,8 @@ const mapDispatchToProps = dispatch => {
         inputChange: (field) => {
             return dispatch(inputChange(field));
         },
-        deleteElement: (modelId) => {
-            return dispatch(deleteElement(modelId));
+        deleteElement: (elementId) => {
+            return dispatch(deleteElement(elementId));
         }
     }
 }

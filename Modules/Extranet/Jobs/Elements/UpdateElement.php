@@ -4,6 +4,7 @@ namespace Modules\Extranet\Jobs\Element;
 use Modules\Extranet\Http\Requests\Elements\UpdateElementRequest;
 use Modules\Extranet\Entities\Element;
 use Modules\Extranet\Entities\ElementField;
+use Modules\Extranet\Entities\ElementAttribute;
 
 use Config;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ class UpdateElement
     public function __construct(Element $element, array $attributes = [])
     {
       $this->element = $element;
+
       $this->attributes = array_only($attributes, [
           'name',
           'identifier',
@@ -37,13 +39,13 @@ class UpdateElement
       $this->element->name = $this->attributes['name'];
       $this->element->identifier = $this->attributes['identifier'];
       $this->element->icon =$this->attributes["icon"];
-      $this->element->has_parameters = count($this->attributes["parameters"]) > 0 ?1:0
+      $this->element->has_parameters = count($this->attributes["parameters"]) > 0 ? 1:0;
       $this->element->save();
 
       $this->element->fields()->delete();
 
       foreach($this->attributes["fields"] as $field) {
-          $element->fields()->save(new ElementField([
+          $this->element->fields()->save(new ElementField([
               'icon' => $field['icon'],
               'name' => $field['name'],
               'identifier' => $field['identifier'],
@@ -54,18 +56,16 @@ class UpdateElement
           ]));
       }
 
-      $this->typology->attrs()->delete();
+      $this->element->attrs()->delete();
 
       if(count($this->attributes["parameters"]) > 0){
         foreach ($this->attributes["parameters"] as $parameter) {
-          $element->attrs()->save(new ElementAttribute([
+          $this->element->attrs()->save(new ElementAttribute([
               'name' => 'parameter',
               'value' => $parameter['id']
           ]));
         }
       }
-
-//      (new UpdateUrlsTypology($this->typology))->run();
 
       return $this->element;
     }

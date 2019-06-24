@@ -29,13 +29,13 @@ class LayoutDataTable extends Component {
 
         var table = this._table.DataTable({
     	    language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
+    	        //"url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		processing: true,
           serverSide: true,
     	    pageLength: 20,
           language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
+              //url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
           },
     	    ajax: this.props.route,
     	    columns: [

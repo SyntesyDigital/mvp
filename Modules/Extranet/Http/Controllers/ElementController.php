@@ -85,11 +85,12 @@ class ElementController extends Controller
       $model = $this->getModelById($models,$element->model_ws);
       $fields = $this->elements->getFieldsByElement($model->WS);
       $parametersList = RouteParameter::all();
+
       $data = [
         'element_type' => $element->type,
         'model' => $model,
         'fields' => $fields,
-        'element' => $element,
+        'element' => $element->load('fields','attrs'),
         'parametersList' => $parametersList,
         'parameters' => $element->getParameters()
       ];

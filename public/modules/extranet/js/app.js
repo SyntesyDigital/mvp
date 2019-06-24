@@ -29624,7 +29624,7 @@ function submitForm(data) {
 
     console.log("submitForm :: ", data);
 
-    if (data.modelId == null) {
+    if (data.elementId == null) {
         return createElement(data);
     } else {
         return updateElement(data);
@@ -29664,7 +29664,7 @@ function updateElement(data) {
     console.log('UPDATE::', data);
     return function (dispatch) {
 
-        axios.put('/architect/models/' + data.modelId + '/update', data).then(function (response) {
+        axios.put('/architect/elements/' + data.elementId + '/update', data).then(function (response) {
             if (response.data.success) {
                 dispatch(onSaveSuccess(response.data));
             }
@@ -29681,18 +29681,18 @@ function updateElement(data) {
     };
 }
 
-function deleteElement(modelId) {
+function deleteElement(elementId) {
 
     var _this = this;
 
     return function (dispatch) {
 
-        axios.delete('/architect/models/' + modelId + '/delete').then(function (response) {
+        axios.delete('/architect/elements/' + elementId + '/delete').then(function (response) {
             if (response.data.success) {
 
                 dispatch(onSaveSuccess(response.data));
 
-                //window.location.href = routes['models'];
+                window.location.href = routes['elements'];
             }
         }).catch(function (error) {
             if (error.response) {
@@ -51776,7 +51776,7 @@ var ElementBar = function (_Component) {
     value: function getFormData() {
 
       return {
-        modelId: this.props.app.model != null && this.props.app.model.id !== undefined ? this.props.app.model.id : null,
+        elementId: this.props.app.element != null && this.props.app.element.id !== undefined ? this.props.app.element.id : null,
         name: this.props.app.inputs.name,
         identifier: this.props.app.inputs.identifier,
         fields: this.props.app.fields,
@@ -51922,7 +51922,7 @@ var ElementSidebar = function (_Component) {
         },
         callback: function callback(result) {
           if (result) {
-            self.props.deleteElement(self.app.model.id);
+            self.props.deleteElement(self.props.app.element.id);
           }
         }
       });
@@ -51973,7 +51973,7 @@ var ElementSidebar = function (_Component) {
         element={this.props.element}
         onParameterAdded={this.props.onParameterAdded}
         onRemovePArameter={this.props.onParametereTag}*/
-      , null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h3', null, Lang.get('fields.add_fields')), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-list' }, this.props.children), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null), this.props.app.element != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'text-right' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { className: 'btn btn-link text-danger', onClick: this.handleDeleteElement }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' Esborrar')));
+      , null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h3', null, Lang.get('fields.add_fields')), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-list' }, this.props.children), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null), this.props.app.element != null && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'text-right' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { className: 'btn btn-link text-danger', onClick: this.handleDeleteElement }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' Supprimer')));
     }
   }]);
 
@@ -51992,8 +51992,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     inputChange: function inputChange(field) {
       return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["h" /* inputChange */])(field));
     },
-    deleteElement: function deleteElement(modelId) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["f" /* deleteElement */])(modelId));
+    deleteElement: function deleteElement(elementId) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["f" /* deleteElement */])(elementId));
     }
   };
 };
@@ -54083,6 +54083,15 @@ var initialState = (_initialState = {
   element: null
 }, _defineProperty(_initialState, 'settingsField', null), _defineProperty(_initialState, 'modalSettingsDisplay', false), _initialState);
 
+function checkIfFieldAdded(field, fields) {
+  for (var key in fields) {
+    if (fields[key].identifier == field.identifier) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function appReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
@@ -54113,6 +54122,21 @@ function appReducer() {
             value: action.payload.model.ICONE
           }
         };
+      } else {
+        //element already defined
+        elementInputs = {
+          name: action.payload.element.name,
+          identifier: action.payload.element.identifier,
+          icon: {
+            label: action.payload.element.icon,
+            value: action.payload.element.icon
+          }
+        };
+
+        //check if field already added
+        for (var key in action.payload.fieldsList) {
+          action.payload.fieldsList[key].added = checkIfFieldAdded(action.payload.fieldsList[key], action.payload.element.fields);
+        }
       }
 
       return _extends({}, state, {
@@ -54123,7 +54147,8 @@ function appReducer() {
         wsModelIdentifier: action.payload.wsModelIdentifier,
         elementType: action.payload.elementType,
         parameters: action.payload.parameters,
-        parametersList: action.payload.parametersList
+        parametersList: action.payload.parametersList,
+        fields: action.payload.element != null ? action.payload.element.fields : []
       });
     case __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* INPUT_CHANGE */]:
       var inputs = state.inputs;
@@ -55517,13 +55542,17 @@ var ElementForm = function (_Component) {
 
         var data = {
             element: props.element ? JSON.parse(atob(props.element)) : null,
+            fields: props.fields ? JSON.parse(atob(props.fields)) : [],
             model: props.model ? JSON.parse(atob(props.model)) : null,
             fieldsList: props.fields ? JSON.parse(atob(props.fields)) : [],
             wsModelIdentifier: props.wsModelIdentifier ? props.wsModelIdentifier : null,
             elementType: props.elementType ? props.elementType : null,
             parametersList: props.parametersList ? JSON.parse(atob(props.parametersList)) : [],
             parameters: props.parameters ? JSON.parse(atob(props.parameters)) : []
+
         };
+
+        console.log("Data => ", data);
 
         _this.props.initState(data);
 

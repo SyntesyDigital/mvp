@@ -27,7 +27,7 @@ class ElementBar extends Component {
   getFormData() {
 
      return {
-         modelId : this.props.app.model != null && this.props.app.model.id !== undefined ? this.props.app.model.id : null,
+         elementId : this.props.app.element != null && this.props.app.element.id !== undefined ? this.props.app.element.id : null,
          name : this.props.app.inputs.name,
          identifier : this.props.app.inputs.identifier,
          fields : this.props.app.fields,
