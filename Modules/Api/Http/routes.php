@@ -10,6 +10,8 @@ Route::group(['middleware' => ['web','auth:veos-ws'], 'prefix' => 'api', 'namesp
     Route::get('/categories', 'CategoryController@index');
     Route::get('/categories/tree', 'CategoryController@tree');
 
+    Route::get('/elements', 'ElementController@index');
+
     Route::get('/tags', 'TagController@index');
 
     Route::get('/search', 'SearchController@search');

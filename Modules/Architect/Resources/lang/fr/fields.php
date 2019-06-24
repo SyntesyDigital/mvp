@@ -109,5 +109,6 @@ return [
     'day_month_year' => 'Jour / mois / année',
     'month_year' => 'Mois / année',
     'year' => 'Année',
-    'telephone' => 'Téléphone'
+    'telephone' => 'Téléphone',
+    'collapsable' => 'Repliable'
 ];

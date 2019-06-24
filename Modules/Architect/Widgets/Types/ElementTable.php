@@ -30,6 +30,8 @@ class ElementTable extends Widget implements WidgetInterface
         'htmlId',
         'htmlClass',
         'itemsPerPage',
+        'tableElements',
+        'collapsable'
     ];
 }
 ?>

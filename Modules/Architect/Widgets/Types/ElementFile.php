@@ -17,7 +17,8 @@ class ElementFile extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        'title' => 'Modules\Architect\Fields\Types\Text'
+        'title' => 'Modules\Architect\Fields\Types\Text',
+        'link' => 'Modules\Architect\Fields\Types\Link'
     ];
 
     public $rules = [
@@ -29,6 +30,8 @@ class ElementFile extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
+        'fileElements',
+        'collapsable'
     ];
 }
 ?>

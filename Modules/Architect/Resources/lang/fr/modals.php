@@ -49,6 +49,7 @@ return [
     'edit_slug_alert' => 'La modification de l\'identifiant peut entraîner des modifications importantes dans la mise en page finale. Souhaitez-vous modifier le champ ?',
     'max_size' => 'Taille maximum',
     'cut media' => 'Couper',
-    'select_right_list' => 'Sélectionnez une option dans la liste à droite'
-
+    'select_right_list' => 'Sélectionnez une option dans la liste à droite',
+    'element' => 'Element',
+    'collapsable' => 'Repliable'
 ];

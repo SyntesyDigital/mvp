@@ -29,6 +29,8 @@ class ElementForm extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
+        'formElements',
+        'collapsable'
     ];
 }
 ?>

@@ -68,7 +68,20 @@ class ModalEditItem extends Component {
           value:'',
           name:'----'
         }],
-        originalCategories : []
+        originalCategories : [],
+        originalElements : [],
+        fileElements : [{
+          value:'',
+          name:'----'
+        }],
+        formElements : [{
+          value:'',
+          name:'----'
+        }],
+        tableElements : [{
+          value:'',
+          name:'----'
+        }]
     };
 
     this.TYPOLOGIES = [{
@@ -76,6 +89,7 @@ class ModalEditItem extends Component {
           name:'----'
         }
     ];
+
 
     this.SELECTABLE_TYPOLOGIES = [{
           id:'',
@@ -105,6 +119,24 @@ class ModalEditItem extends Component {
     for(var key in TYPOLOGIES){
       this.TYPOLOGIES.push(TYPOLOGIES[key]);
     }
+
+    this.FILE_ELEMENTS = [{
+          id:'',
+          name:'----'
+        }
+    ];
+
+    this.FORM_ELEMENTS = [{
+          id:'',
+          name:'----'
+        }
+    ];
+
+    this.TABLE_ELEMENTS = [{
+          id:'',
+          name:'----'
+        }
+    ];
 
     console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
 
@@ -144,8 +176,54 @@ class ModalEditItem extends Component {
        });
 
   }
+
+  loadElements() {
+
+    var self = this;
+
+
+    axios.get(ASSETS+'api/elements')
+      .then(function (response) {
+          if(response.status == 200
+              && response.data !== undefined
+              && response.data.length > 0)
+          {
+
+            console.log("original elements => ",response.data);
+
+            var fileElements = [{
+              value:'',
+              name:'----'
+            }];
+
+            var tableElements = [{
+              value:'',
+              name:'----'
+            }];
+
+            var formElements = [{
+              value:'',
+              name:'----'
+            }];
+
+            self.push_elements(response.data, fileElements,formElements, tableElements);
+            self.setState({
+              originalElements : response.data,
+              fileElements  : fileElements,
+              tableElements : tableElements,
+              formElements  : formElements
+            });
+
+          }
+
+      }).catch(function (error) {
+         console.log(error);
+       });
+
+  }
+
   printSpace(level)
- {
+  {
 
    if(level <= 1)
      return '';
@@ -158,21 +236,45 @@ class ModalEditItem extends Component {
    }
 
    return spaces;
- }
+  }
 
- push_categories(categories_from, level, categories_to){
+  push_categories(categoriesFrom, level, categoriesTo){
    level++;
-   for (var i = 0; i< categories_from.length; i++ ){
-        categories_to.push({
-          value: categories_from[i].id,
-          name: this.printSpace(level)+categories_from[i].name,
+   for (var i = 0; i< categoriesFrom.length; i++ ){
+        categoriesTo.push({
+          value: categoriesFrom[i].id,
+          name: this.printSpace(level)+categoriesFrom[i].name,
         });
-       if(categories_from[i].descendants.length > 0){
-          this.push_categories(categories_from[i].descendants,level, categories_to);
+       if(categoriesFrom[i].descendants.length > 0){
+          this.push_categories(categoriesFrom[i].descendants,level, categoriesTo);
        }
    }
 
- }
+  }
+
+  push_elements(elementsFrom, fileElementsTo, formElementsTo, tableElementsTo){
+      for (var i = 0; i< elementsFrom.length; i++ ){
+         if(elementsFrom[i].type == 'file'){
+           fileElementsTo.push({
+             value: elementsFrom[i].id,
+             name : elementsFrom[i].name,
+           });
+         }
+         if(elementsFrom[i].type == 'form'){
+           formElementsTo.push({
+             value: elementsFrom[i].id,
+             name : elementsFrom[i].name,
+           });
+         }
+         if(elementsFrom[i].type == 'table'){
+           tableElementsTo.push({
+             value: elementsFrom[i].id,
+             name : elementsFrom[i].name,
+           });
+         }
+      }
+
+   }
 
   processProps(props) {
 
@@ -195,7 +297,7 @@ class ModalEditItem extends Component {
     }
 
     this.loadCategories();
-
+    this.loadElements();
   }
 
   componentWillReceiveProps(nextProps)
@@ -867,6 +969,14 @@ class ModalEditItem extends Component {
           inputLabel={Lang.get('modals.indica_css')}
         />
 
+        <BooleanSettingsField
+          field={this.state.field}
+          name="collapsable"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.collapsable')}
+        />
+
         <RadioSettingsField
           field={this.state.field}
           name="cropsAllowed"
@@ -1036,6 +1146,48 @@ class ModalEditItem extends Component {
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.height')}
           inputLabel={Lang.get('modals.indica_height')}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="fileElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.element')}
+          options={this.state.fileElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="tableElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.tipology_allowed')}
+          options={this.state.tableElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="formElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.tipology_allowed')}
+          options={this.state.formElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
         />
 
       </div>

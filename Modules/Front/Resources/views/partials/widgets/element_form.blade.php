@@ -1,5 +1,19 @@
-<!--h2>{{$content->title}}</h2-->
+<div id="{{$field['settings']['htmlId'] or ''}}" class="element-form-container row justify-content-center {{$field['settings']['htmlClass'] or ''}}">
 
+  <div class="{{$field['settings']['collapsable']? 'element-collapsable':'' }} element-form-container-head" @if($field['settings']['htmlClass']) data-toggle="collapse" data-target="#collapsetable" aria-expanded="true" aria-controls="collapsetable"@endif>
+    {{$field['fields'][0]['value'][App::getLocale()]}}
+  </div>
+
+  <div id="elementForm" class="elementForm"
+    field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
+    collapsable="{{$field['settings']['collapsable']}}"
+  >
+  </div>
+
+</div>
+
+
+{{--
 <div class="element-form-container container row justify-content-center">
   <form>
     <div class="col-md-offset-1 col-md-8">
@@ -54,3 +68,4 @@
     </div>
   </form>
 </div>
+--}}
