@@ -50797,6 +50797,9 @@ var ElementBar = function (_Component) {
         fields: this.props.app.fields,
         icon: this.props.app.inputs.icon.value ? this.props.app.inputs.icon.value : null,
         wsModelIdentifier: this.props.app.wsModelIdentifier ? this.props.app.wsModelIdentifier : null,
+        wsModel: this.props.app.wsModel ? this.props.app.wsModel : null,
+        wsModelFormat: this.props.app.wsModelFormat ? this.props.app.wsModelFormat : null,
+        wsModelExemple: this.props.app.wsModelExemple ? this.props.app.wsModelExemple : null,
         elementType: this.props.app.elementType ? this.props.app.elementType : null,
         parameters: this.props.app.parameters ? this.props.app.parameters : null
 
@@ -51308,6 +51311,9 @@ if (document.getElementById('element-form')) {
     parameters: htmlElement.getAttribute('parameters'),
     model: htmlElement.getAttribute('model'),
     wsModelIdentifier: htmlElement.getAttribute('wsModelIdentifier'),
+    wsModel: htmlElement.getAttribute('wsModel'),
+    wsModelFormat: htmlElement.getAttribute('wsModelFormat'),
+    wsModelExemple: htmlElement.getAttribute('wsModelExemple'),
     elementType: htmlElement.getAttribute('elementType')
   })), htmlElement);
 }
@@ -52247,6 +52253,9 @@ function appReducer() {
         fieldsList: action.payload.fieldsList,
         inputs: elementInputs,
         wsModelIdentifier: action.payload.wsModelIdentifier,
+        wsModel: action.payload.wsModel,
+        wsModelFormat: action.payload.wsModelFormat,
+        wsModelExemple: action.payload.wsModelExemple,
         elementType: action.payload.elementType,
         parameters: action.payload.parameters,
         parametersList: action.payload.parametersList,
@@ -53648,6 +53657,9 @@ var ElementForm = function (_Component) {
             model: props.model ? JSON.parse(atob(props.model)) : null,
             fieldsList: props.fields ? JSON.parse(atob(props.fields)) : [],
             wsModelIdentifier: props.wsModelIdentifier ? props.wsModelIdentifier : null,
+            wsModel: props.wsModel ? props.wsModel : null,
+            wsModelFormat: props.wsModelFormat ? props.wsModelFormat : null,
+            wsModelExemple: props.wsModelExemple ? props.wsModelExemple : null,
             elementType: props.elementType ? props.elementType : null,
             parametersList: props.parametersList ? JSON.parse(atob(props.parametersList)) : [],
             parameters: props.parameters ? JSON.parse(atob(props.parameters)) : []

@@ -10,75 +10,62 @@ export default class ElementFile extends Component {
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const collapsable = props.collapsable ? props.collapsable : null;
-        const elementFields = props.elementFields ? JSON.parse(atob(props.elementFields)) : null;
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
 
         this.state = {
             field : field,
             collapsable : collapsable,
-            elementFields: elementFields,
-            elementObject : elementObject
+            elementObject : elementObject,
+            modelValues:[]
         };
     }
 
     componentDidMount() {
-      //this.query();
+      this.query();
     }
 
-    /*query(page,filters) {
+    query(page,filters) {
         var self = this;
-
-        axios.post(ASSETS+'api/contents',params)
+        const {elementObject} = this.state;
+        console.log(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data');
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data')
           .then(function (response) {
-
               if(response.status == 200
-                  && response.data.data !== undefined)
+                  && response.data.modelValues !== undefined)
               {
-                var old_items = self.state.items;
-                if(response.data.meta.current_page != 1){
-                  old_items.push.apply(old_items, response.data.data);
-                }else{
-                  old_items =response.data.data;
-                }
-                  self.setState({
-                      items : old_items,
-                      lastPage : response.data.meta.last_page,
-                      currPage : response.data.meta.current_page,
-                      filters : filters
-                  });
-              }
+                console.log("ModelValues :: componentDidMount => ",response.data.modelValues);
 
+                self.setState({
+                  modelValues : response.data.modelValues
+                });
+              }
 
           }).catch(function (error) {
              console.log(error);
            });
-    }*/
-    renderValue(element) {
-
-      return element.name
     }
 
-
     renderItems() {
-      const {elementFields} = this.state;
+      const {modelValues, elementObject} = this.state;
       var result = [];
 
-      for(var key in elementFields){
-        console.log('ELEMENT XXX:',elementFields[key] );
+      for(var key in modelValues){
+        for(var i in elementObject.fields){
+          console.log('ELEMENT XXX:',elementObject.fields[i] );
           result.push(
-              <div className="col-md-6">
-                <div className="element-file-input-container">
-                  <div className="col-xs-6 element-file-title">
-                    <i className={elementFields[key].icon}></i> {elementFields[key].name}
-                  </div>
-                  <div className="col-xs-6 element-file-content">
-                    {this.renderValue(elementFields[key])}
+                <div className="col-md-6">
+                  <div className="element-file-input-container">
+                    <div className="col-xs-6 element-file-title">
+                      <i className={elementObject.fields[i].icon}></i> {elementObject.fields[i].name}
+                    </div>
+                    <div className="col-xs-6 element-file-content">
+                      {modelValues[key][elementObject.fields[i].identifier]}
+                    </div>
                   </div>
                 </div>
-              </div>
-          );
+            );
+        }
       }
-
       return result;
     }
 
@@ -100,13 +87,11 @@ if (document.getElementById('elementFile')) {
        var field = element.getAttribute('field');
        var collapse = element.getAttribute('collapse');
        var elementObject = element.getAttribute('elementObject');
-       var elementFields = element.getAttribute('elementFields');
 
        ReactDOM.render(<ElementFile
            field={field}
            collapse={collapse}
            elementObject={elementObject}
-           elementFields={elementFields}
          />, element);
    });
 }

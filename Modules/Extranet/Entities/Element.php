@@ -54,6 +54,9 @@ class Element extends Model
         'icon',
         'identifier',
         'model_ws',
+        'model_identifier',
+        'model_format',
+        'model_exemple',
         'type',
         'has_parameters'
     ];

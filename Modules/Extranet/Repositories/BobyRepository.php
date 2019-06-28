@@ -40,6 +40,28 @@ class BobyRepository
         return $beans;
     }
 
+    public function getModelValuesQuery($name)
+    {
+        $cacheKey = md5("getQuery_" . $name);
+
+        if (Cache::has($cacheKey) && false) {
+            $beans = Cache::get($cacheKey);
+        } else {
+            $response = $this->client->get(VeosWsUrl::get() . 'boBy/v2/'.$name, [
+                'headers' => [
+                    'Authorization' => "Bearer " . Auth::user()->token
+                ]
+            ]);
+
+            $result = json_decode($response->getBody());
+            $beans = $result->data;
+
+            Cache::put($cacheKey, $beans, config('cache.time'));
+        }
+
+        return $beans;
+    }
+
     public function postQuery($name, $params = null)
     {
         $cacheKey = md5("postQuery_" . $name . json_encode($params));

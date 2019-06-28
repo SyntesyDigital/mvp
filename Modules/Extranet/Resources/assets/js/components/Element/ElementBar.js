@@ -33,6 +33,9 @@ class ElementBar extends Component {
          fields : this.props.app.fields,
          icon : this.props.app.inputs.icon.value ? this.props.app.inputs.icon.value : null,
          wsModelIdentifier :  this.props.app.wsModelIdentifier ? this.props.app.wsModelIdentifier : null,
+         wsModel :  this.props.app.wsModel ? this.props.app.wsModel : null,
+         wsModelFormat :  this.props.app.wsModelFormat ? this.props.app.wsModelFormat : null,
+         wsModelExemple :  this.props.app.wsModelExemple ? this.props.app.wsModelExemple : null,
          elementType :  this.props.app.elementType ? this.props.app.elementType : null,
          parameters :  this.props.app.parameters ? this.props.app.parameters : null,
 

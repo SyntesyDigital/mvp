@@ -16,6 +16,8 @@ use Modules\Extranet\Jobs\Element\CreateElement;
 use Modules\Extranet\Jobs\Element\UpdateElement;
 use Modules\Extranet\Jobs\Element\DeleteElement;
 
+use Modules\Extranet\Transformers\ModelValuesFormatTransformer;
+
 
 use Config;
 use Illuminate\Http\Request;
@@ -82,7 +84,7 @@ class ElementController extends Controller
     public function show(Element $element, Request $request)
     {
       $models = $this->elements->getModelsByType( $element->type);
-      $model = $this->getModelById($models,$element->model_ws);
+      $model = $this->getModelById($models,$element->model_identifier);
       $fields = $this->elements->getFieldsByElement($model->WS);
       $parametersList = RouteParameter::all();
 
@@ -136,6 +138,23 @@ class ElementController extends Controller
             ]) : response()->json([
                 'success' => false
             ], 500);
+    }
+
+
+    public function getModelValues(Element $element)
+    {
+      try {
+            $modelValues = $this->elements->getModelValuesFromElement($element);
+            return response()->json([
+                      'success' => true,
+                      'modelValues' => new ModelValuesFormatTransformer($modelValues,$element->fields()->get())
+                  ]);
+        } catch (\Exception $e) {
+        }
+        return response()->json([
+            'success' => false
+        ], 500);
+
     }
 
 }

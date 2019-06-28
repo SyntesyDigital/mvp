@@ -23,6 +23,9 @@ class UpdateElement
           'fields',
           'icon',
           'wsModelIdentifier',
+          'wsModel',
+          'wsModelFormat',
+          'wsModelExemple',
           'elementType',
           'has_parameters',
           'parameters'

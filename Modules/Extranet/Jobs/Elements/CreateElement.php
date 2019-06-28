@@ -21,6 +21,9 @@ class CreateElement
           'fields',
           'icon',
           'wsModelIdentifier',
+          'wsModel',
+          'wsModelFormat',
+          'wsModelExemple',
           'elementType',
           'has_parameters',
           'parameters'
@@ -38,7 +41,10 @@ class CreateElement
         'identifier' => $this->attributes['identifier'],
         'name' => $this->attributes['name'],
         'icon' => isset($this->attributes["icon"]) ? $this->attributes["icon"] : null,
-        'model_ws' => isset($this->attributes["wsModelIdentifier"]) ? $this->attributes["wsModelIdentifier"] : null,
+        'model_ws' => isset($this->attributes["wsModel"]) ? $this->attributes["wsModel"] : null,
+        'model_identifier' => isset($this->attributes["wsModelIdentifier"]) ? $this->attributes["wsModelIdentifier"] : null,
+        'model_format' => isset($this->attributes["wsModelFormat"]) ? $this->attributes["wsModelFormat"] : null,
+        'model_exemple' => isset($this->attributes["wsModelExemple"]) ? $this->attributes["wsModelExemple"] : null,
         'type' => isset($this->attributes["elementType"]) ? $this->attributes["elementType"] : null,
         'has_parameters' => count($this->attributes["parameters"]) > 0 ?1:0
       ]);

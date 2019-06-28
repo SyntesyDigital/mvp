@@ -5,6 +5,9 @@
       fields={{base64_encode(json_encode($fields,true))}}
       model={{base64_encode(json_encode($model,true))}}
       wsModelIdentifier={{$model->ID}}
+      wsModel={{$model->WS}}
+      wsModelFormat={{$model->WS_FORMAT}}
+      wsModelExemple={{$model->EXEMPLE}}
       parametersList={{base64_encode(json_encode($parametersList,true))}}
       @if((isset($parameters)) && $parameters)parameters={{base64_encode($parameters->toJson())}}@endif
       elementType={{$element_type}}

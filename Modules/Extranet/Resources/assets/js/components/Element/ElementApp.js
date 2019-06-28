@@ -23,6 +23,9 @@ if (document.getElementById('element-form')) {
           parameters={htmlElement.getAttribute('parameters')}
           model={htmlElement.getAttribute('model')}
           wsModelIdentifier={htmlElement.getAttribute('wsModelIdentifier')}
+          wsModel={htmlElement.getAttribute('wsModel')}
+          wsModelFormat={htmlElement.getAttribute('wsModelFormat')}
+          wsModelExemple={htmlElement.getAttribute('wsModelExemple')}
           elementType={htmlElement.getAttribute('elementType')}
         />
       </Provider>
