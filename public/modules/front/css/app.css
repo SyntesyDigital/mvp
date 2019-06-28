@@ -10631,6 +10631,23 @@ form.contact-form .checkbox {
   color: #2A3649;
 }
 
+.more-btn {
+  text-align: right;
+  margin: 15px 0px;
+}
+
+.more-btn a {
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+}
+
+.more-btn a:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
 .element-form-container {
   margin: 20px 0;
   background-color: #fff;

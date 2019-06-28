@@ -49,3 +49,19 @@
     color: $primary-color;
   }
 }
+.more-btn{
+  text-align: right;
+  margin:15px 0px;
+  a{
+    padding:7px 20px;
+    text-decoration: none;
+    color:$primary-color;
+    border: 1px solid $primary-color;
+    &:hover{
+      color:$secondary-color;
+      border: 1px solid $secondary-color;
+
+    }
+  }
+
+}

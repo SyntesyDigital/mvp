@@ -51,7 +51,7 @@ export default class ElementFile extends Component {
 
       for(var key in modelValues){
         for(var i in elementObject.fields){
-          console.log('ELEMENT XXX:',elementObject.fields[i] );
+
           result.push(
                 <div className="col-md-6">
                   <div className="element-file-input-container">
@@ -69,14 +69,11 @@ export default class ElementFile extends Component {
       return result;
     }
 
-    render() {
-
+    render() { 
         return (
-          <div id="collapsetable" className="element-file-container-body collapse in">
             <div className="row">
               {this.renderItems()}
             </div>
-          </div>
         );
     }
 }
