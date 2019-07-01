@@ -110,5 +110,8 @@ return [
     'month_year' => 'Mois / année',
     'year' => 'Année',
     'telephone' => 'Téléphone',
-    'collapsable' => 'Repliable'
+    'collapsable' => 'Repliable',
+    'moreBtn' => 'Voir plus',
+    'addBtn' => 'Ajouter Element'
+
 ];

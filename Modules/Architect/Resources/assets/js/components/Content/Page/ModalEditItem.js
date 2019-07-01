@@ -977,6 +977,14 @@ class ModalEditItem extends Component {
           label={Lang.get('modals.collapsable')}
         />
 
+        <BooleanSettingsField
+          field={this.state.field}
+          name="header"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.header')}
+        />
+
         <RadioSettingsField
           field={this.state.field}
           name="cropsAllowed"

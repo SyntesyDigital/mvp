@@ -17,7 +17,9 @@ class ElementTable extends Widget implements WidgetInterface
     public $component = 'CommonWidget';
 
     public $fields = [
-        'title' => 'Modules\Architect\Fields\Types\Text'
+        'title' => 'Modules\Architect\Fields\Types\Text',
+        'moreBtn' => 'Modules\Architect\Fields\Types\Link',
+        'addBtn' => 'Modules\Architect\Fields\Types\Link'
     ];
 
     public $rules = [
@@ -31,7 +33,9 @@ class ElementTable extends Widget implements WidgetInterface
         'htmlClass',
         'itemsPerPage',
         'tableElements',
-        'collapsable'
+        'collapsable',
+        'header',
+        'excel'
     ];
 }
 ?>

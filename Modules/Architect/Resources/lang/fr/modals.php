@@ -51,5 +51,6 @@ return [
     'cut media' => 'Couper',
     'select_right_list' => 'Sélectionnez une option dans la liste à droite',
     'element' => 'Element',
-    'collapsable' => 'Repliable'
+    'collapsable' => 'Repliable',
+    'header' => 'Entête'
 ];
