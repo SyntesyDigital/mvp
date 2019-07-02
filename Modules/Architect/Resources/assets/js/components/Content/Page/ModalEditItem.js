@@ -979,6 +979,14 @@ class ModalEditItem extends Component {
 
         <BooleanSettingsField
           field={this.state.field}
+          name="collapsed"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.collapsed')}
+        />
+
+        <BooleanSettingsField
+          field={this.state.field}
           name="header"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}

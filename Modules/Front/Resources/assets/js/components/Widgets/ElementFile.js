@@ -48,15 +48,18 @@ export default class ElementFile extends Component {
     renderItems() {
       const {modelValues, elementObject} = this.state;
       var result = [];
-
+      var firstElement = true;
       for(var key in modelValues){
         for(var i in elementObject.fields){
-
+    /*      if(firstElement){
+            result.push(<div className="row">);
+          }*/
           result.push(
+
                 <div className="col-md-6">
                   <div className="element-file-input-container">
                     <div className="col-xs-6 element-file-title">
-                      <i className={elementObject.fields[i].icon}></i> {elementObject.fields[i].name}
+                      {elementObject.fields[i].name}
                     </div>
                     <div className="col-xs-6 element-file-content">
                       {modelValues[key][elementObject.fields[i].identifier]}
@@ -64,8 +67,15 @@ export default class ElementFile extends Component {
                   </div>
                 </div>
             );
+          /*  if(!firstElement){
+              result.push(</div>);
+            }*/
+            firstElement = !firstElement;
         }
       }
+    /*  if(!firstElement){
+        result.push(</div>);
+      } */
       return result;
     }
 

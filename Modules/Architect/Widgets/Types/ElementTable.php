@@ -34,6 +34,7 @@ class ElementTable extends Widget implements WidgetInterface
         'itemsPerPage',
         'tableElements',
         'collapsable',
+        'collapsed',
         'header',
         'excel'
     ];
