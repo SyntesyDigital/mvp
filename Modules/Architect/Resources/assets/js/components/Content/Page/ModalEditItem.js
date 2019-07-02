@@ -1175,7 +1175,7 @@ class ModalEditItem extends Component {
           name="tableElements"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.tipology_allowed')}
+          label={Lang.get('modals.element')}
           options={this.state.tableElements.map(function(obj){
               return {
                   value: obj.value,
