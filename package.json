@@ -49,6 +49,7 @@
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-select": "^0.14.0",
     "react-cropper": "^1.2.0",
+    "react-data-grid": "^6.1.0",
     "react-datepicker": "^1.8.0",
     "react-dnd": "^2.6.0",
     "react-dnd-html5-backend": "^2.6.0",

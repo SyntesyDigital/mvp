@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MoreResults from './../Common/MoreResults';
+import ReactDataGrid from 'react-data-grid';
 
-export default class ElementFile extends Component {
+export default class ElementTable extends Component {
 
     constructor(props)
     {
@@ -22,6 +23,7 @@ export default class ElementFile extends Component {
 
     componentDidMount() {
       this.query();
+      console.log('hola');
     }
 
     query(page,filters) {
@@ -33,7 +35,7 @@ export default class ElementFile extends Component {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
               {
-                console.log("ModelValues :: componentDidMount => ",response.data.modelValues);
+                console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
 
                 self.setState({
                   modelValues : response.data.modelValues
@@ -49,7 +51,7 @@ export default class ElementFile extends Component {
       const {modelValues, elementObject} = this.state;
       var result = [];
 
-      for(var key in modelValues){
+    /*  for(var key in modelValues){
         for(var i in elementObject.fields){
 
           result.push(
@@ -65,27 +67,41 @@ export default class ElementFile extends Component {
                 </div>
             );
         }
-      }
+      }*/
       return result;
     }
 
     render() {
-        return (
+      /*  return (
             <div className="row">
               {this.renderItems()}
             </div>
-        );
+        );*/
+
+        const columns = [
+        { key: 'id', name: 'ID' },
+        { key: 'title', name: 'Title' },
+        { key: 'count', name: 'Count' } ];
+
+        const rows = [{id: 0, title: 'row1', count: 20}, {id: 1, title: 'row1', count: 40}, {id: 2, title: 'row1', count: 60}];
+
+          return (
+            <ReactDataGrid
+              columns={columns}
+              rowGetter={i => rows[i]}
+              rowsCount={3} />
+          );
     }
 }
 
-if (document.getElementById('elementFile')) {
+if (document.getElementById('elementTable')) {
 
-   document.querySelectorAll('[id=elementFile]').forEach(function(element){
+   document.querySelectorAll('[id=elementTable]').forEach(function(element){
        var field = element.getAttribute('field');
        var collapse = element.getAttribute('collapse');
        var elementObject = element.getAttribute('elementObject');
 
-       ReactDOM.render(<ElementFile
+       ReactDOM.render(<ElementTable
            field={field}
            collapse={collapse}
            elementObject={elementObject}
