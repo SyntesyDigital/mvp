@@ -10,14 +10,16 @@ export default class ElementTable extends Component {
         super(props);
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
-        const collapsable = props.collapsable ? props.collapsable : null;
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
+        const header = props.header ? props.header : false;
+        const itemsPerPage = props.itemsPerPage ? props.itemsPerPage : false;
 
         this.state = {
             field : field,
-            collapsable : collapsable,
             elementObject : elementObject,
-            modelValues:[]
+            modelValues:[],
+            header : header,
+            itemsPerPage :  itemsPerPage
         };
     }
 
@@ -38,7 +40,8 @@ export default class ElementTable extends Component {
                 console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
 
                 self.setState({
-                  modelValues : response.data.modelValues
+                  modelValues : response.data.modelValues,
+                  initialModelValues : response.data.modelValues
                 });
               }
 
@@ -47,50 +50,61 @@ export default class ElementTable extends Component {
            });
     }
 
-    renderItems() {
-      const {modelValues, elementObject} = this.state;
-      var result = [];
-
-    /*  for(var key in modelValues){
-        for(var i in elementObject.fields){
-
-          result.push(
-                <div className="col-md-6">
-                  <div className="element-file-input-container">
-                    <div className="col-xs-6 element-file-title">
-                      <i className={elementObject.fields[i].icon}></i> {elementObject.fields[i].name}
-                    </div>
-                    <div className="col-xs-6 element-file-content">
-                      {modelValues[key][elementObject.fields[i].identifier]}
-                    </div>
-                  </div>
-                </div>
-            );
+    sortRows(sortColumn, sortDirection){
+      console.log(sortColumn);
+      const comparer = (a, b) => {
+        if (sortDirection === "ASC") {
+          return a[sortColumn] > b[sortColumn] ? 1 : -1;
+        } else if (sortDirection === "DESC") {
+          return a[sortColumn] < b[sortColumn] ? 1 : -1;
         }
-      }*/
-      return result;
+      };
+      if(sortDirection === "NONE" ){
+        this.setState({
+          modelValues : this.state.initialModelValues
+        });
+      }else{
+        this.setState({
+          modelValues : this.state.initialModelValues.sort(comparer)
+        });
+      }
+    }
+
+    renderTable() {
+      const {modelValues, elementObject} = this.state;
+      var columns = [];
+      for(var index in elementObject.fields){
+        columns.push({
+          key : elementObject.fields[index].identifier,
+          name: elementObject.fields[index].name,
+          sortable: true
+        });
+      }
+      var numRows = this.state.itemsPerPage ? this.state.itemsPerPage: modelValues.length;
+      var minHeight = parseInt(numRows)*35 ;
+      if(this.state.header){
+        minHeight = minHeight +35;
+      }
+      return (
+        <ReactDataGrid
+          columns={columns}
+          rowGetter={i => modelValues[i]}
+          rowsCount={numRows}
+          minHeight={minHeight}
+          onGridSort={(sortColumn, sortDirection) =>
+             this.sortRows(sortColumn, sortDirection)
+           }
+          />
+      );
     }
 
     render() {
-      /*  return (
-            <div className="row">
-              {this.renderItems()}
+        return (
+            <div className = {this.state.header ? "" : "noHeaderWrapper "} >
+              {this.renderTable()}
             </div>
-        );*/
+        );
 
-        const columns = [
-        { key: 'id', name: 'ID' },
-        { key: 'title', name: 'Title' },
-        { key: 'count', name: 'Count' } ];
-
-        const rows = [{id: 0, title: 'row1', count: 20}, {id: 1, title: 'row1', count: 40}, {id: 2, title: 'row1', count: 60}];
-
-          return (
-            <ReactDataGrid
-              columns={columns}
-              rowGetter={i => rows[i]}
-              rowsCount={3} />
-          );
     }
 }
 
@@ -98,13 +112,15 @@ if (document.getElementById('elementTable')) {
 
    document.querySelectorAll('[id=elementTable]').forEach(function(element){
        var field = element.getAttribute('field');
-       var collapse = element.getAttribute('collapse');
        var elementObject = element.getAttribute('elementObject');
+       var header = element.getAttribute('header');
+       var itemsPerPage = element.getAttribute('itemsPerPage');
 
        ReactDOM.render(<ElementTable
            field={field}
-           collapse={collapse}
            elementObject={elementObject}
+           header={header}
+           itemsPerPage={itemsPerPage}
          />, element);
    });
 }

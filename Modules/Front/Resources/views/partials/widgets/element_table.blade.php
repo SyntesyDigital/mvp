@@ -5,7 +5,8 @@
   <div id="collapsetable-{{$field['settings']['tableElements']?$field['settings']['tableElements']:''}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
       <div id="elementTable" class="elementTable "
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
-        collapsable="{{$field['settings']['collapsable']}}"
+        header="{{$field['settings']['header']}}"
+        itemsPerPage="{{$field['settings']['itemsPerPage']}}"
         elementObject="{{$field['settings']['tableElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['tableElements'])->first()->load('fields'))):null}}"
       >
       </div>

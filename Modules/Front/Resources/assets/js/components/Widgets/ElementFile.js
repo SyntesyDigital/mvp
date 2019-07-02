@@ -9,12 +9,10 @@ export default class ElementFile extends Component {
         super(props);
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
-        const collapsable = props.collapsable ? props.collapsable : null;
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
 
         this.state = {
             field : field,
-            collapsable : collapsable,
             elementObject : elementObject,
             modelValues:[]
         };
@@ -92,12 +90,10 @@ if (document.getElementById('elementFile')) {
 
    document.querySelectorAll('[id=elementFile]').forEach(function(element){
        var field = element.getAttribute('field');
-       var collapse = element.getAttribute('collapse');
        var elementObject = element.getAttribute('elementObject');
 
        ReactDOM.render(<ElementFile
            field={field}
-           collapse={collapse}
            elementObject={elementObject}
          />, element);
    });

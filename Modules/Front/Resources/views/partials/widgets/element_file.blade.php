@@ -5,9 +5,7 @@
   <div id="collapsefile-{{$field['settings']['fileElements']?$field['settings']['fileElements']:''}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-file-container-body">
       <div id="elementFile" class="elementFile "
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
-        collapsable="{{$field['settings']['collapsable']}}"
-        elementObject="{{$field['settings']['fileElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['fileElements'])->first()->load('fields'))):null}}"
-      >
+        elementObject="{{$field['settings']['fileElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['fileElements'])->first()->load('fields'))):null}}" >
       </div>
       <div>
         <div class="more-btn">
@@ -19,6 +17,6 @@
             ]
           )
         </div>
-      <div>
+      </div>
   </div>
 </div>

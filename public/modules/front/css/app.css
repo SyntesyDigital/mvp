@@ -10059,6 +10059,31 @@ form.contact-form .checkbox {
   }
 }
 
+.element-table-container {
+  margin: 20px 0;
+}
+
+.element-table-container .element-table-container-head {
+  background-color: #E8E8E8;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
+
+.react-grid-Grid > div {
+  position: initial;
+}
+
+.noHeaderWrapper .react-grid-Header {
+  display: none !important;
+}
+
+.noHeaderWrapper .react-grid-Viewport {
+  top: 0px !important;
+}
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;

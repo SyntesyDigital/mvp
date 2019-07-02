@@ -45,16 +45,16 @@ class ModelValuesFormatTransformer extends Resource
               }elseif($elementField->settings['format'] == 'price_with_decimals'){
                 $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
               }else{
-                $result[$i][$elementField->identifier] = $originalValue;
+                $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
               }
               break;
             case 'text':
               if($elementField->settings['format'] == 'email'){
-                $result[$i][$elementField->identifier] = $originalValue;
+                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               }elseif($elementField->settings['format'] == 'telephone'){
-                $result[$i][$elementField->identifier] = $originalValue;
+                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               }else{
-                $result[$i][$elementField->identifier] = $originalValue;
+                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               }
               break;
             case 'date':
@@ -65,13 +65,13 @@ class ModelValuesFormatTransformer extends Resource
               }elseif($elementField->settings['format'] == 'year'){
                 $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
               }else{
-                $result[$i][$elementField->identifier] = $originalValue;
+                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               }
 
               break;
 
             default:
-              $result[$i][$elementField->identifier] = $originalValue;
+              $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               break;
           }
         }
