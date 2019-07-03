@@ -32,7 +32,8 @@ class ElementFile extends Widget implements WidgetInterface
         'htmlClass',
         'fileElements',
         'collapsable',
-        'collapsed'
+        'collapsed',
+        'doubleColumn'
     ];
 }
 ?>

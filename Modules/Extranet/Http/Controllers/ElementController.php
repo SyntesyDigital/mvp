@@ -141,13 +141,13 @@ class ElementController extends Controller
     }
 
 
-    public function getModelValues(Element $element)
+    public function getModelValues(Element $element, $limit = null)
     {
       try {
             $modelValues = $this->elements->getModelValuesFromElement($element);
             return response()->json([
                       'success' => true,
-                      'modelValues' => new ModelValuesFormatTransformer($modelValues,$element->fields()->get())
+                      'modelValues' => new ModelValuesFormatTransformer($modelValues,$element->fields()->get(), $limit)
                   ]);
         } catch (\Exception $e) {
         }

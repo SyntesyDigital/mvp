@@ -10,10 +10,12 @@ export default class ElementFile extends Component {
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
+        const doubleColumn = props.doubleColumn ? props.doubleColumn : false;
 
         this.state = {
             field : field,
             elementObject : elementObject,
+            doubleColumn:doubleColumn,
             modelValues:[]
         };
     }
@@ -44,37 +46,75 @@ export default class ElementFile extends Component {
     }
 
     renderItems() {
-      const {modelValues, elementObject} = this.state;
+      const {modelValues, elementObject, doubleColumn} = this.state;
       var result = [];
-      var firstElement = true;
-      for(var key in modelValues){
-        for(var i in elementObject.fields){
-    /*      if(firstElement){
-            result.push(<div className="row">);
-          }*/
-          result.push(
 
-                <div className="col-md-6">
-                  <div className="element-file-input-container">
-                    <div className="col-xs-6 element-file-title">
-                      {elementObject.fields[i].name}
-                    </div>
-                    <div className="col-xs-6 element-file-content">
-                      {modelValues[key][elementObject.fields[i].identifier]}
-                    </div>
-                  </div>
-                </div>
+      for(var key in modelValues){
+        if(doubleColumn){
+          result.push(
+              <div className="col-md-6">
+                {this.renderItemsColumn(1,key)}
+              </div>
             );
-          /*  if(!firstElement){
-              result.push(</div>);
-            }*/
-            firstElement = !firstElement;
+
+          result.push(
+              <div className="col-md-6">
+                {this.renderItemsColumn(2,key)}
+              </div>
+            );
+
+        }else{
+          result.push(
+              <div className="col-md-12">
+                  {this.renderItemsColumn(0,key)}
+              </div>
+            );
         }
+
       }
-    /*  if(!firstElement){
-        result.push(</div>);
-      } */
+
       return result;
+    }
+
+    renderItemsColumn(column,key){
+      const {modelValues, elementObject} = this.state;
+      var numFieldsFirstColumn = parseInt(elementObject.fields.length)/2;
+      var columnRows = [];
+
+      var index = 0;
+      for(var i in elementObject.fields){
+
+        if(column == 1 && index < numFieldsFirstColumn){
+          columnRows.push(
+            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+          );
+        }
+
+        if(column == 2 && index >= numFieldsFirstColumn){
+          columnRows.push(
+            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+          );
+        }
+
+        if(column == 0){
+          columnRows.push(
+            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+          );
+        }
+        index++;
+      }
+      return columnRows;
+    }
+
+    renderField(name, value){
+      return (<div className="element-file-input-container">
+                <div className="col-xs-6 element-file-title">
+                  {name}
+                </div>
+                <div className="col-xs-6 element-file-content">
+                  {value}
+                </div>
+              </div>);
     }
 
     render() {
@@ -91,10 +131,12 @@ if (document.getElementById('elementFile')) {
    document.querySelectorAll('[id=elementFile]').forEach(function(element){
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
+       var doubleColumn = element.getAttribute('doubleColumn');
 
        ReactDOM.render(<ElementFile
            field={field}
            elementObject={elementObject}
+           doubleColumn={doubleColumn}
          />, element);
    });
 }

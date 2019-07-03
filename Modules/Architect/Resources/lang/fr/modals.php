@@ -53,5 +53,6 @@ return [
     'element' => 'Element',
     'collapsable' => 'Repliable',
     'collapsed' => 'Initialment replié',
-    'header' => 'Entête'
+    'header' => 'Entête',
+    'doubleColumn' => 'Deux colonnes'
 ];

@@ -10,9 +10,10 @@ class ModelValuesFormatTransformer extends Resource
 {
     protected $element;
 
-    public function __construct($modelValues,$elementFields) {
+    public function __construct($modelValues,$elementFields,$limit) {
         $this->modelValues = $modelValues;
         $this->elementFields = $elementFields;
+        $this->limit = $limit;
     }
     /**
      * Transform the resource into an array.
@@ -22,7 +23,7 @@ class ModelValuesFormatTransformer extends Resource
      */
     public function toArray($request = null)
     {
-        return $this->getSurveyArray($this->modelValues,$this->elementFields);
+        return $this->getSurveyArray($this->modelValues,$this->elementFields, $this->limit);
     }
 
     public function toJson($request = null)
@@ -30,12 +31,13 @@ class ModelValuesFormatTransformer extends Resource
       return json_encode($this->toArray($request));
     }
 
-    public function getSurveyArray($modelValues, $elementFields)
+    public function getSurveyArray($modelValues, $elementFields, $limit)
     {
       $result = [];
       $i = 0;
       foreach ($modelValues as $modelValue) {
-        foreach ($elementFields as $elementField) {
+        if(!$limit || $i < $limit ){
+          foreach ($elementFields as $elementField) {
           $originalValue = $modelValue->{$elementField->identifier};
 
           switch ($elementField->type) {
@@ -74,6 +76,7 @@ class ModelValuesFormatTransformer extends Resource
               $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
               break;
           }
+        }
         }
         $i++;
       }

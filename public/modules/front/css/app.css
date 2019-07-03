@@ -10076,13 +10076,13 @@ form.contact-form .checkbox {
   position: initial;
 }
 
+/*
 .noHeaderWrapper .react-grid-Header {
   display: none !important;
 }
-
-.noHeaderWrapper .react-grid-Viewport {
+.noHeaderWrapper  .react-grid-Viewport {
   top: 0px !important;
-}
+}*/
 
 .map-container .leaflet-container {
   height: 300px;

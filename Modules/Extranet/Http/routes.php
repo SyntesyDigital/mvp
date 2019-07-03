@@ -47,6 +47,6 @@ Route::group([
     Route::put('/routes_parameters/{route_parameter}/update', 'RouteParameterController@update')->name('extranet.routes_parameters.update');
     Route::delete('/routes_parameters/{route_parameter}/delete', 'RouteParameterController@delete')->name('extranet.routes_parameters.delete');
 
-    Route::get('/extranet/{element}/model_values/data', 'ElementController@getModelValues')->name('extranet.element.mode_values.data');
+    Route::get('/extranet/{element}/model_values/data/{limit?}', 'ElementController@getModelValues')->name('extranet.element.mode_values.data');
 
 });

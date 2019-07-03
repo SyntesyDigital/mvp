@@ -987,6 +987,15 @@ class ModalEditItem extends Component {
 
         <BooleanSettingsField
           field={this.state.field}
+          name="doubleColumn"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.doubleColumn')}
+        />
+
+
+        <BooleanSettingsField
+          field={this.state.field}
           name="header"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
