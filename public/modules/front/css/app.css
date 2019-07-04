@@ -10072,8 +10072,112 @@ form.contact-form .checkbox {
   padding: 10px 15px;
 }
 
-.react-grid-Grid > div {
+.element-table-container .elementTable {
+  padding: 20px;
+  background-color: white;
+}
+
+.title {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.title h4 {
+  text-transform: none;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  float: left;
+}
+
+.title .title-btns {
+  overflow: hidden;
+  padding-left: 20px;
+}
+
+.title .title-btns.title-btns-no-header {
+  padding-left: 0px;
+}
+
+.title .title-btns .excel-btn {
+  float: right;
+  overflow: hidden;
+}
+
+.title .title-btns .excel-btn button {
+  margin: 10px 0;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: white;
+}
+
+.title .title-btns .excel-btn button i {
+  margin-right: 10px;
+}
+
+.title .title-btns .excel-btn button:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.title .title-btns .add-btn {
+  float: left;
+  overflow: hidden;
+}
+
+.title .title-btns .add-btn a {
+  margin: 10px 0;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #E84B37;
+  background-color: #E84B37;
+}
+
+.title .title-btns .add-btn a i {
+  margin-right: 10px;
+}
+
+.title .title-btns .add-btn a:hover {
+  color: #E84B37;
+  background-color: white;
+}
+
+.react-grid-Container .react-grid-Main {
+  outline: none;
+}
+
+.react-grid-Container .react-grid-Main .react-grid-Grid > div {
   position: initial;
+}
+
+.react-grid-Container .react-grid-Main .react-grid-Grid {
+  border: none;
+}
+
+.react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Header .react-grid-HeaderRow {
+  background-color: white;
+}
+
+.react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Header .react-grid-HeaderRow .react-grid-HeaderCell {
+  background-color: white;
+  border-right: none;
+  border-left: none;
+}
+
+.react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Viewport .react-grid-Canvas .react-grid-Row .react-grid-Cell {
+  border-right: none;
+  border-left: none;
+}
+
+.elementTableNoHeader .react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Header .react-grid-HeaderRow:first-of-type {
+  background-color: #E8E8E8;
+}
+
+.elementTableNoHeader .react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Header .react-grid-HeaderRow:first-of-type .react-grid-HeaderCell {
+  background-color: #E8E8E8;
 }
 
 /*

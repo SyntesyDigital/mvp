@@ -21,15 +21,22 @@ export default class ElementTable extends Component {
             elementObject : elementObject,
             modelValues:[],
             itemsPerPage :  itemsPerPage,
-            filters : [],
-            sortColumn : false,
-            sortDirection : 'NONE'
+            filters : []
         };
     }
 
     componentDidMount() {
       this.query();
-      this.myOpenGrid.onToggleFilter();
+
+      var anySearchable = false;
+
+      var columns = [];
+      for(var index in this.state.elementObject.fields){
+        if(this.state.elementObject.fields[index].rules.searchable && ! anySearchable){
+          anySearchable = true;
+          this.myOpenGrid.onToggleFilter();
+        }
+      }
     }
 
     query(page,filters) {
@@ -57,10 +64,6 @@ export default class ElementTable extends Component {
 
     sortRows(sortColumn, sortDirection){
       console.log(sortColumn);
-      this.setState({
-        sortColumn : sortColumn,
-        sortDirection : sortDirection
-      });
       const comparer = (a, b) => {
         if (sortDirection === "ASC") {
           return a[sortColumn] > b[sortColumn] ? 1 : -1;
@@ -94,23 +97,31 @@ export default class ElementTable extends Component {
       return newFilters;
     }
 
+    processResults(){
+      alert('hola');
+    }
+
     getRows(rows, filters) {
       return selectors.getRows({ rows, filters });
     }
 
     renderTable() {
       const {modelValues, elementObject, filters} = this.state;
-
+      var anySearchable = false;
       var columns = [];
+
       for(var index in elementObject.fields){
+        if(elementObject.fields[index].rules.searchable && ! anySearchable){
+          anySearchable = true;
+        }
         columns.push({
           key : elementObject.fields[index].identifier,
           name: elementObject.fields[index].name,
-          sortable: true,
-          filterable: true
+          sortable: elementObject.fields[index].rules.sortable,
+          filterable:  elementObject.fields[index].rules.searchable
         });
       }
-      var minHeight = parseInt( modelValues.length + 2)*35 + 17;
+      var minHeight = anySearchable?(parseInt( modelValues.length) + 2)*35 : (parseInt( modelValues.length) + 1)*35  ;
 
       const filteredModelValues = this.getRows(modelValues, filters);
 

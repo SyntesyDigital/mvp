@@ -193,8 +193,21 @@ class ElementModal extends Component {
                       inputLabel="Indique la hauteur en pixels"
                     />
 
+                    <BooleanSettingsField
+                      field={field}
+                      name="searchable"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Recherche"
+                    />
 
-
+                    <BooleanSettingsField
+                      field={field}
+                      name="sortable"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Trie"
+                    />
 
                   </div>
                 </div>

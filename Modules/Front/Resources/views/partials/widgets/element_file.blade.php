@@ -15,7 +15,9 @@
             [
               "field" => $field['fields'][1],
               "settings" => $field['settings'],
-              "div" => false
+              "div" => false,
+              "icon" => "far fa-eye"
+
             ]
           )
         </div>

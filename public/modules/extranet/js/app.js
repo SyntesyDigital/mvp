@@ -50483,7 +50483,9 @@ var ElementDropZone = function (_Component) {
 			var result = {};
 
 			for (var i = 0; i < fields.length; i++) {
-				result[fields[i]] = null;
+				if (fields[i] != 'searchable' && fields[i] != 'sortable' || this.props.elementType == 'table') {
+					result[fields[i]] = null;
+				}
 			}
 			return result;
 		}
@@ -54776,6 +54778,7 @@ var ElementDropZoneContainer = function (_Component) {
 				errors: this.props.app.errors,
 				created: this.props.app.model !== undefined && this.props.app.model != null,
 				fields: this.props.app.fields,
+				elementType: this.props.app.elementType,
 				onFieldAdded: this.handleFieldAdded.bind(this),
 				onFieldChanged: this.handleFieldChange.bind(this),
 				moveField: this.moveField.bind(this),
@@ -55024,6 +55027,18 @@ var ElementModal = function (_Component) {
         onFieldChange: this.handleFieldSettingsChange,
         label: 'Hauteur du champ',
         inputLabel: 'Indique la hauteur en pixels'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_BooleanSettingsField__["a" /* default */], {
+        field: field,
+        name: 'searchable',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Recherche'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Settings_BooleanSettingsField__["a" /* default */], {
+        field: field,
+        name: 'sortable',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Trie'
       })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-footer' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default', onClick: this.onModalClose }, ' Fermer '), ' \xA0'))));
     }
   }]);

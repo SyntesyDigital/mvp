@@ -54,5 +54,6 @@ return [
     'collapsable' => 'Repliable',
     'collapsed' => 'Initialment replié',
     'header' => 'Entête',
-    'doubleColumn' => 'Deux colonnes'
+    'doubleColumn' => 'Deux colonnes',
+    'excel' => 'Exportable pour exceller'
 ];

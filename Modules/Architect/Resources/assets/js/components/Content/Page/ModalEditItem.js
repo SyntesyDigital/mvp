@@ -1002,6 +1002,14 @@ class ModalEditItem extends Component {
           label={Lang.get('modals.header')}
         />
 
+        <BooleanSettingsField
+          field={this.state.field}
+          name="excel"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.excel')}
+        />
+
         <RadioSettingsField
           field={this.state.field}
           name="cropsAllowed"

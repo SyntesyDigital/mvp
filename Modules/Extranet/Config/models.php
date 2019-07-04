@@ -14,7 +14,9 @@ return [
         'rules' => [
           'required',
           'minCharacters',
-          'maxCharacters'
+          'maxCharacters',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'format',
@@ -31,7 +33,9 @@ return [
           'price_with_decimals',
         ],
         'rules' => [
-          'required'
+          'required',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'format',
@@ -49,6 +53,8 @@ return [
         ],
         'rules' => [
           'required',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'format',
@@ -63,6 +69,8 @@ return [
         ],
         'rules' => [
           'required',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'ws' => ''
@@ -77,6 +85,8 @@ return [
         ],
         'rules' => [
           'required',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'ws' => ''
@@ -92,7 +102,9 @@ return [
         'rules' => [
           'required',
           'minCharacters',
-          'maxCharacters'
+          'maxCharacters',
+          'searchable',
+          'sortable',
         ],
         'settings' => [
           'ws' => ''

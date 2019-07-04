@@ -44,6 +44,7 @@ class ElementDropZoneContainer extends Component {
 				errors={this.props.app.errors}
 				created={this.props.app.model !== undefined && this.props.app.model != null}
 				fields={this.props.app.fields}
+				elementType={this.props.app.elementType}
 				onFieldAdded={this.handleFieldAdded.bind(this)}
 				onFieldChanged={this.handleFieldChange.bind(this)}
 				moveField={this.moveField.bind(this)}

@@ -6,12 +6,114 @@
     text-transform: uppercase;
     padding:10px 15px;
   }
+  .elementTable{
+    padding:20px;
+    background-color:white;
+  }
+}
+
+.title{
+  margin-bottom: 10px;
+  overflow: hidden;
+  h4{
+    text-transform: none;
+     @include font(24,32,600);
+     float:left;
+  }
+  .title-btns{
+    overflow: hidden;
+    padding-left: 20px;
+    &.title-btns-no-header{
+      padding-left:0px;
+    }
+    .excel-btn{
+      float:right;
+      overflow: hidden;
+      button{
+        margin:10px 0;
+        padding:7px 20px;
+        text-decoration: none;
+        color:$primary-color;
+        border: 1px solid $primary-color;
+        background-color: white;
+        i{
+          margin-right: 10px;
+        }
+        &:hover{
+          color:$secondary-color;
+          border: 1px solid $secondary-color;
+
+        }
+      }
+    }
+    .add-btn{
+    float:left;
+    overflow: hidden;
+    a{
+      margin:10px 0;
+      padding:7px 20px;
+      text-decoration: none;
+      color:white;
+      border: 1px solid $secondary-color;
+      background-color: $secondary-color;
+      i{
+        margin-right: 10px;
+      }
+      &:hover{
+        color:$secondary-color;
+        background-color:white;
+      }
+    }
+  }
+  }
 }
 
 
 //CSS TABLE MODIFICATIONS
-.react-grid-Grid>div{
+.react-grid-Container{
+  .react-grid-Main{
+      outline:none;
+    .react-grid-Grid>div{
       position: initial;
+    }
+    .react-grid-Grid{
+      border:none;
+      .react-grid-Header{
+        .react-grid-HeaderRow{
+          background-color: white;
+          .react-grid-HeaderCell{
+            background-color: white;
+            border-right: none;
+            border-left: none;
+          }
+        }
+      }
+      .react-grid-Viewport{
+        .react-grid-Canvas{
+          .react-grid-Row{
+            .react-grid-Cell{
+              border-right: none;
+              border-left: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.elementTableNoHeader{
+  .react-grid-Container{
+    .react-grid-Main{
+      .react-grid-Grid{
+        .react-grid-Header .react-grid-HeaderRow:first-of-type {
+          background-color: $sidebar-background-color;
+          .react-grid-HeaderCell{
+            background-color: $sidebar-background-color;
+          }
+        }
+      }
+    }
+  }
 }
 /*
 .noHeaderWrapper .react-grid-Header {

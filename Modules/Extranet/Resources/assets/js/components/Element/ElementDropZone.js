@@ -60,7 +60,9 @@ class ElementDropZone extends Component {
 		var result = {};
 
 		for(var i=0;i<fields.length;i++){
-			result[fields[i]] = null;
+			if((fields[i] != 'searchable' &&  fields[i] != 'sortable') || this.props.elementType == 'table'){
+				result[fields[i]] = null;
+			}
 		}
 		return result;
 	}
