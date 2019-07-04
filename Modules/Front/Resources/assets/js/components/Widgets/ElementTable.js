@@ -62,8 +62,21 @@ export default class ElementTable extends Component {
            });
     }
 
-    sortRows(sortColumn, sortDirection){
-      console.log(sortColumn);
+    handleResultsChange(filter, sortColumn, sortDirection){
+      if(filter != 'NONE'){
+        const {modelValues, initialModelValues} = { ...this.state };
+        const newFilters = { ...this.state.filters };
+
+        if (filter.filterTerm) {
+          newFilters[filter.column.key] = filter;
+        } else {
+          delete newFilters[filter.column.key];
+        }
+        this.setState({
+          filters : newFilters,
+          modelValues : selectors.getRows({rows : initialModelValues, filters : newFilters})
+        });
+      }
       const comparer = (a, b) => {
         if (sortDirection === "ASC") {
           return a[sortColumn] > b[sortColumn] ? 1 : -1;
@@ -71,38 +84,12 @@ export default class ElementTable extends Component {
           return a[sortColumn] < b[sortColumn] ? 1 : -1;
         }
       };
-      if(sortDirection === "NONE" ){
-        this.setState({
-          modelValues : [...this.state.initialModelValues]
-        });
-      }else{
+      if(sortDirection != "NONE" ){
         this.setState({
           modelValues : this.state.modelValues.sort(comparer)
         });
       }
-    }
 
-
-    handleFilterChange(filter){
-      const newFilters = { ...this.state.filters };
-      if (filter.filterTerm) {
-        newFilters[filter.column.key] = filter;
-      } else {
-        delete newFilters[filter.column.key];
-      }
-      this.setState({
-        filters : newFilters
-      });
-
-      return newFilters;
-    }
-
-    processResults(){
-      alert('hola');
-    }
-
-    getRows(rows, filters) {
-      return selectors.getRows({ rows, filters });
     }
 
     renderTable() {
@@ -121,19 +108,17 @@ export default class ElementTable extends Component {
           filterable:  elementObject.fields[index].rules.searchable
         });
       }
-      var minHeight = anySearchable?(parseInt( modelValues.length) + 2)*35 : (parseInt( modelValues.length) + 1)*35  ;
-
-      const filteredModelValues = this.getRows(modelValues, filters);
+      var minHeight = anySearchable?(parseInt( modelValues.length) + 1)*35 + 45 : (parseInt( modelValues.length) + 1)*35  ;
 
       return (
         <ReactDataGrid
           ref={(datagrid) => { this.myOpenGrid = datagrid; }}
           columns={columns}
-          rowGetter={i => filteredModelValues[i]}
+          rowGetter={i => modelValues[i]}
           rowsCount={ modelValues.length}
-          minHeight={minHeight}
-          onGridSort={(sortColumn, sortDirection) => this.sortRows(sortColumn, sortDirection)}
-          onAddFilter={filter => this.handleFilterChange(filter)}
+          minHeight={minHeight + 40}
+          onGridSort={(sortColumn, sortDirection) => this.handleResultsChange('NONE',sortColumn, sortDirection)}
+          onAddFilter={filter => this.handleResultsChange(filter,'NONE','NONE')}
           />
       );
     }
