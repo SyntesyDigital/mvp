@@ -25,7 +25,7 @@ export default class ElementTable extends Component {
             itemsPerPage :  itemsPerPage,
             maxItems :  maxItems,
             filters : [],
-            currentPage:1,
+            currPage:1,
             modelValuesPaginated:[]
         };
     }
@@ -78,7 +78,8 @@ export default class ElementTable extends Component {
         elementsInPage = modelValues;
       }
       this.setState({
-        modelValuesPaginated : elementsInPage
+        modelValuesPaginated : elementsInPage,
+        currPage:page
       });
     }
 
@@ -150,7 +151,7 @@ export default class ElementTable extends Component {
 
               {this.state.itemsPerPage &&
                 <Paginator
-                  currPage={this.state.currentPage}
+                  currPage={this.state.currPage}
                   lastPage={Math.ceil(this.state.modelValues.length/this.state.itemsPerPage)}
                   onChange={this.onPageChange.bind(this)}
                 />
