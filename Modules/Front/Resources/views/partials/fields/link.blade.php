@@ -30,9 +30,6 @@
     @if(!isset($p))
     <p class="titol">
     @endif
-      @if(isset($icon) && $icon && $icon != '')
-        <i class="{{$icon}}"></i>
-      @endif
       {{$field['value']['title'][App::getLocale()] or ''}}
 
     @if(!isset($p))

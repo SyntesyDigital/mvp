@@ -33,50 +33,51 @@ class ModelValuesFormatTransformer extends Resource
 
     public function getSurveyArray($modelValues, $elementFields, $limit)
     {
+
       $result = [];
       $i = 0;
       foreach ($modelValues as $modelValue) {
         if(!$limit || $i < $limit ){
           foreach ($elementFields as $elementField) {
-          $originalValue = $modelValue->{$elementField->identifier};
+            $originalValue = $modelValue->{$elementField->identifier};
 
-          switch ($elementField->type) {
-            case 'number':
-              if($elementField->settings['format'] == 'price'){
-                $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
-              }elseif($elementField->settings['format'] == 'price_with_decimals'){
-                $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
-              }else{
-                $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
-              }
-              break;
-            case 'text':
-              if($elementField->settings['format'] == 'email'){
-                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-              }elseif($elementField->settings['format'] == 'telephone'){
-                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-              }else{
-                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-              }
-              break;
-            case 'date':
-              if($elementField->settings['format'] == 'day_month_year'){
-                $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
-              }elseif($elementField->settings['format'] == 'month_year'){
-                $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
-              }elseif($elementField->settings['format'] == 'year'){
-                $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
-              }else{
-                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-              }
+            switch ($elementField->type) {
+              case 'number':
+                if($elementField->settings['format'] == 'price'){
+                  $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
+                }elseif($elementField->settings['format'] == 'price_with_decimals'){
+                  $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
+                }else{
+                  $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
+                }
+                break;
+              case 'text':
+                if($elementField->settings['format'] == 'email'){
+                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                }elseif($elementField->settings['format'] == 'telephone'){
+                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                }else{
+                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                }
+                break;
+              case 'date':
+                if($elementField->settings['format'] == 'day_month_year'){
+                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
+                }elseif($elementField->settings['format'] == 'month_year'){
+                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
+                }elseif($elementField->settings['format'] == 'year'){
+                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
+                }else{
+                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                }
 
-              break;
+                break;
 
-            default:
-              $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-              break;
+              default:
+                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                break;
+            }
           }
-        }
         }
         $i++;
       }

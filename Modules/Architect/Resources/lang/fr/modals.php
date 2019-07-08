@@ -20,6 +20,7 @@ return [
     'max_elements'    => 'Nombre maximum d\'éléments',
     'indica_max_elements'    => 'Indiquez le nombre maximum d\'éléments',
     'max_elements_page'    => 'Nombre maximum d\'éléments pour pàge',
+    'pagination'      => 'Pagination',
     'indica_max_elements_page'    => 'Indiquez le nombre maximum d\'éléments pour page',
     'search_field'        => 'champ de recherche',
     'indica_tipology_text_identifier' => 'Indiquer l\'identifiant du texte de la typologie',

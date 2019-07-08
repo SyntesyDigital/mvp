@@ -37,6 +37,7 @@ Route::group([
     Route::post('/elements/store', 'ElementController@store')->name('extranet.elements.store');
     Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');
     Route::delete('/elements/{element}/delete', 'ElementController@delete')->name('extranet.elements.delete');
+    Route::get('/elements/{element}/export/{limit?}', 'ElementController@export')->name('table.export');
 
     // Routes Parameters
     Route::get('/routes_parameters', 'RouteParameterController@index')->name('extranet.routes_parameters.index');

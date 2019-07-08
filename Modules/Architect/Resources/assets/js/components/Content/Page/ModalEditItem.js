@@ -1118,6 +1118,14 @@ class ModalEditItem extends Component {
 
         <InputSettingsField
           field={this.state.field}
+          name="pagination"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.pagination')}
+          inputLabel={Lang.get('modals.indica_max_elements_page')}
+        />
+        <InputSettingsField
+          field={this.state.field}
           name="textIdentifier"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}

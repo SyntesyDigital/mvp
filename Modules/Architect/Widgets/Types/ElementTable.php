@@ -31,7 +31,8 @@ class ElementTable extends Widget implements WidgetInterface
     public $settings = [
         'htmlId',
         'htmlClass',
-        'itemsPerPage',
+        'maxItems',
+        'pagination',
         'tableElements',
         'collapsable',
         'collapsed',

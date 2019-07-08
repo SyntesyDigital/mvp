@@ -3,21 +3,21 @@
     @if(isset($field['settings']['excel']) && $field['settings']['excel'])
       <div class="title">
         <div class="title-btns title-btns-no-header">
-
           <div class="excel-btn">
-            <button element="" class="">
+            <a href="{{route('table.export', [$field['settings']['tableElements'], $field['settings']['pagination']] )}}" element="" class="">
+
               <i class="fas fa-download"></i>Exportation CSV
-            </button>
+            </a>
           </div>
           <div class="add-btn">
-          @include('front::partials.fields.'.$field['fields'][2]['type'],
-            [
-              "field" => $field['fields'][2],
-              "settings" => $field['settings'],
-              "div" => false,
-              "icon" => "fas fa-plus-circle"
-            ]
-          )
+            @include('front::partials.fields.'.$field['fields'][2]['type'],
+              [
+                "field" => $field['fields'][2],
+                "settings" => $field['settings'],
+                "div" => false,
+                "icon" => "fas fa-plus-circle"
+              ]
+            )
         </div>
       </div>
       </div>
@@ -32,9 +32,9 @@
       @if(isset($field['settings']['excel']) && $field['settings']['excel'])
         <div class="title-btns">
           <div class="excel-btn">
-            <button element="" class="">
+            <a href="{{route('table.export', [$field['settings']['tableElements'], $field['settings']['pagination']] )}}" element="" class="">
               <i class="fas fa-download"></i>Exportation CSV
-            </button>
+            </a>
           </div>
           <div class="add-btn">
             @include('front::partials.fields.'.$field['fields'][2]['type'],
@@ -53,7 +53,8 @@
   <div id="collapsetable-{{$field['settings']['tableElements']?$field['settings']['tableElements']:''}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
       <div id="elementTable" class="elementTable {{$field['settings']['header']?'':'elementTableNoHeader'}}"
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
-        itemsPerPage="{{$field['settings']['itemsPerPage']}}"
+        itemsPerPage="{{$field['settings']['pagination']}}"
+        maxItems = "{{$field['settings']['maxItems']}}"
         elementObject="{{$field['settings']['tableElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['tableElements'])->first()->load('fields'))):null}}"
       >
       </div>

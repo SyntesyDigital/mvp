@@ -22,6 +22,8 @@ use Modules\Extranet\Transformers\ModelValuesFormatTransformer;
 use Config;
 use Illuminate\Http\Request;
 use Session;
+use Carbon\Carbon;
+
 
 class ElementController extends Controller
 {
@@ -143,6 +145,7 @@ class ElementController extends Controller
 
     public function getModelValues(Element $element, $limit = null)
     {
+
       try {
             $modelValues = $this->elements->getModelValuesFromElement($element);
             return response()->json([
@@ -154,6 +157,37 @@ class ElementController extends Controller
         return response()->json([
             'success' => false
         ], 500);
+
+    }
+
+    public function export(Element $element, $limit = null, Request $request)
+    {
+      $modelValues = (new ModelValuesFormatTransformer($this->elements->getModelValuesFromElement($element),$element->fields()->get(), $limit))->toArray();
+      $filename =  Carbon::now()->format('YmdHs').'_'.str_slug($element->name, "_").".csv";
+      $filepath = storage_path() . "/app/".$filename;
+      $handle = fopen($filepath, 'w+');
+
+      $titles = $element->fields()->pluck('name')->toArray();
+      $colmuns = $element->fields()->pluck('name','identifier');
+      fputcsv($handle, $titles);
+
+
+      foreach($modelValues as $modelValue){
+        $row = [];
+        foreach($colmuns as $key => $value) {
+          array_push($row,isset($modelValue[$key]) ? $modelValue[$key] : "" );
+        }
+
+        fputcsv($handle, $row);
+      }
+
+      fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+      return response()->download($filepath, $filename, $headers);
 
     }
 

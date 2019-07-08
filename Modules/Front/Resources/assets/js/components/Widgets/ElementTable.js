@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MoreResults from './../Common/MoreResults';
+import Paginator from './../Common/Paginator';
 import ReactDataGrid from 'react-data-grid';
 import { Toolbar, Data } from "react-data-grid-addons";
 
@@ -15,13 +16,17 @@ export default class ElementTable extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const itemsPerPage = props.itemsPerPage ? props.itemsPerPage : false;
+        const maxItems = props.maxItems ? props.maxItems : false;
 
         this.state = {
             field : field,
             elementObject : elementObject,
             modelValues:[],
             itemsPerPage :  itemsPerPage,
-            filters : []
+            maxItems :  maxItems,
+            filters : [],
+            currentPage:1,
+            modelValuesPaginated:[]
         };
     }
 
@@ -41,8 +46,8 @@ export default class ElementTable extends Component {
 
     query(page,filters) {
         var self = this;
-        const {elementObject,itemsPerPage} = this.state;
-        var limit = itemsPerPage?'/'+itemsPerPage:'';
+        const {elementObject,itemsPerPage, maxItems} = this.state;
+        var limit = maxItems?'/'+maxItems:'';
 
         axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit)
           .then(function (response) {
@@ -55,11 +60,26 @@ export default class ElementTable extends Component {
                   modelValues : response.data.modelValues,
                   initialModelValues : [...response.data.modelValues]
                 });
+                self.onPageChange(1);
               }
 
           }).catch(function (error) {
              console.log(error);
            });
+    }
+
+    onPageChange(page){
+      const {modelValues, itemsPerPage, maxItems} = { ...this.state };
+      var init=0;
+      var elementsInPage = [];
+      if(itemsPerPage){
+        elementsInPage = modelValues.slice((page -1)*itemsPerPage,page*itemsPerPage);
+      }else{
+        elementsInPage = modelValues;
+      }
+      this.setState({
+        modelValuesPaginated : elementsInPage
+      });
     }
 
     handleResultsChange(filter, sortColumn, sortDirection){
@@ -89,11 +109,11 @@ export default class ElementTable extends Component {
           modelValues : this.state.modelValues.sort(comparer)
         });
       }
-
+      this.onPageChange(1);
     }
 
     renderTable() {
-      const {modelValues, elementObject, filters} = this.state;
+      const {modelValues, modelValuesPaginated, elementObject, filters} = this.state;
       var anySearchable = false;
       var columns = [];
 
@@ -114,7 +134,7 @@ export default class ElementTable extends Component {
         <ReactDataGrid
           ref={(datagrid) => { this.myOpenGrid = datagrid; }}
           columns={columns}
-          rowGetter={i => modelValues[i]}
+          rowGetter={i => modelValuesPaginated[i]}
           rowsCount={ modelValues.length}
           minHeight={minHeight + 40}
           onGridSort={(sortColumn, sortDirection) => this.handleResultsChange('NONE',sortColumn, sortDirection)}
@@ -127,7 +147,16 @@ export default class ElementTable extends Component {
         return (
             <div>
               {this.renderTable()}
+
+              {this.state.itemsPerPage &&
+                <Paginator
+                  currPage={this.state.currentPage}
+                  lastPage={Math.ceil(this.state.modelValues.length/this.state.itemsPerPage)}
+                  onChange={this.onPageChange.bind(this)}
+                />
+              }
             </div>
+
         );
 
     }
@@ -138,12 +167,14 @@ if (document.getElementById('elementTable')) {
    document.querySelectorAll('[id=elementTable]').forEach(function(element){
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
+       var maxItems = element.getAttribute('maxItems');
        var itemsPerPage = element.getAttribute('itemsPerPage');
 
        ReactDOM.render(<ElementTable
            field={field}
            elementObject={elementObject}
            itemsPerPage={itemsPerPage}
+           maxItems={maxItems}
          />, element);
    });
 }

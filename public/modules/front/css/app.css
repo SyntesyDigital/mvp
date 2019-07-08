@@ -10104,7 +10104,7 @@ form.contact-form .checkbox {
   overflow: hidden;
 }
 
-.title .title-btns .excel-btn button {
+.title .title-btns .excel-btn a {
   margin: 10px 0;
   padding: 7px 20px;
   text-decoration: none;
@@ -10113,11 +10113,11 @@ form.contact-form .checkbox {
   background-color: white;
 }
 
-.title .title-btns .excel-btn button i {
+.title .title-btns .excel-btn a i {
   margin-right: 10px;
 }
 
-.title .title-btns .excel-btn button:hover {
+.title .title-btns .excel-btn a:hover {
   color: #E84B37;
   border: 1px solid #E84B37;
 }
