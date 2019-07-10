@@ -10077,6 +10077,37 @@ form.contact-form .checkbox {
   background-color: white;
 }
 
+.element-table-container .elementTable .navigation {
+  padding: 15px;
+  list-style-type: none;
+  text-align: right;
+}
+
+.element-table-container .elementTable .navigation li {
+  display: inline-block;
+  margin: 5px;
+  border-radius: 50%;
+  min-height: 25px;
+  min-width: 25px;
+  text-align: center;
+}
+
+.element-table-container .elementTable .navigation li a {
+  color: #2A3649;
+  line-height: 23px;
+}
+
+.element-table-container .elementTable .navigation li.active,
+.element-table-container .elementTable .navigation li:hover {
+  background-color: #2A3649;
+  text-decoration: none;
+}
+
+.element-table-container .elementTable .navigation li.active a,
+.element-table-container .elementTable .navigation li:hover a {
+  color: white;
+}
+
 .title {
   margin-bottom: 10px;
   overflow: hidden;

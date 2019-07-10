@@ -9,6 +9,31 @@
   .elementTable{
     padding:20px;
     background-color:white;
+    .navigation{
+      padding:15px;
+      list-style-type:none;
+      text-align: right;
+      li{
+        display:  inline-block;
+        margin:5px;
+        border-radius: 50%;
+        min-height: 25px;
+        min-width:25px;
+        text-align: center;
+        a{
+          color:$primary-color;
+          line-height: 23px;
+        }
+        &.active, &:hover{
+          background-color: $primary-color;
+          text-decoration: none;
+          a{
+            color:white;
+          }
+        }
+      }
+    }
+
   }
 }
 

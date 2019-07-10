@@ -129,7 +129,11 @@ export default class ElementTable extends Component {
           filterable:  elementObject.fields[index].rules.searchable
         });
       }
-      var minHeight = anySearchable?(parseInt( modelValues.length) + 1)*35 + 45 : (parseInt( modelValues.length) + 1)*35  ;
+      if(this.state.itemsPerPage){
+        var minHeight = anySearchable?(parseInt( this.state.itemsPerPage) + 1)*35 + 45 : (parseInt( this.state.itemsPerPage) + 1)*35  ;
+      }else{
+        var minHeight = anySearchable?(parseInt( modelValues.length) + 1)*35 + 45 : (parseInt( modelValues.length) + 1)*35  ;
+      }
 
       return (
         <ReactDataGrid

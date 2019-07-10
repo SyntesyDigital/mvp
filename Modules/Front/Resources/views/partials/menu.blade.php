@@ -7,7 +7,12 @@
 			$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
 		@endphp
 		@if(isset($link))
-				<a href="{{$link["url"]}}" id="{{$link["id"]}}" class="{{$link["class"]}}" >{{$link["name"]}}</a>
+				<a href="{{$link["url"]}}" id="{{$link["id"]}}" class="{{$link["class"]}}" >
+					@if(isset($link["icon"]))
+						<i class="{{$link['icon']}}"></i>
+					@endif
+					{{$link["name"]}}
+				</a>
 
 				@if(sizeof($menuElement["children"]) > 0 )
 					<ul class="menu-children">
@@ -17,7 +22,12 @@
 							@endphp
 							@if(isset($childLink))
 								<li class"menu-child">
-									<a href="{{$childLink["url"]}}" id="{{$childLink["id"]}}" class="{{$childLink["class"]}}" @if(isset($childLink["target"])) target="_blank" @endif >{{$childLink["name"]}}</a>
+									<a href="{{$childLink["url"]}}" id="{{$childLink["id"]}}" class="{{$childLink["class"]}}" @if(isset($childLink["target"])) target="_blank" @endif >
+										@if(isset($childLink["icon"]))
+											<i class="{{$childLink['icon']}}"></i>
+										@endif
+										{{$childLink["name"]}}
+									</a>
 								</li>
 							@endif
 						@endforeach
