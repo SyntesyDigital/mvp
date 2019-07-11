@@ -5,6 +5,7 @@
     @include font(16,21,400);
     text-transform: uppercase;
     padding:10px 15px;
+    min-height: 41px;
   }
   .element-file-container-body{
     background-color: $elements-background-color;

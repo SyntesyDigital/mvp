@@ -1,3 +1,5 @@
+@php $num = rand(0,10000000) @endphp
+
 <div id="{{$field['settings']['htmlId'] or ''}}" class="element-table-container {{$field['settings']['htmlClass'] or ''}}">
   @if($field['settings']['header'])
     @if(isset($field['settings']['excel']) && $field['settings']['excel'])
@@ -22,7 +24,7 @@
       </div>
       </div>
     @endif
-    <div class="{{$field['settings']['collapsable']? 'element-collapsable':'' }} element-table-container-head {{$field['settings']['collapsed']?'collapsed':''}}" @if($field['settings']['collapsable']) data-toggle="collapse" data-target="#collapsetable-{{$field['settings']['tableElements']?$field['settings']['tableElements']:''}}" aria-expanded="true" aria-controls="collapsetable-{{$field['settings']['tableElements']?$field['settings']['tableElements']:''}}"@endif>
+    <div class="{{$field['settings']['collapsable']? 'element-collapsable':'' }} element-table-container-head {{$field['settings']['collapsed']?'collapsed':''}}" @if($field['settings']['collapsable']) data-toggle="collapse" data-target="#collapsetable-{{$num}}" aria-expanded="true" aria-controls="collapsetable-{{$num}}"@endif>
       {{$field['fields'][0]['value'][App::getLocale()]}}
 
     </div>
@@ -50,7 +52,7 @@
       @endif
     </div>
   @endif
-  <div id="collapsetable-{{$field['settings']['tableElements']?$field['settings']['tableElements']:''}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
+  <div id="collapsetable-{{$num}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
       <div id="elementTable" class="elementTable {{$field['settings']['header']?'':'elementTableNoHeader'}}"
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
         itemsPerPage="{{$field['settings']['pagination']}}"
@@ -69,6 +71,6 @@
             ]
           )
         </div>
-      <div>
+      </div>
   </div>
 </div>
