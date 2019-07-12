@@ -93,6 +93,24 @@ footer{
     @include font(16,18,400);
     display:inline;
   }
+  ul{
+    list-style-type: none;
+    text-align: center;
+    li{
+      display:inline;
+      color:$footer-text-color;
+      @include font(16,18,400);
+      a{
+        color:$footer-text-color;
+        @include font(16,18,400);
+        &:hover{
+          text-decoration: none;
+          color:$footer-text-color;
+        }
+      }
+    }
+
+  }
 
 }
 

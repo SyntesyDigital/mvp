@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import Select from 'react-select';
 
 const TYPE_INTERNAL = "internal";
 const TYPE_EXTERNAL = "external";
@@ -15,18 +16,44 @@ class LinkField extends Component
     this.handleLinkTypeChange = this.handleLinkTypeChange.bind(this);
     this.onContentSelect = this.onContentSelect.bind(this);
     this.onRemoveField = this.onRemoveField.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
 
     this.state = {
       title : {},
       type : TYPE_INTERNAL,
-      linkValues : null
+      linkValues : null,
+      icon : ''
     };
 
+    this.fontIcons = [];
+    this.fontIcons.push({
+        value : '',
+        label : 'Selectionez'
+    });
+    this.fontIcons.push({
+        value : 'fas fa-address-book',
+        label : 'fas fa-address-book'
+    });
+    this.fontIcons.push({
+        value : 'fas fa-address-card',
+        label : 'fas fa-address-card'
+    });
+    this.fontIcons.push({
+        value : 'fas fa-adjust',
+        label : 'fas fa-adjust'
+    });
+  /*  for(var key in props.icons){
+      this.fontIcons.push({
+          value : props.icons[key],
+          label : props.icons[key]
+      });
+    } */
   }
 
   componentDidMount()
   {
     var title = {};
+    var icon = "";
     var type = "";
     var linkValues = null;
 
@@ -38,6 +65,10 @@ class LinkField extends Component
 
       if(this.props.field.value.title !== undefined && this.props.field.value.title != null){
         title = this.props.field.value.title;
+      }
+
+      if(this.props.field.value.icon !== undefined && this.props.field.value.icon != null){
+        icon = this.props.field.value.icon?this.props.field.value.icon:'';
       }
 
       if(this.props.field.value.url !== undefined){
@@ -52,7 +83,8 @@ class LinkField extends Component
       this.setState({
         title : title,
         type : type,
-        linkValues : linkValues
+        linkValues : linkValues,
+        icon : icon
       });
 
     }
@@ -62,6 +94,7 @@ class LinkField extends Component
 
     var title = null;
     var type = "";
+    var icon = "";
     var linkValues = null;
 
     console.log("LinkField :: componentWillReceiveProps => ",nextProps);
@@ -75,6 +108,9 @@ class LinkField extends Component
 
       if(nextProps.field.value.title !== undefined && nextProps.field.value.title != null){
         title = nextProps.field.value.title;
+      }
+      if(nextProps.field.value.icon !== undefined && nextProps.field.value.icon != null){
+        icon = nextProps.field.value.icon?nextProps.field.value.icon:'';
       }
 
       if(nextProps.field.value.url !== undefined && nextProps.field.value.url != null){
@@ -93,7 +129,8 @@ class LinkField extends Component
       this.setState({
         title : title,
         type : type,
-        linkValues : linkValues
+        linkValues : linkValues,
+        icon : icon
       });
 
     }
@@ -152,6 +189,22 @@ class LinkField extends Component
 
     this.props.onFieldChange(field);
   }
+
+  handleSelectChange(selectedOption) {
+    const value = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value : {};
+
+    if(value.icon === undefined){
+      value.icon = selectedOption;
+    }
+
+    var field = {
+      identifier : this.props.field.identifier,
+      value : value
+    };
+
+    this.props.onFieldChange(field);
+  }
+
 
   handleLinkTypeChange(event)
   {
@@ -219,6 +272,29 @@ class LinkField extends Component
         );
       //}
     }
+
+    return inputs;
+  }
+
+  renderIcon()
+  {
+    var inputs = [];
+    var value = '';
+
+    value = this.state.icon ? this.state.icon : '';
+
+    inputs.push(
+      <div className="form-group bmd-form-group">
+         <label  htmlFor={this.props.field.identifier}  className="bmd-label-floating">Icon</label>
+         <Select
+              id="icon"
+              name="icon"
+              value={value}
+              onChange={this.handleSelectChange}
+              options={this.fontIcons}
+          />
+      </div>
+    );
 
     return inputs;
   }
@@ -368,6 +444,7 @@ class LinkField extends Component
 
           <div className="field-form">
             {this.renderTitle()}
+            {this.renderIcon()}
             {this.renderRadio()}
 
             {this.state.type == TYPE_INTERNAL &&

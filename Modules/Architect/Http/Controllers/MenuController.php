@@ -25,7 +25,7 @@ class MenuController extends Controller
     public function __construct(MenuRepository $menus)
     {
         $this->menus = $menus;
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function index()

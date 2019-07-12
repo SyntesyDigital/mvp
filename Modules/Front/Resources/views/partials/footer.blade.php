@@ -4,9 +4,10 @@
 
   <div class="container">
     <div class="row">
-      <p>© ARILIM 2018/2019 <span class="footer-separator"> - </span></p>
-			<p>Tous droits réservés <span class="footer-separator"> - </span></p>
-			<p>Mentions légales</p>
+      @include ('front::partials.menu_footer',
+    		["menu" => get_menu('footer')]
+    	)
+
 		</div>
   </div>
 	<!-- end Col 2 -->
