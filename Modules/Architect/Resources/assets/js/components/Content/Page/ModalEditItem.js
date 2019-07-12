@@ -939,6 +939,35 @@ class ModalEditItem extends Component {
 
         <h6>{Lang.get('modals.configuration')}</h6>
 
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="fileElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.element')}
+          options={this.state.fileElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="tableElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.element')}
+          options={this.state.tableElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
+        />
+
         <InputTranslatedSettingsField
           field={this.state.field}
           name="title"
@@ -1189,33 +1218,7 @@ class ModalEditItem extends Component {
           inputLabel={Lang.get('modals.indica_height')}
         />
 
-        <SelectorSettingsField
-          field={this.state.field}
-          name="fileElements"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.element')}
-          options={this.state.fileElements.map(function(obj){
-              return {
-                  value: obj.value,
-                  name: obj.name
-              };
-          })}
-        />
 
-        <SelectorSettingsField
-          field={this.state.field}
-          name="tableElements"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.element')}
-          options={this.state.tableElements.map(function(obj){
-              return {
-                  value: obj.value,
-                  name: obj.name
-              };
-          })}
-        />
 
         <SelectorSettingsField
           field={this.state.field}

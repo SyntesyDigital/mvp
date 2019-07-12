@@ -28,8 +28,6 @@ class ElementFile extends Widget implements WidgetInterface
     public $hidden = false;
 
     public $settings = [
-        'htmlId',
-        'htmlClass',
         'fileElements',
         'collapsable',
         'collapsed',

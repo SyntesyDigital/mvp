@@ -5,11 +5,18 @@
     @include font(16,21,400);
     text-transform: uppercase;
     padding:10px 15px;
+    min-height: 41px;
   }
   .elementTable{
     padding:20px;
     background-color:white;
   }
+
+  .more-btn{
+    padding:20px;
+    padding-top:0px;
+  }
+
 }
 
 .title{
@@ -102,23 +109,8 @@
   }
 }
 .elementTableNoHeader{
-  .react-grid-Container{
-    .react-grid-Main{
-      .react-grid-Grid{
-        .react-grid-Header .react-grid-HeaderRow:first-of-type {
-          background-color: $sidebar-background-color;
-          .react-grid-HeaderCell{
-            background-color: $sidebar-background-color;
-          }
-        }
-      }
-    }
+  .ReactTable .rt-thead .rt-th.-cursor-pointer,
+  .ReactTable .rt-thead .rt-td.-cursor-pointer {
+  	//background-color: $sidebar-background-color;
   }
 }
-/*
-.noHeaderWrapper .react-grid-Header {
-  display: none !important;
-}
-.noHeaderWrapper  .react-grid-Viewport {
-  top: 0px !important;
-}*/

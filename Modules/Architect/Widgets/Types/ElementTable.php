@@ -18,7 +18,6 @@ class ElementTable extends Widget implements WidgetInterface
 
     public $fields = [
         'title' => 'Modules\Architect\Fields\Types\Text',
-        'moreBtn' => 'Modules\Architect\Fields\Types\Link',
         'addBtn' => 'Modules\Architect\Fields\Types\Link'
     ];
 
@@ -29,14 +28,8 @@ class ElementTable extends Widget implements WidgetInterface
     public $hidden = false;
 
     public $settings = [
-        'htmlId',
-        'htmlClass',
-        'maxItems',
         'pagination',
         'tableElements',
-        'collapsable',
-        'collapsed',
-        'header',
         'excel'
     ];
 }

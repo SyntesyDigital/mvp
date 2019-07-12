@@ -5,6 +5,7 @@
     @include font(16,21,400);
     text-transform: uppercase;
     padding:10px 15px;
+    min-height: 41px;
   }
   .element-file-container-body{
     background-color: $elements-background-color;
@@ -51,7 +52,10 @@
 }
 .more-btn{
   text-align: right;
-  margin:15px 0px;
+  padding:15px;
+  padding-right:0;
+  background-color: #fff;
+
   a{
     padding:7px 20px;
     text-decoration: none;

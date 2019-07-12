@@ -40,6 +40,7 @@ return [
     'SEARCH' => 'Chercheur',
     'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale',
     'ELEMENT_FORM' => 'Formulaire',
-    'ELEMENT_TABLE' => 'Tableau',
-    'ELEMENT_FILE' => 'Fiche'
+    'ELEMENT_TABLE' => 'Tableau principaux',
+    'ELEMENT_FILE' => 'Fiche',
+    'ELEMENT_SECONDARY_TABLE' => 'Tableau secondaire'
 ];

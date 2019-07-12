@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import MoreResults from './../Common/MoreResults';
-import Paginator from './../Common/Paginator';
-import ReactDataGrid from 'react-data-grid';
-import { Toolbar, Data } from "react-data-grid-addons";
+//import MoreResults from './../Common/MoreResults';
+//import Paginator from './../Common/Paginator';
+//import ReactDataGrid from 'react-data-grid';
+//import { Toolbar, Data } from "react-data-grid-addons";
 
-const selectors = Data.Selectors;
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import matchSorter from 'match-sorter'
+
+//const selectors = Data.Selectors;
 
 export default class ElementTable extends Component {
 
@@ -15,14 +19,23 @@ export default class ElementTable extends Component {
 
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
-        const itemsPerPage = props.itemsPerPage ? props.itemsPerPage : false;
+        const pagination =  props.pagination ? true : false;
+        const itemsPerPage = props.itemsPerPage !== undefined
+          && props.itemsPerPage != null
+          && props.itemsPerPage != '' ? props.itemsPerPage : 10;
+
+        console.log("props.itemsPerPage => ",props.itemsPerPage);
+        console.log("itemsPerPage => ",itemsPerPage);
+
+
         const maxItems = props.maxItems ? props.maxItems : false;
 
         this.state = {
             field : field,
             elementObject : elementObject,
-            modelValues:[],
-            itemsPerPage :  itemsPerPage,
+            data:[],
+            pagination : pagination,
+            itemsPerPage : itemsPerPage,
             maxItems :  maxItems,
             filters : [],
             currPage:1,
@@ -31,20 +44,10 @@ export default class ElementTable extends Component {
     }
 
     componentDidMount() {
-      this.query();
-
-      var anySearchable = false;
-
-      var columns = [];
-      for(var index in this.state.elementObject.fields){
-        if(this.state.elementObject.fields[index].rules.searchable && ! anySearchable){
-          anySearchable = true;
-          this.myOpenGrid.onToggleFilter();
-        }
-      }
+        this.query();
     }
 
-    query(page,filters) {
+    query() {
         var self = this;
         const {elementObject,itemsPerPage, maxItems} = this.state;
         var limit = maxItems?'/'+maxItems:'';
@@ -57,10 +60,9 @@ export default class ElementTable extends Component {
                 console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
 
                 self.setState({
-                  modelValues : response.data.modelValues,
-                  initialModelValues : [...response.data.modelValues]
+                  data : response.data.modelValues
+                  //initialModelValues : [...response.data.modelValues]
                 });
-                self.onPageChange(1);
               }
 
           }).catch(function (error) {
@@ -68,53 +70,14 @@ export default class ElementTable extends Component {
            });
     }
 
-    onPageChange(page){
-      const {modelValues, itemsPerPage, maxItems} = { ...this.state };
-      var init=0;
-      var elementsInPage = [];
-      if(itemsPerPage){
-        elementsInPage = modelValues.slice((page -1)*itemsPerPage,page*itemsPerPage);
-      }else{
-        elementsInPage = modelValues;
-      }
-      this.setState({
-        modelValuesPaginated : elementsInPage,
-        currPage:page
-      });
-    }
-
-    handleResultsChange(filter, sortColumn, sortDirection){
-      if(filter != 'NONE'){
-        const {modelValues, initialModelValues} = { ...this.state };
-        const newFilters = { ...this.state.filters };
-
-        if (filter.filterTerm) {
-          newFilters[filter.column.key] = filter;
-        } else {
-          delete newFilters[filter.column.key];
-        }
-        this.setState({
-          filters : newFilters,
-          modelValues : selectors.getRows({rows : initialModelValues, filters : newFilters})
-        });
-      }
-      const comparer = (a, b) => {
-        if (sortDirection === "ASC") {
-          return a[sortColumn] > b[sortColumn] ? 1 : -1;
-        } else if (sortDirection === "DESC") {
-          return a[sortColumn] < b[sortColumn] ? 1 : -1;
-        }
-      };
-      if(sortDirection != "NONE" ){
-        this.setState({
-          modelValues : this.state.modelValues.sort(comparer)
-        });
-      }
-      this.onPageChange(1);
+    filterMethod(identifier, filter, rows, ) {
+        console.log("identifier => ",identifier);
+        return matchSorter(rows, filter.value, { keys: [identifier] });
     }
 
     renderTable() {
-      const {modelValues, modelValuesPaginated, elementObject, filters} = this.state;
+      const {data, elementObject, itemsPerPage} = this.state;
+
       var anySearchable = false;
       var columns = [];
 
@@ -122,25 +85,46 @@ export default class ElementTable extends Component {
         if(elementObject.fields[index].rules.searchable && ! anySearchable){
           anySearchable = true;
         }
+
+        var identifier = elementObject.fields[index].identifier.replace('.','');
+
         columns.push({
-          key : elementObject.fields[index].identifier,
-          name: elementObject.fields[index].name,
-          sortable: elementObject.fields[index].rules.sortable,
-          filterable:  elementObject.fields[index].rules.searchable
+          accessor : identifier,
+          Header: elementObject.fields[index].name,
+          //sortable: elementObject.fields[index].rules.sortable,
+          //filterable:  elementObject.fields[index].rules.searchable
+          filterMethod: this.filterMethod.bind(this,identifier),
+
+          filterAll: true
         });
       }
-      var minHeight = anySearchable?(parseInt( modelValues.length) + 1)*35 + 45 : (parseInt( modelValues.length) + 1)*35  ;
+
+      for(var key in data){
+        for( var subkey in data[key]){
+          var newSubkey = subkey.replace('.','');
+          console.log("subkey => ",subkey);
+          console.log("newSubkey => ",newSubkey);
+          data[key][newSubkey] = data[key][subkey];
+        }
+      }
+
+      console.log("data => ",data);
+      console.log("elementObject => ",elementObject);
+      console.log("columns => ",columns);
 
       return (
-        <ReactDataGrid
-          ref={(datagrid) => { this.myOpenGrid = datagrid; }}
+        <ReactTable
+          data={data}
           columns={columns}
-          rowGetter={i => modelValuesPaginated[i]}
-          rowsCount={ modelValues.length}
-          minHeight={minHeight + 40}
-          onGridSort={(sortColumn, sortDirection) => this.handleResultsChange('NONE',sortColumn, sortDirection)}
-          onAddFilter={filter => this.handleResultsChange(filter,'NONE','NONE')}
-          />
+          showPagination={this.state.pagination}
+          defaultPageSize={this.state.itemsPerPage}
+          loading={false}
+          filterable={true}
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]) === filter.value
+          }
+          className="-striped -highlight"
+        />
       );
     }
 
@@ -148,14 +132,6 @@ export default class ElementTable extends Component {
         return (
             <div>
               {this.renderTable()}
-
-              {this.state.itemsPerPage &&
-                <Paginator
-                  currPage={this.state.currPage}
-                  lastPage={Math.ceil(this.state.modelValues.length/this.state.itemsPerPage)}
-                  onChange={this.onPageChange.bind(this)}
-                />
-              }
             </div>
 
         );
@@ -169,11 +145,13 @@ if (document.getElementById('elementTable')) {
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
        var maxItems = element.getAttribute('maxItems');
+       var pagination = element.getAttribute('pagination');
        var itemsPerPage = element.getAttribute('itemsPerPage');
 
        ReactDOM.render(<ElementTable
            field={field}
            elementObject={elementObject}
+           pagination={pagination}
            itemsPerPage={itemsPerPage}
            maxItems={maxItems}
          />, element);
