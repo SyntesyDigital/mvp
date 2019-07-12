@@ -95,7 +95,7 @@ class ContentController extends Controller
     {
       //$slug = $request->segment(count($request->segments()));
 
-      $slug = '/'.App::getLocale().'/'.$slug;
+      $slug = '/'.$slug;
 
       $url = Url::where('url', $slug)
         ->where('entity_type','Modules\Architect\Entities\Content')

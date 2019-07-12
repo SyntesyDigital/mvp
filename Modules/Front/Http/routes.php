@@ -4,8 +4,9 @@
 
 
 Route::group([
-  'prefix' => LaravelLocalization::setLocale(),
-  'middleware' => ['web','auth:veos-ws','localeSessionRedirect', 'localizationRedirect', 'localeViewPath','localize'],
+  //'prefix' => LaravelLocalization::setLocale(),
+  //'middleware' => ['web','auth:veos-ws','localeSessionRedirect', 'localeViewPath','localize'],
+  'middleware' => ['web','auth:veos-ws'],
   'namespace' => 'Modules\Front\Http\Controllers'
 ], function() {
     Route::get('/countries/list', 'CountriesController@list')->name('countries.list');
