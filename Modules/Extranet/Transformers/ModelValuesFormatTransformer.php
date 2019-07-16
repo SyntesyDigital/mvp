@@ -61,6 +61,9 @@ class ModelValuesFormatTransformer extends Resource
                 }
                 break;
               case 'date':
+
+                $originalValue = intval($originalValue)/1000;
+
                 if($elementField->settings['format'] == 'day_month_year'){
                   $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
                 }elseif($elementField->settings['format'] == 'month_year'){
@@ -68,7 +71,7 @@ class ModelValuesFormatTransformer extends Resource
                 }elseif($elementField->settings['format'] == 'year'){
                   $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
                 }else{
-                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                  $result[$i][$elementField->identifier] = $originalValue ? $originalValue:'';
                 }
 
                 break;

@@ -10237,6 +10237,53 @@ form.contact-form .checkbox {
   border-left: none;
 }
 
+.ReactTable .rt-thead .rt-th.-cursor-pointer,
+.ReactTable .rt-thead .rt-td.-cursor-pointer {
+  padding-left: 22px;
+}
+
+.ReactTable .rt-thead .rt-th.-cursor-pointer:before,
+.ReactTable .rt-thead .rt-td.-cursor-pointer:before {
+  position: absolute;
+  content: '\E150';
+  font-family: Glyphicons Halflings;
+  top: 7px;
+  left: 5px;
+  color: #d7d7d7;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc,
+.ReactTable .rt-thead .rt-td.-sort-asc {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc:before,
+.ReactTable .rt-thead .rt-td.-sort-asc:before {
+  position: absolute;
+  content: '\F160';
+  font-family: FontAwesome;
+  top: 7px;
+  left: 5px;
+  color: #aeaeae;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc,
+.ReactTable .rt-thead .rt-td.-sort-desc {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc:before,
+.ReactTable .rt-thead .rt-td.-sort-desc:before {
+  position: absolute;
+  content: '\F161';
+  font-family: FontAwesome;
+  top: 7px;
+  left: 5px;
+  color: #aeaeae;
+}
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;
