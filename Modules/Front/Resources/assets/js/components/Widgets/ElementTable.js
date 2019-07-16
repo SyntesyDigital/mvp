@@ -26,8 +26,8 @@ export default class ElementTable extends Component {
           && props.itemsPerPage != null
           && props.itemsPerPage != '' ? props.itemsPerPage : 10;
 
-        console.log("props.itemsPerPage => ",props.itemsPerPage);
-        console.log("itemsPerPage => ",itemsPerPage);
+        //console.log("props.itemsPerPage => ",props.itemsPerPage);
+        //console.log("itemsPerPage => ",itemsPerPage);
 
 
         const maxItems = props.maxItems ? props.maxItems : false;
@@ -79,10 +79,24 @@ export default class ElementTable extends Component {
     }
 
     renderCell(field,identifier,row) {
-      console.log("renderCell => ",field,row);
+
       if(field.type == "date") {
+          //console.log("renderCell => ",field,row);
           if(row.original[identifier] !== undefined && row.original[identifier] != ""){
-            return moment.unix(row.original[identifier]).format('lll')
+
+            if(field.settings !== undefined && field.settings.format !== undefined){
+              switch(field.settings.format) {
+                case 'day_month_year':
+                  return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+                case 'month_year':
+                  return moment.unix(row.original[identifier]).format('MM/YYYY')
+                case 'year':
+                  return moment.unix(row.original[identifier]).format('YYYY')
+              }
+
+            }
+
+            return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
           }
       }
 
@@ -126,9 +140,10 @@ export default class ElementTable extends Component {
 
         for(var key in data){
           for( var subkey in data[key]){
+            //remove . on keys to allow filter
             var newSubkey = subkey.replace('.','');
-            console.log("subkey => ",subkey);
-            console.log("newSubkey => ",newSubkey);
+            //console.log("subkey => ",subkey);
+            //console.log("newSubkey => ",newSubkey);
             data[key][newSubkey] = data[key][subkey];
           }
         }
@@ -140,7 +155,7 @@ export default class ElementTable extends Component {
     }
 
     filterMethod(identifier, filter, rows, ) {
-        console.log("identifier => ",identifier);
+        //console.log("identifier => ",identifier);
         return matchSorter(rows, filter.value, { keys: [identifier] });
     }
 

@@ -209,6 +209,14 @@ class ElementModal extends Component {
                       label="Trie"
                     />
 
+                    <BooleanSettingsField
+                      field={field}
+                      name="hasRoute"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Lien"
+                    />
+
                   </div>
                 </div>
               </div>
