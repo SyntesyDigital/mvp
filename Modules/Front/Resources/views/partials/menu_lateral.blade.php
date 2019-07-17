@@ -1,13 +1,15 @@
 @if(isset($menu))
 	<ul class="menu">
 		@foreach($menu as $index => $menuElement)
-		{{--class="active"--}}
-		<li class="menu-item">
-			@php
-				$link = format_link($menuElement);
-				$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
-			@endphp
-			@if(isset($link))
+
+		@php
+			$link = format_link($menuElement);
+			$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
+		@endphp
+
+		@if(isset($link))
+			<li class="menu-item {{ Request::is($link['request_url'].'*') ? 'active' : '' }}">
+
 					<a href="{{$link["url"]}}" id="{{$link["id"]}}" class="{{$link["class"]}}" >
 						@if(isset($link["icon"]))
 							<i class="{{$link['icon']}}"></i>
@@ -35,8 +37,8 @@
 						</ul>
 					@endif
 
-			@endif
-		</li>
+			</li>
+		@endif
 		@endforeach
 	</ul>
 @endif

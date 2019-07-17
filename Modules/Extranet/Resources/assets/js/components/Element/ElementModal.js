@@ -7,6 +7,7 @@ import InputSettingsField from './Settings/InputSettingsField';
 import CheckboxesSettingsField from './Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './Settings/SelectorSettingsField';
 import RadioSettingsField from './Settings/RadioSettingsField';
+import LinkSettingsField from './Settings/LinkSettingsField';
 
 import {
   closeModalSettings,
@@ -207,6 +208,14 @@ class ElementModal extends Component {
                       source="rules"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Trie"
+                    />
+
+                    <LinkSettingsField
+                      field={field}
+                      name="hasRoute"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Lien"
                     />
 
                   </div>

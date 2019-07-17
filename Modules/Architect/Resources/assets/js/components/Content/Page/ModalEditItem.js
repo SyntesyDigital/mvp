@@ -1145,13 +1145,43 @@ class ModalEditItem extends Component {
           inputLabel={Lang.get('modals.indica_max_elements_page')}
         />
 
-        <InputSettingsField
+        <SelectorSettingsField
           field={this.state.field}
           name="pagination"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.pagination')}
-          inputLabel={Lang.get('modals.indica_max_elements_page')}
+          //inputLabel={Lang.get('modals.indica_max_elements_page')}
+          options={[
+              {
+                  value: "",
+                  name: "Désactivé",
+              },
+              {
+                  value: 5,
+                  name: "5",
+              },
+              {
+                  value: 10,
+                  name: "10",
+              },
+              {
+                  value: 20,
+                  name: "20",
+              },
+              {
+                  value: 25,
+                  name: "25",
+              },
+              {
+                  value: 50,
+                  name: "50",
+              },
+              {
+                  value: 100,
+                  name: "100",
+              }
+          ]}
         />
         <InputSettingsField
           field={this.state.field}
