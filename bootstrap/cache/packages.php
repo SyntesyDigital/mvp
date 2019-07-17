@@ -1,78 +1,20 @@
 <?php return array (
-  'prettus/l5-repository' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    ),
-  ),
-  'laravelcollective/html' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Collective\\Html\\HtmlServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Form' => 'Collective\\Html\\FormFacade',
-      'Html' => 'Collective\\Html\\HtmlFacade',
-    ),
-  ),
-  'mariuzzo/laravel-js-localization' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
-    ),
-  ),
-  'nwidart/laravel-modules' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Module' => 'Nwidart\\Modules\\Facades\\Module',
-    ),
-  ),
-  'petercoles/multilingual-country-list' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'PeterColes\\Countries\\CountriesServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Countries' => 'PeterColes\\Countries\\CountriesFacade',
-    ),
-  ),
-  'tightenco/ziggy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
-    ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
     array (
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'jenssegers/date' => 
@@ -104,15 +46,30 @@
       'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
     ),
   ),
-  'intervention/image' => 
+  'laravel/tinker' => 
   array (
     'providers' => 
     array (
-      0 => 'Intervention\\Image\\ImageServiceProvider',
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
     ),
     'aliases' => 
     array (
-      'Image' => 'Intervention\\Image\\Facades\\Image',
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
+    ),
+  ),
+  'mariuzzo/laravel-js-localization' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
     ),
   ),
   'mcamara/laravel-localization' => 
@@ -124,6 +81,49 @@
     'aliases' => 
     array (
       'LaravelLocalization' => 'Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization',
+    ),
+  ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'nwidart/laravel-modules' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Module' => 'Nwidart\\Modules\\Facades\\Module',
+    ),
+  ),
+  'petercoles/multilingual-country-list' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'PeterColes\\Countries\\CountriesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Countries' => 'PeterColes\\Countries\\CountriesFacade',
+    ),
+  ),
+  'prettus/l5-repository' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+    ),
+  ),
+  'tightenco/ziggy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
     ),
   ),
   'yajra/laravel-datatables-oracle' => 
