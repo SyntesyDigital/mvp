@@ -57,6 +57,7 @@
   background-color: #fff;
 
   a{
+    @include round($button-radius);
     padding:7px 20px;
     text-decoration: none;
     color:$primary-color;

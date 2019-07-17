@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
-import Select from 'react-select';
 
 const TYPE_INTERNAL = "internal";
 const TYPE_EXTERNAL = "external";
@@ -16,44 +15,18 @@ class LinkField extends Component
     this.handleLinkTypeChange = this.handleLinkTypeChange.bind(this);
     this.onContentSelect = this.onContentSelect.bind(this);
     this.onRemoveField = this.onRemoveField.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
 
     this.state = {
       title : {},
       type : TYPE_INTERNAL,
-      linkValues : null,
-      icon : ''
+      linkValues : null
     };
 
-    this.fontIcons = [];
-    this.fontIcons.push({
-        value : '',
-        label : 'Selectionez'
-    });
-    this.fontIcons.push({
-        value : 'fas fa-address-book',
-        label : 'fas fa-address-book'
-    });
-    this.fontIcons.push({
-        value : 'fas fa-address-card',
-        label : 'fas fa-address-card'
-    });
-    this.fontIcons.push({
-        value : 'fas fa-adjust',
-        label : 'fas fa-adjust'
-    });
-  /*  for(var key in props.icons){
-      this.fontIcons.push({
-          value : props.icons[key],
-          label : props.icons[key]
-      });
-    } */
   }
 
   componentDidMount()
   {
     var title = {};
-    var icon = "";
     var type = "";
     var linkValues = null;
 
@@ -65,10 +38,6 @@ class LinkField extends Component
 
       if(this.props.field.value.title !== undefined && this.props.field.value.title != null){
         title = this.props.field.value.title;
-      }
-
-      if(this.props.field.value.icon !== undefined && this.props.field.value.icon != null){
-        icon = this.props.field.value.icon?this.props.field.value.icon:'';
       }
 
       if(this.props.field.value.url !== undefined){
@@ -83,8 +52,7 @@ class LinkField extends Component
       this.setState({
         title : title,
         type : type,
-        linkValues : linkValues,
-        icon : icon
+        linkValues : linkValues
       });
 
     }
@@ -94,10 +62,9 @@ class LinkField extends Component
 
     var title = null;
     var type = "";
-    var icon = "";
     var linkValues = null;
 
-    console.log("LinkField :: componentWillReceiveProps => ",nextProps);
+    //console.log("LinkField :: componentWillReceiveProps => ",nextProps);
 
     if(nextProps.field.value === undefined || nextProps.field.value == null){
       title = {};
@@ -108,9 +75,6 @@ class LinkField extends Component
 
       if(nextProps.field.value.title !== undefined && nextProps.field.value.title != null){
         title = nextProps.field.value.title;
-      }
-      if(nextProps.field.value.icon !== undefined && nextProps.field.value.icon != null){
-        icon = nextProps.field.value.icon?nextProps.field.value.icon:'';
       }
 
       if(nextProps.field.value.url !== undefined && nextProps.field.value.url != null){
@@ -129,8 +93,7 @@ class LinkField extends Component
       this.setState({
         title : title,
         type : type,
-        linkValues : linkValues,
-        icon : icon
+        linkValues : linkValues
       });
 
     }
@@ -175,7 +138,7 @@ class LinkField extends Component
     const value = this.props.field.value !== undefined && this.props.field.value != null ?
       this.props.field.value : {};
 
-    console.log("LinkField :: handleOnChange ",value);
+    //console.log("LinkField :: handleOnChange ",value);
     if(value.title === undefined){
       value.title = {};
     }
@@ -189,22 +152,6 @@ class LinkField extends Component
 
     this.props.onFieldChange(field);
   }
-
-  handleSelectChange(selectedOption) {
-    const value = this.props.field.value !== undefined && this.props.field.value != null ? this.props.field.value : {};
-
-    if(value.icon === undefined){
-      value.icon = selectedOption;
-    }
-
-    var field = {
-      identifier : this.props.field.identifier,
-      value : value
-    };
-
-    this.props.onFieldChange(field);
-  }
-
 
   handleLinkTypeChange(event)
   {
@@ -266,35 +213,12 @@ class LinkField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.title')} - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Títol - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleOnChange} />
           </div>
         );
       //}
     }
-
-    return inputs;
-  }
-
-  renderIcon()
-  {
-    var inputs = [];
-    var value = '';
-
-    value = this.state.icon ? this.state.icon : '';
-
-    inputs.push(
-      <div className="form-group bmd-form-group">
-         <label  htmlFor={this.props.field.identifier}  className="bmd-label-floating">Icon</label>
-         <Select
-              id="icon"
-              name="icon"
-              value={value}
-              onChange={this.handleSelectChange}
-              options={this.fontIcons}
-          />
-      </div>
-    );
 
     return inputs;
   }
@@ -316,7 +240,7 @@ class LinkField extends Component
               value={TYPE_INTERNAL}
               onChange={this.handleLinkTypeChange}
             /> &nbsp;
-            {Lang.get('fields.internal_link')}
+            Enllaç intern
             &nbsp;&nbsp;
         </label>
 
@@ -329,7 +253,7 @@ class LinkField extends Component
               value={TYPE_EXTERNAL}
               onChange={this.handleLinkTypeChange}
             /> &nbsp;
-            {Lang.get('fields.external_link')}
+            Enllaç extern
             &nbsp;&nbsp;
         </label>
 
@@ -357,7 +281,7 @@ class LinkField extends Component
 
         inputs.push(
           <div className="form-group bmd-form-group" key={key}>
-             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">{Lang.get('fields.link')} - {key}</label>
+             <label htmlFor={this.props.field.identifier} className="bmd-label-floating">Enllaç - {key}</label>
              <input type="text" className="form-control" language={key} name="name" value={value} onChange={this.handleLinkChange} />
           </div>
         );
@@ -388,8 +312,8 @@ class LinkField extends Component
 
             {(pageValues.typology === undefined || pageValues.typology == null) &&
               <div className="field-type">
-                <i className="far fa-file"></i>
-                &nbsp; {Lang.get('fields.page')}
+                <i className="fa fa-file-o"></i>
+                &nbsp; Pàgina
               </div>
             }
 
@@ -403,7 +327,7 @@ class LinkField extends Component
             </div>
 
             <div className="field-actions">
-              <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
+              <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> Esborrar </a>
               &nbsp;&nbsp;
             </div>
           </div>
@@ -414,7 +338,7 @@ class LinkField extends Component
     else {
       return (
         <div className="add-content-button">
-          <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> {Lang.get('fields.select')} </a>
+          <a href="" className="btn btn-default" onClick={this.onContentSelect}><i className="fa fa-plus-circle"></i> Seleccionar </a>
         </div>
       );
     }
@@ -444,7 +368,6 @@ class LinkField extends Component
 
           <div className="field-form">
             {this.renderTitle()}
-            {this.renderIcon()}
             {this.renderRadio()}
 
             {this.state.type == TYPE_INTERNAL &&

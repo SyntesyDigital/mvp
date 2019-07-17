@@ -39,6 +39,7 @@ if (!function_exists('format_link')) {
 
       $target = null;
       $url = "";
+      $icon = null;
       if(isset($menuElement["link"]["url"]) &&
         isset($menuElement["link"]["url"][App::getLocale()])){
 
@@ -52,6 +53,10 @@ if (!function_exists('format_link')) {
         return null;
       }
 
+      if(isset($menuElement["settings"]["icon"])){
+        $icon = $menuElement["settings"]["icon"];
+      }
+
       $result = [
         "url" => $url,
         "request_url" => substr($url,1),
@@ -60,7 +65,8 @@ if (!function_exists('format_link')) {
           $menuElement["settings"]["htmlClass"] : '',
         "id" => isset($menuElement["settings"]["htmlId"]) ?
           $menuElement["settings"]["htmlId"] : '',
-        "target" => $target
+        "target" => $target,
+        "icon" => $icon
       ];
 
       //print_r($result);

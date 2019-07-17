@@ -6,6 +6,7 @@
     text-transform: uppercase;
     padding:10px 15px;
     min-height: 41px;
+    border-bottom: 1px solid $element-file-border;
   }
   .elementTable{
     padding:20px;
@@ -174,4 +175,8 @@
     left:5px;
     color: #aeaeae;
   }
+}
+
+.ReactTable.-striped .rt-tr.-odd {
+  background-color:$row-background !important;
 }
