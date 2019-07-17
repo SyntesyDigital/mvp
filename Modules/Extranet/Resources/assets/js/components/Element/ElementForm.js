@@ -14,6 +14,7 @@ import ElementDropZoneContainer from './ElementDropZoneContainer';
 import ElementDragField from './ElementDragField';
 import ElementBar from './ElementBar';
 import ElementModal from './ElementModal';
+import ModalContents from './Contents/ModalContents';
 
 class ElementForm extends Component {
 
@@ -74,6 +75,8 @@ class ElementForm extends Component {
             <div className="container rightbar-page">
 
               <ElementModal />
+
+              <ModalContents />
 
               <div className="col-md-9 page-content">
                 {

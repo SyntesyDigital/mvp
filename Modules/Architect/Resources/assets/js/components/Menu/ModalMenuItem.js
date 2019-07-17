@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import LinkField from './../Content/ContentFields/LinkField';
 import ContentSelectModal from './../Content/ContentSelectModal';
 import InputSettingsField from './../Typology/Settings/InputSettingsField';
+import SelectorSettingsField from './../Typology/Settings/SelectorSettingsField';
 
 import axios from 'axios';
 
@@ -39,7 +40,7 @@ export default class ModalMenuItem extends Component {
           value:{},
           name:"Enllaç",
           type:"link",
-          settings:{htmlId:null,htmlClass:null}
+          settings:{htmlId:null,htmlClass:null,icon:null}
       };
 
       this.setState({
@@ -218,6 +219,17 @@ export default class ModalMenuItem extends Component {
           label="Html Class"
           inputLabel={Lang.get('modals.indica_css')}
         />
+
+        <InputSettingsField
+          field={this.state.field}
+          name="icon"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label="Icône"
+          inputLabel="Indiquez une icône"
+        />
+
+
       </div>
     );
   }

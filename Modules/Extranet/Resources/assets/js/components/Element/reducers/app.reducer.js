@@ -58,6 +58,27 @@ function checkIfFieldAdded(field,fields) {
   return false;
 }
 
+function mergeFieldSettings(field,modelField) {
+  //console.log("Merge => ,",field," => ",modelField);
+  if(modelField.rules !== undefined){
+    for(var key in modelField.rules){
+      if(field.rules[modelField.rules[key]] === undefined){
+        field.rules[modelField.rules[key]] = null;
+      }
+    }
+  }
+
+  if(modelField.settings !== undefined){
+    for(var key in modelField.settings){
+      if(field.settings[modelField.settings[key]] === undefined){
+        field.settings[modelField.settings[key]] = null;
+      }
+    }
+  }
+
+  return field;
+}
+
 function appReducer(state = initialState, action) {
 
     const {fields, fieldsList, settingsField, parameters, parametersList} = state;
@@ -236,6 +257,18 @@ function appReducer(state = initialState, action) {
               if(fields[key].id == action.payload){
                 newField = fields[key];
                 break;
+              }
+            }
+
+            console.log("Check merge !");
+
+            //check if new settings are available
+            if(newField != null){
+              for(var key in fieldsList){
+                if(fieldsList[key].identifier == newField.identifier){
+                  newField = mergeFieldSettings(newField,fieldsList[key]);
+                  break;
+                }
               }
             }
 

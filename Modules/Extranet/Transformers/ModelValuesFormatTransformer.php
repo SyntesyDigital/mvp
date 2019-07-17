@@ -36,6 +36,12 @@ class ModelValuesFormatTransformer extends Resource
 
       $result = [];
       $i = 0;
+      $isTable = false;
+
+      if(sizeof($modelValues) > 1){
+        $isTable = true;
+      }
+
       foreach ($modelValues as $modelValue) {
         if(!$limit || $i < $limit ){
           foreach ($elementFields as $elementField) {
@@ -61,14 +67,20 @@ class ModelValuesFormatTransformer extends Resource
                 }
                 break;
               case 'date':
-                if($elementField->settings['format'] == 'day_month_year'){
-                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
-                }elseif($elementField->settings['format'] == 'month_year'){
-                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
-                }elseif($elementField->settings['format'] == 'year'){
-                  $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
-                }else{
-                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+
+                $originalValue = intval($originalValue)/1000;
+                $result[$i][$elementField->identifier] = $originalValue ? $originalValue: '';
+
+                //only process date when is not table. At tables date is processed in react to sort properly
+                if(!$isTable){
+
+                  if($elementField->settings['format'] == 'day_month_year'){
+                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
+                  }elseif($elementField->settings['format'] == 'month_year'){
+                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
+                  }elseif($elementField->settings['format'] == 'year'){
+                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
+                  }
                 }
 
                 break;

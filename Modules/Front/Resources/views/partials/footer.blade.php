@@ -2,7 +2,7 @@
 <footer>
 	<!-- Col 2 -->
 
-  <div class="container">
+  <div>
     <div class="row">
       @include ('front::partials.menu_footer',
     		["menu" => get_menu('footer')]

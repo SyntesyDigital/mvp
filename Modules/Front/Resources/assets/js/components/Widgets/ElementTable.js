@@ -9,6 +9,8 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import matchSorter from 'match-sorter'
 
+import moment from 'moment';
+
 //const selectors = Data.Selectors;
 
 export default class ElementTable extends Component {
@@ -24,8 +26,8 @@ export default class ElementTable extends Component {
           && props.itemsPerPage != null
           && props.itemsPerPage != '' ? props.itemsPerPage : 10;
 
-        console.log("props.itemsPerPage => ",props.itemsPerPage);
-        console.log("itemsPerPage => ",itemsPerPage);
+        //console.log("props.itemsPerPage => ",props.itemsPerPage);
+        //console.log("itemsPerPage => ",itemsPerPage);
 
 
         const maxItems = props.maxItems ? props.maxItems : false;
@@ -34,16 +36,21 @@ export default class ElementTable extends Component {
             field : field,
             elementObject : elementObject,
             data:[],
+            columns:[],
             pagination : pagination,
             itemsPerPage : itemsPerPage,
             maxItems :  maxItems,
             filters : [],
             currPage:1,
-            modelValuesPaginated:[]
+            modelValuesPaginated:[],
+            loading : true,
+            filterable : false
         };
     }
 
     componentDidMount() {
+
+        this.processColumns();
         this.query();
     }
 
@@ -59,71 +66,121 @@ export default class ElementTable extends Component {
               {
                 console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
 
-                self.setState({
-                  data : response.data.modelValues
-                  //initialModelValues : [...response.data.modelValues]
-                });
+                self.processData(response.data.modelValues);
+
               }
 
           }).catch(function (error) {
              console.log(error);
+             self.setState({
+               loading: false
+             });
            });
     }
 
+    renderCell(field,identifier,row) {
+
+      if(field.type == "date") {
+          //console.log("renderCell => ",field,row);
+          if(row.original[identifier] !== undefined && row.original[identifier] != ""){
+
+            if(field.settings !== undefined && field.settings.format !== undefined){
+              switch(field.settings.format) {
+                case 'day_month_year':
+                  return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+                case 'month_year':
+                  return moment.unix(row.original[identifier]).format('MM/YYYY')
+                case 'year':
+                  return moment.unix(row.original[identifier]).format('YYYY')
+              }
+
+            }
+
+            return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+          }
+      }
+
+      return row.original[identifier];
+
+
+    }
+
+    processColumns() {
+
+        const {elementObject} = this.state;
+
+        var anySearchable = false;
+        var columns = [];
+
+        for(var index in elementObject.fields){
+          if(elementObject.fields[index].rules.searchable && ! anySearchable){
+            anySearchable = true;
+          }
+
+          var identifier = elementObject.fields[index].identifier.replace('.','');
+
+          columns.push({
+            accessor : identifier,
+            Header: elementObject.fields[index].name,
+            sortable: elementObject.fields[index].rules.sortable,
+            filterable:  elementObject.fields[index].rules.searchable,
+            filterMethod: this.filterMethod.bind(this,identifier),
+            filterAll: true,
+            Cell: this.renderCell.bind(this,elementObject.fields[index],identifier)
+          });
+        }
+
+        this.setState({
+            columns : columns,
+            filterable : anySearchable
+        });
+    }
+
+    processData(data){
+
+        for(var key in data){
+          for( var subkey in data[key]){
+            //remove . on keys to allow filter
+            var newSubkey = subkey.replace('.','');
+            //console.log("subkey => ",subkey);
+            //console.log("newSubkey => ",newSubkey);
+            data[key][newSubkey] = data[key][subkey];
+          }
+        }
+
+        this.setState({
+            data : data,
+            loading : false
+        });
+    }
+
     filterMethod(identifier, filter, rows, ) {
-        console.log("identifier => ",identifier);
+        //console.log("identifier => ",identifier);
         return matchSorter(rows, filter.value, { keys: [identifier] });
     }
 
     renderTable() {
       const {data, elementObject, itemsPerPage} = this.state;
 
-      var anySearchable = false;
-      var columns = [];
-
-      for(var index in elementObject.fields){
-        if(elementObject.fields[index].rules.searchable && ! anySearchable){
-          anySearchable = true;
-        }
-
-        var identifier = elementObject.fields[index].identifier.replace('.','');
-
-        columns.push({
-          accessor : identifier,
-          Header: elementObject.fields[index].name,
-          //sortable: elementObject.fields[index].rules.sortable,
-          //filterable:  elementObject.fields[index].rules.searchable
-          filterMethod: this.filterMethod.bind(this,identifier),
-
-          filterAll: true
-        });
-      }
-
-      for(var key in data){
-        for( var subkey in data[key]){
-          var newSubkey = subkey.replace('.','');
-          console.log("subkey => ",subkey);
-          console.log("newSubkey => ",newSubkey);
-          data[key][newSubkey] = data[key][subkey];
-        }
-      }
-
-      console.log("data => ",data);
-      console.log("elementObject => ",elementObject);
-      console.log("columns => ",columns);
-
       return (
         <ReactTable
-          data={data}
-          columns={columns}
+          data={this.state.data}
+          columns={this.state.columns}
           showPagination={this.state.pagination}
           defaultPageSize={this.state.itemsPerPage}
-          loading={false}
+          loading={this.state.loading}
           filterable={true}
           defaultFilterMethod={(filter, row) =>
             String(row[filter.id]) === filter.value
           }
           className="-striped -highlight"
+          previousText={<span><i className="fa fa-caret-left"></i> &nbsp; Précédente</span>}
+          nextText={<span>Suivante &nbsp; <i className="fa fa-caret-right"></i></span>}
+          loadingText={'Chargement...'}
+          noDataText={'Aucune donnée trouvée'}
+          pageText={'Page'}
+          ofText={'de'}
+          rowsText={'lignes'}
         />
       );
     }

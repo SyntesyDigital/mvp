@@ -21,6 +21,7 @@ return [
         'settings' => [
           'format',
           'maxLength',
+          'hasRoute'
         ]
       ],
       'number' => [
@@ -39,6 +40,7 @@ return [
         ],
         'settings' => [
           'format',
+          'hasRoute'
         ]
       ],
       'date' => [
@@ -58,6 +60,7 @@ return [
         ],
         'settings' => [
           'format',
+          'hasRoute'
         ]
       ],
       'select' => [

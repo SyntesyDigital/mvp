@@ -1739,7 +1739,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
 }
 
 input,
@@ -1788,7 +1788,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -3409,7 +3409,7 @@ th {
 }
 
 .table .table {
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
 }
 
 .table-condensed > thead > tr > th,
@@ -5457,7 +5457,7 @@ tbody.collapse.in {
 .nav-tabs > li.active > a:focus {
   color: #555555;
   cursor: default;
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }
@@ -5557,7 +5557,7 @@ tbody.collapse.in {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #F7F7F7;
+    border-bottom-color: #e7eaef;
   }
 }
 
@@ -6000,7 +6000,7 @@ tbody.collapse.in {
 
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #dedddd;
+  border-color: #c8cfdb;
 }
 
 .navbar-default .navbar-brand {
@@ -6089,7 +6089,7 @@ tbody.collapse.in {
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #dedddd;
+  border-color: #c8cfdb;
 }
 
 .navbar-default .navbar-link {
@@ -6625,7 +6625,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
@@ -6907,7 +6907,7 @@ a.thumbnail.active {
   padding: 10px 15px;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid #dedddd;
+  border: 1px solid #c8cfdb;
 }
 
 .list-group-item:first-child {
@@ -7190,7 +7190,7 @@ button.list-group-item-danger.active:focus {
 .panel-footer {
   padding: 10px 15px;
   background-color: #f5f5f5;
-  border-top: 1px solid #dedddd;
+  border-top: 1px solid #c8cfdb;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -7411,7 +7411,7 @@ button.list-group-item-danger.active:focus {
 
 .panel-group .panel-heading + .panel-collapse > .panel-body,
 .panel-group .panel-heading + .panel-collapse > .list-group {
-  border-top: 1px solid #dedddd;
+  border-top: 1px solid #c8cfdb;
 }
 
 .panel-group .panel-footer {
@@ -7419,21 +7419,21 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-group .panel-footer + .panel-collapse .panel-body {
-  border-bottom: 1px solid #dedddd;
+  border-bottom: 1px solid #c8cfdb;
 }
 
 .panel-default {
-  border-color: #dedddd;
+  border-color: #c8cfdb;
 }
 
 .panel-default > .panel-heading {
   color: #333333;
   background-color: #fff;
-  border-color: #dedddd;
+  border-color: #c8cfdb;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #dedddd;
+  border-top-color: #c8cfdb;
 }
 
 .panel-default > .panel-heading .badge {
@@ -7442,7 +7442,7 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #dedddd;
+  border-bottom-color: #c8cfdb;
 }
 
 .panel-primary {
@@ -9332,6 +9332,7 @@ header:first-child .row.row-header .right-part-header .user-info .button-header-
   color: #fff;
   background-color: transparent;
   text-transform: none;
+  border-radius: 20px;
 }
 
 header:first-child .row.row-header .right-part-header .user-info .button-header-container .btn-header:hover {
@@ -9367,17 +9368,19 @@ header .navbar-toggle .icon-bar {
 
 footer {
   height: 50px;
-  background-color: #A8A8A8;
+  background-color: #e7eaef;
   text-align: center;
   padding: 15px;
+  padding-right: 30px;
   position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
+  border-top: 1px solid rgba(42, 54, 73, 0.22);
 }
 
 footer p {
-  color: #fff;
+  color: #2A3649;
   text-align: center;
   font-size: 16px;
   line-height: 18px;
@@ -9387,27 +9390,27 @@ footer p {
 
 footer ul {
   list-style-type: none;
-  text-align: center;
+  text-align: right;
 }
 
 footer ul li {
   display: inline;
-  color: #fff;
-  font-size: 16px;
+  color: #2A3649;
+  font-size: 12px;
   line-height: 18px;
   font-weight: 400;
 }
 
 footer ul li a {
-  color: #fff;
-  font-size: 16px;
+  color: #2A3649;
+  font-size: 12px;
   line-height: 18px;
   font-weight: 400;
 }
 
 footer ul li a:hover {
-  text-decoration: none;
-  color: #fff;
+  text-decoration: underline;
+  color: #2A3649;
 }
 
 .content-wrapper {
@@ -9425,7 +9428,7 @@ footer ul li a:hover {
   width: 100%;
   z-index: 100;
   overflow: hidden;
-  background-color: #E8E8E8;
+  background-color: #fff;
   font-size: 16px;
   line-height: 21px;
   font-weight: 400;
@@ -9470,7 +9473,7 @@ footer ul li a:hover {
 .sidebar ul li:hover,
 .sidebar ul li.active {
   padding-left: 15px;
-  background-color: #F7F7F7;
+  background-color: #fff;
   border-left: 4px solid #E84B37;
 }
 
@@ -9497,6 +9500,7 @@ footer ul li a:hover {
 
 .breadcrumb {
   border-bottom: 1px solid rgba(42, 54, 73, 0.22);
+  background-color: #e7eaef;
 }
 
 .breadcrumb .container {
@@ -9522,7 +9526,7 @@ footer ul li a:hover {
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #F7F7F7;
+  background-color: #e7eaef;
   color: #2A3649;
   position: relative;
   /* 16px / 24px */
@@ -9586,7 +9590,7 @@ body {
   .sidebar {
     width: 230px;
     height: 100%;
-    min-height: calc(100vh - 112px);
+    min-height: calc(100vh - 62px);
   }
 
   .sidebar.collapsed {
@@ -9953,7 +9957,7 @@ form.contact-form .checkbox {
 }
 
 .element-file-container .element-file-container-head {
-  background-color: #E8E8E8;
+  background-color: #fff;
   font-size: 16px;
   line-height: 21px;
   font-weight: 400;
@@ -9972,7 +9976,7 @@ form.contact-form .checkbox {
   padding: 7px 0px;
   margin: 5px 0;
   overflow: hidden;
-  border-bottom: 1px solid #E8E8E8;
+  border-bottom: 1px solid #fff;
 }
 
 .element-file-container .element-file-container-body .element-file-input-container .element-file-title {
@@ -10021,6 +10025,7 @@ form.contact-form .checkbox {
 }
 
 .more-btn a {
+  border-radius: 20px;
   padding: 7px 20px;
   text-decoration: none;
   color: #2A3649;
@@ -10064,8 +10069,8 @@ form.contact-form .checkbox {
 }
 
 .element-form-container .element-form-row .buttons .btn-back:hover {
-  background-color: #E8E8E8;
-  border-color: #E8E8E8;
+  background-color: #fff;
+  border-color: #fff;
   color: #2A3649;
 }
 
@@ -10092,13 +10097,14 @@ form.contact-form .checkbox {
 }
 
 .element-table-container .element-table-container-head {
-  background-color: #E8E8E8;
+  background-color: #fff;
   font-size: 16px;
   line-height: 21px;
   font-weight: 400;
   text-transform: uppercase;
   padding: 10px 15px;
   min-height: 41px;
+  border-bottom: 1px solid #E0E0E0;
 }
 
 .element-table-container .elementTable {
@@ -10235,6 +10241,57 @@ form.contact-form .checkbox {
 .react-grid-Container .react-grid-Main .react-grid-Grid .react-grid-Viewport .react-grid-Canvas .react-grid-Row .react-grid-Cell {
   border-right: none;
   border-left: none;
+}
+
+.ReactTable .rt-thead .rt-th.-cursor-pointer,
+.ReactTable .rt-thead .rt-td.-cursor-pointer {
+  padding-left: 22px;
+}
+
+.ReactTable .rt-thead .rt-th.-cursor-pointer:before,
+.ReactTable .rt-thead .rt-td.-cursor-pointer:before {
+  position: absolute;
+  content: '\E150';
+  font-family: Glyphicons Halflings;
+  top: 7px;
+  left: 5px;
+  color: #d7d7d7;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc,
+.ReactTable .rt-thead .rt-td.-sort-asc {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-asc:before,
+.ReactTable .rt-thead .rt-td.-sort-asc:before {
+  position: absolute;
+  content: '\F160';
+  font-family: FontAwesome;
+  top: 7px;
+  left: 5px;
+  color: #aeaeae;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc,
+.ReactTable .rt-thead .rt-td.-sort-desc {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.ReactTable .rt-thead .rt-th.-sort-desc:before,
+.ReactTable .rt-thead .rt-td.-sort-desc:before {
+  position: absolute;
+  content: '\F161';
+  font-family: FontAwesome;
+  top: 7px;
+  left: 5px;
+  color: #aeaeae;
+}
+
+.ReactTable.-striped .rt-tr.-odd {
+  background-color: #f7f8f9 !important;
 }
 
 .map-container .leaflet-container {
