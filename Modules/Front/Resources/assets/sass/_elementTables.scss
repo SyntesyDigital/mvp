@@ -1,5 +1,18 @@
 .element-table-container{
   margin:20px 0;
+  @include round($elements-radius);
+  overflow: hidden;
+
+  .element-table-container-body{
+    @include round($elements-radius);
+    overflow: hidden;
+
+    &.collapse{
+      @include round(0);
+    }
+  }
+
+
   .element-table-container-head{
     background-color: $sidebar-background-color;
     @include font(16,21,400);
@@ -9,7 +22,7 @@
     border-bottom: 1px solid $element-file-border;
   }
   .elementTable{
-    padding:20px;
+    padding:0px;
     background-color:white;
     .navigation{
       padding:15px;
@@ -40,7 +53,6 @@
 
   .more-btn{
     padding:20px;
-    padding-top:0px;
   }
 
 }
@@ -49,8 +61,8 @@
   margin-bottom: 10px;
   overflow: hidden;
   h4{
-    text-transform: none;
-     @include font(24,32,600);
+    text-transform: uppercase;
+     @include font(24,32,300);
      float:left;
   }
   .title-btns{
@@ -69,6 +81,8 @@
         color:$primary-color;
         border: 1px solid $primary-color;
         background-color: white;
+        @include round($button-radius);
+
         i{
           margin-right: 10px;
         }
@@ -89,6 +103,8 @@
       color:white;
       border: 1px solid $secondary-color;
       background-color: $secondary-color;
+      @include round($button-radius);
+
       i{
         margin-right: 10px;
       }
@@ -179,4 +195,93 @@
 
 .ReactTable.-striped .rt-tr.-odd {
   background-color:$row-background !important;
+}
+
+
+
+.ReactTable {
+  border: none;
+
+  &.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+    background-color: $body-bg !important;
+  }
+
+  .rt-tbody {
+    .rt-tr {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      font-weight: 100;
+    }
+
+    .rt-td {
+      border-right:none !important;
+      padding-right: 10px;
+      padding-left:10px;
+    }
+  }
+
+
+
+  .rt-thead {
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    .rt-resizable-header-content{
+      color:$table-header-color;
+      text-transform: uppercase;
+    }
+  }
+
+  .-pagination {
+    padding: 10px 0 !important;
+
+    .-btn {
+      display: inline-block !important;
+      width: 80%  !important;
+      border: 1px solid $brand-dark-color-1 !important;
+      color:$brand-dark-color-1 !important;
+      padding: 10px !important;
+      border-radius: 20px !important;
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+      background-color: transparent !important;
+      max-height: 40px;
+
+      @include mq(tablet){
+        width: 50% !important;
+      }
+
+      &:not([disabled]):hover {
+        border: 1px solid $primary-color !important;
+        background-color: transparent !important;
+        color: $primary-color !important;
+      }
+      &[disabled] {
+          opacity: 0.3 !important;
+      }
+    }
+
+    .-pageInfo {
+      color: $brand-dark-color-1 !important;
+      font-weight: 100 !important;
+    }
+
+
+    select {
+      color: $brand-dark-color-1 !important;
+      font-weight: 100 !important;
+    }
+
+    .-pageJump {
+      margin-top: -5px !important;
+    }
+
+    .-previous {
+      text-align: right !important;
+    }
+    .-next {
+      text-align: left !important;
+    }
+  }
+
 }

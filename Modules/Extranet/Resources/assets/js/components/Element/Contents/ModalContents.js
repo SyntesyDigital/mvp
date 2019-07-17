@@ -33,7 +33,7 @@ class ModalContents extends Component {
   onModalClose(e) {
     e.preventDefault();
 
-    this.props.closeModalSettings();
+    this.props.closeModalContents();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,7 +74,6 @@ class ModalContents extends Component {
               self.setState({
                   isOpen : false
               });
-              self.props.onModalSettingsClosed();
           }
       });
   }

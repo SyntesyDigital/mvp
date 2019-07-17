@@ -1,7 +1,8 @@
 import {
   MODAL_CONTENT_OPEN,
   MODAL_CONTENT_CLOSE,
-  MODAL_CONTENT_SELECT
+  MODAL_CONTENT_SELECT,
+  MODAL_CONTENT_CLEAR
 
 } from '../constants';
 
@@ -35,7 +36,12 @@ function contentsReducer(state = initialState, action) {
               display: false,
               content: action.payload
             }
+        case MODAL_CONTENT_CLEAR :
 
+            return {
+              ...state,
+              content: null
+            }
 
         default:
             return state;

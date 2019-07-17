@@ -1,5 +1,8 @@
 .element-file-container{
   margin:20px 0;
+  @include round($elements-radius);
+  overflow: hidden;
+
   .element-file-container-head{
     background-color: $sidebar-background-color;
     @include font(16,21,400);

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import {connect} from 'react-redux';
 
-import {openModalContents} from './../actions/';
+import {openModalContents, clearContent} from './../actions/';
 
 /*
 *
@@ -44,7 +44,8 @@ class LinkSettingsField extends Component {
     this.state = {
       checkbox : checkbox,
       link : null,
-      display : display
+      display : display,
+      content : null
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -57,13 +58,47 @@ class LinkSettingsField extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.processProps(nextProps);
+
+    //to check if need to proces or not
+    var contentUpdated = false;
+
+    if(nextProps.contents.content != null ) {
+        //update the content
+        var updateContent = false;
+        if(this.state.content != null) {
+          //check if is not the same to avoid multiple updates
+          if(this.state.content.id !=nextProps.contents.content.id){
+            //is different update
+            updateContent = true;
+          }
+        }
+        else {
+          //just update
+          updateContent = true;
+        }
+
+        if(updateContent){
+            this.handleContentUpdate(nextProps.contents.content);
+            contentUpdated = true;
+        }
+    }
+    else if(nextProps.contents.content == null && this.state.content != null){
+        //delete the content
+        this.handleContentUpdate(null);
+        contentUpdated = true;
+    }
+
+    //if not updated then process props, if updated it will come here after update
+    if(!contentUpdated) {
+      this.processProps(nextProps);
+    }
   }
 
   processProps(nextProps){
     var checkbox = null;
     var link = null;
     var display = false;
+    var content = null;
 
     //console.log("LinkSettingsField :: componentWillRecieveProps");
     //console.log(nextProps);
@@ -78,10 +113,15 @@ class LinkSettingsField extends Component {
         '' : nextProps.field[nextProps.source][nextProps.name];
     }
 
+    if(nextProps.contents.content != null){
+      content = nextProps.contents.content;
+    }
+
     this.setState({
       checkbox : checkbox,
       link : link,
-      display : display
+      display : display,
+      content : content
     });
   }
 
@@ -104,6 +144,32 @@ class LinkSettingsField extends Component {
     this.props.onFieldChange(field);
   }
 
+  handleContentUpdate(content) {
+
+    var contentValue = {
+      content : null,
+      params : {}
+    };
+
+    if(content != null){
+      contentValue.content = content;
+    }
+
+    var field = {
+      name : this.props.name,
+      source : this.props.source,
+      value : contentValue
+    };
+
+    //update the state for comparision
+    this.setState({
+      content : content
+    });
+
+    //propagate to main field
+    this.props.onFieldChange(field);
+  }
+
   handleInputChange(event) {
 
     var field = {
@@ -122,42 +188,36 @@ class LinkSettingsField extends Component {
     this.props.openModalContents();
   }
 
+  onRemoveField(event) {
+    event.preventDefault();
+
+    this.props.clearContent();
+  }
+
   renderSelectedPage() {
 
-    const pageValues = null;
+    const {content} = this.state;
 
-    if(pageValues != null){
+    if(content != null){
       return (
         <div className="field-form fields-list-container">
 
           <div className="typology-field">
-            {pageValues.typology !== undefined && pageValues.typology != null &&
-              <div className="field-type">
-                {pageValues.typology.icon !== undefined &&
-                  <i className={"fa "+pageValues.typology.icon}></i>
-                }
-                &nbsp; {pageValues.typology.name !== undefined ? pageValues.typology.name : ''}
-              </div>
-            }
-
-            {(pageValues.typology === undefined || pageValues.typology == null) &&
-              <div className="field-type">
-                <i className="far fa-file"></i>
-                &nbsp; {Lang.get('fields.page')}
-              </div>
-            }
-
+            <div className="field-type">
+              <i className="far fa-file"></i>
+              &nbsp; {Lang.get('fields.page')}
+            </div>
 
             <div className="field-inputs">
               <div className="row">
                 <div className="field-name col-xs-6">
-                  {pageValues.title ? pageValues.title : ""}
+                  {content.title ? content.title : ""}
                 </div>
               </div>
             </div>
 
             <div className="field-actions">
-              <a href="" className="remove-field-btn" onClick={this.onRemoveField}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
+              <a href="" className="remove-field-btn" onClick={this.onRemoveField.bind(this)}> <i className="fa fa-trash"></i> {Lang.get('fields.delete')} </a>
               &nbsp;&nbsp;
             </div>
           </div>
@@ -221,6 +281,9 @@ const mapDispatchToProps = dispatch => {
     return {
         openModalContents : () => {
             return dispatch(openModalContents());
+        },
+        clearContent : () => {
+            return dispatch(clearContent());
         }
     };
 }

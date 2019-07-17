@@ -173,7 +173,8 @@ export default class ElementTable extends Component {
           defaultFilterMethod={(filter, row) =>
             String(row[filter.id]) === filter.value
           }
-          className="-striped -highlight"
+          //className="-striped -highlight"
+          className=""
           previousText={<span><i className="fa fa-caret-left"></i> &nbsp; Précédente</span>}
           nextText={<span>Suivante &nbsp; <i className="fa fa-caret-right"></i></span>}
           loadingText={'Chargement...'}

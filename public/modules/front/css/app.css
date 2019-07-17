@@ -9954,6 +9954,8 @@ form.contact-form .checkbox {
 
 .element-file-container {
   margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .element-file-container .element-file-container-head {
@@ -10094,6 +10096,17 @@ form.contact-form .checkbox {
 
 .element-table-container {
   margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.element-table-container .element-table-container-body {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.element-table-container .element-table-container-body.collapse {
+  border-radius: 0;
 }
 
 .element-table-container .element-table-container-head {
@@ -10108,7 +10121,7 @@ form.contact-form .checkbox {
 }
 
 .element-table-container .elementTable {
-  padding: 20px;
+  padding: 0px;
   background-color: white;
 }
 
@@ -10145,7 +10158,6 @@ form.contact-form .checkbox {
 
 .element-table-container .more-btn {
   padding: 20px;
-  padding-top: 0px;
 }
 
 .title {
@@ -10154,10 +10166,10 @@ form.contact-form .checkbox {
 }
 
 .title h4 {
-  text-transform: none;
+  text-transform: uppercase;
   font-size: 24px;
   line-height: 32px;
-  font-weight: 600;
+  font-weight: 300;
   float: left;
 }
 
@@ -10182,6 +10194,7 @@ form.contact-form .checkbox {
   color: #2A3649;
   border: 1px solid #2A3649;
   background-color: white;
+  border-radius: 20px;
 }
 
 .title .title-btns .excel-btn a i {
@@ -10205,6 +10218,7 @@ form.contact-form .checkbox {
   color: white;
   border: 1px solid #E84B37;
   background-color: #E84B37;
+  border-radius: 20px;
 }
 
 .title .title-btns .add-btn a i {
@@ -10292,6 +10306,91 @@ form.contact-form .checkbox {
 
 .ReactTable.-striped .rt-tr.-odd {
   background-color: #f7f8f9 !important;
+}
+
+.ReactTable {
+  border: none;
+}
+
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+  background-color: #e7eaef !important;
+}
+
+.ReactTable .rt-tbody .rt-tr {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: 100;
+}
+
+.ReactTable .rt-tbody .rt-td {
+  border-right: none !important;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.ReactTable .rt-thead {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.ReactTable .rt-thead .rt-resizable-header-content {
+  color: #868d97;
+  text-transform: uppercase;
+}
+
+.ReactTable .-pagination {
+  padding: 10px 0 !important;
+}
+
+.ReactTable .-pagination .-btn {
+  display: inline-block !important;
+  width: 80%  !important;
+  border: 1px solid #2A3649 !important;
+  color: #2A3649 !important;
+  padding: 10px !important;
+  border-radius: 20px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  background-color: transparent !important;
+  max-height: 40px;
+}
+
+@media (min-width: 52.85714286em) {
+  .ReactTable .-pagination .-btn {
+    width: 50% !important;
+  }
+}
+
+.ReactTable .-pagination .-btn:not([disabled]):hover {
+  border: 1px solid #2A3649 !important;
+  background-color: transparent !important;
+  color: #2A3649 !important;
+}
+
+.ReactTable .-pagination .-btn[disabled] {
+  opacity: 0.3 !important;
+}
+
+.ReactTable .-pagination .-pageInfo {
+  color: #2A3649 !important;
+  font-weight: 100 !important;
+}
+
+.ReactTable .-pagination select {
+  color: #2A3649 !important;
+  font-weight: 100 !important;
+}
+
+.ReactTable .-pagination .-pageJump {
+  margin-top: -5px !important;
+}
+
+.ReactTable .-pagination .-previous {
+  text-align: right !important;
+}
+
+.ReactTable .-pagination .-next {
+  text-align: left !important;
 }
 
 .map-container .leaflet-container {
