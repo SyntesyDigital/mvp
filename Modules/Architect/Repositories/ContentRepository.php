@@ -170,9 +170,7 @@ class ContentRepository extends BaseRepository
                 return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
             ->addColumn('action', function ($item) {
-                return '
-                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> '.Lang::get("architect::fields.add").'</a> &nbsp;
-                ';
+                return '<a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> '.Lang::get("architect::fields.add").'</a> &nbsp;';
             })
             ->make(true);
     }

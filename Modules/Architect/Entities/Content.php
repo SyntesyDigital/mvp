@@ -105,6 +105,13 @@ class Content extends Model
     	  return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
     }
 
+    public function routesParameters()
+    {
+        return $this->belongsToMany('\Modules\Extranet\Entities\RouteParameter', 'contents_routes_parameters',  'content_id', 'route_parameter_id');
+    }
+
+
+
     public function isStatusPublished()
     {
         return $this->status == self::STATUS_PUBLISHED;

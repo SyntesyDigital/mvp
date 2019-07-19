@@ -87,18 +87,9 @@ class ModalContents extends Component {
 
     var data = {
       id : content.id,
-      title : content.title
+      title : content.title,
+      params : []
     };
-
-    /*
-    if(!content.is_page){
-      data["typology"] = {
-        id : content.typology.id,
-        name : content.typology.name,
-        icon : content.typology.icon
-      };
-    }
-    */
 
     return data;
   }

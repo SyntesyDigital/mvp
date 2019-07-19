@@ -26,10 +26,13 @@ class ParameterManager extends Component {
         suggestions: this.suggestions
     };
 
+    console.log("suggestions => ",this.suggestions);
+
     this.onRemoveParameter = this.onRemoveParameter.bind(this);
     this.handleClickOnSuggest = this.handleClickOnSuggest.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+
   }
 
   onChange(event, { newValue })
@@ -130,6 +133,15 @@ class ParameterManager extends Component {
     this.handleRemoveParameter($(e.target).closest('.remove-btn').attr('id'))
   }
 
+  existInModelParameters(identifier) {
+    for( var key in this.props.app.modelParameters){
+      if(this.props.app.modelParameters[key] == identifier){
+        return true;
+      }
+    }
+    return false;
+  }
+
   renderParameters() {
     console.log('RENDER PARAMETER::',this.props.app.parameters);
     if(this.props.app.parameters ===undefined)
@@ -137,7 +149,25 @@ class ParameterManager extends Component {
 
     return (
       this.props.app.parameters.map((parameter,i) => (
-        <span key={i} className="parameter"> {parameter.name} <a href="" className="remove-btn" id={parameter.id} onClick={this.onRemoveParameter}> <i className="fa fa-times-circle"></i> </a> </span>
+        <span key={i} className="parameter" style={{
+          display:'block',
+          borderBottom: '1px solid #ccc',
+          padding:'10px'
+        }}>
+          {parameter.name}
+
+          {!this.existInModelParameters(parameter.identifier) &&
+            <a href="" style={{float:'right'}} className="remove-btn" id={parameter.id} onClick={this.onRemoveParameter}>
+              <i className="fa fa-times-circle"></i>
+            </a>
+          }
+          {this.existInModelParameters(parameter.identifier) &&
+            <span style={{float:'right',color:'#666'}}>
+              <i className="fa fa-lock"></i>
+            </span>
+          }
+
+        </span>
       ))
     );
   }

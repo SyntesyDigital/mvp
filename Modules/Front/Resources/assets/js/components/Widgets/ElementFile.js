@@ -84,21 +84,37 @@ export default class ElementFile extends Component {
       var index = 0;
       for(var i in elementObject.fields){
 
+        var field = elementObject.fields[i];
+
+        var hasRoute = field.settings.hasRoute !== undefined && field.settings.hasRoute != null ? true : false;
+
         if(column == 1 && index < numFieldsFirstColumn){
           columnRows.push(
-            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+            this.renderField(
+              elementObject.fields[i].name,
+              modelValues[key][elementObject.fields[i].identifier],
+              hasRoute
+            )
           );
         }
 
         if(column == 2 && index >= numFieldsFirstColumn){
           columnRows.push(
-            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+            this.renderField(
+              elementObject.fields[i].name,
+              modelValues[key][elementObject.fields[i].identifier],
+              hasRoute
+            )
           );
         }
 
         if(column == 0){
           columnRows.push(
-            this.renderField(elementObject.fields[i].name, modelValues[key][elementObject.fields[i].identifier])
+            this.renderField(
+              elementObject.fields[i].name,
+              modelValues[key][elementObject.fields[i].identifier],
+              hasRoute
+            )
           );
         }
         index++;
@@ -106,14 +122,27 @@ export default class ElementFile extends Component {
       return columnRows;
     }
 
-    renderField(name, value){
+    renderField(name, value, hasRoute){
       return (<div className="element-file-input-container">
                 <div className="col-xs-6 element-file-title">
                   {name}
                 </div>
-                <div className="col-xs-6 element-file-content">
-                  {value}
-                </div>
+
+                {hasRoute &&
+                  <div className="col-xs-6 element-file-content"
+                    dangerouslySetInnerHTML={{__html: value}}
+                  >
+                  </div>
+                }
+
+                {!hasRoute &&
+                  <div className="col-xs-6 element-file-content">
+                    {value}
+                  </div>
+                }
+
+
+                <div  />
               </div>);
     }
 

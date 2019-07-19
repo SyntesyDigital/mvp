@@ -48,6 +48,9 @@ class UpdateElement
       $this->element->fields()->delete();
 
       foreach($this->attributes["fields"] as $field) {
+
+          //dd($field);
+
           $this->element->fields()->save(new ElementField([
               'icon' => $field['icon'],
               'name' => $field['name'],

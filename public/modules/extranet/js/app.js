@@ -3263,21 +3263,28 @@ module.exports = cacheHas;
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["b"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["c"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["d"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["e"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["f"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["g"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["h"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["i"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["j"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["k"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["l"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["m"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["n"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["h"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["i"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["j"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["k"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["l"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["m"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_0__app__["n"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__contents__ = __webpack_require__(982);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["b"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["c"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["d"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["c"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["d"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["e"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["f"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["g"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["h"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["i"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "x", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["j"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "y", function() { return __WEBPACK_IMPORTED_MODULE_1__contents__["k"]; });
 
 
 
@@ -39635,8 +39642,8 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return INIT_STATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return INPUT_CHANGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DELETE_ELEMENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SAVE_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SAVE_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SAVE_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SAVE_ERROR; });
 /* unused harmony export SUBMIT_FORM */
 /* unused harmony export CREATE_ELEMENT */
 /* unused harmony export UPDATE_ELEMENT */
@@ -39644,16 +39651,25 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return FIELD_MOVE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return FIELD_REMOVE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FIELD_CHANGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return SETTINGS_OPEN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SETTINGS_CHANGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SETTINGS_CLOSE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return SETTINGS_CLOSED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return SETTINGS_OPEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SETTINGS_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SETTINGS_CLOSE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SETTINGS_CLOSED; });
+/* unused harmony export INIT_PARAMETERS */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ADD_PARAMETER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return REMOVE_PARAMETER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return MODAL_CONTENT_OPEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return REMOVE_PARAMETER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return MODAL_CONTENT_OPEN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return MODAL_CONTENT_CLOSE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return MODAL_CONTENT_SELECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return MODAL_CONTENT_SELECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return MODAL_CONTENT_UNSELECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return MODAL_CONTENT_CLEAR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return MODAL_CONTENT_INIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return MODAL_CONTENT_UPDATED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return PARAMETERS_INIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return PARAMETERS_OPEN_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return PARAMETERS_CLOSE_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return PARAMETERS_UPDATE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return PARAMETERS_CLEAR; });
 var INIT_STATE = "INIT_STATE";
 var INPUT_CHANGE = "INPUT_CHANGE";
 var DELETE_ELEMENT = "DELETE_ELEMENT";
@@ -39673,13 +39689,23 @@ var SETTINGS_CHANGE = "SETTINGS_CHANGE";
 var SETTINGS_CLOSE = "SETTINGS_CLOSE";
 var SETTINGS_CLOSED = "SETTINGS_CLOSED";
 
+var INIT_PARAMETERS = "INIT_PARAMETERS";
 var ADD_PARAMETER = "ADD_PARAMETER";
 var REMOVE_PARAMETER = "REMOVE_PARAMETER";
 
 var MODAL_CONTENT_OPEN = "MODAL_CONTENT_OPEN";
 var MODAL_CONTENT_CLOSE = "MODAL_CONTENT_CLOSE";
 var MODAL_CONTENT_SELECT = "MODAL_CONTENT_SELECT";
+var MODAL_CONTENT_UNSELECT = "MODAL_CONTENT_UNSELECT";
 var MODAL_CONTENT_CLEAR = "MODAL_CONTENT_CLEAR";
+var MODAL_CONTENT_INIT = "MODAL_CONTENT_INIT";
+var MODAL_CONTENT_UPDATED = "MODAL_CONTENT_UPDATED";
+
+var PARAMETERS_INIT = "PARAMETERS_INIT";
+var PARAMETERS_OPEN_MODAL = "PARAMETERS_OPEN_MODAL";
+var PARAMETERS_CLOSE_MODAL = "PARAMETERS_CLOSE_MODAL";
+var PARAMETERS_UPDATE = "PARAMETERS_UPDATE";
+var PARAMETERS_CLEAR = "PARAMETERS_CLEAR";
 
 /***/ }),
 /* 431 */,
@@ -51659,7 +51685,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     submitForm: function submitForm(data) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["r" /* submitForm */])(data));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["w" /* submitForm */])(data));
     }
   };
 };
@@ -51842,10 +51868,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     inputChange: function inputChange(field) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["j" /* inputChange */])(field));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["n" /* inputChange */])(field));
     },
     deleteElement: function deleteElement(elementId) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["h" /* deleteElement */])(elementId));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["j" /* deleteElement */])(elementId));
     }
   };
 };
@@ -53946,7 +53972,7 @@ var initialState = (_initialState = {
   fieldsList: [],
   model: null,
   element: null
-}, _defineProperty(_initialState, 'settingsField', null), _defineProperty(_initialState, 'modalSettingsDisplay', false), _initialState);
+}, _defineProperty(_initialState, 'settingsField', null), _defineProperty(_initialState, 'modelParameters', null), _defineProperty(_initialState, 'modalSettingsDisplay', false), _initialState);
 
 function checkIfFieldAdded(field, fields) {
   for (var key in fields) {
@@ -53976,6 +54002,55 @@ function mergeFieldSettings(field, modelField) {
   }
 
   return field;
+}
+
+function checkIfFilterExist(filterIdentifier, parameters) {}
+
+function getParamerter(identifier, parametersList) {
+
+  for (var key in parametersList) {
+    if (parametersList[key].identifier == identifier) {
+      return parametersList[key];
+    }
+  }
+
+  return null;
+}
+
+function getModelParameters(model) {
+
+  var modelFilters = model.FILTRES;
+
+  var filters = [];
+
+  if (modelFilters != "" && modelFilters != null) {
+    var modelFiltersArray = modelFilters.split(",");
+    for (var key in modelFiltersArray) {
+      var modelFiltersValues = modelFiltersArray[key].split("=");
+      filters.push(modelFiltersValues[0]);
+    }
+  }
+
+  return filters;
+}
+
+function updateParamertsFromModel(model, parameters, parametersList) {
+
+  var filters = getModelParameters(model);
+
+  for (var key in filters) {
+    if (getParamerter(filters[key], parameters) == null) {
+      //dont exist yet add parameter
+      var newParameter = getParamerter(filters[key], parametersList);
+      if (newParameter != null) {
+        parameters.push(newParameter);
+      } else {
+        console.error("Parameter need to be created with key => ", filters[key]);
+      }
+    }
+  }
+
+  return parameters;
 }
 
 function appReducer() {
@@ -54025,6 +54100,11 @@ function appReducer() {
         }
       }
 
+      var modelParameters = getModelParameters(action.payload.model);
+
+      //check from model if paramerts correctly set
+      var parametersMerged = updateParamertsFromModel(action.payload.model, action.payload.parameters, action.payload.parametersList);
+
       return _extends({}, state, {
         element: action.payload.element,
         model: action.payload.model,
@@ -54035,8 +54115,9 @@ function appReducer() {
         wsModelFormat: action.payload.wsModelFormat,
         wsModelExemple: action.payload.wsModelExemple,
         elementType: action.payload.elementType,
-        parameters: action.payload.parameters,
+        parameters: parametersMerged,
         parametersList: action.payload.parametersList,
+        modelParameters: modelParameters,
         fields: action.payload.element != null ? action.payload.element.fields : []
       });
     case __WEBPACK_IMPORTED_MODULE_0__constants__["h" /* INPUT_CHANGE */]:
@@ -54047,7 +54128,7 @@ function appReducer() {
       return _extends({}, state, {
         inputs: inputs
       });
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["n" /* SAVE_ERROR */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["v" /* SAVE_ERROR */]:
 
       var stateErrors = state.errors;
       var errors = action.payload;
@@ -54062,7 +54143,7 @@ function appReducer() {
         errors: stateErrors
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["o" /* SAVE_SUCCESS */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["w" /* SAVE_SUCCESS */]:
 
       for (var i = 0; i < fields.length; i++) {
         fields[i].saved = true;
@@ -54136,7 +54217,7 @@ function appReducer() {
         fields: fields
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["s" /* SETTINGS_OPEN */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["A" /* SETTINGS_OPEN */]:
 
       var newField = null;
 
@@ -54164,7 +54245,7 @@ function appReducer() {
         modalSettingsDisplay: true
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["p" /* SETTINGS_CHANGE */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["x" /* SETTINGS_CHANGE */]:
 
       var field = action.payload;
 
@@ -54176,13 +54257,13 @@ function appReducer() {
         settingsField: settingsField
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["q" /* SETTINGS_CLOSE */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["y" /* SETTINGS_CLOSE */]:
 
       return _extends({}, state, {
         modalSettingsDisplay: false
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["r" /* SETTINGS_CLOSED */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["z" /* SETTINGS_CLOSED */]:
 
       return _extends({}, state, {
         settingsField: null
@@ -54205,7 +54286,7 @@ function appReducer() {
         parameters: parameters
       });
 
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* REMOVE_PARAMETER */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["u" /* REMOVE_PARAMETER */]:
       var found = false;
       for (var i = 0; i < parameters.length; i++) {
         if (parameters[i].id == action.payload) {
@@ -54243,17 +54324,87 @@ var _extends = Object.assign || function (target) {
 
 
 
+/*
+content = {
+  id : 1,
+  title : "Home",
+  params : [{
+      name: "",
+      value : ""
+    },
+    {
+      name: "",
+      value : ""
+    },
+  ]
+}
+*/
+
 var initialState = {
   content: null,
-  display: false
+  display: false,
+  needUpdate: true, //update the main field
+
+  //parameters
+  parameters: [], //page parameters to define
+  displayParameters: false
 };
+
+function getContentParamsValue(contentParams, id) {
+  for (var key in contentParams) {
+    if (contentParams[key].id == id) {
+      return contentParams[key].value;
+    }
+  }
+  return '';
+}
+
+function mergeContentInfo(content, data, params) {
+
+  var newContent = {
+    id: data.id,
+    title: data.title,
+    params: params
+  };
+
+  if (content == null) return newContent;
+
+  if (content.params !== undefined && content.params != null) {
+    for (var key in newContent.params) {
+      newContent.params[key].value = getContentParamsValue(content.params, newContent.params[key].id);
+    }
+  }
+
+  return newContent;
+}
+
+function getParameters(data) {
+
+  var params = [];
+
+  if (data.routes_parameters !== undefined && data.routes_parameters != null) {
+    for (var key in data.routes_parameters) {
+      params.push({
+        id: data.routes_parameters[key].id,
+        identifier: data.routes_parameters[key].identifier,
+        name: data.routes_parameters[key].name,
+        value: ''
+      });
+    }
+  }
+
+  return params;
+}
 
 function contentsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
+  console.log("LinkSettingsField :: REDUCER :: => ", action.type, action.payload);
+  var content = state.content;
+
   switch (action.type) {
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["k" /* MODAL_CONTENT_OPEN */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["l" /* MODAL_CONTENT_OPEN */]:
 
       return _extends({}, state, {
         display: true,
@@ -54265,16 +54416,69 @@ function contentsReducer() {
       return _extends({}, state, {
         display: false
       });
-    case __WEBPACK_IMPORTED_MODULE_0__constants__["l" /* MODAL_CONTENT_SELECT */]:
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["m" /* MODAL_CONTENT_SELECT */]:
 
       return _extends({}, state, {
         display: false,
-        content: action.payload
+        content: action.payload,
+        needUpdate: true
+      });
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["n" /* MODAL_CONTENT_UNSELECT */]:
+
+      return _extends({}, state, {
+        content: null,
+        needUpdate: true
       });
     case __WEBPACK_IMPORTED_MODULE_0__constants__["i" /* MODAL_CONTENT_CLEAR */]:
 
       return _extends({}, state, {
-        content: null
+        content: null,
+        needUpdate: false
+      });
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["k" /* MODAL_CONTENT_INIT */]:
+
+      return _extends({}, state, {
+        content: action.payload,
+        needUpdate: false
+      });
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["o" /* MODAL_CONTENT_UPDATED */]:
+      return _extends({}, state, {
+        needUpdate: false
+      });
+
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["r" /* PARAMETERS_INIT */]:
+
+      //update content with values
+      var parameters = getParameters(action.payload);
+      console.log("ContentsReducer :: parameters => ", parameters);
+      var newContent = mergeContentInfo(content, action.payload, parameters);
+
+      console.log("ContentsReducer => newContent => ", newContent);
+
+      return _extends({}, state, {
+        parameters: parameters,
+        content: newContent
+      });
+
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["s" /* PARAMETERS_OPEN_MODAL */]:
+      return _extends({}, state, {
+        displayParameters: true
+      });
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["q" /* PARAMETERS_CLOSE_MODAL */]:
+      return _extends({}, state, {
+        displayParameters: false
+      });
+    case __WEBPACK_IMPORTED_MODULE_0__constants__["t" /* PARAMETERS_UPDATE */]:
+
+      for (var key in content.params) {
+        if (content.params[key].id == action.payload.id) {
+          content.params[key] = action.payload;
+        }
+      }
+
+      return _extends({}, state, {
+        content: content,
+        needUpdate: true
       });
 
     default:
@@ -55445,6 +55649,7 @@ function fontawesomeReducer() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ElementBar__ = __webpack_require__(761);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ElementModal__ = __webpack_require__(989);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__Contents_ModalContents__ = __webpack_require__(996);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Parameters_ModalParameters__ = __webpack_require__(1048);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -55474,6 +55679,7 @@ function _inherits(subClass, superClass) {
         throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
+
 
 
 
@@ -55549,7 +55755,7 @@ var ElementForm = function (_Component) {
 
             console.log("\n\nElementForm :: render!");
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'model-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__ElementBar__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_dnd__["DragDropContextProvider"], { backend: __WEBPACK_IMPORTED_MODULE_5_react_dnd_html5_backend___default.a }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container rightbar-page' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ElementModal__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__Contents_ModalContents__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-9 page-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ElementDropZoneContainer__["a" /* default */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ElementSidebar__["a" /* default */], null, this.renderFields()))));
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'model-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__ElementBar__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_dnd__["DragDropContextProvider"], { backend: __WEBPACK_IMPORTED_MODULE_5_react_dnd_html5_backend___default.a }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container rightbar-page' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ElementModal__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__Contents_ModalContents__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_13__Parameters_ModalParameters__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-9 page-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ElementDropZoneContainer__["a" /* default */], null)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ElementSidebar__["a" /* default */], null, this.renderFields()))));
         }
     }]);
 
@@ -55565,7 +55771,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         initState: function initState(payload) {
-            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions___["i" /* initState */])(payload));
+            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions___["m" /* initState */])(payload));
         }
     };
 };
@@ -55699,7 +55905,7 @@ function onSaveSuccess(response) {
 
     toastr.success(Lang.get('fields.success'));
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["o" /* SAVE_SUCCESS */], payload: response.element };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["w" /* SAVE_SUCCESS */], payload: response.element };
 }
 
 function onSaveError(response) {
@@ -55710,7 +55916,7 @@ function onSaveError(response) {
         toastr.error(response.message);
     }
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["n" /* SAVE_ERROR */], payload: errors };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["v" /* SAVE_ERROR */], payload: errors };
 }
 
 function addField(payload) {
@@ -55738,22 +55944,22 @@ function removeField(fieldId) {
 
 function openModalSettings(fieldId) {
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["s" /* SETTINGS_OPEN */], payload: fieldId };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["A" /* SETTINGS_OPEN */], payload: fieldId };
 }
 
 function changeFieldSettings(field) {
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["p" /* SETTINGS_CHANGE */], payload: field };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["x" /* SETTINGS_CHANGE */], payload: field };
 }
 
 function closeModalSettings() {
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["q" /* SETTINGS_CLOSE */] };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["y" /* SETTINGS_CLOSE */] };
 }
 
 function onModalSettingsClosed() {
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["r" /* SETTINGS_CLOSED */] };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["z" /* SETTINGS_CLOSED */] };
 }
 
 function addParameter(payload) {
@@ -55763,7 +55969,7 @@ function addParameter(payload) {
 
 function removeParameter(payload) {
 
-    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["m" /* REMOVE_PARAMETER */], payload: payload };
+    return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["u" /* REMOVE_PARAMETER */], payload: payload };
 }
 
 /***/ }),
@@ -55771,16 +55977,24 @@ function removeParameter(payload) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["c"] = openModalContents;
+/* harmony export (immutable) */ __webpack_exports__["g"] = openModalContents;
 /* harmony export (immutable) */ __webpack_exports__["b"] = closeModalContents;
-/* harmony export (immutable) */ __webpack_exports__["d"] = selectContent;
+/* harmony export (immutable) */ __webpack_exports__["i"] = selectContent;
+/* harmony export (immutable) */ __webpack_exports__["j"] = unselectContent;
 /* harmony export (immutable) */ __webpack_exports__["a"] = clearContent;
+/* harmony export (immutable) */ __webpack_exports__["e"] = initContent;
+/* harmony export (immutable) */ __webpack_exports__["d"] = contentUpdated;
+/* harmony export (immutable) */ __webpack_exports__["f"] = initParameters;
+/* harmony export (immutable) */ __webpack_exports__["h"] = openModalParameters;
+/* harmony export (immutable) */ __webpack_exports__["c"] = closeModalParameters;
+/* harmony export (immutable) */ __webpack_exports__["k"] = updateParameter;
+/* unused harmony export clearParameters */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants___ = __webpack_require__(430);
 
 
 function openModalContents() {
 
-  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["k" /* MODAL_CONTENT_OPEN */] };
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["l" /* MODAL_CONTENT_OPEN */] };
 }
 
 function closeModalContents() {
@@ -55790,12 +56004,56 @@ function closeModalContents() {
 
 function selectContent(content) {
 
-  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["l" /* MODAL_CONTENT_SELECT */], payload: content };
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["m" /* MODAL_CONTENT_SELECT */], payload: content };
 }
 
+//when button is presed by the user
+function unselectContent() {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["n" /* MODAL_CONTENT_UNSELECT */] };
+}
+
+//clear to component unmount
 function clearContent() {
 
   return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["i" /* MODAL_CONTENT_CLEAR */] };
+}
+
+function initContent(content) {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["k" /* MODAL_CONTENT_INIT */], payload: content };
+}
+
+function contentUpdated() {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["o" /* MODAL_CONTENT_UPDATED */] };
+}
+
+/**
+*   Init with parameters already set
+*/
+function initParameters(content) {
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["r" /* PARAMETERS_INIT */], payload: content };
+}
+
+function openModalParameters() {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["s" /* PARAMETERS_OPEN_MODAL */] };
+}
+
+function closeModalParameters() {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["q" /* PARAMETERS_CLOSE_MODAL */] };
+}
+
+function updateParameter(parameter) {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["t" /* PARAMETERS_UPDATE */], payload: parameter };
+}
+
+function clearParameters(parameter) {
+
+  return { type: __WEBPACK_IMPORTED_MODULE_0__constants___["p" /* PARAMETERS_CLEAR */] };
 }
 
 /***/ }),
@@ -56271,6 +56529,27 @@ var ElementField = function (_Component) {
 			this.props.onFieldChange(field);
 		}
 	}, {
+		key: 'isValid',
+		value: function isValid() {
+
+			console.log("isValid => ", this.props.settings);
+
+			if (this.props.settings.hasRoute != null) {
+				var hasRoute = this.props.settings.hasRoute;
+				if (hasRoute.params != undefined && hasRoute.params != null) {
+					if (hasRoute.params != null && hasRoute.params.length > 0) {
+						for (var key in hasRoute.params) {
+							if (hasRoute.params[key].value == "") {
+								return false;
+							}
+						}
+					}
+				}
+			}
+
+			return true;
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 
@@ -56281,6 +56560,8 @@ var ElementField = function (_Component) {
 				isEntryTitle = true;
 			}
 
+			//const valid = this.isValid();
+
 			var _props = this.props,
 			    isDragging = _props.isDragging,
 			    connectDragSource = _props.connectDragSource,
@@ -56288,7 +56569,11 @@ var ElementField = function (_Component) {
 
 			var opacity = isDragging ? 0 : 1;
 
-			return connectDragSource(connectDropTarget(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', style: _extends({}, style, { opacity: opacity }) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: "field-type " }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.icon }), ' \xA0', MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: this.props.editable ? false : true, type: 'text', className: 'form-control', name: 'name', placeholder: 'Nom', value: this.state.name, onChange: this.handleChange })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: true, type: 'text', className: 'form-control', name: 'identifier', placeholder: 'Idenfiticador', value: this.state.identifier, onChange: this.handleChange })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', onClick: this.onOpenSettings }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-pencil-alt' }), ' ', Lang.get('header.configuration')), ' \xA0\xA0', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0'))));
+			return connectDragSource(connectDropTarget(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', style: _extends({}, style, { opacity: opacity }) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: "field-type " }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.icon }), ' \xA0', MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : '', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: {
+					position: 'absolute',
+					top: 0,
+					right: 20
+				} })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: this.props.editable ? false : true, type: 'text', className: 'form-control', name: 'name', placeholder: 'Nom', value: this.state.name, onChange: this.handleChange })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { disabled: true, type: 'text', className: 'form-control', name: 'identifier', placeholder: 'Idenfiticador', value: this.state.identifier, onChange: this.handleChange })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', onClick: this.onOpenSettings }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-pencil-alt' }), ' ', Lang.get('header.configuration')), ' \xA0\xA0', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0'))));
 		}
 	}]);
 
@@ -56325,31 +56610,31 @@ ElementField.propTypes = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-    if (!self) {
-        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 
@@ -56360,205 +56645,222 @@ function _inherits(subClass, superClass) {
 
 
 var charMap = {
-    'a': /[àáâ]/gi,
-    'c': /[ç]/gi,
-    'e': /[èéêë]/gi,
-    'i': /[ìíï]/gi,
-    'o': /[òóô]/gi,
-    'oe': /[œ]/gi,
-    'u': /[üú]/gi
+  'a': /[àáâ]/gi,
+  'c': /[ç]/gi,
+  'e': /[èéêë]/gi,
+  'i': /[ìíï]/gi,
+  'o': /[òóô]/gi,
+  'oe': /[œ]/gi,
+  'u': /[üú]/gi
 };
 
 var ParameterManager = function (_Component) {
-    _inherits(ParameterManager, _Component);
+  _inherits(ParameterManager, _Component);
 
-    function ParameterManager(props) {
-        _classCallCheck(this, ParameterManager);
+  function ParameterManager(props) {
+    _classCallCheck(this, ParameterManager);
 
-        var _this2 = _possibleConstructorReturn(this, (ParameterManager.__proto__ || Object.getPrototypeOf(ParameterManager)).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, (ParameterManager.__proto__ || Object.getPrototypeOf(ParameterManager)).call(this, props));
 
-        _this2.suggestions = props.app.parametersList ? props.app.parametersList : [];
+    _this2.suggestions = props.app.parametersList ? props.app.parametersList : [];
 
-        _this2.state = {
-            value: '',
-            suggestions: _this2.suggestions
-        };
+    _this2.state = {
+      value: '',
+      suggestions: _this2.suggestions
+    };
 
-        _this2.onRemoveParameter = _this2.onRemoveParameter.bind(_this2);
-        _this2.handleClickOnSuggest = _this2.handleClickOnSuggest.bind(_this2);
-        _this2.renderSuggestion = _this2.renderSuggestion.bind(_this2);
-        _this2.handleKeyPress = _this2.handleKeyPress.bind(_this2);
-        return _this2;
+    console.log("suggestions => ", _this2.suggestions);
+
+    _this2.onRemoveParameter = _this2.onRemoveParameter.bind(_this2);
+    _this2.handleClickOnSuggest = _this2.handleClickOnSuggest.bind(_this2);
+    _this2.renderSuggestion = _this2.renderSuggestion.bind(_this2);
+    _this2.handleKeyPress = _this2.handleKeyPress.bind(_this2);
+
+    return _this2;
+  }
+
+  _createClass(ParameterManager, [{
+    key: 'onChange',
+    value: function onChange(event, _ref) {
+      var newValue = _ref.newValue;
+
+      this.setState({
+        value: newValue
+      });
+    }
+  }, {
+    key: 'normalize',
+    value: function normalize(str) {
+
+      $.each(charMap, function (normalized, regex) {
+        str = str.replace(regex, normalized);
+      });
+      return str.toLowerCase();
+    }
+  }, {
+    key: 'getSuggestions',
+    value: function getSuggestions(value) {
+      var inputValue = this.normalize(value.trim().toLowerCase());
+      var inputLength = inputValue.length;
+
+      var _this = this;
+      return inputLength === 0 ? [] : this.suggestions.filter(function (item) {
+        //return item.name.toLowerCase().slice(0, inputLength) === inputValue
+        return _this.normalize(item.name.toLowerCase()).indexOf(inputValue) != -1;
+      });
+    }
+  }, {
+    key: 'getSuggestionValue',
+    value: function getSuggestionValue(suggestion) {
+      return suggestion.name;
+    }
+  }, {
+    key: 'renderSuggestion',
+    value: function renderSuggestion(suggestion) {
+      var _this3 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { onClick: function onClick() {
+          return _this3.handleClickOnSuggest(suggestion.id);
+        } }, suggestion.name);
     }
 
-    _createClass(ParameterManager, [{
-        key: 'onChange',
-        value: function onChange(event, _ref) {
-            var newValue = _ref.newValue;
+    // Autosuggest will call this function every time you need to update suggestions.
+    // You already implemented this logic above, so just use it.
 
-            this.setState({
-                value: newValue
-            });
+  }, {
+    key: 'onSuggestionsFetchRequested',
+    value: function onSuggestionsFetchRequested(_ref2) {
+      var value = _ref2.value;
+
+      this.setState({
+        suggestions: this.getSuggestions(value)
+      });
+    }
+
+    // Autosuggest will call this function every time you need to clear suggestions.
+
+  }, {
+    key: 'onSuggestionsClearRequested',
+    value: function onSuggestionsClearRequested() {
+      this.setState({
+        suggestions: []
+      });
+    }
+  }, {
+    key: 'handleParameterAdded',
+    value: function handleParameterAdded(parameter) {
+
+      console.log("handleParameterAdded => ", parameter);
+      this.props.addParameter(parameter);
+    }
+  }, {
+    key: 'handleRemoveParameter',
+    value: function handleRemoveParameter(parameterId) {
+
+      console.log("handleRemoveParameter => ", parameterId);
+      this.props.removeParameter(parameterId);
+    }
+  }, {
+    key: 'handleClickOnSuggest',
+    value: function handleClickOnSuggest(id) {
+      var self = this;
+
+      this.suggestions.map(function (item, index) {
+        if (item.id === id) {
+          self.handleParameterAdded(item);
         }
-    }, {
-        key: 'normalize',
-        value: function normalize(str) {
+      });
+    }
+  }, {
+    key: 'handleKeyPress',
+    value: function handleKeyPress(event) {
+      var _this4 = this;
 
-            $.each(charMap, function (normalized, regex) {
-                str = str.replace(regex, normalized);
-            });
-            return str.toLowerCase();
+      if (event.key == 'Enter') {
+        var self = this;
+        this.suggestions.map(function (parameter, index) {
+          if (_this4.normalize(parameter.name) == _this4.normalize(_this4.state.value)) {
+            self.handleParameterAdded(parameter);
+          }
+        });
+      }
+    }
+  }, {
+    key: 'onRemoveParameter',
+    value: function onRemoveParameter(e) {
+      e.preventDefault();
+      this.handleRemoveParameter($(e.target).closest('.remove-btn').attr('id'));
+    }
+  }, {
+    key: 'existInModelParameters',
+    value: function existInModelParameters(identifier) {
+      for (var key in this.props.app.modelParameters) {
+        if (this.props.app.modelParameters[key] == identifier) {
+          return true;
         }
-    }, {
-        key: 'getSuggestions',
-        value: function getSuggestions(value) {
-            var inputValue = this.normalize(value.trim().toLowerCase());
-            var inputLength = inputValue.length;
+      }
+      return false;
+    }
+  }, {
+    key: 'renderParameters',
+    value: function renderParameters() {
+      var _this5 = this;
 
-            var _this = this;
-            return inputLength === 0 ? [] : this.suggestions.filter(function (item) {
-                //return item.name.toLowerCase().slice(0, inputLength) === inputValue
-                return _this.normalize(item.name.toLowerCase()).indexOf(inputValue) != -1;
-            });
-        }
-    }, {
-        key: 'getSuggestionValue',
-        value: function getSuggestionValue(suggestion) {
-            return suggestion.name;
-        }
-    }, {
-        key: 'renderSuggestion',
-        value: function renderSuggestion(suggestion) {
-            var _this3 = this;
+      console.log('RENDER PARAMETER::', this.props.app.parameters);
+      if (this.props.app.parameters === undefined) return;
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { onClick: function onClick() {
-                    return _this3.handleClickOnSuggest(suggestion.id);
-                } }, suggestion.name);
-        }
+      return this.props.app.parameters.map(function (parameter, i) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { key: i, className: 'parameter', style: {
+            display: 'block',
+            borderBottom: '1px solid #ccc',
+            padding: '10px'
+          } }, parameter.name, !_this5.existInModelParameters(parameter.identifier) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', style: { float: 'right' }, className: 'remove-btn', id: parameter.id, onClick: _this5.onRemoveParameter }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times-circle' })), _this5.existInModelParameters(parameter.identifier) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { style: { float: 'right', color: '#666' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-lock' })));
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log('RENDER GRAL::');
+      var _state = this.state,
+          value = _state.value,
+          suggestions = _state.suggestions;
 
-        // Autosuggest will call this function every time you need to update suggestions.
-        // You already implemented this logic above, so just use it.
+      var inputProps = {
+        placeholder: 'Sélectionner parametre',
+        className: 'form-control',
+        value: value,
+        onChange: this.onChange.bind(this)
+      };
 
-    }, {
-        key: 'onSuggestionsFetchRequested',
-        value: function onSuggestionsFetchRequested(_ref2) {
-            var value = _ref2.value;
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'parameter-manager', onKeyPress: this.handleKeyPress }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { htmlFor: 'template', className: 'bmd-label-floating' }, 'Parametres'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_autosuggest___default.a, {
+        suggestions: suggestions,
+        onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
+        onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
+        getSuggestionValue: this.getSuggestionValue,
+        renderSuggestion: this.renderSuggestion,
+        inputProps: inputProps
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'parameters' }, this.renderParameters()));
+    }
+  }]);
 
-            this.setState({
-                suggestions: this.getSuggestions(value)
-            });
-        }
-
-        // Autosuggest will call this function every time you need to clear suggestions.
-
-    }, {
-        key: 'onSuggestionsClearRequested',
-        value: function onSuggestionsClearRequested() {
-            this.setState({
-                suggestions: []
-            });
-        }
-    }, {
-        key: 'handleParameterAdded',
-        value: function handleParameterAdded(parameter) {
-
-            console.log("handleParameterAdded => ", parameter);
-            this.props.addParameter(parameter);
-        }
-    }, {
-        key: 'handleRemoveParameter',
-        value: function handleRemoveParameter(parameterId) {
-
-            console.log("handleRemoveParameter => ", parameterId);
-            this.props.removeParameter(parameterId);
-        }
-    }, {
-        key: 'handleClickOnSuggest',
-        value: function handleClickOnSuggest(id) {
-            var self = this;
-
-            this.suggestions.map(function (item, index) {
-                if (item.id === id) {
-                    self.handleParameterAdded(item);
-                }
-            });
-        }
-    }, {
-        key: 'handleKeyPress',
-        value: function handleKeyPress(event) {
-            var _this4 = this;
-
-            if (event.key == 'Enter') {
-                var self = this;
-                this.suggestions.map(function (parameter, index) {
-                    if (_this4.normalize(parameter.name) == _this4.normalize(_this4.state.value)) {
-                        self.handleParameterAdded(parameter);
-                    }
-                });
-            }
-        }
-    }, {
-        key: 'onRemoveParameter',
-        value: function onRemoveParameter(e) {
-            e.preventDefault();
-            this.handleRemoveParameter($(e.target).closest('.remove-btn').attr('id'));
-        }
-    }, {
-        key: 'renderParameters',
-        value: function renderParameters() {
-            var _this5 = this;
-
-            console.log('RENDER PARAMETER::', this.props.app.parameters);
-            if (this.props.app.parameters === undefined) return;
-
-            return this.props.app.parameters.map(function (parameter, i) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { key: i, className: 'parameter' }, ' ', parameter.name, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-btn', id: parameter.id, onClick: _this5.onRemoveParameter }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times-circle' }), ' '), ' ');
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            console.log('RENDER GRAL::');
-            var _state = this.state,
-                value = _state.value,
-                suggestions = _state.suggestions;
-
-            var inputProps = {
-                placeholder: 'Sélectionner parametre',
-                className: 'form-control',
-                value: value,
-                onChange: this.onChange.bind(this)
-            };
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'parameter-manager', onKeyPress: this.handleKeyPress }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { htmlFor: 'template', className: 'bmd-label-floating' }, 'Parametres'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_autosuggest___default.a, {
-                suggestions: suggestions,
-                onSuggestionsFetchRequested: this.onSuggestionsFetchRequested.bind(this),
-                onSuggestionsClearRequested: this.onSuggestionsClearRequested.bind(this),
-                getSuggestionValue: this.getSuggestionValue,
-                renderSuggestion: this.renderSuggestion,
-                inputProps: inputProps
-            }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'parameters' }, this.renderParameters()));
-        }
-    }]);
-
-    return ParameterManager;
+  return ParameterManager;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {
-        app: state.app
-    };
+  return {
+    app: state.app
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {
-        addParameter: function addParameter(parameter) {
-            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions___["b" /* addParameter */])(parameter));
-        },
-        removeParameter: function removeParameter(parameterId) {
-            return dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions___["p" /* removeParameter */])(parameterId));
-        }
-    };
+  return {
+    addParameter: function addParameter(parameter) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions___["b" /* addParameter */])(parameter));
+    },
+    removeParameter: function removeParameter(parameterId) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions___["u" /* removeParameter */])(parameterId));
+    }
+  };
 };
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps, mapDispatchToProps)(ParameterManager));
 
@@ -56878,13 +57180,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["c" /* changeField */])(field));
 		},
 		removeField: function removeField(fieldId) {
-			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["o" /* removeField */])(fieldId));
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["t" /* removeField */])(fieldId));
 		},
 		moveField: function moveField(dragIndex, hoverIndex) {
-			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["k" /* moveField */])(dragIndex, hoverIndex));
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["o" /* moveField */])(dragIndex, hoverIndex));
 		},
 		onOpenSettings: function onOpenSettings(fieldId) {
-			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["n" /* openModalSettings */])(fieldId));
+			return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["s" /* openModalSettings */])(fieldId));
 		}
 	};
 };
@@ -57133,10 +57435,10 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     closeModalSettings: function closeModalSettings() {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["g" /* closeModalSettings */])());
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["h" /* closeModalSettings */])());
     },
     onModalSettingsClosed: function onModalSettingsClosed() {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["l" /* onModalSettingsClosed */])());
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["p" /* onModalSettingsClosed */])());
     },
     changeFieldSettings: function changeFieldSettings(field) {
       return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["d" /* changeFieldSettings */])(field));
@@ -57899,6 +58201,7 @@ var RadioSettingsField = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Parameters_ParametersButton__ = __webpack_require__(1049);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -57935,33 +58238,7 @@ function _inherits(subClass, superClass) {
 
 
 
-/*
-*
 
-    link : null,
-    {
-      "content":1,
-      "params" : {
-        "id_pol" : "element_identifier",
-        "id_per" : ""
-      }
-    }
-
-    Como se sabra si esta bien definido ?
-    Porque todos los params, si los tiene seran diferente de "",
-
-    De donde se saca los parametros que tiene la ruta ?
-
-    Cuando se selecciona el contenido que información tenemos ?
-      Aqui no hay modal todavia.
-      Yo creo que en ajuter podemos poner los parametros que tiene
-      Necesitamos recuperar el id y los parametros en array []
-      O su id ? yo creo mejor por el identifier porque es lo que vamos a construir la ruta.
-      ['id_per','id_pol'], o quiza id : [1,2]
-
-
-
-*/
 
 var LinkSettingsField = function (_Component) {
   _inherits(LinkSettingsField, _Component);
@@ -57975,11 +58252,12 @@ var LinkSettingsField = function (_Component) {
     var input = "";
     var display = false;
 
+    _this.initialised = false;
+
     _this.state = {
       checkbox: checkbox,
-      link: null,
-      display: display,
-      content: null
+      display: display
+      //content : null
     };
 
     _this.handleFieldChange = _this.handleFieldChange.bind(_this);
@@ -57996,48 +58274,37 @@ var LinkSettingsField = function (_Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      this.processProps(nextProps);
+    }
+  }, {
+    key: 'loadContentParameters',
+    value: function loadContentParameters(contentId) {
 
-      //to check if need to proces or not
-      var contentUpdated = false;
+      var route = routes['extranet.content.parameters'].replace(':content', contentId);
+      //console.log("LinkSettingsField :: loadContentParameters :: ",route);
 
-      if (nextProps.contents.content != null) {
-        //update the content
-        var updateContent = false;
-        if (this.state.content != null) {
-          //check if is not the same to avoid multiple updates
-          if (this.state.content.id != nextProps.contents.content.id) {
-            //is different update
-            updateContent = true;
-          }
-        } else {
-          //just update
-          updateContent = true;
+      var self = this;
+
+      axios.get(route).then(function (response) {
+        if (response.status == 200 && response.data !== undefined) {
+          //console.log("LinkSettingsField  :: data => ",response.data);
+
+          //self.processData(response.data.modelValues);
+          self.props.initParameters(response.data);
         }
-
-        if (updateContent) {
-          this.handleContentUpdate(nextProps.contents.content);
-          contentUpdated = true;
-        }
-      } else if (nextProps.contents.content == null && this.state.content != null) {
-        //delete the content
-        this.handleContentUpdate(null);
-        contentUpdated = true;
-      }
-
-      //if not updated then process props, if updated it will come here after update
-      if (!contentUpdated) {
-        this.processProps(nextProps);
-      }
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }, {
     key: 'processProps',
     value: function processProps(nextProps) {
       var checkbox = null;
-      var link = null;
       var display = false;
       var content = null;
+      var initialised = false;
 
-      //console.log("LinkSettingsField :: componentWillRecieveProps");
+      console.log("LinkSettingsField :: componentWillRecieveProps :: ", nextProps);
       //console.log(nextProps);
 
       if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
@@ -58045,25 +58312,50 @@ var LinkSettingsField = function (_Component) {
         checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
         display = true;
 
-        link = nextProps.field[nextProps.source][nextProps.name] == null ? '' : nextProps.field[nextProps.source][nextProps.name];
+        /*
+        content = nextProps.field[nextProps.source][nextProps.name] == null ?
+          null : nextProps.field[nextProps.source][nextProps.name];
+        */
+
+        console.log("LinkSettingsField :: processProps : nextProps.contents.content => ", nextProps.contents.content);
+        //content came always from redux
+        content = nextProps.contents.content != null ? nextProps.contents.content : null;
       }
 
-      if (nextProps.contents.content != null) {
-        content = nextProps.contents.content;
+      //if content changed
+      if (nextProps.contents.needUpdate) {
+        this.handleContentUpdate(content);
       }
 
       this.setState({
         checkbox: checkbox,
-        link: link,
-        display: display,
-        content: content
+        display: display
+        //content : content
       });
+
+      //check if state is changing
+      if (nextProps.field == null && this.initialised) {
+        //destroying the component
+        console.log("LinkSettingsField :: Destroying!");
+        this.initialised = false;
+        this.props.clearContent();
+      } else if (nextProps.field != null && !this.initialised) {
+        //constructing the component
+        var newContent = nextProps.field[nextProps.source][nextProps.name];
+        console.log("LinkSettingsField :: Constructing => ", newContent);
+        this.initialised = true;
+        if (newContent != null) {
+          this.props.initContent(newContent);
+          this.loadContentParameters(newContent.id);
+        }
+      }
     }
   }, {
     key: 'getDefaultValue',
     value: function getDefaultValue() {
       return {
-        content: null,
+        id: null,
+        title: '',
         params: {}
       };
     }
@@ -58083,28 +58375,36 @@ var LinkSettingsField = function (_Component) {
     key: 'handleContentUpdate',
     value: function handleContentUpdate(content) {
 
-      var contentValue = {
-        content: null,
-        params: {}
-      };
+      console.log("LinkSettingsField :: handleContentUpdate => , initialised => ", this.initialised, "content =>", content);
 
-      if (content != null) {
-        contentValue.content = content;
+      if (this.initialised) {
+
+        var contentValue = this.getDefaultValue();
+
+        if (content != null) {
+          contentValue = content;
+          this.loadContentParameters(content.id);
+        }
+
+        var field = {
+          name: this.props.name,
+          source: this.props.source,
+          value: contentValue
+        };
+
+        //update the state for comparision
+        /*
+        this.setState({
+          content : content
+        });
+        */
+
+        //console.log("handleContentUpdate => ",field);
+
+        //propagate to main field
+        this.props.onFieldChange(field);
+        this.props.contentUpdated();
       }
-
-      var field = {
-        name: this.props.name,
-        source: this.props.source,
-        value: contentValue
-      };
-
-      //update the state for comparision
-      this.setState({
-        content: content
-      });
-
-      //propagate to main field
-      this.props.onFieldChange(field);
     }
   }, {
     key: 'handleInputChange',
@@ -58130,15 +58430,16 @@ var LinkSettingsField = function (_Component) {
     value: function onRemoveField(event) {
       event.preventDefault();
 
-      this.props.clearContent();
+      console.log("onRemoveField => ", this.props.contents.content);
+      this.props.unselectContent();
     }
   }, {
     key: 'renderSelectedPage',
     value: function renderSelectedPage() {
-      var content = this.state.content;
+      var content = this.props.contents.content;
 
       if (content != null) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-form fields-list-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-type' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-file' }), '\xA0 ', Lang.get('fields.page')), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, content.title ? content.title : ""))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField.bind(this) }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0')));
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-form fields-list-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-type' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-file' }), '\xA0 ', Lang.get('fields.page')), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, content.title ? content.title : ""), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Parameters_ParametersButton__["a" /* default */], null)))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'remove-field-btn', onClick: this.onRemoveField.bind(this) }, ' ', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-trash' }), ' ', Lang.get('fields.delete'), ' '), '\xA0\xA0')));
       } else {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'add-content-button' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default', onClick: this.onContentSelect.bind(this) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-plus-circle' }), ' ', Lang.get('fields.select'), ' '));
       }
@@ -58154,7 +58455,7 @@ var LinkSettingsField = function (_Component) {
         name: this.props.name,
         checked: this.state.checkbox != null ? checkbox : false,
         onChange: this.handleFieldChange
-      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config', style: { display: this.state.checkbox != null && this.state.checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { htmlFor: 'num', className: 'bmd-label-floating' }, this.props.inputLabel), this.renderSelectedPage()))));
+      }), this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config settings-field', style: { display: this.state.checkbox != null && this.state.checkbox ? "block" : "none" } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { htmlFor: 'num', className: 'bmd-label-floating' }, this.props.inputLabel), this.renderSelectedPage()))));
     }
   }]);
 
@@ -58170,12 +58471,25 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    initContent: function initContent(content) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["k" /* initContent */])(content));
+    },
     openModalContents: function openModalContents() {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["m" /* openModalContents */])());
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["q" /* openModalContents */])());
     },
     clearContent: function clearContent() {
       return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["e" /* clearContent */])());
+    },
+    contentUpdated: function contentUpdated() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["i" /* contentUpdated */])());
+    },
+    unselectContent: function unselectContent() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["x" /* unselectContent */])());
+    },
+    initParameters: function initParameters(content) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["l" /* initParameters */])(content));
     }
+
   };
 };
 
@@ -58317,18 +58631,9 @@ var ModalContents = function (_Component) {
 
       var data = {
         id: content.id,
-        title: content.title
+        title: content.title,
+        params: []
       };
-
-      /*
-      if(!content.is_page){
-        data["typology"] = {
-          id : content.typology.id,
-          name : content.typology.name,
-          icon : content.typology.icon
-        };
-      }
-      */
 
       return data;
     }
@@ -58372,7 +58677,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["f" /* closeModalContents */])());
     },
     selectContent: function selectContent(content) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["q" /* selectContent */])(content));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["v" /* selectContent */])(content));
     }
   };
 };
@@ -58564,6 +58869,381 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 /* harmony default export */ __webpack_exports__["a"] = (thunk);
+
+/***/ }),
+/* 1000 */,
+/* 1001 */,
+/* 1002 */,
+/* 1003 */,
+/* 1004 */,
+/* 1005 */,
+/* 1006 */,
+/* 1007 */,
+/* 1008 */,
+/* 1009 */,
+/* 1010 */,
+/* 1011 */,
+/* 1012 */,
+/* 1013 */,
+/* 1014 */,
+/* 1015 */,
+/* 1016 */,
+/* 1017 */,
+/* 1018 */,
+/* 1019 */,
+/* 1020 */,
+/* 1021 */,
+/* 1022 */,
+/* 1023 */,
+/* 1024 */,
+/* 1025 */,
+/* 1026 */,
+/* 1027 */,
+/* 1028 */,
+/* 1029 */,
+/* 1030 */,
+/* 1031 */,
+/* 1032 */,
+/* 1033 */,
+/* 1034 */,
+/* 1035 */,
+/* 1036 */,
+/* 1037 */,
+/* 1038 */,
+/* 1039 */,
+/* 1040 */,
+/* 1041 */,
+/* 1042 */,
+/* 1043 */,
+/* 1044 */,
+/* 1045 */,
+/* 1046 */,
+/* 1047 */,
+/* 1048 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(96);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+
+
+
+var ModalParameters = function (_Component) {
+  _inherits(ModalParameters, _Component);
+
+  function ModalParameters(props) {
+    _classCallCheck(this, ModalParameters);
+
+    var _this = _possibleConstructorReturn(this, (ModalParameters.__proto__ || Object.getPrototypeOf(ModalParameters)).call(this, props));
+
+    _this.onModalClose = _this.onModalClose.bind(_this);
+
+    _this.state = {
+      id: 'modal-parameters',
+      isOpen: false,
+      zIndex: 13000
+    };
+
+    return _this;
+  }
+
+  /*
+  handleFieldSettingsChange(field) {
+      this.props.changeFieldSettings(field);
+  }
+  */
+
+  _createClass(ModalParameters, [{
+    key: 'checkValidParameters',
+    value: function checkValidParameters(params) {
+
+      if (params != null && params.length > 0) {
+        for (var key in params) {
+          if (params[key].value == "") {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: 'onModalClose',
+    value: function onModalClose(e) {
+      e.preventDefault();
+
+      this.props.closeModalParameters();
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("ModalParameters :: ", nextProps);
+
+      if (nextProps.display != this.state.isOpen) {
+        if (nextProps.display) {
+          this.openModal();
+        } else {
+          this.closeModal();
+        }
+      }
+    }
+  }, {
+    key: 'openModal',
+    value: function openModal() {
+      $("#" + this.state.id).css({
+        display: "block"
+      });
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        opacity: 1,
+        ease: Power2.easeInOut
+      });
+      this.setState({
+        isOpen: true
+      });
+    }
+  }, {
+    key: 'closeModal',
+    value: function closeModal() {
+      var self = this;
+
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        display: "none",
+        opacity: 0,
+        ease: Power2.easeInOut,
+        onComplete: function onComplete() {
+          self.setState({
+            isOpen: false
+          });
+        }
+      });
+    }
+  }, {
+    key: 'renderOptions',
+    value: function renderOptions() {
+      return this.props.app.fieldsList.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { value: item.identifier, key: index }, item.name);
+      });
+    }
+  }, {
+    key: 'onChangeParameter',
+    value: function onChangeParameter(item, event) {
+      //console.log("ModalParameters :: onChangeParameter => ",item,event.target.value);
+      item.value = event.target.value;
+      this.props.updateParameter(item);
+    }
+  }, {
+    key: 'renderParameters',
+    value: function renderParameters(params) {
+      var _this2 = this;
+
+      console.log("ModalParameters :: params => ", params);
+
+      return params.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'parameter', key: index }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row parameter' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col col-xs-6' }, item.name, ' ( ', item.identifier, ' )'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col col-xs-6 float-right' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('select', { className: 'form-control', value: item.value, onChange: _this2.onChangeParameter.bind(_this2, item) }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { value: '', key: '-1' }, '---'), _this2.renderOptions())))));
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      var params = this.props.contents.content != null && this.props.contents.content.params != null ? this.props.contents.content.params : [];
+
+      var valid = this.checkValidParameters(params);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { zIndex: this.state.zIndex } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'custom-modal', id: this.state.id }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-background' }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-header' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h2', null, 'S\xE9lectionner des param\xE8tres'), ' \xA0\xA0', !valid && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'text-danger' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-exclamation-triangle' })), valid && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'text-success' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-check' })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-buttons' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { className: 'btn btn-default close-button-modal', onClick: this.onModalClose }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-times' })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-content' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'container' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-xs-12 col-md-8 col-md-offset-2' }, this.renderParameters(params)))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-footer' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default', onClick: this.onModalClose }, ' Fermer '), ' \xA0')))));
+    }
+  }]);
+
+  return ModalParameters;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    app: state.app,
+    contents: state.contents,
+    display: state.contents.displayParameters
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    closeModalParameters: function closeModalParameters() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["g" /* closeModalParameters */])());
+    },
+    updateParameter: function updateParameter(parameter) {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["y" /* updateParameter */])(parameter));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps, mapDispatchToProps)(ModalParameters));
+
+/***/ }),
+/* 1049 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(96);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+
+
+
+var ParametersButton = function (_Component) {
+  _inherits(ParametersButton, _Component);
+
+  function ParametersButton(props) {
+    _classCallCheck(this, ParametersButton);
+
+    var _this = _possibleConstructorReturn(this, (ParametersButton.__proto__ || Object.getPrototypeOf(ParametersButton)).call(this, props));
+
+    _this.state = {
+      valid: true
+    };
+
+    return _this;
+  }
+
+  _createClass(ParametersButton, [{
+    key: 'checkValidParameters',
+    value: function checkValidParameters(content) {
+
+      var params = content.params;
+
+      if (params != null && params.length > 0) {
+        for (var key in params) {
+          if (params[key].value == "") {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+
+      var valid = true;
+
+      if (nextProps.contents.content !== undefined && nextProps.contents.content != null) {
+
+        valid = this.checkValidParameters(nextProps.contents.content);
+      }
+
+      this.setState({
+        valid: valid
+      });
+    }
+  }, {
+    key: 'onButtonPressed',
+    value: function onButtonPressed(event) {
+      event.preventDefault();
+
+      console.log("button pressed!");
+
+      this.props.openModalParameters();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default btn-parameters', onClick: this.onButtonPressed.bind(this) }, ' param\xE8tres \xA0', !this.state.valid && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'text-danger' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-exclamation-triangle' })), this.state.valid && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'text-success' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-check' }))));
+    }
+  }]);
+
+  return ParametersButton;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    contents: state.contents,
+    app: state.app
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    openModalParameters: function openModalParameters() {
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions___["r" /* openModalParameters */])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps, mapDispatchToProps)(ParametersButton));
 
 /***/ })
 /******/ ]);

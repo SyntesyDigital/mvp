@@ -177,6 +177,26 @@ class ElementField extends Component {
 
 	}
 
+	isValid() {
+
+		console.log("isValid => ",this.props.settings);
+
+		if(this.props.settings.hasRoute != null ){
+			var hasRoute = this.props.settings.hasRoute;
+			if(hasRoute.params != undefined && hasRoute.params != null){
+				if(hasRoute.params != null && hasRoute.params.length > 0){
+		        for(var key in hasRoute.params){
+		            if(hasRoute.params[key].value == ""){
+		              return false;
+		            }
+		        }
+		    }
+			}
+		}
+
+		return true;
+	}
+
   render() {
 
 		//console.log("is editable => ",this.props.editable);
@@ -188,6 +208,8 @@ class ElementField extends Component {
 	){
 		isEntryTitle = true;
 	}
+
+	//const valid = this.isValid();
 
 	const {
 		isDragging,
@@ -203,6 +225,26 @@ class ElementField extends Component {
         <div className={"field-type "}>
           <i className={"fa "+this.props.icon}></i> &nbsp;
 					{MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''}
+
+					<div style={{
+						position: 'absolute',
+						top: 0,
+						right: 20
+					}}>
+						{/*
+						{!valid &&
+						<span className="text-danger">
+							<i className="fas fa-exclamation-triangle"></i>
+						</span>
+						}
+						{valid &&
+							<span className="text-success">
+								<i className="fas fa-check"></i>
+							</span>
+						}
+						*/}
+					</div>
+
         </div>
 
         <div className="field-inputs">

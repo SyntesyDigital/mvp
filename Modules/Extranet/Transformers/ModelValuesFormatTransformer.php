@@ -4,6 +4,7 @@ namespace Modules\Extranet\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 use Carbon\Carbon;
+use Modules\Architect\Entities\Content;
 
 
 class ModelValuesFormatTransformer extends Resource
@@ -14,6 +15,12 @@ class ModelValuesFormatTransformer extends Resource
         $this->modelValues = $modelValues;
         $this->elementFields = $elementFields;
         $this->limit = $limit;
+
+        /*
+          [id] => url
+          $contentURls[1] = "http://www...."
+        */
+        $this->contentUrls = [];
     }
     /**
      * Transform the resource into an array.
@@ -23,7 +30,7 @@ class ModelValuesFormatTransformer extends Resource
      */
     public function toArray($request = null)
     {
-        return $this->getSurveyArray($this->modelValues,$this->elementFields, $this->limit);
+        return $this->getModelArray($this->modelValues,$this->elementFields, $this->limit);
     }
 
     public function toJson($request = null)
@@ -31,7 +38,41 @@ class ModelValuesFormatTransformer extends Resource
       return json_encode($this->toArray($request));
     }
 
-    public function getSurveyArray($modelValues, $elementFields, $limit)
+    private function processContent($hasRoute,$modelValue,$value)
+    {
+
+      if(isset($hasRoute['id'])){
+
+        if(!isset($this->contentUrls[$hasRoute['id']])){
+          //get the url
+          $content = Content::find($hasRoute['id']);
+          $this->contentUrls[$content->id] = $content->url;
+          $url = $content->url;
+        }
+        else {
+          $url = $this->contentUrls[$hasRoute['id']];
+        }
+
+        //process parameters
+        if($hasRoute['params'] != null && sizeof($hasRoute['params']) > 0){
+
+          $url.="?";
+          $first = true;
+          foreach($hasRoute['params'] as $param ){
+            if($param['value'] != "" && $modelValue->{$param['value']} != null ){
+              if(!$first){
+                  $url.="&";
+              }
+              $url.= $param['identifier'].'='.$modelValue->{$param['value']};
+              $first = false;
+            }
+          }
+        }
+      }
+      return '<a href="'.$url.'">'.$value.'</a>';
+    }
+
+    public function getModelArray($modelValues, $elementFields, $limit)
     {
 
       $result = [];
@@ -42,57 +83,79 @@ class ModelValuesFormatTransformer extends Resource
         $isTable = true;
       }
 
-      foreach ($modelValues as $modelValue) {
-        if(!$limit || $i < $limit ){
-          foreach ($elementFields as $elementField) {
-            $originalValue = $modelValue->{$elementField->identifier};
+      try {
 
-            switch ($elementField->type) {
-              case 'number':
-                if($elementField->settings['format'] == 'price'){
-                  $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
-                }elseif($elementField->settings['format'] == 'price_with_decimals'){
-                  $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
-                }else{
-                  $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
-                }
-                break;
-              case 'text':
-                if($elementField->settings['format'] == 'email'){
-                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-                }elseif($elementField->settings['format'] == 'telephone'){
-                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-                }else{
-                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-                }
-                break;
-              case 'date':
+        foreach ($modelValues as $modelValue) {
+          if(!$limit || $i < $limit ){
 
-                $originalValue = intval($originalValue)/1000;
-                $result[$i][$elementField->identifier] = $originalValue ? $originalValue: '';
+            foreach ($elementFields as $elementField) {
+              $originalValue = $modelValue->{$elementField->identifier};
 
-                //only process date when is not table. At tables date is processed in react to sort properly
-                if(!$isTable){
-
-                  if($elementField->settings['format'] == 'day_month_year'){
-                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
-                  }elseif($elementField->settings['format'] == 'month_year'){
-                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
-                  }elseif($elementField->settings['format'] == 'year'){
-                    $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
+              switch ($elementField->type) {
+                case 'number':
+                  if($elementField->settings['format'] == 'price'){
+                    $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
+                  }elseif($elementField->settings['format'] == 'price_with_decimals'){
+                    $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
+                  }else{
+                    $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
                   }
-                }
+                  break;
+                case 'text':
+                  if($elementField->settings['format'] == 'email'){
+                    $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                  }elseif($elementField->settings['format'] == 'telephone'){
+                    $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                  }else{
+                    $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                  }
+                  break;
+                case 'date':
 
-                break;
+                  $originalValue = intval($originalValue)/1000;
+                  $result[$i][$elementField->identifier] = $originalValue ? $originalValue: '';
 
-              default:
-                $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
-                break;
+                  //only process date when is not table. At tables date is processed in react to sort properly
+                  if(!$isTable){
+
+                    if($elementField->settings['format'] == 'day_month_year'){
+                      $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('d-m-Y');
+                    }elseif($elementField->settings['format'] == 'month_year'){
+                      $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('m-Y');
+                    }elseif($elementField->settings['format'] == 'year'){
+                      $result[$i][$elementField->identifier] = Carbon::createFromTimestamp($originalValue)->format('Y');
+                    }
+                  }
+
+                  break;
+
+                default:
+                  $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';
+                  break;
+              }
+
+              if(isset($elementField->settings) &&
+                isset($elementField->settings['hasRoute']) && $elementField->settings['hasRoute'] != null
+                && isset($elementField->settings['hasRoute']['id'])
+              ){
+
+                $result[$i][$elementField->identifier] = $this->processContent(
+                  $elementField->settings['hasRoute'],
+                  $modelValue,
+                  $result[$i][$elementField->identifier]);
+
+              }
+
             }
           }
+          $i++;
         }
-        $i++;
+
       }
+      catch(Exception $e){
+        dd($e->getMessage());
+      }
+
       return $result;
     }
 

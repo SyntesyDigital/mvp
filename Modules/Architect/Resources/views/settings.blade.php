@@ -29,6 +29,7 @@
             @endforeach()
 
             {{-- Plugins settings --}}
+
             @foreach(config('architect::plugins.settings') as $setting)
                 @if(empty($item['roles']) || has_roles([$item['roles']]))
                   <div class="col-xs-3">

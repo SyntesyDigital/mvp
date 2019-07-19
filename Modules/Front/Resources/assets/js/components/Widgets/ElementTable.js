@@ -80,6 +80,8 @@ export default class ElementTable extends Component {
 
     renderCell(field,identifier,row) {
 
+      var value = row.original[identifier];
+
       if(field.type == "date") {
           //console.log("renderCell => ",field,row);
           if(row.original[identifier] !== undefined && row.original[identifier] != ""){
@@ -87,21 +89,25 @@ export default class ElementTable extends Component {
             if(field.settings !== undefined && field.settings.format !== undefined){
               switch(field.settings.format) {
                 case 'day_month_year':
-                  return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+                  value = moment.unix(row.original[identifier]).format('DD/MM/YYYY')
                 case 'month_year':
-                  return moment.unix(row.original[identifier]).format('MM/YYYY')
+                  value = moment.unix(row.original[identifier]).format('MM/YYYY')
                 case 'year':
-                  return moment.unix(row.original[identifier]).format('YYYY')
+                  value = moment.unix(row.original[identifier]).format('YYYY')
               }
 
             }
 
-            return moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+            value = moment.unix(row.original[identifier]).format('DD/MM/YYYY')
           }
       }
 
-      return row.original[identifier];
-
+      if(field.settings.hasRoute !== undefined){
+        return <div dangerouslySetInnerHTML={{__html: value}} />
+      }
+      else {
+        return value;
+      }
 
     }
 

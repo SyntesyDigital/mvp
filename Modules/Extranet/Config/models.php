@@ -59,8 +59,7 @@ return [
           'sortable',
         ],
         'settings' => [
-          'format',
-          'hasRoute'
+          'format'
         ]
       ],
       'select' => [

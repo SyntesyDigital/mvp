@@ -46,6 +46,7 @@ const initialState =  {
   model : null,
   element : null,
   settingsField : null,
+  modelParameters : null,
   modalSettingsDisplay : false
 }
 
@@ -78,6 +79,59 @@ function mergeFieldSettings(field,modelField) {
 
   return field;
 }
+
+function checkIfFilterExist(filterIdentifier, parameters) {
+
+}
+
+function getParamerter(identifier, parametersList){
+
+  for(var key in parametersList) {
+    if(parametersList[key].identifier == identifier){
+      return parametersList[key];
+    }
+  }
+
+  return null;
+}
+
+function getModelParameters(model) {
+
+  var modelFilters = model.FILTRES;
+
+  var filters = [];
+
+  if(modelFilters != "" && modelFilters != null ){
+    var modelFiltersArray = modelFilters.split(",");
+    for(var key in modelFiltersArray){
+      var modelFiltersValues = modelFiltersArray[key].split("=");
+      filters.push(modelFiltersValues[0]);
+    }
+  }
+
+  return filters;
+}
+
+function updateParamertsFromModel(model,parameters, parametersList) {
+
+    var filters = getModelParameters(model);
+
+    for(var key in filters) {
+      if(getParamerter(filters[key], parameters) == null) {
+        //dont exist yet add parameter
+        var newParameter = getParamerter(filters[key], parametersList);
+        if(newParameter != null){
+          parameters.push(newParameter);
+        }
+        else {
+          console.error("Parameter need to be created with key => ",filters[key]);
+        }
+      }
+    }
+
+    return parameters;
+}
+
 
 function appReducer(state = initialState, action) {
 
@@ -125,6 +179,15 @@ function appReducer(state = initialState, action) {
 
             }
 
+            var modelParameters = getModelParameters(action.payload.model);
+
+            //check from model if paramerts correctly set
+            var parametersMerged = updateParamertsFromModel(
+              action.payload.model,
+              action.payload.parameters,
+              action.payload.parametersList
+            );
+
             return {
                 ...state,
                 element : action.payload.element,
@@ -136,8 +199,9 @@ function appReducer(state = initialState, action) {
                 wsModelFormat : action.payload.wsModelFormat,
                 wsModelExemple : action.payload.wsModelExemple,
                 elementType :  action.payload.elementType,
-                parameters: action.payload.parameters,
+                parameters: parametersMerged,
                 parametersList : action.payload.parametersList,
+                modelParameters : modelParameters,
                 fields : action.payload.element != null ?
                   action.payload.element.fields : []
             }
@@ -304,7 +368,6 @@ function appReducer(state = initialState, action) {
               ...state,
               settingsField : null
             }
-
 
         case ADD_PARAMETER :
             var found = false;

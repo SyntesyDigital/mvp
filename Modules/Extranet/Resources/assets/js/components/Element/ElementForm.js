@@ -15,6 +15,8 @@ import ElementDragField from './ElementDragField';
 import ElementBar from './ElementBar';
 import ElementModal from './ElementModal';
 import ModalContents from './Contents/ModalContents';
+import ModalParameters from './Parameters/ModalParameters';
+
 
 class ElementForm extends Component {
 
@@ -77,6 +79,8 @@ class ElementForm extends Component {
               <ElementModal />
 
               <ModalContents />
+
+              <ModalParameters />
 
               <div className="col-md-9 page-content">
                 {

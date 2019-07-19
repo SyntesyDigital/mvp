@@ -2,35 +2,13 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import {connect} from 'react-redux';
 
-import {openModalContents, clearContent} from './../actions/';
+import {openModalContents, clearContent, initContent,
+  contentUpdated, unselectContent,
+  initParameters,
+} from './../actions/';
 
-/*
-*
+import ParametersButton from '../Parameters/ParametersButton';
 
-    link : null,
-    {
-      "content":1,
-      "params" : {
-        "id_pol" : "element_identifier",
-        "id_per" : ""
-      }
-    }
-
-    Como se sabra si esta bien definido ?
-    Porque todos los params, si los tiene seran diferente de "",
-
-    De donde se saca los parametros que tiene la ruta ?
-
-    Cuando se selecciona el contenido que información tenemos ?
-      Aqui no hay modal todavia.
-      Yo creo que en ajuter podemos poner los parametros que tiene
-      Necesitamos recuperar el id y los parametros en array []
-      O su id ? yo creo mejor por el identifier porque es lo que vamos a construir la ruta.
-      ['id_per','id_pol'], o quiza id : [1,2]
-
-
-
-*/
 
 class LinkSettingsField extends Component {
 
@@ -41,11 +19,12 @@ class LinkSettingsField extends Component {
     var input = "";
     var display = false;
 
+    this.initialised = false;
+
     this.state = {
       checkbox : checkbox,
-      link : null,
       display : display,
-      content : null
+      //content : null
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
@@ -58,49 +37,39 @@ class LinkSettingsField extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    this.processProps(nextProps);
+  }
 
-    //to check if need to proces or not
-    var contentUpdated = false;
+  loadContentParameters(contentId) {
 
-    if(nextProps.contents.content != null ) {
-        //update the content
-        var updateContent = false;
-        if(this.state.content != null) {
-          //check if is not the same to avoid multiple updates
-          if(this.state.content.id !=nextProps.contents.content.id){
-            //is different update
-            updateContent = true;
+    var route = routes['extranet.content.parameters'].replace(':content',contentId);
+    //console.log("LinkSettingsField :: loadContentParameters :: ",route);
+
+    var self = this;
+
+    axios.get(route)
+      .then(function (response) {
+          if(response.status == 200
+              && response.data !== undefined)
+          {
+            //console.log("LinkSettingsField  :: data => ",response.data);
+
+            //self.processData(response.data.modelValues);
+            self.props.initParameters(response.data);
           }
-        }
-        else {
-          //just update
-          updateContent = true;
-        }
 
-        if(updateContent){
-            this.handleContentUpdate(nextProps.contents.content);
-            contentUpdated = true;
-        }
-    }
-    else if(nextProps.contents.content == null && this.state.content != null){
-        //delete the content
-        this.handleContentUpdate(null);
-        contentUpdated = true;
-    }
-
-    //if not updated then process props, if updated it will come here after update
-    if(!contentUpdated) {
-      this.processProps(nextProps);
-    }
+      }).catch(function (error) {
+         console.log(error);
+       });
   }
 
   processProps(nextProps){
     var checkbox = null;
-    var link = null;
     var display = false;
     var content = null;
+    var initialised = false;
 
-    //console.log("LinkSettingsField :: componentWillRecieveProps");
+    console.log("LinkSettingsField :: componentWillRecieveProps :: ",nextProps);
     //console.log(nextProps);
 
     if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
@@ -109,25 +78,55 @@ class LinkSettingsField extends Component {
       checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
       display = true;
 
-      link = nextProps.field[nextProps.source][nextProps.name] == null ?
-        '' : nextProps.field[nextProps.source][nextProps.name];
+      /*
+      content = nextProps.field[nextProps.source][nextProps.name] == null ?
+        null : nextProps.field[nextProps.source][nextProps.name];
+      */
+
+      console.log("LinkSettingsField :: processProps : nextProps.contents.content => ", nextProps.contents.content);
+      //content came always from redux
+      content = nextProps.contents.content != null ?
+        nextProps.contents.content : null;
     }
 
-    if(nextProps.contents.content != null){
-      content = nextProps.contents.content;
+    //if content changed
+    if(nextProps.contents.needUpdate){
+      this.handleContentUpdate(content);
     }
 
     this.setState({
       checkbox : checkbox,
-      link : link,
       display : display,
-      content : content
+      //content : content
     });
+
+    //check if state is changing
+    if(nextProps.field == null && this.initialised){
+      //destroying the component
+      console.log("LinkSettingsField :: Destroying!");
+      this.initialised = false;
+      this.props.clearContent();
+
+    }
+    else if(nextProps.field != null && !this.initialised){
+      //constructing the component
+      var newContent = nextProps.field[nextProps.source][nextProps.name];
+      console.log("LinkSettingsField :: Constructing => ", newContent);
+      this.initialised = true;
+      if(newContent != null){
+        this.props.initContent(newContent);
+        this.loadContentParameters(newContent.id);
+      }
+    }
+
+
+
   }
 
   getDefaultValue() {
     return {
-      content : null,
+      id : null,
+      title : '',
       params : {}
     };
   }
@@ -146,28 +145,36 @@ class LinkSettingsField extends Component {
 
   handleContentUpdate(content) {
 
-    var contentValue = {
-      content : null,
-      params : {}
-    };
+    console.log("LinkSettingsField :: handleContentUpdate => , initialised => ",this.initialised,"content =>", content);
 
-    if(content != null){
-      contentValue.content = content;
+    if(this.initialised) {
+
+        var contentValue = this.getDefaultValue();
+
+        if(content != null){
+          contentValue = content;
+          this.loadContentParameters(content.id);
+        }
+
+        var field = {
+          name : this.props.name,
+          source : this.props.source,
+          value : contentValue
+        };
+
+        //update the state for comparision
+        /*
+        this.setState({
+          content : content
+        });
+        */
+
+        //console.log("handleContentUpdate => ",field);
+
+        //propagate to main field
+        this.props.onFieldChange(field);
+        this.props.contentUpdated();
     }
-
-    var field = {
-      name : this.props.name,
-      source : this.props.source,
-      value : contentValue
-    };
-
-    //update the state for comparision
-    this.setState({
-      content : content
-    });
-
-    //propagate to main field
-    this.props.onFieldChange(field);
   }
 
   handleInputChange(event) {
@@ -191,12 +198,14 @@ class LinkSettingsField extends Component {
   onRemoveField(event) {
     event.preventDefault();
 
-    this.props.clearContent();
+    console.log("onRemoveField => ",this.props.contents.content);
+    this.props.unselectContent();
+
   }
 
   renderSelectedPage() {
 
-    const {content} = this.state;
+    const {content} = this.props.contents;
 
     if(content != null){
       return (
@@ -212,6 +221,11 @@ class LinkSettingsField extends Component {
               <div className="row">
                 <div className="field-name col-xs-6">
                   {content.title ? content.title : ""}
+                </div>
+
+                <div className="field-name col-xs-6">
+                  <ParametersButton
+                  />
                 </div>
               </div>
             </div>
@@ -255,7 +269,7 @@ class LinkSettingsField extends Component {
           </div>
 
 
-          <div className="setup-field-config" style={{display : this.state.checkbox != null && this.state.checkbox ? "block" : "none" }}>
+          <div className="setup-field-config settings-field" style={{display : this.state.checkbox != null && this.state.checkbox ? "block" : "none" }}>
             <div className="form-group bmd-form-group">
                <label htmlFor="num" className="bmd-label-floating">{this.props.inputLabel}</label>
                {this.renderSelectedPage()}
@@ -279,12 +293,25 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        initContent : (content) => {
+            return dispatch(initContent(content));
+        },
         openModalContents : () => {
             return dispatch(openModalContents());
         },
         clearContent : () => {
             return dispatch(clearContent());
+        },
+        contentUpdated : () => {
+            return dispatch(contentUpdated());
+        },
+        unselectContent : () => {
+            return dispatch(unselectContent());
+        },
+        initParameters : (content) => {
+            return dispatch(initParameters(content))
         }
+
     };
 }
 
