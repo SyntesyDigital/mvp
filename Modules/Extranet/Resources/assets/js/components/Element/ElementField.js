@@ -250,7 +250,7 @@ class ElementField extends Component {
         <div className="field-inputs">
           <div className="row">
             <div className="field-name col-xs-6">
-              <input disabled={this.props.editable ? false : true} type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
+              <input type="text" className="form-control" name="name" placeholder="Nom" value={this.state.name} onChange={this.handleChange}/>
             </div>
 						<div className="field-name col-xs-6">
 							<input disabled type="text" className="form-control" name="identifier" placeholder="Idenfiticador" value={this.state.identifier} onChange={this.handleChange}/>
