@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 // CONTENT FIELDS
-import LinkField from './../Content/ContentFields/LinkField';
-import ContentSelectModal from './../Content/ContentSelectModal';
+import LinkField from './../Contents/ContentFields/LinkField';
+import ContentSelectModal from './../Contents/ContentSelectModal';
 import InputSettingsField from './../Typology/Settings/InputSettingsField';
 import SelectorSettingsField from './../Typology/Settings/SelectorSettingsField';
 

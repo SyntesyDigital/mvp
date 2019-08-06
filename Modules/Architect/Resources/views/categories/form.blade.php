@@ -44,7 +44,7 @@
                           </a>
                       </li>
                       <li>
-                          <a href="{{route('account')}}" class="text-danger">
+                          <a href="#" class="text-danger">
                               <i class="fa fa-trash text-danger"></i>
                               &nbsp;
                               <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>

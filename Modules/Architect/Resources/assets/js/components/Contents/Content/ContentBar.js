@@ -1,0 +1,261 @@
+import React, {Component} from 'react';
+import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  duplicate,
+  deleteContent,
+  submitForm
+} from './../actions/';
+
+class ContentBar extends Component {
+
+  constructor(props){
+    super(props);
+
+    if(props.app.typology.id != null){
+      this.createRoute = routes['contents.create'].replace(':id',props.app.typology.id);
+    }
+    else {
+      this.createRoute = routes['contents.page.create'];
+    }
+
+  }
+
+  saveLayout(e) {
+      e.preventDefault();
+      this.props.onLayoutSave != undefined ? this.props.onLayoutSave() : null;
+  }
+
+  loadLayout(e) {
+      e.preventDefault();
+      this.props.onLoadLayout != undefined ? this.props.onLoadLayout() : null;
+  }
+
+  getFormData() {
+
+      //console.log("app => ",this.props.app);
+      const isPage = this.props.typology ? false : true;
+      const app = this.props.app;
+
+      var data = {
+        parent_id: app.parent_id,
+        translations : app.translations,
+        content_id : app.content !== undefined ? app.content.id : null,
+        status : app.status,
+        category_id : app.category,
+        tags : app.tags,
+        settings : app.settings,
+      }
+
+      //merge different fields for page and content
+      if(isPage) {
+        return {
+          ...data,
+          fields : {
+              title : app.title,
+              slug : app.slug,
+              description : app.description
+          },
+          is_page : true,
+          page: app.layout,
+        };
+      }
+      else {
+        return {
+          ...data,
+          fields : app.fields,
+          typology_id : app.typology.id,
+        }
+      }
+
+  }
+
+  renderUnsavedMenu() {
+
+    return (
+      <ul className="dropdown-menu dropdown-menu-right default-padding">
+          <li className="dropdown-header"></li>
+          <li>
+              <a href={this.createRoute}>
+                  <i className="fa fa-plus-circle"></i>
+                  &nbsp;{Lang.get('fields.new')}
+              </a>
+          </li>
+          {this.props.onLoadLayout &&
+          <li>
+              <a href="#" onClick={this.loadLayout.bind(this)}>
+                  <i className="fa fa-download"></i>
+                  &nbsp;{Lang.get('modals.load_template')}
+              </a>
+          </li>
+          }
+      </ul>
+    );
+  }
+
+  renderFullMenu() {
+
+    return (
+      <ul className="dropdown-menu dropdown-menu-right default-padding">
+          <li className="dropdown-header"></li>
+          <li>
+              <a href={this.createRoute}>
+                  <i className="fa fa-plus-circle"></i>
+                  &nbsp;{Lang.get('fields.new')}
+              </a>
+          </li>
+
+          <li>
+              <a href="#" onClick={this.onDuplicate.bind(this)}>
+                  <i className="fa fa-files-o"></i>
+                  &nbsp;{Lang.get('fields.duplicate')}
+              </a>
+          </li>
+
+          {this.props.onLoadLayout &&
+          <li>
+              <a href="#" onClick={this.loadLayout.bind(this)}>
+                  <i className="fa fa-download"></i>
+                  &nbsp;{Lang.get('modals.load_template')}
+              </a>
+          </li>
+          }
+
+          {this.props.onLayoutSave &&
+          <li>
+              <a href="#" onClick={this.saveLayout.bind(this)}>
+                  <i className="fa fa-upload"></i>
+                  &nbsp;{Lang.get('modals.save_template')}
+              </a>
+          </li>
+          }
+
+          <li>
+              <a href="#" className="text-danger" onClick={this.onDelete.bind(this)}>
+                  <i className="fa fa-trash text-danger"></i>
+                  &nbsp;
+                  <span className="text-danger">{Lang.get('fields.delete')}</span>
+              </a>
+          </li>
+      </ul>
+    );
+
+  }
+
+  onSubmitForm(e) {
+    e.preventDefault();
+
+    if(!this.props.app.saving){
+      this.props.submitForm(this.getFormData());
+    }
+  }
+
+  onDuplicate(e) {
+    e.preventDefault();
+
+    if(!this.props.app.saving){
+      this.props.duplicate(this.props.app.content.id)
+    }
+  }
+
+  onDelete(e) {
+    e.preventDefault();
+
+    if(!this.props.app.saving){
+      this.props.deleteContent(this.props.app.content.id,this.getFormData());
+    }
+  }
+
+  render() {
+
+    const isPage = this.props.typology ? false : true;
+
+    const icon = isPage ? 'far fa-file' : this.props.app.typology.icon;
+    const name = isPage ? Lang.get('fields.page') : this.props.app.typology.name;
+    const saved = this.props.app.saved;
+    const hasPreview = isPage ? true : (
+      this.props.app.typology.has_slug == 1 ? true : false
+    );
+    const content = this.props.app.content;
+    const saving = this.props.app.saving;
+
+    return (
+      <div className="page-bar">
+        <div className="container">
+          <div className="row">
+
+            <div className="col-md-12">
+              <a href={routes.contents} className="btn btn-default"> <i className="fa fa-angle-left"></i> </a>
+              <h1>
+                {icon != "" &&
+                  <i className={icon}></i>
+                }
+                {'\u00A0'}
+
+                { name != "" ? name : Lang.get('modals.new_content') }
+              </h1>
+
+              <div className="float-buttons pull-right">
+
+
+                {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+
+                  <div className="actions-dropdown">
+                    <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
+                      {Lang.get('fields.actions') }
+                      <b className="caret"></b>
+                      <div className="ripple-container"></div>
+                    </a>
+                      { saved && content !== undefined && content != null && !architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+                        this.renderFullMenu()
+                      }
+
+                      { !saved  &&
+                        this.renderUnsavedMenu()
+                      }
+                  </div>
+                }
+
+              {  saved && content !== undefined && content != null &&
+                hasPreview &&
+                <a href={routes['previewContent'].replace(':id',content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; {Lang.get('fields.preview') } </a>
+              }
+              <a href="" className="btn btn-primary"
+                onClick={this.onSubmitForm.bind(this)}
+                disabled={saving}
+              > <i className="fa fa-cloud-upload"></i> &nbsp; {Lang.get('fields.save') } </a>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    );
+  }
+
+}
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        duplicate: (contentId) => {
+            return dispatch(duplicate(contentId));
+        },
+        deleteContent: (contentId, data) => {
+          return dispatch(deleteContent(contentId, data));
+        },
+        submitForm: (data) => {
+          return dispatch(submitForm(data));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentBar);

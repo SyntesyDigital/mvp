@@ -1,10 +1,10 @@
 {
-    "/modules/architect/js/app.js": "/modules/architect/js/app.js",
     "/modules/front/js/app.js": "/modules/front/js/app.js",
     "/css/app.css": "/css/app.css",
     "/modules/architect/css/app.css": "/modules/architect/css/app.css",
     "/modules/extranet/css/app.css": "/modules/extranet/css/app.css",
     "/modules/front/css/app.css": "/modules/front/css/app.css",
+    "/modules/architect/js/app.js": "/modules/architect/js/app.js",
     "/modules/extranet/js/app.js": "/modules/extranet/js/app.js",
     "/js/app.js": "/js/app.js",
     "/modules/architect/js/architect.js": "/modules/architect/js/architect.js"

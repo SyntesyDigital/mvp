@@ -16,7 +16,7 @@ import {
   SETTINGS_CLOSED,
 
   ADD_PARAMETER,
-  REMOVE_PARAMETER
+  REMOVE_PARAMETER,
 
 } from '../constants';
 
@@ -402,8 +402,6 @@ function appReducer(state = initialState, action) {
               ...state,
               parameters
             }
-
-
 
         default:
             return state;

@@ -71,6 +71,9 @@ class MediaSelectModal extends Component {
             addRemoveLinks: false,
             maxFilesize: maxFilesize,
             paramName: paramName,
+            sending: function(file, xhr, formData) {
+  				    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+    				},
             /*
             thumbnail: function(file, dataUrl) {
                 return false;
@@ -234,7 +237,8 @@ class MediaSelectModal extends Component {
 
     modalClose() {
         console.log("modalClose");
-      var self =this;
+        var self =this;
+        
         TweenMax.to($("#media-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({
             imageSelected : null

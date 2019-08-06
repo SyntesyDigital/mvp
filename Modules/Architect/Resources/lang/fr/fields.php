@@ -15,7 +15,7 @@ return [
     'slug' => 'Slug',
     'url' => 'URL',
     'file' => 'Fichier',
-    'translated_file' => 'Fichier',
+    'translated_file' => 'Fichier traduit',
     'key_values' => 'Clé/Valeur',
 
     'title' => 'Titre',

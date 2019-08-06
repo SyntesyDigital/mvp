@@ -145,6 +145,7 @@ class ElementRepository extends BaseRepository
 
     public function getModelValuesFromElement($element)
     {
+        dd($element->model_exemple);
         return $this->boby->getModelValuesQuery($element->model_exemple);
     }
 
