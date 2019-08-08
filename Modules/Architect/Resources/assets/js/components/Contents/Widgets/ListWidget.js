@@ -1,35 +1,23 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 import update from 'immutability-helper'
+import {connect} from 'react-redux';
+
+import {
+  editItemList,
+  addListField,
+  removeListField
+} from './../actions/';
+
 import ItemListDragField from './ItemListDragField';
 
-/**
 
-[
-  {
-      title : {
-        "ca" : "asdfasdfasdf",
-        "es" : "sdfasdfsdf"
-      },
-      richtect : {
-        "ca" : "sfasdfasdf",
-        "es" : "asfasdfasdf"
-      },
-      url : {
-        url :
-        content :
-      },
-
-  }
-]
-*
-*/
 class ListWidget extends Component
 {
   constructor(props)
   {
 
-    //console.log("ListWidget :: constructor");
+    ////console.log("ListWidget :: constructor");
 
     super(props);
 
@@ -50,7 +38,7 @@ class ListWidget extends Component
 
         this.currentId ++;
     }
-    console.log("ListWidget :: currentId = "+this.currentId);
+    //console.log("ListWidget :: currentId = "+this.currentId);
 
   }
 
@@ -68,9 +56,9 @@ class ListWidget extends Component
           }
       });
 
-      // console.log("\n\nResult value : ");
-      // console.log(field.value);
-      // console.log(result);
+      // //console.log("\n\nResult value : ");
+      // //console.log(field.value);
+      // //console.log(result);
 
       this.props.onFieldChange({
           identifier: this.props.field.identifier,
@@ -83,7 +71,7 @@ class ListWidget extends Component
 
     const fields = this.props.field.value;
 
-    //console.log("ListWidget :: handleEditField => ",fieldId,fields);
+    ////console.log("ListWidget :: handleEditField => ",fieldId,fields);
 
     var field = null;
     var index = -1;
@@ -108,7 +96,7 @@ class ListWidget extends Component
       type : 'list-item'
     };
 
-    this.props.onListItemEdit(editInfo);
+    this.props.editItemList(editInfo);
 
   }
 
@@ -127,7 +115,11 @@ class ListWidget extends Component
       }
 
       if(index != -1){
-        this.props.onRemoveField(index);
+        this.props.removeListField(
+          index,
+          this.props.modalEdit.item.pathToIndex,
+          this.props.app.layout
+        );
       }
       else {
         console.error("handleRemoveField field Id not found : "+fieldId);
@@ -154,7 +146,7 @@ class ListWidget extends Component
 
     //FIXME to replace with text provided by widget configuration
     const widgetIdentifier = this.props.field.widget;
-    //console.log("FIELDS ======>", this.props.field);
+    ////console.log("FIELDS ======>", this.props.field);
 
     var currentIndex = this.props.field.value != undefined && this.props.field.value != null ?
       this.props.field.value.length : 0;
@@ -165,9 +157,12 @@ class ListWidget extends Component
 
     this.currentId++;
 
-    //console.log("ListWidget :: onAddField with value => ",field);
-
-    this.props.onAddField(field);
+    ////console.log("ListWidget :: onAddField with value => ",field);
+    this.props.addListField(
+      field,
+      this.props.modalEdit.item.pathToIndex,
+      this.props.app.layout
+    );
 
   }
 
@@ -175,7 +170,7 @@ class ListWidget extends Component
   findName(fields){
     for(var key in fields){
 
-      //console.log("findName => ",fields[key]);
+      ////console.log("findName => ",fields[key]);
 
       if(fields[key].type == "text"){
         if(fields[key].value !== undefined && fields[key].value != null
@@ -190,7 +185,7 @@ class ListWidget extends Component
   findImage(fields){
     for(var key in fields){
 
-      //console.log("findImage => ",fields[key]);
+      ////console.log("findImage => ",fields[key]);
 
       if(fields[key].type == "image"){
         if(fields[key].value !== undefined && fields[key].value != null){
@@ -205,12 +200,12 @@ class ListWidget extends Component
      var fields = [];
      var _this = this;
 
-     //console.log("ListWidget :: renderInputs => ",this.props.field);
+     ////console.log("ListWidget :: renderInputs => ",this.props.field);
 
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){
 
-              console.log("ListWidget :: renderInputs =>",widget);
+              //console.log("ListWidget :: renderInputs =>",widget);
               const name = _this.findName(widget.fields);
               const image = _this.findImage(widget.fields);
 
@@ -259,4 +254,29 @@ class ListWidget extends Component
   }
 
 }
-export default ListWidget;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalEdit : state.modalEdit
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        editItemList : (item) => {
+            return dispatch(editItemList(item));
+        },
+        addListField : (field,pathToIndex,layout) => {
+            return dispatch(addListField(field,pathToIndex,layout));
+        },
+        removeListField : (index,pathToIndex,layout) => {
+            return dispatch(removeListField(index,pathToIndex,layout));
+        },
+
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListWidget);

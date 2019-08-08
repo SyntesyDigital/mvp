@@ -7,8 +7,7 @@ class FirstEmptyRow extends Component {
     super(props);
 
   }
-
-
+  
   render() {
 
     return (

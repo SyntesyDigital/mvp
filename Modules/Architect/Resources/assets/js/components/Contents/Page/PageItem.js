@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  copyItem,
+  editItem,
+  pullUpItem,
+  pullDownItem,
+  deletePageItem
+} from './../actions/';
 
 class PageItem extends Component {
 
   constructor(props){
     super(props);
-
-
-
   }
 
   onEditItem(e) {
     e.preventDefault();
 
-    this.props.onEditItem(this.props);
+    this.props.editItem(this.props);
   }
 
   onDeleteItem(e) {
@@ -34,7 +40,10 @@ class PageItem extends Component {
 				},
 				callback: function (result) {
 					if(result){
-						self.props.onDeleteItem(self.props);
+						self.props.deletePageItem(
+              self.props.pathToIndex,
+              self.props.app.layout
+            );
 					}
 				}
 		});
@@ -44,20 +53,30 @@ class PageItem extends Component {
   onPullDownItem(e) {
     e.preventDefault();
 
-    this.props.onPullDownItem(this.props.pathToIndex);
+    this.props.pullDownItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
 
   }
 
   onPullUpItem(e) {
     e.preventDefault();
 
-    this.props.onPullUpItem(this.props.pathToIndex);
+    this.props.pullUpItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
+
   }
 
   onCopyItem(e) {
     e.preventDefault();
 
-    this.props.onCopyItem(this.props.pathToIndex);
+    this.props.copyItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
   }
 
   renderTextPreview() {
@@ -84,7 +103,7 @@ class PageItem extends Component {
   renderLinkPreview() {
     var value = null;
 
-    console.log("this.props.data.field.value => ",this.props.data.field.value);
+    //console.log("this.props.data.field.value => ",this.props.data.field.value);
 
     if(this.props.data.field.value !== undefined && this.props.data.field.value != null
       && this.props.data.field.value.title !== undefined && this.props.data.field.value.title != null
@@ -135,7 +154,7 @@ class PageItem extends Component {
     if(this.props.data.field.value !== undefined &&
       this.props.data.field.value != null ){
 
-      //console.log("renderImagePreview => ",this.props.data.field.value);
+      ////console.log("renderImagePreview => ",this.props.data.field.value);
       var crop = 'original';
 
       if(this.props.data.field.settings.cropsAllowed != null){
@@ -163,7 +182,7 @@ class PageItem extends Component {
   renderImageTextLinkPreview() {
     var value = null;
 
-    console.log("PageItem :: renderImageTextLinkPreview => ",this.props.data.field);
+    //console.log("PageItem :: renderImageTextLinkPreview => ",this.props.data.field);
 
     if(this.props.data.field.fields[1] !== undefined &&
       this.props.data.field.fields[1].value !== undefined &&
@@ -218,7 +237,7 @@ class PageItem extends Component {
 
   render() {
 
-    //console.log("PageItem => ",this.props);
+    ////console.log("PageItem => ",this.props);
     const childrenIndex = this.props.pathToIndex[this.props.pathToIndex.length-1];
     const childrenLength = this.props.childrenLength;
 
@@ -261,4 +280,33 @@ class PageItem extends Component {
   }
 
 }
-export default PageItem;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        copyItem: (pathToIndex,layout) => {
+          return dispatch(copyItem(pathToIndex,layout))
+        },
+        editItem: (item) => {
+          return dispatch(editItem(item))
+        },
+        pullUpItem: (pathToIndex,layout) => {
+            return dispatch(pullUpItem(pathToIndex,layout))
+        },
+        pullDownItem: (pathToIndex,layout) => {
+            return dispatch(pullDownItem(pathToIndex,layout))
+        },
+        deletePageItem: (pathToIndex,layout) => {
+            return dispatch(deletePageItem(pathToIndex,layout))
+        }
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageItem);

@@ -19,7 +19,7 @@ class TextField extends Component
     const values = this.props.field.value ? this.props.field.value : {};
     values[language] = event.target.value;
 
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       value : values
     });
@@ -30,7 +30,7 @@ class TextField extends Component
   {
 
     const errors = this.props.app.errors[this.props.field.identifier];
-    //console.log("ERRROR : ", errors);
+    ////console.log("ERRROR : ", errors);
 
     var inputs = [];
     for(var key in this.props.app.translations){
@@ -42,7 +42,7 @@ class TextField extends Component
               error = true;
           }
 
-          //console.log("Error => ",error);
+          ////console.log("Error => ",error);
 
           inputs.push(
               <div className={'form-group bmd-form-group ' + (error !== null ? 'has-error' : null)} key={key}>

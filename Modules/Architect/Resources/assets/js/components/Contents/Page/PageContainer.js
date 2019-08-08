@@ -25,6 +25,7 @@ class PageContainer extends Component {
   constructor(props) {
      super(props);
 
+     //console.log("props.app => ", props.app.content);
      this.props.initPageState(props.app.content);
    }
 
@@ -32,7 +33,6 @@ class PageContainer extends Component {
 
     return (
       <div>
-
         <ContentBar
           /*
           onLayoutSave={this.handleLayoutSave}
@@ -45,19 +45,7 @@ class PageContainer extends Component {
 
           <DragDropContextProvider backend={HTML5Backend}>
 
-            <PageBuilder
-              /*
-              layout={this.state.layout}
-              updateLayout={this.handleUpdateLayout}
-              translations={this.state.translations}
-              onFieldChange={this.handleFieldChange}
-              title={this.state.title}
-              slug={this.state.slug}
-              description={this.state.description}
-              saved={this.props.saved}
-              errors={this.state.errors}
-              */
-            />
+            <PageBuilder />
 
           </DragDropContextProvider>
 

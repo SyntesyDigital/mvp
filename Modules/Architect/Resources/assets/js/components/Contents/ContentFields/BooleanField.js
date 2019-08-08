@@ -20,7 +20,7 @@ class BooleanField extends Component {
       value : event.target.checked
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   renderInputs() {

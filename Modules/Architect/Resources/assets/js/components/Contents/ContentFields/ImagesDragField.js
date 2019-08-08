@@ -87,7 +87,7 @@ class ImagesDragField extends Component {
 	constructor(props){
 		super(props);
 
-		//console.log("ImagesDragField => ",props);
+		////console.log("ImagesDragField => ",props);
 
 		this.onRemoveField = this.onRemoveField.bind(this);
 	}

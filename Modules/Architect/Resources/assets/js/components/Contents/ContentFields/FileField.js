@@ -15,7 +15,7 @@ class FileField extends Component {
   }
 
   handleOnChange(event) {
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       language : $(event.target).closest('.form-control').attr('language'),
       value : event.target.value
@@ -24,14 +24,14 @@ class FileField extends Component {
 
   onFileSelect(event) {
     event.preventDefault();
-    console.log('onFileSelect => ', event);
+    //console.log('onFileSelect => ', event);
 
     this.props.selectFile(this.props.field);
   }
 
   cancelFile(event) {
     event.preventDefault();
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       value : null
     });
@@ -59,7 +59,7 @@ class FileField extends Component {
 
     var url = null;
 
-    //console.log("FileField :: url => ",this.props.field);
+    ////console.log("FileField :: url => ",this.props.field);
 
     if(this.props.field.value != null && this.props.field.value.type.indexOf("application") != -1){
       url = this.props.field.value.urls.files;

@@ -15,7 +15,7 @@ class KeyValuesField extends Component {
   }
 
   componentDidMount(){
-      //console.log('KeyValues =>', this.props.field);
+      ////console.log('KeyValues =>', this.props.field);
 
     if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length == 0){
       //setup value if not yet defined
@@ -24,9 +24,9 @@ class KeyValuesField extends Component {
           value: []
       };
 
-      this.props.customFieldChange(newField);
+      this.props.onFieldChange(newField);
 
-      //console.log('componentDidMount =>', this.props.field);
+      ////console.log('componentDidMount =>', this.props.field);
 
     }
   }
@@ -37,20 +37,20 @@ class KeyValuesField extends Component {
 
       field.value[index][e.target.name] = e.target.value;
 
-      //console.log("KeyValuesField :: handleOnChange => ",e,index);
+      ////console.log("KeyValuesField :: handleOnChange => ",e,index);
 
-      this.props.customFieldChange(field);
+      this.props.onFieldChange(field);
   }
 
   handleRemoveField(index) {
 
-    //console.log("KeyValuesField :: handleRemoveField => ",index);
+    ////console.log("KeyValuesField :: handleRemoveField => ",index);
 
       const fields = this.props.field.value;
 
       fields.splice(index,1);
 
-      this.props.customFieldChange({
+      this.props.onFieldChange({
           identifier : this.props.field.identifier,
           value : fields
       });
@@ -65,7 +65,7 @@ class KeyValuesField extends Component {
       return;
     }
 
-    console.log("KeyValuesField => ",this.props.field.value);
+    //console.log("KeyValuesField => ",this.props.field.value);
 
     const images = this.props.field.value;
 
@@ -88,7 +88,7 @@ class KeyValuesField extends Component {
   onAddItem(e){
     e.preventDefault();
 
-    //console.log("KeyValuesField :: on AddItem");
+    ////console.log("KeyValuesField :: on AddItem");
 
     const field = this.props.field;
 
@@ -98,7 +98,7 @@ class KeyValuesField extends Component {
       value : 0
     });
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
 

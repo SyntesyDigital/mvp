@@ -13,6 +13,8 @@ class ContentBar extends Component {
   constructor(props){
     super(props);
 
+    //console.log("props.app => ",props.app);
+
     if(props.app.typology.id != null){
       this.createRoute = routes['contents.create'].replace(':id',props.app.typology.id);
     }
@@ -34,8 +36,8 @@ class ContentBar extends Component {
 
   getFormData() {
 
-      //console.log("app => ",this.props.app);
-      const isPage = this.props.typology ? false : true;
+      ////console.log("app => ",this.props.app);
+      const isPage = this.props.app.typology ? false : true;
       const app = this.props.app;
 
       var data = {
@@ -52,11 +54,14 @@ class ContentBar extends Component {
       if(isPage) {
         return {
           ...data,
+          /*
           fields : {
               title : app.title,
               slug : app.slug,
               description : app.description
           },
+          */
+          fields : app.fields,
           is_page : true,
           page: app.layout,
         };
@@ -169,7 +174,7 @@ class ContentBar extends Component {
 
   render() {
 
-    const isPage = this.props.typology ? false : true;
+    const isPage = this.props.app.typology ? false : true;
 
     const icon = isPage ? 'far fa-file' : this.props.app.typology.icon;
     const name = isPage ? Lang.get('fields.page') : this.props.app.typology.name;

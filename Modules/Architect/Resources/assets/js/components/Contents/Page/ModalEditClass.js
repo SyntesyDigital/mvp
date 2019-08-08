@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  cancelSettings,
+  changeFieldSettings
+} from './../actions/';
 
 import InputSettingsField from './../../Typology/Settings/InputSettingsField';
 import BooleanSettingsField from './../../Typology/Settings/BooleanSettingsField';
@@ -10,7 +16,7 @@ class ModalEditClass extends Component {
   constructor(props){
     super(props);
 
-    // console.log(" ModalEditClass :: construct ",props);
+    // //console.log(" ModalEditClass :: construct ",props);
 
     this.state = {
       field : null
@@ -21,7 +27,7 @@ class ModalEditClass extends Component {
 
   componentDidMount() {
 
-    if(this.props.display){
+    if(this.props.modalSettings.displayModal){
         this.modalOpen();
     }
 
@@ -30,19 +36,19 @@ class ModalEditClass extends Component {
   componentWillReceiveProps(nextProps)
   {
 
-    console.log(" ModalEditClass :: componentWillReceiveProps ",nextProps);
+    //console.log(" ModalEditClass :: componentWillReceiveProps ",nextProps);
 
     var field = null;
 
-    if(nextProps.display){
+    if(nextProps.modalSettings.displayModal){
         this.modalOpen();
-        field = nextProps.item;
+        field = nextProps.modalSettings.item;
 
     } else {
         this.modalClose();
     }
 
-     //console.log("ModalEditClass :: componentWillReceiveProps :: =>",field);
+     ////console.log("ModalEditClass :: componentWillReceiveProps :: =>",field);
 
     this.setState({
       field : field
@@ -52,7 +58,7 @@ class ModalEditClass extends Component {
 
   onModalClose(e){
       e.preventDefault();
-      this.props.onCancel();
+      this.props.cancelSettings();
   }
 
   modalOpen()
@@ -77,7 +83,7 @@ class ModalEditClass extends Component {
 
     const field = this.state.field;
 
-    this.props.onSubmit(field);
+    this.props.changeFieldSettings(field,this.props.app.layout);
 
   }
 
@@ -85,7 +91,7 @@ class ModalEditClass extends Component {
 
   handleFieldSettingsChange(field) {
 
-      console.log("ModalEditClass :: handleFieldSettingsChange => ", field);
+      //console.log("ModalEditClass :: handleFieldSettingsChange => ", field);
 
       const stateField = this.state.field;
 
@@ -98,7 +104,7 @@ class ModalEditClass extends Component {
 
   renderSettings() {
 
-    console.log("renderSettings!",this.state.field);
+    //console.log("renderSettings!",this.state.field);
 
     const data = this.state.field != null ? this.state.field.data : null;
 
@@ -184,4 +190,25 @@ class ModalEditClass extends Component {
   }
 
 }
-export default ModalEditClass;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalSettings : state.modalSettings
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        cancelSettings: () => {
+            return dispatch(cancelSettings());
+        },
+        changeFieldSettings: (field,layout) => {
+            return dispatch(changeFieldSettings(field, layout));
+        }
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditClass);

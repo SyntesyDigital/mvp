@@ -14,7 +14,12 @@ import {
   UPDATE_IMAGE,
   UPDATE_SELECTED_CONTENT,
 
-  INIT_PAGE_STATE
+  INIT_PAGE_STATE,
+  UPDATE_LAYOUT,
+  UPDATE_ITEM,
+  UPDATE_SETTINGS,
+  UPDATE_PAGE_IMAGE,
+  UPDATE_PAGE_CONTENT
 
 
 } from '../constants';
@@ -75,7 +80,7 @@ function appReducer(state = initialState, action) {
 
     const {fields, translations} = state;
 
-    console.log("AppReducer => ",action);
+    //console.log("AppReducer => ",action);
 
     switch(action.type) {
         case INIT_STATE:
@@ -99,16 +104,10 @@ function appReducer(state = initialState, action) {
 
             var isPage = action.payload.typology ? false : true;
 
-
-            if(isPage) {
-              //add fields
-            }
-
-
             return {
                 ...state,
 
-                page : action.payload.page,
+                page : isPage ? action.payload.page : '',
                 pages : action.payload.pages,
                 layout : action.payload.page ? action.payload.page : null,
 
@@ -137,47 +136,61 @@ function appReducer(state = initialState, action) {
 
         case INIT_PAGE_STATE :
 
-            var titleField = {
+            var pageFields = {};
+            var content = action.payload;
+
+            pageFields.title = {
                 id:0,
                 identifier:"title",
                 value:{},
-                name:"Titre"
+                name:"Titre",
+                type:'text',
+                icon:'fa-font',
+                settings:{
+                  entryTitle:true
+                }
             };
 
-            var slugField = {
+            pageFields.slug = {
               id:1,
               identifier:"slug",
               value:{},
-              name:"Lien permanent"
+              name:"Lien permanent",
+              type:'slug',
+              icon:'fa-link'
             };
 
-            var descriptionField = {
+            pageFields.description = {
                 id:0,
                 identifier:"description",
                 value:{},
-                name:"Description"
+                name:"Description",
+                type:'richtext',
+                icon:'fa-align-left'
             };
 
-            var content = action.payload;
+
+            //console.log("Content => ",content);
+
             //update the state with content values
             if(content){
                 LANGUAGES.map(function(language,k){
                     content.fields.map(function(field){
                         if(field.name == "title") {
                             if(language.id == field.language_id) {
-                                titleField.value[language.iso] = field.value;
+                                pageFields.title.value[language.iso] = field.value;
                             }
                         }
 
                         if(field.name == "slug") {
                             if(language.id == field.language_id) {
-                                slugField.value[language.iso] = field.value;
+                                pageFields.slug.value[language.iso] = field.value;
                             }
                         }
 
                         if(field.name == "description") {
                             if(language.id == field.language_id) {
-                                descriptionField.value[language.iso] = field.value;
+                                pageFields.description.value[language.iso] = field.value;
                             }
                         }
                     });
@@ -186,9 +199,7 @@ function appReducer(state = initialState, action) {
 
             return {
               ...state,
-              title : titleField,
-              slug : slugField,
-              description : descriptionField,
+              fields : pageFields
             }
 
         case SAVING:
@@ -266,6 +277,17 @@ function appReducer(state = initialState, action) {
           return {
             ...state,
             fields : action.payload
+          }
+
+        case UPDATE_PAGE_CONTENT :
+        case UPDATE_PAGE_IMAGE :
+        case UPDATE_SETTINGS :
+        case UPDATE_ITEM :
+        case UPDATE_LAYOUT :
+
+          return {
+            ...state,
+            layout : action.payload
           }
 
         default:

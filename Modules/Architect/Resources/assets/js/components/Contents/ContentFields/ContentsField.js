@@ -28,7 +28,7 @@ class ContentsField extends Component {
          value: []
      };
 
-     //this.props.customFieldChange(newField);
+     //this.props.onFieldChange(newField);
    }
  }
 
@@ -46,11 +46,11 @@ class ContentsField extends Component {
          }
      });
 
-     // console.log("\n\nResult value : ");
-     // console.log(field.value);
-     // console.log(result);
+     // //console.log("\n\nResult value : ");
+     // //console.log(field.value);
+     // //console.log(result);
 
-     this.props.customFieldChange({
+     this.props.onFieldChange({
          identifier: this.props.field.identifier,
          value: result.value
      });
@@ -75,7 +75,7 @@ class ContentsField extends Component {
          value: fields
      };
 
-     this.props.customFieldChange(field);
+     this.props.onFieldChange(field);
 
  }
 
@@ -89,10 +89,10 @@ class ContentsField extends Component {
          value: value
      };
 
-     // console.log("textField :: handleOnChange ");
-     // console.log(field);
+     // //console.log("textField :: handleOnChange ");
+     // //console.log(field);
 
-     this.props.customFieldChange(field);
+     this.props.onFieldChange(field);
  }
 
  onContentSelect(event) {

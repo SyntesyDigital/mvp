@@ -19,7 +19,7 @@ class LocalizationField extends Component
 
     if(this.props.field.value === undefined || this.props.field.value == null){
       //setup value if not yet defined
-      this.props.customFieldChange({
+      this.props.onFieldChange({
           identifier: this.props.field.identifier,
           value: {
             lat : "",
@@ -40,9 +40,9 @@ class LocalizationField extends Component
       value : value
     };
 
-    console.log(field);
+    //console.log(field);
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   handleLatLngChange(latLng){
@@ -55,7 +55,7 @@ class LocalizationField extends Component
       }
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   renderInputs()

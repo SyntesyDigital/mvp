@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  editItem,
+  cancelEditItem,
+  changePageField,
+  initEditItem,
+  loadCategories,
+  loadElements
+} from './../actions/';
 
 // CONTENT FIELDS
 import TextField from './../ContentFields/TextField';
@@ -37,17 +47,6 @@ import axios from 'axios';
 
 class ModalEditItem extends Component {
 
-
-
-
-  /*
-    listItemInfo = {
-      identifier : this.props.field.identifier,
-      field : field,
-      index : index //fields array index,
-      type : 'list-item'
-    };
-  */
   constructor(props){
     super(props);
 
@@ -56,292 +55,64 @@ class ModalEditItem extends Component {
         TitleImageWidget: TitleImageWidget
     };
 
-    // console.log(" ModalEditItem :: construct ",props);
+    // //console.log(" ModalEditItem :: construct ",props);
 
     this.state = {
         field : null,
         displayListItemModal : false,
         listItemInfo : null,
-        programs : [],
-        axes : [],
-        categories : [{
-          value:'',
-          name:'----'
-        }],
-        originalCategories : [],
-        originalElements : [],
-        fileElements : [{
-          value:'',
-          name:'----'
-        }],
-        formElements : [{
-          value:'',
-          name:'----'
-        }],
-        tableElements : [{
-          value:'',
-          name:'----'
-        }]
     };
 
-    this.TYPOLOGIES = [{
-          id:'',
-          name:'----'
-        }
-    ];
-
-
-    this.SELECTABLE_TYPOLOGIES = [{
-          id:'',
-          name:'----'
-        }
-    ];
-    this.LISTABLE_TYPOLOGIES = [{
-          id:'',
-          name:'----'
-        }
-    ];
-    const selectableArray = [4,6,7,14];
-    const nonSelectableTypologies = [1];
-
-    for(var key in TYPOLOGIES){
-      if(selectableArray.indexOf(parseInt(TYPOLOGIES[key].id)) != -1){
-        this.SELECTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
-      }
-    }
-
-    for(var key in TYPOLOGIES){
-      if(nonSelectableTypologies.indexOf(parseInt(TYPOLOGIES[key].id)) == -1){
-        this.LISTABLE_TYPOLOGIES.push(TYPOLOGIES[key]);
-      }
-    }
-
-    for(var key in TYPOLOGIES){
-      this.TYPOLOGIES.push(TYPOLOGIES[key]);
-    }
-
-    this.FILE_ELEMENTS = [{
-          id:'',
-          name:'----'
-        }
-    ];
-
-    this.FORM_ELEMENTS = [{
-          id:'',
-          name:'----'
-        }
-    ];
-
-    this.TABLE_ELEMENTS = [{
-          id:'',
-          name:'----'
-        }
-    ];
-
-    console.log("ModalEditItem ::  typologies => ",this.SELECTABLE_TYPOLOGIES);
-
     this.onModalClose = this.onModalClose.bind(this);
+    this.onFieldChange = this.onFieldChange.bind(this);
+
+    this.props.initEditItem();
   }
-
-  loadCategories() {
-
-    var self = this;
-
-
-    axios.get(ASSETS+'api/categories/tree?accept_lang=es')
-      .then(function (response) {
-          if(response.status == 200
-              && response.data.data !== undefined
-              && response.data.data[0].descendants.length > 0)
-          {
-
-            console.log("original categories => ",response.data.data);
-
-            var categories = [{
-              value:'',
-              name:'----'
-            }];
-
-            self.push_categories(response.data.data, 0,categories);
-
-            self.setState({
-              originalCategories : response.data.data,
-              categories : categories
-            });
-
-          }
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-
-  }
-
-  loadElements() {
-
-    var self = this;
-
-
-    axios.get(ASSETS+'api/elements')
-      .then(function (response) {
-          if(response.status == 200
-              && response.data !== undefined
-              && response.data.length > 0)
-          {
-
-            console.log("original elements => ",response.data);
-
-            var fileElements = [{
-              value:'',
-              name:'----'
-            }];
-
-            var tableElements = [{
-              value:'',
-              name:'----'
-            }];
-
-            var formElements = [{
-              value:'',
-              name:'----'
-            }];
-
-            self.push_elements(response.data, fileElements,formElements, tableElements);
-            self.setState({
-              originalElements : response.data,
-              fileElements  : fileElements,
-              tableElements : tableElements,
-              formElements  : formElements
-            });
-
-          }
-
-      }).catch(function (error) {
-         console.log(error);
-       });
-
-  }
-
-  printSpace(level)
-  {
-
-   if(level <= 1)
-     return '';
-
-   var spaces = [];
-   for(var i=1;i<level;i++){
-     spaces.push(
-       "- "
-     );
-   }
-
-   return spaces;
-  }
-
-  push_categories(categoriesFrom, level, categoriesTo){
-   level++;
-   for (var i = 0; i< categoriesFrom.length; i++ ){
-        categoriesTo.push({
-          value: categoriesFrom[i].id,
-          name: this.printSpace(level)+categoriesFrom[i].name,
-        });
-       if(categoriesFrom[i].descendants.length > 0){
-          this.push_categories(categoriesFrom[i].descendants,level, categoriesTo);
-       }
-   }
-
-  }
-
-  push_elements(elementsFrom, fileElementsTo, formElementsTo, tableElementsTo){
-      for (var i = 0; i< elementsFrom.length; i++ ){
-         if(elementsFrom[i].type == 'file'){
-           fileElementsTo.push({
-             value: elementsFrom[i].id,
-             name : elementsFrom[i].name,
-           });
-         }
-         if(elementsFrom[i].type == 'form'){
-           formElementsTo.push({
-             value: elementsFrom[i].id,
-             name : elementsFrom[i].name,
-           });
-         }
-         if(elementsFrom[i].type == 'table'){
-           tableElementsTo.push({
-             value: elementsFrom[i].id,
-             name : elementsFrom[i].name,
-           });
-         }
-      }
-
-   }
 
   processProps(props) {
 
-    console.log("ModalEditItem :: field processProps ",props);
+    ////console.log("ModalEditItem :: field processProps ",props);
 
-    var field = JSON.parse(JSON.stringify(props.item.data.field));
-    field.identifier = "temp_"+JSON.stringify(props.item.pathToIndex);
-    field.value = props.item.data.field !== undefined &&
-      props.item.data.field.value !== undefined ? props.item.data.field.value : null;
+    var field = JSON.parse(JSON.stringify(props.modalEdit.item.data.field));
+    field.identifier = "temp_"+JSON.stringify(props.modalEdit.item.pathToIndex);
+    field.value = props.modalEdit.item.data.field !== undefined &&
+      props.modalEdit.item.data.field.value !== undefined ? props.modalEdit.item.data.field.value : null;
 
     //
-    console.log("ModalEditItem :: field after process : ",field);
+    ////console.log("ModalEditItem :: field after process : ",field);
 
     return field;
   }
 
   componentDidMount() {
-    if(this.props.display){
+    if(this.props.modalEdit.displayModal){
         this.modalOpen();
     }
 
-    this.loadCategories();
-    this.loadElements();
+    this.props.loadCategories();
+    this.props.loadElements();
   }
 
   componentWillReceiveProps(nextProps)
   {
     var field = null;
-    var categories = null;
 
-    if(nextProps.display){
+    if(nextProps.modalEdit.displayModal){
         this.modalOpen();
         field = this.processProps(nextProps);
-
-        //update categories
-        console.log("componentWillReceiveProps :: field => ",field);
-
-        if(field.settings !== undefined && field.settings.typology !== undefined
-          && field.settings.typology != null){
-
-          console.log("Typology vale => ",field.settings.typology);
-          categories = this.updateCategoriesFromTypology(field.settings.typology);
-        }
-        else {
-          categories = this.updateCategoriesFromTypology(null);
-        }
-
     } else {
         this.modalClose();
     }
 
-    if(categories != null){
-      this.setState({
-        field : field,
-        categories : categories
-      });
-    }
-    else {
-      this.setState({
-        field : field
-      });
-    }
+    this.setState({
+      field : field
+    });
+
   }
 
   onModalClose(e){
       e.preventDefault();
-      this.props.onItemCancel();
+      this.props.cancelEditItem();
   }
 
   modalOpen() {
@@ -351,17 +122,12 @@ class ModalEditItem extends Component {
   modalClose() {
     var self =this;
       TweenMax.to($("#modal-edit-item"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
-        /*
-        self.setState({
-          field : null
-        });
-        */
       }});
   }
 
   onFieldChange(field) {
 
-    //console.log("ModalEditItem :: onFieldChange => ",field);
+    ////console.log("ModalEditItem :: onFieldChange => ",field);
 
     var stateField = this.state.field;
     stateField.value = field.value;
@@ -369,7 +135,11 @@ class ModalEditItem extends Component {
         field : stateField
     });
 
-    this.props.onUpdateData(stateField);
+    this.props.changePageField(
+      stateField,
+      this.props.modalEdit.item.pathToIndex,
+      this.props.app.layout
+    )
 
   }
 
@@ -381,292 +151,63 @@ class ModalEditItem extends Component {
         field : stateField
     });
 
-    this.props.onUpdateData(stateField);
-
-  }
-
-  onWidgetContentSelect(identifier) {
-
-    console.log("ModalEditItem :: onWidgetContentSelect",identifier);
-
-    var self = this;
-
-    const fields = this.state.field.fields;
-    const index = this.getFieldArrayIndex(fields,identifier);
-
-    if(index == -1){
-        console.error("ModalEditItem :: id not found : ",fields,identifier);
-        return;
-    }
-
-    this.props.onContentSelect(identifier, function (field, content){
-
-      console.log("ModalEditItem :: current field => ",field);
-
-      field.fields[index] = self.processContentField(field.fields[index],content);
-
-      return field;
-
-    },fields[index]);
-
-  }
-
-  processContentField(field,content) {
-
-    switch (field.type) {
-
-      case FIELDS.LINK.type:
-        if(field.value == null || field.value == ""){
-          field.value = {};
-        }
-        else if(field.value.url !== undefined){
-          delete field.value['url'];
-        }
-        field.value.content = content;
-
-        return field;
-
-      case FIELDS.URL.type:
-        if(field.value == null || field.value == ""){
-          field.value = {};
-        }
-        else if(field.value.url !== undefined){
-          delete field.value['url'];
-        }
-        field.value.content = content;
-
-        return field;
-
-      case FIELDS.CONTENTS.type:
-
-        if(field.value === undefined || field.value == null){
-          field.value = [];
-        }
-
-        field.value.push(content);
-
-        return field;
-    }
-
-  }
-
-  handleListContentSelect(identifier) {
-
-    var self = this;
-    const {listItemInfo} = this.state;
-
-    const fields = this.state.field.value[listItemInfo.index].fields;
-    const index = this.getFieldArrayIndex(fields,identifier);
-
-    if(index == -1){
-        console.error("ModalEditItem :: id not found : "+identifier);
-        return;
-    }
-
-    console.log("ModalEditItem :: handleListContentSelect => ",fields,index);
-
-    this.props.onContentSelect(identifier, function (field, content){
-
-      field.value[listItemInfo.index].fields[index] = self.processContentField(
-        field.value[listItemInfo.index].fields[index],
-        content
-      );
-
-      return field;
-
-    },fields[index]);
-
-  }
-
-  getFieldArrayIndex(fields, identifier) {
-
-    for(var i=0;i<fields.length;i++){
-      if(fields[i].identifier == identifier){
-        return i;
-      }
-    }
-
-
-
-    return -1;
-
-  }
-
-  onTranslatedFileSelect(field,language) {
-
-    console.log("ModalEditItem :: onTranslatedFileSelect => ",field,language);
-
-    var self = this;
-
-    this.props.onImageSelect(field, function (field, media){
-
-      if(field.value === undefined || field.value == null ){
-        field.value = {};
-      }
-
-      field.value[language] = media;
-      return field;
-
-    });
-
-  }
-
-  onWidgetImageSelect(field,language) {
-
-    console.log("ModalEditItem :: onWidgetImageSelect => ",field,language);
-    var self = this;
-
-    const fields = this.state.field.fields;
-    const index = this.getFieldArrayIndex(fields,field.identifier);
-
-    if(index == -1){
-        console.error("ModalEditItem :: id not found : "+field.identifier);
-        return;
-    }
-
-    if(language !== undefined){
-
-      //es un campo con localización
-      this.props.onImageSelect(field, function (field, media){
-
-        if(field.fields[index].value === undefined || field.fields[index].value == null ){
-          field.fields[index].value = {};
-        }
-
-        field.fields[index].value[language] = media;
-        //console.log("ModalEditItem :: Field after => ",field);
-        return field;
-
-      });
-    }
-    else {
-
-      //es un campo image o file sin localización
-      this.props.onImageSelect(field, function (field, media){
-
-        field.fields[index].value = media;
-        return field;
-
-      });
-    }
-  }
-
-  handleListImageSelect(field,language) {
-
-    const {listItemInfo} = this.state;
-
-    const fields = this.state.field.value[listItemInfo.index].fields;
-    const index = this.getFieldArrayIndex(fields,field.identifier);
-
-    if(index == -1){
-        console.error("ModalEditItem :: id not found : "+identifier);
-        return;
-    }
-
-    console.log("ModalEditItem :: handleListImageSelect => ",fields,index);
-
-    if(language !== undefined){
-
-      this.props.onImageSelect(field, function (field, media){
-
-        if(field.value[listItemInfo.index].fields[index].value === undefined ||
-          field.value[listItemInfo.index].fields[index].value == null ){
-
-          field.value[listItemInfo.index].fields[index].value = {};
-        }
-
-        field.value[listItemInfo.index].fields[index].value[language] = media;
-        console.log("ModalEditItem :: onImageSelect :: Field after => ",field,language);
-
-        return field;
-
-      });
-    }
-    else {
-
-      this.props.onImageSelect(field, function (field, media){
-
-        field.value[listItemInfo.index].fields[index].value = media;
-        return field;
-
-      });
-
-    }
+    this.props.changePageField(
+      stateField,
+      this.props.modalEdit.item.pathToIndex,
+      this.props.app.layout
+    )
 
   }
 
   onSubmit(e) {
     e.preventDefault();
-    const field = this.state.field;
-    this.props.onSubmitData(field);
-  }
-
-  onAddListField(field) {
-    this.props.onAddField(field);
-  }
-
-  onRemoveListField(index) {
-    this.props.onRemoveField(index);
+    this.props.cancelEditItem();
   }
 
   renderField() {
 
-    console.log("ModalEditItem : renderField => ",this.state.field);
+    ////console.log("ModalEditItem : renderField => ",this.state.field);
 
     switch(this.state.field.type) {
       case FIELDS.TEXT.type:
         return (
           <TextField
-            //errors={_this.props.errors[k]}
             field={this.state.field}
             hideTab={true}
-            translations={this.props.translations}
-            onFieldChange={this.onFieldChange.bind(this)}
-
+            onFieldChange={this.onFieldChange}
           />
         );
       case FIELDS.RICHTEXT.type:
         return (
           <RichTextField
-            //errors={_this.props.errors[k]}
             field={this.state.field}
             hideTab={true}
-            translations={this.props.translations}
-            onFieldChange={this.onFieldChange.bind(this)}
-
+            onFieldChange={this.onFieldChange}
           />
         );
         case FIELDS.IMAGE.type:
           return (
             <ImageField
-                //errors={_this.props.errors[k]}
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onImageSelect={this.props.onImageSelect}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.FILE.type:
           return (
             <FileField
-                //errors={_this.props.errors[k]}
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onImageSelect={this.props.onImageSelect}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.TRANSLATED_FILE.type:
           return (
             <TranslatedFileField
-                //errors={_this.props.errors[k]}
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
                 onFileSelect={this.onTranslatedFileSelect.bind(this)}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.DATE.type:
@@ -674,8 +215,7 @@ class ModalEditItem extends Component {
             <DateField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.IMAGES.type:
@@ -683,8 +223,7 @@ class ModalEditItem extends Component {
             <ImagesField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
                 onImageSelect={this.props.onImageSelect}
             />
           );
@@ -693,8 +232,7 @@ class ModalEditItem extends Component {
             <ContentsField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
                 onContentSelect={this.props.onContentSelect}
             />
           );
@@ -703,8 +241,7 @@ class ModalEditItem extends Component {
             <BooleanField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.LINK.type:
@@ -712,8 +249,7 @@ class ModalEditItem extends Component {
             <LinkField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
                 onContentSelect={this.props.onContentSelect}
             />
           );
@@ -723,8 +259,7 @@ class ModalEditItem extends Component {
             <VideoField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
         case FIELDS.LOCALIZATION.type:
@@ -732,8 +267,7 @@ class ModalEditItem extends Component {
             <LocalizationField
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
-                onFieldChange={this.onFieldChange.bind(this)}
+                onFieldChange={this.onFieldChange}
             />
           );
 
@@ -744,10 +278,7 @@ class ModalEditItem extends Component {
             return <Widget
                 field={this.state.field}
                 hideTab={true}
-                translations={this.props.translations}
                 onWidgetChange={this.onWidgetChange.bind(this)}
-                onContentSelect={this.onWidgetContentSelect.bind(this)}
-                onImageSelect={this.onWidgetImageSelect.bind(this)}
             />
 
         case "widget-list":
@@ -756,11 +287,6 @@ class ModalEditItem extends Component {
             <ListWidget
               field={this.state.field}
               hideTab={true}
-              translations={this.props.translations}
-              onFieldChange={this.onFieldChange.bind(this)}
-              onAddField={this.onAddListField.bind(this)}
-              onRemoveField={this.onRemoveListField.bind(this)}
-              onListItemEdit={this.handleListItemEdit.bind(this)}
             />
           );
 
@@ -772,144 +298,50 @@ class ModalEditItem extends Component {
 
   /**************** MODAL LIST *******************/
 
-  handleListItemEdit(editInfo) {
-
-    console.log("ModalEditItem :: handleListItemEdit :: editInfo => ",editInfo);
-
-    this.setState({
-      displayListItemModal : true,
-      listItemInfo : editInfo
-    });
-
-  }
-
-  handleListItemCancel() {
-
-    this.setState({
-      displayListItemModal : false,
-      listItemInfo : null
-    });
-
-  }
-
-  handleSubmitListItem(field) {
-
-    var stateField = this.state.field;
-
-    stateField.value[this.state.listItemInfo.index] = field;
-
-    console.log("ModalEditItem :: handleSubmitListItem :: listItemInfo => ",this.state.listItemInfo);
-    console.log("ModalEditItem :: handleSubmitListItem => ",stateField);
-
-    this.setState({
-        field : stateField,
-        displayListItemModal : false,
-        listItemInfo : null
-    });
-
-    //Iniclamente comentado
-
-
-
-    this.props.onUpdateData(stateField);
-  }
-
   handleListItemChange(field) {
 
     var stateField = this.state.field;
-    const {listItemInfo} = this.state;
+    const listItemInfo = this.props.modalEditList.item;
 
-    stateField.value[this.state.listItemInfo.index] = field;
+    stateField.value[listItemInfo.index] = field;
 
     //update the field used to comunicate between the ListWidget and the Modal
     listItemInfo.field = field;
 
-    console.log("ModalEditItem :: handleListItemChange :: listItemInfo => ",this.state.listItemInfo);
-    console.log("ModalEditItem :: handleListItemChange => ",stateField);
+    ////console.log("ModalEditItem :: handleListItemChange :: listItemInfo => ",this.state.listItemInfo);
+    ////console.log("ModalEditItem :: handleListItemChange => ",stateField);
 
     this.setState({
         field : stateField,
         listItemInfo : listItemInfo
     });
 
-
-
-    this.props.onUpdateData(stateField);
+    this.props.changePageField(
+      stateField,
+      this.props.modalEdit.item.pathToIndex,
+      this.props.app.layout
+    )
   }
-
-  handleImageSelect(field) {
-    //console.log("ModalEditItem :: handleImageSelect => ",field);
-
-    this.props.onImageSelect(this.state.listItemInfo);
-  }
-
-  handleContentSelect(field) {
-    //console.log("ModalEditItem :: handleContentSelect => ",field);
-
-    this.props.onContentSelect(this.state.listItemInfo);
-  }
-
 
   /*************** SETTINGS **********************/
 
-  updateCategoriesFromTypology(typologyId) {
-
-    const {originalCategories,categories} = this.state;
-
-    var resultCategories = [{
-      value:'',
-      name:'----'
-    }];
-
-    if(typologyId === undefined || typologyId == null){
-      this.push_categories(originalCategories, 0,resultCategories);
-      //console.log("updateCategoriesFromTypology :: resultCategories : ",resultCategories);
-      return resultCategories;
-    }
-
-    //console.log("updateCategoriesFromTypology :: original : ",originalCategories);
-
-    //FIXME this relation should come from the BBDD
-    var correspondance = {
-      "2" : 0,
-      "3" : 1,
-      "8" : 2,
-      "4" : 3,
-      //"11" : 4
-    };
-
-    var index = correspondance[typologyId] !== undefined ? correspondance[typologyId] : null ;
-
-    if(index != null){
-      this.push_categories(originalCategories[index].descendants, 0,resultCategories);
-      //console.log("updateCategoriesFromTypology :: resultCategories : ",resultCategories);
-    }
-
-    return resultCategories;
-
-  }
-
   handleFieldSettingsChange(field) {
 
-      console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+      ////console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
 
       const stateField = this.state.field;
 
       stateField[field.source][field.name] = field.value;
 
-      if(field.name == "typology"){
-        this.setState({
-            field : stateField,
-            categories : this.updateCategoriesFromTypology(field.value)
-        });
+      this.setState({
+          field : stateField
+      });
 
-      }
-      else {
-        this.setState({
-            field : stateField
-        });
-      }
-
+      this.props.changePageField(
+        stateField,
+        this.props.modalEdit.item.pathToIndex,
+        this.props.app.layout
+      )
 
   }
 
@@ -925,14 +357,9 @@ class ModalEditItem extends Component {
       return formats;
   }
 
-
-
-
-
-
   renderSettings() {
 
-    //console.log("renderSettings!",this.state.field);
+    ////console.log("renderSettings!",this.state.field);
 
     return (
       <div>
@@ -946,7 +373,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.element')}
-          options={this.state.fileElements.map(function(obj){
+          options={this.props.modalEdit.fileElements.map(function(obj){
               return {
                   value: obj.value,
                   name: obj.name
@@ -960,7 +387,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.element')}
-          options={this.state.tableElements.map(function(obj){
+          options={this.props.modalEdit.tableElements.map(function(obj){
               return {
                   value: obj.value,
                   name: obj.name
@@ -977,7 +404,6 @@ class ModalEditItem extends Component {
           inputLabel={Lang.get('modals.indica_title')}
           translations={this.props.translations}
         />
-
 
 
         <InputSettingsField
@@ -1054,7 +480,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.tipology_allowed')}
-          options={this.TYPOLOGIES.map(function(obj){
+          options={this.props.modalEdit.typologies.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name
@@ -1068,7 +494,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.typology_allowed')}
-          options={this.LISTABLE_TYPOLOGIES.map(function(obj){
+          options={this.props.modalEdit.listableTypologies.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name
@@ -1082,38 +508,10 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.tipology')}
-          options={this.SELECTABLE_TYPOLOGIES.map(function(obj){
+          options={this.props.modalEdit.selectableTypologies.map(function(obj){
               return {
                   value: obj.id,
                   name: obj.name
-              };
-          })}
-        />
-
-        <SelectorSettingsField
-          field={this.state.field}
-          name="program"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.program')}
-          options={this.state.programs.map(function(obj){
-              return {
-                  value: obj.id,
-                  name: obj.description_es
-              };
-          })}
-        />
-
-        <SelectorSettingsField
-          field={this.state.field}
-          name="axe"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.axe')}
-          options={this.state.axes.map(function(item){
-              return {
-                  value: item.id,
-                  name: item.description_es,
               };
           })}
         />
@@ -1124,7 +522,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.category')}
-          options={this.state.categories}
+          options={this.props.modalEdit.categories}
         />
 
         <InputSettingsField
@@ -1256,7 +654,7 @@ class ModalEditItem extends Component {
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.tipology_allowed')}
-          options={this.state.formElements.map(function(obj){
+          options={this.props.modalEdit.formElements.map(function(obj){
               return {
                   value: obj.value,
                   name: obj.name
@@ -1276,24 +674,15 @@ class ModalEditItem extends Component {
 
   render() {
 
-    //console.log("ModalEditItem :: render field => ",this.state.field);
+    ////console.log("ModalEditItem :: render field => ",this.state.field);
 
     return (
       <div>
 
         <ModalEditListItem
-          display={this.state.displayListItemModal}
-          item={this.state.listItemInfo}
-          translations={this.props.translations}
-          onItemCancel={this.handleListItemCancel.bind(this)}
-
-          onSubmitData={this.handleSubmitListItem.bind(this)}
-          onImageSelect={this.handleListImageSelect.bind(this)}
-          onContentSelect={this.handleListContentSelect.bind(this)}
           onUpdateData={this.handleListItemChange.bind(this)}
           zIndex={9500}
         />
-
 
         <div className="custom-modal" id="modal-edit-item" style={{zIndex:this.props.zIndex}}>
           <div className="modal-background"></div>
@@ -1343,4 +732,38 @@ class ModalEditItem extends Component {
   }
 
 }
-export default ModalEditItem;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalEdit : state.modalEdit,
+        modalEditList : state.modalEditList
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        initEditItem : (payload) => {
+            return dispatch(initEditItem(payload));
+        },
+        editItem: (item) => {
+            return dispatch(editItem(item));
+        },
+        cancelEditItem: () => {
+            return dispatch(cancelEditItem());
+        },
+        changePageField: (field,pathToIndex,layout) => {
+            return dispatch(changePageField(field,pathToIndex,layout));
+        },
+        loadCategories : () => {
+            return dispatch(loadCategories())
+        },
+        loadElements : () => {
+            return dispatch(loadElements())
+        },
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditItem);

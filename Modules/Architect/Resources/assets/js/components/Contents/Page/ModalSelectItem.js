@@ -1,21 +1,26 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  cancelItem,
+  itemSelected,
+  addRow
+} from './../actions/';
 
 class ModalSelectItem extends Component {
 
   constructor(props){
     super(props);
 
-    console.log(" ModalSelectItem :: construct ",props);
+    //console.log(" ModalSelectItem :: construct ",props);
 
     this.onModalClose = this.onModalClose.bind(this);
-    this.handleSelectItem = this.handleSelectItem.bind(this);
-
   }
 
   componentDidMount() {
 
-    if(this.props.display){
+    if(this.props.modalItem.displayModal){
         this.modalOpen();
     }
 
@@ -23,8 +28,7 @@ class ModalSelectItem extends Component {
 
   componentWillReceiveProps(nextProps)
   {
-
-    if(nextProps.display){
+    if(nextProps.modalItem.displayModal){
         this.modalOpen();
     } else {
         this.modalClose();
@@ -33,11 +37,17 @@ class ModalSelectItem extends Component {
 
   onModalClose(e){
       e.preventDefault();
-      this.props.onItemCancel();
+      this.props.cancelItem();
   }
 
   handleSelectItem(item){
-    this.props.onItemSelected(item);
+
+    this.props.itemSelected(
+      item,
+      this.props.modalItem.pathToIndex,
+      this.props.modalItem.addPosition,
+      this.props.app.layout
+    );
   }
 
   modalOpen()
@@ -73,7 +83,7 @@ class ModalSelectItem extends Component {
 
     e.preventDefault();
 
-    this.props.onItemSelected({
+    this.handleSelectItem({
       type : 'row',
       settings : this.exploteToObject(ROW_SETTINGS),
       children : [
@@ -110,7 +120,7 @@ class ModalSelectItem extends Component {
     newField.rules = this.exploteToObject(newField.rules);
     newField.settings = this.exploteToObject(newField.settings);
 
-    this.props.onItemSelected({
+    this.handleSelectItem({
       type : 'item',
       field : newField
     });
@@ -125,7 +135,7 @@ class ModalSelectItem extends Component {
     newField.rules = this.exploteToObject(newField.rules);
     newField.settings = this.exploteToObject(newField.settings);
 
-    this.props.onItemSelected({
+    this.handleSelectItem({
       type : 'item',
       field : newField
     });
@@ -136,13 +146,13 @@ class ModalSelectItem extends Component {
     var fields = [];
 
     var nonAllowed = [
-        FIELDS["CONTENTS"].type,
+        //FIELDS["CONTENTS"].type,
         FIELDS["SLUG"].type,
         FIELDS["KEY_VALUES"].type,
-        FIELDS["IMAGES"].type,
+        //FIELDS["IMAGES"].type,
         FIELDS["BOOLEAN"].type,
         FIELDS["URL"].type,
-        FIELDS["FILE"].type
+        //FIELDS["FILE"].type
     ];
 
     for( var key in FIELDS){
@@ -288,4 +298,26 @@ class ModalSelectItem extends Component {
   }
 
 }
-export default ModalSelectItem;
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalItem : state.modalItem
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addRow : (layout) => {
+          return dispatch(addRow(layout));
+        },
+        cancelItem: () => {
+            return dispatch(cancelItem());
+        },
+        itemSelected: (item,pathToIndex,position,layout) => {
+            return dispatch(itemSelected(item,pathToIndex,position,layout))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalSelectItem);

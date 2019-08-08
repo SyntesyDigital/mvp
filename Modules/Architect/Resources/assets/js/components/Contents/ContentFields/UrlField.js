@@ -56,7 +56,7 @@ class UrlField extends Component
 
   componentDidMount() {
 
-    //console.log("UrlField :: componentWillReceiveProps => ",this.props);
+    ////console.log("UrlField :: componentWillReceiveProps => ",this.props);
 
     var type = TYPE_INTERNAL;
     var linkValues = this.getDefaultValue(TYPE_INTERNAL);
@@ -82,7 +82,7 @@ class UrlField extends Component
 
   componentWillReceiveProps(nextProps){
 
-    //console.log("UrlField :: componentWillReceiveProps => ",nextProps);
+    ////console.log("UrlField :: componentWillReceiveProps => ",nextProps);
 
     var type = TYPE_INTERNAL;
     var linkValues = this.getDefaultValue(TYPE_INTERNAL);
@@ -143,7 +143,7 @@ class UrlField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
     */
   }
 
@@ -169,7 +169,7 @@ class UrlField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   onRemoveField(event){
@@ -185,7 +185,7 @@ class UrlField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
 
   }
 

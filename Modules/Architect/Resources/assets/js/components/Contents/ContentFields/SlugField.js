@@ -16,14 +16,14 @@ class SlugField extends Component
       sourceField : props.sourceField
     };
 
-    //console.log("SlugField :: this.props.sourceField => ",this.props.sourceField);
+    ////console.log("SlugField :: this.props.sourceField => ",this.props.sourceField);
 
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
 
-    //console.log("SlugField ::will recieve props : =>",nextProps);
+    ////console.log("SlugField ::will recieve props : =>",nextProps);
 
     //this.props.sourceField = nextProps.sourceField;
 
@@ -40,9 +40,9 @@ class SlugField extends Component
     const values = this.props.field.value ? this.props.field.value : {};
     values[language] = value;
 
-    //console.log("SlugField :: handleOnChange :: values => ",values);
+    ////console.log("SlugField :: handleOnChange :: values => ",values);
 
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       value : values
     });
@@ -64,7 +64,7 @@ class SlugField extends Component
               error = true;
           }
 
-          //console.log("SlugField :: error ", error);
+          ////console.log("SlugField :: error ", error);
           var sourceValue = '';
 
           if(this.state.sourceField != null && this.state.sourceField.value !== undefined &&
@@ -78,7 +78,7 @@ class SlugField extends Component
             }
           }
 
-          //console.log("source value )=> ",sourceValue);
+          ////console.log("source value )=> ",sourceValue);
 
           inputs.push(
               <div className={'form-group bmd-form-group ' + (error != null ? 'has-error' : '')} key={key}>

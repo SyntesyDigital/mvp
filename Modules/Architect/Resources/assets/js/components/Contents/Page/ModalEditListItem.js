@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  cancelEditItemList
+} from './../actions/';
 
 // WIDGETS LIST
 import CommonWidget from './../Widgets/CommonWidget';
@@ -10,7 +15,7 @@ class ModalEditListItem extends Component {
   constructor(props){
     super(props);
 
-    // console.log(" ModalEditItem :: construct ",props);
+    // //console.log(" ModalEditItem :: construct ",props);
 
     this.widgets = {
         CommonWidget: CommonWidget
@@ -25,9 +30,9 @@ class ModalEditListItem extends Component {
 
   processProps(props) {
 
-    //console.log(" ModalEditListItem :: processProps ",props);
+    ////console.log(" ModalEditListItem :: processProps ",props);
 
-    var field = JSON.parse(JSON.stringify(props.item.field));
+    var field = JSON.parse(JSON.stringify(props.modalEditList.item.field));
     //field.identifier = "temp_"+JSON.stringify(props.item.id);
     field.value = field !== undefined && field.value !== undefined ? field.value : null;
 
@@ -36,7 +41,7 @@ class ModalEditListItem extends Component {
 
   componentDidMount() {
 
-    if(this.props.display){
+    if(this.props.modalEditList.displayModal){
         this.modalOpen();
     }
 
@@ -45,11 +50,11 @@ class ModalEditListItem extends Component {
   componentWillReceiveProps(nextProps)
   {
 
-    //console.log(" ModalEditListItem :: componentWillReceiveProps ",nextProps);
+    ////console.log(" ModalEditListItem :: componentWillReceiveProps ",nextProps);
 
     var field = null;
 
-    if(nextProps.display){
+    if(nextProps.modalEditList.displayModal){
         this.modalOpen();
         field = this.processProps(nextProps);
 
@@ -57,7 +62,7 @@ class ModalEditListItem extends Component {
         this.modalClose();
     }
 
-    //console.log("ModalEditListItem :: componentWillReceiveProps :: =>",field);
+    ////console.log("ModalEditListItem :: componentWillReceiveProps :: =>",field);
 
     this.setState({
       field : field
@@ -67,7 +72,7 @@ class ModalEditListItem extends Component {
 
   onModalClose(e){
       e.preventDefault();
-      this.props.onItemCancel();
+      this.props.cancelEditItemList();
   }
 
   modalOpen()
@@ -85,15 +90,13 @@ class ModalEditListItem extends Component {
 
   onWidgetChange(field) {
 
-    //const stateField = this.state.field;
+    const stateField = this.state.field;
 
-    /*
     this.setState({
         field : stateField
     });
-    */
 
-    //console.log("ModalEditListItem :: onWidgetChange :: =>",field);
+    ////console.log("ModalEditListItem :: onWidgetChange :: =>",field);
 
     this.props.onUpdateData(field);
 
@@ -104,7 +107,8 @@ class ModalEditListItem extends Component {
 
     const field = this.state.field;
 
-    this.props.onSubmitData(field);
+    this.props.onUpdateData(field);
+    this.props.cancelEditItemList();
 
   }
 
@@ -117,10 +121,7 @@ class ModalEditListItem extends Component {
                 <Widget
                     field={this.state.field}
                     hideTab={true}
-                    translations={this.props.translations}
                     onWidgetChange={this.onWidgetChange.bind(this)}
-                    onContentSelect={this.props.onContentSelect}
-                    onImageSelect={this.props.onImageSelect}
                 />
             );
 
@@ -177,4 +178,21 @@ class ModalEditListItem extends Component {
   }
 
 }
-export default ModalEditListItem;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalEditList : state.modalEditList
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        cancelEditItemList : () => {
+            return dispatch(cancelEditItemList());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditListItem);

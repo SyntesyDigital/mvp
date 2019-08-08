@@ -42,7 +42,7 @@ class ContentDataTable extends Component {
     setDatatable(route)
     {
 
-        console.log("ContentDataTable :: setDatatable route : ",route,$(this.refs.main));
+        //console.log("ContentDataTable :: setDatatable route : ",route,$(this.refs.main));
 
         var _this = this;
         var table = $(this.refs.main).DataTable({
@@ -70,7 +70,7 @@ class ContentDataTable extends Component {
 
     destroyDatatable() {
 
-      console.log("ContentDataTable :: destroy datatable ");
+      //console.log("ContentDataTable :: destroy datatable ");
 
       $(this.refs.main).DataTable().destroy();
     }

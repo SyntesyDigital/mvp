@@ -11,7 +11,7 @@ class EmptyItem extends Component {
   onSelectItem(e) {
     e.preventDefault();
 
-    console.log("EmptyItem :: onSelectItem : "+this.props.index);
+    //console.log("EmptyItem :: onSelectItem : "+this.props.index);
 
     this.props.onSelectItem(this.props.pathToIndex);
   }

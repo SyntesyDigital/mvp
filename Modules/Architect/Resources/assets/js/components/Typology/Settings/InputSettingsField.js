@@ -34,8 +34,8 @@ class InputSettingsField extends Component {
     var input = "";
     var display = false;
 
-    //console.log("InputSettingsField :: componentWillRecieveProps");
-    //console.log(nextProps);
+    ////console.log("InputSettingsField :: componentWillRecieveProps");
+    ////console.log(nextProps);
 
     if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
        nextProps.field[nextProps.source][nextProps.name] !== undefined){

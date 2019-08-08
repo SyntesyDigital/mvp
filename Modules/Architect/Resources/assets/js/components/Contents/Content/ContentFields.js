@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import {connect} from 'react-redux';
 
+import {customFieldChange} from './../actions/';
+
 import TextField from './../ContentFields/TextField';
 import SlugField from './../ContentFields/SlugField';
 import RichTextField from './../ContentFields/RichTextField';
@@ -25,6 +27,7 @@ class ContentFields extends Component {
     super(props);
 
     this.entryTitleKey = this.getEntryTitleKey();
+    this.handleFieldChange = this.handleFieldChange.bind(this);
   }
 
   getEntryTitleKey() {
@@ -39,11 +42,15 @@ class ContentFields extends Component {
     return null;
   }
 
+  handleFieldChange(field) {
+    this.props.customFieldChange(field);
+  }
+
   renderFields() {
     var fields = [];
     var _this = this;
 
-    console.log("fields => ",_this.props.app.fields);
+    //console.log("fields => ",_this.props.app.fields);
 
     Object.keys(_this.props.app.fields).map(function(k){
         switch(_this.props.app.fields[k].type) {
@@ -52,6 +59,7 @@ class ContentFields extends Component {
                   <TextField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                   />
                 );
             break;
@@ -63,6 +71,7 @@ class ContentFields extends Component {
                     sourceField={_this.entryTitleKey != null ? _this.props.app.fields[_this.entryTitleKey] : null}
                     blocked={_this.props.app.saved}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                   />
                 );
             break;
@@ -72,6 +81,7 @@ class ContentFields extends Component {
                 <RichTextField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -81,6 +91,7 @@ class ContentFields extends Component {
                 <ImageField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -90,6 +101,7 @@ class ContentFields extends Component {
                 <FileField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -99,6 +111,7 @@ class ContentFields extends Component {
                 <TranslatedFileField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -110,6 +123,7 @@ class ContentFields extends Component {
                 <DateField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -119,6 +133,7 @@ class ContentFields extends Component {
                 <ImagesField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -128,6 +143,7 @@ class ContentFields extends Component {
                 <KeyValuesField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -137,6 +153,7 @@ class ContentFields extends Component {
                 <ContentsField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -146,6 +163,7 @@ class ContentFields extends Component {
                 <BooleanField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -156,6 +174,7 @@ class ContentFields extends Component {
                 <LinkField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -165,6 +184,7 @@ class ContentFields extends Component {
                 <VideoField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -174,6 +194,7 @@ class ContentFields extends Component {
                   <UrlField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                   />
                 );
             break;
@@ -183,6 +204,7 @@ class ContentFields extends Component {
                 <LocalizationField
                     field={_this.props.app.fields[k]}
                     key={k}
+                    onFieldChange={_this.handleFieldChange}
                 />
                 );
             break;
@@ -195,10 +217,8 @@ class ContentFields extends Component {
 
   render() {
     return (
-      <div className="col-xs-9 page-content">
-        <div className="field-group">
-            {this.renderFields()}
-        </div>
+      <div className="field-group">
+          {this.renderFields()}
       </div>
     );
   }
@@ -212,7 +232,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+      customFieldChange: (field) => {
+          return dispatch(customFieldChange(field));
+      }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentFields);

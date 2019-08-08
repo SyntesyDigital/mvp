@@ -18,7 +18,7 @@ class ImageField extends Component {
   }
 
   handleOnChange(event) {
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       language : $(event.target).closest('.form-control').attr('language'),
       value : event.target.value
@@ -33,7 +33,7 @@ class ImageField extends Component {
 
   cancelImage(event) {
     event.preventDefault();
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       value : null
     });

@@ -19,8 +19,8 @@ class PageContainer extends Component {
      super(props);
 
 
-     console.log('LAYOUT LOADED', props.page);
-     console.log('CONTENT LOADED', props.content);
+     //console.log('LAYOUT LOADED', props.page);
+     //console.log('CONTENT LOADED', props.content);
 
     var titleField = {
         id:0,
@@ -142,7 +142,7 @@ class PageContainer extends Component {
 
      handleLayoutSelected(layoutId) {
 
-       console.log("PageContainer :: handleLayoutSelected => "+layoutId);
+       //console.log("PageContainer :: handleLayoutSelected => "+layoutId);
 
        var _this = this;
 
@@ -188,7 +188,7 @@ class PageContainer extends Component {
 
     handleUpdateLayout(layout) {
 
-        console.log("PageContainer :: handleUpdateLayout!");
+        //console.log("PageContainer :: handleUpdateLayout!");
 
         this.setState({
             layout : layout
@@ -283,9 +283,9 @@ class PageContainer extends Component {
              } else if (error.message) {
                  toastr.error(error.message);
              } else {
-                 console.log('Error', error.message);
+                 //console.log('Error', error.message);
              }
-             //console.log(error.config);
+             ////console.log(error.config);
          });
   }
 
@@ -304,9 +304,9 @@ class PageContainer extends Component {
               } else if (error.message) {
                   toastr.error(error.message);
               } else {
-                  console.log('Error', error.message);
+                  //console.log('Error', error.message);
               }
-              //console.log(error.config);
+              ////console.log(error.config);
           });
   }
 
@@ -330,9 +330,9 @@ class PageContainer extends Component {
               } else if (error.message) {
                   toastr.error(error.message);
               } else {
-                  console.log('Error', error.message);
+                  //console.log('Error', error.message);
               }
-              //console.log(error.config);
+              ////console.log(error.config);
           });
   }
 
@@ -368,7 +368,7 @@ class PageContainer extends Component {
 
      }
 
-      console.log('ERROR ====>', stateErrors);
+      //console.log('ERROR ====>', stateErrors);
 
      this.setState({
        saving : false,
@@ -425,7 +425,7 @@ class PageContainer extends Component {
 
     handleFieldChange(field) {
 
-        console.log("On text change : =>",field);
+        //console.log("On text change : =>",field);
 
         const result = {};
         result[field.name] = field.value;

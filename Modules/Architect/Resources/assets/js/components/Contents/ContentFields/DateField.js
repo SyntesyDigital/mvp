@@ -23,7 +23,7 @@ class DateField extends Component {
       value : date
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   renderInputs() {

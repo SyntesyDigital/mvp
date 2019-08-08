@@ -25,7 +25,7 @@ class MediaSelectModal extends Component {
         this._mediaEditModal = null;
         this._table = $('#table-medias');
 
-        console.log("MediaSelectModal :: construct");
+        //console.log("MediaSelectModal :: construct");
 
         this.onModalClose = this.onModalClose.bind(this);
         this.handleMediaSelected = this.handleMediaSelected.bind(this);
@@ -39,7 +39,7 @@ class MediaSelectModal extends Component {
     componentDidMount()
     {
 
-      console.log("MediaSelectModal :: componentDidMount");
+      //console.log("MediaSelectModal :: componentDidMount");
 
       this.initDropzone();
       //this.setDatatable();
@@ -60,7 +60,7 @@ class MediaSelectModal extends Component {
     {
         var _this = this;
 
-        console.log("MediaSelectModal :: initDropzone");
+        //console.log("MediaSelectModal :: initDropzone");
 
         var settings = {
             url: routes['medias.store'],
@@ -80,7 +80,7 @@ class MediaSelectModal extends Component {
             }*/
         };
 
-        console.log(settings);
+        //console.log(settings);
 
         this._dropzone = new Dropzone(identifier, settings);
 
@@ -143,7 +143,7 @@ class MediaSelectModal extends Component {
     setDatatable(mediaType)
     {
 
-        console.log("MediaSelectModal :: setDatatable route : ",mediaType,$(this.refs.main));
+        //console.log("MediaSelectModal :: setDatatable route : ",mediaType,$(this.refs.main));
 
         var _this = this;
 
@@ -173,7 +173,7 @@ class MediaSelectModal extends Component {
 
     destroyDatatable() {
 
-      console.log("MediaSelectModal :: destroy datatable ");
+      //console.log("MediaSelectModal :: destroy datatable ");
 
       $(this.refs.main).DataTable().destroy();
     }
@@ -181,7 +181,7 @@ class MediaSelectModal extends Component {
     refresh()
     {
 
-        console.log("MediaSelectModal :: refresh ");
+        //console.log("MediaSelectModal :: refresh ");
 
         var datatable = $(this.refs.main).DataTable();
         datatable.ajax.reload();
@@ -231,12 +231,12 @@ class MediaSelectModal extends Component {
 
     modalOpen()
     {
-        console.log("modalOpen");
+        //console.log("modalOpen");
         TweenMax.to($("#media-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
     }
 
     modalClose() {
-        console.log("modalClose");
+        //console.log("modalClose");
         var self =this;
         
         TweenMax.to($("#media-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){

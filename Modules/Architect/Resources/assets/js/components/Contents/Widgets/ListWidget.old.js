@@ -41,7 +41,7 @@ class ListWidget extends Component
 
   handleEditField(index) {
 
-      // console.log('PROPS ====>', _this.props);
+      // //console.log('PROPS ====>', _this.props);
 
     const fields = this.props.field.value;
     var field = fields[index];
@@ -147,7 +147,7 @@ class ListWidget extends Component
     //     //"settings": this.exploteToObject(['htmlId','htmlClass','cropsAllowed']),
     // };
 
-    console.log('PROPS', this.props);
+    //console.log('PROPS', this.props);
 
     this.props.onAddField(field);
 

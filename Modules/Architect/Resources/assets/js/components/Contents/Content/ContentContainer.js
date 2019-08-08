@@ -22,7 +22,7 @@ class ContentContainer extends Component {
  }
 
    handleImageSelected(media){
-      console.log("Selected image => ",media,this.props.images);
+      //console.log("Selected image => ",media,this.props.images);
 
        this.props.updateImage(
          this.props.images.sourceField,
@@ -50,7 +50,7 @@ class ContentContainer extends Component {
 
   render() {
 
-    //console.log("Content => ",this.props.app);
+    ////console.log("Content => ",this.props.app);
 
     const fields = this.props.app.fields;
     const contentSourceField = this.props.contents.sourceField;
@@ -80,12 +80,13 @@ class ContentContainer extends Component {
         <div className="container rightbar-page content">
           <ContentSidebar />
 
-          <DragDropContextProvider backend={HTML5Backend}>
-          {this.props.app.errors &&
-            <ContentFields />
-          }
-          </DragDropContextProvider>
-
+          <div className="col-xs-9 page-content">
+            <DragDropContextProvider backend={HTML5Backend}>
+            {this.props.app.errors &&
+              <ContentFields />
+            }
+            </DragDropContextProvider>
+          </div>
 
         </div>
 

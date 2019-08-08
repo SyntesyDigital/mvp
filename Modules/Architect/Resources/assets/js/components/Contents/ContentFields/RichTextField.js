@@ -22,7 +22,7 @@ class RichTextField extends Component {
         }
     }
 
-    console.log("RichTextField :: constructor : ",values);
+    //console.log("RichTextField :: constructor : ",values);
 
     this.state = {
         value : values
@@ -37,7 +37,7 @@ class RichTextField extends Component {
 
     _this.state.value[language] = content;
 
-    _this.props.customFieldChange({
+    _this.props.onFieldChange({
         identifier : _this.props.field.identifier,
         value : _this.state.value
     });

@@ -30,7 +30,7 @@ export function duplicate(contentId) {
               }
           })
           .catch((error) => {
-              //console.log(error.config);
+              ////console.log(error.config);
               dispatch(saving(false));
           });
   }
@@ -74,7 +74,7 @@ export function createContent(data) {
            } else if (error.message) {
                toastr.error(error.message);
            } else {
-               console.log('Error', error.message);
+               //console.log('Error', error.message);
            }
        });
     }
@@ -101,7 +101,7 @@ export function updateContent(data) {
               } else if (error.message) {
                   toastr.error(error.message);
               } else {
-                  console.log('Error', error.message);
+                  //console.log('Error', error.message);
               }
           });
     }
@@ -129,9 +129,9 @@ export function deleteContent(contentId, formData) {
             } else if (error.message) {
                 toastr.error(error.message);
             } else {
-                console.log('Error', error.message);
+                //console.log('Error', error.message);
             }
-            //console.log(error.config);
+            ////console.log(error.config);
         });
     }
 }

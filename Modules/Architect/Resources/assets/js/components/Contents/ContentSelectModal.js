@@ -58,7 +58,7 @@ class ContentSelectModal extends Component {
 
     handleSelectItem(item){
 
-      console.log("ContentSelectModal :: handleSelectItem => ",item);
+      //console.log("ContentSelectModal :: handleSelectItem => ",item);
 
       if(item != null){
         this.props.onContentSelected(this.processContent(item));
@@ -87,7 +87,7 @@ class ContentSelectModal extends Component {
 
       const field = this.props.field;
 
-      console.log("handleContentSelect => ContentSelectModal :: this.props.field => ",field);
+      //console.log("handleContentSelect => ContentSelectModal :: this.props.field => ",field);
 
       var route = routes["contents.data"];
 
@@ -114,7 +114,7 @@ class ContentSelectModal extends Component {
         //only linkable contents
         var route = this.getModalRoute();
 
-        console.log("ContentSelectModal :: Field => ",this.props.field,route);
+        //console.log("ContentSelectModal :: Field => ",this.props.field,route);
 
         return (
           <div style={{zIndex:zIndex}}>

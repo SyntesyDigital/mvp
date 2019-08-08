@@ -88,7 +88,7 @@ class VideoField extends Component
     const value = this.props.field.value !== undefined && this.props.field.value != null ?
       this.props.field.value : {};
 
-    //console.log("LinkField :: handleOnChange ",value);
+    ////console.log("LinkField :: handleOnChange ",value);
     if(value.title === undefined){
       value.title = {};
     }
@@ -100,7 +100,7 @@ class VideoField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   handleLinkChange(event)
@@ -121,7 +121,7 @@ class VideoField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   renderTitle()
@@ -154,7 +154,7 @@ class VideoField extends Component
     for(var key in this.props.app.translations){
       //if(this.props.app.translations[key]){
           var value = '';
-          console.log(this.props.field);
+          //console.log(this.props.field);
 
           if(linkValues !== undefined && linkValues != null) {
               value = linkValues[key] ? linkValues[key] : '';

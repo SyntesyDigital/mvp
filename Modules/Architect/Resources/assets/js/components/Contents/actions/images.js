@@ -11,13 +11,20 @@ import {
   saving
 } from "./";
 
-export function selectImage(identifier, language) {
+export function selectImage(field, language) {
 
-  //console.log("Images : selectImage ",identifier,language);
+  ////console.log("Images : selectImage ",identifier,language);
+  var listItemIndex = -1;
+  //FIXME try to find a more elegant way
+  if(field.type !== undefined && field.type == "list-item"){
+    //if the event came from the list item, then save the array of the fields
+    listItemIndex = field.index;
+  }
 
   return { type: IMAGE_SELECT, payload : {
-      identifier : identifier,
-      language : language !== undefined ? language : null
+      identifier : field,
+      language : language !== undefined ? language : null,
+      listItemIndex : listItemIndex !== undefined ? listItemIndex : null
   }}
 };
 
@@ -28,7 +35,7 @@ export function cancelImage() {
 
 export function updateImage(field, media, fields, language) {
 
-  console.log("Image :: updateImages ",field,media,fields,language);
+  //console.log("Image :: updateImages ",field,media,fields,language);
 
   switch (field.type) {
       case FIELDS.IMAGES.type:

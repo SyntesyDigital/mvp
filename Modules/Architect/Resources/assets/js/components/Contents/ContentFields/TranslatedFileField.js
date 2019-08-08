@@ -16,19 +16,19 @@ class TranslatedFileField extends Component {
 
   onFileSelect(key,event) {
     event.preventDefault();
-    //console.log('TranslatedFileField :: onFileSelect => ', event,key);
+    ////console.log('TranslatedFileField :: onFileSelect => ', event,key);
 
     this.props.selectFile(this.props.field,key);
   }
 
   cancelFile(language,event) {
     event.preventDefault();
-    console.log('TranslatedFileField :: cancelFile => ', event,language);
+    //console.log('TranslatedFileField :: cancelFile => ', event,language);
 
     const values = this.props.field.value ? this.props.field.value : {};
     values[language] = null;
 
-    this.props.customFieldChange({
+    this.props.onFieldChange({
       identifier : this.props.field.identifier,
       value : values
     });
@@ -61,7 +61,7 @@ class TranslatedFileField extends Component {
 
       var url = null;
 
-      //console.log("TranslatedFileField :: url => ",this.props.field);
+      ////console.log("TranslatedFileField :: url => ",this.props.field);
 
       if(defined && value.type.indexOf("application") != -1){
         url = value.urls.files;

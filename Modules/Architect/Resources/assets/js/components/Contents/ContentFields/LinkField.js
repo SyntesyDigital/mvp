@@ -67,7 +67,7 @@ class LinkField extends Component
     var type = "";
     var linkValues = null;
 
-    //console.log("LinkField :: componentWillReceiveProps => ",nextProps);
+    ////console.log("LinkField :: componentWillReceiveProps => ",nextProps);
 
     if(nextProps.field.value === undefined || nextProps.field.value == null){
       title = {};
@@ -132,7 +132,18 @@ class LinkField extends Component
 
   onContentSelect(event) {
       event.preventDefault();
-      this.props.selectContent(this.props.field.identifier);
+
+      var listItemIndex = -1;
+      //FIXME try to find a more elegant way
+      if(this.props.field.type !== undefined && this.props.field.type == "list-item"){
+        //if the event came from the list item, then save the array of the fields
+        listItemIndex = this.props.field.index;
+      }
+
+      this.props.selectContent(
+        this.props.field.identifier,
+        listItemIndex
+      );
   }
 
   handleOnChange(event)
@@ -141,7 +152,7 @@ class LinkField extends Component
     const value = this.props.field.value !== undefined && this.props.field.value != null ?
       this.props.field.value : {};
 
-    //console.log("LinkField :: handleOnChange ",value);
+    ////console.log("LinkField :: handleOnChange ",value);
     if(value.title === undefined){
       value.title = {};
     }
@@ -153,7 +164,7 @@ class LinkField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   handleLinkTypeChange(event)
@@ -183,7 +194,7 @@ class LinkField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
   }
 
   onRemoveField(event){
@@ -199,7 +210,7 @@ class LinkField extends Component
       value : value
     };
 
-    this.props.customFieldChange(field);
+    this.props.onFieldChange(field);
 
   }
 
@@ -402,8 +413,8 @@ const mapDispatchToProps = dispatch => {
         customFieldChange: (field) => {
             return dispatch(customFieldChange(field));
         },
-        selectContent: (field) => {
-            return dispatch(selectContent(field));
+        selectContent: (field, listItemIndex) => {
+            return dispatch(selectContent(field, listItemIndex));
         }
 
     }

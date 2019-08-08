@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  editItem
+} from './../actions/';
+
 
 import TextField from './../ContentFields/TextField';
 import SlugField from './../ContentFields/SlugField';
@@ -26,7 +32,7 @@ class CommonWidget extends Component
       field : props.field
     };
 
-    console.log(props.field);
+    ////console.log(props.field);
 
     this.onFieldChange = this.onFieldChange.bind(this);
   }
@@ -62,33 +68,6 @@ class CommonWidget extends Component
     this.props.onWidgetChange(stateField);
   }
 
-  handleContentSelect(identifier) {
-
-    const stateFields = this.state.field.fields;
-
-    console.log("CommonWidget :: handleContentSelect ::",identifier,stateFields[identifier]);
-
-    var field = null;
-    for(var key in stateFields){
-      if(stateFields[key].identifier == identifier){
-        field = stateFields[key];
-        break;
-      }
-    }
-
-    if(field == null){
-      console.error("CommonWidget :: handleContentSelect : field = null");
-      return;
-    }
-
-    field.settings = this.state.field.settings;
-
-    console.log("CommonWidget :: handleContentSelect :: field => ",field);
-
-    this.props.onContentSelect(identifier,null,field);
-
-  }
-
   renderFields() {
     var fields = [];
     var _this = this;
@@ -102,7 +81,6 @@ class CommonWidget extends Component
                 fields.push(
                   <TextField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange.bind(this)}
                   />
@@ -113,7 +91,6 @@ class CommonWidget extends Component
                 fields.push(
                   <SlugField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     sourceField={_this.entryTitleKey != null ? stateFields[_this.entryTitleKey] : null}
                     blocked={_this.props.saved}
                     key={k}
@@ -126,7 +103,6 @@ class CommonWidget extends Component
                 fields.push(
                 <RichTextField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
                 />
@@ -137,10 +113,8 @@ class CommonWidget extends Component
                 fields.push(
                 <ImageField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onImageSelect={_this.props.onImageSelect}
                 />
                 );
             break;
@@ -149,10 +123,8 @@ class CommonWidget extends Component
                 fields.push(
                 <FileField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onImageSelect={_this.props.onImageSelect}
                 />
                 );
             break;
@@ -161,10 +133,8 @@ class CommonWidget extends Component
                 fields.push(
                 <TranslatedFileField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onFileSelect={_this.props.onImageSelect}
                 />
                 );
             break;
@@ -173,7 +143,6 @@ class CommonWidget extends Component
                 fields.push(
                 <DateField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
                 />
@@ -184,10 +153,8 @@ class CommonWidget extends Component
                 fields.push(
                 <ImagesField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onImageSelect={_this.props.onImageSelect}
                 />
                 );
             break;
@@ -198,10 +165,8 @@ class CommonWidget extends Component
                 fields.push(
                 <ContentsField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onContentSelect={_this.handleContentSelect.bind(_this)}
                 />
                 );
             break;
@@ -210,7 +175,6 @@ class CommonWidget extends Component
                 fields.push(
                 <BooleanField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
                 />
@@ -222,10 +186,8 @@ class CommonWidget extends Component
                 fields.push(
                 <LinkField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onContentSelect={_this.props.onContentSelect}
                 />
                 );
             break;
@@ -234,7 +196,6 @@ class CommonWidget extends Component
                 fields.push(
                 <VideoField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
                 />
@@ -245,10 +206,8 @@ class CommonWidget extends Component
                 fields.push(
                   <UrlField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
-                    onContentSelect={_this.props.onContentSelect}
                   />
                 );
             break;
@@ -257,7 +216,6 @@ class CommonWidget extends Component
                 fields.push(
                 <LocalizationField
                     field={stateFields[k]}
-                    translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.onFieldChange}
                 />
@@ -281,4 +239,23 @@ class CommonWidget extends Component
   }
 
 }
-export default CommonWidget;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalEdit : state.modalEdit
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        /*
+        editItem : () => {
+            return dispatch(editItem());
+        }
+        */
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommonWidget);

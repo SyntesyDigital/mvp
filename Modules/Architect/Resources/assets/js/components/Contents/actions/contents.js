@@ -6,10 +6,18 @@ import {
 } from "../constants/";
 
 
-export function selectContent(identifier) {
+export function selectContent(identifier, listItemIndex) {
+
+  var listItemIndex = -1;
+  //FIXME try to find a more elegant way
+  if(identifier.type !== undefined && identifier.type == "list-item"){
+    //if the event came from the list item, then save the array of the fields
+    listItemIndex = identifier.index;
+  }
 
   return { type: CONTENT_SELECT, payload : {
-      identifier : identifier
+      identifier : identifier,
+      listItemIndex : listItemIndex
   }}
 };
 

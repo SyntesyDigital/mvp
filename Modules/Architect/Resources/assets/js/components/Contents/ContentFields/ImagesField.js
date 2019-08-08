@@ -21,7 +21,7 @@ class ImagesField extends Component {
   }
 
   componentDidMount(){
-      console.log('IMAGES =>', this.props.field);
+      //console.log('IMAGES =>', this.props.field);
 
     if(this.props.field.value === undefined || this.props.field.value == null || Object.keys(this.props.field.value).length == 0){
       //setup value if not yet defined
@@ -30,9 +30,9 @@ class ImagesField extends Component {
           value: []
       };
 
-      this.props.customFieldChange(newField);
+      this.props.onFieldChange(newField);
 
-      console.log('componentDidMount =>', this.props.field);
+      //console.log('componentDidMount =>', this.props.field);
 
     }
   }
@@ -56,7 +56,7 @@ class ImagesField extends Component {
       value : result.value
     };
 
-    this.props.customFieldChange({
+    this.props.onFieldChange({
         identifier: this.props.field.identifier,
         value: result.value
     });
@@ -65,7 +65,7 @@ class ImagesField extends Component {
 
   handleOnChange(event) {
       this.props.field.value = event.target.value;
-      this.props.customFieldChange(this.props.field);
+      this.props.onFieldChange(this.props.field);
   }
 
   onImageSelect(event) {
@@ -84,7 +84,7 @@ class ImagesField extends Component {
         	}
         }
 
-        this.props.customFieldChange({
+        this.props.onFieldChange({
             identifier : this.props.field.identifier,
             value : fields
         });

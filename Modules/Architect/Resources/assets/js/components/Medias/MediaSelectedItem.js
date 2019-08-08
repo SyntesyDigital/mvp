@@ -54,8 +54,8 @@ class MediaSelectedItem extends Component {
                 };
               }
 
-              console.log(media);
-              console.log(image);
+              //console.log(media);
+              //console.log(image);
 
               this.setState({
                   media: media,

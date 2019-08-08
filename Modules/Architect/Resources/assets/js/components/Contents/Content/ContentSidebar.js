@@ -21,7 +21,7 @@ class ContentSidebar extends Component {
   constructor(props) {
     super(props);
 
-    //console.log('PROPS ======>', props);
+    ////console.log('PROPS ======>', props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleTranslationChange = this.handleTranslationChange.bind(this);
@@ -94,7 +94,7 @@ class ContentSidebar extends Component {
 
   handleFieldSettingsChange(field) {
 
-      //console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
+      ////console.log("ModalEditItem :: handleFieldSettingsChange => ", field);
 
       const settings = this.props.app.settings;
 
@@ -124,7 +124,7 @@ class ContentSidebar extends Component {
   renderSettings()
   {
 
-    console.log("settings => ",this.props.app.settings)
+    //console.log("settings => ",this.props.app.settings)
 
     const field = {
       settings : this.props.app.settings

@@ -58,8 +58,8 @@ class RadioSettingsField extends Component {
   }
 
   handleCheckboxChange(event) {
-      console.log('=> handleCheckboxChange');
-      console.log('value => ',event.target.value);
+      //console.log('=> handleCheckboxChange');
+      //console.log('value => ',event.target.value);
 
       this.setState({
           value : event.target.value

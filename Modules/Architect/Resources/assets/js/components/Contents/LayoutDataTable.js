@@ -68,7 +68,7 @@ class LayoutDataTable extends Component {
           e.preventDefault();
           var content = $(this).data('id');
 
-          //console.log("LayoutDataTable :: ",content);
+          ////console.log("LayoutDataTable :: ",content);
 
           _this.props.onSelectItem(content);
         });

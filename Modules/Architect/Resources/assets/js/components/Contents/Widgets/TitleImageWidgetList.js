@@ -51,9 +51,9 @@ class TitleImageWidgetList extends Component
           }
       });
 
-      // console.log("\n\nResult value : ");
-      // console.log(field.value);
-      // console.log(result);
+      // //console.log("\n\nResult value : ");
+      // //console.log(field.value);
+      // //console.log(result);
 
       this.props.onFieldChange({
           identifier: this.props.field.identifier,
@@ -156,7 +156,7 @@ class TitleImageWidgetList extends Component
      var fields = [];
      var _this = this;
 
-     console.log("TitleImageWidgetList :: renderInputs => ",this.props.field);
+     //console.log("TitleImageWidgetList :: renderInputs => ",this.props.field);
 
      if(this.props.field.value !== undefined && this.props.field.value != null) {
          this.props.field.value.map(function(widget, i){

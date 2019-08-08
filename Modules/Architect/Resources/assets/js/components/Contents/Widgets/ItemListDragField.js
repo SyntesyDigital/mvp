@@ -109,7 +109,7 @@ class ItemListDragField extends Component {
 			connectDropTarget,
 		} = this.props;
 
-		console.log("ItemListDragField :: props => ",this.props);
+		//console.log("ItemListDragField :: props => ",this.props);
 
 		const opacity = isDragging ? 0 : 1
 

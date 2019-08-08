@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
 
 import Row from './../RowTypes/Row';
 import EmptyItem from './../EmptyItem';
 import PageItem from './../PageItem';
+
+import {
+  selectItem,
+  editSettings,
+} from './../../actions/';
+
+import {
+  ITEM_POSITION_BEFORE,
+  ITEM_POSITION_AFTER
+} from './../../constants/';
 
 
 class Col extends Component {
@@ -11,7 +22,7 @@ class Col extends Component {
   constructor(props){
     super(props);
 
-    console.log("Col :: props => ",props);
+    //console.log("Col :: props => ",props);
 
   }
 
@@ -35,19 +46,8 @@ class Col extends Component {
                 key={key}
                 index={parseInt(key)}
                 childrenLength={this.props.data.children.length}
-                onSelectItem={this.props.onSelectItem}
-                onColsChanged={this.props.onColsChanged}
-                onDeleteRow={this.props.onDeleteRow}
                 data={item}
                 pathToIndex={this.getPathToIndex(key)}
-                onEditItem={this.props.onEditItem}
-                onPullDownItem={this.props.onPullDownItem}
-                onPullUpItem={this.props.onPullUpItem}
-                onCopyItem={this.props.onCopyItem}
-                onEditClass={this.props.onEditClass}
-                onDeleteItem={this.props.onDeleteItem}
-                onSelectItemBefore={this.props.onSelectItemBefore}
-                onSelectItemAfter={this.props.onSelectItemAfter}
               />
             );
           }
@@ -58,12 +58,6 @@ class Col extends Component {
                 childrenLength={this.props.data.children.length}
                 data={item}
                 pathToIndex={this.getPathToIndex(key)}
-                onEditItem={this.props.onEditItem}
-                onCopyItem={this.props.onCopyItem}
-                onEditClass={this.props.onEditClass}
-                onPullDownItem={this.props.onPullDownItem}
-                onPullUpItem={this.props.onPullUpItem}
-                onDeleteItem={this.props.onDeleteItem}
               />
             );
           }
@@ -71,7 +65,7 @@ class Col extends Component {
             <EmptyItem
               key={key}
               index={key}
-              onSelectItem={this.props.onSelectItem}
+              onSelectItem={this.onSelectItem.bind(this)}
               pathToIndex={this.props.pathToIndex}
             />
           }
@@ -83,7 +77,7 @@ class Col extends Component {
         <EmptyItem
           key={0}
           index={0}
-          onSelectItem={this.props.onSelectItem}
+          onSelectItem={this.onSelectItem.bind(this)}
           pathToIndex={this.props.pathToIndex}
         />
       );
@@ -94,20 +88,31 @@ class Col extends Component {
 
   onSelectItemAfter(e) {
     e.preventDefault();
-    this.props.onSelectItemAfter(this.props.pathToIndex);
+
+    this.props.selectItem(
+      this.props.pathToIndex,
+      ITEM_POSITION_AFTER
+    );
   }
 
   onSelectItemBefore(e) {
     e.preventDefault();
-    this.props.onSelectItemBefore(this.props.pathToIndex);
+
+    this.props.selectItem(
+      this.props.pathToIndex,
+      ITEM_POSITION_BEFORE
+    );
   }
 
   onEditClass(e) {
     e.preventDefault();
 
-    this.props.onEditClass(this.props);
+    this.props.editSettings(this.props);
   }
 
+  onSelectItem(pathToIndex) {
+    this.props.selectItem(pathToIndex);
+  }
 
   render() {
 
@@ -159,4 +164,22 @@ class Col extends Component {
   }
 
 }
-export default Col;
+
+const mapStateToProps = state => {
+    return {
+        app: state.app
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectItem: (pathToIndex,position) => {
+            return dispatch(selectItem(pathToIndex,position));
+        },
+        editSettings: (item) => {
+            return dispatch(editSettings(item))
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Col);

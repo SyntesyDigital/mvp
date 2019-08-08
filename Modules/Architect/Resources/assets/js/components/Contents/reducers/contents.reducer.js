@@ -1,14 +1,16 @@
 import {
   CONTENT_CANCEL,
   CONTENT_SELECT,
-  UPDATE_SELECTED_CONTENT
+  UPDATE_SELECTED_CONTENT,
+  UPDATE_PAGE_CONTENT
 
 } from '../constants';
 
 const initialState =  {
   //modal states
   displayModal: false,
-  sourceField: null
+  sourceField: null,
+  listItemIndex : null
 }
 
 function contentsReducer(state = initialState, action) {
@@ -20,20 +22,24 @@ function contentsReducer(state = initialState, action) {
             return {
                 ...state,
                 displayModal : true,
-                sourceField : action.payload.identifier
+                sourceField : action.payload.identifier,
+                listItemIndex : action.payload.listItemIndex,
             }
         case CONTENT_CANCEL:
             return {
                 ...state,
                 displayModal : false,
-                sourceField : null
+                sourceField : null,
+                listItemIndex : null
             }
 
+        case UPDATE_PAGE_CONTENT:
         case UPDATE_SELECTED_CONTENT:
             return {
                 ...state,
                 displayModal : false,
-                sourceField : null
+                sourceField : null,
+                listItemIndex : null
             }
 
         default:

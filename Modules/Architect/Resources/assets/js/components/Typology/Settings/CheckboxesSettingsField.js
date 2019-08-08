@@ -54,8 +54,8 @@ class CheckboxesSettingsField extends Component {
 
     var fields = this.state.fields;
 
-    console.log("CheckboxesSettingsField::handleFieldChange");
-    console.log(event.target.value);
+    //console.log("CheckboxesSettingsField::handleFieldChange");
+    //console.log(event.target.value);
 
     if(event.target.checked){
       //add value
@@ -74,8 +74,8 @@ class CheckboxesSettingsField extends Component {
       value : fields
     };
 
-    //console.log("selectorSettingsField");
-    //console.log(field);
+    ////console.log("selectorSettingsField");
+    ////console.log(field);
 
     this.props.onFieldChange(field);
 
@@ -93,7 +93,7 @@ class CheckboxesSettingsField extends Component {
 
   existInput(value) {
 
-    //console.log("SelectorSettings : existInput : "+value);
+    ////console.log("SelectorSettings : existInput : "+value);
     const fields = this.state.fields;
 
     if(fields == null){

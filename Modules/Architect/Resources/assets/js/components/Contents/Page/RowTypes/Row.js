@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
+import {connect} from 'react-redux';
+
+import {
+  selectItem,
+  deleteRow,
+  pullUpItem,
+  pullDownItem,
+  editSettings,
+  changeColumns,
+  copyItem
+} from './../../actions/';
 
 import Col from './../ColTypes/Col';
 import ColTypeOption from './../ColTypes/ColTypeOption';
@@ -9,7 +20,7 @@ class Row extends Component {
   constructor(props){
     super(props);
 
-    //console.log("Row : constructor ",props);
+    ////console.log("Row : constructor ",props);
 
     this.state = {
       colsOpen : false
@@ -33,7 +44,7 @@ class Row extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    //console.log("Row : componentWillRecieveProps ",nextProps);
+    ////console.log("Row : componentWillRecieveProps ",nextProps);
 
     this.setState({
       colsOpen : false
@@ -45,6 +56,10 @@ class Row extends Component {
     const pathToIndex = this.props.pathToIndex.slice(0);
     pathToIndex.push(parseInt(index));
     return pathToIndex;
+  }
+
+  onSelectItem() {
+    this.props.selectItem(this.props.pathToIndex);
   }
 
   renderChildren() {
@@ -61,18 +76,7 @@ class Row extends Component {
                 colClass={item.colClass}
                 index={parseInt(key)}
                 data={item}
-                onSelectItem={this.props.onSelectItem}
-                onColsChanged={this.props.onColsChanged}
-                onDeleteRow={this.props.onDeleteRow}
                 pathToIndex={this.getPathToIndex(key)}
-                onEditItem={this.props.onEditItem}
-                onPullDownItem={this.props.onPullDownItem}
-                onPullUpItem={this.props.onPullUpItem}
-                onCopyItem={this.props.onCopyItem}
-                onEditClass={this.props.onEditClass}
-                onDeleteItem={this.props.onDeleteItem}
-                onSelectItemBefore={this.props.onSelectItemBefore}
-                onSelectItemAfter={this.props.onSelectItemAfter}
               />
             );
           }
@@ -102,7 +106,10 @@ class Row extends Component {
 				},
 				callback: function (result) {
 					if(result){
-						self.props.onDeleteRow(self.props.pathToIndex);
+						self.props.deleteRow(
+              self.props.pathToIndex,
+              self.props.app.layout
+            );
 					}
 				}
 		});
@@ -112,26 +119,36 @@ class Row extends Component {
   onPullDownItem(e) {
     e.preventDefault();
 
-    this.props.onPullDownItem(this.props.pathToIndex);
+    this.props.pullDownItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
 
   }
 
   onPullUpItem(e) {
     e.preventDefault();
 
-    this.props.onPullUpItem(this.props.pathToIndex);
+    this.props.pullUpItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
   }
 
   onCopyItem(e) {
     e.preventDefault();
 
-    this.props.onCopyItem(this.props.pathToIndex);
+    this.props.copyItem(
+      this.props.pathToIndex,
+      this.props.app.layout
+    );
   }
 
   onEditClass(e) {
     e.preventDefault();
 
-    this.props.onEditClass(this.props);
+    //FIXME set only necessary info
+    this.props.editSettings(this.props);
   }
 
   toggleColumns(e) {
@@ -219,7 +236,7 @@ class Row extends Component {
       //TODO como mejora unir las filas para no perder hijos
     }
 
-    console.log("children actual => ",children);
+    ////console.log("children actual => ",children);
 
     var resultChildren = [];
 
@@ -234,14 +251,13 @@ class Row extends Component {
 
     }
 
-    console.log("children final => ",resultChildren);
+    ////console.log("children final => ",resultChildren);
 
-    //var pathToIndex = [];
-    //pathToIndex.push(this.props.index);
-
-    //console.log("Row :: setColType : "+this.props.pathToIndex);
-
-    this.props.onColsChanged(this.props.pathToIndex,resultChildren);
+    this.props.changeColumns(
+      this.props.pathToIndex,
+      resultChildren,
+      this.props.app.layout
+    );
 
   }
 
@@ -295,7 +311,7 @@ class Row extends Component {
                 </a>
                 {!isWrapper &&
                   <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-                    <i className="fa fa-files-o"></i>
+                    <i className="fa far fa-copy"></i>
                   </a>
                 }
                 {!isWrapper &&
@@ -324,4 +340,38 @@ class Row extends Component {
   }
 
 }
-export default Row;
+
+
+const mapStateToProps = state => {
+    return {
+        app: state.app
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectItem: (pathToIndex) => {
+            return dispatch(selectItem(pathToIndex));
+        },
+        deleteRow: (pathToIndex,layout) => {
+            return dispatch(deleteRow(pathToIndex,layout))
+        },
+        pullUpItem: (pathToIndex,layout) => {
+            return dispatch(pullUpItem(pathToIndex,layout))
+        },
+        pullDownItem: (pathToIndex,layout) => {
+            return dispatch(pullDownItem(pathToIndex,layout))
+        },
+        editSettings: (item) => {
+            return dispatch(editSettings(item))
+        },
+        changeColumns: (pathToIndex, data, layout) => {
+            return dispatch(changeColumns(pathToIndex,data,layout))
+        },
+        copyItem: (pathToIndex,layout) => {
+          return dispatch(copyItem(pathToIndex,layout))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Row);

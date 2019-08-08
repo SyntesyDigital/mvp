@@ -30,8 +30,8 @@ class InputTranslatedSettingsField extends Component {
     var input = {};
     var display = false;
 
-    //console.log("InputSettingsField :: componentWillRecieveProps");
-    //console.log(nextProps);
+    ////console.log("InputSettingsField :: componentWillRecieveProps");
+    ////console.log(nextProps);
 
     if(nextProps.field != null && nextProps.field[nextProps.source] != null &&
        nextProps.field[nextProps.source][nextProps.name] !== undefined){
@@ -48,7 +48,7 @@ class InputTranslatedSettingsField extends Component {
 
   handleInputChange(language,event) {
 
-    console.log("InputTranslatedSettingsField :: handleInputChange => ",language);
+    //console.log("InputTranslatedSettingsField :: handleInputChange => ",language);
     const values = this.state.input !== undefined && this.state.input != null ? this.state.input : {};
     values[language] = event.target.value;
 

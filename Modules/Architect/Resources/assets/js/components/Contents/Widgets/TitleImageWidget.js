@@ -67,7 +67,7 @@ class TitleImageWidget extends Component
 
   getStateFromProms(props) {
 
-    console.log("TitleImageWidget :: getStateFromProms => ",props);
+    //console.log("TitleImageWidget :: getStateFromProms => ",props);
 
     const state = this.state;
 
@@ -122,7 +122,7 @@ class TitleImageWidget extends Component
 
   onFieldChange(field) {
 
-    console.log("TitleImageWidget :: onFieldChange => ",field);
+    //console.log("TitleImageWidget :: onFieldChange => ",field);
 
     const value = this.props.field.value !== undefined && this.props.field.value != null ?
       this.props.field.value : {};
