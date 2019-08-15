@@ -148,4 +148,130 @@ class ElementRepository extends BaseRepository
         return $this->boby->getModelValuesQuery($element->model_exemple);
     }
 
+    public function getFormFields($modelId)
+    {
+        $procedures = $this->getProcedures($modelId);
+
+        $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS');
+
+
+        //obtain the fields from procedures
+        $fields = [];
+
+        //foreach procedures
+        foreach($procedures as $procedure) {
+            if($procedure->CONF == "Y" && $procedure->REP == "N"){
+              //normal procedure, add field directly
+              $fields = array_merge($fields,$this->getFieldsFromProcedure($procedure,$allObjects));
+
+            }
+            else if($procedure->CONF == "Y" && $procedure->REP == "Y"){
+              //internal array like assure contact
+
+              //add speceific field to define a internal array
+              /*
+              $fields = array_merge($fields,[[
+                "type" => "fields_list",
+                "procedure" => $procedure,
+                "fields" => $this->getFieldsFromProcedure($procedure,$allObjects)
+              ]]);
+              */
+
+            }
+            else if($procedure->CONF == "N" && $procedure->REP == "Y"){
+              //list with external model like documents
+
+              /*
+              $fields = array_merge($fields,[[
+                "type" => "fields_model",
+                "procedure" => $procedure
+              ]]);
+              */
+
+            }
+            else {
+              //nothing to do
+            }
+        }
+
+        return $fields;
+    }
+
+    public function getFieldsFromProcedure($procedure,$allObjects)
+    {
+        $fields = [];
+
+        //get all fields configurable
+        foreach($allObjects as $object) {
+            if($procedure->OBJID == $object->OBJ_ID) {
+              if($object->CONF == "Y"){
+
+                //process field
+
+                $fields[] = $this->processFormField($object);
+              }
+            }
+        }
+
+        return $fields;
+    }
+
+    public function processFormField($object){
+
+      $parameters = [];
+
+      $identifier = $object->CHAMP;
+      $parameters['format'] = $object->FORMAT;
+      $parameters['lib'] =  $object->LIB;
+
+      $fieldType = $this->getFieldType($parameters);
+
+      //TODO Not using :
+      //"VIS": "Y",
+      //"CONT": null,
+      //"COM": null,
+      //"ACTIF": "Y",
+      //"EXEMPLE": "CAUSES",
+      //"P1": null,
+      //"P2": null
+
+      return [
+        'type' => $fieldType['identifier'],
+        'identifier' => $object->CHAMP,
+        'name' => $object->LIB,
+        'icon' => $fieldType['icon'],
+        'help' => '',
+        'default' => $object->VALEUR,
+        'boby' => $object->BOBY,
+        'added' => false,
+        'formats' => $fieldType['formats'],
+        'rules' => $fieldType['rules'],
+        'settings' => $fieldType['settings']
+      ];
+
+    }
+
+
+    public function getProcedures($modelId)
+    {
+        $procedures = $this->boby->getModelValuesQuery('WS_EXT2_DEF_PROCEDURES');
+
+        $modelProcedures = [];
+
+        foreach( $procedures as $index => $procedure ) {
+          if($procedure->MODELE == $modelId){
+            $modelProcedures[] = $procedure;
+          }
+        }
+
+        usort($modelProcedures, function($a, $b)
+        {
+            return intval($a->ETAP) > intval($b->ETAP);
+        });
+
+        return $modelProcedures;
+    }
+
+
+
 }

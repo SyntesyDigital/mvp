@@ -59,6 +59,7 @@ class ElementController extends Controller
 
     public function create($element_type, $model_id, Request $request)
     {
+
         //get model and fields
         $models = $this->elements->getModelsByType($element_type);
         $model = $this->getModelById($models,$model_id);
@@ -66,7 +67,15 @@ class ElementController extends Controller
         if(!$model)
           abort(500);
 
-        $fields = $this->elements->getFieldsByElement($model->WS);
+        if($element_type == 'form'){
+          $fields = $this->elements->getFormFields($model->ID);
+        }
+        else {
+          $fields = $this->elements->getFieldsByElement($model->WS);
+        }
+
+        //dd($fields);
+
         $parametersList = RouteParameter::all();
 
         $data = [
