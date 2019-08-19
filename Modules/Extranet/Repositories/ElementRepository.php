@@ -152,7 +152,7 @@ class ElementRepository extends BaseRepository
     {
         $procedures = $this->getProcedures($modelId);
 
-        $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS');
+        $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS?perPage=100');
 
 
         //obtain the fields from procedures
@@ -160,34 +160,25 @@ class ElementRepository extends BaseRepository
 
         //foreach procedures
         foreach($procedures as $procedure) {
+
             if($procedure->CONF == "Y" && $procedure->REP == "N"){
               //normal procedure, add field directly
-              $fields = array_merge($fields,$this->getFieldsFromProcedure($procedure,$allObjects));
+
+              $resultFields = $this->getFieldsFromProcedure($procedure,$allObjects);
+              $fields = array_merge($fields,$resultFields);
 
             }
             else if($procedure->CONF == "Y" && $procedure->REP == "Y"){
               //internal array like assure contact
 
               //add speceific field to define a internal array
-              /*
-              $fields = array_merge($fields,[[
-                "type" => "fields_list",
-                "procedure" => $procedure,
-                "fields" => $this->getFieldsFromProcedure($procedure,$allObjects)
-              ]]);
-              */
+              $fields[] = $this->processArrayListField($procedure,$allObjects);
 
             }
             else if($procedure->CONF == "N" && $procedure->REP == "Y"){
               //list with external model like documents
 
-              /*
-              $fields = array_merge($fields,[[
-                "type" => "fields_model",
-                "procedure" => $procedure
-              ]]);
-              */
-
+              //TODO añadir un modelo externo
             }
             else {
               //nothing to do
@@ -218,13 +209,13 @@ class ElementRepository extends BaseRepository
 
     public function processFormField($object){
 
-      $parameters = [];
-
       $identifier = $object->CHAMP;
-      $parameters['format'] = $object->FORMAT;
-      $parameters['lib'] =  $object->LIB;
 
-      $fieldType = $this->getFieldType($parameters);
+      $fieldType = $this->getFieldType([
+        'format' => $object->BOBY != '' ?
+          'select' :  //if has boby is a select
+          $object->FORMAT
+      ]);
 
       //TODO Not using :
       //"VIS": "Y",
@@ -245,8 +236,36 @@ class ElementRepository extends BaseRepository
         'boby' => $object->BOBY,
         'added' => false,
         'formats' => $fieldType['formats'],
+        'rules' => ['required'],
+        'settings' => array_diff($fieldType['settings'],['hasRoute'])
+      ];
+
+    }
+
+    public function processArrayListField($procedure,$allObjects) {
+
+      $fields = $this->getFieldsFromProcedure($procedure,$allObjects);
+
+      //dd($fields);
+      //dd($procedure);
+
+      $fieldType = $this->getFieldType([
+        'format' => 'list'
+      ]);
+
+      return [
+        'type' => $fieldType['identifier'],
+        'identifier' => $procedure->OBJID,
+        'name' => $procedure->LIB,
+        'icon' => $fieldType['icon'],
+        'help' => '',
+        'default' => '',
+        'boby' => '',
+        'added' => false,
+        'formats' => $fieldType['formats'],
         'rules' => $fieldType['rules'],
-        'settings' => $fieldType['settings']
+        'settings' => $fieldType['settings'],
+        'fields' => $fields
       ];
 
     }
@@ -254,7 +273,7 @@ class ElementRepository extends BaseRepository
 
     public function getProcedures($modelId)
     {
-        $procedures = $this->boby->getModelValuesQuery('WS_EXT2_DEF_PROCEDURES');
+        $procedures = $this->boby->getModelValuesQuery('WS_EXT2_DEF_PROCEDURES?perPage=100');
 
         $modelProcedures = [];
 

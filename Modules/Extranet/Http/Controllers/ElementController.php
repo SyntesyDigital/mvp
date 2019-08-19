@@ -96,7 +96,14 @@ class ElementController extends Controller
     {
       $models = $this->elements->getModelsByType( $element->type);
       $model = $this->getModelById($models,$element->model_identifier);
-      $fields = $this->elements->getFieldsByElement($model->WS);
+
+      if($element->type == 'form'){
+        $fields = $this->elements->getFormFields($model->ID);
+      }
+      else {
+        $fields = $this->elements->getFieldsByElement($model->WS);
+      }
+
       $parametersList = RouteParameter::all();
 
       $data = [
@@ -120,9 +127,12 @@ class ElementController extends Controller
                       'element' => $element
                   ]);
         } catch (\Exception $e) {
+
         }
+
         return response()->json([
-            'success' => false
+            'success' => false,
+            'message' => $e->getMessage()
         ], 500);
 
     }

@@ -76,6 +76,12 @@ class ElementDropZone extends Component {
 			return;
 		}
 
+		var settings = this.exploteToObject(field.settings);
+
+		if(field.fields != null){
+			settings.fields = field.fields;
+		}
+
 		var field = {
 			id : this.getMaxId() + 1,
 			type : field.type,
@@ -85,7 +91,7 @@ class ElementDropZone extends Component {
 			saved : false,
 			editable : true,
 			rules : this.exploteToObject(field.rules),
-			settings : this.exploteToObject(field.settings)
+			settings : settings
 		};
 
 		this.props.onFieldAdded(field);

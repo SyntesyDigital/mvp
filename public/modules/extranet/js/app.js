@@ -51358,6 +51358,12 @@ var ElementDropZone = function (_Component) {
 				return;
 			}
 
+			var settings = this.exploteToObject(field.settings);
+
+			if (field.fields != null) {
+				settings.fields = field.fields;
+			}
+
 			var field = {
 				id: this.getMaxId() + 1,
 				type: field.type,
@@ -51367,7 +51373,7 @@ var ElementDropZone = function (_Component) {
 				saved: false,
 				editable: true,
 				rules: this.exploteToObject(field.rules),
-				settings: this.exploteToObject(field.settings)
+				settings: settings
 			};
 
 			this.props.onFieldAdded(field);
@@ -51520,7 +51526,8 @@ var fieldSource = {
 			added: props.definition.added,
 			formats: props.definition.formats,
 			rules: props.definition.rules,
-			settings: props.definition.settings
+			settings: props.definition.settings,
+			fields: props.definition.fields !== undefined ? props.definition.fields : null
 		};
 	},
 	endDrag: function endDrag(props, monitor) {
@@ -57209,7 +57216,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Settings_SelectorSettingsField__ = __webpack_require__(993);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Settings_RadioSettingsField__ = __webpack_require__(994);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Settings_LinkSettingsField__ = __webpack_require__(995);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__actions___ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Settings_FieldsSettings__ = __webpack_require__(1048);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__actions___ = __webpack_require__(63);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
@@ -57239,6 +57247,7 @@ function _inherits(subClass, superClass) {
     throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
+
 
 
 
@@ -57418,6 +57427,12 @@ var ElementModal = function (_Component) {
         source: 'settings',
         onFieldChange: this.handleFieldSettingsChange,
         label: 'Lien'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__Settings_FieldsSettings__["a" /* default */], {
+        field: field,
+        name: 'fields',
+        source: 'settings',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Liste des champs'
       })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'modal-footer' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', { href: '', className: 'btn btn-default', onClick: this.onModalClose }, ' Fermer '), ' \xA0'))));
     }
   }]);
@@ -57435,13 +57450,13 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     closeModalSettings: function closeModalSettings() {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["h" /* closeModalSettings */])());
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_10__actions___["h" /* closeModalSettings */])());
     },
     onModalSettingsClosed: function onModalSettingsClosed() {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["p" /* onModalSettingsClosed */])());
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_10__actions___["p" /* onModalSettingsClosed */])());
     },
     changeFieldSettings: function changeFieldSettings(field) {
-      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_9__actions___["d" /* changeFieldSettings */])(field));
+      return dispatch(Object(__WEBPACK_IMPORTED_MODULE_10__actions___["d" /* changeFieldSettings */])(field));
     }
   };
 };
@@ -58339,7 +58354,7 @@ var LinkSettingsField = function (_Component) {
         console.log("LinkSettingsField :: Destroying!");
         this.initialised = false;
         this.props.clearContent();
-      } else if (nextProps.field != null && !this.initialised) {
+      } else if (nextProps.field != null && !this.initialised && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
         //constructing the component
         var newContent = nextProps.field[nextProps.source][nextProps.name];
         console.log("LinkSettingsField :: Constructing => ", newContent);
@@ -58966,7 +58981,13 @@ var ContentDataTable = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions___ = __webpack_require__(63);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+  return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
 
 var _createClass = function () {
   function defineProperties(target, props) {
@@ -58987,12 +59008,12 @@ function _classCallCheck(instance, Constructor) {
 function _possibleConstructorReturn(self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof2(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof2(superClass)));
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
@@ -59120,7 +59141,7 @@ var ModalParameters = function (_Component) {
     key: 'render',
     value: function render() {
 
-      var params = this.props.contents.content != null && this.props.contents.content.params != null ? this.props.contents.content.params : [];
+      var params = this.props.contents.content != null && this.props.contents.content.params != null && _typeof(this.props.contents.content.params) !== 'object' ? this.props.contents.content.params : [];
 
       var valid = this.checkValidParameters(params);
 
@@ -59196,6 +59217,170 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 /* harmony default export */ __webpack_exports__["a"] = (thunk);
+
+/***/ }),
+/* 1002 */,
+/* 1003 */,
+/* 1004 */,
+/* 1005 */,
+/* 1006 */,
+/* 1007 */,
+/* 1008 */,
+/* 1009 */,
+/* 1010 */,
+/* 1011 */,
+/* 1012 */,
+/* 1013 */,
+/* 1014 */,
+/* 1015 */,
+/* 1016 */,
+/* 1017 */,
+/* 1018 */,
+/* 1019 */,
+/* 1020 */,
+/* 1021 */,
+/* 1022 */,
+/* 1023 */,
+/* 1024 */,
+/* 1025 */,
+/* 1026 */,
+/* 1027 */,
+/* 1028 */,
+/* 1029 */,
+/* 1030 */,
+/* 1031 */,
+/* 1032 */,
+/* 1033 */,
+/* 1034 */,
+/* 1035 */,
+/* 1036 */,
+/* 1037 */,
+/* 1038 */,
+/* 1039 */,
+/* 1040 */,
+/* 1041 */,
+/* 1042 */,
+/* 1043 */,
+/* 1044 */,
+/* 1045 */,
+/* 1046 */,
+/* 1047 */,
+/* 1048 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+
+
+
+var FieldsSettings = function (_Component) {
+  _inherits(FieldsSettings, _Component);
+
+  function FieldsSettings(props) {
+    _classCallCheck(this, FieldsSettings);
+
+    var _this = _possibleConstructorReturn(this, (FieldsSettings.__proto__ || Object.getPrototypeOf(FieldsSettings)).call(this, props));
+
+    var checkbox = null;
+    var input = "";
+    var display = false;
+
+    _this.state = {
+      input: input,
+      display: display
+    };
+
+    return _this;
+  }
+
+  _createClass(FieldsSettings, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.processProps(this.props);
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.processProps(nextProps);
+    }
+  }, {
+    key: 'processProps',
+    value: function processProps(nextProps) {
+      var checkbox = null;
+      var input = "";
+      var display = false;
+
+      console.log("FieldsSettings :: componentWillRecieveProps", nextProps);
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+
+        input = nextProps.field[nextProps.source][nextProps.name] == null ? '' : nextProps.field[nextProps.source][nextProps.name];
+      }
+
+      this.setState({
+        input: input,
+        display: display
+      });
+    }
+  }, {
+    key: 'renderFields',
+    value: function renderFields() {
+
+      if (this.state.input == "") return null;
+
+      return this.state.input.map(function (item, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'typology-field', key: index }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-type' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: item.icon }), item.type), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-inputs' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'row' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }, item.name), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-name col-xs-6' }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-actions' }));
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var input = this.state.input;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { display: this.state.display ? 'block' : 'none' } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'togglebutton' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', null, this.props.label)), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'setup-field-config' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'form-group bmd-form-group' }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field-form fields-list-container' }, this.renderFields())))));
+    }
+  }]);
+
+  return FieldsSettings;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (FieldsSettings);
 
 /***/ })
 /******/ ]);
