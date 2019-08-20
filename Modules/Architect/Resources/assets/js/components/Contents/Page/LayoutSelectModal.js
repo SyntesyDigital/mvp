@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
 
-import LayoutDataTable from './../LayoutDataTable';
+import {
+  cancelLayout,
+  saveSelectedLayout
+} from './../actions/';
+
+import LayoutDataTable from './LayoutDataTable';
 
 class LayoutSelectModal extends Component {
 
@@ -11,12 +17,14 @@ class LayoutSelectModal extends Component {
     }
 
     componentDidMount(){
-
+      if(this.props.modalLayout.displayModal){
+          this.modalOpen();
+      }
     }
 
     componentWillReceiveProps(nextProps)
     {
-      if(nextProps.display){
+      if(nextProps.modalLayout.displayModal){
           this.modalOpen();
       } else {
           this.modalClose();
@@ -25,7 +33,7 @@ class LayoutSelectModal extends Component {
 
     onModalClose(e){
         e.preventDefault();
-        this.props.onContentCancel();
+        this.props.cancelLayout();
     }
 
     modalOpen()
@@ -39,6 +47,37 @@ class LayoutSelectModal extends Component {
 
         }});
     }
+
+    handleLayoutSelected(layoutId) {
+
+      //console.log("PageContainer :: handleLayoutSelected => "+layoutId);
+
+      var _this = this;
+
+      bootbox.confirm({
+         message: Lang.get('modals.load_template_alert'),
+         buttons: {
+           confirm: {
+               label: Lang.get('fields.si'),
+               className: 'btn-primary'
+           },
+           cancel: {
+               label: Lang.get('fields.no'),
+               className: 'btn-default'
+           }
+         },
+         callback: function (result) {
+            if(result) {
+              _this.props.saveSelectedLayout(layoutId);
+            }
+         }
+       });
+
+       this.setState({
+         displayLayoutModal : false
+       })
+    }
+
 
     render() {
 
@@ -68,7 +107,7 @@ class LayoutSelectModal extends Component {
 
                           <LayoutDataTable
                             route={routes["pagelayouts.data"]}
-                            onSelectItem={this.props.onLayoutSelected}
+                            onSelectItem={this.handleLayoutSelected.bind(this)}
                           />
 
                         </div>
@@ -88,4 +127,23 @@ class LayoutSelectModal extends Component {
     }
 }
 
-export default LayoutSelectModal;
+const mapStateToProps = state => {
+    return {
+        app: state.app,
+        modalLayout : state.modalLayout
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        cancelLayout: () => {
+            return dispatch(cancelLayout());
+        },
+        saveSelectedLayout : (layoutId) => {
+            return dispatch(saveSelectedLayout(layoutId));
+        }
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutSelectModal);

@@ -174,3 +174,20 @@ export function onSaveSuccess(response) {
 export function customFieldChange(field) {
     return {type : CUSTOM_FIELD_CHANGE, payload : field};
 }
+
+export function saveLayout(name,layout,settings) {
+
+  return (dispatch) => {
+    axios.post('/architect/page-layouts', {
+        name : name,
+        definition : layout,
+        settings : settings
+    })
+    .then((response) => {
+        toastr.success(Lang.get('modals.template_saved'));
+    })
+    .catch((error) => {
+        toastr.error(Lang.get('fields.error')+'!');
+    });
+  }
+}

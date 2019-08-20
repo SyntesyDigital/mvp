@@ -19,6 +19,7 @@ import ModalEditClass from './ModalEditClass';
 import ModalEditItem from './ModalEditItem';
 import MediaSelectModal from './../../Medias/MediaSelectModal';
 import ContentSelectModal from './../ContentSelectModal';
+import LayoutSelectModal from './LayoutSelectModal';
 
 class PageBuilder extends Component {
 
@@ -104,6 +105,10 @@ class PageBuilder extends Component {
         />
 
         <ModalEditClass
+          zIndex={9000}
+        />
+
+        <LayoutSelectModal
           zIndex={9000}
         />
 

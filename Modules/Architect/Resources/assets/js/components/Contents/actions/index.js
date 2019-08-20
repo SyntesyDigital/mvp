@@ -7,3 +7,4 @@ export * from './modalItem';
 export * from './modalSettings';
 export * from './modalEdit';
 export * from './modalEditList';
+export * from './modalLayout';

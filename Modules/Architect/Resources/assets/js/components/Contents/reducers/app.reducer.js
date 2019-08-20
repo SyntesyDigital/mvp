@@ -19,7 +19,8 @@ import {
   UPDATE_ITEM,
   UPDATE_SETTINGS,
   UPDATE_PAGE_IMAGE,
-  UPDATE_PAGE_CONTENT
+  UPDATE_PAGE_CONTENT,
+  UPDATE_PAGE_LAYOUT
 
 
 } from '../constants';
@@ -288,6 +289,13 @@ function appReducer(state = initialState, action) {
           return {
             ...state,
             layout : action.payload
+          }
+
+        case UPDATE_PAGE_LAYOUT :
+          return {
+            ...state,
+            layout : action.payload.layout,
+            settings : action.payload.settings
           }
 
         default:

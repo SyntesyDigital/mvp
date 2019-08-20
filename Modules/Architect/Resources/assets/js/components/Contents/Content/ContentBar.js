@@ -5,7 +5,9 @@ import {connect} from 'react-redux';
 import {
   duplicate,
   deleteContent,
-  submitForm
+  submitForm,
+  saveLayout,
+  selectLayout
 } from './../actions/';
 
 class ContentBar extends Component {
@@ -27,11 +29,23 @@ class ContentBar extends Component {
   saveLayout(e) {
       e.preventDefault();
       this.props.onLayoutSave != undefined ? this.props.onLayoutSave() : null;
+
+      var self = this;
+
+      bootbox.prompt(Lang.get('modals.name_template'), function(result){
+        if(result != null){
+          self.props.saveLayout(result,
+            self.props.app.layout,
+            self.props.app.settings
+          );
+        }
+      });
+
   }
 
   loadLayout(e) {
       e.preventDefault();
-      this.props.onLoadLayout != undefined ? this.props.onLoadLayout() : null;
+      this.props.selectLayout();
   }
 
   getFormData() {
@@ -76,7 +90,7 @@ class ContentBar extends Component {
 
   }
 
-  renderUnsavedMenu() {
+  renderUnsavedMenu(isPage) {
 
     return (
       <ul className="dropdown-menu dropdown-menu-right default-padding">
@@ -87,13 +101,13 @@ class ContentBar extends Component {
                   &nbsp;{Lang.get('fields.new')}
               </a>
           </li>
-          {this.props.onLoadLayout &&
-          <li>
-              <a href="#" onClick={this.loadLayout.bind(this)}>
-                  <i className="fa fa-download"></i>
-                  &nbsp;{Lang.get('modals.load_template')}
-              </a>
-          </li>
+          {isPage &&
+            <li>
+                <a href="#" onClick={this.loadLayout.bind(this)}>
+                    <i className="fa fa-download"></i>
+                    &nbsp;{Lang.get('modals.load_template')}
+                </a>
+            </li>
           }
       </ul>
     );
@@ -118,23 +132,19 @@ class ContentBar extends Component {
               </a>
           </li>
 
-          {this.props.onLoadLayout &&
           <li>
               <a href="#" onClick={this.loadLayout.bind(this)}>
                   <i className="fa fa-download"></i>
                   &nbsp;{Lang.get('modals.load_template')}
               </a>
           </li>
-          }
 
-          {this.props.onLayoutSave &&
           <li>
               <a href="#" onClick={this.saveLayout.bind(this)}>
                   <i className="fa fa-upload"></i>
                   &nbsp;{Lang.get('modals.save_template')}
               </a>
           </li>
-          }
 
           <li>
               <a href="#" className="text-danger" onClick={this.onDelete.bind(this)}>
@@ -217,7 +227,7 @@ class ContentBar extends Component {
                       }
 
                       { !saved  &&
-                        this.renderUnsavedMenu()
+                        this.renderUnsavedMenu(isPage)
                       }
                   </div>
                 }
@@ -245,7 +255,8 @@ class ContentBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        app: state.app
+        app: state.app,
+        modalLayout : state.modalLayout
     }
 }
 
@@ -259,6 +270,12 @@ const mapDispatchToProps = dispatch => {
         },
         submitForm: (data) => {
           return dispatch(submitForm(data));
+        },
+        saveLayout: (name,layout,settings) => {
+          return dispatch(saveLayout(name,layout,settings));
+        },
+        selectLayout : () => {
+          return dispatch(selectLayout());
         }
     }
 }

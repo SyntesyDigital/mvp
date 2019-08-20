@@ -33,12 +33,7 @@ class PageContainer extends Component {
 
     return (
       <div>
-        <ContentBar
-          /*
-          onLayoutSave={this.handleLayoutSave}
-          onLoadLayout={this.handleLoadLayout}
-          */
-        />
+        <ContentBar />
 
         <div className="container rightbar-page content">
           <ContentSidebar />
