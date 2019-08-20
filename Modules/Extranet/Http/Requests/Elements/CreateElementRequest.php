@@ -30,8 +30,8 @@ class CreateElementRequest extends FormRequest
 
             case 'POST':
                 return [
-            //        'name' => 'required',
-
+                    'name' => 'required',
+                    'identifier' => 'required|unique:elements'
                 ];
                 break;
 

@@ -38832,7 +38832,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(101);
@@ -56901,7 +56901,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(20);
+window.axios = __webpack_require__(21);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

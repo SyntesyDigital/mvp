@@ -8,6 +8,8 @@ import CheckboxesSettingsField from './Settings/CheckboxesSettingsField';
 import SelectorSettingsField from './Settings/SelectorSettingsField';
 import RadioSettingsField from './Settings/RadioSettingsField';
 import LinkSettingsField from './Settings/LinkSettingsField';
+import FieldsSettings from './Settings/FieldsSettings';
+
 
 import {
   closeModalSettings,
@@ -216,6 +218,14 @@ class ElementModal extends Component {
                       source="settings"
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Lien"
+                    />
+
+                    <FieldsSettings
+                      field={field}
+                      name="fields"
+                      source="settings"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Liste des champs"
                     />
 
                   </div>

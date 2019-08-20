@@ -66,7 +66,7 @@ return [
         'mapping' => 'select',
         'identifier' => 'select',
         'label' => 'Boby List',
-        'icon' => 'fas fa-list-ul',
+        'icon' => 'fas fa-sort',
         'formats' => [
         ],
         'rules' => [
@@ -110,6 +110,22 @@ return [
         ],
         'settings' => [
           'ws' => ''
+        ]
+      ],
+      'list' => [
+        'mapping' => 'list',
+        'identifier' => 'list',
+        'label' => 'Fields list',
+        'icon' => 'fas fa-list',
+        'formats' => [
+        ],
+        'rules' => [
+          'required',
+        ],
+        'settings' => [
+        ],
+        'fields' => [
+
         ]
       ]
     ]

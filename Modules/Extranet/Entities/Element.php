@@ -17,8 +17,8 @@ class Element extends Model
             'name' => 'Formulaire',
             'identifier' => 'form',
             'icon' => 'fa fa-list-alt',
-            'WS_NAME' => '', //TODO chagne with correct
-            'FORMAT' =>  ''
+            'WS_NAME' => 'WS_EXT2_DEF_MODELES',
+            'FORMAT' =>  'CR'
         ],
         'table' => [
             'name' => 'Tableau',

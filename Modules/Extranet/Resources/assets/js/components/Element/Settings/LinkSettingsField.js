@@ -108,7 +108,8 @@ class LinkSettingsField extends Component {
       this.props.clearContent();
 
     }
-    else if(nextProps.field != null && !this.initialised){
+    else if(nextProps.field != null && !this.initialised &&
+      nextProps.field[nextProps.source][nextProps.name] !== undefined){
       //constructing the component
       var newContent = nextProps.field[nextProps.source][nextProps.name];
       console.log("LinkSettingsField :: Constructing => ", newContent);
