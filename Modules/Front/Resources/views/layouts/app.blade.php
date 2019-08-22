@@ -64,6 +64,12 @@
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';
           const LOCALE = '{{App::getLocale()}}';
+
+          @if(isset(Auth::user()->id))
+            const ID_PER_ASS = '{{Auth::user()->id}}';
+            const ID_PER_USER = '{{Auth::user()->id}}';
+          @endif
+
         </script>
         {{-- <script type="text/javascript" src="{{route('messages', App::getLocale())}}" ></script> --}}
         <script type="text/javascript" src="{{route('localization.js', App::getLocale())}}" ></script>

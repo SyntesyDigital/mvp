@@ -38,6 +38,10 @@ Route::group([
     Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');
     Route::delete('/elements/{element}/delete', 'ElementController@delete')->name('extranet.elements.delete');
     Route::get('/elements/{element}/export/{limit?}', 'ElementController@export')->name('table.export');
+    Route::get('/elements/select/data/{name}', 'ElementController@getSelectData')->name('elements.select.data');
+    Route::get('/elements/procedures/{modelId}', 'ElementController@getFormProcedures')->name('elements.procedures');
+
+
 
     // Routes Parameters
     Route::get('/routes_parameters', 'RouteParameterController@index')->name('extranet.routes_parameters.index');
@@ -51,5 +55,7 @@ Route::group([
     Route::get('/extranet/{element}/model_values/data/{limit?}', 'ElementController@getModelValues')->name('extranet.element.mode_values.data');
 
     Route::get('/extranet/content/{content}/parameters', 'ContentController@getContentParameters')->name('extranet.content.parameters');
+
+
 
 });

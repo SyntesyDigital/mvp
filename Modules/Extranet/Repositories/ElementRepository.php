@@ -208,6 +208,20 @@ class ElementRepository extends BaseRepository
         return $fields;
     }
 
+    public function getObjectsFromProcedure($procedure,$allObjects)
+    {
+        $fields = [];
+
+        //get all fields configurable
+        foreach($allObjects as $object) {
+            if($procedure->OBJID == $object->OBJ_ID) {
+              $fields[] = $object;
+            }
+        }
+
+        return $fields;
+    }
+
     public function processFormField($object){
 
       $identifier = $object->CHAMP;

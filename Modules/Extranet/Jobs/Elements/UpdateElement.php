@@ -58,7 +58,7 @@ class UpdateElement
               'type' => $field['type'],
               'rules' => isset($field['rules']) ? $field['rules'] : null,
               'settings' => $field['settings'],
-              //boby????
+              'boby' => $field['boby']
           ]));
       }
 

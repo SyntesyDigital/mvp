@@ -91,6 +91,7 @@ class ElementDropZone extends Component {
 			saved : false,
 			editable : true,
 			rules : this.exploteToObject(field.rules),
+			boby : field.boby,
 			settings : settings
 		};
 

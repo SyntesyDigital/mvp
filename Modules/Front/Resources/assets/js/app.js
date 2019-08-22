@@ -14,17 +14,6 @@ require('./libs/tweenMax/tweenmax.js');
 
 //require('./components/Home');
 require('./components/Fields/MapField');
-require('./components/Widgets/TypologyLast');
-require('./components/Widgets/TypologyPaginated');
-require('./components/Widgets/TypologyByCategory');
-require('./components/Widgets/TypologySearchDate');
-require('./components/Widgets/TypologyCarousel');
-require('./components/Widgets/ContactForm');
-require('./components/Common/Paginator');
-require('./components/Common/MoreResults');
-require('./components/Widgets/Blog');
-require('./components/Widgets/Search');
-require('./components/Widgets/RelatedNews');
-require('./components/Widgets/TypologyHorizontalCarousel');
 require('./components/Widgets/ElementFile');
 require('./components/Widgets/ElementTable');
+require('./components/Widgets/ElementForm');

@@ -17,6 +17,7 @@ const fieldSource = {
 			formats : props.definition.formats,
 			rules: props.definition.rules,
 			settings: props.definition.settings,
+			boby : props.definition.boby,
 			fields : props.definition.fields !== undefined ?
 				props.definition.fields : null
 		}
