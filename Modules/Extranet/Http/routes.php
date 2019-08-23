@@ -40,6 +40,7 @@ Route::group([
     Route::get('/elements/{element}/export/{limit?}', 'ElementController@export')->name('table.export');
     Route::get('/elements/select/data/{name}', 'ElementController@getSelectData')->name('elements.select.data');
     Route::get('/elements/procedures/{modelId}', 'ElementController@getFormProcedures')->name('elements.procedures');
+    Route::post('/elements/form/process-service', 'ElementController@postService')->name('elements.postservice');
 
 
 

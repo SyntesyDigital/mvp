@@ -12,10 +12,16 @@ use Modules\Extranet\Entities\RouteParameter;
 use Modules\Extranet\Http\Requests\Elements\CreateElementRequest;
 use Modules\Extranet\Http\Requests\Elements\UpdateElementRequest;
 use Modules\Extranet\Http\Requests\Elements\DeleteElementRequest;
+use Modules\Extranet\Http\Requests\Elements\PostServiceRequest;
 
+
+use Modules\Extranet\Jobs\Elements\ProcessService;
 use Modules\Extranet\Jobs\Element\CreateElement;
 use Modules\Extranet\Jobs\Element\UpdateElement;
 use Modules\Extranet\Jobs\Element\DeleteElement;
+//use Modules\Extranet\Jobs\Element\PostService;
+
+
 
 use Modules\Extranet\Transformers\ModelValuesFormatTransformer;
 
@@ -130,13 +136,12 @@ class ElementController extends Controller
                   ]);
         } catch (\Exception $e) {
 
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => $e->getMessage()
-        ], 500);
-
     }
 
     public function update(Element $element, UpdateElementRequest $request)
@@ -148,10 +153,13 @@ class ElementController extends Controller
                         'element' => $element
                     ]);
           } catch (\Exception $e) {
+
+              return response()->json([
+                  'success' => false,
+                  'message' => $e->getMessage()
+              ], 500);
           }
-          return response()->json([
-              'success' => false
-          ], 500);
+
     }
 
     public function delete(Element $element, DeleteElementRequest $request)
@@ -238,6 +246,24 @@ class ElementController extends Controller
             ], 500);
         }
     }
+
+    public function postService(PostServiceRequest $request)
+    {
+        try {
+            $result = $this->dispatchNow(ProcessService::fromRequest($request));
+            return response()->json([
+                      'success' => true,
+                      'result' => $result
+                  ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
 
     public function getFormProcedures($modelId)
     {

@@ -14,7 +14,8 @@ class ListField extends Component
 
     this.state = {
       value : [],
-      display : true
+      display : false,
+      initItem : null
     };
   }
 
@@ -47,17 +48,58 @@ class ListField extends Component
     );
   }
 
+  renderCols(value) {
+    return Object.keys(value).map((key) => {
+      var item = value[key];
+
+      return (
+        <td>{item}</td>
+      );
+    });
+  }
+
+  handleEditItem(item,e) {
+      e.preventDefault();
+
+      this.setState({
+        initItem : item,
+        display : true
+      });
+  }
+
+  handleRemoveItem(index,e) {
+      e.preventDefault();
+
+      const {value} = this.state;
+
+      value.splice(index,1);
+      this.setState({
+        value : value
+      });
+  }
+
   renderValues() {
     const {value} = this.state;
-    return value.map((item,index) =>
-      <tr>
-        <td>Mark</td>
-        <td className="text-right">
-          <a href="#" className="btn btn-link"><i className="fas fa-pencil-alt"></i></a> &nbsp;
-          <a href="#" className="btn btn-link btn-danger"><i className="fas fa-trash-alt"></i></a>
-        </td>
-      </tr>
-    );
+    return value.map((item,key) => {
+
+      return (
+          <tr key={key}>
+            {this.renderCols(item)}
+            <td className="text-right">
+              <a href="#" className="btn btn-link"
+                onClick={this.handleEditItem.bind(this,item)}
+              >
+                <i className="fas fa-pencil-alt"></i>
+              </a> &nbsp;
+              <a href="#" className="btn btn-link btn-danger"
+                onClick={this.handleRemoveItem.bind(this,key)}
+              >
+                <i className="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        )
+    });
   }
 
   renderTable() {
@@ -80,7 +122,26 @@ class ListField extends Component
 
   handleModalClose(){
     this.setState({
-      display : false
+      display : false,
+    });
+  }
+
+  handleModalSubmit(item) {
+    const {value,initItem} = this.state;
+
+    //if we are editing
+    if(initItem == null){
+      value.push(item);
+    }
+
+    this.setState({
+      value,
+      initItem : null
+    });
+
+    this.props.onFieldChange({
+      name : this.props.field.identifier,
+      value : value
     });
   }
 
@@ -93,9 +154,11 @@ class ListField extends Component
 
         <ModalListField
           display={this.state.display}
+          initValue={this.state.initItem}
           onModalClose={this.handleModalClose.bind(this)}
           zIndex={1000}
           fields={this.props.field.settings.fields}
+          onAjouter={this.handleModalSubmit.bind(this)}
         />
 
         <div className="row element-form-row">

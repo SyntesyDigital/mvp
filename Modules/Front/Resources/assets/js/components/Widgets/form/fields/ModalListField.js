@@ -19,6 +19,7 @@ class ModalListField extends Component {
     };
 
     this.onModalClose = this.onModalClose.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +33,7 @@ class ModalListField extends Component {
   componentWillReceiveProps(nextProps)
   {
     if(nextProps.display){
-        this.modalOpen();
+        this.modalOpen(nextProps.initValue);
     } else {
         this.modalClose();
     }
@@ -43,8 +44,12 @@ class ModalListField extends Component {
       this.props.onModalClose();
   }
 
-  modalOpen()
+  modalOpen(initValues)
   {
+    this.setState({
+      values : initValues != null ? initValues : this.initValues()
+    });
+
     $('body').css({overflow:'hidden'});
     TweenMax.to($("#modal-list-field"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
   }
@@ -57,6 +62,15 @@ class ModalListField extends Component {
       }});
   }
 
+  handleOnChange(field) {
+    const {values} = this.state;
+
+    values[field.name] = field.value;
+
+    this.setState({
+      values : values
+    });
+  }
 
 
   renderItems() {
@@ -79,6 +93,32 @@ class ModalListField extends Component {
     }
 
     return fields;
+
+  }
+
+  initValues() {
+
+    //else just empty object
+    if(this.props.fields === undefined || this.props.fields == null){
+      return {};
+    }
+    var result = {};
+    for(var key in this.props.fields) {
+      result[this.props.fields[key].identifier] = '';
+    }
+
+    return result;
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const {values} = this.state;
+
+    var self = this;
+
+    self.props.onAjouter(values);
+    self.props.onModalClose();
 
   }
 
@@ -119,7 +159,7 @@ class ModalListField extends Component {
                 <a href="" className="btn btn-default" onClick={this.onModalClose}>
                   <i className="fa fa-angle-left"></i> Retour
                 </a> &nbsp;
-                <a href="" className="btn btn-primary" onClick={this.onModalClose}>
+                <a href="" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>
                   <i className="fas fa-plus"></i> Ajouter
                 </a>
               </div>

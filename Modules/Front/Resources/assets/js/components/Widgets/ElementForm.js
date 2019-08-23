@@ -8,7 +8,9 @@ import {
   getArrayPosition,
   setupJsonResult,
   processJsonRoot,
-  getFieldComponent
+  getFieldComponent,
+  processObjectValue,
+  processObject
 } from './form/actions/';
 
 export default class ElementForm extends Component {
@@ -28,6 +30,7 @@ export default class ElementForm extends Component {
             loading : true,
 
             currentProcedureIndex : 0,
+            currentListIndex : 0,
             jsonResult : {},
             processing : false,
             complete : false
@@ -142,166 +145,211 @@ export default class ElementForm extends Component {
     */
     processProcedure() {
 
-        const {procedures,currentProcedureIndex, values} = this.state;
+        const {procedures,currentProcedureIndex, values, currentListIndex} = this.state;
         let {jsonResult} = this.state;
         const procedure = procedures[currentProcedureIndex];
+
+        const isRequired = procedure.OBL == "Y" ? true : false;
+        const isConfigurable = procedure.CONF == "Y" ? true : false;
+        const isRepetable = procedure.REP == "Y" ? true : false;
 
         console.log("processProcedure :: ",currentProcedureIndex,procedure, jsonResult);
         var self = this;
 
-        //process json root
+        if(!isRepetable){
+          //normal procedure
+          console.log("Process standard iteration => ",currentProcedureIndex, jsonResult);
+
+          jsonResult = this.processStandardProcedure(currentProcedureIndex,procedure,jsonResult,values);
+
+          //always pass to next procedure
+
+          //if has values
+              this.submitStandardProcedure(currentProcedureIndex,procedure,jsonResult);
+          //else
+              //if it is required
+                //TODO error
+              //else
+                //TODO pass next procedure
+        }
+        else if(isConfigurable && isRepetable){
+          //internal array, check for values list
+
+          console.log("Process list iteration => ",currentProcedureIndex, currentListIndex, values[procedure.OBJID]);
+
+          //check for value with id => procedure->OBJID
+          if(values[procedure.OBJID] !== undefined && values[procedure.OBJID].length > 0){
+            //there is values
+
+            //check what is the current value index
+
+
+            //process every values
+            jsonResult = this.processListProcedure (
+              currentProcedureIndex,
+              procedure,
+              values[procedure.OBJID][currentListIndex],
+              jsonResult
+            );
+
+            //go to next value of this procedure of submit as standard procedure
+            this.submitListProcedure(
+              currentProcedureIndex,
+              procedure,jsonResult,currentListIndex,
+              values[procedure.OBJID]
+            );
+
+          }
+          else {
+            if(isRequired){
+              //this is needed
+              console.error("No list values and this procedure is required "+procedure.OBJID);
+            }
+            else {
+              //TODO submit standard procedure
+              this.submitStandardProcedure(currentProcedureIndex,procedure,jsonResult);
+            }
+          }
+
+        }
+
+        //after procedure is done we obtain a jsonResult, with this jsonResult decide what to Do.
+    }
+
+
+    processStandardProcedure(currentIndex,procedure,jsonResult,values) {
+
+      console.log("processStandardProcedure :: ",currentIndex);
+
+      //if conf == Y && repetable == N
+        //if OBL == N , check for values, if not values, don't process de procedure
+        //check for values
+        //normal procedure
+          //after procedure processed
+            //check what to do
+              //or next or finish
+
         const {arrayPosition, jsonRoot} = processJsonRoot(procedure.JSONP, jsonResult);
-        //console.log("processProcedure :: Array position => ",jsonRoot, arrayPosition);
 
         for(var j in procedure.OBJECTS) {
           var object = procedure.OBJECTS[j];
 
           //process the object modifing the jsonResult
-          jsonResult = this.processObject(object,jsonResult,jsonRoot, arrayPosition,values);
+          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,values);
         }
 
-        //console.log("processProcedure :: Result => ",jsonResult);
+        return jsonResult;
 
-        var nextProcedure = null;
-        if( currentProcedureIndex + 1 < procedures.length){
-          //is the last one
-          nextProcedure = procedures[currentProcedureIndex+1];
-        }
-        //console.log("nextProcedure => ",nextProcedure);
+    }
 
-        //if next procedure is different -> submit
-        if(nextProcedure == null) {
-          //process this procedure
+    submitStandardProcedure(currentProcedureIndex,procedure,jsonResult) {
 
-          this.submitProcedure(procedure,jsonResult, function(response){
-            //finish!
-            self.setState({
-              currentProcedureIndex : 0,
-              jsonResult : {},
-              processing : false,
-              complete : true
-            });
+      const {procedures} = this.state;
+      var self = this;
 
-          });
-        }
-        else if(nextProcedure.SERVICE.ID != procedure.SERVICE.ID ){
-          //the service is different, process the procedure
+      var nextProcedure = null;
+      if( currentProcedureIndex + 1 < procedures.length){
+        //is the last one
+        nextProcedure = procedures[currentProcedureIndex+1];
+      }
+      //console.log("nextProcedure => ",nextProcedure);
 
-          this.submitProcedure(procedure,jsonResult,function(response){
+      //if next procedure is different -> submit
+      if(nextProcedure == null) {
+        //process this procedure
 
-            //TODO process response
-
-            //continue next step
-            self.setState({
-              currentProcedureIndex : currentProcedureIndex + 1 ,
-              jsonResult : {},
-              processing : true,
-              complete : false
-            },function(){
-                self.processProcedure();
-            });
-
+        this.submitProcedure(procedure,jsonResult, function(response){
+          //finish!
+          self.setState({
+            currentProcedureIndex : 0,
+            currentListIndex : 0,
+            jsonResult : {},
+            processing : false,
+            complete : true
           });
 
-        }
-        else {
-          //we have next procedure and is the same service, continue same json
-          this.setState({
+        });
+      }
+      else if(nextProcedure.SERVICE.ID != procedure.SERVICE.ID ){
+        //the service is different, process the procedure
+
+        this.submitProcedure(procedure,jsonResult,function(response){
+
+          //TODO process response
+
+          //continue next step
+          self.setState({
             currentProcedureIndex : currentProcedureIndex + 1 ,
-            jsonResult : jsonResult,
+            currentListIndex : 0,
+            jsonResult : {},
             processing : true,
             complete : false
           },function(){
               self.processProcedure();
           });
-        }
+
+        });
+
+      }
+      else {
+        //we have next procedure and is the same service, continue same json
+        this.setState({
+          currentProcedureIndex : currentProcedureIndex + 1 ,
+          currentListIndex : 0,
+          jsonResult : jsonResult,
+          processing : true,
+          complete : false
+        },function(){
+            self.processProcedure();
+        });
+      }
+
     }
 
+    submitListProcedure(currentProcedureIndex,procedure,jsonResult,currentListIndex, listValues) {
 
 
 
+      const {procedures} = this.state;
+      var self = this;
+
+      //if we there is more values process next
+      if(currentListIndex + 1 < listValues.length){
+        //go to next procedure
+        this.setState({
+          currentListIndex : currentListIndex + 1,
+          jsonResult : jsonResult,
+          processing : true,
+          complete : false
+        },function(){
+            self.processProcedure();
+        });
+      }
+      else {
+        //process this as standard procedure
+        this.submitStandardProcedure(currentProcedureIndex,procedure,jsonResult);
+      }
+    }
 
     /**
-    * Process the object and return the json modified
+    *   values = current list position with values of this item
     */
-    processObject(object,jsonResult,jsonRoot,arrayPosition,values) {
-      //console.log("processObject :: ", jsonResult,jsonRoot,arrayPosition);
+    processListProcedure (currentIndex,procedure,values,jsonResult) {
 
-      var paramArray = jsonRoot.split('.');
+        console.log("processListProcedure :: ",currentIndex, values);
 
-      //conditionals to check what to do with this object
-      const value = this.processObjectValue(object,values);
+        const {arrayPosition, jsonRoot} = processJsonRoot(procedure.JSONP, jsonResult);
 
-      jsonResult = setupJsonResult(
-        paramArray,
-        1,
-        jsonResult,
-        object.CHAMP,
-        value,
-        arrayPosition
-      );
+        for(var j in procedure.OBJECTS) {
+          var object = procedure.OBJECTS[j];
 
-      //console.log("paramArray => ",paramArray);
-      //console.log("setupJsonResult :: RESULT => ",jsonResult);
+          //process the object modifing the jsonResult
+          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,values);
+        }
 
-      return jsonResult;
+        return jsonResult;
+
     }
-
-    /**
-    *   Depending of the type of object and some values is necesary to process the value
-    */
-    processObjectValue(object,values) {
-
-      const isRequired = object.OBL == "Y" ? true : false;
-      const defaultValue = object.VALEUR;
-      const type = object.NATURE;
-      const isVisible = object.VIS;
-      const isConfigurable = object.CONF == "Y" ? true : false;
-      const isActive = object.ACTIF == "Y" ? true : false;
-
-
-      if(type == "INPUT"){
-
-
-        //FIXME this not should be necessary
-        if(defaultValue == "_id_per_ass"){
-          //this needs to be changed to SYSTEM
-          return ID_PER_ASS;
-        }
-        else if(defaultValue == "_id_per_user"){
-          return ID_PER_USER;
-        }
-        else {
-            //get value
-            if(values[object.CHAMP] === undefined){
-              if(isRequired){
-                console.error("Field is required : "+object.CHAMP);
-              }
-            }
-            else {
-              return values[object.CHAMP];
-            }
-        }
-
-      }
-      else if(type == "SYSTEM") {
-        if(defaultValue == "_time"){
-          //_time
-          return moment().format("DD/MM/YYYY");
-        }
-        else if(defaultValue == "_id_per_ass"){
-          return ID_PER_ASS;
-        }
-        else if(defaultValue == "_id_per_user"){
-          return ID_PER_USER;
-        }
-      }
-      else if(type == "CTE") {
-        return defaultValue;
-      }
-    }
-
-
 
     /**
     * Process the procedure, with the service and the json
@@ -310,6 +358,32 @@ export default class ElementForm extends Component {
     submitProcedure(procedure, jsonResult, callback) {
 
       console.log("submitProcedure :: ",procedure, jsonResult);
+
+      if(procedure.SERVICE === undefined){
+        console.error("procedure not defined => ",procedure);
+      }
+
+      var params = {
+        method : procedure.SERVICE.METHODE,
+        url : procedure.SERVICE.URL,
+        data : jsonResult
+      };
+
+      axios.post('/architect/elements/form/process-service',params)
+        .then(function(response) {
+          if(response.status == 200 && response.data.result !== undefined){
+            console.log("response => ",response);
+            /*
+            self.setState({
+              procedures : response.data.data,
+              loading : false
+            });
+            */
+          }
+        })
+        .catch(function(error){
+          console.error("error => ",error.message);
+        });
 
       return jsonResult;
 

@@ -10315,6 +10315,14 @@ form.contact-form .checkbox {
   font-weight: bold;
 }
 
+.element-form-container .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 100px;
+}
+
+.element-form-container .react-datepicker__time-container {
+  width: 100px;
+}
+
 @media (min-width: 768px) {
   .element-form-container .element-form-row label {
     float: right;

@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 import TextField from './../fields/TextField';
 import RichtextField from './../fields/RichtextField';
@@ -101,4 +102,83 @@ export function processJsonRoot(jsonRoot,jsonResult) {
     arrayPosition : arrayPosition,
     jsonRoot : processedJsonRoot
   }
+}
+
+/**
+*   Depending of the type of object and some values is necesary to process the value
+*/
+export function processObjectValue(object,values) {
+
+  const isRequired = object.OBL == "Y" ? true : false;
+  const defaultValue = object.VALEUR;
+  const type = object.NATURE;
+  const isVisible = object.VIS;
+  const isConfigurable = object.CONF == "Y" ? true : false;
+  const isActive = object.ACTIF == "Y" ? true : false;
+
+  if(type == "INPUT"){
+
+    //FIXME this not should be necessary
+    if(defaultValue == "_id_per_ass"){
+      //this needs to be changed to SYSTEM
+      return ID_PER_ASS;
+    }
+    else if(defaultValue == "_id_per_user"){
+      return ID_PER_USER;
+    }
+    else {
+        //get value
+        if(values[object.CHAMP] === undefined){
+          if(isRequired){
+            console.error("Field is required : "+object.CHAMP);
+            //TODO dispatch error
+          }
+        }
+        else {
+          return values[object.CHAMP];
+        }
+    }
+
+  }
+  else if(type == "SYSTEM") {
+    if(defaultValue == "_time"){
+      //_time
+      return moment().format("DD/MM/YYYY");
+    }
+    else if(defaultValue == "_id_per_ass"){
+      return ID_PER_ASS;
+    }
+    else if(defaultValue == "_id_per_user"){
+      return ID_PER_USER;
+    }
+  }
+  else if(type == "CTE") {
+    return defaultValue;
+  }
+}
+
+/**
+* Process the object and return the json modified
+*/
+export function processObject(object,jsonResult,jsonRoot,arrayPosition,values) {
+  //console.log("processObject :: ", jsonResult,jsonRoot,arrayPosition);
+
+  var paramArray = jsonRoot.split('.');
+
+  //conditionals to check what to do with this object
+  const value = processObjectValue(object,values);
+
+  jsonResult = setupJsonResult(
+    paramArray,
+    1,
+    jsonResult,
+    object.CHAMP,
+    value,
+    arrayPosition
+  );
+
+  //console.log("paramArray => ",paramArray);
+  //console.log("setupJsonResult :: RESULT => ",jsonResult);
+
+  return jsonResult;
 }
