@@ -56,18 +56,25 @@ class SelectField extends Component
 
     const {field} = this.props;
     const defaultValue = this.state.loading ? 'Chargement...' : 'Sélectionnez';
+    const isRequired = field.rules.required !== undefined ?
+      field.rules.required : false;
+    const errors = this.props.error ? 'is-invalid' : '';
 
     return (
 
       <div className="row element-form-row">
         <div className="col-sm-4">
-          <label>{field.name}</label>
+          <label>{field.name}
+            {isRequired &&
+              <span className="required">&nbsp; *</span>
+            }
+          </label>
         </div>
         <div className="col-sm-6">
 
           <select
             name={field.identifier}
-            className="form-control"
+            className={"form-control " + errors}
             value={this.props.value}
             onChange={this.handleOnChange.bind(this)}
           >

@@ -7,6 +7,7 @@ class TextField extends Component
   {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
+
   }
 
 
@@ -23,20 +24,28 @@ class TextField extends Component
   render() {
 
     const {field} = this.props;
+    const errors = this.props.error ? 'is-invalid' : '';
+    const isRequired = field.rules.required !== undefined ?
+      field.rules.required : false;
 
     return (
 
       <div className="row element-form-row">
         <div className="col-sm-4">
-          <label>{field.name}</label>
+          <label>{field.name}
+          {isRequired &&
+            <span className="required">&nbsp; *</span>
+          }
+          </label>
         </div>
         <div className="col-sm-6">
           <input
             type="text"
             name={field.identifier}
-            className="form-control"
+            className={"form-control " + errors}
             value={this.props.value}
             onChange={this.handleOnChange.bind(this)}
+
           />
         </div>
       </div>

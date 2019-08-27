@@ -1,6 +1,7 @@
 @extends('architect::layouts.master')
 
 @section('content')
+
 <div id="content-form"
 languages="{{ base64_encode(Modules\Architect\Entities\Language::getAllCached()) }}"
 tags="{{ isset($tags) ? base64_encode($tags->toJson()) : null }}"

@@ -77,9 +77,14 @@ class ElementDropZone extends Component {
 		}
 
 		var settings = this.exploteToObject(field.settings);
+		var rules = this.exploteToObject(field.rules);
 
 		if(field.fields != null){
 			settings.fields = field.fields;
+		}
+
+		if(rules['required'] !== undefined){
+			rules['required'] = field.required;
 		}
 
 		var field = {
@@ -90,9 +95,9 @@ class ElementDropZone extends Component {
 			icon : field.icon,
 			saved : false,
 			editable : true,
-			rules : this.exploteToObject(field.rules),
+			rules : rules,
 			boby : field.boby,
-			settings : settings
+			settings : settings,
 		};
 
 		this.props.onFieldAdded(field);

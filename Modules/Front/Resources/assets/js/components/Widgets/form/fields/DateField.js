@@ -82,19 +82,34 @@ class DateField extends Component
 
   }
 
+  /*
+  handleOnBlur () {
+    this.setState({
+      errors : !this.isValid(this.props.value)
+    });
+  }
+  */
+
   render() {
 
     const {field} = this.props;
+    const errors = this.props.error ? 'is-invalid' : '';
+    const isRequired = field.rules.required !== undefined ?
+      field.rules.required : false;
 
     return (
 
       <div className="row element-form-row">
         <div className="col-sm-4">
-          <label>{field.name}</label>
+          <label>{field.name}
+            {isRequired &&
+              <span className="required">&nbsp; *</span>
+            }
+          </label>
         </div>
         <div className="col-sm-6">
           <DatePicker
-              className="form-control"
+              className={"form-control "+errors}
               selected={this.state.value}
               onChange={this.handleOnChange}
               dateFormat={this.getDateFormat()}
@@ -105,6 +120,7 @@ class DateField extends Component
               //showMonthYearPicker={this.isMonthYear()}
               timeCaption="Heure"
               timeFormat="HH:mm"
+              //onBlur={this.handleOnBlur.bind(this)}
           />
         </div>
       </div>

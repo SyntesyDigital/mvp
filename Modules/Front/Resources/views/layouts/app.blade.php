@@ -31,6 +31,10 @@
 
         <link href="{{asset('modules/front/css/app.css')}}" rel="stylesheet" type="text/css" />
 
+        <!-- Toastr -->
+        <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
+
+
         <!-- Fonts -->
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">-->
         <link rel="stylesheet" media="all" href="{{ asset('/front/css/font-awesome.min.css')}}" />
@@ -84,7 +88,8 @@
 
         <script type="text/javascript" src="{{asset('modules/front/js/app.js')}}" ></script>
         <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
+        <script src="{{ asset('modules/architect/plugins/toastr/toastr.min.js') }}"></script>
+        {{ Html::script('/modules/architect/plugins/bootbox/bootbox.min.js') }}
 
         @stack('javascripts')
     </body>

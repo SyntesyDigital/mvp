@@ -145,7 +145,7 @@ class ElementRepository extends BaseRepository
 
     public function getModelValuesFromElement($element)
     {
-        dd($element->model_exemple);
+        //dd($element->model_exemple);
         return $this->boby->getModelValuesQuery($element->model_exemple);
     }
 
@@ -250,6 +250,7 @@ class ElementRepository extends BaseRepository
         'default' => $object->VALEUR,
         'boby' => $object->BOBY,
         'added' => false,
+        'required' => $object->OBL == "Y" ? true : false,
         'formats' => $fieldType['formats'],
         'rules' => ['required'],
         'settings' => array_diff($fieldType['settings'],['hasRoute'])

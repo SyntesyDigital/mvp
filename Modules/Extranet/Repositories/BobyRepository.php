@@ -96,15 +96,12 @@ class BobyRepository
     public function processService($method,$url,$data)
     {
 
-
         $params = [
             'json' => $data,
             'headers' => [
                 'Authorization' => "Bearer " . Auth::user()->token
             ]
         ];
-
-
 
         switch($method){
            case "POST":
@@ -122,9 +119,7 @@ class BobyRepository
              return null;
         }
 
-        dd($response->getBody());
         return json_decode($response->getBody());
-
     }
 
 

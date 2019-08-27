@@ -53142,9 +53142,14 @@ var ElementDropZone = function (_Component) {
 			}
 
 			var settings = this.exploteToObject(field.settings);
+			var rules = this.exploteToObject(field.rules);
 
 			if (field.fields != null) {
 				settings.fields = field.fields;
+			}
+
+			if (rules['required'] !== undefined) {
+				rules['required'] = field.required;
 			}
 
 			var field = {
@@ -53155,7 +53160,7 @@ var ElementDropZone = function (_Component) {
 				icon: field.icon,
 				saved: false,
 				editable: true,
-				rules: this.exploteToObject(field.rules),
+				rules: rules,
 				boby: field.boby,
 				settings: settings
 			};
@@ -53312,6 +53317,7 @@ var fieldSource = {
 			rules: props.definition.rules,
 			settings: props.definition.settings,
 			boby: props.definition.boby,
+			required: props.definition.required,
 			fields: props.definition.fields !== undefined ? props.definition.fields : null
 		};
 	},
@@ -53351,7 +53357,7 @@ var ElementDragField = function (_Component) {
 
 			var opacity = isDragging || definition.added ? 0.4 : 1;
 
-			return connectDragSource(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field', style: { opacity: opacity } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.definition.icon }), ' \xA0 ', Lang.get(this.props.definition.name)));
+			return connectDragSource(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'field', style: { opacity: opacity } }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: "fa " + this.props.definition.icon }), ' \xA0', Lang.get(this.props.definition.name), ' \xA0', this.props.definition.required && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'required' }, '*')));
 		}
 	}]);
 

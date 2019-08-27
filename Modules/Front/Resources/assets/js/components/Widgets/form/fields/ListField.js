@@ -10,7 +10,7 @@ class ListField extends Component
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
 
-    console.log("ListField => ",this.props.field);
+    //console.log("ListField => ",this.props.field);
 
     this.state = {
       value : [],

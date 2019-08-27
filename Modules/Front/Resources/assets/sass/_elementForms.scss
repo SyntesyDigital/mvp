@@ -104,6 +104,9 @@
   input.is-invalid {
     border:1px solid $brand-danger;
   }
+  select.is-invalid {
+    border:1px solid $brand-danger;
+  }
 
   input.is-valid {
     border:1px solid $brand-success;

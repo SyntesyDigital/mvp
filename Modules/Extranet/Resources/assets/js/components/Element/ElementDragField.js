@@ -18,6 +18,7 @@ const fieldSource = {
 			rules: props.definition.rules,
 			settings: props.definition.settings,
 			boby : props.definition.boby,
+			required : props.definition.required,
 			fields : props.definition.fields !== undefined ?
 				props.definition.fields : null
 		}
@@ -47,7 +48,11 @@ class ElementDragField extends Component {
 
 		return connectDragSource(
 			<div className="field" style={{ opacity }}>
-				<i className={"fa "+this.props.definition.icon}></i> &nbsp; {Lang.get(this.props.definition.name)}
+				<i className={"fa "+this.props.definition.icon}></i> &nbsp;
+				{Lang.get(this.props.definition.name)} &nbsp;
+				{this.props.definition.required &&
+					<span className="required">*</span>
+				}
 			</div>
 		)
 	}

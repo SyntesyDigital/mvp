@@ -10,7 +10,8 @@ import {
   processJsonRoot,
   getFieldComponent,
   processObjectValue,
-  processObject
+  processObject,
+  validateField
 } from './form/actions/';
 
 export default class ElementForm extends Component {
@@ -33,7 +34,8 @@ export default class ElementForm extends Component {
             currentListIndex : 0,
             jsonResult : {},
             processing : false,
-            complete : false
+            complete : false,
+            errors : {}
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -57,6 +59,17 @@ export default class ElementForm extends Component {
       return values;
     }
 
+    getElementObjectField(identifier){
+      const {fields} = this.state.elementObject;
+
+      for(var key in fields) {
+        if(fields[key].identifier == identifier){
+          return fields[key];
+        }
+      }
+      return null;
+    }
+
     handleOnChange(field) {
 
       console.log("ElementForm :: handleOnChange",field);
@@ -65,8 +78,14 @@ export default class ElementForm extends Component {
 
       values[field.name] = field.value;
 
+      var self = this;
+
       this.setState({
         values : values
+      },function(){
+        self.validateFieldChange(
+          self.getElementObjectField(field.name)
+        )
       });
     }
 
@@ -104,6 +123,7 @@ export default class ElementForm extends Component {
             key={key}
             field={field}
             value={this.state.values[field.identifier]}
+            error={this.state.errors[field.identifier] !== undefined ? true : false}
             onFieldChange={this.handleOnChange}
           />);
 
@@ -118,6 +138,13 @@ export default class ElementForm extends Component {
 
       //console.log("handleSubmit");
 
+      const hasErrors = this.validateFields();
+
+      if(hasErrors){
+        toastr.error('Vous devez remplir tous les champs obligatoires.');
+        console.log("handleSubmit :: Form has errors");
+        return;
+      }
 
       //start with the process
       if(this.state.procedures.length > 0){
@@ -259,6 +286,7 @@ export default class ElementForm extends Component {
         //process this procedure
 
         this.submitProcedure(procedure,jsonResult, function(response){
+
           //finish!
           self.setState({
             currentProcedureIndex : 0,
@@ -268,6 +296,17 @@ export default class ElementForm extends Component {
             complete : true
           });
 
+          toastr.success('Contenu enregistré');
+
+        },function(){
+          //error
+          self.setState({
+            currentProcedureIndex : 0,
+            currentListIndex : 0,
+            jsonResult : {},
+            processing : false,
+            complete : false
+          });
         });
       }
       else if(nextProcedure.SERVICE.ID != procedure.SERVICE.ID ){
@@ -288,6 +327,15 @@ export default class ElementForm extends Component {
               self.processProcedure();
           });
 
+        },function(){
+          //error restart to begining
+          self.setState({
+            currentProcedureIndex : 0,
+            currentListIndex : 0,
+            jsonResult : {},
+            processing : false,
+            complete : false
+          });
         });
 
       }
@@ -355,7 +403,7 @@ export default class ElementForm extends Component {
     * Process the procedure, with the service and the json
     * Returns info for next Step
     */
-    submitProcedure(procedure, jsonResult, callback) {
+    submitProcedure(procedure, jsonResult, successCallback, errorCallback) {
 
       console.log("submitProcedure :: ",procedure, jsonResult);
 
@@ -371,22 +419,79 @@ export default class ElementForm extends Component {
 
       axios.post('/architect/elements/form/process-service',params)
         .then(function(response) {
+          console.log("response => ",response);
           if(response.status == 200 && response.data.result !== undefined){
-            console.log("response => ",response);
-            /*
-            self.setState({
-              procedures : response.data.data,
-              loading : false
-            });
-            */
+              successCallback();
+          }
+          else {
+              toastr.error(response.data.message);
+              errorCallback();
           }
         })
         .catch(function(error){
           console.error("error => ",error.message);
+          if(error.response.data.message !== undefined){
+            toastr.error(error.response.data.message);
+          }
+          else {
+            toastr.error(error.message);
+          }
+          errorCallback();
         });
 
       return jsonResult;
 
+    }
+
+    /**
+    *   When field change
+    */
+    validateFieldChange(field) {
+      const {errors,values} = this.state;
+
+      var valid = validateField(field,values);
+
+      if(!valid){
+        errors[field.identifier] = true;
+      }
+      else {
+        delete errors[field.identifier];
+      }
+
+      this.setState({
+        errors : errors
+      });
+    }
+
+    /**
+    *   When submit is preseed
+    */
+    validateFields() {
+        if(this.state.elementObject.fields === undefined || this.state.elementObject.fields == null){
+          return {};
+        }
+
+        var fields = [];
+        var errors = {};
+        var hasErrors = false;
+
+        for(var key in this.state.elementObject.fields) {
+          var field = this.state.elementObject.fields[key];
+
+            var valid = validateField(field,this.state.values);
+            if(!valid)
+              errors[field.identifier] = !valid;
+
+            if(!hasErrors && !valid){
+              hasErrors = true;
+            }
+        }
+
+        this.setState({
+          errors : errors
+        });
+
+        return hasErrors;
     }
 
     render() {
@@ -398,7 +503,11 @@ export default class ElementForm extends Component {
             <div className="row element-form-row">
               <div className="col-md-4"></div>
               <div className="col-md-6 buttons">
-                  <button className="btn btn-primary right" type="submit" onClick={this.handleSubmit.bind(this)}>
+                  <button
+                    className="btn btn-primary right" type="submit"
+                    onClick={this.handleSubmit.bind(this)}
+                    disabled={this.state.processing}
+                  >
                     <i className="fa fa-paper-plane"></i>Valider
                   </button>
                   {/*

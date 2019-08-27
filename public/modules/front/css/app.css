@@ -10242,6 +10242,10 @@ form.contact-form .checkbox {
   border: 1px solid #bf5329;
 }
 
+.element-form-container select.is-invalid {
+  border: 1px solid #bf5329;
+}
+
 .element-form-container input.is-valid {
   border: 1px solid #2ab27b;
 }

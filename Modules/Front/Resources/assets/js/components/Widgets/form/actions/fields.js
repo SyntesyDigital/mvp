@@ -64,6 +64,12 @@ export function setupJsonResult(paramArray,index,jsonResult,name,value,arrayPosi
     );
   }
   else {
+
+    //FIXME remove this chage
+    if(name == "Categ"){
+      name = "categ";
+    }
+
     if(arrayPosition != null){
       //is array
       if(jsonResult[arrayPosition] === undefined){
@@ -181,4 +187,18 @@ export function processObject(object,jsonResult,jsonRoot,arrayPosition,values) {
   //console.log("setupJsonResult :: RESULT => ",jsonResult);
 
   return jsonResult;
+}
+
+export function validateField(field,values) {
+
+  const isRequired = field.rules.required !== undefined ?
+    field.rules.required : false;
+
+  if(isRequired){
+    if(values[field.identifier] === undefined || values[field.identifier] == ''){
+      return false;
+    }
+  }
+
+  return true;
 }

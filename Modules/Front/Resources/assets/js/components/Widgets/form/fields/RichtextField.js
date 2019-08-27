@@ -24,16 +24,24 @@ class RichtextField extends Component
   render() {
 
     const {field} = this.props;
+    const isRequired = field.rules.required !== undefined ?
+      field.rules.required : false;
+    const errors = this.props.error ? 'is-invalid' : '';
 
     return (
 
       <div className="row element-form-row">
         <div className="col-sm-4">
-          <label>{field.name}</label>
+          <label>{field.name}
+          {isRequired &&
+            <span className="required">&nbsp; *</span>
+          }
+          </label>
         </div>
         <div className="col-sm-6">
           <ReactQuill
              id={field.identifier}
+             className={"form-control " + errors}
              parent={this}
              value={this.props.value}
              onChange={this.handleOnChange}
