@@ -1,0 +1,32 @@
+.box-button-container-a{
+  width: 100%;
+  &:hover{
+    text-decoration: none;
+  }
+  .box-button-container{
+
+    &:hover{
+      color:$secondary-color;
+      text-decoration: none;
+      border: 1px solid $secondary-color;
+
+    }
+
+  }
+}
+.box-button-container{
+  color:$primary-color;
+  background-color: #fff;
+  border: 1px solid $primary-color;
+  padding: 20px 40px;
+  text-align: center;
+  width: 100%;
+  i{
+    @include font(40,40,300);
+    margin-bottom:5px;
+  }
+  p{
+    @include font(18,18,300);
+    margin-bottom: 0;
+  }
+}
