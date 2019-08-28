@@ -10668,6 +10668,38 @@ form.contact-form .checkbox {
   font-weight: 400;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
+a .box-button-container:hover {
+  color: #E84B37;
+  text-decoration: none;
+  border: 1px solid #E84B37;
+}
+
+.box-button-container {
+  color: #2A3649;
+  background-color: #fff;
+  border: 1px solid #2A3649;
+  padding: 20px 40px;
+  text-align: center;
+}
+
+.box-button-container i {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+.box-button-container p {
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
 .map-container .leaflet-container {
   height: 300px;
   width: 100%;

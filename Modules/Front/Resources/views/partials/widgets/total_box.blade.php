@@ -1,15 +1,8 @@
 <div id="{{$field['settings']['htmlId'] or ''}}" class="total-box-container {{$field['settings']['htmlClass'] or ''}}">
   <div class="title">
-      <i class="fa fa-{{$field['fields'][1]['value']['fr']}}"></i>
+      <i class="{{$field['fields'][1]['value'][App::getLocale()]}}"></i>
 
-      @include('front::partials.fields.'.$field['fields'][0]['type'],
-        [
-          "field" => $field['fields'][0],
-          "settings" => $field['settings'],
-          "div" => false,
-          "icon" => "fas fa-plus-circle"
-        ]
-      )
+      {{$field['fields'][0]['value'][App::getLocale()]}}
   </div>
 
   <div class="total-box-container-body">
