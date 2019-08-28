@@ -1,0 +1,16 @@
+.total-box-container{
+  background-color: #fff;
+  border: 1px solid #E0E0E0;
+  padding: 20px 40px;
+  text-align: left;
+  .title{
+    @include font(16,18,300);
+    i{
+      margin-right: 4px;
+    }
+  }
+  .totalBox{
+    padding:0 20px;
+    @include font(30,35,400);
+  }
+}
