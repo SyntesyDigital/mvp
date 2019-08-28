@@ -16,7 +16,7 @@
 @endphp
 
 @if(isset($link) && $link != "")
-  <a target="{{$target}}" href="{{$link}}" >
+  <a target="{{$target}}" href="{{$link}}" class="box-button-container-a" >
 @endif
 
     <div id="{{$field['settings']['htmlId'] or ''}}" class="box-button-container {{$field['settings']['htmlClass'] or ''}}">

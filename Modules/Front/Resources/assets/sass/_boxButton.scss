@@ -1,4 +1,5 @@
-a{
+.box-button-container-a{
+  width: 100%;
   &:hover{
     text-decoration: none;
   }
@@ -19,6 +20,7 @@ a{
   border: 1px solid $primary-color;
   padding: 20px 40px;
   text-align: center;
+  width: 100%;
   i{
     @include font(40,40,300);
     margin-bottom:5px;

@@ -10668,11 +10668,15 @@ form.contact-form .checkbox {
   font-weight: 400;
 }
 
-a:hover {
+.box-button-container-a {
+  width: 100%;
+}
+
+.box-button-container-a:hover {
   text-decoration: none;
 }
 
-a .box-button-container:hover {
+.box-button-container-a .box-button-container:hover {
   color: #E84B37;
   text-decoration: none;
   border: 1px solid #E84B37;
@@ -10684,6 +10688,7 @@ a .box-button-container:hover {
   border: 1px solid #2A3649;
   padding: 20px 40px;
   text-align: center;
+  width: 100%;
 }
 
 .box-button-container i {
