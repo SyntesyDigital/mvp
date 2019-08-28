@@ -78,6 +78,7 @@ class ContentBar extends Component {
           fields : app.fields,
           is_page : true,
           page: app.layout,
+          parameters : app.parameters
         };
       }
       else {

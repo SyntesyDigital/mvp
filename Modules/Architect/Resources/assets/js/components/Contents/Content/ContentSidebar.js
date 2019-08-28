@@ -7,7 +7,8 @@ import {
   changeField,
   changeSettings,
   publishToogle,
-  changeTranslation
+  changeTranslation,
+  updateDefaultParameters
 } from './../actions/';
 
 import TagManager from "./../Tags/TagManager";
@@ -176,6 +177,18 @@ class ContentSidebar extends Component {
     )
   }
 
+  handleParameterDefaultChange(index,event) {
+    event.preventDefault();
+
+    console.log("handleParameterDefaultChange ::");
+
+    const parameters = this.props.app.parameters;
+
+    parameters[index].default = event.target.value;
+
+    this.props.updateDefaultParameters(parameters);
+  }
+
   renderParameters() {
 
     const parameters = this.props.app.parameters;
@@ -189,7 +202,13 @@ class ContentSidebar extends Component {
         <label htmlFor={item.id} className="bmd-label-floating">
           {item.name}
         </label>
-        <input id={item.id} className="form-control" value={item.default} placeholder="Valeur de prévisualisation" />
+        <input
+          id={item.id} className="form-control"
+          value={item.default}
+          placeholder="Valeur de prévisualisation"
+          name={item.identifier}
+          onChange={this.handleParameterDefaultChange.bind(this,index)}
+        />
       </div>
     );
   }
@@ -348,7 +367,10 @@ const mapDispatchToProps = dispatch => {
         },
         changeTranslation : (field) => {
             return dispatch(changeTranslation(field));
-        }
+        },
+        updateDefaultParameters : (parameters) => {
+            return dispatch(updateDefaultParameters(parameters));
+        },
     }
 }
 

@@ -4,7 +4,8 @@ import {
   UPDATE_EDIT_ITEM,
   INIT_EDIT_ITEM_MODAL,
   EDIT_ITEM_UPDATE_CATEGORIES,
-  EDIT_ITEM_UPDATE_ELEMENS
+  EDIT_ITEM_UPDATE_ELEMENS,
+  LOAD_PARAMETERS
 
 } from '../constants';
 
@@ -20,6 +21,7 @@ const initialState =  {
   fileElements : [],
   formElements : [],
   tableElements : [],
+  parameters : {},
 
   typologies : [],
   selectableTypologies : [],
@@ -108,6 +110,14 @@ function modalEditReducer(state = initialState, action) {
                 ...state,
                 displayModal : false,
                 item : null
+            }
+        case LOAD_PARAMETERS :
+
+            //console.log("LOAD_PARAMETERS,",action.payload)
+
+            return {
+              ...state,
+              parameters : action.payload
             }
 
         default:

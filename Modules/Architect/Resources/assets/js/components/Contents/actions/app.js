@@ -9,7 +9,8 @@ import {
   SAVE_ERROR,
   SAVE_SUCCESS,
   SAVING,
-  CUSTOM_FIELD_CHANGE
+  CUSTOM_FIELD_CHANGE,
+  UPDATE_DEFAULT_PARAMETERS
 
 } from "../constants/";
 
@@ -191,3 +192,7 @@ export function saveLayout(name,layout,settings) {
     });
   }
 }
+
+export function updateDefaultParameters(parameters) {
+  return { type: UPDATE_DEFAULT_PARAMETERS, payload:parameters }
+};

@@ -20,8 +20,9 @@ import {
   UPDATE_SETTINGS,
   UPDATE_PAGE_IMAGE,
   UPDATE_PAGE_CONTENT,
-  UPDATE_PAGE_LAYOUT
-
+  UPDATE_PAGE_LAYOUT,
+  LOAD_PARAMETERS,
+  UPDATE_DEFAULT_PARAMETERS
 
 } from '../constants';
 
@@ -62,7 +63,8 @@ const initialState =  {
   saved : false,
 
   //route parameters
-  parameters : null
+  parameters : null,
+  parametersList : {},
 }
 
 function exploteToObject(fields) {
@@ -81,7 +83,7 @@ function exploteToObject(fields) {
 
 function appReducer(state = initialState, action) {
 
-    const {fields, translations} = state;
+    const {fields, translations, parameters} = state;
 
     //console.log("AppReducer => ",action);
 
@@ -200,12 +202,12 @@ function appReducer(state = initialState, action) {
                 });
             }
 
-            var parameters = [];
+            var newParameters = [];
 
             if(content.routes_parameters !== undefined){
               for(var key in content.routes_parameters){
                 var parameter = content.routes_parameters[key];
-                parameters.push({
+                newParameters.push({
                   id : parameter.id,
                   identifier : parameter.identifier,
                   name : parameter.name,
@@ -217,7 +219,7 @@ function appReducer(state = initialState, action) {
             return {
               ...state,
               fields : pageFields,
-              parameters : parameters
+              parameters : newParameters
             }
 
         case SAVING:
@@ -314,6 +316,21 @@ function appReducer(state = initialState, action) {
             layout : action.payload.layout,
             settings : action.payload.settings
           }
+
+        case LOAD_PARAMETERS :
+
+            //console.log("LOAD_PARAMETERS,",action.payload)
+
+            return {
+              ...state,
+              parametersList : action.payload
+            }
+        case UPDATE_DEFAULT_PARAMETERS :
+
+            return {
+              ...state,
+              parameters : action.payload
+            }
 
         default:
             return state;

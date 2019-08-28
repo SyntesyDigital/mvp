@@ -11,6 +11,7 @@ Route::group(['middleware' => ['web','auth:veos-ws'], 'prefix' => 'api', 'namesp
     Route::get('/categories/tree', 'CategoryController@tree');
 
     Route::get('/elements', 'ElementController@index');
+    Route::get('/parameters', 'ElementController@parameters');
 
     Route::get('/tags', 'TagController@index');
 

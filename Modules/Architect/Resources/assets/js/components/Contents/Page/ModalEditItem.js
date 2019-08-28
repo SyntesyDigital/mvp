@@ -8,7 +8,9 @@ import {
   changePageField,
   initEditItem,
   loadCategories,
-  loadElements
+  loadElements,
+  loadParameters,
+  updateParameters
 } from './../actions/';
 
 // CONTENT FIELDS
@@ -61,12 +63,14 @@ class ModalEditItem extends Component {
         field : null,
         displayListItemModal : false,
         listItemInfo : null,
+        parameters : null
     };
 
     this.onModalClose = this.onModalClose.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
 
     this.props.initEditItem();
+    this.isOpen = false;
   }
 
   processProps(props) {
@@ -91,6 +95,7 @@ class ModalEditItem extends Component {
 
     this.props.loadCategories();
     this.props.loadElements();
+    this.props.loadParameters();
   }
 
   componentWillReceiveProps(nextProps)
@@ -98,16 +103,72 @@ class ModalEditItem extends Component {
     var field = null;
 
     if(nextProps.modalEdit.displayModal){
-        this.modalOpen();
+        if(!this.isOpen){
+          this.isOpen = true;
+          this.modalOpen();
+
+          this.props.updateParameters(
+            this.props.app.layout,
+            this.props.modalEdit.originalElements,
+            this.props.app.parameters,
+            this.props.app.parametersList,
+          );
+        }
+
         field = this.processProps(nextProps);
+        var paramerters = this.getInitParameters(field);
+
+        this.setState({
+          parameters : paramerters
+        });
+
+
     } else {
+      if(this.isOpen){
+        this.isOpen = false;
         this.modalClose();
+      }
     }
 
+    //get parameters
+
+    //console.log("componentWillReceiveProps :: ");
     this.setState({
       field : field
     });
 
+  }
+
+  getInitParameters(field) {
+
+    if(field == null || field.settings === undefined){
+      return null;
+    }
+
+    var result = {
+      name : '',
+      value : ''
+    };
+    if(field.settings['fileElements'] !== undefined){
+      result.name = 'fileElements';
+      result.value = field.settings['fileElements'];
+    }
+    else if(field.settings['tableElements'] !== undefined){
+      result.name = 'tableElements';
+      result.value = field.settings['tableElements'];
+    }
+    else if(field.settings['formElements'] !== undefined){
+      result.name = 'formElements';
+      result.value = field.settings['formElements'];
+    }
+    else {
+      return null;
+    }
+
+    var params = this.getElementParameters(result);
+    //console.log("getInitParameters :: params => ",params);
+
+    return params;
   }
 
   onModalClose(e){
@@ -343,6 +404,53 @@ class ModalEditItem extends Component {
         this.props.app.layout
       )
 
+      if(field.name == "fileElements" || field.name == "tableElements"
+        || field.name == "formElements") {
+
+        this.updateParameters(field);
+      }
+  }
+
+  updateParameters(field) {
+
+    //get parameters of this field.value
+    var parameters = this.getElementParameters(field);
+    //console.log("updateParameters :: parameters => ",parameters);
+
+    this.setState({
+      parameters : parameters
+    });
+
+    //update page parameters with this new parameters
+    this.props.updateParameters(
+      this.props.app.layout,
+      this.props.modalEdit.originalElements,
+      this.props.app.parameters,
+      this.props.app.parametersList,
+    );
+  }
+
+  getElementParameters(field) {
+    if(field.value == null)
+      return null;
+
+    var elementsList = this.props.modalEdit.fileElements;
+
+    if(field.name == "tableElements"){
+      elementsList = this.props.modalEdit.tableElements;
+    }
+    else if(field.name == "formElements"){
+      elementsList = this.props.modalEdit.formElements;
+    }
+
+    for(var i=0;i<elementsList.length;i++){
+      var element = elementsList[i];
+      if(element.value == field.value){
+        return element.parameters;
+      }
+    }
+
+    return null;
   }
 
   getCropsformats() {
@@ -355,6 +463,24 @@ class ModalEditItem extends Component {
       });
 
       return formats;
+  }
+
+  renderParameters() {
+    if(this.state.parameters.length == 0){
+      return (
+          <div className="parameter">
+            Aucun paramètre trouvé
+          </div>
+      )
+    }
+    return this.state.parameters.map((id,index) =>
+      <div className="parameter" key={index} style={{display:"inline-block"}}>
+        {index != 0 &&
+            <span>, &nbsp;</span>
+        }
+        {this.props.modalEdit.parameters[id].name}
+      </div>
+    )
   }
 
   renderSettings() {
@@ -394,6 +520,30 @@ class ModalEditItem extends Component {
               };
           })}
         />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="formElements"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.element')}
+          options={this.props.modalEdit.formElements.map(function(obj){
+              return {
+                  value: obj.value,
+                  name: obj.name
+              };
+          })}
+        />
+
+        {this.state.parameters !== undefined && this.state.parameters != null &&
+          <div>
+            <label>Paramètres</label>
+            <div>
+              {this.renderParameters()}
+            </div>
+            <hr/>
+          </div>
+        }
 
         <InputTranslatedSettingsField
           field={this.state.field}
@@ -648,19 +798,7 @@ class ModalEditItem extends Component {
 
 
 
-        <SelectorSettingsField
-          field={this.state.field}
-          name="formElements"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.tipology_allowed')}
-          options={this.props.modalEdit.formElements.map(function(obj){
-              return {
-                  value: obj.value,
-                  name: obj.name
-              };
-          })}
-        />
+
 
       </div>
 
@@ -762,7 +900,12 @@ const mapDispatchToProps = dispatch => {
         loadElements : () => {
             return dispatch(loadElements())
         },
-
+        loadParameters : () => {
+          return dispatch(loadParameters())
+        },
+        updateParameters : (definition, elements, pageParameters, parametersList) => {
+          return dispatch(updateParameters(definition, elements, pageParameters, parametersList))
+        }
     }
 }
 
