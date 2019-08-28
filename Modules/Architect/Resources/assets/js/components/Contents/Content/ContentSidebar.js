@@ -176,9 +176,29 @@ class ContentSidebar extends Component {
     )
   }
 
+  renderParameters() {
+
+    const parameters = this.props.app.parameters;
+
+    if(parameters === undefined || parameters == null){
+        return null;
+    }
+
+    return parameters.map((item,index) =>
+      <div className="form-group bmd-form-group" key={index}>
+        <label htmlFor={item.id} className="bmd-label-floating">
+          {item.name}
+        </label>
+        <input id={item.id} className="form-control" value={item.default} placeholder="Valeur de prévisualisation" />
+      </div>
+    );
+  }
+
   render() {
 
     var self = this;
+
+    const isPage = this.props.app.typology ? false : true;
 
     return (
       <div className="sidebar">
@@ -206,6 +226,14 @@ class ContentSidebar extends Component {
 
             <hr/>
 
+          </div>
+        }
+
+        {isPage &&
+          <div>
+            <h3>Parametres</h3>
+            {this.renderParameters()}
+            <hr/>
           </div>
         }
 

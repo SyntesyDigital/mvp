@@ -87,7 +87,7 @@ class ContentController extends Controller
         }
 
         $data = [
-            'content' => $content->load('tags', 'categories', 'languages'),
+            'content' => $content->load('tags', 'categories', 'languages','routesParameters'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
             'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,

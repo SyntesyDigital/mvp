@@ -59,7 +59,7 @@
   padding-right:0;
   background-color: #fff;
 
-  a{
+  a {
     @include round($button-radius);
     padding:7px 20px;
     text-decoration: none;

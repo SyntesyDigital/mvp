@@ -48,25 +48,32 @@ export default class ElementFile extends Component {
     renderItems() {
       const {modelValues, elementObject, doubleColumn} = this.state;
       var result = [];
-
+      var numTotalFields = parseInt(elementObject.fields.length);
       for(var key in modelValues){
+
         if(doubleColumn){
+          numTotalFields = 0;
+          for(var i in elementObject.fields){
+            if(modelValues[key][elementObject.fields[i].identifier] !== null && modelValues[key][elementObject.fields[i].identifier] != ''){
+                numTotalFields++;
+            }
+          }
           result.push(
               <div className="col-md-6">
-                {this.renderItemsColumn(1,key)}
+                {this.renderItemsColumn(1,key,numTotalFields)}
               </div>
             );
 
           result.push(
               <div className="col-md-6">
-                {this.renderItemsColumn(2,key)}
+                {this.renderItemsColumn(2,key,numTotalFields)}
               </div>
             );
 
         }else{
           result.push(
               <div className="col-md-12">
-                  {this.renderItemsColumn(0,key)}
+                  {this.renderItemsColumn(0,key,numTotalFields)}
               </div>
             );
         }
@@ -76,9 +83,12 @@ export default class ElementFile extends Component {
       return result;
     }
 
-    renderItemsColumn(column,key){
+    renderItemsColumn(column,key,numTotalFields){
       const {modelValues, elementObject} = this.state;
-      var numFieldsFirstColumn = parseInt(elementObject.fields.length)/2;
+
+
+
+      var numFieldsFirstColumn = numTotalFields/2;
       var columnRows = [];
 
       var index = 0;
@@ -87,37 +97,39 @@ export default class ElementFile extends Component {
         var field = elementObject.fields[i];
 
         var hasRoute = field.settings.hasRoute !== undefined && field.settings.hasRoute != null ? true : false;
+        if(modelValues[key][elementObject.fields[i].identifier] !== null && modelValues[key][elementObject.fields[i].identifier] != ''){
 
-        if(column == 1 && index < numFieldsFirstColumn){
-          columnRows.push(
-            this.renderField(
-              elementObject.fields[i].name,
-              modelValues[key][elementObject.fields[i].identifier],
-              hasRoute
-            )
-          );
-        }
+          if(column == 1 && index < numFieldsFirstColumn){
+            columnRows.push(
+              this.renderField(
+                elementObject.fields[i].name,
+                modelValues[key][elementObject.fields[i].identifier],
+                hasRoute
+              )
+            );
+          }
 
-        if(column == 2 && index >= numFieldsFirstColumn){
-          columnRows.push(
-            this.renderField(
-              elementObject.fields[i].name,
-              modelValues[key][elementObject.fields[i].identifier],
-              hasRoute
-            )
-          );
-        }
+          if(column == 2 && index >= numFieldsFirstColumn){
+            columnRows.push(
+              this.renderField(
+                elementObject.fields[i].name,
+                modelValues[key][elementObject.fields[i].identifier],
+                hasRoute
+              )
+            );
+          }
 
-        if(column == 0){
-          columnRows.push(
-            this.renderField(
-              elementObject.fields[i].name,
-              modelValues[key][elementObject.fields[i].identifier],
-              hasRoute
-            )
-          );
+          if(column == 0){
+            columnRows.push(
+              this.renderField(
+                elementObject.fields[i].name,
+                modelValues[key][elementObject.fields[i].identifier],
+                hasRoute
+              )
+            );
+          }
+          index++;
         }
-        index++;
       }
       return columnRows;
     }

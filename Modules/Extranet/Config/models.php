@@ -49,9 +49,11 @@ return [
         'label' => 'Date',
         'icon' => 'far fa-calendar',
         'formats' => [
+          //'day_month_year_time',
           'day_month_year',
           'month_year',
-          'year'
+          'year',
+          'hour'
         ],
         'rules' => [
           'required',

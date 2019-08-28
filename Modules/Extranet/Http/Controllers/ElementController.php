@@ -4,6 +4,7 @@ namespace Modules\Extranet\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\Extranet\Repositories\ElementRepository;
+use Modules\Extranet\Repositories\BobyRepository;
 
 use Modules\Extranet\Entities\Element;
 use Modules\Extranet\Entities\RouteParameter;
@@ -11,10 +12,16 @@ use Modules\Extranet\Entities\RouteParameter;
 use Modules\Extranet\Http\Requests\Elements\CreateElementRequest;
 use Modules\Extranet\Http\Requests\Elements\UpdateElementRequest;
 use Modules\Extranet\Http\Requests\Elements\DeleteElementRequest;
+use Modules\Extranet\Http\Requests\Elements\PostServiceRequest;
 
+
+use Modules\Extranet\Jobs\Elements\ProcessService;
 use Modules\Extranet\Jobs\Element\CreateElement;
 use Modules\Extranet\Jobs\Element\UpdateElement;
 use Modules\Extranet\Jobs\Element\DeleteElement;
+//use Modules\Extranet\Jobs\Element\PostService;
+
+
 
 use Modules\Extranet\Transformers\ModelValuesFormatTransformer;
 
@@ -27,8 +34,9 @@ use Carbon\Carbon;
 
 class ElementController extends Controller
 {
-    public function __construct(ElementRepository $elements) {
+    public function __construct(ElementRepository $elements, BobyRepository $boby) {
         $this->elements = $elements;
+        $this->boby = $boby;
     }
 
     public function index()
@@ -128,13 +136,12 @@ class ElementController extends Controller
                   ]);
         } catch (\Exception $e) {
 
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+
         }
-
-        return response()->json([
-            'success' => false,
-            'message' => $e->getMessage()
-        ], 500);
-
     }
 
     public function update(Element $element, UpdateElementRequest $request)
@@ -146,10 +153,13 @@ class ElementController extends Controller
                         'element' => $element
                     ]);
           } catch (\Exception $e) {
+
+              return response()->json([
+                  'success' => false,
+                  'message' => $e->getMessage()
+              ], 500);
           }
-          return response()->json([
-              'success' => false
-          ], 500);
+
     }
 
     public function delete(Element $element, DeleteElementRequest $request)
@@ -172,11 +182,11 @@ class ElementController extends Controller
                       'modelValues' => new ModelValuesFormatTransformer($modelValues,$element->fields()->get(), $limit)
                   ]);
         } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return response()->json([
-            'success' => false
-        ], 500);
-
     }
 
     public function export(Element $element, $limit = null, Request $request)
@@ -208,6 +218,117 @@ class ElementController extends Controller
 
       return response()->download($filepath, $filename, $headers);
 
+    }
+
+    public function getSelectData($name)
+    {
+
+      try {
+            $selectData = $this->boby->getModelValuesQuery($name);
+            $resultData = [];
+
+            foreach($selectData as $item) {
+              $resultData[] = [
+                "name" => $item->lib,
+                "value" => $item->val
+              ];
+            }
+
+            return response()->json([
+                      'success' => true,
+                      'data' => $resultData
+                  ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function postService(PostServiceRequest $request)
+    {
+        try {
+            $result = $this->dispatchNow(ProcessService::fromRequest($request));
+            return response()->json([
+                      'success' => true,
+                      'result' => $result
+                  ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+
+    public function getFormProcedures($modelId)
+    {
+
+      try {
+
+            $procedures = $this->elements->getProcedures($modelId);
+
+            $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS?perPage=100');
+            $allServices = $this->boby->getModelValuesQuery('WS_EXT2_DEF_SERVICES?perPage=100');
+            $services = [];
+
+            foreach($allServices as $service){
+              $services[$service->ID] = $service;
+            }
+
+            foreach($procedures as $index => $procedure) {
+
+              $objects = [];
+              $procedureServices = [];
+              $root = "";
+
+              foreach($allObjects as $object) {
+                  if($procedure->OBJID == $object->OBJ_ID) {
+
+                    if(strpos($object->OBJ_JSONP,'listPer') !== false ) {
+                      //if is listPer add []
+                      //FIXME remove [] when added directly
+                      $object->OBJ_JSONP = $object->OBJ_JSONP."[]";
+                    }
+
+                    $objects[] = $object;
+
+                    /*
+                    FIXME not necessary Service linked to procedure
+                    if(!isset($procedureServices[$object->SERV_ID])){
+                      $procedureServices[$object->SERV_ID] = $services[$object->SERV_ID];
+                    }
+                    */
+                    //conclusion only one service per procedure
+                    if(isset($services[$object->SERV_ID])){
+                      $procedureServices = $services[$object->SERV_ID];
+                    }
+
+                    $root = $object->OBJ_JSONP;
+
+                  }
+              }
+              $procedures[$index]->{'OBJECTS'} = $objects;
+              $procedures[$index]->{'SERVICE'} = $procedureServices;
+              $procedures[$index]->{'JSONP'} = $root;
+            }
+
+
+            return response()->json([
+                      'success' => true,
+                      'data' => $procedures
+                  ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
 }

@@ -93,5 +93,34 @@ class BobyRepository
         return $beans;
     }
 
+    public function processService($method,$url,$data)
+    {
+
+        $params = [
+            'json' => $data,
+            'headers' => [
+                'Authorization' => "Bearer " . Auth::user()->token
+            ]
+        ];
+
+        switch($method){
+           case "POST":
+              $response = $this->client->post(VeosWsUrl::get() . $url, $params);
+              break;
+           case "PUT":
+              $response = $this->client->put(VeosWsUrl::get() . $url, $params);
+              break;
+           case "GET":
+             $response = $this->client->get(VeosWsUrl::get() . $url, $params);
+             break;
+           //case "DELETE":
+              //return $this->client->delete(VeosWsUrl::get() . $url, $params);
+           default:
+             return null;
+        }
+
+        return json_decode($response->getBody());
+    }
+
 
 }

@@ -61,6 +61,8 @@ const initialState =  {
   saving : false,
   saved : false,
 
+  //route parameters
+  parameters : null
 }
 
 function exploteToObject(fields) {
@@ -198,9 +200,24 @@ function appReducer(state = initialState, action) {
                 });
             }
 
+            var parameters = [];
+
+            if(content.routes_parameters !== undefined){
+              for(var key in content.routes_parameters){
+                var parameter = content.routes_parameters[key];
+                parameters.push({
+                  id : parameter.id,
+                  identifier : parameter.identifier,
+                  name : parameter.name,
+                  default : parameter.pivot.preview_default_value
+                });
+              }
+            }
+
             return {
               ...state,
-              fields : pageFields
+              fields : pageFields,
+              parameters : parameters
             }
 
         case SAVING:

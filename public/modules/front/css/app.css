@@ -8696,8 +8696,7 @@ img {
 }
 
 .rounded,
-.btn,
-.custom-modal .modal-buttons .close-button-modal {
+.btn {
   border-radius: 200px;
 }
 
@@ -9092,7 +9091,8 @@ a {
 header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
-.sidebar.collapsed ul li i {
+.sidebar.collapsed ul li i,
+.element-form-container .element-form-wrapper {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -9136,8 +9136,7 @@ b {
 }
 
 .rounded,
-.btn,
-.custom-modal .modal-buttons .close-button-modal {
+.btn {
   border-radius: 200px;
 }
 
@@ -9150,7 +9149,8 @@ b {
 header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
-.sidebar.collapsed ul li i {
+.sidebar.collapsed ul li i,
+.element-form-container .element-form-wrapper {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -9605,7 +9605,47 @@ body {
 .custom-modal {
   display: none;
   opacity: 0;
-  z-index: 0;
+  z-index: 1000;
+}
+
+.custom-modal a.btn-default {
+  border-radius: 20px;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: transparent;
+}
+
+.custom-modal a.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.custom-modal a.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
+.custom-modal a.btn-danger {
+  color: #bf5329;
+}
+
+.custom-modal a.btn-primary {
+  border-radius: 20px;
+  background-color: #2A3649;
+  border: none;
+}
+
+.custom-modal .form-group .form-control,
+.custom-modal .form-group .cke_textarea_inline {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0 10px;
 }
 
 .custom-modal .modal-background {
@@ -9615,7 +9655,8 @@ body {
   z-index: 560;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.68);
+  background-color: #000;
+  opacity: 0.5;
 }
 
 .custom-modal .modal-container {
@@ -9629,93 +9670,150 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  overflow-x: auto;
-  padding: 40px 10vw;
-  background-color: transparent;
+  padding: 40px 5%;
+}
+
+@media (min-width: 52.85714286em) {
+  .custom-modal .modal-container {
+    padding: 40px 20%;
+  }
 }
 
 .custom-modal .modal-content {
   position: relative;
   z-index: 600;
   width: auto;
-  height: auto;
   border: none;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: #fff;
   border-radius: 0px;
+  height: calc(100% - 55px);
+  padding-bottom: 65px;
+}
+
+.custom-modal .modal-content .container {
+  overflow: scroll;
+  height: 100%;
+  padding: 20px 20px;
+}
+
+.custom-modal .modal-footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.custom-modal .modal-footer a {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  min-height: 56px;
+  z-index: 1000;
+  border-bottom: 1px solid #ccc;
+}
+
+.custom-modal .modal-header i.fa {
+  font-size: 22px;
+  padding-right: 10px;
+  color: #b4b4b4;
+  display: inline-block;
+}
+
+.custom-modal .modal-header h2 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-modal .modal-header h3 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  font-style: italic;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 .custom-modal .modal-buttons {
   display: inline-block;
   position: absolute;
   z-index: 650;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
 }
 
 .custom-modal .modal-buttons .close-button-modal {
-  opacity: 0.5;
-  color: #000;
-  width: 30px;
-  height: 30px;
-  line-height: 23px;
-  font-size: 20px;
-  text-align: center;
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 100;
-  text-decoration: none;
+  height: 35px;
+  width: 35px;
+  padding: 0;
+  border: none;
+  color: #2A3649;
 }
 
 .custom-modal .modal-buttons .close-button-modal:hover {
   text-decoration: none;
+  border: none;
+}
+
+.custom-modal .modal-buttons .close-button-modal i.fa {
+  text-align: center;
+  margin: 0px;
+  font-size: 20px;
+  line-height: 34px;
+  padding: 0;
+}
+
+.custom-modal .modal-hover-content {
+  background-color: #fff;
+  opacity: 0.8;
+  text-align: center;
+  padding: 0px 15px 25px;
 }
 
 @media (min-width: 52.85714286em) {
-  .custom-modal .modal-buttons .close-button-modal {
-    width: 47px;
-    height: 47px;
-    line-height: 38px;
-    font-size: 30px;
+  .custom-modal .modal-hover-content {
+    padding: 25px 15px 25px;
   }
 }
 
-.custom-modal .row {
-  position: relative;
-  margin: 0;
-  bottom: auto;
-  padding: 0;
-  margin-right: 0px;
-  width: 100%;
+.custom-modal .setup-field {
+  padding: 8px 0;
+}
+
+.custom-modal .setup-field .togglebutton label {
+  color: #2d2f31;
+}
+
+.custom-modal .setup-field .form-group {
+  padding-left: 53px;
+}
+
+.custom-modal .setup-field.input-translated .form-group {
+  padding-left: 0px;
+}
+
+.custom-modal.no-buttons .modal-header {
+  border-bottom: none;
   background-color: #fff;
+  height: 0px;
 }
 
-.custom-modal h2 {
-  padding-bottom: 20px;
-}
-
-.modal-thanks.custom-modal .modal-container {
-  padding: 40px 20vw;
-}
-
-.modal-thanks h2 {
-  font-size: 50px;
-  margin-bottom: 40px;
-  margin-top: 40px;
-  font-weight: 100;
-  padding-bottom: 0px;
-}
-
-.modal-thanks p.links {
-  border-top: 1px solid #e5e5e5;
-  margin-top: 50px;
-  padding-top: 20px;
-  margin-bottom: 40px !important;
-}
-
-.modal-thanks p.links a {
-  color: #9a9a9a;
+.custom-modal.no-buttons .modal-content {
+  /*padding-bottom:0px;*/
 }
 
 form.contact-form {
@@ -10041,8 +10139,71 @@ form.contact-form .checkbox {
 
 .element-form-container {
   margin: 20px 0;
+}
+
+.element-form-container a.btn-default {
+  border-radius: 20px;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: transparent;
+}
+
+.element-form-container a.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.element-form-container a.btn-primary {
+  border-radius: 20px;
+}
+
+.element-form-container a.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
+.element-form-container a.btn-danger {
+  color: #bf5329;
+}
+
+.element-form-container .element-form-wrapper {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.element-form-container .element-form-wrapper.loading {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.element-form-container .element-form-container-head {
   background-color: #fff;
-  padding: 40px 20px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  min-height: 41px;
+  border-bottom: 1px solid #E0E0E0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.element-form-container .element-form-container-head.collapsed {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.element-form-container .element-form {
+  padding: 0px;
+  background-color: white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .element-form-container .element-form-row {
@@ -10064,6 +10225,7 @@ form.contact-form .checkbox {
 
 .element-form-container .element-form-row .buttons .btn {
   margin: 10px 0;
+  border-radius: 20px;
 }
 
 .element-form-container .element-form-row .buttons .btn-back {
@@ -10074,6 +10236,95 @@ form.contact-form .checkbox {
   background-color: #fff;
   border-color: #fff;
   color: #2A3649;
+}
+
+.element-form-container input.is-invalid {
+  border: 1px solid #bf5329;
+}
+
+.element-form-container select.is-invalid {
+  border: 1px solid #bf5329;
+}
+
+.element-form-container input.is-valid {
+  border: 1px solid #2ab27b;
+}
+
+.element-form-container .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.element-form-container .react-datepicker button:not(:disabled),
+.element-form-container .react-datepicker [type="button"]:not(:disabled),
+.element-form-container .react-datepicker [type="reset"]:not(:disabled),
+.element-form-container .react-datepicker [type="submit"]:not(:disabled) {
+  color: #000 !important;
+  padding: 0;
+}
+
+.element-form-container .react-datepicker__month-container {
+  font-size: 170%;
+  width: 270px;
+}
+
+.element-form-container .react-datepicker__current-month,
+.element-form-container .react-datepicker-time__header {
+  font-size: 1.6rem !important;
+  font-weight: normal;
+  padding-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.element-form-container .react-datepicker__header {
+  background-color: #ffffff;
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.element-form-container .react-datepicker__current-month,
+.element-form-container .react-datepicker-time__header {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.element-form-container .react-datepicker__navigation--next {
+  border-left-color: #000;
+}
+
+.element-form-container .react-datepicker__navigation--previous {
+  border-right-color: #000;
+}
+
+.element-form-container .react-datepicker__day-name,
+.element-form-container .react-datepicker__day,
+.element-form-container .react-datepicker__time-name {
+  width: 3.3rem;
+  height: 2.6rem;
+  font-size: 1.4rem;
+  line-height: 2.6rem;
+}
+
+.element-form-container .react-datepicker__day--selected,
+.element-form-container .react-datepicker__day--in-selecting-range,
+.element-form-container .react-datepicker__day--in-range {
+  background-color: #fff  !important;
+  color: #000  !important;
+  border: 1px solid #3097D1;
+}
+
+.element-form-container .react-datepicker__day--keyboard-selected {
+  background-color: #fff  !important;
+  color: #000  !important;
+  font-weight: bold;
+}
+
+.element-form-container .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+  width: 100px;
+}
+
+.element-form-container .react-datepicker__time-container {
+  width: 100px;
 }
 
 @media (min-width: 768px) {
