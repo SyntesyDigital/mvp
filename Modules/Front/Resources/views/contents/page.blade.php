@@ -2,6 +2,15 @@
   $htmlClass = isset($contentSettings) && isset($contentSettings['htmlClass']) ? $contentSettings['htmlClass'] : '';
   $pageType = isset($contentSettings) && isset($contentSettings['pageType']) ? $contentSettings['pageType'] : '';
   $idClass = isset($content) ? "id_".$content->id : '';
+
+  $parameters = "";
+  $first = true;
+  foreach(Request::all() as $key => $value) {
+    $parameters.= (!$first?"&":"").$key."=".$value;
+
+    $first = false;
+  }
+
 @endphp
 
 @extends('front::layouts.app',[

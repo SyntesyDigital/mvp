@@ -12,7 +12,9 @@
       <div id="elementFile" class="elementFile "
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
         doubleColumn="{{$field['settings']['doubleColumn']?$field['settings']['doubleColumn']:false}}"
-        elementObject="{{$field['settings']['fileElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['fileElements'])->first()->load('fields'))):null}}" >
+        elementObject="{{$field['settings']['fileElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['fileElements'])->first()->load('fields'))):null}}"
+        parameters="{{$parameters}}"
+      >
 
       </div>
       <div>

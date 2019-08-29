@@ -29,6 +29,12 @@ class ContentController extends Controller
 
       $content->load('fields', 'page');
 
+      //check parameters exist
+      foreach($content->routesParameters as $parameter){
+        if(!$request->has($parameter->identifier))
+          abort(422);
+      }
+
       $pageBuilderAdapter = new PageBuilderAdapter($content);
 
       if($request->has('debug'))
@@ -66,6 +72,12 @@ class ContentController extends Controller
     private function renderPage($request,$content) {
 
         $pageBuilderAdapter = new PageBuilderAdapter($content);
+
+        //check parameters exist
+        foreach($content->routesParameters as $parameter){
+          if(!$request->has($parameter->identifier))
+            abort(422);
+        }
 
         if($request->has('debug'))
           dd($pageBuilderAdapter->get());
@@ -130,6 +142,12 @@ class ContentController extends Controller
 
       if($request->has('debug'))
         dd($pageBuilderAdapter->get());
+
+      //check parameters exist
+      foreach($content->routesParameters as $parameter){
+        if(!$request->has($parameter->identifier))
+          abort(422);
+      }
 
 
       if($content->is_page){

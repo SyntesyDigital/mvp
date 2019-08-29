@@ -183,6 +183,29 @@ class ContentBar extends Component {
     }
   }
 
+  getPageParams() {
+    const isPage = this.props.app.typology ? false : true;
+
+    if(!isPage) {
+      return "";
+    }
+    else{
+
+      const params = this.props.app.parameters;
+      if(params === undefined || params.length == 0)
+        return "";
+
+      var result = "?";
+      var first = true;
+      for(var i=0;i<params.length;i++){
+        result += (!first? '&':'')+params[i].identifier+"="+params[i].default;
+        first = false;
+      }
+    }
+
+    return result;
+  }
+
   render() {
 
     const isPage = this.props.app.typology ? false : true;
@@ -195,6 +218,8 @@ class ContentBar extends Component {
     );
     const content = this.props.app.content;
     const saving = this.props.app.saving;
+
+    const params = this.getPageParams();
 
     return (
       <div className="page-bar">
@@ -235,7 +260,7 @@ class ContentBar extends Component {
 
               {  saved && content !== undefined && content != null &&
                 hasPreview &&
-                <a href={routes['previewContent'].replace(':id',content.id)} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; {Lang.get('fields.preview') } </a>
+                <a href={routes['previewContent'].replace(':id',content.id)+params} target="_blank" className="btn btn-default" > <i className="fa fa-eye"></i> &nbsp; {Lang.get('fields.preview') } </a>
               }
               <a href="" className="btn btn-primary"
                 onClick={this.onSubmitForm.bind(this)}

@@ -172,11 +172,11 @@ class ElementController extends Controller
     }
 
 
-    public function getModelValues(Element $element, $limit = null)
+    public function getModelValues(Element $element, $limit = null,Request $request)
     {
 
       try {
-            $modelValues = $this->elements->getModelValuesFromElement($element);
+            $modelValues = $this->elements->getModelValuesFromElement($element,$request->all());
             return response()->json([
                       'success' => true,
                       'modelValues' => new ModelValuesFormatTransformer($modelValues,$element->fields()->get(), $limit)

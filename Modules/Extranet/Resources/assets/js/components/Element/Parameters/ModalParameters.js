@@ -130,8 +130,10 @@ class ModalParameters extends Component {
 
     const params = this.props.contents.content != null &&
       this.props.contents.content.params != null &&
-      typeof this.props.contents.content.params !== 'object' ?
+      this.props.contents.content.params instanceof Array ?
       this.props.contents.content.params : [];
+
+    console.log("ModalParameteres :: params => ",params);
 
     const valid = this.checkValidParameters(params);
 

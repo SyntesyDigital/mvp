@@ -12,11 +12,12 @@ export default class ElementFile extends Component {
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const doubleColumn = props.doubleColumn ? props.doubleColumn : false;
 
+
         this.state = {
             field : field,
             elementObject : elementObject,
             doubleColumn:doubleColumn,
-            modelValues:[]
+            modelValues:[],
         };
     }
 
@@ -27,8 +28,8 @@ export default class ElementFile extends Component {
     query(page,filters) {
         var self = this;
         const {elementObject} = this.state;
-        console.log(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data');
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data')
+        console.log(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+this.props.parameters);
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+this.props.parameters)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -173,11 +174,13 @@ if (document.getElementById('elementFile')) {
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
        var doubleColumn = element.getAttribute('doubleColumn');
+       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementFile
            field={field}
            elementObject={elementObject}
            doubleColumn={doubleColumn}
+           parameters={parameters}
          />, element);
    });
 }

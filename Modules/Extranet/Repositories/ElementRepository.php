@@ -143,10 +143,21 @@ class ElementRepository extends BaseRepository
     }
 
 
-    public function getModelValuesFromElement($element)
+    public function getModelValuesFromElement($element,$parameters)
     {
         //dd($element->model_exemple);
-        return $this->boby->getModelValuesQuery($element->model_exemple);
+        $params = "";
+
+        if(isset($parameters) && sizeof($parameters) > 0){
+          $params = "?";
+          $first = true;
+          foreach($parameters as $key => $value) {
+            $params .= (!$first ? "&":"").$key."=".$value;
+            $first = false;
+          }
+        }
+
+        return $this->boby->getModelValuesQuery($element->model_ws.$params);
     }
 
     public function getFormFields($modelId)
