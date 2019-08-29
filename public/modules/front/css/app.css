@@ -10677,15 +10677,15 @@ form.contact-form .checkbox {
 }
 
 .box-button-container-a .box-button-container:hover {
-  color: #E84B37;
+  color: #2A3649;
   text-decoration: none;
-  border: 1px solid #E84B37;
+  border: 1px solid #2A3649;
 }
 
 .box-button-container {
-  color: #2A3649;
+  color: #E84B37;
   background-color: #fff;
-  border: 1px solid #2A3649;
+  border: 1px solid #E84B37;
   padding: 20px 40px;
   text-align: center;
   width: 100%;
