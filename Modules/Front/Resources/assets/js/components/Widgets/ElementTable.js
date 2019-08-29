@@ -57,7 +57,7 @@ export default class ElementTable extends Component {
     query() {
         var self = this;
         const {elementObject,itemsPerPage, maxItems} = this.state;
-        var limit = maxItems?'/'+maxItems:'';
+        var limit = maxItems && maxItems <100?'/'+maxItems:'/100';
 
         axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit)
           .then(function (response) {
@@ -67,7 +67,27 @@ export default class ElementTable extends Component {
                 console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
 
                 self.processData(response.data.modelValues);
+                var self2 = self;
+                if(!maxItems || limit < maxItems){
 
+                  var limit = maxItems?'/'+maxItems:'';
+
+                  axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit)
+                    .then(function (response) {
+                        if(response.status == 200
+                            && response.data.modelValues !== undefined)
+                        {
+                          console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
+                          self2.processData(response.data.modelValues);
+                        }
+
+                    }).catch(function (error) {
+                       console.log(error);
+                       self2.setState({
+                         loading: false
+                       });
+                     });
+                }
               }
 
           }).catch(function (error) {
