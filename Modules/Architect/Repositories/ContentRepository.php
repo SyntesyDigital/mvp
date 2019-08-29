@@ -253,7 +253,7 @@ class ContentRepository extends BaseRepository
       $homeId = null;
 
       foreach($pages as $page) {
-        if(strtolower($page->title) == 'home'){
+        if(strtolower($page->title) == 'accueil'){
 
           $homeId = $page->id;
 
