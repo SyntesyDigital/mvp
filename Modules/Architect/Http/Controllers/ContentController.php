@@ -144,6 +144,7 @@ class ContentController extends Controller
 
     public function update(Content $content, CreateContentRequest $request)
     {
+
         $content = dispatch_now(UpdateContent::fromRequest($content, $request));
 
         return $content ? response()->json([

@@ -32,7 +32,8 @@ class UpdateContent
              'page',
              'translations',
              'is_page',
-             'settings'
+             'settings',
+             'parameters'
          ]);
      }
 
@@ -57,6 +58,15 @@ class UpdateContent
 
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
+        }
+
+        $this->content->routesParameters()->detach();
+        if((isset($this->attributes['parameters'])) && count($this->attributes['parameters'])>0) {
+          foreach ($this->attributes['parameters'] as $parameter) {
+            $this->content->routesParameters()->attach($parameter['id'],[
+              'preview_default_value' => $parameter['default']
+            ]);
+          }
         }
 
         // RESET CACHE MENU

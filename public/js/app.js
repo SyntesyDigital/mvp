@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 833);
+/******/ 	return __webpack_require__(__webpack_require__.s = 834);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -56739,15 +56739,15 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ 833:
+/***/ 834:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(834);
+module.exports = __webpack_require__(835);
 
 
 /***/ }),
 
-/***/ 834:
+/***/ 835:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -56757,7 +56757,7 @@ module.exports = __webpack_require__(834);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(835);
+__webpack_require__(836);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -56765,11 +56765,11 @@ __webpack_require__(835);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(837);
+__webpack_require__(838);
 
 /***/ }),
 
-/***/ 835:
+/***/ 836:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -56785,7 +56785,7 @@ window.Popper = __webpack_require__(185).default;
 try {
   window.$ = window.jQuery = __webpack_require__(174);
 
-  __webpack_require__(836);
+  __webpack_require__(837);
 } catch (e) {}
 
 /**
@@ -56831,7 +56831,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 836:
+/***/ 837:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -61273,7 +61273,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 837:
+/***/ 838:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

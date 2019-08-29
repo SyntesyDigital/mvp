@@ -29,7 +29,8 @@ class CreateContent
             'page',
             'translations',
             'is_page',
-            'settings'
+            'settings',
+            'parameters'
         ]);
     }
 
@@ -54,6 +55,14 @@ class CreateContent
         $this->saveLanguages();
         $this->saveFields();
 
+        if((isset($this->attributes['parameters'])) && count($this->attributes['parameters'])>0) {
+          foreach ($this->attributes['parameters'] as $parameter) {
+            $this->content->routesParameters()->attach($parameter['id'],[
+              'preview_default_value' => $parameter['default']
+            ]);
+          }
+        }
+
         if((isset($this->attributes['is_page'])) && $this->attributes['is_page'] == 1) {
             $this->savePage();
         }
@@ -63,6 +72,8 @@ class CreateContent
 
         // Index or reindex content on elasticsearch
         $this->content->index();
+
+
 
         return $this->content;
     }
