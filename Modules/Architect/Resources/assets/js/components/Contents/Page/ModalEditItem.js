@@ -675,13 +675,43 @@ class ModalEditItem extends Component {
           options={this.props.modalEdit.categories}
         />
 
-        <InputSettingsField
+        <SelectorSettingsField
           field={this.state.field}
           name="maxItems"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
           label={Lang.get('modals.max_elements')}
-          inputLabel={Lang.get('modals.indica_max_elements')}
+          //inputLabel={Lang.get('modals.indica_max_elements_page')}
+          options={[
+              {
+                  value: "",
+                  name: "Désactivé",
+              },
+              {
+                  value: 5,
+                  name: "5",
+              },
+              {
+                  value: 10,
+                  name: "10",
+              },
+              {
+                  value: 20,
+                  name: "20",
+              },
+              {
+                  value: 25,
+                  name: "25",
+              },
+              {
+                  value: 50,
+                  name: "50",
+              },
+              {
+                  value: 100,
+                  name: "100",
+              }
+          ]}
         />
 
         <InputSettingsField
