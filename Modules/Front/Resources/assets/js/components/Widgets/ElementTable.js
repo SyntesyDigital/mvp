@@ -193,7 +193,7 @@ export default class ElementTable extends Component {
           data={this.state.data}
           columns={this.state.columns}
           showPagination={this.state.pagination}
-          defaultPageSize={this.state.itemsPerPage}
+          defaultPageSize={this.state.maxItems && this.state.maxItems!= '' && this.state.maxItems < this.state.itemsPerPage ? this.state.maxItems:this.state.itemsPerPage }
           loading={this.state.loading}
           filterable={true}
           defaultFilterMethod={(filter, row) =>
