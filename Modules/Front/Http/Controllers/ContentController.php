@@ -32,7 +32,7 @@ class ContentController extends Controller
       //check parameters exist
       foreach($content->routesParameters as $parameter){
         if(!$request->has($parameter->identifier))
-          abort(422);
+          abort(404,'Insuficient parameters');
       }
 
       $pageBuilderAdapter = new PageBuilderAdapter($content);
@@ -76,7 +76,7 @@ class ContentController extends Controller
         //check parameters exist
         foreach($content->routesParameters as $parameter){
           if(!$request->has($parameter->identifier))
-            abort(422);
+            abort(404,'Insuficient parameters');
         }
 
         if($request->has('debug'))
@@ -146,7 +146,7 @@ class ContentController extends Controller
       //check parameters exist
       foreach($content->routesParameters as $parameter){
         if(!$request->has($parameter->identifier))
-          abort(422);
+          abort(404,'Insuficient parameters');
       }
 
 

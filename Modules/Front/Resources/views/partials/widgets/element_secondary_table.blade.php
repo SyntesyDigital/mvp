@@ -17,6 +17,7 @@
         itemsPerPage="{{$field['settings']['pagination']}}"
         maxItems = "{{$field['settings']['maxItems']}}"
         elementObject="{{$field['settings']['tableElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['tableElements'])->first()->load('fields'))):null}}"
+        parameters="{{$parameters}}"
       >
       </div>
       <div>

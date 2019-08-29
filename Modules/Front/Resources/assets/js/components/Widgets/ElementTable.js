@@ -44,7 +44,9 @@ export default class ElementTable extends Component {
             currPage:1,
             modelValuesPaginated:[],
             loading : true,
-            filterable : false
+            filterable : false,
+            parameters : props.parameters != null && props.parameters !== undefined ?
+              '?'+props.parameters : ''
         };
     }
 
@@ -59,7 +61,7 @@ export default class ElementTable extends Component {
         const {elementObject,itemsPerPage, maxItems} = this.state;
         var limit = maxItems && maxItems <100?'/'+maxItems:'/100';
 
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit)
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit+this.state.parameters)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -72,7 +74,7 @@ export default class ElementTable extends Component {
 
                   var limit = maxItems?'/'+maxItems:'';
 
-                  axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit)
+                  axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit+this.state.parameters)
                     .then(function (response) {
                         if(response.status == 200
                             && response.data.modelValues !== undefined)
@@ -231,6 +233,7 @@ if (document.getElementById('elementTable')) {
        var maxItems = element.getAttribute('maxItems');
        var pagination = element.getAttribute('pagination');
        var itemsPerPage = element.getAttribute('itemsPerPage');
+       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementTable
            field={field}
@@ -238,6 +241,7 @@ if (document.getElementById('elementTable')) {
            pagination={pagination}
            itemsPerPage={itemsPerPage}
            maxItems={maxItems}
+           parameters={parameters}
          />, element);
    });
 }
