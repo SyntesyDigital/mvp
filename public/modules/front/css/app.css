@@ -10644,11 +10644,31 @@ form.contact-form .checkbox {
   text-align: left !important;
 }
 
+.total-box-container-a {
+  width: 100%;
+  color: #2A3649;
+  /*.box-button-container{
+    &:hover{
+      color:$primary-color;
+      text-decoration: none;
+      border: 1px solid $primary-color;
+
+    }
+  }*/
+}
+
+.total-box-container-a:hover {
+  text-decoration: none;
+}
+
 .total-box-container {
+  color: #2A3649;
   background-color: #fff;
   border: 1px solid #E0E0E0;
   padding: 20px 40px;
   text-align: left;
+  border-radius: 12px;
+  min-height: 105px;
 }
 
 .total-box-container .title {
@@ -10689,6 +10709,8 @@ form.contact-form .checkbox {
   padding: 20px 40px;
   text-align: center;
   width: 100%;
+  border-radius: 12px;
+  min-height: 105px;
 }
 
 .box-button-container i {

@@ -19,6 +19,7 @@ class TotalBox extends Widget implements WidgetInterface
     public $fields = [
         'name' => 'Modules\Architect\Fields\Types\Text',
         'icon' => 'Modules\Architect\Fields\Types\Text',
+        'url' => 'Modules\Architect\Fields\Types\Url',
     ];
 
     public $rules = [

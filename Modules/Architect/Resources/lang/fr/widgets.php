@@ -42,5 +42,7 @@ return [
     'ELEMENT_FORM' => 'Formulaire',
     'ELEMENT_TABLE' => 'Tableau principaux',
     'ELEMENT_FILE' => 'Fiche',
-    'ELEMENT_SECONDARY_TABLE' => 'Tableau secondaire'
+    'ELEMENT_SECONDARY_TABLE' => 'Tableau secondaire',
+    'TOTAL_BOX' => 'Boîte totale',
+    'BOX_BUTTON' => 'Boîte à boutons'
 ];
