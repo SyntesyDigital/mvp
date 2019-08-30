@@ -93,13 +93,21 @@ class ModelValuesFormatTransformer extends Resource
 
               switch ($elementField->type) {
                 case 'number':
-                  if($elementField->settings['format'] == 'price'){
-                    $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
-                  }elseif($elementField->settings['format'] == 'price_with_decimals'){
-                    $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
+
+                  if(!$isTable){
+
+                    if($elementField->settings['format'] == 'price'){
+                      $result[$i][$elementField->identifier] = number_format ( $originalValue , 0 , ',' , '.' ).' €';
+                    }elseif($elementField->settings['format'] == 'price_with_decimals'){
+                      $result[$i][$elementField->identifier] = number_format ( $originalValue , 2 , ',' , '.' ).' €';
+                    }else{
+                      $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
+                    }
+
                   }else{
-                    $result[$i][$elementField->identifier] = $originalValue !== null?$originalValue:'';
+                    $result[$i][$elementField->identifier] = $originalValue != ''? intval($originalValue):0;
                   }
+
                   break;
                 case 'text':
                   if($elementField->settings['format'] == 'email'){

@@ -19,6 +19,7 @@ export default class ElementTable extends Component {
     {
         super(props);
 
+        const defaultDataLoadStep = 100;
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const pagination =  props.pagination ? true : false;
@@ -44,9 +45,9 @@ export default class ElementTable extends Component {
             currPage:1,
             modelValuesPaginated:[],
             loading : true,
+            loadingData : true,
             filterable : false,
-            parameters : props.parameters != null && props.parameters !== undefined ?
-              '?'+props.parameters : ''
+            defaultDataLoadStep:defaultDataLoadStep
         };
     }
 
@@ -58,38 +59,21 @@ export default class ElementTable extends Component {
 
     query() {
         var self = this;
-        const {elementObject,itemsPerPage, maxItems} = this.state;
-        var limit = maxItems && maxItems <100?'/'+maxItems:'/100';
+        const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
+        var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
 
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit+this.state.parameters)
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/?perPage='+limitFirstLoad)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
               {
                 console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
+                console.log("CompleteObject  :: componentDidMount => ",response.data.totalPage);
+                // en completeObject rengo el total de registros, por pagina, pagina, total de paginas, desde y hasta
 
                 self.processData(response.data.modelValues);
-                var self2 = self;
-                if(!maxItems || limit < maxItems){
+                self.getAllData(response.data.totalPage);
 
-                  var limit = maxItems?'/'+maxItems:'';
-
-                  axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data'+limit+this.state.parameters)
-                    .then(function (response) {
-                        if(response.status == 200
-                            && response.data.modelValues !== undefined)
-                        {
-                          console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
-                          self2.processData(response.data.modelValues);
-                        }
-
-                    }).catch(function (error) {
-                       console.log(error);
-                       self2.setState({
-                         loading: false
-                       });
-                     });
-                }
               }
 
           }).catch(function (error) {
@@ -98,6 +82,41 @@ export default class ElementTable extends Component {
                loading: false
              });
            });
+    }
+
+    getAllData(totalPages){
+
+      const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
+      var limitLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
+
+      if(!maxItems || limit < maxItems){
+        var self = this;
+
+        for(var page= 2;page<=totalPages;page++){
+
+          axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitLoad+'/?perPage='+limitLoad+'&page='+page)
+            .then(function (response) {
+                if(response.status == 200
+                    && response.data.modelValues !== undefined)
+                {
+                  self.processData(response.data.modelValues);
+                }
+
+            }).catch(function (error) {
+               console.log(error);
+               selfs.setState({
+                 loadingData: false
+               });
+             });
+
+        }
+
+
+      }
+
+      this.setState({
+        loadingData: false
+      });
     }
 
     renderCell(field,identifier,row) {
@@ -177,7 +196,7 @@ export default class ElementTable extends Component {
         }
 
         this.setState({
-            data : data,
+            data : [...this.state.data, ...data ],
             loading : false
         });
     }
@@ -233,7 +252,6 @@ if (document.getElementById('elementTable')) {
        var maxItems = element.getAttribute('maxItems');
        var pagination = element.getAttribute('pagination');
        var itemsPerPage = element.getAttribute('itemsPerPage');
-       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementTable
            field={field}
@@ -241,7 +259,6 @@ if (document.getElementById('elementTable')) {
            pagination={pagination}
            itemsPerPage={itemsPerPage}
            maxItems={maxItems}
-           parameters={parameters}
          />, element);
    });
 }

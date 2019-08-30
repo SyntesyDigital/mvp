@@ -54,7 +54,10 @@ class BobyRepository
             ]);
 
             $result = json_decode($response->getBody());
-            $beans = $result->data;
+            $beans['modelValues'] = $result->data;
+            $beans['completeObject'] = $result;
+
+
 
             Cache::put($cacheKey, $beans, config('cache.time'));
         }

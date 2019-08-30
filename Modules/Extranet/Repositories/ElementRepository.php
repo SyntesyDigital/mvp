@@ -156,7 +156,6 @@ class ElementRepository extends BaseRepository
             $first = false;
           }
         }
-
         return $this->boby->getModelValuesQuery($element->model_ws.$params);
     }
 
