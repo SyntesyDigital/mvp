@@ -57,6 +57,7 @@ Route::group([
 
     Route::get('/extranet/content/{content}/parameters', 'ContentController@getContentParameters')->name('extranet.content.parameters');
 
-
+    //update user session
+    Route::post('/session','UserController@setUserSession')->name('session.update');
 
 });

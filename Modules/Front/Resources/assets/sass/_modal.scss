@@ -215,3 +215,11 @@
   }
 
 }
+
+.bootbox.modal {
+  z-index: 1100;
+
+  button {
+    @include round($button-radius);
+  }
+}

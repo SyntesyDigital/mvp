@@ -52,6 +52,22 @@ class Login
         );
     }
 
+    private function getSessions($WsUrl,$token)
+    {
+
+      $client = new Client();
+
+      $sessions = $client->get($WsUrl . 'boBy/v2/WS_EXT2_SESSIONS', [
+          'headers' => [
+              'Authorization' => "Bearer " . $token
+          ]
+      ]);
+
+      $sessions = json_decode($sessions->getBody());
+      return $sessions->data;
+
+    }
+
     public function handle()
     {
         try {
@@ -71,7 +87,6 @@ class Login
             ]);
 
 
-
             if ($login) {
 
                 $loginResult = json_decode($login->getBody()->getContents());
@@ -89,6 +104,20 @@ class Login
                         return false;
                     }
 
+                    //get user sessions available
+                    $sessions = $this->getSessions($WsUrl,$loginResult->token);
+                    $currentSession = null;
+
+                    //if no sessions exti
+                    if(sizeof($sessions) == 0) {
+                      return false;
+                    }
+                    else if(sizeof($sessions) == 1){
+                      //if only one session take this one
+                      $currentSession = $sessions[0]->session;
+                    }
+                    //else need a modal to select from all sessions
+
                     $userData = [
                         'id' => isset($user->id) ? $user->id : null,
                         'firstname' => isset($user->prenom) ? $user->prenom : null,
@@ -100,7 +129,9 @@ class Login
                         'testMode' => $this->testMode,
                         'recMode' => $this->recMode,
                         'role' => ROLE_ADMIN,  //TODO set different roles,
-                        'language' => 'fr'
+                        'language' => 'fr',
+                        'sessions' => $sessions,
+                        'session_id' => $currentSession
                     ];
 
                     Session::put('user', json_encode($userData));

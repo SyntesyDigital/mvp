@@ -48,6 +48,11 @@
 
         @stack('modal')
 
+        <!-- Sessions modal -->
+        @if(isset(Auth::user()->id) && Auth::user()->session_id == null)
+          @include('front::partials.session_modal')
+        @endif
+
         @include ('front::partials.header')
         <div>
 
@@ -62,6 +67,7 @@
           @endif
 
         </div>
+
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('front::partials.footer')
         <script>

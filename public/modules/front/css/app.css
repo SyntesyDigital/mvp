@@ -9816,6 +9816,14 @@ body {
   /*padding-bottom:0px;*/
 }
 
+.bootbox.modal {
+  z-index: 1100;
+}
+
+.bootbox.modal button {
+  border-radius: 20px;
+}
+
 form.contact-form {
   padding-top: 40px;
   padding-bottom: 60px;

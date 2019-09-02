@@ -146,16 +146,14 @@ class ElementRepository extends BaseRepository
     public function getModelValuesFromElement($element,$parameters)
     {
         //dd($element->model_exemple);
-        $params = "";
+        $params = "?SES=".Auth::user()->session_id;
 
         if(isset($parameters) && sizeof($parameters) > 0){
-          $params = "?";
-          $first = true;
           foreach($parameters as $key => $value) {
-            $params .= (!$first ? "&":"").$key."=".$value;
-            $first = false;
+            $params .= "&".$key."=".$value;
           }
         }
+
         return $this->boby->getModelValuesQuery($element->model_ws.$params);
     }
 
