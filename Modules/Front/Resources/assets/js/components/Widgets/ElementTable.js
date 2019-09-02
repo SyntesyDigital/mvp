@@ -100,7 +100,7 @@ export default class ElementTable extends Component {
                     && response.data.modelValues !== undefined)
                 {
                   self.processData(response.data.modelValues);
-                  
+
                 }
 
             }).catch(function (error) {
@@ -141,6 +141,21 @@ export default class ElementTable extends Component {
             }
 
             value = moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+          }
+      }
+
+      if(field.type == "number") {
+          //console.log("renderCell => ",field,row);
+          if(row.original[identifier] !== undefined && row.original[identifier] != ""){
+
+            if(field.settings !== undefined && field.settings.format !== undefined){
+              switch(field.settings.format) {
+                case 'price':
+                  value = parseFloat(row.original[identifier]).toFixed(0) + '€';
+                case 'price_with_decimals':
+                  value = parseFloat(row.original[identifier]).toFixed(2) + '€';
+              }
+            }
           }
       }
 
