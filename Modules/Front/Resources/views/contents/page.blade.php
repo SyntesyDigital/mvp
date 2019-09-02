@@ -40,9 +40,10 @@
     <!--h2>{{$content->title}}</h2-->
 
     @if($page)
-      @foreach($page as $node)
+      @foreach($page as $index => $node)
           @include('front::partials.node', [
-              'node' => $node
+              'node' => $node,
+              'iterator' => $index
           ])
       @endforeach
     @endif

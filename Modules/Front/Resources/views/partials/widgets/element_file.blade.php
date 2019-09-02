@@ -1,7 +1,7 @@
 @php
   $identifier = str_replace(",","",$field['identifier']);
   $identifier = str_replace("[","",$identifier);
-  $identifier = str_replace("]","",$identifier);
+  $identifier = str_replace("]","",$identifier).'_'.$iterator;
 @endphp
 
 <div id="{{$field['settings']['htmlId'] or ''}}" class="element-file-container {{$field['settings']['htmlClass'] or ''}}">
@@ -24,8 +24,8 @@
               "field" => $field['fields'][1],
               "settings" => $field['settings'],
               "div" => false,
-              "icon" => "far fa-eye"
-
+              "icon" => "far fa-eye",
+              "parameters" => $parameters
             ]
           )
         </div>

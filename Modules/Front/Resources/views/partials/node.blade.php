@@ -22,6 +22,7 @@
       @includeIf('front::partials.widgets.'.strtolower($node['field']['label']),
         [
           "field" => $node['field'],
+          "iterator" => $iterator
         ]
       )
 
@@ -44,9 +45,10 @@
 
 {{-- RECURSIVE CALL --}}
 @if(isset($node['children']))
-    @foreach($node['children'] as $n)
+    @foreach($node['children'] as $index => $n)
         @include('front::partials.node', [
-            'node' => $n
+            'node' => $n,
+            'iterator' => $index,
         ])
     @endforeach
 @endif

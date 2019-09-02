@@ -16688,8 +16688,9 @@ line.links {
 }
 
 .page-builder .row-container .row-container-header .btn-link {
-  padding: 5px 7px;
+  padding: 2px 7px;
   color: #455660;
+  font-size: 16px;
 }
 
 .page-builder .row-container .row-container-header .btn-link.text-danger,
@@ -16813,8 +16814,9 @@ line.links {
 }
 
 .page-builder .page-row.item-filled .item-header .btn-link {
-  padding: 5px 7px;
+  padding: 2px 7px;
   color: #455660;
+  font-size: 16px;
 }
 
 .page-builder .page-row.item-filled .item-header .btn-link.text-danger,

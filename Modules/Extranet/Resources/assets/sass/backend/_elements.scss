@@ -1,7 +1,7 @@
 .grid-items{
 	.dashed{
 		a{
-			.grid-item{
+			.grid-item {
 				border: 1px dashed #ccc;
 				background-color: transparent;
 			}
@@ -44,5 +44,18 @@ li{
 		span{
 			padding: 6px 20px;
 		}
+	}
+}
+
+.typology-field {
+	.type-info {
+		position: absolute;
+		top: 0;
+		right: 20px;
+
+		span {
+			padding-left:5px;
+		}
+
 	}
 }

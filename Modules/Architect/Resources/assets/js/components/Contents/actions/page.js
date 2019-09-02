@@ -143,7 +143,6 @@ export function copyItem(pathToIndex,layout) {
     var copy = jQuery.extend(true, {}, children[index]);
 
     if(index == children.length-1){
-      //if is the last
       children.push(copy);
     }
     else {

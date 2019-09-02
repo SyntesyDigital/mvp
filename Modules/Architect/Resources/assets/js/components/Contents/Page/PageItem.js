@@ -263,10 +263,10 @@ class PageItem extends Component {
           {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
             <div className="right-buttons">
               <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-                <i className="fa fa-files-o"></i>
+                <i className="far fa-copy"></i>
               </a>
               <a href="" className="btn btn-link text-danger" onClick={this.onDeleteItem.bind(this)}>
-                <i className="fa fa-trash"></i>
+                <i className="fas fa-trash-alt"></i>
               </a>
             </div>
           }

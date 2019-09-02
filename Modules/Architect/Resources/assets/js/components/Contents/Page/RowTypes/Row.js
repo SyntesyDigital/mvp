@@ -311,12 +311,12 @@ class Row extends Component {
                 </a>
                 {!isWrapper &&
                   <a href="" className="btn btn-link" onClick={this.onCopyItem.bind(this)}>
-                    <i className="fa far fa-copy"></i>
+                    <i className="far fa-copy"></i>
                   </a>
                 }
                 {!isWrapper &&
                   <a href="" className="btn btn-link text-danger" onClick={this.deleteRow}>
-                    <i className="fa fa-trash"></i>
+                    <i className="fas fa-trash-alt"></i>
                   </a>
                 }
               </div>

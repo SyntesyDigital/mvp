@@ -1,7 +1,7 @@
 @php
   $identifier = str_replace(",","",$field['identifier']);
   $identifier = str_replace("[","",$identifier);
-  $identifier = str_replace("]","",$identifier);
+  $identifier = str_replace("]","",$identifier).'_'.$iterator;
 @endphp
 
 <div id="{{$field['settings']['htmlId'] or ''}}" class="element-form-container {{$field['settings']['htmlClass'] or ''}}">

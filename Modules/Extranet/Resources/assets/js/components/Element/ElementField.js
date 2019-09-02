@@ -197,17 +197,56 @@ class ElementField extends Component {
 		return true;
 	}
 
+	getConfiguration() {
+			var configured = false;
+			var required = false;
+			var hasRoute = false;
+
+			if(this.props.rules != null){
+				for(var key in this.props.rules){
+					if(this.props.rules[key] != null && this.props.rules[key] != false){
+						configured = true;
+						if(key == "required" && this.props.rules[key])
+							required = true;
+					}
+				}
+			}
+
+			if(this.props.settings != null){
+				for(var key in this.props.settings){
+					if(this.props.settings[key] != null && this.props.settings[key] != false){
+						configured = true;
+						if(key == "hasRoute"){
+							hasRoute = true;
+						}
+					}
+				}
+			}
+
+			return {
+				configured : configured,
+				required : required,
+				hasRoute : hasRoute
+			}
+	}
+
   render() {
 
 		//console.log("is editable => ",this.props.editable);
 
-	var isEntryTitle = false;
-	if(this.props.settings != null &&
-		this.props.settings.entryTitle !== undefined &&
-		this.props.settings.entryTitle
-	){
-		isEntryTitle = true;
-	}
+		var configuration = this.getConfiguration();
+
+
+		var isEntryTitle = false;
+		if(this.props.settings != null &&
+			this.props.settings.entryTitle !== undefined &&
+			this.props.settings.entryTitle
+		){
+			isEntryTitle = true;
+		}
+
+
+
 
 	//const valid = this.isValid();
 
@@ -226,16 +265,24 @@ class ElementField extends Component {
           <i className={"fa "+this.props.icon}></i> &nbsp;
 					{MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : ''}
 
-					<div style={{
-						position: 'absolute',
-						top: 0,
-						right: 20
-					}}>
+					<div className="type-info">
+
+						{configuration.hasRoute &&
+							<span className="text-success">
+								<i class="fas fa-link"></i>
+							</span>
+						}
+
+						{configuration.configured &&
+							<span className="text-success">
+								<i className="fas fa-cog"></i>
+							</span>
+						}
+
+
 						{/*
 						{!valid &&
-						<span className="text-danger">
-							<i className="fas fa-exclamation-triangle"></i>
-						</span>
+
 						}
 						{valid &&
 							<span className="text-success">

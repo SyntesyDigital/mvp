@@ -141,6 +141,7 @@ class ElementDropZone extends Component {
 					name={item.name}
 					icon={item.icon}
 					settings={item.settings}
+					rules={item.rules}
 					identifier={item.identifier}
 					moveField={this.moveField}
 					onRemoveField={this.handleRemoveField}

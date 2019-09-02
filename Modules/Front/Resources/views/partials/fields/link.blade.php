@@ -12,6 +12,10 @@
     $link = isset($field['value']['url'][App::getLocale()]) ? $field['value']['url'][App::getLocale()] : '';
   }
 
+  if(isset($parameters) && $link != ""){
+    $link .= "?".$parameters;
+  }
+
 @endphp
 
 @if(!isset($div))
