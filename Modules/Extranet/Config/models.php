@@ -17,6 +17,7 @@ return [
           'maxCharacters',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'format',
@@ -37,6 +38,7 @@ return [
           'required',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'format',
@@ -59,6 +61,7 @@ return [
           'required',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'format'
@@ -75,6 +78,7 @@ return [
           'required',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'ws' => ''
@@ -91,6 +95,7 @@ return [
           'required',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'ws' => ''
@@ -109,6 +114,7 @@ return [
           'maxCharacters',
           'searchable',
           'sortable',
+          'sortableByDefault'
         ],
         'settings' => [
           'ws' => ''

@@ -41,10 +41,10 @@ export default class TotalBox extends Component {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
               {
-                console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
+                console.log("ModelValues  :: componentDidMount => ",response.data);
 
                 self.setState({
-                  total: response.data.modelValues.length
+                  total: response.data.total
                 });
               }
 

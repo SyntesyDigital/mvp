@@ -47,6 +47,8 @@ export default class ElementTable extends Component {
             loading : true,
             loadingData : true,
             filterable : false,
+            sortColumnName: null,
+            sortColumnType:null,
             defaultDataLoadStep:defaultDataLoadStep
         };
     }
@@ -54,20 +56,24 @@ export default class ElementTable extends Component {
     componentDidMount() {
 
         this.processColumns();
-        this.query();
+      //  this.query();
     }
 
     query() {
         var self = this;
         const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
         var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
-
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/?perPage='+limitFirstLoad)
+        var params = '?perPage='+limitFirstLoad;
+        console.log('SORT',this.state.sortColumnName);
+        if( this.state.sortColumnName){
+          params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
+        }
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/'+params)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
               {
-                console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
+                //console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
                 console.log("CompleteObject  :: componentDidMount => ",response.data.totalPage);
                 // en completeObject rengo el total de registros, por pagina, pagina, total de paginas, desde y hasta
 
@@ -174,6 +180,8 @@ export default class ElementTable extends Component {
 
         var anySearchable = false;
         var columns = [];
+        var sortColumnName = null;
+        var sortColumnType = null;
 
         for(var index in elementObject.fields){
           if(elementObject.fields[index].rules.searchable && ! anySearchable){
@@ -181,6 +189,10 @@ export default class ElementTable extends Component {
           }
 
           var identifier = elementObject.fields[index].identifier.replace('.','');
+          if(elementObject.fields[index].rules.sortableByDefault){
+                sortColumnName  = identifier;
+                sortColumnType = elementObject.fields[index].rules.sortableByDefault;
+          }
 
           columns.push({
             accessor : identifier,
@@ -195,8 +207,11 @@ export default class ElementTable extends Component {
 
         this.setState({
             columns : columns,
-            filterable : anySearchable
-        });
+            filterable : anySearchable,
+            sortColumnName :sortColumnName,
+            sortColumnType : sortColumnType
+        }, this.query.bind(this)
+      );
     }
 
     processData(data){
@@ -230,6 +245,12 @@ export default class ElementTable extends Component {
           data={this.state.data}
           columns={this.state.columns}
           showPagination={this.state.pagination}
+          defaultSorted={[
+            {
+              id: this.state.sortColumnName,
+              desc: this.state.sortColumnType == 'DESC'?true:false
+            }
+          ]}
           defaultPageSize={this.state.maxItems && this.state.maxItems!= '' &&
             this.state.maxItems < this.state.itemsPerPage ?
             this.state.maxItems : this.state.itemsPerPage }

@@ -57448,6 +57448,19 @@ var ElementModal = function (_Component) {
         source: 'rules',
         onFieldChange: this.handleFieldSettingsChange,
         label: 'Trie'
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Settings_SelectorSettingsField__["a" /* default */], {
+        field: field,
+        name: 'sortableByDefault',
+        source: 'rules',
+        onFieldChange: this.handleFieldSettingsChange,
+        label: 'Tri\xE9 par d\xE9faut',
+        options: [{
+          value: "ASC",
+          name: "Ascendant"
+        }, {
+          value: "DESC",
+          name: "Descendant"
+        }]
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__Settings_LinkSettingsField__["a" /* default */], {
         field: field,
         name: 'hasRoute',

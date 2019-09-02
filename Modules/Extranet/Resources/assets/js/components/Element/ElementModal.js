@@ -212,6 +212,24 @@ class ElementModal extends Component {
                       label="Trie"
                     />
 
+                    <SelectorSettingsField
+                      field={field}
+                      name="sortableByDefault"
+                      source="rules"
+                      onFieldChange={this.handleFieldSettingsChange}
+                      label="Trié par défaut"
+                      options={[
+                          {
+                              value: "ASC",
+                              name: "Ascendant",
+                          },
+                          {
+                              value: "DESC",
+                              name: "Descendant",
+                          }
+                      ]}
+                    />
+
                     <LinkSettingsField
                       field={field}
                       name="hasRoute"
@@ -227,6 +245,9 @@ class ElementModal extends Component {
                       onFieldChange={this.handleFieldSettingsChange}
                       label="Liste des champs"
                     />
+
+
+
 
                   </div>
                 </div>
