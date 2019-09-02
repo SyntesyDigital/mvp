@@ -47,8 +47,8 @@ export default class ElementTable extends Component {
             loading : true,
             loadingData : true,
             filterable : false,
-            sortColumnName: false,
-            sortColumnType:false,
+            sortColumnName: null,
+            sortColumnType:null,
             defaultDataLoadStep:defaultDataLoadStep
         };
     }
@@ -56,7 +56,7 @@ export default class ElementTable extends Component {
     componentDidMount() {
 
         this.processColumns();
-        this.query();
+      //  this.query();
     }
 
     query() {
@@ -73,7 +73,7 @@ export default class ElementTable extends Component {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
               {
-                console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
+                //console.log("ModelValues  :: componentDidMount => ",response.data.modelValues);
                 console.log("CompleteObject  :: componentDidMount => ",response.data.totalPage);
                 // en completeObject rengo el total de registros, por pagina, pagina, total de paginas, desde y hasta
 
@@ -180,6 +180,8 @@ export default class ElementTable extends Component {
 
         var anySearchable = false;
         var columns = [];
+        var sortColumnName = null;
+        var sortColumnType = null;
 
         for(var index in elementObject.fields){
           if(elementObject.fields[index].rules.searchable && ! anySearchable){
@@ -188,10 +190,8 @@ export default class ElementTable extends Component {
 
           var identifier = elementObject.fields[index].identifier.replace('.','');
           if(elementObject.fields[index].rules.sortableByDefault){
-            this.setState({
-                sortColumnName : identifier,
-                sortColumnType : elementObject.fields[index].rules.sortableByDefault
-            });
+                sortColumnName  = identifier;
+                sortColumnType = elementObject.fields[index].rules.sortableByDefault;
           }
 
           columns.push({
@@ -207,8 +207,11 @@ export default class ElementTable extends Component {
 
         this.setState({
             columns : columns,
-            filterable : anySearchable
-        });
+            filterable : anySearchable,
+            sortColumnName :sortColumnName,
+            sortColumnType : sortColumnType
+        }, this.query.bind(this)
+      );
     }
 
     processData(data){
