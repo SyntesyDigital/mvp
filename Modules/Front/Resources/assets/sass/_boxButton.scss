@@ -23,7 +23,8 @@
   border-radius: 12px;
   min-height: 105px;
   i{
-    @include font(40,40,300);
+    font-size:40;
+    line-height: 40;
     margin-bottom:5px;
   }
   p{
