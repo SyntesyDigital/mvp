@@ -49,7 +49,7 @@
         @stack('modal')
 
         <!-- Sessions modal -->
-        @if(isset(Auth::user()->id) && Auth::user()->session_id == null)
+        @if(isset(Auth::user()->id) && !isset(Auth::user()->session_id))
           @include('front::partials.session_modal')
         @endif
 
