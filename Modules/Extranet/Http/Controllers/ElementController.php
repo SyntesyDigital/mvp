@@ -180,7 +180,9 @@ class ElementController extends Controller
             return response()->json([
                       'success' => true,
                       'modelValues' => new ModelValuesFormatTransformer($result['modelValues'],$element->fields()->get(), $limit),
-                      'totalPage' => $result['completeObject']->totalPage != null? $result['completeObject']->totalPage:null
+                      'totalPage' => $result['completeObject']->totalPage != null? $result['completeObject']->totalPage:null,
+                      'total' => $result['completeObject']->totalPage != null? $result['completeObject']->total:null
+
                   ]);
         } catch (\Exception $e) {
             return response()->json([

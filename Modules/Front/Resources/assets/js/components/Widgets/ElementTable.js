@@ -47,6 +47,8 @@ export default class ElementTable extends Component {
             loading : true,
             loadingData : true,
             filterable : false,
+            sortColumnName: false,
+            sortColumnType:false,
             defaultDataLoadStep:defaultDataLoadStep
         };
     }
@@ -61,8 +63,12 @@ export default class ElementTable extends Component {
         var self = this;
         const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
         var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
-
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/?perPage='+limitFirstLoad)
+        var params = '?perPage='+limitFirstLoad;
+        console.log('SORT',this.state.sortColumnName);
+        if( this.state.sortColumnName){
+          params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
+        }
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/'+params)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -181,6 +187,12 @@ export default class ElementTable extends Component {
           }
 
           var identifier = elementObject.fields[index].identifier.replace('.','');
+          if(elementObject.fields[index].rules.sortableByDefault){
+            this.setState({
+                sortColumnName : identifier,
+                sortColumnType : elementObject.fields[index].rules.sortableByDefault
+            });
+          }
 
           columns.push({
             accessor : identifier,
@@ -230,6 +242,12 @@ export default class ElementTable extends Component {
           data={this.state.data}
           columns={this.state.columns}
           showPagination={this.state.pagination}
+          defaultSorted={[
+            {
+              id: this.state.sortColumnName,
+              desc: this.state.sortColumnType == 'DESC'?true:false
+            }
+          ]}
           defaultPageSize={this.state.maxItems && this.state.maxItems!= '' &&
             this.state.maxItems < this.state.itemsPerPage ?
             this.state.maxItems : this.state.itemsPerPage }
