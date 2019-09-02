@@ -225,7 +225,7 @@ class ElementController extends Controller
     {
 
       try {
-            $selectData = $this->boby->getModelValuesQuery($name);
+            $selectData = $this->boby->getModelValuesQuery($name.'?perPage=100')['modelValues'];
             $resultData = [];
 
             foreach($selectData as $item) {
@@ -273,9 +273,14 @@ class ElementController extends Controller
 
             $procedures = $this->elements->getProcedures($modelId);
 
-            $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS?perPage=100');
-            $allServices = $this->boby->getModelValuesQuery('WS_EXT2_DEF_SERVICES?perPage=100');
+            $allObjects = $this->boby->getModelValuesQuery(
+                'WS_EXT2_DEF_OBJETS?perPage=100'
+              )["modelValues"];
+            $allServices = $this->boby->getModelValuesQuery(
+                'WS_EXT2_DEF_SERVICES?perPage=100'
+              )["modelValues"];
             $services = [];
+
 
             foreach($allServices as $service){
               $services[$service->ID] = $service;

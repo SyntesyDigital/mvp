@@ -19,7 +19,7 @@ export default class ElementTable extends Component {
     {
         super(props);
 
-        const defaultDataLoadStep = 100;
+        const defaultDataLoadStep = 2500;
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const pagination =  props.pagination ? true : false;
@@ -31,7 +31,7 @@ export default class ElementTable extends Component {
         //console.log("itemsPerPage => ",itemsPerPage);
 
 
-        const maxItems = props.maxItems ? props.maxItems : false;
+        const maxItems = props.maxItems !== undefined ? props.maxItems : false;
 
         this.state = {
             field : field,
@@ -89,7 +89,7 @@ export default class ElementTable extends Component {
       const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
       var limitLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
 
-      if(!maxItems || limit < maxItems){
+      if(!maxItems || limitLoad < maxItems){
         var self = this;
 
         for(var page= 2;page<=totalPages;page++){
@@ -100,11 +100,12 @@ export default class ElementTable extends Component {
                     && response.data.modelValues !== undefined)
                 {
                   self.processData(response.data.modelValues);
+                  
                 }
 
             }).catch(function (error) {
                console.log(error);
-               selfs.setState({
+               self.setState({
                  loadingData: false
                });
              });
@@ -214,7 +215,9 @@ export default class ElementTable extends Component {
           data={this.state.data}
           columns={this.state.columns}
           showPagination={this.state.pagination}
-          defaultPageSize={this.state.maxItems && this.state.maxItems!= '' && this.state.maxItems < this.state.itemsPerPage ? this.state.maxItems:this.state.itemsPerPage }
+          defaultPageSize={this.state.maxItems && this.state.maxItems!= '' &&
+            this.state.maxItems < this.state.itemsPerPage ?
+            this.state.maxItems : this.state.itemsPerPage }
           loading={this.state.loading}
           filterable={true}
           defaultFilterMethod={(filter, row) =>

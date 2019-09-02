@@ -2,16 +2,20 @@
 
 @section('content')
     <div id="element-form"
-      fields={{base64_encode(json_encode($fields,true))}}
-      model={{base64_encode(json_encode($model,true))}}
-      wsModelIdentifier={{$model->ID}}
-      wsModel={{$model->WS}}
-      wsModelFormat={{$model->WS_FORMAT}}
-      wsModelExemple={{$model->EXEMPLE}}
-      parametersList={{base64_encode(json_encode($parametersList,true))}}
-      @if((isset($parameters)) && $parameters)parameters={{base64_encode($parameters->toJson())}}@endif
-      elementType={{$element_type}}
-      @if((isset($element)) && $element)element={{base64_encode($element->toJson())}}@endif
+      fields="{{base64_encode(json_encode($fields,true))}}"
+      model="{{base64_encode(json_encode($model,true))}}"
+      wsModelIdentifier="{{$model->ID}}"
+      wsModel="{{$model->WS or ''}}"
+      wsModelFormat="{{$model->WS_FORMAT or ''}}"
+      wsModelExemple="{{$model->EXEMPLE or ''}}"
+      parametersList="{{base64_encode(json_encode($parametersList,true))}}"
+      @if((isset($parameters)) && $parameters)
+        parameters="{{base64_encode($parameters->toJson())}}"
+      @endif
+      elementType="{{$element_type}}"
+      @if((isset($element)) && $element)
+        element="{{base64_encode($element->toJson())}}"
+      @endif
     ></div>
 @stop
 

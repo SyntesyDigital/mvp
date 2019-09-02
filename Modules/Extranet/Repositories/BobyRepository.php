@@ -44,7 +44,7 @@ class BobyRepository
     {
         $cacheKey = md5("getQuery_" . $name);
 
-        if (Cache::has($cacheKey) && false) {
+        if (Cache::has($cacheKey)) {
             $beans = Cache::get($cacheKey);
         } else {
             $response = $this->client->get(VeosWsUrl::get() . 'boBy/v2/'.$name, [
@@ -56,8 +56,6 @@ class BobyRepository
             $result = json_decode($response->getBody());
             $beans['modelValues'] = $result->data;
             $beans['completeObject'] = $result;
-
-
 
             Cache::put($cacheKey, $beans, config('cache.time'));
         }

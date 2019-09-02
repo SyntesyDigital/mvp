@@ -23,6 +23,8 @@ class ElementForm extends Component {
     constructor(props) {
       super(props);
 
+      console.log("parameters list =>",props.parametersList);
+
 			//init redux state with component parameters
 			var data = {
 				element : props.element ? JSON.parse(atob(props.element)) : null,
