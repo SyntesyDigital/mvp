@@ -23,11 +23,13 @@ export default class ElementForm extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
 
+
         this.state = {
             field : field,
             elementObject : elementObject,
             values : this.initValues(elementObject),
             procedures : [],
+            variables : [], //system variables with all data processed
             loading : true,
 
             currentProcedureIndex : 0,
@@ -35,12 +37,34 @@ export default class ElementForm extends Component {
             jsonResult : {},
             processing : false,
             complete : false,
-            errors : {}
+            errors : {},
+            parameters : this.parameteres2Array(props.parameters),
+
+            //variables to process form iterator
+            formIterator : 0,
+            formParameters : [],
+            formParametersLoaded : false
+
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
 
         this.loadProcedures();
+    }
+
+    parameteres2Array(paramString){
+      var result = {};
+
+      if(paramString === undefined || paramString == '')
+        return result;
+
+      var paramsArray = paramString.split("&");
+      for(var i=0;i<paramsArray.length;i++){
+        var paramsSubArray = paramsArray[i].split("=");
+        result[paramsSubArray[0]] = paramsSubArray[1];
+      }
+
+      return result;
     }
 
     initValues(elementObject) {
@@ -89,6 +113,108 @@ export default class ElementForm extends Component {
       });
     }
 
+    checkParameters() {
+      var formParameters = {};
+      for(var i=0;i<this.state.procedures.length;i++){
+        var procedure = this.state.procedures[i];
+
+        for(var key in procedure.PARAMS){
+          if(key != "_time"){
+
+            //add the parameter removing first _
+            var parameterKey = key.substring(1);
+            //if parameter defined, if not null
+            formParameters[key] = this.state.parameters[parameterKey] !== undefined ?
+              this.state.parameters[parameterKey] : null;
+          }
+        }
+      }
+
+      this.setState({
+        formParameters : formParameters,
+        formIterator : 0,
+      },this.iterateParameters.bind(this));
+    }
+
+    initForm() {
+      //start loading selectors
+    }
+
+    iterateParameters() {
+
+      const {formIterator,formParameters,variables} = this.state;
+      console.log("iterateParameters :: Start iteration :: ",formIterator,variables);
+
+      var formParametersArray = Object.keys(formParameters);
+
+      if(formParametersArray.length == 0){
+        this.setState({
+          formParametersLoaded : true
+        },this.initForm.bind(this));
+        return; //nothing to do
+      }
+
+      if(formIterator == formParametersArray.length){
+        this.setState({
+          formParametersLoaded : true
+        },this.initForm.bind(this));
+        return; // we are at the end
+      }
+
+      //iterate
+      var key = formParametersArray[formIterator];
+      console.log("iterateParameters :: ",formParameters,formIterator,key);
+
+      if(formParameters[key] != null){
+        //already set go to next
+        this.setState({
+          formIterator : formIterator + 1,
+          formParametersLoaded : false
+        },this.iterateParameters.bind(this));
+      }
+      else {
+        //ask for this variable
+        var self = this;
+        var variable = variables[key.substring(1)];
+
+        bootbox.prompt({
+    		    title: variable.MESSAGE,
+    		    inputType: 'select',
+    				closeButton : false,
+    				buttons: {
+    		        confirm: {
+    		            label: 'Envoyer',
+    		            className: 'btn-primary'
+    		        },
+    						cancel : {
+    								label: 'Retour',
+    								className: 'btn-default'
+    						}
+    		    },
+    		    inputOptions: variable.BOBY_DATA,
+    		    callback: function (result) {
+    	        if(result != null && result != ''){
+    							//post sessions
+                  formParameters[key] = result;
+
+                  //set new value and got to next
+    							self.setState({
+                    formParameters : formParameters,
+                    formIterator : formIterator + 1,
+                  },self.iterateParameters.bind(self));
+    					}
+    					else {
+    						//show error
+                toastr.error('Le paramètre est nécessaire.');
+                //iterate again
+                return self.iterateParameters();
+    					}
+    		    }
+    		});
+
+      }
+    }
+
     loadProcedures() {
 
       var self = this;
@@ -97,9 +223,13 @@ export default class ElementForm extends Component {
         .then(function(response) {
           if(response.status == 200 && response.data.data !== undefined){
             self.setState({
-              procedures : response.data.data,
+              procedures : response.data.data.procedures,
+              variables : response.data.data.variables,
               loading : false
-            });
+            },self.checkParameters.bind(self));
+
+
+
           }
         })
         .catch(function(error){
@@ -262,7 +392,8 @@ export default class ElementForm extends Component {
           var object = procedure.OBJECTS[j];
 
           //process the object modifing the jsonResult
-          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,values);
+          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,
+            values, this.state.formParameters);
         }
 
         return jsonResult;
@@ -498,7 +629,9 @@ export default class ElementForm extends Component {
         return (
           <div className={"element-form-wrapper row "+(this.state.loading == true ? 'loading' : '')}>
             <form>
-            {this.renderItems()}
+            {this.state.formParametersLoaded &&
+              this.renderItems()
+            }
 
             <div className="row element-form-row">
               <div className="col-md-4"></div>
@@ -527,10 +660,12 @@ if (document.getElementById('elementForm')) {
    document.querySelectorAll('[id=elementForm]').forEach(function(element){
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
+       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementForm
            field={field}
            elementObject={elementObject}
+           parameters={parameters}
          />, element);
    });
 }

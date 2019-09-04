@@ -13,7 +13,10 @@
       <div id="elementForm" class="element-form"
         field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
         collapsable="{{$field['settings']['collapsable']}}"
-        elementObject="{{$field['settings']['formElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['formElements'])->first()->load('fields'))):null}}" >
+        elementObject="{{$field['settings']['formElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['formElements'])->first()->load('fields'))):null}}"
+        parameters="{{$parameters}}"
+      >
+
       </div>
   </div>
 

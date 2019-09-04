@@ -85,7 +85,7 @@ return [
         ]
       ],
       'file' => [
-        'mapping' => 'file',
+        'mapping' => 'doc',
         'identifier' => 'file',
         'label' => 'File',
         'icon' => 'fas fa-paperclip',

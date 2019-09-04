@@ -113,7 +113,7 @@ export function processJsonRoot(jsonRoot,jsonResult) {
 /**
 *   Depending of the type of object and some values is necesary to process the value
 */
-export function processObjectValue(object,values) {
+export function processObjectValue(object,values,formParameters) {
 
   const isRequired = object.OBL == "Y" ? true : false;
   const defaultValue = object.VALEUR;
@@ -151,11 +151,12 @@ export function processObjectValue(object,values) {
       //_time
       return moment().format("DD/MM/YYYY");
     }
-    else if(defaultValue == "_id_per_ass"){
-      return ID_PER_ASS;
-    }
     else if(defaultValue == "_id_per_user"){
       return ID_PER_USER;
+    }
+    else if(formParameters[defaultValue] !== undefined){
+      //check parameters
+      return formParameters[defaultValue];
     }
   }
   else if(type == "CTE") {
@@ -166,13 +167,13 @@ export function processObjectValue(object,values) {
 /**
 * Process the object and return the json modified
 */
-export function processObject(object,jsonResult,jsonRoot,arrayPosition,values) {
+export function processObject(object,jsonResult,jsonRoot,arrayPosition,values, formParameters) {
   //console.log("processObject :: ", jsonResult,jsonRoot,arrayPosition);
 
   var paramArray = jsonRoot.split('.');
 
   //conditionals to check what to do with this object
-  const value = processObjectValue(object,values);
+  const value = processObjectValue(object,values, formParameters);
 
   jsonResult = setupJsonResult(
     paramArray,

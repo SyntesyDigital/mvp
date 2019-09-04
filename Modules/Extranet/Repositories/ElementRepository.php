@@ -315,6 +315,33 @@ class ElementRepository extends BaseRepository
         return $modelProcedures;
     }
 
+    public function getVariables()
+    {
+        $variables = $this->boby->getModelValuesQuery('WS_EXT2_DEF_PARAMPAGES?perPage=100');
+
+        $result = [];
+
+        foreach( $variables['modelValues'] as $index => $variable ) {
+          $result[$variable->PARAM] = $variable;
+
+          $data = $this->boby->getModelValuesQuery(
+            $variable->BOBY."?SES=".Auth::user()->session_id.'&perPage=100');
+
+          $modelValuesProcessed = [];
+          foreach($data['modelValues'] as $modelValue){
+            $modelValuesProcessed[] = [
+              "text" => $modelValue->lib,
+              "value" => $modelValue->val
+            ];
+          }
+
+          $result[$variable->PARAM]->{'BOBY_DATA'} = $modelValuesProcessed;
+        }
+
+        return $result;
+
+    }
+
 
 
 }

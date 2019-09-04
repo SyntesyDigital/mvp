@@ -30,6 +30,7 @@ use Config;
 use Illuminate\Http\Request;
 use Session;
 use Carbon\Carbon;
+use Auth;
 
 
 class ElementController extends Controller
@@ -227,7 +228,10 @@ class ElementController extends Controller
     {
 
       try {
-            $selectData = $this->boby->getModelValuesQuery($name.'?perPage=100')['modelValues'];
+            $selectData = $this->boby->getModelValuesQuery(
+              $name."?SES=".Auth::user()->session_id.'&perPage=100'
+            )['modelValues'];
+
             $resultData = [];
 
             foreach($selectData as $item) {
@@ -281,8 +285,11 @@ class ElementController extends Controller
             $allServices = $this->boby->getModelValuesQuery(
                 'WS_EXT2_DEF_SERVICES?perPage=100'
               )["modelValues"];
-            $services = [];
 
+            //get system variables processed
+            $variables = $this->elements->getVariables();
+
+            $services = [];
 
             foreach($allServices as $service){
               $services[$service->ID] = $service;
@@ -292,6 +299,7 @@ class ElementController extends Controller
 
               $objects = [];
               $procedureServices = [];
+              $systemVars = [];
               $root = "";
 
               foreach($allObjects as $object) {
@@ -304,6 +312,10 @@ class ElementController extends Controller
                     }
 
                     $objects[] = $object;
+
+                    if($object->NATURE == "SYSTEM"){
+                      $systemVars[$object->VALEUR] = true;
+                    }
 
                     /*
                     FIXME not necessary Service linked to procedure
@@ -323,12 +335,15 @@ class ElementController extends Controller
               $procedures[$index]->{'OBJECTS'} = $objects;
               $procedures[$index]->{'SERVICE'} = $procedureServices;
               $procedures[$index]->{'JSONP'} = $root;
+              $procedures[$index]->{'PARAMS'} = $systemVars;
             }
-
 
             return response()->json([
                       'success' => true,
-                      'data' => $procedures
+                      'data' => [
+                          'procedures' => $procedures,
+                          'variables' => $variables
+                        ]
                   ]);
 
         } catch (\Exception $e) {
