@@ -151,6 +151,10 @@ export function processObjectValue(object,values,formParameters) {
       //_time
       return moment().format("DD/MM/YYYY");
     }
+    else if(defaultValue == "_timestamp"){
+      //_time
+      return moment().unix();
+    }
     else if(defaultValue == "_id_per_user"){
       return ID_PER_USER;
     }

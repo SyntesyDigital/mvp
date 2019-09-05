@@ -119,7 +119,7 @@ export default class ElementForm extends Component {
         var procedure = this.state.procedures[i];
 
         for(var key in procedure.PARAMS){
-          if(key != "_time"){
+          if(key != "_time" && key != "_timestamp"){
 
             //add the parameter removing first _
             var parameterKey = key.substring(1);
