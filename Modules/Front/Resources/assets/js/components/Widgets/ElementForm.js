@@ -113,6 +113,10 @@ export default class ElementForm extends Component {
       });
     }
 
+    /**
+    *  Iterate all params of all procedures fo type SYSTEM, to see if any params is needed.
+    *  If any need iteration begin
+    */
     checkParameters() {
       var formParameters = {};
       for(var i=0;i<this.state.procedures.length;i++){
@@ -147,6 +151,7 @@ export default class ElementForm extends Component {
 
       var formParametersArray = Object.keys(formParameters);
 
+      //if no parameters
       if(formParametersArray.length == 0){
         this.setState({
           formParametersLoaded : true
@@ -154,6 +159,7 @@ export default class ElementForm extends Component {
         return; //nothing to do
       }
 
+      //if is the end
       if(formIterator == formParametersArray.length){
         this.setState({
           formParametersLoaded : true
@@ -215,6 +221,9 @@ export default class ElementForm extends Component {
       }
     }
 
+    /**
+    * First api call to load procedures info.
+    */
     loadProcedures() {
 
       var self = this;
@@ -237,6 +246,29 @@ export default class ElementForm extends Component {
         });
     }
 
+
+    getUrlParameters() {
+
+      var parameters = this.props.parameters;
+      var formParametersArray = Object.keys(this.state.formParameters);
+
+      if(formParametersArray.length > 0){
+
+        for(var i=0;i<formParametersArray.length;i++){
+          if(this.state.formParameters[formParametersArray[i]] != null){
+            //concat new parameters
+            parameters += (parameters != ''?"&":"")+formParametersArray[i]+"="
+              +this.state.formParameters[formParametersArray[i]];
+          }
+        }
+
+      }
+
+      return parameters;
+
+    }
+
+
     renderItems() {
 
       if(this.state.elementObject.fields === undefined || this.state.elementObject.fields == null){
@@ -255,6 +287,7 @@ export default class ElementForm extends Component {
             value={this.state.values[field.identifier]}
             error={this.state.errors[field.identifier] !== undefined ? true : false}
             onFieldChange={this.handleOnChange}
+            parameters={this.getUrlParameters()}
           />);
 
       }

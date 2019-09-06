@@ -21,7 +21,7 @@ class SelectField extends Component
 
       var self = this;
 
-      axios.get('/architect/elements/select/data/'+this.props.field.boby)
+      axios.get('/architect/elements/select/data/'+this.props.field.boby+"?"+this.props.parameters)
         .then(function(response) {
           if(response.status == 200 && response.data.data !== undefined){
             self.setState({
