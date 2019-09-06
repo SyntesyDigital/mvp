@@ -20,10 +20,12 @@ export default class TotalBox extends Component {
         super(props);
 
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
+        const model = props.model ? JSON.parse(atob(props.model)) : null;
 
         this.state = {
             elementObject :elementObject,
-            total: null
+            total: null,
+            model : model
         };
     }
 
@@ -32,11 +34,26 @@ export default class TotalBox extends Component {
         this.query();
     }
 
+    getUrlParameters() {
+      //concat parameters, first constant parameters
+      var parameters = this.state.model.DEF1 != null ?
+        this.state.model.DEF1 : '';
+
+      if(parameters != '')
+        parameters += "&";
+
+      //then
+      parameters += this.props.parameters;
+
+      return parameters;
+    }
+
     query() {
         var self = this;
         const {elementObject} = this.state;
+        const parameters = this.getUrlParameters();
 
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data')
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+parameters)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -44,7 +61,7 @@ export default class TotalBox extends Component {
                 console.log("ModelValues  :: componentDidMount => ",response.data);
 
                 self.setState({
-                  total: response.data.total
+                  total: response.data.total != null ? response.data.total : 0
                 });
               }
 
@@ -71,9 +88,13 @@ if (document.getElementById('totalBox')) {
 
    document.querySelectorAll('[id=totalBox]').forEach(function(element){
        var elementObject = element.getAttribute('elementObject');
+       var model = element.getAttribute('model');
+       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<TotalBox
            elementObject={elementObject}
+           model={model}
+           parameters={parameters}
          />, element);
    });
 }

@@ -11,10 +11,17 @@ use Modules\Front\Adapters\FieldsAdapter;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Url;
 
+use Modules\Extranet\Repositories\ElementRepository;
+
 use App;
 
 class ContentController extends Controller
 {
+
+    public function __construct(ElementRepository $elements) {
+        $this->elements = $elements;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
@@ -43,6 +50,7 @@ class ContentController extends Controller
       return view('front::contents.page',[
         'content' => $content,
         'page' => $pageBuilderAdapter->get(),
+        'models' => $this->elements->getModelsByIdentifier(),
         'contentSettings' => $content->getSettings()
       ]);
     }
@@ -65,6 +73,7 @@ class ContentController extends Controller
       return view('front::contents.page',[
         'content' => $content,
         'page' => $pageBuilderAdapter->get(),
+        'models' => $this->elements->getModelsByIdentifier(),
         'contentSettings' => $content->getSettings()
       ]);
     }
@@ -85,6 +94,7 @@ class ContentController extends Controller
         return view('front::contents.page',[
             'content' => $content,
             'page' => $pageBuilderAdapter->get(),
+            'models' => $this->elements->getModelsByIdentifier(),
             'contentSettings' => $content->getSettings()
         ]);
     }
@@ -154,6 +164,7 @@ class ContentController extends Controller
          return view('front::contents.page',[
             'content' => $content,
             'page' => $pageBuilderAdapter->get(),
+            'models' => $this->elements->getModelsByIdentifier(),
             'contentSettings' => $content->getSettings()
           ]);
       }

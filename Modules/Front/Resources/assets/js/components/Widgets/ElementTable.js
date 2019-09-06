@@ -19,7 +19,7 @@ export default class ElementTable extends Component {
     {
         super(props);
 
-        const defaultDataLoadStep = 2500;
+        const defaultDataLoadStep = 1000;
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const pagination =  props.pagination ? true : false;
@@ -64,10 +64,15 @@ export default class ElementTable extends Component {
         const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
         var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
         var params = '?perPage='+limitFirstLoad;
-        console.log('SORT',this.state.sortColumnName);
+        //console.log('SORT',this.state.sortColumnName);
         if( this.state.sortColumnName){
           params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
         }
+
+        //add url params
+        if(this.props.parameters != '')
+          params += "&"+this.props.parameters;
+
         axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/'+params)
           .then(function (response) {
               if(response.status == 200
@@ -291,6 +296,7 @@ if (document.getElementById('elementTable')) {
        var maxItems = element.getAttribute('maxItems');
        var pagination = element.getAttribute('pagination');
        var itemsPerPage = element.getAttribute('itemsPerPage');
+       var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementTable
            field={field}
@@ -298,6 +304,7 @@ if (document.getElementById('elementTable')) {
            pagination={pagination}
            itemsPerPage={itemsPerPage}
            maxItems={maxItems}
+           parameters={parameters}
          />, element);
    });
 }

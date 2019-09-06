@@ -13,6 +13,17 @@
     $target = "_blank";
     $link = isset($field['fields'][2]['value']['url'][App::getLocale()]) ? $field['fields'][2]['value']['url'][App::getLocale()] : '';
   }
+
+  $elementObject = null;
+  if(isset($field['settings']['tableElements'])){
+    $elementObject = \Modules\Extranet\Entities\Element::where('id',$field['settings']['tableElements'])->first()->load('fields');
+  }
+
+  $model = null;
+  if(isset($elementObject) && isset($models[$elementObject->model_identifier])){
+    $model = $models[$elementObject->model_identifier];
+  }
+
 @endphp
 
 @if(isset($link) && $link != "")
@@ -26,7 +37,9 @@
     </div>
     <div class="total-box-container-body">
         <div id="totalBox" class="totalBox"
-          elementObject="{{$field['settings']['tableElements']?base64_encode(json_encode(\Modules\Extranet\Entities\Element::where('id',$field['settings']['tableElements'])->first()->load('fields'))):null}}"
+          elementObject="{{base64_encode(json_encode($elementObject))}}"
+          model="{{base64_encode(json_encode($model))}}"
+          parameters="{{$parameters}}"
         >
         </div>
     </div>

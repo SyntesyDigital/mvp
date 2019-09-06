@@ -52,6 +52,23 @@ class ElementRepository extends BaseRepository
     }
 
     /*
+    *   Get models sources info for widgets and componentes.
+    *   Sorted by identifier
+    *   API : [POST] /boBy/list
+    *
+    *   @return Models List
+    */
+    public function getModelsByIdentifier()
+    {
+        $allBeans = $this->boby->postQuery('WS_EXT2_DEF_MODELES');
+        $beans = [];
+        foreach ($allBeans as $bean) {
+          $beans[$bean->ID] = $bean;
+        }
+        return $beans;
+    }
+
+    /*
     *   Return fields from all field definition and filter by WS
     */
     public function getFieldsByElement($WS)
