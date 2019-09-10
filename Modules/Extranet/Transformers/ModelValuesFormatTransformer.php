@@ -147,10 +147,20 @@ class ModelValuesFormatTransformer extends Resource
                 && isset($elementField->settings['hasRoute']['id'])
               ){
 
-                $result[$i][$elementField->identifier] = $this->processContent(
+                $link = $this->processContent(
                   $elementField->settings['hasRoute'],
                   $modelValue,
-                  $result[$i][$elementField->identifier]);
+                  $result[$i][$elementField->identifier]
+                );
+
+                //to allow order when table, need to process separately link and value
+                if($isTable){
+                  $result[$i][$elementField->identifier] =
+                    $result[$i][$elementField->identifier].";".$link;
+                }
+                else {
+                  $result[$i][$elementField->identifier] = $link;
+                }
 
               }
 

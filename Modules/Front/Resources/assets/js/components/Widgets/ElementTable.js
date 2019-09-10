@@ -170,8 +170,10 @@ export default class ElementTable extends Component {
           }
       }
 
-      if(field.settings.hasRoute !== undefined){
-        return <div dangerouslySetInnerHTML={{__html: value}} />
+      if(field.settings.hasRoute !== undefined && field.settings.hasRoute != null){
+
+        //console.log("Field with has Route => ",field,row.original);
+        return <div dangerouslySetInnerHTML={{__html: row.original[identifier+"_url"]}} />
       }
       else {
         return value;
@@ -225,9 +227,19 @@ export default class ElementTable extends Component {
           for( var subkey in data[key]){
             //remove . on keys to allow filter
             var newSubkey = subkey.replace('.','');
-            //console.log("subkey => ",subkey);
-            //console.log("newSubkey => ",newSubkey);
-            data[key][newSubkey] = data[key][subkey];
+            var dataValue = data[key][subkey];
+
+            //if value has ';' that means it has a link
+            //console.log("dataValue => ",dataValue);
+            if(typeof dataValue === 'string' && dataValue.indexOf(';') != -1){
+              //console.log("data => ",data[key],newSubkey,dataValue);
+              //dataValue =
+              var valueArray = dataValue.split(';');
+              data[key][newSubkey+'_url'] = valueArray[1];
+              dataValue = valueArray[0];
+            }
+
+            data[key][newSubkey] = dataValue;
           }
         }
 
