@@ -11,7 +11,8 @@ import {
   getFieldComponent,
   processObjectValue,
   processObject,
-  validateField
+  validateField,
+  processResponseParameters
 } from './form/actions/';
 
 export default class ElementForm extends Component {
@@ -114,7 +115,7 @@ export default class ElementForm extends Component {
     }
 
     /**
-    *  Iterate all params of all procedures fo type SYSTEM, to see if any params is needed.
+    *  Iterate all params of all procedures of type SYSTEM, to see if any params is needed.
     *  If any need iteration begin
     */
     checkParameters() {
@@ -257,7 +258,13 @@ export default class ElementForm extends Component {
         for(var i=0;i<formParametersArray.length;i++){
           if(this.state.formParameters[formParametersArray[i]] != null){
             //concat new parameters
-            parameters += (parameters != ''?"&":"")+formParametersArray[i]+"="
+            var formParameterKey = formParametersArray[i];
+            //if has _ remove first character
+            if(formParameterKey.charAt(0) == "_"){
+              formParameterKey = formParameterKey.substr(1);
+            }
+
+            parameters += (parameters != ''?"&":"")+formParameterKey+"="
               +this.state.formParameters[formParametersArray[i]];
           }
         }
@@ -462,6 +469,8 @@ export default class ElementForm extends Component {
 
           toastr.success('Contenu enregistré');
 
+          self.finalRedirect();
+
         },function(){
           //error
           self.setState({
@@ -581,11 +590,22 @@ export default class ElementForm extends Component {
         data : jsonResult
       };
 
+      self = this;
+
       axios.post('/architect/elements/form/process-service',params)
         .then(function(response) {
-          console.log("response => ",response);
-          if(response.status == 200 && response.data.result !== undefined){
-              successCallback();
+          //console.log("response => ",response);
+          if(response.status == 200){
+              //process parameters
+              //console.log("response 2 => ",self.state);
+
+              self.setState({
+                formParameters : processResponseParameters(
+                    response.data.result,
+                    procedure.SERVICE,
+                    self.state.formParameters
+                )
+              },successCallback);
           }
           else {
               toastr.error(response.data.message);
@@ -656,6 +676,26 @@ export default class ElementForm extends Component {
         });
 
         return hasErrors;
+    }
+
+    /**
+    *  After all submits is necessary to redirect to url configured by the widget.
+    *  The url comes from the field, and is necessary to add all route parameters, + modal parameters + response parameters
+    */
+    finalRedirect() {
+
+      const {field} = this.state;
+      var url = "";
+
+      if(field.fields[1].value !== undefined && field.fields[1].value.content !== undefined &&
+        field.fields[1].value.content.url !== undefined){
+          url = field.fields[1].value.content.url;
+      }
+
+      if(url != ""){
+        window.location.href = url+"?"+this.getUrlParameters();
+      }
+
     }
 
     render() {

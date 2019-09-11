@@ -10368,6 +10368,13 @@ form.contact-form .checkbox {
   border-radius: 0;
 }
 
+.element-table-container a.file-link {
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
+
 .element-table-container .element-table-container-head {
   background-color: #fff;
   font-size: 16px;

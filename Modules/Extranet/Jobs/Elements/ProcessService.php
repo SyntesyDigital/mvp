@@ -37,8 +37,6 @@ class ProcessService
         $this->attributes['data']
       );
 
-      //dd($response);
-
-      return true;
+      return $response;
     }
 }

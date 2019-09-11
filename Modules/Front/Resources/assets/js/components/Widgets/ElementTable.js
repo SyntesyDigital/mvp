@@ -154,7 +154,6 @@ export default class ElementTable extends Component {
             value = moment.unix(row.original[identifier]).format('DD/MM/YYYY')
           }
       }
-
       if(field.type == "number") {
           //console.log("renderCell => ",field,row);
           if(row.original[identifier] !== undefined && row.original[identifier] != ""){
@@ -170,7 +169,11 @@ export default class ElementTable extends Component {
           }
       }
 
-      if(field.settings.hasRoute !== undefined && field.settings.hasRoute != null){
+      if(field.type == "file"){
+        //console.log("Field with has Route => ",field,row.original);
+        return <div dangerouslySetInnerHTML={{__html: row.original[identifier]}} />
+      }
+      else if(field.settings.hasRoute !== undefined && field.settings.hasRoute != null){
 
         //console.log("Field with has Route => ",field,row.original);
         return <div dangerouslySetInnerHTML={{__html: row.original[identifier+"_url"]}} />

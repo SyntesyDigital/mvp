@@ -12,14 +12,21 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Url;
 
 use Modules\Extranet\Repositories\ElementRepository;
+use Modules\Extranet\Repositories\BobyRepository;
+use Modules\Extranet\Repositories\DocumentRepository;
 
 use App;
 
 class ContentController extends Controller
 {
 
-    public function __construct(ElementRepository $elements) {
+    public function __construct(ElementRepository $elements,
+      BobyRepository $boby,
+      DocumentRepository $document ) {
+
         $this->elements = $elements;
+        $this->boby = $boby;
+        $this->document = $document;
     }
 
     /**
@@ -173,6 +180,22 @@ class ContentController extends Controller
       }
 
       abort(404);
+
+    }
+
+    public function showDocument($id)
+    {
+
+        $authorized = $this->boby->checkDocumentAvailable($id);
+
+        if(!$authorized) {
+            abort(500);
+        }
+
+        $result = $this->document->find($id);
+        $content = base64_decode($result->datas);
+
+        return response($content, 200)->header('Content-Type', $result->contentType);
 
     }
 

@@ -136,6 +136,15 @@ class ModelValuesFormatTransformer extends Resource
                   }
 
                   break;
+                case 'file':
+
+                  $fileLink = '';
+                  if($originalValue != null && $originalValue != ''){
+                    $fileLink = '<a href="'.route("document.show",$originalValue).'" class="file-link"><i class="fas fa-file-download"></i></a>';
+                  }
+                  $result[$i][$elementField->identifier] = $fileLink;
+
+                  break;
 
                 default:
                   $result[$i][$elementField->identifier] = $originalValue?$originalValue:'';

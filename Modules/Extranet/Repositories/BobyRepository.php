@@ -25,14 +25,19 @@ class BobyRepository
         if (Cache::has($cacheKey) && false) {
             $beans = Cache::get($cacheKey);
         } else {
-            $response = $this->client->get(VeosWsUrl::get() . 'boBy/'.$name, [
+            $response = $this->client->get(VeosWsUrl::get() . 'boBy/v2/'.$name, [
                 'headers' => [
                     'Authorization' => "Bearer " . Auth::user()->token
                 ]
             ]);
 
             $result = json_decode($response->getBody());
-            $beans = $result->beans;
+            if(isset($result->responses[0])) {
+                if((isset($result->responses[0]->statusCode)) && $result->responses[0]->statusCode == 1) {
+                    throw new \Exception($result->responses[0]->statusMessage);
+                }
+            }
+            $beans = isset($result->responses[0]->beans) ? $result->responses[0]->beans : null;
 
             Cache::put($cacheKey, $beans, config('cache.time'));
         }
@@ -121,6 +126,25 @@ class BobyRepository
         }
 
         return json_decode($response->getBody());
+    }
+
+    public function checkDocumentAvailable($id)
+    {
+      $response = $this->client->get(VeosWsUrl::get() . 'boBy/v2/WS_EXT2_DEF_PERMISDOC?id_doc='.$id, [
+          'headers' => [
+              'Authorization' => "Bearer " . Auth::user()->token
+          ]
+      ]);
+
+      $result = json_decode($response->getBody());
+
+      if(isset($result->data[0])){
+        if($result->data[0]->PERMIS == "yes"){
+          return true;
+        }
+      }
+
+      return false;
     }
 
 

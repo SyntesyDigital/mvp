@@ -207,3 +207,32 @@ export function validateField(field,values) {
 
   return true;
 }
+
+/**
+*   Process the response of the POST to see if necessary to
+*   to add a form parameter.
+*/
+export function processResponseParameters(response,service,formParameters) {
+
+  if(service.REPONSE != ''){
+    //there is parameters to process
+    var parametersArray = service.REPONSE.split('&');
+
+    for(var key in parametersArray){
+      var parameter = parametersArray[key];
+
+      var parameterArray = parameter.split('=');
+      if(parameterArray.length > 1){
+        // is a paramter , _id_sin=id, 0 : value, 1: response ocurrence
+        var parameterIdentifier = parameterArray[0];
+        var responseValue = parameterArray[1];
+
+        formParameters[parameterIdentifier] = response[responseValue];
+      }
+    }
+  }
+
+  console.log("processResponseParameters :: form parameters => ",formParameters);
+
+  return formParameters;
+}
