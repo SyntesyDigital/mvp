@@ -7,7 +7,7 @@
 */
 
 Route::group([
-  'middleware' => ['web', 'auth:veos-ws', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws', 'roles:ROLE_SUPERADMIN,ROLE_SYSTEM', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Extranet\Http\Controllers'
 ], function() {

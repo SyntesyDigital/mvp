@@ -18,9 +18,10 @@ class VeosUserProvider implements UserProvider {
        if($this->user()) {
 
            switch($this->user()->role) {
+               case ROLE_SYSTEM:
+               case ROLE_SUPERADMIN:
                case ROLE_ADMIN:
-               case ROLE_AUTHOR:
-               case ROLE_EDITOR:
+               case ROLE_USER:
                     break;
 
                 default:

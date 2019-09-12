@@ -70,6 +70,9 @@ class Login
 
     public function handle()
     {
+
+
+
         try {
             $client = new Client();
 
@@ -97,6 +100,7 @@ class Login
 
                 if ($loginResult->statusCode == 0) {
                     $user = $this->getUser($loginResult->token);
+
                     $user->testMode = $this->testMode;
                     $user->recMode = $this->recMode;
 
@@ -128,7 +132,8 @@ class Login
                         'token' => $loginResult->token,
                         'testMode' => $this->testMode,
                         'recMode' => $this->recMode,
-                        'role' => ROLE_ADMIN,  //TODO set different roles,
+                        'role' => $this->processMainRole($user->USEREXT),
+                        'pages' => $this->getAllowedPages($user->USEREXT,$loginResult->token),
                         'language' => 'fr',
                         'sessions' => $sessions,
                         'session_id' => $currentSession
@@ -165,7 +170,79 @@ class Login
             ]
         ]);
 
-        return json_decode($result->getBody()->getContents());
+        $userInfo = json_decode($result->getBody()->getContents());
+
+        //get roles info
+        $result = $client->get($WsUrl . 'boBy/v2/WS_EXT2_USE?id_per_user='.$userInfo->id, [
+            'headers' => [
+                'Authorization' => "Bearer " . $token
+            ]
+        ]);
+
+        $userFile = json_decode($result->getBody()->getContents());
+
+        $userInfo->{'USEREXT'} = null;
+        if($userFile->total > 0 && isset($userFile->data[0])){
+          $userInfo->{'USEREXT'} = $userFile->data[0];
+        }
+
+        return $userInfo;
+    }
+
+    private function processMainRole($userext)
+    {
+
+        if(!isset($userext)){
+          return ROLE_USER;
+        }
+
+        //check if user is in admin array
+        if(in_array($userext->{'USEREXT.login_per'},Config::get('admin'))){
+          //return admin
+          return ROLE_SYSTEM;
+        }
+
+        if(isset($userext->{'USEREXT.admin'}) && $userext->{'USEREXT.admin'} == "Y"){
+          return ROLE_ADMIN;
+        }
+
+        return ROLE_USER;
+    }
+
+    /**
+    *   Return allowed slugs for this user
+    */
+    private function getAllowedPages($userext,$token)
+    {
+
+        $client = new Client();
+        $WsUrl = $this->testMode ? VeosWsUrl::test() : VeosWsUrl::prod();
+
+        if($this->recMode) {
+            $WsUrl = VeosWsUrl::rec();
+        }
+
+        $result = $client->get($WsUrl . 'boBy/v2/WS_EXT2_DEF_PAGES?perPage=100', [
+            'headers' => [
+                'Authorization' => "Bearer " . $token
+            ]
+        ]);
+
+        $data = json_decode($result->getBody()->getContents());
+
+        $pages = [];
+        if($data->total > 0 && isset($data->data[0])){
+
+          foreach($data->data as $index => $page){
+            //if this option exist in user info, and is Y
+            if(isset($userext->{$page->option}) && $userext->{$page->option} == "Y"){
+              //add page
+              $pages[$page->PAGE] = true;
+            }
+          }
+        }
+        //create array with roles to check
+        return $pages;
     }
 
 }

@@ -4,7 +4,7 @@
 Auth::routes();
 
 Route::group([
-  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -21,7 +21,7 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 Route::group([
-  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN,ROLE_EDITOR', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -33,6 +33,8 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
+
+    Route::get('/settings', 'ArchitectController@settings')->name('settings');
 });
 
 /*
@@ -42,7 +44,7 @@ Route::group([
 */
 
 Route::group([
-  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_ADMIN,ROLE_CLIENT', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -100,7 +102,7 @@ Route::group([
   Route::put('/medias/{media?}/update', 'MediaController@update')->name('medias.update');
 
 
-  Route::get('/settings', 'ArchitectController@settings')->name('settings');
+  //Route::get('/settings', 'ArchitectController@settings')->name('settings');
 
   // Menu
   Route::get('/settings/menu', 'MenuController@index')->name('menu.index');

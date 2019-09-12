@@ -29,7 +29,7 @@
 											</form>
 									</div>
 
-									@if(Auth::user()->role == 1)
+									@if(has_roles([ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN]))
 										<div class="button-header-container"><a href="{{route('dashboard')}}" class="btn btn-header"><i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
 									@endif
 									<p class="user-name">Bonjour, {{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
