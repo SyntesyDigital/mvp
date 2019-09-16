@@ -5,14 +5,14 @@ return [
         "route" => 'extranet.elements.index',
         "icon" => "fa-sitemap",
         "label" => 'Éléments',
-        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
+        "roles" => [ROLE_SYSTEM]
     ],
 
     [
         "route" => 'typologies',
         "icon" => "fa-th",
         "label" => Lang::get('architect::settings.typologies'),
-        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
+        "roles" => [ROLE_SYSTEM]
     ],
 
     [
@@ -26,7 +26,7 @@ return [
         "route" => 'extranet.admin.sitelists.index',
         "icon" => "fa-bars",
         "label" => Lang::get('architect::settings.list'),
-        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
+        "roles" => [ROLE_SYSTEM]
     ],
 
     [
@@ -47,6 +47,6 @@ return [
         "route" => 'extranet.routes_parameters.index',
         "icon" => "fa-bars",
         "label" => Lang::get('architect::settings.routes_parameters'),
-        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
+        "roles" => [ROLE_SYSTEM]
     ]
 ];

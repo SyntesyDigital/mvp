@@ -140,7 +140,7 @@ class PageBuilder extends Component {
             this.renderRows()
           }
 
-          {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+          {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
             <FirstEmptyRow
               onAddRow={this.handleAddRow.bind(this)}
             />

@@ -150,7 +150,9 @@ export default class ElementForm extends Component {
       const {formIterator,formParameters,variables} = this.state;
       console.log("iterateParameters :: Start iteration :: ",formIterator,variables);
 
-      var formParametersArray = Object.keys(formParameters);
+      var formParametersArray = Object.keys(variables);
+      //console.log("iterateParameters :: formParameters => ",formParameters);
+      console.log("iterateParameters :: formParametersArray => ",formParametersArray);
 
       //if no parameters
       if(formParametersArray.length == 0){
@@ -172,7 +174,7 @@ export default class ElementForm extends Component {
       var key = formParametersArray[formIterator];
       console.log("iterateParameters :: ",formParameters,formIterator,key);
 
-      if(formParameters[key] != null){
+      if(formParameters['_'+key] != null){
         //already set go to next
         this.setState({
           formIterator : formIterator + 1,
@@ -182,42 +184,57 @@ export default class ElementForm extends Component {
       else {
         //ask for this variable
         var self = this;
-        var variable = variables[key.substring(1)];
+        var variable = variables[key];
 
-        bootbox.prompt({
-    		    title: variable.MESSAGE,
-    		    inputType: 'select',
-    				closeButton : false,
-    				buttons: {
-    		        confirm: {
-    		            label: 'Envoyer',
-    		            className: 'btn-primary'
-    		        },
-    						cancel : {
-    								label: 'Retour',
-    								className: 'btn-default'
-    						}
-    		    },
-    		    inputOptions: variable.BOBY_DATA,
-    		    callback: function (result) {
-    	        if(result != null && result != ''){
-    							//post sessions
-                  formParameters[key] = result;
+        //ask boby
+        axios.get('/architect/elements/select/data/'+variable.BOBY+"?"+this.getUrlParameters())
+          .then(function(response) {
+            if(response.status == 200 && response.data.data !== undefined){
 
-                  //set new value and got to next
-    							self.setState({
-                    formParameters : formParameters,
-                    formIterator : formIterator + 1,
-                  },self.iterateParameters.bind(self));
-    					}
-    					else {
-    						//show error
-                toastr.error('Le paramètre est nécessaire.');
-                //iterate again
-                return self.iterateParameters();
-    					}
-    		    }
-    		});
+                for(var index in response.data.data ){
+                  response.data.data[index]['text'] = response.data.data[index]['name'];
+                }
+
+                bootbox.prompt({
+            		    title: variable.MESSAGE,
+            		    inputType: 'select',
+            				closeButton : false,
+            				buttons: {
+            		        confirm: {
+            		            label: 'Envoyer',
+            		            className: 'btn-primary'
+            		        },
+            						cancel : {
+            								label: 'Retour',
+            								className: 'btn-default'
+            						}
+            		    },
+            		    inputOptions: response.data.data,
+            		    callback: function (result) {
+            	        if(result != null && result != ''){
+            							//post sessions
+                          formParameters['_'+key] = result;
+
+                          //set new value and got to next
+            							self.setState({
+                            formParameters : formParameters,
+                            formIterator : formIterator + 1,
+                          },self.iterateParameters.bind(self));
+            					}
+            					else {
+            						//show error
+                        toastr.error('Le paramètre est nécessaire.');
+                        //iterate again
+                        return self.iterateParameters();
+            					}
+            		    }
+            		});
+
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
 
       }
     }
@@ -701,28 +718,38 @@ export default class ElementForm extends Component {
     render() {
         return (
           <div className={"element-form-wrapper row "+(this.state.loading == true ? 'loading' : '')}>
-            <form>
-            {this.state.formParametersLoaded &&
-              this.renderItems()
-            }
-
-            <div className="row element-form-row">
-              <div className="col-md-4"></div>
-              <div className="col-md-6 buttons">
-                  <button
-                    className="btn btn-primary right" type="submit"
-                    onClick={this.handleSubmit.bind(this)}
-                    disabled={this.state.processing}
-                  >
-                    <i className="fa fa-paper-plane"></i>Valider
-                  </button>
-                  {/*
-                  <a className="btn btn-back left"><i className="fa fa-angle-left"></i> Retour</a>
-                  */}
+            {
+              !this.state.formParametersLoaded &&
+              <div className="" style={{
+                padding:40,
+                textAlign : 'center'
+              }}>
+                En attente de paramètres
               </div>
-            </div>
+            }
+            {this.state.formParametersLoaded &&
+                <form>
 
-            </form>
+                  {this.renderItems()}
+
+                  <div className="row element-form-row">
+                    <div className="col-md-4"></div>
+                    <div className="col-md-6 buttons">
+                        <button
+                          className="btn btn-primary right" type="submit"
+                          onClick={this.handleSubmit.bind(this)}
+                          disabled={this.state.processing}
+                        >
+                          <i className="fa fa-paper-plane"></i>Valider
+                        </button>
+                        {/*
+                        <a className="btn btn-back left"><i className="fa fa-angle-left"></i> Retour</a>
+                        */}
+                    </div>
+                  </div>
+
+                </form>
+            }
           </div>
         );
     }

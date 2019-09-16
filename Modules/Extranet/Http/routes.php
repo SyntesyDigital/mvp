@@ -37,12 +37,6 @@ Route::group([
     Route::post('/elements/store', 'ElementController@store')->name('extranet.elements.store');
     Route::put('/elements/{element}/update', 'ElementController@update')->name('extranet.elements.update');
     Route::delete('/elements/{element}/delete', 'ElementController@delete')->name('extranet.elements.delete');
-    Route::get('/elements/{element}/export/{limit?}', 'ElementController@export')->name('table.export');
-    Route::get('/elements/select/data/{name}', 'ElementController@getSelectData')->name('elements.select.data');
-    Route::get('/elements/procedures/{modelId}', 'ElementController@getFormProcedures')->name('elements.procedures');
-    Route::post('/elements/form/process-service', 'ElementController@postService')->name('elements.postservice');
-
-
 
     // Routes Parameters
     Route::get('/routes_parameters', 'RouteParameterController@index')->name('extranet.routes_parameters.index');
@@ -53,11 +47,24 @@ Route::group([
     Route::put('/routes_parameters/{route_parameter}/update', 'RouteParameterController@update')->name('extranet.routes_parameters.update');
     Route::delete('/routes_parameters/{route_parameter}/delete', 'RouteParameterController@delete')->name('extranet.routes_parameters.delete');
 
-    Route::get('/extranet/{element}/model_values/data/{limit?}', 'ElementController@getModelValues')->name('extranet.element.mode_values.data');
+});
 
-    Route::get('/extranet/content/{content}/parameters', 'ContentController@getContentParameters')->name('extranet.content.parameters');
+Route::group([
+  'middleware' => ['web', 'auth:veos-ws'],
+  'prefix' => 'architect',
+  'namespace' => 'Modules\Extranet\Http\Controllers'
+], function() {
+  //update user session
+  Route::post('/session','UserController@setUserSession')->name('session.update');
+  Route::get('/extranet/content/{content}/parameters', 'ContentController@getContentParameters')->name('extranet.content.parameters');
 
-    //update user session
-    Route::post('/session','UserController@setUserSession')->name('session.update');
 
+  //tables
+  Route::get('/elements/{element}/export/{limit?}', 'ElementController@export')->name('table.export');
+  Route::get('/extranet/{element}/model_values/data/{limit?}', 'ElementController@getModelValues')->name('extranet.element.mode_values.data');
+
+  //form
+  Route::get('/elements/select/data/{name}', 'ElementController@getSelectData')->name('elements.select.data');
+  Route::get('/elements/procedures/{modelId}', 'ElementController@getFormProcedures')->name('elements.procedures');
+  Route::post('/elements/form/process-service', 'ElementController@postService')->name('elements.postservice');
 });

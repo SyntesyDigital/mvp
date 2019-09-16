@@ -224,12 +224,22 @@ class ElementController extends Controller
 
     }
 
-    public function getSelectData($name)
+    public function getSelectData($name, Request $request)
     {
+
+      $parameters = $request->all();
+
+      $params = "?SES=".Auth::user()->session_id.'&perPage=100';
+
+      if(isset($parameters) && sizeof($parameters) > 0){
+        foreach($parameters as $key => $value) {
+          $params .= "&".$key."=".$value;
+        }
+      }
 
       try {
             $selectData = $this->boby->getModelValuesQuery(
-              $name."?SES=".Auth::user()->session_id.'&perPage=100'
+              $name.$params
             )['modelValues'];
 
             $resultData = [];

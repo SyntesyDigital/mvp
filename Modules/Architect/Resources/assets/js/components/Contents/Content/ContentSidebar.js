@@ -226,7 +226,7 @@ class ContentSidebar extends Component {
             { this.props.app.status == 1 &&
               <div className="publish-form sidebar-item">
                   <i className="fa fa-circle text-success"></i> {Lang.get('fields.published')} <br/>
-                  {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+                  {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
                     <a className="btn btn-default" href="" onClick={this.handleUnpublish.bind(this)}> {Lang.get('fields.unpublish')} </a>
                   }
                   <p className="field-help">{moment(this.props.app.content.published_at).format('LLLL')}</p>
@@ -236,7 +236,7 @@ class ContentSidebar extends Component {
             {this.props.app.status == 0 &&
               <div className="publish-form sidebar-item">
                   <i className="fa fa-circle text-warning"></i> {Lang.get('fields.draft')} <br/>
-                  {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+                  {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
                     <a className="btn btn-success" href=""  onClick={this.handlePublish.bind(this)}> {Lang.get('fields.publish')} </a>
                   }
                   <p className="field-help"></p>
@@ -268,7 +268,7 @@ class ContentSidebar extends Component {
             <div className="form-group bmd-form-group sidebar-item">
                <label htmlFor="parent_id" className="bmd-label-floating">{Lang.get('fields.parent_page')}</label>
 
-               {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+               {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
                  <select className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
                       <option value="">---</option>
                      {
@@ -278,7 +278,7 @@ class ContentSidebar extends Component {
                      }
                  </select>
                }
-               {architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+               {architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
                  <select disabled="true" className="form-control" id="parent_id" name="parent_id" value={this.props.parent_id}  onChange={this.handleChange}>
                       <option value="">---</option>
                      {
@@ -325,7 +325,7 @@ class ContentSidebar extends Component {
           </div>
         }
 
-        {this.props.app.settings !== undefined && !architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+        {this.props.app.settings !== undefined && !architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
 
           <div>
             <hr/>

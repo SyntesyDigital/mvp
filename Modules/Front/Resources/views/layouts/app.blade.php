@@ -59,7 +59,9 @@
           @if(null !== Auth::user())
             @include ('front::partials.sidebar')
             <div class="content-wrapper">
-              @yield('content')
+              @if(isset(Auth::user()->id) && isset(Auth::user()->session_id))
+                @yield('content')
+              @endif
             </div>
           @else
             @yield('content')

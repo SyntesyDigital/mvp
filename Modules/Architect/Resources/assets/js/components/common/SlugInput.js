@@ -113,13 +113,13 @@ class SlugInput extends Component
 
     return (
       <div>
-        {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+        {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
         <div className="block-div" onClick={this.toggleBlock.bind(this)} style={{display: this.state.blocked ? 'display' : 'none'}}>
           <i className="fa fa-lock"></i>
         </div>
         }
 
-        {architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+        {architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
         <div className="block-div" style={{display: 'block'}}>
           <i className="fa fa-lock"></i>
         </div>

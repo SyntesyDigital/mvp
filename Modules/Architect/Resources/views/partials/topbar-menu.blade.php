@@ -2,7 +2,7 @@
 
     {{-- If current user can show this menu --}}
     @if(!empty($item['roles']))
-        @if(has_roles([$item['roles']]))
+        @if(!has_roles($item['roles']))
             @continue;
         @endif
     @endif

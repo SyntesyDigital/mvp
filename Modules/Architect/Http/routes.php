@@ -35,6 +35,8 @@ Route::group([
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
 
     Route::get('/settings', 'ArchitectController@settings')->name('settings');
+    Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
+    Route::get('/contents/pages-tree', 'ContentController@pagesTree')->name('contents.pages-tree');
 });
 
 /*
@@ -81,8 +83,7 @@ Route::group([
   Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');
   Route::get('/contents', 'ContentController@index')->name('contents');
   Route::get('/contents/data', 'ContentController@data')->name('contents.data');
-  Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
-  Route::get('/contents/pages-tree', 'ContentController@pagesTree')->name('contents.pages-tree');
+
   Route::post('/contents', 'ContentController@store')->name('contents.store');
   Route::get('/contents/show', 'ContentController@show')->name('contents.show');
   Route::get('/contents/page/create', 'ContentController@create')->name('contents.page.create');

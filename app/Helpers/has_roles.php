@@ -8,7 +8,6 @@ if (!function_exists('has_roles')) {
     {
         $user = $user ? $user : Auth::user();
         $roles = !is_array($roles) ? [$roles] : $roles;
-
         return in_array($user->role, $roles);
     }
 

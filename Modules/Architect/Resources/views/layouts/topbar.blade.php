@@ -26,7 +26,8 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              {{Lang::get('architect::header.hello')}} {{Auth::user()->lastname}},
+                              {{substr(Auth::user()->lastname,0,15)}}
+                              {{strlen(Auth::user()->lastname) > 15 ? '...' : ''}}
                               <b class="caret"></b>
                               <div class="ripple-container"></div>
                             </a>

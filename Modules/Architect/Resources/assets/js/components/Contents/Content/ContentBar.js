@@ -240,7 +240,7 @@ class ContentBar extends Component {
               <div className="float-buttons pull-right">
 
 
-                {!architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+                {!architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
 
                   <div className="actions-dropdown">
                     <a href="#" className="dropdown-toggle btn btn-default" data-toggle="dropdown" aria-expanded="false">
@@ -248,7 +248,7 @@ class ContentBar extends Component {
                       <b className="caret"></b>
                       <div className="ripple-container"></div>
                     </a>
-                      { saved && content !== undefined && content != null && !architect.currentUserHasRole(ROLES['ROLE_EDITOR']) &&
+                      { saved && content !== undefined && content != null && !architect.currentUserHasRole(ROLES['ROLE_ADMIN']) &&
                         this.renderFullMenu()
                       }
 

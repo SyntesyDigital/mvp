@@ -338,9 +338,17 @@ class ElementRepository extends BaseRepository
 
         $result = [];
 
+        //sort by p1
+        usort($variables['modelValues'], function($a, $b)
+        {
+            return intval($a->P1) > intval($b->P1);
+        });
+
         foreach( $variables['modelValues'] as $index => $variable ) {
           $result[$variable->PARAM] = $variable;
 
+          //Boby Data not procesed here because needed parameters
+          /*
           $data = $this->boby->getModelValuesQuery(
             $variable->BOBY."?SES=".Auth::user()->session_id.'&perPage=100');
 
@@ -353,6 +361,7 @@ class ElementRepository extends BaseRepository
           }
 
           $result[$variable->PARAM]->{'BOBY_DATA'} = $modelValuesProcessed;
+          */
         }
 
         return $result;
