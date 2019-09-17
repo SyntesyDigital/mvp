@@ -178,7 +178,7 @@ class ElementRepository extends BaseRepository
     {
         $procedures = $this->getProcedures($modelId);
 
-        $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS?perPage=100');
+        $allObjects = $this->boby->getModelValuesQuery('WS_EXT2_DEF_OBJETS?perPage=200');
         $allObjects = $allObjects['modelValues'];
 
         //obtain the fields from procedures
@@ -287,7 +287,6 @@ class ElementRepository extends BaseRepository
 
       $fields = $this->getFieldsFromProcedure($procedure,$allObjects);
 
-      //dd($fields);
       //dd($procedure);
 
       $fieldType = $this->getFieldType([
