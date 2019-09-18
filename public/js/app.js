@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 843);
+/******/ 	return __webpack_require__(__webpack_require__.s = 844);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -56956,15 +56956,15 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ 843:
+/***/ 844:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(844);
+module.exports = __webpack_require__(845);
 
 
 /***/ }),
 
-/***/ 844:
+/***/ 845:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -56974,7 +56974,7 @@ module.exports = __webpack_require__(844);
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(845);
+__webpack_require__(846);
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -56982,11 +56982,11 @@ __webpack_require__(845);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(847);
+__webpack_require__(848);
 
 /***/ }),
 
-/***/ 845:
+/***/ 846:
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -57002,7 +57002,7 @@ window.Popper = __webpack_require__(192).default;
 try {
   window.$ = window.jQuery = __webpack_require__(181);
 
-  __webpack_require__(846);
+  __webpack_require__(847);
 } catch (e) {}
 
 /**
@@ -57048,7 +57048,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 846:
+/***/ 847:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -61490,7 +61490,7 @@ if (token) {
 
 /***/ }),
 
-/***/ 847:
+/***/ 848:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

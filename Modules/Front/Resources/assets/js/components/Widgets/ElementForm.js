@@ -648,7 +648,7 @@ export default class ElementForm extends Component {
     */
     procedureIsArray(procedure) {
       if(procedure.CONF == 'Y' && procedure.REP == "Y" &&
-        procedure.JSONP.indexOf('[]') != -1){
+        procedure.JSONP == '$.[]' ){
           return true;
       }
       return false;
