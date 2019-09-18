@@ -141,18 +141,10 @@ export default class ElementFile extends Component {
                   {name}
                 </div>
 
-                {hasRoute &&
-                  <div className="col-xs-6 element-file-content"
-                    dangerouslySetInnerHTML={{__html: value}}
-                  >
-                  </div>
-                }
-
-                {!hasRoute &&
-                  <div className="col-xs-6 element-file-content">
-                    {value}
-                  </div>
-                }
+                <div className="col-xs-6 element-file-content"
+                  dangerouslySetInnerHTML={{__html: value}}
+                >
+                </div>
 
 
                 <div  />
