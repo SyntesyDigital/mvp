@@ -150,7 +150,7 @@
             </div>
 
 
-            @if(has_roles([ROLE_ADMIN]))
+            @if(has_roles([ROLE_SYSTEM,ROLE_SUPERADMIN]))
 
               <div class="row">
                   <div class="col-md-12">

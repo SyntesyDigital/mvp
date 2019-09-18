@@ -27,7 +27,7 @@
               <div class="grid-items">
                 <div class="row">
 
-                    @if(has_roles([ROLE_ADMIN]))
+                    @if(has_roles([ROLE_SYSTEM,ROLE_SUPERADMIN]))
                   <div class="col-xs-3">
                     <a href="{{route('contents.page.create')}}">
                       <div class="grid-item">
