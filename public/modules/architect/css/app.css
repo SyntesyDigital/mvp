@@ -16143,7 +16143,7 @@ line.links {
   margin-right: 20px;
 }
 
-.typology-field {
+.setup-field-config .typology-field {
   border: 1px solid #ccc;
   position: relative;
   height: 50px;
@@ -16153,16 +16153,16 @@ line.links {
   border-radius: 6px;
 }
 
-.typology-field .form-group .form-control,
-.typology-field .form-group .cke_textarea_inline,
-.typology-field .form-group .cke_textarea_inline {
+.setup-field-config .typology-field .form-group .form-control,
+.setup-field-config .typology-field .form-group .cke_textarea_inline,
+.setup-field-config .typology-field .form-group .cke_textarea_inline {
   border-top: none;
   border-left: none;
   border-right: none;
   padding: 0 10px;
 }
 
-.typology-field .field-type {
+.setup-field-config .typology-field .field-type {
   display: inline-block;
   width: 150px;
   position: absolute;
@@ -16175,7 +16175,8 @@ line.links {
   border-right: 1px solid #ccc;
 }
 
-.typology-field .field-type i.fa {
+.setup-field-config .typology-field .field-type i.fa,
+.setup-field-config .typology-field .field-type i.fas {
   position: absolute;
   top: 12px;
   left: 18px;
@@ -16184,22 +16185,22 @@ line.links {
   color: #b4b4b4;
 }
 
-.typology-field .field-inputs {
+.setup-field-config .typology-field .field-inputs {
   position: relative;
   padding-left: 160px;
   padding-right: 200px;
   padding-top: 2px;
 }
 
-.typology-field .field-inputs .field-name {
+.setup-field-config .typology-field .field-inputs .field-name {
   line-height: 45px;
 }
 
-.typology-field .remove-field-btn {
+.setup-field-config .typology-field .remove-field-btn {
   color: #fc4b6c;
 }
 
-.typology-field .field-actions {
+.setup-field-config .typology-field .field-actions {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -16208,7 +16209,7 @@ line.links {
   padding-right: 5px;
 }
 
-.typology-field .field-actions a {
+.setup-field-config .typology-field .field-actions a {
   font-size: 12px;
   line-height: 50px;
   font-weight: 400;

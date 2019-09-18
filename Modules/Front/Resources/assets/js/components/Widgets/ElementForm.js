@@ -36,6 +36,7 @@ export default class ElementForm extends Component {
             currentProcedureIndex : 0,
             currentListIndex : 0,
             jsonResult : {},
+            stepsToProcess : false, //variable to know if there is previous steps that need submit
             processing : false,
             complete : false,
             errors : {},
@@ -389,14 +390,14 @@ export default class ElementForm extends Component {
         else if(isConfigurable && isRepetable){
           //internal array, check for values list
 
-          console.log("Process list iteration => ",currentProcedureIndex, currentListIndex, values[procedure.OBJID]);
+          console.log("Process list iteration => ",currentProcedureIndex, currentListIndex, values[procedure.OBJID],jsonResult);
 
           //check for value with id => procedure->OBJID
+
           if(values[procedure.OBJID] !== undefined && values[procedure.OBJID].length > 0){
             //there is values
 
             //check what is the current value index
-
 
             //process every values
             jsonResult = this.processListProcedure (
@@ -415,19 +416,71 @@ export default class ElementForm extends Component {
 
           }
           else {
+            //there is no data
+
             if(isRequired){
               //this is needed
               console.error("No list values and this procedure is required "+procedure.OBJID);
             }
             else {
-              //TODO submit standard procedure
-              this.submitStandardProcedure(currentProcedureIndex,procedure,jsonResult);
+              //if there is data to process, submit process
+              if(this.state.stepsToProcess){
+                this.submitStandardProcedure(currentProcedureIndex,procedure,jsonResult);
+              }
+              else {
+                //skip procedure
+                this.skipProcedure(currentProcedureIndex,procedure,jsonResult);
+              }
             }
           }
 
         }
 
         //after procedure is done we obtain a jsonResult, with this jsonResult decide what to Do.
+    }
+
+    skipProcedure(currentProcedureIndex, procedures, jsonResult) {
+      var nextProcedure = null;
+      if( currentProcedureIndex + 1 < procedures.length){
+        //is the last one
+        nextProcedure = procedures[currentProcedureIndex+1];
+      }
+      var self = this;
+
+      if(nextProcedure != null){
+        this.setState({
+          currentProcedureIndex : currentProcedureIndex + 1 ,
+          currentListIndex : 0,
+          jsonResult : jsonResult,
+          stepsToProcess : false,
+          processing : true,
+          complete : false
+        },function(){
+            self.processProcedure();
+        });
+      }
+      else {
+        //we are at then end, complete
+        this.finish();
+
+      }
+    }
+
+    finish() {
+
+      //finish!
+      this.setState({
+        currentProcedureIndex : 0,
+        currentListIndex : 0,
+        stepsToProcess : false,
+        jsonResult : {},
+        processing : false,
+        complete : true
+      });
+
+      toastr.success('Formulaire traité avec succès');
+
+      this.finalRedirect();
     }
 
 
@@ -444,6 +497,7 @@ export default class ElementForm extends Component {
               //or next or finish
 
         const {arrayPosition, jsonRoot} = processJsonRoot(procedure.JSONP, jsonResult);
+        console.log("processObject :: arrayPosition : ",arrayPosition);
 
         for(var j in procedure.OBJECTS) {
           var object = procedure.OBJECTS[j];
@@ -469,30 +523,20 @@ export default class ElementForm extends Component {
       }
       //console.log("nextProcedure => ",nextProcedure);
 
-      //if next procedure is different -> submit
+      //if no next procedure
       if(nextProcedure == null) {
         //process this procedure
 
         this.submitProcedure(procedure,jsonResult, function(response){
 
-          //finish!
-          self.setState({
-            currentProcedureIndex : 0,
-            currentListIndex : 0,
-            jsonResult : {},
-            processing : false,
-            complete : true
-          });
-
-          toastr.success('Contenu enregistré');
-
-          self.finalRedirect();
+          self.finish();
 
         },function(){
           //error
           self.setState({
             currentProcedureIndex : 0,
             currentListIndex : 0,
+            stepsToProcess : false,
             jsonResult : {},
             processing : false,
             complete : false
@@ -505,6 +549,7 @@ export default class ElementForm extends Component {
         this.submitProcedure(procedure,jsonResult,function(response){
 
           //TODO process response
+          console.log("processProcedure => ",procedure,response)
 
           //continue next step
           self.setState({
@@ -512,6 +557,7 @@ export default class ElementForm extends Component {
             currentListIndex : 0,
             jsonResult : {},
             processing : true,
+            stepsToProcess : false,
             complete : false
           },function(){
               self.processProcedure();
@@ -522,6 +568,7 @@ export default class ElementForm extends Component {
           self.setState({
             currentProcedureIndex : 0,
             currentListIndex : 0,
+            stepsToProcess : false,
             jsonResult : {},
             processing : false,
             complete : false
@@ -535,6 +582,7 @@ export default class ElementForm extends Component {
           currentProcedureIndex : currentProcedureIndex + 1 ,
           currentListIndex : 0,
           jsonResult : jsonResult,
+          stepsToProcess : true,
           processing : true,
           complete : false
         },function(){
@@ -574,19 +622,36 @@ export default class ElementForm extends Component {
     */
     processListProcedure (currentIndex,procedure,values,jsonResult) {
 
-        console.log("processListProcedure :: ",currentIndex, values);
+        console.log("processListProcedure :: ",currentIndex, values, jsonResult);
 
         const {arrayPosition, jsonRoot} = processJsonRoot(procedure.JSONP, jsonResult);
+
+        console.log("processListProcedure :: array position ",arrayPosition);
 
         for(var j in procedure.OBJECTS) {
           var object = procedure.OBJECTS[j];
 
           //process the object modifing the jsonResult
-          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,values);
+          jsonResult = processObject(object,jsonResult,jsonRoot, arrayPosition,values,
+            this.state.formParameters);
         }
+
+        console.log("processListProcedure :: after => ",currentIndex, values, jsonResult);
 
         return jsonResult;
 
+    }
+
+    /**
+    * When procedure is repeatable, and configurable, then the data is an array.
+    * So needs to be processed one POST per array item.
+    */
+    procedureIsArray(procedure) {
+      if(procedure.CONF == 'Y' && procedure.REP == "Y" &&
+        procedure.JSONP.indexOf('[]') != -1){
+          return true;
+      }
+      return false;
     }
 
     /**
@@ -604,7 +669,8 @@ export default class ElementForm extends Component {
       var params = {
         method : procedure.SERVICE.METHODE,
         url : procedure.SERVICE.URL,
-        data : jsonResult
+        data : jsonResult,
+        is_array : this.procedureIsArray(procedure)
       };
 
       self = this;
@@ -613,8 +679,6 @@ export default class ElementForm extends Component {
         .then(function(response) {
           //console.log("response => ",response);
           if(response.status == 200){
-              //process parameters
-              //console.log("response 2 => ",self.state);
 
               self.setState({
                 formParameters : processResponseParameters(
@@ -622,7 +686,7 @@ export default class ElementForm extends Component {
                     procedure.SERVICE,
                     self.state.formParameters
                 )
-              },successCallback);
+              },successCallback.bind(self,response));
           }
           else {
               toastr.error(response.data.message);
@@ -704,7 +768,8 @@ export default class ElementForm extends Component {
       const {field} = this.state;
       var url = "";
 
-      if(field.fields[1].value !== undefined && field.fields[1].value.content !== undefined &&
+      if(field.fields[1].value !== undefined && field.fields[1].value != null &&
+        field.fields[1].value.content !== undefined &&
         field.fields[1].value.content.url !== undefined){
           url = field.fields[1].value.content.url;
       }

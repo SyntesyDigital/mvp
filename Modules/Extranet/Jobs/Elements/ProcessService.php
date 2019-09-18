@@ -17,7 +17,8 @@ class ProcessService
       $this->attributes = array_only($attributes, [
           'method',
           'url',
-          'data'
+          'data',
+          'is_array'
       ]);
     }
 
@@ -34,7 +35,8 @@ class ProcessService
       $response = $bobyRepository->processService(
         $this->attributes['method'],
         $this->attributes['url'],
-        $this->attributes['data']
+        $this->attributes['data'],
+        isset($this->attributes['is_array']) ? $this->attributes['is_array'] : false
       );
 
       return $response;

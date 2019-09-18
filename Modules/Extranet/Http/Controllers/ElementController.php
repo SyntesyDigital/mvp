@@ -327,6 +327,11 @@ class ElementController extends Controller
                       $systemVars[$object->VALEUR] = true;
                     }
 
+                    if($object->OBJ_ID == "DOC01"){
+                      //FIXME remove [] when added to procedure
+                      $object->OBJ_JSONP = $object->OBJ_JSONP."[]";
+                    }
+
                     /*
                     FIXME not necessary Service linked to procedure
                     if(!isset($procedureServices[$object->SERV_ID])){

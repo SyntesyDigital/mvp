@@ -10179,6 +10179,28 @@ form.contact-form .checkbox {
   color: #bf5329;
 }
 
+.element-form-container button.btn-default {
+  border-radius: 20px;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: transparent;
+}
+
+.element-form-container button.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.element-form-container button.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
 .element-form-container .element-form-wrapper {
   opacity: 1;
   pointer-events: auto;

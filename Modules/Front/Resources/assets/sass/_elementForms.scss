@@ -31,6 +31,29 @@
 
   }
 
+  button {
+    &.btn-default {
+      @include round($button-radius);
+      padding:7px 20px;
+      text-decoration: none;
+      color:$primary-color;
+      border: 1px solid $primary-color;
+      background-color: transparent;
+      &:hover{
+        color:$secondary-color;
+        border: 1px solid $secondary-color;
+
+      }
+    }
+    &.btn-link{
+      text-decoration: none;
+      color:$primary-color;
+      border: none;
+      background-color: transparent;
+      padding: 5px;
+    }
+  }
+
   .element-form-container-body{
 
     &.collapse{

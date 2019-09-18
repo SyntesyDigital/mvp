@@ -51,13 +51,13 @@ class ModalListField extends Component {
     });
 
     $('body').css({overflow:'hidden'});
-    TweenMax.to($("#modal-list-field"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
+    TweenMax.to($("#modal-list-field-"+this.props.id),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
   }
 
   modalClose() {
 
     var self = this;
-      TweenMax.to($("#modal-list-field"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
+      TweenMax.to($("#modal-list-field-"+this.props.id),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
         $('body').css({overflow:'auto'});
       }});
   }
@@ -89,6 +89,7 @@ class ModalListField extends Component {
           field={field}
           value={this.state.values[field.identifier]}
           onFieldChange={this.handleOnChange}
+          values={this.state.values}
         />);
     }
 
@@ -127,7 +128,7 @@ class ModalListField extends Component {
     return (
       <div
         className="custom-modal"
-        id="modal-list-field"
+        id={"modal-list-field-"+this.props.id}
         style={{
           zIndex: this.props.zIndex !== undefined ? this.props.zIndex : 500
         }}
@@ -137,7 +138,7 @@ class ModalListField extends Component {
 
           <div className="modal-container">
             <div className="modal-header">
-              <h2>Ajouter contact</h2>
+              <h2>Ajouter {this.props.name}</h2>
 
               <div className="modal-buttons">
                 <a className="btn btn-default close-button-modal" onClick={this.onModalClose}>

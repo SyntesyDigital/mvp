@@ -52,6 +52,12 @@ class ListField extends Component
     return Object.keys(value).map((key) => {
       var item = value[key];
 
+      //if is a base64 string print null
+      if(item === undefined || item == null ||
+        item == '' || item.indexOf('data:') != -1){
+          return (<td></td>);
+      }
+
       return (
         <td>{item}</td>
       );
@@ -149,10 +155,14 @@ class ListField extends Component
 
     const {field} = this.props;
 
+    console.log("List Field => ",field);
+
     return (
       <div className="list-field">
 
         <ModalListField
+          id={field.id}
+          name={field.name}
           display={this.state.display}
           initValue={this.state.initItem}
           onModalClose={this.handleModalClose.bind(this)}

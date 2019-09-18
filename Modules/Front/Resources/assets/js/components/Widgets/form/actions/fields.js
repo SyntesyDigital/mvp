@@ -6,13 +6,14 @@ import DateField from './../fields/DateField';
 import NumberField from './../fields/NumberField';
 import SelectField from './../fields/SelectField';
 import ListField from './../fields/ListField';
+import FileField from './../fields/FileField';
 
 const fieldComponents = {
     text: TextField,
     date: DateField,
     number: NumberField,
     select:SelectField,
-    file:TextField,
+    file:FileField,
     richtext:RichtextField,
     list:ListField
 };
@@ -26,10 +27,31 @@ export function getFieldComponent(type) {
 *   Function to get current array position of the json.
 */
 export function getArrayPosition(jsonResult,name) {
+
   name = name.slice(0,-2);
 
-  if(jsonResult[name] !== undefined){
-    return jsonResult[name].length;
+  console.log("getArrayPosition :: ",jsonResult,name);
+
+  if(name == ""){
+    //is root
+    if(jsonResult instanceof Array){
+      return jsonResult.length;
+    }
+    else if($.isEmptyObject(jsonResult)){
+      //not yet set as array
+      return 0;
+    }
+    else {
+      console.error("getArrayPosition :: getting array position of non array");
+    }
+
+
+  }
+  else {
+
+    if(jsonResult[name] !== undefined){
+      return jsonResult[name].length;
+    }
   }
 
   return 0;
@@ -41,10 +63,12 @@ export function getArrayPosition(jsonResult,name) {
 */
 export function setupJsonResult(paramArray,index,jsonResult,name,value,arrayPosition) {
 
-  //console.log("setupJsonResult :: setup => ",paramArray,jsonResult,index,name,arrayPosition);
+  console.log("setupJsonResult :: setup => ",paramArray,jsonResult,index,name,arrayPosition);
 
-  if(jsonResult === undefined ){
+  if(jsonResult === undefined || $.isEmptyObject(jsonResult)){
+
     if(arrayPosition != null){
+      console.log("setupJsonResult :: is array ");
       jsonResult = [{}];
     }
     else {
@@ -75,6 +99,7 @@ export function setupJsonResult(paramArray,index,jsonResult,name,value,arrayPosi
       if(jsonResult[arrayPosition] === undefined){
           jsonResult[arrayPosition] = {};
       }
+      console.log("setupJsonResult :: put this var in this position ",arrayPosition,name);
       jsonResult[arrayPosition][name] = value;
     }
     else {
@@ -122,6 +147,8 @@ export function processObjectValue(object,values,formParameters) {
   const isConfigurable = object.CONF == "Y" ? true : false;
   const isActive = object.ACTIF == "Y" ? true : false;
 
+  console.log("processObjectValue :: ",object,values, formParameters);
+
   if(type == "INPUT"){
 
     //FIXME this not should be necessary
@@ -131,6 +158,9 @@ export function processObjectValue(object,values,formParameters) {
     }
     else if(defaultValue == "_id_per_user"){
       return ID_PER_USER;
+    }
+    else if(formParameters[defaultValue] !== undefined) {
+      return formParameters[defaultValue];
     }
     else {
         //get value
@@ -158,6 +188,9 @@ export function processObjectValue(object,values,formParameters) {
     else if(defaultValue == "_id_per_user"){
       return ID_PER_USER;
     }
+    else if(defaultValue == "_contentType"){
+      return values['_contentType'] ? values['_contentType'] : '';
+    }
     else if(formParameters[defaultValue] !== undefined){
       //check parameters
       return formParameters[defaultValue];
@@ -172,7 +205,7 @@ export function processObjectValue(object,values,formParameters) {
 * Process the object and return the json modified
 */
 export function processObject(object,jsonResult,jsonRoot,arrayPosition,values, formParameters) {
-  //console.log("processObject :: ", jsonResult,jsonRoot,arrayPosition);
+  console.log("processObject :: ", jsonRoot,arrayPosition);
 
   var paramArray = jsonRoot.split('.');
 
