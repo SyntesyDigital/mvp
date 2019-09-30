@@ -1,4 +1,5 @@
 /vendor
+/packages
 /node_modules
 /Modules/Architect/node_modules
 Homestead.yaml
