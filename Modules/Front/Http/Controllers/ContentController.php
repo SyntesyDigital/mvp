@@ -11,10 +11,24 @@ use Modules\Front\Adapters\FieldsAdapter;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Url;
 
+use Modules\Extranet\Repositories\ElementRepository;
+use Modules\Extranet\Repositories\BobyRepository;
+use Modules\Extranet\Repositories\DocumentRepository;
+
 use App;
 
 class ContentController extends Controller
 {
+
+    public function __construct(ElementRepository $elements,
+      BobyRepository $boby,
+      DocumentRepository $document ) {
+
+        $this->elements = $elements;
+        $this->boby = $boby;
+        $this->document = $document;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
@@ -29,6 +43,12 @@ class ContentController extends Controller
 
       $content->load('fields', 'page');
 
+      //check parameters exist
+      foreach($content->routesParameters as $parameter){
+        if(!$request->has($parameter->identifier))
+          abort(404,'Insuficient parameters');
+      }
+
       $pageBuilderAdapter = new PageBuilderAdapter($content);
 
       if($request->has('debug'))
@@ -37,6 +57,7 @@ class ContentController extends Controller
       return view('front::contents.page',[
         'content' => $content,
         'page' => $pageBuilderAdapter->get(),
+        'models' => $this->elements->getModelsByIdentifier(),
         'contentSettings' => $content->getSettings()
       ]);
     }
@@ -59,6 +80,7 @@ class ContentController extends Controller
       return view('front::contents.page',[
         'content' => $content,
         'page' => $pageBuilderAdapter->get(),
+        'models' => $this->elements->getModelsByIdentifier(),
         'contentSettings' => $content->getSettings()
       ]);
     }
@@ -67,12 +89,19 @@ class ContentController extends Controller
 
         $pageBuilderAdapter = new PageBuilderAdapter($content);
 
+        //check parameters exist
+        foreach($content->routesParameters as $parameter){
+          if(!$request->has($parameter->identifier))
+            abort(404,'Insuficient parameters');
+        }
+
         if($request->has('debug'))
           dd($pageBuilderAdapter->get());
 
         return view('front::contents.page',[
             'content' => $content,
             'page' => $pageBuilderAdapter->get(),
+            'models' => $this->elements->getModelsByIdentifier(),
             'contentSettings' => $content->getSettings()
         ]);
     }
@@ -95,7 +124,7 @@ class ContentController extends Controller
     {
       //$slug = $request->segment(count($request->segments()));
 
-      $slug = '/'.App::getLocale().'/'.$slug;
+      $slug = '/'.$slug;
 
       $url = Url::where('url', $slug)
         ->where('entity_type','Modules\Architect\Entities\Content')
@@ -131,11 +160,18 @@ class ContentController extends Controller
       if($request->has('debug'))
         dd($pageBuilderAdapter->get());
 
+      //check parameters exist
+      foreach($content->routesParameters as $parameter){
+        if(!$request->has($parameter->identifier))
+          abort(404,'Insuficient parameters');
+      }
+
 
       if($content->is_page){
          return view('front::contents.page',[
             'content' => $content,
             'page' => $pageBuilderAdapter->get(),
+            'models' => $this->elements->getModelsByIdentifier(),
             'contentSettings' => $content->getSettings()
           ]);
       }
@@ -144,6 +180,22 @@ class ContentController extends Controller
       }
 
       abort(404);
+
+    }
+
+    public function showDocument($id)
+    {
+
+        $authorized = $this->boby->checkDocumentAvailable($id);
+
+        if(!$authorized) {
+            abort(500);
+        }
+
+        $result = $this->document->find($id);
+        $content = base64_decode($result->datas);
+
+        return response($content, 200)->header('Content-Type', $result->contentType);
 
     }
 

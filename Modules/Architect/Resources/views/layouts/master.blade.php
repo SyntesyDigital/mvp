@@ -51,8 +51,6 @@
 
             var error = "";
 
-
-
             @if(isset($errors))
 
                 @if (count($errors) > 0)

@@ -44,7 +44,7 @@ class MediaFieldsList extends Component {
 
     renderField(name, type, label)
     {
-        // console.log(this.state.fields);
+        // //console.log(this.state.fields);
 
         var field = this.state.fields[name];
 

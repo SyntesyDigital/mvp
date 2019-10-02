@@ -25,7 +25,7 @@ class MediaSelectModal extends Component {
         this._mediaEditModal = null;
         this._table = $('#table-medias');
 
-        console.log("MediaSelectModal :: construct");
+        //console.log("MediaSelectModal :: construct");
 
         this.onModalClose = this.onModalClose.bind(this);
         this.handleMediaSelected = this.handleMediaSelected.bind(this);
@@ -39,7 +39,7 @@ class MediaSelectModal extends Component {
     componentDidMount()
     {
 
-      console.log("MediaSelectModal :: componentDidMount");
+      //console.log("MediaSelectModal :: componentDidMount");
 
       this.initDropzone();
       //this.setDatatable();
@@ -60,7 +60,7 @@ class MediaSelectModal extends Component {
     {
         var _this = this;
 
-        console.log("MediaSelectModal :: initDropzone");
+        //console.log("MediaSelectModal :: initDropzone");
 
         var settings = {
             url: routes['medias.store'],
@@ -71,13 +71,16 @@ class MediaSelectModal extends Component {
             addRemoveLinks: false,
             maxFilesize: maxFilesize,
             paramName: paramName,
+            sending: function(file, xhr, formData) {
+  				    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+    				},
             /*
             thumbnail: function(file, dataUrl) {
                 return false;
             }*/
         };
 
-        console.log(settings);
+        //console.log(settings);
 
         this._dropzone = new Dropzone(identifier, settings);
 
@@ -140,27 +143,26 @@ class MediaSelectModal extends Component {
     setDatatable(mediaType)
     {
 
-        console.log("MediaSelectModal :: setDatatable route : ",mediaType,$(this.refs.main));
+        //console.log("MediaSelectModal :: setDatatable route : ",mediaType,$(this.refs.main));
 
         var _this = this;
 
         var table = $(this.refs.main).DataTable({
     	    language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
+    	        //"url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		processing: true,
           serverSide: true,
     	    pageLength: 20,
           language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
+              //url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
           },
     	    ajax: this.getRoute(mediaType),
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},
-                {data: 'preview', name: 'preview'},
-    	        {data: 'uploaded_filename', name: 'uploaded_filename'},
-                {data: 'type', name: 'type'},
-                {data: 'author', name: 'author'},
+              {data: 'preview', name: 'preview'},
+  	          {data: 'uploaded_filename', name: 'uploaded_filename'},
+              {data: 'type', name: 'type'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
@@ -171,7 +173,7 @@ class MediaSelectModal extends Component {
 
     destroyDatatable() {
 
-      console.log("MediaSelectModal :: destroy datatable ");
+      //console.log("MediaSelectModal :: destroy datatable ");
 
       $(this.refs.main).DataTable().destroy();
     }
@@ -179,7 +181,7 @@ class MediaSelectModal extends Component {
     refresh()
     {
 
-        console.log("MediaSelectModal :: refresh ");
+        //console.log("MediaSelectModal :: refresh ");
 
         var datatable = $(this.refs.main).DataTable();
         datatable.ajax.reload();
@@ -229,13 +231,14 @@ class MediaSelectModal extends Component {
 
     modalOpen()
     {
-        console.log("modalOpen");
+        //console.log("modalOpen");
         TweenMax.to($("#media-select"),0.5,{opacity:1,display:"block",ease:Power2.easeInOut});
     }
 
     modalClose() {
-        console.log("modalClose");
-      var self =this;
+        //console.log("modalClose");
+        var self =this;
+        
         TweenMax.to($("#media-select"),0.5,{display:"none",opacity:0,ease:Power2.easeInOut,onComplete:function(){
           self.setState({
             imageSelected : null
@@ -279,13 +282,11 @@ class MediaSelectModal extends Component {
                      <th></th>
                      <th>{Lang.get('fields.filename')}</th>
                      <th data-filter="select">{Lang.get('fields.tipus')}</th>
-                     <th data-filter="select">{Lang.get('fields.author')}</th>
                      <th></th>
                  </tr>
               </thead>
               <tfoot>
                  <tr>
-                     <th></th>
                      <th></th>
                      <th></th>
                      <th></th>

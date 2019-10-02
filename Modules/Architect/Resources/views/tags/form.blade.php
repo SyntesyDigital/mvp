@@ -34,12 +34,12 @@
                 <ul class="dropdown-menu dropdown-menu-right default-padding">
                     <li class="dropdown-header"></li>
                     <li>
-                        <a href="{{route('account')}}">
+                        <a href="#">
                             <i class="fa fa-plus-circle"></i>
                             &nbsp;{{Lang::get('architect::fields.new')}}
                     </li>
                     <li>
-                        <a href="{{route('account')}}" class="text-danger">
+                        <a href="#" class="text-danger">
                             <i class="fa fa-trash text-danger"></i>
                             &nbsp;
                             <span class="text-danger">{{Lang::get('architect::fields.delete')}}</span>

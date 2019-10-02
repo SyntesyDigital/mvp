@@ -20,22 +20,13 @@ class MediaRepository extends BaseRepository
 
     public function getDatatable()
     {
-        $medias = Media::leftJoin('users', 'users.id', '=', 'medias.author_id')
-            ->select(
-                'medias.*',
-                'users.firstname',
-                'users.lastname'
+        $medias = Media::select(
+                'medias.*'
             )
             ->type(request('type'))
             ->orderBy('created_at', 'desc');
 
         return Datatables::of($medias)
-            ->filterColumn('author', function ($query, $keyword) {
-                $query->whereRaw("CONCAT(users.firstname,' ',users.lastname) like ?", ["%{$keyword}%"]);
-            })
-            ->addColumn('author', function ($item) {
-                return $item->author->full_name;
-            })
             ->addColumn('preview', function ($item) {
                 switch($item->type) {
                     case "image":
@@ -52,10 +43,10 @@ class MediaRepository extends BaseRepository
 
                 $html = "";
 
-                //$html .= '<a href="'..'" target="_blank" class="btn btn-sm" data-id="'.$item->id.'"><i class="fa fa-pencil"> &nbsp; Editar</a>';
+                //$html .= '<a href="'..'" target="_blank" class="btn btn-sm" data-id="'.$item->id.'"><i class="fa fa-pencil-alt"> &nbsp; Editar</a>';
 
                 if($item->type == "image") {
-                    $html .= '<a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;';
+                    $html .= '<a href="#" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil-alt"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;';
                 }
 
                 $html .= '<a href="#" class="btn btn-link text-danger toogle-delete" data-toogle="delete" data-ajax="'.route('medias.delete', $item).'" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;';

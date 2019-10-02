@@ -82,7 +82,6 @@ class CreateMedia
                 'uploaded_filename' => $this->file->getClientOriginalName(),
                 'type' => $this->getFileType(),
                 'mime_type' => $this->getFileMimeType(),
-                'author_id' => Auth::user()->id,
                 'metadata' => $this->metadata ? $this->metadata : null
             ])
             : false;

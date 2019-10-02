@@ -10,8 +10,6 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 
-use App\Models\User;
-
 use Modules\Architect\Jobs\Typology\CreateTypology;
 use Modules\Architect\Jobs\Typology\UpdateTypology;
 
@@ -53,7 +51,6 @@ class TasksUrlsTest extends TestCase
         'content' => [
             'status' => 0,
             'typology_id' => null,
-            'author_id' => null,
             'is_page' => false,
             'translations' => [
                 'es' => true,
@@ -169,7 +166,6 @@ class TasksUrlsTest extends TestCase
         $attributes = $attributes ? $attributes : $this->attributes['content'];
 
         $attributes['typology_id'] = !$attributes['is_page'] ? Typology::first()->id : null;
-        $attributes['author_id'] = User::first()->id;
 
         return (new CreateContent($attributes))->handle();
     }
@@ -205,7 +201,6 @@ class TasksUrlsTest extends TestCase
         $attributes = $this->attributes["content"];
 
         $attributes['typology_id'] = Typology::first()->id;
-        $attributes['author_id'] = User::first()->id;
 
         $attributes["fields"][1]["value"] = [
             'es' => 'mi-noticias-spanish-modificada',
@@ -593,7 +588,6 @@ class TasksUrlsTest extends TestCase
 
 
         // 3. Update Page 1
-        $attributes1['author_id'] = User::first()->id;
         $attributes1["fields"][1]["value"] = [
             'es' => 'mi-pagina-1-modificada',
             'en' => 'my-page-1-modified',

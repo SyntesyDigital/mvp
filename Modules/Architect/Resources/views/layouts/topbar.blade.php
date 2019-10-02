@@ -26,18 +26,14 @@
                       <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                              {{Lang::get('architect::header.hello')}} {{Auth::user()->firstname}},
+                              {{substr(Auth::user()->lastname,0,15)}}
+                              {{strlen(Auth::user()->lastname) > 15 ? '...' : ''}}
                               <b class="caret"></b>
                               <div class="ripple-container"></div>
                             </a>
                               <ul class="dropdown-menu dropdown-menu-right default-padding">
                                   <li class="dropdown-header"></li>
-                                  <li>
-                                      <a href="{{route('users.show',Auth::user()->id)}}">
-                                          <i class="fa fa-user"></i>
-                                          &nbsp;{{Lang::get('architect::header.my_profile')}}
-                                      </a>
-                                  </li>
+
                                   <li>
                                       <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                           <i class="fa fa-sign-out"></i> &nbsp; {{Lang::get('architect::header.disconnect')}}

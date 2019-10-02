@@ -4,10 +4,10 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Project name
-set('application', 'Architect IGA');
+set('application', 'Arilim');
 
 // Project repository
-set('repository', 'git@bitbucket.org:syntesy/architect-iga.git');
+set('repository', 'git@bitbucket.org:syntesy/arilim.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -16,17 +16,17 @@ set('git_tty', true);
 add('shared_files', []);
 add('shared_dirs', []);
 
-set('keep_releases', 10);
+set('keep_releases', 5);
 
 // Writable dirs by web server
 add('writable_dirs', []);
 
 
 // Hosts
-host('bitbucket@architect-iga.syntesy.io')
+host('bitbucket@arilim-iga.syntesy.io')
     ->stage('stage')
     ->set('branch', 'dev')
-    ->set('deploy_path', '/var/www/architect-iga.syntesy.io');
+    ->set('deploy_path', '/var/www/arilim-iga.syntesy.io');
 
 // Tasks
 

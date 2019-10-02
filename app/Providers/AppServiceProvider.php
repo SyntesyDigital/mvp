@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Config;
+use Illuminate\Support\Facades\Cache;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        // load roles
+        foreach(Config::get('roles') as $k => $v) {
+            if(!defined($k)) {
+                define($k, $v);
+            }
+        }
+
+        if(request('cache-clear')) {
+            Cache::flush();
+        }
     }
 
     /**
@@ -24,5 +37,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+      foreach (glob(app_path().'/Helpers/*.php') as $filename){
+          require_once($filename);
+      }
+
     }
 }

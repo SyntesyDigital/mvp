@@ -80,7 +80,6 @@ class DuplicateContent
 
         $content->update([
             'status' => Content::STATUS_DRAFT,
-            'author_id' => Auth::user()->id,
             'parent_id' => $this->content->parent_id
         ]);
 

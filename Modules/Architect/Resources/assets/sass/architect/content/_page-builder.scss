@@ -5,7 +5,7 @@
 
   .empty-item{
     border:1px dashed #ccc;
-    
+
     a.btn.btn-link {
       padding: 12px 0px;
 
@@ -169,8 +169,9 @@
       }
 
       .btn-link{
-        padding: 5px 7px;
+        padding: 2px 7px;
         color:$text-color;
+        font-size: 16px;
 
         &.text-danger{
           color:$text-color;
@@ -260,8 +261,9 @@
         }
 
         .btn-link{
-          padding: 5px 7px;
+          padding: 2px 7px;
           color:$text-color;
+          font-size: 16px;
 
           &.text-danger{
             color:$text-color;

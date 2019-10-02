@@ -2,16 +2,8 @@
 
 namespace Modules\Architect\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Auth;
-use Modules\Architect\Http\Requests\SaveContent;
 
-use Modules\Extranet\Repositories\BobyRepository;
-
-use App\Jobs\Login;
 
 class ArchitectController extends Controller
 {

@@ -31,7 +31,7 @@ class MediaCropModal extends Component {
 
     componentDidMount()
     {
-      // console.log("MediaEditModal :: open");
+      // //console.log("MediaEditModal :: open");
       //TO TEST modal
       //this.modalOpen();
     }
@@ -80,8 +80,8 @@ class MediaCropModal extends Component {
     onCropDone()
     {
       // image in dataUrl
-      //console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
-      //console.log(this.refs.cropper);
+      ////console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+      ////console.log(this.refs.cropper);
     }
 
     setCurrentFormat(event)

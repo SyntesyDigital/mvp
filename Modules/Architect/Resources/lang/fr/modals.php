@@ -20,6 +20,7 @@ return [
     'max_elements'    => 'Nombre maximum d\'éléments',
     'indica_max_elements'    => 'Indiquez le nombre maximum d\'éléments',
     'max_elements_page'    => 'Nombre maximum d\'éléments pour pàge',
+    'pagination'      => 'Pagination',
     'indica_max_elements_page'    => 'Indiquez le nombre maximum d\'éléments pour page',
     'search_field'        => 'champ de recherche',
     'indica_tipology_text_identifier' => 'Indiquer l\'identifiant du texte de la typologie',
@@ -49,6 +50,11 @@ return [
     'edit_slug_alert' => 'La modification de l\'identifiant peut entraîner des modifications importantes dans la mise en page finale. Souhaitez-vous modifier le champ ?',
     'max_size' => 'Taille maximum',
     'cut media' => 'Couper',
-    'select_right_list' => 'Sélectionnez une option dans la liste à droite'
-
+    'select_right_list' => 'Sélectionnez une option dans la liste à droite',
+    'element' => 'Element',
+    'collapsable' => 'Repliable',
+    'collapsed' => 'Initialment replié',
+    'header' => 'Entête',
+    'doubleColumn' => 'Deux colonnes',
+    'excel' => 'Exportable pour exceller'
 ];

@@ -32,8 +32,7 @@ class Media extends Model
          'mime_type',
          'stored_filename',
          'uploaded_filename',
-         'metadata',
-         'author_id'
+         'metadata'
      ];
 
     /**
@@ -42,11 +41,6 @@ class Media extends Model
      * @var array
      */
     protected $hidden = [];
-
-    public function author()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'author_id');
-    }
 
     public function getMetaJSON()
     {

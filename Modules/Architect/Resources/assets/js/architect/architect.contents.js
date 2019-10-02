@@ -18,19 +18,18 @@ architect.contents = {
         var _this = this;
 
         var table = _this._settings.table.DataTable({
-    		processing: true,
-            serverSide: true,
-            order: [],
-             pageLength: 10,
-              language: {
-                  url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
-              },
+  		    processing: true,
+          serverSide: true,
+          order: [],
+          pageLength: 10,
+          language: {
+              //url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/"+Lang.get('datatables.json')+".json"
+          },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
                 {data: 'title', name: 'title'},
                 {data: 'typology', name: 'typology'},
                 {data: 'updated', name: 'updated'},
-                {data: 'author', name: 'author'},
                 {data: 'status', name: 'status'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],

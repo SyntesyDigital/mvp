@@ -5,6 +5,8 @@ namespace Modules\Architect\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Routing\Router;
+use Illuminate\Foundation\AliasLoader;
+use Config;
 
 class ArchitectServiceProvider extends ServiceProvider
 {
@@ -27,7 +29,25 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
         $router->aliasMiddleware('DetectUserLocale', \Modules\Architect\Http\Middleware\DetectUserLocale::class);
+
+        // FIXME : don't know if necesary
+        //$this->registerAliases();
+    }
+
+    public function registerAliases()
+    {
+        $this->app->booting(function() {
+            $loader = AliasLoader::getInstance();
+            $aliases = Config::get('architect.aliases');
+
+            if(is_array($aliases)) {
+                foreach($aliases as $alias => $class) {
+                    $loader->alias($alias, $class);
+                }
+            }
+        });
     }
 
     /**

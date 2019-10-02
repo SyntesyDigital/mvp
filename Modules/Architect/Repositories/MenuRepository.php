@@ -25,7 +25,7 @@ class MenuRepository extends BaseRepository
         return Datatables::of(Menu::all())
             ->addColumn('action', function ($item) {
                 return '
-                <a href="'.route('menu.show', $item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;
+                <a href="'.route('menu.show', $item).'" class="btn btn-link toogle-edit" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil-alt"></i> '.Lang::get("architect::datatables.edit").'</a> &nbsp;
                 <a href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('menu.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> '.Lang::get("architect::datatables.delete").'</a> &nbsp;
                 ';
             })

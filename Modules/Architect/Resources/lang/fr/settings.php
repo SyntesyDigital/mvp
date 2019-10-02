@@ -9,7 +9,6 @@ return [
     'menu'        => 'Menu',
     'templates'   => 'Modèle',
     'typologies'  => 'Tipologies',
-    'models'      => 'Modeles',
     'routes_parameters' => 'Parametres',
     'elements'    => 'Éléments',
     'list'        => 'Listes'

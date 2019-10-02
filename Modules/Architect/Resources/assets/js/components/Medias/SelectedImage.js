@@ -14,7 +14,7 @@ class SelectedImage extends Component {
             <div className="image" style={{backgroundImage:"url("+this.props.url+")"}} ></div>
 
             {/*
-            <a href="" className="btn btn-default"><i className="fa fa-pencil"></i> Editar</a>
+            <a href="" className="btn btn-default"><i className="fa fa-pencil-alt"></i> Editar</a>
             */}
 
             <ul>
@@ -36,7 +36,7 @@ class SelectedImage extends Component {
                 <b>{Lang.get('fields.author')}</b> : {this.props.author}
               </li>
               <li>
-                <a href="" className="btn btn-link" onClick={this.props.onEdit}><i className="fa fa-pencil"></i> {Lang.get('fields.edit')}</a>
+                <a href="" className="btn btn-link" onClick={this.props.onEdit}><i className="fa fa-pencil-alt"></i> {Lang.get('fields.edit')}</a>
                 {/*
                 <a href="" className="btn btn-link text-danger"><i className="fa fa-trash"></i> Esborrar</a>
                 */}

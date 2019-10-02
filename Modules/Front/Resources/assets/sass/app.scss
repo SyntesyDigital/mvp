@@ -5,11 +5,14 @@
 @import "fonts";
 @import "variables";
 
-@import '~leaflet/dist/leaflet.css';
+//@import '~leaflet/dist/leaflet.css';
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 //@import "~font-awesome/scss/font-awesome";
+
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 @import 'helpers/init';
 @import 'helpers/common';
@@ -26,6 +29,13 @@
 @import 'modal';
 @import 'form';
 @import 'datepicker';
+@import 'login';
+@import 'elementFiles';
+@import 'elementForms';
+@import 'elementTables';
+@import 'totalBox';
+@import 'boxButton';
+
 
 //Extras
 

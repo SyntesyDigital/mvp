@@ -18,8 +18,6 @@ use Modules\Architect\Jobs\PageLayout\DeletePageLayout;
 
 // Models
 use Modules\Architect\Entities\PageLayout;
-use App\Models\User;
-use App\Models\Role;
 
 
 class PageLayoutController extends Controller

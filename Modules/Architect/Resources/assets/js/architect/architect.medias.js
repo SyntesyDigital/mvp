@@ -95,14 +95,14 @@ architect.medias = {
 
         var table = _this._settings.table.DataTable({
     	    language: {
-    	        "url": "/modules/architect/plugins/datatables/locales/french.json"
+    	        //"url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
     		  processing: true,
           //serverSide: true, Disabled beacuse break the Order
           ordering: true,
     	    pageLength: 20,
           language: {
-              url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
+              //url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/"+Lang.get('datatables.json')+".json"
           },
     	    ajax: _this._settings.table.data('url'),
     	    columns: [
@@ -110,8 +110,7 @@ architect.medias = {
               {data: 'preview', name: 'preview'},
   	          {data: 'uploaded_filename', name: 'uploaded_filename'},
               {data: 'type', name: 'type'},
-              {data: 'author', name: 'author'},
-    	        {data: 'action', name: 'action', orderable: false, searchable: false}
+              {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
             initComplete: function(settings, json) {
 

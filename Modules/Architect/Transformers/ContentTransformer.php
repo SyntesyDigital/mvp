@@ -10,7 +10,7 @@ use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 
 // FIXME : move this or find a better way :)
-use Modules\Front\Adapters\PageBuilderAdapter;
+use Modules\Turisme\Adapters\PageBuilderAdapter;
 
 use Modules\Architect\Transformers\TagTransformer;
 use Modules\Architect\Transformers\CategoryTransformer;

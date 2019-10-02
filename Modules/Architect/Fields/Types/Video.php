@@ -11,7 +11,7 @@ use Modules\Architect\Entities\Language;
 class Video extends Field implements FieldInterface
 {
     public $type = 'video';
-    public $icon = 'fa-video-camera';
+    public $icon = 'fas fa-video';
     public $name = 'VIDEO';
 
     public $rules = [

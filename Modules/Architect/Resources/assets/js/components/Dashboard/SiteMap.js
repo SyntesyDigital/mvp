@@ -179,7 +179,7 @@ export default class SiteMap extends Component {
                       <li><b>{Lang.get('home.url')}</b> : {this.state.selectedInfo.url}</li>
                       <li>
                         <a href={this.state.selectedInfo.url} target="_blank"><i className="fa fa-eye"></i> {Lang.get('home.view')}</a> |
-                        &nbsp;<a href={"/architect/contents/"+this.state.selectedInfo.id} target="_blank"><i className="fa fa-pencil"></i> {Lang.get('home.edit')}</a>
+                        &nbsp;<a href={"/architect/contents/"+this.state.selectedInfo.id} target="_blank"><i className="fa fa-pencil-alt"></i> {Lang.get('home.edit')}</a>
                       </li>
                     </ul>
                   </div>

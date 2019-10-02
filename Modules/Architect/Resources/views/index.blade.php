@@ -12,8 +12,7 @@
 
       <div class="dashboard-items">
         <div class="row">
-
-            @if(Auth::user()->hasRole(["admin"]))
+            @if(has_roles([ROLE_SUPERADMIN,ROLE_SYSTEM]))
               <div class="col-xs-6">
                 <!-- React Table.js -->
                 <div id="dashboard-table"
@@ -29,13 +28,13 @@
                   route={{route('contents.modal.data')."?typology_id=1"}}
                 ></div>
               </div>
-
-
-              <div class="col-xs-12">
-                <!-- React SiteMap.js-->
-                <div id="dashboard-sitemap"></div>
-              </div>
             @endif
+
+            <div class="col-xs-12">
+              <!-- React SiteMap.js-->
+              <div id="dashboard-sitemap"></div>
+            </div>
+
 
         </div>
       </div>

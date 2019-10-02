@@ -10,8 +10,6 @@ use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
 
-use App\Models\User;
-
 use Modules\Architect\Jobs\Typology\CreateTypology;
 use Modules\Architect\Jobs\Typology\UpdateTypology;
 
@@ -30,7 +28,6 @@ class ContentPageTest extends TestCase
         'page' => [
             'status' => 0,
             'typology_id' => null,
-            'author_id' => null,
             'is_page' => true,
             'definition' => [],
             'translations' => [
@@ -82,7 +79,6 @@ class ContentPageTest extends TestCase
         $attributes = $attributes ? $attributes : $this->attributes['page'];
 
         $attributes['typology_id'] = null;
-        $attributes['author_id'] = User::first()->id;
 
         return (new CreateContent($attributes))->handle();
     }

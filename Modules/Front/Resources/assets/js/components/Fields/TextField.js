@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import {connect} from 'react-redux';
 
 class ImageField extends Component {
 

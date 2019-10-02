@@ -18,8 +18,7 @@ use Modules\Architect\Repositories\Criterias\ContentModalDatatableCriteria;
 class ContentRepository extends BaseRepository
 {
     protected $fieldSearchable = [
-    	'typology_id',
-        'author_id',
+    	  'typology_id',
         'parent_id',
         'is_page',
         'published_at',
@@ -42,16 +41,12 @@ class ContentRepository extends BaseRepository
     public function getDatatable($options = [])
     {
         $results = Content::leftJoin('contents_fields', 'contents.id', '=', 'contents_fields.content_id')
-            ->leftJoin('users', 'contents.author_id', '=', 'users.id')
             ->select(
-                'contents.*',
-                'users.firstname',
-                'users.lastname'
+                'contents.*'
             )
             ->groupBy('contents.id')
             ->orderBy('contents.updated_at','DESC')
             ->with(
-                'author',
                 'typology',
                 'urls',
                 'page',
@@ -95,13 +90,6 @@ class ContentRepository extends BaseRepository
 
         return Datatables::of($results)
 
-            ->addColumn('author', function ($item) {
-                return isset($item->author) ? $item->author->full_name : null;
-            })
-            ->filterColumn('author', function ($query, $author_id) {
-                $query->whereRaw("contents.author_id = ?", $author_id);
-            })
-
             ->addColumn('title', function ($item) {
                 $title = isset($item->title) ? $item->title : '';
 
@@ -139,10 +127,10 @@ class ContentRepository extends BaseRepository
                   $buttons .= '<a title="Previsualitzar" href="'.route('preview', $item->id).'" class="btn btn-link" target="_blank"><i class="fa fa-eye"></i> </a> &nbsp;';
                 //}
 
-                $buttons .= '<a title="'.Lang::get("architect::datatables.edit").'" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil"></i> </a> &nbsp';
+                $buttons .= '<a title="'.Lang::get("architect::datatables.edit").'" href="' . route('contents.show', $item) . '" class="btn btn-link" data-toogle="edit" data-id="'.$item->id.'"><i class="fa fa-pencil-alt"></i> </a> &nbsp';
 
                 //si no es ( pagina y author a la vez add remove)
-                if(!($item->page && Auth::user()->hasRole(["author"]))){
+                if(!($item->page && has_roles([ROLE_ADMIN]) )){
                   $buttons .= '<a title="'.Lang::get("architect::datatables.delete").'" href="#" class="btn btn-link text-danger" data-toogle="delete" data-ajax="' . route('contents.delete', $item) . '" data-confirm-message="'.Lang::get('architect::datatables.sure').'"><i class="fa fa-trash"></i> </a> &nbsp';
                 }
 
@@ -181,13 +169,8 @@ class ContentRepository extends BaseRepository
                 }
                 return isset($item->typology) ? ucfirst(strtolower($item->typology->name)) : null;
             })
-            ->addColumn('author', function ($item) {
-                return isset($item->author) ? $item->author->full_name : null;
-            })
             ->addColumn('action', function ($item) {
-                return '
-                    <a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> '.Lang::get("architect::fields.add").'</a> &nbsp;
-                ';
+                return '<a href="" id="item-'.$item->id.'" data-content="'.base64_encode($item->toJson()).'" class="btn btn-link add-item" data-type="'.( isset($item->typology) ? $item->typology->name : null ).'" data-name="'.$item->getField('title').'" data-id="'.$item->id.'"><i class="fa fa-plus"></i> '.Lang::get("architect::fields.add").'</a> &nbsp;';
             })
             ->make(true);
     }
@@ -254,7 +237,6 @@ class ContentRepository extends BaseRepository
               "title" => $page->getTitleAttribute(),
               "level" => $level,
               "status" => $page->status,
-              "author" => $page->author->getFullNameAttribute(),
               "url" => $page->url
             ];
 
@@ -271,7 +253,7 @@ class ContentRepository extends BaseRepository
       $homeId = null;
 
       foreach($pages as $page) {
-        if(strtolower($page->title) == 'home'){
+        if(strtolower($page->title) == 'accueil'){
 
           $homeId = $page->id;
 
@@ -280,7 +262,6 @@ class ContentRepository extends BaseRepository
             "title" => $page->title,
             "level" => $level,
             "status" => $page->status,
-            "author" => $page->author->getFullNameAttribute(),
             "url" => $page->url
           ];
 
@@ -298,7 +279,6 @@ class ContentRepository extends BaseRepository
             "title" => $page->getTitleAttribute(),
             "level" => $level,
             "status" => $page->status,
-            "author" => $page->author->getFullNameAttribute(),
             "url" => $page->url
           ];
 

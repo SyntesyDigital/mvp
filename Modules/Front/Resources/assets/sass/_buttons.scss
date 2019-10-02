@@ -3,11 +3,13 @@
   background-color:$brand-light-color-1;
   @extend .rounded;
   text-transform:uppercase;
-  padding:9px 28px;
+  padding:9px 25px;
   @include font(14,16,400);
   color:#000;
-  border:none;
-
+  border-radius:0;
+  i{
+    margin-right: 10px;
+  }
   @extend .animate;
 
   &:hover {
@@ -29,6 +31,17 @@
 
   &:visited{
     background-color:auto;
+  }
+
+  &.btn-primary{
+    background-color:$secondary-color;
+    color:#fff;
+    border-color:$secondary-color;
+    &:focus, &:active, &:active:focus, &:hover {
+      background-color:$primary-color;
+      color:#fff;
+      border-color:$primary-color;
+    }
   }
 
 }

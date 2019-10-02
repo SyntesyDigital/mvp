@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 // Models
 use Modules\Architect\Entities\Typology;
-use App\Models\User;
-use App\Models\Role;
 
 // Create
 use Modules\Architect\Http\Requests\Typology\CreateTypologyRequest;

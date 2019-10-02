@@ -45,7 +45,6 @@ class Content extends Model
         'status',
         'typology_id',
         'user_id',
-        'author_id',
         'parent_id',
         'is_page',
         'published_at',
@@ -96,16 +95,6 @@ class Content extends Model
         return $this->belongsToMany('\Modules\Architect\Entities\Category', 'contents_categories',  'content_id', 'category_id');
     }
 
-    public function parameters()
-    {
-        return $this->belongsToMany('\Modules\Extranet\Entities\RouteParameter', 'contents_routes_parameters',  'content_id', 'route_parameter_id');
-    }
-
-    public function author()
-    {
-        return $this->hasOne('App\Models\User', "id", "author_id");
-    }
-
     public function page()
     {
         return $this->belongsTo('\Modules\Architect\Entities\Page', 'id', 'content_id');
@@ -113,7 +102,18 @@ class Content extends Model
 
     public function parent()
     {
-    	return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
+    	  return $this->hasOne('\Modules\Architect\Entities\Content', 'id', 'parent_id');
+    }
+
+    public function routesParameters()
+    {
+        return $this->belongsToMany('\Modules\Extranet\Entities\RouteParameter', 'contents_routes_parameters',  'content_id', 'route_parameter_id')
+          ->withPivot('preview_default_value');
+    }
+
+    public function isStatusPublished()
+    {
+        return $this->status == self::STATUS_PUBLISHED;
     }
 
     public function getStringStatus()
@@ -246,10 +246,5 @@ class Content extends Model
         return $tagsId ? $query->whereHas('tags', function($q) use($tagsId) {
             $q->whereIn('tag_id', $tagsId);
         }) : $query;
-    }
-
-    public function scopeByAuthorId(Builder $query, $authorId)
-    {
-        return $query->where('author_id', $authorId);
     }
 }

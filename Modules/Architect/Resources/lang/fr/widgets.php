@@ -38,5 +38,11 @@ return [
     'CONTACT_FORM_PRESS' => 'Formulaire de presse',
     'SEPARATOR' => 'Séparateur',
     'SEARCH' => 'Chercheur',
-    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale'
+    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale',
+    'ELEMENT_FORM' => 'Formulaire',
+    'ELEMENT_TABLE' => 'Tableau principaux',
+    'ELEMENT_FILE' => 'Fiche',
+    'ELEMENT_SECONDARY_TABLE' => 'Tableau secondaire',
+    'TOTAL_BOX' => 'Boîte totale',
+    'BOX_BUTTON' => 'Boîte à boutons'
 ];

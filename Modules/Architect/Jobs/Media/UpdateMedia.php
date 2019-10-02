@@ -42,7 +42,32 @@ class UpdateMedia
 
             if($data) {
                 $path = str_replace('/storage/', '/public/', $f['url']);
-                $imageData = (string) Image::make($data)->encode();
+                $image = Image::make($data);
+                /*Dani fix images */
+                if($f['ratio'] !== null){
+                  if($f['width']/$f['height'] >=  $image->width()/$image->height()){
+                    //control height of new image
+                    if($image->height() > $f['height']){
+                      $image->resize(null, $f['height'], function ($constraint) {
+                          $constraint->aspectRatio();
+                      });
+                      //we do that in case aspect ratio of selector has been modified or incorrect
+                      $image->resizeCanvas($f['width'], $f['height']);
+                    }
+                  }else{
+                    //control width of new image
+                    if($image->width() > $f['width']){
+                      $image->resize($f['widht'], null,  function ($constraint) {
+                          $constraint->aspectRatio();
+                      });
+                      //we do that in case aspect ratio of selector has been modified or incorrect
+                      $image->resizeCanvas($f['width'], $f['height']);
+                    }
+                  }
+                }
+                /* End dani fix images */
+                $imageData = (string) $image->encode();
+
 
                 Storage::put($path, $imageData);
             }

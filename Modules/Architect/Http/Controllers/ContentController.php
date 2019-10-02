@@ -32,8 +32,6 @@ use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Tag;
 use Modules\Architect\Entities\Category;
-use App\Models\User;
-use App\Models\Role;
 
 use Modules\Architect\Fields\FieldsReactAdapter;
 use Modules\Architect\Fields\FieldsReactPageBuilderAdapter;
@@ -41,19 +39,15 @@ use Modules\Architect\Fields\FieldsReactPageBuilderAdapter;
 class ContentController extends Controller
 {
 
-    public function __construct(ContentRepository $contents, CategoryRepository $categories, UserRepository $users) {
+    public function __construct(ContentRepository $contents, CategoryRepository $categories) {
         $this->contents = $contents;
         $this->categories = $categories;
-        $this->users = $users;
     }
 
     public function index(Request $request)
     {
         return view('architect::contents.index', [
-            "typologies" => Typology::all(),
-            "users" => $this->users->getAllByRoles(['admin', 'editor', 'author'])->mapWithKeys(function($user){
-                return [$user->id => $user->full_name];
-            })
+            "typologies" => Typology::all()
         ]);
     }
 
@@ -93,13 +87,12 @@ class ContentController extends Controller
         }
 
         $data = [
-            'content' => $content->load('tags', 'categories', 'languages'),
+            'content' => $content->load('tags', 'categories', 'languages','routesParameters'),
             'typology' => $content->typology,
             'fields' => $content->typology ? (new FieldsReactAdapter($content))->get() : null,
             'page' => $content->is_page ? (new FieldsReactPageBuilderAdapter($content))->get() : null,
             'settings' => $content->settings,
             'pages' => $this->contents->getTreeWithHyphens(),
-            'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
         ];
@@ -118,7 +111,6 @@ class ContentController extends Controller
             'page' => null,
             'settings' => null,
             'pages' => $this->contents->getTreeWithHyphens(),
-            'users' => User::all(),
             'tags' => Tag::all(),
             'categories' => $this->categories->getTree()
         ]);
@@ -126,6 +118,7 @@ class ContentController extends Controller
 
     public function store(CreateContentRequest $request)
     {
+
         $content = dispatch_now(CreateContent::fromRequest($request));
 
         return $content ? response()->json([
@@ -151,6 +144,7 @@ class ContentController extends Controller
 
     public function update(Content $content, CreateContentRequest $request)
     {
+
         $content = dispatch_now(UpdateContent::fromRequest($content, $request));
 
         return $content ? response()->json([

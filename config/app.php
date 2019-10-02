@@ -160,11 +160,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
+        //Zizaco\Entrust\EntrustServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         //Barryvdh\Debugbar\ServiceProvider::class,
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class
     ],
 
     /*
@@ -214,7 +214,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        //'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
         'Countries' => PeterColes\Countries\CountriesFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,

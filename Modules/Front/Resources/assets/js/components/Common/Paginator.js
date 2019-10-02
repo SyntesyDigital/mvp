@@ -20,14 +20,14 @@ class Paginator extends Component {
         const nextPage = this.props.currPage < this.props.lastPage ? (this.props.currPage + 1) : this.props.lastPage;
         const currPage = this.props.currPage;
         const lastPage = this.props.lastPage;
-
+        /*
+        <!--li className="start"> <a href="#" onClick={(e) => this.onPageChange(1, e)}>&lt;&lt;</a> </li-->
+        <!--li className="end"><a href="#" onClick={(e) => this.onPageChange(lastPage, e)}> &gt;&gt;</a></li-->
+        */
         console.log("Paginator :: currPage => ",currPage);
         return (
                 <ul className="navigation">
-                    <li className="start"> <a href="#" onClick={(e) => this.onPageChange(1, e)}>&lt;&lt;</a> </li>
-                    <li className="before"><a href="#" onClick={(e) => this.onPageChange(prevPage, e)}>&lt;</a></li>
-                
-
+                  <li className="before"><a href="#" onClick={(e) => this.onPageChange(prevPage, e)}>&lt;</a></li>
                     {Array.apply(null, Array(this.props.lastPage + 1)).map(function(item, i){
                         if(i > 0){
                             if(i == currPage -3 ){
@@ -56,8 +56,7 @@ class Paginator extends Component {
 
 
                     }, this)}
-                    <li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> &gt;</a></li>
-                    <li className="end"><a href="#" onClick={(e) => this.onPageChange(lastPage, e)}> &gt; &gt;</a></li>
+                  <li className="next"><a href="#" onClick={(e) => this.onPageChange(nextPage, e)}> &gt;</a></li>
                 </ul>
         );
     }

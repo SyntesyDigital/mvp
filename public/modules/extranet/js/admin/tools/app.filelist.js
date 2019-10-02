@@ -228,7 +228,7 @@ app.filelist = {
             node += "<div class='col-md-12 dragable-option' draggable='true' ondragstart='app.filelist.dragstart(event)'  ondragenter='app.filelist.dragenter(event)' >"
                 +"<div class='content-add content-add-list'>"
                     +"<div class='tool-box'>"
-                        +"<a class='edit-action' num='"+i+"'><i class='fa fa-pencil'></i></a>"
+                        +"<a class='edit-action' num='"+i+"'><i class='fa fa-pencil-alt'></i></a>"
                         +"<a class='remove-action text-danger'  num='"+i+"' ><i class='fa fa-trash'></i></a>"
                     +"</div>"
                     +"<h4 class='filename-list'><i class='fa fa-file'></i> <b><span class='fname'>"+list_json[i].filename+"</span></b></h4>"

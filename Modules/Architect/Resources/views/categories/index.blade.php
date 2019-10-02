@@ -66,7 +66,7 @@
     	  			//'<i class="fa fa-bars"></i> &nbsp; '+category.name+
               category.name+
     	  			'<div class="actions">'+
-    		  			'<a href="'+routes.showItem.replace(':id',category.id)+'" class="btn btn-link"><i class="fa fa-pencil"></i> &nbsp; '+Lang.get('fields.edit')+'</a>&nbsp;'+
+    		  			'<a href="'+routes.showItem.replace(':id',category.id)+'" class="btn btn-link"><i class="fa fa-pencil-alt"></i> &nbsp; '+Lang.get('fields.edit')+'</a>&nbsp;'+
     		  			'<a href="#" data-ajax="'+routes.deleteItem.replace(':id',category.id)+'" class="btn btn-link text-danger btn-delete"><i class="fa fa-trash"></i> &nbsp; '+Lang.get('fields.delete')+'</a>'+
     		  		'</div>'+
             '</div>'+

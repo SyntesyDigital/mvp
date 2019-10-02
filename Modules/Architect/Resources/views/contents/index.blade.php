@@ -23,14 +23,12 @@
                <th> {{Lang::get('architect::fields.name')}}</th>
                <th>{{Lang::get('architect::fields.tipus')}}</th>
                <th>{{Lang::get('architect::fields.updated')}}</th>
-               <th data-filter="select" data-values="{{base64_encode($users->toJson())}}">{{Lang::get('architect::fields.author')}}</th>
                <th>{{Lang::get('architect::fields.status')}}</th>
                <th></th>
            </tr>
         </thead>
         <tfoot>
            <tr>
-               <th></th>
                <th></th>
                <th></th>
                <th></th>

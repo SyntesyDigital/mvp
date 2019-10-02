@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Session;
+use Config;
+
+use App\Http\Requests\LoginRequest;
 use App\Jobs\Login;
 
 class LoginController extends Controller
@@ -40,13 +43,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function redirectTo()
+    public function login(LoginRequest $request)
     {
-        if(Auth::user()->hasRole('admin')) {
-          //login to WS
-          dispatch_now(new Login());
+        if(dispatch_now(Login::fromRequest($request))) {
+            return redirect($this->redirectTo);
         }
 
-        return '/architect';
+        throw ValidationException::withMessages([
+            $this->username() => [trans('auth.failed')],
+        ]);
     }
+    
 }

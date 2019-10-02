@@ -54,8 +54,8 @@ class MediaSelectedItem extends Component {
                 };
               }
 
-              console.log(media);
-              console.log(image);
+              //console.log(media);
+              //console.log(image);
 
               this.setState({
                   media: media,
@@ -83,7 +83,7 @@ class MediaSelectedItem extends Component {
                   name={this.state.media.uploaded_filename}
                   dimension={this.state.media.metadata.dimension}
                   filesize={this.state.media.metadata.filesize+" KB"}
-                  author={this.state.media.author.firstname+" "+this.state.media.author.lastname}
+                  //author={this.state.media.author.firstname+" "+this.state.media.author.lastname}
                   onEdit={this.props.onImageEdit}
                 />
               }
@@ -91,7 +91,7 @@ class MediaSelectedItem extends Component {
               {this.state.media.type == "application" &&
                 <SelectedFile
                   name={this.state.media.uploaded_filename}
-                  author={this.state.media.author.firstname+" "+this.state.media.author.lastname}
+                  //author={this.state.media.author.firstname+" "+this.state.media.author.lastname}
                 />
               }
 

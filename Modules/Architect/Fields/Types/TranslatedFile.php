@@ -11,7 +11,7 @@ use Modules\Architect\Entities\Language;
 class TranslatedFile extends Field implements FieldInterface
 {
     public $type = 'translated_file';
-    public $icon = 'fa-file-pdf-o';
+    public $icon = 'far fa-file-pdf';
     public $name = 'TRANSLATED_FILE';
 
     public $rules = [

@@ -1,11 +1,4 @@
 <?php return array (
-  'prettus/l5-repository' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
@@ -90,6 +83,13 @@
       'LaravelLocalization' => 'Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization',
     ),
   ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
   'nwidart/laravel-modules' => 
   array (
     'providers' => 
@@ -112,6 +112,27 @@
       'Countries' => 'PeterColes\\Countries\\CountriesFacade',
     ),
   ),
+  'prettus/l5-repository' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
+    ),
+  ),
+  'syntesy-digital/architect-installer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SyntesyDigital\\ArchitectInstaller\\ArchitectInstallerProvider',
+    ),
+  ),
+  'syntesy-digital/insurance-installer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SyntesyDigital\\InsuranceInstaller\\InsuranceInstallerProvider',
+    ),
+  ),
   'tightenco/ziggy' => 
   array (
     'providers' => 
@@ -128,42 +149,6 @@
     'aliases' => 
     array (
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
-    ),
-  ),
-  'zizaco/entrust' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Zizaco\\Entrust\\EntrustServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Entrust' => 'Zizaco\\Entrust\\EntrustFacade',
-    ),
-  ),
-  'barryvdh/laravel-debugbar' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Debugbar' => 'Barryvdh\\Debugbar\\Facade',
-    ),
-  ),
-  'laravel-notification-channels/facebook-poster' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NotificationChannels\\FacebookPoster\\FacebookPosterServiceProvider',
-    ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
 );

@@ -7,6 +7,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Modules\Architect\Rules\ContentField;
 use Modules\Architect\Rules\PageField;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class CreateContentRequest extends FormRequest
 {
     /**
@@ -19,7 +24,6 @@ class CreateContentRequest extends FormRequest
         if(request('is_page')) {
             return [
                 'status' => 'required',
-                'author_id' => 'required',
                 'fields' => ['required', new PageField]
             ];
         }
@@ -27,10 +31,20 @@ class CreateContentRequest extends FormRequest
         return [
             'status' => 'required',
             'typology_id' => 'required',
-            'author_id' => 'required',
             'fields' => ['required', new ContentField]
         ];
     }
+
+
+    protected function failedValidation(Validator $validator)
+     {
+         $errors = (new ValidationException($validator))->errors();
+
+         throw new HttpResponseException(response()->json([
+           'errors' => $errors,
+           'message' => trans('architect::rules.error')
+         ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+     }
 
     /**
      * Determine if the user is authorized to make this request.

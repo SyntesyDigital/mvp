@@ -80,7 +80,7 @@ class SelectorSettingsField extends Component {
 
     const {value,display} = this.state;
 
-    console.log("SelectorSettingsValue => ",value);
+    //console.log("SelectorSettingsValue => ",value);
 
     return (
       <div style={{display : display ? 'block' : 'none'}}>

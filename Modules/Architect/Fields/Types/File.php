@@ -10,7 +10,7 @@ use Modules\Architect\Entities\ContentField;
 class File extends Field implements FieldInterface
 {
     public $type = 'file';
-    public $icon = 'fa-file-pdf-o';
+    public $icon = 'far fa-file-pdf';
     public $name = 'FILE';
 
     public $rules = [

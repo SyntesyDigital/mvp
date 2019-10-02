@@ -150,7 +150,7 @@
             </div>
 
 
-            @if(Auth::user()->hasRole(["admin"]))
+            @if(has_roles([ROLE_SYSTEM,ROLE_SUPERADMIN]))
 
               <div class="row">
                   <div class="col-md-12">

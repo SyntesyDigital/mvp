@@ -52,9 +52,21 @@ class TypologyDropZone extends Component {
 		return result;
 	}
 
+	getMaxId() {
+		const fields = this.props.fields;
+
+		var maxId = 1;
+
+		for(var key in fields){
+			maxId = Math.max(fields[key].id,maxId);
+		}
+
+		return maxId;
+	}
+
 	addField(field) {
 		var field = {
-			id : this.props.fields.length + 1,
+			id : this.getMaxId() + 1,
 			type : field.type,
 			label : field.label,
 			icon : field.icon,

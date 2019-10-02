@@ -9,7 +9,7 @@ use Modules\Architect\Entities\Content;
 class Boolean extends Field implements FieldInterface
 {
     public $type = 'boolean';
-    public $icon = 'fa-check-square-o';
+    public $icon = 'fa-check-square';
     public $name = 'BOOLEAN';
 
     public $rules = [

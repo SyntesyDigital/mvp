@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul>
     <li class="{{ isset($display_pages) ? 'active' : '' }}">
-      <a href="{{route('contents')}}?display_pages=true" > <i class="fa fa-file-o"></i> <span class="text">{{Lang::get('architect::fields.pages')}}</span> </a>
+      <a href="{{route('contents')}}?display_pages=true" > <i class="far fa-file"></i> <span class="text">{{Lang::get('architect::fields.pages')}}</span> </a>
     </li>
   </ul>
   <hr />

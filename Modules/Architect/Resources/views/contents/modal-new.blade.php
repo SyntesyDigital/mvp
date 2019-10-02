@@ -27,11 +27,11 @@
               <div class="grid-items">
                 <div class="row">
 
-                    @if(Auth::user()->hasRole(["admin", "editor"]))
+                    @if(has_roles([ROLE_SYSTEM,ROLE_SUPERADMIN]))
                   <div class="col-xs-3">
                     <a href="{{route('contents.page.create')}}">
                       <div class="grid-item">
-                        <i class="fa fa-file-o"></i>
+                        <i class="far fa-file"></i>
                         <p class="grid-item-name">
                           {{Lang::get('architect::fields.page')}}
                         </p>

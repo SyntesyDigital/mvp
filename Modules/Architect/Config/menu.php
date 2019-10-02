@@ -7,7 +7,7 @@ return [
         "patterns" => [
             'architect'
         ],
-        "roles" => []
+        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN,ROLE_ADMIN]
     ],
 
     [
@@ -16,7 +16,16 @@ return [
         "patterns" => [
             'architect/contents*'
         ],
-        "roles" => ['admin']
+        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
+    ],
+
+    [
+        "route" => 'medias.index',
+        "label" => 'architect::header.media',
+        "patterns" => [
+            'architect/medias*'
+        ],
+        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN]
     ],
 
     [
@@ -25,8 +34,6 @@ return [
         "patterns" => [
             'architect/settings*'
         ],
-        "roles" => [
-            'admin'
-        ]
+        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN,ROLE_ADMIN]
     ],
 ];

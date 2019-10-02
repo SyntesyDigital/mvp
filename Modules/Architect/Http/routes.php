@@ -4,56 +4,13 @@
 Auth::routes();
 
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
 {
 
     Route::get('/', 'ArchitectController@index')->name('dashboard');
-
-    // Account
-    Route::post('/account/save', 'AccountController@save')->name('account.save');
-    Route::get('/account', 'AccountController@index')->name('account');
-
-    // Users
-    Route::get('/users', 'UserController@index')->name('users');
-    Route::get('/users/data', 'UserController@data')->name('users.data');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
-    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
-
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| CUSTOMER
-|--------------------------------------------------------------------------
-*/
-Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin|customer', 'DetectUserLocale'],
-  'prefix' => 'architect',
-  'namespace' => 'Modules\Architect\Http\Controllers'
-], function()
-{
-
-    Route::get('/', 'ArchitectController@index')->name('dashboard');
-
-    // Account
-    Route::post('/account/save', 'AccountController@save')->name('account.save');
-    Route::get('/account', 'AccountController@index')->name('account');
-
-    // Users
-    Route::get('/users', 'UserController@index')->name('users');
-    Route::get('/users/data', 'UserController@data')->name('users.data');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::get('/users/create', 'UserController@create')->name('users.create');
-    Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
-    Route::delete('/users/{user?}/delete', 'UserController@delete')->name('users.delete');
-    Route::get('/users/{user?}', 'UserController@show')->name('users.show');
 
 });
 
@@ -64,7 +21,7 @@ Route::group([
 |--------------------------------------------------------------------------
 */
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin|customer|candidate', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -76,6 +33,10 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::post('/file/upload', ['as' => 'upload-post', 'uses' => 'FileUploadController@postUpload']);
+
+    Route::get('/settings', 'ArchitectController@settings')->name('settings');
+    Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
+    Route::get('/contents/pages-tree', 'ContentController@pagesTree')->name('contents.pages-tree');
 });
 
 /*
@@ -85,7 +46,7 @@ Route::group([
 */
 
 Route::group([
-  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth:veos-ws','roles:ROLE_SUPERADMIN,ROLE_SYSTEM', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
@@ -122,8 +83,7 @@ Route::group([
   Route::post('/contents/{content?}/duplicate', 'ContentController@duplicate')->name('contents.duplicate');
   Route::get('/contents', 'ContentController@index')->name('contents');
   Route::get('/contents/data', 'ContentController@data')->name('contents.data');
-  Route::get('/contents/modal-data', 'ContentController@modalData')->name('contents.modal.data');
-  Route::get('/contents/pages-tree', 'ContentController@pagesTree')->name('contents.pages-tree');
+
   Route::post('/contents', 'ContentController@store')->name('contents.store');
   Route::get('/contents/show', 'ContentController@show')->name('contents.show');
   Route::get('/contents/page/create', 'ContentController@create')->name('contents.page.create');
@@ -143,7 +103,7 @@ Route::group([
   Route::put('/medias/{media?}/update', 'MediaController@update')->name('medias.update');
 
 
-  Route::get('/settings', 'ArchitectController@settings')->name('settings');
+  //Route::get('/settings', 'ArchitectController@settings')->name('settings');
 
   // Menu
   Route::get('/settings/menu', 'MenuController@index')->name('menu.index');

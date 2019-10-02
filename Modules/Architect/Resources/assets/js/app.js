@@ -34,7 +34,8 @@ slugify = require('slugify');
 require('./components/Typology/TypologyForm');
 require('./components/Typology/ModalSettings');
 require('./components/Medias/MediaEditModal');
-require('./components/Content/ContentForm');
 require('./components/Menu/ModalMenuItem');
 require('./components/Dashboard/Table');
 require('./components/Dashboard/SiteMap');
+
+require('./components/Contents/ContentApp');
