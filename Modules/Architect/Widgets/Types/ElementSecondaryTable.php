@@ -32,7 +32,8 @@ class ElementSecondaryTable extends Widget implements WidgetInterface
         'pagination',
         'tableElements',
         'collapsable',
-        'collapsed'
+        'collapsed',
+        'hiddenFilter'
     ];
 }
 ?>

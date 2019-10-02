@@ -116,7 +116,6 @@ Route::group([
   Route::get('/settings/menu/{menu?}', 'MenuController@show')->name('menu.show');
   Route::delete('/settings/menu/{menu?}/delete', 'MenuController@delete')->name('menu.delete');
 
-  Route::get('/settings/menu/element/{id}', 'MenuController@element')->name('menu.element');
 
   // Typologies
   Route::get('/typologies', 'TypologyController@index')->name('typologies');
@@ -149,5 +148,10 @@ Route::group([
   //added to all users FIXME separete account and users ?
   //Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
   //Route::get('/users/{user?}', 'UserController@show')->name('users.show');
+
+  // Styles
+  Route::get('/styles', 'StyleController@index')->name('styles');
+  Route::get('/styles/{name}', 'StyleController@show')->name('style.show');
+  Route::post('/styles/{style}/update', 'StyleController@update')->name('style.update');
 
 });

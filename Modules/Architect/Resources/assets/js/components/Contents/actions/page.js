@@ -335,8 +335,8 @@ export function updatePageContent(content,identifier,pathToIndex,layout,editItem
 
       case "widget":
 
-          var fields = editItem.fields;
-          var index = getFieldArrayIndex(fields,identifier);
+          const fields = editItem.fields;
+          const index = getFieldArrayIndex(fields,identifier);
 
           if(index == -1){
               console.error("Page actions :: id not found : "+field.identifier);
@@ -538,6 +538,26 @@ function addItem(layout,currentIndex,pathToIndex,data){
   }
 }
 
+function removeItem(layout,currentIndex,pathToIndex){
+  currentIndex++;
+
+  if(currentIndex == pathToIndex.length -1){
+    layout.splice([pathToIndex[currentIndex]],1);
+    return layout;
+  }
+  else {
+
+    layout[pathToIndex[currentIndex]].children = removeItem(
+      layout[pathToIndex[currentIndex]].children,
+      currentIndex,
+      pathToIndex
+    );
+
+    return layout;
+  }
+}
+
+
 function changeItemChildren(layout,currentIndex,pathToIndex,callback){
   currentIndex++;
 
@@ -604,29 +624,29 @@ function changeCols(layout,currentIndex,pathToIndex,data){
   }
 }
 
-// function changeItemWithCallback(layout,currentIndex,pathToIndex,data,callback){
-//   currentIndex++;
+function changeItemWithCallback(layout,currentIndex,pathToIndex,data,callback){
+  currentIndex++;
 
-//   if(currentIndex == pathToIndex.length -1){
+  if(currentIndex == pathToIndex.length -1){
 
-//     layout[pathToIndex[currentIndex]].field = callback(
-//       layout[pathToIndex[currentIndex]].field,data
-//     );
-//     return layout;
-//   }
-//   else {
+    layout[pathToIndex[currentIndex]].field = callback(
+      layout[pathToIndex[currentIndex]].field,data
+    );
+    return layout;
+  }
+  else {
 
-//     layout[pathToIndex[currentIndex]].children = changeItemWithCallback(
-//       layout[pathToIndex[currentIndex]].children,
-//       currentIndex,
-//       pathToIndex,
-//       data,
-//       callback
-//     );
+    layout[pathToIndex[currentIndex]].children = changeItemWithCallback(
+      layout[pathToIndex[currentIndex]].children,
+      currentIndex,
+      pathToIndex,
+      data,
+      callback
+    );
 
-//     return layout;
-//   }
-// }
+    return layout;
+  }
+}
 
 function removeItem(layout,currentIndex,pathToIndex){
   currentIndex++;

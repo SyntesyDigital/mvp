@@ -104,7 +104,7 @@
     	        </section>
             </section>
         </div>
-
+        @include('architect::partials.style')
         @stack('javascripts-libs')
         @stack('javascripts')
     </body>

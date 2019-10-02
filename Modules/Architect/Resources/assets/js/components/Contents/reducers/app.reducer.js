@@ -237,7 +237,6 @@ function appReducer(state = initialState, action) {
             return {
                 ...state,
                 errors : {},
-                content : action.payload,
                 saving : false,
                 saved : true
             }

@@ -75,11 +75,7 @@ trait Searchable
             return null;
         }
 
-        return ClientBuilder::create()
-                ->setHosts(config('elasticsearch.hosts'))
-                ->setLogger(ClientBuilder::defaultLogger(storage_path('logs/elastic.log')))
-                ->build()
-                ->search($parameters);
+        return $this->getElasticSearchClient()->search($parameters);
     }
 
 

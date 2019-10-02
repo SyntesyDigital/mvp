@@ -11,5 +11,6 @@ return [
     'typologies'  => 'Tipologies',
     'routes_parameters' => 'Parametres',
     'elements'    => 'Éléments',
-    'list'        => 'Listes'
+    'list'        => 'Listes',
+    'styles'      => 'style'
 ];

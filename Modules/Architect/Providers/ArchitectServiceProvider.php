@@ -83,10 +83,12 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../Config/images.php', 'images');
         $this->mergeConfigFrom(__DIR__.'/../Config/database.php', 'database.connections');
         $this->mergeConfigFrom(__DIR__.'/../Config/settings.php', 'settings');
+        $this->mergeConfigFrom(__DIR__.'/../Config/fonts.php', 'fonts');
 
         // We really use-it ?
         $this->mergeConfigFrom(__DIR__.'/../Config/medias.php', 'medias');
         $this->mergeConfigFrom(__DIR__.'/../Config/fields.php', 'fields');
+        $this->mergeConfigFrom(__DIR__.'/../Config/styles.php', 'styles');
 
         $this->mergeConfigFrom(__DIR__.'/../Config/menu.php', 'architect::menu');
 

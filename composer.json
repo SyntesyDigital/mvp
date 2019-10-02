@@ -46,8 +46,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "Modules/",
-            "SyntesyDigital\\InsuranceInstaller\\": "packages/syntesy-digital/insurance-installer/src"
+            "Modules\\": "Modules/"
         }
     },
     "autoload-dev": {

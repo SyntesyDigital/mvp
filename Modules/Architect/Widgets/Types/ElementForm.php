@@ -30,7 +30,8 @@ class ElementForm extends Widget implements WidgetInterface
     public $settings = [
         'formElements',
         'collapsable',
-        'collapsed'
+        'collapsed',
+        'hiddenFilter'
     ];
 }
 ?>

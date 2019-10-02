@@ -82,9 +82,6 @@ class MediaFieldsList extends Component {
                   <li>
                     <b>{Lang.get('fields.date')}</b> : {this.state.media && this.state.media.created_at}
                   </li>
-                  <li>
-                    <b>{Lang.get('fields.author')}</b> : {this.state.media && this.state.media.author.firstname + ' ' + this.state.media.author.lastname}
-                  </li>
                 </ul>
               </div>
               <div className="col-xs-6">

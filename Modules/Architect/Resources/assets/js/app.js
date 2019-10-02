@@ -39,3 +39,4 @@ require('./components/Dashboard/Table');
 require('./components/Dashboard/SiteMap');
 
 require('./components/Contents/ContentApp');
+require('./components/Forms/FormApp');

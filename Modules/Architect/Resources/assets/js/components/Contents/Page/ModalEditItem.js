@@ -42,6 +42,7 @@ import SelectorSettingsField from './../../Typology/Settings/SelectorSettingsFie
 import InputTranslatedSettingsField from './../../Typology/Settings/InputTranslatedSettingsField';
 import BooleanSettingsField from './../../Typology/Settings/BooleanSettingsField';
 
+import HiddenFilter from './Settings/HiddenFilter';
 
 import ModalEditListItem from './ModalEditListItem';
 
@@ -105,6 +106,7 @@ class ModalEditItem extends Component {
     if(nextProps.modalEdit.displayModal){
         if(!this.isOpen){
           this.isOpen = true;
+
           this.modalOpen();
 
           this.props.updateParameters(
@@ -113,9 +115,14 @@ class ModalEditItem extends Component {
             this.props.app.parameters,
             this.props.app.parametersList,
           );
+
+
         }
 
         field = this.processProps(nextProps);
+        //update widget settings
+        field = this.updateSettingsFromConfig(field);
+
         var paramerters = this.getInitParameters(field);
 
         this.setState({
@@ -137,6 +144,34 @@ class ModalEditItem extends Component {
       field : field
     });
 
+  }
+
+  /**
+  *   Widget configuration can be changed because some settings or $rule
+  *   added directly to PHP. It's necessary to update the json stored in BBDD
+  *   to update the avialabe settings, and modifiy if necessary
+  */
+  updateSettingsFromConfig(field) {
+
+    var widgetConfig = WIDGETS[field.label];
+
+    for(var id in widgetConfig.rules){
+      var rule = widgetConfig.rules[id];
+      if(field.rules[rule] === undefined){
+        field.rules[rule] = null;
+      }
+    }
+
+    for(var id in widgetConfig.settings){
+      var setting = widgetConfig.settings[id];
+      if(field.settings[setting] === undefined){
+        field.settings[setting] = null;
+      }
+    }
+
+    //console.log("updateSettingsFromConfig :: ",widgetConfig,field);
+
+    return field;
   }
 
   getInitParameters(field) {
@@ -405,7 +440,7 @@ class ModalEditItem extends Component {
       )
 
       if(field.name == "fileElements" || field.name == "tableElements"
-        || field.name == "formElements") {
+        || field.name == "formElements" || field.name == "hiddenFilter") {
 
         this.updateParameters(field);
       }
@@ -466,21 +501,28 @@ class ModalEditItem extends Component {
   }
 
   renderParameters() {
-    if(this.state.parameters.length == 0){
+    if(this.state.parameters == null || this.state.parameters.length == 0 ||
+      this.props.modalEdit == null || this.props.modalEdit.parameters === undefined){
       return (
           <div className="parameter">
             Aucun paramètre trouvé
           </div>
       )
     }
-    return this.state.parameters.map((id,index) =>
-      <div className="parameter" key={index} style={{display:"inline-block"}}>
-        {index != 0 &&
-            <span>, &nbsp;</span>
-        }
-        {this.props.modalEdit.parameters[id].name}
-      </div>
-    )
+    return this.state.parameters.map((id,index) => {
+
+      if(this.props.modalEdit.parameters[id] === undefined)
+        return null;
+
+      return (
+        <div className="parameter" key={index} style={{display:"inline-block"}}>
+          {index != 0 &&
+              <span>, &nbsp;</span>
+          }
+          {this.props.modalEdit.parameters[id].name}
+        </div>
+      );
+    })
   }
 
   renderSettings() {
@@ -827,8 +869,14 @@ class ModalEditItem extends Component {
         />
 
 
-
-
+        <HiddenFilter
+          field={this.state.field}
+          name="hiddenFilter"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={'Filtrer pour cacher'}
+          inputLabel={'Si la variable a cette valeur est caché'}
+        />
 
       </div>
 

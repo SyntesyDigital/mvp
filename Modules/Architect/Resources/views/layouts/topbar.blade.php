@@ -1,3 +1,15 @@
+@php
+  $storedStylesBack = \Cache::get('backStyles');
+@endphp
+
+@if(!$storedStylesBack)
+  @php
+    $seconds = 24*3600;
+    $style = \Modules\Architect\Entities\Style::where('identifier','back')->first();
+    $storedStylesBack = (new \Modules\Architect\Transformers\StyleFormTransformer($style))->toArray();
+    \Cache::put('backStyles', $storedStylesBack, $seconds);
+  @endphp
+@endif
 <header>
     <div class="topnav">
 
@@ -7,7 +19,12 @@
               <div class="row">
 
                 <div id="logo-wrapper" class="col-xs-2">
+                  @if(isset($storedStylesBack['backLogo']) && isset($storedStylesBack['backLogo']->value))
+                    <img src="/{{$storedStylesBack['backLogo']->value->urls['medium']}}" alt="Logo" />
+
+                  @else
                     <img src="{{asset('modules/architect/images/client-logo.jpg')}}" alt="Logo" />
+                  @endif
                 </div>
 
                 <div class="col-xs-8">

@@ -6,7 +6,7 @@
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 //@import "node_modules/react-select/dist/react-select.css";
 @import '~leaflet/dist/leaflet.css';
 //@import '~font-awesome/scss/font-awesome';
@@ -42,7 +42,13 @@
 @import 'content/widgets';
 @import 'content/fields';
 
+@import 'form/fields';
+@import 'form/number';
+@import 'form/color';
+
 @import 'menu';
 @import 'sortable';
 
 @import 'theme';
+
+//@import 'customized';

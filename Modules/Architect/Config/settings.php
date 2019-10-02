@@ -48,5 +48,12 @@ return [
         "icon" => "fa-bars",
         "label" => Lang::get('architect::settings.routes_parameters'),
         "roles" => [ROLE_SYSTEM]
+    ],
+
+    [
+        "route" => 'styles',
+        "icon" => "fa-paint-brush ",
+        "label" => Lang::get('architect::settings.styles'),
+        "roles" => [ROLE_SYSTEM,ROLE_SUPERADMIN,ROLE_ADMIN]
     ]
 ];

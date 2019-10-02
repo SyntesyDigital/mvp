@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -66255,14 +66255,26 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/assets/js/app.js ***!
-  \******************************************/
+/***/ "./resources/assets/sass/app.scss":
+/*!****************************************!*\
+  !*** ./resources/assets/sass/app.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!***************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/nicolasdelcastillo/Workspace/arilim/resources/assets/js/app.js */"./resources/assets/js/app.js");
+__webpack_require__(/*! /Users/sergi/Documents/htdocs/IGA/arilim/arilim/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sergi/Documents/htdocs/IGA/arilim/arilim/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

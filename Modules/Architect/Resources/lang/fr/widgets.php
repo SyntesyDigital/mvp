@@ -44,5 +44,7 @@ return [
     'ELEMENT_FILE' => 'Fiche',
     'ELEMENT_SECONDARY_TABLE' => 'Tableau secondaire',
     'TOTAL_BOX' => 'Boîte totale',
-    'BOX_BUTTON' => 'Boîte à boutons'
+    'BOX_BUTTON' => 'Boîte à boutons',
+    'STATIC_BANNER' => 'Bannière statique'
+
 ];

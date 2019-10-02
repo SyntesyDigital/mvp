@@ -232,7 +232,12 @@ export function updateParameters(layout, elements, pageParameters, parametersLis
 
   var parameters = getParametersFromLayout(layout,[], elements);
   //console.log("getParametersFromLayout : pageParams : => ", pageParameters, parameters);
+  var filterParameters = getFilterParametersFromLayout(layout,{});
+  console.log("updateParameters :: filter parameters ",filterParameters);
 
+  //add filter parameters into parameters array
+  parameters = concatFilterParameters(parameters,filterParameters);
+  console.log("updateParameters :: parameters after concat ",parameters);
 
   //console.log("getParametersFromLayout : init page parameters => ",pageParameters);
   //check existing parameters
@@ -241,6 +246,7 @@ export function updateParameters(layout, elements, pageParameters, parametersLis
     //console.log("getParametersFromLayout :: indexOf => ", parameters.indexOf(pageParameters[j].id.toString()));
     if(parameters.indexOf(pageParameters[j].id.toString()) == -1){
       //console.log("getParametersFromLayout :: delete => ", j);
+      //remove it
       pageParameters.splice(j,1);
     }
   }
@@ -249,20 +255,49 @@ export function updateParameters(layout, elements, pageParameters, parametersLis
   //add new parameters
   for(var i =0;i<parameters.length;i++){
     var id = parameters[i];
+    //check if not already pushed to page
     if(!parameterExist(id, pageParameters)){
         //console.log("dont exist :: id => ", id,parametersList[id].identifier);
-        pageParameters.push({
-            id : parseInt(id),
-            default : getElementParameterOption(parametersList[id].identifier, elements),
-            identifier : parametersList[id].identifier,
-            name : parametersList[id].name,
-        });
+
+        //if parameters is a filter
+        if(filterParameters[id] !== undefined){
+          pageParameters.push({
+              id : parseInt(id),
+              default : filterParameters[id],
+              identifier : parametersList[id].identifier,
+              name : parametersList[id].name,
+          });
+        }
+        else {
+          pageParameters.push({
+              id : parseInt(id),
+              default : getElementParameterOption(parametersList[id].identifier, elements),
+              identifier : parametersList[id].identifier,
+              name : parametersList[id].name,
+          });
+        }
     }
   }
 
   console.log("getParametersFromLayout : after adding => ",pageParameters);
 
   return { type: UPDATE_PARAMETERS,payload : pageParameters };
+}
+
+/**
+*    Filter parametres are an object. Need to convert parameters to array
+*    and concat with parameters to allow the same process for filters.
+*/
+function concatFilterParameters(parameters,filterParameters) {
+
+  for(var parameterId in filterParameters){
+    if(parameters.indexOf(parameterId) == -1){
+      //if don't exist to parameters
+      parameters.push(parameterId);
+    }
+  }
+
+  return parameters;
 }
 
 function getParametersFromLayout(layout,params, elements) {
@@ -285,6 +320,38 @@ function getParametersFromLayout(layout,params, elements) {
       params = Array.from(new Set(params.concat(childrenParams)));
       //console.log("row/col, params => ",params);
     }
+  }
+
+  return params;
+}
+
+/**
+*   Function that iterate all widgets, and see if widget has a filter.
+*   If has a filter add to array like this :
+      params = {
+        "param id" : "default value",
+        "param id" : "default value"
+      }
+*/
+function getFilterParametersFromLayout(layout,params) {
+
+  for(var i=0;i<layout.length;i++){
+    var item = layout[i];
+    //console.log("item => ",item);
+    if(item.type == "item"){
+      //process item, return params
+
+      var widgetParams = getWidgetFilterParam(item.field);
+      if(widgetParams != null){
+        params[widgetParams.id] = widgetParams.value;
+      }
+      //console.log("item, widgetParams => ",item,widgetParams);
+
+    }
+    else if(item.children != null && item.children !== undefined &&
+      item.children.length > 0){
+        params = getFilterParametersFromLayout(item.children,params);
+      }
   }
 
   return params;
@@ -321,4 +388,31 @@ function getWidgetParams(field, elements) {
     }
   }
   return [];
+}
+
+/**
+*   Check if filter exist in this widget.
+*   Return {
+*       id : "param id"
+*       value : "selected value"
+*    }
+*/
+function getWidgetFilterParam(field) {
+
+  if(field == null || field.settings === undefined){
+    return null;
+  }
+
+  if(field.settings['hiddenFilter'] !== undefined && field.settings['hiddenFilter'] != null
+    && field.settings['hiddenFilter'] != ''){
+
+    var paramArray = field.settings['hiddenFilter'].split(':');
+
+    return {
+      id : paramArray[0],
+      value : paramArray[1]
+    }
+  }
+
+  return null;
 }

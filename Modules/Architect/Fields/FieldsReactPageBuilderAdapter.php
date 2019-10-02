@@ -193,6 +193,7 @@ class FieldsReactPageBuilderAdapter
                 return $values;
             break;
 
+            case 'url':
             case 'link':
                 $field = ContentField::where('name', $fieldName)
                     ->where('content_id', $this->content->id)
