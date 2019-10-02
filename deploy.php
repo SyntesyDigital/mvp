@@ -25,7 +25,7 @@ add('writable_dirs', []);
 // Hosts
 host('bitbucket@arilim-iga.syntesy.io')
     ->stage('stage')
-    ->set('branch', 'dev')
+    ->set('branch', 'master')
     ->set('deploy_path', '/var/www/arilim-iga.syntesy.io');
 
 // Tasks
