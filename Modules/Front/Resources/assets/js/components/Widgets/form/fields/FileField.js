@@ -66,8 +66,11 @@ class FileField extends Component
       reader.readAsDataURL(this.state.file);
 
       reader.onload = function () {
+
+          var base64Array = reader.result.split(',');
+
           self.setState({
-            base64 : reader.result,
+            base64 : base64Array.length > 0 ? base64Array[1] : null,
             loading : false
           },self.updateFile.bind(self));
 
@@ -114,6 +117,7 @@ class FileField extends Component
     const errors = this.props.error ? 'is-invalid' : '';
     const isRequired = field.rules.required !== undefined ?
       field.rules.required : false;
+
 
     return (
 

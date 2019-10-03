@@ -36,6 +36,7 @@ class ListField extends Component
     e.preventDefault();
 
     this.setState({
+      initItem : null,
       display : true
     });
 
@@ -43,12 +44,32 @@ class ListField extends Component
 
   renderFields() {
     const {fields} = this.props.field.settings;
-    return fields.map((item,index) =>
-      <th key={index}>{item.name}</th>
-    );
+    return fields.map((item,index) => {
+
+      if(item.identifier == 'datas'){
+        return null;
+      }
+
+      return (
+        <th key={index}>{item.name}</th>
+      );
+    });
   }
 
-  renderCols(value) {
+  renderCols(value,fields) {
+
+    return fields.map((item,index) => {
+
+      if(item.identifier == 'datas'){
+        return null;
+      }
+
+      return (
+        <th key={index}>{value[item.identifier]}</th>
+      )
+    });
+
+    /*
     return Object.keys(value).map((key) => {
       var item = value[key];
 
@@ -62,6 +83,7 @@ class ListField extends Component
         <td>{item}</td>
       );
     });
+    */
   }
 
   handleEditItem(item,e) {
@@ -86,11 +108,13 @@ class ListField extends Component
 
   renderValues() {
     const {value} = this.state;
+    const {fields} = this.props.field.settings;
+
     return value.map((item,key) => {
 
       return (
           <tr key={key}>
-            {this.renderCols(item)}
+            {this.renderCols(item,fields)}
             <td className="text-right">
               <a href="#" className="btn btn-link"
                 onClick={this.handleEditItem.bind(this,item)}

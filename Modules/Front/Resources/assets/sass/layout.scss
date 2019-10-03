@@ -12,11 +12,14 @@ header{
         &.row-header{
           margin-bottom: 0;
           .logo-container{
+            height: 62px;
             @extend .animate;
             background-color: $header-logo-background-color;
             text-align: center;
             padding: 0 25px;
             img{
+              max-height: 100%;
+              max-width: 100%;
             }
           }
 
@@ -193,7 +196,7 @@ footer{
 }
 .breadcrumb{
   border-bottom: 1px solid $separator-line-color;
-  background-color: $body-bg;
+  background-color: transparent;
   .container{
     padding-left:0;
     @include font(12,16,400);

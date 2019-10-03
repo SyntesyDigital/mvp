@@ -111,6 +111,20 @@ class ModalListField extends Component {
     return result;
   }
 
+  checkAllFilled() {
+    const {values} = this.state;
+
+    for(var key in values){
+      if(values[key] === undefined || values[key] == null
+        || values[key] == ''){
+          return false;
+      }
+    }
+
+    return true;
+
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -118,9 +132,13 @@ class ModalListField extends Component {
 
     var self = this;
 
-    self.props.onAjouter(values);
-    self.props.onModalClose();
-
+    if(!this.checkAllFilled()){
+      toastr.error('Vous devez remplir tous les champs.');
+    }
+    else {
+      self.props.onAjouter(values);
+      self.props.onModalClose();
+    }
   }
 
   render() {

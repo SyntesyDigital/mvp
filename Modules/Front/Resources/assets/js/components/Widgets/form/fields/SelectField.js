@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
+import {
+  HIDDEN_FIELD
+} from './../constants';
+
 class SelectField extends Component
 {
   constructor(props)
@@ -28,11 +32,24 @@ class SelectField extends Component
               data : response.data.data,
               loading : false
             });
+
+            if(response.data.data.length == 0){
+              //no data set this field as hidden, not needed
+              self.setHidden();
+            }
+
           }
         })
         .catch(function (error) {
           console.error(error);
         });
+  }
+
+  setHidden() {
+    this.props.onFieldChange({
+      name : this.props.field.identifier,
+      value : HIDDEN_FIELD
+    });
   }
 
   handleOnChange(event)
@@ -59,10 +76,11 @@ class SelectField extends Component
     const isRequired = field.rules.required !== undefined ?
       field.rules.required : false;
     const errors = this.props.error ? 'is-invalid' : '';
+    const display = this.props.value != HIDDEN_FIELD ? true : false;
 
     return (
 
-      <div className="row element-form-row">
+      <div className="row element-form-row" style={{display : display ? 'block' : 'none'}}>
         <div className="col-sm-4">
           <label>{field.name}
             {isRequired &&

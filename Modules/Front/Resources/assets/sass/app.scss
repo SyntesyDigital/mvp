@@ -8,8 +8,7 @@
 //@import '~leaflet/dist/leaflet.css';
 
 // Bootstrap
-$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 //@import "~font-awesome/scss/font-awesome";
 
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
@@ -35,6 +34,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import 'elementTables';
 @import 'totalBox';
 @import 'boxButton';
+@import 'staticBanner';
+
+//@import 'customized';
 
 
 //Extras

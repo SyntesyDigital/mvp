@@ -65,13 +65,13 @@
             </div>
           @else
             @yield('content')
-
           @endif
 
         </div>
 
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('front::partials.footer')
+        @include ('front::partials.style')
         <script>
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';

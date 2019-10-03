@@ -8,6 +8,10 @@ import SelectField from './../fields/SelectField';
 import ListField from './../fields/ListField';
 import FileField from './../fields/FileField';
 
+import {
+  HIDDEN_FIELD
+} from './../constants';
+
 const fieldComponents = {
     text: TextField,
     date: DateField,
@@ -162,6 +166,10 @@ export function processObjectValue(object,values,formParameters) {
     else if(formParameters[defaultValue] !== undefined) {
       return formParameters[defaultValue];
     }
+    else if(values[object.CHAMP] == HIDDEN_FIELD){
+      //this field is hidden
+      return  null;
+    }
     else {
         //get value
         if(values[object.CHAMP] === undefined){
@@ -233,6 +241,13 @@ export function validateField(field,values) {
     field.rules.required : false;
 
   if(isRequired){
+
+    //if is hidden, means during the form creation is defined as not needed
+    if(values[field.identifier] !== undefined && values[field.identifier] == HIDDEN_FIELD){
+      //is valid
+      return true;
+    }
+
     if(values[field.identifier] === undefined || values[field.identifier] == ''){
       return false;
     }

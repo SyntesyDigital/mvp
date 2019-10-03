@@ -5,6 +5,10 @@
 		@php
 			$link = format_link($menuElement);
 			$hasChildren = sizeof($menuElement["children"]) > 0 ? 1 : 0;
+
+			if(!allowed_link($link)){
+         continue;
+      }
 		@endphp
 
 		@if(isset($link))

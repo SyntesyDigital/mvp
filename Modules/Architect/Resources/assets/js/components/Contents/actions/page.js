@@ -188,6 +188,8 @@ export function updatePageImage(media,field,pathToIndex,layout,language, editIte
 
   //console.log("updatePageImage : editItem => ",editItem.type);
 
+  var fields = null;
+
   switch (editItem.type) {
       case FIELDS.IMAGES.type:
           layout = addItem(layout,-1,pathToIndex,media);
@@ -216,7 +218,7 @@ export function updatePageImage(media,field,pathToIndex,layout,language, editIte
       //case "widget":
       case "widget-list":
 
-          var fields = editItem.value[listItemInfo.index].fields;
+          fields = editItem.value[listItemInfo.index].fields;
           var index = getFieldArrayIndex(fields,field.identifier);
           var fieldType = field.type;
 
@@ -263,7 +265,7 @@ export function updatePageImage(media,field,pathToIndex,layout,language, editIte
           break;
       case "widget":
 
-          var fields = editItem.fields;
+          fields = editItem.fields;
           var index = getFieldArrayIndex(fields,field.identifier);
 
           if(index == -1){
@@ -310,6 +312,8 @@ export function updatePageImage(media,field,pathToIndex,layout,language, editIte
 
 export function updatePageContent(content,identifier,pathToIndex,layout,editItem, listItemInfo){
 
+  const fields = null, index = null;
+
   switch (editItem.type) {
 
       case FIELDS.CONTENTS.type:
@@ -335,8 +339,8 @@ export function updatePageContent(content,identifier,pathToIndex,layout,editItem
 
       case "widget":
 
-          const fields = editItem.fields;
-          const index = getFieldArrayIndex(fields,identifier);
+          fields = editItem.fields;
+          index = getFieldArrayIndex(fields,identifier);
 
           if(index == -1){
               console.error("Page actions :: id not found : "+field.identifier);
@@ -357,8 +361,8 @@ export function updatePageContent(content,identifier,pathToIndex,layout,editItem
 
       case "widget-list":
 
-          var fields = editItem.value[listItemInfo.index].fields;
-          var index = getFieldArrayIndex(fields,identifier);
+          fields = editItem.value[listItemInfo.index].fields;
+          index = getFieldArrayIndex(fields,identifier);
 
           if(index == -1){
               console.error("ModalEditItem :: id not found : "+identifier);
@@ -618,49 +622,6 @@ function changeCols(layout,currentIndex,pathToIndex,data){
       currentIndex,
       pathToIndex,
       data
-    );
-
-    return layout;
-  }
-}
-
-function changeItemWithCallback(layout,currentIndex,pathToIndex,data,callback){
-  currentIndex++;
-
-  if(currentIndex == pathToIndex.length -1){
-
-    layout[pathToIndex[currentIndex]].field = callback(
-      layout[pathToIndex[currentIndex]].field,data
-    );
-    return layout;
-  }
-  else {
-
-    layout[pathToIndex[currentIndex]].children = changeItemWithCallback(
-      layout[pathToIndex[currentIndex]].children,
-      currentIndex,
-      pathToIndex,
-      data,
-      callback
-    );
-
-    return layout;
-  }
-}
-
-function removeItem(layout,currentIndex,pathToIndex){
-  currentIndex++;
-
-  if(currentIndex == pathToIndex.length -1){
-    layout.splice([pathToIndex[currentIndex]],1);
-    return layout;
-  }
-  else {
-
-    layout[pathToIndex[currentIndex]].children = removeItem(
-      layout[pathToIndex[currentIndex]].children,
-      currentIndex,
-      pathToIndex
     );
 
     return layout;

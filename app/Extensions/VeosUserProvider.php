@@ -8,7 +8,9 @@ use GuzzleHttp\Client;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 
+use App\Extensions\VeosWsUrl;
 use Session;
+use Auth;
 
 class VeosUserProvider implements UserProvider {
 
@@ -22,6 +24,8 @@ class VeosUserProvider implements UserProvider {
                case ROLE_SUPERADMIN:
                case ROLE_ADMIN:
                case ROLE_USER:
+                    //update token
+                    $this->renewToken();
                     break;
 
                 default:
@@ -76,12 +80,54 @@ class VeosUserProvider implements UserProvider {
 
     }
 
+    private function isTokenExpired($token)
+    {
+        if(!isset($token))
+          return true;
+
+        $tokenArray = explode('.',$token);
+        $payload = json_decode(base64_decode($tokenArray[1]));
+
+        if($payload->exp < time())
+          return true;
+        else
+          return false;
+    }
+
+    public function renewToken()
+    {
+      if(Session::has('user')){
+
+        //if not has expired renew
+        $user = json_decode(Session::get('user'));
+
+        //if token expired redirect to login
+        if($this->isTokenExpired($user->token)){
+          header("Location: /login");
+          exit();
+        }
+
+        //if not expired renew login
+        $client = new Client();
+        $response = $client->get(VeosWsUrl::get() . 'login/renew', [
+            'headers' => [
+                'Authorization' => "Bearer " . $user->token
+            ]
+        ]);
+        $result = json_decode($response->getBody());
+        $user->token = $result->token;
+        Session::put('user', json_encode($user));
+      }
+    }
+
     public function user()
     {
         return Session::has('user') ? json_decode(Session::get('user')) : false;
     }
 
     public function attempt()
-    {}
+    {
+
+    }
 
 }

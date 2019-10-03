@@ -1,13 +1,12 @@
 {
-    "/modules/extranet/js/app.js": "/modules/extranet/js/app.js?id=c1bb0ab0ddfd3ce5f322",
-    "/modules/extranet/css/app.css": "/modules/extranet/css/app.css?id=c0e4cb28c38ddc6cb8f9",
-    "/modules/front/js/app.js": "/modules/front/js/app.js?id=1230197d8efd47247f28",
-    "/modules/front/css/app.css": "/modules/front/css/app.css?id=a2e13778f639ae4e48b9",
     "/modules/architect/js/app.js": "/modules/architect/js/app.js",
-    "/public/modules/architect/js/admin.js": "/public/modules/architect/js/admin.js",
-    "/js/app.js": "/js/app.js",
+    "/modules/front/js/app.js": "/modules/front/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/modules/architect/css/app.css": "/modules/architect/css/app.css",
+    "/modules/extranet/css/app.css": "/modules/extranet/css/app.css",
+    "/modules/front/css/app.css": "/modules/front/css/app.css",
+    "/modules/extranet/js/app.js": "/modules/extranet/js/app.js",
+    "/js/app.js": "/js/app.js",
     "/modules/architect/js/architect.js": "/modules/architect/js/architect.js",
-    "/modules/architect/js/admin.js": "/modules/architect/js/admin.js",
-    "/modules/architect/css/app.css": "/modules/architect/css/app.css"
+    "/modules/architect/js/admin.js": "/modules/architect/js/admin.js"
 }

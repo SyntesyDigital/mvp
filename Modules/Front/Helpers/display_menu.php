@@ -37,6 +37,7 @@ if (!function_exists('format_link')) {
         $menuElement["name"][App::getLocale()] == '')
         return null;
 
+
       $target = null;
       $url = "";
       $icon = null;
@@ -70,7 +71,29 @@ if (!function_exists('format_link')) {
       ];
 
       //print_r($result);
-
       return $result;
+    }
+}
+
+
+if (!function_exists('allowed_link')) {
+
+    function allowed_link($link) {
+
+      if(has_roles([ROLE_USER])){
+        $pages = Auth::user()->allowed_pages;
+        if(!isset($pages))
+          return false;
+
+        if(isset($pages->{$link['request_url']})){
+          return $pages->{$link['request_url']};
+        }
+
+        return true;
+      }
+      else {
+        //all allowed
+        return true;
+      }
     }
 }

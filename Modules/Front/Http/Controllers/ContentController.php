@@ -16,6 +16,7 @@ use Modules\Extranet\Repositories\BobyRepository;
 use Modules\Extranet\Repositories\DocumentRepository;
 
 use App;
+use Auth;
 
 class ContentController extends Controller
 {
@@ -35,7 +36,13 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
-      $content = Content::whereField('slug','home')->first();
+
+      $homeSlug = 'accueil';
+
+      $content = Content::whereField('slug',$homeSlug)->first();
+
+      if(!$this->isPageAllowed($homeSlug))
+        abort(404,'Page not allowed');
 
       if($content == null){
         abort(404);
@@ -120,9 +127,28 @@ class ContentController extends Controller
         return view('front::contents.'.strtolower($content->typology->name),$data);
     }
 
+    private function isPageAllowed($slug)
+    {
+        if(Auth::user()->role == ROLE_USER){
+          $pages = Auth::user()->allowed_pages;
+          if(!isset($pages))
+            return false;
+
+          if(isset($pages->{$slug})){
+            return $pages->{$slug};
+          }
+          //if not in allowed pages then not necessary to filter
+          return true;
+        }
+
+        return true;
+    }
+
     public function show(Request $request, $slug)
     {
       //$slug = $request->segment(count($request->segments()));
+      if(!$this->isPageAllowed($slug))
+        abort(404,'Page not allowed');
 
       $slug = '/'.$slug;
 

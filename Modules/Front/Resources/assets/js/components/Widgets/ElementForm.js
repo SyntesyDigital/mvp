@@ -24,6 +24,7 @@ export default class ElementForm extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
 
+        const parametersObject = this.parameteres2Array(props.parameters);
 
         this.state = {
             field : field,
@@ -40,11 +41,11 @@ export default class ElementForm extends Component {
             processing : false,
             complete : false,
             errors : {},
-            parameters : this.parameteres2Array(props.parameters),
+            parameters : parametersObject,
 
             //variables to process form iterator
             formIterator : 0,
-            formParameters : [],
+            formParameters : this.initFormParameters(parametersObject),
             formParametersLoaded : false
 
         };
@@ -67,6 +68,14 @@ export default class ElementForm extends Component {
       }
 
       return result;
+    }
+
+    initFormParameters(parameters) {
+      var formParameters = {};
+      for(var key in parameters){
+        formParameters['_'+key] = parameters[key];
+      }
+      return formParameters;
     }
 
     initValues(elementObject) {
@@ -120,7 +129,8 @@ export default class ElementForm extends Component {
     *  If any need iteration begin
     */
     checkParameters() {
-      var formParameters = {};
+      var formParameters = this.state.formParameters;
+
       for(var i=0;i<this.state.procedures.length;i++){
         var procedure = this.state.procedures[i];
 
@@ -196,40 +206,54 @@ export default class ElementForm extends Component {
                   response.data.data[index]['text'] = response.data.data[index]['name'];
                 }
 
-                bootbox.prompt({
-            		    title: variable.MESSAGE,
-            		    inputType: 'select',
-            				closeButton : false,
-            				buttons: {
-            		        confirm: {
-            		            label: 'Envoyer',
-            		            className: 'btn-primary'
-            		        },
-            						cancel : {
-            								label: 'Retour',
-            								className: 'btn-default'
-            						}
-            		    },
-            		    inputOptions: response.data.data,
-            		    callback: function (result) {
-            	        if(result != null && result != ''){
-            							//post sessions
-                          formParameters['_'+key] = result;
+                if(response.data.data.length == 1){
+                  //not necessary to process parameter take the result
+                  formParameters['_'+key] = response.data.data[0].value;
 
-                          //set new value and got to next
-            							self.setState({
-                            formParameters : formParameters,
-                            formIterator : formIterator + 1,
-                          },self.iterateParameters.bind(self));
-            					}
-            					else {
-            						//show error
-                        toastr.error('Le paramètre est nécessaire.');
-                        //iterate again
-                        return self.iterateParameters();
-            					}
-            		    }
-            		});
+                  //set new value and got to next
+                  self.setState({
+                    formParameters : formParameters,
+                    formIterator : formIterator + 1,
+                  },self.iterateParameters.bind(self));
+
+                }
+                else {
+                  //ask for the result
+                  bootbox.prompt({
+              		    title: variable.MESSAGE,
+              		    inputType: 'select',
+              				closeButton : false,
+              				buttons: {
+              		        confirm: {
+              		            label: 'Envoyer',
+              		            className: 'btn-primary'
+              		        },
+              						cancel : {
+              								label: 'Retour',
+              								className: 'btn-default'
+              						}
+              		    },
+              		    inputOptions: response.data.data,
+              		    callback: function (result) {
+              	        if(result != null && result != ''){
+              							//post sessions
+                            formParameters['_'+key] = result;
+
+                            //set new value and got to next
+              							self.setState({
+                              formParameters : formParameters,
+                              formIterator : formIterator + 1,
+                            },self.iterateParameters.bind(self));
+              					}
+              					else {
+              						//show error
+                          toastr.error('Le paramètre est nécessaire.');
+                          //iterate again
+                          return self.iterateParameters();
+              					}
+              		    }
+              		});
+                }
 
             }
           })
@@ -346,7 +370,8 @@ export default class ElementForm extends Component {
           processing : true,
           complete : false
         },function(){
-          self.processProcedure();
+          //check if necessary to fill jsonResult and continue
+          self.checkJsonResult(self.processProcedure.bind(self));
         });
 
       }
@@ -355,13 +380,28 @@ export default class ElementForm extends Component {
       }
     }
 
+    checkJsonResult(callback) {
+
+      const {procedures,currentProcedureIndex, stepsToProcess} = this.state;
+      const procedure = procedures[currentProcedureIndex];
+
+      if(!stepsToProcess && procedure.SERVICE !== undefined && procedure.SERVICE.METHODE == "PUT"){
+        //set the jsonResult with a get
+        this.getJsonResultBeforePut(procedure,callback);
+      }
+      else {
+        callback();
+      }
+    }
+
     /**
     * Process procedure with current step id
     */
     processProcedure() {
 
-        const {procedures,currentProcedureIndex, values, currentListIndex} = this.state;
+        const {procedures,currentProcedureIndex, values, currentListIndex, stepsToProcess} = this.state;
         let {jsonResult} = this.state;
+
         const procedure = procedures[currentProcedureIndex];
 
         const isRequired = procedure.OBL == "Y" ? true : false;
@@ -486,7 +526,7 @@ export default class ElementForm extends Component {
 
     processStandardProcedure(currentIndex,procedure,jsonResult,values) {
 
-      console.log("processStandardProcedure :: ",currentIndex);
+      console.log("processStandardProcedure :: ",currentIndex,jsonResult);
 
       //if conf == Y && repetable == N
         //if OBL == N , check for values, if not values, don't process de procedure
@@ -594,8 +634,6 @@ export default class ElementForm extends Component {
 
     submitListProcedure(currentProcedureIndex,procedure,jsonResult,currentListIndex, listValues) {
 
-
-
       const {procedures} = this.state;
       var self = this;
 
@@ -666,9 +704,12 @@ export default class ElementForm extends Component {
         console.error("procedure not defined => ",procedure);
       }
 
+      //process URL parameters
+      var url = this.processUrlParameters(procedure.SERVICE.URL);
+
       var params = {
         method : procedure.SERVICE.METHODE,
-        url : procedure.SERVICE.URL,
+        url : url,
         data : jsonResult,
         is_array : this.procedureIsArray(procedure)
       };
@@ -706,6 +747,72 @@ export default class ElementForm extends Component {
 
       return jsonResult;
 
+    }
+
+    /**
+    *   Get json data before PUT, with a GET with the same parameters
+    */
+    getJsonResultBeforePut(procedure,callback) {
+
+      //console.log("getJsonResultBeforePut :: ",procedure);
+
+      if(procedure.SERVICE === undefined){
+        console.error("procedure not defined => ",procedure);
+      }
+
+      //process URL parameters
+      var url = this.processUrlParameters(procedure.SERVICE.URL);
+
+      var params = {
+        method : "GET",
+        url : url,
+        data : "",
+        is_array : false
+      };
+
+      self = this;
+
+      axios.post('/architect/elements/form/process-service',params)
+        .then(function(response) {
+          //console.log("response => ",response);
+          //console.log("getJsonResultBeforePut :: response ",response);
+          if(response.status == 200){
+              //console.log("response => ",response);
+              self.setState({
+                jsonResult : response.data.result
+              },callback)
+          }
+          else {
+              toastr.error(response.data.message);
+              callback();
+          }
+        })
+        .catch(function(error){
+          console.error("error => ",error.message);
+          callback();
+        });
+    }
+
+    /**
+    * Function to process url that have parameters like  /_id_pol/,
+    * From formParameters
+    */
+    processUrlParameters(url) {
+
+      const {formParameters} = this.state;
+
+      var resultUrl = url;
+
+      var urlArray = url.split('/');
+      for(var i=0;i<urlArray.length;i++){
+        if(urlArray[i].charAt(0) == "_"){
+          //is a paramter
+          //check for form parameters
+          resultUrl = resultUrl.replace(urlArray[i],formParameters[urlArray[i]]);
+        }
+      }
+
+      return resultUrl;
     }
 
     /**

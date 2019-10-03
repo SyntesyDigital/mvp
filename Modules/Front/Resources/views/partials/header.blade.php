@@ -1,10 +1,27 @@
+@php
+  $storedStylesFront = \Cache::get('frontStyles');
+@endphp
+
+@if(!$storedStylesFront)
+  @php
+    $seconds = 24*3600;
+    $style = \Modules\Architect\Entities\Style::where('identifier','front')->first();
+    $storedStylesFront = (new \Modules\Architect\Transformers\StyleFormTransformer($style))->toArray();
+    \Cache::put('frontStyles', $storedStylesFront, $seconds);
+  @endphp
+@endif
+
 <!-- HEADER -->
 <header>
 	<!-- CORPO i IDIOMES -->
 				<div class="row row-header">
 					<div class=" logo-container">
 						<a href="{{route('home')}}">
-							<img src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
+							@if(isset($storedStylesFront['frontLogo']) && isset($storedStylesFront['frontLogo']->value))
+								<img src="/{{$storedStylesFront['frontLogo']->value->urls['medium']}}" alt="Logo" />
+							@else
+								<img src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
+							@endif
 						</a>
 					</div>
 					<div class="right-part-header">
@@ -34,7 +51,12 @@
 											<a href="{{route('dashboard')}}" class="btn btn-header">
 												<i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
 									@endif
-									<p class="user-name">Bonjour, {{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
+									<p class="user-name">
+										Bonjour, {{Auth::user()->firstname}}
+										@if(Auth::user()->supervue && isset(Auth::user()->session_info))
+											({{Auth::user()->session_info->{'USEREXT.nom2_per'} }})
+										@endif
+									</p>
 								</div>
 							</div>
 						@endif

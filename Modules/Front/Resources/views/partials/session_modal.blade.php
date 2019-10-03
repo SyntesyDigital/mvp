@@ -45,6 +45,9 @@
 									},
 					        dataType: 'json'
 					    }).done(function(response) {
+
+									//console.log(response);
+									//window.location.href = response.redirect;
 									window.location.href = '/';
 
 					    }).fail(function(jqXHR, textStatus) {
