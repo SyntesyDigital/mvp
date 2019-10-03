@@ -14,7 +14,7 @@
 @php
 
   //BANNER
-    $bannerImage= isset($storedStylesFront['bannerImage']) && $storedStylesFront['bannerImage']->value != null ? $storedStylesFront['bannerImage']->value->urls['original']  :'';
+    $bannerImage= isset($storedStylesFront['bannerImage']) ? $storedStylesFront['bannerImage']->value->urls['medium']  :'';
     $bannerText= isset($storedStylesFront['bannerText']) ? $storedStylesFront['bannerText']->value  :'';
 
 @endphp
