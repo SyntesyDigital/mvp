@@ -52,3 +52,6 @@ desc('Reset config cache');
 task('artisan:config-clear', function () {
     run("php  {{deploy_path}}/current/artisan config:clear");
 });
+
+task('artisan:view:cache', function () {});
+
