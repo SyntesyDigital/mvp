@@ -30,14 +30,14 @@
     		<meta property="og:type" content="website"/>
 
         <link href="{{asset('modules/front/css/app.css')}}" rel="stylesheet" type="text/css" />
+        @include ('front::partials.style')
 
         <!-- Toastr -->
         <link href="{{ asset('modules/architect/plugins/toastr/toastr.min.css')}}" rel="stylesheet" media="all"  />
 
-
         <!-- Fonts -->
         <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">-->
-        <link rel="stylesheet" media="all" href="{{ asset('/front/css/font-awesome.min.css')}}" />
+        <!--<link rel="stylesheet" media="all" href="{{ asset('/front/css/font-awesome.min.css')}}" />-->
 
 
         @stack('styles')
@@ -71,7 +71,6 @@
 
         <!-- Footer blade important to add JavasCript variables from Controller -->
         @include ('front::partials.footer')
-        @include ('front::partials.style')
         <script>
           const WEBROOT = '{{route("home")}}';
           const ASSETS = '{{asset('')}}';
