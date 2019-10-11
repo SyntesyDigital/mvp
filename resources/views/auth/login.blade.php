@@ -6,7 +6,7 @@
         <div class="col-md-7 icons">
           <div class="col-md-4 icon-box">
             <div class="icon">
-              <i class="fa fa-lock"></i>
+              <i class="fas fa-lock"></i>
             </div>
             <div class="title">
               Espace client
@@ -16,7 +16,7 @@
           </div>
           <div class="col-md-4 icon-box">
             <div class="icon">
-              <i class="fa fa-phone"></i>
+              <i class="fas fa-phone"></i>
             </div>
             <div class="title">
               Web call back
@@ -26,7 +26,7 @@
           </div>
           <div class="col-md-4 icon-box">
             <div class="icon">
-              <i class="fa fa-laptop"></i>
+              <i class="fas fa-laptop"></i>
             </div>
             <div class="title">
               Déclaration en ligne
