@@ -6,6 +6,10 @@ import {
   HIDDEN_FIELD
 } from './../constants';
 
+import {
+  parameteres2Array
+} from './../actions/';
+
 class SelectField extends Component
 {
   constructor(props)
@@ -13,19 +17,60 @@ class SelectField extends Component
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
 
+    const {boby,parameters} = this.processBoby(this.props.field.boby);
+
     this.state = {
       loading : true,
-      data : []
+      data : [],
+      boby : boby,
+      parameters : parameters
     };
 
     this.loadData();
+  }
+
+  /**
+  *   Clean boby wihout parameters, and check all paremters are defined.
+  */
+  processBoby(boby) {
+
+    var parameters = parameteres2Array(this.props.parameters);
+
+    if(boby.indexOf('?') != -1){
+      //if has parameters
+      var bobyArray = boby.split('?');
+      boby = bobyArray[0];
+
+      var bobyParams = parameteres2Array(bobyArray[1]);
+
+      for(var key in bobyParams){
+        if(parameters[key] === undefined){
+          //if any parameters is not defined show error
+
+          return {
+            boby : boby,
+            parameters : null
+          }
+        }
+      }
+    }
+
+    return {
+      boby : boby,
+      parameters : this.props.parameters
+    }
   }
 
   loadData() {
 
       var self = this;
 
-      axios.get('/architect/elements/select/data/'+this.props.field.boby+"?"+this.props.parameters)
+      if(this.state.parameters == null){
+        console.error("Parameter necessary not defined , "+key);
+        return;
+      }
+
+      axios.get('/architect/elements/select/data/'+this.state.boby+"?"+this.state.parameters)
         .then(function(response) {
           if(response.status == 200 && response.data.data !== undefined){
             self.setState({
@@ -72,7 +117,8 @@ class SelectField extends Component
   render() {
 
     const {field} = this.props;
-    const defaultValue = this.state.loading ? 'Chargement...' : 'Sélectionnez';
+    let defaultValue = this.state.loading ? 'Chargement...' : 'Sélectionnez';
+    defaultValue = this.state.parameters != null ? defaultValue : 'Paramètres insuffisants';
     const isRequired = field.rules.required !== undefined ?
       field.rules.required : false;
     const errors = this.props.error ? 'is-invalid' : '';

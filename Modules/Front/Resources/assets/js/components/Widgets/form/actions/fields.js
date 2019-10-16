@@ -284,3 +284,21 @@ export function processResponseParameters(response,service,formParameters) {
 
   return formParameters;
 }
+
+/**
+*   Convert parameters string to array of key value
+*/
+export function parameteres2Array(paramString) {
+  var result = {};
+
+  if(paramString === undefined || paramString == '')
+    return result;
+
+  var paramsArray = paramString.split("&");
+  for(var i=0;i<paramsArray.length;i++){
+    var paramsSubArray = paramsArray[i].split("=");
+    result[paramsSubArray[0]] = paramsSubArray[1];
+  }
+
+  return result;
+}

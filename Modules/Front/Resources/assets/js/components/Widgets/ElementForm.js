@@ -12,7 +12,8 @@ import {
   processObjectValue,
   processObject,
   validateField,
-  processResponseParameters
+  processResponseParameters,
+  parameteres2Array
 } from './form/actions/';
 
 export default class ElementForm extends Component {
@@ -24,7 +25,7 @@ export default class ElementForm extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
 
-        const parametersObject = this.parameteres2Array(props.parameters);
+        const parametersObject = parameteres2Array(props.parameters);
 
         this.state = {
             field : field,
@@ -55,20 +56,7 @@ export default class ElementForm extends Component {
         this.loadProcedures();
     }
 
-    parameteres2Array(paramString){
-      var result = {};
 
-      if(paramString === undefined || paramString == '')
-        return result;
-
-      var paramsArray = paramString.split("&");
-      for(var i=0;i<paramsArray.length;i++){
-        var paramsSubArray = paramsArray[i].split("=");
-        result[paramsSubArray[0]] = paramsSubArray[1];
-      }
-
-      return result;
-    }
 
     initFormParameters(parameters) {
       var formParameters = {};
