@@ -26,7 +26,7 @@
   <div class="breadcrumb">
    <div class="container">
      <div class="row">
-          {!! breadcrumb($content) !!}
+          {!! breadcrumb($content,$parameters) !!}
 		 </div>
    </div>
   </div>

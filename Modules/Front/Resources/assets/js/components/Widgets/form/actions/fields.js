@@ -201,7 +201,15 @@ export function processObjectValue(object,values,formParameters) {
     }
     else if(formParameters[defaultValue] !== undefined){
       //check parameters
-      return formParameters[defaultValue];
+
+      //if is a date, and the date comes with timestamp convert to date
+      var formValue = formParameters[defaultValue];
+      if(object['FORMAT'] == "date" && formValue.indexOf('/') == -1){
+        return moment.unix(formValue/1000).format("DD/MM/YYYY");
+      }
+      else {
+        return formValue;
+      }
     }
   }
   else if(type == "CTE") {

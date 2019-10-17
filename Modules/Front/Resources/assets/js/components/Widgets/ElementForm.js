@@ -325,6 +325,7 @@ export default class ElementForm extends Component {
             error={this.state.errors[field.identifier] !== undefined ? true : false}
             onFieldChange={this.handleOnChange}
             parameters={this.getUrlParameters()}
+            values={this.state.values}
           />);
 
       }
@@ -807,7 +808,14 @@ export default class ElementForm extends Component {
     *   When field change
     */
     validateFieldChange(field) {
+
+      //validation of this field not necessary
+      if(field == null)
+        return;
+
       const {errors,values} = this.state;
+
+      console.log("validateFieldChange :: field ",field);
 
       var valid = validateField(field,values);
 
