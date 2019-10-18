@@ -12,7 +12,7 @@
     <div class="{{$field['settings']['collapsable']? 'element-collapsable':'' }} element-file-container-head {{$field['settings']['collapsed']?'collapsed':''}}" @if($field['settings']['collapsable']) data-toggle="collapse" data-target="#collapsefile-{{$identifier}}" aria-expanded="true" aria-controls="collapsefile-{{$identifier}}"@endif>
       {{$field['fields'][0]['value'][App::getLocale()]}}
     </div>
-    <div id="collapsefile-{{$identifier}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-file-container-body">
+    <div id="collapsefile-{{$identifier}}" class="{{$field['settings']['collapsable']? 'collapse':'' }} {{$field['settings']['collapsed']?'':'in'}} element-file-container-body">
         <div id="elementFile" class="elementFile "
           field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
           doubleColumn="{{$field['settings']['doubleColumn']?$field['settings']['doubleColumn']:false}}"

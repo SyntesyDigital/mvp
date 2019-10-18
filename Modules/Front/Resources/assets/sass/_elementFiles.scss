@@ -10,10 +10,17 @@
     padding:10px 15px;
     min-height: 41px;
   }
+
   .element-file-container-body{
     background-color: $elements-background-color;
     border: 1px solid $element-file-border;
     padding:10px 20px;
+    @include round($elements-radius);
+
+    &.collapse{
+      @include round(0);
+    }
+
     .element-file-input-container{
       padding:7px 0px;
       margin:5px 0;

@@ -21,7 +21,8 @@
   padding: 20px 40px;
   text-align: left;
   border-radius: 12px;
-  min-height: 105px;
+  min-height: 125px;
+
   .title{
     @include font(16,18,300);
     i{

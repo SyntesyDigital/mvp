@@ -13,7 +13,7 @@
       {{$field['fields'][0]['value'][App::getLocale()]}}
     </div>
 
-    <div id="collapsetable-{{$identifier}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
+    <div id="collapsetable-{{$identifier}}" class=" {{$field['settings']['collapsable']? 'collapse':'' }} {{$field['settings']['collapsed']?'':'in'}} element-table-container-body">
         <div id="elementTable" class="elementTable"
           field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
           pagination="{{$field['settings']['pagination'] != null ? true : false }}"

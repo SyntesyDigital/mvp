@@ -10083,6 +10083,11 @@ form.contact-form .checkbox {
   background-color: #fff;
   border: 1px solid #E0E0E0;
   padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.element-file-container .element-file-container-body.collapse {
+  border-radius: 0;
 }
 
 .element-file-container .element-file-container-body .element-file-input-container {
@@ -10710,7 +10715,7 @@ form.contact-form .checkbox {
   padding: 20px 40px;
   text-align: left;
   border-radius: 12px;
-  min-height: 105px;
+  min-height: 125px;
 }
 
 .total-box-container .title {
@@ -10741,18 +10746,20 @@ form.contact-form .checkbox {
 .box-button-container-a .box-button-container:hover {
   color: #2A3649;
   text-decoration: none;
-  border: 1px solid #2A3649;
+  /*border: 1px solid $primary-color;*/
 }
 
 .box-button-container {
   color: #E84B37;
   background-color: #fff;
-  border: 1px solid #E84B37;
+  /*
+  border: 1px solid $secondary-color;
+  */
   padding: 20px 40px;
   text-align: center;
   width: 100%;
   border-radius: 12px;
-  min-height: 105px;
+  min-height: 125px;
 }
 
 .box-button-container i {

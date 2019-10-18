@@ -28,8 +28,9 @@
 
     $frontFont=isset($storedStylesFront['frontFont']) ? $storedStylesFront['frontFont']->value : false;
 
-  //radio tables/button
+    //radio tables/button
     $buttonRadius= isset($storedStylesFront['frontButtonRadius']) ? $storedStylesFront['frontButtonRadius']->value.'px' :'20px';
+
 
   //HEADER
     $headerLogoBackgroundColor = isset($storedStylesFront['frontHeaderLogoBackgroundColor']) ? $storedStylesFront['frontHeaderLogoBackgroundColor']->value  :$sidebarBackgroundColor;
@@ -50,16 +51,31 @@
   //BODY
     $bodyTextColor= isset($storedStylesFront['frontBodyTextColor']) ? $storedStylesFront['frontBodyTextColor']->value  :$secondaryColor;
 
+    $frontBodyH1Color = isset($storedStylesFront['frontBodyH1Color']) ? $storedStylesFront['frontBodyH1Color']->value  :$secondaryColor;
+    $frontBodyH2Color = isset($storedStylesFront['frontBodyH2Color']) ? $storedStylesFront['frontBodyH2Color']->value  :$secondaryColor;
+    $frontBodyH3Color = isset($storedStylesFront['frontBodyH3Color']) ? $storedStylesFront['frontBodyH3Color']->value  :$secondaryColor;
+
   //ELEMENTS
     $elementBorder= isset($storedStylesFront['frontElementBorder']) ? $storedStylesFront['frontElementBorder']->value  :$bodyBackgroundColor;
     $elementHeadBackground= isset($storedStylesFront['frontElementHeadBackground']) ? $storedStylesFront['frontElementHeadBackground']->value :$sidebarBackgroundColor;
+    $frontElementHeadCollapsableBackground = isset($storedStylesFront['frontElementHeadCollapsableBackground']) ? $storedStylesFront['frontElementHeadCollapsableBackground']->value :$sidebarBackgroundColor;
+
     $elementHeadColor= isset($storedStylesFront['frontElementHeadColor']) ? $storedStylesFront['frontElementHeadColor']->value  :$secondaryColor;
+    $elementHeadCollapsableColor= isset($storedStylesFront['elementHeadCollapsableColor']) ? $storedStylesFront['elementHeadCollapsableColor']->value  : $elementHeadColor;
+
     $elementBackground= isset($storedStylesFront['frontElementBackground']) ? $storedStylesFront['frontElementBackground']->value  :$sidebarBackgroundColor;
+
     $elementColor= isset($storedStylesFront['frontElementColor']) ? $storedStylesFront['frontElementColor']->value  :$secondaryColor;
     $elementLinkColor= isset($storedStylesFront['frontElementLinkColor']) ? $storedStylesFront['frontElementLinkColor']->value  :$secondaryColor;
     $elementLinkHoverColor= isset($storedStylesFront['frontElementLinkHoverColor']) ? $storedStylesFront['frontElementLinkHoverColor']->value  :$primaryColor;
     $elementButtonColor= isset($storedStylesFront['frontElementButtonColor']) ? $storedStylesFront['frontElementButtonColor']->value  :$primaryColor;
     $elementButtonHoverColor= isset($storedStylesFront['frontElementButtonHoverColor']) ? $storedStylesFront['frontElementButtonHoverColor']->value  :$secondaryColor;
+
+    $titlesFontSize = isset($storedStylesFront['titleFontSize']) ? $storedStylesFront['titleFontSize']->value.'px' :'20px';
+    $titleCollapsableFontSize = isset($storedStylesFront['titleCollapsableFontSize']) ? $storedStylesFront['titleCollapsableFontSize']->value.'px' : $titlesFontSize;
+
+    $buttonPrimaryColor = isset($storedStylesFront['buttonPrimaryColor']) ? $storedStylesFront['buttonPrimaryColor']->value : $primaryColor;
+    $buttonHoverColor = isset($storedStylesFront['buttonHoverColor']) ? $storedStylesFront['buttonHoverColor']->value : $secondaryColor;
 
 
     $fonts = config('fonts');
@@ -137,6 +153,18 @@
     color:{{$bodyTextColor}};
   }
 
+  /*PAGE*/
+  .page-builder h1{
+    color:{{$frontBodyH1Color}};
+  }
+  .page-builder h2{
+    color:{{$frontBodyH2Color}};
+  }
+  .page-builder h3{
+    color:{{$frontBodyH3Color}};
+  }
+
+
   /*FILES*/
 
   .element-file-container{
@@ -145,7 +173,17 @@
   .element-file-container .element-file-container-head{
     background-color: {{$elementHeadBackground}};
     color:{{$elementHeadColor}};
+    font-size:{{$titlesFontSize}};
+    padding-bottom:20px;
   }
+
+  .element-file-container .element-collapsable.element-file-container-head{
+    background-color: {{$frontElementHeadCollapsableBackground}};
+    color: {{$elementHeadCollapsableColor}};
+    font-size: {{$titleCollapsableFontSize}};
+    padding-bottom:10px;
+  }
+
   .element-file-container .element-file-container-body{
     background-color: {{$elementBackground}};
     border: 1px solid {{$elementBorder}};
@@ -153,7 +191,6 @@
   .element-file-container .element-file-container-body .element-file-input-container{
     border-bottom: 1px solid {{$elementBackground}};
   }
-
 
   .element-collapsable{
     cursor: pointer;
@@ -210,6 +247,13 @@
     border-bottom-right-radius: {{$buttonRadius}};
   }
 
+  .element-form-container .element-collapsable.element-form-container-head.collapsed {
+    background-color: {{$elementHeadBackground}};//$sidebarBackgroundColor
+    color:{{$elementHeadColor}};//$secondaryColor
+
+  }
+
+
   .element-form-container .element-form{
     background-color:{{$elementBackground}};
     color:{{$elementColor}};
@@ -240,7 +284,21 @@
     background-color: {{$elementHeadBackground}};
     border-bottom: 1px solid {{$elementBorder}};
     color:{{$elementHeadColor}};
+    font-size:{{$titlesFontSize}};
+    padding-bottom:20px;
   }
+
+  .element-table-container .element-collapsable.element-table-container-head{
+    background-color: {{$frontElementHeadCollapsableBackground}};
+    color: {{$elementHeadCollapsableColor}};
+    font-size: {{$titleCollapsableFontSize}};
+    padding-bottom:10px;
+  }
+
+  .element-table-container .element-collapsable.element-table-container-head{
+    background-color: {{$frontElementHeadCollapsableBackground}};
+  }
+
   .element-table-container .elementTable{
     background-color:{{$elementBackground}};
     color:{{$elementColor}};
@@ -276,12 +334,14 @@
 
   .box-button-container-a .box-button-container:hover{
     color:{{$elementButtonHoverColor}};
+    /*
     border: 1px solid {{$elementButtonHoverColor}};
+    */
   }
 
   .box-button-container{
     color:{{$elementButtonColor}};
-    border: 1px solid {{$elementButtonColor}};
+    /*border: 1px solid {{$elementButtonColor}};*/
     border-radius: {{$buttonRadius}};
   }
 
@@ -290,7 +350,17 @@
     background-color:{{$sidebarBackgroundColor}}
   }
   .static-banner .text-static-banner h1, .static-banner .text-static-banner a{
-    color: {{$primaryColor}}
+    color: {{$frontBodyH1Color}};
+  }
+
+
+  /* button primary */
+  .box-button-container,.box-button-container-a {
+    color: {{$buttonPrimaryColor}};
+  }
+
+  .box-button-container-a .box-button-container:hover {
+    color: {{$buttonHoverColor}};
   }
 
 </style>
