@@ -10157,6 +10157,7 @@ form.contact-form .checkbox {
 
 .element-form-container {
   margin: 20px 0;
+  border-radius: 12px;
 }
 
 .element-form-container a.btn-default {
@@ -10211,7 +10212,18 @@ form.contact-form .checkbox {
   padding: 5px;
 }
 
+.element-form-container .element-form-container-body {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.element-form-container .element-form-container-body.collapse {
+  overflow: auto;
+  border-radius: 0;
+}
+
 .element-form-container .element-form-wrapper {
+  padding-top: 20px;
   opacity: 1;
   pointer-events: auto;
 }

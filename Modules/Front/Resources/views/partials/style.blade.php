@@ -241,7 +241,18 @@
     border-bottom: 1px solid {{$elementBorder}};
     border-top-left-radius: {{$buttonRadius}};
     border-top-right-radius: {{$buttonRadius}};
+    font-size:{{$titlesFontSize}};
+    padding-bottom:20px;
   }
+
+  .element-form-container .element-collapsable.element-form-container-head{
+    background-color: {{$frontElementHeadCollapsableBackground}};
+    color: {{$elementHeadCollapsableColor}};
+    font-size: {{$titleCollapsableFontSize}};
+    padding-bottom:10px;
+  }
+
+
   .element-form-container .element-form-container-head.collapsed{
     border-bottom-left-radius: {{$buttonRadius}};
     border-bottom-right-radius: {{$buttonRadius}};

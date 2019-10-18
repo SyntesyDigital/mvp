@@ -1,5 +1,6 @@
 .element-form-container{
   margin:20px 0;
+  @include round($elements-radius);
 
   a {
     &.btn-default {
@@ -56,12 +57,20 @@
 
   .element-form-container-body{
 
-    &.collapse{
+    overflow: hidden;
+    @include round($elements-radius);
 
+    &.collapse{
+      overflow: auto;
+      @include round(0);
     }
+
   }
 
   .element-form-wrapper {
+
+    padding-top:20px;
+
     @extend .animate;
     opacity: 1;
     pointer-events: auto;

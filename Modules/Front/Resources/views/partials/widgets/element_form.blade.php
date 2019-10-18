@@ -11,7 +11,7 @@
     <div class="{{$field['settings']['collapsable']? 'element-collapsable':'' }} element-form-container-head {{$field['settings']['collapsed']?'collapsed':''}}" @if($field['settings']['collapsable']) data-toggle="collapse" data-target="#collapseform-{{$identifier}}" aria-expanded="true" aria-controls="collapseform-{{$identifier}}"@endif>
       {{$field['fields'][0]['value'][App::getLocale()]}}
     </div>
-    <div id="collapseform-{{$identifier}}" class=" collapse {{$field['settings']['collapsed']?'':'in'}} element-form-container-body">
+    <div id="collapseform-{{$identifier}}" class="{{$field['settings']['collapsable']? 'collapse':'' }}  {{$field['settings']['collapsed']?'':'in'}} element-form-container-body">
 
         <div id="elementForm" class="element-form"
           field="{{ isset($field) ? base64_encode(json_encode($field)) : null }}"
