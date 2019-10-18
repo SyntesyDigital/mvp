@@ -350,7 +350,7 @@
     background-color:{{$sidebarBackgroundColor}}
   }
   .static-banner .text-static-banner h1, .static-banner .text-static-banner a{
-    color: {{$frontBodyH1Color}};
+    color: {{$buttonPrimaryColor}};
   }
 
 
