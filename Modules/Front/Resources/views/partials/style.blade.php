@@ -93,6 +93,10 @@
     color: {{$headerRightPartTextColor}};
   }
 
+  header:first-child .row.row-header .right-part-header.login-header {
+    background-color: {{$headerLogoBackgroundColor}};
+  }
+
   header:first-child .row.row-header .right-part-header .user-info .button-header-container .btn-header{
     border:1px solid {{$headerButtonColor}};
     color:{{$headerButtonColor}};

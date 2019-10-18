@@ -1,4 +1,6 @@
-@extends('front::layouts.app')
+@extends('front::layouts.app',[
+  "isLogin" => true
+])
 
 @section('content')
 <div class="container login-container">

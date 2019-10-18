@@ -18,13 +18,13 @@
 					<div class=" logo-container">
 						<a href="{{route('home')}}">
 							@if(isset($storedStylesFront['frontLogo']) && isset($storedStylesFront['frontLogo']->value))
-								<img src="/{{$storedStylesFront['frontLogo']->value->urls['medium']}}" alt="Logo" />
+								<img src="/{{$storedStylesFront['frontLogo']->value->urls['original']}}" alt="Logo" />
 							@else
 								<img src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
 							@endif
 						</a>
 					</div>
-					<div class="right-part-header">
+					<div class="right-part-header {{isset($isLogin) ? 'login-header' : ''}}">
 						@if(null !== Auth::user())
 							<div class="menu-container">
 								<div class="menu">
