@@ -305,3 +305,16 @@ body {
     }
   }
 }
+
+.invalid-field {
+  color: #aa1818;
+  padding: 10px;
+}
+
+.invalid-feedback {
+  border: 1px solid #8d1111;
+  padding: 10px;
+  font-weight: 100;
+  background-color: #ecbebe;
+  color: #aa1818;
+}

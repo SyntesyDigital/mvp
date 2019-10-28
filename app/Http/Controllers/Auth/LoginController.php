@@ -10,6 +10,7 @@ use Config;
 
 use App\Http\Requests\LoginRequest;
 use App\Jobs\Login;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -45,13 +46,23 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if(dispatch_now(Login::fromRequest($request))) {
-            return redirect($this->redirectTo);
+        $message = trans('auth.failed');
+
+        try {
+          if(dispatch_now(Login::fromRequest($request))) {
+              return redirect($this->redirectTo);
+          }
+        }
+        catch(\Exception $e) {
+          $message = $e->getMessage();
         }
 
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
+        $validator = Validator::make($request->all(),[]);
+        $validator->errors()->add('server', $message);
+
+        return redirect('login')
+                  ->withErrors($validator)
+                  ->withInput();
     }
-    
+
 }
