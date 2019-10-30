@@ -4830,14 +4830,477 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./Resources/assets/js/components/Element/Settings/Visibility/ConditionsModal.js":
+/*!***************************************************************************************!*\
+  !*** ./Resources/assets/js/components/Element/Settings/Visibility/ConditionsModal.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var ConditionsModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ConditionsModal, _Component);
+
+  function ConditionsModal(props) {
+    var _this;
+
+    _classCallCheck(this, ConditionsModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ConditionsModal).call(this, props));
+    _this.onModalClose = _this.onModalClose.bind(_assertThisInitialized(_this));
+    _this.state = {
+      id: 'modal-conditions',
+      isOpen: false,
+      zIndex: 13000
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ConditionsModal, [{
+    key: "onModalClose",
+    value: function onModalClose(e) {
+      e.preventDefault();
+      this.props.onModalClose();
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("ModalParameters :: ", nextProps);
+
+      if (nextProps.display != this.state.isOpen) {
+        if (nextProps.display) {
+          this.openModal();
+        } else {
+          this.closeModal();
+        }
+      }
+    }
+  }, {
+    key: "openModal",
+    value: function openModal() {
+      $("#" + this.state.id).css({
+        display: "block"
+      });
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        opacity: 1,
+        ease: Power2.easeInOut
+      });
+      this.setState({
+        isOpen: true
+      });
+    }
+  }, {
+    key: "closeModal",
+    value: function closeModal() {
+      var self = this;
+      TweenMax.to($("#" + this.state.id), 0.5, {
+        display: "none",
+        opacity: 0,
+        ease: Power2.easeInOut,
+        onComplete: function onComplete() {
+          self.setState({
+            isOpen: false
+          });
+        }
+      });
+    }
+  }, {
+    key: "handleInputChange",
+    value: function handleInputChange(e) {//TODO 
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.props.conditionIndex == null) return null;
+      var condition = this.props.conditions[this.props.conditionIndex];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          zIndex: this.state.zIndex
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-modal",
+        id: this.state.id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-background"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "conditions de visibilit\xE9"), " \xA0\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "btn btn-default close-button-modal",
+        onClick: this.onModalClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-times"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-12 col-md-8 col-md-offset-2"
+      }, this.props.initialValue.name, " si :", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "num",
+        className: "bmd-label-floating"
+      }, "Type of field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "type",
+        value: "",
+        onChange: this.handleInputChange
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "",
+        className: "btn btn-default",
+        onClick: this.onModalClose
+      }, " Fermer "), " \xA0")))));
+    }
+  }]);
+
+  return ConditionsModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ConditionsModal);
+
+/***/ }),
+
 /***/ "./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js":
 /*!************************************************************************************!*\
   !*** ./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js ***!
   \************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js: Unexpected token (200:4)\n\n\u001b[0m \u001b[90m 198 | \u001b[39m      modalDisplay \u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 199 | \u001b[39m      value \u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 200 | \u001b[39m    })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 201 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 202 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 203 | \u001b[39m  getDefaultConditionValue() {\u001b[0m\n    at Object.raise (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:6387:17)\n    at Object.unexpected (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:7704:16)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8912:20)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:3609:20)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8483:23)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseObjectProperty (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9352:101)\n    at Object.parseObjPropValue (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9377:101)\n    at Object.parseObjectMember (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9301:10)\n    at Object.parseObj (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9225:25)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8855:28)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:3609:20)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8483:23)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseExprListItem (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9562:18)\n    at Object.parseCallExpressionArguments (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8692:22)\n    at Object.parseSubscript (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8585:29)\n    at Object.parseSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8504:19)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8493:17)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseExpression (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8197:23)\n    at Object.parseStatementContent (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10029:23)\n    at Object.parseStatement (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9900:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10476:25)\n    at Object.parseBlockBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10463:10)\n    at Object.parseBlock (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10447:10)\n    at Object.parseFunctionBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9495:24)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../constants */ "./Resources/assets/js/components/Element/constants/index.js");
+/* harmony import */ var _Visibility_ConditionsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Visibility/ConditionsModal */ "./Resources/assets/js/components/Element/Settings/Visibility/ConditionsModal.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+/**
+*   Settings with conditional language to define if field is visible or not
+*/
+
+var VisibilitySettingsField =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(VisibilitySettingsField, _Component);
+
+  function VisibilitySettingsField(props) {
+    var _this;
+
+    _classCallCheck(this, VisibilitySettingsField);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VisibilitySettingsField).call(this, props));
+    var checkbox = null;
+
+    var value = _this.getDefaultVisibilityValue();
+
+    var display = false;
+    _this.state = {
+      checkbox: checkbox,
+      value: value,
+      display: display,
+      modalDisplay: false,
+      conditionIndex: null
+    };
+    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
+    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    _this.visibilityOptions = [{
+      name: 'Ocultar',
+      value: _constants__WEBPACK_IMPORTED_MODULE_2__["VISIBILITY_HIDE"]
+    }, {
+      name: 'Mostrar',
+      value: _constants__WEBPACK_IMPORTED_MODULE_2__["VISIBILITY_SHOW"]
+    }];
+    return _this;
+  }
+  /**
+  *   Conditions have by default the opposite default condition, hide or show.
+  */
+
+
+  _createClass(VisibilitySettingsField, [{
+    key: "getConditionalAction",
+    value: function getConditionalAction() {
+      var value = this.state.value;
+
+      if (value !== undefined && value != null && value.initialValue !== undefined) {
+        for (var key in this.visibilityOptions) {
+          if (this.visibilityOptions[key].value != value.initialValue) {
+            return this.visibilityOptions[key];
+          }
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "getConditions",
+    value: function getConditions() {
+      var value = this.state.value;
+
+      if (value !== undefined && value != null && value.conditions !== undefined) {
+        return value.conditions;
+      }
+
+      return [];
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.processProps(this.props);
+    }
+  }, {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+      this.processProps(nextProps);
+    }
+  }, {
+    key: "processProps",
+    value: function processProps(nextProps) {
+      var checkbox = null;
+      var value = "";
+      var display = false;
+
+      if (nextProps.field != null && nextProps.field[nextProps.source] != null && nextProps.field[nextProps.source][nextProps.name] !== undefined) {
+        checkbox = nextProps.field[nextProps.source][nextProps.name] != null;
+        display = true;
+        value = nextProps.field[nextProps.source][nextProps.name] == null ? this.getDefaultVisibilityValue() : nextProps.field[nextProps.source][nextProps.name];
+        console.log("VisibilitySettingsField :: componentWillRecieveProps", nextProps.field[nextProps.source][nextProps.name]);
+      }
+
+      this.setState({
+        checkbox: checkbox,
+        value: value,
+        display: display
+      });
+    }
+  }, {
+    key: "getDefaultVisibilityValue",
+    value: function getDefaultVisibilityValue() {
+      return {
+        initialValue: '',
+        conditions: []
+      };
+      /*
+        {
+          'initialValue' : 'hide',
+          'conditions' : [
+            {
+              'action' : '' //opposite by default
+              'join' : 'and/or' //only appear second condition
+              'type' : 'parameters',
+              'name' : ,
+              'operator : '=,!=',
+              'options : [],  //list of options
+              'values' : [] //selected options
+             },
+           ]
+        }
+      */
+    } //update state from formated value
+
+  }, {
+    key: "setVisibilityValue",
+    value: function setVisibilityValue(initialValue, conditions) {
+      //proces if needed
+      return {
+        'initialValue': initialValue,
+        'conditions': conditions
+      };
+    } //get value to process field
+
+  }, {
+    key: "getVisibilityValue",
+    value: function getVisibilityValue() {
+      return this.state.value;
+    }
+  }, {
+    key: "handleFieldChange",
+    value: function handleFieldChange(event) {
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: event.target.checked ? this.state.value : null
+      };
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: "handleInputChange",
+    value: function handleInputChange(event) {
+      var value = this.getVisibilityValue();
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: this.setVisibilityValue(event.target.value, value.conditions)
+      };
+      this.props.onFieldChange(field);
+    }
+  }, {
+    key: "renderOptions",
+    value: function renderOptions() {
+      return this.visibilityOptions.map(function (item, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: item.value,
+          key: i
+        }, item.name);
+      });
+    }
+  }, {
+    key: "renderConditions",
+    value: function renderConditions() {}
+  }, {
+    key: "openModal",
+    value: function openModal(e) {
+      e.preventDefault();
+      var value = this.getVisibilityValue();
+      value.conditions.push(this.getDefaultConditionValue());
+      this.setState({
+        modalDisplay: true,
+        value: value
+      });
+    }
+  }, {
+    key: "getDefaultConditionValue",
+    value: function getDefaultConditionValue() {
+      return {
+        action: '',
+        //opposite by default
+        join: 'and/or',
+        //only appear second condition
+        type: 'parameters',
+        name: 'name',
+        operator: '=,!=',
+        options: [],
+        //list of options
+        values: [] //selected options
+
+      };
+    }
+  }, {
+    key: "handleModalClose",
+    value: function handleModalClose() {
+      this.setState({
+        modalDisplay: false
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          checkbox = _this$state.checkbox,
+          value = _this$state.value;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: this.state.display ? 'block' : 'none'
+        },
+        className: "visibility-settings-field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Visibility_ConditionsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        display: this.state.modalDisplay,
+        onModalClose: this.handleModalClose.bind(this),
+        initialValue: this.getConditionalAction(),
+        conditions: this.getConditions(),
+        conditionIndex: this.state.selectedContidion
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "setup-field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "togglebutton"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        name: this.props.name,
+        checked: this.state.checkbox != null ? checkbox : false,
+        onChange: this.handleFieldChange
+      }), this.props.label)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "setup-field-config",
+        style: {
+          display: this.state.checkbox != null && this.state.checkbox ? "block" : "none"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "num",
+        className: "bmd-label-floating"
+      }, this.props.inputLabel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "default",
+        value: value.initialValue,
+        onChange: this.handleInputChange
+      }, this.renderOptions())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "conditions-list"
+      }, this.renderConditions()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "add-row-block"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "",
+        "class": "btn btn-default",
+        onClick: this.openModal.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fa fa-plus-circle"
+      }), " Ajouter une condition")))));
+    }
+  }]);
+
+  return VisibilitySettingsField;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (VisibilitySettingsField);
 
 /***/ }),
 
