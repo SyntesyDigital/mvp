@@ -53,9 +53,9 @@
                       <input id="uid" type="text" class="form-control{{ $errors->has('uid') ? ' is-invalid' : '' }}" name="uid" value="{{ old('uid') }}" placeholder="" required autofocus>
 
                       @if ($errors->has('uid'))
-                          <span class="invalid-feedback">
+                          <div class="invalid-field">
                               <strong>{{ $errors->first('uid') }}</strong>
-                          </span>
+                          </div>
                       @endif
                   </div>
               </div>
@@ -67,9 +67,9 @@
                       <input id="passwd" type="password" class="form-control{{ $errors->has('passwd') ? ' is-invalid' : '' }}" name="passwd"  placeholder="" required>
 
                       @if ($errors->has('passwd'))
-                          <span class="invalid-feedback">
+                          <div class="invalid-field">
                               <strong>{{ $errors->first('passwd') }}</strong>
-                          </span>
+                          </div>
                       @endif
                   </div>
               </div>
@@ -82,6 +82,16 @@
                     <!--<p class="forgot"><a hre="">Mot de pass obluié ?</a></p>-->
                 </div>
               </div>
+
+              @if ($errors->has('server'))
+                  <div class="invalid-feedback">
+                      <strong>{{ $errors->first('server') }}</strong>
+                  </div>
+              @endif
+
+
+
+
           </form>
           </div>
         </div>

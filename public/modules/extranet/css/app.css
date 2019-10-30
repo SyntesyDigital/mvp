@@ -35,7 +35,6 @@ b {
 }
 
 .animate {
-  -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -54,7 +53,6 @@ form,
 a,
 ul,
 li {
-  -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
   /* Firefox, other Gecko */
   box-sizing: border-box;

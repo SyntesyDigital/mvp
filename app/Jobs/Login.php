@@ -71,8 +71,6 @@ class Login
     public function handle()
     {
 
-
-
         try {
             $client = new Client();
 
@@ -162,10 +160,7 @@ class Login
             }
 
         } catch (\Exception $ex) {
-
-            throw ValidationException::withMessages([
-                 $ex->getMessage()
-             ]);
+            throw $ex;
         }
 
         return false;

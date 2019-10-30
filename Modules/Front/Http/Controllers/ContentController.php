@@ -51,8 +51,8 @@ class ContentController extends Controller
       $content->load('fields', 'page');
 
       //check parameters exist
-      foreach($content->routesParameters as $parameter){
-        if(!$request->has($parameter->identifier))
+
+      if(!$this->checkNecessaryParameters($request,$content)){
           abort(404,'Insuficient parameters');
       }
 
@@ -92,13 +92,28 @@ class ContentController extends Controller
       ]);
     }
 
+    private function checkNecessaryParameters($request, $content) {
+        $parameters = $content->getRouteParametersWithSettings();
+
+        if(isset($parameters)){
+          
+          foreach($parameters as $identifier => $parameter){
+            if( $parameter['required'] && !$request->has($identifier)){
+              print_r($identifier);
+              return false;
+            }
+          }
+        }
+
+        return true;
+    }
+
     private function renderPage($request,$content) {
 
         $pageBuilderAdapter = new PageBuilderAdapter($content);
 
         //check parameters exist
-        foreach($content->routesParameters as $parameter){
-          if(!$request->has($parameter->identifier))
+        if(!$this->checkNecessaryParameters($request,$content)){
             abort(404,'Insuficient parameters');
         }
 
@@ -187,8 +202,7 @@ class ContentController extends Controller
         dd($pageBuilderAdapter->get());
 
       //check parameters exist
-      foreach($content->routesParameters as $parameter){
-        if(!$request->has($parameter->identifier))
+      if(!$this->checkNecessaryParameters($request,$content)){
           abort(404,'Insuficient parameters');
       }
 
