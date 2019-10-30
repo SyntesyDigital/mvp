@@ -1,46 +1,20 @@
 <?php return array (
-  'laravelcollective/html' => 
+  'fideloper/proxy' => 
   array (
     'providers' => 
     array (
-      0 => 'Collective\\Html\\HtmlServiceProvider',
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
     ),
     'aliases' => 
     array (
-      'Form' => 'Collective\\Html\\FormFacade',
-      'Html' => 'Collective\\Html\\HtmlFacade',
-    ),
-  ),
-  'mariuzzo/laravel-js-localization' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
-    ),
-  ),
-  'petercoles/multilingual-country-list' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'PeterColes\\Countries\\CountriesServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Countries' => 'PeterColes\\Countries\\CountriesFacade',
-    ),
-  ),
-  'tightenco/ziggy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
-    ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'jenssegers/date' => 
@@ -72,33 +46,30 @@
       'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
     ),
   ),
-  'intervention/image' => 
+  'laravel/tinker' => 
   array (
     'providers' => 
     array (
-      0 => 'Intervention\\Image\\ImageServiceProvider',
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
     ),
     'aliases' => 
     array (
-      'Image' => 'Intervention\\Image\\Facades\\Image',
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
     ),
   ),
-  'yajra/laravel-datatables-oracle' => 
+  'mariuzzo/laravel-js-localization' => 
   array (
     'providers' => 
     array (
-      0 => 'Yajra\\DataTables\\DataTablesServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
-    ),
-  ),
-  'fideloper/proxy' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
+      0 => 'Mariuzzo\\LaravelJsLocalization\\LaravelJsLocalizationServiceProvider',
     ),
   ),
   'mcamara/laravel-localization' => 
@@ -112,18 +83,11 @@
       'LaravelLocalization' => 'Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization',
     ),
   ),
-  'prettus/l5-repository' => 
+  'nunomaduro/collision' => 
   array (
     'providers' => 
     array (
-      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    ),
-  ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
   'nwidart/laravel-modules' => 
@@ -137,11 +101,22 @@
       'Module' => 'Nwidart\\Modules\\Facades\\Module',
     ),
   ),
-  'syntesy-digital/insurance-installer' => 
+  'petercoles/multilingual-country-list' => 
   array (
     'providers' => 
     array (
-      0 => 'SyntesyDigital\\InsuranceInstaller\\InsuranceInstallerProvider',
+      0 => 'PeterColes\\Countries\\CountriesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Countries' => 'PeterColes\\Countries\\CountriesFacade',
+    ),
+  ),
+  'prettus/l5-repository' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
     ),
   ),
   'syntesy-digital/architect-installer' => 
@@ -149,6 +124,31 @@
     'providers' => 
     array (
       0 => 'SyntesyDigital\\ArchitectInstaller\\ArchitectInstallerProvider',
+    ),
+  ),
+  'syntesy-digital/insurance-installer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SyntesyDigital\\InsuranceInstaller\\InsuranceInstallerProvider',
+    ),
+  ),
+  'tightenco/ziggy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
+    ),
+  ),
+  'yajra/laravel-datatables-oracle' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
     ),
   ),
 );
