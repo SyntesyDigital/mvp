@@ -1940,7 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Settings_RadioSettingsField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Settings/RadioSettingsField */ "./Resources/assets/js/components/Element/Settings/RadioSettingsField.js");
 /* harmony import */ var _Settings_LinkSettingsField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Settings/LinkSettingsField */ "./Resources/assets/js/components/Element/Settings/LinkSettingsField.js");
 /* harmony import */ var _Settings_FieldsSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Settings/FieldsSettings */ "./Resources/assets/js/components/Element/Settings/FieldsSettings.js");
-/* harmony import */ var _actions___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./actions/ */ "./Resources/assets/js/components/Element/actions/index.js");
+/* harmony import */ var _Settings_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Settings/VisibilitySettingsField */ "./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js");
+/* harmony import */ var _actions___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./actions/ */ "./Resources/assets/js/components/Element/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1958,6 +1959,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2178,6 +2180,13 @@ function (_Component) {
         source: "settings",
         onFieldChange: this.handleFieldSettingsChange,
         label: "Liste des champs"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Settings_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        field: field,
+        name: "conditionalVisibility",
+        source: "settings",
+        inputLabel: "Define el estado por defecto.",
+        onFieldChange: this.handleFieldSettingsChange,
+        label: "Visibilit\xE9 conditionnelle"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -2201,13 +2210,13 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     closeModalSettings: function closeModalSettings() {
-      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_10__["closeModalSettings"])());
+      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_11__["closeModalSettings"])());
     },
     onModalSettingsClosed: function onModalSettingsClosed() {
-      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_10__["onModalSettingsClosed"])());
+      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_11__["onModalSettingsClosed"])());
     },
     changeFieldSettings: function changeFieldSettings(field) {
-      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_10__["changeFieldSettings"])(field));
+      return dispatch(Object(_actions___WEBPACK_IMPORTED_MODULE_11__["changeFieldSettings"])(field));
     }
   };
 };
@@ -4821,6 +4830,17 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js":
+/*!************************************************************************************!*\
+  !*** ./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js: Unexpected token (200:4)\n\n\u001b[0m \u001b[90m 198 | \u001b[39m      modalDisplay \u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 199 | \u001b[39m      value \u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 200 | \u001b[39m    })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 201 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 202 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 203 | \u001b[39m  getDefaultConditionValue() {\u001b[0m\n    at Object.raise (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:6387:17)\n    at Object.unexpected (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:7704:16)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8912:20)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:3609:20)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8483:23)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseObjectProperty (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9352:101)\n    at Object.parseObjPropValue (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9377:101)\n    at Object.parseObjectMember (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9301:10)\n    at Object.parseObj (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9225:25)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8855:28)\n    at Object.parseExprAtom (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:3609:20)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8483:23)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseExprListItem (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9562:18)\n    at Object.parseCallExpressionArguments (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8692:22)\n    at Object.parseSubscript (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8585:29)\n    at Object.parseSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8504:19)\n    at Object.parseExprSubscripts (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8493:17)\n    at Object.parseMaybeUnary (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8463:21)\n    at Object.parseExprOps (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8329:23)\n    at Object.parseMaybeConditional (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8302:23)\n    at Object.parseMaybeAssign (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8249:21)\n    at Object.parseExpression (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:8197:23)\n    at Object.parseStatementContent (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10029:23)\n    at Object.parseStatement (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9900:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10476:25)\n    at Object.parseBlockBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10463:10)\n    at Object.parseBlock (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:10447:10)\n    at Object.parseFunctionBody (/Users/sergi/Documents/htdocs/IGA/arilim/arilim/Modules/Extranet/node_modules/@babel/parser/lib/index.js:9495:24)");
+
+/***/ }),
+
 /***/ "./Resources/assets/js/components/Element/actions/app.js":
 /*!***************************************************************!*\
   !*** ./Resources/assets/js/components/Element/actions/app.js ***!
@@ -5272,7 +5292,7 @@ function configureStore() {
 /*!*******************************************************************!*\
   !*** ./Resources/assets/js/components/Element/constants/index.js ***!
   \*******************************************************************/
-/*! exports provided: INIT_STATE, INPUT_CHANGE, DELETE_ELEMENT, SAVE_SUCCESS, SAVE_ERROR, SUBMIT_FORM, CREATE_ELEMENT, UPDATE_ELEMENT, FIELD_ADD, FIELD_MOVE, FIELD_REMOVE, FIELD_CHANGE, SETTINGS_OPEN, SETTINGS_CHANGE, SETTINGS_CLOSE, SETTINGS_CLOSED, INIT_PARAMETERS, ADD_PARAMETER, REMOVE_PARAMETER, MODAL_CONTENT_OPEN, MODAL_CONTENT_CLOSE, MODAL_CONTENT_SELECT, MODAL_CONTENT_UNSELECT, MODAL_CONTENT_CLEAR, MODAL_CONTENT_INIT, MODAL_CONTENT_UPDATED, PARAMETERS_INIT, PARAMETERS_OPEN_MODAL, PARAMETERS_CLOSE_MODAL, PARAMETERS_UPDATE, PARAMETERS_CLEAR, ELEMENT_PARAMETERS_OPEN_MODAL, ELEMENT_PARAMETERS_CLOSE_MODAL, ELEMENT_PARAMETERS_UPDATE, ELEMENT_PARAMETERS_CLEAR, ELEMENT_PARAMETERS_CLOSED */
+/*! exports provided: INIT_STATE, INPUT_CHANGE, DELETE_ELEMENT, SAVE_SUCCESS, SAVE_ERROR, SUBMIT_FORM, CREATE_ELEMENT, UPDATE_ELEMENT, FIELD_ADD, FIELD_MOVE, FIELD_REMOVE, FIELD_CHANGE, SETTINGS_OPEN, SETTINGS_CHANGE, SETTINGS_CLOSE, SETTINGS_CLOSED, INIT_PARAMETERS, ADD_PARAMETER, REMOVE_PARAMETER, MODAL_CONTENT_OPEN, MODAL_CONTENT_CLOSE, MODAL_CONTENT_SELECT, MODAL_CONTENT_UNSELECT, MODAL_CONTENT_CLEAR, MODAL_CONTENT_INIT, MODAL_CONTENT_UPDATED, PARAMETERS_INIT, PARAMETERS_OPEN_MODAL, PARAMETERS_CLOSE_MODAL, PARAMETERS_UPDATE, PARAMETERS_CLEAR, ELEMENT_PARAMETERS_OPEN_MODAL, ELEMENT_PARAMETERS_CLOSE_MODAL, ELEMENT_PARAMETERS_UPDATE, ELEMENT_PARAMETERS_CLEAR, ELEMENT_PARAMETERS_CLOSED, VISIBILITY_HIDE, VISIBILITY_SHOW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5313,6 +5333,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELEMENT_PARAMETERS_UPDATE", function() { return ELEMENT_PARAMETERS_UPDATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELEMENT_PARAMETERS_CLEAR", function() { return ELEMENT_PARAMETERS_CLEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELEMENT_PARAMETERS_CLOSED", function() { return ELEMENT_PARAMETERS_CLOSED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VISIBILITY_HIDE", function() { return VISIBILITY_HIDE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VISIBILITY_SHOW", function() { return VISIBILITY_SHOW; });
 var INIT_STATE = "INIT_STATE";
 var INPUT_CHANGE = "INPUT_CHANGE";
 var DELETE_ELEMENT = "DELETE_ELEMENT";
@@ -5348,7 +5370,10 @@ var ELEMENT_PARAMETERS_OPEN_MODAL = "ELEMENT_PARAMETERS_OPEN_MODAL";
 var ELEMENT_PARAMETERS_CLOSE_MODAL = "ELEMENT_PARAMETERS_CLOSE_MODAL";
 var ELEMENT_PARAMETERS_UPDATE = "ELEMENT_PARAMETERS_UPDATE";
 var ELEMENT_PARAMETERS_CLEAR = "ELEMENT_PARAMETERS_CLEAR";
-var ELEMENT_PARAMETERS_CLOSED = "ELEMENT_PARAMETERS_CLOSED";
+var ELEMENT_PARAMETERS_CLOSED = "ELEMENT_PARAMETERS_CLOSED"; //settings to settings visibility
+
+var VISIBILITY_HIDE = "hide";
+var VISIBILITY_SHOW = "show";
 
 /***/ }),
 

@@ -13696,7 +13696,7 @@ nav.main-nav ul li.active a {
 .custom-modal .modal-buttons {
   display: inline-block;
   position: absolute;
-  z-index: 650;
+  /*z-index: 650;*/
   top: 0px;
   right: 0px;
 }
