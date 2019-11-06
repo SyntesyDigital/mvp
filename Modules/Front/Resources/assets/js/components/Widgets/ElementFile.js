@@ -18,6 +18,7 @@ export default class ElementFile extends Component {
             elementObject : elementObject,
             doubleColumn:doubleColumn,
             modelValues:[],
+            model : model
         };
     }
 
@@ -25,11 +26,28 @@ export default class ElementFile extends Component {
       this.query();
     }
 
+    getUrlParameters() {
+      //concat parameters, first constant parameters
+      var parameters = this.state.model.DEF1 != null ?
+        this.state.model.DEF1 : '';
+
+      if(parameters != '')
+        parameters += "&";
+
+      //then
+      parameters += this.props.parameters;
+
+      return parameters;
+    }
+
     query(page,filters) {
+
         var self = this;
         const {elementObject} = this.state;
-        console.log(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+this.props.parameters);
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+this.props.parameters)
+        const parameters = this.getUrlParameters();
+
+        //console.log(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+this.props.parameters);
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data?'+parameters)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -165,12 +183,14 @@ if (document.getElementById('elementFile')) {
    document.querySelectorAll('[id=elementFile]').forEach(function(element){
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
+       var model = element.getAttribute('model');
        var doubleColumn = element.getAttribute('doubleColumn');
        var parameters = element.getAttribute('parameters');
 
        ReactDOM.render(<ElementFile
            field={field}
            elementObject={elementObject}
+           model={model}
            doubleColumn={doubleColumn}
            parameters={parameters}
          />, element);

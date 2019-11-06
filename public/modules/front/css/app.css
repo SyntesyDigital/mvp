@@ -10233,12 +10233,10 @@ form.contact-form .checkbox {
 }
 
 .element-form-container .element-form-container-body {
-  overflow: hidden;
   border-radius: 12px;
 }
 
 .element-form-container .element-form-container-body.collapse {
-  overflow: auto;
   border-radius: 0;
 }
 
