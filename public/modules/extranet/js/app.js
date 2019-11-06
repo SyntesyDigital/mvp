@@ -1646,6 +1646,7 @@ function (_Component) {
       var configured = false;
       var required = false;
       var hasRoute = false;
+      var visible = false;
 
       if (this.props.rules != null) {
         for (var key in this.props.rules) {
@@ -1668,10 +1669,23 @@ function (_Component) {
         }
       }
 
+      if (this.props.settings != null) {
+        for (var key in this.props.settings) {
+          if (this.props.settings[key] != null && this.props.settings[key] != false) {
+            configured = true;
+
+            if (key == "conditionalVisibility") {
+              visible = true;
+            }
+          }
+        }
+      }
+
       return {
         configured: configured,
         required: required,
-        hasRoute: hasRoute
+        hasRoute: hasRoute,
+        visible: visible
       };
     }
   }, {
@@ -1702,7 +1716,11 @@ function (_Component) {
         className: "fa " + this.props.icon
       }), " \xA0", MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "type-info"
-      }, configuration.hasRoute && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, configuration.visible && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-eye"
+      })), configuration.hasRoute && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "text-success"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-link"
@@ -1940,7 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Settings_RadioSettingsField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Settings/RadioSettingsField */ "./Resources/assets/js/components/Element/Settings/RadioSettingsField.js");
 /* harmony import */ var _Settings_LinkSettingsField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Settings/LinkSettingsField */ "./Resources/assets/js/components/Element/Settings/LinkSettingsField.js");
 /* harmony import */ var _Settings_FieldsSettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Settings/FieldsSettings */ "./Resources/assets/js/components/Element/Settings/FieldsSettings.js");
-/* harmony import */ var _Settings_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Settings/VisibilitySettingsField */ "./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js");
+/* harmony import */ var _Settings_Visibility_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Settings/Visibility/VisibilitySettingsField */ "./Resources/assets/js/components/Element/Settings/Visibility/VisibilitySettingsField.js");
 /* harmony import */ var _actions___WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./actions/ */ "./Resources/assets/js/components/Element/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2180,13 +2198,14 @@ function (_Component) {
         source: "settings",
         onFieldChange: this.handleFieldSettingsChange,
         label: "Liste des champs"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Settings_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Settings_Visibility_VisibilitySettingsField__WEBPACK_IMPORTED_MODULE_10__["default"], {
         field: field,
         name: "conditionalVisibility",
         source: "settings",
-        inputLabel: "Define el estado por defecto.",
+        inputLabel: "D\xE9finir l'\xE9tat par d\xE9faut.",
         onFieldChange: this.handleFieldSettingsChange,
-        label: "Visibilit\xE9 conditionnelle"
+        label: "Afficher selon conditions",
+        parameters: this.props.app.parameters
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -4843,6 +4862,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _constants___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../constants/ */ "./Resources/assets/js/components/Element/constants/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4864,6 +4884,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var ConditionsModal =
 /*#__PURE__*/
 function (_Component) {
@@ -4879,13 +4900,29 @@ function (_Component) {
     _this.state = {
       id: 'modal-conditions',
       isOpen: false,
-      zIndex: 13000
+      zIndex: 13000,
+      fields: []
     };
+    _this.operators = [{
+      name: "Égal",
+      value: _constants___WEBPACK_IMPORTED_MODULE_2__["OPERATOR_EQUAL"]
+    }, {
+      name: "Différent",
+      value: _constants___WEBPACK_IMPORTED_MODULE_2__["OPERATOR_DIFFERENT"]
+    }];
+    _this.types = [{
+      name: "Paramètre",
+      value: _constants___WEBPACK_IMPORTED_MODULE_2__["CONDITION_FIELD_TYPE_PARAMETER"]
+    }];
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ConditionsModal, [{
+    key: "loadFields",
+    value: function loadFields() {//TODO load all fileds types
+    }
+  }, {
     key: "onModalClose",
     value: function onModalClose(e) {
       e.preventDefault();
@@ -4935,13 +4972,49 @@ function (_Component) {
     }
   }, {
     key: "handleInputChange",
-    value: function handleInputChange(e) {//TODO 
+    value: function handleInputChange(e) {
+      //TODO
+      var conditions = this.props.conditions;
+      conditions[this.props.conditionIndex][e.target.name] = e.target.value;
+      this.props.onConditionChange(conditions);
+    }
+  }, {
+    key: "renderOperators",
+    value: function renderOperators() {
+      console.log("this.operators => ", this.operators);
+      return this.operators.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: item.value
+        }, " ", item.name);
+      });
+    }
+  }, {
+    key: "renderTypes",
+    value: function renderTypes() {
+      return this.types.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: item.value
+        }, " ", item.name);
+      });
+    }
+  }, {
+    key: "renderParameters",
+    value: function renderParameters() {
+      return this.props.parameters.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: item.identifier
+        }, " ", item.name);
+      });
     }
   }, {
     key: "render",
     value: function render() {
       if (this.props.conditionIndex == null) return null;
       var condition = this.props.conditions[this.props.conditionIndex];
+      if (condition === undefined) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           zIndex: this.state.zIndex
@@ -4969,16 +5042,51 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-xs-12 col-md-8 col-md-offset-2"
-      }, this.props.initialValue.name, " si :", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-xs-12 col-md-6 col-md-offset-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.initialValue.name, " si :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group bmd-form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "num",
+        htmlFor: "type",
         className: "bmd-label-floating"
       }, "Type of field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "form-control",
         name: "type",
-        value: "",
+        value: condition.type,
+        onChange: this.handleInputChange
+      }, this.renderTypes())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "name",
+        className: "bmd-label-floating"
+      }, "Field"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        type: "text",
+        className: "form-control",
+        name: "name",
+        value: condition.name,
+        onChange: this.handleInputChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: -1,
+        value: ""
+      }, " S\xE9lectionner "), this.renderParameters())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "operator",
+        className: "bmd-label-floating"
+      }, "Operator"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "operator",
+        value: condition.operator,
+        onChange: this.handleInputChange
+      }, this.renderOperators())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "values",
+        className: "bmd-label-floating"
+      }, "Values separated by comas"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "values",
+        value: condition.values,
         onChange: this.handleInputChange
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-footer"
@@ -4997,10 +5105,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js":
-/*!************************************************************************************!*\
-  !*** ./Resources/assets/js/components/Element/Settings/VisibilitySettingsField.js ***!
-  \************************************************************************************/
+/***/ "./Resources/assets/js/components/Element/Settings/Visibility/VisibilitySettingsField.js":
+/*!***********************************************************************************************!*\
+  !*** ./Resources/assets/js/components/Element/Settings/Visibility/VisibilitySettingsField.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5010,8 +5118,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../constants */ "./Resources/assets/js/components/Element/constants/index.js");
-/* harmony import */ var _Visibility_ConditionsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Visibility/ConditionsModal */ "./Resources/assets/js/components/Element/Settings/Visibility/ConditionsModal.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../constants */ "./Resources/assets/js/components/Element/constants/index.js");
+/* harmony import */ var _ConditionsModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ConditionsModal */ "./Resources/assets/js/components/Element/Settings/Visibility/ConditionsModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5064,10 +5172,10 @@ function (_Component) {
     _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     _this.visibilityOptions = [{
-      name: 'Ocultar',
+      name: 'Invisible',
       value: _constants__WEBPACK_IMPORTED_MODULE_2__["VISIBILITY_HIDE"]
     }, {
-      name: 'Mostrar',
+      name: 'Visible',
       value: _constants__WEBPACK_IMPORTED_MODULE_2__["VISIBILITY_SHOW"]
     }];
     return _this;
@@ -5137,7 +5245,7 @@ function (_Component) {
     key: "getDefaultVisibilityValue",
     value: function getDefaultVisibilityValue() {
       return {
-        initialValue: '',
+        initialValue: _constants__WEBPACK_IMPORTED_MODULE_2__["VISIBILITY_HIDE"],
         conditions: []
       };
       /*
@@ -5205,42 +5313,145 @@ function (_Component) {
       });
     }
   }, {
+    key: "onConditionEdit",
+    value: function onConditionEdit(index, e) {
+      e.preventDefault();
+      var self = this;
+      this.setState({
+        selectedContidion: index
+      }, function () {
+        self.setState({
+          modalDisplay: true
+        });
+      });
+    }
+  }, {
+    key: "onConditionRemove",
+    value: function onConditionRemove(index, e) {
+      e.preventDefault();
+      var self = this;
+      bootbox.confirm({
+        message: 'Êtes-vous sûr de supprimer définitivement ce condition',
+        buttons: {
+          confirm: {
+            label: Lang.get('fields.si'),
+            className: 'btn-primary'
+          },
+          cancel: {
+            label: Lang.get('fields.no'),
+            className: 'btn-default'
+          }
+        },
+        callback: function callback(result) {
+          if (result) {
+            var conditions = self.getConditions();
+            conditions.splice(index, 1); //console.log("onConditionRemove :: ",conditions);
+
+            self.updateConditions(conditions);
+          }
+        }
+      });
+    }
+  }, {
+    key: "processCondition",
+    value: function processCondition(condition, index) {
+      //"Or show si type_pol = Hola, asdf, sdfsd "
+      if (condition === undefined) return null;
+      var conditionalAction = this.getConditionalAction();
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, index != 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Ou \xA0"), conditionalAction.name, " si ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, condition.name), "\xA0 ", this.processOperator(condition.operator), " \xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, condition.values));
+    }
+  }, {
+    key: "processOperator",
+    value: function processOperator(operator) {
+      switch (operator) {
+        case _constants__WEBPACK_IMPORTED_MODULE_2__["OPERATOR_EQUAL"]:
+          return "égal";
+
+        case _constants__WEBPACK_IMPORTED_MODULE_2__["OPERATOR_DIFFERENT"]:
+          return "différent";
+      }
+    }
+  }, {
     key: "renderConditions",
-    value: function renderConditions() {}
+    value: function renderConditions() {
+      var _this2 = this;
+
+      if (this.state.value.conditions === undefined) return null;
+      return this.state.value.conditions.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "condition-item row",
+          key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-sm-9"
+        }, _this2.processCondition(item, index)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-sm-3 text-right"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "",
+          onClick: _this2.onConditionEdit.bind(_this2, index),
+          className: ""
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-pencil-alt"
+        })), " \xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "",
+          onClick: _this2.onConditionRemove.bind(_this2, index),
+          className: "text-danger"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-trash"
+        }))));
+      });
+    }
   }, {
     key: "openModal",
     value: function openModal(e) {
       e.preventDefault();
       var value = this.getVisibilityValue();
       value.conditions.push(this.getDefaultConditionValue());
+      var self = this;
       this.setState({
-        modalDisplay: true,
-        value: value
+        value: value,
+        selectedContidion: value.conditions.length - 1
+      }, function () {
+        self.setState({
+          modalDisplay: true
+        });
       });
     }
   }, {
     key: "getDefaultConditionValue",
     value: function getDefaultConditionValue() {
       return {
-        action: '',
-        //opposite by default
-        join: 'and/or',
-        //only appear second condition
-        type: 'parameters',
-        name: 'name',
-        operator: '=,!=',
-        options: [],
-        //list of options
-        values: [] //selected options
-
+        join: _constants__WEBPACK_IMPORTED_MODULE_2__["CONDITION_JOIN_OR"],
+        type: _constants__WEBPACK_IMPORTED_MODULE_2__["CONDITION_FIELD_TYPE_PARAMETER"],
+        name: '',
+        operator: _constants__WEBPACK_IMPORTED_MODULE_2__["OPERATOR_EQUAL"],
+        values: ''
       };
     }
   }, {
     key: "handleModalClose",
     value: function handleModalClose() {
       this.setState({
-        modalDisplay: false
+        modalDisplay: false,
+        selectedContidion: null
       });
+    }
+  }, {
+    key: "handleConditionChange",
+    value: function handleConditionChange(conditions) {
+      //console.log("handleConditionChange :: ",conditions);
+      this.updateConditions(conditions);
+    }
+  }, {
+    key: "updateConditions",
+    value: function updateConditions(conditions) {
+      var value = this.state.value;
+      value.conditions = conditions;
+      var field = {
+        name: this.props.name,
+        source: this.props.source,
+        value: value
+      };
+      this.props.onFieldChange(field);
     }
   }, {
     key: "render",
@@ -5253,12 +5464,14 @@ function (_Component) {
           display: this.state.display ? 'block' : 'none'
         },
         className: "visibility-settings-field"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Visibility_ConditionsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ConditionsModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
         display: this.state.modalDisplay,
         onModalClose: this.handleModalClose.bind(this),
         initialValue: this.getConditionalAction(),
         conditions: this.getConditions(),
-        conditionIndex: this.state.selectedContidion
+        conditionIndex: this.state.selectedContidion,
+        onConditionChange: this.handleConditionChange.bind(this),
+        parameters: this.props.parameters
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "setup-field"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5284,7 +5497,11 @@ function (_Component) {
         value: value.initialValue,
         onChange: this.handleInputChange
       }, this.renderOptions())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "conditions-list"
+        className: "form-group bmd-form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "bmd-label-floating"
+      }, "D\xE9finir les conditions :")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group conditions-list"
       }, this.renderConditions()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         "class": "add-row-block"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -5755,7 +5972,7 @@ function configureStore() {
 /*!*******************************************************************!*\
   !*** ./Resources/assets/js/components/Element/constants/index.js ***!
   \*******************************************************************/
-/*! exports provided: INIT_STATE, INPUT_CHANGE, DELETE_ELEMENT, SAVE_SUCCESS, SAVE_ERROR, SUBMIT_FORM, CREATE_ELEMENT, UPDATE_ELEMENT, FIELD_ADD, FIELD_MOVE, FIELD_REMOVE, FIELD_CHANGE, SETTINGS_OPEN, SETTINGS_CHANGE, SETTINGS_CLOSE, SETTINGS_CLOSED, INIT_PARAMETERS, ADD_PARAMETER, REMOVE_PARAMETER, MODAL_CONTENT_OPEN, MODAL_CONTENT_CLOSE, MODAL_CONTENT_SELECT, MODAL_CONTENT_UNSELECT, MODAL_CONTENT_CLEAR, MODAL_CONTENT_INIT, MODAL_CONTENT_UPDATED, PARAMETERS_INIT, PARAMETERS_OPEN_MODAL, PARAMETERS_CLOSE_MODAL, PARAMETERS_UPDATE, PARAMETERS_CLEAR, ELEMENT_PARAMETERS_OPEN_MODAL, ELEMENT_PARAMETERS_CLOSE_MODAL, ELEMENT_PARAMETERS_UPDATE, ELEMENT_PARAMETERS_CLEAR, ELEMENT_PARAMETERS_CLOSED, VISIBILITY_HIDE, VISIBILITY_SHOW */
+/*! exports provided: INIT_STATE, INPUT_CHANGE, DELETE_ELEMENT, SAVE_SUCCESS, SAVE_ERROR, SUBMIT_FORM, CREATE_ELEMENT, UPDATE_ELEMENT, FIELD_ADD, FIELD_MOVE, FIELD_REMOVE, FIELD_CHANGE, SETTINGS_OPEN, SETTINGS_CHANGE, SETTINGS_CLOSE, SETTINGS_CLOSED, INIT_PARAMETERS, ADD_PARAMETER, REMOVE_PARAMETER, MODAL_CONTENT_OPEN, MODAL_CONTENT_CLOSE, MODAL_CONTENT_SELECT, MODAL_CONTENT_UNSELECT, MODAL_CONTENT_CLEAR, MODAL_CONTENT_INIT, MODAL_CONTENT_UPDATED, PARAMETERS_INIT, PARAMETERS_OPEN_MODAL, PARAMETERS_CLOSE_MODAL, PARAMETERS_UPDATE, PARAMETERS_CLEAR, ELEMENT_PARAMETERS_OPEN_MODAL, ELEMENT_PARAMETERS_CLOSE_MODAL, ELEMENT_PARAMETERS_UPDATE, ELEMENT_PARAMETERS_CLEAR, ELEMENT_PARAMETERS_CLOSED, VISIBILITY_HIDE, VISIBILITY_SHOW, OPERATOR_EQUAL, OPERATOR_DIFFERENT, CONDITION_FIELD_TYPE_PARAMETER, CONDITION_FIELD_TYPE_CONFIGURABLE, CONDITION_FIELD_TYPE_UNCONFIGURABLE, CONDITION_JOIN_AND, CONDITION_JOIN_OR */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5798,6 +6015,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ELEMENT_PARAMETERS_CLOSED", function() { return ELEMENT_PARAMETERS_CLOSED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VISIBILITY_HIDE", function() { return VISIBILITY_HIDE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VISIBILITY_SHOW", function() { return VISIBILITY_SHOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OPERATOR_EQUAL", function() { return OPERATOR_EQUAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OPERATOR_DIFFERENT", function() { return OPERATOR_DIFFERENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITION_FIELD_TYPE_PARAMETER", function() { return CONDITION_FIELD_TYPE_PARAMETER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITION_FIELD_TYPE_CONFIGURABLE", function() { return CONDITION_FIELD_TYPE_CONFIGURABLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITION_FIELD_TYPE_UNCONFIGURABLE", function() { return CONDITION_FIELD_TYPE_UNCONFIGURABLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITION_JOIN_AND", function() { return CONDITION_JOIN_AND; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONDITION_JOIN_OR", function() { return CONDITION_JOIN_OR; });
 var INIT_STATE = "INIT_STATE";
 var INPUT_CHANGE = "INPUT_CHANGE";
 var DELETE_ELEMENT = "DELETE_ELEMENT";
@@ -5837,6 +6061,13 @@ var ELEMENT_PARAMETERS_CLOSED = "ELEMENT_PARAMETERS_CLOSED"; //settings to setti
 
 var VISIBILITY_HIDE = "hide";
 var VISIBILITY_SHOW = "show";
+var OPERATOR_EQUAL = "equal";
+var OPERATOR_DIFFERENT = "different";
+var CONDITION_FIELD_TYPE_PARAMETER = "parameter";
+var CONDITION_FIELD_TYPE_CONFIGURABLE = "config_field";
+var CONDITION_FIELD_TYPE_UNCONFIGURABLE = "unconfig_field";
+var CONDITION_JOIN_AND = "and";
+var CONDITION_JOIN_OR = "or";
 
 /***/ }),
 

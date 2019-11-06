@@ -255,3 +255,11 @@ li.react-autosuggest__suggestion span {
   padding: 15px 40px;
 }
 
+.visibility-settings-field .condition-item {
+  border: 1px solid #ccc;
+  padding: 12px 0;
+  margin: 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
