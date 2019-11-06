@@ -22,6 +22,7 @@ export default class ElementTable extends Component {
         const defaultDataLoadStep = 1000;
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
+        const model = props.model ? JSON.parse(atob(props.model)) : null;
         const pagination =  props.pagination ? true : false;
         const itemsPerPage = props.itemsPerPage !== undefined
           && props.itemsPerPage != null
@@ -49,7 +50,9 @@ export default class ElementTable extends Component {
             filterable : false,
             sortColumnName: null,
             sortColumnType:null,
-            defaultDataLoadStep:defaultDataLoadStep
+            defaultDataLoadStep:defaultDataLoadStep,
+            model : model
+
         };
     }
 
@@ -63,7 +66,14 @@ export default class ElementTable extends Component {
         var self = this;
         const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
         var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
-        var params = '?perPage='+limitFirstLoad;
+
+        var params = '?';
+
+        if(this.state.model.DEF1 != null)
+          params+= this.state.model.DEF1+"&";
+
+        params += 'perPage='+limitFirstLoad;
+
         //console.log('SORT',this.state.sortColumnName);
         if( this.state.sortColumnName){
           params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
@@ -308,6 +318,7 @@ if (document.getElementById('elementTable')) {
    document.querySelectorAll('[id=elementTable]').forEach(function(element){
        var field = element.getAttribute('field');
        var elementObject = element.getAttribute('elementObject');
+       var model = element.getAttribute('model');
        var maxItems = element.getAttribute('maxItems');
        var pagination = element.getAttribute('pagination');
        var itemsPerPage = element.getAttribute('itemsPerPage');
@@ -316,6 +327,7 @@ if (document.getElementById('elementTable')) {
        ReactDOM.render(<ElementTable
            field={field}
            elementObject={elementObject}
+           model={model}
            pagination={pagination}
            itemsPerPage={itemsPerPage}
            maxItems={maxItems}

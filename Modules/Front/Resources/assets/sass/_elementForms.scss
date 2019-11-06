@@ -57,11 +57,11 @@
 
   .element-form-container-body{
 
-    overflow: hidden;
+    //overflow: hidden;
     @include round($elements-radius);
 
     &.collapse{
-      overflow: auto;
+      //overflow: auto;
       @include round(0);
     }
 

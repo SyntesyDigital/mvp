@@ -240,8 +240,8 @@
   }
 
   .element-form-container .element-form-container-head{
-    background-color: {{$elementHeadBackground}};//$sidebarBackgroundColor
-    color:{{$elementHeadColor}};//$secondaryColor
+    background-color: {{$elementHeadBackground}};
+    color:{{$elementHeadColor}};
     border-bottom: 1px solid {{$elementBorder}};
     border-top-left-radius: {{$buttonRadius}};
     border-top-right-radius: {{$buttonRadius}};
@@ -263,8 +263,8 @@
   }
 
   .element-form-container .element-collapsable.element-form-container-head.collapsed {
-    background-color: {{$elementHeadBackground}};//$sidebarBackgroundColor
-    color:{{$elementHeadColor}};//$secondaryColor
+    background-color: {{$frontElementHeadCollapsableBackground}};
+    color:{{$elementHeadColor}};
 
   }
 
@@ -274,6 +274,14 @@
     color:{{$elementColor}};
     border-bottom-left-radius: {{$buttonRadius}};
     border-bottom-right-radius: {{$buttonRadius}};
+    border-top-left-radius: {{$buttonRadius}};
+    border-top-right-radius: {{$buttonRadius}};
+
+  }
+
+  .element-form-container .element-form-container-body.collapse .element-form{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   .element-form-container .element-form-row label span{
