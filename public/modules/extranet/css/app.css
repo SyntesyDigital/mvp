@@ -243,3 +243,23 @@ li.react-autosuggest__suggestion span {
   padding-right: 5px;
 }
 
+.visibility-settings-field .add-row-block {
+  border: 1px dashed #ccc;
+  text-align: center;
+  padding: 0px 5px;
+  margin-bottom: 0px;
+  margin-left: 50px;
+}
+
+.visibility-settings-field .modal-header {
+  padding: 15px 40px;
+}
+
+.visibility-settings-field .condition-item {
+  border: 1px solid #ccc;
+  padding: 12px 0;
+  margin: 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+

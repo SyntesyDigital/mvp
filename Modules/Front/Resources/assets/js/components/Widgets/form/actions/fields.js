@@ -9,7 +9,10 @@ import ListField from './../fields/ListField';
 import FileField from './../fields/FileField';
 
 import {
-  HIDDEN_FIELD
+  HIDDEN_FIELD,
+  VISIBILITY_SHOW,
+  OPERATOR_EQUAL,
+  OPERATOR_DIFFERENT
 } from './../constants';
 
 const fieldComponents = {
@@ -309,4 +312,80 @@ export function parameteres2Array(paramString) {
   }
 
   return result;
+}
+
+/**
+*   Check if field is visible depending on visibility conditionals.
+
+- check if parameter exist in form parameters and check value
+- check every condition
+type_pol = [true,false,]
+
+*/
+export function isVisible(file,formParameters) {
+  if(file.name == "Dommages")
+    console.log("isVisible :: ",file,formParameters);
+
+  //if no has settings return visible
+  if(file.settings.conditionalVisibility === undefined || file.settings.conditionalVisibility == null){
+    return true;
+  }
+
+  var settings = file.settings.conditionalVisibility;
+
+  var visible = settings.initialValue == VISIBILITY_SHOW ? true : false;  //init with default value
+
+  var conditionAccepted = false;
+
+  for(var index in settings.conditions) {
+    //fixme improve || for join type
+    conditionAccepted = conditionAccepted || checkConditionAccepted(
+      settings.conditions[index],
+      formParameters
+    );
+  }
+
+  if(conditionAccepted){
+    //change visible to opposite
+    visible = !visible;
+  }
+  //if any condition is accepted, visible
+
+  console.log("isVisible :: ",visible);
+
+  return visible;
+}
+
+/**
+*   Check each condition to see if it's accepted or not.
+*/
+function checkConditionAccepted(condition,formParameters) {
+  if(condition.name === undefined || condition.name == "" )
+    return false;
+
+  if(condition.values === undefined || condition.values == "" )
+    return false;
+
+  //condition parameter don't exist in form
+  if(formParameters['_'+condition.name] === undefined){
+    return false;
+  }
+
+  var formValue = formParameters['_'+condition.name];
+  var operator = condition.operator;
+
+  var values = condition.values.split(",");
+  for(var key in values){
+    var value = values[key].trim();
+
+    if(operator == OPERATOR_EQUAL && value == formValue){
+      return true;
+    }
+    else if(operator == OPERATOR_DIFFERENT && value != formValue){
+      return true;
+    }
+  }
+
+  return false;
+
 }

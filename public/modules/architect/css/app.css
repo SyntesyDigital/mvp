@@ -15387,6 +15387,19 @@ line.links {
   pointer-events: none !important;
 }
 
+#modal-edit-item .settings-col .visibility-settings-field .setup-field-config .form-group {
+  padding-left: 0px !important;
+}
+
+#modal-edit-item .settings-col .visibility-settings-field .text-right {
+  padding: 0;
+  padding-right: 15px;
+}
+
+#modal-edit-item .settings-col .visibility-settings-field .add-row-block {
+  margin-left: 0px;
+}
+
 .translated-file {
   display: inline-block;
   padding: 10px;
@@ -16735,6 +16748,19 @@ ol.example li.placeholder {
 ol.example li.placeholder:before {
   position: absolute;
   /** Define arrowhead **/
+}
+
+.item-content .title {
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item-header .preview-icons {
+  font-size: 16px;
+  line-height: 27px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 /*

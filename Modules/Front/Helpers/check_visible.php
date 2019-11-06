@@ -8,29 +8,57 @@ if (!function_exists('check_visible')) {
         return true;
       }
 
-      if(!isset($settings) || !isset($settings['hiddenFilter'])
-        || $settings['hiddenFilter'] == ""){
+      if(!isset($settings) || !isset($settings['conditionalVisibility'])
+        || $settings['conditionalVisibility'] == ""){
         return true;
       }
 
-      $filterArray = explode(':',$settings['hiddenFilter']);
-      $filterName = $filterArray[2];
-      $filterValue = $filterArray[1];
+      $settings = $settings['conditionalVisibility'];
 
-      $paramsArray = explode("&",$parameters);
-      foreach($paramsArray as $param) {
-        $paramArray = explode("=",$param);
+      $visible = $settings['initialValue'] == "show" ?
+        true : false;
 
-        if($paramArray[0] == $filterName){
-          //dd($paramArray[0],$paramArray[1],$filterValue);
-          //if the parameter of the filter exist in the url
-          if($paramArray[1] == $filterValue){
-            //if the value is the same set in the hidden filter
-            return false; //hide
-          }
-        }
+      $parameters = parameters2array($parameters);
+
+      $conditionsAccepted = false;
+
+      foreach($settings['conditions'] as $condition) {
+        $conditionsAccepted = $conditionsAccepted || check_condition_accepted(
+          $condition,
+          $parameters
+        );
       }
 
-      return true;
+      if($conditionsAccepted){
+        $visible = !$visible;
+      }
+      return $visible;
+    }
+
+    function check_condition_accepted($condition,$parameters)
+    {
+        if(!isset($condition['name']) || $condition['name'] == "")
+          return false;
+        if(!isset($condition['values']) || $condition['values'] == "")
+          return false;
+        if(!isset($parameters[$condition['name']]))
+          return false;
+
+        $formValue = $parameters[$condition['name']];
+        $operator = $condition['operator'];
+
+        $values = explode(',',$condition['values']);
+        foreach($values as $value) {
+          $value = trim($value);
+          if($operator == "equal" && $value == $formValue){
+            return true;
+          }
+          else if($operator == "different" && $value != $formValue){
+            return true;
+          }
+        }
+
+        return false;
+
     }
 }

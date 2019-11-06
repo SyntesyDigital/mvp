@@ -13,7 +13,8 @@ import {
   processObject,
   validateField,
   processResponseParameters,
-  parameteres2Array
+  parameteres2Array,
+  isVisible
 } from './form/actions/';
 
 export default class ElementForm extends Component {
@@ -318,15 +319,19 @@ export default class ElementForm extends Component {
         var field = this.state.elementObject.fields[key];
         const FieldComponent = getFieldComponent(field.type);
 
-        fields.push(<FieldComponent
-            key={key}
-            field={field}
-            value={this.state.values[field.identifier]}
-            error={this.state.errors[field.identifier] !== undefined ? true : false}
-            onFieldChange={this.handleOnChange}
-            parameters={this.getUrlParameters()}
-            values={this.state.values}
-          />);
+        //check visibilitiy
+        const visible = isVisible(field,this.state.formParameters);
+
+        if(visible)
+          fields.push(<FieldComponent
+              key={key}
+              field={field}
+              value={this.state.values[field.identifier]}
+              error={this.state.errors[field.identifier] !== undefined ? true : false}
+              onFieldChange={this.handleOnChange}
+              parameters={this.getUrlParameters()}
+              values={this.state.values}
+            />);
 
       }
 
