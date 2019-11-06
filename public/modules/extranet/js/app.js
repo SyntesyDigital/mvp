@@ -1240,7 +1240,8 @@ function (_Component) {
           moveField: _this2.moveField,
           onRemoveField: _this2.handleRemoveField,
           onFieldChange: _this2.handleFieldChange,
-          onOpenSettings: _this2.handleOpenSettings
+          onOpenSettings: _this2.handleOpenSettings,
+          errors: item.errors
         });
       });
     }
@@ -1693,6 +1694,7 @@ function (_Component) {
     value: function render() {
       //console.log("is editable => ",this.props.editable);
       var configuration = this.getConfiguration();
+      var errors = this.props.errors !== undefined && this.props.errors != null ? true : false;
       var isEntryTitle = false;
 
       if (this.props.settings != null && this.props.settings.entryTitle !== undefined && this.props.settings.entryTitle) {
@@ -1716,7 +1718,11 @@ function (_Component) {
         className: "fa " + this.props.icon
       }), " \xA0", MODELS_FIELDS[this.props.type] !== undefined ? MODELS_FIELDS[this.props.type].label : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "type-info"
-      }, configuration.visible && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, errors && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "class": "text-danger"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle"
+      })), configuration.visible && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "text-success"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-eye"
@@ -6187,8 +6193,9 @@ function checkValidParameters(params) {
   if (params != null && params.length > 0) {
     for (var key in params) {
       var required = isRequired(params[key]);
+      console.log("checkValidParameters : ", params[key], required);
 
-      if (required && params[key].value == "") {
+      if (required && (params[key].value == "" || params[key].value == null)) {
         return false;
       }
     }
