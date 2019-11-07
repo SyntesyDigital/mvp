@@ -11,7 +11,7 @@ export default class ElementFile extends Component {
         const field = props.field ? JSON.parse(atob(props.field)) : '';
         const elementObject = props.elementObject ? JSON.parse(atob(props.elementObject)) : null;
         const doubleColumn = props.doubleColumn ? props.doubleColumn : false;
-
+        const model = props.model ? JSON.parse(atob(props.model)) : null;
 
         this.state = {
             field : field,

@@ -6,7 +6,7 @@
   $visible = check_visible($field['settings'],$parameters);
 
   $elementObject = null;
-  if(isset($field['settings']['tableElements'])){
+  if(isset($field['settings']['fileElements'])){
     $elementObject = \Modules\Extranet\Entities\Element::where('id',$field['settings']['fileElements'])->first()->load('fields');
   }
 
@@ -14,6 +14,7 @@
   if(isset($elementObject) && isset($models[$elementObject->model_identifier])){
     $model = $models[$elementObject->model_identifier];
   }
+  
 @endphp
 
 
