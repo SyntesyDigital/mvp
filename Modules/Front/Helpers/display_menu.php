@@ -70,7 +70,6 @@ if (!function_exists('format_link')) {
         "icon" => $icon
       ];
 
-      //print_r($result);
       return $result;
     }
 }

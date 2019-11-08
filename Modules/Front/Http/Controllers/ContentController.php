@@ -96,10 +96,9 @@ class ContentController extends Controller
         $parameters = $content->getRouteParametersWithSettings();
 
         if(isset($parameters)){
-          
+
           foreach($parameters as $identifier => $parameter){
             if( $parameter['required'] && !$request->has($identifier)){
-              print_r($identifier);
               return false;
             }
           }

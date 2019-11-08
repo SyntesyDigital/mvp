@@ -25,7 +25,7 @@ class VeosUserProvider implements UserProvider {
                case ROLE_ADMIN:
                case ROLE_USER:
                     //update token
-                    //$this->renewToken();
+                    $this->renewToken();
                     break;
 
                 default:

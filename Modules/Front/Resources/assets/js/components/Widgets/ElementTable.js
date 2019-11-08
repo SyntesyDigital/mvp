@@ -34,6 +34,8 @@ export default class ElementTable extends Component {
 
         const maxItems = props.maxItems !== undefined ? props.maxItems : false;
 
+        var pageLimit = maxItems && maxItems < defaultDataLoadStep? maxItems : defaultDataLoadStep;
+
         this.state = {
             field : field,
             elementObject : elementObject,
@@ -51,8 +53,12 @@ export default class ElementTable extends Component {
             sortColumnName: null,
             sortColumnType:null,
             defaultDataLoadStep:defaultDataLoadStep,
-            model : model
+            model : model,
 
+            pageLimit : pageLimit,
+            currentPage : 2,
+            totalPages : 0,
+            dataProcessing : []
         };
     }
 
@@ -62,28 +68,36 @@ export default class ElementTable extends Component {
       //  this.query();
     }
 
+    getQueryParams(limit,page) {
+      var params = '?';
+
+      if(this.state.model.DEF1 != null)
+        params+= this.state.model.DEF1+"&";
+
+      params += 'perPage='+limit+'&page='+page;
+
+      //console.log('SORT',this.state.sortColumnName);
+      if( this.state.sortColumnName){
+        params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
+      }
+
+      return params;
+    }
+
     query() {
         var self = this;
-        const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
-        var limitFirstLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
+        const {
+          elementObject,itemsPerPage,maxItems,
+          defaultDataLoadStep, pageLimit
+        } = this.state;
 
-        var params = '?';
-
-        if(this.state.model.DEF1 != null)
-          params+= this.state.model.DEF1+"&";
-
-        params += 'perPage='+limitFirstLoad;
-
-        //console.log('SORT',this.state.sortColumnName);
-        if( this.state.sortColumnName){
-          params += '&orderBy='+this.state.sortColumnName+'&orderType='+this.state.sortColumnType;
-        }
+        var params = this.getQueryParams(pageLimit,1);
 
         //add url params
         if(this.props.parameters != '')
           params += "&"+this.props.parameters;
 
-        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitFirstLoad+'/'+params)
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+pageLimit+'/'+params)
           .then(function (response) {
               if(response.status == 200
                   && response.data.modelValues !== undefined)
@@ -92,8 +106,19 @@ export default class ElementTable extends Component {
                 console.log("CompleteObject  :: componentDidMount => ",response.data.totalPage);
                 // en completeObject rengo el total de registros, por pagina, pagina, total de paginas, desde y hasta
 
-                self.processData(response.data.modelValues);
-                self.getAllData(response.data.totalPage);
+                var dataProcessed = self.processData(response.data.modelValues);
+
+
+
+                self.setState({
+                    data : [...self.state.data, ...dataProcessed ],
+                    totalPages : response.data.totalPage,
+                    loading : false
+                }, function(){
+                    if(!maxItems) {
+                      self.iterateAllPages();
+                    }
+                });
 
               }
 
@@ -105,40 +130,53 @@ export default class ElementTable extends Component {
            });
     }
 
-    getAllData(totalPages){
+    iterateAllPages(){
 
-      const {elementObject,itemsPerPage, maxItems,defaultDataLoadStep} = this.state;
-      var limitLoad = maxItems && maxItems < defaultDataLoadStep?+maxItems:defaultDataLoadStep;
+      const {
+        elementObject,totalPages,currentPage,
+        pageLimit
+      } = this.state;
 
-      if(!maxItems || limitLoad < maxItems){
+      if(currentPage > totalPages){
+
+        //process data and add to main data
+        this.setState({
+          loadingData : true
+        })
+      }
+      else {
+
+        //process page
+        var params = this.getQueryParams(pageLimit,currentPage);
         var self = this;
 
-        for(var page= 2;page<=totalPages;page++){
+        axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+pageLimit+'/'+params)
+          .then(function (response) {
+              if(response.status == 200
+                  && response.data.modelValues !== undefined)
+              {
+                const {currentPage} = self.state;
+                //add data to
+                var dataProcessed = self.processData(response.data.modelValues);
 
-          axios.get(ASSETS+'architect/extranet/'+elementObject.id+'/model_values/data/'+limitLoad+'/?perPage='+limitLoad+'&page='+page)
-            .then(function (response) {
-                if(response.status == 200
-                    && response.data.modelValues !== undefined)
-                {
-                  self.processData(response.data.modelValues);
+                self.setState({
+                    data : [...self.state.data, ...dataProcessed ],
+                    currentPage : currentPage + 1,
+                    loadingData : true
+                }, function(){
+                    self.iterateAllPages();
+                });
 
-                }
+              }
 
-            }).catch(function (error) {
-               console.log(error);
-               self.setState({
-                 loadingData: false
-               });
+          }).catch(function (error) {
+             console.log(error);
+             self.setState({
+               loadingData: false
              });
-
-        }
-
-
+           });
       }
 
-      this.setState({
-        loadingData: false
-      });
     }
 
     renderCell(field,identifier,row) {
@@ -256,19 +294,16 @@ export default class ElementTable extends Component {
           }
         }
 
-        this.setState({
-            data : [...this.state.data, ...data ],
-            loading : false
-        });
+        return data;
     }
 
-    filterMethod(identifier, filter, rows, ) {
+    filterMethod(identifier, filter, rows ) {
         //console.log("identifier => ",identifier);
         return matchSorter(rows, filter.value, { keys: [identifier] });
     }
 
     renderTable() {
-      const {data, elementObject, itemsPerPage} = this.state;
+      const {data, elementObject, itemsPerPage,maxItems} = this.state;
 
       return (
         <ReactTable
@@ -281,14 +316,9 @@ export default class ElementTable extends Component {
               desc: this.state.sortColumnType == 'DESC'?true:false
             }
           ]}
-          defaultPageSize={this.state.maxItems && this.state.maxItems!= '' &&
-            this.state.maxItems < this.state.itemsPerPage ?
-            this.state.maxItems : this.state.itemsPerPage }
+          defaultPageSize={maxItems ? parseInt(maxItems) : parseInt(this.state.itemsPerPage)}
           loading={this.state.loading}
           filterable={true}
-          defaultFilterMethod={(filter, row) =>
-            String(row[filter.id]) === filter.value
-          }
           //className="-striped -highlight"
           className=""
           previousText={<span><i className="fa fa-caret-left"></i> &nbsp; Précédente</span>}
