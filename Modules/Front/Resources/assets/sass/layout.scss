@@ -3,10 +3,9 @@ html{
   box-sizing: border-box;
 }
 
-
-
 header{
   border-bottom: none !important;
+
   &:first-child{
       .row{
         &.row-header{
@@ -240,6 +239,9 @@ body {
   margin: 0;
   min-height: 100%;
 
+  &.is-test {
+      padding-top:30px;
+  }
 }
 
 .separator{

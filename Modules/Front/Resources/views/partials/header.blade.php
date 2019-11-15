@@ -24,6 +24,7 @@
 							@endif
 						</a>
 					</div>
+
 					<div class="right-part-header {{isset($isLogin) ? 'login-header' : ''}}">
 						@if(null !== Auth::user())
 							<div class="menu-container">
@@ -39,7 +40,7 @@
 
 									<div class="button-header-container">
 											<a href="" class="btn btn-header" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-													<i class="fa fa-sign-out"></i> <p class="button-text">Déconnecter</p>
+													<i class="fas fa-sign-out-alt"></i> <p class="button-text">Déconnecter</p>
 											</a>
 											<form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
 											{{csrf_field()}}
@@ -49,7 +50,9 @@
 									@if(has_roles([ROLE_SUPERADMIN,ROLE_SYSTEM,ROLE_ADMIN]))
 										<div class="button-header-container">
 											<a href="{{route('dashboard')}}" class="btn btn-header">
-												<i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p></a></div>
+												<i class="fa fa-cog"></i> <p class="button-text">Espace Admin</p>
+                      </a>
+                    </div>
 									@endif
 									<p class="user-name">
 										Bonjour, {{Auth::user()->firstname}}

@@ -44,7 +44,8 @@
 
 
     </head>
-    <body class="{{$mainClass or ''}}">
+    <body class="{{$mainClass or ''}} {{is_test_environment() ? 'is-test' : ''}}">
+
 
         @stack('modal')
 
@@ -54,6 +55,9 @@
         @endif
 
         @include ('front::partials.header')
+
+        @include ('front::partials.env_bar')
+
         <div>
 
           @if(null !== Auth::user())

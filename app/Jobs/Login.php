@@ -21,34 +21,31 @@ class Login
 
     private $login;
     private $password;
-    private $testMode;
-    private $recMode;
+    private $test;
 
-    public function __construct($login, $password)
+    public function __construct($login, $password, $env = null)
     {
         $this->uid = $login;
         $this->passwd = $password;
-        $this->testMode = substr(strtolower($this->uid), -4) == '-dev' ? true : false;
-        $this->recMode = substr(strtolower($this->uid), -4) == '-rec' ? true : false;
-
-        if($this->testMode || $this->recMode) {
-            $this->uid = substr($this->uid, 0, -4);
-        }
+        $this->test = $env != null ? true : false;
+        $this->env = $env != null ? $env : VeosWsUrl::PROD;
     }
 
     public static function fromRequest(LoginRequest $request)
     {
         return new Login(
             $request->get('uid'),
-            $request->get('passwd')
+            $request->get('passwd'),
+            $request->get('env')
         );
     }
 
-    public static function fromAttributes($uid,$passwd)
+    public static function fromAttributes($uid,$passwd,$env = null)
     {
         return new Login(
             $uid,
-            $passwd
+            $passwd,
+            $env
         );
     }
 
@@ -74,11 +71,7 @@ class Login
         try {
             $client = new Client();
 
-            $WsUrl = $this->testMode ? VeosWsUrl::test() : VeosWsUrl::prod();
-
-            if($this->recMode) {
-                $WsUrl = VeosWsUrl::rec();
-            }
+            $WsUrl = VeosWsUrl::getEnvironmentUrl($this->env);
 
             $login = $client->post($WsUrl . 'login', [
                 'json' => [
@@ -99,8 +92,7 @@ class Login
                 if ($loginResult->statusCode == 0) {
                     $user = $this->getUser($loginResult->token);
 
-                    $user->testMode = $this->testMode;
-                    $user->recMode = $this->recMode;
+                    $user->env = $this->env;
 
                     if (!$user) {
                         return false;
@@ -142,8 +134,8 @@ class Login
                         'phone' => isset($user->{'USEREXT.telprinc_per'}) ? $user->{'USEREXT.telprinc_per'} : null,
                         'supervue' => $isSupervue,
                         'token' => $loginResult->token,
-                        'testMode' => $this->testMode,
-                        'recMode' => $this->recMode,
+                        'env' => $this->env,
+                        'test' => $this->test,
                         'role' => $this->processMainRole($sessionInfo),
                         'pages' => $pages,
                         'allowed_pages' => $allowedPages,  //can be null if no session defined
@@ -169,11 +161,7 @@ class Login
     public function getUser($token)
     {
         $client = new Client();
-        $WsUrl = $this->testMode ? VeosWsUrl::test() : VeosWsUrl::prod();
-
-        if($this->recMode) {
-            $WsUrl = VeosWsUrl::rec();
-        }
+        $WsUrl = VeosWsUrl::getEnvironmentUrl($this->env);
 
         //get user info
         $result = $client->get($WsUrl . 'boBy/v2/WS_EXT2_USE', [
@@ -215,11 +203,7 @@ class Login
     private function getPages($token)
     {
       $client = new Client();
-      $WsUrl = $this->testMode ? VeosWsUrl::test() : VeosWsUrl::prod();
-
-      if($this->recMode) {
-          $WsUrl = VeosWsUrl::rec();
-      }
+      $WsUrl = VeosWsUrl::getEnvironmentUrl($this->env);
 
       $result = $client->get($WsUrl . 'boBy/v2/WS_EXT2_DEF_PAGES?perPage=100', [
           'headers' => [
@@ -244,11 +228,7 @@ class Login
         return null;
 
       $client = new Client();
-      $WsUrl = $this->testMode ? VeosWsUrl::test() : VeosWsUrl::prod();
-
-      if($this->recMode) {
-          $WsUrl = VeosWsUrl::rec();
-      }
+      $WsUrl = VeosWsUrl::getEnvironmentUrl($this->env);
 
       $result = $client->get($WsUrl . 'boBy/v2/WS_EXT2_DEF_OPTIONS_SESSION?SES='.$currentSession, [
           'headers' => [

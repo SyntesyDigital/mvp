@@ -9555,6 +9555,10 @@ body {
   min-height: 100%;
 }
 
+body.is-test {
+  padding-top: 30px;
+}
+
 .separator {
   height: 1px;
   width: 80%;
@@ -10959,5 +10963,43 @@ form.contact-form .checkbox {
 .blog-home .grey {
   overflow: inherit !important;
   padding-bottom: 1px;
+}
+
+.env-bar {
+  background-color: #e84b36;
+  color: #fff;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 500;
+  padding-left: 5px;
+  line-height: 30px;
+}
+
+.env-bar .envirnment-button {
+  background-color: #fff;
+  color: #293649;
+  padding: 0 15px;
+  margin: 0 10px;
+  border-radius: 6px;
+}
+
+.env-bar .envirnment-button i {
+  font-size: 11px;
+  color: #e84b35;
+}
+
+.env-bar .envirnment-button.prod i {
+  color: #e84b35;
+}
+
+.env-bar .envirnment-button.dev i {
+  color: #e84b35;
+}
+
+.env-bar .envirnment-button.rec i {
+  color: #3599e8;
 }
 

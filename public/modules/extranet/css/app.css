@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.horizontal-container {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+
+.horizontal-container {
   max-width: 100%;
   margin: 0 auto;
 }
@@ -122,7 +124,25 @@ li {
   text-align: left;
 }
 
-.grid-items .dashed a .grid-item {
+.elements-page .grid-items .grid-item {
+  height: 130px;
+  display: table;
+  width: 100%;
+}
+
+.elements-page .grid-items .grid-item p.grid-item-name {
+  padding-top: 5px;
+  line-height: 18px;
+  max-height: 55px;
+  overflow: hidden;
+}
+
+.elements-page .grid-items .grid-item .grid-item-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.elements-page .grid-items .dashed a .grid-item {
   border: 1px dashed #ccc;
   background-color: transparent;
 }

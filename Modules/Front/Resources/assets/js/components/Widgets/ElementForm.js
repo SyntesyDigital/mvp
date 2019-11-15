@@ -320,7 +320,9 @@ export default class ElementForm extends Component {
         const FieldComponent = getFieldComponent(field.type);
 
         //check visibilitiy
-        const visible = isVisible(field,this.state.formParameters);
+        const visible = isVisible(field,this.state.formParameters,this.state.values);
+
+        //console.log("is visible ==> "+field.name,field,visible);
 
         if(visible)
           fields.push(<FieldComponent

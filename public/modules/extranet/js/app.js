@@ -2211,7 +2211,8 @@ function (_Component) {
         inputLabel: "D\xE9finir l'\xE9tat par d\xE9faut.",
         onFieldChange: this.handleFieldSettingsChange,
         label: "Afficher selon conditions",
-        parameters: this.props.app.parameters
+        parameters: this.props.app.parameters,
+        fields: this.props.app.fields
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -4919,6 +4920,9 @@ function (_Component) {
     _this.types = [{
       name: "Paramètre",
       value: _constants___WEBPACK_IMPORTED_MODULE_2__["CONDITION_FIELD_TYPE_PARAMETER"]
+    }, {
+      name: "Champ configurable",
+      value: _constants___WEBPACK_IMPORTED_MODULE_2__["CONDITION_FIELD_TYPE_CONFIGURABLE"]
     }];
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     return _this;
@@ -5008,12 +5012,23 @@ function (_Component) {
   }, {
     key: "renderParameters",
     value: function renderParameters() {
-      return this.props.parameters.map(function (item, index) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: index,
-          value: item.identifier
-        }, " ", item.name);
-      });
+      var condition = this.props.conditions[this.props.conditionIndex];
+
+      if (condition.type == _constants___WEBPACK_IMPORTED_MODULE_2__["CONDITION_FIELD_TYPE_CONFIGURABLE"]) {
+        return this.props.fields.map(function (item, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: index,
+            value: item.identifier
+          }, " ", item.name);
+        });
+      } else {
+        return this.props.parameters.map(function (item, index) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            key: index,
+            value: item.identifier
+          }, " ", item.name);
+        });
+      }
     }
   }, {
     key: "render",
@@ -5477,7 +5492,8 @@ function (_Component) {
         conditions: this.getConditions(),
         conditionIndex: this.state.selectedContidion,
         onConditionChange: this.handleConditionChange.bind(this),
-        parameters: this.props.parameters
+        parameters: this.props.parameters,
+        fields: this.props.fields
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "setup-field"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -6301,6 +6317,9 @@ function checkIfFieldAdded(field, fields) {
 
 function mergeFieldSettings(field, modelField) {
   //console.log("Merge => ,",field," => ",modelField);
+  //if is array means and old configuration, not possible to be array
+  if (Array.isArray(field.settings)) field.settings = {}; //console.log("mergeFieldSettings :: field settings vale => ",field.settings);
+
   if (modelField.rules !== undefined) {
     for (var key in modelField.rules) {
       if (field.rules[modelField.rules[key]] === undefined) {
@@ -6592,7 +6611,8 @@ function appReducer() {
             break;
           }
         }
-      }
+      } //console.log("mergeFieldSettings :: After merge => ",newField);
+
 
       return _objectSpread({}, state, {
         settingsField: newField,
@@ -6600,9 +6620,9 @@ function appReducer() {
       });
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__["SETTINGS_CHANGE"]:
-      var field = action.payload;
-      settingsField[field.source][field.name] = field.value; //console.log("SETTINGS_CHANGE :: ",settingsField);
+      var field = action.payload; //console.log("SETTINGS_CHANGE :: ",settingsField);
 
+      settingsField[field.source][field.name] = field.value;
       return _objectSpread({}, state, {
         settingsField: settingsField
       });

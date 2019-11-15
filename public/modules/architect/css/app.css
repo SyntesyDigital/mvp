@@ -12761,6 +12761,13 @@ section#content .body {
   right: 40px;
 }
 
+#logo-wrapper .logo-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
 #logo-wrapper img {
   /*max-width: 287px;*/
   height: 100%;

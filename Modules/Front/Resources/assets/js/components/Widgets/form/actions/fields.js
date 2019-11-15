@@ -12,7 +12,9 @@ import {
   HIDDEN_FIELD,
   VISIBILITY_SHOW,
   OPERATOR_EQUAL,
-  OPERATOR_DIFFERENT
+  OPERATOR_DIFFERENT,
+  CONDITION_FIELD_TYPE_CONFIGURABLE,
+  CONDITION_FIELD_TYPE_PARAMETER
 } from './../constants';
 
 const fieldComponents = {
@@ -322,9 +324,9 @@ export function parameteres2Array(paramString) {
 type_pol = [true,false,]
 
 */
-export function isVisible(file,formParameters) {
-  if(file.name == "Dommages")
-    console.log("isVisible :: ",file,formParameters);
+export function isVisible(file,formParameters,values) {
+
+  //console.log("isVisible :: ",file,formParameters,values);
 
   //if no has settings return visible
   if(file.settings.conditionalVisibility === undefined || file.settings.conditionalVisibility == null){
@@ -341,7 +343,8 @@ export function isVisible(file,formParameters) {
     //fixme improve || for join type
     conditionAccepted = conditionAccepted || checkConditionAccepted(
       settings.conditions[index],
-      formParameters
+      formParameters,
+      values
     );
   }
 
@@ -351,7 +354,7 @@ export function isVisible(file,formParameters) {
   }
   //if any condition is accepted, visible
 
-  console.log("isVisible :: ",visible);
+  //console.log("isVisible :: ",visible);
 
   return visible;
 }
@@ -359,30 +362,71 @@ export function isVisible(file,formParameters) {
 /**
 *   Check each condition to see if it's accepted or not.
 */
-function checkConditionAccepted(condition,formParameters) {
+function checkConditionAccepted(condition,formParameters,values) {
   if(condition.name === undefined || condition.name == "" )
     return false;
 
   if(condition.values === undefined || condition.values == "" )
     return false;
 
-  //condition parameter don't exist in form
-  if(formParameters['_'+condition.name] === undefined){
-    return false;
+  var formValue = null;
+
+  //first get the value from parameters or variables
+  if(condition.type == CONDITION_FIELD_TYPE_CONFIGURABLE){
+    //it is a config field
+    if(values[condition.name] === undefined){
+      return false;
+    }
+
+    formValue = values[condition.name];
+  }
+  else if(condition.type == CONDITION_FIELD_TYPE_PARAMETER){
+    //it is a parameter
+
+    //condition parameter don't exist in form
+    if(formParameters['_'+condition.name] === undefined){
+      return false;
+    }
+
+    formValue = formParameters['_'+condition.name];
   }
 
-  var formValue = formParameters['_'+condition.name];
+  if(formValue == null)
+    return false;
+
+
   var operator = condition.operator;
 
-  var values = condition.values.split(",");
-  for(var key in values){
-    var value = values[key].trim();
+  console.log("checkConditionAccepted :: ",condition,formValue,values);
 
-    if(operator == OPERATOR_EQUAL && value == formValue){
+  // second check if need to check for defined or undefined
+  if(condition.values == null || condition.values == ""){
+    //not defined, maybe checking if defined or not, example : visible if variable ===  undefined
+    if(operator == OPERATOR_EQUAL && (formValue === undefined ||
+      formValue == null || formValue == "" )){
+        //value is undefined
       return true;
     }
-    else if(operator == OPERATOR_DIFFERENT && value != formValue){
+    if(operator == OPERATOR_DIFFERENT && (formValue !== undefined &&
+      formValue != null && formValue != "" )){
+        //value is defined
       return true;
+    }
+  }
+  else {
+
+    var values = condition.values.split(",");
+
+    //third, check for values
+    for(var key in values){
+      var value = values[key].trim();
+
+      if(operator == OPERATOR_EQUAL && value == formValue){
+        return true;
+      }
+      else if(operator == OPERATOR_DIFFERENT && value != formValue){
+        return true;
+      }
     }
   }
 

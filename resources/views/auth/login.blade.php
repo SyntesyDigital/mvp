@@ -74,10 +74,24 @@
                   </div>
               </div>
 
+              @if(Request::has('debug'))
+                <div class="form-group row">
+                    <label for="passwd" class="col-md-12 col-form-label text-md-right">Environnement</label>
+
+                    <div class="col-md-12">
+                        <select id="env" class="form-control" name="env" >
+                          @foreach(\App\Extensions\VeosWsUrl::getEnvironmentOptions() as $env)
+                            <option name="{{$env}}">{{$env}}</option>
+                          @endforeach
+                        </select>
+                    </div>
+                </div>
+              @endif
+
               <div class="form-group row mb-0">
                 <div class="col-md-12 buttons-group">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-sign-out"></i>Connexion
+                        <i class="fas fa-sign-in-alt"></i> Connexion
                     </button>
                     <!--<p class="forgot"><a hre="">Mot de pass obluié ?</a></p>-->
                 </div>

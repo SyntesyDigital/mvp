@@ -23,7 +23,8 @@ class SelectField extends Component
       loading : true,
       data : [],
       boby : boby,
-      parameters : parameters
+      parameters : parameters,
+      display : true
     };
 
     this.loadData();
@@ -73,15 +74,26 @@ class SelectField extends Component
       axios.get('/architect/elements/select/data/'+this.state.boby+"?"+this.state.parameters)
         .then(function(response) {
           if(response.status == 200 && response.data.data !== undefined){
-            self.setState({
-              data : response.data.data,
-              loading : false
-            });
+
+            var display = false;
 
             if(response.data.data.length == 0){
               //no data set this field as hidden, not needed
               self.setHidden();
             }
+            else if(response.data.data.length == 1){
+              //only one value, selected it and hide
+              self.setUniqueValue(response.data.data[0].value);
+            }
+            else {
+              display = true;
+            }
+
+            self.setState({
+              data : response.data.data,
+              loading : false,
+              display : display
+            });
 
           }
         })
@@ -94,6 +106,12 @@ class SelectField extends Component
     this.props.onFieldChange({
       name : this.props.field.identifier,
       value : HIDDEN_FIELD
+    });
+  }
+  setUniqueValue(value) {
+    this.props.onFieldChange({
+      name : this.props.field.identifier,
+      value : value
     });
   }
 
@@ -122,7 +140,7 @@ class SelectField extends Component
     const isRequired = field.rules.required !== undefined ?
       field.rules.required : false;
     const errors = this.props.error ? 'is-invalid' : '';
-    const display = this.props.value != HIDDEN_FIELD ? true : false;
+    const display = this.state.display;
 
     return (
 
