@@ -20,6 +20,7 @@ if (!function_exists('breadcrumb')) {
           $resultParameters[$param['identifier']] = $parameters[$param['identifier']];
         }
       }
+      
 
       $url = arrayToUrl($parameters);
 
