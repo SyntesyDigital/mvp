@@ -75,6 +75,9 @@
               </div>
 
               @if(Request::has('debug'))
+
+                <hr/>
+
                 <div class="form-group row">
                     <label for="passwd" class="col-md-12 col-form-label text-md-right">Environnement</label>
 
@@ -86,7 +89,23 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="test_passwd" class="col-md-12 col-form-label text-md-right">Mot de passe du test</label>
+
+                    <div class="col-md-12">
+                        <input id="test_passwd" type="test_passwd" class="form-control{{ $errors->has('test_passwd') ? ' is-invalid' : '' }}" name="test_passwd"  placeholder="" required>
+
+                        @if ($errors->has('test_passwd'))
+                            <div class="invalid-field">
+                                <strong>{{ $errors->first('test_passwd') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
               @endif
+
+
 
               <div class="form-group row mb-0">
                 <div class="col-md-12 buttons-group">

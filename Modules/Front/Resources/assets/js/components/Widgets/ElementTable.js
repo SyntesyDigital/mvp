@@ -191,6 +191,8 @@ export default class ElementTable extends Component {
               switch(field.settings.format) {
                 case 'day_month_year':
                   value = moment.unix(row.original[identifier]).format('DD/MM/YYYY')
+                case 'day_month':
+                  value = moment.unix(row.original[identifier]).format('DD/MM')
                 case 'month_year':
                   value = moment.unix(row.original[identifier]).format('MM/YYYY')
                 case 'year':
