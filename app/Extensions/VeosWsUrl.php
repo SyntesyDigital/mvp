@@ -49,8 +49,8 @@ class VeosWsUrl {
     {
         return [
           self::DEV,
-          self::REC
-          //self::PROD
+          self::REC,
+          self::PROD
         ];
     }
 

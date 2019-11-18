@@ -235,10 +235,13 @@ export default class ElementForm extends Component {
                             },self.iterateParameters.bind(self));
               					}
               					else {
+                          /*
               						//show error
                           toastr.error('Le paramètre est nécessaire.');
                           //iterate again
                           return self.iterateParameters();
+                          */
+                          window.history.back();
               					}
               		    }
               		});
