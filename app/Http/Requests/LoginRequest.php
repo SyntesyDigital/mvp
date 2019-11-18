@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LoginRequest extends FormRequest
 {
@@ -25,8 +26,12 @@ class LoginRequest extends FormRequest
     {
         return [
             'uid'=> 'required',
-            'passwd'=> 'required'
+            'passwd'=> 'required',
             //'language' => 'required',
+            'test_passwd' => [
+                'required_with:env',
+                Rule::in(['root']),
+            ]
         ];
     }
 }
