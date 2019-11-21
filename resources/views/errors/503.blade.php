@@ -1,4 +1,4 @@
-@extends('front::layouts.app')
+@extends('extranet::front.layouts.app')
 
 @section('content')
     <div class="gray-information-container" style="min-height:500px;">
