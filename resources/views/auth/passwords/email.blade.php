@@ -1,4 +1,4 @@
-@extends('front::layouts.master')
+@extends('extranet::front.layouts.master')
 
 @section('content')
 

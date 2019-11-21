@@ -1,4 +1,4 @@
-@extends('front::layouts.app',[
+@extends('extranet::front.layouts.app',[
   "isLogin" => true
 ])
 

@@ -8,5 +8,9 @@
     "/modules/extranet/js/app.js": "/modules/extranet/js/app.js",
     "/js/app.js": "/js/app.js",
     "/modules/architect/js/architect.js": "/modules/architect/js/architect.js",
-    "/modules/architect/js/admin.js": "/modules/architect/js/admin.js"
+    "/modules/architect/js/admin.js": "/modules/architect/js/admin.js",
+    "/modules/extranet/js/back-app.js": "/modules/extranet/js/back-app.js",
+    "/modules/extranet/css/back-style.css": "/modules/extranet/css/back-style.css",
+    "/modules/extranet/css/front-style.css": "/modules/extranet/css/front-style.css",
+    "/modules/extranet/js/front-app.js": "/modules/extranet/js/front-app.js"
 }

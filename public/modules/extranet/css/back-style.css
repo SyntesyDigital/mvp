@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+.horizontal-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.horizontal-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+b {
+  font-weight: bold;
+}
+
+.separator {
+  clear: both;
+  font-size: 1px;
+  line-height: 0;
+  height: 1px;
+  pointer-events: none;
+}
+
+.rounded {
+  border-radius: 200px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.animate {
+  transition: all 0.5s ease;
+}
+
+.box-sizing,
+div,
+header,
+footer,
+aside,
+section,
+article,
+h1,
+h2,
+h3,
+p,
+form,
+a,
+ul,
+li {
+  /* Safari/Chrome, other WebKit */
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+}
+
+div,
+header,
+footer,
+aside,
+section,
+article,
+h1,
+h2,
+h3,
+p,
+form,
+a,
+ul,
+li {
+  position: relative;
+  vertical-align: top;
+}
+
+.badge-notify {
+  background: red;
+  position: relative;
+  top: -20px;
+  left: -35px;
+  padding: 3px 5px;
+  font-size: 10px;
+  right: 8px;
+  top: -11px;
+  left: auto;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.background-image-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sitelist .medias-dropfiles {
+  border: 2px dotted #dcdcdc;
+  padding: 30px 50px;
+}
+
+.sitelist .content-add {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+.sitelist .content-add h4 {
+  font-size: 18px;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.sitelist .content-add .tool-box {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+.sitelist .content-add .tool-box a {
+  padding-right: 15px;
+  color: #fc4b6c;
+  font-size: 12px;
+  line-height: 40px;
+}
+
+.sitelist .content-add input {
+  width: 40%;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.sitelist .content-add .filefields-list {
+  width: 30%;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.sitelist .content-add .filefields-list-last {
+  width: 30%;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.visibility-settings-field .add-row-block {
+  border: 1px dashed #ccc;
+  text-align: center;
+  padding: 0px 5px;
+  margin-bottom: 0px;
+  margin-left: 50px;
+}
+
+.visibility-settings-field .modal-header {
+  padding: 15px 40px;
+}
+
+.visibility-settings-field .condition-item {
+  border: 1px solid #ccc;
+  padding: 12px 0;
+  margin: 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+
+#model-container .rightbar-page .page-content .field-inputs {
+  padding-left: 260px;
+}
+
+#model-container .rightbar-page .page-content .field-type {
+  width: 240px;
+  text-align: left;
+}
+
+.elements-page .grid-items .grid-item {
+  height: 130px;
+  display: table;
+  width: 100%;
+}
+
+.elements-page .grid-items .grid-item p.grid-item-name {
+  padding-top: 5px;
+  line-height: 18px;
+  max-height: 55px;
+  overflow: hidden;
+}
+
+.elements-page .grid-items .grid-item .grid-item-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.elements-page .grid-items .dashed a .grid-item {
+  border: 1px dashed #ccc;
+  background-color: transparent;
+}
+
+#modal-models {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 300;
+}
+
+#modal-models .table-header {
+  padding: 10px 20px;
+  background-color: #F4F4F4;
+}
+
+#modal-models .table-row {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#modal-models .table-row .second-column {
+  float: right;
+}
+
+#modal-models .table-row .second-column a {
+  color: #455660;
+  text-decoration: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#modal-models .table-row .second-column a:hover {
+  text-decoration: none;
+}
+
+#modal-models .table-row .first-column {
+  overflow: hidden;
+}
+
+#modal-models .table-row .first-column i {
+  width: 30px;
+}
+
+li.react-autosuggest__suggestion {
+  padding: 0;
+}
+
+li.react-autosuggest__suggestion span {
+  padding: 6px 20px;
+}
+
+.typology-field .type-info {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.typology-field .type-info span {
+  padding-left: 5px;
+}
+
+.ReactTable .rt-thead .rt-th.-cursor-pointer,
+.ReactTable .rt-thead .rt-td.-cursor-pointer {
+  background-color: #f00 !important;
+}
+
