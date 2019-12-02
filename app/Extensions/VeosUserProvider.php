@@ -109,7 +109,7 @@ class VeosUserProvider implements UserProvider {
 
         //if not expired renew login
         $client = new Client();
-        $response = $client->get(VeosWsUrl::get() . 'login/renew', [
+        $response = $client->get(VeosWsUrl::getEnvironmentUrl($user->env) . 'login/renew', [
             'headers' => [
                 'Authorization' => "Bearer " . $user->token
             ]

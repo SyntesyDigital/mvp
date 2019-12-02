@@ -12,7 +12,10 @@ class VeosWsUrl {
 
     public static function get()
     {
-      return self::test();
+        if(isset(Auth::user()->env)) {
+
+            return self::getEnvironmentUrl(Auth::user()->env);
+        }
     }
 
     public static function prod()

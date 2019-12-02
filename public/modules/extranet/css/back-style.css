@@ -278,6 +278,11 @@ li.react-autosuggest__suggestion span {
   padding-left: 5px;
 }
 
+.typology-field .field-type.large {
+  width: 260px;
+  border-right: none;
+}
+
 .ReactTable .rt-thead .rt-th.-cursor-pointer,
 .ReactTable .rt-thead .rt-td.-cursor-pointer {
   background-color: #f00 !important;
