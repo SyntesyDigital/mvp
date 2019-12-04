@@ -83,7 +83,7 @@
 
                     <div class="col-md-12">
                         <select id="env" class="form-control" name="env" >
-                          @foreach(\App\Extensions\VeosWsUrl::getEnvironmentOptions() as $env)
+                          @foreach(\Modules\Extranet\Extensions\VeosWsUrl::getEnvironmentOptions() as $env)
                             <option name="{{$env}}">{{$env}}</option>
                           @endforeach
                         </select>
