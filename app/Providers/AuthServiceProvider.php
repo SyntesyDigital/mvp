@@ -7,7 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Extensions\VeosUserProvider;
+use Modules\Extranet\Extensions\VeosUserProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
