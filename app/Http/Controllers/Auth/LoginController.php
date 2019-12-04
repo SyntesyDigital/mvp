@@ -9,7 +9,7 @@ use Session;
 use Config;
 
 use App\Http\Requests\LoginRequest;
-use App\Jobs\Login;
+use Modules\Extranet\Jobs\User\Login;
 use Validator;
 
 class LoginController extends Controller
