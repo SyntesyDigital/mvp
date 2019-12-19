@@ -21,7 +21,6 @@ set('keep_releases', 5);
 // Writable dirs by web server
 add('writable_dirs', []);
 
-
 // Hosts
 host('bitbucket@arilim-iga.syntesy.io')
     ->stage('stage')
@@ -54,4 +53,3 @@ task('artisan:config-clear', function () {
 });
 
 task('artisan:view:cache', function () {});
-
