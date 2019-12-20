@@ -288,3 +288,12 @@ li.react-autosuggest__suggestion span {
   background-color: #f00 !important;
 }
 
+/*
+*   Basic CSS for main templates wrappers
+*/
+
+.template-2 {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
