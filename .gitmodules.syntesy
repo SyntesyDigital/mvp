@@ -1,9 +1,9 @@
 [submodule "Modules/Architect"]
     path = Modules/Architect
-    url = git@github.com:SyntesyDigital/InsuranceArchitect.git
+    url = https://github.com/SyntesyDigital/InsuranceExtranet.git
     branch = master
 
 [submodule "Modules/Extranet"]
     path = Modules/Extranet
-    url = git@github.com:SyntesyDigital/InsuranceExtranet.git
+    url = https://github.com/SyntesyDigital/InsuranceArchitect.git
     branch = master
