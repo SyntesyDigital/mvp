@@ -20,28 +20,7 @@ type PermissionGroup {
 ################################
 #   INPUT
 ################################
-input UpdatePermissionInput {
-  id: ID!
-  name: String!
-  identifier: String!
-  description: String!
-  roles: UpdatePermissionRolesRelation
-}
 
-input CreatePermissionInput {
-  name: String!
-  identifier: String!
-  description: String!
-}
-
-input UpdatePermissionRolesRelation {
-  create: [CreatePermissionInput!]
-  update: [UpdatePermissionRolesInput!]
-}
-
-input UpdatePermissionRolesInput {
-  id: ID!
-}
 
 ################################
 #   QUERY
@@ -78,12 +57,19 @@ extend type Mutation {
         name: String!
         identifier: String!
         description: String!
+        group_id: ID!
     ): Permission!
         @create(
             model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
         )
 
-    updatePermission(input: UpdatePermissionInput! @spread): Permission
+    updatePermission(
+        id: ID!
+        name: String!
+        identifier: String!
+        description: String!
+        group_id: ID!
+    ): Permission
         @update(
             model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
         )
@@ -92,5 +78,4 @@ extend type Mutation {
         @delete(
             model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
         )
-        
 }

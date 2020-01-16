@@ -1,14 +1,13 @@
-
 ################################
 #   TYPE
 ################################
 type Role {
-  id: ID!
-  name: String!
-  description: String!
-  identifier: String!
-  permissions: [Permission!]! @belongsToMany
-  users: [User!]! @belongsToMany
+    id: ID!
+    name: String!
+    description: String!
+    identifier: String!
+    permissions: [Permission!]! @belongsToMany
+    users: [User!]! @belongsToMany
 }
 
 ################################
@@ -19,21 +18,22 @@ type Role {
 #   QUERY
 ################################
 extend type Query {
+    roles: [Role!]!
+        @all(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 
-  roles: [Role!]!
-    @all(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
-
-  role(id: ID! @eq): Role
-    @find(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
-
+    role(id: ID! @eq): Role
+        @find(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 }
 
 ################################
 #   MUTATOR
 ################################
 type Mutation {
-    
-    createRole(name: String!, identifier: String!, description: String!): Role!
+    createRole(
+        name: String!, 
+        identifier: String!, 
+        description: String!
+    ): Role!
         @create(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 
     updateRole(
@@ -44,7 +44,8 @@ type Mutation {
     ): Role
         @update(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 
-    deleteRole(id: ID!): Role
+    deleteRole(
+        id: ID!
+    ): Role
         @delete(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
-
 }
