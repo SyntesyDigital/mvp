@@ -7,6 +7,7 @@ type Permission {
   name: String!
   description: String!
   identifier: String!
+  roles: [Role!]! @hasMany
   group: PermissionGroup! @hasOne
 }
 

@@ -8,6 +8,7 @@ type Role {
   description: String!
   identifier: String!
   permissions: [Permission!]! @belongsToMany
+  users: [User!]! @belongsToMany
 }
 
 ################################
