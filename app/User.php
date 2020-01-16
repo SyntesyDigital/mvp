@@ -7,9 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Notifications\CustomResetPasswordNotification;
 
+use Modules\Architect\Core\RolesPermissions\Traits\HasPermissions;
+use Modules\Architect\Core\RolesPermissions\Traits\HasRoles;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
