@@ -17,17 +17,18 @@ input CreateRoleInput {
     name: String!
     identifier: String!
     description: String
-    permissions: PermissionBelongsToMany
+    permissions: PermissionsInput
 }
 
 input UpdateRoleInput {
+    id: ID!
     name: String
     identifier: String
     description: String
-    permissions: PermissionBelongsToMany
+    permissions: PermissionsInput
 }
 
-input PermissionBelongsToMany {
+input PermissionsInput {
     connect: [ID!]
     sync: [ID!]
     create: [CreatePermissionInput!]

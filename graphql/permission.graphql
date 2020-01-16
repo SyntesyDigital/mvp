@@ -31,7 +31,7 @@ input UpdatePermissionInput {
     name: String
     identifier: String
     description: String
-    group_id: ID
+    group_id: ID!
 }
 
 ################################
