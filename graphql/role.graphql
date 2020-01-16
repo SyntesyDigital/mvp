@@ -13,6 +13,29 @@ type Role {
 ################################
 #   INPUT
 ################################
+input CreateRoleInput {
+    name: String!
+    identifier: String!
+    description: String
+    permissions: PermissionBelongsToMany
+}
+
+input UpdateRoleInput {
+    name: String
+    identifier: String
+    description: String
+    permissions: PermissionBelongsToMany
+}
+
+input PermissionBelongsToMany {
+    connect: [ID!]
+    sync: [ID!]
+    create: [CreatePermissionInput!]
+    update: [UpdatePermissionInput!]
+    upsert: [UpdatePermissionInput!]
+}
+
+
 
 ################################
 #   QUERY
@@ -29,19 +52,10 @@ extend type Query {
 #   MUTATOR
 ################################
 type Mutation {
-    createRole(
-        name: String!, 
-        identifier: String!, 
-        description: String!
-    ): Role!
+    createRole(input: CreateRoleInput! @spread): Role
         @create(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 
-    updateRole(
-        id: ID!
-        name: String!
-        identifier: String!
-        description: String!
-    ): Role
+    updateRole(input: UpdateRoleInput! @spread): Role
         @update(model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Role")
 
     deleteRole(
