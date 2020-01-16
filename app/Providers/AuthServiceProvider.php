@@ -8,6 +8,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Auth;
 
 use Modules\Extranet\Extensions\VeosUserProvider;
+use Modules\Extranet\Extensions\VeosUserTokenProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Auth::extend('veos-ws', function($app, $name, array $config) {
             return new VeosUserProvider();
+        });
+
+        Auth::extend('veos-ws-token', function($app, $name, array $config) {
+            return new VeosUserTokenProvider();
         });
     }
 }

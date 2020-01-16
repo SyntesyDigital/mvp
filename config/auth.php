@@ -50,6 +50,11 @@ return [
             'driver' => 'veos-ws',
             'provider' => 'users',
         ],
+
+        'veos-ws-token' => [
+            'driver' => 'veos-ws-token',
+            'provider' => 'users',
+        ],
     ],
 
     /*
