@@ -1,0 +1,79 @@
+
+################################
+#   TYPE
+################################
+type Permission {
+  id: ID!
+  name: String!
+  description: String!
+  identifier: String!
+}
+
+################################
+#   INPUT
+################################
+input UpdatePermissionInput {
+  id: ID!
+  name: String!
+  identifier: String!
+  description: String!
+  roles: UpdatePermissionRolesRelation
+}
+
+input CreatePermissionInput {
+  name: String!
+  identifier: String!
+  description: String!
+}
+
+input UpdatePermissionRolesRelation {
+  create: [CreatePermissionInput!]
+  update: [UpdatePermissionRolesInput!]
+}
+
+input UpdatePermissionRolesInput {
+  id: ID!
+}
+
+################################
+#   QUERY
+################################
+extend type Query {
+
+    permissions: [Permission!]!
+        @all(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+        
+    permission(id: ID! @eq): Role
+        @find(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+
+}
+
+################################
+#   MUTATOR
+################################
+extend type Mutation {
+
+    createPermission(
+        name: String!
+        identifier: String!
+        description: String!
+    ): Permission!
+        @create(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+
+    updatePermission(input: UpdatePermissionInput! @spread): Permission
+        @update(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+
+    deletePermisson(id: ID!): Permission
+        @delete(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+        
+}

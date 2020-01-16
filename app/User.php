@@ -2,14 +2,16 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-use App\Notifications\CustomResetPasswordNotification;
+use Illuminate\Notifications\Notifiable;
+use Modules\Architect\Core\RolesPermissions\Traits\HasPermissions;
+use Modules\Architect\Core\RolesPermissions\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermissions;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id', 'id_per'
     ];
 
     /**
@@ -26,7 +28,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        
     ];
-
 }
