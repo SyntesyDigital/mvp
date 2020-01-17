@@ -1,7 +1,8 @@
 /vendor
 /packages
 /node_modules
-/Modules/Architect/node_modules
+/Modules/Architect
+/Modules/Extranet
 Homestead.yaml
 Homestead.json
 .env

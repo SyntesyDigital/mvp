@@ -83,7 +83,7 @@
 
                     <div class="col-md-12">
                         <select id="env" class="form-control" name="env" >
-                          @foreach(\App\Extensions\VeosWsUrl::getEnvironmentOptions() as $env)
+                          @foreach(\Modules\Extranet\Extensions\VeosWsUrl::getEnvironmentOptions() as $env)
                             <option name="{{$env}}">{{$env}}</option>
                           @endforeach
                         </select>
@@ -94,7 +94,7 @@
                     <label for="test_passwd" class="col-md-12 col-form-label text-md-right">Mot de passe du test</label>
 
                     <div class="col-md-12">
-                        <input id="test_passwd" type="test_passwd" class="form-control{{ $errors->has('test_passwd') ? ' is-invalid' : '' }}" name="test_passwd"  placeholder="" required>
+                        <input id="test_passwd" type="password" class="form-control{{ $errors->has('test_passwd') ? ' is-invalid' : '' }}" name="test_passwd"  placeholder="" required>
 
                         @if ($errors->has('test_passwd'))
                             <div class="invalid-field">

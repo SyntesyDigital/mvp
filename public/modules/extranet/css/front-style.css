@@ -9025,7 +9025,7 @@ header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
 .sidebar.collapsed ul li i,
-.element-form-container .element-form-wrapper {
+.form-component.element-form-wrapper {
   transition: all 0.5s ease;
 }
 
@@ -9083,7 +9083,7 @@ header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
 .sidebar.collapsed ul li i,
-.element-form-container .element-form-wrapper {
+.form-component.element-form-wrapper {
   transition: all 0.5s ease;
 }
 
@@ -10046,21 +10046,23 @@ form.contact-form .checkbox {
   border-radius: 0;
 }
 
-.element-file-container .element-file-container-body .element-file-input-container {
+.file-component .element-file-input-container {
   padding: 7px 0px;
   margin: 5px 0;
   overflow: hidden;
   border-bottom: 1px solid #fff;
 }
 
-.element-file-container .element-file-container-body .element-file-input-container .element-file-title {
+.file-component .element-file-input-container .element-file-title {
   font-size: 14px;
   line-height: 19px;
   font-weight: 600;
   padding: 0;
+  text-align: right;
+  padding-right: 30px;
 }
 
-.element-file-container .element-file-container-body .element-file-input-container .element-file-content {
+.file-component .element-file-input-container .element-file-content {
   font-size: 14px;
   line-height: 19px;
   font-weight: 400;
@@ -10116,75 +10118,11 @@ form.contact-form .checkbox {
   border-radius: 12px;
 }
 
-.element-form-container a.btn-default {
-  border-radius: 20px;
-  padding: 7px 20px;
-  text-decoration: none;
-  color: #2A3649;
-  border: 1px solid #2A3649;
-  background-color: transparent;
-}
-
-.element-form-container a.btn-default:hover {
-  color: #E84B37;
-  border: 1px solid #E84B37;
-}
-
-.element-form-container a.btn-primary {
-  border-radius: 20px;
-}
-
-.element-form-container a.btn-link {
-  text-decoration: none;
-  color: #2A3649;
-  border: none;
-  background-color: transparent;
-  padding: 5px;
-}
-
-.element-form-container a.btn-danger {
-  color: #bf5329;
-}
-
-.element-form-container button.btn-default {
-  border-radius: 20px;
-  padding: 7px 20px;
-  text-decoration: none;
-  color: #2A3649;
-  border: 1px solid #2A3649;
-  background-color: transparent;
-}
-
-.element-form-container button.btn-default:hover {
-  color: #E84B37;
-  border: 1px solid #E84B37;
-}
-
-.element-form-container button.btn-link {
-  text-decoration: none;
-  color: #2A3649;
-  border: none;
-  background-color: transparent;
-  padding: 5px;
-}
-
-.element-form-container .element-form-container-body {
-  border-radius: 12px;
-}
-
-.element-form-container .element-form-container-body.collapse {
-  border-radius: 0;
-}
-
-.element-form-container .element-form-wrapper {
-  padding-top: 20px;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.element-form-container .element-form-wrapper.loading {
-  opacity: 0.3;
-  pointer-events: none;
+.element-form-container .element-form {
+  padding: 0px;
+  background-color: white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .element-form-container .element-form-container-head {
@@ -10205,150 +10143,232 @@ form.contact-form .checkbox {
   border-bottom-right-radius: 12px;
 }
 
-.element-form-container .element-form {
-  padding: 0px;
-  background-color: white;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+.element-form-container .element-form-container-body {
+  border-radius: 12px;
 }
 
-.element-form-container .element-form-row {
+.element-form-container .element-form-container-body.collapse {
+  border-radius: 0;
+}
+
+.form-component a.btn-default {
+  border-radius: 20px;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: transparent;
+}
+
+.form-component a.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.form-component a.btn-primary {
+  border-radius: 20px;
+}
+
+.form-component a.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
+.form-component a.btn-danger {
+  color: #bf5329;
+}
+
+.form-component button.btn-default {
+  border-radius: 20px;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: transparent;
+}
+
+.form-component button.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+.form-component button.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+}
+
+.form-component.element-form-wrapper {
+  padding-top: 20px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.form-component.element-form-wrapper.loading {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.form-component .element-form-row {
   margin: 15px 0;
 }
 
-.element-form-container .element-form-row label {
+.form-component .element-form-row label {
   padding: 7px 0;
 }
 
-.element-form-container .element-form-row label span {
+.form-component .element-form-row label span {
   color: #E84B37;
 }
 
-.element-form-container .element-form-row .buttons {
+.form-component .element-form-row .buttons {
   margin-top: 20px;
   padding-bottom: 20px;
 }
 
-.element-form-container .element-form-row .buttons .btn {
+.form-component .element-form-row .buttons .btn {
   margin: 10px 0;
   border-radius: 20px;
 }
 
-.element-form-container .element-form-row .buttons .btn-back {
+.form-component .element-form-row .buttons .btn-back {
   border: 1px solid #2A3649;
 }
 
-.element-form-container .element-form-row .buttons .btn-back:hover {
+.form-component .element-form-row .buttons .btn-back:hover {
   background-color: #fff;
   border-color: #fff;
   color: #2A3649;
 }
 
-.element-form-container input.is-invalid {
+.form-component input.is-invalid {
   border: 1px solid #bf5329;
 }
 
-.element-form-container select.is-invalid {
+.form-component select.is-invalid {
   border: 1px solid #bf5329;
 }
 
-.element-form-container input.is-valid {
+.form-component input.is-valid {
   border: 1px solid #2ab27b;
 }
 
-.element-form-container .react-datepicker-wrapper {
+.form-component .react-datepicker-wrapper {
   width: 100%;
 }
 
-.element-form-container .react-datepicker button:not(:disabled),
-.element-form-container .react-datepicker [type="button"]:not(:disabled),
-.element-form-container .react-datepicker [type="reset"]:not(:disabled),
-.element-form-container .react-datepicker [type="submit"]:not(:disabled) {
+.form-component .react-datepicker button:not(:disabled),
+.form-component .react-datepicker [type="button"]:not(:disabled),
+.form-component .react-datepicker [type="reset"]:not(:disabled),
+.form-component .react-datepicker [type="submit"]:not(:disabled) {
   color: #000 !important;
   padding: 0;
 }
 
-.element-form-container .react-datepicker__month-container {
+.form-component .react-datepicker__month-container {
   font-size: 170%;
   width: 270px;
 }
 
-.element-form-container .react-datepicker__current-month,
-.element-form-container .react-datepicker-time__header {
+.form-component .react-datepicker__current-month,
+.form-component .react-datepicker-time__header {
   font-size: 1.6rem !important;
   font-weight: normal;
   padding-bottom: 1rem;
   text-transform: capitalize;
 }
 
-.element-form-container .react-datepicker__header {
+.form-component .react-datepicker__header {
   background-color: #ffffff;
   border-bottom: none;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.element-form-container .react-datepicker__current-month,
-.element-form-container .react-datepicker-time__header {
+.form-component .react-datepicker__current-month,
+.form-component .react-datepicker-time__header {
   font-size: 1.2rem;
   font-weight: normal;
 }
 
-.element-form-container .react-datepicker__navigation--next {
+.form-component .react-datepicker__navigation--next {
   border-left-color: #000;
 }
 
-.element-form-container .react-datepicker__navigation--previous {
+.form-component .react-datepicker__navigation--previous {
   border-right-color: #000;
 }
 
-.element-form-container .react-datepicker__day-name,
-.element-form-container .react-datepicker__day,
-.element-form-container .react-datepicker__time-name {
+.form-component .react-datepicker__day-name,
+.form-component .react-datepicker__day,
+.form-component .react-datepicker__time-name {
   width: 3.3rem;
   height: 2.6rem;
   font-size: 1.4rem;
   line-height: 2.6rem;
 }
 
-.element-form-container .react-datepicker__day--selected,
-.element-form-container .react-datepicker__day--in-selecting-range,
-.element-form-container .react-datepicker__day--in-range {
+.form-component .react-datepicker__day--selected,
+.form-component .react-datepicker__day--in-selecting-range,
+.form-component .react-datepicker__day--in-range {
   background-color: #fff  !important;
   color: #000  !important;
   border: 1px solid #3097D1;
 }
 
-.element-form-container .react-datepicker__day--keyboard-selected {
+.form-component .react-datepicker__day--keyboard-selected {
   background-color: #fff  !important;
   color: #000  !important;
   font-weight: bold;
 }
 
-.element-form-container .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+.form-component .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
   width: 100px;
 }
 
-.element-form-container .react-datepicker__time-container {
+.form-component .react-datepicker__time-container {
   width: 100px;
 }
 
 @media (min-width: 768px) {
-  .element-form-container .element-form-row label {
+  .form-component .element-form-row label {
     float: right;
   }
 
-  .element-form-container .element-form-row .buttons {
+  .form-component .element-form-row .buttons {
     margin-top: 40px;
   }
 
-  .element-form-container .element-form-row .buttons .left {
+  .form-component .element-form-row .buttons .left {
     float: left;
   }
 
-  .element-form-container .element-form-row .buttons .right {
+  .form-component .element-form-row .buttons .right {
     float: right;
   }
+}
+
+.modal-list-field .modal-container {
+  overflow-x: auto;
+}
+
+.modal-list-field .modal-body {
+  padding: 15px;
+  padding-bottom: 80px;
+}
+
+.modal-list-field .modal-content {
+  height: auto;
+  padding-bottom: 0px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .element-table-container {
@@ -10371,6 +10391,15 @@ form.contact-form .checkbox {
   margin: 0 auto;
   text-align: center;
   display: block;
+}
+
+.element-table-container a.file-link.image-link {
+  height: 40px;
+  width: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #ccc;
 }
 
 .element-table-container .element-table-container-head {
@@ -10655,6 +10684,53 @@ form.contact-form .checkbox {
   text-align: left !important;
 }
 
+.table-document-container {
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-document-container .table-document-container-body {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-document-container .table-document-container-body.collapse {
+  border-radius: 0;
+}
+
+.table-document-container .documentsContainer {
+  padding: 20px 0;
+}
+
+.table-document-container .documentsContainer .item-container {
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.table-document-container .documentsContainer .item-container .field-container {
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.table-document-container .documentsContainer .item-container .field-container .field-name {
+  font-weight: bold;
+}
+
+.title {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.title h4 {
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 300;
+  float: left;
+}
+
 .total-box-container-a {
   width: 100%;
   color: #2A3649;
@@ -10893,6 +10969,107 @@ form.contact-form .checkbox {
 .blog-home .grey {
   overflow: inherit !important;
   padding-bottom: 1px;
+}
+
+#modal-table-component.custom-modal .modal-container {
+  overflow-x: auto;
+  padding: 40px 40px;
+}
+
+#modal-table-component.custom-modal .modal-content {
+  height: auto;
+  padding-bottom: 0px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+#modal-table-component.custom-modal .modal-content .pagination-bottom {
+  background: transparent;
+  border: none;
+}
+
+#modal-table-component.custom-modal .modal-footer {
+  height: 0px;
+  padding: 0;
+  border: none;
+}
+
+#modal-table-component.custom-modal .modal-body {
+  padding: 0;
+}
+
+#modal-table-component.custom-modal .file-component {
+  padding: 15px;
+}
+
+@media (min-width: 52.85714286em) {
+  #modal-table-component.custom-modal .file-component {
+    padding: 30px;
+  }
+}
+
+#modal-table-component.custom-modal .form-component {
+  padding: 15px;
+}
+
+@media (min-width: 52.85714286em) {
+  #modal-table-component.custom-modal .form-component {
+    padding: 30px;
+  }
+}
+
+#modal-table-component.custom-modal .form-component a.btn-default {
+  color: #2A3649;
+}
+
+#modal-table-component.custom-modal .form-component a.btn-default:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
+#modal-table-component.custom-modal .form-component a.btn-link {
+  text-decoration: none;
+  color: #2A3649;
+}
+
+#modal-table-component.custom-modal .form-component a.btn-danger {
+  color: #bf5329;
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+  padding: 40px 40px;
+}
+
+@media (min-width: 52.85714286em) {
+  #modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+    padding: 40px 20%;
+  }
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field .modal-body {
+  padding: 15px;
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer {
+  position: relative;
+  background-color: transparent;
+  height: auto;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary {
+  color: #fff;
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary:hover {
+  color: #fff;
+}
+
+#modal-table-component.custom-modal .form-component .modal-list-field a.close-button-modal:hover {
+  border: none;
 }
 
 .env-bar {

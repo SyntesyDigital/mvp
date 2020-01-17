@@ -132,13 +132,6 @@
       0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
     ),
   ),
-  'syntesy-digital/architect-installer' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'SyntesyDigital\\ArchitectInstaller\\ArchitectInstallerProvider',
-    ),
-  ),
   'syntesy-digital/insurance-installer' => 
   array (
     'providers' => 
