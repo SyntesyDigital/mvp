@@ -1,7 +1,0 @@
-type Mutation
-type Query
-
-#import user.graphql 
-#import permission.graphql 
-#import role.graphql 
-#import auth.graphql 
