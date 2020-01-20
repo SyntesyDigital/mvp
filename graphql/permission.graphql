@@ -13,6 +13,8 @@ type Permission {
 type PermissionGroup {
     id: ID!
     name: String!
+    identifier: String!
+    order: Int!
     permissions: [Permission!]! @hasMany
 }
 
@@ -32,6 +34,12 @@ input UpdatePermissionInput {
     identifier: String
     description: String
     group_id: ID!
+}
+
+input CreateGroupInput {
+    name: String!
+    identifier: String!
+    order: Int!
 }
 
 ################################
@@ -76,5 +84,15 @@ extend type Mutation {
     deletePermisson(id: ID!): Permission
         @delete(
             model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\Permission"
+        )
+    
+    createGroup(input: CreateGroupInput @spread): PermissionGroup
+        @create(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\PermissionGroup"
+        )
+
+    deleteGroup(id: ID!): PermissionGroup
+        @delete(
+            model: "Modules\\Architect\\Core\\RolesPermissions\\Entities\\PermissionGroup"
         )
 }
