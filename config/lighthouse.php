@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Route Configuration
@@ -53,7 +52,7 @@ return [
     */
 
     'schema' => [
-        'register' => base_path('graphql/schema.graphql'),
+        'register' => base_path('/Modules/Extranet/GraphQL/schema/schema.graphql'),
     ],
 
     /*
@@ -85,14 +84,20 @@ return [
     */
 
     'namespaces' => [
-        'models' => ['App', 'App\\Models'],
-        'queries' => 'App\\GraphQL\\Queries',
-        'mutations' => 'App\\GraphQL\\Mutations',
-        'subscriptions' => 'App\\GraphQL\\Subscriptions',
-        'interfaces' => 'App\\GraphQL\\Interfaces',
-        'unions' => 'App\\GraphQL\\Unions',
-        'scalars' => 'App\\GraphQL\\Scalars',
-        'directives' => ['App\\GraphQL\\Directives'],
+        'models' => [
+            'App',
+            'App\\Models',
+            'Modules\\Extranet\Entities',
+        ],
+        'queries' => 'Modules\\Extranet\\GraphQL\\Queries',
+        'mutations' => 'Modules\\Extranet\\GraphQL\\Mutations',
+        'subscriptions' => 'Modules\\Extranet\\GraphQL\\Subscriptions',
+        'interfaces' => 'Modules\\Extranet\\GraphQL\\Interfaces',
+        'unions' => 'Modules\\Extranet\\GraphQL\\Unions',
+        'scalars' => 'Modules\\Extranet\\GraphQL\\Scalars',
+        'directives' => [
+            'Modules\\Extranet\\GraphQL\\Directives',
+        ],
     ],
 
     /*
@@ -255,5 +260,4 @@ return [
             ],
         ],
     ],
-
 ];
