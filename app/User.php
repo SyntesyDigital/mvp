@@ -2,12 +2,11 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-use Modules\Architect\Core\RolesPermissions\Traits\HasPermissions;
-use Modules\Architect\Core\RolesPermissions\Traits\HasRoles;
-
+use Modules\Extranet\Services\RolesPermissions\Traits\HasPermissions;
+use Modules\Extranet\Services\RolesPermissions\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -21,7 +20,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'id_per'
+        'id',
+        'id_per',
+        'firstname',
+        'lastname',
+        'email',
+        'phone',
     ];
 
     /**
@@ -30,6 +34,34 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        
     ];
+
+    public function session()
+    {
+        return $this->hasOne('Modules\Extranet\Entities\Session', 'user_id', 'id');
+    }
+
+    public function __get($name)
+    {
+        // Check in model
+        if (in_array($name, $this->fillable)) {
+            return parent::__get($name);
+        }
+
+        if (Auth::user()) {
+            // Check in session
+            $session = $this->session()->first()->toArray();
+
+            if (isset($session[$name])) {
+                return $session[$name];
+            }
+
+            // Check in session payload (from VEOS)
+            $payload = isset($session['payload']) ? json_decode($session['payload']) : null;
+
+            if (isset($payload->$name)) {
+                return $payload->$name;
+            }
+        }
+    }
 }
