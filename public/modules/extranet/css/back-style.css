@@ -356,6 +356,10 @@ li.react-autosuggest__suggestion span {
   border-right: 1px solid #ccc;
 }
 
+.custom-modal .modal-content {
+  overflow: hidden;
+}
+
 .custom-modal .modal-content .container {
   overflow: unset;
 }
@@ -400,10 +404,6 @@ li.react-autosuggest__suggestion span {
   }
 }
 
-.custom-modal .outer-box {
-  border: 1px solid #ccc;
-}
-
 .custom-modal #modal-edit-permision .modal-container {
   width: 50%;
   margin: 0 auto;
@@ -417,6 +417,31 @@ li.react-autosuggest__suggestion span {
   padding-right: 10px;
   font-size: 14px;
   color: #858585;
+}
+
+#modal-edit-procedures [name="outer-box"],
+#modal-test-form [name="outer-box"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures [name="outer-box"] [name="container"],
+#modal-test-form [name="outer-box"] [name="container"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures .rightbar-page .page-content,
+#modal-test-form .rightbar-page .page-content {
+  padding-top: 0;
+}
+
+#modal-edit-procedures .modal-content .container,
+#modal-test-form .modal-content .container {
+  padding: 30px 40px;
+}
+
+#modal-edit-procedures #modal-edit-object .modal-header,
+#modal-test-form #modal-edit-object .modal-header {
+  padding: 15px;
 }
 
 .field-list-item .field-type {
@@ -551,5 +576,9 @@ li.react-autosuggest__suggestion span {
 
 .box-input-add a:hover {
   text-decoration: none;
+}
+
+[name="outer-box"] [name="container"] {
+  border: 1px solid #ccc;
 }
 
