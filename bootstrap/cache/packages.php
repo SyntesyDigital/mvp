@@ -90,6 +90,19 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'nuwave/lighthouse' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Nuwave\\Lighthouse\\LighthouseServiceProvider',
+      1 => 'Nuwave\\Lighthouse\\SoftDeletes\\SoftDeletesServiceProvider',
+      2 => 'Nuwave\\Lighthouse\\OrderBy\\OrderByServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'graphql' => 'Nuwave\\Lighthouse\\GraphQL',
+    ),
+  ),
   'nwidart/laravel-modules' => 
   array (
     'providers' => 
@@ -117,13 +130,6 @@
     'providers' => 
     array (
       0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    ),
-  ),
-  'syntesy-digital/architect-installer' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'SyntesyDigital\\ArchitectInstaller\\ArchitectInstallerProvider',
     ),
   ),
   'syntesy-digital/insurance-installer' => 

@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
-use Session;
-use Config;
-
 use App\Http\Requests\LoginRequest;
 use Modules\Extranet\Jobs\User\Login;
 use Validator;
@@ -36,8 +32,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -49,20 +43,18 @@ class LoginController extends Controller
         $message = trans('auth.failed');
 
         try {
-          if(dispatch_now(Login::fromRequest($request))) {
-              return redirect($this->redirectTo);
-          }
-        }
-        catch(\Exception $e) {
-          $message = $e->getMessage();
+            if (dispatch_now(Login::fromRequest($request))) {
+                return redirect($this->redirectTo);
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
         }
 
-        $validator = Validator::make($request->all(),[]);
+        $validator = Validator::make($request->all(), []);
         $validator->errors()->add('server', $message);
 
         return redirect('login')
                   ->withErrors($validator)
                   ->withInput();
     }
-
 }
