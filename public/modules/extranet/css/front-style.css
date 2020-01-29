@@ -122,7 +122,6 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
-
 @charset 'UTF-8';
 /* Slider */
 .slick-loading .slick-list
@@ -9775,6 +9774,10 @@ body.is-test {
   height: 0px;
 }
 
+.custom-modal.no-buttons .modal-content {
+  /*padding-bottom:0px;*/
+}
+
 .bootbox.modal {
   z-index: 1100;
 }
@@ -9927,17 +9930,51 @@ form.contact-form .checkbox {
   padding: 45px 20px 80px;
 }
 
+.login-container .icons {
+  padding: 30px 15px;
+  text-align: center;
+}
+
+.login-container .icons .icon-box {
+  padding: 20px 20px;
+  margin-bottom: 20px;
+}
+
+.login-container .icons .icon-box .icon i {
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.login-container .icons .icon-box .title {
+  margin-top: 5px;
+  min-height: 56px;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.login-container .icons .icon-box p {
+  padding: 0px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+}
+
+.login-container .icons p {
+  padding: 5px 15px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+}
+
 .login-container .login-box-container {
-  max-width: 430px;
-  padding: 0 10px;
-  margin:0 auto;
+  padding: 0 40px;
 }
 
 .login-container .login-box-container .login-box {
-  padding: 30px 20px;
+  padding: 20px 40px;
   border: 1px solid #DBDBDB;
-  /*background-color: #FFFFFF;
-  border-radius: 10px;*/
+  background-color: #FFFFFF;
 }
 
 .login-container .login-box-container .login-box form {
@@ -9945,15 +9982,11 @@ form.contact-form .checkbox {
   padding: 0;
 }
 
-.login-container .login-box-container .login-box form .logo-container{
-  text-align: center;
-}
-
 .login-container .login-box-container .login-box form h2 {
   text-align: center;
-  font-size: 18px;
-  line-height: 24px;
-  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
 }
 
 .login-container .login-box-container .login-box form .form-group {
@@ -9966,24 +9999,12 @@ form.contact-form .checkbox {
   font-weight: 400;
 }
 
-.login-container .login-box-container .login-box form .form-group label i{
-  margin-right: 5px;
-}
-
 .login-container .login-box-container .login-box form .form-group .form-control {
   border-color: #A8A8A8;
 }
 
 .login-container .login-box-container .login-box form .form-group .buttons-group {
   text-align: center;
-  margin-top:15px;
-}
-
-.login-container .login-box-container .login-box form .form-group .buttons-group .btn{
-  width: 100%;
- /* border-radius:10px;*/
-  font-size: 14px;
-  text-transform: capitalize;
 }
 
 .login-container .login-box-container .login-box form .form-group .forgot {
@@ -9991,7 +10012,7 @@ form.contact-form .checkbox {
 }
 
 .login-container .login-box-container .login-box form .form-group .forgot a {
-  /*color: #2A3649;*/
+  color: #2A3649;
   font-size: 14px;
   line-height: 19px;
   font-weight: 400;
@@ -10765,11 +10786,15 @@ form.contact-form .checkbox {
 .box-button-container-a .box-button-container:hover {
   color: #2A3649;
   text-decoration: none;
+  /*border: 1px solid $primary-color;*/
 }
 
 .box-button-container {
   color: #E84B37;
   background-color: #fff;
+  /*
+  border: 1px solid $secondary-color;
+  */
   padding: 20px 40px;
   text-align: center;
   width: 100%;
