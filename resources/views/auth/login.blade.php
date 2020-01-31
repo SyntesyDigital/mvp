@@ -2,6 +2,10 @@
   "isLogin" => true
 ])
 
+@php
+    $storedStylesFront = \Cache::get('frontStyles');
+@endphp
+
 @section('content')
 <div class="container login-container">
     <div class="row justify-content-center">
@@ -11,9 +15,9 @@
               @csrf
               <div class="logo-container">
                 @if(isset($storedStylesFront['frontLogo']) && isset($storedStylesFront['frontLogo']->value))
-                  <img src="/{{$storedStylesFront['frontLogo']->value->urls['original']}}" alt="Logo" />
+                  <img style="max-height: 75px;" src="/{{$storedStylesFront['frontLogo']->value->urls['original']}}" alt="Logo" />
                 @else
-                  <img src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
+                  <img style="max-height: 75px;" src="{{asset('modules/architect/images/logo.png')}}" alt=""/>
                 @endif
               </div>
               <h2>Connectez-vous</h2>
