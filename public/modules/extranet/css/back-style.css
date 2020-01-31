@@ -339,81 +339,81 @@ li.react-autosuggest__suggestion span {
   float: right;
 }
 
-.custom-modal .form-group {
+.custom-modal.modal-component .form-group {
   margin: 0;
 }
 
-.custom-modal .modal-container {
+.custom-modal.modal-component .modal-container {
   margin: 0 auto;
 }
 
-.custom-modal .field-col {
+.custom-modal.modal-component .field-col {
   height: calc(100vh - 250px);
   overflow-y: scroll;
 }
 
-.custom-modal .field-col.border-right {
+.custom-modal.modal-component .field-col.border-right {
   border-right: 1px solid #ccc;
 }
 
-.custom-modal .modal-content {
+.custom-modal.modal-component .modal-content {
   overflow: hidden;
 }
 
-.custom-modal .modal-content .container {
+.custom-modal.modal-component .modal-content .container {
   overflow: unset;
 }
 
-.custom-modal .medium {
+.custom-modal.modal-component .medium {
   width: 100%;
 }
 
 @media (min-width: 52.85714286em) {
-  .custom-modal .medium {
+  .custom-modal.modal-component .medium {
     width: 70%;
   }
 }
 
 @media (min-width: 91.42857143em) {
-  .custom-modal .medium {
+  .custom-modal.modal-component .medium {
     width: 50%;
   }
 }
 
-.custom-modal .medium-large {
+.custom-modal.modal-component .medium-large {
   width: 80%;
 }
 
-.custom-modal .large {
+.custom-modal.modal-component .large {
   width: 100%;
 }
 
-.custom-modal .small {
+.custom-modal.modal-component .small {
   width: 100%;
 }
 
 @media (min-width: 52.85714286em) {
-  .custom-modal .small {
+  .custom-modal.modal-component .small {
     width: 50%;
   }
 }
 
 @media (min-width: 91.42857143em) {
-  .custom-modal .small {
+  .custom-modal.modal-component .small {
     width: 30%;
   }
 }
 
-.custom-modal #modal-edit-permision .modal-container {
+.custom-modal.modal-component #modal-edit-permision .modal-container {
   width: 50%;
   margin: 0 auto;
 }
 
-.custom-modal #modal-edit-permision .form-group {
+.custom-modal.modal-component #modal-edit-permision .form-group {
   margin: 0 !important;
 }
 
-.custom-modal .modal-header i {
+.custom-modal.modal-component .modal-header i {
   padding-right: 10px;
   font-size: 14px;
   color: #858585;
@@ -580,5 +580,14 @@ li.react-autosuggest__suggestion span {
 
 [name="outer-box"] [name="container"] {
   border: 1px solid #ccc;
+}
+
+.check-field {
+  position: relative;
+}
+
+.check-field span.icon a {
+  display: inline-block;
+  top: 5px;
 }
 

@@ -13672,6 +13672,7 @@ nav.main-nav ul li.active a {
 .custom-modal .modal-header {
   border-bottom: 1px solid #ccc;
   background-color: #fff;
+  min-height: 55px;
 }
 
 .custom-modal .modal-header i.fa {
