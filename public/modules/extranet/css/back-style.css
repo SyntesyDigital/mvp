@@ -582,12 +582,3 @@ li.react-autosuggest__suggestion span {
   border: 1px solid #ccc;
 }
 
-.check-field {
-  position: relative;
-}
-
-.check-field span.icon a {
-  display: inline-block;
-  top: 5px;
-}
-

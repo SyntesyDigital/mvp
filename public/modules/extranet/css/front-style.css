@@ -9968,13 +9968,14 @@ form.contact-form .checkbox {
 }
 
 .login-container .login-box-container {
-  padding: 0 40px;
+  max-width: 430px;
+  padding: 0 10px;
+  margin: 0 auto;
 }
 
 .login-container .login-box-container .login-box {
-  padding: 20px 40px;
+  padding: 30px 20px;
   border: 1px solid #DBDBDB;
-  background-color: #FFFFFF;
 }
 
 .login-container .login-box-container .login-box form {
@@ -9982,11 +9983,15 @@ form.contact-form .checkbox {
   padding: 0;
 }
 
+.login-container .login-box-container .login-box form .logo-container {
+  text-align: center;
+}
+
 .login-container .login-box-container .login-box form h2 {
   text-align: center;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
 .login-container .login-box-container .login-box form .form-group {
@@ -9999,12 +10004,24 @@ form.contact-form .checkbox {
   font-weight: 400;
 }
 
+.login-container .login-box-container .login-box form .form-group label i {
+  margin-right: 5px;
+}
+
 .login-container .login-box-container .login-box form .form-group .form-control {
   border-color: #A8A8A8;
 }
 
 .login-container .login-box-container .login-box form .form-group .buttons-group {
   text-align: center;
+  margin-top: 15px;
+}
+
+.login-container .login-box-container .login-box form .form-group .buttons-group .btn {
+  width: 100%;
+  /* border-radius:10px;*/
+  font-size: 14px;
+  text-transform: capitalize;
 }
 
 .login-container .login-box-container .login-box form .form-group .forgot {
