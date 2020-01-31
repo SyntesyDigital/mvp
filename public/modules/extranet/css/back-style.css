@@ -288,3 +288,306 @@ li.react-autosuggest__suggestion span {
   background-color: #f00 !important;
 }
 
+/*
+*   Basic CSS for main templates wrappers
+*/
+
+.template-2 {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.modal-edit-permision .container-roles-switch {
+  text-align: center;
+}
+
+.modal-edit-permision .container-roles-switch label {
+  margin: 10px;
+}
+
+.modal-edit-permision .modal-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.modal-edit-permision .icon-edit i {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.modal-edit-group .modal-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.container-toggle-switch {
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.container-toggle-switch label {
+  width: 100%;
+}
+
+.container-toggle-switch label span {
+  width: 60%;
+  display: inline-block;
+}
+
+.container-toggle-switch label .react-switch {
+  float: right;
+}
+
+.custom-modal .form-group {
+  margin: 0;
+}
+
+.custom-modal .modal-container {
+  margin: 0 auto;
+}
+
+.custom-modal .field-col {
+  height: calc(100vh - 250px);
+  overflow-y: scroll;
+}
+
+.custom-modal .field-col.border-right {
+  border-right: 1px solid #ccc;
+}
+
+.custom-modal .modal-content {
+  overflow: hidden;
+}
+
+.custom-modal .modal-content .container {
+  overflow: unset;
+}
+
+.custom-modal .medium {
+  width: 100%;
+}
+
+@media (min-width: 52.85714286em) {
+  .custom-modal .medium {
+    width: 70%;
+  }
+}
+
+@media (min-width: 91.42857143em) {
+  .custom-modal .medium {
+    width: 50%;
+  }
+}
+
+.custom-modal .medium-large {
+  width: 80%;
+}
+
+.custom-modal .large {
+  width: 100%;
+}
+
+.custom-modal .small {
+  width: 100%;
+}
+
+@media (min-width: 52.85714286em) {
+  .custom-modal .small {
+    width: 50%;
+  }
+}
+
+@media (min-width: 91.42857143em) {
+  .custom-modal .small {
+    width: 30%;
+  }
+}
+
+.custom-modal #modal-edit-permision .modal-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.custom-modal #modal-edit-permision .form-group {
+  margin: 0 !important;
+}
+
+.custom-modal .modal-header i {
+  padding-right: 10px;
+  font-size: 14px;
+  color: #858585;
+}
+
+#modal-edit-procedures [name="outer-box"],
+#modal-test-form [name="outer-box"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures [name="outer-box"] [name="container"],
+#modal-test-form [name="outer-box"] [name="container"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures .rightbar-page .page-content,
+#modal-test-form .rightbar-page .page-content {
+  padding-top: 0;
+}
+
+#modal-edit-procedures .modal-content .container,
+#modal-test-form .modal-content .container {
+  padding: 30px 40px;
+}
+
+#modal-edit-procedures #modal-edit-object .modal-header,
+#modal-test-form #modal-edit-object .modal-header {
+  padding: 15px;
+}
+
+.field-list-item .field-type {
+  text-align: left;
+}
+
+.field-list-item .field-type i.fa,
+.field-list-item .field-type i.fas,
+.field-list-item .field-type i.far {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  font-size: 22px;
+  padding-right: 10px;
+  color: #b4b4b4;
+}
+
+.field-list-item .field-type .type-info i {
+  position: relative;
+  color: #47daa4;
+  font-size: 16px;
+  top: 0px;
+}
+
+.field-list-item .col {
+  line-height: 40px;
+  padding-left: 15px;
+}
+
+.button-dropdown a.dropdown-item.text-danger {
+  color: #fc4b6c;
+}
+
+.button-dropdown a.dropdown-item.text-danger i {
+  color: #fc4b6c;
+}
+
+.button-dropdown a.dropdown-item.text-danger:hover,
+.button-dropdown a.dropdown-item.text-danger:focus,
+.button-dropdown a.dropdown-item.text-danger:active {
+  color: #fc4b6c;
+}
+
+.elements-models-page {
+  padding: 20px 40px;
+}
+
+.elements-models-page .btn-backroute {
+  margin-right: 20px;
+}
+
+.box-add-group {
+  border: 1px dashed #ccc;
+  text-align: center;
+  width: 100%;
+  padding: 10px 5px;
+  margin-bottom: 0px;
+  min-height: 70px;
+}
+
+.box-add-group .btn {
+  margin: 0;
+}
+
+.icon-field .css-bg1rzq-control {
+  border-radius: 0;
+}
+
+.icon-field .css-1szy77t-control {
+  border-radius: 0;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #4a9fea;
+  box-shadow: none;
+}
+
+.collapsable-group {
+  position: relative;
+}
+
+.collapsable-group button {
+  padding-left: 30px;
+}
+
+.collapsable-group.editable button {
+  padding-left: 50px;
+}
+
+.collapsable-group .actions {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  top: 13px;
+  right: 40px;
+}
+
+.collapsable-group .actions a {
+  font-size: 16px;
+  color: #455660;
+  padding-right: 10px;
+}
+
+.collapsable-group .actions.left {
+  left: 0px;
+  width: 50px;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.collapsable-group .actions.left a {
+  font-size: 18px;
+  padding-right: 7px;
+}
+
+.form-fields .collapsable-group.editable button {
+  padding-left: 50px;
+}
+
+.box-input-add {
+  border: 1px dashed #ccc;
+  text-align: center;
+  width: 100%;
+  padding: 10px 5px;
+  margin-bottom: 0px;
+  min-height: 45px;
+  cursor: pointer;
+}
+
+.box-input-add a {
+  color: #455660;
+}
+
+.box-input-add a:hover {
+  text-decoration: none;
+}
+
+[name="outer-box"] [name="container"] {
+  border: 1px solid #ccc;
+}
+
+.check-field {
+  position: relative;
+}
+
+.check-field span.icon a {
+  display: inline-block;
+  top: 5px;
+}
+
