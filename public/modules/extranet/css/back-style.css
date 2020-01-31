@@ -339,84 +339,109 @@ li.react-autosuggest__suggestion span {
   float: right;
 }
 
-.custom-modal .form-group {
+.custom-modal.modal-component .form-group {
   margin: 0;
 }
 
-.custom-modal .modal-container {
+.custom-modal.modal-component .modal-container {
   margin: 0 auto;
 }
 
-.custom-modal .field-col {
+.custom-modal.modal-component .field-col {
   height: calc(100vh - 250px);
   overflow-y: scroll;
 }
 
-.custom-modal .field-col.border-right {
+.custom-modal.modal-component .field-col.border-right {
   border-right: 1px solid #ccc;
 }
 
-.custom-modal .modal-content .container {
+.custom-modal.modal-component .modal-content {
+  overflow: hidden;
+}
+
+.custom-modal.modal-component .modal-content .container {
   overflow: unset;
 }
 
-.custom-modal .medium {
+.custom-modal.modal-component .medium {
   width: 100%;
 }
 
 @media (min-width: 52.85714286em) {
-  .custom-modal .medium {
+  .custom-modal.modal-component .medium {
     width: 70%;
   }
 }
 
 @media (min-width: 91.42857143em) {
-  .custom-modal .medium {
+  .custom-modal.modal-component .medium {
     width: 50%;
   }
 }
 
-.custom-modal .medium-large {
+.custom-modal.modal-component .medium-large {
   width: 80%;
 }
 
-.custom-modal .large {
+.custom-modal.modal-component .large {
   width: 100%;
 }
 
-.custom-modal .small {
+.custom-modal.modal-component .small {
   width: 100%;
 }
 
 @media (min-width: 52.85714286em) {
-  .custom-modal .small {
+  .custom-modal.modal-component .small {
     width: 50%;
   }
 }
 
 @media (min-width: 91.42857143em) {
-  .custom-modal .small {
+  .custom-modal.modal-component .small {
     width: 30%;
   }
 }
 
-.custom-modal .outer-box {
-  border: 1px solid #ccc;
-}
-
-.custom-modal #modal-edit-permision .modal-container {
+.custom-modal.modal-component #modal-edit-permision .modal-container {
   width: 50%;
   margin: 0 auto;
 }
 
-.custom-modal #modal-edit-permision .form-group {
+.custom-modal.modal-component #modal-edit-permision .form-group {
   margin: 0 !important;
 }
 
-.custom-modal .modal-header i {
+.custom-modal.modal-component .modal-header i {
   padding-right: 10px;
   font-size: 14px;
   color: #858585;
+}
+
+#modal-edit-procedures [name="outer-box"],
+#modal-test-form [name="outer-box"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures [name="outer-box"] [name="container"],
+#modal-test-form [name="outer-box"] [name="container"] {
+  width: 100% !important;
+}
+
+#modal-edit-procedures .rightbar-page .page-content,
+#modal-test-form .rightbar-page .page-content {
+  padding-top: 0;
+}
+
+#modal-edit-procedures .modal-content .container,
+#modal-test-form .modal-content .container {
+  padding: 30px 40px;
+}
+
+#modal-edit-procedures #modal-edit-object .modal-header,
+#modal-test-form #modal-edit-object .modal-header {
+  padding: 15px;
 }
 
 .field-list-item .field-type {
@@ -551,5 +576,18 @@ li.react-autosuggest__suggestion span {
 
 .box-input-add a:hover {
   text-decoration: none;
+}
+
+[name="outer-box"] [name="container"] {
+  border: 1px solid #ccc;
+}
+
+.check-field {
+  position: relative;
+}
+
+.check-field span.icon a {
+  display: inline-block;
+  top: 5px;
 }
 
