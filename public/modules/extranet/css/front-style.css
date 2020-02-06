@@ -10931,6 +10931,25 @@ form.contact-form .checkbox {
   right: 100px;
 }
 
+.check-field label span.MuiTypography-root {
+  color: #2A3649 !important;
+}
+
+.check-field label.is-invalid span.MuiIconButton-label {
+  color: #bf5329 !important;
+}
+
+.check-field label.is-invalid span.MuiTypography-root {
+  color: #bf5329 !important;
+}
+
+.label-field {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  color: #3097D1;
+}
+
 .paginator ul li {
   display: inline-block;
   padding: 0 8px;

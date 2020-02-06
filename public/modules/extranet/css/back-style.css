@@ -198,6 +198,16 @@ li {
   text-align: left;
 }
 
+.setup-field.version-2 .container-toggle-switch {
+  padding-top: 0px;
+  margin-bottom: 5px;
+  padding-right: 6px;
+}
+
+.setup-field.version-2 .container-toggle-switch label span {
+  color: #273544;
+}
+
 .elements-page .grid-items .grid-item {
   height: 130px;
   display: table;
@@ -358,10 +368,6 @@ li.react-autosuggest__suggestion span {
 
 .custom-modal.modal-component .modal-content {
   overflow: hidden;
-}
-
-.custom-modal.modal-component .modal-content .container {
-  overflow: unset;
 }
 
 .custom-modal.modal-component .medium {

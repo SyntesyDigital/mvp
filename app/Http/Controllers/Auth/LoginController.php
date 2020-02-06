@@ -57,4 +57,9 @@ class LoginController extends Controller
                   ->withErrors($validator)
                   ->withInput();
     }
+
+    public function showLoginForm()
+    {
+        return view('extranet::auth.login');
+    }
 }
