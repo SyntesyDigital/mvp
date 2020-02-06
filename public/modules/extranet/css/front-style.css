@@ -10838,13 +10838,22 @@ form.contact-form .checkbox {
 }
 
 .static-banner .image-static-banner {
-  height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  position: absolute;
+  height: 100%;
+}
+
+@media (max-width: 70.85714286em) {
+  .static-banner .image-static-banner {
+    height: 290px;
+    position: unset;
+  }
 }
 
 .static-banner .text-static-banner {
+  float: right;
   padding: 20px;
 }
 
