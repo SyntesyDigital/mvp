@@ -10079,7 +10079,16 @@ form.contact-form .checkbox {
   padding-right: 30px;
 }
 
-.file-component .element-file-input-container .element-file-content {
+.file-component .element-file-input-container .element-file-content.has-color .value-container {
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.file-component .element-file-input-container .element-file-content .value-container {
+  display: inline-block;
+}
+
+.file-component .element-file-input-container .element-file-content .value-content {
   font-size: 14px;
   line-height: 19px;
   font-weight: 400;
@@ -10634,6 +10643,13 @@ form.contact-form .checkbox {
   border-right: none !important;
   padding-right: 10px;
   padding-left: 10px;
+}
+
+.ReactTable .rt-tbody .has-color {
+  padding: 2px 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
 }
 
 .ReactTable .rt-thead {

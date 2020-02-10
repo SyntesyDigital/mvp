@@ -208,6 +208,19 @@ li {
   color: #273544;
 }
 
+.conditional-formatting .condition-item {
+  border: 1px solid #ccc;
+  padding: 12px 0;
+  margin: 0;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  padding-bottom: 0px;
+}
+
+.conditional-formatting .form-group {
+  padding-left: 0px !important;
+}
+
 .elements-page .grid-items .grid-item {
   height: 130px;
   display: table;
@@ -595,5 +608,19 @@ li.react-autosuggest__suggestion span {
 .check-field span.icon a {
   display: inline-block;
   top: 5px;
+}
+
+.color-field {
+  padding-left: 0px;
+}
+
+.color-field.inline label {
+  display: inline-block;
+  line-height: 37px;
+}
+
+.color-field.inline .color-field-swatch {
+  display: inline-block;
+  margin-left: 15px;
 }
 
