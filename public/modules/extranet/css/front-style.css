@@ -10097,6 +10097,7 @@ form.contact-form .checkbox {
 
 .element-collapsable {
   cursor: pointer;
+  padding-left: 40px;
 }
 
 .element-collapsable.collapsed:before {
@@ -10104,8 +10105,8 @@ form.contact-form .checkbox {
   margin-right: 0px;
   position: absolute;
   top: 9px;
-  right: 19px;
-  font-size: 18px;
+  left: 15px;
+  font-size: 22px;
   color: #2A3649;
 }
 
@@ -10114,8 +10115,8 @@ form.contact-form .checkbox {
   margin-right: 0px;
   position: absolute;
   top: 9px;
-  right: 19px;
-  font-size: 18px;
+  left: 15px;
+  font-size: 22px;
   color: #2A3649;
 }
 
