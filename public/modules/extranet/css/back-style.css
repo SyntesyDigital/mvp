@@ -432,6 +432,12 @@ li.react-autosuggest__suggestion span {
   margin: 0 !important;
 }
 
+.custom-modal.modal-component .modal-header {
+  padding: 15px;
+  padding-bottom: 0px;
+  line-height: 25px;
+}
+
 .custom-modal.modal-component .modal-header i {
   padding-right: 10px;
   font-size: 14px;
