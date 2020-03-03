@@ -52,11 +52,11 @@ class LoginController extends Controller
 
         $validator = Validator::make($request->all(), []);
         
-        if(strpos($message,'404')) {
-            $message = Login::MESSAGE_404;
+        if(strpos($message,'500')) {
+            $message = Login::MESSAGE_500;
         }
         else {
-            $message = Login::MESSAGE_500;
+            $message = Login::MESSAGE_404;
         }
 
         $validator->errors()->add('server', $message);
