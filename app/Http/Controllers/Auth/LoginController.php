@@ -51,6 +51,14 @@ class LoginController extends Controller
         }
 
         $validator = Validator::make($request->all(), []);
+        
+        if(strpos($message,'404')) {
+            $message = Login::MESSAGE_404;
+        }
+        else {
+            $message = Login::MESSAGE_500;
+        }
+
         $validator->errors()->add('server', $message);
 
         return redirect('login')
