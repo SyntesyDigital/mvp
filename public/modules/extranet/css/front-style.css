@@ -10921,6 +10921,18 @@ body .total-box-container .container-parameters {
   display: block;
 }
 
+.react-datepicker-wrapper .react-datepicker__input-container:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 500;
+  content: "\F073";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #91979f;
+  pointer-events: none;
+  font-size: 16px;
+}
+
 .react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {
