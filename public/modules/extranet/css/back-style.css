@@ -554,6 +554,10 @@ li.react-autosuggest__suggestion span {
   padding-left: 50px;
 }
 
+.collapsable-group .field-name {
+  text-transform: initial !important;
+}
+
 .collapsable-group .actions {
   position: absolute;
   top: 0px;
