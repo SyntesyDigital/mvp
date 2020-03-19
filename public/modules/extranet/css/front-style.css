@@ -9327,6 +9327,14 @@ footer {
   border-top: 1px solid rgba(42, 54, 73, 0.22);
 }
 
+footer .version {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
 footer p {
   color: #2A3649;
   text-align: center;
