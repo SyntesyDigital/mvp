@@ -11006,6 +11006,10 @@ body .total-box-container .container-parameters {
   color: #3097D1;
 }
 
+.richttext-field .ql-editor {
+  height: 150px !important;
+}
+
 .paginator ul li {
   display: inline-block;
   padding: 0 8px;
@@ -11063,12 +11067,12 @@ body .total-box-container .container-parameters {
   padding-bottom: 1px;
 }
 
-#modal-table-component.custom-modal .modal-container {
+.modal-table-component.custom-modal .modal-container {
   overflow-x: auto;
   padding: 40px 40px;
 }
 
-#modal-table-component.custom-modal .modal-content {
+.modal-table-component.custom-modal .modal-content {
   height: auto;
   padding-bottom: 0px;
   border-top-left-radius: 12px;
@@ -11077,74 +11081,74 @@ body .total-box-container .container-parameters {
   border-bottom-right-radius: 12px;
 }
 
-#modal-table-component.custom-modal .modal-content .pagination-bottom {
+.modal-table-component.custom-modal .modal-content .pagination-bottom {
   background: transparent;
   border: none;
 }
 
-#modal-table-component.custom-modal .modal-footer {
+.modal-table-component.custom-modal .modal-footer {
   height: 0px;
   padding: 0;
   border: none;
 }
 
-#modal-table-component.custom-modal .modal-body {
+.modal-table-component.custom-modal .modal-body {
   padding: 0;
 }
 
-#modal-table-component.custom-modal .file-component {
+.modal-table-component.custom-modal .file-component {
   padding: 15px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .file-component {
+  .modal-table-component.custom-modal .file-component {
     padding: 30px;
   }
 }
 
-#modal-table-component.custom-modal .form-component {
+.modal-table-component.custom-modal .form-component {
   padding: 15px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .form-component {
+  .modal-table-component.custom-modal .form-component {
     padding: 30px;
   }
 }
 
-#modal-table-component.custom-modal .form-component a.btn-default {
+.modal-table-component.custom-modal .form-component a.btn-default {
   color: #2A3649;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-default:hover {
+.modal-table-component.custom-modal .form-component a.btn-default:hover {
   color: #E84B37;
   border: 1px solid #E84B37;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-link {
+.modal-table-component.custom-modal .form-component a.btn-link {
   text-decoration: none;
   color: #2A3649;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-danger {
+.modal-table-component.custom-modal .form-component a.btn-danger {
   color: #bf5329;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
   padding: 40px 40px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+  .modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
     padding: 40px 20%;
   }
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-body {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-body {
   padding: 15px;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer {
   position: relative;
   background-color: transparent;
   height: auto;
@@ -11152,15 +11156,15 @@ body .total-box-container .container-parameters {
   border-top: 1px solid #ccc;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary {
   color: #fff;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary:hover {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary:hover {
   color: #fff;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field a.close-button-modal:hover {
+.modal-table-component.custom-modal .form-component .modal-list-field a.close-button-modal:hover {
   border: none;
 }
 
