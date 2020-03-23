@@ -9026,6 +9026,9 @@ header:first-child .row.row-header .logo-container,
 .sidebar,
 .sidebar.collapsed ul li i,
 .form-component.element-form-wrapper,
+.box-button-container i,
+.box-button-container .wrap-box-button .image-container,
+.box-button-container .wrap-box-button .label-container,
 body input.form-control.text-field.bordered {
   transition: all 0.5s ease;
 }
@@ -9085,6 +9088,9 @@ header:first-child .row.row-header .logo-container,
 .sidebar,
 .sidebar.collapsed ul li i,
 .form-component.element-form-wrapper,
+.box-button-container i,
+.box-button-container .wrap-box-button .image-container,
+.box-button-container .wrap-box-button .label-container,
 body input.form-control.text-field.bordered {
   transition: all 0.5s ease;
 }
@@ -10414,6 +10420,40 @@ form.contact-form .checkbox {
   overflow: hidden;
 }
 
+.element-table-container .elementTable .excel-btn {
+  position: absolute;
+  top: -50px;
+}
+
+.element-table-container .elementTable .excel-btn a {
+  margin: 10px 0;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.element-table-container .elementTable .excel-btn a.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.element-table-container .elementTable .excel-btn a.disabled:hover {
+  color: #2A3649;
+  border: 1px solid #2A3649;
+}
+
+.element-table-container .elementTable .excel-btn a i {
+  margin-right: 10px;
+}
+
+.element-table-container .elementTable .excel-btn a:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
+}
+
 .element-table-container .element-table-container-body {
   border-radius: 12px;
   overflow: hidden;
@@ -10452,7 +10492,6 @@ form.contact-form .checkbox {
 
 .element-table-container .elementTable {
   padding: 0px;
-  background-color: white;
 }
 
 .element-table-container .elementTable .navigation {
@@ -10486,6 +10525,15 @@ form.contact-form .checkbox {
   color: white;
 }
 
+.element-table-container .elementTable .react-table-container {
+  background-color: white;
+  overflow: hidden;
+}
+
+.element-table-container .elementTable .react-table-container.m-top {
+  margin-top: 40px;
+}
+
 .element-table-container .more-btn {
   padding: 20px;
 }
@@ -10510,30 +10558,6 @@ form.contact-form .checkbox {
 
 .title .title-btns.title-btns-no-header {
   padding-left: 0px;
-}
-
-.title .title-btns .excel-btn {
-  float: right;
-  overflow: hidden;
-}
-
-.title .title-btns .excel-btn a {
-  margin: 10px 0;
-  padding: 7px 20px;
-  text-decoration: none;
-  color: #2A3649;
-  border: 1px solid #2A3649;
-  background-color: white;
-  border-radius: 20px;
-}
-
-.title .title-btns .excel-btn a i {
-  margin-right: 10px;
-}
-
-.title .title-btns .excel-btn a:hover {
-  color: #E84B37;
-  border: 1px solid #E84B37;
 }
 
 .title .title-btns .add-btn {
@@ -10791,6 +10815,7 @@ body .total-box-container {
   min-height: 125px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 991px) {
@@ -10846,15 +10871,11 @@ body .total-box-container .container-parameters {
 .box-button-container-a .box-button-container:hover {
   color: #2A3649;
   text-decoration: none;
-  /*border: 1px solid $primary-color;*/
 }
 
 .box-button-container {
   color: #E84B37;
   background-color: #fff;
-  /*
-  border: 1px solid $secondary-color;
-  */
   padding: 20px 40px;
   text-align: center;
   width: 100%;
@@ -10873,6 +10894,86 @@ body .total-box-container .container-parameters {
   line-height: 18px;
   font-weight: 300;
   margin-bottom: 0;
+}
+
+.box-button-root {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.box-button-container-a .box-button-container:hover {
+  color: #2a3649;
+  text-decoration: none;
+}
+
+.box-button-container {
+  overflow: hidden;
+  color: #e84b37;
+  background-color: #fff;
+  text-align: center;
+  width: 100%;
+  border-radius: 12px;
+  min-height: 125px;
+  padding: 0;
+}
+
+.box-button-container i {
+  font-size: 6rem;
+  margin-bottom: 0px;
+}
+
+.box-button-container p {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.box-button-container .wrap-box-button {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+}
+
+.box-button-container .wrap-box-button .image-container {
+  padding: 0px;
+  height: 70px;
+  display: table-row;
+}
+
+.box-button-container .wrap-box-button .image-container .wrap-image,
+.box-button-container .wrap-box-button .image-container .wrap-icon {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.box-button-container .wrap-box-button .image-container .wrap-image img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.box-button-container .wrap-box-button .label-container {
+  height: 100%;
+  display: table-row;
+}
+
+.box-button-container .wrap-box-button .label-container div {
+  display: table-cell;
+  vertical-align: middle;
+  border-top: 2px solid;
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.box-button-container .wrap-box-button .label-container p {
+  text-transform: uppercase;
+  width: 108px;
+  margin: auto;
 }
 
 .static-banner {
@@ -11016,6 +11117,208 @@ body .total-box-container .container-parameters {
 
 .richttext-field .ql-editor {
   height: 150px !important;
+}
+
+.container-car-field {
+  margin-top: 20px;
+}
+
+.container-car-field .container-fix {
+  width: 450px;
+}
+
+.container-car-field .container-fix .bottom-buttons label {
+  padding: 10px;
+}
+
+.container-car-field .container-img {
+  border: 1px solid #b4b4b4;
+  background-image: url(/images/car_damage.png?8af8316a7d35ef697d6d6c9c9c10a786);
+  width: 425px;
+  height: 250px;
+}
+
+.container-car-field .container-img input + label {
+  position: absolute;
+  cursor: pointer;
+}
+
+.container-car-field .top-left + label {
+  left: 50px;
+  top: 25px;
+}
+
+.container-car-field .top-middle + label {
+  left: 170px;
+  top: 25px;
+}
+
+.container-car-field .top-retroviseur + label {
+  top: 15px;
+  right: 130px;
+}
+
+.container-car-field .top-right + label {
+  top: 30px;
+  left: 335px;
+}
+
+.container-car-field .middle-right + label {
+  top: 105px;
+  right: 0px;
+}
+
+.container-car-field .quart-middle + label {
+  top: 105px;
+  right: 55px;
+}
+
+.container-car-field .parebrise-middle + label {
+  top: 105px;
+  right: 115px;
+}
+
+.container-car-field .middle-middle + label {
+  top: 103px;
+  left: 170px;
+}
+
+.container-car-field .quart-middle-paravrise + label {
+  top: 105px;
+  left: 40px;
+}
+
+.container-car-field .middle-bottom-paravrise + label {
+  top: 105px;
+  left: 5px;
+}
+
+.container-car-field .bottom-right + label {
+  bottom: 10px;
+  right: 35px;
+}
+
+.container-car-field .bottom-retroviseur + label {
+  bottom: 0px;
+  right: 130px;
+}
+
+.container-car-field .bottom-middle + label {
+  left: 170px;
+  bottom: 5px;
+}
+
+.container-car-field .bottom-left + label {
+  bottom: 10px;
+  left: 50px;
+}
+
+.container-car-field input[type="checkbox"] {
+  display: none;
+}
+
+.container-car-field input[type="checkbox"] + label {
+  display: inline-block;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 50%;
+  color: #ffff;
+}
+
+.container-car-field input[type="checkbox"] + label:before {
+  padding: 4px 6px;
+  border-radius: 50%;
+  background-color: #69a8ff;
+  content: "\F067";
+  font-size: 15px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+}
+
+.container-car-field input[type="checkbox"]:checked + label:before {
+  padding: 4px 6px;
+  background-color: #f77978;
+  border-radius: 50%;
+  color: #ffff;
+  content: "\F068";
+  font-size: 15px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+}
+
+.container-car-field .table td.label-item {
+  width: 155px;
+}
+
+.container-car-field .table td.delete-item {
+  width: 50px;
+  padding: 0;
+}
+
+.container-car-field .table td,
+.container-car-field .table th {
+  line-height: unset;
+  vertical-align: unset;
+  border: none;
+}
+
+.container-car-field .table input + label {
+  cursor: pointer;
+}
+
+body label.label-custom {
+  padding: 0px 8px;
+}
+
+body .container-car-field label.bottom {
+  cursor: pointer;
+  color: #333;
+  width: unset;
+  height: unset;
+}
+
+body .container-car-field label.bottom:before {
+  margin-right: 5px;
+  color: #ffff;
+}
+
+@media (max-width: 1775px) {
+  body .container-flex {
+    width: 64%;
+  }
+}
+
+@media (max-width: 1671px) {
+  body .container-flex {
+    width: 60%;
+  }
+}
+
+@media (max-width: 1540px) {
+  body .container-flex {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1434px) {
+  body .container-flex {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1250px) {
+  body .container-flex {
+    width: 44%;
+  }
+}
+
+@media (max-width: 1150px) {
+  body .container-flex {
+    width: 100%;
+    margin-top: 25px;
+  }
 }
 
 .paginator ul li {
