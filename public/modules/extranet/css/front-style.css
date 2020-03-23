@@ -10966,7 +10966,7 @@ body .total-box-container .container-parameters {
 .box-button-container .wrap-box-button .label-container div {
   display: table-cell;
   vertical-align: middle;
-  border-top: 2px solid;
+  border-top: 1px solid;
   border-top-color: rgba(0, 0, 0, 0.1);
 }
 
