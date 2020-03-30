@@ -607,6 +607,161 @@ li.react-autosuggest__suggestion span {
   text-decoration: none;
 }
 
+.elements-template .filled {
+  padding: 0px;
+  border: none;
+  margin-bottom: 10px;
+  min-height: 100px;
+  text-align: center;
+  width: 100%;
+}
+
+.elements-template .row-container-component .row-container-header {
+  background-color: #dadada;
+  border: 1px solid #ccc;
+  height: 50px;
+  z-index: 10;
+}
+
+.elements-template .row-container-component .row-container-header .left-buttons {
+  display: inline-block;
+  float: left;
+  padding-left: 10px;
+}
+
+.elements-template .row-container-component .row-container-header .btn-link {
+  padding: 2px 7px;
+  color: #455660;
+  font-size: 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.elements-template .row-container-component .row-container-header .right-buttons {
+  display: inline-block;
+  float: right;
+  padding-right: 10px;
+}
+
+.elements-template .row-container-component .row-container-header .right-buttons .btn-link {
+  padding: 2px 7px;
+  color: #455660;
+  font-size: 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.elements-template .row-container-component .row-container-body {
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.elements-template .row-container-component .col-types-container {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  z-index: 5;
+  height: 40px;
+  background-color: #dadada;
+}
+
+.elements-template .row-container-component .col-types-container ul {
+  text-align: left;
+  padding-top: 9px;
+  padding-left: 16px;
+}
+
+.elements-template .row-container-component .col-types-container ul li {
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 15px;
+}
+
+.elements-template .row-container-component .col-types-container ul li .col-icon {
+  cursor: pointer;
+  width: 30px;
+}
+
+.elements-template .row-container-component .col-types-container ul li .col-icon .row {
+  width: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.elements-template .row-container-component .col-types-container ul li .col-icon .col {
+  height: 18px;
+  background-repeat: repeat-x;
+  margin: 0;
+  padding: 0;
+}
+
+.elements-template .row-container-component .col-types-container ul li .col-icon .col .col-bars {
+  height: 18px;
+  width: 70%;
+  position: absolute;
+  top: 0px;
+  left: 15%;
+}
+
+.col-container {
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.col-container .row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.col-container .row-container-body-content {
+  background-color: #eeeeee;
+  padding: 0 10px;
+}
+
+.col-container .row-container-body-content .row-empty-item {
+  border: 1px dashed #ccc;
+}
+
+.col-container .row-container-body-content .row-empty-item .btn-link {
+  color: #455660;
+  padding: 12px 0px;
+}
+
+.col-container .row-container-body-content .row-container-body-top {
+  min-height: 15px;
+}
+
+.col-container .row-container-body-content .row-container-body-top .btn-link {
+  padding: 0;
+  color: #acacac;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.col-container .row-container-body-content .row-container-body-bottom {
+  min-height: 15px;
+}
+
+.col-container .row-container-body-content .row-container-body-bottom .btn-link {
+  padding: 0;
+  color: #acacac;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.element-template .page-bar {
+  top: 73px;
+}
+
+.element-template .page-bar h1 {
+  line-height: 66px;
+}
+
+.element-template .page-bar .MuiTab-labelIcon {
+  padding-top: unset !important;
+}
+
 [name="outer-box"] [name="container"] {
   border: 1px solid #ccc;
 }
@@ -632,5 +787,66 @@ li.react-autosuggest__suggestion span {
 .color-field.inline .color-field-swatch {
   display: inline-block;
   margin-left: 15px;
+}
+
+.field-list .field {
+  border: 1px solid #ccc;
+  padding: 10px 16px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  background-color: #fafafa;
+  padding-left: 60px;
+  border-radius: 6px;
+}
+
+.field-list .field i.fa,
+.field-list .field i.fas {
+  position: absolute;
+  top: 12px;
+  left: 23px;
+  font-size: 22px;
+  padding-right: 10px;
+  color: #b4b4b4;
+}
+
+.container-tabs {
+  display: inline-block;
+  position: relative;
+  margin-left: 30px;
+}
+
+.container-tabs .container-tab-button {
+  display: inline-block;
+  position: relative;
+}
+
+.container-tabs .container-tab-button .MuiTabs-indicator {
+  background-color: #4a9fea;
+}
+
+.container-tabs .container-tab-button header.MuiPaper-root {
+  height: 65px;
+  box-shadow: none;
+}
+
+.container-tabs .container-tab-button header .MuiTabs-root,
+.container-tabs .container-tab-button header .MuiTabs-flexContainer {
+  height: 65px;
+}
+
+.container-tabs .container-tab-button header .MuiButtonBase-root {
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+.container-tabs .container-tab-button header .MuiButtonBase-root .MuiTab-wrapper {
+  display: inline-block;
+}
+
+.container-tabs .container-tab-button header .MuiButtonBase-root .MuiTab-wrapper .MuiSvgIcon-root {
+  margin-bottom: -5px;
+  margin-right: 5px;
 }
 
