@@ -11766,7 +11766,15 @@ body .container-car-field label.bottom:before {
 }
 
 .container-fields-default.border-right {
-  border-right: 1px solid #333;
+  border-right: 1px solid #ccc;
+}
+
+.container-fields-default.border-right:last-child {
+  border-right: none;
+}
+
+.container-fields-default h3 {
+  border-bottom: 1px solid #ccc;
 }
 
 body input.form-control.text-field {
