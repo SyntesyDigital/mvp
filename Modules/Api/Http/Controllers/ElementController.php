@@ -14,7 +14,7 @@ class ElementController extends Controller
     public function index(Request $request)
     {
       $elements= Element::all();
-      $elements->load('attrs','templates');
+      $elements->load('attrs');
       return $elements->toArray();
     }
 
