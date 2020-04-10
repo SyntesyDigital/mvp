@@ -11572,6 +11572,20 @@ body .container-car-field label.bottom:before {
   background-color: #fff;
 }
 
+/** DATE  **/
+
+.immat-field:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  content: "\F1B9";
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  color: #91979f;
+  pointer-events: none;
+  font-size: 16px;
+}
+
 .paginator ul li {
   display: inline-block;
   padding: 0 8px;
@@ -11791,7 +11805,7 @@ body .container-car-field label.bottom:before {
 
 .container-radio-field .MuiFormGroup-root .MuiFormControlLabel-root {
   border: 1px solid #ccc;
-  padding: 0px 10px 0px 25px;
+  padding: 0px 25px 0px 10px;
   margin-right: 16px;
   margin-left: 0px;
 }
@@ -11802,6 +11816,10 @@ body .container-car-field label.bottom:before {
 
 .container-radio-field .bordered {
   border: 1px solid #8db7f7 !important;
+}
+
+.has-error .container-radio-field .MuiFormControlLabel-root {
+  border: 1px solid #a94442;
 }
 
 .border-radius {
