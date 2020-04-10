@@ -10309,8 +10309,15 @@ form.contact-form .checkbox {
   color: #2A3649;
 }
 
-.form-component .element-form-row .preload-form .buttons {
-  text-align: right;
+.form-component .element-form-row.preload-form {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-component .element-form-row.preload-form .buttons {
+  text-align: left;
+  padding-left: 41px;
+  margin-bottom: 20px;
 }
 
 .form-component input.is-invalid {
