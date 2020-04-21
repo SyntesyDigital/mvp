@@ -750,6 +750,15 @@ li.react-autosuggest__suggestion span {
   text-decoration: none;
 }
 
+.empty-item.is-active {
+  border-color: #4a9fea;
+  background-color: #fff;
+}
+
+.empty-item.can-drop {
+  background-color: #fff;
+}
+
 .element-template .page-bar {
   top: 73px;
 }
