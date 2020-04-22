@@ -28,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
         if(request('cache-clear')) {
             Cache::flush();
         }
+
+        if(config('app.env') == 'production') {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
