@@ -9240,6 +9240,14 @@ header .session-changer {
   margin-top: -8px;
   background-color: transparent;
   border: 1px solid #2a3649;
+  display: none;
+  width: 200px;
+}
+
+@media (min-width: 52.85714286em) {
+  header .session-changer {
+    display: inline-block;
+  }
 }
 
 header:first-child .row.row-header {
