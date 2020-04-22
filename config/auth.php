@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -77,7 +76,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Modules\Extranet\User::class,
             //'table' => 'users',
         ],
 
@@ -109,5 +108,4 @@ return [
             'expire' => 60,
         ],
     ],
-
 ];

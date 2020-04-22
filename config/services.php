@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -27,17 +26,5 @@ return [
 
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
-    ],
-
-    'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'linkedin' => [
-        'client_id' => env('LINKEDIN_KEY'),
-        'client_secret' => env('LINKEDIN_SECRET'),
-        'redirect' => env('LINKEDIN_REDIRECT_URI')
     ],
 ];

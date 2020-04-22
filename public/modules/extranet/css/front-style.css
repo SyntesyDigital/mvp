@@ -9025,7 +9025,13 @@ header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
 .sidebar.collapsed ul li i,
-.form-component.element-form-wrapper {
+.form-component.element-form-wrapper,
+.box-button-container i,
+.box-button-container .wrap-box-button .image-container,
+.box-button-container .wrap-box-button .label-container,
+body input.form-control.bordered,
+body select.form-control.bordered,
+body textarea.form-control.bordered {
   transition: all 0.5s ease;
 }
 
@@ -9083,7 +9089,13 @@ header:first-child .row.row-header .logo-container,
 .content-wrapper,
 .sidebar,
 .sidebar.collapsed ul li i,
-.form-component.element-form-wrapper {
+.form-component.element-form-wrapper,
+.box-button-container i,
+.box-button-container .wrap-box-button .image-container,
+.box-button-container .wrap-box-button .label-container,
+body input.form-control.bordered,
+body select.form-control.bordered,
+body textarea.form-control.bordered {
   transition: all 0.5s ease;
 }
 
@@ -9224,6 +9236,12 @@ header {
   border-bottom: none !important;
 }
 
+header .session-changer {
+  margin-top: -8px;
+  background-color: transparent;
+  border: 1px solid #2a3649;
+}
+
 header:first-child .row.row-header {
   margin-bottom: 0;
 }
@@ -9323,6 +9341,14 @@ footer {
   right: 0;
   left: 0;
   border-top: 1px solid rgba(42, 54, 73, 0.22);
+}
+
+footer .version {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 12px;
+  opacity: 0.5;
 }
 
 footer p {
@@ -9564,6 +9590,16 @@ body.is-test {
   color: #aa1818;
 }
 
+article.page-builder {
+  padding: 0;
+}
+
+@media (min-width: 91.42857143em) {
+  article.page-builder {
+    padding: 0 7%;
+  }
+}
+
 .custom-modal {
   display: none;
   opacity: 0;
@@ -9604,9 +9640,11 @@ body.is-test {
 
 .custom-modal .form-group .form-control,
 .custom-modal .form-group .cke_textarea_inline {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+  /*
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    */
   padding: 0 10px;
 }
 
@@ -9857,6 +9895,16 @@ form.contact-form .checkbox {
   margin-top: 30px !important;
 }
 
+#preload-form .buttons {
+  width: 30%;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+#preload-form .element-form-row .col-sm-6 {
+  width: 60%;
+}
+
 /** DATE  **/
 
 .react-datepicker-popper {
@@ -9968,13 +10016,14 @@ form.contact-form .checkbox {
 }
 
 .login-container .login-box-container {
-  padding: 0 40px;
+  max-width: 430px;
+  padding: 0 10px;
+  margin: 0 auto;
 }
 
 .login-container .login-box-container .login-box {
-  padding: 20px 40px;
+  padding: 30px 20px;
   border: 1px solid #DBDBDB;
-  background-color: #FFFFFF;
 }
 
 .login-container .login-box-container .login-box form {
@@ -9982,11 +10031,15 @@ form.contact-form .checkbox {
   padding: 0;
 }
 
+.login-container .login-box-container .login-box form .logo-container {
+  text-align: center;
+}
+
 .login-container .login-box-container .login-box form h2 {
   text-align: center;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
 .login-container .login-box-container .login-box form .form-group {
@@ -9999,12 +10052,24 @@ form.contact-form .checkbox {
   font-weight: 400;
 }
 
+.login-container .login-box-container .login-box form .form-group label i {
+  margin-right: 5px;
+}
+
 .login-container .login-box-container .login-box form .form-group .form-control {
   border-color: #A8A8A8;
 }
 
 .login-container .login-box-container .login-box form .form-group .buttons-group {
   text-align: center;
+  margin-top: 15px;
+}
+
+.login-container .login-box-container .login-box form .form-group .buttons-group .btn {
+  width: 100%;
+  /* border-radius:10px;*/
+  font-size: 14px;
+  text-transform: capitalize;
 }
 
 .login-container .login-box-container .login-box form .form-group .forgot {
@@ -10062,7 +10127,16 @@ form.contact-form .checkbox {
   padding-right: 30px;
 }
 
-.file-component .element-file-input-container .element-file-content {
+.file-component .element-file-input-container .element-file-content.has-color .value-container {
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.file-component .element-file-input-container .element-file-content .value-container {
+  display: inline-block;
+}
+
+.file-component .element-file-input-container .element-file-content .value-content {
   font-size: 14px;
   line-height: 19px;
   font-weight: 400;
@@ -10071,6 +10145,7 @@ form.contact-form .checkbox {
 
 .element-collapsable {
   cursor: pointer;
+  padding-left: 40px;
 }
 
 .element-collapsable.collapsed:before {
@@ -10078,8 +10153,8 @@ form.contact-form .checkbox {
   margin-right: 0px;
   position: absolute;
   top: 9px;
-  right: 19px;
-  font-size: 18px;
+  left: 15px;
+  font-size: 22px;
   color: #2A3649;
 }
 
@@ -10088,8 +10163,8 @@ form.contact-form .checkbox {
   margin-right: 0px;
   position: absolute;
   top: 9px;
-  right: 19px;
-  font-size: 18px;
+  left: 15px;
+  font-size: 22px;
   color: #2A3649;
 }
 
@@ -10216,6 +10291,9 @@ form.contact-form .checkbox {
 
 .form-component .element-form-row {
   margin: 15px 0;
+  /**
+    *   Conditions when is form preload
+    */
 }
 
 .form-component .element-form-row label {
@@ -10227,6 +10305,7 @@ form.contact-form .checkbox {
 }
 
 .form-component .element-form-row .buttons {
+  text-align: center;
   margin-top: 20px;
   padding-bottom: 20px;
 }
@@ -10244,6 +10323,17 @@ form.contact-form .checkbox {
   background-color: #fff;
   border-color: #fff;
   color: #2A3649;
+}
+
+.form-component .element-form-row.preload-form {
+  margin: 0px;
+  padding: 0px;
+}
+
+.form-component .element-form-row.preload-form .buttons {
+  text-align: left;
+  padding-left: 41px;
+  margin-bottom: 20px;
 }
 
 .form-component input.is-invalid {
@@ -10371,10 +10461,59 @@ form.contact-form .checkbox {
   border-bottom-right-radius: 12px;
 }
 
+/* Template */
+
+.element-form-container .layout h3 {
+  margin-bottom: 10px;
+}
+
+.element-form-container .layout .border-right {
+  border: none;
+}
+
+.element-form-container .layout .container-fields-default {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .element-table-container {
   margin: 20px 0;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.element-table-container .elementTable .excel-btn {
+  position: absolute;
+  top: -50px;
+}
+
+.element-table-container .elementTable .excel-btn a {
+  margin: 10px 0;
+  padding: 7px 20px;
+  text-decoration: none;
+  color: #2A3649;
+  border: 1px solid #2A3649;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.element-table-container .elementTable .excel-btn a.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.element-table-container .elementTable .excel-btn a.disabled:hover {
+  color: #2A3649;
+  border: 1px solid #2A3649;
+}
+
+.element-table-container .elementTable .excel-btn a i {
+  margin-right: 10px;
+}
+
+.element-table-container .elementTable .excel-btn a:hover {
+  color: #E84B37;
+  border: 1px solid #E84B37;
 }
 
 .element-table-container .element-table-container-body {
@@ -10415,7 +10554,6 @@ form.contact-form .checkbox {
 
 .element-table-container .elementTable {
   padding: 0px;
-  background-color: white;
 }
 
 .element-table-container .elementTable .navigation {
@@ -10449,6 +10587,15 @@ form.contact-form .checkbox {
   color: white;
 }
 
+.element-table-container .elementTable .react-table-container {
+  background-color: white;
+  overflow: hidden;
+}
+
+.element-table-container .elementTable .react-table-container.m-top {
+  margin-top: 40px;
+}
+
 .element-table-container .more-btn {
   padding: 20px;
 }
@@ -10473,30 +10620,6 @@ form.contact-form .checkbox {
 
 .title .title-btns.title-btns-no-header {
   padding-left: 0px;
-}
-
-.title .title-btns .excel-btn {
-  float: right;
-  overflow: hidden;
-}
-
-.title .title-btns .excel-btn a {
-  margin: 10px 0;
-  padding: 7px 20px;
-  text-decoration: none;
-  color: #2A3649;
-  border: 1px solid #2A3649;
-  background-color: white;
-  border-radius: 20px;
-}
-
-.title .title-btns .excel-btn a i {
-  margin-right: 10px;
-}
-
-.title .title-btns .excel-btn a:hover {
-  color: #E84B37;
-  border: 1px solid #E84B37;
 }
 
 .title .title-btns .add-btn {
@@ -10619,6 +10742,13 @@ form.contact-form .checkbox {
   padding-left: 10px;
 }
 
+.ReactTable .rt-tbody .has-color {
+  padding: 2px 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: 12px;
+}
+
 .ReactTable .rt-thead {
   padding-top: 6px;
   padding-bottom: 6px;
@@ -10731,48 +10861,65 @@ form.contact-form .checkbox {
   float: left;
 }
 
-.total-box-container-a {
+body .total-box-container-a {
   width: 100%;
   color: #2A3649;
-  /*.box-button-container{
-    &:hover{
-      color:$primary-color;
-      text-decoration: none;
-      border: 1px solid $primary-color;
-
-    }
-  }*/
 }
 
-.total-box-container-a:hover {
+body .total-box-container-a:hover {
   text-decoration: none;
 }
 
-.total-box-container {
+body .total-box-container {
   color: #2A3649;
   background-color: #fff;
-  border: 1px solid #E0E0E0;
-  padding: 20px 40px;
   text-align: left;
-  border-radius: 12px;
   min-height: 125px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
 }
 
-.total-box-container .title {
+@media (max-width: 991px) {
+  body .total-box-container {
+    margin-bottom: 20px;
+  }
+}
+
+body .total-box-container .title {
   font-size: 16px;
   line-height: 18px;
-  font-weight: 300;
+  font-weight: 400;
+  text-transform: uppercase;
+  overflow: hidden;
+  height: 35px;
 }
 
-.total-box-container .title i {
+body .total-box-container .title i {
   margin-right: 4px;
 }
 
-.total-box-container .totalBox {
-  padding: 0 20px;
-  font-size: 30px;
+body .total-box-container .totalBox {
+  margin-bottom: 10px;
+  font-weight: 100;
   line-height: 35px;
-  font-weight: 400;
+}
+
+body .total-box-container .container-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1px;
+}
+
+body .total-box-container .container-icon i {
+  color: #98a0aa;
+}
+
+body .total-box-container .container-parameters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .box-button-container-a {
@@ -10786,15 +10933,11 @@ form.contact-form .checkbox {
 .box-button-container-a .box-button-container:hover {
   color: #2A3649;
   text-decoration: none;
-  /*border: 1px solid $primary-color;*/
 }
 
 .box-button-container {
   color: #E84B37;
   background-color: #fff;
-  /*
-  border: 1px solid $secondary-color;
-  */
   padding: 20px 40px;
   text-align: center;
   width: 100%;
@@ -10815,25 +10958,220 @@ form.contact-form .checkbox {
   margin-bottom: 0;
 }
 
+.box-button-root {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.box-button-container-a .box-button-container:hover {
+  color: #2a3649;
+  text-decoration: none;
+}
+
+.box-button-container {
+  overflow: hidden;
+  color: #e84b37;
+  background-color: #fff;
+  text-align: center;
+  width: 100%;
+  border-radius: 12px;
+  min-height: 125px;
+  padding: 0;
+}
+
+.box-button-container i {
+  font-size: 48px;
+  margin-bottom: 0px;
+}
+
+.box-button-container p {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.box-button-container .wrap-box-button {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+}
+
+.box-button-container .wrap-box-button .image-container {
+  padding: 0px;
+  height: 70px;
+  display: table-row;
+}
+
+.box-button-container .wrap-box-button .image-container .wrap-image,
+.box-button-container .wrap-box-button .image-container .wrap-icon {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.box-button-container .wrap-box-button .image-container .wrap-image img {
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.box-button-container .wrap-box-button .label-container {
+  height: 100%;
+  display: table-row;
+}
+
+.box-button-container .wrap-box-button .label-container div {
+  display: table-cell;
+  vertical-align: middle;
+  border-top: 1px solid;
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.box-button-container .wrap-box-button .label-container p {
+  text-transform: uppercase;
+  width: 108px;
+  margin: auto;
+}
+
 .static-banner {
   overflow: hidden;
   margin: 20px 0;
 }
 
 .static-banner .image-static-banner {
-  height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  position: absolute;
+  height: 100%;
+}
+
+@media (max-width: 70.85714286em) {
+  .static-banner .image-static-banner {
+    height: 290px;
+    position: unset;
+  }
 }
 
 .static-banner .text-static-banner {
+  float: right;
   padding: 20px;
 }
 
 .static-banner .text-static-banner h1,
 .static-banner .text-static-banner h2 {
   margin-top: 0px;
+}
+
+.stepper-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  padding: 35px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.stepper-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.stepper-item#stepper-item-completed .stepper-item-outer {
+  background-color: #69a8ff;
+  border: 3px solid #69a8ff;
+}
+
+.stepper-item#stepper-item-completed .stepper-title:not(.stepper-title-active) {
+  color: #69a8ff;
+}
+
+.stepper-item .stepper-item-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.stepper-item .stepper-item-outer.stepper-item-outer-active {
+  border: 3px solid #69a8ff;
+}
+
+.stepper-item .stepper-item-outer .stepper-item-inner-future {
+  color: #adadad !important;
+}
+
+.stepper-item .stepper-title {
+  position: absolute;
+  display: inline-block;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  max-width: 225px;
+  min-width: 225px;
+  transform: translate(-39%, 5px);
+  text-align: center;
+  color: #adadad;
+  font-size: 14px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+.stepper-item .stepper-title-active {
+  color: #69a8ff;
+}
+
+.stepper-item-outer:nth-of-type(odd) {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.stepper-item-outer:nth-of-type(odd) .stepper-item-inner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.stepper-item-outer:nth-of-type(odd) .stepper-item-inner.stepper-item-inner-active {
+  width: 18px;
+  height: 18px;
+  color: #69a8ff;
+}
+
+.stepper-item-outer:nth-of-type(even) {
+  height: 8px;
+  border-top: 0.5px solid #e0e0e0;
+  border-bottom: 0.5px solid #e0e0e0;
+  width: 15%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.stepper-item-outer-inner {
+  background-color: #69a8ff;
+  width: 0%;
+  overflow: hidden;
+  transition: width 1s ease-in-out;
+  display: inline-block;
+  color: transparent;
+}
+
+div#stepper-item-completed + .stepper-item-outer .stepper-item-outer-inner {
+  width: 100%;
+  height: 8px;
 }
 
 .map-container .leaflet-container {
@@ -10858,6 +11196,18 @@ form.contact-form .checkbox {
 
 .react-datepicker-wrapper .react-datepicker__input-container {
   display: block;
+}
+
+.react-datepicker-wrapper .react-datepicker__input-container:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 500;
+  content: "\F073";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #91979f;
+  pointer-events: none;
+  font-size: 16px;
 }
 
 .react-datepicker__day-name,
@@ -10912,6 +11262,356 @@ form.contact-form .checkbox {
 
 .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
   right: 100px;
+}
+
+.check-field label {
+  float: none;
+}
+
+.check-field label span {
+  color: #77a9f4;
+}
+
+.check-field label span.MuiTypography-root {
+  color: #2A3649 !important;
+}
+
+.check-field label.is-invalid span.MuiIconButton-label {
+  color: #bf5329 !important;
+}
+
+.check-field label.is-invalid span.MuiTypography-root {
+  color: #bf5329 !important;
+}
+
+.label-field {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+  color: #3097D1;
+}
+
+.richttext-field .ql-editor {
+  height: 150px !important;
+}
+
+.container-car-field {
+  margin-top: 20px;
+}
+
+.container-car-field .container-fix {
+  width: 450px;
+  padding-left: 0px;
+}
+
+.container-car-field .container-fix .bottom-buttons label {
+  padding: 10px;
+}
+
+.container-car-field .container-img {
+  border: 1px solid #b4b4b4;
+  background-image: url(/images/car_damage.png?8af8316a7d35ef697d6d6c9c9c10a786);
+  width: 425px;
+  height: 250px;
+}
+
+.container-car-field .container-img input + label {
+  position: absolute;
+  cursor: pointer;
+}
+
+.container-car-field .top-left + label {
+  left: 50px;
+  top: 25px;
+}
+
+.container-car-field .top-middle + label {
+  left: 170px;
+  top: 25px;
+}
+
+.container-car-field .top-retroviseur + label {
+  top: 15px;
+  right: 130px;
+}
+
+.container-car-field .top-right + label {
+  top: 30px;
+  left: 335px;
+}
+
+.container-car-field .middle-right + label {
+  top: 105px;
+  right: 0px;
+}
+
+.container-car-field .quart-middle + label {
+  top: 105px;
+  right: 55px;
+}
+
+.container-car-field .parebrise-middle + label {
+  top: 105px;
+  right: 115px;
+}
+
+.container-car-field .middle-middle + label {
+  top: 103px;
+  left: 170px;
+}
+
+.container-car-field .quart-middle-paravrise + label {
+  top: 105px;
+  left: 40px;
+}
+
+.container-car-field .middle-bottom-paravrise + label {
+  top: 105px;
+  left: 5px;
+}
+
+.container-car-field .bottom-right + label {
+  bottom: 10px;
+  right: 35px;
+}
+
+.container-car-field .bottom-retroviseur + label {
+  bottom: 0px;
+  right: 130px;
+}
+
+.container-car-field .bottom-middle + label {
+  left: 170px;
+  bottom: 5px;
+}
+
+.container-car-field .bottom-left + label {
+  bottom: 10px;
+  left: 50px;
+}
+
+.container-car-field input[type="checkbox"] {
+  display: none;
+}
+
+.container-car-field input[type="checkbox"] + label {
+  display: inline-block;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 50%;
+  color: #ffff;
+}
+
+.container-car-field input[type="checkbox"] + label:before {
+  padding: 4px 6px;
+  border-radius: 50%;
+  background-color: #69a8ff;
+  content: "\F067";
+  font-size: 15px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+}
+
+.container-car-field input[type="checkbox"]:checked + label:before {
+  padding: 4px 6px;
+  background-color: #f77978;
+  border-radius: 50%;
+  color: #ffff;
+  content: "\F068";
+  font-size: 15px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+}
+
+.container-car-field .table td.label-item {
+  width: 155px;
+}
+
+.container-car-field .table td.delete-item {
+  width: 50px;
+  padding: 0;
+}
+
+.container-car-field .table td,
+.container-car-field .table th {
+  line-height: unset;
+  vertical-align: unset;
+  border: none;
+}
+
+.container-car-field .table input + label {
+  cursor: pointer;
+}
+
+.container-car-field.is-invalid .container-img {
+  border: 1px solid #bf5229;
+}
+
+body label.label-custom {
+  padding: 0px 8px;
+}
+
+body .container-car-field label.bottom {
+  cursor: pointer;
+  color: #333;
+  width: unset;
+  height: unset;
+}
+
+body .container-car-field label.bottom:before {
+  margin-right: 5px;
+  color: #ffff;
+}
+
+@media (max-width: 1775px) {
+  body .container-flex {
+    width: 64%;
+  }
+}
+
+@media (max-width: 1671px) {
+  body .container-flex {
+    width: 60%;
+  }
+}
+
+@media (max-width: 1540px) {
+  body .container-flex {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1434px) {
+  body .container-flex {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1250px) {
+  body .container-flex {
+    width: 44%;
+  }
+}
+
+@media (max-width: 1150px) {
+  body .container-flex {
+    width: 100%;
+    margin-top: 25px;
+  }
+}
+
+.file-field .uploaded-file {
+  border: 1px solid #77a9f4;
+  padding: 5px 10px;
+}
+
+.file-field .uploaded-file .col-xs-10 {
+  padding-left: 0;
+  line-height: 22px;
+}
+
+.file-field .uploaded-file .col-xs-2 {
+  text-align: right;
+  padding: 0;
+}
+
+.file-field .uploaded-file .col-xs-2 .btn i {
+  margin: 0;
+}
+
+.fields-list-container {
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.fields-list-container .typology-field {
+  border: 1px solid #77a9f4;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border-radius: 6px;
+}
+
+.fields-list-container .typology-field .field-type {
+  width: 60px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 14px;
+  line-height: 50px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.fields-list-container .typology-field .field-type .type-info {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.fields-list-container .typology-field .field-type i.fa {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  font-size: 22px;
+  padding-right: 10px;
+  color: #77a9f4;
+}
+
+.fields-list-container .typology-field .field-labels {
+  position: relative;
+  padding-right: 70px;
+  padding-top: 2px;
+  line-height: 40px;
+  padding-left: 60px;
+}
+
+.fields-list-container .typology-field .field-actions {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 70px;
+  padding-right: 0;
+}
+
+.fields-list-container .typology-field .field-actions a {
+  font-size: 12px;
+  line-height: 50px;
+  font-weight: 400;
+  display: inline-block;
+  font-size: 17px;
+  padding: 14px 6px;
+}
+
+.fields-list-container .typology-field .field-actions a.text-primary {
+  color: #77a9f4;
+}
+
+.fields-list-container .typology-field .remove-field-btn {
+  color: #fc4b6c;
+}
+
+.fields-list-container .more-btn a {
+  background-color: #fff;
+}
+
+/** DATE  **/
+
+.immat-field:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  content: "\F1B9";
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  color: #91979f;
+  pointer-events: none;
+  font-size: 16px;
 }
 
 .paginator ul li {
@@ -10971,12 +11671,12 @@ form.contact-form .checkbox {
   padding-bottom: 1px;
 }
 
-#modal-table-component.custom-modal .modal-container {
+.modal-table-component.custom-modal .modal-container {
   overflow-x: auto;
   padding: 40px 40px;
 }
 
-#modal-table-component.custom-modal .modal-content {
+.modal-table-component.custom-modal .modal-content {
   height: auto;
   padding-bottom: 0px;
   border-top-left-radius: 12px;
@@ -10985,74 +11685,74 @@ form.contact-form .checkbox {
   border-bottom-right-radius: 12px;
 }
 
-#modal-table-component.custom-modal .modal-content .pagination-bottom {
+.modal-table-component.custom-modal .modal-content .pagination-bottom {
   background: transparent;
   border: none;
 }
 
-#modal-table-component.custom-modal .modal-footer {
+.modal-table-component.custom-modal .modal-footer {
   height: 0px;
   padding: 0;
   border: none;
 }
 
-#modal-table-component.custom-modal .modal-body {
+.modal-table-component.custom-modal .modal-body {
   padding: 0;
 }
 
-#modal-table-component.custom-modal .file-component {
+.modal-table-component.custom-modal .file-component {
   padding: 15px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .file-component {
+  .modal-table-component.custom-modal .file-component {
     padding: 30px;
   }
 }
 
-#modal-table-component.custom-modal .form-component {
+.modal-table-component.custom-modal .form-component {
   padding: 15px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .form-component {
+  .modal-table-component.custom-modal .form-component {
     padding: 30px;
   }
 }
 
-#modal-table-component.custom-modal .form-component a.btn-default {
+.modal-table-component.custom-modal .form-component a.btn-default {
   color: #2A3649;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-default:hover {
+.modal-table-component.custom-modal .form-component a.btn-default:hover {
   color: #E84B37;
   border: 1px solid #E84B37;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-link {
+.modal-table-component.custom-modal .form-component a.btn-link {
   text-decoration: none;
   color: #2A3649;
 }
 
-#modal-table-component.custom-modal .form-component a.btn-danger {
+.modal-table-component.custom-modal .form-component a.btn-danger {
   color: #bf5329;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
   padding: 40px 40px;
 }
 
 @media (min-width: 52.85714286em) {
-  #modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
+  .modal-table-component.custom-modal .form-component .modal-list-field .modal-container {
     padding: 40px 20%;
   }
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-body {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-body {
   padding: 15px;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer {
   position: relative;
   background-color: transparent;
   height: auto;
@@ -11060,16 +11760,28 @@ form.contact-form .checkbox {
   border-top: 1px solid #ccc;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary {
   color: #fff;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary:hover {
+.modal-table-component.custom-modal .form-component .modal-list-field .modal-footer a.btn-primary:hover {
   color: #fff;
 }
 
-#modal-table-component.custom-modal .form-component .modal-list-field a.close-button-modal:hover {
+.modal-table-component.custom-modal .form-component .modal-list-field a.close-button-modal:hover {
   border: none;
+}
+
+.form-button {
+  cursor: pointer;
+}
+
+.form-button.loading {
+  pointer-events: none;
+}
+
+.form-button .disabled {
+  opacity: 0.5;
 }
 
 .env-bar {
@@ -11108,5 +11820,157 @@ form.contact-form .checkbox {
 
 .env-bar .envirnment-button.rec i {
   color: #3599e8;
+}
+
+.container-radio-field {
+  width: 100%;
+  padding: 0;
+}
+
+.container-radio-field .MuiFormGroup-root {
+  display: inline;
+}
+
+.container-radio-field .MuiFormGroup-root .MuiFormControlLabel-root {
+  border: 1px solid #ccc;
+  padding: 0px 25px 0px 10px;
+  margin-right: 16px;
+  margin-left: 0px;
+}
+
+.container-radio-field .MuiFormGroup-root .MuiFormControlLabel-root .Mui-checked {
+  color: #8db7f7;
+}
+
+.container-radio-field .bordered {
+  border: 1px solid #8db7f7 !important;
+}
+
+.has-error .container-radio-field .MuiFormControlLabel-root {
+  border: 1px solid #a94442;
+}
+
+.border-radius {
+  border-radius: 50%;
+}
+
+.check-field .MuiCheckbox-root .MuiIconButton-label {
+  padding: 10px 0px 10px 0px;
+}
+
+.layout .container-fields-default .value-center {
+  margin-bottom: 10px !important;
+}
+
+.layout .container-fields-default .stripped:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.layout .container-fields-default .stripped:nth-of-type(even) {
+  background-color: #fff;
+}
+
+.btn-rounded {
+  border-radius: 20px;
+}
+
+.container-fields-default {
+  padding: 0;
+}
+
+.container-fields-default.border-right {
+  border-right: 1px solid #ccc;
+}
+
+.container-fields-default.border-right:last-child {
+  border-right: none;
+}
+
+.container-fields-default h3 {
+  border-bottom: 1px solid #ccc;
+}
+
+body input.form-control,
+body select.form-control,
+body textarea.form-control {
+  border-radius: 0;
+}
+
+body input.form-control.bordered,
+body select.form-control.bordered,
+body textarea.form-control.bordered {
+  border: 1px solid #77a9f4;
+}
+
+body input.form-control:focus,
+body select.form-control:focus,
+body textarea.form-control:focus {
+  border-color: #77a9f4;
+  box-shadow: none;
+}
+
+.yes-no-field {
+  margin: 20px 0px 20px 0px;
+  align-items: center;
+  display: flex;
+}
+
+.yes-no-field .container-text {
+  width: calc(100% - 240px);
+  display: inline-block;
+}
+
+.yes-no-field .container-fields-yes-no {
+  text-align: right;
+  width: 240px;
+  display: inline-block;
+  position: relative;
+}
+
+.yes-no-field div {
+  padding: 0;
+}
+
+.yes-no-field .MuiFormControlLabel-root {
+  margin-bottom: 0;
+}
+
+#modal-add-document .modal-header {
+  padding-left: 45px;
+}
+
+#modal-add-document .modal-content {
+  padding-top: 25px;
+}
+
+#modal-add-document .modal-content .yes-no-field .container-text {
+  width: calc(100% - 240px);
+  display: inline-block;
+}
+
+#modal-add-document .modal-content .yes-no-field .container-fields-yes-no {
+  text-align: right;
+  width: 240px;
+  display: inline-block;
+  position: relative;
+}
+
+#modal-add-document .modal-footer {
+  text-align: center;
+}
+
+#modal-add-document .modal-container.small {
+  width: 75%;
+  margin: 0 auto;
+}
+
+#modal-add-document .modal-container.medium {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#modal-add-document .modal-container.large {
+  width: 100%;
+  margin: 0 auto;
 }
 
