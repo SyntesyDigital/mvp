@@ -10748,6 +10748,13 @@ form.contact-form .checkbox {
   border-right: none !important;
   padding-right: 10px;
   padding-left: 10px;
+  align-items: center;
+  display: flex;
+}
+
+.ReactTable .rt-tbody .rt-td .file-container {
+  text-align: center;
+  width: 100%;
 }
 
 .ReactTable .rt-tbody .has-color {
@@ -10820,53 +10827,6 @@ form.contact-form .checkbox {
 
 .ReactTable .-pagination .-next {
   text-align: left !important;
-}
-
-.table-document-container {
-  margin: 20px 0;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.table-document-container .table-document-container-body {
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.table-document-container .table-document-container-body.collapse {
-  border-radius: 0;
-}
-
-.table-document-container .documentsContainer {
-  padding: 20px 0;
-}
-
-.table-document-container .documentsContainer .item-container {
-  border-radius: 12px;
-  overflow: hidden;
-  padding: 20px;
-}
-
-.table-document-container .documentsContainer .item-container .field-container {
-  overflow: hidden;
-  margin-bottom: 5px;
-}
-
-.table-document-container .documentsContainer .item-container .field-container .field-name {
-  font-weight: bold;
-}
-
-.title {
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.title h4 {
-  text-transform: uppercase;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 300;
-  float: left;
 }
 
 body .total-box-container-a {
@@ -11790,6 +11750,87 @@ body .container-car-field label.bottom:before {
 
 .form-button .disabled {
   opacity: 0.5;
+}
+
+.table-document-container {
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.table-document-container p.message {
+  padding: 20px;
+  text-align: center;
+}
+
+.table-document-container .more-btn {
+  text-align: center;
+}
+
+.table-document-container .table-document-container-body {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-document-container .table-document-container-body.collapse {
+  border-radius: 0;
+}
+
+.table-document-container .documents-container {
+  padding: 20px;
+}
+
+.table-document-container .documents-container .item-container {
+  margin-bottom: 15px;
+}
+
+.table-document-container .documents-container .item-container .field-container {
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.table-document-container .documents-container .item-container .field-container .field-name {
+  font-weight: bold;
+}
+
+.table-document-container .item-container .file-contianer a.file-link {
+  height: 170px;
+  width: 100%;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2A3649;
+  font-size: 50px;
+}
+
+.table-document-container .item-container .file-infos-container .file-icon {
+  position: absolute;
+  left: 5px;
+  top: 12px;
+}
+
+.table-document-container .item-container .file-infos-container .file-icon i {
+  font-size: 22px;
+}
+
+.table-document-container .item-container .file-infos-container .file-infos {
+  padding-top: 7px;
+  padding-left: 35px;
+}
+
+.title {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.title h4 {
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 300;
+  float: left;
 }
 
 .env-bar {
