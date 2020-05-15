@@ -13150,6 +13150,13 @@ nav.main-nav ul li.active a {
   margin: 0px;
 }
 
+.page-title .right-actions {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: 0px;
+}
+
 .grid-items {
   padding-top: 20px;
 }

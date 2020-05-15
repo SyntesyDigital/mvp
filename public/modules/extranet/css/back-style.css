@@ -221,8 +221,13 @@ li {
   padding-left: 0px !important;
 }
 
+.elements-page .actions-dropdown {
+  display: inline-block;
+}
+
 .elements-page .grid-items .grid-item {
-  height: 130px;
+  height: 160px;
+  max-height: 160px;
   display: table;
   width: 100%;
 }
@@ -230,7 +235,7 @@ li {
 .elements-page .grid-items .grid-item p.grid-item-name {
   padding-top: 5px;
   line-height: 18px;
-  max-height: 55px;
+  max-height: 75px;
   overflow: hidden;
 }
 
@@ -857,5 +862,21 @@ li.react-autosuggest__suggestion span {
 .container-tabs .container-tab-button header .MuiButtonBase-root .MuiTab-wrapper .MuiSvgIcon-root {
   margin-bottom: -5px;
   margin-right: 5px;
+}
+
+#modal-result-import .success {
+  color: #00c851;
+}
+
+#modal-result-import .error {
+  color: #ff4444;
+}
+
+#modal-result-import .modal-content {
+  padding-bottom: 0;
+}
+
+#modal-result-import .modal-footer {
+  display: none;
 }
 
