@@ -63,10 +63,5 @@ class Kernel extends HttpKernel
             'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
             'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
-
-        // FIXME : to remove
-        'roles' => \App\Http\Middleware\Roles::class,
-        'can' => \App\Http\Middleware\Can::class,
-        'abilities' => \Modules\Extranet\Services\RolesPermissions\Middleware\HasPermissionsRoute::class,
     ];
 }

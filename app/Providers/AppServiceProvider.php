@@ -18,13 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        // load roles
-        foreach(Config::get('roles') as $k => $v) {
-            if(!defined($k)) {
-                define($k, $v);
-            }
-        }
-
         if(request('cache-clear')) {
             Cache::flush();
         }
@@ -41,10 +34,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-      foreach (glob(app_path().'/Helpers/*.php') as $filename){
-          require_once($filename);
-      }
 
     }
 }
