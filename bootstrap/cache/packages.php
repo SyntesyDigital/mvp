@@ -1,11 +1,4 @@
 <?php return array (
-  'prettus/l5-repository' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
@@ -90,6 +83,13 @@
       'LaravelLocalization' => 'Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization',
     ),
   ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
   'nuwave/lighthouse' => 
   array (
     'providers' => 
@@ -103,6 +103,17 @@
       'graphql' => 'Nuwave\\Lighthouse\\GraphQL',
     ),
   ),
+  'nwidart/laravel-modules' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Module' => 'Nwidart\\Modules\\Facades\\Module',
+    ),
+  ),
   'petercoles/multilingual-country-list' => 
   array (
     'providers' => 
@@ -114,15 +125,11 @@
       'Countries' => 'PeterColes\\Countries\\CountriesFacade',
     ),
   ),
-  'nwidart/laravel-modules' => 
+  'prettus/l5-repository' => 
   array (
     'providers' => 
     array (
-      0 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Module' => 'Nwidart\\Modules\\Facades\\Module',
+      0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
     ),
   ),
   'syntesy-digital/insurance-installer' => 
@@ -148,13 +155,6 @@
     'aliases' => 
     array (
       'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
-    ),
-  ),
-  'nunomaduro/collision' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
 );
