@@ -132,6 +132,17 @@
       0 => 'Prettus\\Repository\\Providers\\RepositoryServiceProvider',
     ),
   ),
+  'sentry/sentry-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Sentry\\Laravel\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Sentry' => 'Sentry\\Laravel\\Facade',
+    ),
+  ),
   'syntesy-digital/insurance-installer' => 
   array (
     'providers' => 

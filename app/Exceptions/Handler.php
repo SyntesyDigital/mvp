@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
+use App;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App;
 
 class Handler extends ExceptionHandler
 {
@@ -14,7 +14,6 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
     ];
 
     /**
@@ -32,39 +31,41 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
      * @return void
      */
     public function report(Exception $exception)
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $exception
+     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
     {
-
-        if(App::environment() == 'local' || App::environment() == 'development'){
-          return parent::render($request, $e);
-        }
-        else {
+        if (App::environment() == 'local' || App::environment() == 'development') {
+            return parent::render($request, $e);
+        } else {
             // 404 page when a model is not found
-           if ($e instanceof \ModelNotFoundException) {
-               return response()->view('extranet::front.errors.404', [], 404);
-           }
+            if ($e instanceof \ModelNotFoundException) {
+                return response()->view('extranet::front.errors.404', [], 404);
+            }
 
-           // custom error message
-           if ($e instanceof \ErrorException) {
-               return response()->view('extranet::front.errors.500', [], 500);
-           } else {
-               return parent::render($request, $e);
-           }
+            // custom error message
+            if ($e instanceof \ErrorException) {
+                return response()->view('extranet::front.errors.500', [], 500);
+            } else {
+                return parent::render($request, $e);
+            }
         }
     }
 }
