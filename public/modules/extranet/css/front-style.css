@@ -9427,6 +9427,22 @@ footer ul li a:hover {
   width: 0px;
 }
 
+.sidebar.collapsed ul li.menu-child a {
+  top: 12px;
+}
+
+.sidebar.collapsed ul li.menu-child a .sidebar-text {
+  display: none;
+}
+
+.sidebar.collapsed ul li.menu-child.parent .arrowLeft {
+  left: 0;
+}
+
+.sidebar.collapsed ul li .arrowright img {
+  display: none;
+}
+
 .sidebar.collapsed ul li.user-item {
   padding-left: 12px;
 }
@@ -9475,8 +9491,8 @@ footer ul li a:hover {
   width: 100%;
   height: 80px;
   text-align: center;
-  /*padding: 0 25px;*/
   display: table;
+  padding-bottom: 30px;
 }
 
 .sidebar ul {
@@ -9523,7 +9539,11 @@ footer ul li a:hover {
 }
 
 .sidebar .menu-item a {
-  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  padding-right: 50px;
 }
 
 .sidebar .menu-item a .sidebar-text {
@@ -9534,6 +9554,19 @@ footer ul li a:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.sidebar .menu-item a .arrowright {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 7px;
+  width: 32px;
+}
+
+.sidebar .menu-item a .arrowright i {
+  font-size: 20px;
+  color: #E6E6E6;
 }
 
 .sidebar .user-item {
@@ -9552,11 +9585,13 @@ footer ul li a:hover {
 }
 
 .sidebar .user-item a {
-  position: absolute;
-  top: 7px;
-  right: 37px;
   width: 30px;
   height: 30px;
+  position: absolute;
+  right: 37px;
+  width: 30px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .sidebar .user-item a i {
@@ -9565,6 +9600,79 @@ footer ul li a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 20px;
+}
+
+.wrapper-menu {
+  overflow: hidden;
+}
+
+.wrapper-menu .sub-menu-sidebar-container {
+  display: none;
+  color: black;
+  background: #fff;
+  position: absolute;
+  z-index: 999999;
+  height: 90%;
+  top: 50px;
+  width: 250px;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li {
+  height: 50px;
+  line-height: 45px;
+  padding-left: 19px;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li:hover {
+  padding-left: 15px;
+  background-color: #fff;
+  border-left: 4px solid #E84B37;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li a {
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  padding-right: 50px;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li a .arrowLeft {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 32px;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li a .arrowLeft i {
+  font-size: 20px;
+  color: #E6E6E6;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li a i {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.wrapper-menu .sub-menu-sidebar-container ul li .sidebar-text {
+  height: 50px;
+  white-space: no-wrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 53px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
 }
 
 .breadcrumb {
@@ -9659,7 +9767,7 @@ body.is-test {
 
   .content-wrapper {
     position: relative;
-    margin-left: 230px;
+    margin-left: 250px;
     padding-bottom: 80px;
     margin-top: 60px;
   }
@@ -9682,8 +9790,8 @@ body.is-test {
   }
 
   .sidebar .contact-sidebar {
-    position: fixed;
-    bottom: 120px;
+    margin-bottom: 80px;
+    margin-top: 50px;
     width: 250px;
   }
 
@@ -9778,6 +9886,18 @@ body.is-test {
     width: 75px;
   }
 
+  .sidebar.collapsed ul li a {
+    text-overflow: unset;
+  }
+
+  .sidebar.collapsed ul li a i.fas.fa-minus:before {
+    content: '\F053';
+  }
+
+  .sidebar.collapsed ul li a span.arrowLeft {
+    display: none;
+  }
+
   .sidebar.collapsed .btn-ham {
     margin: 0 auto;
     right: 24px;
@@ -9788,9 +9908,8 @@ body.is-test {
   }
 
   .sidebar .footer-menu-sidebar {
-    position: absolute;
-    bottom: 30px;
     width: 100%;
+    margin-bottom: 30px;
   }
 
   .sidebar .footer-menu-sidebar ul {
@@ -9812,6 +9931,9 @@ body.is-test {
   .sidebar .footer-menu-sidebar ul .menu-item a {
     color: #A8A8A8;
     font-size: 14px;
+    width: unset;
+    padding-right: unset;
+    display: inline-block;
   }
 
   .sidebar .footer-menu-sidebar ul .menu-item p {
@@ -9832,6 +9954,7 @@ body.is-test {
     display: table;
     width: 100%;
     height: 80px;
+    padding-bottom: 30px;
   }
 
   .logo-container a img {
@@ -9840,6 +9963,8 @@ body.is-test {
 
   .logo-container.collapsed {
     height: unset;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .container-user {
@@ -9891,6 +10016,10 @@ article.page-builder {
 
   .sidebar .logo-container img {
     width: 50%;
+  }
+
+  .sidebar .sub-menu-sidebar-container {
+    width: 100%;
   }
 
   .sidebar .user-item {
@@ -10706,8 +10835,20 @@ body .total-box-container .container-parameters {
 
 .box-button-container .wrap-box-button .label-container p {
   text-transform: uppercase;
-  width: 108px;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: -o-ellipsis-lastline;
+  text-overflow: ellipsis;
+  display: block;
+  /* autoprefixer: off */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 80px;
+  word-break: break-word;
+  white-space: initial;
 }
 
 .static-banner {
@@ -12308,7 +12449,6 @@ body .select2-dropdown {
 }
 
 .element-table-container .element-table-container-body {
-  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -12856,7 +12996,7 @@ body .react-table-container .ReactTable .rt-tbody .rt-tr-group .rt-td {
   max-height: 40px;
   word-break: break-word;
   white-space: initial;
-  min-height: 60px;
+  min-height: 42px;
 }
 
 .ImageTextTitleDocuments .container-image-text-title-documents .container-description {
@@ -13090,6 +13230,7 @@ body .react-table-container .ReactTable .rt-tbody .rt-tr-group .rt-td {
 
 .action-button-container .container-title p {
   margin-bottom: 0;
+  line-height: 20px;
   -webkit-transition: 0.8s;
   overflow: hidden;
   overflow: hidden;
@@ -13340,7 +13481,7 @@ body .action-list-widget #actionList .action-list-container ul a.btn {
   text-align: center;
 }
 
-.typology-last .news .container-image img {
+.typology-last .news .container-image .thumbnail-image {
   border-radius: 8px;
 }
 
