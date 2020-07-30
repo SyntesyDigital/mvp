@@ -10,11 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 Auth::routes();
 
 Route::get('/unavailable', ['as' => 'unavailable', 'uses' => 'UnavailableController@index']);
-
 
 //Route::get('/', 'HomeController@index')->name('home');

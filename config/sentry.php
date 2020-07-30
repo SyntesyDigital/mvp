@@ -1,6 +1,7 @@
 <?php
 
 return [
+    // 'dsn' => env('SENTRY_LARAVEL_DSN', env('SENTRY_DSN')),
     'dsn' => 'https://2102f423e74c4dbeab39587d5b52cf36@o242209.ingest.sentry.io/5372517',
 
     // capture release as git sha
