@@ -12,6 +12,7 @@
         "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "~4.0",
         "fzaninotto/faker": "^1.8",
+        "galbar/jsonpath": "^1.1",
         "google/apiclient": "^2.2",
         "intervention/image": "^2.4",
         "jenssegers/date": "^3.3",

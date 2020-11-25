@@ -14774,6 +14774,10 @@ line.links {
   padding: 10px 0;
 }
 
+.content .sidebar-item a.btn {
+  width: 100%;
+}
+
 .content .sidebar {
   padding-bottom: 50px;
 }
@@ -16568,6 +16572,17 @@ fieldset[disabled] .rw-multiselect-tag {
   right: 0px;
   bottom: 0px;
   left: 0px;
+}
+
+.color-field-container a.btn-link {
+  position: absolute;
+  top: -13px;
+  right: -60px;
+}
+
+.field .text-area-field textarea {
+  width: 100%;
+  border-color: #ccc;
 }
 
 .menu .grid-items a {
