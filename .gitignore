@@ -13,7 +13,6 @@ Homestead.json
 /public/storage
 /public/.htpasswd
 /storage/*.key
-/storage
 /vendor
 /.idea
 /.vagrant
